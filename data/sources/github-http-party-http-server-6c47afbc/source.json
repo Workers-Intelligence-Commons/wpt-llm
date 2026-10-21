@@ -1,0 +1,318 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/http-party/http-server",
+  "revision": "0d3b7bb5b6e8a59fd450ae2dca65870009cfcd8b",
+  "checksum": "sha256:3f7c159012ead4a65a90b6552ccdc5017e282bfbb8b83c6a21b0aa312d69e3d5",
+  "extract": {
+    "exclude": [
+      "public/img/**",
+      "screenshots/**",
+      "test/fixtures/root/compression/index.html.gz",
+      "test/public/404.html.gz",
+      "test/public/brotli/fake_ecstatic.br",
+      "test/public/brotli/index.html.br",
+      "test/public/brotli/index.html.gz",
+      "test/public/brotli/real_ecstatic.br",
+      "test/public/charset/**",
+      "test/public/compress/foo.js.gz",
+      "test/public/gzip/index.html.gz",
+      "test/public/gzip/real_ecstatic.gz"
+    ]
+  },
+  "history": {
+    "since": "baac7068933556940942da31043ecfb5dd49126e"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2011-2026 Charlie Robbins, Marak Squires, Jade Michael Thornton and the Contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/http-party/http-server: Copyright (c) 2011-2026 Charlie Robbins, Marak Squires, Jade Michael Thornton and the Contributors., MIT license (LICENSE), https://github.com/http-party/http-server."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".eslintrc.json",
+        ".github/**",
+        ".gitignore",
+        "CODE_OF_CONDUCT.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "bin/**",
+        "doc/**",
+        "lib/**",
+        "package-lock.json",
+        "package.json",
+        "public/404.html",
+        "public/index.html",
+        "test/304.test.js",
+        "test/accept-encoding.test.js",
+        "test/allowed-hosts.test.js",
+        "test/cache.test.js",
+        "test/check-headers.js",
+        "test/cli.test.js",
+        "test/compression.test.js",
+        "test/content-type.test.js",
+        "test/coop.test.js",
+        "test/core-error.test.js",
+        "test/core.test.js",
+        "test/cors.test.js",
+        "test/custom-content-type-file-secret.test.js",
+        "test/custom-content-type-file.test.js",
+        "test/custom-content-type.test.js",
+        "test/default-default-ext.test.js",
+        "test/dir-overrides-404.test.js",
+        "test/enotdir.test.js",
+        "test/escaping.test.js",
+        "test/express-error.test.js",
+        "test/express.test.js",
+        "test/fixtures/common-cases-error.js",
+        "test/fixtures/common-cases.js",
+        "test/fixtures/custom_mime_type.types",
+        "test/fixtures/https/**",
+        "test/fixtures/proxy-all-local/**",
+        "test/fixtures/root/canYouSeeMe",
+        "test/fixtures/root/compression/index.html",
+        "test/fixtures/root/compression/index.html.br",
+        "test/fixtures/root/file",
+        "test/fixtures/root/htmlButNot",
+        "test/force-content-encoding.test.js",
+        "test/headers.test.js",
+        "test/illegal-access-date.test.js",
+        "test/localhost.test.js",
+        "test/main.test.js",
+        "test/malformed-dir.test.js",
+        "test/malformed.test.js",
+        "test/mime.test.js",
+        "test/network-interfaces.test.js",
+        "test/pathname-encoding.test.js",
+        "test/private-network-access.test.js",
+        "test/process-env-port.test.js",
+        "test/proxy-all.test.js",
+        "test/proxy-config.test.js",
+        "test/proxy-options.test.js",
+        "test/public/404.html",
+        "test/public/a.txt",
+        "test/public/another-subdir/**",
+        "test/public/b.txt",
+        "test/public/brotli/fake_ecstatic",
+        "test/public/brotli/index.html",
+        "test/public/brotli/not_actually_brotli.br",
+        "test/public/brotli/real_ecstatic",
+        "test/public/c.js",
+        "test/public/compress/foo.js",
+        "test/public/compress/foo_2.js",
+        "test/public/curimit@gmail.com (40%)/**",
+        "test/public/custom_mime_type.opml",
+        "test/public/custom_mime_type.types",
+        "test/public/d.js",
+        "test/public/dir-overrides-404/**",
+        "test/public/e.js",
+        "test/public/f_f",
+        "test/public/gzip/fake_ecstatic",
+        "test/public/gzip/fake_ecstatic.gz",
+        "test/public/gzip/index.html",
+        "test/public/gzip/real_ecstatic",
+        "test/public/show-dir$$href_encoding$$/**",
+        "test/public/subdir/**",
+        "test/public/subdir_with space/**",
+        "test/public/中文/**",
+        "test/range.test.js",
+        "test/showdir-href-encoding.test.js",
+        "test/showdir-search-encoding.test.js",
+        "test/showdir-with-spaces.test.js",
+        "test/timeout.test.js",
+        "test/trailing-slash.test.js",
+        "test/websocket-proxy.test.js"
+      ],
+      "text": "Copyright (c) 2011-2026 Charlie Robbins, Marak Squires, Jade Michael Thornton and the Contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2011-2026 Charlie Robbins, Marak Squires, Jade Michael Thornton and the Contributors., MIT license (LICENSE), https://github.com/http-party/http-server."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.br"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.opml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/canYouSeeMe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/does-not-exist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f_f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fake_ecstatic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/htmlButNot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/http-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/real_ecstatic"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

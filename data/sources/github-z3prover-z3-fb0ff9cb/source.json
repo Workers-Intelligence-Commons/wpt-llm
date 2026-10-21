@@ -1,0 +1,693 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/Z3Prover/z3",
+  "revision": "01614435dcc4f6588c6d3a94a94c908f4ce1ef73",
+  "checksum": "sha256:070cd2b91ec5430cf2735c5657a93dd0c898caba94c18cac0370cfc9371aa459",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "examples/python/tutorial/html/examples/**",
+      "examples/userPropagator/example.pdf",
+      "noarch/repodata.json.bz2",
+      "resources/**",
+      "src/api/dotnet/Microsoft.Z3.snk",
+      "z3guide.jpeg"
+    ]
+  },
+  "history": {
+    "since": "40269c8511ca343bc6848cae8c4f2d0f0455b949"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Z3\nCopyright (c) Microsoft Corporation\nAll rights reserved. \nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Commit history of https://github.com/Z3Prover/z3: Copyright (c) Microsoft Corporation, MIT license (LICENSE.txt), https://github.com/Z3Prover/z3."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".bazelrc",
+        ".clang-format",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "BUILD.bazel",
+        "CMakeLists.txt",
+        "LICENSE.txt",
+        "MODULE.bazel",
+        "README-CMake.md",
+        "README.md",
+        "RELEASE_NOTES.md",
+        "Z3-AGENT.md",
+        "a3/**",
+        "cmake/**",
+        "codeql/**",
+        "dafny/**",
+        "doc/**",
+        "docker/**",
+        "examples/CMakeLists.txt",
+        "examples/SMT-LIB2/**",
+        "examples/c/**",
+        "examples/c++/**",
+        "examples/dotnet/**",
+        "examples/go/**",
+        "examples/java/**",
+        "examples/maxsat/**",
+        "examples/ml/**",
+        "examples/python/CMakeLists.txt",
+        "examples/python/README",
+        "examples/python/all_interval_series.py",
+        "examples/python/bincover.py",
+        "examples/python/bounded model checking/**",
+        "examples/python/complex/**",
+        "examples/python/data/**",
+        "examples/python/efsmt.py",
+        "examples/python/example.py",
+        "examples/python/hamiltonian/**",
+        "examples/python/hs.py",
+        "examples/python/mini_ic3.py",
+        "examples/python/mini_quip.py",
+        "examples/python/mus/**",
+        "examples/python/parallel.py",
+        "examples/python/proof_certificate.py",
+        "examples/python/proof_clause_log.py",
+        "examples/python/proof_preprocessing.py",
+        "examples/python/proof_to_lean.py",
+        "examples/python/prooflogs.py",
+        "examples/python/proofreplay.py",
+        "examples/python/rc2.py",
+        "examples/python/simplify_formula.py",
+        "examples/python/socrates.py",
+        "examples/python/test_proof_certificate.py",
+        "examples/python/test_proof_to_lean.py",
+        "examples/python/test_proof_to_lean_arith.py",
+        "examples/python/test_proof_to_lean_integration.py",
+        "examples/python/test_proof_to_lean_uf.py",
+        "examples/python/trafficjam.py",
+        "examples/python/tutorial/html/advanced-examples.htm",
+        "examples/python/tutorial/html/fixpoint-examples.htm",
+        "examples/python/tutorial/html/guide-examples.htm",
+        "examples/python/tutorial/html/index.html",
+        "examples/python/tutorial/html/strategies-examples.htm",
+        "examples/python/tutorial/jupyter/**",
+        "examples/python/union_sort.py",
+        "examples/python/visitor.py",
+        "examples/userPropagator/CMakeLists.txt",
+        "examples/userPropagator/README",
+        "examples/userPropagator/common.h",
+        "examples/userPropagator/example.cpp",
+        "examples/userPropagator/user_propagator.h",
+        "examples/userPropagator/user_propagator_created_maximisation.h",
+        "examples/userPropagator/user_propagator_internal_maximisation.h",
+        "examples/userPropagator/user_propagator_subquery_maximisation.h",
+        "examples/userPropagator/user_propagator_with_theory.h",
+        "fstar/**",
+        "lean/**",
+        "noarch/repodata.json",
+        "scripts/**",
+        "src/CMakeLists.txt",
+        "src/ackermannization/**",
+        "src/api/CMakeLists.txt",
+        "src/api/api_algebraic.cpp",
+        "src/api/api_arith.cpp",
+        "src/api/api_array.cpp",
+        "src/api/api_ast.cpp",
+        "src/api/api_ast_map.cpp",
+        "src/api/api_ast_map.h",
+        "src/api/api_ast_vector.cpp",
+        "src/api/api_ast_vector.h",
+        "src/api/api_bv.cpp",
+        "src/api/api_config_params.cpp",
+        "src/api/api_context.cpp",
+        "src/api/api_context.h",
+        "src/api/api_datalog.cpp",
+        "src/api/api_datalog.h",
+        "src/api/api_datatype.cpp",
+        "src/api/api_finite_field.cpp",
+        "src/api/api_finite_set.cpp",
+        "src/api/api_fpa.cpp",
+        "src/api/api_goal.cpp",
+        "src/api/api_goal.h",
+        "src/api/api_log.cpp",
+        "src/api/api_model.cpp",
+        "src/api/api_model.h",
+        "src/api/api_numeral.cpp",
+        "src/api/api_opt.cpp",
+        "src/api/api_params.cpp",
+        "src/api/api_parsers.cpp",
+        "src/api/api_pb.cpp",
+        "src/api/api_polynomial.cpp",
+        "src/api/api_polynomial.h",
+        "src/api/api_qe.cpp",
+        "src/api/api_quant.cpp",
+        "src/api/api_rcf.cpp",
+        "src/api/api_seq.cpp",
+        "src/api/api_solver.cpp",
+        "src/api/api_solver.h",
+        "src/api/api_special_relations.cpp",
+        "src/api/api_stats.cpp",
+        "src/api/api_stats.h",
+        "src/api/api_tactic.cpp",
+        "src/api/api_tactic.h",
+        "src/api/api_util.h",
+        "src/api/c++/**",
+        "src/api/dll/**",
+        "src/api/dotnet/AST.cs",
+        "src/api/dotnet/ASTMap.cs",
+        "src/api/dotnet/ASTVector.cs",
+        "src/api/dotnet/AlgebraicNum.cs",
+        "src/api/dotnet/ApplyResult.cs",
+        "src/api/dotnet/ArithExpr.cs",
+        "src/api/dotnet/ArithSort.cs",
+        "src/api/dotnet/ArrayExpr.cs",
+        "src/api/dotnet/ArraySort.cs",
+        "src/api/dotnet/BitVecExpr.cs",
+        "src/api/dotnet/BitVecNum.cs",
+        "src/api/dotnet/BitVecSort.cs",
+        "src/api/dotnet/BoolExpr.cs",
+        "src/api/dotnet/BoolSort.cs",
+        "src/api/dotnet/CMakeLists.txt",
+        "src/api/dotnet/CharSort.cs",
+        "src/api/dotnet/Constructor.cs",
+        "src/api/dotnet/ConstructorList.cs",
+        "src/api/dotnet/Context.cs",
+        "src/api/dotnet/DatatypeExpr.cs",
+        "src/api/dotnet/DatatypeSort.cs",
+        "src/api/dotnet/EnumSort.cs",
+        "src/api/dotnet/Expr.cs",
+        "src/api/dotnet/FPExpr.cs",
+        "src/api/dotnet/FPNum.cs",
+        "src/api/dotnet/FPRMExpr.cs",
+        "src/api/dotnet/FPRMNum.cs",
+        "src/api/dotnet/FPRMSort.cs",
+        "src/api/dotnet/FPSort.cs",
+        "src/api/dotnet/FiniteDomainExpr.cs",
+        "src/api/dotnet/FiniteDomainNum.cs",
+        "src/api/dotnet/FiniteDomainSort.cs",
+        "src/api/dotnet/FiniteSetSort.cs",
+        "src/api/dotnet/Fixedpoint.cs",
+        "src/api/dotnet/FuncDecl.cs",
+        "src/api/dotnet/FuncInterp.cs",
+        "src/api/dotnet/Global.cs",
+        "src/api/dotnet/Goal.cs",
+        "src/api/dotnet/IntExpr.cs",
+        "src/api/dotnet/IntNum.cs",
+        "src/api/dotnet/IntSort.cs",
+        "src/api/dotnet/IntSymbol.cs",
+        "src/api/dotnet/Lambda.cs",
+        "src/api/dotnet/ListSort.cs",
+        "src/api/dotnet/Log.cs",
+        "src/api/dotnet/Microsoft.Z3.Sharp.pc.in",
+        "src/api/dotnet/Microsoft.Z3.csproj.in",
+        "src/api/dotnet/Microsoft.Z3.props",
+        "src/api/dotnet/Microsoft.Z3.targets",
+        "src/api/dotnet/Microsoft.Z3.targets.in",
+        "src/api/dotnet/Model.cs",
+        "src/api/dotnet/NativeContext.cs",
+        "src/api/dotnet/NativeFuncInterp.cs",
+        "src/api/dotnet/NativeModel.cs",
+        "src/api/dotnet/NativeSolver.cs",
+        "src/api/dotnet/OnClause.cs",
+        "src/api/dotnet/Optimize.cs",
+        "src/api/dotnet/ParamDescrs.cs",
+        "src/api/dotnet/Params.cs",
+        "src/api/dotnet/Pattern.cs",
+        "src/api/dotnet/Probe.cs",
+        "src/api/dotnet/Properties/**",
+        "src/api/dotnet/Quantifier.cs",
+        "src/api/dotnet/RCFNum.cs",
+        "src/api/dotnet/README.md",
+        "src/api/dotnet/RatNum.cs",
+        "src/api/dotnet/ReExpr.cs",
+        "src/api/dotnet/ReSort.cs",
+        "src/api/dotnet/RealExpr.cs",
+        "src/api/dotnet/RealSort.cs",
+        "src/api/dotnet/RelationSort.cs",
+        "src/api/dotnet/SeqExpr.cs",
+        "src/api/dotnet/SeqSort.cs",
+        "src/api/dotnet/SetSort.cs",
+        "src/api/dotnet/Simplifiers.cs",
+        "src/api/dotnet/Solver.cs",
+        "src/api/dotnet/Sort.cs",
+        "src/api/dotnet/Statistics.cs",
+        "src/api/dotnet/Status.cs",
+        "src/api/dotnet/StringSymbol.cs",
+        "src/api/dotnet/Symbol.cs",
+        "src/api/dotnet/Tactic.cs",
+        "src/api/dotnet/TupleSort.cs",
+        "src/api/dotnet/UninterpretedSort.cs",
+        "src/api/dotnet/UserPropagator.cs",
+        "src/api/dotnet/Version.cs",
+        "src/api/dotnet/Z3Exception.cs",
+        "src/api/dotnet/Z3Object.cs",
+        "src/api/dotnet/cmake_install_gac.cmake.in",
+        "src/api/dotnet/cmake_uninstall_gac.cmake.in",
+        "src/api/go/**",
+        "src/api/java/**",
+        "src/api/js/**",
+        "src/api/julia/**",
+        "src/api/mcp/**",
+        "src/api/ml/**",
+        "src/api/python/**",
+        "src/api/z3.h",
+        "src/api/z3_algebraic.h",
+        "src/api/z3_api.h",
+        "src/api/z3_ast_containers.h",
+        "src/api/z3_fixedpoint.h",
+        "src/api/z3_fpa.h",
+        "src/api/z3_logger.h",
+        "src/api/z3_macros.h",
+        "src/api/z3_optimization.h",
+        "src/api/z3_polynomial.h",
+        "src/api/z3_private.h",
+        "src/api/z3_rcf.h",
+        "src/api/z3_replayer.cpp",
+        "src/api/z3_replayer.h",
+        "src/api/z3_spacer.h",
+        "src/api/z3_v1.h",
+        "src/ast/**",
+        "src/cmd_context/**",
+        "src/math/**",
+        "src/model/**",
+        "src/muz/**",
+        "src/nlsat/**",
+        "src/opt/**",
+        "src/params/**",
+        "src/parsers/**",
+        "src/qe/**",
+        "src/sat/**",
+        "src/shell/**",
+        "src/smt/**",
+        "src/solver/**",
+        "src/tactic/**",
+        "src/test/**",
+        "src/util/**",
+        "z3.pc.cmake.in"
+      ],
+      "text": "Z3\nCopyright (c) Microsoft Corporation\nAll rights reserved. \nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Copyright (c) Microsoft Corporation, MIT license (LICENSE.txt), https://github.com/Z3Prover/z3."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.htm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ocaml",
+      "paths": [
+        "**/*.ml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ocaml",
+      "paths": [
+        "**/*.mli"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pre"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.smt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.smt2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "LICENSE.txt",
+        "fstar/qf_lra_bench/full_polypaver.txt",
+        "fstar/qf_lra_bench/full_sqrt.txt",
+        "fstar/qf_lra_bench/full_synthetic1.txt",
+        "fstar/qf_lra_bench/full_synthetic2.txt",
+        "scripts/VERSION.txt",
+        "src/api/java/NativeStatic.txt",
+        "src/api/python/README.txt",
+        "src/ast/rewriter/rewriter.txt",
+        "src/muz/spacer/spacer_notes.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lean-toolchain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.targets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

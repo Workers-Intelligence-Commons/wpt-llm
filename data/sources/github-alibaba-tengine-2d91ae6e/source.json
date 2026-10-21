@@ -1,0 +1,896 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/alibaba/tengine",
+  "revision": "f9c9f759c029dec42ad855141fa7f0c24e9a671e",
+  "checksum": "sha256:d57eca080f9c342e5c0e248ca9226fdbf4d8b7175fb61004c6e83cecddf41650",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "docs/image/**",
+      "modules/mod_dubbo/utils/objects.cc",
+      "modules/mod_dubbo/utils/objects.h",
+      "modules/ngx_zstd/t/suite/test.zst",
+      "packages/build/deb/**",
+      "packages/debian/**",
+      "tests/nginx-tests/tengine-tests/concat.t"
+    ]
+  },
+  "history": {
+    "since": "13ecf65f55d917dc8434745a5b52580e3e7d491c"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "/* \n * Copyright (C) 2002-2021 Igor Sysoev\n * Copyright (C) 2011-2026 Nginx, Inc.\n * Copyright (C) 2010-2026 Alibaba Group Holding Limited\n * Copyright (C) 2011-2013 Xiaozhe \"chaoslawful\" Wang\n * Copyright (C) 2011-2013 Zhang \"agentzh\" Yichun\n * Copyright (C) 2011-2013 Weibin Yao\n * Copyright (C) 2012-2013 Sogou, Inc.\n * Copyright (C) 2012-2013 NetEase, Inc.\n * Copyright (C) 2014-2017 Intel, Inc.\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n\n\nBSD 2-Clause License\n\nCopyright (C) 2009-2017, by Xiaozhe Wang (chaoslawful) <chaoslawful@gmail.com>.\n\nCopyright (C) 2009-2019, by Yichun \"agentzh\" Zhang (章亦春) <agentzh@gmail.com>,\nOpenResty Inc.\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nBSD 2-Clause License\n\nCopyright (c) 2018, Alex Zhang\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n/* \n * Copyright (C) 2008-2011 Maxim Dounin\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n",
+      "attribution": "Commit history of https://github.com/alibaba/tengine: the authors of alibaba/tengine (the license file names no copyright line), BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine; Copyright (C) 2009-2017, by Xiaozhe Wang (chaoslawful) <chaoslawful@gmail.com>.; Copyright (C) 2009-2019, by Yichun \"agentzh\" Zhang (章亦春) <agentzh@gmail.com>,, BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/modules/ngx_http_lua_module; Copyright (c) 2018, Alex Zhang, BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/modules/ngx_zstd; the authors of alibaba/tengine (tests/nginx-tests/nginx-tests) (the license file names no copyright line), BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/tests/nginx-tests/nginx-tests."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        "AUTHORS.te",
+        "CHANGES",
+        "CHANGES.cn",
+        "CHANGES.te",
+        "Dockerfile",
+        "Dockerfile.alpine",
+        "LICENSE",
+        "README.markdown",
+        "THANKS.te",
+        "auto/**",
+        "conf/**",
+        "configure",
+        "docs/core.md",
+        "docs/core_cn.md",
+        "docs/modules/**",
+        "html/**",
+        "man/**",
+        "modules/mod_append_header/**",
+        "modules/mod_common/**",
+        "modules/mod_config/**",
+        "modules/mod_dubbo/README.md",
+        "modules/mod_dubbo/config",
+        "modules/mod_dubbo/hessian2/**",
+        "modules/mod_dubbo/ngx_dubbo.c",
+        "modules/mod_dubbo/ngx_dubbo.h",
+        "modules/mod_dubbo/ngx_dubbo_util.cpp",
+        "modules/mod_dubbo/ngx_http_dubbo_module.c",
+        "modules/mod_dubbo/ngx_http_dubbo_module.h",
+        "modules/mod_dubbo/utils/exceptions.h",
+        "modules/mod_dubbo/utils/utils.cc",
+        "modules/mod_dubbo/utils/utils.h",
+        "modules/mod_strategy/**",
+        "modules/mod_xudp/**",
+        "modules/ngx_backtrace_module/**",
+        "modules/ngx_debug_conn/**",
+        "modules/ngx_debug_pool/**",
+        "modules/ngx_debug_timer/**",
+        "modules/ngx_http_concat_module/**",
+        "modules/ngx_http_footer_filter_module/**",
+        "modules/ngx_http_proxy_connect_module/**",
+        "modules/ngx_http_reqstat_module/**",
+        "modules/ngx_http_slice_module/**",
+        "modules/ngx_http_sysguard_module/**",
+        "modules/ngx_http_tfs_module/**",
+        "modules/ngx_http_trim_filter_module/**",
+        "modules/ngx_http_upstream_check_module/**",
+        "modules/ngx_http_upstream_consistent_hash_module/**",
+        "modules/ngx_http_upstream_dynamic_module/**",
+        "modules/ngx_http_upstream_dyups_module/**",
+        "modules/ngx_http_upstream_iwrr_module/**",
+        "modules/ngx_http_upstream_keepalive_module/**",
+        "modules/ngx_http_upstream_session_sticky_module/**",
+        "modules/ngx_http_upstream_vnswrr_module/**",
+        "modules/ngx_http_user_agent_module/**",
+        "modules/ngx_http_xquic_module/**",
+        "modules/ngx_ingress_module/**",
+        "modules/ngx_multi_upstream_module/**",
+        "modules/ngx_slab_stat/**",
+        "modules/ngx_tongsuo_ntls/**",
+        "packages/build/README.md",
+        "packages/build/apk/**",
+        "packages/build/build-deps.sh",
+        "packages/build/build.sh",
+        "packages/build/collect-release.sh",
+        "packages/build/conf/**",
+        "packages/build/configure-args.sh",
+        "packages/build/deps.env",
+        "packages/build/fetch-deps.sh",
+        "packages/build/rpm/**",
+        "packages/build/sign-release.sh",
+        "src/**",
+        "tests/nginx-tests/tengine-tests/consistent_hash.t",
+        "tests/nginx-tests/tengine-tests/dynamic_resolve.t",
+        "tests/nginx-tests/tengine-tests/dynamic_resolve_aaaa.t",
+        "tests/nginx-tests/tengine-tests/dyups.t",
+        "tests/nginx-tests/tengine-tests/fastcgi_check.t",
+        "tests/nginx-tests/tengine-tests/gzip_clear_etag.t",
+        "tests/nginx-tests/tengine-tests/h2_max_headers.t",
+        "tests/nginx-tests/tengine-tests/http_raw_uri_variable.t",
+        "tests/nginx-tests/tengine-tests/http_ssl_asynchronous_mode.t",
+        "tests/nginx-tests/tengine-tests/http_ssl_handshakd_time.t",
+        "tests/nginx-tests/tengine-tests/if_numeric_comparison.t",
+        "tests/nginx-tests/tengine-tests/iwrr.t",
+        "tests/nginx-tests/tengine-tests/limit_req_enhance.t",
+        "tests/nginx-tests/tengine-tests/ngx_dtls.t",
+        "tests/nginx-tests/tengine-tests/ngx_http_upstream_vnswrr.t",
+        "tests/nginx-tests/tengine-tests/reqstat.t",
+        "tests/nginx-tests/tengine-tests/resolver.t",
+        "tests/nginx-tests/tengine-tests/resolver_file.t",
+        "tests/nginx-tests/tengine-tests/rewrite_capture_args.t",
+        "tests/nginx-tests/tengine-tests/rewrite_overlap_captures.t",
+        "tests/nginx-tests/tengine-tests/server_banner.t",
+        "tests/nginx-tests/tengine-tests/session_sticky.t",
+        "tests/nginx-tests/tengine-tests/slice.t",
+        "tests/nginx-tests/tengine-tests/stream_sni.t",
+        "tests/nginx-tests/tengine-tests/stream_ssl_handshakd_time.t",
+        "tests/nginx-tests/tengine-tests/sysguard.t",
+        "tests/nginx-tests/tengine-tests/tunnel.t",
+        "tests/nginx-tests/tengine-tests/tunnel_auth_basic.t",
+        "tests/nginx-tests/tengine-tests/tunnel_next_upstream.t",
+        "tests/nginx-tests/tengine-tests/upstream.t",
+        "tests/nginx-tests/tengine-tests/upstream_keepalive_timeout.t",
+        "tests/nginx-tests/tengine-tests/upstream_resolve_empty.t",
+        "tests/nginx-tests/tengine-tests/upstream_resolve_shrink.t",
+        "tests/nginx-tests/tengine-tests/variable.t",
+        "tests/nginx-tests/tengine-tests/vnswrr4dynamic_ups.t",
+        "tests/test-nginx/**"
+      ],
+      "text": "/* \n * Copyright (C) 2002-2021 Igor Sysoev\n * Copyright (C) 2011-2026 Nginx, Inc.\n * Copyright (C) 2010-2026 Alibaba Group Holding Limited\n * Copyright (C) 2011-2013 Xiaozhe \"chaoslawful\" Wang\n * Copyright (C) 2011-2013 Zhang \"agentzh\" Yichun\n * Copyright (C) 2011-2013 Weibin Yao\n * Copyright (C) 2012-2013 Sogou, Inc.\n * Copyright (C) 2012-2013 NetEase, Inc.\n * Copyright (C) 2014-2017 Intel, Inc.\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n",
+      "attribution": "the authors of alibaba/tengine (the license file names no copyright line), BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "modules/ngx_http_lua_module/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (C) 2009-2017, by Xiaozhe Wang (chaoslawful) <chaoslawful@gmail.com>.\n\nCopyright (C) 2009-2019, by Yichun \"agentzh\" Zhang (章亦春) <agentzh@gmail.com>,\nOpenResty Inc.\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (C) 2009-2017, by Xiaozhe Wang (chaoslawful) <chaoslawful@gmail.com>.; Copyright (C) 2009-2019, by Yichun \"agentzh\" Zhang (章亦春) <agentzh@gmail.com>,, BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/modules/ngx_http_lua_module."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "modules/ngx_zstd/LICENSE",
+        "modules/ngx_zstd/README.md",
+        "modules/ngx_zstd/config",
+        "modules/ngx_zstd/filter/**",
+        "modules/ngx_zstd/static/**",
+        "modules/ngx_zstd/t/00-filter.t",
+        "modules/ngx_zstd/t/01-static.t",
+        "modules/ngx_zstd/t/suite/test",
+        "modules/ngx_zstd/valgrind.suppress"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2018, Alex Zhang\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2018, Alex Zhang, BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/modules/ngx_zstd."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "tests/nginx-tests/nginx-tests/**"
+      ],
+      "text": "/* \n * Copyright (C) 2008-2011 Maxim Dounin\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n",
+      "attribution": "the authors of alibaba/tengine (tests/nginx-tests/nginx-tests) (the license file names no copyright line), BSD-2-Clause license (LICENSE), https://github.com/alibaba/tengine/tree/f9c9f759c029dec42ad855141fa7f0c24e9a671e/tests/nginx-tests/nginx-tests."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.PL"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SKIP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.alpine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.il"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.logrotate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msvc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.openrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.owc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.post-install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pre-install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.suppress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.taobao"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.te"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wiki"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/APKBUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MANIFEST"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/acc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/browsers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ccc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/conf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/define"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/endianness"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fastcgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fix-comments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/freebsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gen-lexer-c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/have"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/have_headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/icc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/include"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/koi-utf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/koi-win"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/module"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/modules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msvc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ngx-links"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nohave"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/owc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/releng"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/retab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/revim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sizeof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/solaris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stubs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/summary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sunc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/threads"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/token_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typedef"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uintptr_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uwsgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/value"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/win-utf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/win32"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

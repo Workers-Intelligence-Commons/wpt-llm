@@ -1,0 +1,696 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/solana-labs/solana",
+  "revision": "7700cb3128c1f19820de67b81aa45d18f73d2ac0",
+  "checksum": "sha256:68cdf72131f1911aeb03d047096c9111ccd32d0ee66a49523ecc370ea56ae72c",
+  "extract": {
+    "exclude": [
+      "bench-tps/tests/fixtures/**",
+      "ci/semver_bash/**",
+      "cli/tests/fixtures/noop.so",
+      "cli/tests/fixtures/noop_large.so",
+      "docs/src/runtime/zk-docs/**",
+      "docs/static/img/android-chrome-192x192.png",
+      "docs/static/img/android-chrome-512x512.png",
+      "docs/static/img/apple-touch-icon.png",
+      "docs/static/img/data-plane-propagation.png",
+      "docs/static/img/economic_design_infl_230719.png",
+      "docs/static/img/favicon-16x16.png",
+      "docs/static/img/favicon-32x32.png",
+      "docs/static/img/favicon.ico",
+      "docs/static/img/ledger-live-install-solana-app.png",
+      "docs/static/img/ledger-live-latest-version-installed.png",
+      "docs/static/img/ledger-live-update-available-v0.2.2.png",
+      "docs/static/img/p_ex_adjusted_staked_yields.png",
+      "docs/static/img/p_ex_interest.png",
+      "docs/static/img/p_ex_relative_dilution.png",
+      "docs/static/img/p_ex_schedule.png",
+      "docs/static/img/p_ex_staked_dilution.png",
+      "docs/static/img/p_ex_staked_supply_w_range_initial_stake.png",
+      "docs/static/img/p_ex_staked_yields.png",
+      "docs/static/img/p_ex_supply.png",
+      "docs/static/img/p_ex_unstaked_dilution.png",
+      "docs/static/img/p_inflation_schedule.png",
+      "docs/static/img/p_inflation_schedule_ranges_w_comments.png",
+      "docs/static/img/p_total_supply.png",
+      "docs/static/img/p_total_supply_ranges.png",
+      "docs/static/img/porep_reward.png",
+      "docs/static/img/ramp-tps-rounds.png",
+      "docs/static/img/rt-dropped-minority-fork-post-process.png",
+      "docs/static/img/rt-dropped-minority-fork-pre-process.png",
+      "docs/static/img/rt-dropped-via-rpc-pool.png",
+      "docs/static/img/rt-tpu-jito-labs.png",
+      "docs/static/img/rt-tx-journey.png",
+      "docs/static/katex/contrib/**",
+      "docs/static/katex/fonts/**",
+      "program-test/src/programs/**",
+      "programs/bpf-loader-tests/noop.so",
+      "programs/bpf_loader/test_elfs/out/**",
+      "programs/loader-v4/test_elfs/**",
+      "svm/tests/hello_solana_program.so",
+      "zk-token-sdk/src/encryption/decode_u32_precomputation_for_G.bincode"
+    ]
+  },
+  "history": {
+    "since": "c65605802a2fa58d3f48a655b90dfb0b14c2b62e"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\nYou must give any other recipients of the Work or Derivative Works a copy of this License; and\nYou must cause any modified files to carry prominent notices stating that You changed the files; and\nYou must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\nIf the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\nYou may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n",
+      "attribution": "Commit history of https://github.com/solana-labs/solana: the authors of solana-labs/solana (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/solana-labs/solana."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".buildkite/**",
+        ".clippy.toml",
+        ".codecov.yml",
+        ".github/**",
+        ".gitignore",
+        ".mergify.yml",
+        ".travis.yml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "LICENSE",
+        "README.md",
+        "RELEASE.md",
+        "SECURITY.md",
+        "account-decoder/**",
+        "accounts-bench/**",
+        "accounts-cluster-bench/**",
+        "accounts-db/**",
+        "banking-bench/**",
+        "banks-client/**",
+        "banks-interface/**",
+        "banks-server/**",
+        "bench-streamer/**",
+        "bench-tps/.gitignore",
+        "bench-tps/Cargo.toml",
+        "bench-tps/src/**",
+        "bench-tps/tests/bench_tps.rs",
+        "bloom/**",
+        "bucket_map/**",
+        "cargo",
+        "cargo-build-bpf",
+        "cargo-build-sbf",
+        "cargo-registry/**",
+        "cargo-test-bpf",
+        "cargo-test-sbf",
+        "cd/**",
+        "ci/.gitignore",
+        "ci/README.md",
+        "ci/_",
+        "ci/affects.sh",
+        "ci/bench/**",
+        "ci/buildkite-pipeline-in-disk.sh",
+        "ci/buildkite-pipeline.sh",
+        "ci/buildkite-secondary.yml",
+        "ci/buildkite-solana-private.sh",
+        "ci/channel-info.sh",
+        "ci/channel_restriction.sh",
+        "ci/check-channel-version.sh",
+        "ci/check-crates.sh",
+        "ci/check-install-all.sh",
+        "ci/check-ssh-keys.sh",
+        "ci/common/**",
+        "ci/crate-version.sh",
+        "ci/dependabot-pr.sh",
+        "ci/dependabot-updater.sh",
+        "ci/do-audit.sh",
+        "ci/docker/**",
+        "ci/docker-run-default-image.sh",
+        "ci/docker-run.sh",
+        "ci/downstream-projects/**",
+        "ci/env.sh",
+        "ci/format-url.sh",
+        "ci/hoover.sh",
+        "ci/intercept.sh",
+        "ci/localnet-sanity.sh",
+        "ci/nits.sh",
+        "ci/order-crates-for-publishing.py",
+        "ci/platform-tools-info.sh",
+        "ci/publish-crate.sh",
+        "ci/publish-installer.sh",
+        "ci/publish-metrics-dashboard.sh",
+        "ci/publish-tarball.sh",
+        "ci/run-local.sh",
+        "ci/run-sanity.sh",
+        "ci/rust-version.sh",
+        "ci/setup-new-buildkite-agent/**",
+        "ci/shellcheck.sh",
+        "ci/stable/**",
+        "ci/test-bench.sh",
+        "ci/test-checks.sh",
+        "ci/test-coverage.sh",
+        "ci/test-dev-context-only-utils.sh",
+        "ci/test-docs.sh",
+        "ci/test-downstream-builds.sh",
+        "ci/test-sanity.sh",
+        "ci/test-stable-perf.sh",
+        "ci/test-stable-sbf.sh",
+        "ci/test-stable.sh",
+        "ci/test-wasm.sh",
+        "ci/test.sh",
+        "ci/upload-ci-artifact.sh",
+        "ci/upload-github-release-asset.sh",
+        "clap-utils/**",
+        "clap-v3-utils/**",
+        "cli/.gitignore",
+        "cli/Cargo.toml",
+        "cli/src/**",
+        "cli/tests/address_lookup_table.rs",
+        "cli/tests/fixtures/build.sh",
+        "cli/tests/nonce.rs",
+        "cli/tests/program.rs",
+        "cli/tests/request_airdrop.rs",
+        "cli/tests/stake.rs",
+        "cli/tests/transfer.rs",
+        "cli/tests/vote.rs",
+        "cli-config/**",
+        "cli-output/**",
+        "client/**",
+        "client-test/**",
+        "connection-cache/**",
+        "core/**",
+        "cost-model/**",
+        "docs/.eslintignore",
+        "docs/.eslintrc",
+        "docs/.gitignore",
+        "docs/.prettierignore",
+        "docs/.prettierrc.json",
+        "docs/.travis/**",
+        "docs/README.md",
+        "docs/art/**",
+        "docs/babel.config.js",
+        "docs/build-cli-usage.sh",
+        "docs/build.sh",
+        "docs/components/**",
+        "docs/convert-ascii-to-svg.sh",
+        "docs/crowdin.yml",
+        "docs/docusaurus.config.js",
+        "docs/offline-cmd-md-links.sh",
+        "docs/package-lock.json",
+        "docs/package.json",
+        "docs/publish-docs.sh",
+        "docs/set-solana-release-tag.sh",
+        "docs/sidebars.js",
+        "docs/src/architecture.md",
+        "docs/src/backwards-compatibility.md",
+        "docs/src/cli/**",
+        "docs/src/clusters/**",
+        "docs/src/consensus/**",
+        "docs/src/css/**",
+        "docs/src/faq.md",
+        "docs/src/implemented-proposals/**",
+        "docs/src/index.mdx",
+        "docs/src/operations/**",
+        "docs/src/pages/**",
+        "docs/src/proposals/**",
+        "docs/src/proposals.md",
+        "docs/src/runtime/programs.md",
+        "docs/src/runtime/sysvars.md",
+        "docs/src/runtime/zk-token-proof.md",
+        "docs/src/theme/**",
+        "docs/src/validator/**",
+        "docs/src/what-is-a-validator.md",
+        "docs/src/what-is-an-rpc-node.md",
+        "docs/static/.nojekyll",
+        "docs/static/img/dark-mark-white.inline.svg",
+        "docs/static/img/logo-horizontal-dark.svg",
+        "docs/static/img/logo-horizontal.svg",
+        "docs/static/img/logo.svg",
+        "docs/static/img/spiral.svg",
+        "docs/static/katex/README.md",
+        "docs/static/katex/katex.css",
+        "docs/static/katex/katex.js",
+        "docs/static/katex/katex.min.css",
+        "docs/static/katex/katex.min.js",
+        "docs/static/katex/katex.mjs",
+        "dos/**",
+        "download-utils/**",
+        "entry/**",
+        "faucet/**",
+        "fetch-perf-libs.sh",
+        "fetch-spl.sh",
+        "frozen-abi/**",
+        "genesis/**",
+        "genesis-utils/**",
+        "geyser-plugin-interface/**",
+        "geyser-plugin-manager/**",
+        "gossip/**",
+        "install/**",
+        "keygen/**",
+        "ledger/**",
+        "ledger-tool/**",
+        "local-cluster/**",
+        "log-analyzer/**",
+        "logger/**",
+        "measure/**",
+        "memory-management/**",
+        "merkle-root-bench/**",
+        "merkle-tree/**",
+        "metrics/**",
+        "multinode-demo/**",
+        "net/**",
+        "net-shaper/**",
+        "net-utils/**",
+        "nextest.toml",
+        "notifier/**",
+        "perf/**",
+        "poh/**",
+        "poh-bench/**",
+        "program-runtime/**",
+        "program-test/Cargo.toml",
+        "program-test/src/lib.rs",
+        "program-test/src/programs.rs",
+        "program-test/tests/**",
+        "programs/address-lookup-table/**",
+        "programs/address-lookup-table-tests/**",
+        "programs/bpf-loader-tests/Cargo.toml",
+        "programs/bpf-loader-tests/tests/**",
+        "programs/bpf_loader/Cargo.toml",
+        "programs/bpf_loader/benches/**",
+        "programs/bpf_loader/gen-syscall-list/**",
+        "programs/bpf_loader/src/**",
+        "programs/bpf_loader/test_elfs/makefile",
+        "programs/bpf_loader/test_elfs/src/**",
+        "programs/compute-budget/**",
+        "programs/config/**",
+        "programs/ed25519-tests/**",
+        "programs/loader-v4/Cargo.toml",
+        "programs/loader-v4/src/**",
+        "programs/sbf/**",
+        "programs/stake/**",
+        "programs/system/**",
+        "programs/vote/**",
+        "programs/zk-token-proof/**",
+        "programs/zk-token-proof-tests/**",
+        "pubsub-client/**",
+        "quic-client/**",
+        "rayon-threadlimit/**",
+        "rbpf-cli/**",
+        "remote-wallet/**",
+        "rpc/**",
+        "rpc-client/**",
+        "rpc-client-api/**",
+        "rpc-client-nonce-utils/**",
+        "rpc-test/**",
+        "run.sh",
+        "runtime/**",
+        "runtime-transaction/**",
+        "rust-toolchain.toml",
+        "rustfmt.toml",
+        "scripts/**",
+        "sdk/**",
+        "send-transaction-service/**",
+        "stake-accounts/**",
+        "storage-bigtable/**",
+        "storage-proto/**",
+        "streamer/**",
+        "svm/Cargo.toml",
+        "svm/build.rs",
+        "svm/src/**",
+        "svm/tests/integration_test.rs",
+        "svm/tests/mock_bank.rs",
+        "system-test/**",
+        "test-abi.sh",
+        "test-validator/**",
+        "thin-client/**",
+        "tokens/**",
+        "tpu-client/**",
+        "transaction-dos/**",
+        "transaction-status/**",
+        "turbine/**",
+        "udp-client/**",
+        "unified-scheduler-logic/**",
+        "unified-scheduler-pool/**",
+        "upload-perf/**",
+        "validator/**",
+        "vercel.json",
+        "version/**",
+        "vote/**",
+        "watchtower/**",
+        "web3.js/**",
+        "wen-restart/**",
+        "zk-keygen/**",
+        "zk-token-sdk/**"
+      ],
+      "text": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\nYou must give any other recipients of the Work or Derivative Works a copy of this License; and\nYou must cause any modified files to carry prominent notices stating that You changed the files; and\nYou must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\nIf the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\nYou may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n",
+      "attribution": "the authors of solana-labs/solana (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/solana-labs/solana."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bincode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bob"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo-build-bpf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo-build-sbf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo-test-bpf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo-test-sbf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/colo_nodes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/complete-loss-four-partitions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/complete-loss-two-partitions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/partial-loss-three-partitions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-checkout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/solana-test-validator"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

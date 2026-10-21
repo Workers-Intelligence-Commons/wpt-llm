@@ -1,0 +1,800 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/triton-inference-server/server",
+  "revision": "57b3eba6b5ac9b493747bec0eb8c69f0a0cee7a4",
+  "checksum": "sha256:02ffc4d99a9cdb102f1762c4f9425e44cb151c5d266eb7544e753ac70449ce18",
+  "extract": {
+    "exclude": [
+      "NVIDIA_Deep_Learning_Container_License.pdf",
+      "Triton-CCLA-v1.pdf",
+      "deploy/gke-marketplace-app/client.png",
+      "deploy/gke-marketplace-app/diagram.png",
+      "deploy/gke-marketplace-app/server-deployer/chart/triton/logo.png",
+      "deploy/gke-marketplace-app/ui.png",
+      "deploy/mlflow-triton-plugin/examples/onnx_float32_int32_int32/1/**",
+      "docs/examples/jetson/concurrency_and_dynamic_batching/capture.jpg",
+      "docs/examples/model_repository/simple/1/**",
+      "docs/examples/model_repository/simple_dyna_sequence/1/**",
+      "docs/examples/model_repository/simple_int8/1/**",
+      "docs/examples/model_repository/simple_sequence/1/**",
+      "docs/examples/model_repository/simple_string/1/**",
+      "docs/user_guide/images/**",
+      "qa/L0_initializer_as_input/models/add_with_initializer/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/bad_input_dims/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/bad_max_batch_size/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/bad_output_dims/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/too_few_inputs/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/too_many_inputs/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/unknown_input/1/**",
+      "qa/L0_model_config/autofill_noplatform/onnx/unknown_output/1/**",
+      "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/1/**",
+      "qa/L0_model_config/autofill_noplatform_success/onnx/no_config/1/**",
+      "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/1/**",
+      "qa/L0_request_cancellation/implicit_state_model/model.pt",
+      "qa/images/**",
+      "src/python/examples/example_model_repository/identity/1/**",
+      "qa/L0_warmup/raw_mug_data"
+    ]
+  },
+  "history": {
+    "since": "e4c4d7b06743908d046867c9ece5b1b75c83669f"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2018-2026, NVIDIA CORPORATION. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n * Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n * Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n * Neither the name of NVIDIA CORPORATION nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY\nEXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\nEXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\nPROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY\nOF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/triton-inference-server/server: Copyright (c) 2018-2026, NVIDIA CORPORATION. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/triton-inference-server/server."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CITATION.cff",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "Dockerfile.QA",
+        "Dockerfile.sdk",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "TRITON_VERSION",
+        "build.py",
+        "compose.py",
+        "deploy/alibaba-cloud/**",
+        "deploy/aws/**",
+        "deploy/fleetcommand/**",
+        "deploy/gcp/**",
+        "deploy/gke-marketplace-app/README.md",
+        "deploy/gke-marketplace-app/benchmark/**",
+        "deploy/gke-marketplace-app/client-sample/**",
+        "deploy/gke-marketplace-app/server-deployer/Dockerfile",
+        "deploy/gke-marketplace-app/server-deployer/build_and_push.sh",
+        "deploy/gke-marketplace-app/server-deployer/chart/triton/Chart.yaml",
+        "deploy/gke-marketplace-app/server-deployer/chart/triton/templates/**",
+        "deploy/gke-marketplace-app/server-deployer/chart/triton/values.yaml",
+        "deploy/gke-marketplace-app/server-deployer/data-test/**",
+        "deploy/gke-marketplace-app/server-deployer/schema.yaml",
+        "deploy/gke-marketplace-app/trt-engine/**",
+        "deploy/k8s-onprem/**",
+        "deploy/mlflow-triton-plugin/README.md",
+        "deploy/mlflow-triton-plugin/examples/expected_output.json",
+        "deploy/mlflow-triton-plugin/examples/input.json",
+        "deploy/mlflow-triton-plugin/examples/onnx_float32_int32_int32/config.pbtxt",
+        "deploy/mlflow-triton-plugin/mlflow_triton/**",
+        "deploy/mlflow-triton-plugin/scripts/**",
+        "deploy/mlflow-triton-plugin/setup.py",
+        "deploy/oci/**",
+        "docker/**",
+        "docs/Dockerfile.docs",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/_reference/**",
+        "docs/_static/**",
+        "docs/_templates/**",
+        "docs/backend_guide/**",
+        "docs/client_guide/**",
+        "docs/conf.py",
+        "docs/contents.rst",
+        "docs/customization_guide/**",
+        "docs/examples/README.md",
+        "docs/examples/fetch_models.sh",
+        "docs/examples/jetson/README.md",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/Makefile",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/README.md",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/common.h",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/labels.txt",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/people_detection.cc",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/tao/**",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/trtis_model_repo_sample_1/**",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/trtis_model_repo_sample_2/**",
+        "docs/examples/model_repository/densenet_onnx/**",
+        "docs/examples/model_repository/inception_onnx/**",
+        "docs/examples/model_repository/simple/config.pbtxt",
+        "docs/examples/model_repository/simple_dyna_sequence/config.pbtxt",
+        "docs/examples/model_repository/simple_identity/**",
+        "docs/examples/model_repository/simple_int8/config.pbtxt",
+        "docs/examples/model_repository/simple_sequence/config.pbtxt",
+        "docs/examples/model_repository/simple_string/config.pbtxt",
+        "docs/exclusions.txt",
+        "docs/generate_docs.py",
+        "docs/getting_started/**",
+        "docs/index.md",
+        "docs/introduction/**",
+        "docs/llm_features/**",
+        "docs/perf_benchmark/**",
+        "docs/protocol/**",
+        "docs/repositories.txt",
+        "docs/scaling_guide/**",
+        "docs/server_guide/**",
+        "docs/tutorials/**",
+        "docs/user_guide/architecture.md",
+        "docs/user_guide/batcher.md",
+        "docs/user_guide/bls.md",
+        "docs/user_guide/custom_operations.md",
+        "docs/user_guide/debugging_guide.md",
+        "docs/user_guide/decoupled_models.md",
+        "docs/user_guide/ensemble_models.md",
+        "docs/user_guide/faq.md",
+        "docs/user_guide/implicit_state_management.md",
+        "docs/user_guide/jetson.md",
+        "docs/user_guide/metrics.md",
+        "docs/user_guide/model_analyzer.md",
+        "docs/user_guide/model_configuration.md",
+        "docs/user_guide/model_execution.md",
+        "docs/user_guide/model_management.md",
+        "docs/user_guide/model_repository.md",
+        "docs/user_guide/optimization.md",
+        "docs/user_guide/perf_analyzer.md",
+        "docs/user_guide/performance_tuning.md",
+        "docs/user_guide/ragged_batching.md",
+        "docs/user_guide/rate_limiter.md",
+        "docs/user_guide/request_cancellation.md",
+        "docs/user_guide/response_cache.md",
+        "docs/user_guide/scheduler.md",
+        "docs/user_guide/trace.md",
+        "docs/user_guide/v1_to_v2.md",
+        "enhancements/**",
+        "pyproject.toml",
+        "python/**",
+        "qa/L0_additional_dependency_dirs/**",
+        "qa/L0_async_work_queue/**",
+        "qa/L0_backend_bls/**",
+        "qa/L0_backend_config/**",
+        "qa/L0_backend_fastertransformer/**",
+        "qa/L0_backend_identity/**",
+        "qa/L0_backend_onnxruntime/**",
+        "qa/L0_backend_output_detail/**",
+        "qa/L0_backend_python/**",
+        "qa/L0_backend_release/**",
+        "qa/L0_backend_tutorial/**",
+        "qa/L0_batch_custom/**",
+        "qa/L0_batch_input/**",
+        "qa/L0_batcher/**",
+        "qa/L0_buffer_attributes/**",
+        "qa/L0_client_build_variants/**",
+        "qa/L0_client_java/**",
+        "qa/L0_client_memory_growth/**",
+        "qa/L0_client_nobatch/**",
+        "qa/L0_client_timeout/**",
+        "qa/L0_client_valgrind/**",
+        "qa/L0_cmdline_trace/**",
+        "qa/L0_compute_capability/**",
+        "qa/L0_config_json/**",
+        "qa/L0_cuda_graph/**",
+        "qa/L0_cuda_shared_memory/**",
+        "qa/L0_custom_model_config/**",
+        "qa/L0_custom_ops/**",
+        "qa/L0_data_compression/**",
+        "qa/L0_decoupled/**",
+        "qa/L0_device_memory_tracker/**",
+        "qa/L0_dlpack_multi_gpu/**",
+        "qa/L0_doc_links/**",
+        "qa/L0_dyna_implicit_state/**",
+        "qa/L0_dyna_sequence_batcher/**",
+        "qa/L0_grpc/**",
+        "qa/L0_grpc_state_cleanup/**",
+        "qa/L0_http/**",
+        "qa/L0_http_fuzz/**",
+        "qa/L0_https/**",
+        "qa/L0_implicit_state/**",
+        "qa/L0_infer/**",
+        "qa/L0_infer_reshape/**",
+        "qa/L0_infer_variable/**",
+        "qa/L0_infer_zero/**",
+        "qa/L0_initializer_as_input/README.md",
+        "qa/L0_initializer_as_input/generate_test_model.py",
+        "qa/L0_initializer_as_input/models/add_with_initializer/config.pbtxt",
+        "qa/L0_initializer_as_input/test.py",
+        "qa/L0_initializer_as_input/test.sh",
+        "qa/L0_input_validation/**",
+        "qa/L0_io/**",
+        "qa/L0_iterative_sequence/**",
+        "qa/L0_java_memory_growth/**",
+        "qa/L0_java_resnet/**",
+        "qa/L0_java_sequence_batcher/**",
+        "qa/L0_java_simple_example/**",
+        "qa/L0_json/**",
+        "qa/L0_large_payload/**",
+        "qa/L0_libtorch_disable_cudnn/**",
+        "qa/L0_libtorch_inference_mode/**",
+        "qa/L0_libtorch_instance_group_kind_model/**",
+        "qa/L0_libtorch_io_names/**",
+        "qa/L0_libtorch_io_types/**",
+        "qa/L0_libtorch_optimized_execution/**",
+        "qa/L0_libtorch_shared_weights/**",
+        "qa/L0_lifecycle/**",
+        "qa/L0_logging/**",
+        "qa/L0_long_running_stress/**",
+        "qa/L0_memory/**",
+        "qa/L0_memory_growth/**",
+        "qa/L0_metrics/**",
+        "qa/L0_mlflow/**",
+        "qa/L0_model_config/autofill_noplatform/common/**",
+        "qa/L0_model_config/autofill_noplatform/custom/**",
+        "qa/L0_model_config/autofill_noplatform/ensemble/**",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_input_dims/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_input_dims/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_max_batch_size/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_max_batch_size/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_output_dims/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/bad_output_dims/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/too_few_inputs/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/too_few_inputs/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/too_many_inputs/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/too_many_inputs/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/unknown_input/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/unknown_input/expected",
+        "qa/L0_model_config/autofill_noplatform/onnx/unknown_output/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform/onnx/unknown_output/expected",
+        "qa/L0_model_config/autofill_noplatform/openvino/**",
+        "qa/L0_model_config/autofill_noplatform/python/**",
+        "qa/L0_model_config/autofill_noplatform/pytorch/**",
+        "qa/L0_model_config/autofill_noplatform/tensorrt/**",
+        "qa/L0_model_config/autofill_noplatform_success/custom/**",
+        "qa/L0_model_config/autofill_noplatform_success/ensemble/**",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/cpu_instance/**",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/expected",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/expected.1",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/expected.2",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/empty_config/expected.3",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config/expected",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config/expected.1",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config/expected.2",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config/expected.3",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/config.pbtxt",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/expected",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/expected.1",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/expected.2",
+        "qa/L0_model_config/autofill_noplatform_success/onnx/no_config_no_batch/expected.3",
+        "qa/L0_model_config/autofill_noplatform_success/openvino/**",
+        "qa/L0_model_config/autofill_noplatform_success/python/**",
+        "qa/L0_model_config/autofill_noplatform_success/pytorch/**",
+        "qa/L0_model_config/autofill_noplatform_success/tensorrt/**",
+        "qa/L0_model_config/cli_messages/**",
+        "qa/L0_model_config/compare_status.py",
+        "qa/L0_model_config/custom_parameters/**",
+        "qa/L0_model_config/model_metrics/**",
+        "qa/L0_model_config/noautofill_platform/**",
+        "qa/L0_model_config/special_cases/**",
+        "qa/L0_model_config/test.sh",
+        "qa/L0_model_namespacing/**",
+        "qa/L0_model_queue/**",
+        "qa/L0_model_update/**",
+        "qa/L0_multi_server/**",
+        "qa/L0_nan_inf/**",
+        "qa/L0_nullchar_string/**",
+        "qa/L0_onnx_optimization/**",
+        "qa/L0_openai/**",
+        "qa/L0_optional_input/**",
+        "qa/L0_orca/**",
+        "qa/L0_output_name/**",
+        "qa/L0_output_validation/**",
+        "qa/L0_parallel_copy/**",
+        "qa/L0_parameters/**",
+        "qa/L0_passive_instance/**",
+        "qa/L0_perf_deeprecommender/**",
+        "qa/L0_perf_kaldi/**",
+        "qa/L0_perf_nomodel/**",
+        "qa/L0_perf_pyclients/**",
+        "qa/L0_perf_resnet/**",
+        "qa/L0_perf_tensorrt_llm/**",
+        "qa/L0_perf_vllm/**",
+        "qa/L0_pinned_memory/**",
+        "qa/L0_priority/**",
+        "qa/L0_python_api/**",
+        "qa/L0_python_client_unit_tests/**",
+        "qa/L0_pytorch_python_runtime/**",
+        "qa/L0_query/**",
+        "qa/L0_rate_limiter/**",
+        "qa/L0_register/**",
+        "qa/L0_repoagent_checksum/**",
+        "qa/L0_request_cancellation/cancellation_test_utils.py",
+        "qa/L0_request_cancellation/grpc_cancellation_test.py",
+        "qa/L0_request_cancellation/implicit_state_model/config.pbtxt",
+        "qa/L0_request_cancellation/implicit_state_model/gen_model.py",
+        "qa/L0_request_cancellation/implicit_state_test.py",
+        "qa/L0_request_cancellation/scheduler_test.py",
+        "qa/L0_request_cancellation/test.sh",
+        "qa/L0_request_cancellation/trt_cancellation_test.py",
+        "qa/L0_response_cache/**",
+        "qa/L0_response_statistics/**",
+        "qa/L0_rhel_tutorial_cpu/**",
+        "qa/L0_rhel_tutorial_gpu/**",
+        "qa/L0_sagemaker/**",
+        "qa/L0_scalar_io/**",
+        "qa/L0_sdk/**",
+        "qa/L0_secure_grpc/**",
+        "qa/L0_sequence_batcher/**",
+        "qa/L0_sequence_corrid_batcher/**",
+        "qa/L0_sequence_stress/**",
+        "qa/L0_server_status/**",
+        "qa/L0_shared_memory/**",
+        "qa/L0_simple_ensemble/**",
+        "qa/L0_simple_example/**",
+        "qa/L0_simple_go_client/**",
+        "qa/L0_simple_lib/**",
+        "qa/L0_simple_nodejs_client/**",
+        "qa/L0_socket/**",
+        "qa/L0_storage_S3/**",
+        "qa/L0_storage_S3_local/**",
+        "qa/L0_storage_azure/**",
+        "qa/L0_storage_swiftstack/**",
+        "qa/L0_string_io/**",
+        "qa/L0_torch_aoti/**",
+        "qa/L0_torch_aoti_hstu/**",
+        "qa/L0_trace/**",
+        "qa/L0_triton_repo_agent/**",
+        "qa/L0_trt_bf16_dtype/**",
+        "qa/L0_trt_compat/**",
+        "qa/L0_trt_data_dependent_shape/**",
+        "qa/L0_trt_dla/**",
+        "qa/L0_trt_dynamic_shape/**",
+        "qa/L0_trt_error_propagation/**",
+        "qa/L0_trt_plugin/**",
+        "qa/L0_trt_reformat_free/**",
+        "qa/L0_trt_shape_tensors/**",
+        "qa/L0_vertex_ai/**",
+        "qa/L0_vllm_speculative_decoding/**",
+        "qa/L0_warmup/**",
+        "qa/L2_build_presets/**",
+        "qa/common/**",
+        "qa/custom_models/**",
+        "qa/ensemble_models/**",
+        "qa/openvino_models/**",
+        "qa/python_models/**",
+        "src/CMakeLists.txt",
+        "src/classification.cc",
+        "src/classification.h",
+        "src/command_line_parser.cc",
+        "src/command_line_parser.h",
+        "src/common.cc",
+        "src/common.h",
+        "src/data_compressor.h",
+        "src/grpc/**",
+        "src/http_server.cc",
+        "src/http_server.h",
+        "src/main.cc",
+        "src/memory_alloc.cc",
+        "src/multi_server.cc",
+        "src/orca_http.cc",
+        "src/orca_http.h",
+        "src/python/CMakeLists.txt",
+        "src/python/build_wheel.py",
+        "src/python/examples/example.py",
+        "src/python/examples/example_model_repository/identity/config.pbtxt",
+        "src/python/hatch_build.py",
+        "src/python/pyproject.toml",
+        "src/python/tritonfrontend/**",
+        "src/restricted_features.h",
+        "src/sagemaker_server.cc",
+        "src/sagemaker_server.h",
+        "src/shared_memory_manager.cc",
+        "src/shared_memory_manager.h",
+        "src/simple.cc",
+        "src/test/**",
+        "src/tracer.cc",
+        "src/tracer.h",
+        "src/triton_signal.cc",
+        "src/triton_signal.h",
+        "src/vertex_ai_server.cc",
+        "src/vertex_ai_server.h",
+        "tools/**"
+      ],
+      "text": "Copyright (c) 2018-2026, NVIDIA CORPORATION. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n * Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n * Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n * Neither the name of NVIDIA CORPORATION nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY\nEXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\nEXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\nPROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY\nOF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2018-2026, NVIDIA CORPORATION. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/triton-inference-server/server."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.QA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.docs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldscript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mapping"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbtxt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sdk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.third-party-src"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "docker/entrypoint.d/10-banner.txt",
+        "docker/entrypoint.d/15-container-copyright.txt",
+        "docs/examples/jetson/concurrency_and_dynamic_batching/labels.txt",
+        "docs/examples/model_repository/densenet_onnx/densenet_labels.txt",
+        "docs/examples/model_repository/inception_onnx/inception_labels.txt",
+        "docs/exclusions.txt",
+        "docs/repositories.txt",
+        "python/openai/requirements-test.txt",
+        "python/openai/requirements.txt",
+        "qa/L0_java_resnet/expected_output_data/expected_output_onnx.txt",
+        "qa/L0_java_resnet/expected_output_data/expected_output_pytorch.txt",
+        "qa/L0_java_resnet/expected_output_data/expected_output_tensorflow.txt",
+        "qa/L2_build_presets/requirements.txt",
+        "qa/common/resnet50_labels.txt",
+        "qa/ensemble_models/label_override_int32_float32_float32/output0_labels.txt",
+        "qa/ensemble_models/wrong_label_int32_float32_float32/output0_labels.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TRITON_VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/data_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected_ensemble"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected_unsupported"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gen_qa_model_repository"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/raw_mug_data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serve"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/show_testlogs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

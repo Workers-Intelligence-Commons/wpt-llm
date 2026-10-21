@@ -1,0 +1,504 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nextauthjs/next-auth",
+  "revision": "a1a16a5a7780488c7449feece410033f445d0b31",
+  "checksum": "sha256:a5c6c9b838ed578057f9213c6e00b92778df16417870622c04db782546c6e4f9",
+  "extract": {
+    "exclude": [
+      "apps/dev/sveltekit/static/**",
+      "apps/examples/nextjs/app/favicon.ico",
+      "apps/examples/nextjs/public/**",
+      "apps/examples/nextjs-pages/pages/favicon.ico",
+      "apps/examples/nextjs-pages/public/**",
+      "apps/examples/solid-start/public/**",
+      "apps/examples/sveltekit/static/**",
+      "docs/**",
+      "packages/core/src/lib/vendored/**"
+    ]
+  },
+  "history": {
+    "since": "87d41aff9412dcbddb3bbdc18706afa784bb0f73"
+  },
+  "licenses": [
+    {
+      "license": "ISC AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "ISC License\n\nCopyright (c) 2022-2024, Balázs Orbán\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nextauthjs/next-auth: Copyright (c) 2022-2024, Balázs Orbán, ISC license (LICENSE), https://github.com/nextauthjs/next-auth; ndom91 <yo@ndo.dev> (https://ndo.dev/), MIT license (declared in package.json), https://github.com/nextauthjs/next-auth/tree/a1a16a5a7780488c7449feece410033f445d0b31/.github/broken-link-checker; Auth.js Team (https://authjs.dev/contributors), MIT license (declared in package.json), https://github.com/nextauthjs/next-auth/tree/a1a16a5a7780488c7449feece410033f445d0b31/apps/dev/express."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        ".dockerignore",
+        ".github/CODEOWNERS",
+        ".github/DISCUSSION_TEMPLATE/**",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/dependabot.yml",
+        ".github/good-first-issue.md",
+        ".github/help-needed.md",
+        ".github/invalid-reproduction.md",
+        ".github/pr-labeler.yml",
+        ".github/stale.yml",
+        ".github/sync.yml",
+        ".github/version-pr/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".nvmrc",
+        ".prettierignore",
+        ".vscode/**",
+        "LICENSE",
+        "README.md",
+        "apps/dev/nextjs/**",
+        "apps/dev/qwik/**",
+        "apps/dev/sveltekit/.env.example",
+        "apps/dev/sveltekit/.eslintignore",
+        "apps/dev/sveltekit/.eslintrc.cjs",
+        "apps/dev/sveltekit/.gitignore",
+        "apps/dev/sveltekit/.prettierignore",
+        "apps/dev/sveltekit/.prettierrc",
+        "apps/dev/sveltekit/README.md",
+        "apps/dev/sveltekit/package.json",
+        "apps/dev/sveltekit/src/**",
+        "apps/dev/sveltekit/svelte.config.js",
+        "apps/dev/sveltekit/tsconfig.json",
+        "apps/dev/sveltekit/vite.config.js",
+        "apps/examples/express/**",
+        "apps/examples/nextjs/.env.local.example",
+        "apps/examples/nextjs/.gitignore",
+        "apps/examples/nextjs/Dockerfile",
+        "apps/examples/nextjs/README.md",
+        "apps/examples/nextjs/app/[[]...proxy[]]/**",
+        "apps/examples/nextjs/app/api/**",
+        "apps/examples/nextjs/app/api-example/**",
+        "apps/examples/nextjs/app/auth/**",
+        "apps/examples/nextjs/app/client-example/**",
+        "apps/examples/nextjs/app/globals.css",
+        "apps/examples/nextjs/app/layout.tsx",
+        "apps/examples/nextjs/app/middleware-example/**",
+        "apps/examples/nextjs/app/page.tsx",
+        "apps/examples/nextjs/app/policy/**",
+        "apps/examples/nextjs/app/server-example/**",
+        "apps/examples/nextjs/auth.ts",
+        "apps/examples/nextjs/components/**",
+        "apps/examples/nextjs/components.json",
+        "apps/examples/nextjs/docker-compose.yml",
+        "apps/examples/nextjs/lib/**",
+        "apps/examples/nextjs/middleware.ts",
+        "apps/examples/nextjs/next.config.js",
+        "apps/examples/nextjs/package.json",
+        "apps/examples/nextjs/postcss.config.js",
+        "apps/examples/nextjs/tailwind.config.js",
+        "apps/examples/nextjs/test-docker.sh",
+        "apps/examples/nextjs/tsconfig.json",
+        "apps/examples/nextjs-pages/.env.local.example",
+        "apps/examples/nextjs-pages/.gitignore",
+        "apps/examples/nextjs-pages/README.md",
+        "apps/examples/nextjs-pages/app/**",
+        "apps/examples/nextjs-pages/auth.ts",
+        "apps/examples/nextjs-pages/components/**",
+        "apps/examples/nextjs-pages/components.json",
+        "apps/examples/nextjs-pages/lib/**",
+        "apps/examples/nextjs-pages/middleware.ts",
+        "apps/examples/nextjs-pages/next.config.js",
+        "apps/examples/nextjs-pages/package.json",
+        "apps/examples/nextjs-pages/pages/_app.tsx",
+        "apps/examples/nextjs-pages/pages/api/**",
+        "apps/examples/nextjs-pages/pages/api-example/**",
+        "apps/examples/nextjs-pages/pages/client-example/**",
+        "apps/examples/nextjs-pages/pages/globals.css",
+        "apps/examples/nextjs-pages/pages/index.tsx",
+        "apps/examples/nextjs-pages/pages/middleware-example/**",
+        "apps/examples/nextjs-pages/pages/policy/**",
+        "apps/examples/nextjs-pages/pages/server-example/**",
+        "apps/examples/nextjs-pages/pnpm-lock.yaml",
+        "apps/examples/nextjs-pages/postcss.config.js",
+        "apps/examples/nextjs-pages/tailwind.config.js",
+        "apps/examples/nextjs-pages/tsconfig.json",
+        "apps/examples/qwik/**",
+        "apps/examples/solid-start/.env.example",
+        "apps/examples/solid-start/.gitignore",
+        "apps/examples/solid-start/README.md",
+        "apps/examples/solid-start/package.json",
+        "apps/examples/solid-start/pnpm-lock.yaml",
+        "apps/examples/solid-start/postcss.config.cjs",
+        "apps/examples/solid-start/src/**",
+        "apps/examples/solid-start/tailwind.config.cjs",
+        "apps/examples/solid-start/tsconfig.json",
+        "apps/examples/solid-start/vite.config.ts",
+        "apps/examples/sveltekit/.env.example",
+        "apps/examples/sveltekit/.eslintignore",
+        "apps/examples/sveltekit/.eslintrc.cjs",
+        "apps/examples/sveltekit/.gitignore",
+        "apps/examples/sveltekit/.prettierignore",
+        "apps/examples/sveltekit/.prettierrc",
+        "apps/examples/sveltekit/README.md",
+        "apps/examples/sveltekit/package.json",
+        "apps/examples/sveltekit/pnpm-lock.yaml",
+        "apps/examples/sveltekit/src/**",
+        "apps/examples/sveltekit/svelte.config.js",
+        "apps/examples/sveltekit/tsconfig.json",
+        "apps/examples/sveltekit/vite.config.js",
+        "apps/playgrounds/**",
+        "apps/proxy/**",
+        "eslint.config.mjs",
+        "lefthook.yml",
+        "package.json",
+        "packages/adapter-azure-tables/**",
+        "packages/adapter-d1/**",
+        "packages/adapter-dgraph/**",
+        "packages/adapter-drizzle/**",
+        "packages/adapter-dynamodb/**",
+        "packages/adapter-edgedb/**",
+        "packages/adapter-fauna/**",
+        "packages/adapter-firebase/**",
+        "packages/adapter-hasura/**",
+        "packages/adapter-kysely/**",
+        "packages/adapter-mikro-orm/**",
+        "packages/adapter-mongodb/**",
+        "packages/adapter-neo4j/**",
+        "packages/adapter-neon/**",
+        "packages/adapter-pg/**",
+        "packages/adapter-pouchdb/**",
+        "packages/adapter-prisma/**",
+        "packages/adapter-sequelize/**",
+        "packages/adapter-supabase/**",
+        "packages/adapter-surrealdb/**",
+        "packages/adapter-typeorm/**",
+        "packages/adapter-unstorage/**",
+        "packages/adapter-upstash-redis/**",
+        "packages/adapter-xata/**",
+        "packages/core/README.md",
+        "packages/core/package.json",
+        "packages/core/scripts/**",
+        "packages/core/src/adapters.ts",
+        "packages/core/src/errors.ts",
+        "packages/core/src/index.ts",
+        "packages/core/src/jwt.ts",
+        "packages/core/src/lib/actions/**",
+        "packages/core/src/lib/index.ts",
+        "packages/core/src/lib/init.ts",
+        "packages/core/src/lib/pages/**",
+        "packages/core/src/lib/symbols.ts",
+        "packages/core/src/lib/utils/**",
+        "packages/core/src/providers/**",
+        "packages/core/src/types.ts",
+        "packages/core/src/warnings.ts",
+        "packages/core/test/**",
+        "packages/core/tsconfig.json",
+        "packages/core/typedoc.config.cjs",
+        "packages/frameworks-express/**",
+        "packages/frameworks-qwik/**",
+        "packages/frameworks-solid-start/**",
+        "packages/frameworks-sveltekit/**",
+        "packages/frameworks-template/**",
+        "packages/next-auth/**",
+        "packages/utils/**",
+        "patches/**",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "turbo.json"
+      ],
+      "text": "ISC License\n\nCopyright (c) 2022-2024, Balázs Orbán\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022-2024, Balázs Orbán, ISC license (LICENSE), https://github.com/nextauthjs/next-auth."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/broken-link-checker/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "ndom91 <yo@ndo.dev> (https://ndo.dev/), MIT license (declared in package.json), https://github.com/nextauthjs/next-auth/tree/a1a16a5a7780488c7449feece410033f445d0b31/.github/broken-link-checker."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "apps/dev/express/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Auth.js Team (https://authjs.dev/contributors), MIT license (declared in package.json), https://github.com/nextauthjs/next-auth/tree/a1a16a5a7780488c7449feece410033f445d0b31/apps/dev/express."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.gql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pug",
+      "paths": [
+        "**/*.pug"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-snippets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fsl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prisma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.fauna-project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

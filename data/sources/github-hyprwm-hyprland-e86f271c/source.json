@@ -1,0 +1,772 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/hyprwm/Hyprland",
+  "revision": "e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb",
+  "checksum": "sha256:a8e2bcbabf267cc7b593bb30e5e21edbbccdd91b2c9cf6c775f61bb5c9e98cbc",
+  "extract": {
+    "exclude": [
+      "assets/install/**",
+      "assets/prev1.png",
+      "assets/prev2.png",
+      "assets/prev3.png",
+      "subprojects/tracy/.github/sponsor.png",
+      "subprojects/tracy/doc/**",
+      "subprojects/tracy/examples/ToyPathTracer/**",
+      "subprojects/tracy/extra/zigzag01.png",
+      "subprojects/tracy/extra/zigzag02.png",
+      "subprojects/tracy/extra/zigzag04.png",
+      "subprojects/tracy/extra/zigzag08.png",
+      "subprojects/tracy/extra/zigzag16.png",
+      "subprojects/tracy/extra/zigzag32.png",
+      "subprojects/tracy/icon/icon.ico",
+      "subprojects/tracy/icon/icon.pdf",
+      "subprojects/tracy/icon/icon.png",
+      "subprojects/tracy/manual/icons/lmb.pdf",
+      "subprojects/tracy/manual/icons/mmb.pdf",
+      "subprojects/tracy/manual/icons/rmb.pdf",
+      "subprojects/tracy/manual/icons/scroll.pdf",
+      "subprojects/tracy/manual/images/**",
+      "subprojects/tracy/profiler/src/font/**",
+      "subprojects/tracy/test/image.jpg"
+    ]
+  },
+  "history": {
+    "since": "382189b84bb9be62776568077388de81a9522c76"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2022-2026, vaxerski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nBSD 3-Clause License\n\nCopyright (c) 2022, Hypr Development\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nTracy Profiler (https://github.com/wolfpld/tracy) is licensed under the\n3-clause BSD license.\n\nCopyright (c) 2017-2025, Bartosz Taudul <wolf@nereid.pl>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the <organization> nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n# Copyright (C) 2012-2016 Free Software Foundation, Inc.\n\n# Redistribution and use in source and binary forms, with or without\n# modification, are permitted provided that the following conditions are\n# met:\n\n#     (1) Redistributions of source code must retain the above copyright\n#     notice, this list of conditions and the following disclaimer. \n\n#     (2) Redistributions in binary form must reproduce the above copyright\n#     notice, this list of conditions and the following disclaimer in\n#     the documentation and/or other materials provided with the\n#     distribution.  \n    \n#     (3) The name of the author may not be used to\n#     endorse or promote products derived from this software without\n#     specific prior written permission.\n\n# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR\n# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,\n# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,\n# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING\n# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n# POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2002-2012, Vivek Thampi <vivek.mt@gmail.com>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, \nare permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, \n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice, \n   this list of conditions and the following disclaimer in the documentation \n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND \nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED \nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE \nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR \nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES \n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; \nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON \nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT \n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS \nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/hyprwm/Hyprland: Copyright (c) 2022-2026, vaxerski, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland; Copyright (c) 2022, Hypr Development, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/hyprland-protocols; Copyright (c) 2017-2025, Bartosz Taudul <wolf@nereid.pl>, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/tracy; the authors of hyprwm/Hyprland (subprojects/tracy/public/libbacktrace) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/tracy/public/libbacktrace; Copyright (c) 2002-2012, Vivek Thampi <vivek.mt@gmail.com>, BSD-2-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/udis86."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".clang-format-ignore",
+        ".clang-tidy",
+        ".codeowners",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        "AGENTS.md",
+        "CLAUDE.MD",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "VERSION",
+        "assets/header.svg",
+        "assets/hyprland-portals.conf",
+        "codeowners.toml",
+        "debug-tools/**",
+        "docs/**",
+        "example/**",
+        "flake.lock",
+        "flake.nix",
+        "hyprctl/**",
+        "hyprland.pc.in",
+        "hyprpm/**",
+        "hyprtester/**",
+        "meta/**",
+        "nix/**",
+        "protocols/**",
+        "scripts/**",
+        "src/**",
+        "start/**",
+        "systemd/**",
+        "tests/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2022-2026, vaxerski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2022-2026, vaxerski, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "subprojects/hyprland-protocols/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2022, Hypr Development\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2022, Hypr Development, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/hyprland-protocols."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "subprojects/tracy/.clang-format",
+        "subprojects/tracy/.clang-tidy",
+        "subprojects/tracy/.github/FUNDING.yml",
+        "subprojects/tracy/.github/workflows/**",
+        "subprojects/tracy/.gitignore",
+        "subprojects/tracy/.mailmap",
+        "subprojects/tracy/.vscode/**",
+        "subprojects/tracy/CMakeLists.txt",
+        "subprojects/tracy/Config.cmake.in",
+        "subprojects/tracy/LICENSE",
+        "subprojects/tracy/NEWS",
+        "subprojects/tracy/README.md",
+        "subprojects/tracy/capture/**",
+        "subprojects/tracy/cmake/**",
+        "subprojects/tracy/csvexport/**",
+        "subprojects/tracy/dtl/**",
+        "subprojects/tracy/examples/OpenCLVectorAdd/**",
+        "subprojects/tracy/examples/fibers.cpp",
+        "subprojects/tracy/extra/color-hot.cpp",
+        "subprojects/tracy/extra/color.cpp",
+        "subprojects/tracy/extra/desktop/**",
+        "subprojects/tracy/extra/dxt1divtable.c",
+        "subprojects/tracy/extra/dxt1table.c",
+        "subprojects/tracy/extra/identify.cpp",
+        "subprojects/tracy/extra/make-build.sh",
+        "subprojects/tracy/extra/natvis.py",
+        "subprojects/tracy/extra/rdotbl.c",
+        "subprojects/tracy/extra/uarch/**",
+        "subprojects/tracy/extra/update-meson-version.sh",
+        "subprojects/tracy/extra/version.cpp",
+        "subprojects/tracy/extra/x11_colors.c",
+        "subprojects/tracy/extra/zigzag.svg",
+        "subprojects/tracy/getopt/**",
+        "subprojects/tracy/icon/application-tracy.copying",
+        "subprojects/tracy/icon/application-tracy.svg",
+        "subprojects/tracy/icon/icon.svg",
+        "subprojects/tracy/import/**",
+        "subprojects/tracy/manual/filter.lua",
+        "subprojects/tracy/manual/icons/lmb.svg",
+        "subprojects/tracy/manual/icons/mmb.svg",
+        "subprojects/tracy/manual/icons/mouse.svg",
+        "subprojects/tracy/manual/icons/rmb.svg",
+        "subprojects/tracy/manual/icons/scroll.svg",
+        "subprojects/tracy/manual/latex2md.sh",
+        "subprojects/tracy/manual/techdoc.tex",
+        "subprojects/tracy/manual/tracy.bib",
+        "subprojects/tracy/manual/tracy.md",
+        "subprojects/tracy/manual/tracy.tex",
+        "subprojects/tracy/meson.build",
+        "subprojects/tracy/meson.options",
+        "subprojects/tracy/profiler/CMakeLists.txt",
+        "subprojects/tracy/profiler/helpers/**",
+        "subprojects/tracy/profiler/src/Backend.hpp",
+        "subprojects/tracy/profiler/src/BackendEmscripten.cpp",
+        "subprojects/tracy/profiler/src/BackendGlfw.cpp",
+        "subprojects/tracy/profiler/src/BackendWayland.cpp",
+        "subprojects/tracy/profiler/src/ConnectionHistory.cpp",
+        "subprojects/tracy/profiler/src/ConnectionHistory.hpp",
+        "subprojects/tracy/profiler/src/Filters.cpp",
+        "subprojects/tracy/profiler/src/Filters.hpp",
+        "subprojects/tracy/profiler/src/Fonts.cpp",
+        "subprojects/tracy/profiler/src/Fonts.hpp",
+        "subprojects/tracy/profiler/src/HttpRequest.cpp",
+        "subprojects/tracy/profiler/src/HttpRequest.hpp",
+        "subprojects/tracy/profiler/src/ImGuiContext.cpp",
+        "subprojects/tracy/profiler/src/ImGuiContext.hpp",
+        "subprojects/tracy/profiler/src/IsElevated.cpp",
+        "subprojects/tracy/profiler/src/IsElevated.hpp",
+        "subprojects/tracy/profiler/src/ResolvService.cpp",
+        "subprojects/tracy/profiler/src/ResolvService.hpp",
+        "subprojects/tracy/profiler/src/RunQueue.cpp",
+        "subprojects/tracy/profiler/src/RunQueue.hpp",
+        "subprojects/tracy/profiler/src/WindowPosition.cpp",
+        "subprojects/tracy/profiler/src/WindowPosition.hpp",
+        "subprojects/tracy/profiler/src/icon.hpp",
+        "subprojects/tracy/profiler/src/ini.c",
+        "subprojects/tracy/profiler/src/ini.h",
+        "subprojects/tracy/profiler/src/llm/**",
+        "subprojects/tracy/profiler/src/main.cpp",
+        "subprojects/tracy/profiler/src/profiler/**",
+        "subprojects/tracy/profiler/src/stb_image.h",
+        "subprojects/tracy/profiler/src/stb_image_resize.h",
+        "subprojects/tracy/profiler/src/winmain.cpp",
+        "subprojects/tracy/profiler/src/winmainArchDiscovery.cpp",
+        "subprojects/tracy/profiler/src/zigzag01.hpp",
+        "subprojects/tracy/profiler/src/zigzag02.hpp",
+        "subprojects/tracy/profiler/src/zigzag04.hpp",
+        "subprojects/tracy/profiler/src/zigzag08.hpp",
+        "subprojects/tracy/profiler/src/zigzag16.hpp",
+        "subprojects/tracy/profiler/src/zigzag32.hpp",
+        "subprojects/tracy/profiler/wasm/**",
+        "subprojects/tracy/profiler/win32/**",
+        "subprojects/tracy/public/TracyClient.F90",
+        "subprojects/tracy/public/TracyClient.cpp",
+        "subprojects/tracy/public/client/**",
+        "subprojects/tracy/public/common/**",
+        "subprojects/tracy/public/tracy/**",
+        "subprojects/tracy/python/**",
+        "subprojects/tracy/server/**",
+        "subprojects/tracy/test/CMakeLists.txt",
+        "subprojects/tracy/test/stb_image.h",
+        "subprojects/tracy/test/test.cpp",
+        "subprojects/tracy/update/**"
+      ],
+      "text": "Tracy Profiler (https://github.com/wolfpld/tracy) is licensed under the\n3-clause BSD license.\n\nCopyright (c) 2017-2025, Bartosz Taudul <wolf@nereid.pl>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the <organization> nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2017-2025, Bartosz Taudul <wolf@nereid.pl>, BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/tracy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "subprojects/tracy/public/libbacktrace/**"
+      ],
+      "text": "# Copyright (C) 2012-2016 Free Software Foundation, Inc.\n\n# Redistribution and use in source and binary forms, with or without\n# modification, are permitted provided that the following conditions are\n# met:\n\n#     (1) Redistributions of source code must retain the above copyright\n#     notice, this list of conditions and the following disclaimer. \n\n#     (2) Redistributions in binary form must reproduce the above copyright\n#     notice, this list of conditions and the following disclaimer in\n#     the documentation and/or other materials provided with the\n#     distribution.  \n    \n#     (3) The name of the author may not be used to\n#     endorse or promote products derived from this software without\n#     specific prior written permission.\n\n# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR\n# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,\n# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,\n# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING\n# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n# POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "the authors of hyprwm/Hyprland (subprojects/tracy/public/libbacktrace) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/tracy/public/libbacktrace."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "subprojects/udis86/**"
+      ],
+      "text": "Copyright (c) 2002-2012, Vivek Thampi <vivek.mt@gmail.com>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, \nare permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, \n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice, \n   this list of conditions and the following disclaimer in the documentation \n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND \nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED \nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE \nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR \nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES \n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; \nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON \nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT \n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS \nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2002-2012, Vivek Thampi <vivek.mt@gmail.com>, BSD-2-Clause license (LICENSE), https://github.com/hyprwm/Hyprland/tree/e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb/subprojects/udis86."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.asm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fortran",
+      "paths": [
+        "**/*.F90"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Sref"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.am"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.copying"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hmm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.m4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.proj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ref"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.target"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "hyprtester/pointer-scroll.txt",
+        "subprojects/udis86/BuildVS2010/README.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xccheckout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format-ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codeowners"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUILD-WINDOWS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NEWS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_input"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "subprojects/hyprland-protocols": "https://github.com/hyprwm/hyprland-protocols",
+    "subprojects/tracy": "https://github.com/wolfpld/tracy",
+    "subprojects/udis86": "https://github.com/canihavesomecoffee/udis86"
+  }
+}

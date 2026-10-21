@@ -1,0 +1,1138 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/BabylonJS/Babylon.js",
+  "revision": "ac0601c633650d4802c60913a28c854529a259d5",
+  "checksum": "sha256:efee69d9450134ef5315f47a0a760a1470fe411f4a32b953922a37e35dfb0194",
+  "extract": {
+    "exclude": [
+      "packages/dev/inspector-v2/public/**",
+      "packages/dev/loaders/test/external/**",
+      "packages/public/@babylonjs/accessibility/**",
+      "packages/public/@babylonjs/addons/**",
+      "packages/public/@babylonjs/core/**",
+      "packages/public/@babylonjs/gui/**",
+      "packages/public/@babylonjs/gui-editor/**",
+      "packages/public/@babylonjs/inspector/**",
+      "packages/public/@babylonjs/inspector-v2/**",
+      "packages/public/@babylonjs/ktx2decoder/**",
+      "packages/public/@babylonjs/loaders/license.md",
+      "packages/public/@babylonjs/loaders/package.json",
+      "packages/public/@babylonjs/loaders/readme.md",
+      "packages/public/@babylonjs/loaders/tsconfig.build.json",
+      "packages/public/@babylonjs/loaders/tsconfig.json",
+      "packages/public/@babylonjs/materials/**",
+      "packages/public/@babylonjs/node-editor/**",
+      "packages/public/@babylonjs/node-geometry-editor/**",
+      "packages/public/@babylonjs/node-particle-editor/**",
+      "packages/public/@babylonjs/node-render-graph-editor/**",
+      "packages/public/@babylonjs/post-processes/**",
+      "packages/public/@babylonjs/procedural-textures/**",
+      "packages/public/@babylonjs/serializers/**",
+      "packages/public/@babylonjs/shared-ui-components/**",
+      "packages/public/@babylonjs/test-tools/**",
+      "packages/public/@babylonjs/viewer/**",
+      "packages/public/glTF2Interface/**",
+      "packages/public/umd/babylonjs/**",
+      "packages/public/umd/babylonjs-accessibility/**",
+      "packages/public/umd/babylonjs-addons/**",
+      "packages/public/umd/babylonjs-gui/**",
+      "packages/public/umd/babylonjs-gui-editor/**",
+      "packages/public/umd/babylonjs-inspector/**",
+      "packages/public/umd/babylonjs-inspector-v2/**",
+      "packages/public/umd/babylonjs-ktx2decoder/**",
+      "packages/public/umd/babylonjs-loaders/**",
+      "packages/public/umd/babylonjs-materials/**",
+      "packages/public/umd/babylonjs-node-editor/**",
+      "packages/public/umd/babylonjs-node-geometry-editor/**",
+      "packages/public/umd/babylonjs-node-particle-editor/**",
+      "packages/public/umd/babylonjs-node-render-graph-editor/**",
+      "packages/public/umd/babylonjs-post-process/**",
+      "packages/public/umd/babylonjs-procedural-textures/**",
+      "packages/public/umd/babylonjs-serializers/**",
+      "packages/tools/babylonServer/public/Oimo.license",
+      "packages/tools/babylonServer/public/ammo.wasm.wasm",
+      "packages/tools/babylonServer/public/babylonUsdImporter/4/babylon-usd-importer.wasm",
+      "packages/tools/babylonServer/public/babylonUsdImporter/5/babylon-usd-importer.wasm",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/asymmetric.png",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/instances.usdc",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/instances.usdz",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/material-textures.usdc",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/material-textures.usdz",
+      "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/texture.png",
+      "packages/tools/babylonServer/public/basisTranscoder/1/basis_transcoder.wasm",
+      "packages/tools/babylonServer/public/basisTranscoder/basis_transcoder.wasm",
+      "packages/tools/babylonServer/public/basis_encoder.wasm",
+      "packages/tools/babylonServer/public/draco_decoder.wasm",
+      "packages/tools/babylonServer/public/draco_decoder_gltf.wasm",
+      "packages/tools/babylonServer/public/draco_encoder.wasm",
+      "packages/tools/babylonServer/public/favicon.ico",
+      "packages/tools/babylonServer/public/glslang/glslang.wasm",
+      "packages/tools/babylonServer/public/havok/HavokPhysics.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/msc_basis_transcoder.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_astc.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_bc7.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_r8_unorm.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_rg8_unorm.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_rgba8_srgb_v2.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/1/uastc_rgba8_unorm_v2.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/msc_basis_transcoder.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/uastc_astc.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/uastc_bc7.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/uastc_rgba32_srgb.wasm",
+      "packages/tools/babylonServer/public/ktx2Transcoders/uastc_rgba32_unorm.wasm",
+      "packages/tools/babylonServer/public/libktx.wasm",
+      "packages/tools/babylonServer/public/twgsl/twgsl.wasm",
+      "packages/tools/babylonServer/public/zstddec.wasm",
+      "packages/tools/guiEditor/public/imageControlDefault.jpg",
+      "packages/tools/playground/public/scenes/0.jpg",
+      "packages/tools/playground/public/scenes/Alien/Alien.bin",
+      "packages/tools/playground/public/scenes/Alien/Alien_baseColor.png",
+      "packages/tools/playground/public/scenes/Alien/Alien_normal.png",
+      "packages/tools/playground/public/scenes/Alien/Alien_occlusionRoughnessMetallic.png",
+      "packages/tools/playground/public/scenes/BoomBox/BoomBox.bin",
+      "packages/tools/playground/public/scenes/BoomBox/BoomBox_baseColor.png",
+      "packages/tools/playground/public/scenes/BoomBox/BoomBox_emissive.png",
+      "packages/tools/playground/public/scenes/BoomBox/BoomBox_normal.png",
+      "packages/tools/playground/public/scenes/BoomBox/BoomBox_occlusionRoughnessMetallic.png",
+      "packages/tools/playground/public/scenes/BoomBox.glb",
+      "packages/tools/playground/public/scenes/Box/20140615_192225.png",
+      "packages/tools/playground/public/scenes/Box/Box.bin",
+      "packages/tools/playground/public/scenes/Box/Box_extras.bin",
+      "packages/tools/playground/public/scenes/BrainStem/BrainStem0.bin",
+      "packages/tools/playground/public/scenes/Buggy/glTF/Buggy0.bin",
+      "packages/tools/playground/public/scenes/Buggy/glTF-Draco/0.bin",
+      "packages/tools/playground/public/scenes/Dude/0.jpg",
+      "packages/tools/playground/public/scenes/Dude/1.jpg",
+      "packages/tools/playground/public/scenes/Dude/2.jpg",
+      "packages/tools/playground/public/scenes/Dude/3.jpg",
+      "packages/tools/playground/public/scenes/Elf/Elf.bin",
+      "packages/tools/playground/public/scenes/Elf/Elf_allAnimations.bin",
+      "packages/tools/playground/public/scenes/Elf/Elf_die.bin",
+      "packages/tools/playground/public/scenes/Elf/Elf_run.bin",
+      "packages/tools/playground/public/scenes/LevelOfDetail.glb",
+      "packages/tools/playground/public/scenes/Trees/BroadleafBark.jpg",
+      "packages/tools/playground/public/scenes/Trees/BroadleafBark_Normal.png",
+      "packages/tools/playground/public/scenes/Trees/Broadleaf_Desktop_Atlas.png",
+      "packages/tools/playground/public/scenes/Trees/Broadleaf_Desktop_Atlas_Billboards.png",
+      "packages/tools/playground/public/scenes/Trees/Broadleaf_Desktop_Atlas_Billboards_Normal.png",
+      "packages/tools/playground/public/scenes/Trees/Broadleaf_Desktop_Atlas_Normal.png",
+      "packages/tools/playground/public/scenes/Xbot.glb",
+      "packages/tools/playground/public/scenes/cubeMorph_8target.glb",
+      "packages/tools/playground/public/scenes/miniBar2.glb",
+      "packages/tools/playground/public/scenes/pumpkinBucketCarved.glb",
+      "packages/tools/playground/public/scenes/seagulf.glb",
+      "packages/tools/playground/public/scenes/ufo.glb",
+      "packages/tools/playground/public/sounds/6sounds.mp3",
+      "packages/tools/playground/public/sounds/bounce.wav",
+      "packages/tools/playground/public/sounds/cellolong.wav",
+      "packages/tools/playground/public/sounds/gunshot.wav",
+      "packages/tools/playground/public/sounds/violons11.wav",
+      "packages/tools/playground/public/sounds/violons18.wav",
+      "packages/tools/playground/public/textures/360photo.jpg",
+      "packages/tools/playground/public/textures/BJS-logo_v3-astc.ktx",
+      "packages/tools/playground/public/textures/BJS-logo_v3-dxt.ktx",
+      "packages/tools/playground/public/textures/BJS-logo_v3-etc2.ktx",
+      "packages/tools/playground/public/textures/BJS-logo_v3-pvrtc.ktx",
+      "packages/tools/playground/public/textures/BJS-logo_v3.png",
+      "packages/tools/playground/public/textures/Checker_albedo.png",
+      "packages/tools/playground/public/textures/DemageFont.png",
+      "packages/tools/playground/public/textures/Dot.png",
+      "packages/tools/playground/public/textures/Fire_SpriteSheet1_8x8.png",
+      "packages/tools/playground/public/textures/Fire_SpriteSheet2_8x8.png",
+      "packages/tools/playground/public/textures/Fire_SpriteSheet3_8x8.png",
+      "packages/tools/playground/public/textures/Fire_SpriteSheet_8x8.png",
+      "packages/tools/playground/public/textures/FlameBlastSpriteSheet.png",
+      "packages/tools/playground/public/textures/Flare2.png",
+      "packages/tools/playground/public/textures/FlashParticle.png",
+      "packages/tools/playground/public/textures/GatonaParkWalkway1_Panorama_4Kx2K.jpg",
+      "packages/tools/playground/public/textures/JbvoYlB.png",
+      "packages/tools/playground/public/textures/Logo.png",
+      "packages/tools/playground/public/textures/ParallaxDiffuse.png",
+      "packages/tools/playground/public/textures/ParallaxNormal.png",
+      "packages/tools/playground/public/textures/Rain.png",
+      "packages/tools/playground/public/textures/Runyon_Canyon_A_2k_cube_specular.dds",
+      "packages/tools/playground/public/textures/Runyon_Canyon_A_2k_cube_specular.env",
+      "packages/tools/playground/public/textures/Smoke_SpriteSheet_8x8.png",
+      "packages/tools/playground/public/textures/Space/**",
+      "packages/tools/playground/public/textures/Spark.png",
+      "packages/tools/playground/public/textures/SpecularHDR.dds",
+      "packages/tools/playground/public/textures/Studio_Softbox_2Umbrellas_cube_specular.dds",
+      "packages/tools/playground/public/textures/Studio_Softbox_2Umbrellas_cube_specular.env",
+      "packages/tools/playground/public/textures/SunDiffuse.png",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_nx.jpg",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_ny.jpg",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_nz.jpg",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_px.jpg",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_py.jpg",
+      "packages/tools/playground/public/textures/TropicalSunnyDay_pz.jpg",
+      "packages/tools/playground/public/textures/WhiteTransarentRamp.png",
+      "packages/tools/playground/public/textures/albedo.png",
+      "packages/tools/playground/public/textures/amiga.jpg",
+      "packages/tools/playground/public/textures/babylonjs.mp4",
+      "packages/tools/playground/public/textures/babylonjs.webm",
+      "packages/tools/playground/public/textures/big_buck_bunny.mp4",
+      "packages/tools/playground/public/textures/blenderSpecularHDR.dds",
+      "packages/tools/playground/public/textures/bloc.jpg",
+      "packages/tools/playground/public/textures/candleopacity.png",
+      "packages/tools/playground/public/textures/checkerBJS-astc.ktx",
+      "packages/tools/playground/public/textures/checkerBJS-dxt.ktx",
+      "packages/tools/playground/public/textures/checkerBJS-etc2.ktx",
+      "packages/tools/playground/public/textures/checkerBJS-pvrtc.ktx",
+      "packages/tools/playground/public/textures/checkerBJS.png",
+      "packages/tools/playground/public/textures/circusArenaHDR.dds",
+      "packages/tools/playground/public/textures/cloud.png",
+      "packages/tools/playground/public/textures/co.png",
+      "packages/tools/playground/public/textures/colorGrade-highContrast.png",
+      "packages/tools/playground/public/textures/colorGrade-inverted.png",
+      "packages/tools/playground/public/textures/colorGrade-posterize.png",
+      "packages/tools/playground/public/textures/colorGrade.png",
+      "packages/tools/playground/public/textures/country.dds",
+      "packages/tools/playground/public/textures/country.hdr",
+      "packages/tools/playground/public/textures/countrySpecularHDR.dds",
+      "packages/tools/playground/public/textures/crate.png",
+      "packages/tools/playground/public/textures/cubemapDebug/**",
+      "packages/tools/playground/public/textures/customProceduralTextures/land/textures/**",
+      "packages/tools/playground/public/textures/deltaParkHDR.dds",
+      "packages/tools/playground/public/textures/detailmap.png",
+      "packages/tools/playground/public/textures/distortion.png",
+      "packages/tools/playground/public/textures/down.png",
+      "packages/tools/playground/public/textures/earth.jpg",
+      "packages/tools/playground/public/textures/earthnormal.jpg",
+      "packages/tools/playground/public/textures/ennisSpecularHDR.dds",
+      "packages/tools/playground/public/textures/environment.dds",
+      "packages/tools/playground/public/textures/environment.env",
+      "packages/tools/playground/public/textures/environment.hdr",
+      "packages/tools/playground/public/textures/equirectangular.jpg",
+      "packages/tools/playground/public/textures/fan.png",
+      "packages/tools/playground/public/textures/fire/**",
+      "packages/tools/playground/public/textures/fire.jpg",
+      "packages/tools/playground/public/textures/fire.png",
+      "packages/tools/playground/public/textures/fireplaceHDR.dds",
+      "packages/tools/playground/public/textures/flare.png",
+      "packages/tools/playground/public/textures/flare3.png",
+      "packages/tools/playground/public/textures/flare32bits.png",
+      "packages/tools/playground/public/textures/floor.png",
+      "packages/tools/playground/public/textures/floor_bump.PNG",
+      "packages/tools/playground/public/textures/footprintCourtSpecularHDR.dds",
+      "packages/tools/playground/public/textures/forest.dds",
+      "packages/tools/playground/public/textures/forest.hdr",
+      "packages/tools/playground/public/textures/fur.jpg",
+      "packages/tools/playground/public/textures/garageSpecularHDR.dds",
+      "packages/tools/playground/public/textures/grass.dds",
+      "packages/tools/playground/public/textures/grass.jpg",
+      "packages/tools/playground/public/textures/grass.png",
+      "packages/tools/playground/public/textures/grassn.png",
+      "packages/tools/playground/public/textures/graySpecularHDR.dds",
+      "packages/tools/playground/public/textures/ground.jpg",
+      "packages/tools/playground/public/textures/gui/backgroundImage-vertical.png",
+      "packages/tools/playground/public/textures/gui/backgroundImage.png",
+      "packages/tools/playground/public/textures/gui/thumb.png",
+      "packages/tools/playground/public/textures/gui/valueImage-vertical.png",
+      "packages/tools/playground/public/textures/gui/valueImage.png",
+      "packages/tools/playground/public/textures/heightMap.png",
+      "packages/tools/playground/public/textures/heightMapTriPlanar.png",
+      "packages/tools/playground/public/textures/hollow.png",
+      "packages/tools/playground/public/textures/houseWithAlpha.basis",
+      "packages/tools/playground/public/textures/icons/Back.png",
+      "packages/tools/playground/public/textures/icons/Crop.png",
+      "packages/tools/playground/public/textures/icons/Delete.png",
+      "packages/tools/playground/public/textures/icons/Dot.png",
+      "packages/tools/playground/public/textures/icons/Download.png",
+      "packages/tools/playground/public/textures/icons/Edit.png",
+      "packages/tools/playground/public/textures/icons/GearIcon.png",
+      "packages/tools/playground/public/textures/icons/Open.png",
+      "packages/tools/playground/public/textures/icons/Pause.png",
+      "packages/tools/playground/public/textures/icons/Play.png",
+      "packages/tools/playground/public/textures/icons/Redo.png",
+      "packages/tools/playground/public/textures/icons/Refresh.png",
+      "packages/tools/playground/public/textures/icons/Save.png",
+      "packages/tools/playground/public/textures/icons/Settings.png",
+      "packages/tools/playground/public/textures/icons/Share.png",
+      "packages/tools/playground/public/textures/icons/Undo.png",
+      "packages/tools/playground/public/textures/icons/Upload.png",
+      "packages/tools/playground/public/textures/icons/Zoom.png",
+      "packages/tools/playground/public/textures/impact.png",
+      "packages/tools/playground/public/textures/indoorSpecularHDR.dds",
+      "packages/tools/playground/public/textures/invmask.png",
+      "packages/tools/playground/public/textures/kloofendalPartlyCloudyHDR.dds",
+      "packages/tools/playground/public/textures/ktx2/sample_etc1s.ktx2",
+      "packages/tools/playground/public/textures/ktx2/sample_uastc_zcmp.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testalpha_etc1s.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testalpha_uastc.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testalpha_uastc_zcmp.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testmipmapcustom_etc1s.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testmipmapcustom_uastc_zcmp.ktx2",
+      "packages/tools/playground/public/textures/lava/**",
+      "packages/tools/playground/public/textures/lenscolor.png",
+      "packages/tools/playground/public/textures/lensdirt.jpg",
+      "packages/tools/playground/public/textures/lensflaredirt.png",
+      "packages/tools/playground/public/textures/lensstar.png",
+      "packages/tools/playground/public/textures/leopard_fur.JPG",
+      "packages/tools/playground/public/textures/mask.png",
+      "packages/tools/playground/public/textures/mercator.jpg",
+      "packages/tools/playground/public/textures/mercator2.jpg",
+      "packages/tools/playground/public/textures/misc.jpg",
+      "packages/tools/playground/public/textures/mistyPinesHDR.dds",
+      "packages/tools/playground/public/textures/mixMap.png",
+      "packages/tools/playground/public/textures/mixMap_2.png",
+      "packages/tools/playground/public/textures/mountainFieldHDR.dds",
+      "packages/tools/playground/public/textures/mr.jpg",
+      "packages/tools/playground/public/textures/nba.png",
+      "packages/tools/playground/public/textures/night.dds",
+      "packages/tools/playground/public/textures/night.hdr",
+      "packages/tools/playground/public/textures/nightBridgeHDR.dds",
+      "packages/tools/playground/public/textures/nightSpecularHDR.dds",
+      "packages/tools/playground/public/textures/normal-pxr24.exr",
+      "packages/tools/playground/public/textures/normal.exr",
+      "packages/tools/playground/public/textures/normal.png",
+      "packages/tools/playground/public/textures/normalMap.jpg",
+      "packages/tools/playground/public/textures/opacity.png",
+      "packages/tools/playground/public/textures/orient.jpg",
+      "packages/tools/playground/public/textures/pack1.png",
+      "packages/tools/playground/public/textures/palm.png",
+      "packages/tools/playground/public/textures/panel_blue2x.9.direct.png",
+      "packages/tools/playground/public/textures/panel_blue2x.9.inv.png",
+      "packages/tools/playground/public/textures/panel_blue2x.9.png",
+      "packages/tools/playground/public/textures/parkPathHDR.dds",
+      "packages/tools/playground/public/textures/parking.dds",
+      "packages/tools/playground/public/textures/parking.hdr",
+      "packages/tools/playground/public/textures/particle.png",
+      "packages/tools/playground/public/textures/plane.basis",
+      "packages/tools/playground/public/textures/player.png",
+      "packages/tools/playground/public/textures/reflectivity.png",
+      "packages/tools/playground/public/textures/rock.png",
+      "packages/tools/playground/public/textures/rockn.png",
+      "packages/tools/playground/public/textures/rockyGround_basecolor.png",
+      "packages/tools/playground/public/textures/rockyGround_metalRough.png",
+      "packages/tools/playground/public/textures/rockyGround_normal.png",
+      "packages/tools/playground/public/textures/room.dds",
+      "packages/tools/playground/public/textures/room.hdr",
+      "packages/tools/playground/public/textures/rosendal_plains_1_1k.exr",
+      "packages/tools/playground/public/textures/roundMask.png",
+      "packages/tools/playground/public/textures/sand.jpg",
+      "packages/tools/playground/public/textures/sg.png",
+      "packages/tools/playground/public/textures/shanghaiBundHDR.dds",
+      "packages/tools/playground/public/textures/sidexside.jpg",
+      "packages/tools/playground/public/textures/skateParkHDR.dds",
+      "packages/tools/playground/public/textures/skybox2_nx.jpg",
+      "packages/tools/playground/public/textures/skybox2_ny.jpg",
+      "packages/tools/playground/public/textures/skybox2_nz.jpg",
+      "packages/tools/playground/public/textures/skybox2_px.jpg",
+      "packages/tools/playground/public/textures/skybox2_py.jpg",
+      "packages/tools/playground/public/textures/skybox2_pz.jpg",
+      "packages/tools/playground/public/textures/skybox3_nx.jpg",
+      "packages/tools/playground/public/textures/skybox3_ny.jpg",
+      "packages/tools/playground/public/textures/skybox3_nz.jpg",
+      "packages/tools/playground/public/textures/skybox3_px.jpg",
+      "packages/tools/playground/public/textures/skybox3_py.jpg",
+      "packages/tools/playground/public/textures/skybox3_pz.jpg",
+      "packages/tools/playground/public/textures/skybox4_nx.jpg",
+      "packages/tools/playground/public/textures/skybox4_ny.jpg",
+      "packages/tools/playground/public/textures/skybox4_nz.jpg",
+      "packages/tools/playground/public/textures/skybox4_px.jpg",
+      "packages/tools/playground/public/textures/skybox4_py.jpg",
+      "packages/tools/playground/public/textures/skybox4_pz.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_nx.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_ny.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_nz.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_px.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_py.jpg",
+      "packages/tools/playground/public/textures/skyboxBlack_pz.jpg",
+      "packages/tools/playground/public/textures/skybox_nx.jpg",
+      "packages/tools/playground/public/textures/skybox_ny.jpg",
+      "packages/tools/playground/public/textures/skybox_nz.jpg",
+      "packages/tools/playground/public/textures/skybox_px.jpg",
+      "packages/tools/playground/public/textures/skybox_py.jpg",
+      "packages/tools/playground/public/textures/skybox_pz.jpg",
+      "packages/tools/playground/public/textures/sparkStretched.png",
+      "packages/tools/playground/public/textures/sparkle.png",
+      "packages/tools/playground/public/textures/sparkle2.jpg",
+      "packages/tools/playground/public/textures/sparks.png",
+      "packages/tools/playground/public/textures/speckles.jpg",
+      "packages/tools/playground/public/textures/specmap.png",
+      "packages/tools/playground/public/textures/spectorjsLayer.png",
+      "packages/tools/playground/public/textures/specularglossymap.png",
+      "packages/tools/playground/public/textures/sphereMap.png",
+      "packages/tools/playground/public/textures/spriteMap/none_trimmed/Legends_Level_A.png",
+      "packages/tools/playground/public/textures/stars.png",
+      "packages/tools/playground/public/textures/sun.png",
+      "packages/tools/playground/public/textures/sunnyVondelparkHDR.dds",
+      "packages/tools/playground/public/textures/test2D.dds",
+      "packages/tools/playground/public/textures/tiergartenOvercastHDR.dds",
+      "packages/tools/playground/public/textures/topbottom.jpg",
+      "packages/tools/playground/public/textures/tree.png",
+      "packages/tools/playground/public/textures/up.png",
+      "packages/tools/playground/public/textures/walk.png",
+      "packages/tools/playground/public/textures/waterbump.png",
+      "packages/tools/playground/public/textures/wood.jpg",
+      "packages/tools/playground/public/textures/worldHeightMap.jpg",
+      "packages/tools/playground/public/textures/xStrip.jpg",
+      "packages/tools/playground/public/textures/yStrip.jpg",
+      "packages/tools/playground/public/textures/zStrip.jpg",
+      "packages/tools/sandbox/Assets/BtnPerf.png",
+      "packages/tools/sandbox/Assets/FlecheDown.png",
+      "packages/tools/sandbox/Assets/LogoSandbox.png",
+      "packages/tools/sandbox/Assets/arrow.png",
+      "packages/tools/sandbox/Assets/arrowUp.png",
+      "packages/tools/sandbox/Assets/circle.png",
+      "packages/tools/sandbox/Assets/down.png",
+      "packages/tools/sandbox/Assets/font.woff",
+      "packages/tools/sandbox/Assets/pause.png",
+      "packages/tools/sandbox/Assets/play.png",
+      "packages/tools/sandbox/Assets/sep.png",
+      "packages/tools/sandbox/Assets/up.png",
+      "packages/tools/sandbox/Assets/video.png",
+      "packages/tools/sandbox/public/icons/**",
+      "packages/tools/sandbox/test/LogoSandbox.png",
+      "packages/tools/smartFiltersDebugger/src/assets/icons/**",
+      "packages/tools/smartFiltersEditor/public/**",
+      "packages/tools/smartFiltersEditorControl/src/assets/imgs/logo.png",
+      "packages/tools/tests/test/visualization/ReferenceImages/**",
+      "packages/tools/playground/public/textures/SpecularHDR.env",
+      "packages/tools/playground/public/textures/country.env",
+      "packages/tools/playground/public/textures/forest.env",
+      "packages/tools/playground/public/textures/ktx2/sample_uastc.ktx2",
+      "packages/tools/playground/public/textures/ktx2/testmipmapcustom_uastc.ktx2",
+      "packages/tools/playground/public/textures/night.env",
+      "packages/tools/playground/public/textures/parking.env",
+      "packages/tools/playground/public/textures/room.env"
+    ]
+  },
+  "history": {
+    "since": "691dc53808dacf90bb041ebdad24f1b42109f277"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "# Apache License 2.0 (Apache)\r\n\r\nApache License\r\nVersion 2.0, January 2004\r\n<http://www.apache.org/licenses/>\r\n\r\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\r\n\r\n## Definitions\r\n\r\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\r\n\r\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\r\n\r\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\r\n\r\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\r\n\r\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\r\n\r\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\r\n\r\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\r\n\r\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\r\n\r\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\r\n\r\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\r\n\r\n## Grant of Copyright License\r\n\r\nSubject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\r\n\r\n## Grant of Patent License\r\n\r\nSubject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\r\n\r\n## Redistribution\r\n\r\nYou may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\r\n\r\n1. You must give any other recipients of the Work or Derivative Works a copy of this License; and\r\n\r\n2. You must cause any modified files to carry prominent notices stating that You changed the files; and\r\n\r\n3. You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\r\n\r\n4. If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\r\n\r\nYou may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\r\n\r\n## Submission of Contributions\r\n\r\nUnless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\r\n\r\n## Trademarks\r\n\r\nThis License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\r\n\r\n## Disclaimer of Warranty\r\n\r\nUnless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\r\n\r\n## Limitation of Liability\r\n\r\nIn no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\r\n\r\n## Accepting Warranty or Additional Liability\r\n\r\nWhile redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\r\n\n\nNOTICE.md:\n\nBabylon.js\nCopyright 2023 The Babylon.js team\n\n\nMIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2016 herzig\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n# MIT License\r\n\r\nCopyright (c) 2023 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Commit history of https://github.com/BabylonJS/Babylon.js: Copyright 2023 The Babylon.js team, Apache-2.0 license (license.md), https://github.com/BabylonJS/Babylon.js; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/dev/smartFilterBlocks; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/dev/smartFilters; Copyright (c) 2016 herzig, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/loaders/BVH; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/smart-filters; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/smart-filters-blocks; Copyright (c) 2023 Babylon.js, MIT license (LICENSE), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/babylonServer/public/havok; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersDebugger; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersEditor; Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersEditorControl."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".azure-pipelines/**",
+        ".build/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".githooks/**",
+        ".github/**",
+        ".gitignore",
+        ".hintrc",
+        ".npmrc",
+        ".prettierignore",
+        ".prettierrc",
+        ".vscode/**",
+        "CHANGELOG.md",
+        "CNAME",
+        "CNAME.txt",
+        "CODE_OF_CONDUCT.md",
+        "NOTICE.md",
+        "contributing.md",
+        "eslint.config.mjs",
+        "lerna.json",
+        "license.md",
+        "lint-staged.config.mjs",
+        "nx.json",
+        "package-lock.json",
+        "package.json",
+        "packages/dev/addons/**",
+        "packages/dev/buildTools/**",
+        "packages/dev/core/**",
+        "packages/dev/gui/**",
+        "packages/dev/inspector/**",
+        "packages/dev/inspector-v2/index.html",
+        "packages/dev/inspector-v2/package.json",
+        "packages/dev/inspector-v2/readme.md",
+        "packages/dev/inspector-v2/scripts/**",
+        "packages/dev/inspector-v2/src/**",
+        "packages/dev/inspector-v2/test/**",
+        "packages/dev/inspector-v2/tsconfig.build.json",
+        "packages/dev/inspector-v2/tsconfig.common.json",
+        "packages/dev/inspector-v2/tsconfig.json",
+        "packages/dev/inspector-v2/vite.config.ts",
+        "packages/dev/loaders/package.json",
+        "packages/dev/loaders/readme.md",
+        "packages/dev/loaders/src/**",
+        "packages/dev/loaders/test/integration/**",
+        "packages/dev/loaders/test/unit/**",
+        "packages/dev/loaders/tsconfig.build.json",
+        "packages/dev/loaders/tsconfig.json",
+        "packages/dev/loaders/tsconfig.nocomposite.json",
+        "packages/dev/materials/**",
+        "packages/dev/postProcesses/**",
+        "packages/dev/proceduralTextures/**",
+        "packages/dev/serializers/**",
+        "packages/dev/sharedUiComponents/**",
+        "packages/public/@babylonjs/.gitignore",
+        "packages/public/@babylonjs/mcp-servers/**",
+        "packages/public/@babylonjs/ui-controls/**",
+        "packages/public/create-babylonjs/**",
+        "packages/public/rollupUMDHelper.mjs",
+        "packages/public/rollupUtils.mjs",
+        "packages/public/umd/.gitignore",
+        "packages/public/umd/babylonjs-testproject/**",
+        "packages/public/umd/babylonjs-ui-controls/**",
+        "packages/public/umd/test/**",
+        "packages/public/viteToolsHelper.mjs",
+        "packages/tools/README.md",
+        "packages/tools/accessibility/**",
+        "packages/tools/babylonServer/.gitignore",
+        "packages/tools/babylonServer/declarationConfigDev.json",
+        "packages/tools/babylonServer/index-ts.html",
+        "packages/tools/babylonServer/index.html",
+        "packages/tools/babylonServer/package.json",
+        "packages/tools/babylonServer/public/Oimo.js",
+        "packages/tools/babylonServer/public/ammo.js",
+        "packages/tools/babylonServer/public/ammo.wasm.js",
+        "packages/tools/babylonServer/public/audiov2-test.js",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/README.md",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/babylon-usd-importer.data",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/babylon-usd-importer.js",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/babylon-usd-importer.worker.js",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/openusd.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/tbb.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/4/zlib.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/README.md",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/babylon-usd-importer.data",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/babylon-usd-importer.js",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/babylon-usd-importer.worker.js",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/openusd.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/tbb.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/5/zlib.license",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/README.md",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/analytic.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/bind-pose.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/instances.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/material-textures.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/materials.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/morph-targets.usda",
+        "packages/tools/babylonServer/public/babylonUsdImporter/testAssets/point-instancer.usda",
+        "packages/tools/babylonServer/public/basisTranscoder/1/basis_transcoder.js",
+        "packages/tools/babylonServer/public/basisTranscoder/basis_transcoder.js",
+        "packages/tools/babylonServer/public/basis_encoder.js",
+        "packages/tools/babylonServer/public/cannon.js",
+        "packages/tools/babylonServer/public/cannon.license",
+        "packages/tools/babylonServer/public/draco.license",
+        "packages/tools/babylonServer/public/draco_decoder.js",
+        "packages/tools/babylonServer/public/draco_decoder_gltf.js",
+        "packages/tools/babylonServer/public/draco_encoder.js",
+        "packages/tools/babylonServer/public/draco_encoder_wasm_wrapper.js",
+        "packages/tools/babylonServer/public/draco_wasm_wrapper.js",
+        "packages/tools/babylonServer/public/draco_wasm_wrapper_gltf.js",
+        "packages/tools/babylonServer/public/earcut.license",
+        "packages/tools/babylonServer/public/earcut.min.js",
+        "packages/tools/babylonServer/public/empty-preview.html",
+        "packages/tools/babylonServer/public/empty-stable.html",
+        "packages/tools/babylonServer/public/empty.html",
+        "packages/tools/babylonServer/public/glslang/glslang.js",
+        "packages/tools/babylonServer/public/gltf_validator.js",
+        "packages/tools/babylonServer/public/index-ts.html",
+        "packages/tools/babylonServer/public/index.html",
+        "packages/tools/babylonServer/public/ktx2Transcoders/1/msc_basis_transcoder.js",
+        "packages/tools/babylonServer/public/ktx2Transcoders/msc_basis_transcoder.js",
+        "packages/tools/babylonServer/public/libktx.js",
+        "packages/tools/babylonServer/public/meshopt.license",
+        "packages/tools/babylonServer/public/meshopt_decoder.js",
+        "packages/tools/babylonServer/public/recast.d.ts",
+        "packages/tools/babylonServer/public/recast.js",
+        "packages/tools/babylonServer/public/split.js",
+        "packages/tools/babylonServer/public/test.html",
+        "packages/tools/babylonServer/public/twgsl/twgsl.js",
+        "packages/tools/babylonServer/public/uiControls/**",
+        "packages/tools/babylonServer/scripts/**",
+        "packages/tools/babylonServer/src/**",
+        "packages/tools/babylonServer/test/**",
+        "packages/tools/babylonServer/tsconfig.build.json",
+        "packages/tools/babylonServer/tsconfig.json",
+        "packages/tools/babylonServer/vite.config.ts",
+        "packages/tools/devHost/**",
+        "packages/tools/eslintBabylonPlugin/**",
+        "packages/tools/flow-graph-mcp-server/**",
+        "packages/tools/flowGraphEditor/**",
+        "packages/tools/gui-mcp-server/**",
+        "packages/tools/guiEditor/index.html",
+        "packages/tools/guiEditor/package.json",
+        "packages/tools/guiEditor/public/babylon.guiEditor.js",
+        "packages/tools/guiEditor/public/index.js",
+        "packages/tools/guiEditor/src/**",
+        "packages/tools/guiEditor/tsconfig.build.json",
+        "packages/tools/guiEditor/tsconfig.json",
+        "packages/tools/guiEditor/tsconfig.nocomposite.json",
+        "packages/tools/guiEditor/vite.config.ts",
+        "packages/tools/ktx2Decoder/**",
+        "packages/tools/mcp-server-core/**",
+        "packages/tools/nge-mcp-server/**",
+        "packages/tools/ngeMcpCommon/**",
+        "packages/tools/nme-mcp-server/**",
+        "packages/tools/nodeEditor/**",
+        "packages/tools/nodeGeometryEditor/**",
+        "packages/tools/nodeParticleEditor/**",
+        "packages/tools/nodeRenderGraphEditor/**",
+        "packages/tools/npe-mcp-server/**",
+        "packages/tools/nrge-mcp-server/**",
+        "packages/tools/playground/debug.html",
+        "packages/tools/playground/frame.html",
+        "packages/tools/playground/full.html",
+        "packages/tools/playground/index.html",
+        "packages/tools/playground/package.json",
+        "packages/tools/playground/public/babylon.playground.js",
+        "packages/tools/playground/public/imgs/**",
+        "packages/tools/playground/public/index.js",
+        "packages/tools/playground/public/libs/**",
+        "packages/tools/playground/public/procedural.json",
+        "packages/tools/playground/public/scenes/Alien/Alien.gltf",
+        "packages/tools/playground/public/scenes/BoomBox/BoomBox.gltf",
+        "packages/tools/playground/public/scenes/BoomBox/UnlitBoomBox.gltf",
+        "packages/tools/playground/public/scenes/Box/Box.gltf",
+        "packages/tools/playground/public/scenes/Box/Box.mtl",
+        "packages/tools/playground/public/scenes/Box/Box.obj",
+        "packages/tools/playground/public/scenes/Box/Box_extras.gltf",
+        "packages/tools/playground/public/scenes/BrainStem/BrainStem.gltf",
+        "packages/tools/playground/public/scenes/Buggy/glTF/Buggy.gltf",
+        "packages/tools/playground/public/scenes/Buggy/glTF-Draco/Buggy.gltf",
+        "packages/tools/playground/public/scenes/Dude/dude.babylon",
+        "packages/tools/playground/public/scenes/Elf/Elf.gltf",
+        "packages/tools/playground/public/scenes/Elf/Elf_allAnimations.gltf",
+        "packages/tools/playground/public/scenes/Elf/Elf_die.gltf",
+        "packages/tools/playground/public/scenes/Elf/Elf_run.gltf",
+        "packages/tools/playground/public/scenes/README.md",
+        "packages/tools/playground/public/scenes/Rabbit.babylon",
+        "packages/tools/playground/public/scenes/SSAOcat.babylon",
+        "packages/tools/playground/public/scenes/StanfordBunny.mtl",
+        "packages/tools/playground/public/scenes/StanfordBunny.obj",
+        "packages/tools/playground/public/scenes/Trees/rawtrees.babylon",
+        "packages/tools/playground/public/scenes/arr.babylon",
+        "packages/tools/playground/public/scenes/babylonJS_logo_v3.babylon",
+        "packages/tools/playground/public/scenes/candle.babylon",
+        "packages/tools/playground/public/scenes/dummy2.babylon",
+        "packages/tools/playground/public/scenes/dummy3.babylon",
+        "packages/tools/playground/public/scenes/msft-lod.gltf",
+        "packages/tools/playground/public/scenes/skull.babylon",
+        "packages/tools/playground/public/sounds/6sounds_lengths.txt",
+        "packages/tools/playground/public/templates.json",
+        "packages/tools/playground/public/textures/ColorGrading.3DL",
+        "packages/tools/playground/public/textures/DemageFont.fnt",
+        "packages/tools/playground/public/textures/HorrorBlue.3dl",
+        "packages/tools/playground/public/textures/LateSunset.3dl",
+        "packages/tools/playground/public/textures/PBR_PACK_1_texurePackage.json",
+        "packages/tools/playground/public/textures/SpecularHDR.env",
+        "packages/tools/playground/public/textures/TestPack_texurePackage.json",
+        "packages/tools/playground/public/textures/country.env",
+        "packages/tools/playground/public/textures/customProceduralTextures/land/config.json",
+        "packages/tools/playground/public/textures/customProceduralTextures/land/custom.fragment.fx",
+        "packages/tools/playground/public/textures/forest.env",
+        "packages/tools/playground/public/textures/gui/bjs_demo1.svg",
+        "packages/tools/playground/public/textures/icons/Icon_Fullscreen.svg",
+        "packages/tools/playground/public/textures/invert.3dl",
+        "packages/tools/playground/public/textures/ktx2/sample_uastc.ktx2",
+        "packages/tools/playground/public/textures/ktx2/testmipmapcustom_uastc.ktx2",
+        "packages/tools/playground/public/textures/night.env",
+        "packages/tools/playground/public/textures/pack1.json",
+        "packages/tools/playground/public/textures/parking.env",
+        "packages/tools/playground/public/textures/room.env",
+        "packages/tools/playground/public/textures/spriteMap/none_trimmed/Legends_Level_A.json",
+        "packages/tools/playground/public/textures/spriteMap/none_trimmed/levelStage.tilemaps",
+        "packages/tools/playground/public/workers/**",
+        "packages/tools/playground/src/**",
+        "packages/tools/playground/test/**",
+        "packages/tools/playground/tsconfig.build.json",
+        "packages/tools/playground/tsconfig.json",
+        "packages/tools/playground/vite.config.ts",
+        "packages/tools/reflector/**",
+        "packages/tools/rollup.config.mcp.mjs",
+        "packages/tools/sandbox/Assets/BabylonIdentity.svg",
+        "packages/tools/sandbox/Assets/IBLicon.svg",
+        "packages/tools/sandbox/Assets/Icon_Dashboard.svg",
+        "packages/tools/sandbox/Assets/Icon_Down.svg",
+        "packages/tools/sandbox/Assets/Icon_EditModel.svg",
+        "packages/tools/sandbox/Assets/Icon_Fullscreen.svg",
+        "packages/tools/sandbox/Assets/Icon_OpenFile.svg",
+        "packages/tools/sandbox/Assets/Icon_Pause.svg",
+        "packages/tools/sandbox/Assets/Icon_Play.svg",
+        "packages/tools/sandbox/Assets/Icon_Up.svg",
+        "packages/tools/sandbox/Assets/Logo_Fullscreen.svg",
+        "packages/tools/sandbox/index.html",
+        "packages/tools/sandbox/package.json",
+        "packages/tools/sandbox/public/index.html",
+        "packages/tools/sandbox/public/index.js",
+        "packages/tools/sandbox/public/manifest.webmanifest",
+        "packages/tools/sandbox/public/sw.js",
+        "packages/tools/sandbox/src/**",
+        "packages/tools/sandbox/test/interaction.sandbox.test.ts",
+        "packages/tools/sandbox/test/unit/**",
+        "packages/tools/sandbox/tsconfig.build.json",
+        "packages/tools/sandbox/tsconfig.json",
+        "packages/tools/sandbox/vite.config.ts",
+        "packages/tools/smart-filters-mcp-server/**",
+        "packages/tools/snippetLoader/**",
+        "packages/tools/testTools/**",
+        "packages/tools/tests/README.md",
+        "packages/tools/tests/browserstack.config.ts",
+        "packages/tools/tests/build.mjs",
+        "packages/tools/tests/es6Vis/**",
+        "packages/tools/tests/globalSetup.ts",
+        "packages/tools/tests/globalTeardown.ts",
+        "packages/tools/tests/package.json",
+        "packages/tools/tests/performanceSummaryReporter.ts",
+        "packages/tools/tests/playwright.utils.ts",
+        "packages/tools/tests/publicReportReporter.ts",
+        "packages/tools/tests/scripts/**",
+        "packages/tools/tests/src/**",
+        "packages/tools/tests/test/audioV2/**",
+        "packages/tools/tests/test/es6/**",
+        "packages/tools/tests/test/integration/**",
+        "packages/tools/tests/test/performance/**",
+        "packages/tools/tests/test/playwright/**",
+        "packages/tools/tests/test/unit/**",
+        "packages/tools/tests/test/visualization/config.json",
+        "packages/tools/tests/test/visualization/tagMap.json",
+        "packages/tools/tests/test/visualization/webxr.json",
+        "packages/tools/tests/tsconfig.build.json",
+        "packages/tools/tests/tsconfig.es6-smoke.json",
+        "packages/tools/tests/tsconfig.json",
+        "packages/tools/tests/vitest.es6.config.mts",
+        "packages/tools/testsMemoryLeaks/**",
+        "packages/tools/viewer/**",
+        "packages/tools/viewer-configurator/**",
+        "packages/tools/vsm/**",
+        "playwright.browserstack.config.ts",
+        "playwright.config.ts",
+        "playwright.es6vis.config.ts",
+        "playwright.khr-interactivity.config.ts",
+        "readme-es6.md",
+        "readme.md",
+        "scripts/**",
+        "specs/**",
+        "tsconfig.build.json",
+        "tsconfig.devpackages.json",
+        "tsconfig.json",
+        "tsconfig.smartFilters.json",
+        "tsconfig.test.json",
+        "tsdoc.json",
+        "vitest.config.mts",
+        "vitest.setup.ts"
+      ],
+      "text": "# Apache License 2.0 (Apache)\r\n\r\nApache License\r\nVersion 2.0, January 2004\r\n<http://www.apache.org/licenses/>\r\n\r\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\r\n\r\n## Definitions\r\n\r\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\r\n\r\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\r\n\r\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\r\n\r\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\r\n\r\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\r\n\r\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\r\n\r\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\r\n\r\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\r\n\r\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\r\n\r\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\r\n\r\n## Grant of Copyright License\r\n\r\nSubject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\r\n\r\n## Grant of Patent License\r\n\r\nSubject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\r\n\r\n## Redistribution\r\n\r\nYou may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\r\n\r\n1. You must give any other recipients of the Work or Derivative Works a copy of this License; and\r\n\r\n2. You must cause any modified files to carry prominent notices stating that You changed the files; and\r\n\r\n3. You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\r\n\r\n4. If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\r\n\r\nYou may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\r\n\r\n## Submission of Contributions\r\n\r\nUnless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\r\n\r\n## Trademarks\r\n\r\nThis License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\r\n\r\n## Disclaimer of Warranty\r\n\r\nUnless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\r\n\r\n## Limitation of Liability\r\n\r\nIn no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\r\n\r\n## Accepting Warranty or Additional Liability\r\n\r\nWhile redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\r\n\n\nNOTICE.md:\n\nBabylon.js\nCopyright 2023 The Babylon.js team\n",
+      "attribution": "Copyright 2023 The Babylon.js team, Apache-2.0 license (license.md), https://github.com/BabylonJS/Babylon.js."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/dev/smartFilterBlocks/**"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/dev/smartFilterBlocks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/dev/smartFilters/**"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/dev/smartFilters."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/public/@babylonjs/loaders/BVH/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016 herzig\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2016 herzig, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/loaders/BVH."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/public/@babylonjs/smart-filters/**"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/smart-filters."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/public/@babylonjs/smart-filters-blocks/**"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/public/@babylonjs/smart-filters-blocks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/tools/babylonServer/public/havok/HavokPhysics_umd.js",
+        "packages/tools/babylonServer/public/havok/LICENSE"
+      ],
+      "text": "# MIT License\r\n\r\nCopyright (c) 2023 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2023 Babylon.js, MIT license (LICENSE), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/babylonServer/public/havok."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/tools/smartFiltersDebugger/license.md",
+        "packages/tools/smartFiltersDebugger/package.json",
+        "packages/tools/smartFiltersDebugger/readme.md",
+        "packages/tools/smartFiltersDebugger/rollup.config.umd.mjs",
+        "packages/tools/smartFiltersDebugger/src/assets/manifest.json",
+        "packages/tools/smartFiltersDebugger/src/background.ts",
+        "packages/tools/smartFiltersDebugger/src/editorLauncher.ts",
+        "packages/tools/smartFiltersDebugger/src/smartFilterCompatibility.ts",
+        "packages/tools/smartFiltersDebugger/test/**",
+        "packages/tools/smartFiltersDebugger/tsconfig.build.json",
+        "packages/tools/smartFiltersDebugger/tsconfig.json"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersDebugger."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/tools/smartFiltersEditor/index.html",
+        "packages/tools/smartFiltersEditor/license.md",
+        "packages/tools/smartFiltersEditor/package.json",
+        "packages/tools/smartFiltersEditor/readme.md",
+        "packages/tools/smartFiltersEditor/src/**",
+        "packages/tools/smartFiltersEditor/test/**",
+        "packages/tools/smartFiltersEditor/tsconfig.build.json",
+        "packages/tools/smartFiltersEditor/tsconfig.json",
+        "packages/tools/smartFiltersEditor/vite.config.ts"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersEditor."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/tools/smartFiltersEditorControl/license.md",
+        "packages/tools/smartFiltersEditorControl/package.json",
+        "packages/tools/smartFiltersEditorControl/readme.md",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/add.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/copy.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/delete.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/downArrow.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/popOut.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/square.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/imgs/triangle.svg",
+        "packages/tools/smartFiltersEditorControl/src/assets/styles/**",
+        "packages/tools/smartFiltersEditorControl/src/blockTools.ts",
+        "packages/tools/smartFiltersEditorControl/src/components/**",
+        "packages/tools/smartFiltersEditorControl/src/configuration/**",
+        "packages/tools/smartFiltersEditorControl/src/constants.ts",
+        "packages/tools/smartFiltersEditorControl/src/custom.d.ts",
+        "packages/tools/smartFiltersEditorControl/src/globalState.ts",
+        "packages/tools/smartFiltersEditorControl/src/graphEditor.tsx",
+        "packages/tools/smartFiltersEditorControl/src/graphSystem/**",
+        "packages/tools/smartFiltersEditorControl/src/helpers/**",
+        "packages/tools/smartFiltersEditorControl/src/index.ts",
+        "packages/tools/smartFiltersEditorControl/src/initializePreview.ts",
+        "packages/tools/smartFiltersEditorControl/src/portal.tsx",
+        "packages/tools/smartFiltersEditorControl/src/previewSizeManager.ts",
+        "packages/tools/smartFiltersEditorControl/src/sharedComponents/**",
+        "packages/tools/smartFiltersEditorControl/src/smartFilterEditorControl.ts",
+        "packages/tools/smartFiltersEditorControl/test/**",
+        "packages/tools/smartFiltersEditorControl/tsconfig.build.json",
+        "packages/tools/smartFiltersEditorControl/tsconfig.json"
+      ],
+      "text": "MIT License\r\n\r\nCopyright (c) 2025 Babylon.js\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all\r\ncopies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n",
+      "attribution": "Copyright (c) 2025 Babylon.js, MIT license (license.md), https://github.com/BabylonJS/Babylon.js/tree/ac0601c633650d4802c60913a28c854529a259d5/packages/tools/smartFiltersEditorControl."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3DL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3dl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.babylon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bvh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fnt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gltf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ktx2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mtl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.obj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.temp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tilemaps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.hintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

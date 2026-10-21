@@ -1,0 +1,514 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/acidanthera/OpenCorePkg",
+  "revision": "81ecf1a7e75c318dfc859ddabe5b91f4af757231",
+  "checksum": "sha256:fa746572a5bd7e2eeb926b1bf4cd26f8e4924e98811e186cdbb8b640c23e03b8",
+  "extract": {
+    "exclude": [
+      "AppleModels/Products.zjson",
+      "Application/GopStop/Examples/**",
+      "Debug/GdbSyms/Bin/**",
+      "Docs/Configuration.pdf",
+      "Docs/Differences/Differences.pdf",
+      "Docs/Errata/Errata.pdf",
+      "Docs/Logos/Logo.pdf",
+      "Docs/Logos/Logo.png",
+      "Docs/Logos/Logo.sketch",
+      "Docs/Logos/OpenCore_with_text_Large.png",
+      "Docs/Logos/OpenCore_with_text_Small.png",
+      "Staging/EnableGop/Release/**",
+      "Staging/EnableGop/UEFITool_Inserted_Screenshot.png",
+      "Utilities/ACPIe/Tests/Input/**",
+      "Utilities/AppleEfiSignTool/Samples/apfs.efi",
+      "Utilities/AppleEfiSignTool/Samples/apfs_10.15.efi",
+      "Utilities/AppleEfiSignTool/Samples/apfs_aligned_10.15.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.10.5.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.11.6.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.12.6.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.13.6.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.14.0.18A371a.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.14.0.18A389.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.15.7.19H15.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.11.32.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.11.64.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.11.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.7.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.8.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.4.9.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.5.6.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.5.8.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.6.8.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.7.5.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.8.5.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_10.9.5.efi",
+      "Utilities/AppleEfiSignTool/Samples/boot_11.0.1.20B29.efi",
+      "Utilities/CreateVault/RsaTool",
+      "Utilities/LegacyBoot/boot0",
+      "Utilities/LegacyBoot/boot1f32",
+      "Utilities/LogoutHook/Legacy/nvramdump",
+      "Utilities/TestMacho/kernel",
+      "Utilities/TestSmbios/Smbios.bin",
+      "Utilities/WinNvram/nvram.exe"
+    ]
+  },
+  "history": {
+    "since": "efb4c378979c5baaf4ab691060a68363bc8f2b60"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2016-2017, The HermitCrabs Lab\nCopyright (c) 2016-2020, Download-Fritz\nCopyright (c) 2017-2020, savvas\nCopyright (c) 2016-2020, vit9696\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2016, Nikolaj Schlej\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n\n// Copyright (c) 2010 The Chromium OS Authors. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/acidanthera/OpenCorePkg: Copyright (c) 2016-2017, The HermitCrabs Lab; Copyright (c) 2016-2020, Download-Fritz; Copyright (c) 2017-2020, savvas; Copyright (c) 2016-2020, vit9696, BSD-3-Clause license (LICENSE.txt), https://github.com/acidanthera/OpenCorePkg; Copyright (c) 2016, Nikolaj Schlej, BSD-2-Clause license (LICENSE), https://github.com/acidanthera/OpenCorePkg/tree/81ecf1a7e75c318dfc859ddabe5b91f4af757231/Platform/CrScreenshotDxe; the authors of acidanthera/OpenCorePkg (Utilities/RsaTool) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/acidanthera/OpenCorePkg/tree/81ecf1a7e75c318dfc859ddabe5b91f4af757231/Utilities/RsaTool."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".shellcheckrc",
+        "AppleModels/**",
+        "Application/BootKicker/**",
+        "Application/Bootstrap/**",
+        "Application/ChipTune/**",
+        "Application/CleanNvram/**",
+        "Application/ControlMsrE2/**",
+        "Application/CsrUtil/**",
+        "Application/FontTester/**",
+        "Application/GopPerf/**",
+        "Application/GopStop/GopStop.c",
+        "Application/GopStop/GopStop.inf",
+        "Application/GopStop/README.md",
+        "Application/KeyTester/**",
+        "Application/ListPartitions/**",
+        "Application/MmapDump/**",
+        "Application/OpenControl/**",
+        "Application/OpenCore/**",
+        "Application/PavpProvision/**",
+        "Application/ResetSystem/**",
+        "Application/RtcRw/**",
+        "Application/TpmInfo/**",
+        "Application/VerifyMemOpt/**",
+        "Changelog.md",
+        "Debug/GdbSyms/GdbSyms.c",
+        "Debug/GdbSyms/GdbSyms.inf",
+        "Debug/README.md",
+        "Debug/Scripts/**",
+        "Debug/efidebug.tool",
+        "Dockerfiles/**",
+        "Docs/AcpiSamples/**",
+        "Docs/BuildDocs.tool",
+        "Docs/Configuration.md5",
+        "Docs/Configuration.tex",
+        "Docs/Differences/Differences.tex",
+        "Docs/Differences/PreviousConfiguration.tex",
+        "Docs/Errata/Errata.tex",
+        "Docs/FORUMS.md",
+        "Docs/Flavours.md",
+        "Docs/Kexts.md",
+        "Docs/Libraries.md",
+        "Docs/Logos/LogoApprox.svg",
+        "Docs/Logos/README.md",
+        "Docs/Sample.plist",
+        "Docs/SampleCustom.plist",
+        "Doxyfile",
+        "Include/**",
+        "LICENSE.txt",
+        "Legacy/**",
+        "Library/**",
+        "OpenCorePkg.dec",
+        "OpenCorePkg.dsc",
+        "OpenCorePkg.fdf",
+        "OpenDuetPkg.dec",
+        "OpenDuetPkg.dsc",
+        "OpenDuetPkg.fdf",
+        "OpenDuetPkgDefines.fdf.inc",
+        "Patches/**",
+        "Platform/FirmwareSettingsEntry/**",
+        "Platform/OpenCanopy/**",
+        "Platform/OpenLegacyBoot/**",
+        "Platform/OpenLinuxBoot/**",
+        "Platform/OpenNetworkBoot/**",
+        "Platform/OpenNtfsDxe/**",
+        "Platform/OpenPartitionDxe/**",
+        "Platform/OpenRuntime/**",
+        "Platform/OpenUsbKbDxe/**",
+        "Platform/OpenVariableRuntimeDxe/**",
+        "Platform/ResetNvramEntry/**",
+        "Platform/ToggleSipEntry/**",
+        "README.md",
+        "Staging/AudioDxe/**",
+        "Staging/EnableGop/EnableGop.c",
+        "Staging/EnableGop/EnableGop.inf",
+        "Staging/EnableGop/EnableGopDirect.inf",
+        "Staging/EnableGop/README.md",
+        "Staging/EnableGop/vBiosInsert.sh",
+        "Staging/OpenHfsPlus/**",
+        "Staging/README.md",
+        "Tests/**",
+        "Uncrustify.yml",
+        "User/**",
+        "Utilities/ACPIe/ACPIe.c",
+        "Utilities/ACPIe/Makefile",
+        "Utilities/ACPIe/Tests/Correct/**",
+        "Utilities/ACPIe/testsuite.sh",
+        "Utilities/AppleEfiSignTool/AppleEfiSignTool.c",
+        "Utilities/AppleEfiSignTool/Makefile",
+        "Utilities/AppleEfiSignTool/README.md",
+        "Utilities/AppleEfiSignTool/Samples/boot_10.7.5.efi",
+        "Utilities/AppleKeyboardLayouts/**",
+        "Utilities/BaseTools/**",
+        "Utilities/CreateVault/create_vault.sh",
+        "Utilities/CreateVault/sign.command",
+        "Utilities/EfiResTool/**",
+        "Utilities/FindSerialPort/**",
+        "Utilities/LegacyBoot/BootInstallBase.sh",
+        "Utilities/LegacyBoot/BootInstall_IA32.tool",
+        "Utilities/LegacyBoot/BootInstall_IA32_BlockIO.tool",
+        "Utilities/LegacyBoot/BootInstall_X64.tool",
+        "Utilities/LegacyBoot/BootInstall_X64_BlockIO.tool",
+        "Utilities/LegacyBoot/QemuBuild.command",
+        "Utilities/LegacyBoot/README.md",
+        "Utilities/LogoutHook/Launchd.command",
+        "Utilities/LogoutHook/Launchd.command.plist",
+        "Utilities/LogoutHook/Legacy/README.md",
+        "Utilities/LogoutHook/Makefile",
+        "Utilities/LogoutHook/README.md",
+        "Utilities/LogoutHook/nvramdump.c",
+        "Utilities/MacEfiUnpack/**",
+        "Utilities/ShimUtils/**",
+        "Utilities/TestAtapiPath/**",
+        "Utilities/TestBmf/**",
+        "Utilities/TestCpuFrequency/**",
+        "Utilities/TestDiskImage/**",
+        "Utilities/TestEvent/**",
+        "Utilities/TestExt4Dxe/**",
+        "Utilities/TestFatDxe/**",
+        "Utilities/TestHelloWorld/**",
+        "Utilities/TestImg4/**",
+        "Utilities/TestKextInject/**",
+        "Utilities/TestMacho/**",
+        "Utilities/TestMp3/**",
+        "Utilities/TestNtfsDxe/**",
+        "Utilities/TestPeCoff/**",
+        "Utilities/TestProcessKernel/**",
+        "Utilities/TestRsaPreprocess/**",
+        "Utilities/TestSmbios/Makefile",
+        "Utilities/TestSmbios/Smbios.c",
+        "Utilities/WinNvram/Makefile",
+        "Utilities/WinNvram/nvram.c",
+        "Utilities/acdtinfo/**",
+        "Utilities/disklabel/**",
+        "Utilities/ext4read/**",
+        "Utilities/icnspack/**",
+        "Utilities/kpdescribe/**",
+        "Utilities/macrecovery/**",
+        "Utilities/macserial/**",
+        "Utilities/ocpasswordgen/**",
+        "Utilities/ocvalidate/**",
+        "build_duet.tool",
+        "build_oc.tool",
+        "docker-compose.yaml",
+        "xcbuild.tool"
+      ],
+      "text": "Copyright (c) 2016-2017, The HermitCrabs Lab\nCopyright (c) 2016-2020, Download-Fritz\nCopyright (c) 2017-2020, savvas\nCopyright (c) 2016-2020, vit9696\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2016-2017, The HermitCrabs Lab; Copyright (c) 2016-2020, Download-Fritz; Copyright (c) 2017-2020, savvas; Copyright (c) 2016-2020, vit9696, BSD-3-Clause license (LICENSE.txt), https://github.com/acidanthera/OpenCorePkg."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "Platform/CrScreenshotDxe/**"
+      ],
+      "text": "Copyright (c) 2016, Nikolaj Schlej\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Copyright (c) 2016, Nikolaj Schlej, BSD-2-Clause license (LICENSE), https://github.com/acidanthera/OpenCorePkg/tree/81ecf1a7e75c318dfc859ddabe5b91f4af757231/Platform/CrScreenshotDxe."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "Utilities/RsaTool/**"
+      ],
+      "text": "// Copyright (c) 2010 The Chromium OS Authors. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "the authors of acidanthera/OpenCorePkg (Utilities/RsaTool) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/acidanthera/OpenCorePkg/tree/81ecf1a7e75c318dfc859ddabe5b91f4af757231/Utilities/RsaTool."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.efi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.md5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uni"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zjson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SilenceZlibWarnings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/kernel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

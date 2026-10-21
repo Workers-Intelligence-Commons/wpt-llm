@@ -1,0 +1,1796 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/postgres/postgres",
+  "revision": "febd05600d789ea89f3b3e5fd50391990b652a68",
+  "checksum": "sha256:02db00485592c4093a56de4be68b4d9b107feb15526b692930416848fb6e5857",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "src/backend/regex/**",
+      "src/backend/utils/mb/conversion_procs/README.euc_jp",
+      "src/bin/pg_config/po/nb.po",
+      "src/bin/pgevent/MSG00001.bin",
+      "src/port/win32.ico",
+      "src/test/locale/de_DE.ISO8859-1/expected/**",
+      "src/test/locale/de_DE.ISO8859-1/test-de-select.sql.in",
+      "src/test/locale/de_DE.ISO8859-1/test-de-sort.in",
+      "src/test/locale/de_DE.ISO8859-1/test-de-upper.sql.in",
+      "src/test/locale/de_DE.ISO8859-1/test-de.sql.in",
+      "src/test/locale/gr_GR.ISO8859-7/expected/**",
+      "src/test/locale/gr_GR.ISO8859-7/test-gr-select.sql.in",
+      "src/test/locale/gr_GR.ISO8859-7/test-gr-sort.in",
+      "src/test/locale/gr_GR.ISO8859-7/test-gr.sql.in",
+      "src/test/locale/koi8-r/expected/**",
+      "src/test/locale/koi8-r/test-koi8-select.sql.in",
+      "src/test/locale/koi8-r/test-koi8-sort.in",
+      "src/test/locale/koi8-r/test-koi8.sql.in",
+      "src/test/locale/koi8-to-win1251/expected/**",
+      "src/test/locale/koi8-to-win1251/test-koi8-select.sql.in",
+      "src/test/locale/koi8-to-win1251/test-koi8-sort.in",
+      "src/test/locale/koi8-to-win1251/test-koi8.sql.in",
+      "src/test/mb/expected/big5.out",
+      "src/test/mb/expected/euc_cn.out",
+      "src/test/mb/expected/euc_jp.out",
+      "src/test/mb/expected/euc_kr.out",
+      "src/test/mb/expected/euc_tw.out",
+      "src/test/mb/expected/gb18030.out",
+      "src/test/mb/expected/sjis.out",
+      "src/test/mb/sql/big5.sql",
+      "src/test/mb/sql/euc_cn.sql",
+      "src/test/mb/sql/euc_jp.sql",
+      "src/test/mb/sql/euc_kr.sql",
+      "src/test/mb/sql/euc_tw.sql",
+      "src/test/mb/sql/gb18030.sql",
+      "src/test/mb/sql/sjis.sql",
+      "src/test/regress/expected/collate.windows.win1252.out",
+      "src/test/regress/sql/collate.windows.win1252.sql",
+      "src/test/ssl/ssl/client-der.key",
+      "src/test/ssl/ssl/client-encrypted-der.key",
+      "src/tools/**"
+    ]
+  },
+  "history": {
+    "since": "b070db6632bda5267ac82cdbba56edd53a699fe1"
+  },
+  "licenses": [
+    {
+      "license": "PostgreSQL",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "PostgreSQL Database Management System\n(also known as Postgres, formerly known as Postgres95)\n\nPortions Copyright (c) 1996-2026, PostgreSQL Global Development Group\n\nPortions Copyright (c) 1994, The Regents of the University of California\n\nPermission to use, copy, modify, and distribute this software and its\ndocumentation for any purpose, without fee, and without a written agreement\nis hereby granted, provided that the above copyright notice and this\nparagraph and the following two paragraphs appear in all copies.\n\nIN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR\nDIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING\nLOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS\nDOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\nTHE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,\nINCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS\nON AN \"AS IS\" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO\nPROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.\n",
+      "attribution": "Commit history of https://github.com/postgres/postgres: the authors of postgres/postgres (the license file names no copyright line), PostgreSQL license (COPYRIGHT), https://github.com/postgres/postgres."
+    },
+    {
+      "license": "PostgreSQL",
+      "paths": [
+        ".dir-locals.el",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        "COPYRIGHT",
+        "GNUmakefile.in",
+        "HISTORY",
+        "Makefile",
+        "README.md",
+        "aclocal.m4",
+        "config/**",
+        "configure",
+        "configure.ac",
+        "doc/**",
+        "meson.build",
+        "meson_options.txt",
+        "src/.gitignore",
+        "src/DEVELOPERS",
+        "src/Makefile",
+        "src/Makefile.global.in",
+        "src/Makefile.shlib",
+        "src/backend/.gitignore",
+        "src/backend/Makefile",
+        "src/backend/access/**",
+        "src/backend/archive/**",
+        "src/backend/backup/**",
+        "src/backend/bootstrap/**",
+        "src/backend/catalog/**",
+        "src/backend/commands/**",
+        "src/backend/common.mk",
+        "src/backend/executor/**",
+        "src/backend/foreign/**",
+        "src/backend/jit/**",
+        "src/backend/lib/**",
+        "src/backend/libpq/**",
+        "src/backend/main/**",
+        "src/backend/meson.build",
+        "src/backend/nls.mk",
+        "src/backend/nodes/**",
+        "src/backend/optimizer/**",
+        "src/backend/parser/**",
+        "src/backend/partitioning/**",
+        "src/backend/po/**",
+        "src/backend/port/**",
+        "src/backend/postmaster/**",
+        "src/backend/replication/**",
+        "src/backend/rewrite/**",
+        "src/backend/snowball/**",
+        "src/backend/statistics/**",
+        "src/backend/storage/**",
+        "src/backend/tcop/**",
+        "src/backend/tsearch/**",
+        "src/backend/utils/.gitignore",
+        "src/backend/utils/Gen_dummy_probes.pl",
+        "src/backend/utils/Gen_fmgrtab.pl",
+        "src/backend/utils/Makefile",
+        "src/backend/utils/activity/**",
+        "src/backend/utils/adt/**",
+        "src/backend/utils/cache/**",
+        "src/backend/utils/errcodes.txt",
+        "src/backend/utils/error/**",
+        "src/backend/utils/fmgr/**",
+        "src/backend/utils/generate-errcodes.pl",
+        "src/backend/utils/hash/**",
+        "src/backend/utils/init/**",
+        "src/backend/utils/mb/Makefile",
+        "src/backend/utils/mb/README",
+        "src/backend/utils/mb/Unicode/**",
+        "src/backend/utils/mb/conv.c",
+        "src/backend/utils/mb/conversion_procs/Makefile",
+        "src/backend/utils/mb/conversion_procs/cyrillic/**",
+        "src/backend/utils/mb/conversion_procs/euc2004_sjis2004/**",
+        "src/backend/utils/mb/conversion_procs/euc_jp_and_sjis/**",
+        "src/backend/utils/mb/conversion_procs/euc_tw_and_big5/**",
+        "src/backend/utils/mb/conversion_procs/latin2_and_win1250/**",
+        "src/backend/utils/mb/conversion_procs/meson.build",
+        "src/backend/utils/mb/conversion_procs/proc.mk",
+        "src/backend/utils/mb/conversion_procs/utf8_and_big5/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_cyrillic/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_euc2004/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_euc_cn/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_euc_jp/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_euc_kr/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_euc_tw/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_gb18030/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_gbk/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_iso8859/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_iso8859_1/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_johab/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_sjis/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_sjis2004/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_uhc/**",
+        "src/backend/utils/mb/conversion_procs/utf8_and_win/**",
+        "src/backend/utils/mb/mbutils.c",
+        "src/backend/utils/mb/meson.build",
+        "src/backend/utils/mb/stringinfo_mb.c",
+        "src/backend/utils/mb/wstrcmp.c",
+        "src/backend/utils/mb/wstrncmp.c",
+        "src/backend/utils/meson.build",
+        "src/backend/utils/misc/**",
+        "src/backend/utils/mmgr/**",
+        "src/backend/utils/postprocess_dtrace.sed",
+        "src/backend/utils/probes.d",
+        "src/backend/utils/resowner/**",
+        "src/backend/utils/sort/**",
+        "src/backend/utils/time/**",
+        "src/bin/Makefile",
+        "src/bin/initdb/**",
+        "src/bin/meson.build",
+        "src/bin/pg_amcheck/**",
+        "src/bin/pg_archivecleanup/**",
+        "src/bin/pg_basebackup/**",
+        "src/bin/pg_checksums/**",
+        "src/bin/pg_combinebackup/**",
+        "src/bin/pg_config/.gitignore",
+        "src/bin/pg_config/Makefile",
+        "src/bin/pg_config/meson.build",
+        "src/bin/pg_config/nls.mk",
+        "src/bin/pg_config/pg_config.c",
+        "src/bin/pg_config/po/LINGUAS",
+        "src/bin/pg_config/po/cs.po",
+        "src/bin/pg_config/po/de.po",
+        "src/bin/pg_config/po/el.po",
+        "src/bin/pg_config/po/es.po",
+        "src/bin/pg_config/po/fr.po",
+        "src/bin/pg_config/po/he.po",
+        "src/bin/pg_config/po/it.po",
+        "src/bin/pg_config/po/ja.po",
+        "src/bin/pg_config/po/ka.po",
+        "src/bin/pg_config/po/ko.po",
+        "src/bin/pg_config/po/meson.build",
+        "src/bin/pg_config/po/pl.po",
+        "src/bin/pg_config/po/pt_BR.po",
+        "src/bin/pg_config/po/ro.po",
+        "src/bin/pg_config/po/ru.po",
+        "src/bin/pg_config/po/sv.po",
+        "src/bin/pg_config/po/ta.po",
+        "src/bin/pg_config/po/tr.po",
+        "src/bin/pg_config/po/uk.po",
+        "src/bin/pg_config/po/vi.po",
+        "src/bin/pg_config/po/zh_CN.po",
+        "src/bin/pg_config/po/zh_TW.po",
+        "src/bin/pg_config/t/**",
+        "src/bin/pg_controldata/**",
+        "src/bin/pg_ctl/**",
+        "src/bin/pg_dump/**",
+        "src/bin/pg_resetwal/**",
+        "src/bin/pg_rewind/**",
+        "src/bin/pg_test_fsync/**",
+        "src/bin/pg_test_timing/**",
+        "src/bin/pg_upgrade/**",
+        "src/bin/pg_verifybackup/**",
+        "src/bin/pg_waldump/**",
+        "src/bin/pg_walsummary/**",
+        "src/bin/pgbench/**",
+        "src/bin/pgevent/Makefile",
+        "src/bin/pgevent/README",
+        "src/bin/pgevent/exports.txt",
+        "src/bin/pgevent/meson.build",
+        "src/bin/pgevent/pgevent.c",
+        "src/bin/pgevent/pgevent.def",
+        "src/bin/pgevent/pgmsgevent.h",
+        "src/bin/pgevent/pgmsgevent.mc",
+        "src/bin/pgevent/pgmsgevent.rc",
+        "src/bin/psql/**",
+        "src/bin/scripts/**",
+        "src/common/**",
+        "src/fe_utils/**",
+        "src/include/**",
+        "src/interfaces/**",
+        "src/makefiles/**",
+        "src/meson.build",
+        "src/nls-global.mk",
+        "src/pl/**",
+        "src/port/.gitignore",
+        "src/port/Makefile",
+        "src/port/README",
+        "src/port/bsearch_arg.c",
+        "src/port/chklocale.c",
+        "src/port/dirent.c",
+        "src/port/dirmod.c",
+        "src/port/explicit_bzero.c",
+        "src/port/getopt.c",
+        "src/port/getopt_long.c",
+        "src/port/getpeereid.c",
+        "src/port/inet_aton.c",
+        "src/port/inet_net_ntop.c",
+        "src/port/kill.c",
+        "src/port/meson.build",
+        "src/port/mkdtemp.c",
+        "src/port/noblock.c",
+        "src/port/open.c",
+        "src/port/path.c",
+        "src/port/pg_bitutils.c",
+        "src/port/pg_cpu_x86.c",
+        "src/port/pg_crc32c_armv8.c",
+        "src/port/pg_crc32c_armv8_choose.c",
+        "src/port/pg_crc32c_loongarch.c",
+        "src/port/pg_crc32c_sb8.c",
+        "src/port/pg_crc32c_sse42.c",
+        "src/port/pg_getopt_ctx.c",
+        "src/port/pg_localeconv_r.c",
+        "src/port/pg_numa.c",
+        "src/port/pg_popcount_aarch64.c",
+        "src/port/pg_popcount_x86.c",
+        "src/port/pg_strong_random.c",
+        "src/port/pgcheckdir.c",
+        "src/port/pgmkdirp.c",
+        "src/port/pgsleep.c",
+        "src/port/pgstrcasecmp.c",
+        "src/port/pgstrsignal.c",
+        "src/port/pqsignal.c",
+        "src/port/pthread-win32.h",
+        "src/port/pthread_barrier_wait.c",
+        "src/port/qsort.c",
+        "src/port/qsort_arg.c",
+        "src/port/quotes.c",
+        "src/port/snprintf.c",
+        "src/port/strerror.c",
+        "src/port/strlcat.c",
+        "src/port/strlcpy.c",
+        "src/port/strsep.c",
+        "src/port/strtof.c",
+        "src/port/system.c",
+        "src/port/tar.c",
+        "src/port/timingsafe_bcmp.c",
+        "src/port/win32common.c",
+        "src/port/win32dlopen.c",
+        "src/port/win32env.c",
+        "src/port/win32error.c",
+        "src/port/win32fdatasync.c",
+        "src/port/win32fseek.c",
+        "src/port/win32gai_strerror.c",
+        "src/port/win32getrusage.c",
+        "src/port/win32gettimeofday.c",
+        "src/port/win32link.c",
+        "src/port/win32ntdll.c",
+        "src/port/win32pread.c",
+        "src/port/win32pwrite.c",
+        "src/port/win32security.c",
+        "src/port/win32setlocale.c",
+        "src/port/win32stat.c",
+        "src/port/win32ver.rc",
+        "src/template/**",
+        "src/test/Makefile",
+        "src/test/README",
+        "src/test/authentication/**",
+        "src/test/examples/**",
+        "src/test/icu/**",
+        "src/test/isolation/**",
+        "src/test/kerberos/**",
+        "src/test/ldap/**",
+        "src/test/locale/.gitignore",
+        "src/test/locale/Makefile",
+        "src/test/locale/README",
+        "src/test/locale/de_DE.ISO8859-1/Makefile",
+        "src/test/locale/de_DE.ISO8859-1/README",
+        "src/test/locale/de_DE.ISO8859-1/runall",
+        "src/test/locale/gr_GR.ISO8859-7/Makefile",
+        "src/test/locale/gr_GR.ISO8859-7/README",
+        "src/test/locale/gr_GR.ISO8859-7/runall",
+        "src/test/locale/koi8-r/Makefile",
+        "src/test/locale/koi8-r/runall",
+        "src/test/locale/koi8-to-win1251/Makefile",
+        "src/test/locale/koi8-to-win1251/README",
+        "src/test/locale/koi8-to-win1251/runall",
+        "src/test/locale/sort-test.pl",
+        "src/test/locale/sort-test.py",
+        "src/test/locale/test-ctype.c",
+        "src/test/mb/README",
+        "src/test/mb/expected/utf8.out",
+        "src/test/mb/mbregress.sh",
+        "src/test/mb/sql/utf8.sql",
+        "src/test/meson.build",
+        "src/test/modules/**",
+        "src/test/perl/**",
+        "src/test/postmaster/**",
+        "src/test/recovery/**",
+        "src/test/regress/.gitignore",
+        "src/test/regress/GNUmakefile",
+        "src/test/regress/Makefile",
+        "src/test/regress/README",
+        "src/test/regress/data/**",
+        "src/test/regress/expected/advisory_lock.out",
+        "src/test/regress/expected/aggregates.out",
+        "src/test/regress/expected/alter_generic.out",
+        "src/test/regress/expected/alter_operator.out",
+        "src/test/regress/expected/alter_table.out",
+        "src/test/regress/expected/amutils.out",
+        "src/test/regress/expected/arrays.out",
+        "src/test/regress/expected/async.out",
+        "src/test/regress/expected/bit.out",
+        "src/test/regress/expected/bitmapops.out",
+        "src/test/regress/expected/boolean.out",
+        "src/test/regress/expected/box.out",
+        "src/test/regress/expected/brin.out",
+        "src/test/regress/expected/brin_bloom.out",
+        "src/test/regress/expected/brin_multi.out",
+        "src/test/regress/expected/btree_index.out",
+        "src/test/regress/expected/case.out",
+        "src/test/regress/expected/char.out",
+        "src/test/regress/expected/char_1.out",
+        "src/test/regress/expected/char_2.out",
+        "src/test/regress/expected/circle.out",
+        "src/test/regress/expected/cluster.out",
+        "src/test/regress/expected/collate.icu.utf8.out",
+        "src/test/regress/expected/collate.icu.utf8_1.out",
+        "src/test/regress/expected/collate.linux.utf8.out",
+        "src/test/regress/expected/collate.linux.utf8_1.out",
+        "src/test/regress/expected/collate.out",
+        "src/test/regress/expected/collate.utf8.out",
+        "src/test/regress/expected/collate.utf8_1.out",
+        "src/test/regress/expected/collate.windows.win1252_1.out",
+        "src/test/regress/expected/combocid.out",
+        "src/test/regress/expected/comments.out",
+        "src/test/regress/expected/compression.out",
+        "src/test/regress/expected/compression_lz4.out",
+        "src/test/regress/expected/compression_lz4_1.out",
+        "src/test/regress/expected/compression_pglz.out",
+        "src/test/regress/expected/constraints.out",
+        "src/test/regress/expected/conversion.out",
+        "src/test/regress/expected/copy.out",
+        "src/test/regress/expected/copy2.out",
+        "src/test/regress/expected/copydml.out",
+        "src/test/regress/expected/copyencoding.out",
+        "src/test/regress/expected/copyencoding_1.out",
+        "src/test/regress/expected/copyselect.out",
+        "src/test/regress/expected/create_aggregate.out",
+        "src/test/regress/expected/create_am.out",
+        "src/test/regress/expected/create_cast.out",
+        "src/test/regress/expected/create_function_c.out",
+        "src/test/regress/expected/create_function_sql.out",
+        "src/test/regress/expected/create_index.out",
+        "src/test/regress/expected/create_index_spgist.out",
+        "src/test/regress/expected/create_misc.out",
+        "src/test/regress/expected/create_operator.out",
+        "src/test/regress/expected/create_procedure.out",
+        "src/test/regress/expected/create_role.out",
+        "src/test/regress/expected/create_schema.out",
+        "src/test/regress/expected/create_table.out",
+        "src/test/regress/expected/create_table_like.out",
+        "src/test/regress/expected/create_type.out",
+        "src/test/regress/expected/create_view.out",
+        "src/test/regress/expected/database.out",
+        "src/test/regress/expected/date.out",
+        "src/test/regress/expected/dbsize.out",
+        "src/test/regress/expected/delete.out",
+        "src/test/regress/expected/dependency.out",
+        "src/test/regress/expected/domain.out",
+        "src/test/regress/expected/drop_if_exists.out",
+        "src/test/regress/expected/drop_operator.out",
+        "src/test/regress/expected/eager_aggregate.out",
+        "src/test/regress/expected/encoding.out",
+        "src/test/regress/expected/encoding_1.out",
+        "src/test/regress/expected/enum.out",
+        "src/test/regress/expected/equivclass.out",
+        "src/test/regress/expected/errors.out",
+        "src/test/regress/expected/euc_kr.out",
+        "src/test/regress/expected/euc_kr_1.out",
+        "src/test/regress/expected/event_trigger.out",
+        "src/test/regress/expected/event_trigger_login.out",
+        "src/test/regress/expected/explain.out",
+        "src/test/regress/expected/expressions.out",
+        "src/test/regress/expected/fast_default.out",
+        "src/test/regress/expected/float4-misrounded-input.out",
+        "src/test/regress/expected/float4.out",
+        "src/test/regress/expected/float8.out",
+        "src/test/regress/expected/foreign_data.out",
+        "src/test/regress/expected/foreign_key.out",
+        "src/test/regress/expected/functional_deps.out",
+        "src/test/regress/expected/generated_stored.out",
+        "src/test/regress/expected/generated_virtual.out",
+        "src/test/regress/expected/geometry.out",
+        "src/test/regress/expected/gin.out",
+        "src/test/regress/expected/gist.out",
+        "src/test/regress/expected/groupingsets.out",
+        "src/test/regress/expected/guc.out",
+        "src/test/regress/expected/hash_func.out",
+        "src/test/regress/expected/hash_index.out",
+        "src/test/regress/expected/hash_part.out",
+        "src/test/regress/expected/horology.out",
+        "src/test/regress/expected/identity.out",
+        "src/test/regress/expected/incremental_sort.out",
+        "src/test/regress/expected/index_including.out",
+        "src/test/regress/expected/index_including_gist.out",
+        "src/test/regress/expected/indexing.out",
+        "src/test/regress/expected/indirect_toast.out",
+        "src/test/regress/expected/inet.out",
+        "src/test/regress/expected/infinite_recurse.out",
+        "src/test/regress/expected/infinite_recurse_1.out",
+        "src/test/regress/expected/inherit.out",
+        "src/test/regress/expected/init_privs.out",
+        "src/test/regress/expected/insert.out",
+        "src/test/regress/expected/insert_conflict.out",
+        "src/test/regress/expected/int2.out",
+        "src/test/regress/expected/int4.out",
+        "src/test/regress/expected/int8.out",
+        "src/test/regress/expected/interval.out",
+        "src/test/regress/expected/join.out",
+        "src/test/regress/expected/join_hash.out",
+        "src/test/regress/expected/json.out",
+        "src/test/regress/expected/json_encoding.out",
+        "src/test/regress/expected/json_encoding_1.out",
+        "src/test/regress/expected/json_encoding_2.out",
+        "src/test/regress/expected/jsonb.out",
+        "src/test/regress/expected/jsonb_jsonpath.out",
+        "src/test/regress/expected/jsonpath.out",
+        "src/test/regress/expected/jsonpath_encoding.out",
+        "src/test/regress/expected/jsonpath_encoding_1.out",
+        "src/test/regress/expected/jsonpath_encoding_2.out",
+        "src/test/regress/expected/largeobject.out",
+        "src/test/regress/expected/largeobject_1.out",
+        "src/test/regress/expected/limit.out",
+        "src/test/regress/expected/line.out",
+        "src/test/regress/expected/lock.out",
+        "src/test/regress/expected/lseg.out",
+        "src/test/regress/expected/macaddr.out",
+        "src/test/regress/expected/macaddr8.out",
+        "src/test/regress/expected/maintain_every.out",
+        "src/test/regress/expected/matview.out",
+        "src/test/regress/expected/md5.out",
+        "src/test/regress/expected/md5_1.out",
+        "src/test/regress/expected/md5_2.out",
+        "src/test/regress/expected/memoize.out",
+        "src/test/regress/expected/merge.out",
+        "src/test/regress/expected/misc.out",
+        "src/test/regress/expected/misc_functions.out",
+        "src/test/regress/expected/misc_sanity.out",
+        "src/test/regress/expected/money.out",
+        "src/test/regress/expected/multirangetypes.out",
+        "src/test/regress/expected/mvcc.out",
+        "src/test/regress/expected/name.out",
+        "src/test/regress/expected/namespace.out",
+        "src/test/regress/expected/nls.out",
+        "src/test/regress/expected/nls_1.out",
+        "src/test/regress/expected/nls_2.out",
+        "src/test/regress/expected/numa.out",
+        "src/test/regress/expected/numa_1.out",
+        "src/test/regress/expected/numeric.out",
+        "src/test/regress/expected/numeric_big.out",
+        "src/test/regress/expected/numerology.out",
+        "src/test/regress/expected/object_address.out",
+        "src/test/regress/expected/oid.out",
+        "src/test/regress/expected/oid8.out",
+        "src/test/regress/expected/oidjoins.out",
+        "src/test/regress/expected/opr_sanity.out",
+        "src/test/regress/expected/partition_aggregate.out",
+        "src/test/regress/expected/partition_info.out",
+        "src/test/regress/expected/partition_join.out",
+        "src/test/regress/expected/partition_prune.out",
+        "src/test/regress/expected/password.out",
+        "src/test/regress/expected/password_1.out",
+        "src/test/regress/expected/password_2.out",
+        "src/test/regress/expected/path.out",
+        "src/test/regress/expected/pg_dependencies.out",
+        "src/test/regress/expected/pg_lsn.out",
+        "src/test/regress/expected/pg_ndistinct.out",
+        "src/test/regress/expected/plancache.out",
+        "src/test/regress/expected/planner_est.out",
+        "src/test/regress/expected/plpgsql.out",
+        "src/test/regress/expected/point.out",
+        "src/test/regress/expected/polygon.out",
+        "src/test/regress/expected/polymorphism.out",
+        "src/test/regress/expected/portals.out",
+        "src/test/regress/expected/portals_p2.out",
+        "src/test/regress/expected/predicate.out",
+        "src/test/regress/expected/prepare.out",
+        "src/test/regress/expected/prepared_xacts.out",
+        "src/test/regress/expected/prepared_xacts_1.out",
+        "src/test/regress/expected/privileges.out",
+        "src/test/regress/expected/psql.out",
+        "src/test/regress/expected/psql_crosstab.out",
+        "src/test/regress/expected/psql_pipeline.out",
+        "src/test/regress/expected/publication.out",
+        "src/test/regress/expected/random.out",
+        "src/test/regress/expected/rangefuncs.out",
+        "src/test/regress/expected/rangetypes.out",
+        "src/test/regress/expected/regex.out",
+        "src/test/regress/expected/regproc.out",
+        "src/test/regress/expected/reindex_catalog.out",
+        "src/test/regress/expected/reloptions.out",
+        "src/test/regress/expected/replica_identity.out",
+        "src/test/regress/expected/returning.out",
+        "src/test/regress/expected/roleattributes.out",
+        "src/test/regress/expected/rowsecurity.out",
+        "src/test/regress/expected/rowtypes.out",
+        "src/test/regress/expected/rules.out",
+        "src/test/regress/expected/sanity_check.out",
+        "src/test/regress/expected/security_label.out",
+        "src/test/regress/expected/select.out",
+        "src/test/regress/expected/select_distinct.out",
+        "src/test/regress/expected/select_distinct_on.out",
+        "src/test/regress/expected/select_having.out",
+        "src/test/regress/expected/select_having_1.out",
+        "src/test/regress/expected/select_having_2.out",
+        "src/test/regress/expected/select_implicit.out",
+        "src/test/regress/expected/select_implicit_1.out",
+        "src/test/regress/expected/select_implicit_2.out",
+        "src/test/regress/expected/select_into.out",
+        "src/test/regress/expected/select_parallel.out",
+        "src/test/regress/expected/select_views.out",
+        "src/test/regress/expected/sequence.out",
+        "src/test/regress/expected/spgist.out",
+        "src/test/regress/expected/sqljson.out",
+        "src/test/regress/expected/sqljson_jsontable.out",
+        "src/test/regress/expected/sqljson_queryfuncs.out",
+        "src/test/regress/expected/stats.out",
+        "src/test/regress/expected/stats_ext.out",
+        "src/test/regress/expected/stats_import.out",
+        "src/test/regress/expected/stats_rewrite.out",
+        "src/test/regress/expected/stats_rewrite_1.out",
+        "src/test/regress/expected/strings.out",
+        "src/test/regress/expected/subscription.out",
+        "src/test/regress/expected/subselect.out",
+        "src/test/regress/expected/sysviews.out",
+        "src/test/regress/expected/tablesample.out",
+        "src/test/regress/expected/tablespace.out",
+        "src/test/regress/expected/temp.out",
+        "src/test/regress/expected/test_setup.out",
+        "src/test/regress/expected/text.out",
+        "src/test/regress/expected/tid.out",
+        "src/test/regress/expected/tidrangescan.out",
+        "src/test/regress/expected/tidscan.out",
+        "src/test/regress/expected/time.out",
+        "src/test/regress/expected/timestamp.out",
+        "src/test/regress/expected/timestamptz.out",
+        "src/test/regress/expected/timetz.out",
+        "src/test/regress/expected/transactions.out",
+        "src/test/regress/expected/triggers.out",
+        "src/test/regress/expected/truncate.out",
+        "src/test/regress/expected/tsdicts.out",
+        "src/test/regress/expected/tsearch.out",
+        "src/test/regress/expected/tsrf.out",
+        "src/test/regress/expected/tstypes.out",
+        "src/test/regress/expected/tuplesort.out",
+        "src/test/regress/expected/txid.out",
+        "src/test/regress/expected/type_sanity.out",
+        "src/test/regress/expected/typed_table.out",
+        "src/test/regress/expected/unicode.out",
+        "src/test/regress/expected/unicode_1.out",
+        "src/test/regress/expected/union.out",
+        "src/test/regress/expected/updatable_views.out",
+        "src/test/regress/expected/update.out",
+        "src/test/regress/expected/uuid.out",
+        "src/test/regress/expected/vacuum.out",
+        "src/test/regress/expected/vacuum_parallel.out",
+        "src/test/regress/expected/varchar.out",
+        "src/test/regress/expected/varchar_1.out",
+        "src/test/regress/expected/varchar_2.out",
+        "src/test/regress/expected/window.out",
+        "src/test/regress/expected/with.out",
+        "src/test/regress/expected/without_overlaps.out",
+        "src/test/regress/expected/write_parallel.out",
+        "src/test/regress/expected/xid.out",
+        "src/test/regress/expected/xml.out",
+        "src/test/regress/expected/xml_1.out",
+        "src/test/regress/expected/xmlmap.out",
+        "src/test/regress/expected/xmlmap_1.out",
+        "src/test/regress/meson.build",
+        "src/test/regress/nls.mk",
+        "src/test/regress/parallel_schedule",
+        "src/test/regress/pg_regress.c",
+        "src/test/regress/pg_regress.h",
+        "src/test/regress/pg_regress_main.c",
+        "src/test/regress/po/**",
+        "src/test/regress/regress.c",
+        "src/test/regress/regressplans.sh",
+        "src/test/regress/resultmap",
+        "src/test/regress/sql/advisory_lock.sql",
+        "src/test/regress/sql/aggregates.sql",
+        "src/test/regress/sql/alter_generic.sql",
+        "src/test/regress/sql/alter_operator.sql",
+        "src/test/regress/sql/alter_table.sql",
+        "src/test/regress/sql/amutils.sql",
+        "src/test/regress/sql/arrays.sql",
+        "src/test/regress/sql/async.sql",
+        "src/test/regress/sql/bit.sql",
+        "src/test/regress/sql/bitmapops.sql",
+        "src/test/regress/sql/boolean.sql",
+        "src/test/regress/sql/box.sql",
+        "src/test/regress/sql/brin.sql",
+        "src/test/regress/sql/brin_bloom.sql",
+        "src/test/regress/sql/brin_multi.sql",
+        "src/test/regress/sql/btree_index.sql",
+        "src/test/regress/sql/case.sql",
+        "src/test/regress/sql/char.sql",
+        "src/test/regress/sql/circle.sql",
+        "src/test/regress/sql/cluster.sql",
+        "src/test/regress/sql/collate.icu.utf8.sql",
+        "src/test/regress/sql/collate.linux.utf8.sql",
+        "src/test/regress/sql/collate.sql",
+        "src/test/regress/sql/collate.utf8.sql",
+        "src/test/regress/sql/combocid.sql",
+        "src/test/regress/sql/comments.sql",
+        "src/test/regress/sql/compression.sql",
+        "src/test/regress/sql/compression_lz4.sql",
+        "src/test/regress/sql/compression_pglz.sql",
+        "src/test/regress/sql/constraints.sql",
+        "src/test/regress/sql/conversion.sql",
+        "src/test/regress/sql/copy.sql",
+        "src/test/regress/sql/copy2.sql",
+        "src/test/regress/sql/copydml.sql",
+        "src/test/regress/sql/copyencoding.sql",
+        "src/test/regress/sql/copyselect.sql",
+        "src/test/regress/sql/create_aggregate.sql",
+        "src/test/regress/sql/create_am.sql",
+        "src/test/regress/sql/create_cast.sql",
+        "src/test/regress/sql/create_function_c.sql",
+        "src/test/regress/sql/create_function_sql.sql",
+        "src/test/regress/sql/create_index.sql",
+        "src/test/regress/sql/create_index_spgist.sql",
+        "src/test/regress/sql/create_misc.sql",
+        "src/test/regress/sql/create_operator.sql",
+        "src/test/regress/sql/create_procedure.sql",
+        "src/test/regress/sql/create_role.sql",
+        "src/test/regress/sql/create_schema.sql",
+        "src/test/regress/sql/create_table.sql",
+        "src/test/regress/sql/create_table_like.sql",
+        "src/test/regress/sql/create_type.sql",
+        "src/test/regress/sql/create_view.sql",
+        "src/test/regress/sql/database.sql",
+        "src/test/regress/sql/date.sql",
+        "src/test/regress/sql/dbsize.sql",
+        "src/test/regress/sql/delete.sql",
+        "src/test/regress/sql/dependency.sql",
+        "src/test/regress/sql/domain.sql",
+        "src/test/regress/sql/drop_if_exists.sql",
+        "src/test/regress/sql/drop_operator.sql",
+        "src/test/regress/sql/eager_aggregate.sql",
+        "src/test/regress/sql/encoding.sql",
+        "src/test/regress/sql/enum.sql",
+        "src/test/regress/sql/equivclass.sql",
+        "src/test/regress/sql/errors.sql",
+        "src/test/regress/sql/euc_kr.sql",
+        "src/test/regress/sql/event_trigger.sql",
+        "src/test/regress/sql/event_trigger_login.sql",
+        "src/test/regress/sql/explain.sql",
+        "src/test/regress/sql/expressions.sql",
+        "src/test/regress/sql/fast_default.sql",
+        "src/test/regress/sql/float4.sql",
+        "src/test/regress/sql/float8.sql",
+        "src/test/regress/sql/foreign_data.sql",
+        "src/test/regress/sql/foreign_key.sql",
+        "src/test/regress/sql/functional_deps.sql",
+        "src/test/regress/sql/generated_stored.sql",
+        "src/test/regress/sql/generated_virtual.sql",
+        "src/test/regress/sql/geometry.sql",
+        "src/test/regress/sql/gin.sql",
+        "src/test/regress/sql/gist.sql",
+        "src/test/regress/sql/groupingsets.sql",
+        "src/test/regress/sql/guc.sql",
+        "src/test/regress/sql/hash_func.sql",
+        "src/test/regress/sql/hash_index.sql",
+        "src/test/regress/sql/hash_part.sql",
+        "src/test/regress/sql/horology.sql",
+        "src/test/regress/sql/identity.sql",
+        "src/test/regress/sql/incremental_sort.sql",
+        "src/test/regress/sql/index_including.sql",
+        "src/test/regress/sql/index_including_gist.sql",
+        "src/test/regress/sql/indexing.sql",
+        "src/test/regress/sql/indirect_toast.sql",
+        "src/test/regress/sql/inet.sql",
+        "src/test/regress/sql/infinite_recurse.sql",
+        "src/test/regress/sql/inherit.sql",
+        "src/test/regress/sql/init_privs.sql",
+        "src/test/regress/sql/insert.sql",
+        "src/test/regress/sql/insert_conflict.sql",
+        "src/test/regress/sql/int2.sql",
+        "src/test/regress/sql/int4.sql",
+        "src/test/regress/sql/int8.sql",
+        "src/test/regress/sql/interval.sql",
+        "src/test/regress/sql/join.sql",
+        "src/test/regress/sql/join_hash.sql",
+        "src/test/regress/sql/json.sql",
+        "src/test/regress/sql/json_encoding.sql",
+        "src/test/regress/sql/jsonb.sql",
+        "src/test/regress/sql/jsonb_jsonpath.sql",
+        "src/test/regress/sql/jsonpath.sql",
+        "src/test/regress/sql/jsonpath_encoding.sql",
+        "src/test/regress/sql/largeobject.sql",
+        "src/test/regress/sql/limit.sql",
+        "src/test/regress/sql/line.sql",
+        "src/test/regress/sql/lock.sql",
+        "src/test/regress/sql/lseg.sql",
+        "src/test/regress/sql/macaddr.sql",
+        "src/test/regress/sql/macaddr8.sql",
+        "src/test/regress/sql/maintain_every.sql",
+        "src/test/regress/sql/matview.sql",
+        "src/test/regress/sql/md5.sql",
+        "src/test/regress/sql/memoize.sql",
+        "src/test/regress/sql/merge.sql",
+        "src/test/regress/sql/misc.sql",
+        "src/test/regress/sql/misc_functions.sql",
+        "src/test/regress/sql/misc_sanity.sql",
+        "src/test/regress/sql/money.sql",
+        "src/test/regress/sql/multirangetypes.sql",
+        "src/test/regress/sql/mvcc.sql",
+        "src/test/regress/sql/name.sql",
+        "src/test/regress/sql/namespace.sql",
+        "src/test/regress/sql/nls.sql",
+        "src/test/regress/sql/numa.sql",
+        "src/test/regress/sql/numeric.sql",
+        "src/test/regress/sql/numeric_big.sql",
+        "src/test/regress/sql/numerology.sql",
+        "src/test/regress/sql/object_address.sql",
+        "src/test/regress/sql/oid.sql",
+        "src/test/regress/sql/oid8.sql",
+        "src/test/regress/sql/oidjoins.sql",
+        "src/test/regress/sql/opr_sanity.sql",
+        "src/test/regress/sql/partition_aggregate.sql",
+        "src/test/regress/sql/partition_info.sql",
+        "src/test/regress/sql/partition_join.sql",
+        "src/test/regress/sql/partition_prune.sql",
+        "src/test/regress/sql/password.sql",
+        "src/test/regress/sql/path.sql",
+        "src/test/regress/sql/pg_dependencies.sql",
+        "src/test/regress/sql/pg_lsn.sql",
+        "src/test/regress/sql/pg_ndistinct.sql",
+        "src/test/regress/sql/plancache.sql",
+        "src/test/regress/sql/planner_est.sql",
+        "src/test/regress/sql/plpgsql.sql",
+        "src/test/regress/sql/point.sql",
+        "src/test/regress/sql/polygon.sql",
+        "src/test/regress/sql/polymorphism.sql",
+        "src/test/regress/sql/portals.sql",
+        "src/test/regress/sql/portals_p2.sql",
+        "src/test/regress/sql/predicate.sql",
+        "src/test/regress/sql/prepare.sql",
+        "src/test/regress/sql/prepared_xacts.sql",
+        "src/test/regress/sql/privileges.sql",
+        "src/test/regress/sql/psql.sql",
+        "src/test/regress/sql/psql_crosstab.sql",
+        "src/test/regress/sql/psql_pipeline.sql",
+        "src/test/regress/sql/publication.sql",
+        "src/test/regress/sql/random.sql",
+        "src/test/regress/sql/rangefuncs.sql",
+        "src/test/regress/sql/rangetypes.sql",
+        "src/test/regress/sql/regex.sql",
+        "src/test/regress/sql/regproc.sql",
+        "src/test/regress/sql/reindex_catalog.sql",
+        "src/test/regress/sql/reloptions.sql",
+        "src/test/regress/sql/replica_identity.sql",
+        "src/test/regress/sql/returning.sql",
+        "src/test/regress/sql/roleattributes.sql",
+        "src/test/regress/sql/rowsecurity.sql",
+        "src/test/regress/sql/rowtypes.sql",
+        "src/test/regress/sql/rules.sql",
+        "src/test/regress/sql/sanity_check.sql",
+        "src/test/regress/sql/security_label.sql",
+        "src/test/regress/sql/select.sql",
+        "src/test/regress/sql/select_distinct.sql",
+        "src/test/regress/sql/select_distinct_on.sql",
+        "src/test/regress/sql/select_having.sql",
+        "src/test/regress/sql/select_implicit.sql",
+        "src/test/regress/sql/select_into.sql",
+        "src/test/regress/sql/select_parallel.sql",
+        "src/test/regress/sql/select_views.sql",
+        "src/test/regress/sql/sequence.sql",
+        "src/test/regress/sql/spgist.sql",
+        "src/test/regress/sql/sqljson.sql",
+        "src/test/regress/sql/sqljson_jsontable.sql",
+        "src/test/regress/sql/sqljson_queryfuncs.sql",
+        "src/test/regress/sql/stats.sql",
+        "src/test/regress/sql/stats_ext.sql",
+        "src/test/regress/sql/stats_import.sql",
+        "src/test/regress/sql/stats_rewrite.sql",
+        "src/test/regress/sql/strings.sql",
+        "src/test/regress/sql/subscription.sql",
+        "src/test/regress/sql/subselect.sql",
+        "src/test/regress/sql/sysviews.sql",
+        "src/test/regress/sql/tablesample.sql",
+        "src/test/regress/sql/tablespace.sql",
+        "src/test/regress/sql/temp.sql",
+        "src/test/regress/sql/test_setup.sql",
+        "src/test/regress/sql/text.sql",
+        "src/test/regress/sql/tid.sql",
+        "src/test/regress/sql/tidrangescan.sql",
+        "src/test/regress/sql/tidscan.sql",
+        "src/test/regress/sql/time.sql",
+        "src/test/regress/sql/timestamp.sql",
+        "src/test/regress/sql/timestamptz.sql",
+        "src/test/regress/sql/timetz.sql",
+        "src/test/regress/sql/transactions.sql",
+        "src/test/regress/sql/triggers.sql",
+        "src/test/regress/sql/truncate.sql",
+        "src/test/regress/sql/tsdicts.sql",
+        "src/test/regress/sql/tsearch.sql",
+        "src/test/regress/sql/tsrf.sql",
+        "src/test/regress/sql/tstypes.sql",
+        "src/test/regress/sql/tuplesort.sql",
+        "src/test/regress/sql/txid.sql",
+        "src/test/regress/sql/type_sanity.sql",
+        "src/test/regress/sql/typed_table.sql",
+        "src/test/regress/sql/unicode.sql",
+        "src/test/regress/sql/union.sql",
+        "src/test/regress/sql/updatable_views.sql",
+        "src/test/regress/sql/update.sql",
+        "src/test/regress/sql/uuid.sql",
+        "src/test/regress/sql/vacuum.sql",
+        "src/test/regress/sql/vacuum_parallel.sql",
+        "src/test/regress/sql/varchar.sql",
+        "src/test/regress/sql/window.sql",
+        "src/test/regress/sql/with.sql",
+        "src/test/regress/sql/without_overlaps.sql",
+        "src/test/regress/sql/write_parallel.sql",
+        "src/test/regress/sql/xid.sql",
+        "src/test/regress/sql/xml.sql",
+        "src/test/regress/sql/xmlmap.sql",
+        "src/test/ssl/.gitignore",
+        "src/test/ssl/Makefile",
+        "src/test/ssl/README",
+        "src/test/ssl/conf/**",
+        "src/test/ssl/meson.build",
+        "src/test/ssl/ssl/.gitignore",
+        "src/test/ssl/ssl/both-cas-1.crt",
+        "src/test/ssl/ssl/both-cas-2.crt",
+        "src/test/ssl/ssl/client+client_ca.crt",
+        "src/test/ssl/ssl/client-crldir/**",
+        "src/test/ssl/ssl/client-dn.crt",
+        "src/test/ssl/ssl/client-dn.key",
+        "src/test/ssl/ssl/client-encrypted-pem.key",
+        "src/test/ssl/ssl/client-long.crt",
+        "src/test/ssl/ssl/client-long.key",
+        "src/test/ssl/ssl/client-revoked-utf8.crt",
+        "src/test/ssl/ssl/client-revoked-utf8.key",
+        "src/test/ssl/ssl/client-revoked.crt",
+        "src/test/ssl/ssl/client-revoked.key",
+        "src/test/ssl/ssl/client.crl",
+        "src/test/ssl/ssl/client.crt",
+        "src/test/ssl/ssl/client.key",
+        "src/test/ssl/ssl/client_ca.crt",
+        "src/test/ssl/ssl/client_ca.key",
+        "src/test/ssl/ssl/client_ext.crt",
+        "src/test/ssl/ssl/client_ext.key",
+        "src/test/ssl/ssl/root+client-crldir/**",
+        "src/test/ssl/ssl/root+client.crl",
+        "src/test/ssl/ssl/root+client_ca.crt",
+        "src/test/ssl/ssl/root+server-crldir/**",
+        "src/test/ssl/ssl/root+server.crl",
+        "src/test/ssl/ssl/root+server_ca.crt",
+        "src/test/ssl/ssl/root.crl",
+        "src/test/ssl/ssl/root_ca.crt",
+        "src/test/ssl/ssl/root_ca.key",
+        "src/test/ssl/ssl/server-cn-and-alt-names.crt",
+        "src/test/ssl/ssl/server-cn-and-alt-names.key",
+        "src/test/ssl/ssl/server-cn-and-ip-alt-names.crt",
+        "src/test/ssl/ssl/server-cn-and-ip-alt-names.key",
+        "src/test/ssl/ssl/server-cn-only+server_ca.crt",
+        "src/test/ssl/ssl/server-cn-only.crt",
+        "src/test/ssl/ssl/server-cn-only.key",
+        "src/test/ssl/ssl/server-crldir/**",
+        "src/test/ssl/ssl/server-ip-alt-names.crt",
+        "src/test/ssl/ssl/server-ip-alt-names.key",
+        "src/test/ssl/ssl/server-ip-cn-and-alt-names.crt",
+        "src/test/ssl/ssl/server-ip-cn-and-alt-names.key",
+        "src/test/ssl/ssl/server-ip-cn-and-dns-alt-names.crt",
+        "src/test/ssl/ssl/server-ip-cn-and-dns-alt-names.key",
+        "src/test/ssl/ssl/server-ip-cn-only.crt",
+        "src/test/ssl/ssl/server-ip-cn-only.key",
+        "src/test/ssl/ssl/server-ip-in-dnsname.crt",
+        "src/test/ssl/ssl/server-ip-in-dnsname.key",
+        "src/test/ssl/ssl/server-localhost-alt-names.crt",
+        "src/test/ssl/ssl/server-localhost-alt-names.key",
+        "src/test/ssl/ssl/server-multiple-alt-names.crt",
+        "src/test/ssl/ssl/server-multiple-alt-names.key",
+        "src/test/ssl/ssl/server-no-names.crt",
+        "src/test/ssl/ssl/server-no-names.key",
+        "src/test/ssl/ssl/server-password.key",
+        "src/test/ssl/ssl/server-revoked.crt",
+        "src/test/ssl/ssl/server-revoked.key",
+        "src/test/ssl/ssl/server-rsapss.crt",
+        "src/test/ssl/ssl/server-rsapss.key",
+        "src/test/ssl/ssl/server-single-alt-name.crt",
+        "src/test/ssl/ssl/server-single-alt-name.key",
+        "src/test/ssl/ssl/server.crl",
+        "src/test/ssl/ssl/server_ca.crt",
+        "src/test/ssl/ssl/server_ca.key",
+        "src/test/ssl/sslfiles.mk",
+        "src/test/ssl/t/**",
+        "src/test/subscription/**",
+        "src/timezone/**",
+        "src/tutorial/**"
+      ],
+      "text": "PostgreSQL Database Management System\n(also known as Postgres, formerly known as Postgres95)\n\nPortions Copyright (c) 1996-2026, PostgreSQL Global Development Group\n\nPortions Copyright (c) 1994, The Regents of the University of California\n\nPermission to use, copy, modify, and distribute this software and its\ndocumentation for any purpose, without fee, and without a written agreement\nis hereby granted, provided that the above copyright notice and this\nparagraph and the following two paragraphs appear in all copies.\n\nIN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR\nDIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING\nLOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS\nDOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\nTHE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,\nINCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS\nON AN \"AS IS\" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO\nPROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.\n",
+      "attribution": "the authors of postgres/postgres (the license file names no copyright line), PostgreSQL license (COPYRIGHT), https://github.com/postgres/postgres."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elisp",
+      "paths": [
+        "**/*.el"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/GNUmakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.HOT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SSL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.addons"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.affix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.barrier"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cygwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dependencies"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dynSQL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.freebsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.guess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.l"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.links"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.m4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mcv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.netbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.non-ASCII"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.openbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.parallel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.parser"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pgc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.r0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.regress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sgml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.shlib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.solaris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stderr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stdout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.syn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ths"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tokens"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.trace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.trailer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tuplock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.win32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Australia"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYRIGHT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DEVELOPERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HISTORY"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/IMPLEMENTATION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/India"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/KNOWN_BUGS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LINGUAS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MISSING_FEATURES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README-SSI"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TESTING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cp_history_files"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cygwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/duplicate_oids"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ecpg_schedule"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/freebsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install-sh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/isolation_schedule"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/missing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/netbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openbsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/parallel_schedule"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prep_buildtree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resultmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/solaris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unused_oids"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wait_for_shutdown"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/win32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xmltools_dep_wrapper"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

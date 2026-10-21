@@ -1,0 +1,865 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/mitmproxy/mitmproxy",
+  "revision": "77355977e5ea540b51ed029a40ed1dc2f1c2ba7b",
+  "checksum": "sha256:9024fa46d991a0b943da58af97b393a9ae9b2f8019384d429bf561fb7e897f2f",
+  "extract": {
+    "exclude": [
+      "docs/raw/_explicit.graffle/image3.icns",
+      "docs/raw/_explicit.graffle/image6.tiff",
+      "docs/raw/_explicit_https.graffle/image3.icns",
+      "docs/raw/_explicit_https.graffle/image6.tiff",
+      "docs/raw/_transparent.graffle/image3.icns",
+      "docs/raw/_transparent.graffle/image6.tiff",
+      "docs/raw/_transparent_https.graffle/image3.icns",
+      "docs/raw/_transparent_https.graffle/image6.tiff",
+      "docs/raw/proxy-modes.vsdx",
+      "docs/src/assets/logo-navbar.png",
+      "docs/src/static/**",
+      "examples/contrib/**",
+      "mitmproxy/addons/onboardingapp/static/images/**",
+      "mitmproxy/contrib/README.md",
+      "mitmproxy/contrib/__init__.py",
+      "mitmproxy/contrib/imghdr.py",
+      "mitmproxy/contrib/kaitaistruct/**",
+      "mitmproxy/contrib/wbxml/**",
+      "mitmproxy/tools/web/static/favicon.ico",
+      "mitmproxy/tools/web/static/fontawesome-webfont-B-jkhYfk.woff2",
+      "mitmproxy/tools/web/static/fontawesome-webfont-CDK5bt4p.woff",
+      "mitmproxy/tools/web/static/fontawesome-webfont-CQDK8MU3.ttf",
+      "mitmproxy/tools/web/static/fontawesome-webfont-G5YE5S7X.eot",
+      "release/installbuilder/**",
+      "release/specs/icon.icns",
+      "release/specs/icon.ico",
+      "release/windows-installer/Assets/**",
+      "test/mitmproxy/contentviews/test_grpc_data/**",
+      "test/mitmproxy/contentviews/test_protobuf_data/protobuf02.bin",
+      "test/mitmproxy/contentviews/test_protobuf_data/protobuf03.bin",
+      "test/mitmproxy/contentviews/test_wbxml_data/data.wbxml",
+      "test/mitmproxy/data/all.jpeg",
+      "test/mitmproxy/data/confdir/mitmproxy-ca-cert.p12",
+      "test/mitmproxy/data/confdir/mitmproxy-magisk-module.zip",
+      "test/mitmproxy/data/dercert",
+      "test/mitmproxy/data/dumpfile-010.mitm",
+      "test/mitmproxy/data/dumpfile-019.mitm",
+      "test/mitmproxy/data/dumpfile-7-websocket.mitm",
+      "test/mitmproxy/data/flows/compressed.zhar",
+      "test/mitmproxy/data/flows/corrupted_gzip_body.mitm",
+      "test/mitmproxy/data/flows/diff_data.mitm",
+      "test/mitmproxy/data/image.gif",
+      "test/mitmproxy/data/image.ico",
+      "test/mitmproxy/data/image.jpg",
+      "test/mitmproxy/data/image.png",
+      "test/mitmproxy/data/image_parser/all.jpeg",
+      "test/mitmproxy/data/image_parser/app1.jpeg",
+      "test/mitmproxy/data/image_parser/aspect.png",
+      "test/mitmproxy/data/image_parser/chi.gif",
+      "test/mitmproxy/data/image_parser/comment.jpg",
+      "test/mitmproxy/data/image_parser/ct0n0g04.png",
+      "test/mitmproxy/data/image_parser/ct1n0g04.png",
+      "test/mitmproxy/data/image_parser/cten0g04.png",
+      "test/mitmproxy/data/image_parser/ctzn0g04.png",
+      "test/mitmproxy/data/image_parser/example.jpg",
+      "test/mitmproxy/data/image_parser/g07n0g16.png",
+      "test/mitmproxy/data/image_parser/hopper.gif",
+      "test/mitmproxy/data/image_parser/iss634.gif",
+      "test/mitmproxy/net/data/dercert",
+      "test/wg-test-client/**",
+      "web/public/**"
+    ]
+  },
+  "history": {
+    "since": "5c33f6784b4ba34dd9825ea7e3070cdf0b2b4621"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2013, Aldo Cortesi. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright 2014 Pallets\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1.  Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n2.  Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\n3.  Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived from\n    this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A\nPARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/mitmproxy/mitmproxy: Copyright (c) 2013, Aldo Cortesi. All rights reserved., MIT license (LICENSE), https://github.com/mitmproxy/mitmproxy; Copyright 2014 Pallets, BSD-3-Clause license (LICENSE.BSD-3), https://github.com/mitmproxy/mitmproxy/tree/77355977e5ea540b51ed029a40ed1dc2f1c2ba7b/mitmproxy/contrib/click."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".python-version",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "codecov.yml",
+        "docs/.gitignore",
+        "docs/README.md",
+        "docs/bucketassets/**",
+        "docs/build.py",
+        "docs/modd.conf",
+        "docs/raw/_explicit.graffle/data.plist",
+        "docs/raw/_explicit_https.graffle/data.plist",
+        "docs/raw/_transparent.graffle/data.plist",
+        "docs/raw/_transparent_https.graffle/data.plist",
+        "docs/scripts/**",
+        "docs/setup.sh",
+        "docs/src/archetypes/**",
+        "docs/src/assets/asciinema-player.css",
+        "docs/src/assets/asciinema-player.js",
+        "docs/src/assets/asciinema-tutorial.js",
+        "docs/src/assets/css/**",
+        "docs/src/assets/elasticlunr.min.js",
+        "docs/src/assets/recordings/**",
+        "docs/src/assets/search.js",
+        "docs/src/assets/version-selector.js",
+        "docs/src/config.toml",
+        "docs/src/content/**",
+        "docs/src/examples",
+        "docs/src/generated/**",
+        "docs/src/layouts/**",
+        "docs/upload-archive.sh",
+        "docs/upload-stable.sh",
+        "examples/README.md",
+        "examples/addons/**",
+        "examples/keys.yaml",
+        "mitmproxy/__init__.py",
+        "mitmproxy/addonmanager.py",
+        "mitmproxy/addons/__init__.py",
+        "mitmproxy/addons/anticache.py",
+        "mitmproxy/addons/anticomp.py",
+        "mitmproxy/addons/asgiapp.py",
+        "mitmproxy/addons/block.py",
+        "mitmproxy/addons/blocklist.py",
+        "mitmproxy/addons/browser.py",
+        "mitmproxy/addons/clientplayback.py",
+        "mitmproxy/addons/command_history.py",
+        "mitmproxy/addons/comment.py",
+        "mitmproxy/addons/core.py",
+        "mitmproxy/addons/cut.py",
+        "mitmproxy/addons/disable_h2c.py",
+        "mitmproxy/addons/dns_resolver.py",
+        "mitmproxy/addons/dumper.py",
+        "mitmproxy/addons/errorcheck.py",
+        "mitmproxy/addons/eventstore.py",
+        "mitmproxy/addons/export.py",
+        "mitmproxy/addons/intercept.py",
+        "mitmproxy/addons/keepserving.py",
+        "mitmproxy/addons/maplocal.py",
+        "mitmproxy/addons/mapremote.py",
+        "mitmproxy/addons/modifybody.py",
+        "mitmproxy/addons/modifyheaders.py",
+        "mitmproxy/addons/next_layer.py",
+        "mitmproxy/addons/onboarding.py",
+        "mitmproxy/addons/onboardingapp/__init__.py",
+        "mitmproxy/addons/onboardingapp/static/bootstrap.min.css",
+        "mitmproxy/addons/onboardingapp/static/mitmproxy.css",
+        "mitmproxy/addons/onboardingapp/templates/**",
+        "mitmproxy/addons/proxyauth.py",
+        "mitmproxy/addons/proxyserver.py",
+        "mitmproxy/addons/readfile.py",
+        "mitmproxy/addons/save.py",
+        "mitmproxy/addons/savehar.py",
+        "mitmproxy/addons/script.py",
+        "mitmproxy/addons/server_side_events.py",
+        "mitmproxy/addons/serverplayback.py",
+        "mitmproxy/addons/stickyauth.py",
+        "mitmproxy/addons/stickycookie.py",
+        "mitmproxy/addons/strip_dns_https_records.py",
+        "mitmproxy/addons/termlog.py",
+        "mitmproxy/addons/tlsconfig.py",
+        "mitmproxy/addons/update_alt_svc.py",
+        "mitmproxy/addons/upstream_auth.py",
+        "mitmproxy/addons/view.py",
+        "mitmproxy/certs.py",
+        "mitmproxy/command.py",
+        "mitmproxy/command_lexer.py",
+        "mitmproxy/connection.py",
+        "mitmproxy/contentviews/**",
+        "mitmproxy/coretypes/**",
+        "mitmproxy/ctx.py",
+        "mitmproxy/dns.py",
+        "mitmproxy/eventsequence.py",
+        "mitmproxy/exceptions.py",
+        "mitmproxy/flow.py",
+        "mitmproxy/flowfilter.py",
+        "mitmproxy/hooks.py",
+        "mitmproxy/http.py",
+        "mitmproxy/io/**",
+        "mitmproxy/log.py",
+        "mitmproxy/master.py",
+        "mitmproxy/net/**",
+        "mitmproxy/options.py",
+        "mitmproxy/optmanager.py",
+        "mitmproxy/platform/**",
+        "mitmproxy/proxy/**",
+        "mitmproxy/py.typed",
+        "mitmproxy/script/**",
+        "mitmproxy/tcp.py",
+        "mitmproxy/test/**",
+        "mitmproxy/tls.py",
+        "mitmproxy/tools/__init__.py",
+        "mitmproxy/tools/cmdline.py",
+        "mitmproxy/tools/console/**",
+        "mitmproxy/tools/dump.py",
+        "mitmproxy/tools/main.py",
+        "mitmproxy/tools/web/__init__.py",
+        "mitmproxy/tools/web/app.py",
+        "mitmproxy/tools/web/index.html",
+        "mitmproxy/tools/web/master.py",
+        "mitmproxy/tools/web/static/fontawesome-webfont-D13rzr4g.svg",
+        "mitmproxy/tools/web/static/index-Be7e-cwP.js",
+        "mitmproxy/tools/web/static/index-DhPPoJ7G.css",
+        "mitmproxy/tools/web/static/vendor-BS4xPthR.js",
+        "mitmproxy/tools/web/static/vendor-Cg3S-P9H.css",
+        "mitmproxy/tools/web/static_viewer.py",
+        "mitmproxy/tools/web/templates/**",
+        "mitmproxy/tools/web/web_columns.py",
+        "mitmproxy/tools/web/webaddons.py",
+        "mitmproxy/types.py",
+        "mitmproxy/udp.py",
+        "mitmproxy/utils/**",
+        "mitmproxy/version.py",
+        "mitmproxy/websocket.py",
+        "pyproject.toml",
+        "release/.gitignore",
+        "release/README.md",
+        "release/build.py",
+        "release/deploy-microsoft-store.py",
+        "release/deploy.py",
+        "release/docker/**",
+        "release/github-release-notes.txt",
+        "release/release.py",
+        "release/selftest.py",
+        "release/specs/.mitmproxy-wrapper",
+        "release/specs/macos-entitlements.plist",
+        "release/specs/mitmdump",
+        "release/specs/mitmproxy",
+        "release/specs/mitmweb",
+        "release/specs/onedir.spec",
+        "release/specs/standalone.spec",
+        "release/windows-installer/AppxManifest.xml",
+        "test/__init__.py",
+        "test/bench/**",
+        "test/conftest.py",
+        "test/examples/**",
+        "test/filename_matching.py",
+        "test/helper_tools/**",
+        "test/individual_coverage.py",
+        "test/mitmproxy/__init__.py",
+        "test/mitmproxy/addons/**",
+        "test/mitmproxy/completion/**",
+        "test/mitmproxy/contentviews/__init__.py",
+        "test/mitmproxy/contentviews/_view_image/**",
+        "test/mitmproxy/contentviews/test___init__.py",
+        "test/mitmproxy/contentviews/test__api.py",
+        "test/mitmproxy/contentviews/test__compat.py",
+        "test/mitmproxy/contentviews/test__registry.py",
+        "test/mitmproxy/contentviews/test__utils.py",
+        "test/mitmproxy/contentviews/test__view_css.py",
+        "test/mitmproxy/contentviews/test__view_dns.py",
+        "test/mitmproxy/contentviews/test__view_graphql.py",
+        "test/mitmproxy/contentviews/test__view_http3.py",
+        "test/mitmproxy/contentviews/test__view_javascript.py",
+        "test/mitmproxy/contentviews/test__view_json.py",
+        "test/mitmproxy/contentviews/test__view_mqtt.py",
+        "test/mitmproxy/contentviews/test__view_multipart.py",
+        "test/mitmproxy/contentviews/test__view_query.py",
+        "test/mitmproxy/contentviews/test__view_raw.py",
+        "test/mitmproxy/contentviews/test__view_socketio.py",
+        "test/mitmproxy/contentviews/test__view_urlencoded.py",
+        "test/mitmproxy/contentviews/test__view_wbxml.py",
+        "test/mitmproxy/contentviews/test__view_xml_html.py",
+        "test/mitmproxy/contentviews/test__view_zip.py",
+        "test/mitmproxy/contentviews/test_base.py",
+        "test/mitmproxy/contentviews/test_css_data/**",
+        "test/mitmproxy/contentviews/test_js_data/**",
+        "test/mitmproxy/contentviews/test_protobuf_data/protobuf01.bin",
+        "test/mitmproxy/contentviews/test_protobuf_data/protobuf02-decoded.bin",
+        "test/mitmproxy/contentviews/test_protobuf_data/protobuf03-decoded.bin",
+        "test/mitmproxy/contentviews/test_wbxml_data/data-formatted.wbxml",
+        "test/mitmproxy/contentviews/test_xml_html_data/**",
+        "test/mitmproxy/coretypes/**",
+        "test/mitmproxy/data/1.css",
+        "test/mitmproxy/data/addonscripts/**",
+        "test/mitmproxy/data/clientcert/**",
+        "test/mitmproxy/data/confdir/mitmproxy-ca-cert.cer",
+        "test/mitmproxy/data/confdir/mitmproxy-ca-cert.pem",
+        "test/mitmproxy/data/confdir/mitmproxy-ca.pem",
+        "test/mitmproxy/data/confdir/mitmproxy-dhparam.pem",
+        "test/mitmproxy/data/corrupted_har/**",
+        "test/mitmproxy/data/dumpfile-011.mitm",
+        "test/mitmproxy/data/dumpfile-018.mitm",
+        "test/mitmproxy/data/dumpfile-10.mitm",
+        "test/mitmproxy/data/dumpfile-19.mitm",
+        "test/mitmproxy/data/dumpfile-7.mitm",
+        "test/mitmproxy/data/flows/corrupted_gzip_body.har",
+        "test/mitmproxy/data/flows/diff_data.har",
+        "test/mitmproxy/data/flows/error_log.har",
+        "test/mitmproxy/data/flows/error_log.mitm",
+        "test/mitmproxy/data/flows/event_stream.har",
+        "test/mitmproxy/data/flows/event_stream.mitm",
+        "test/mitmproxy/data/flows/incomplete_log.har",
+        "test/mitmproxy/data/flows/incomplete_log.mitm",
+        "test/mitmproxy/data/flows/successful_log.har",
+        "test/mitmproxy/data/flows/successful_log.mitm",
+        "test/mitmproxy/data/flows/websocket.har",
+        "test/mitmproxy/data/flows/websocket.mitm",
+        "test/mitmproxy/data/har_extractor.har",
+        "test/mitmproxy/data/har_files/**",
+        "test/mitmproxy/data/htpasswd",
+        "test/mitmproxy/data/image_parser/README.md",
+        "test/mitmproxy/data/invalid-subject.pem",
+        "test/mitmproxy/data/mitmproxy.pem",
+        "test/mitmproxy/data/no_common_name.pem",
+        "test/mitmproxy/data/pf01",
+        "test/mitmproxy/data/pf02",
+        "test/mitmproxy/data/replace",
+        "test/mitmproxy/data/servercert/**",
+        "test/mitmproxy/data/test_config.yml",
+        "test/mitmproxy/data/testkey.pem",
+        "test/mitmproxy/io/**",
+        "test/mitmproxy/net/__init__.py",
+        "test/mitmproxy/net/data/clientcert/**",
+        "test/mitmproxy/net/data/dhparam.pem",
+        "test/mitmproxy/net/data/dsa_cert.pem",
+        "test/mitmproxy/net/data/ec_cert.pem",
+        "test/mitmproxy/net/data/htpasswd",
+        "test/mitmproxy/net/data/server.crt",
+        "test/mitmproxy/net/data/server.key",
+        "test/mitmproxy/net/data/text_cert",
+        "test/mitmproxy/net/data/text_cert_2",
+        "test/mitmproxy/net/data/text_cert_weird1",
+        "test/mitmproxy/net/data/text_cert_with_comma",
+        "test/mitmproxy/net/data/verificationcerts/**",
+        "test/mitmproxy/net/dns/**",
+        "test/mitmproxy/net/http/**",
+        "test/mitmproxy/net/test_check.py",
+        "test/mitmproxy/net/test_encoding.py",
+        "test/mitmproxy/net/test_free_port.py",
+        "test/mitmproxy/net/test_local_ip.py",
+        "test/mitmproxy/net/test_server_spec.py",
+        "test/mitmproxy/net/test_tls.py",
+        "test/mitmproxy/net/tools/**",
+        "test/mitmproxy/platform/**",
+        "test/mitmproxy/proxy/**",
+        "test/mitmproxy/script/**",
+        "test/mitmproxy/test_addonmanager.py",
+        "test/mitmproxy/test_certs.py",
+        "test/mitmproxy/test_command.py",
+        "test/mitmproxy/test_command_lexer.py",
+        "test/mitmproxy/test_connection.py",
+        "test/mitmproxy/test_ctx.py",
+        "test/mitmproxy/test_dns.py",
+        "test/mitmproxy/test_eventsequence.py",
+        "test/mitmproxy/test_exceptions.py",
+        "test/mitmproxy/test_flow.py",
+        "test/mitmproxy/test_flowfilter.py",
+        "test/mitmproxy/test_hooks.py",
+        "test/mitmproxy/test_http.py",
+        "test/mitmproxy/test_log.py",
+        "test/mitmproxy/test_master.py",
+        "test/mitmproxy/test_options.py",
+        "test/mitmproxy/test_optmanager.py",
+        "test/mitmproxy/test_proxy.py",
+        "test/mitmproxy/test_taddons.py",
+        "test/mitmproxy/test_tcp.py",
+        "test/mitmproxy/test_tls.py",
+        "test/mitmproxy/test_typemanager.py",
+        "test/mitmproxy/test_types.py",
+        "test/mitmproxy/test_udp.py",
+        "test/mitmproxy/test_version.py",
+        "test/mitmproxy/test_websocket.py",
+        "test/mitmproxy/tools/**",
+        "test/mitmproxy/utils/**",
+        "test/run-tests-offline.sh",
+        "uv.lock",
+        "web/.editorconfig",
+        "web/.prettierignore",
+        "web/README.md",
+        "web/eslint.config.mjs",
+        "web/gen/**",
+        "web/index.html",
+        "web/jest.config.js",
+        "web/package-lock.json",
+        "web/package.json",
+        "web/setup-global-jest.js",
+        "web/setup-jest.js",
+        "web/src/**",
+        "web/tsconfig.json",
+        "web/vite.config.ts"
+      ],
+      "text": "Copyright (c) 2013, Aldo Cortesi. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013, Aldo Cortesi. All rights reserved., MIT license (LICENSE), https://github.com/mitmproxy/mitmproxy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "mitmproxy/contrib/click/**"
+      ],
+      "text": "Copyright 2014 Pallets\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1.  Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n2.  Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\n3.  Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived from\n    this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A\nPARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2014 Pallets, BSD-3-Clause license (LICENSE.BSD-3), https://github.com/mitmproxy/mitmproxy/tree/77355977e5ea540b51ed029a40ed1dc2f1c2ba7b/mitmproxy/contrib/click."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BSD-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.har"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mitm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.peg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.srl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wbxml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mitmproxy-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aaa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/all"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcertnames"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/htpasswd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mitmdump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mitmproxy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mitmweb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pf01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pf02"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-mitmdump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-mitmproxy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text_cert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text_cert_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text_cert_weird1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text_cert_with_comma"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/python-poetry/poetry",
+  "revision": "38a86661d2ae58694c76d0bb4e628e1400d6dc6f",
+  "checksum": "sha256:62476ceacc1b88f0b685fbd5d827b84640d680b9fb5781c458ad9e5e1a296c40",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "tests/console/commands/self/fixtures/poetry-1.0.5-darwin.tar.gz",
+      "tests/fixtures/distributions/**",
+      "tests/fixtures/invalid_pyproject/**",
+      "tests/fixtures/simple_project/**",
+      "tests/fixtures/simple_project_legacy/**",
+      "tests/fixtures/wheel_with_no_requires_dist/**",
+      "tests/fixtures/with_multiple_dist_dir/dist/**",
+      "tests/fixtures/with_multiple_dist_dir/other_dist/**",
+      "tests/repositories/fixtures/installed/lib/python3.7/site-packages/foo-0.1.0-py3.8.egg",
+      "tests/repositories/fixtures/installed/vendor/**",
+      "tests/repositories/fixtures/pypi.org/dists/**",
+      "tests/repositories/fixtures/pypi.org/stubbed/**"
+    ]
+  },
+  "history": {
+    "since": "10e50e66cd029066563565cf80e152d51fd59355"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2018-present Sébastien Eustace\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2018 Sébastien Eustace\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/python-poetry/poetry: Copyright (c) 2018-present Sébastien Eustace, MIT license (LICENSE), https://github.com/python-poetry/poetry; Copyright (c) 2018 Sébastien Eustace, MIT license (LICENSE), https://github.com/python-poetry/poetry/tree/38a86661d2ae58694c76d0bb4e628e1400d6dc6f/tests/fixtures/with-include."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".pre-commit-hooks.yaml",
+        "CHANGELOG.md",
+        "CITATION.cff",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "README.md",
+        "docs/**",
+        "poetry.lock",
+        "pyproject.toml",
+        "src/**",
+        "tests/__init__.py",
+        "tests/config/**",
+        "tests/conftest.py",
+        "tests/console/__init__.py",
+        "tests/console/commands/__init__.py",
+        "tests/console/commands/cache/**",
+        "tests/console/commands/conftest.py",
+        "tests/console/commands/debug/**",
+        "tests/console/commands/env/**",
+        "tests/console/commands/python/**",
+        "tests/console/commands/self/__init__.py",
+        "tests/console/commands/self/conftest.py",
+        "tests/console/commands/self/fixtures/poetry-1.0.5-darwin.sha256sum",
+        "tests/console/commands/self/test_add_plugins.py",
+        "tests/console/commands/self/test_install.py",
+        "tests/console/commands/self/test_remove_plugins.py",
+        "tests/console/commands/self/test_self_command.py",
+        "tests/console/commands/self/test_show.py",
+        "tests/console/commands/self/test_show_plugins.py",
+        "tests/console/commands/self/test_sync.py",
+        "tests/console/commands/self/test_update.py",
+        "tests/console/commands/self/utils.py",
+        "tests/console/commands/source/**",
+        "tests/console/commands/test_about.py",
+        "tests/console/commands/test_add.py",
+        "tests/console/commands/test_build.py",
+        "tests/console/commands/test_check.py",
+        "tests/console/commands/test_config.py",
+        "tests/console/commands/test_init.py",
+        "tests/console/commands/test_install.py",
+        "tests/console/commands/test_lock.py",
+        "tests/console/commands/test_new.py",
+        "tests/console/commands/test_publish.py",
+        "tests/console/commands/test_remove.py",
+        "tests/console/commands/test_run.py",
+        "tests/console/commands/test_search.py",
+        "tests/console/commands/test_show.py",
+        "tests/console/commands/test_sync.py",
+        "tests/console/commands/test_update.py",
+        "tests/console/commands/test_version.py",
+        "tests/console/conftest.py",
+        "tests/console/logging/**",
+        "tests/console/test_application.py",
+        "tests/console/test_application_command_not_found.py",
+        "tests/console/test_application_global_options.py",
+        "tests/console/test_application_removed_commands.py",
+        "tests/console/test_command_loader.py",
+        "tests/console/test_exceptions_console_message.py",
+        "tests/console/test_exceptions_poetry_runtime_error.py",
+        "tests/fixtures/bad_scripts_project/**",
+        "tests/fixtures/build_constraints/**",
+        "tests/fixtures/build_constraints_empty/**",
+        "tests/fixtures/build_system_requires_not_available/**",
+        "tests/fixtures/build_systems/**",
+        "tests/fixtures/complete.toml",
+        "tests/fixtures/deleted_directory_dependency/**",
+        "tests/fixtures/deleted_file_dependency/**",
+        "tests/fixtures/directory/**",
+        "tests/fixtures/excluded_subpackage/**",
+        "tests/fixtures/extended_project/**",
+        "tests/fixtures/extended_project_without_setup/**",
+        "tests/fixtures/extended_with_no_setup/**",
+        "tests/fixtures/file_scripts_dir_ref_project/**",
+        "tests/fixtures/file_scripts_missing_ref_project/**",
+        "tests/fixtures/file_scripts_no_ref_field_project/**",
+        "tests/fixtures/file_scripts_project/**",
+        "tests/fixtures/git/**",
+        "tests/fixtures/incompatible_lock/**",
+        "tests/fixtures/inspection/**",
+        "tests/fixtures/invalid_lock/**",
+        "tests/fixtures/invalid_pyproject_dep_name/**",
+        "tests/fixtures/missing_directory_dependency/**",
+        "tests/fixtures/missing_extra_directory_dependency/**",
+        "tests/fixtures/missing_file_dependency/**",
+        "tests/fixtures/nameless_pyproject/**",
+        "tests/fixtures/no_name_project/**",
+        "tests/fixtures/non_package_mode/**",
+        "tests/fixtures/old_lock/**",
+        "tests/fixtures/old_lock_path_dependency/**",
+        "tests/fixtures/outdated_lock/**",
+        "tests/fixtures/private_pyproject/**",
+        "tests/fixtures/project_plugins/**",
+        "tests/fixtures/project_with_extras/**",
+        "tests/fixtures/project_with_git_dev_dependency/**",
+        "tests/fixtures/project_with_local_dependencies/**",
+        "tests/fixtures/project_with_multi_constraints_dependency/**",
+        "tests/fixtures/project_with_nested_local/**",
+        "tests/fixtures/project_with_setup/**",
+        "tests/fixtures/project_with_setup_calls_script/**",
+        "tests/fixtures/pypi_reference/**",
+        "tests/fixtures/sample_project/**",
+        "tests/fixtures/scripts/**",
+        "tests/fixtures/self_version_not_ok/**",
+        "tests/fixtures/self_version_not_ok_invalid_config/**",
+        "tests/fixtures/self_version_ok/**",
+        "tests/fixtures/up_to_date_lock/**",
+        "tests/fixtures/up_to_date_lock_non_package/**",
+        "tests/fixtures/with_conditional_path_deps/**",
+        "tests/fixtures/with_explicit_pypi_and_other/**",
+        "tests/fixtures/with_explicit_pypi_and_other_explicit/**",
+        "tests/fixtures/with_explicit_pypi_no_other/**",
+        "tests/fixtures/with_explicit_source/**",
+        "tests/fixtures/with_local_config/**",
+        "tests/fixtures/with_multiple_dist_dir/README.rst",
+        "tests/fixtures/with_multiple_dist_dir/pyproject.toml",
+        "tests/fixtures/with_multiple_dist_dir/simple_project/**",
+        "tests/fixtures/with_multiple_readme_files/**",
+        "tests/fixtures/with_multiple_sources/**",
+        "tests/fixtures/with_multiple_sources_pypi/**",
+        "tests/fixtures/with_multiple_supplemental_sources/**",
+        "tests/fixtures/with_path_dependency/**",
+        "tests/fixtures/with_primary_source_explicit/**",
+        "tests/fixtures/with_primary_source_implicit/**",
+        "tests/fixtures/with_source/**",
+        "tests/fixtures/with_supplemental_source/**",
+        "tests/helpers.py",
+        "tests/inspection/**",
+        "tests/installation/**",
+        "tests/integration/**",
+        "tests/json/**",
+        "tests/masonry/**",
+        "tests/mixology/**",
+        "tests/packages/**",
+        "tests/plugins/**",
+        "tests/publishing/**",
+        "tests/puzzle/**",
+        "tests/pyproject/**",
+        "tests/repositories/__init__.py",
+        "tests/repositories/conftest.py",
+        "tests/repositories/fixtures/__init__.py",
+        "tests/repositories/fixtures/distribution_hashes.py",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/cleo-0.7.6.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/directory_pep_610-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable-2.3.4.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable-src-dir-2.3.4.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable-src-dir.pth",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable-with-import-2.3.4.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable-with-import.pth",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable.pth",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable_directory_pep_610-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/file_pep_610-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610_no_requested_version-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610_subdirectory-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/standard-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/standard.pth",
+        "tests/repositories/fixtures/installed/lib/python3.7/site-packages/url_pep_610-1.2.3.dist-info/**",
+        "tests/repositories/fixtures/installed/lib64/**",
+        "tests/repositories/fixtures/installed/src/**",
+        "tests/repositories/fixtures/legacy/**",
+        "tests/repositories/fixtures/legacy.py",
+        "tests/repositories/fixtures/pypi.org/generate.py",
+        "tests/repositories/fixtures/pypi.org/json/**",
+        "tests/repositories/fixtures/pypi.org/metadata/**",
+        "tests/repositories/fixtures/pypi.org/search/**",
+        "tests/repositories/fixtures/pypi.py",
+        "tests/repositories/fixtures/python_hosted.py",
+        "tests/repositories/fixtures/single-page/**",
+        "tests/repositories/link_sources/**",
+        "tests/repositories/parsers/**",
+        "tests/repositories/test_cached_repository.py",
+        "tests/repositories/test_http_repository.py",
+        "tests/repositories/test_installed_repository.py",
+        "tests/repositories/test_legacy_repository.py",
+        "tests/repositories/test_lockfile_repository.py",
+        "tests/repositories/test_pypi_repository.py",
+        "tests/repositories/test_repository.py",
+        "tests/repositories/test_repository_pool.py",
+        "tests/repositories/test_single_page_repository.py",
+        "tests/test_conftest.py",
+        "tests/test_factory.py",
+        "tests/test_helpers.py",
+        "tests/test_main.py",
+        "tests/toml/**",
+        "tests/types.py",
+        "tests/utils/**",
+        "tests/vcs/**"
+      ],
+      "text": "Copyright (c) 2018-present Sébastien Eustace\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018-present Sébastien Eustace, MIT license (LICENSE), https://github.com/python-poetry/poetry."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/fixtures/with-include/**"
+      ],
+      "text": "Copyright (c) 2018 Sébastien Eustace\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Sébastien Eustace, MIT license (LICENSE), https://github.com/python-poetry/poetry/tree/38a86661d2ae58694c76d0bb4e628e1400d6dc6f/tests/fixtures/with-include."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pth"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/METADATA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PKG-INFO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_readme"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

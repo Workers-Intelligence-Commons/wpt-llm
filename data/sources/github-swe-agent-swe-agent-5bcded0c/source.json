@@ -1,0 +1,632 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/SWE-agent/SWE-agent",
+  "revision": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+  "checksum": "sha256:38bb31d8d1eeb0fd6ab9941ffa49457c95c5b72896e0ae677107240f5b094a6f",
+  "extract": {
+    "exclude": [
+      "assets/batch_animated.gif",
+      "assets/swe-agent-banner.png",
+      "assets/swe-agent-hand.png",
+      "assets/warning.png",
+      "docs/assets/architecture.png",
+      "docs/assets/batch_animated.gif",
+      "docs/assets/favicon.ico",
+      "docs/assets/inspector_1.png",
+      "docs/assets/inspector_2.png",
+      "docs/assets/open_port_default.png",
+      "docs/assets/open_port_in_browser.png",
+      "docs/assets/swebench_logo.png",
+      "docs/assets/swesmith_logo.png",
+      "docs/assets/template_workflow.png",
+      "sweagent/inspector/favicon.ico",
+      "sweagent/inspector/icons/computer.png",
+      "sweagent/inspector/icons/swe-agent-logo-50.png",
+      "sweagent/inspector/icons/swellama_blue.png",
+      "sweagent/inspector/icons/swellama_brown.png",
+      "sweagent/inspector/icons/swellama_grey.png",
+      "sweagent/inspector/icons/swellama_tan.png",
+      "tests/test_data/data_sources/ctf/crypto/Katy/release",
+      "tests/test_data/data_sources/ctf/crypto/Katy/server",
+      "tests/test_data/data_sources/ctf/forensics/flash/flash_c8429a430278283c0e571baebca3d139.zip",
+      "tests/test_data/data_sources/ctf/misc/networking_1/networking.pcap",
+      "tests/test_data/data_sources/ctf/pwn/warmup/warmup",
+      "tests/test_data/data_sources/ctf/rev/rock/rock"
+    ]
+  },
+  "history": {
+    "since": "5b143857cb7af8b22fd421a103429f76f5259f08"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Karthik Narasimhan, Ofir Press\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/SWE-agent/SWE-agent: Copyright (c) 2024 John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Karthik Narasimhan, Ofir Press, MIT license (LICENSE), https://github.com/SWE-agent/SWE-agent."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cursor/**",
+        ".devcontainer/**",
+        ".env.example",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "assets/swe-agent-banner-dark.svg",
+        "assets/swe-agent-banner-light.svg",
+        "assets/swe-agent-banner.svg",
+        "assets/swe-agent-hand.svg",
+        "codecov.yml",
+        "config/**",
+        "docs/CNAME",
+        "docs/README.md",
+        "docs/_footer.md",
+        "docs/assets/bubbles.css",
+        "docs/assets/custom.css",
+        "docs/assets/image_theme.css",
+        "docs/assets/js/**",
+        "docs/assets/mini_logo.svg",
+        "docs/assets/mini_logo_text_below.svg",
+        "docs/assets/mkdocstrings.css",
+        "docs/assets/navigation_cards.css",
+        "docs/assets/readme_assets",
+        "docs/assets/sbcli_logo.svg",
+        "docs/assets/sbcli_logo_text_below.svg",
+        "docs/assets/swe-agent.svg",
+        "docs/assets/sweagent_logo_text_below.svg",
+        "docs/assets/swebench_logo_text_below.svg",
+        "docs/assets/swerex_logo.svg",
+        "docs/assets/swerex_logo_text_below.svg",
+        "docs/assets/swesmith_logo_text_below.svg",
+        "docs/background/**",
+        "docs/config/**",
+        "docs/dev/**",
+        "docs/faq.md",
+        "docs/index.md",
+        "docs/installation/**",
+        "docs/overrides/**",
+        "docs/reference/**",
+        "docs/usage/**",
+        "mkdocs.yml",
+        "mlc_config.json",
+        "pyproject.toml",
+        "sweagent/__init__.py",
+        "sweagent/__main__.py",
+        "sweagent/agent/**",
+        "sweagent/environment/**",
+        "sweagent/exceptions.py",
+        "sweagent/inspector/README.md",
+        "sweagent/inspector/__init__.py",
+        "sweagent/inspector/fileViewer.js",
+        "sweagent/inspector/icons/edit_icon.svg",
+        "sweagent/inspector/index.html",
+        "sweagent/inspector/server.py",
+        "sweagent/inspector/static.py",
+        "sweagent/inspector/style.css",
+        "sweagent/run/**",
+        "sweagent/tools/**",
+        "sweagent/types.py",
+        "sweagent/utils/**",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/test_agent.py",
+        "tests/test_batch_instance.py",
+        "tests/test_commands/**",
+        "tests/test_data/config_files/**",
+        "tests/test_data/data_sources/ctf/crypto/Katy/Dockerfile",
+        "tests/test_data/data_sources/ctf/crypto/Katy/README.md",
+        "tests/test_data/data_sources/ctf/crypto/Katy/challenge.json",
+        "tests/test_data/data_sources/ctf/crypto/Katy/customrandom.c",
+        "tests/test_data/data_sources/ctf/crypto/Katy/docker-compose.yml",
+        "tests/test_data/data_sources/ctf/crypto/Katy/solver.py",
+        "tests/test_data/data_sources/ctf/forensics/flash/README.md",
+        "tests/test_data/data_sources/ctf/forensics/flash/challenge.json",
+        "tests/test_data/data_sources/ctf/misc/networking_1/README.md",
+        "tests/test_data/data_sources/ctf/misc/networking_1/challenge.json",
+        "tests/test_data/data_sources/ctf/pwn/warmup/Dockerfile",
+        "tests/test_data/data_sources/ctf/pwn/warmup/README.md",
+        "tests/test_data/data_sources/ctf/pwn/warmup/challenge.json",
+        "tests/test_data/data_sources/ctf/pwn/warmup/docker-compose.yml",
+        "tests/test_data/data_sources/ctf/pwn/warmup/flag.txt",
+        "tests/test_data/data_sources/ctf/pwn/warmup/warmup.c",
+        "tests/test_data/data_sources/ctf/pwn/warmup/warmup.py",
+        "tests/test_data/data_sources/ctf/rev/rock/README.md",
+        "tests/test_data/data_sources/ctf/rev/rock/challenge.json",
+        "tests/test_data/data_sources/ctf/rev/rock/rock.cpp",
+        "tests/test_data/data_sources/ctf/rev/rock/solution.cpp",
+        "tests/test_data/data_sources/ctf/rev/rock/test_solver/**",
+        "tests/test_data/data_sources/ctf/web/**",
+        "tests/test_data/data_sources/debug_20240322.json",
+        "tests/test_data/data_sources/expert_instances.yaml",
+        "tests/test_data/data_sources/human_eval.json",
+        "tests/test_data/data_sources/simple_instances.yaml",
+        "tests/test_data/data_sources/simple_instances_long.yaml",
+        "tests/test_data/data_sources/swe-bench-dev-easy.json",
+        "tests/test_data/data_sources/swe-bench-dev-easy_first_only.json",
+        "tests/test_data/data_sources/swe-bench-lite-test.json",
+        "tests/test_data/trajectories/**",
+        "tests/test_env.py",
+        "tests/test_env_utils.py",
+        "tests/test_history_processors.py",
+        "tests/test_models.py",
+        "tests/test_packaging.py",
+        "tests/test_parsing.py",
+        "tests/test_problem_statement_multimodal.py",
+        "tests/test_quick_stats.py",
+        "tests/test_run.py",
+        "tests/test_run_batch.py",
+        "tests/test_run_hooks.py",
+        "tests/test_run_replay.py",
+        "tests/test_run_single.py",
+        "tests/test_swesmith.py",
+        "tests/test_tools_command_parsing.py",
+        "tests/test_utils.py",
+        "tests/tools/**",
+        "tests/utils.py",
+        "tools/**",
+        "trajectories/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Karthik Narasimhan, Ofir Press\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Karthik Narasimhan, Ofir Press, MIT license (LICENSE), https://github.com/SWE-agent/SWE-agent."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.traj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_read_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_state"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_state_anthropic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_state_diff_state"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_write_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/click_mouse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/close_site"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/do_nothing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/double_click_mouse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/drag_mouse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/edit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/execute_script_on_page"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exit_forfeit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/get_console_output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/goto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/move_mouse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/navigate_back"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/navigate_forward"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/open"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/open_site"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/press_keys_on_page"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reload_page"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_web_browser_server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/screenshot_site"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_down"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_on_page"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_up"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/search_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/search_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/set_browser_window_size"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/str_replace_editor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/submit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/type_text"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/view_image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wait_time"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

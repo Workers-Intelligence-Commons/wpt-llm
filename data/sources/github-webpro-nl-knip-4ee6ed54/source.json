@@ -1,0 +1,449 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/webpro-nl/knip",
+  "revision": "585f206ca52d54e30f2068c818e1b33b50085459",
+  "checksum": "sha256:ea565cd170e9ca38c8e9ab85cd702ec0dce96d360078f070b89079d4cf5318cc",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "packages/create-config/**",
+      "packages/docs/public/apple-touch-icon.png",
+      "packages/docs/public/authors/**",
+      "packages/docs/public/cow-with-orange-scissors-van-gogh-style.webp",
+      "packages/docs/public/favicon.ico",
+      "packages/docs/public/fonts/SourceSansPro-Regular.otf",
+      "packages/docs/public/icon-192x192.png",
+      "packages/docs/public/icon-512x512.png",
+      "packages/docs/public/screenshots/**",
+      "packages/docs/public/sponsors/**",
+      "packages/docs/src/assets/projects/create-typescript-app.png",
+      "packages/docs/src/fonts/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2",
+      "packages/docs/src/fonts/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSds18S0xR41.woff2",
+      "packages/docs/src/fonts/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkids18S0xR41.woff2",
+      "packages/docs/src/fonts/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2",
+      "packages/docs/src/fonts/hack-regular-subset.woff2",
+      "packages/knip/.gitignore",
+      "packages/knip/.release-it.json",
+      "packages/knip/LICENSE",
+      "packages/knip/README.md",
+      "packages/knip/bin/**",
+      "packages/knip/fixtures/binaries/**",
+      "packages/knip/fixtures/cli/**",
+      "packages/knip/fixtures/cli-preprocessor/**",
+      "packages/knip/fixtures/cli-reporter/**",
+      "packages/knip/fixtures/compact-reporter/**",
+      "packages/knip/fixtures/compilers/**",
+      "packages/knip/fixtures/config-js-async/**",
+      "packages/knip/fixtures/config-js-flat/**",
+      "packages/knip/fixtures/config-json/**",
+      "packages/knip/fixtures/config-mjs-async/**",
+      "packages/knip/fixtures/config-package-json/**",
+      "packages/knip/fixtures/config-preprocessor/**",
+      "packages/knip/fixtures/config-preprocessor-chain/**",
+      "packages/knip/fixtures/config-preprocessor-options/**",
+      "packages/knip/fixtures/config-preprocessor-override/**",
+      "packages/knip/fixtures/config-preprocessor-workspaces/**",
+      "packages/knip/fixtures/config-ts-async/**",
+      "packages/knip/fixtures/config-ts-flat/**",
+      "packages/knip/fixtures/config-ts-function/**",
+      "packages/knip/fixtures/config-ts-nested-function/**",
+      "packages/knip/fixtures/config-yaml/**",
+      "packages/knip/fixtures/dependencies/**",
+      "packages/knip/fixtures/e2e-lib-arrow-inferred-return/**",
+      "packages/knip/fixtures/e2e-lib-as-cast-in-body/**",
+      "packages/knip/fixtures/e2e-lib-call-arg/**",
+      "packages/knip/fixtures/e2e-lib-call-arg-in-body/**",
+      "packages/knip/fixtures/e2e-lib-call-forward-decl/**",
+      "packages/knip/fixtures/e2e-lib-export-star-as/**",
+      "packages/knip/fixtures/e2e-lib-member-call/**",
+      "packages/knip/fixtures/e2e-lib-private-helper-param/**",
+      "packages/knip/fixtures/e2e-lib-typed-exports/**",
+      "packages/knip/fixtures/entry/empty-main/**",
+      "packages/knip/fixtures/entry/exports-enum-members/**",
+      "packages/knip/fixtures/entry/exports-namespace/**",
+      "packages/knip/fixtures/entry/files/**",
+      "packages/knip/fixtures/entry/include-entry-exports/**",
+      "packages/knip/fixtures/entry/include-entry-exports-scripts/**",
+      "packages/knip/fixtures/entry/include-entry-reexports/**",
+      "packages/knip/fixtures/entry/include-libs/components.ts",
+      "packages/knip/fixtures/entry/include-libs/index.tsx",
+      "packages/knip/fixtures/entry/include-libs/loadable.ts",
+      "packages/knip/fixtures/entry/include-libs/node_modules/@loadable/**",
+      "packages/knip/fixtures/entry/include-libs/package.json",
+      "packages/knip/fixtures/entry/include-libs/tsconfig.json",
+      "packages/knip/fixtures/entry/js/**",
+      "packages/knip/fixtures/entry/negated-production-paths/**",
+      "packages/knip/fixtures/entry/null-root-export/**",
+      "packages/knip/fixtures/entry/package-entry-bare/**",
+      "packages/knip/fixtures/entry/package-entry-points/**",
+      "packages/knip/fixtures/entry/package-entry-points-all-gitignored/**",
+      "packages/knip/fixtures/entry/package-entry-points-gitignored/**",
+      "packages/knip/fixtures/entry/package-entry-points-gitignored-workspace/**",
+      "packages/knip/fixtures/entry/package-entry-points-null-subpath/**",
+      "packages/knip/fixtures/entry/package-entry-points-null-subpath-bin/**",
+      "packages/knip/fixtures/entry/package-entry-points-null-subpath-dist/**",
+      "packages/knip/fixtures/entry/package-entry-points-null-subpath-exported/**",
+      "packages/knip/fixtures/entry/package-entry-points-null-subpath-suffix/**",
+      "packages/knip/fixtures/entry/package-entry-points-root-dir/**",
+      "packages/knip/fixtures/entry/package-entry-points-test-files/**",
+      "packages/knip/fixtures/entry/production-plugin-negations/**",
+      "packages/knip/fixtures/entry/public-enum-members/**",
+      "packages/knip/fixtures/entry/self-reference/**",
+      "packages/knip/fixtures/entry/self-reference-from-plugin/**",
+      "packages/knip/fixtures/exports/**",
+      "packages/knip/fixtures/fix/**",
+      "packages/knip/fixtures/fix-members/**",
+      "packages/knip/fixtures/fix-workspaces/**",
+      "packages/knip/fixtures/glob/**",
+      "packages/knip/fixtures/glob-worktree/**",
+      "packages/knip/fixtures/ignore/**",
+      "packages/knip/fixtures/ignore-exports-used-in-file/**",
+      "packages/knip/fixtures/imports/**",
+      "packages/knip/fixtures/infra/**",
+      "packages/knip/fixtures/language/**",
+      "packages/knip/fixtures/load-cjs/**",
+      "packages/knip/fixtures/load-esm/**",
+      "packages/knip/fixtures/load-esm-ts/**",
+      "packages/knip/fixtures/load-json5/**",
+      "packages/knip/fixtures/namespaces/**",
+      "packages/knip/fixtures/plugin-config/**",
+      "packages/knip/fixtures/plugins/**",
+      "packages/knip/fixtures/pnpm-workspace.yaml",
+      "packages/knip/fixtures/preprocessor-hints/**",
+      "packages/knip/fixtures/re-exports/**",
+      "packages/knip/fixtures/reporter-markdown-short/**",
+      "packages/knip/fixtures/resolution/**",
+      "packages/knip/fixtures/session/**",
+      "packages/knip/fixtures/session-compilers/**",
+      "packages/knip/fixtures/session-compilers-overlap/**",
+      "packages/knip/fixtures/session-preprocessor/**",
+      "packages/knip/fixtures/session-preprocessor-mutation/**",
+      "packages/knip/fixtures/session-re-exports/**",
+      "packages/knip/fixtures/symbol-reporter-directory/**",
+      "packages/knip/fixtures/tags-hints/**",
+      "packages/knip/fixtures/trace/**",
+      "packages/knip/fixtures/treat-config-hints-as-errors/**",
+      "packages/knip/fixtures/treat-config-hints-as-errors2/**",
+      "packages/knip/fixtures/treat-tag-hints-as-errors/**",
+      "packages/knip/fixtures/treat-tag-hints-as-errors2/**",
+      "packages/knip/fixtures/types/**",
+      "packages/knip/fixtures/workspaces/**",
+      "packages/knip/fixtures/yarn-pnp/**",
+      "packages/knip/fixtures/yarn-pnpm-store/**",
+      "packages/knip/package.json",
+      "packages/knip/rmdir.js",
+      "packages/knip/schema-jsonc.json",
+      "packages/knip/schema.json",
+      "packages/knip/scripts/**",
+      "packages/knip/src/**",
+      "packages/knip/test/**",
+      "packages/knip/tsconfig.json",
+      "packages/knip/typescript-5.0.d.ts",
+      "packages/language-server/**",
+      "packages/mcp-server/**",
+      "packages/vscode-knip/**",
+      "templates/demo/monorepo/node_modules/**",
+      "templates/issue-reproduction/monorepo/node_modules/**",
+      "templates/language-server-client/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "ed97e6a37a2077cc692f9c239cc4f35869e61833"
+  },
+  "licenses": [
+    {
+      "license": "ISC AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "ISC License (ISC)\n\nCopyright 2022-2026 Lars Kappert\n\nPermission to use, copy, modify, and/or distribute this software for any purpose\nwith or without fee is hereby granted, provided that the above copyright notice\nand this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS\nOF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER\nTORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF\nTHIS SOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/webpro-nl/knip: Copyright 2022-2026 Lars Kappert, ISC license (LICENSE), https://github.com/webpro-nl/knip; the authors of @types/loadable__component, MIT license (declared in package.json), https://github.com/webpro-nl/knip/tree/585f206ca52d54e30f2068c818e1b33b50085459/packages/knip/fixtures/entry/include-libs/node_modules/@types/loadable__component."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        ".agents/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        ".oxfmtrc.json",
+        ".prettierignore",
+        ".release-it.json",
+        ".vscode/**",
+        ".zed/**",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CLAUDE.md",
+        "LICENSE",
+        "README.md",
+        "knip.json",
+        "oxlint.config.ts",
+        "package.json",
+        "packages/docs/.gitignore",
+        "packages/docs/README.md",
+        "packages/docs/astro.config.ts",
+        "packages/docs/mock/**",
+        "packages/docs/package.json",
+        "packages/docs/plugins/**",
+        "packages/docs/public/favicon.svg",
+        "packages/docs/public/fonts/fonts.conf",
+        "packages/docs/public/logo.svg",
+        "packages/docs/public/manifest.json",
+        "packages/docs/public/robots.txt",
+        "packages/docs/scripts/**",
+        "packages/docs/src/assets/logo.svg",
+        "packages/docs/src/assets/og-template.svg",
+        "packages/docs/src/assets/projects/adobe.svg",
+        "packages/docs/src/assets/projects/ag-grid.svg",
+        "packages/docs/src/assets/projects/ag-grid2.svg",
+        "packages/docs/src/assets/projects/anthropic.svg",
+        "packages/docs/src/assets/projects/arktype.svg",
+        "packages/docs/src/assets/projects/astro.svg",
+        "packages/docs/src/assets/projects/aws.svg",
+        "packages/docs/src/assets/projects/babel.svg",
+        "packages/docs/src/assets/projects/backstage.svg",
+        "packages/docs/src/assets/projects/cloudflare.svg",
+        "packages/docs/src/assets/projects/datadog.svg",
+        "packages/docs/src/assets/projects/eslint.svg",
+        "packages/docs/src/assets/projects/freecodecamp.svg",
+        "packages/docs/src/assets/projects/ghost.svg",
+        "packages/docs/src/assets/projects/google.svg",
+        "packages/docs/src/assets/projects/grafana.svg",
+        "packages/docs/src/assets/projects/guardian.svg",
+        "packages/docs/src/assets/projects/khan-academy.svg",
+        "packages/docs/src/assets/projects/microsoft.svg",
+        "packages/docs/src/assets/projects/mocha.svg",
+        "packages/docs/src/assets/projects/n8n.svg",
+        "packages/docs/src/assets/projects/nuxt.svg",
+        "packages/docs/src/assets/projects/nvidia.svg",
+        "packages/docs/src/assets/projects/oxc.svg",
+        "packages/docs/src/assets/projects/prettier.svg",
+        "packages/docs/src/assets/projects/sanity.svg",
+        "packages/docs/src/assets/projects/sap.svg",
+        "packages/docs/src/assets/projects/sentry.svg",
+        "packages/docs/src/assets/projects/shopify.svg",
+        "packages/docs/src/assets/projects/signal.svg",
+        "packages/docs/src/assets/projects/sourcegraph.svg",
+        "packages/docs/src/assets/projects/stately.svg",
+        "packages/docs/src/assets/projects/storybook.svg",
+        "packages/docs/src/assets/projects/supabase.svg",
+        "packages/docs/src/assets/projects/svelte.svg",
+        "packages/docs/src/assets/projects/tanstack.svg",
+        "packages/docs/src/assets/projects/typescript-eslint.svg",
+        "packages/docs/src/assets/projects/vercel.svg",
+        "packages/docs/src/assets/sponsors/**",
+        "packages/docs/src/assets/testimonials.json",
+        "packages/docs/src/assets/title-dark.svg",
+        "packages/docs/src/assets/title-light.svg",
+        "packages/docs/src/components/**",
+        "packages/docs/src/content/**",
+        "packages/docs/src/content.config.ts",
+        "packages/docs/src/fonts/font-face.css",
+        "packages/docs/src/pages/**",
+        "packages/docs/src/styles/**",
+        "packages/docs/src/util/**",
+        "packages/docs/tsconfig.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "renovate.json",
+        "scripts/**",
+        "templates/demo/monorepo/.gitignore",
+        "templates/demo/monorepo/knip.ts",
+        "templates/demo/monorepo/package.json",
+        "templates/demo/monorepo/packages/**",
+        "templates/demo/monorepo/tsconfig.json",
+        "templates/demo/script/**",
+        "templates/issue-reproduction/basic/**",
+        "templates/issue-reproduction/monorepo/.gitignore",
+        "templates/issue-reproduction/monorepo/README.md",
+        "templates/issue-reproduction/monorepo/knip.json",
+        "templates/issue-reproduction/monorepo/package.json",
+        "templates/issue-reproduction/monorepo/packages/**",
+        "templates/issue-reproduction/monorepo/tsconfig.json",
+        "templates/language-server-client/.gitignore",
+        "templates/language-server-client/knip.json",
+        "templates/language-server-client/package.json",
+        "templates/language-server-client/packages/**",
+        "templates/language-server-client/tsconfig.json",
+        "templates/playground/**",
+        "templates/vscode-nested-root/**"
+      ],
+      "text": "ISC License (ISC)\n\nCopyright 2022-2026 Lars Kappert\n\nPermission to use, copy, modify, and/or distribute this software for any purpose\nwith or without fee is hereby granted, provided that the above copyright notice\nand this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS\nOF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER\nTORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF\nTHIS SOFTWARE.\n",
+      "attribution": "Copyright 2022-2026 Lars Kappert, ISC license (LICENSE), https://github.com/webpro-nl/knip."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/knip/fixtures/entry/include-libs/node_modules/@types/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of @types/loadable__component, MIT license (declared in package.json), https://github.com/webpro-nl/knip/tree/585f206ca52d54e30f2068c818e1b33b50085459/packages/knip/fixtures/entry/include-libs/node_modules/@types/loadable__component."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

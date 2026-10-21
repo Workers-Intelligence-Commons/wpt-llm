@@ -1,0 +1,316 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/KoljaB/RealtimeSTT",
+  "revision": "5b0764226720a8568b029897e4dd47235ce5504f",
+  "checksum": "sha256:ae555de22e7a703b192f58a5f0190de0ae1d6785e5ec224d1cfc378ec27aad95",
+  "extract": {
+    "exclude": [
+      "RealtimeSTT/assets/warmup_audio.wav",
+      "example_app/active.wav",
+      "example_app/inactive.wav",
+      "tests/samanta.tflite",
+      "tests/suh_mahn_thuh.onnx",
+      "tests/suh_man_tuh.onnx",
+      "tests/unit/audio/LJ001-0002.wav",
+      "tests/unit/audio/LJ001-0004.wav",
+      "tests/unit/audio/LJ001-0006.wav",
+      "tests/unit/audio/LJ001-0008.wav",
+      "tests/unit/audio/LJ001-0013.wav",
+      "tests/unit/audio/asr-reference-short.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/00_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/01_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/02_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/03_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/04_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/05_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/06_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/07_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/08_gpu_expected_pass.wav",
+      "tests/unit/audio/asr-reference.wav"
+    ]
+  },
+  "history": {
+    "since": "72aa862b756daba1eb693800715eb0507540abbb"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Kolja Beigel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/KoljaB/RealtimeSTT: Copyright (c) 2023 Kolja Beigel, MIT license (LICENSE), https://github.com/KoljaB/RealtimeSTT."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        "Dockerfile",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "RELEASE_NOTES.md",
+        "RealtimeSTT/__init__.py",
+        "RealtimeSTT/assets/__init__.py",
+        "RealtimeSTT/audio_input.py",
+        "RealtimeSTT/audio_recorder.py",
+        "RealtimeSTT/audio_recorder_client.py",
+        "RealtimeSTT/core/**",
+        "RealtimeSTT/engines/**",
+        "RealtimeSTT/install_kroko.py",
+        "RealtimeSTT/install_sherpa_models.py",
+        "RealtimeSTT/model_manifests.py",
+        "RealtimeSTT/transcription_engines/**",
+        "RealtimeSTT_server/**",
+        "__init__.py",
+        "docker-compose.yml",
+        "docs/**",
+        "example_app/README.MD",
+        "example_app/install_cpu.bat",
+        "example_app/install_gpu.bat",
+        "example_app/start.bat",
+        "example_app/ui_openai_voice_interface.py",
+        "example_browserclient/**",
+        "example_fastapi_server/**",
+        "example_webserver/**",
+        "install_with_gpu_support.bat",
+        "requirements-gpu-torch.txt",
+        "requirements-gpu.txt",
+        "requirements.txt",
+        "setup.py",
+        "tests/README.md",
+        "tests/__init__.py",
+        "tests/advanced_talk.py",
+        "tests/feed_audio.py",
+        "tests/final_transcription_gap_regression.py",
+        "tests/install_extras_matrix.py",
+        "tests/install_packages.py",
+        "tests/minimalistic_talkbot.py",
+        "tests/openai_voice_interface.py",
+        "tests/openwakeword_test.py",
+        "tests/realtime_boundary_detector_live_test.py",
+        "tests/realtime_boundary_detector_microphone.py",
+        "tests/realtime_loop_test.py",
+        "tests/realtime_transcription_count_comparison.py",
+        "tests/realtimestt_chinese.py",
+        "tests/realtimestt_funasr_test.py",
+        "tests/realtimestt_kroko_test.py",
+        "tests/realtimestt_omnilingual_test.py",
+        "tests/realtimestt_speechendpoint.py",
+        "tests/realtimestt_speechendpoint_binary_classified.py",
+        "tests/realtimestt_test.py",
+        "tests/realtimestt_test_hotkeys_v2.py",
+        "tests/realtimestt_test_stereomix.py",
+        "tests/realtimestt_test_whispercpp.py",
+        "tests/recorder_client.py",
+        "tests/simple_test.py",
+        "tests/test_preview_transcription.py",
+        "tests/test_release_guard.py",
+        "tests/test_tail_transcription.py",
+        "tests/translator.py",
+        "tests/type_into_textbox.py",
+        "tests/unit/__init__.py",
+        "tests/unit/audio/LJ001-0002.txt",
+        "tests/unit/audio/LJ001-0004.txt",
+        "tests/unit/audio/LJ001-0006.txt",
+        "tests/unit/audio/LJ001-0008.txt",
+        "tests/unit/audio/LJ001-0013.txt",
+        "tests/unit/audio/NOTICE.md",
+        "tests/unit/audio/asr-reference.expected_sentences.json",
+        "tests/unit/audio/asr-reference.expected_sentences.prebuffer2.json",
+        "tests/unit/audio/asr-reference.expected_sentences.snippets/gpu_expected_pass/manifest.json",
+        "tests/unit/audio/ljspeech_metadata.csv",
+        "tests/unit/audio/manifest.json",
+        "tests/unit/test_additional_transcription_engines.py",
+        "tests/unit/test_asr_streaming_benchmark.py",
+        "tests/unit/test_audio_fixtures.py",
+        "tests/unit/test_audio_input_worker.py",
+        "tests/unit/test_audio_recorder_boundaries.py",
+        "tests/unit/test_audio_recorder_preroll_integration.py",
+        "tests/unit/test_audio_recorder_public_api.py",
+        "tests/unit/test_cohere_transcribe_engine.py",
+        "tests/unit/test_custom_transcription_engine_api.py",
+        "tests/unit/test_dual_realtime_initialization.py",
+        "tests/unit/test_fastapi_server_multi_user.py",
+        "tests/unit/test_fastapi_server_multi_user_asr_integration.py",
+        "tests/unit/test_fastapi_server_protocol.py",
+        "tests/unit/test_fastapi_server_streaming_executor.py",
+        "tests/unit/test_faster_whisper_engine.py",
+        "tests/unit/test_funasr_engine.py",
+        "tests/unit/test_granite_speech_engine.py",
+        "tests/unit/test_install_sherpa_models.py",
+        "tests/unit/test_kroko_onnx_engine.py",
+        "tests/unit/test_manual_audio_drain.py",
+        "tests/unit/test_manual_audio_input.py",
+        "tests/unit/test_moonshine_engine.py",
+        "tests/unit/test_nemotron_engine.py",
+        "tests/unit/test_omnilingual_asr_engine.py",
+        "tests/unit/test_openai_whisper_engine.py",
+        "tests/unit/test_orukeet_model.py",
+        "tests/unit/test_preroll.py",
+        "tests/unit/test_preview_transcription_worker.py",
+        "tests/unit/test_production_dual_realtime.py",
+        "tests/unit/test_production_preview.py",
+        "tests/unit/test_production_server.py",
+        "tests/unit/test_production_server_acceptance.py",
+        "tests/unit/test_production_session_races.py",
+        "tests/unit/test_realtime_boundary_detector.py",
+        "tests/unit/test_realtime_merge.py",
+        "tests/unit/test_realtime_punctuation_split.py",
+        "tests/unit/test_realtime_streaming_transcription.py",
+        "tests/unit/test_realtime_text_stabilizer.py",
+        "tests/unit/test_realtime_text_stabilizer_eval.py",
+        "tests/unit/test_recorder_runtime.py",
+        "tests/unit/test_recorder_state_callbacks.py",
+        "tests/unit/test_sherpa_onnx_engine.py",
+        "tests/unit/test_shutdown.py",
+        "tests/unit/test_silero_vad_backend.py",
+        "tests/unit/test_slow_final_transcription_audio_gap.py",
+        "tests/unit/test_text_formatting.py",
+        "tests/unit/test_transcribe_cpp_engine.py",
+        "tests/unit/test_transcription_api.py",
+        "tests/unit/test_transcription_worker_shutdown.py",
+        "tests/unit/test_wakeword.py",
+        "tests/unit/test_whisper_cpp_engine.py",
+        "tests/vad_test.py",
+        "tools/**",
+        "win_installgpu_virtual_env.bat"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Kolja Beigel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Kolja Beigel, MIT license (LICENSE), https://github.com/KoljaB/RealtimeSTT."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

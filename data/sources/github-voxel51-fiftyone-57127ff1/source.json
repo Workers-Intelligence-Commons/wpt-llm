@@ -1,0 +1,1145 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/voxel51/fiftyone",
+  "revision": "4b915c7d576fdb6bfc1937ff87dbc29609df0bd8",
+  "checksum": "sha256:9322c9f647db6979f15c9f6246c750d08dda2dba26086cc1a748f85def63bd79",
+  "extract": {
+    "exclude": [
+      "app/packages/annotation/src/engine/temporal/frameTemporalView.test.ts",
+      "app/packages/app/public/favicon.ico",
+      "app/packages/app/src/app.icns",
+      "app/packages/app/src/fonts/palanquin/palanquin-400-devanagari.woff2",
+      "app/packages/app/src/fonts/palanquin/palanquin-400-latin-ext.woff2",
+      "app/packages/app/src/fonts/palanquin/palanquin-400-latin.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-cyrillic-ext.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-cyrillic.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-greek.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-latin-ext.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-latin.woff2",
+      "app/packages/app/src/fonts/roboto-mono/roboto-mono-vietnamese.woff2",
+      "app/packages/components/src/images/**",
+      "app/packages/core/src/app.icns",
+      "app/packages/core/src/components/Modal/Lighter/assets/**",
+      "app/packages/core/src/images/favicon.ico",
+      "app/packages/core/src/images/icon.icns",
+      "app/packages/core/src/images/icon.ico",
+      "app/packages/core/src/images/icon.png",
+      "app/packages/core/src/images/icons/**",
+      "app/packages/core/src/images/logo.png",
+      "app/packages/map/public/favicon.ico",
+      "docs/source/_static/favicon/**",
+      "docs/source/_static/fonts/**",
+      "docs/source/_static/images/annotate.gif",
+      "docs/source/_static/images/annotation/**",
+      "docs/source/_static/images/fiftyone.png",
+      "docs/source/_static/images/homepage_curate.gif",
+      "docs/source/_static/images/homepage_embeddings.gif",
+      "docs/source/_static/images/homepage_evaluate.gif",
+      "docs/source/_static/images/homepage_location.gif",
+      "docs/source/_static/images/homepage_mistakes.gif",
+      "docs/source/_static/images/homepage_redundant.gif",
+      "docs/source/_static/images/icons/browser-512px.png",
+      "docs/source/_static/images/icons/cloud-icon-256px.png",
+      "docs/source/_static/images/icons/cloud-icon-32px.png",
+      "docs/source/_static/images/icons/colab-logo-256px.png",
+      "docs/source/_static/images/icons/colab-logo-32px.png",
+      "docs/source/_static/images/icons/discord-logo-256px.png",
+      "docs/source/_static/images/icons/github-logo-256px.png",
+      "docs/source/_static/images/icons/github-logo-32px.png",
+      "docs/source/_static/images/icons/jupyter-logo-256px.png",
+      "docs/source/_static/images/icons/jupyter-logo-32px.png",
+      "docs/source/_static/images/icons/medium-logo-256px.png",
+      "docs/source/_static/images/icons/medium-logo-32px.png",
+      "docs/source/_static/images/icons/slack-logo-256px.png",
+      "docs/source/_static/images/icons/slack-logo-32px.png",
+      "docs/source/_static/images/icons/statistics-512px.png",
+      "docs/source/_static/images/icons/twitter-logo-256px.png",
+      "docs/source/_static/images/icons/twitter-logo-32px.png",
+      "docs/source/_static/images/icons/voxel51-166px.png",
+      "docs/source/_static/images/icons/zoom-512px.png",
+      "docs/source/_static/images/integrations/**",
+      "docs/source/_static/images/recipes/**",
+      "docs/source/_static/images/release-notes/**",
+      "docs/source/_static/images/tutorials/**",
+      "docs/source/_static/images/voxel51_300dpi.png",
+      "docs/source/images/**",
+      "docs/source/recipes/images/**",
+      "docs/source/tutorials/images/**",
+      "e2e-pw/src/oss/specs/annotate-2d-keypoint.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-2d-rotate.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-keypoint-color-by-value.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-keypoint-field-swap.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-segmentation-ai-sam2.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-segmentation-pen-roundtrip.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-video-keypoint.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-video-polyline-interpolation.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-video-schema-activation.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-video-track-split-merge.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/annotate-zoom-pan.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/canvas.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/color-scheme.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/detection-mask.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/detection-mode.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/fo3d-pcd-stl.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/fo3d-ply.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/group-video-label.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/grouped-direct-pcd-world-alignment.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/histograms.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/mcap-playback.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/mcap-surfaces.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/media-field.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/navigation-slice-integrity.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/pcd-only-dataset.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/quick-edit.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/segmentation-tool-snapshots.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/sidebar-classification.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/sidebar.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/tagger.spec.ts-snapshots/**",
+      "e2e-pw/src/oss/specs/viewport-bridge.spec.ts-snapshots/**",
+      "e2e-pw/src/shared/assets/images/**",
+      "e2e-pw/src/shared/assets/masks/**",
+      "package/db/**",
+      "tests/unittests/specs/**"
+    ]
+  },
+  "history": {
+    "since": "83aaad4320ce954604e4e318bc57706f40cb9311"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2026, Voxel51, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/voxel51/fiftyone: Copyright 2017-2026, Voxel51, Inc., Apache-2.0 license (LICENSE), https://github.com/voxel51/fiftyone; the authors of e2e-pw, MIT license (declared in package.json), https://github.com/voxel51/fiftyone/tree/4b915c7d576fdb6bfc1937ff87dbc29609df0bd8/e2e-pw."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".coderabbit.yaml",
+        ".dockerignore",
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".prettierignore",
+        ".prettierrc.js",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "ISSUE_POLICY.md",
+        "ISSUE_TRIAGE.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "STYLE_GUIDE.md",
+        "app/.eslintignore",
+        "app/.eslintrc.js",
+        "app/.gitignore",
+        "app/.mui-allowlist.txt",
+        "app/.recoil-allowlist.txt",
+        "app/.vscode/**",
+        "app/.yarn/**",
+        "app/.yarnrc.yml",
+        "app/AGENTS.md",
+        "app/CLAUDE.md",
+        "app/CODING_STANDARDS.md",
+        "app/CONTRIBUTING.md",
+        "app/README.md",
+        "app/__mocks__/**",
+        "app/dev.mjs",
+        "app/eslint-packages.txt",
+        "app/gen-docs.js",
+        "app/gen-docs.sh",
+        "app/package.json",
+        "app/packages/aggregations/**",
+        "app/packages/analytics/**",
+        "app/packages/annotation/package.json",
+        "app/packages/annotation/src/agents/**",
+        "app/packages/annotation/src/components/**",
+        "app/packages/annotation/src/engine/README.md",
+        "app/packages/annotation/src/engine/bridge/**",
+        "app/packages/annotation/src/engine/core/**",
+        "app/packages/annotation/src/engine/identity/**",
+        "app/packages/annotation/src/engine/index.ts",
+        "app/packages/annotation/src/engine/integration.test.tsx",
+        "app/packages/annotation/src/engine/interaction/**",
+        "app/packages/annotation/src/engine/react/**",
+        "app/packages/annotation/src/engine/signals/**",
+        "app/packages/annotation/src/engine/store/**",
+        "app/packages/annotation/src/engine/surfaces/**",
+        "app/packages/annotation/src/engine/temporal/frameTemporalView.ts",
+        "app/packages/annotation/src/engine/temporal/poolTemporalView.ts",
+        "app/packages/annotation/src/engine/temporal/types.ts",
+        "app/packages/annotation/src/engine/testing/**",
+        "app/packages/annotation/src/events.ts",
+        "app/packages/annotation/src/hooks/**",
+        "app/packages/annotation/src/index.ts",
+        "app/packages/annotation/src/persistence/**",
+        "app/packages/annotation/src/providers/**",
+        "app/packages/annotation/src/state/**",
+        "app/packages/annotation/src/types.ts",
+        "app/packages/annotation/src/util/**",
+        "app/packages/annotation/tsconfig.json",
+        "app/packages/annotation/vite.config.ts",
+        "app/packages/annotation/vitest.config.ts",
+        "app/packages/app/.env.development",
+        "app/packages/app/.gitignore",
+        "app/packages/app/README.md",
+        "app/packages/app/fs-stub.js",
+        "app/packages/app/index.html",
+        "app/packages/app/package.json",
+        "app/packages/app/public/404.html",
+        "app/packages/app/public/assets/**",
+        "app/packages/app/public/model_evaluation.svg",
+        "app/packages/app/src/Network.tsx",
+        "app/packages/app/src/Pixelating.tsx",
+        "app/packages/app/src/Renderer.tsx",
+        "app/packages/app/src/Sync.tsx",
+        "app/packages/app/src/components/**",
+        "app/packages/app/src/env.d.ts",
+        "app/packages/app/src/fonts/fonts.css",
+        "app/packages/app/src/fonts/palanquin/OFL.txt",
+        "app/packages/app/src/fonts/roboto-mono/OFL.txt",
+        "app/packages/app/src/ga.ts",
+        "app/packages/app/src/index.css",
+        "app/packages/app/src/index.tsx",
+        "app/packages/app/src/makeRoutes.test.ts",
+        "app/packages/app/src/makeRoutes.ts",
+        "app/packages/app/src/pages/**",
+        "app/packages/app/src/routing/**",
+        "app/packages/app/src/sharedSession/**",
+        "app/packages/app/src/useEventSource.ts",
+        "app/packages/app/src/useEvents/**",
+        "app/packages/app/src/useSetters/**",
+        "app/packages/app/src/useWriters/**",
+        "app/packages/app/src/utils.test.ts",
+        "app/packages/app/src/utils.ts",
+        "app/packages/app/src/vite-env.d.ts",
+        "app/packages/app/tsconfig.json",
+        "app/packages/app/vite.config.ts",
+        "app/packages/command-bus/**",
+        "app/packages/commands/**",
+        "app/packages/components/.gitignore",
+        "app/packages/components/.storybook/**",
+        "app/packages/components/README.md",
+        "app/packages/components/index.html",
+        "app/packages/components/package.json",
+        "app/packages/components/relay.config.json",
+        "app/packages/components/src/components/**",
+        "app/packages/components/src/env.d.ts",
+        "app/packages/components/src/icons/**",
+        "app/packages/components/src/index.ts",
+        "app/packages/components/src/scrollable.module.css",
+        "app/packages/components/src/vite-env.d.ts",
+        "app/packages/components/tsconfig.json",
+        "app/packages/components/vite.config.ts",
+        "app/packages/core/.gitignore",
+        "app/packages/core/package.json",
+        "app/packages/core/src/client/**",
+        "app/packages/core/src/commands/**",
+        "app/packages/core/src/components/Actions/**",
+        "app/packages/core/src/components/ActivityToast.tsx",
+        "app/packages/core/src/components/ColorModal/**",
+        "app/packages/core/src/components/Common/**",
+        "app/packages/core/src/components/Dataset.tsx",
+        "app/packages/core/src/components/DatasetGridRendererFailover.tsx",
+        "app/packages/core/src/components/EmptySamples.tsx",
+        "app/packages/core/src/components/EventTracker.tsx",
+        "app/packages/core/src/components/FieldLabelAndInfo/**",
+        "app/packages/core/src/components/Filters/**",
+        "app/packages/core/src/components/GatedDynamicImports.tsx",
+        "app/packages/core/src/components/Grid/**",
+        "app/packages/core/src/components/Histogram.tsx",
+        "app/packages/core/src/components/Loading.tsx",
+        "app/packages/core/src/components/MainSpace/**",
+        "app/packages/core/src/components/Modal/Actions/**",
+        "app/packages/core/src/components/Modal/Bars.tsx",
+        "app/packages/core/src/components/Modal/Group/**",
+        "app/packages/core/src/components/Modal/ImaVidLooker.tsx",
+        "app/packages/core/src/components/Modal/Lighter/GpuErrorAnimation.tsx",
+        "app/packages/core/src/components/Modal/Lighter/LighterSampleRenderer.module.css",
+        "app/packages/core/src/components/Modal/Lighter/LighterSampleRenderer.tsx",
+        "app/packages/core/src/components/Modal/Lighter/LighterToolbar.tsx",
+        "app/packages/core/src/components/Modal/Lighter/SharedCanvas.ts",
+        "app/packages/core/src/components/Modal/Lighter/ToolbarButton.tsx",
+        "app/packages/core/src/components/Modal/Lighter/annotateActions.ts",
+        "app/packages/core/src/components/Modal/Lighter/useBridge.ts",
+        "app/packages/core/src/components/Modal/Lighter/useColorMappingContext.ts",
+        "app/packages/core/src/components/Modal/Lighter/useInitializeViewport.ts",
+        "app/packages/core/src/components/Modal/Lighter/useLighterSelectionEventHandler.test.ts",
+        "app/packages/core/src/components/Modal/Lighter/useLighterSelectionEventHandler.ts",
+        "app/packages/core/src/components/Modal/Lighter/useLighterTooltipEventHandler.ts",
+        "app/packages/core/src/components/Modal/Lighter/useRetrieveViewport.ts",
+        "app/packages/core/src/components/Modal/Lighter/useViewport.test.ts",
+        "app/packages/core/src/components/Modal/Lighter/useViewport.ts",
+        "app/packages/core/src/components/Modal/Lighter/useViewportReadiness.ts",
+        "app/packages/core/src/components/Modal/MetadataLooker.tsx",
+        "app/packages/core/src/components/Modal/Modal.test.tsx",
+        "app/packages/core/src/components/Modal/Modal.tsx",
+        "app/packages/core/src/components/Modal/ModalLooker.test.tsx",
+        "app/packages/core/src/components/Modal/ModalLooker.tsx",
+        "app/packages/core/src/components/Modal/ModalNavigation.test.tsx",
+        "app/packages/core/src/components/Modal/ModalNavigation.tsx",
+        "app/packages/core/src/components/Modal/ModalSamplePending.test.tsx",
+        "app/packages/core/src/components/Modal/ModalSamplePending.tsx",
+        "app/packages/core/src/components/Modal/ModalSamplePlugin.test.tsx",
+        "app/packages/core/src/components/Modal/ModalSamplePlugin.tsx",
+        "app/packages/core/src/components/Modal/ModalSampleRenderer.test.tsx",
+        "app/packages/core/src/components/Modal/ModalSampleRenderer.tsx",
+        "app/packages/core/src/components/Modal/ModalSpace.tsx",
+        "app/packages/core/src/components/Modal/ModalStatusBar.test.tsx",
+        "app/packages/core/src/components/Modal/ModalStatusBar.tsx",
+        "app/packages/core/src/components/Modal/Pin.tsx",
+        "app/packages/core/src/components/Modal/Sample2D.test.tsx",
+        "app/packages/core/src/components/Modal/Sample2D.tsx",
+        "app/packages/core/src/components/Modal/Sample3d.tsx",
+        "app/packages/core/src/components/Modal/SelectSampleCheckbox.tsx",
+        "app/packages/core/src/components/Modal/Sidebar/**",
+        "app/packages/core/src/components/Modal/TooltipInfo.tsx",
+        "app/packages/core/src/components/Modal/TooltipInfoBoundary.test.tsx",
+        "app/packages/core/src/components/Modal/TooltipInfoBoundary.tsx",
+        "app/packages/core/src/components/Modal/VideoExploreToolbar.tsx",
+        "app/packages/core/src/components/Modal/VideoLookerSurface.module.css",
+        "app/packages/core/src/components/Modal/VideoLookerSurface.tsx",
+        "app/packages/core/src/components/Modal/VideoTimelineExtensions.test.tsx",
+        "app/packages/core/src/components/Modal/VideoTimelineExtensions.tsx",
+        "app/packages/core/src/components/Modal/debouncedNavigator.test.ts",
+        "app/packages/core/src/components/Modal/debouncedNavigator.ts",
+        "app/packages/core/src/components/Modal/hooks.ts",
+        "app/packages/core/src/components/Modal/imaVidLoadRange.test.ts",
+        "app/packages/core/src/components/Modal/imaVidLoadRange.ts",
+        "app/packages/core/src/components/Modal/index.ts",
+        "app/packages/core/src/components/Modal/lookerAttached.ts",
+        "app/packages/core/src/components/Modal/modal-context.ts",
+        "app/packages/core/src/components/Modal/modal-spaces-utils.ts",
+        "app/packages/core/src/components/Modal/modalLifecycle.ts",
+        "app/packages/core/src/components/Modal/use-key-events.ts",
+        "app/packages/core/src/components/Modal/use-looker.ts",
+        "app/packages/core/src/components/Modal/use-modal-sample-renderer-persistence.test.tsx",
+        "app/packages/core/src/components/Modal/use-modal-sample-renderer-persistence.ts",
+        "app/packages/core/src/components/Modal/use-modal-selective-rendering.ts",
+        "app/packages/core/src/components/Modal/useLookerFrameSync.test.ts",
+        "app/packages/core/src/components/Modal/useLookerFrameSync.ts",
+        "app/packages/core/src/components/Modal/useLookerPlaybackBridge.ts",
+        "app/packages/core/src/components/Modal/useSavedVideoSegments.test.ts",
+        "app/packages/core/src/components/Modal/useSavedVideoSegments.ts",
+        "app/packages/core/src/components/Modal/useVideoExploreKeybindings.test.tsx",
+        "app/packages/core/src/components/Modal/useVideoExploreKeybindings.ts",
+        "app/packages/core/src/components/Modal/utils.test.ts",
+        "app/packages/core/src/components/Modal/utils.ts",
+        "app/packages/core/src/components/QueryPerformanceToast.test.tsx",
+        "app/packages/core/src/components/QueryPerformanceToast.tsx",
+        "app/packages/core/src/components/ResourceCount.tsx",
+        "app/packages/core/src/components/SamplesContainer.tsx",
+        "app/packages/core/src/components/SavedQueries/**",
+        "app/packages/core/src/components/SchemaManagerOutlet.test.tsx",
+        "app/packages/core/src/components/SchemaManagerOutlet.tsx",
+        "app/packages/core/src/components/Sidebar/**",
+        "app/packages/core/src/components/Snackbar.tsx",
+        "app/packages/core/src/components/Starter/**",
+        "app/packages/core/src/components/index.ts",
+        "app/packages/core/src/components/utils.tsx",
+        "app/packages/core/src/env.d.ts",
+        "app/packages/core/src/hooks/**",
+        "app/packages/core/src/images/error.svg",
+        "app/packages/core/src/images/robots.txt",
+        "app/packages/core/src/images/t-shirt.svg",
+        "app/packages/core/src/index.css",
+        "app/packages/core/src/index.ts",
+        "app/packages/core/src/plugins/**",
+        "app/packages/core/src/subscription/**",
+        "app/packages/core/src/url/**",
+        "app/packages/core/src/useFlashlightPager.ts",
+        "app/packages/core/src/utils/**",
+        "app/packages/core/src/vite-env.d.ts",
+        "app/packages/core/tsconfig.json",
+        "app/packages/core/vite.config.ts",
+        "app/packages/embeddings/**",
+        "app/packages/embeddings-v2/**",
+        "app/packages/events/**",
+        "app/packages/feature-flags/**",
+        "app/packages/flashlight/**",
+        "app/packages/lighter/**",
+        "app/packages/looker/**",
+        "app/packages/looker-3d/**",
+        "app/packages/map/.env",
+        "app/packages/map/.gitignore",
+        "app/packages/map/README.md",
+        "app/packages/map/package.json",
+        "app/packages/map/public/index.html",
+        "app/packages/map/public/manifest.json",
+        "app/packages/map/public/robots.txt",
+        "app/packages/map/src/**",
+        "app/packages/map/tsconfig.json",
+        "app/packages/map/vite.config.ts",
+        "app/packages/multimodal/**",
+        "app/packages/operators/**",
+        "app/packages/playback/**",
+        "app/packages/plugins/**",
+        "app/packages/relay/**",
+        "app/packages/similarity-search/**",
+        "app/packages/spaces/**",
+        "app/packages/spotlight/**",
+        "app/packages/state/**",
+        "app/packages/tiling/**",
+        "app/packages/utilities/**",
+        "app/packages/video-annotation/**",
+        "app/packages/view-bar/**",
+        "app/patches/**",
+        "app/relay.config.json",
+        "app/schema.graphql",
+        "app/tsconfig.base.json",
+        "app/tsconfig.check.json",
+        "app/tsconfig.json",
+        "app/typedoc.js",
+        "app/types/**",
+        "app/vite.config.ts",
+        "app/vitest.setup.ts",
+        "app/yarn.config.cjs",
+        "app/yarn.lock",
+        "codecov.yml",
+        "docs/.gitignore",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/extensions/**",
+        "docs/generate_docs.bash",
+        "docs/preview_page.bash",
+        "docs/process_css.py",
+        "docs/scripts/**",
+        "docs/source/404.html",
+        "docs/source/_extra/**",
+        "docs/source/_includes/**",
+        "docs/source/_static/css/**",
+        "docs/source/_static/images/icons/checkmark.svg",
+        "docs/source/_static/images/icons/danger.svg",
+        "docs/source/_static/images/icons/envelope.svg",
+        "docs/source/_static/images/icons/github-logo.svg",
+        "docs/source/_static/images/icons/info.svg",
+        "docs/source/_static/images/icons/lightbulb.svg",
+        "docs/source/_static/images/icons/link-icon.svg",
+        "docs/source/_static/images/icons/mobile-dropdown-icon.svg",
+        "docs/source/_static/images/icons/slack-logo.svg",
+        "docs/source/_static/images/icons/success.svg",
+        "docs/source/_static/images/icons/warning.svg",
+        "docs/source/_static/images/voxel51-logo.svg",
+        "docs/source/_static/js/**",
+        "docs/source/_templates/**",
+        "docs/source/agents/**",
+        "docs/source/assets/**",
+        "docs/source/brain/**",
+        "docs/source/cheat_sheets/**",
+        "docs/source/cli/**",
+        "docs/source/conf.py",
+        "docs/source/contribute/**",
+        "docs/source/custom_directives.py",
+        "docs/source/dataset_zoo/**",
+        "docs/source/deprecation.rst",
+        "docs/source/enterprise/**",
+        "docs/source/faq/**",
+        "docs/source/getting_started/**",
+        "docs/source/index.rst",
+        "docs/source/installation/**",
+        "docs/source/integrations/**",
+        "docs/source/labs/**",
+        "docs/source/model_zoo/**",
+        "docs/source/plugins/**",
+        "docs/source/recipes/.gitignore",
+        "docs/source/recipes/adding_classifications.ipynb",
+        "docs/source/recipes/adding_detections.ipynb",
+        "docs/source/recipes/convert_datasets.ipynb",
+        "docs/source/recipes/creating_views.ipynb",
+        "docs/source/recipes/custom_exporter.ipynb",
+        "docs/source/recipes/custom_importer.ipynb",
+        "docs/source/recipes/custom_parser.ipynb",
+        "docs/source/recipes/draw_labels.ipynb",
+        "docs/source/recipes/fiftyone_torch_dataloader.ipynb",
+        "docs/source/recipes/image_deduplication.ipynb",
+        "docs/source/recipes/image_deduplication_helpers.py",
+        "docs/source/recipes/index.rst",
+        "docs/source/recipes/merge_datasets.ipynb",
+        "docs/source/recipes/remove_duplicate_annos.ipynb",
+        "docs/source/recipes/torch-dataset-examples/**",
+        "docs/source/redirects",
+        "docs/source/redirects.py",
+        "docs/source/release-notes.rst",
+        "docs/source/robots.txt",
+        "docs/source/tutorials/.gitignore",
+        "docs/source/tutorials/anomaly_detection.ipynb",
+        "docs/source/tutorials/classification_mistakes.ipynb",
+        "docs/source/tutorials/clustering.ipynb",
+        "docs/source/tutorials/cosmos-transfer-integration.ipynb",
+        "docs/source/tutorials/cvat_annotation.ipynb",
+        "docs/source/tutorials/data_augmentation.ipynb",
+        "docs/source/tutorials/detection_mistakes.ipynb",
+        "docs/source/tutorials/detectron2.ipynb",
+        "docs/source/tutorials/dimension_reduction.ipynb",
+        "docs/source/tutorials/dinov3.ipynb",
+        "docs/source/tutorials/evaluate_classifications.ipynb",
+        "docs/source/tutorials/evaluate_detections.ipynb",
+        "docs/source/tutorials/fiftyone_annotation_workflows.ipynb",
+        "docs/source/tutorials/gemini_fiftyone_skills.ipynb",
+        "docs/source/tutorials/gemini_vision.ipynb",
+        "docs/source/tutorials/image_embeddings.ipynb",
+        "docs/source/tutorials/index.rst",
+        "docs/source/tutorials/kaputt_dataset.ipynb",
+        "docs/source/tutorials/labelbox_annotation.ipynb",
+        "docs/source/tutorials/monocular_depth_estimation.ipynb",
+        "docs/source/tutorials/open_images.ipynb",
+        "docs/source/tutorials/pandas_comparison.ipynb",
+        "docs/source/tutorials/pointe.ipynb",
+        "docs/source/tutorials/qdrant.ipynb",
+        "docs/source/tutorials/query_flickr.py",
+        "docs/source/tutorials/small_object_detection.ipynb",
+        "docs/source/tutorials/uniqueness.ipynb",
+        "docs/source/tutorials/yolov8.ipynb",
+        "docs/source/tutorials/zero_shot_classification.ipynb",
+        "docs/source/user_guide/**",
+        "docs/source/workflows/**",
+        "docs/templates/**",
+        "fiftyone/**",
+        "install.bat",
+        "install.sh",
+        "mcap-ui-desloppify-audit.md",
+        "package/README.md",
+        "plugins/**",
+        "pylintrc",
+        "pyproject.toml",
+        "pytest.ini",
+        "requirements/**",
+        "schemas/**",
+        "setup.py",
+        "tests/README.md",
+        "tests/benchmarking/**",
+        "tests/ci/**",
+        "tests/conftest.py",
+        "tests/generate_expression_fixtures.py",
+        "tests/intensive/**",
+        "tests/ipc_tests.py",
+        "tests/isolated/**",
+        "tests/misc/**",
+        "tests/no_wrapper/**",
+        "tests/session_tests.py",
+        "tests/unittests/aggregation_tests.py",
+        "tests/unittests/annotation/**",
+        "tests/unittests/brain_group_slices_tests.py",
+        "tests/unittests/camera_tests.py",
+        "tests/unittests/cityscapes_tests.py",
+        "tests/unittests/conftest.py",
+        "tests/unittests/converted_subsets_tests.py",
+        "tests/unittests/cpu_count_tests.py",
+        "tests/unittests/dataset_tests.py",
+        "tests/unittests/decorators.py",
+        "tests/unittests/documents.py",
+        "tests/unittests/evaluation_plugins/**",
+        "tests/unittests/evaluation_tests.py",
+        "tests/unittests/execution_cache/**",
+        "tests/unittests/execution_store_repo_tests.py",
+        "tests/unittests/execution_store_service_tests.py",
+        "tests/unittests/execution_store_unit_tests.py",
+        "tests/unittests/factory/**",
+        "tests/unittests/fcv_tests.py",
+        "tests/unittests/filepath_media_reference_regression_tests.py",
+        "tests/unittests/get_item_tests.py",
+        "tests/unittests/group_selection_tests.py",
+        "tests/unittests/group_tests.py",
+        "tests/unittests/import_export_tests.py",
+        "tests/unittests/index_tests.py",
+        "tests/unittests/internal_docs_tests.py",
+        "tests/unittests/json_tests.py",
+        "tests/unittests/label_schema_attributes_tests.py",
+        "tests/unittests/label_schema_docs_tests.py",
+        "tests/unittests/label_schema_group_tests.py",
+        "tests/unittests/label_schema_memory.py",
+        "tests/unittests/label_tests.py",
+        "tests/unittests/logging_tests.py",
+        "tests/unittests/map/**",
+        "tests/unittests/memory_limit_tests.py",
+        "tests/unittests/metadata_tests.py",
+        "tests/unittests/migrations/**",
+        "tests/unittests/model_tests.py",
+        "tests/unittests/multimodal/**",
+        "tests/unittests/odm_tests.py",
+        "tests/unittests/ontology_class_tests.py",
+        "tests/unittests/ontology_delete_tests.py",
+        "tests/unittests/ontology_tests.py",
+        "tests/unittests/ontology_validation_tests.py",
+        "tests/unittests/operators/**",
+        "tests/unittests/panels/**",
+        "tests/unittests/patches_tests.py",
+        "tests/unittests/plugins/**",
+        "tests/unittests/run_tests.py",
+        "tests/unittests/sample_tests.py",
+        "tests/unittests/secrets/**",
+        "tests/unittests/selection_extensions_tests.py",
+        "tests/unittests/selection_jobs_tests.py",
+        "tests/unittests/selection_navigation_tests.py",
+        "tests/unittests/selection_range_source_tests.py",
+        "tests/unittests/selection_routes_tests.py",
+        "tests/unittests/selection_scope_tests.py",
+        "tests/unittests/selection_tags_tests.py",
+        "tests/unittests/server/**",
+        "tests/unittests/server_aggregations_tests.py",
+        "tests/unittests/server_dataset_tests.py",
+        "tests/unittests/server_decorators_tests.py",
+        "tests/unittests/server_embeddings_v2_tests.py",
+        "tests/unittests/server_events_tests.py",
+        "tests/unittests/server_frames_tests.py",
+        "tests/unittests/server_geo_tests.py",
+        "tests/unittests/server_group_tests.py",
+        "tests/unittests/server_lightning_tests.py",
+        "tests/unittests/server_samples_tests.py",
+        "tests/unittests/server_state_tests.py",
+        "tests/unittests/server_utils_tests.py",
+        "tests/unittests/server_video_labels_tests.py",
+        "tests/unittests/server_view_tests.py",
+        "tests/unittests/server_workspace_tests.py",
+        "tests/unittests/session_events_tests.py",
+        "tests/unittests/similarity_tests.py",
+        "tests/unittests/sort_by_similarity_groups_tests.py",
+        "tests/unittests/storage_tests.py",
+        "tests/unittests/subset_sdk_tests.py",
+        "tests/unittests/subsets_tests.py",
+        "tests/unittests/sync_voodoo_palette_tests.py",
+        "tests/unittests/synchronization_tests.py",
+        "tests/unittests/threed/**",
+        "tests/unittests/torch_dataset_tests.py",
+        "tests/unittests/transforms_tests.py",
+        "tests/unittests/uid_tests.py",
+        "tests/unittests/utils/**",
+        "tests/unittests/utils3d_tests.py",
+        "tests/unittests/utils_tests.py",
+        "tests/unittests/video_keyframe_sync_tests.py",
+        "tests/unittests/video_tests.py",
+        "tests/unittests/view_tests.py",
+        "tests/unittests/zoo/**",
+        "tests/utils/**",
+        "tools/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2026, Voxel51, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Copyright 2017-2026, Voxel51, Inc., Apache-2.0 license (LICENSE), https://github.com/voxel51/fiftyone."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "e2e-pw/.env.dev.template",
+        "e2e-pw/.gitignore",
+        "e2e-pw/.yarn/**",
+        "e2e-pw/.yarnrc.yml",
+        "e2e-pw/CODING_STANDARDS.md",
+        "e2e-pw/README.md",
+        "e2e-pw/ci/**",
+        "e2e-pw/eslint.config.cjs",
+        "e2e-pw/package.json",
+        "e2e-pw/playwright.config.ts",
+        "e2e-pw/scripts/**",
+        "e2e-pw/src/global.d.ts",
+        "e2e-pw/src/oss/fixtures/**",
+        "e2e-pw/src/oss/poms/**",
+        "e2e-pw/src/oss/specs/annotate-2d-class.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-classification.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-field-move.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-keypoint.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-last-used-class.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-lighter.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-mask-edit.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-mask-merge.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-mask.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-persistence.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-polyline-single-vertex.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-polyline.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-2d-rotate.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-3d-cuboid.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-3d-polyline.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-3d-setfield-overwrite.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-dgva-frame-primitives.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-grouped-3d-pin-leak.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-grouped-no-leak.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-grouped-video.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-keypoint-color-by-value.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-keypoint-field-swap.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-multimodal-disabled.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-segmentation-ai-sam2.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-segmentation-pen-roundtrip.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-temporal-tags.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-toolbar-state.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-undo-durability.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-audio-control.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-auto-extend.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-draw.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-dynamic-attribute.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-dynamic-subtracks.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-field-move.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-frame-primitives.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-keypoint.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-label-types-create.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-label-types.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-last-used-class.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-mask-playback.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-navigation.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-polyline-interpolation.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-rotate-interpolation.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-schema-activation.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-temporal-crud.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-temporal.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-timeline-drawer.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-track-delete.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-track-edit.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-track-split-merge.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-video-undo.spec.ts",
+        "e2e-pw/src/oss/specs/annotate-zoom-pan.spec.ts",
+        "e2e-pw/src/oss/specs/built-in-operators.spec.ts",
+        "e2e-pw/src/oss/specs/canvas.spec.ts",
+        "e2e-pw/src/oss/specs/color-scheme.spec.ts",
+        "e2e-pw/src/oss/specs/default-video-slice-group.spec.ts",
+        "e2e-pw/src/oss/specs/detection-mask.spec.ts",
+        "e2e-pw/src/oss/specs/detection-mode.spec.ts",
+        "e2e-pw/src/oss/specs/detections-data.ts",
+        "e2e-pw/src/oss/specs/direct3d-flat-parity.spec.ts",
+        "e2e-pw/src/oss/specs/display-options.spec.ts",
+        "e2e-pw/src/oss/specs/dynamic-embedded-documents-segmentation.spec.ts",
+        "e2e-pw/src/oss/specs/dynamic-groups.spec.ts",
+        "e2e-pw/src/oss/specs/embeddings-panel.spec.ts",
+        "e2e-pw/src/oss/specs/fo3d-camera-init.spec.ts",
+        "e2e-pw/src/oss/specs/fo3d-pcd-stl.spec.ts",
+        "e2e-pw/src/oss/specs/fo3d-ply.spec.ts",
+        "e2e-pw/src/oss/specs/frame-filtering.spec.ts",
+        "e2e-pw/src/oss/specs/grid-page.spec.ts",
+        "e2e-pw/src/oss/specs/grid-tagging.spec.ts",
+        "e2e-pw/src/oss/specs/group-filter-toPatches.spec.ts",
+        "e2e-pw/src/oss/specs/group-video-label.spec.ts",
+        "e2e-pw/src/oss/specs/grouped-direct-pcd-world-alignment.spec.ts",
+        "e2e-pw/src/oss/specs/grouped-fo3d-direct3d.spec.ts",
+        "e2e-pw/src/oss/specs/grouped-point-cloud-ply.spec.ts",
+        "e2e-pw/src/oss/specs/groups-dynamic.spec.ts",
+        "e2e-pw/src/oss/specs/groups.spec.ts",
+        "e2e-pw/src/oss/specs/histograms.spec.ts",
+        "e2e-pw/src/oss/specs/ima-vid.spec.ts",
+        "e2e-pw/src/oss/specs/index-page.spec.ts",
+        "e2e-pw/src/oss/specs/large-groups.spec.ts",
+        "e2e-pw/src/oss/specs/lighter-toolbar.spec.ts",
+        "e2e-pw/src/oss/specs/linking.spec.ts",
+        "e2e-pw/src/oss/specs/mcap-persistence.spec.ts",
+        "e2e-pw/src/oss/specs/mcap-playback.spec.ts",
+        "e2e-pw/src/oss/specs/mcap-surfaces.spec.ts",
+        "e2e-pw/src/oss/specs/media-field.spec.ts",
+        "e2e-pw/src/oss/specs/modal-multi-pcd.spec.ts",
+        "e2e-pw/src/oss/specs/navigation-slice-integrity.spec.ts",
+        "e2e-pw/src/oss/specs/nested-dynamic-groups.spec.ts",
+        "e2e-pw/src/oss/specs/one-loading-screen-explore-mode-grouped.spec.ts",
+        "e2e-pw/src/oss/specs/one-loading-screen-explore-mode.spec.ts",
+        "e2e-pw/src/oss/specs/one-loading-screen-patches.spec.ts",
+        "e2e-pw/src/oss/specs/panels-modal.spec.ts",
+        "e2e-pw/src/oss/specs/patch-label-overlays.spec.ts",
+        "e2e-pw/src/oss/specs/pcd-only-dataset.spec.ts",
+        "e2e-pw/src/oss/specs/polyline-single-vertex.spec.ts",
+        "e2e-pw/src/oss/specs/prompt.spec.ts",
+        "e2e-pw/src/oss/specs/python-panels-grid.spec.ts",
+        "e2e-pw/src/oss/specs/query-performance.spec.ts",
+        "e2e-pw/src/oss/specs/quick-edit.spec.ts",
+        "e2e-pw/src/oss/specs/saved-queries.spec.ts",
+        "e2e-pw/src/oss/specs/schema-manager-tooltip-stacking.spec.ts",
+        "e2e-pw/src/oss/specs/schema-manager.spec.ts",
+        "e2e-pw/src/oss/specs/segmentation-tool-snapshots.spec.ts",
+        "e2e-pw/src/oss/specs/selection-subsets-groups.spec.ts",
+        "e2e-pw/src/oss/specs/selection-subsets-lerobot.spec.ts",
+        "e2e-pw/src/oss/specs/selection-subsets-mcap.spec.ts",
+        "e2e-pw/src/oss/specs/selection-subsets-patches.spec.ts",
+        "e2e-pw/src/oss/specs/selection-subsets-video.spec.ts",
+        "e2e-pw/src/oss/specs/selection-tray.spec.ts",
+        "e2e-pw/src/oss/specs/selection.spec.ts",
+        "e2e-pw/src/oss/specs/sidebar-classification.spec.ts",
+        "e2e-pw/src/oss/specs/sidebar-datetime.spec.ts",
+        "e2e-pw/src/oss/specs/sidebar-explore-is-disabled.spec.ts",
+        "e2e-pw/src/oss/specs/sidebar.spec.ts",
+        "e2e-pw/src/oss/specs/smoke.spec.ts",
+        "e2e-pw/src/oss/specs/spaces-layout-grid-remount.spec.ts",
+        "e2e-pw/src/oss/specs/sparse-dynamic-groups.spec.ts",
+        "e2e-pw/src/oss/specs/sparse-fo3d-groups.spec.ts",
+        "e2e-pw/src/oss/specs/sparse-groups-scenes.spec.ts",
+        "e2e-pw/src/oss/specs/sparse-groups.spec.ts",
+        "e2e-pw/src/oss/specs/sparse-multimodal-groups.spec.ts",
+        "e2e-pw/src/oss/specs/summary-fields.spec.ts",
+        "e2e-pw/src/oss/specs/tagger.spec.ts",
+        "e2e-pw/src/oss/specs/video-explore-mask-tracks.spec.ts",
+        "e2e-pw/src/oss/specs/video-explore-timeline-field-toggle.spec.ts",
+        "e2e-pw/src/oss/specs/view-bar-expression-suggestions.spec.ts",
+        "e2e-pw/src/oss/specs/view-bar-keyboard.spec.ts",
+        "e2e-pw/src/oss/specs/view-bar-quick-search.spec.ts",
+        "e2e-pw/src/oss/specs/view-bar.spec.ts",
+        "e2e-pw/src/oss/specs/viewport-bridge.spec.ts",
+        "e2e-pw/src/oss/utils/**",
+        "e2e-pw/src/shared/abstract-loader.ts",
+        "e2e-pw/src/shared/assets/canvas-only.css",
+        "e2e-pw/src/shared/assets/plugins/**",
+        "e2e-pw/src/shared/dataset-factory/**",
+        "e2e-pw/src/shared/event-utils/**",
+        "e2e-pw/src/shared/media-factory/**",
+        "e2e-pw/src/shared/network-utils/**",
+        "e2e-pw/src/shared/python-runner/**",
+        "e2e-pw/src/shared/sam2-mock-worker.ts",
+        "e2e-pw/src/shared/session-state/**",
+        "e2e-pw/src/shared/utils.ts",
+        "e2e-pw/tsconfig.json",
+        "e2e-pw/vitest.config.ts",
+        "e2e-pw/yarn.lock"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of e2e-pw, MIT license (declared in package.json), https://github.com/voxel51/fiftyone/tree/4b915c7d576fdb6bfc1937ff87dbc29609df0bd8/e2e-pw."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sass",
+      "paths": [
+        "**/*.sass"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.development"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "e2e-pw/ci/Dockerfile.dockerignore",
+        "tests/ci/Dockerfile.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rst_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redirects"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

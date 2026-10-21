@@ -1,0 +1,1757 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dense-analysis/ale",
+  "revision": "e1789bc54483d76ac9ddb40b633d1645c8281914",
+  "checksum": "sha256:0ed539df3e19adacc37e8ab9c361e7b3d43ce84bed5bd071345d7b70b9463783",
+  "extract": {
+    "exclude": [
+      "test/test-files/alex/**",
+      "test/test-files/angular/**",
+      "test/test-files/cspell/**",
+      "test/test-files/debcopyright/**",
+      "test/test-files/elm/newapp/node_modules/**",
+      "test/test-files/elm/newapp-notests/node_modules/**",
+      "test/test-files/elm/node_modules/**",
+      "test/test-files/elm/oldapp/node_modules/**",
+      "test/test-files/erlang/app_with_erlang_ls_config/deps/**",
+      "test/test-files/erlang/erlang_mk_app/deps/**",
+      "test/test-files/eslint/astro-app/node_modules/**",
+      "test/test-files/eslint/node_modules/**",
+      "test/test-files/eslint/react-app/node_modules/**",
+      "test/test-files/eslint/react-app/subdir-with-package-json/node_modules/**",
+      "test/test-files/htmlhint/node_modules/**",
+      "test/test-files/jsonlint/app/node_modules/**",
+      "test/test-files/jsonlint/node_modules/**",
+      "test/test-files/lessc/**",
+      "test/test-files/ols/node_modules/**",
+      "test/test-files/php/project-with-php-cs-fixer/vendor/**",
+      "test/test-files/php/project-with-phpcbf/vendor/**",
+      "test/test-files/php/project-with-pint/vendor/**",
+      "test/test-files/php/vendor/**",
+      "test/test-files/php/with-composer/vendor/**",
+      "test/test-files/php/with-git/**",
+      "test/test-files/phpcs/project-with-phpcs/vendor/**",
+      "test/test-files/psalm/**",
+      "test/test-files/puglint/node_modules/**",
+      "test/test-files/remark_lint/**",
+      "test/test-files/sasslint/**",
+      "test/test-files/solhint/node_modules/**",
+      "test/test-files/spectral/node_modules/**",
+      "test/test-files/standard/**",
+      "test/test-files/stylelint/**",
+      "test/test-files/swaglint/node_modules/**",
+      "test/test-files/textlint/**",
+      "test/test-files/vim/node_modules/**",
+      "test/test-files/volar/node_modules/**",
+      "test/test-files/write-good/**",
+      "test/test-files/xo/monorepo/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "11c11e578f22cda52048fdec1354f9675b413495"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2016-2023, Dense Analysis\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/dense-analysis/ale: Copyright (c) 2016-2023, Dense Analysis, BSD-2-Clause license (LICENSE), https://github.com/dense-analysis/ale."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".codex/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".luacheckrc",
+        ".luarc.json",
+        ".vintrc.yaml",
+        "AGENTS.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "ale_linters/**",
+        "autoload/**",
+        "doc/**",
+        "docker/**",
+        "dockerignore.txt",
+        "ftplugin/**",
+        "lspconfig.vim",
+        "lua/**",
+        "plugin/**",
+        "rplugin/**",
+        "run-tests",
+        "run-tests.bat",
+        "supported-tools.md",
+        "syntax/**",
+        "test/.config/**",
+        "test/completion/**",
+        "test/fix/**",
+        "test/fixers/**",
+        "test/handler/**",
+        "test/jsonnet_files/**",
+        "test/linter/**",
+        "test/lsp/**",
+        "test/lua/**",
+        "test/python/**",
+        "test/script/**",
+        "test/sign/**",
+        "test/smoke_test.vader",
+        "test/test-files/.circleci/**",
+        "test/test-files/.gitignore",
+        "test/test-files/ada/**",
+        "test/test-files/ansible/**",
+        "test/test-files/ant/**",
+        "test/test-files/autopkgtest/**",
+        "test/test-files/bazel/**",
+        "test/test-files/bib/**",
+        "test/test-files/biome/**",
+        "test/test-files/bzl/**",
+        "test/test-files/c/**",
+        "test/test-files/cargo/**",
+        "test/test-files/ccls/**",
+        "test/test-files/checkstyle/**",
+        "test/test-files/clangd/**",
+        "test/test-files/clangformat/**",
+        "test/test-files/cpp/**",
+        "test/test-files/cppcheck/**",
+        "test/test-files/cquery/**",
+        "test/test-files/csslint/**",
+        "test/test-files/cucumber/**",
+        "test/test-files/d/**",
+        "test/test-files/dart/**",
+        "test/test-files/debchangelog/**",
+        "test/test-files/debcontrol/**",
+        "test/test-files/debsources/**",
+        "test/test-files/debupstream/**",
+        "test/test-files/debwatch/**",
+        "test/test-files/dprint/**",
+        "test/test-files/elixir/**",
+        "test/test-files/elm/newapp/elm.json",
+        "test/test-files/elm/newapp/src/**",
+        "test/test-files/elm/newapp/tests/**",
+        "test/test-files/elm/newapp-notests/elm.json",
+        "test/test-files/elm/newapp-notests/tests/**",
+        "test/test-files/elm/oldapp/elm-package.json",
+        "test/test-files/elm/oldapp/src/**",
+        "test/test-files/elm/oldapp/tests/**",
+        "test/test-files/elm/src/**",
+        "test/test-files/erlang/app_with_elvis_config/**",
+        "test/test-files/erlang/app_with_erlang_ls_config/_build/**",
+        "test/test-files/erlang/app_with_erlang_ls_config/erlang_ls.config",
+        "test/test-files/erlang/app_with_erlfmt/**",
+        "test/test-files/erlang/erlang_mk_app/erlang.mk",
+        "test/test-files/erlang/kerl_otp_root/**",
+        "test/test-files/erlang/rebar3_app/**",
+        "test/test-files/eruby/**",
+        "test/test-files/eslint/astro-app/.eslintrc.js",
+        "test/test-files/eslint/astro-app/package.json",
+        "test/test-files/eslint/astro-app/src/**",
+        "test/test-files/eslint/astro-app/tsconfig.json",
+        "test/test-files/eslint/other-app/**",
+        "test/test-files/eslint/package.json",
+        "test/test-files/eslint/react-app/.eslintrc.js",
+        "test/test-files/eslint/react-app/subdir/**",
+        "test/test-files/eslint/react-app/subdir-with-config/**",
+        "test/test-files/eslint/react-app/subdir-with-package-json/package.json",
+        "test/test-files/eslint/yarn2-app/**",
+        "test/test-files/fatou/**",
+        "test/test-files/fecs/**",
+        "test/test-files/fish/**",
+        "test/test-files/flow/**",
+        "test/test-files/fortls-project/**",
+        "test/test-files/generic/**",
+        "test/test-files/gleam/**",
+        "test/test-files/go/**",
+        "test/test-files/gradle/**",
+        "test/test-files/hamllint/**",
+        "test/test-files/haskell/**",
+        "test/test-files/hdl_server/**",
+        "test/test-files/hie_paths/**",
+        "test/test-files/html_beautify/**",
+        "test/test-files/htmlhint/with_config/**",
+        "test/test-files/ink/**",
+        "test/test-files/inko/**",
+        "test/test-files/java/**",
+        "test/test-files/javascript/**",
+        "test/test-files/javascript_deno/**",
+        "test/test-files/json/**",
+        "test/test-files/jsonlint/app/src/**",
+        "test/test-files/jsonlint/app-without-jsonlint/**",
+        "test/test-files/julia/**",
+        "test/test-files/kotlin/**",
+        "test/test-files/lean/**",
+        "test/test-files/long-line/**",
+        "test/test-files/lua/**",
+        "test/test-files/markdown/**",
+        "test/test-files/maven/**",
+        "test/test-files/nim/**",
+        "test/test-files/ocaml/**",
+        "test/test-files/ocamllsp/**",
+        "test/test-files/odin/**",
+        "test/test-files/ols/.merlin",
+        "test/test-files/openscad/**",
+        "test/test-files/pascal/**",
+        "test/test-files/perl/**",
+        "test/test-files/php/project-with-php-cs-fixer/test.php",
+        "test/test-files/php/project-with-phpcbf/foo/**",
+        "test/test-files/php/project-with-pint/test.php",
+        "test/test-files/php/project-without-php-cs-fixer/**",
+        "test/test-files/php/project-without-phpcbf/**",
+        "test/test-files/php/project-without-pint/**",
+        "test/test-files/php/with-composer/composer.json",
+        "test/test-files/phpcs/project-with-phpcs/composer.json",
+        "test/test-files/phpcs/project-with-phpcs/foo/**",
+        "test/test-files/phpcs/project-without-phpcs/**",
+        "test/test-files/prettier/**",
+        "test/test-files/proto/**",
+        "test/test-files/puglint/package.json",
+        "test/test-files/puglint/puglint_rc_dir/**",
+        "test/test-files/puglint/puglint_rc_js_dir/**",
+        "test/test-files/puglint/puglint_rc_json_dir/**",
+        "test/test-files/puppet/**",
+        "test/test-files/purescript/**",
+        "test/test-files/python/**",
+        "test/test-files/r/**",
+        "test/test-files/racket/**",
+        "test/test-files/reasonml/**",
+        "test/test-files/rescript/**",
+        "test/test-files/roc/**",
+        "test/test-files/ruby/**",
+        "test/test-files/rust/**",
+        "test/test-files/rustywind/**",
+        "test/test-files/scala/**",
+        "test/test-files/slimlint/**",
+        "test/test-files/smlnj/**",
+        "test/test-files/solhint/Contract.sol",
+        "test/test-files/solhint/package.json",
+        "test/test-files/spectral/openapi.yaml",
+        "test/test-files/stack/**",
+        "test/test-files/stylua/**",
+        "test/test-files/swaglint/docs/**",
+        "test/test-files/swift/**",
+        "test/test-files/swiftlint/**",
+        "test/test-files/terraform/**",
+        "test/test-files/tex/**",
+        "test/test-files/tflint/**",
+        "test/test-files/tfsec/**",
+        "test/test-files/tidy/**",
+        "test/test-files/toml/**",
+        "test/test-files/top/**",
+        "test/test-files/tsserver/**",
+        "test/test-files/typescript/**",
+        "test/test-files/verilog/**",
+        "test/test-files/vim/invalid_vim_project/**",
+        "test/test-files/vim/path_with_autoload/**",
+        "test/test-files/vim/path_with_initvim/**",
+        "test/test-files/vim/path_with_plugin/**",
+        "test/test-files/vim/path_with_vimrc/**",
+        "test/test-files/volar/package.json",
+        "test/test-files/volar/src/**",
+        "test/test-files/xml/**",
+        "test/test-files/xo/monorepo/package.json",
+        "test/test-files/xo/monorepo/packages/**",
+        "test/test-files/yaml/**",
+        "test/test-files/yara/**",
+        "test/test-files/zig/**",
+        "test/test_ale_has.vader",
+        "test/test_ale_info.vader",
+        "test/test_ale_info_to_clipboard.vader",
+        "test/test_ale_lint_command.vader",
+        "test/test_ale_lint_stop_command.vader",
+        "test/test_ale_populate_command.vader",
+        "test/test_ale_toggle.vader",
+        "test/test_ale_var.vader",
+        "test/test_alejobstarted_autocmd.vader",
+        "test/test_alelint_autocmd.vader",
+        "test/test_ant_build_classpath_command.vader",
+        "test/test_ant_find_project_root.vader",
+        "test/test_autocmd_commands.vader",
+        "test/test_balloon_messages.vader",
+        "test/test_c_find_compile_commands.vader",
+        "test/test_c_flag_parsing.vader",
+        "test/test_cleanup.vader",
+        "test/test_code_action.vader",
+        "test/test_code_action_corner_cases.vader",
+        "test/test_codefix.vader",
+        "test/test_computed_lint_file_values.vader",
+        "test/test_cursor_warnings.vader",
+        "test/test_deferred_command_string.vader",
+        "test/test_deferred_executable_string.vader",
+        "test/test_deno_executable_detection.vader",
+        "test/test_disabling_ale.vader",
+        "test/test_env_function.vader",
+        "test/test_errors_removed_after_filetype_changed.vader",
+        "test/test_filename_mapping.vader",
+        "test/test_filerename.vader",
+        "test/test_filetype_guessing.vader",
+        "test/test_filetype_linter_defaults.vader",
+        "test/test_find_nearest_directory.vader",
+        "test/test_find_nearest_file.vader",
+        "test/test_find_nearest_file_or_directory.vader",
+        "test/test_find_references.vader",
+        "test/test_floating_preview.vader",
+        "test/test_format_command.vader",
+        "test/test_format_temporary_file_creation.vader",
+        "test/test_function_arg_count.vader",
+        "test/test_fuzzy_json_decode.vader",
+        "test/test_get_abspath.vader",
+        "test/test_get_loclist.vader",
+        "test/test_getmatches.vader",
+        "test/test_go_to_definition.vader",
+        "test/test_gradle_build_classpath_command.vader",
+        "test/test_gradle_find_executable.vader",
+        "test/test_gradle_find_project_root.vader",
+        "test/test_helptags.vader",
+        "test/test_highlight_placement.vader",
+        "test/test_highlight_position_chunking.vader",
+        "test/test_history_saving.vader",
+        "test/test_hover.vader",
+        "test/test_hover_parsing.vader",
+        "test/test_ignoring_linters.vader",
+        "test/test_line_join.vader",
+        "test/test_lint_file_linters.vader",
+        "test/test_lint_on_enter_when_file_changed.vader",
+        "test/test_lint_on_filetype_changed.vader",
+        "test/test_linter_defintion_processing.vader",
+        "test/test_linter_retrieval.vader",
+        "test/test_linter_type_mapping.vader",
+        "test/test_linting_blacklist.vader",
+        "test/test_linting_updates_loclist.vader",
+        "test/test_list_formatting.vader",
+        "test/test_list_opening.vader",
+        "test/test_list_titles.vader",
+        "test/test_load_all_linters.vader",
+        "test/test_loclist_binary_search.vader",
+        "test/test_loclist_corrections.vader",
+        "test/test_loclist_jumping.vader",
+        "test/test_loclist_sorting.vader",
+        "test/test_maven_build_classpath_command.vader",
+        "test/test_maven_find_executable.vader",
+        "test/test_maven_find_project_root.vader",
+        "test/test_neovim_diagnostics.vader",
+        "test/test_no_linting_on_write_quit.vader",
+        "test/test_organize_imports.vader",
+        "test/test_other_sources.vader",
+        "test/test_parse_command_args.vader",
+        "test/test_path_dirname.vader",
+        "test/test_path_equality.vader",
+        "test/test_path_upwards.vader",
+        "test/test_path_uri.vader",
+        "test/test_pattern_options.vader",
+        "test/test_powershell.vader",
+        "test/test_prepare_command.vader",
+        "test/test_proselint_get_command.vader",
+        "test/test_proselint_get_executable.vader",
+        "test/test_python_pipenv.vader",
+        "test/test_python_poetry.vader",
+        "test/test_python_traceback.vader",
+        "test/test_python_uv.vader",
+        "test/test_python_virtualenv.vader",
+        "test/test_quickfix_deduplication.vader",
+        "test/test_quitting_variable.vader",
+        "test/test_redundant_tsserver_rendering_avoided.vader",
+        "test/test_regex_escaping.vader",
+        "test/test_rename.vader",
+        "test/test_resolve_local_path.vader",
+        "test/test_results_not_cleared_when_opening_loclist.vader",
+        "test/test_sandbox_execution.vader",
+        "test/test_semver_utils.vader",
+        "test/test_set_list_timers.vader",
+        "test/test_setting_loclist_from_another_buffer.vader",
+        "test/test_setting_problems_found_in_previous_buffers.vader",
+        "test/test_shell_detection.vader",
+        "test/test_should_do_nothing_conditions.vader",
+        "test/test_sml_command.vader",
+        "test/test_socket_connections.vader",
+        "test/test_statusline.vader",
+        "test/test_swift_find_project_root.vader",
+        "test/test_symbol_search.vader",
+        "test/test_temporary_file_management.vader",
+        "test/test_tmpdir_wrapper.vader",
+        "test/test_vim8_processid_parsing.vader",
+        "test/test_virtualtext.vader",
+        "test/test_windows_escaping.vader",
+        "test/test_wrap_comand.vader",
+        "test/test_writefile_function.vader",
+        "test/util/**",
+        "test/v_files/**",
+        "test/vimrc"
+      ],
+      "text": "Copyright (c) 2016-2023, Dense Analysis\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2016-2023, Dense Analysis, BSD-2-Clause license (LICENSE), https://github.com/dense-analysis/ale."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ada",
+      "paths": [
+        "**/*.adb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.ex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.exs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elm",
+      "paths": [
+        "**/*.elm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "julia",
+      "paths": [
+        "**/*.jl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/GNUmakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nim",
+      "paths": [
+        "**/*.nim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ocaml",
+      "paths": [
+        "**/*.ml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pascal",
+      "paths": [
+        "**/*.pas"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.PL"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "purescript",
+      "paths": [
+        "**/*.purs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "racket",
+      "paths": [
+        "**/*.rkt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "reason",
+      "paths": [
+        "**/*.re"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rescript",
+      "paths": [
+        "**/*.res"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "solidity",
+      "paths": [
+        "**/*.sol"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cabal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dhall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.epp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.feature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filelist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gleam"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.haml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ink"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inko"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.odin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.resi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.roc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sbt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.scad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vader"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vhd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yapf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.Rprofile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.astylerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bandit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ccls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ccls-root"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cquery"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.csslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.fortls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.htmlhintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.kerl_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.luacheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.merlin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.packages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pug-lintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.swift-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.tidyrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vimrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COMMIT_EDITMSG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/REQUIRE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Steepfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_astylerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/activate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/args"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autoflake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autoimport"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autopep8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bad_folder_to_test_priority"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/black"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/block-padding-checker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/changelog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-duplicate-tags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-supported-tools-tables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-tag-alignment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-tag-references"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-toc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/custom-checks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/custom-linting-rules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dummy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dune-project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/erlfmt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fecs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flakehell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitlint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gopls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/html-beautify"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/isort"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jedi-language-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvnw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mypy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/needle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pycln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyflakes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylama"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyre"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyrefly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyright-langserver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/refurb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reorder-python-imports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ruff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-lua-tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-vader-tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-vint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/staticcheck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swiftlint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testfile-noextension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tidy-imports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unimport"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vimrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vulture"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/watch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yamlfix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yapf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "v",
+      "paths": [
+        "**/*.v"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

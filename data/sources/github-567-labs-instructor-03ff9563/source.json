@@ -1,0 +1,562 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/567-labs/instructor",
+  "revision": "035c77b7b04dbbf70ae4457eb102038907b5a2a4",
+  "checksum": "sha256:b5330112ea3b27335ffea92956502303d1765de94a6e8e1666eb4d09cb3982df",
+  "extract": {
+    "exclude": [
+      "docs/blog/posts/img/**",
+      "docs/concepts/response.png",
+      "docs/examples/db.png",
+      "docs/examples/entity_resolution.png",
+      "docs/examples/knowledge_graph.png",
+      "docs/img/**",
+      "examples/auto-ticketer/tasks.png",
+      "examples/citation_with_extraction/schema.png",
+      "examples/knowledge-graph/final.png",
+      "examples/knowledge-graph/iteration_0.png",
+      "examples/knowledge-graph/iteration_1.png",
+      "examples/knowledge-graph/iteration_2.png",
+      "examples/knowledge-graph/iteration_3.png",
+      "examples/knowledge-graph/kg.png",
+      "examples/multiple_search_queries/schema.png",
+      "examples/openai-audio/output.wav",
+      "examples/query_planner_execution/schema.png",
+      "examples/recursive_filepaths/schema.png",
+      "examples/resolving-complex-entities/entity.png",
+      "examples/safer_sql_example/schema.png",
+      "examples/task_planner/schema.png",
+      "tests/assets/**",
+      "tests/llm/test_gemini/test_files/**"
+    ]
+  },
+  "history": {
+    "since": "81bff7d72709b907d13c607f5f37a818f37bc447"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Jason Liu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/567-labs/instructor: Copyright (c) 2023 Jason Liu, MIT license (LICENSE), https://github.com/567-labs/instructor."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".coveragerc",
+        ".cursor/**",
+        ".cursorignore",
+        ".github/**",
+        ".gitignore",
+        ".grit/**",
+        ".pre-commit-config.yaml",
+        ".ruff.toml",
+        "AGENT.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "NEW_PROVIDER_AGENT_INSTRUCTIONS.md",
+        "README.md",
+        "benchmarks/**",
+        "build_mkdocs.sh",
+        "cross_link_mapping.yaml",
+        "docs/AGENT.md",
+        "docs/api-docstring-assessment.md",
+        "docs/api.md",
+        "docs/architecture.md",
+        "docs/blog/.authors.yml",
+        "docs/blog/index.md",
+        "docs/blog/posts/aisummit-2023.md",
+        "docs/blog/posts/announcing-gemini-tool-calling-support.md",
+        "docs/blog/posts/announcing-instructor-responses-support.md",
+        "docs/blog/posts/announcing-unified-provider-interface.md",
+        "docs/blog/posts/anthropic-prompt-caching.md",
+        "docs/blog/posts/anthropic-web-search-structured.md",
+        "docs/blog/posts/anthropic.md",
+        "docs/blog/posts/bad-schemas-could-break-llms.md",
+        "docs/blog/posts/best_framework.md",
+        "docs/blog/posts/caching.md",
+        "docs/blog/posts/chain-of-density.md",
+        "docs/blog/posts/chat-with-your-pdf-with-gemini.md",
+        "docs/blog/posts/citations.md",
+        "docs/blog/posts/consistent-stories.md",
+        "docs/blog/posts/course.md",
+        "docs/blog/posts/cursor-rules.md",
+        "docs/blog/posts/distilation-part1.md",
+        "docs/blog/posts/extract-model-looks.md",
+        "docs/blog/posts/extracting-model-metadata.md",
+        "docs/blog/posts/fake-data.md",
+        "docs/blog/posts/full-fastapi-visibility.md",
+        "docs/blog/posts/generating-pdf-citations.md",
+        "docs/blog/posts/generator.md",
+        "docs/blog/posts/google-openai-client.md",
+        "docs/blog/posts/introducing-structured-outputs-with-cerebras-inference.md",
+        "docs/blog/posts/introducing-structured-outputs.md",
+        "docs/blog/posts/introduction.md",
+        "docs/blog/posts/jinja-proposal.md",
+        "docs/blog/posts/langsmith.md",
+        "docs/blog/posts/learn-async.md",
+        "docs/blog/posts/llm-as-reranker.md",
+        "docs/blog/posts/llms-txt-adoption.md",
+        "docs/blog/posts/llms-txt-support.md",
+        "docs/blog/posts/logfire.md",
+        "docs/blog/posts/lseg-market-surveillance.md",
+        "docs/blog/posts/matching-language.md",
+        "docs/blog/posts/migrating-to-uv.md",
+        "docs/blog/posts/mkdocs-llmstxt-plugin-integration.md",
+        "docs/blog/posts/multimodal-gemini.md",
+        "docs/blog/posts/native_caching.md",
+        "docs/blog/posts/open_source.md",
+        "docs/blog/posts/openai-distilation-store.md",
+        "docs/blog/posts/openai-multimodal.md",
+        "docs/blog/posts/pairwise-llm-judge.md",
+        "docs/blog/posts/parea.md",
+        "docs/blog/posts/pydantic-is-still-all-you-need.md",
+        "docs/blog/posts/rag-and-beyond.md",
+        "docs/blog/posts/rag-timelines.md",
+        "docs/blog/posts/semantic-validation-structured-outputs.md",
+        "docs/blog/posts/situate-context.md",
+        "docs/blog/posts/string-based-init.md",
+        "docs/blog/posts/structured-output-anthropic.md",
+        "docs/blog/posts/tidy-data-from-messy-tables.md",
+        "docs/blog/posts/timestamp.md",
+        "docs/blog/posts/using_json.md",
+        "docs/blog/posts/validation-part1.md",
+        "docs/blog/posts/version-1.md",
+        "docs/blog/posts/whats-new-in-v2.md",
+        "docs/blog/posts/why-care-about-mcps.md",
+        "docs/blog/posts/writer-support.md",
+        "docs/blog/posts/youtube-flashcards.md",
+        "docs/blog/posts/youtube-transcripts.md",
+        "docs/cli/**",
+        "docs/concepts/alias.md",
+        "docs/concepts/batch.md",
+        "docs/concepts/caching.md",
+        "docs/concepts/citation.md",
+        "docs/concepts/decisions.md",
+        "docs/concepts/dictionary_operations.md",
+        "docs/concepts/distillation.md",
+        "docs/concepts/enums.md",
+        "docs/concepts/error_handling.md",
+        "docs/concepts/fastapi.md",
+        "docs/concepts/fields.md",
+        "docs/concepts/from_provider.md",
+        "docs/concepts/hooks.md",
+        "docs/concepts/index.md",
+        "docs/concepts/iterable.md",
+        "docs/concepts/lists.md",
+        "docs/concepts/logging.md",
+        "docs/concepts/maybe.md",
+        "docs/concepts/migration.md",
+        "docs/concepts/mode-migration.md",
+        "docs/concepts/models.md",
+        "docs/concepts/multimodal.md",
+        "docs/concepts/parallel.md",
+        "docs/concepts/partial.md",
+        "docs/concepts/patching.md",
+        "docs/concepts/philosophy.md",
+        "docs/concepts/prompt_caching.md",
+        "docs/concepts/prompting.md",
+        "docs/concepts/raw_response.md",
+        "docs/concepts/reask_validation.md",
+        "docs/concepts/retrying.md",
+        "docs/concepts/semantic_validation.md",
+        "docs/concepts/templating.md",
+        "docs/concepts/typeadapter.md",
+        "docs/concepts/typeddicts.md",
+        "docs/concepts/types.md",
+        "docs/concepts/union.md",
+        "docs/concepts/unions.md",
+        "docs/concepts/usage.md",
+        "docs/concepts/validation.md",
+        "docs/contributing.md",
+        "docs/debugging.md",
+        "docs/examples/action_items.md",
+        "docs/examples/audio_extraction.md",
+        "docs/examples/batch_classification_langsmith.md",
+        "docs/examples/batch_in_memory.md",
+        "docs/examples/batch_job_oai.md",
+        "docs/examples/building_knowledge_graphs.md",
+        "docs/examples/bulk_classification.md",
+        "docs/examples/classification.md",
+        "docs/examples/document_segmentation.md",
+        "docs/examples/entity_resolution.md",
+        "docs/examples/exact_citations.md",
+        "docs/examples/examples.md",
+        "docs/examples/extract_contact_info.md",
+        "docs/examples/extract_slides.md",
+        "docs/examples/extracting_receipts.md",
+        "docs/examples/extracting_tables.md",
+        "docs/examples/groq.md",
+        "docs/examples/image_to_ad_copy.md",
+        "docs/examples/index.md",
+        "docs/examples/knowledge_graph.md",
+        "docs/examples/local_classification.md",
+        "docs/examples/mistral.md",
+        "docs/examples/moderation.md",
+        "docs/examples/multi_modal_gemini.md",
+        "docs/examples/multiple_classification.md",
+        "docs/examples/ollama.md",
+        "docs/examples/open_source.md",
+        "docs/examples/pandas_df.md",
+        "docs/examples/partial_streaming.md",
+        "docs/examples/pii.md",
+        "docs/examples/planning-tasks.md",
+        "docs/examples/recursive.md",
+        "docs/examples/search.md",
+        "docs/examples/self_critique.md",
+        "docs/examples/single_classification.md",
+        "docs/examples/sqlmodel.md",
+        "docs/examples/tables_from_vision.md",
+        "docs/examples/tracing_with_langfuse.md",
+        "docs/examples/using_decimals.md",
+        "docs/examples/watsonx.md",
+        "docs/examples/youtube_clips.md",
+        "docs/faq.md",
+        "docs/getting-started.md",
+        "docs/help.md",
+        "docs/hooks/**",
+        "docs/index.md",
+        "docs/installation.md",
+        "docs/integrations/**",
+        "docs/javascripts/**",
+        "docs/jobs.md",
+        "docs/learning/**",
+        "docs/llms.txt",
+        "docs/modes-comparison.md",
+        "docs/newsletter.md",
+        "docs/overrides/**",
+        "docs/prompting/**",
+        "docs/repository-overview.md",
+        "docs/start-here.md",
+        "docs/templates/**",
+        "docs/tutorials/**",
+        "docs/why.md",
+        "ellipsis.yaml",
+        "examples/__init__.py",
+        "examples/anthropic/**",
+        "examples/anthropic-web-tool/**",
+        "examples/asyncio-benchmarks/**",
+        "examples/auto-ticketer/run.py",
+        "examples/automodel/**",
+        "examples/avail/**",
+        "examples/batch-classification/**",
+        "examples/batch_api/**",
+        "examples/caching/**",
+        "examples/caching_prototype/**",
+        "examples/chain-of-density/**",
+        "examples/citation_with_extraction/Dockerfile",
+        "examples/citation_with_extraction/README.md",
+        "examples/citation_with_extraction/citation_fuzzy_match.py",
+        "examples/citation_with_extraction/diagram.py",
+        "examples/citation_with_extraction/main.py",
+        "examples/citation_with_extraction/modal_main.py",
+        "examples/citation_with_extraction/requirements.txt",
+        "examples/citations/**",
+        "examples/classification/**",
+        "examples/codegen-from-schema/**",
+        "examples/cohere/**",
+        "examples/crm/**",
+        "examples/decimals/**",
+        "examples/distilations/**",
+        "examples/evals/**",
+        "examples/extract-table/**",
+        "examples/extracting-pii/**",
+        "examples/fastapi_app/**",
+        "examples/fizzbuzz/**",
+        "examples/gpt-engineer/**",
+        "examples/groq/**",
+        "examples/hooks/**",
+        "examples/iterables/**",
+        "examples/knowledge-graph/run.py",
+        "examples/knowledge-graph/run_stream.py",
+        "examples/learn-async/**",
+        "examples/llm-judge-relevance/**",
+        "examples/logfire/**",
+        "examples/logfire-fastapi/**",
+        "examples/logging/**",
+        "examples/match_language/**",
+        "examples/mistral/**",
+        "examples/multi-actions/**",
+        "examples/multiple_search_queries/diagram.py",
+        "examples/multiple_search_queries/segment_search_queries.py",
+        "examples/open_source_examples/**",
+        "examples/openai/**",
+        "examples/openai-audio/run.py",
+        "examples/parallel/**",
+        "examples/partial_streaming/**",
+        "examples/patching/**",
+        "examples/proscons/**",
+        "examples/query_planner_execution/diagram.py",
+        "examples/query_planner_execution/query_planner_execution.py",
+        "examples/recursive_filepaths/diagram.py",
+        "examples/recursive_filepaths/parse_recursive_paths.py",
+        "examples/reranker/**",
+        "examples/resolving-complex-entities/run.py",
+        "examples/retry/**",
+        "examples/safer_sql_example/diagram.py",
+        "examples/safer_sql_example/safe_sql.py",
+        "examples/simple-extraction/**",
+        "examples/situate_context/**",
+        "examples/sqlmodel/**",
+        "examples/stream_action_items/**",
+        "examples/synethic-data/**",
+        "examples/task_planner/diagram.py",
+        "examples/task_planner/task_planner_topological_sort.py",
+        "examples/tenacity-benchmarks/**",
+        "examples/timestamps/**",
+        "examples/union/**",
+        "examples/validated-multiclass/**",
+        "examples/validators/**",
+        "examples/vision/**",
+        "examples/watsonx/**",
+        "examples/youtube/**",
+        "examples/youtube-clips/**",
+        "examples/youtube-flashcards/**",
+        "github_issue.md",
+        "instructor/**",
+        "mkdocs.yml",
+        "pyproject.toml",
+        "requirements-doc.txt",
+        "requirements-examples.txt",
+        "requirements.txt",
+        "scripts/**",
+        "sitemap.yaml",
+        "tests/__init__.py",
+        "tests/benchmarks/**",
+        "tests/cache/**",
+        "tests/cli/**",
+        "tests/conftest.py",
+        "tests/core/**",
+        "tests/coverage/**",
+        "tests/docs/**",
+        "tests/dsl/**",
+        "tests/genai/**",
+        "tests/llm/__init__.py",
+        "tests/llm/shared_config.py",
+        "tests/llm/test_anthropic/**",
+        "tests/llm/test_bedrock/**",
+        "tests/llm/test_core_providers/**",
+        "tests/llm/test_current_doc_models.py",
+        "tests/llm/test_decisions/**",
+        "tests/llm/test_gemini/__init__.py",
+        "tests/llm/test_gemini/conftest.py",
+        "tests/llm/test_gemini/evals/**",
+        "tests/llm/test_gemini/test_list_content.py",
+        "tests/llm/test_gemini/test_multimodal_content.py",
+        "tests/llm/test_gemini/util.py",
+        "tests/llm/test_genai/**",
+        "tests/llm/test_litellm.py",
+        "tests/llm/test_new_client.py",
+        "tests/llm/test_openai/**",
+        "tests/llm/test_vertexai/**",
+        "tests/llm/test_writer/**",
+        "tests/multimodal/**",
+        "tests/packaging/**",
+        "tests/processing/**",
+        "tests/providers/**",
+        "tests/scripts/**",
+        "tests/test_anthropic_bedrock_caller.py",
+        "tests/test_batch_in_memory.py",
+        "tests/test_batch_processor_coverage.py",
+        "tests/test_genai_config_merging.py",
+        "tests/test_genai_reask.py",
+        "tests/test_genai_truncation.py",
+        "tests/test_import_lazy_openai.py",
+        "tests/test_incomplete_output_exception.py",
+        "tests/test_lazy_imports.py",
+        "tests/test_llm_validator_allow_override.py",
+        "tests/test_openai_responses_tools.py",
+        "tests/test_parallel_schema_names.py",
+        "tests/test_prepare_release.py",
+        "tests/test_streaming_reask_bug.py",
+        "tests/test_streaming_reasoning_events.py",
+        "tests/test_update_total_usage.py",
+        "tests/test_usage_accounting_audit.py",
+        "tests/test_usage_accounting_contracts.py",
+        "tests/test_utils.py",
+        "tests/test_xai_optional_dependency.py",
+        "tests/typing/**",
+        "tests/v2/**",
+        "ty-tests.toml",
+        "ty.toml",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Jason Liu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Jason Liu, MIT license (LICENSE), https://github.com/567-labs/instructor."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cursorignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

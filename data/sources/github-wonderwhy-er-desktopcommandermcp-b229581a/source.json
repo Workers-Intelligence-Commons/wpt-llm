@@ -1,0 +1,412 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/wonderwhy-er/DesktopCommanderMCP",
+  "revision": "f508e524469c26f6366e17dbfd3ee5a69d112127",
+  "checksum": "sha256:da8bde8a1ac0b86d539b0067a493900efe32dd624cc0ea6d3117c8eadee71803",
+  "extract": {
+    "exclude": [
+      "1080_60.mp4",
+      "header.png",
+      "icon.png",
+      "logo.png",
+      "screenshots/**",
+      "test/samples/**",
+      "testemonials/**",
+      "vendor/**"
+    ]
+  },
+  "history": {
+    "since": "e88048b9ff9e545dfc070f12396db213cac211b8"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024-2025 Eduard Ruzga and Desktop Commander Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/wonderwhy-er/DesktopCommanderMCP: Copyright (c) 2024-2025 Eduard Ruzga and Desktop Commander Contributors, MIT license (LICENSE), https://github.com/wonderwhy-er/DesktopCommanderMCP."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".claude-plugin/**",
+        ".codespellrc",
+        ".cursor-plugin/**",
+        ".github/**",
+        ".gitignore",
+        ".mcp.json",
+        ".npmignore",
+        "CLINE_NOTIFICATION_PROBLEM.md",
+        "CUSTOM_STDIO_EXPLANATION.md",
+        "Dockerfile",
+        "FAQ.md",
+        "LICENSE",
+        "PRIVACY.md",
+        "PUBLISH.md",
+        "README.md",
+        "SECURITY.md",
+        "config.json",
+        "gemini-extension.json",
+        "install-docker.ps1",
+        "install-docker.sh",
+        "install.sh",
+        "manifest.template.json",
+        "package-lock.json",
+        "package.json",
+        "plugin.json",
+        "plugin.yaml",
+        "plugins/**",
+        "rules/**",
+        "scripts/**",
+        "server.json",
+        "server.yaml",
+        "setup-claude-server.js",
+        "skills/**",
+        "smithery.yaml",
+        "src/**",
+        "test/fixtures/**",
+        "test/helpers/**",
+        "test/integration/**",
+        "test/large_test_file.txt",
+        "test/modified-test.js",
+        "test/repro/**",
+        "test/run-all-tests.js",
+        "test/test-ab-test.js",
+        "test/test-allowed-directories-symlink.js",
+        "test/test-allowed-directories.js",
+        "test/test-allowed-drive-root.js",
+        "test/test-atomic-write.js",
+        "test/test-blocked-commands.js",
+        "test/test-blocklist-bypass.js",
+        "test/test-client-results.js",
+        "test/test-command-paths.js",
+        "test/test-conditional-tools.js",
+        "test/test-config-atomic-write.js",
+        "test/test-config-bom.js",
+        "test/test-config-client-id-cross-process.js",
+        "test/test-config-corrupt-concurrency.js",
+        "test/test-config-corrupt-recovery.js",
+        "test/test-config-cross-process-clobber.js",
+        "test/test-config-damaged-reset.js",
+        "test/test-config-damaged.js",
+        "test/test-config-failures.js",
+        "test/test-config-lock-compromised.js",
+        "test/test-config-mutation-recovery.js",
+        "test/test-config-read-mid-write.js",
+        "test/test-config-recovery.js",
+        "test/test-config-stale-lock-recovery.js",
+        "test/test-config-temp-homes-removed.js",
+        "test/test-config-usage-cross-process.js",
+        "test/test-config-watch-cross-process.js",
+        "test/test-default-shell-consistency.js",
+        "test/test-default-shell.js",
+        "test/test-device-rollouts.js",
+        "test/test-directory-creation.js",
+        "test/test-docx-header-footer-edit.js",
+        "test/test-edit-block-line-endings.js",
+        "test/test-edit-block-occurrences.js",
+        "test/test-edit-block-overlapping-matches.js",
+        "test/test-edit-block-range-result.js",
+        "test/test-enhanced-repl.js",
+        "test/test-error-sanitization.js",
+        "test/test-excel-edge-cases.js",
+        "test/test-excel-files.js",
+        "test/test-exit-process.js",
+        "test/test-feature-flags-timeout.js",
+        "test/test-file-handlers.js",
+        "test/test-file-info-folder.js",
+        "test/test-file-preview-directory-runtime.js",
+        "test/test-file-preview-image-runtime.js",
+        "test/test-home-directory.js",
+        "test/test-image-write-file-append.js",
+        "test/test-interact-output-cleaning.js",
+        "test/test-kill-process.js",
+        "test/test-line-count.js",
+        "test/test-list-directory-entries.js",
+        "test/test-list-processes.js",
+        "test/test-list-sessions.js",
+        "test/test-literal-search.js",
+        "test/test-markdown-editor-edit-diff.js",
+        "test/test-markdown-editor-roundtrip.js",
+        "test/test-markdown-preview.js",
+        "test/test-move-file.js",
+        "test/test-negative-offset-analysis.js",
+        "test/test-negative-offset-readfile.js",
+        "test/test-node-local-timeout.js",
+        "test/test-node-repl.js",
+        "test/test-nonblocking-config-save.js",
+        "test/test-offline-update-source.js",
+        "test/test-output-buffer-eviction.js",
+        "test/test-package-ships-local-deps.js",
+        "test/test-pdf-chrome-cache.js",
+        "test/test-pdf-creation.js",
+        "test/test-pdf-delete-missing-page.js",
+        "test/test-pdf-edit-block-paths.js",
+        "test/test-pdf-front-matter-js.js",
+        "test/test-pdf-insert-options.js",
+        "test/test-pdf-launch-failure.js",
+        "test/test-pdf-no-chrome.js",
+        "test/test-pdf-parsing.js",
+        "test/test-pdf-read-pages.js",
+        "test/test-pdf-render-allowed-folders.js",
+        "test/test-pdf-render-option-paths.js",
+        "test/test-pdf-render-options.js",
+        "test/test-pdf-render-resources.js",
+        "test/test-pdf-system-chrome.js",
+        "test/test-pdf-write-file-append.js",
+        "test/test-process-exit.js",
+        "test/test-process-facts.js",
+        "test/test-process-memory.js",
+        "test/test-process-pagination.js",
+        "test/test-process-state-detection.js",
+        "test/test-process-wait-config.js",
+        "test/test-program-lookup-working-folder.js",
+        "test/test-program-not-on-path.js",
+        "test/test-prompt-detection.js",
+        "test/test-read-abort-timeout.js",
+        "test/test-read-completed-process.js",
+        "test/test-read-file-large-offsets.js",
+        "test/test-read-file-line-breaks.js",
+        "test/test-read-file-line-limit.js",
+        "test/test-read-multiple-files.js",
+        "test/test-realtime-health-telemetry.js",
+        "test/test-redact.js",
+        "test/test-remote-channel-reconnect.js",
+        "test/test-remote-channel-signed-out.js",
+        "test/test-remote-clock-skew-before-session.js",
+        "test/test-remote-clock-writes.js",
+        "test/test-remote-device-auth-poll.js",
+        "test/test-remote-device-env.js",
+        "test/test-remote-device-log.js",
+        "test/test-remote-device-logout.js",
+        "test/test-remote-device-readiness.js",
+        "test/test-remote-device-ready-requires-channel.js",
+        "test/test-remote-device-session-without-id.js",
+        "test/test-remote-inflight-call-fast-fail.js",
+        "test/test-remote-install-telemetry.js",
+        "test/test-remote-pending-recovery.js",
+        "test/test-remote-report.js",
+        "test/test-remote-token-rotation-persisted.js",
+        "test/test-remote-transport.js",
+        "test/test-rename-held-file.js",
+        "test/test-rename-retry.js",
+        "test/test-repl-interaction.js",
+        "test/test-ripgrep-install-folders.js",
+        "test/test-runner-arguments.js",
+        "test/test-search-answers-unchanged.js",
+        "test/test-search-code-edge-cases.js",
+        "test/test-search-code.js",
+        "test/test-search-error-output.js",
+        "test/test-search-failed.js",
+        "test/test-search-file-pattern.js",
+        "test/test-search-files-file-pattern.js",
+        "test/test-search-files-literal.js",
+        "test/test-search-files.js",
+        "test/test-search-hidden-attribute.js",
+        "test/test-search-hidden.js",
+        "test/test-search-long-lines.js",
+        "test/test-search-long-timeout.js",
+        "test/test-search-memory-unsampled.js",
+        "test/test-search-office-any-folder.js",
+        "test/test-search-office-completion.js",
+        "test/test-search-outcome.js",
+        "test/test-search-process-exit.js",
+        "test/test-search-ripgrep-config.js",
+        "test/test-search-stopped-not-failed.js",
+        "test/test-search-timeout.js",
+        "test/test-search-utf8-chunks.js",
+        "test/test-search-without-ripgrep.js",
+        "test/test-server-unhandled-rejection.js",
+        "test/test-session-blocked.js",
+        "test/test-shell-list-etc-shells.js",
+        "test/test-signal-process-group.js",
+        "test/test-skip-reporting.js",
+        "test/test-spawn-error-no-crash.js",
+        "test/test-startup-imports.js",
+        "test/test-still-loading-answers.js",
+        "test/test-strip-null-bytes.js",
+        "test/test-svg-text.js",
+        "test/test-symlink-security.js",
+        "test/test-telemetry-handling.js",
+        "test/test-telemetry-paths.js",
+        "test/test-temp-dir.js",
+        "test/test-terminal-timestamps.js",
+        "test/test-terminate-process-tree.js",
+        "test/test-transport-telemetry-redaction.js",
+        "test/test-transport-telemetry.js",
+        "test/test-transport-tool-call-telemetry.js",
+        "test/test-ui-event-tracking.js",
+        "test/test-usage-stats-partial.js",
+        "test/test-utf16-powershell-read.js",
+        "test/test-welcome-onboarding-legacy-config.js",
+        "test/test-widget-state-runtime.js",
+        "test/test-write-file-line-count.js",
+        "test/test.js",
+        "test/test_enhanced_read.js",
+        "test/test_improved_search_truncation.js",
+        "test/test_output/**",
+        "test/test_search_truncation.js",
+        "test-listener-bug.js",
+        "track-installation.js",
+        "tsconfig.json",
+        "uninstall-claude-server.js"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024-2025 Eduard Ruzga and Desktop Commander Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2024-2025 Eduard Ruzga and Desktop Commander Contributors, MIT license (LICENSE), https://github.com/wonderwhy-er/DesktopCommanderMCP."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

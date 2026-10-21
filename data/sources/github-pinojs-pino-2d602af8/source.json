@@ -1,0 +1,292 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pinojs/pino",
+  "revision": "b29dbe97820630e7128e464c50263b427965ec99",
+  "checksum": "sha256:aaf2ef9596e05830de05d061e044351ae0eb990d5bdccea6c0163b927049546f",
+  "extract": {
+    "exclude": [
+      "favicon-16x16.png",
+      "favicon-32x32.png",
+      "favicon.ico",
+      "pino-banner.png",
+      "pino-logo-hire.png",
+      "pino-tree.png",
+      "pretty-demo.png",
+      "test/fixtures/eval/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "d4c0ac5fa08f18ac2552fa81bdaed2fc2b2a3a8e"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-present Matteo Collina, David Mark Clements and the Pino contributors listed at <https://github.com/pinojs/pino#the-team> and in the README file.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/pinojs/pino: Copyright (c) 2016-present Matteo Collina, David Mark Clements and the Pino contributors listed at <https://github.com/pinojs/pino#the-team> and in the README file., MIT license (LICENSE), https://github.com/pinojs/pino."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".nojekyll",
+        ".npmignore",
+        ".npmrc",
+        ".prettierignore",
+        "CNAME",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "benchmarks/**",
+        "bin.js",
+        "browser.js",
+        "build/**",
+        "docs/**",
+        "docsify/**",
+        "eslint.config.js",
+        "examples/**",
+        "file.js",
+        "inc-version.sh",
+        "index.html",
+        "lib/**",
+        "package.json",
+        "pino.d.ts",
+        "pino.js",
+        "test/basic.test.js",
+        "test/broken-pipe.test.js",
+        "test/browser-bindings.test.js",
+        "test/browser-child.test.js",
+        "test/browser-disabled.test.js",
+        "test/browser-early-console-freeze.test.js",
+        "test/browser-is-level-enabled.test.js",
+        "test/browser-levels.test.js",
+        "test/browser-redaction.test.js",
+        "test/browser-serializers.test.js",
+        "test/browser-set-bindings.test.js",
+        "test/browser-timestamp.test.js",
+        "test/browser-transmit.test.js",
+        "test/browser.test.js",
+        "test/caller.test.js",
+        "test/complex-objects.test.js",
+        "test/crlf.test.js",
+        "test/custom-levels.test.js",
+        "test/diagnostics.test.js",
+        "test/error-key.test.js",
+        "test/error.test.js",
+        "test/escaping.test.js",
+        "test/esm/**",
+        "test/exit.test.js",
+        "test/fixtures/broken-pipe/**",
+        "test/fixtures/caller-loop.js",
+        "test/fixtures/console-transport.js",
+        "test/fixtures/crashing-transport.js",
+        "test/fixtures/default-exit.js",
+        "test/fixtures/destination-exit.js",
+        "test/fixtures/eval/index.js",
+        "test/fixtures/noop-transport.js",
+        "test/fixtures/pretty/**",
+        "test/fixtures/stdout-hack-protection.js",
+        "test/fixtures/syncfalse-child.js",
+        "test/fixtures/syncfalse-exit.js",
+        "test/fixtures/syncfalse-flush-exit.js",
+        "test/fixtures/syncfalse.js",
+        "test/fixtures/syntax-error-esm.mjs",
+        "test/fixtures/to-file-transport-with-transform.js",
+        "test/fixtures/to-file-transport.js",
+        "test/fixtures/to-file-transport.mjs",
+        "test/fixtures/transport/**",
+        "test/fixtures/transport-exit-immediately-with-async-dest.js",
+        "test/fixtures/transport-exit-immediately.js",
+        "test/fixtures/transport-exit-on-ready.js",
+        "test/fixtures/transport-invalid-node-options.js",
+        "test/fixtures/transport-main.js",
+        "test/fixtures/transport-many-lines.js",
+        "test/fixtures/transport-preload-main.mjs",
+        "test/fixtures/transport-preload.mjs",
+        "test/fixtures/transport-string-stdout.js",
+        "test/fixtures/transport-transform.js",
+        "test/fixtures/transport-uses-pino-config.js",
+        "test/fixtures/transport-with-on-exit.js",
+        "test/fixtures/transport-worker-data.js",
+        "test/fixtures/transport-worker-name.js",
+        "test/fixtures/transport-worker.js",
+        "test/fixtures/transport-wrong-export-type.js",
+        "test/fixtures/ts/**",
+        "test/formatters.test.js",
+        "test/helper.d.ts",
+        "test/helper.js",
+        "test/hooks.test.js",
+        "test/http.test.js",
+        "test/internals/**",
+        "test/is-level-enabled.test.js",
+        "test/jest/**",
+        "test/levels.test.js",
+        "test/metadata.test.js",
+        "test/mixin-merge-strategy.test.js",
+        "test/mixin.test.js",
+        "test/multistream.test.js",
+        "test/redact.test.js",
+        "test/serializers.test.js",
+        "test/smoke.js",
+        "test/stdout-protection.test.js",
+        "test/syncfalse.test.js",
+        "test/timestamp-nano.test.js",
+        "test/timestamp.test.js",
+        "test/transport/**",
+        "test/transport-stream.test.js",
+        "test/types/**",
+        "tsconfig.json"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-present Matteo Collina, David Mark Clements and the Pino contributors listed at <https://github.com/pinojs/pino#the-team> and in the README file.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present Matteo Collina, David Mark Clements and the Pino contributors listed at <https://github.com/pinojs/pino#the-team> and in the README file., MIT license (LICENSE), https://github.com/pinojs/pino."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

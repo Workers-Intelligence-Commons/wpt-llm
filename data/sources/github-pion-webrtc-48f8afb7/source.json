@@ -1,0 +1,392 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pion/webrtc",
+  "revision": "2a514ff46414e67870efe29e133b6b7b85465893",
+  "checksum": "sha256:08c84e4889bab7a5d9a7b3eb1513297103cf73e767db8da974b38d30a62c2ece",
+  "extract": {
+    "exclude": [
+      ".github/pion-gopher-webrtc.png"
+    ]
+  },
+  "history": {
+    "since": "c719ccd60d4768f390dbbb5a62d73ce02bb44b67"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 The Pion community <https://pion.ly>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/pion/webrtc: Copyright (c) 2026 The Pion community <https://pion.ly>, MIT license (LICENSE), https://github.com/pion/webrtc; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/pion/webrtc/tree/2a514ff46414e67870efe29e133b6b7b85465893/test-wasm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".codacy.yaml",
+        ".eslintrc.json",
+        ".github/.ci.conf",
+        ".github/.gitignore",
+        ".github/fetch-scripts.sh",
+        ".github/install-hooks.sh",
+        ".github/pion-gopher-webrtc.png.license",
+        ".github/workflows/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yml",
+        ".reuse/**",
+        "DESIGN.md",
+        "LICENSE",
+        "LICENSES/**",
+        "README.md",
+        "api.go",
+        "api_js.go",
+        "api_test.go",
+        "bundlepolicy.go",
+        "bundlepolicy_test.go",
+        "certificate.go",
+        "certificate_js_test.go",
+        "certificate_test.go",
+        "codecov.yml",
+        "configuration.go",
+        "configuration_common.go",
+        "configuration_js.go",
+        "configuration_test.go",
+        "constants.go",
+        "datachannel.go",
+        "datachannel_go_test.go",
+        "datachannel_js.go",
+        "datachannel_js_detach.go",
+        "datachannel_test.go",
+        "datachannelinit.go",
+        "datachannelmessage.go",
+        "datachannelparameters.go",
+        "datachannelstate.go",
+        "datachannelstate_test.go",
+        "dtlsfingerprint.go",
+        "dtlsparameters.go",
+        "dtlsrole.go",
+        "dtlsrole_test.go",
+        "dtlstransport.go",
+        "dtlstransport_js.go",
+        "dtlstransport_test.go",
+        "dtlstransportstate.go",
+        "dtlstransportstate_test.go",
+        "e2e/**",
+        "errors.go",
+        "examples/**",
+        "gathering_complete_promise.go",
+        "gathering_complete_promise_example_test.go",
+        "go.mod",
+        "go.sum",
+        "ice_go.go",
+        "icecandidate.go",
+        "icecandidate_test.go",
+        "icecandidateinit.go",
+        "icecandidateinit_test.go",
+        "icecandidatepair.go",
+        "icecandidatepair_test.go",
+        "icecandidatetype.go",
+        "icecandidatetype_test.go",
+        "icecomponent.go",
+        "icecomponent_test.go",
+        "iceconnectionstate.go",
+        "iceconnectionstate_test.go",
+        "icecredentialtype.go",
+        "icecredentialtype_test.go",
+        "icegatherer.go",
+        "icegatherer_test.go",
+        "icegathererstate.go",
+        "icegathererstate_test.go",
+        "icegatheringstate.go",
+        "icegatheringstate_test.go",
+        "icegatheroptions.go",
+        "icemux.go",
+        "iceparameters.go",
+        "iceprotocol.go",
+        "iceprotocol_test.go",
+        "icerole.go",
+        "icerole_test.go",
+        "iceserver.go",
+        "iceserver_js.go",
+        "iceserver_test.go",
+        "icetransport.go",
+        "icetransport_js.go",
+        "icetransport_test.go",
+        "icetransportpolicy.go",
+        "icetransportpolicy_test.go",
+        "icetransportstate.go",
+        "icetransportstate_test.go",
+        "interceptor.go",
+        "interceptor_option.go",
+        "interceptor_test.go",
+        "internal/**",
+        "js_utils.go",
+        "mediaengine.go",
+        "mediaengine_test.go",
+        "mimetype.go",
+        "networktype.go",
+        "networktype_test.go",
+        "oauthcredential.go",
+        "offeransweroptions.go",
+        "operations.go",
+        "operations_test.go",
+        "ortc_datachannel_test.go",
+        "ortc_media_test.go",
+        "ortc_test.go",
+        "package.json",
+        "peerconnection.go",
+        "peerconnection_close_test.go",
+        "peerconnection_go_test.go",
+        "peerconnection_js.go",
+        "peerconnection_js_test.go",
+        "peerconnection_media_test.go",
+        "peerconnection_renegotiation_test.go",
+        "peerconnection_test.go",
+        "peerconnectionstate.go",
+        "peerconnectionstate_test.go",
+        "pkg/**",
+        "renovate.json",
+        "rtcpfeedback.go",
+        "rtcpmuxpolicy.go",
+        "rtcpmuxpolicy_test.go",
+        "rtpcapabilities.go",
+        "rtpcodec.go",
+        "rtpcodec_test.go",
+        "rtpcodingparameters.go",
+        "rtpdecodingparameters.go",
+        "rtpencodingparameters.go",
+        "rtpheaderencryptionpolicy.go",
+        "rtpheaderencryptionpolicy_test.go",
+        "rtpreceiveparameters.go",
+        "rtpreceiver.go",
+        "rtpreceiver_go.go",
+        "rtpreceiver_go_test.go",
+        "rtpreceiver_js.go",
+        "rtpreceiver_test.go",
+        "rtpsender.go",
+        "rtpsender_js.go",
+        "rtpsender_test.go",
+        "rtpsendparameters.go",
+        "rtptransceiver.go",
+        "rtptransceiver_js.go",
+        "rtptransceiver_test.go",
+        "rtptransceiverdirection.go",
+        "rtptransceiverdirection_test.go",
+        "rtptransceiverinit.go",
+        "rtptransceiverinit_go_test.go",
+        "sctpcapabilities.go",
+        "sctptransport.go",
+        "sctptransport_js.go",
+        "sctptransport_test.go",
+        "sctptransportstate.go",
+        "sctptransportstate_test.go",
+        "sdp.go",
+        "sdp_test.go",
+        "sdpsemantics.go",
+        "sdpsemantics_test.go",
+        "sdptype.go",
+        "sdptype_test.go",
+        "sessiondescription.go",
+        "sessiondescription_test.go",
+        "settingengine.go",
+        "settingengine_js.go",
+        "settingengine_test.go",
+        "signalingstate.go",
+        "signalingstate_test.go",
+        "srtp_writer_future.go",
+        "srtp_writer_future_test.go",
+        "stats.go",
+        "stats_go.go",
+        "stats_go_test.go",
+        "track_local.go",
+        "track_local_static.go",
+        "track_local_static_test.go",
+        "track_remote.go",
+        "track_remote_test.go",
+        "vnet_test.go",
+        "webrtc.go",
+        "yarn.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 The Pion community <https://pion.ly>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 The Pion community <https://pion.ly>, MIT license (LICENSE), https://github.com/pion/webrtc."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "test-wasm/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/pion/webrtc/tree/2a514ff46414e67870efe29e133b6b7b85465893/test-wasm."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.details"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sdp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dep5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go_js_wasm_exec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

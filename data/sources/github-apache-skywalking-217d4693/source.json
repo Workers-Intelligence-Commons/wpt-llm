@@ -1,0 +1,929 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apache/skywalking",
+  "revision": "8c9901c88064f5de45dae49faeb2eb4b032375a7",
+  "checksum": "sha256:9f8d4a3fe80bc70014d80112572a709600cfe286507661c5063c4370025ac4d4",
+  "extract": {
+    "exclude": [
+      "apm-protocol/apm-network/src/main/proto/**",
+      "dist-material/release-docs/**",
+      "docs/en/FAQ/MQ-involved-architecture.png",
+      "docs/en/setup/backend/images/**",
+      "oap-server/server-library/library-banyandb-client/src/main/proto/.mvn/wrapper/maven-wrapper.jar",
+      "oap-server/server-query-plugin/query-graphql-plugin/src/main/resources/query-protocol/**",
+      "test/e2e-v2/cases/runtime-rule/meter/bundled/**",
+      "test/e2e-v2/cases/storage/opensearch/certs/client.p12",
+      "test/e2e-v2/cases/storage/opensearch/certs/truststore.jks",
+      "test/e2e-v2/java-test-service/e2e-protocol/src/**"
+    ]
+  },
+  "history": {
+    "since": "5299a68e7c7e469b3cfe4d440228d351f12c3860"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n=======================================================================\nApache SkyWalking Subcomponents:\n\nThe Apache SkyWalking project contains subcomponents with separate copyright\nnotices and license terms. Your use of the source code for the these\nsubcomponents is subject to the terms and conditions of the following\nlicenses.\n\n========================================================================\nApache 2.0 licenses\n========================================================================\n\nThe following components are provided under the Apache License. See project link for details.\nThe text of each license is the standard Apache 2.0 license.\n\n   proto files from cilium: https://github.com/cilium/cilium/tree/v1.15.6/api/v1 Apache 2.0\n   proto files from cncf/udpa: https://github.com/cncf/udpa Apache 2.0\n   proto files from envoyproxy/data-plane-api: https://github.com/envoyproxy/data-plane-api  Apache 2.0\n   proto files from prometheus/client_model: https://github.com/prometheus/client_model Apache 2.0\n   proto files from opentelemetry: https://github.com/open-telemetry/opentelemetry-proto/tree/main/opentelemetry/proto Apache 2.0\n   proto files from opentelemetry: https://github.com/open-telemetry/opentelemetry-proto/tree/v0.7.0 Apache 2.0\n   flatbuffers files from istio/proxy: https://github.com/istio/proxy Apache 2.0\n   mvnw files from https://github.com/apache/maven-wrapper Apache 2.0\n   svg files from skywalking-ui/src/assets/icons: https://github.com/google/material-design-icons Apache 2.0\n   ZipkinQueryHandler.java reference from zipkin2.server.internal.ZipkinQueryApiV2: https://github.com/openzipkin/zipkin  Apache 2.0\n   Arguments.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   CallStack.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Classifier.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Index.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Frame.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   JFRConverter.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n\nNOTICE:\n\nApache SkyWalking\nCopyright 2017-2026 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\n-----------------------------------------------------------------------\nThis product contains code from the Prometheus Project:\n\nData model artifacts for Prometheus.\nCopyright 2012-2015 The Prometheus Authors\n\nThis product includes software developed at\nSoundCloud Ltd. (http://soundcloud.com/).\n-----------------------------------------------------------------------\nThis product contains code from the Apache Maven Wrapper Project:\n\nApache Maven Wrapper\nCopyright 2013-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\nThe original idea and initial implementation of the maven-wrapper module is derived \nfrom the Gradle Wrapper which was written originally by Hans Dockter and Adam Murdoch.\nCopyright 2007 the original author or authors.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE:\n\nApache SkyWalking\nCopyright 2017-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n",
+      "attribution": "Commit history of https://github.com/apache/skywalking: Copyright 2017-2026 The Apache Software Foundation; Copyright 2012-2015 The Prometheus Authors; Copyright 2013-2022 The Apache Software Foundation; Copyright 2007 the original author or authors., Apache-2.0 license (LICENSE), https://github.com/apache/skywalking; Copyright 2017-2022 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/skywalking/tree/8c9901c88064f5de45dae49faeb2eb4b032375a7/oap-server/server-library/library-banyandb-client/src/main/proto."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".asf.yaml",
+        ".claude/**",
+        ".dlc.json",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".licenserc.yaml",
+        ".mvn/**",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "HEADER",
+        "LICENSE",
+        "Makefile",
+        "NOTICE",
+        "README.md",
+        "apm-checkstyle/**",
+        "apm-dist/**",
+        "apm-protocol/apm-network/pom.xml",
+        "apm-protocol/apm-network/src/main/java/**",
+        "apm-protocol/apm-network/src/test/**",
+        "apm-protocol/pom.xml",
+        "benchmarks/**",
+        "changes/**",
+        "codeStyle.xml",
+        "dist-material/alarm-settings.yml",
+        "dist-material/bin/**",
+        "dist-material/config-examples/**",
+        "dist-material/log4j2.xml",
+        "docker/**",
+        "docs/README.md",
+        "docs/en/FAQ/Compatible-with-other-javaagent-bytecode-processing.md",
+        "docs/en/FAQ/ES-Server-FAQ.md",
+        "docs/en/FAQ/EnhanceRequireObjectCache-Cast-Exception.md",
+        "docs/en/FAQ/How-to-build-with-mac-m1.md",
+        "docs/en/FAQ/Import-Project-Eclipse-RequireItems-Exception.md",
+        "docs/en/FAQ/Memory-leak-enhance-Worker-thread.md",
+        "docs/en/FAQ/New-ElasticSearch-storage-option-explanation-in-9.2.0.md",
+        "docs/en/FAQ/Protoc-Plugin-Fails-When-Build.md",
+        "docs/en/FAQ/README.md",
+        "docs/en/FAQ/Unexpected-endpoint-register.md",
+        "docs/en/FAQ/Why-have-traces-no-others.md",
+        "docs/en/FAQ/es-version-conflict.md",
+        "docs/en/FAQ/install_agent_on_websphere.md",
+        "docs/en/FAQ/kafka-plugin.md",
+        "docs/en/FAQ/thrift-plugin.md",
+        "docs/en/FAQ/time-and-timezone.md",
+        "docs/en/FAQ/v8-version-upgrade.md",
+        "docs/en/FAQ/v9-version-upgrade.md",
+        "docs/en/FAQ/vnode.md",
+        "docs/en/FAQ/why-clickhouse-not-supported.md",
+        "docs/en/FAQ/why_mq_not_involved.md",
+        "docs/en/academy/**",
+        "docs/en/api/**",
+        "docs/en/banyandb/**",
+        "docs/en/changes/**",
+        "docs/en/concepts-and-designs/**",
+        "docs/en/debugging/**",
+        "docs/en/guides/**",
+        "docs/en/operation/**",
+        "docs/en/papers/**",
+        "docs/en/security/**",
+        "docs/en/setup/ai-pipeline/**",
+        "docs/en/setup/backend/admin-api/**",
+        "docs/en/setup/backend/advanced-deployment.md",
+        "docs/en/setup/backend/ai-agent-conversation.md",
+        "docs/en/setup/backend/ai-evaluation.md",
+        "docs/en/setup/backend/apdex-threshold.md",
+        "docs/en/setup/backend/aws-firehose-receiver.md",
+        "docs/en/setup/backend/backend-activemq-monitoring.md",
+        "docs/en/setup/backend/backend-airflow-monitoring.md",
+        "docs/en/setup/backend/backend-alarm.md",
+        "docs/en/setup/backend/backend-alipay-mini-program-monitoring.md",
+        "docs/en/setup/backend/backend-apisix-monitoring.md",
+        "docs/en/setup/backend/backend-aws-api-gateway-monitoring.md",
+        "docs/en/setup/backend/backend-aws-dynamodb-monitoring.md",
+        "docs/en/setup/backend/backend-aws-eks-monitoring.md",
+        "docs/en/setup/backend/backend-aws-s3-monitoring.md",
+        "docs/en/setup/backend/backend-bookkeeper-monitoring.md",
+        "docs/en/setup/backend/backend-clickhouse-monitoring.md",
+        "docs/en/setup/backend/backend-cluster.md",
+        "docs/en/setup/backend/backend-continuous-profiling.md",
+        "docs/en/setup/backend/backend-data-generator.md",
+        "docs/en/setup/backend/backend-docker.md",
+        "docs/en/setup/backend/backend-ebpf-profiling.md",
+        "docs/en/setup/backend/backend-elasticsearch-monitoring.md",
+        "docs/en/setup/backend/backend-envoy-ai-gateway-monitoring.md",
+        "docs/en/setup/backend/backend-expose.md",
+        "docs/en/setup/backend/backend-flink-monitoring.md",
+        "docs/en/setup/backend/backend-go-app-profiling.md",
+        "docs/en/setup/backend/backend-health-check.md",
+        "docs/en/setup/backend/backend-init-mode.md",
+        "docs/en/setup/backend/backend-ios-monitoring.md",
+        "docs/en/setup/backend/backend-ip-port.md",
+        "docs/en/setup/backend/backend-java-app-profiling.md",
+        "docs/en/setup/backend/backend-k8s-monitoring-cilium.md",
+        "docs/en/setup/backend/backend-k8s-monitoring-metrics-cadvisor.md",
+        "docs/en/setup/backend/backend-k8s-monitoring-rover.md",
+        "docs/en/setup/backend/backend-k8s-monitoring.md",
+        "docs/en/setup/backend/backend-k8s-network-monitoring.md",
+        "docs/en/setup/backend/backend-k8s.md",
+        "docs/en/setup/backend/backend-kafka-monitoring.md",
+        "docs/en/setup/backend/backend-kong-monitoring.md",
+        "docs/en/setup/backend/backend-load-balancer.md",
+        "docs/en/setup/backend/backend-meter.md",
+        "docs/en/setup/backend/backend-mongodb-monitoring.md",
+        "docs/en/setup/backend/backend-mysql-monitoring.md",
+        "docs/en/setup/backend/backend-nginx-monitoring.md",
+        "docs/en/setup/backend/backend-postgresql-monitoring.md",
+        "docs/en/setup/backend/backend-profile-thread-merging.md",
+        "docs/en/setup/backend/backend-pulsar-monitoring.md",
+        "docs/en/setup/backend/backend-rabbitmq-monitoring.md",
+        "docs/en/setup/backend/backend-redis-monitoring.md",
+        "docs/en/setup/backend/backend-rocketmq-monitoring.md",
+        "docs/en/setup/backend/backend-setting-override.md",
+        "docs/en/setup/backend/backend-setup.md",
+        "docs/en/setup/backend/backend-start-up-mode.md",
+        "docs/en/setup/backend/backend-storage.md",
+        "docs/en/setup/backend/backend-telemetry.md",
+        "docs/en/setup/backend/backend-token-auth.md",
+        "docs/en/setup/backend/backend-trace-profiling.md",
+        "docs/en/setup/backend/backend-vm-monitoring.md",
+        "docs/en/setup/backend/backend-wechat-mini-program-monitoring.md",
+        "docs/en/setup/backend/backend-win-monitoring.md",
+        "docs/en/setup/backend/backend-zabbix.md",
+        "docs/en/setup/backend/circuit-breaking.md",
+        "docs/en/setup/backend/configuration-vocabulary.md",
+        "docs/en/setup/backend/dashboards-nodejs-runtime.md",
+        "docs/en/setup/backend/dashboards-php-runtime.md",
+        "docs/en/setup/backend/dashboards-so11y-go-agent.md",
+        "docs/en/setup/backend/dashboards-so11y-java-agent.md",
+        "docs/en/setup/backend/dashboards-so11y-satellite.md",
+        "docs/en/setup/backend/dashboards-so11y.md",
+        "docs/en/setup/backend/dynamic-config-apollo.md",
+        "docs/en/setup/backend/dynamic-config-configmap.md",
+        "docs/en/setup/backend/dynamic-config-consul.md",
+        "docs/en/setup/backend/dynamic-config-etcd.md",
+        "docs/en/setup/backend/dynamic-config-nacos.md",
+        "docs/en/setup/backend/dynamic-config-service.md",
+        "docs/en/setup/backend/dynamic-config-zookeeper.md",
+        "docs/en/setup/backend/dynamic-config.md",
+        "docs/en/setup/backend/dynamical-logging.md",
+        "docs/en/setup/backend/endpoint-grouping-rules.md",
+        "docs/en/setup/backend/exporter.md",
+        "docs/en/setup/backend/filelog-native.md",
+        "docs/en/setup/backend/graalvm-distro.md",
+        "docs/en/setup/backend/grafana-cluster.json",
+        "docs/en/setup/backend/grafana-instance.json",
+        "docs/en/setup/backend/grpc-security.md",
+        "docs/en/setup/backend/kafka-fetcher.md",
+        "docs/en/setup/backend/log-agent-native.md",
+        "docs/en/setup/backend/log-analyzer.md",
+        "docs/en/setup/backend/log-otlp.md",
+        "docs/en/setup/backend/logs-template.json",
+        "docs/en/setup/backend/marketplace.md",
+        "docs/en/setup/backend/metrics-exporter.md",
+        "docs/en/setup/backend/micrometer-observations.md",
+        "docs/en/setup/backend/mq.md",
+        "docs/en/setup/backend/on-demand-pod-log.md",
+        "docs/en/setup/backend/opentelemetry-receiver.md",
+        "docs/en/setup/backend/otel-collector-hostmetrics-linux.yaml",
+        "docs/en/setup/backend/otel-collector-hostmetrics-windows.yaml",
+        "docs/en/setup/backend/otlp-trace.md",
+        "docs/en/setup/backend/segment-template.json",
+        "docs/en/setup/backend/service-auto-grouping.md",
+        "docs/en/setup/backend/slow-cache-command.md",
+        "docs/en/setup/backend/slow-db-statement.md",
+        "docs/en/setup/backend/storages/**",
+        "docs/en/setup/backend/telegraf-receiver.md",
+        "docs/en/setup/backend/trace-analyzer.md",
+        "docs/en/setup/backend/trace-sampling.md",
+        "docs/en/setup/backend/ttl.md",
+        "docs/en/setup/backend/ui-grafana.md",
+        "docs/en/setup/backend/ui-setup.md",
+        "docs/en/setup/backend/uninstrumented-gateways.md",
+        "docs/en/setup/backend/zipkin-trace.md",
+        "docs/en/setup/envoy/**",
+        "docs/en/setup/istio/**",
+        "docs/en/setup/service-agent/**",
+        "docs/en/setup/zipkin/**",
+        "docs/en/status/**",
+        "docs/en/swip/**",
+        "docs/en/ui/**",
+        "docs/menu.yml",
+        "lombok.config",
+        "mvnw",
+        "mvnw.cmd",
+        "oap-server/ai-pipeline/**",
+        "oap-server/analyzer/**",
+        "oap-server/exporter/**",
+        "oap-server/mqe-grammar/**",
+        "oap-server/mqe-rt/**",
+        "oap-server/oal-grammar/**",
+        "oap-server/oal-rt/**",
+        "oap-server/pom.xml",
+        "oap-server/server-admin/**",
+        "oap-server/server-alarm-plugin/**",
+        "oap-server/server-cluster-plugin/**",
+        "oap-server/server-configuration/**",
+        "oap-server/server-core/**",
+        "oap-server/server-fetcher-plugin/**",
+        "oap-server/server-health-checker/**",
+        "oap-server/server-library/library-async-profiler-jfr-parser/**",
+        "oap-server/server-library/library-banyandb-client/pom.xml",
+        "oap-server/server-library/library-banyandb-client/src/main/java/**",
+        "oap-server/server-library/library-banyandb-client/src/test/**",
+        "oap-server/server-library/library-batch-queue/**",
+        "oap-server/server-library/library-client/**",
+        "oap-server/server-library/library-elasticsearch-client/**",
+        "oap-server/server-library/library-integration-test/**",
+        "oap-server/server-library/library-kubernetes-support/**",
+        "oap-server/server-library/library-module/**",
+        "oap-server/server-library/library-pprof-parser/**",
+        "oap-server/server-library/library-server/**",
+        "oap-server/server-library/library-util/**",
+        "oap-server/server-library/pom.xml",
+        "oap-server/server-query-plugin/logql-plugin/**",
+        "oap-server/server-query-plugin/pom.xml",
+        "oap-server/server-query-plugin/promql-plugin/**",
+        "oap-server/server-query-plugin/query-graphql-plugin/pom.xml",
+        "oap-server/server-query-plugin/query-graphql-plugin/src/main/java/**",
+        "oap-server/server-query-plugin/query-graphql-plugin/src/main/resources/META-INF/**",
+        "oap-server/server-query-plugin/query-graphql-plugin/src/test/**",
+        "oap-server/server-query-plugin/traceql-plugin/**",
+        "oap-server/server-query-plugin/zipkin-query-plugin/**",
+        "oap-server/server-receiver-plugin/**",
+        "oap-server/server-starter/**",
+        "oap-server/server-storage-plugin/**",
+        "oap-server/server-telemetry/**",
+        "oap-server/server-testing/**",
+        "oap-server/server-tools/**",
+        "oap-server-bom/**",
+        "pom.xml",
+        "test/Makefile",
+        "test/e2e-v2/CLAUDE.md",
+        "test/e2e-v2/cases/activemq/**",
+        "test/e2e-v2/cases/ai-agent/**",
+        "test/e2e-v2/cases/airflow/**",
+        "test/e2e-v2/cases/alarm/**",
+        "test/e2e-v2/cases/apisix/**",
+        "test/e2e-v2/cases/aws/**",
+        "test/e2e-v2/cases/banyandb/**",
+        "test/e2e-v2/cases/baseline/**",
+        "test/e2e-v2/cases/browser/**",
+        "test/e2e-v2/cases/cilium/**",
+        "test/e2e-v2/cases/clickhouse/**",
+        "test/e2e-v2/cases/cluster/**",
+        "test/e2e-v2/cases/dsl-debugging/**",
+        "test/e2e-v2/cases/elasticsearch/**",
+        "test/e2e-v2/cases/envoy-ai-gateway/**",
+        "test/e2e-v2/cases/event/**",
+        "test/e2e-v2/cases/exporter/**",
+        "test/e2e-v2/cases/flink/**",
+        "test/e2e-v2/cases/gateway/**",
+        "test/e2e-v2/cases/go/**",
+        "test/e2e-v2/cases/inspect/**",
+        "test/e2e-v2/cases/ios/**",
+        "test/e2e-v2/cases/istio/**",
+        "test/e2e-v2/cases/kafka/**",
+        "test/e2e-v2/cases/kong/**",
+        "test/e2e-v2/cases/log/**",
+        "test/e2e-v2/cases/logql/**",
+        "test/e2e-v2/cases/lua/**",
+        "test/e2e-v2/cases/mariadb/**",
+        "test/e2e-v2/cases/meter/**",
+        "test/e2e-v2/cases/miniprogram/**",
+        "test/e2e-v2/cases/mongodb/**",
+        "test/e2e-v2/cases/mqe/**",
+        "test/e2e-v2/cases/mysql/**",
+        "test/e2e-v2/cases/nginx/**",
+        "test/e2e-v2/cases/nodejs/**",
+        "test/e2e-v2/cases/otlp-traces/**",
+        "test/e2e-v2/cases/otlp-virtual-genai/**",
+        "test/e2e-v2/cases/php/**",
+        "test/e2e-v2/cases/postgresql/**",
+        "test/e2e-v2/cases/profiling/**",
+        "test/e2e-v2/cases/promql/**",
+        "test/e2e-v2/cases/pulsar/**",
+        "test/e2e-v2/cases/python/**",
+        "test/e2e-v2/cases/rabbitmq/**",
+        "test/e2e-v2/cases/redis/**",
+        "test/e2e-v2/cases/rocketmq/**",
+        "test/e2e-v2/cases/rover/**",
+        "test/e2e-v2/cases/runtime-rule/cluster/**",
+        "test/e2e-v2/cases/runtime-rule/lal/**",
+        "test/e2e-v2/cases/runtime-rule/mal-storage/**",
+        "test/e2e-v2/cases/runtime-rule/meter/docker-compose.yml",
+        "test/e2e-v2/cases/runtime-rule/meter/e2e.yaml",
+        "test/e2e-v2/cases/runtime-rule/meter/expected/**",
+        "test/e2e-v2/cases/runtime-rule/meter/meter-runtime-rule-flow.sh",
+        "test/e2e-v2/cases/runtime-rule/meter/seed-rules/**",
+        "test/e2e-v2/cases/satellite/**",
+        "test/e2e-v2/cases/simple/**",
+        "test/e2e-v2/cases/so11y/**",
+        "test/e2e-v2/cases/storage/banyandb/**",
+        "test/e2e-v2/cases/storage/es/**",
+        "test/e2e-v2/cases/storage/expected/**",
+        "test/e2e-v2/cases/storage/mysql/**",
+        "test/e2e-v2/cases/storage/opensearch/certs/admin-key.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/admin.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/client-key.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/client.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/node-key.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/node.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/root-ca-key.pem",
+        "test/e2e-v2/cases/storage/opensearch/certs/root-ca.pem",
+        "test/e2e-v2/cases/storage/opensearch/clientcert_config.yml",
+        "test/e2e-v2/cases/storage/opensearch/docker-compose.yml",
+        "test/e2e-v2/cases/storage/opensearch/e2e.yaml",
+        "test/e2e-v2/cases/storage/opensearch/generate-certs.sh",
+        "test/e2e-v2/cases/storage/opensearch/internal_users.yml",
+        "test/e2e-v2/cases/storage/opensearch/opensearch.yml",
+        "test/e2e-v2/cases/storage/postgres/**",
+        "test/e2e-v2/cases/storage/storage-cases.yaml",
+        "test/e2e-v2/cases/traceql/**",
+        "test/e2e-v2/cases/ttl/**",
+        "test/e2e-v2/cases/ui-management/**",
+        "test/e2e-v2/cases/virtual-genai/**",
+        "test/e2e-v2/cases/virtual-mq/**",
+        "test/e2e-v2/cases/vm/**",
+        "test/e2e-v2/cases/win/**",
+        "test/e2e-v2/cases/zipkin/**",
+        "test/e2e-v2/cases/zipkin-virtual-genai/**",
+        "test/e2e-v2/java-test-service/Dockerfile",
+        "test/e2e-v2/java-test-service/e2e-mock-baseline-server/**",
+        "test/e2e-v2/java-test-service/e2e-mock-llm-server/**",
+        "test/e2e-v2/java-test-service/e2e-mock-sender/**",
+        "test/e2e-v2/java-test-service/e2e-protocol/pom.xml",
+        "test/e2e-v2/java-test-service/e2e-service-consumer/**",
+        "test/e2e-v2/java-test-service/e2e-service-provider/**",
+        "test/e2e-v2/java-test-service/e2e-spring-ai-service/**",
+        "test/e2e-v2/java-test-service/opentelemetry-proto/**",
+        "test/e2e-v2/java-test-service/pom.xml",
+        "test/e2e-v2/java-test-service/trace-mocker/**",
+        "test/e2e-v2/script/**",
+        "tools/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n=======================================================================\nApache SkyWalking Subcomponents:\n\nThe Apache SkyWalking project contains subcomponents with separate copyright\nnotices and license terms. Your use of the source code for the these\nsubcomponents is subject to the terms and conditions of the following\nlicenses.\n\n========================================================================\nApache 2.0 licenses\n========================================================================\n\nThe following components are provided under the Apache License. See project link for details.\nThe text of each license is the standard Apache 2.0 license.\n\n   proto files from cilium: https://github.com/cilium/cilium/tree/v1.15.6/api/v1 Apache 2.0\n   proto files from cncf/udpa: https://github.com/cncf/udpa Apache 2.0\n   proto files from envoyproxy/data-plane-api: https://github.com/envoyproxy/data-plane-api  Apache 2.0\n   proto files from prometheus/client_model: https://github.com/prometheus/client_model Apache 2.0\n   proto files from opentelemetry: https://github.com/open-telemetry/opentelemetry-proto/tree/main/opentelemetry/proto Apache 2.0\n   proto files from opentelemetry: https://github.com/open-telemetry/opentelemetry-proto/tree/v0.7.0 Apache 2.0\n   flatbuffers files from istio/proxy: https://github.com/istio/proxy Apache 2.0\n   mvnw files from https://github.com/apache/maven-wrapper Apache 2.0\n   svg files from skywalking-ui/src/assets/icons: https://github.com/google/material-design-icons Apache 2.0\n   ZipkinQueryHandler.java reference from zipkin2.server.internal.ZipkinQueryApiV2: https://github.com/openzipkin/zipkin  Apache 2.0\n   Arguments.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   CallStack.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Classifier.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Index.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   Frame.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n   JFRConverter.java in server-library/library-async-profiler-jfr-parser reference from https://github.com/async-profiler/async-profiler/tree/master Apache 2.0\n\nNOTICE:\n\nApache SkyWalking\nCopyright 2017-2026 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\n-----------------------------------------------------------------------\nThis product contains code from the Prometheus Project:\n\nData model artifacts for Prometheus.\nCopyright 2012-2015 The Prometheus Authors\n\nThis product includes software developed at\nSoundCloud Ltd. (http://soundcloud.com/).\n-----------------------------------------------------------------------\nThis product contains code from the Apache Maven Wrapper Project:\n\nApache Maven Wrapper\nCopyright 2013-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\nThe original idea and initial implementation of the maven-wrapper module is derived \nfrom the Gradle Wrapper which was written originally by Hans Dockter and Adam Murdoch.\nCopyright 2007 the original author or authors.\n",
+      "attribution": "Copyright 2017-2026 The Apache Software Foundation; Copyright 2012-2015 The Prometheus Authors; Copyright 2013-2022 The Apache Software Foundation; Copyright 2007 the original author or authors., Apache-2.0 license (LICENSE), https://github.com/apache/skywalking."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "oap-server/server-library/library-banyandb-client/src/main/proto/.asf.yaml",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/.github/**",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/.gitignore",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/.licenserc.yaml",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/.mvn/wrapper/maven-wrapper.properties",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/HEADER",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/LICENSE",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/Makefile",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/NOTICE",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/README.md",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/mvnw",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/pom.xml",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/proto/**",
+        "oap-server/server-library/library-banyandb-client/src/main/proto/scripts/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE:\n\nApache SkyWalking\nCopyright 2017-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n",
+      "attribution": "Copyright 2017-2022 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/skywalking/tree/8c9901c88064f5de45dae49faeb2eb4b032375a7/oap-server/server-library/library-banyandb-client/src/main/proto."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ALSHTTPAnalysis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.AnalysisListenerFactory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Handler"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.HierarchyDefinitionService$HierarchyRuleProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LALOutputBuilder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LALSourceTypeProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LalInputDebugRenderer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LayerExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MalFunctionExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MockMaker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ModuleDefine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ModuleProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.RuntimeRuleOverrideResolver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SpanListener"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TALOutputBuilder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TALSourceTypeProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TCPAccessLogAnalyzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fluentd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.generate-traffic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mock-sender"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nginx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nodeExporter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nodejs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.oal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.otelcol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.provider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.satellite"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sqrt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test-ui"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEADER"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PULL_REQUEST_TEMPLATE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvnw"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "apm-protocol/apm-network/src/main/proto": "https://github.com/apache/skywalking-data-collect-protocol",
+    "oap-server/server-library/library-banyandb-client/src/main/proto": "https://github.com/apache/skywalking-banyandb-client-proto",
+    "oap-server/server-query-plugin/query-graphql-plugin/src/main/resources/query-protocol": "https://github.com/apache/skywalking-query-protocol"
+  }
+}

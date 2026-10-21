@@ -1,0 +1,405 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ariya/phantomjs",
+  "revision": "0a0b0facb16acfbabb7804822ecaf4f4b9dce3d2",
+  "checksum": "sha256:8ce591c8261b722f7d097f16b64e3b0bec5023816f860ab376d6d332156ce322",
+  "extract": {
+    "exclude": [
+      "src/phantomjs-icon.png",
+      "src/phantomjs_win.ico",
+      "test/basics/require/node_modules/**",
+      "test/lib/node_modules/**",
+      "test/lib/www/logo.png",
+      "test/lib/www/phantomjs.png",
+      "test/lib/www/regression/pjs-10690/Windsong.ttf",
+      "test/lib/www/render/image.jpg",
+      "test/module/webpage/renders/test.jpg",
+      "test/module/webpage/renders/test.pdf",
+      "test/module/webpage/renders/test.png",
+      "test/module/webpage/renders/test50.jpg"
+    ]
+  },
+  "history": {
+    "since": "ea329c73483655525c2b7b98e72cc33c1fd9f241"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n  * Neither the name of the <organization> nor the\n    names of its contributors may be used to endorse or promote products\n    derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/ariya/phantomjs: the authors of ariya/phantomjs (the license file names no copyright line), BSD-3-Clause license (LICENSE.BSD), https://github.com/ariya/phantomjs."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "ChangeLog",
+        "INSTALL",
+        "LICENSE.BSD",
+        "README.md",
+        "configure",
+        "examples/**",
+        "src/Info.plist",
+        "src/bootstrap.js",
+        "src/callback.cpp",
+        "src/callback.h",
+        "src/childprocess.cpp",
+        "src/childprocess.h",
+        "src/config.cpp",
+        "src/config.h",
+        "src/configurator.js",
+        "src/consts.h",
+        "src/cookiejar.cpp",
+        "src/cookiejar.h",
+        "src/crashdump.cpp",
+        "src/crashdump.h",
+        "src/encoding.cpp",
+        "src/encoding.h",
+        "src/env.cpp",
+        "src/env.h",
+        "src/filesystem.cpp",
+        "src/filesystem.h",
+        "src/linenoise/**",
+        "src/main.cpp",
+        "src/modules/**",
+        "src/mongoose/**",
+        "src/networkaccessmanager.cpp",
+        "src/networkaccessmanager.h",
+        "src/phantom.cpp",
+        "src/phantom.h",
+        "src/phantomjs.qrc",
+        "src/phantomjs_win.rc",
+        "src/qcommandline/**",
+        "src/repl.cpp",
+        "src/repl.h",
+        "src/repl.js",
+        "src/system.cpp",
+        "src/system.h",
+        "src/terminal.cpp",
+        "src/terminal.h",
+        "src/utils.cpp",
+        "src/utils.h",
+        "src/webpage.cpp",
+        "src/webpage.h",
+        "src/webserver.cpp",
+        "src/webserver.h",
+        "test/basics/exit0.js",
+        "test/basics/exit23.js",
+        "test/basics/module.js",
+        "test/basics/phantom-object.js",
+        "test/basics/require/a.js",
+        "test/basics/require/b.js",
+        "test/basics/require/dir/**",
+        "test/basics/require/dummy.js",
+        "test/basics/require/empty.js",
+        "test/basics/require/json_dummy.json",
+        "test/basics/require/not_found.js",
+        "test/basics/require/require_spec.js",
+        "test/basics/require/stubber.js",
+        "test/basics/require/stubber_child.js",
+        "test/basics/require/thrower.js",
+        "test/basics/require.js",
+        "test/basics/stacktrace.js",
+        "test/basics/test-server.js",
+        "test/basics/timeout.js",
+        "test/basics/url-utils.js",
+        "test/basics/version.js",
+        "test/lib/certs/**",
+        "test/lib/fixtures/**",
+        "test/lib/testharness.js",
+        "test/lib/www/__init__.py",
+        "test/lib/www/delay.py",
+        "test/lib/www/echo.py",
+        "test/lib/www/frameset/**",
+        "test/lib/www/hello.html",
+        "test/lib/www/iframe.html",
+        "test/lib/www/includejs.js",
+        "test/lib/www/includejs1.html",
+        "test/lib/www/includejs2.html",
+        "test/lib/www/js-infinite-loop.html",
+        "test/lib/www/load-images.html",
+        "test/lib/www/logo.html",
+        "test/lib/www/missing-img.html",
+        "test/lib/www/navigation/**",
+        "test/lib/www/regression/pjs-10690/font.css",
+        "test/lib/www/regression/pjs-10690/index.html",
+        "test/lib/www/regression/pjs-10690/jquery.js",
+        "test/lib/www/regression/pjs-13551/**",
+        "test/lib/www/regression/webkit-60448.html",
+        "test/lib/www/render/index.html",
+        "test/lib/www/status.py",
+        "test/lib/www/url-encoding.py",
+        "test/lib/www/user-agent.html",
+        "test/manual/**",
+        "test/module/child_process/**",
+        "test/module/cookiejar/**",
+        "test/module/fs/**",
+        "test/module/system/**",
+        "test/module/webpage/abort-network-request.js",
+        "test/module/webpage/add-header.js",
+        "test/module/webpage/callback.js",
+        "test/module/webpage/capture-content.js",
+        "test/module/webpage/change-request-encoded-url.js",
+        "test/module/webpage/change-request-url.js",
+        "test/module/webpage/cjk-text-codecs.js",
+        "test/module/webpage/clip-rect.js",
+        "test/module/webpage/construction-with-options.js",
+        "test/module/webpage/contextclick-event.js",
+        "test/module/webpage/cookies.js",
+        "test/module/webpage/custom-headers.js",
+        "test/module/webpage/evaluate-broken-json.js",
+        "test/module/webpage/file-upload.js",
+        "test/module/webpage/frame-switching-deprecated.js",
+        "test/module/webpage/frame-switching.js",
+        "test/module/webpage/https-bad-cert.js",
+        "test/module/webpage/https-good-cert.js",
+        "test/module/webpage/includejs.js",
+        "test/module/webpage/keydown-event.js",
+        "test/module/webpage/keypress-event.js",
+        "test/module/webpage/keyup-event.js",
+        "test/module/webpage/load-images-no.js",
+        "test/module/webpage/load-images-yes.js",
+        "test/module/webpage/loading.js",
+        "test/module/webpage/local-urls-disabled-iframe.js",
+        "test/module/webpage/local-urls-disabled.js",
+        "test/module/webpage/local-urls-enabled-iframe.js",
+        "test/module/webpage/local-urls-enabled.js",
+        "test/module/webpage/long-running-javascript.js",
+        "test/module/webpage/modify-header.js",
+        "test/module/webpage/mouseclick-event.js",
+        "test/module/webpage/mousedoubleclick-event.js",
+        "test/module/webpage/mousedown-event.js",
+        "test/module/webpage/mousemove-event.js",
+        "test/module/webpage/mouseup-event.js",
+        "test/module/webpage/navigation.js",
+        "test/module/webpage/no-plugin.js",
+        "test/module/webpage/object.js",
+        "test/module/webpage/on-confirm.js",
+        "test/module/webpage/on-error.js",
+        "test/module/webpage/on-initialized.js",
+        "test/module/webpage/open.js",
+        "test/module/webpage/postdata.js",
+        "test/module/webpage/prompt.js",
+        "test/module/webpage/remove-header.js",
+        "test/module/webpage/render.js",
+        "test/module/webpage/renderBase64.js",
+        "test/module/webpage/renders/index.js",
+        "test/module/webpage/repaint-requested.js",
+        "test/module/webpage/resource-received-error.js",
+        "test/module/webpage/resource-request-error.js",
+        "test/module/webpage/scroll-position.js",
+        "test/module/webpage/set-content.js",
+        "test/module/webpage/set-frame-content.js",
+        "test/module/webpage/subwindows.js",
+        "test/module/webpage/url-encoding.js",
+        "test/module/webpage/user-agent.js",
+        "test/module/webpage/viewport-size.js",
+        "test/module/webpage/window.js",
+        "test/module/webpage/zoom-factor.js",
+        "test/module/webserver/**",
+        "test/regression/**",
+        "test/run-tests.py",
+        "test/standards/**",
+        "test/writing-tests.md",
+        "third-party.txt",
+        "tools/**"
+      ],
+      "text": "Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n  * Neither the name of the <organization> nor the\n    names of its contributors may be used to endorse or promote products\n    derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "the authors of ariya/phantomjs (the license file names no copyright line), BSD-3-Clause license (LICENSE.BSD), https://github.com/ariya/phantomjs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BSD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "src/mongoose/ReadMe.txt",
+        "third-party.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChangeLog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

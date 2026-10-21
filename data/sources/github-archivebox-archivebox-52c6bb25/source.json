@@ -1,0 +1,629 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ArchiveBox/ArchiveBox",
+  "revision": "e586352cd4f37d2864be994ed682e1ebcaae0b53",
+  "checksum": "sha256:6fac2171fe35fbcbae9f82589eb7c95cd7f52f7ec5960b68038c62477bd33387",
+  "extract": {
+    "exclude": [
+      "archivebox/templates/static/archive.png",
+      "archivebox/templates/static/chrome_extension_icon.png",
+      "archivebox/templates/static/external.png",
+      "archivebox/templates/static/favicon.ico",
+      "archivebox/templates/static/sort_asc.png",
+      "archivebox/templates/static/sort_both.png",
+      "archivebox/templates/static/sort_desc.png",
+      "archivebox/templates/static/spinner.gif",
+      "archivebox/tests/fixtures/legacy_proofs/opentimestamps/stamp-tc1mgx85/hashes.json.ots",
+      "archivebox/tests/fixtures/legacy_proofs/tlsnotary/capture-82e4bf62f426a03f80f8f4fb7c6d7b0c634a9ae4fd78b5f4c06e398311a727c4/response.http",
+      "archivebox/tests/fixtures/memento/iframetest.wacz",
+      "archivebox/tests/fixtures/responsive-images/google-drive.wacz",
+      "archivebox/tests/fixtures/tlsnotary/hacker-news/response.http",
+      "docs/_static/icon.png",
+      "docs/logo.png",
+      "publicsite/assets/apple-touch-icon.png",
+      "publicsite/assets/archive-files-finder.png",
+      "publicsite/assets/favicon.ico",
+      "publicsite/assets/icon.png",
+      "publicsite/assets/install/**",
+      "publicsite/assets/integrations/ldap.png",
+      "publicsite/assets/plugins/singlefile.png",
+      "publicsite/assets/share-iphone.png",
+      "publicsite/assets/social-card.png",
+      "publicsite/icon.png",
+      "publicsite/screenshots/**"
+    ]
+  },
+  "history": {
+    "since": "61f6f02b59098212112ea008a5158f61941a7cf0"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Nick Sweeting\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/ArchiveBox/ArchiveBox: Copyright (c) 2026 Nick Sweeting, MIT license (LICENSE), https://github.com/ArchiveBox/ArchiveBox."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "archivebox/.flake8",
+        "archivebox/README.md",
+        "archivebox/__init__.py",
+        "archivebox/__main__.py",
+        "archivebox/api/**",
+        "archivebox/base_models/**",
+        "archivebox/cli/**",
+        "archivebox/config/**",
+        "archivebox/core/**",
+        "archivebox/crawls/**",
+        "archivebox/importers/**",
+        "archivebox/ldap/**",
+        "archivebox/machine/**",
+        "archivebox/manage.py",
+        "archivebox/mcp/**",
+        "archivebox/memento/**",
+        "archivebox/misc/**",
+        "archivebox/personas/**",
+        "archivebox/plugins/**",
+        "archivebox/progressmonitor/**",
+        "archivebox/search/**",
+        "archivebox/services/**",
+        "archivebox/static",
+        "archivebox/templates/admin/**",
+        "archivebox/templates/core/**",
+        "archivebox/templates/includes/**",
+        "archivebox/templates/plugins/**",
+        "archivebox/templates/registration/**",
+        "archivebox/templates/static/add.css",
+        "archivebox/templates/static/admin/**",
+        "archivebox/templates/static/admin-inline-tags.js",
+        "archivebox/templates/static/admin.css",
+        "archivebox/templates/static/bootstrap.min.css",
+        "archivebox/templates/static/directory_index.html",
+        "archivebox/templates/static/files-icon-piles.js",
+        "archivebox/templates/static/jquery-3.7.1.slim.min.js",
+        "archivebox/templates/static/jquery.dataTables.min.css",
+        "archivebox/templates/static/jquery.dataTables.min.js",
+        "archivebox/templates/static/jquery.min.js",
+        "archivebox/templates/static/robots.txt",
+        "archivebox/templates/static/select2.min.css",
+        "archivebox/templates/static/select2.min.js",
+        "archivebox/templates/static/setup_wizard.css",
+        "archivebox/templates/static/setup_wizard.js",
+        "archivebox/templates/static/zip_index.html",
+        "archivebox/tests/__init__.py",
+        "archivebox/tests/conftest.py",
+        "archivebox/tests/fixtures/consolelog_preview.html",
+        "archivebox/tests/fixtures/forumdl/**",
+        "archivebox/tests/fixtures/importers/**",
+        "archivebox/tests/fixtures/legacy_proofs/README.md",
+        "archivebox/tests/fixtures/legacy_proofs/opentimestamps/stamp-tc1mgx85/hashes.json",
+        "archivebox/tests/fixtures/legacy_proofs/opentimestamps/stamp-tc1mgx85/index.html",
+        "archivebox/tests/fixtures/legacy_proofs/tlsnotary/capture-82e4bf62f426a03f80f8f4fb7c6d7b0c634a9ae4fd78b5f4c06e398311a727c4/index.html",
+        "archivebox/tests/fixtures/legacy_proofs/tlsnotary/capture-82e4bf62f426a03f80f8f4fb7c6d7b0c634a9ae4fd78b5f4c06e398311a727c4/metadata.json",
+        "archivebox/tests/fixtures/legacy_proofs/tlsnotary/capture-82e4bf62f426a03f80f8f4fb7c6d7b0c634a9ae4fd78b5f4c06e398311a727c4/receipt.json",
+        "archivebox/tests/fixtures/memento/README.md",
+        "archivebox/tests/fixtures/responsive-images/README.md",
+        "archivebox/tests/fixtures/tlsnotary/hacker-news/metadata.json",
+        "archivebox/tests/fixtures/tlsnotary/hacker-news/navigation.json",
+        "archivebox/tests/fixtures/tlsnotary/hacker-news/receipt.json",
+        "archivebox/tests/migrations_helpers.py",
+        "archivebox/tests/test_api_discovery_performance.py",
+        "archivebox/tests/test_api_v1_auth_browser_session.py",
+        "archivebox/tests/test_api_v1_auth_check_api_token.py",
+        "archivebox/tests/test_api_v1_auth_get_api_token.py",
+        "archivebox/tests/test_api_v1_cli_add.py",
+        "archivebox/tests/test_api_v1_cli_remove.py",
+        "archivebox/tests/test_api_v1_cli_schedule.py",
+        "archivebox/tests/test_api_v1_cli_search.py",
+        "archivebox/tests/test_api_v1_cli_update.py",
+        "archivebox/tests/test_api_v1_cli_workflow_add_search_update_remove.py",
+        "archivebox/tests/test_api_v1_core_any_id.py",
+        "archivebox/tests/test_api_v1_core_archiveresult_archiveresult_id.py",
+        "archivebox/tests/test_api_v1_core_archiveresults.py",
+        "archivebox/tests/test_api_v1_core_snapshot_snapshot_id.py",
+        "archivebox/tests/test_api_v1_core_snapshots.py",
+        "archivebox/tests/test_api_v1_core_snapshots_rss.py",
+        "archivebox/tests/test_api_v1_core_tag_tag_id.py",
+        "archivebox/tests/test_api_v1_core_tag_tag_id_rename.py",
+        "archivebox/tests/test_api_v1_core_tag_tag_id_snapshots_jsonl.py",
+        "archivebox/tests/test_api_v1_core_tag_tag_id_urls_txt.py",
+        "archivebox/tests/test_api_v1_core_tags.py",
+        "archivebox/tests/test_api_v1_core_tags_add_to_snapshot.py",
+        "archivebox/tests/test_api_v1_core_tags_autocomplete.py",
+        "archivebox/tests/test_api_v1_core_tags_create.py",
+        "archivebox/tests/test_api_v1_core_tags_remove_from_snapshot.py",
+        "archivebox/tests/test_api_v1_core_tags_search.py",
+        "archivebox/tests/test_api_v1_crawls_crawl_crawl_id.py",
+        "archivebox/tests/test_api_v1_crawls_crawl_crawl_id_files_filename.py",
+        "archivebox/tests/test_api_v1_crawls_crawl_crawl_id_files_folder_filename.py",
+        "archivebox/tests/test_api_v1_crawls_crawl_crawl_id_files_folder_subfolder_filename.py",
+        "archivebox/tests/test_api_v1_crawls_crawls.py",
+        "archivebox/tests/test_api_v1_machine_binaries.py",
+        "archivebox/tests/test_api_v1_machine_binary_binary_id.py",
+        "archivebox/tests/test_api_v1_machine_binary_by_name_name.py",
+        "archivebox/tests/test_api_v1_machine_machine_current.py",
+        "archivebox/tests/test_api_v1_machine_machine_machine_id.py",
+        "archivebox/tests/test_api_v1_machine_machines.py",
+        "archivebox/tests/test_api_v1_personas_personas.py",
+        "archivebox/tests/test_api_v1_personas_sync.py",
+        "archivebox/tests/test_api_v1_workflow_core_token_auth_side_effects.py",
+        "archivebox/tests/test_api_v1_workflow_frozen_crawl_config_sources.py",
+        "archivebox/tests/test_archive_result_service.py",
+        "archivebox/tests/test_archive_storage_isolation.py",
+        "archivebox/tests/test_auth_ldap.py",
+        "archivebox/tests/test_authenticated_provider_replay.py",
+        "archivebox/tests/test_binary_service.py",
+        "archivebox/tests/test_calendar_replay.py",
+        "archivebox/tests/test_cli_add_1.py",
+        "archivebox/tests/test_cli_add_2.py",
+        "archivebox/tests/test_cli_add_3.py",
+        "archivebox/tests/test_cli_add_4.py",
+        "archivebox/tests/test_cli_archiveresult.py",
+        "archivebox/tests/test_cli_background_screenshot.py",
+        "archivebox/tests/test_cli_binary.py",
+        "archivebox/tests/test_cli_config.py",
+        "archivebox/tests/test_cli_crawl.py",
+        "archivebox/tests/test_cli_dependency_failure.py",
+        "archivebox/tests/test_cli_extract.py",
+        "archivebox/tests/test_cli_extract_input.py",
+        "archivebox/tests/test_cli_help.py",
+        "archivebox/tests/test_cli_init.py",
+        "archivebox/tests/test_cli_install.py",
+        "archivebox/tests/test_cli_list.py",
+        "archivebox/tests/test_cli_list_large.py",
+        "archivebox/tests/test_cli_machine.py",
+        "archivebox/tests/test_cli_manage.py",
+        "archivebox/tests/test_cli_mcp.py",
+        "archivebox/tests/test_cli_oneshot.py",
+        "archivebox/tests/test_cli_persona.py",
+        "archivebox/tests/test_cli_piping.py",
+        "archivebox/tests/test_cli_pluginmap.py",
+        "archivebox/tests/test_cli_process.py",
+        "archivebox/tests/test_cli_remove.py",
+        "archivebox/tests/test_cli_rerun_results.py",
+        "archivebox/tests/test_cli_run_1.py",
+        "archivebox/tests/test_cli_run_2.py",
+        "archivebox/tests/test_cli_run_3.py",
+        "archivebox/tests/test_cli_run_4.py",
+        "archivebox/tests/test_cli_schedule.py",
+        "archivebox/tests/test_cli_search.py",
+        "archivebox/tests/test_cli_seed_urls.py",
+        "archivebox/tests/test_cli_server.py",
+        "archivebox/tests/test_cli_shell.py",
+        "archivebox/tests/test_cli_snapshot.py",
+        "archivebox/tests/test_cli_status.py",
+        "archivebox/tests/test_cli_tag.py",
+        "archivebox/tests/test_cli_update.py",
+        "archivebox/tests/test_cli_update_reindex_snapshots.py",
+        "archivebox/tests/test_cli_version.py",
+        "archivebox/tests/test_config_DELETE_AFTER.py",
+        "archivebox/tests/test_config_MAX_limits.py",
+        "archivebox/tests/test_config_ONLY_NEW.py",
+        "archivebox/tests/test_config_SAVE_TITLE.py",
+        "archivebox/tests/test_config_URL_filters.py",
+        "archivebox/tests/test_core_config.py",
+        "archivebox/tests/test_core_forms.py",
+        "archivebox/tests/test_crawl_history.py",
+        "archivebox/tests/test_crawl_memory_admission.py",
+        "archivebox/tests/test_crawl_pause.py",
+        "archivebox/tests/test_crawl_runner.py",
+        "archivebox/tests/test_crawl_runner_2.py",
+        "archivebox/tests/test_crawl_service.py",
+        "archivebox/tests/test_document_url_crawl.py",
+        "archivebox/tests/test_frozen_crawl_config.py",
+        "archivebox/tests/test_health_responsiveness.py",
+        "archivebox/tests/test_hook_result_lifecycle.py",
+        "archivebox/tests/test_hooks.py",
+        "archivebox/tests/test_importer_host_command.py",
+        "archivebox/tests/test_importers.py",
+        "archivebox/tests/test_issue_1896.py",
+        "archivebox/tests/test_machine_models.py",
+        "archivebox/tests/test_machine_service.py",
+        "archivebox/tests/test_memento.py",
+        "archivebox/tests/test_migrations_04_to_09.py",
+        "archivebox/tests/test_migrations_07_to_09.py",
+        "archivebox/tests/test_migrations_08_to_09.py",
+        "archivebox/tests/test_migrations_fresh.py",
+        "archivebox/tests/test_misc_checks.py",
+        "archivebox/tests/test_misc_monkey_patches.py",
+        "archivebox/tests/test_non_ascii_urls.py",
+        "archivebox/tests/test_opencode_agent_1.py",
+        "archivebox/tests/test_opencode_agent_2.py",
+        "archivebox/tests/test_opencode_agent_3.py",
+        "archivebox/tests/test_opencode_browser_1.py",
+        "archivebox/tests/test_opencode_browser_2.py",
+        "archivebox/tests/test_opencode_browser_3.py",
+        "archivebox/tests/test_opencode_browser_panel.py",
+        "archivebox/tests/test_orm_helpers.py",
+        "archivebox/tests/test_osint_integrations.py",
+        "archivebox/tests/test_output_file_scan.py",
+        "archivebox/tests/test_permissions.py",
+        "archivebox/tests/test_persona_casing.py",
+        "archivebox/tests/test_persona_runtime.py",
+        "archivebox/tests/test_plugin_full_manifests.py",
+        "archivebox/tests/test_plugin_full_preview.py",
+        "archivebox/tests/test_plugin_template_results.py",
+        "archivebox/tests/test_postgres_backend.py",
+        "archivebox/tests/test_process_runtime_paths.py",
+        "archivebox/tests/test_process_service.py",
+        "archivebox/tests/test_progress_archive_size.py",
+        "archivebox/tests/test_proof_previews.py",
+        "archivebox/tests/test_provider_plugin_config_ui.py",
+        "archivebox/tests/test_provider_plugin_replay.py",
+        "archivebox/tests/test_recursive_crawl_1.py",
+        "archivebox/tests/test_recursive_crawl_2.py",
+        "archivebox/tests/test_recursive_crawl_3.py",
+        "archivebox/tests/test_release_notes.py",
+        "archivebox/tests/test_release_source_fingerprint.py",
+        "archivebox/tests/test_release_workflow.py",
+        "archivebox/tests/test_request_output_manifests.py",
+        "archivebox/tests/test_resource_admission.py",
+        "archivebox/tests/test_responsive_image_replay.py",
+        "archivebox/tests/test_runner_deletion.py",
+        "archivebox/tests/test_runner_watch.py",
+        "archivebox/tests/test_search.py",
+        "archivebox/tests/test_serve_static.py",
+        "archivebox/tests/test_server_automatic_url.py",
+        "archivebox/tests/test_server_security_browser.py",
+        "archivebox/tests/test_settings_signal_webhooks.py",
+        "archivebox/tests/test_setup_script.py",
+        "archivebox/tests/test_shutdown_util.py",
+        "archivebox/tests/test_snapshot_file_navigation.py",
+        "archivebox/tests/test_snapshot_filesystem_migration.py",
+        "archivebox/tests/test_snapshot_output_stacks.py",
+        "archivebox/tests/test_snapshot_ref_lookup.py",
+        "archivebox/tests/test_snapshot_service.py",
+        "archivebox/tests/test_snapshot_url_length.py",
+        "archivebox/tests/test_sqlite_backend.py",
+        "archivebox/tests/test_tag_reconciliation.py",
+        "archivebox/tests/test_tag_service.py",
+        "archivebox/tests/test_takeover_util_1.py",
+        "archivebox/tests/test_takeover_util_2.py",
+        "archivebox/tests/test_takeover_util_3.py",
+        "archivebox/tests/test_takeover_util_4.py",
+        "archivebox/tests/test_test_harness.py",
+        "archivebox/tests/test_ui_add_view.py",
+        "archivebox/tests/test_ui_add_view_runtime.py",
+        "archivebox/tests/test_ui_admin_apitoken.py",
+        "archivebox/tests/test_ui_admin_archiveresult.py",
+        "archivebox/tests/test_ui_admin_config_widget.py",
+        "archivebox/tests/test_ui_admin_crawl.py",
+        "archivebox/tests/test_ui_admin_links.py",
+        "archivebox/tests/test_ui_admin_machine.py",
+        "archivebox/tests/test_ui_admin_persona.py",
+        "archivebox/tests/test_ui_admin_snapshot.py",
+        "archivebox/tests/test_ui_admin_tag.py",
+        "archivebox/tests/test_ui_admin_user.py",
+        "archivebox/tests/test_ui_config_views.py",
+        "archivebox/tests/test_ui_list_results.py",
+        "archivebox/tests/test_ui_live_progress.py",
+        "archivebox/tests/test_ui_progress_metrics.py",
+        "archivebox/tests/test_ui_progress_polling.py",
+        "archivebox/tests/test_ui_public_snapshot.py",
+        "archivebox/tests/test_ui_savepagenow.py",
+        "archivebox/tests/test_urls.py",
+        "archivebox/tests/test_util.py",
+        "archivebox/tests/test_version_metadata.py",
+        "archivebox/tests/test_zip_download_lifecycle.py",
+        "archivebox/tests/test_zip_preview.py",
+        "archivebox/uuid_compat.py",
+        "archivebox/workers/**",
+        "bin/**",
+        "docker-compose.yml",
+        "docs/.gitignore",
+        "docs/.mkdocs.unused/**",
+        "docs/.readthedocs.yaml",
+        "docs/ArchiveBox-Architecture-Diagrams.md",
+        "docs/Change-Detection.md",
+        "docs/Changelog.md",
+        "docs/Chromium-Install.md",
+        "docs/Configuration.md",
+        "docs/Contents.rst",
+        "docs/Docker.md",
+        "docs/Donations.md",
+        "docs/Home.md",
+        "docs/Install.md",
+        "docs/Integrating-with-Slack.md",
+        "docs/Makefile",
+        "docs/Merging-Collections.md",
+        "docs/OSINT-Preservation.md",
+        "docs/Publishing-Your-Archive.md",
+        "docs/Quickstart.md",
+        "docs/README.md",
+        "docs/Release-Notes-v0.9.md",
+        "docs/Roadmap.md",
+        "docs/Scheduled-Archiving.md",
+        "docs/Screenshots.md",
+        "docs/Security-Overview.md",
+        "docs/Setting-Up-Storage.md",
+        "docs/Setting-up-Authentication.md",
+        "docs/Setting-up-Search.md",
+        "docs/Troubleshooting.md",
+        "docs/Upgrading-or-Merging-Archives.md",
+        "docs/Upgrading.md",
+        "docs/Usage.md",
+        "docs/Web-Archiving-Community.md",
+        "docs/_Footer.md",
+        "docs/_Sidebar.md",
+        "docs/_static/css/**",
+        "docs/_templates/**",
+        "docs/apidocs/**",
+        "docs/check_links.py",
+        "docs/codeblocks.toml",
+        "docs/conf.py",
+        "docs/index.rst",
+        "docs/mermaid-binary.json",
+        "docs/mermaid-puppeteer-linux.json",
+        "docs/nginx-binary.json",
+        "docs/requirements.txt",
+        "docs/test_codeblocks_manifest.py",
+        "etc/**",
+        "pdm_build.py",
+        "publicsite/.nojekyll",
+        "publicsite/CNAME",
+        "publicsite/ar/**",
+        "publicsite/assets/integrations/SOURCES.md",
+        "publicsite/assets/integrations/aws-s3-wordmark.svg",
+        "publicsite/assets/integrations/aws-s3.svg",
+        "publicsite/assets/integrations/claude-code.svg",
+        "publicsite/assets/integrations/codex.svg",
+        "publicsite/assets/integrations/google-drive.svg",
+        "publicsite/assets/integrations/n8n.svg",
+        "publicsite/assets/integrations/openldap.svg",
+        "publicsite/assets/integrations/postgresql.svg",
+        "publicsite/assets/integrations/slack.svg",
+        "publicsite/assets/plugins/SOURCES.md",
+        "publicsite/assets/plugins/archive-org.svg",
+        "publicsite/assets/plugins/chrome.svg",
+        "publicsite/assets/plugins/claude.svg",
+        "publicsite/assets/plugins/github.svg",
+        "publicsite/assets/plugins/tailscale.svg",
+        "publicsite/assets/plugins/tlsnotary.svg",
+        "publicsite/assets/plugins/ublock.svg",
+        "publicsite/assets/plugins/webrecorder.svg",
+        "publicsite/assets/plugins/youtube.svg",
+        "publicsite/assets/social-card.svg",
+        "publicsite/es/**",
+        "publicsite/fr/**",
+        "publicsite/index.html",
+        "publicsite/install.js",
+        "publicsite/language.js",
+        "publicsite/platform-cta.js",
+        "publicsite/robots.txt",
+        "publicsite/ru/**",
+        "publicsite/shadcn-theme.css",
+        "publicsite/sitemap.xml",
+        "publicsite/styles.css",
+        "publicsite/tests/**",
+        "publicsite/zh/**",
+        "pyproject.toml",
+        "skills/**",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Nick Sweeting\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Nick Sweeting, MIT license (LICENSE), https://github.com/ArchiveBox/ArchiveBox."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

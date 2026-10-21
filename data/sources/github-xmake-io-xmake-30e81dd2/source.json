@@ -1,0 +1,1668 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/xmake-io/xmake",
+  "revision": "05e400746ef988502a2e4f98505d02b877e348e9",
+  "checksum": "sha256:b044ab7689ba26f2beccf53128d2e5a308200b7b562c2a0f5e68015b56168746",
+  "extract": {
+    "exclude": [
+      "core/src/cli/xmake.ico",
+      "core/src/lua/lua/**",
+      "core/src/lua-cjson/lua-cjson/tests/octets-escaped.dat",
+      "core/src/luajit/luajit/**",
+      "core/src/lz4/lz4/.circleci/**",
+      "core/src/lz4/lz4/.cirrus.yml",
+      "core/src/lz4/lz4/.clang-format",
+      "core/src/lz4/lz4/.gitattributes",
+      "core/src/lz4/lz4/.github/**",
+      "core/src/lz4/lz4/.gitignore",
+      "core/src/lz4/lz4/CODING_STYLE",
+      "core/src/lz4/lz4/INSTALL",
+      "core/src/lz4/lz4/LICENSE",
+      "core/src/lz4/lz4/Makefile",
+      "core/src/lz4/lz4/Makefile.inc",
+      "core/src/lz4/lz4/NEWS",
+      "core/src/lz4/lz4/README.md",
+      "core/src/lz4/lz4/SECURITY.md",
+      "core/src/lz4/lz4/appveyor.yml",
+      "core/src/lz4/lz4/build/**",
+      "core/src/lz4/lz4/contrib/debian/**",
+      "core/src/lz4/lz4/contrib/gen_manual/**",
+      "core/src/lz4/lz4/contrib/snap/**",
+      "core/src/lz4/lz4/doc/**",
+      "core/src/lz4/lz4/examples/**",
+      "core/src/lz4/lz4/ossfuzz/**",
+      "core/src/lz4/lz4/programs/**",
+      "core/src/lz4/lz4/tests/**",
+      "core/src/pdcurses/pdcurses/**",
+      "core/src/sv/sv/**",
+      "core/src/tbox/tbox/**",
+      "scripts/debian/**",
+      "tests/modules/io/files/utf16be-lf-eleof",
+      "tests/modules/io/files/utf16le-crlf-neleof",
+      "tests/plugins/pack/console/src/assets/xmake.ico",
+      "tests/plugins/pack/console/src/assets/xmake.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_128x128.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_128x128@2x.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_16x16.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_16x16@2x.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_256x256.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_256x256@2x.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_32x32.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_32x32@2x.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_512x512.png",
+      "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png",
+      "tests/plugins/pack/macapp/src/assets/**",
+      "tests/plugins/pack/qtapp/src/assets/**",
+      "tests/projects/android/native_app/lvgl_basic/android/debug.jks",
+      "tests/projects/android/native_app/lvgl_basic/android/res/mipmap/**",
+      "tests/projects/android/native_app/lvgl_basic/android/res/mipmap-mdpi/**",
+      "tests/projects/android/native_app/lvgl_particles/android/debug.jks",
+      "tests/projects/android/native_app/lvgl_particles/android/res/mipmap/**",
+      "tests/projects/android/native_app/lvgl_particles/android/res/mipmap-mdpi/**",
+      "tests/projects/android/native_app/raylib_basic/android/debug.jks",
+      "tests/projects/android/native_app/raylib_basic/android/res/mipmap/**",
+      "tests/projects/android/native_app/raylib_basic/android/res/mipmap-mdpi/**",
+      "tests/projects/android/native_app/raylib_custom_glue/android/debug.jks",
+      "tests/projects/android/native_app/raylib_custom_glue/android/res/mipmap/**",
+      "tests/projects/android/native_app/raylib_custom_glue/android/res/mipmap-mdpi/**",
+      "tests/projects/android/native_app/raylib_particles/android/debug.jks",
+      "tests/projects/android/native_app/raylib_particles/android/res/mipmap/**",
+      "tests/projects/android/native_app/raylib_particles/android/res/mipmap-mdpi/**",
+      "tests/projects/asm/masm32/src/mainicon.ico",
+      "tests/projects/embed/gnu-rm/hello/src/gcc_arm.ld",
+      "tests/projects/nim/console/src/main",
+      "tests/projects/other/bin2c/src/xmake.ico",
+      "tests/projects/other/bin2obj/src/xmake.ico",
+      "tests/projects/windows/driver/kmdf/serial/serial.inx",
+      "tests/projects/windows/driver/umdf/echo/driver/echoum.inx",
+      "tests/projects/windows/driver/umdf/skeleton/UMDFSkeleton_OSR.inx",
+      "tests/projects/windows/driver/umdf/skeleton/UMDFSkeleton_Root.inx",
+      "tests/projects/windows/driver/wdm/msdsm/SampleDSM.inf",
+      "tests/projects/windows/winsdk/usbview/bang.ico",
+      "tests/projects/windows/winsdk/usbview/hub.ico",
+      "tests/projects/windows/winsdk/usbview/monitor.ico",
+      "tests/projects/windows/winsdk/usbview/port.ico",
+      "tests/projects/windows/winsdk/usbview/split.cur",
+      "tests/projects/windows/winsdk/usbview/ssport.ico",
+      "tests/projects/windows/winsdk/usbview/ssusb.ico",
+      "tests/projects/windows/winsdk/usbview/usb.ico",
+      "tests/projects/windows/winsdk/usbview/vndrlist.h",
+      "tests/projects/windows/winsdk/windemo/small.ico",
+      "tests/projects/windows/winsdk/windemo/test.ico",
+      "tests/projects/xmake_cli/xmake/src/xmake.ico",
+      "xmake/modules/core/base/**",
+      "xmake/modules/private/check/checkers/api/target/**",
+      "xmake/scripts/xpack/deb/**"
+    ]
+  },
+  "history": {
+    "since": "05d9e82172739b36900b6cbc9a4c72625d003f3b"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2015-present Xmake Open Source Community\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE.md:\n\nA cross-platform build utility based on Lua\nCopyright 2015-present, The Xmake Open Source Community\n\nThis product includes software developed by The Xmake Open Source Community (https://xmake.io/).\n\n-------------------------------------------------------------------------------\n\nThis product depends on 'lua-cjson', The Lua CJSON module provides JSON support for Lua,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/lua-cjson/lua-cjson/LICENSE (MIT License)\n  * HOMEPAGE:\n    * https://www.kyne.com.au/~mark/software/lua-cjson.php\n\nThis product depends on 'pdcurses', an implementation of X/Open curses for multiple platforms,\nwhich can be obtained at:\n\n  * LICENSE:\n    * Public Domain License\n  * HOMEPAGE:\n    * http://pdcurses.org/\n\nThis product depends on 'libsv', Public domain semantic versioning in c,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/sv/sv/UNLICENSE (Public Domain License)\n  * HOMEPAGE:\n    * https://github.com/uael/sv\n\nThis product depends on 'LuaJIT', a Just-In-Time Compiler for Lua,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/luajit/luajit/COPYRIGHT (MIT License)\n  * HOMEPAGE:\n    * http://luajit.org/\n\nThis product depends on 'Lua', The Lua Programming Language,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://www.lua.org/license.html (MIT License)\n  * HOMEPAGE:\n    * http://lua.org/\n\nThis product depends on 'lz4', Extremely Fast Compression algorithm,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://github.com/lz4/lz4/blob/dev/LICENSE\n  * HOMEPAGE:\n    * https://www.lz4.org/\n\nThis product depends on 'xxHash', Extremely fast non-cryptographic hash algorithm,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://github.com/Cyan4973/xxHash/blob/dev/LICENSE\n  * HOMEPAGE:\n    * https://www.xxhash.com/\n\nThis product depends on 'tbox', The Treasure Box Library,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/tbox/tbox/LICENSE.md (Apache License 2.0)\n  * HOMEPAGE:\n    * https://tboox.org/\n\n\n\n\nCopyright (c) 2010-2012  Mark Pulford <mark@kyne.com.au>\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2014, lpsantil\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n\nLZ4 Library\nCopyright (c) 2011-2020, Yann Collet\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nxxHash Library\nCopyright (c) 2012-2021 Yann Collet\nAll rights reserved.\n\nBSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2015-present Xmake Open Source Community\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nCopyright © 2020 Apple Inc. \n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n",
+      "attribution": "Commit history of https://github.com/xmake-io/xmake: Copyright 2015-present Xmake Open Source Community; Copyright 2015-present, The Xmake Open Source Community, Apache-2.0 license (LICENSE.md), https://github.com/xmake-io/xmake; Copyright (c) 2010-2012  Mark Pulford <mark@kyne.com.au>, MIT license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lua-cjson/lua-cjson; Copyright (c) 2014, lpsantil, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lz4/lz4/contrib/djgpp; Copyright (c) 2011-2020, Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lz4/lz4/lib; Copyright (c) 2012-2021 Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/xxhash/xxhash; Copyright 2015-present Xmake Open Source Community, Apache-2.0 license (LICENSE.md), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/tests/plugins/pack/console; Copyright © 2020 Apple Inc., MIT license (LICENSE.txt), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/tests/projects/objc/metal_app/LICENSE."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".clang-format",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE.md",
+        "NOTICE.md",
+        "README.md",
+        "README_zh.md",
+        "configure",
+        "core/src/cli/xmake.c",
+        "core/src/cli/xmake.lua",
+        "core/src/cli/xmake.rc",
+        "core/src/cli/xmake.sh",
+        "core/src/lua/xmake.lua",
+        "core/src/lua/xmake.sh",
+        "core/src/lua-cjson/xmake.lua",
+        "core/src/lua-cjson/xmake.sh",
+        "core/src/luajit/xmake.lua",
+        "core/src/luajit/xmake.sh",
+        "core/src/lz4/xmake.lua",
+        "core/src/lz4/xmake.sh",
+        "core/src/pdcurses/xmake.lua",
+        "core/src/sv/.gitignore",
+        "core/src/sv/.travis.yml",
+        "core/src/sv/xmake.lua",
+        "core/src/sv/xmake.sh",
+        "core/src/tbox/inc/**",
+        "core/src/tbox/xmake.lua",
+        "core/src/tbox/xmake.sh",
+        "core/src/xmake/**",
+        "core/xmake.lua",
+        "core/xmake.sh",
+        "core/xpack.lua",
+        "scripts/get.ps1",
+        "scripts/get.sh",
+        "scripts/makeppa",
+        "scripts/man/**",
+        "scripts/msys/**",
+        "scripts/rpmbuild/**",
+        "scripts/srcenv.bat",
+        "scripts/srcenv.profile",
+        "scripts/srcenv.ps1",
+        "scripts/xrepo.bat",
+        "scripts/xrepo.ps1",
+        "scripts/xrepo.sh",
+        "tests/actions/**",
+        "tests/apis/**",
+        "tests/benchmarks/**",
+        "tests/cli/**",
+        "tests/modules/async/**",
+        "tests/modules/binutils/**",
+        "tests/modules/bloom_filter/**",
+        "tests/modules/bytes/**",
+        "tests/modules/cache/**",
+        "tests/modules/compress/**",
+        "tests/modules/detect/**",
+        "tests/modules/devel/**",
+        "tests/modules/download/**",
+        "tests/modules/for_loop/**",
+        "tests/modules/fwatcher/**",
+        "tests/modules/graph/**",
+        "tests/modules/hash/**",
+        "tests/modules/hashset/**",
+        "tests/modules/heap/**",
+        "tests/modules/hello/**",
+        "tests/modules/io/files/.gitattributes",
+        "tests/modules/io/files/utf8-crlf-neleof",
+        "tests/modules/io/files/utf8-longline-eleof",
+        "tests/modules/io/files/utf8-longline-neleof",
+        "tests/modules/io/files/utf8bom-lf-eleof",
+        "tests/modules/io/test.lua",
+        "tests/modules/jobgraph/**",
+        "tests/modules/json/**",
+        "tests/modules/language/**",
+        "tests/modules/lib/**",
+        "tests/modules/list/**",
+        "tests/modules/math/**",
+        "tests/modules/os/**",
+        "tests/modules/package/**",
+        "tests/modules/parse_deps/**",
+        "tests/modules/path/**",
+        "tests/modules/pipe/**",
+        "tests/modules/private/**",
+        "tests/modules/process/**",
+        "tests/modules/project_depend/**",
+        "tests/modules/queue/**",
+        "tests/modules/scheduler/**",
+        "tests/modules/semver/**",
+        "tests/modules/signal/**",
+        "tests/modules/socket/**",
+        "tests/modules/stdin/**",
+        "tests/modules/string/**",
+        "tests/modules/table/**",
+        "tests/modules/thread/**",
+        "tests/modules/tty/**",
+        "tests/modules/utf8/**",
+        "tests/modules/xml/**",
+        "tests/plugins/create/**",
+        "tests/plugins/macro/**",
+        "tests/plugins/pack/macapp/src/AppDelegate.h",
+        "tests/plugins/pack/macapp/src/AppDelegate.m",
+        "tests/plugins/pack/macapp/src/Assets.xcassets/AppIcon.appiconset/Contents.json",
+        "tests/plugins/pack/macapp/src/Assets.xcassets/Contents.json",
+        "tests/plugins/pack/macapp/src/Base.lproj/**",
+        "tests/plugins/pack/macapp/src/Info.plist",
+        "tests/plugins/pack/macapp/src/ViewController.h",
+        "tests/plugins/pack/macapp/src/ViewController.m",
+        "tests/plugins/pack/macapp/src/main.m",
+        "tests/plugins/pack/macapp/xmake.lua",
+        "tests/plugins/pack/qtapp/src/main.cpp",
+        "tests/plugins/pack/qtapp/src/mainwindow.cpp",
+        "tests/plugins/pack/qtapp/src/mainwindow.h",
+        "tests/plugins/pack/qtapp/src/mainwindow.ui",
+        "tests/plugins/pack/qtapp/xmake.lua",
+        "tests/plugins/project/**",
+        "tests/plugins/show/**",
+        "tests/projects/android/native_app/lvgl_basic/android/AndroidManifest.xml",
+        "tests/projects/android/native_app/lvgl_basic/android/res/values/**",
+        "tests/projects/android/native_app/lvgl_basic/src/**",
+        "tests/projects/android/native_app/lvgl_basic/xmake.lua",
+        "tests/projects/android/native_app/lvgl_particles/android/AndroidManifest.xml",
+        "tests/projects/android/native_app/lvgl_particles/android/res/values/**",
+        "tests/projects/android/native_app/lvgl_particles/src/**",
+        "tests/projects/android/native_app/lvgl_particles/xmake.lua",
+        "tests/projects/android/native_app/raylib_basic/android/AndroidManifest.xml",
+        "tests/projects/android/native_app/raylib_basic/android/res/values/**",
+        "tests/projects/android/native_app/raylib_basic/src/**",
+        "tests/projects/android/native_app/raylib_basic/xmake.lua",
+        "tests/projects/android/native_app/raylib_custom_glue/android/AndroidManifest.xml",
+        "tests/projects/android/native_app/raylib_custom_glue/android/res/values/**",
+        "tests/projects/android/native_app/raylib_custom_glue/src/**",
+        "tests/projects/android/native_app/raylib_custom_glue/xmake.lua",
+        "tests/projects/android/native_app/raylib_particles/android/AndroidManifest.xml",
+        "tests/projects/android/native_app/raylib_particles/android/res/values/**",
+        "tests/projects/android/native_app/raylib_particles/src/**",
+        "tests/projects/android/native_app/raylib_particles/xmake.lua",
+        "tests/projects/ascendc/**",
+        "tests/projects/asm/fasm/**",
+        "tests/projects/asm/gas/**",
+        "tests/projects/asm/masm32/src/generic.asm",
+        "tests/projects/asm/masm32/src/rsrc.rc",
+        "tests/projects/asm/masm32/xmake.lua",
+        "tests/projects/asm/nasm/**",
+        "tests/projects/asm/yasm/**",
+        "tests/projects/c/**",
+        "tests/projects/c++/**",
+        "tests/projects/cppfront/**",
+        "tests/projects/csharp/**",
+        "tests/projects/cuda/**",
+        "tests/projects/dlang/**",
+        "tests/projects/embed/c51/**",
+        "tests/projects/embed/esp32/**",
+        "tests/projects/embed/gnu-rm/hello/src/foo/**",
+        "tests/projects/embed/gnu-rm/hello/src/lib/**",
+        "tests/projects/embed/gnu-rm/hello/src/main.c",
+        "tests/projects/embed/gnu-rm/hello/src/startup_ARMCM3.S",
+        "tests/projects/embed/gnu-rm/hello/src/system_ARMCM3.c",
+        "tests/projects/embed/gnu-rm/hello/xmake.lua",
+        "tests/projects/embed/iverilog/**",
+        "tests/projects/embed/mdk/**",
+        "tests/projects/embed/verilator/**",
+        "tests/projects/fortran/**",
+        "tests/projects/go/**",
+        "tests/projects/hybrid/**",
+        "tests/projects/kotlin-native/**",
+        "tests/projects/lex_yacc/**",
+        "tests/projects/linux/**",
+        "tests/projects/nim/console/src/main.nim",
+        "tests/projects/nim/console/xmake.lua",
+        "tests/projects/nim/console_with_c/**",
+        "tests/projects/nim/link_library/**",
+        "tests/projects/nim/native_package/**",
+        "tests/projects/nim/nimble_package/**",
+        "tests/projects/nim/shared_library/**",
+        "tests/projects/nim/static_library/**",
+        "tests/projects/objc/bundle/**",
+        "tests/projects/objc/console/**",
+        "tests/projects/objc/framework/**",
+        "tests/projects/objc/iosapp/**",
+        "tests/projects/objc/iosapp_framework_rpath/**",
+        "tests/projects/objc/iosapp_with_framework/**",
+        "tests/projects/objc/macapp/**",
+        "tests/projects/objc/macapp_duplicate_rpath/**",
+        "tests/projects/objc/macapp_with_framework/**",
+        "tests/projects/objc/macapp_with_shared/**",
+        "tests/projects/objc/metal_app/.gitignore",
+        "tests/projects/objc/metal_app/Application/**",
+        "tests/projects/objc/metal_app/Configuration/**",
+        "tests/projects/objc/metal_app/HelloTriangle.xcodeproj/**",
+        "tests/projects/objc/metal_app/README.md",
+        "tests/projects/objc/metal_app/Renderer/**",
+        "tests/projects/objc/metal_app/xmake.lua",
+        "tests/projects/objc/modulemap/**",
+        "tests/projects/objc++/**",
+        "tests/projects/openmp/**",
+        "tests/projects/other/autogen/**",
+        "tests/projects/other/bin2c/.gitignore",
+        "tests/projects/other/bin2c/src/asset.bin",
+        "tests/projects/other/bin2c/src/asset2.bin",
+        "tests/projects/other/bin2c/src/data.bin",
+        "tests/projects/other/bin2c/src/main.c",
+        "tests/projects/other/bin2c/test.lua",
+        "tests/projects/other/bin2c/transform.lua",
+        "tests/projects/other/bin2c/xmake.lua",
+        "tests/projects/other/bin2obj/src/asset.bin",
+        "tests/projects/other/bin2obj/src/asset2.bin",
+        "tests/projects/other/bin2obj/src/data.bin",
+        "tests/projects/other/bin2obj/src/main.c",
+        "tests/projects/other/bin2obj/test.lua",
+        "tests/projects/other/bin2obj/transform.lua",
+        "tests/projects/other/bin2obj/xmake.lua",
+        "tests/projects/other/build_deps/**",
+        "tests/projects/other/glsl2spv_bin2c/**",
+        "tests/projects/other/glsl2spv_bin2obj/**",
+        "tests/projects/other/group/**",
+        "tests/projects/other/hlsl2spv_bin2c/**",
+        "tests/projects/other/hlsl2spv_bin2obj/**",
+        "tests/projects/other/ispc/**",
+        "tests/projects/other/merge_archive/**",
+        "tests/projects/other/merge_archive_deps/**",
+        "tests/projects/other/merge_archive_packages/**",
+        "tests/projects/other/merge_object/**",
+        "tests/projects/other/multiplats_vs/**",
+        "tests/projects/other/multiplats_xcode/**",
+        "tests/projects/other/native_module/**",
+        "tests/projects/other/object_only/**",
+        "tests/projects/other/parallel_build/**",
+        "tests/projects/other/parse_headerdeps/**",
+        "tests/projects/package/**",
+        "tests/projects/pascal/**",
+        "tests/projects/policy/**",
+        "tests/projects/python/**",
+        "tests/projects/qt/**",
+        "tests/projects/rust/**",
+        "tests/projects/swift/**",
+        "tests/projects/swig/**",
+        "tests/projects/vala/**",
+        "tests/projects/windows/driver/kmdf/ioctl/**",
+        "tests/projects/windows/driver/kmdf/serial/error.c",
+        "tests/projects/windows/driver/kmdf/serial/flush.c",
+        "tests/projects/windows/driver/kmdf/serial/immediat.c",
+        "tests/projects/windows/driver/kmdf/serial/initunlo.c",
+        "tests/projects/windows/driver/kmdf/serial/ioctl.c",
+        "tests/projects/windows/driver/kmdf/serial/isr.c",
+        "tests/projects/windows/driver/kmdf/serial/log.c",
+        "tests/projects/windows/driver/kmdf/serial/log.h",
+        "tests/projects/windows/driver/kmdf/serial/modmflow.c",
+        "tests/projects/windows/driver/kmdf/serial/openclos.c",
+        "tests/projects/windows/driver/kmdf/serial/pnp.c",
+        "tests/projects/windows/driver/kmdf/serial/power.c",
+        "tests/projects/windows/driver/kmdf/serial/precomp.h",
+        "tests/projects/windows/driver/kmdf/serial/precompsrc.c",
+        "tests/projects/windows/driver/kmdf/serial/purge.c",
+        "tests/projects/windows/driver/kmdf/serial/qsfile.c",
+        "tests/projects/windows/driver/kmdf/serial/read.c",
+        "tests/projects/windows/driver/kmdf/serial/registry.c",
+        "tests/projects/windows/driver/kmdf/serial/serial.h",
+        "tests/projects/windows/driver/kmdf/serial/serial.rc",
+        "tests/projects/windows/driver/kmdf/serial/serialp.h",
+        "tests/projects/windows/driver/kmdf/serial/serlog.mc",
+        "tests/projects/windows/driver/kmdf/serial/trace.h",
+        "tests/projects/windows/driver/kmdf/serial/utils.c",
+        "tests/projects/windows/driver/kmdf/serial/waitmask.c",
+        "tests/projects/windows/driver/kmdf/serial/wmi.c",
+        "tests/projects/windows/driver/kmdf/serial/write.c",
+        "tests/projects/windows/driver/kmdf/serial/xmake.lua",
+        "tests/projects/windows/driver/umdf/echo/driver/device.c",
+        "tests/projects/windows/driver/umdf/echo/driver/device.h",
+        "tests/projects/windows/driver/umdf/echo/driver/driver.c",
+        "tests/projects/windows/driver/umdf/echo/driver/driver.h",
+        "tests/projects/windows/driver/umdf/echo/driver/queue.c",
+        "tests/projects/windows/driver/umdf/echo/driver/queue.h",
+        "tests/projects/windows/driver/umdf/echo/exe/**",
+        "tests/projects/windows/driver/umdf/echo/xmake.lua",
+        "tests/projects/windows/driver/umdf/skeleton/Skeleton.rc",
+        "tests/projects/windows/driver/umdf/skeleton/comsup.cpp",
+        "tests/projects/windows/driver/umdf/skeleton/comsup.h",
+        "tests/projects/windows/driver/umdf/skeleton/device.cpp",
+        "tests/projects/windows/driver/umdf/skeleton/device.h",
+        "tests/projects/windows/driver/umdf/skeleton/dllsup.cpp",
+        "tests/projects/windows/driver/umdf/skeleton/driver.cpp",
+        "tests/projects/windows/driver/umdf/skeleton/driver.h",
+        "tests/projects/windows/driver/umdf/skeleton/exports.def",
+        "tests/projects/windows/driver/umdf/skeleton/internal.h",
+        "tests/projects/windows/driver/umdf/skeleton/xmake.lua",
+        "tests/projects/windows/driver/wdm/msdsm/dsmmain.c",
+        "tests/projects/windows/driver/wdm/msdsm/dsmtrace.mof",
+        "tests/projects/windows/driver/wdm/msdsm/intrface.c",
+        "tests/projects/windows/driver/wdm/msdsm/msdsm.h",
+        "tests/projects/windows/driver/wdm/msdsm/msdsm.mof",
+        "tests/projects/windows/driver/wdm/msdsm/msdsm.rc",
+        "tests/projects/windows/driver/wdm/msdsm/msdsmdsm.mof",
+        "tests/projects/windows/driver/wdm/msdsm/precomp.h",
+        "tests/projects/windows/driver/wdm/msdsm/precompsrc.c",
+        "tests/projects/windows/driver/wdm/msdsm/prototypes.h",
+        "tests/projects/windows/driver/wdm/msdsm/trace.h",
+        "tests/projects/windows/driver/wdm/msdsm/utils.c",
+        "tests/projects/windows/driver/wdm/msdsm/wmi.c",
+        "tests/projects/windows/driver/wdm/msdsm/xmake.lua",
+        "tests/projects/windows/driver/wdm/perfcounters/**",
+        "tests/projects/windows/idl/**",
+        "tests/projects/windows/windows_links/**",
+        "tests/projects/windows/winsdk/usbview/app.config",
+        "tests/projects/windows/winsdk/usbview/codeanalysis.h",
+        "tests/projects/windows/winsdk/usbview/debug.c",
+        "tests/projects/windows/winsdk/usbview/devnode.c",
+        "tests/projects/windows/winsdk/usbview/dispaud.c",
+        "tests/projects/windows/winsdk/usbview/display.c",
+        "tests/projects/windows/winsdk/usbview/dispvid.c",
+        "tests/projects/windows/winsdk/usbview/enum.c",
+        "tests/projects/windows/winsdk/usbview/h264.c",
+        "tests/projects/windows/winsdk/usbview/h264.h",
+        "tests/projects/windows/winsdk/usbview/langidlist.h",
+        "tests/projects/windows/winsdk/usbview/resource.h",
+        "tests/projects/windows/winsdk/usbview/usbdesc.h",
+        "tests/projects/windows/winsdk/usbview/usbschema.hpp",
+        "tests/projects/windows/winsdk/usbview/usbviddesc.h",
+        "tests/projects/windows/winsdk/usbview/uvcdesc.h",
+        "tests/projects/windows/winsdk/usbview/uvcview.c",
+        "tests/projects/windows/winsdk/usbview/uvcview.h",
+        "tests/projects/windows/winsdk/usbview/uvcview.rc",
+        "tests/projects/windows/winsdk/usbview/xmake.lua",
+        "tests/projects/windows/winsdk/usbview/xmlhelper.cpp",
+        "tests/projects/windows/winsdk/usbview/xmlhelper.h",
+        "tests/projects/windows/winsdk/windemo/main.cpp",
+        "tests/projects/windows/winsdk/windemo/resource.h",
+        "tests/projects/windows/winsdk/windemo/stdafx.cpp",
+        "tests/projects/windows/winsdk/windemo/stdafx.h",
+        "tests/projects/windows/winsdk/windemo/targetver.h",
+        "tests/projects/windows/winsdk/windemo/test",
+        "tests/projects/windows/winsdk/windemo/test.h",
+        "tests/projects/windows/winsdk/windemo/test.rc",
+        "tests/projects/windows/winsdk/windemo/xmake.lua",
+        "tests/projects/xmake_cli/hello/**",
+        "tests/projects/xmake_cli/ide_integration/**",
+        "tests/projects/xmake_cli/xmake/src/main.c",
+        "tests/projects/xmake_cli/xmake/src/xmake.rc",
+        "tests/projects/xmake_cli/xmake/xmake.lua",
+        "tests/projects/zig/**",
+        "tests/run.lua",
+        "tests/runner.lua",
+        "tests/test/**",
+        "tests/test_utils/**",
+        "tests/ui/**",
+        "xmake/actions/**",
+        "xmake/core/**",
+        "xmake/includes/**",
+        "xmake/languages/**",
+        "xmake/modules/async/**",
+        "xmake/modules/cli/**",
+        "xmake/modules/core/project/**",
+        "xmake/modules/core/tools/**",
+        "xmake/modules/detect/**",
+        "xmake/modules/devel/**",
+        "xmake/modules/lib/**",
+        "xmake/modules/net/**",
+        "xmake/modules/os/**",
+        "xmake/modules/package/**",
+        "xmake/modules/private/action/**",
+        "xmake/modules/private/async/**",
+        "xmake/modules/private/cache/**",
+        "xmake/modules/private/check/checker.lua",
+        "xmake/modules/private/check/checkers/api/api_checker.lua",
+        "xmake/modules/private/check/checkers/api/package/**",
+        "xmake/modules/private/check/checkers/clang/**",
+        "xmake/modules/private/check/checkers/cuda/**",
+        "xmake/modules/private/check/checkers/syntax.lua",
+        "xmake/modules/private/check/show.lua",
+        "xmake/modules/private/detect/**",
+        "xmake/modules/private/service/**",
+        "xmake/modules/private/tools/**",
+        "xmake/modules/private/utils/**",
+        "xmake/modules/private/xrepo/**",
+        "xmake/modules/privilege/**",
+        "xmake/modules/target/**",
+        "xmake/modules/ui/**",
+        "xmake/modules/utils/**",
+        "xmake/platforms/**",
+        "xmake/plugins/**",
+        "xmake/repository/**",
+        "xmake/rules/**",
+        "xmake/scripts/PkgInfo",
+        "xmake/scripts/cmake_importfiles/**",
+        "xmake/scripts/completions/**",
+        "xmake/scripts/conan/**",
+        "xmake/scripts/download.ps1",
+        "xmake/scripts/faq.lua",
+        "xmake/scripts/find_cudadevices.cpp",
+        "xmake/scripts/gas-preprocessor.pl",
+        "xmake/scripts/gitignore",
+        "xmake/scripts/module/**",
+        "xmake/scripts/patches/**",
+        "xmake/scripts/profile-unix.fish",
+        "xmake/scripts/profile-unix.sh",
+        "xmake/scripts/profile-win.ps1",
+        "xmake/scripts/run.vbs",
+        "xmake/scripts/unzip.ps1",
+        "xmake/scripts/update-script.bat",
+        "xmake/scripts/update-script.sh",
+        "xmake/scripts/virtualenvs/**",
+        "xmake/scripts/vsxmake/**",
+        "xmake/scripts/xpack/inno/**",
+        "xmake/scripts/xpack/nsis/**",
+        "xmake/scripts/xpack/runself/**",
+        "xmake/scripts/xpack/srpm/**",
+        "xmake/scripts/xpack/wix/**",
+        "xmake/scripts/xrepo/**",
+        "xmake/scripts/xrepo-hook.psm1",
+        "xmake/templates/**",
+        "xmake/themes/**",
+        "xmake/toolchains/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2015-present Xmake Open Source Community\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE.md:\n\nA cross-platform build utility based on Lua\nCopyright 2015-present, The Xmake Open Source Community\n\nThis product includes software developed by The Xmake Open Source Community (https://xmake.io/).\n\n-------------------------------------------------------------------------------\n\nThis product depends on 'lua-cjson', The Lua CJSON module provides JSON support for Lua,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/lua-cjson/lua-cjson/LICENSE (MIT License)\n  * HOMEPAGE:\n    * https://www.kyne.com.au/~mark/software/lua-cjson.php\n\nThis product depends on 'pdcurses', an implementation of X/Open curses for multiple platforms,\nwhich can be obtained at:\n\n  * LICENSE:\n    * Public Domain License\n  * HOMEPAGE:\n    * http://pdcurses.org/\n\nThis product depends on 'libsv', Public domain semantic versioning in c,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/sv/sv/UNLICENSE (Public Domain License)\n  * HOMEPAGE:\n    * https://github.com/uael/sv\n\nThis product depends on 'LuaJIT', a Just-In-Time Compiler for Lua,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/luajit/luajit/COPYRIGHT (MIT License)\n  * HOMEPAGE:\n    * http://luajit.org/\n\nThis product depends on 'Lua', The Lua Programming Language,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://www.lua.org/license.html (MIT License)\n  * HOMEPAGE:\n    * http://lua.org/\n\nThis product depends on 'lz4', Extremely Fast Compression algorithm,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://github.com/lz4/lz4/blob/dev/LICENSE\n  * HOMEPAGE:\n    * https://www.lz4.org/\n\nThis product depends on 'xxHash', Extremely fast non-cryptographic hash algorithm,\nwhich can be obtained at:\n\n  * LICENSE:\n    * https://github.com/Cyan4973/xxHash/blob/dev/LICENSE\n  * HOMEPAGE:\n    * https://www.xxhash.com/\n\nThis product depends on 'tbox', The Treasure Box Library,\nwhich can be obtained at:\n\n  * LICENSE:\n    * core/src/tbox/tbox/LICENSE.md (Apache License 2.0)\n  * HOMEPAGE:\n    * https://tboox.org/\n\n\n",
+      "attribution": "Copyright 2015-present Xmake Open Source Community; Copyright 2015-present, The Xmake Open Source Community, Apache-2.0 license (LICENSE.md), https://github.com/xmake-io/xmake."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "core/src/lua-cjson/lua-cjson/.gitattributes",
+        "core/src/lua-cjson/lua-cjson/.gitignore",
+        "core/src/lua-cjson/lua-cjson/CMakeLists.txt",
+        "core/src/lua-cjson/lua-cjson/LICENSE",
+        "core/src/lua-cjson/lua-cjson/Makefile",
+        "core/src/lua-cjson/lua-cjson/NEWS",
+        "core/src/lua-cjson/lua-cjson/README.adoc",
+        "core/src/lua-cjson/lua-cjson/THANKS",
+        "core/src/lua-cjson/lua-cjson/TODO",
+        "core/src/lua-cjson/lua-cjson/build-packages.sh",
+        "core/src/lua-cjson/lua-cjson/devel/**",
+        "core/src/lua-cjson/lua-cjson/dtoa.c",
+        "core/src/lua-cjson/lua-cjson/dtoa_config.h",
+        "core/src/lua-cjson/lua-cjson/fpconv.c",
+        "core/src/lua-cjson/lua-cjson/fpconv.h",
+        "core/src/lua-cjson/lua-cjson/g_fmt.c",
+        "core/src/lua-cjson/lua-cjson/lua/**",
+        "core/src/lua-cjson/lua-cjson/lua-cjson-2.1devel-1.rockspec",
+        "core/src/lua-cjson/lua-cjson/lua-cjson.spec",
+        "core/src/lua-cjson/lua-cjson/lua_cjson.c",
+        "core/src/lua-cjson/lua-cjson/manual.adoc",
+        "core/src/lua-cjson/lua-cjson/performance.adoc",
+        "core/src/lua-cjson/lua-cjson/runtests.sh",
+        "core/src/lua-cjson/lua-cjson/strbuf.c",
+        "core/src/lua-cjson/lua-cjson/strbuf.h",
+        "core/src/lua-cjson/lua-cjson/tests/README",
+        "core/src/lua-cjson/lua-cjson/tests/bench.lua",
+        "core/src/lua-cjson/lua-cjson/tests/example1.json",
+        "core/src/lua-cjson/lua-cjson/tests/example2.json",
+        "core/src/lua-cjson/lua-cjson/tests/example3.json",
+        "core/src/lua-cjson/lua-cjson/tests/example4.json",
+        "core/src/lua-cjson/lua-cjson/tests/example5.json",
+        "core/src/lua-cjson/lua-cjson/tests/genutf8.pl",
+        "core/src/lua-cjson/lua-cjson/tests/numbers.json",
+        "core/src/lua-cjson/lua-cjson/tests/rfc-example1.json",
+        "core/src/lua-cjson/lua-cjson/tests/rfc-example2.json",
+        "core/src/lua-cjson/lua-cjson/tests/test.lua",
+        "core/src/lua-cjson/lua-cjson/tests/types.json"
+      ],
+      "text": "Copyright (c) 2010-2012  Mark Pulford <mark@kyne.com.au>\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2010-2012  Mark Pulford <mark@kyne.com.au>, MIT license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lua-cjson/lua-cjson."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "core/src/lz4/lz4/contrib/djgpp/**"
+      ],
+      "text": "Copyright (c) 2014, lpsantil\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Copyright (c) 2014, lpsantil, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lz4/lz4/contrib/djgpp."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "core/src/lz4/lz4/lib/**"
+      ],
+      "text": "LZ4 Library\nCopyright (c) 2011-2020, Yann Collet\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2011-2020, Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/lz4/lz4/lib."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "core/src/xxhash/**"
+      ],
+      "text": "xxHash Library\nCopyright (c) 2012-2021 Yann Collet\nAll rights reserved.\n\nBSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012-2021 Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/core/src/xxhash/xxhash."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "tests/plugins/pack/console/.gitignore",
+        "tests/plugins/pack/console/LICENSE.md",
+        "tests/plugins/pack/console/include/**",
+        "tests/plugins/pack/console/src/assets/file1.txt",
+        "tests/plugins/pack/console/src/assets/file2.txt",
+        "tests/plugins/pack/console/src/assets/img1.png",
+        "tests/plugins/pack/console/src/assets/img2.png",
+        "tests/plugins/pack/console/src/main.cpp",
+        "tests/plugins/pack/console/src/xmake.rc",
+        "tests/plugins/pack/console/xmake.lua"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2015-present Xmake Open Source Community\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n",
+      "attribution": "Copyright 2015-present Xmake Open Source Community, Apache-2.0 license (LICENSE.md), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/tests/plugins/pack/console."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/projects/objc/metal_app/LICENSE/**"
+      ],
+      "text": "Copyright © 2020 Apple Inc. \n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n",
+      "attribution": "Copyright © 2020 Apple Inc., MIT license (LICENSE.txt), https://github.com/xmake-io/xmake/tree/05e400746ef988502a2e4f98505d02b877e348e9/tests/projects/objc/metal_app/LICENSE."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.asm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.ipp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fortran",
+      "paths": [
+        "**/*.f90"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hlsl",
+      "paths": [
+        "**/*.hlsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nim",
+      "paths": [
+        "**/*.nim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pascal",
+      "paths": [
+        "**/*.pas"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.psm1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aicpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asn1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.c(filec)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.c(incc)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.capnp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpp2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cppm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cs(filecs)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cu(filecu)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cxx(filecxx)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.entitlements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.h2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.i"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ispc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.items"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.l"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lsm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.man"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.modulemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mpp(filempp)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis(incnatvis)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.none(filenone)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nsi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.obj(fileobj)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qrc(fileqrc)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc(filerc)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rockspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rsx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ts(filets)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "core/src/lua-cjson/lua-cjson/devel/json_parser_outline.txt",
+        "tests/actions/install/src/foo.txt",
+        "tests/actions/test/outputs/fail_hello_xmake.txt",
+        "tests/actions/test/outputs/pass_hello_foo.txt",
+        "tests/plugins/pack/console/src/assets/file1.txt",
+        "tests/plugins/pack/console/src/assets/file2.txt",
+        "tests/projects/c/embeddirs/assets/message.txt",
+        "tests/projects/c/shared_library_export_list/src/foo.export.txt",
+        "tests/projects/objc/metal_app/LICENSE/LICENSE.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ui"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ui(fileui)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vala"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Filter(dir)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NEWS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PkgInfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProjConfig(target,mode,arch)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Project(target)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProjectConfiguration(mode,arch)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProjectGroup(group)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProjectGroupConfig(group_dep)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProjectRef(dep)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SlnConfig(mode,arch)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/THANKS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/XmakeConfig(mode,arch)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/XmakePath(mode,arch)"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/makeppa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utf8-crlf-neleof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utf8-longline-eleof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utf8-longline-neleof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utf8bom-lf-eleof"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "v",
+      "paths": [
+        "**/*.v"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.targets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "core/src/lua-cjson/lua-cjson": "https://github.com/xmake-io/xmake-core-lua-cjson",
+    "core/src/lua/lua": "https://github.com/xmake-io/xmake-core-lua",
+    "core/src/luajit/luajit": "https://github.com/xmake-io/xmake-core-luajit",
+    "core/src/lz4/lz4": "https://github.com/xmake-io/xmake-core-lz4",
+    "core/src/pdcurses/pdcurses": "https://github.com/xmake-io/xmake-core-pdcurses",
+    "core/src/sv/sv": "https://github.com/xmake-io/xmake-core-sv",
+    "core/src/tbox/tbox": "https://github.com/tboox/tbox"
+  }
+}

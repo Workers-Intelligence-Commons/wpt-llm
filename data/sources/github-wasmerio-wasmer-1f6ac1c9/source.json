@@ -1,0 +1,1365 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/wasmerio/wasmer",
+  "revision": "403c4671f48fa9d757141bee5ac8b763f26ac6e8",
+  "checksum": "sha256:3f986efc21ba2ffb68db98e1258ad72f9c7bc90c185507821b60234a25c0e659",
+  "extract": {
+    "exclude": [
+      "assets/diagrams/Diagram_module_compilation.png",
+      "assets/diagrams/Diagram_module_instantiation.png",
+      "assets/diagrams/Diagram_module_serialization.png",
+      "assets/logo-white.png",
+      "assets/logo.png",
+      "benches/mods/**",
+      "lib/api/src/entities/external/**",
+      "lib/api/tests/simple-name-section.wasm",
+      "lib/api/third-party/**",
+      "lib/c-api/src/wasm_c_api/externals/**",
+      "lib/c-api/tests/wasm-c-api/example/callback.wasm",
+      "lib/c-api/tests/wasm-c-api/example/finalize.wasm",
+      "lib/c-api/tests/wasm-c-api/example/global.wasm",
+      "lib/c-api/tests/wasm-c-api/example/hello.wasm",
+      "lib/c-api/tests/wasm-c-api/example/hostref.wasm",
+      "lib/c-api/tests/wasm-c-api/example/memory.wasm",
+      "lib/c-api/tests/wasm-c-api/example/multi.wasm",
+      "lib/c-api/tests/wasm-c-api/example/reflect.wasm",
+      "lib/c-api/tests/wasm-c-api/example/serialize.wasm",
+      "lib/c-api/tests/wasm-c-api/example/start.wasm",
+      "lib/c-api/tests/wasm-c-api/example/table.wasm",
+      "lib/c-api/tests/wasm-c-api/example/threads.wasm",
+      "lib/c-api/tests/wasm-c-api/example/trap.wasm",
+      "lib/cli/src/commands/security_framework.tgz",
+      "lib/compiler-llvm/**",
+      "lib/compiler-singlepass/**",
+      "lib/napi/quickjs/deps/quickjs/docs/static/img/**",
+      "lib/napi/quickjs/deps/quickjs/test262/.circleci/**",
+      "lib/napi/quickjs/deps/quickjs/test262/.editorconfig",
+      "lib/napi/quickjs/deps/quickjs/test262/.gitattributes",
+      "lib/napi/quickjs/deps/quickjs/test262/.github/**",
+      "lib/napi/quickjs/deps/quickjs/test262/.gitignore",
+      "lib/napi/quickjs/deps/quickjs/test262/.npmrc",
+      "lib/napi/quickjs/deps/quickjs/test262/CODEOWNERS",
+      "lib/napi/quickjs/deps/quickjs/test262/CODE_OF_CONDUCT.md",
+      "lib/napi/quickjs/deps/quickjs/test262/CONTRIBUTING.md",
+      "lib/napi/quickjs/deps/quickjs/test262/ECMA TR-104.pdf",
+      "lib/napi/quickjs/deps/quickjs/test262/INTERPRETING.md",
+      "lib/napi/quickjs/deps/quickjs/test262/LICENSE",
+      "lib/napi/quickjs/deps/quickjs/test262/README.md",
+      "lib/napi/quickjs/deps/quickjs/test262/WEB_FEATURES.yml",
+      "lib/napi/quickjs/deps/quickjs/test262/docs/**",
+      "lib/napi/quickjs/deps/quickjs/test262/excludelist.xml",
+      "lib/napi/quickjs/deps/quickjs/test262/features.txt",
+      "lib/napi/quickjs/deps/quickjs/test262/github-deploy-key.enc",
+      "lib/napi/quickjs/deps/quickjs/test262/harness/**",
+      "lib/napi/quickjs/deps/quickjs/test262/lint.exceptions",
+      "lib/napi/quickjs/deps/quickjs/test262/make.py",
+      "lib/napi/quickjs/deps/quickjs/test262/package.json",
+      "lib/napi/quickjs/deps/quickjs/test262/rfcs/**",
+      "lib/napi/quickjs/deps/quickjs/test262/src/**",
+      "lib/napi/quickjs/deps/quickjs/test262/test/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/CoverageAnalyzer.py",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/copy_tests.sh",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/generation/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/lint/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/misc/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/packaging/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/scripts/**",
+      "lib/napi/quickjs/deps/quickjs/test262/tools/web-features/**",
+      "lib/sys-utils/**",
+      "lib/types/**",
+      "lib/vm/**",
+      "scripts/windows-installer/media/**",
+      "tests/compilers/data/**",
+      "tests/integration/cli/resources/php/db/**",
+      "tests/integration/cli/tests/packages/list-cwd/main.wasm",
+      "tests/integration/cli/tests/packages/nested-mounted-paths/main.o",
+      "tests/integration/cli/tests/packages/nested-mounted-paths/out.webc",
+      "tests/lib/test-generator/**",
+      "tests/lib/wast/**",
+      "tests/wast/spec/comments.wast",
+      "wasmer-test-files/**",
+      "tests/compilers/wasmu/linux/bash.wasmu",
+      "tests/compilers/wasmu/linux/cowsay.wasmu",
+      "tests/compilers/wasmu/linux/python-3.11.3.wasmu"
+    ]
+  },
+  "history": {
+    "since": "9bca61789296c60a97c330d5fe1d997405ddcdc4"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019-present Wasmer, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nCopyright (c) 2022 The Wasmer Engineering Team <engineering@wasmer.io>\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nCargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n \nCopyright (c) 2017-2026 Fabrice Bellard\nCopyright (c) 2017-2024 Charlie Gordon\nCopyright (c) 2023-2026 Ben Noordhuis\nCopyright (c) 2023-2026 Saúl Ibarra Corretgé\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2018 Bocoup\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 Casper Beyer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/wasmerio/wasmer: Copyright (c) 2019-present Wasmer, Inc. and its affiliates., MIT license (LICENSE), https://github.com/wasmerio/wasmer; the authors of wasmerio/wasmer (lib/c-api/tests/wasm-c-api) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/c-api/tests/wasm-c-api; Copyright (c) 2022 The Wasmer Engineering Team <engineering@wasmer.io>, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/config; the authors of wasmer-napi, MIT license (declared in Cargo.toml), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi; Copyright (c) 2017-2026 Fabrice Bellard; Copyright (c) 2017-2024 Charlie Gordon; Copyright (c) 2023-2026 Ben Noordhuis; Copyright (c) 2023-2026 Saúl Ibarra Corretgé, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi/quickjs/deps/quickjs; Copyright (c) 2018 Bocoup, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi/quickjs/deps/quickjs/test262/tools/regexp-generator; Copyright (c) 2021 Casper Beyer, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/wasix/tests/wasm_tests/wasi_fyi; the authors of wasmerio/wasmer (tests/wast/spec) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/tests/wast/spec."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cargo/**",
+        ".clang-format",
+        ".config/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".typos.toml",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "assets/README.md",
+        "assets/diagrams/Diagram_module_compilation.svg",
+        "assets/diagrams/Diagram_module_instantiation.svg",
+        "assets/diagrams/Diagram_module_serialization.svg",
+        "assets/languages/**",
+        "assets/logo-white.svg",
+        "assets/logo.svg",
+        "benches/README.md",
+        "benches/compile.rs",
+        "benches/deserialize_modules.rs",
+        "benches/import_functions.rs",
+        "benches/run.rs",
+        "benches/static_and_dynamic_functions.rs",
+        "benches/typed_call.rs",
+        "build.rs",
+        "deny.toml",
+        "docs/**",
+        "examples/**",
+        "flake.lock",
+        "flake.nix",
+        "fuzz/**",
+        "lib/README.md",
+        "lib/api/Cargo.toml",
+        "lib/api/README.md",
+        "lib/api/build.rs",
+        "lib/api/macro-wasmer-engine-test/**",
+        "lib/api/src/backend/**",
+        "lib/api/src/entities/engine/**",
+        "lib/api/src/entities/exception/**",
+        "lib/api/src/entities/exports.rs",
+        "lib/api/src/entities/function/**",
+        "lib/api/src/entities/global/**",
+        "lib/api/src/entities/imports.rs",
+        "lib/api/src/entities/instance.rs",
+        "lib/api/src/entities/memory/**",
+        "lib/api/src/entities/mod.rs",
+        "lib/api/src/entities/module/**",
+        "lib/api/src/entities/store/**",
+        "lib/api/src/entities/table/**",
+        "lib/api/src/entities/tag/**",
+        "lib/api/src/entities/trap.rs",
+        "lib/api/src/entities/value.rs",
+        "lib/api/src/error.rs",
+        "lib/api/src/lib.rs",
+        "lib/api/src/utils/**",
+        "lib/api/src/vm/**",
+        "lib/api/tests/current_store.rs",
+        "lib/api/tests/externals.rs",
+        "lib/api/tests/function_env.rs",
+        "lib/api/tests/import_function.rs",
+        "lib/api/tests/instance.rs",
+        "lib/api/tests/interrupt.rs",
+        "lib/api/tests/interrupt_async.rs",
+        "lib/api/tests/jspi_async.rs",
+        "lib/api/tests/jspi_async_js.rs",
+        "lib/api/tests/memory.rs",
+        "lib/api/tests/module.rs",
+        "lib/api/tests/module_compilation_progress.rs",
+        "lib/api/tests/reference_types.rs",
+        "lib/api/tests/rt.rs",
+        "lib/api/tests/simple_greenthread.rs",
+        "lib/api/tests/typed_functions.rs",
+        "lib/backend-api/**",
+        "lib/c-api/.gitignore",
+        "lib/c-api/CHANGELOG.md",
+        "lib/c-api/Cargo.toml",
+        "lib/c-api/README.md",
+        "lib/c-api/build.rs",
+        "lib/c-api/doc/**",
+        "lib/c-api/examples/**",
+        "lib/c-api/src/error.rs",
+        "lib/c-api/src/lib.rs",
+        "lib/c-api/src/tracing.rs",
+        "lib/c-api/src/wasm_c_api/DEVELOPMENT.md",
+        "lib/c-api/src/wasm_c_api/engine/**",
+        "lib/c-api/src/wasm_c_api/function_env.rs",
+        "lib/c-api/src/wasm_c_api/imports.rs",
+        "lib/c-api/src/wasm_c_api/instance.rs",
+        "lib/c-api/src/wasm_c_api/macros.rs",
+        "lib/c-api/src/wasm_c_api/mod.rs",
+        "lib/c-api/src/wasm_c_api/module.rs",
+        "lib/c-api/src/wasm_c_api/store.rs",
+        "lib/c-api/src/wasm_c_api/trap.rs",
+        "lib/c-api/src/wasm_c_api/types/**",
+        "lib/c-api/src/wasm_c_api/unstable/**",
+        "lib/c-api/src/wasm_c_api/value.rs",
+        "lib/c-api/src/wasm_c_api/version.rs",
+        "lib/c-api/src/wasm_c_api/wasi/**",
+        "lib/c-api/src/wasm_c_api/wat.rs",
+        "lib/c-api/tests/.gitignore",
+        "lib/c-api/tests/Makefile",
+        "lib/c-api/tests/wasm.h",
+        "lib/c-api/tests/wasmer-c-api-test-runner/**",
+        "lib/c-api/tests/wasmer.h",
+        "lib/c-api/wasm.h",
+        "lib/c-api/wasmer_wasm.h",
+        "lib/c-api-imports/**",
+        "lib/cache/**",
+        "lib/cli/Cargo.toml",
+        "lib/cli/README.md",
+        "lib/cli/build.rs",
+        "lib/cli/src/backend.rs",
+        "lib/cli/src/bin/**",
+        "lib/cli/src/commands/add.rs",
+        "lib/cli/src/commands/app/**",
+        "lib/cli/src/commands/auth/**",
+        "lib/cli/src/commands/binfmt.rs",
+        "lib/cli/src/commands/cache.rs",
+        "lib/cli/src/commands/compile.rs",
+        "lib/cli/src/commands/config.rs",
+        "lib/cli/src/commands/connect.rs",
+        "lib/cli/src/commands/container/**",
+        "lib/cli/src/commands/cron.rs",
+        "lib/cli/src/commands/domain/**",
+        "lib/cli/src/commands/gen_completions.rs",
+        "lib/cli/src/commands/gen_manpage.rs",
+        "lib/cli/src/commands/init.rs",
+        "lib/cli/src/commands/inspect.rs",
+        "lib/cli/src/commands/journal/**",
+        "lib/cli/src/commands/mod.rs",
+        "lib/cli/src/commands/namespace/**",
+        "lib/cli/src/commands/package/**",
+        "lib/cli/src/commands/run/**",
+        "lib/cli/src/commands/self_update.rs",
+        "lib/cli/src/commands/ssh.rs",
+        "lib/cli/src/commands/validate.rs",
+        "lib/cli/src/commands/wast.rs",
+        "lib/cli/src/common.rs",
+        "lib/cli/src/config/**",
+        "lib/cli/src/edge_config.rs",
+        "lib/cli/src/error.rs",
+        "lib/cli/src/lib.rs",
+        "lib/cli/src/logging.rs",
+        "lib/cli/src/net/**",
+        "lib/cli/src/opts.rs",
+        "lib/cli/src/types.rs",
+        "lib/cli/src/utils/**",
+        "lib/cli/tests/**",
+        "lib/compiler/**",
+        "lib/compiler-cranelift/**",
+        "lib/derive/**",
+        "lib/journal/**",
+        "lib/middlewares/**",
+        "lib/package/**",
+        "lib/package-sdk/**",
+        "lib/swift/**",
+        "lib/virtual-fs/**",
+        "lib/virtual-io/**",
+        "lib/virtual-net/**",
+        "lib/wai-bindgen-wasmer/**",
+        "lib/wasi-types/**",
+        "lib/wasix/Cargo.toml",
+        "lib/wasix/README.md",
+        "lib/wasix/src/**",
+        "lib/wasix/tests/README.md",
+        "lib/wasix/tests/binary_package.rs",
+        "lib/wasix/tests/runner_exit_code.rs",
+        "lib/wasix/tests/runners.rs",
+        "lib/wasix/tests/stdio.rs",
+        "lib/wasix/tests/wasm_tests/.gitignore",
+        "lib/wasix/tests/wasm_tests/README.md",
+        "lib/wasix/tests/wasm_tests/basic/**",
+        "lib/wasix/tests/wasm_tests/call_dynamic/**",
+        "lib/wasix/tests/wasm_tests/closure_free/**",
+        "lib/wasix/tests/wasm_tests/context_destroy/**",
+        "lib/wasix/tests/wasm_tests/context_switch/**",
+        "lib/wasix/tests/wasm_tests/context_switching/**",
+        "lib/wasix/tests/wasm_tests/dynamic_call_and_closure/**",
+        "lib/wasix/tests/wasm_tests/dynamic_library/**",
+        "lib/wasix/tests/wasm_tests/dynamic_library_tests/**",
+        "lib/wasix/tests/wasm_tests/edge_case/**",
+        "lib/wasix/tests/wasm_tests/error.rs",
+        "lib/wasix/tests/wasm_tests/exception/**",
+        "lib/wasix/tests/wasm_tests/exit/**",
+        "lib/wasix/tests/wasm_tests/fd/**",
+        "lib/wasix/tests/wasm_tests/fd_dup2/**",
+        "lib/wasix/tests/wasm_tests/fd_fdflags_get/**",
+        "lib/wasix/tests/wasm_tests/fd_fdflags_set/**",
+        "lib/wasix/tests/wasm_tests/fd_fdstat_set_rights/**",
+        "lib/wasix/tests/wasm_tests/fd_tell/**",
+        "lib/wasix/tests/wasm_tests/fd_tests/**",
+        "lib/wasix/tests/wasm_tests/libc/**",
+        "lib/wasix/tests/wasm_tests/lifecycle/**",
+        "lib/wasix/tests/wasm_tests/longjmp/**",
+        "lib/wasix/tests/wasm_tests/mod.rs",
+        "lib/wasix/tests/wasm_tests/path/**",
+        "lib/wasix/tests/wasm_tests/poll/**",
+        "lib/wasix/tests/wasm_tests/proc_exec/**",
+        "lib/wasix/tests/wasm_tests/proc_exec2/**",
+        "lib/wasix/tests/wasm_tests/proc_exec3/**",
+        "lib/wasix/tests/wasm_tests/proc_exec3_empty_argv/**",
+        "lib/wasix/tests/wasm_tests/proc_exec3_errors/**",
+        "lib/wasix/tests/wasm_tests/proc_exec4_newline_arg/**",
+        "lib/wasix/tests/wasm_tests/proc_exec4_newline_env/**",
+        "lib/wasix/tests/wasm_tests/proc_spawn3_newline_arg/**",
+        "lib/wasix/tests/wasm_tests/process/**",
+        "lib/wasix/tests/wasm_tests/process_tests/**",
+        "lib/wasix/tests/wasm_tests/pthread/**",
+        "lib/wasix/tests/wasm_tests/random/**",
+        "lib/wasix/tests/wasm_tests/reflect_signature/**",
+        "lib/wasix/tests/wasm_tests/reflection/**",
+        "lib/wasix/tests/wasm_tests/runner.rs",
+        "lib/wasix/tests/wasm_tests/sched_yield/**",
+        "lib/wasix/tests/wasm_tests/semaphore/**",
+        "lib/wasix/tests/wasm_tests/shared_library/**",
+        "lib/wasix/tests/wasm_tests/signal/**",
+        "lib/wasix/tests/wasm_tests/socket/**",
+        "lib/wasix/tests/wasm_tests/threadlocal/**",
+        "lib/wasix/tests/wasm_tests/wasi_wast/**",
+        "lib/wasix/wia/**",
+        "rust-toolchain.toml",
+        "scripts/RELEASE.md",
+        "scripts/alpine-linux-install-deps.sh",
+        "scripts/find-fn-in-perfmap.py",
+        "scripts/make-release.py",
+        "scripts/nix/**",
+        "scripts/publish.py",
+        "scripts/update-version.py",
+        "scripts/wasmer-binfmt.service.example",
+        "scripts/wasmer-perf-record.py",
+        "scripts/windows-installer/wasmer.iss",
+        "scripts/windows-installer/wax.cmd",
+        "tests/c-wasi-tests/**",
+        "tests/compilers/artifact.rs",
+        "tests/compilers/config.rs",
+        "tests/compilers/deterministic.rs",
+        "tests/compilers/imports.rs",
+        "tests/compilers/issues.rs",
+        "tests/compilers/main.rs",
+        "tests/compilers/metering.rs",
+        "tests/compilers/middlewares.rs",
+        "tests/compilers/multi_value_imports.rs",
+        "tests/compilers/progress.rs",
+        "tests/compilers/serialize.rs",
+        "tests/compilers/traps.rs",
+        "tests/compilers/typed_functions.rs",
+        "tests/compilers/wasmu/**",
+        "tests/compilers/wast.rs",
+        "tests/deprecated/**",
+        "tests/deprecated.rs",
+        "tests/examples/**",
+        "tests/ignores.txt",
+        "tests/integration/README.md",
+        "tests/integration/cli/Cargo.toml",
+        "tests/integration/cli/build.rs",
+        "tests/integration/cli/resources/php/test.php",
+        "tests/integration/cli/resources/python/**",
+        "tests/integration/cli/src/**",
+        "tests/integration/cli/tests/config.rs",
+        "tests/integration/cli/tests/create.rs",
+        "tests/integration/cli/tests/cron.rs",
+        "tests/integration/cli/tests/deploy.rs",
+        "tests/integration/cli/tests/fixtures/**",
+        "tests/integration/cli/tests/init.rs",
+        "tests/integration/cli/tests/login.rs",
+        "tests/integration/cli/tests/msrv.rs",
+        "tests/integration/cli/tests/package/**",
+        "tests/integration/cli/tests/packages/axum/**",
+        "tests/integration/cli/tests/packages/fs-mount/**",
+        "tests/integration/cli/tests/packages/js/**",
+        "tests/integration/cli/tests/packages/js-script/**",
+        "tests/integration/cli/tests/packages/list-cwd/main.c",
+        "tests/integration/cli/tests/packages/list-cwd/wasmer.toml",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/a/**",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/b/**",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/main.c",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/wasmer.toml",
+        "tests/integration/cli/tests/packages/php/**",
+        "tests/integration/cli/tests/packages/shared-fd/**",
+        "tests/integration/cli/tests/packages/static_website/**",
+        "tests/integration/cli/tests/publish.rs",
+        "tests/integration/cli/tests/run.rs",
+        "tests/integration/cli/tests/snapshot.rs",
+        "tests/integration/cli/tests/snapshots/**",
+        "tests/integration/ios/**",
+        "tests/lib/README.md",
+        "tests/lib/compiler-test-derive/**",
+        "tests/rust-wasi-tests/**",
+        "tests/wasmer-argus/**",
+        "tests/wast/README.md",
+        "tests/wast/wasmer/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019-present Wasmer, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019-present Wasmer, Inc. and its affiliates., MIT license (LICENSE), https://github.com/wasmerio/wasmer."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "lib/c-api/tests/wasm-c-api/.gitignore",
+        "lib/c-api/tests/wasm-c-api/Dockerfile",
+        "lib/c-api/tests/wasm-c-api/LICENSE",
+        "lib/c-api/tests/wasm-c-api/README.md",
+        "lib/c-api/tests/wasm-c-api/example/callback.c",
+        "lib/c-api/tests/wasm-c-api/example/callback.cc",
+        "lib/c-api/tests/wasm-c-api/example/callback.wat",
+        "lib/c-api/tests/wasm-c-api/example/finalize.c",
+        "lib/c-api/tests/wasm-c-api/example/finalize.cc",
+        "lib/c-api/tests/wasm-c-api/example/finalize.wat",
+        "lib/c-api/tests/wasm-c-api/example/global.c",
+        "lib/c-api/tests/wasm-c-api/example/global.cc",
+        "lib/c-api/tests/wasm-c-api/example/global.wat",
+        "lib/c-api/tests/wasm-c-api/example/hello.c",
+        "lib/c-api/tests/wasm-c-api/example/hello.cc",
+        "lib/c-api/tests/wasm-c-api/example/hello.wat",
+        "lib/c-api/tests/wasm-c-api/example/hostref.c",
+        "lib/c-api/tests/wasm-c-api/example/hostref.cc",
+        "lib/c-api/tests/wasm-c-api/example/hostref.wat",
+        "lib/c-api/tests/wasm-c-api/example/memory.c",
+        "lib/c-api/tests/wasm-c-api/example/memory.cc",
+        "lib/c-api/tests/wasm-c-api/example/memory.wat",
+        "lib/c-api/tests/wasm-c-api/example/multi.c",
+        "lib/c-api/tests/wasm-c-api/example/multi.cc",
+        "lib/c-api/tests/wasm-c-api/example/multi.wat",
+        "lib/c-api/tests/wasm-c-api/example/reflect.c",
+        "lib/c-api/tests/wasm-c-api/example/reflect.cc",
+        "lib/c-api/tests/wasm-c-api/example/reflect.wat",
+        "lib/c-api/tests/wasm-c-api/example/serialize.c",
+        "lib/c-api/tests/wasm-c-api/example/serialize.cc",
+        "lib/c-api/tests/wasm-c-api/example/serialize.wat",
+        "lib/c-api/tests/wasm-c-api/example/start.c",
+        "lib/c-api/tests/wasm-c-api/example/start.cc",
+        "lib/c-api/tests/wasm-c-api/example/start.wat",
+        "lib/c-api/tests/wasm-c-api/example/table.c",
+        "lib/c-api/tests/wasm-c-api/example/table.cc",
+        "lib/c-api/tests/wasm-c-api/example/table.wat",
+        "lib/c-api/tests/wasm-c-api/example/threads.c",
+        "lib/c-api/tests/wasm-c-api/example/threads.cc",
+        "lib/c-api/tests/wasm-c-api/example/threads.wat",
+        "lib/c-api/tests/wasm-c-api/example/trap.c",
+        "lib/c-api/tests/wasm-c-api/example/trap.cc",
+        "lib/c-api/tests/wasm-c-api/example/trap.wat",
+        "lib/c-api/tests/wasm-c-api/include/**",
+        "lib/c-api/tests/wasm-c-api/patch/**",
+        "lib/c-api/tests/wasm-c-api/src/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n",
+      "attribution": "the authors of wasmerio/wasmer (lib/c-api/tests/wasm-c-api) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/c-api/tests/wasm-c-api."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/config/**"
+      ],
+      "text": "Copyright (c) 2022 The Wasmer Engineering Team <engineering@wasmer.io>\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 The Wasmer Engineering Team <engineering@wasmer.io>, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/config."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/napi/.github/**",
+        "lib/napi/.gitignore",
+        "lib/napi/.gitmodules",
+        "lib/napi/CMakeLists.txt",
+        "lib/napi/Cargo.lock",
+        "lib/napi/Cargo.standalone.lock",
+        "lib/napi/Cargo.standalone.toml",
+        "lib/napi/Cargo.toml",
+        "lib/napi/Makefile",
+        "lib/napi/build.rs",
+        "lib/napi/cargo-standalone.sh",
+        "lib/napi/cmake/**",
+        "lib/napi/include/**",
+        "lib/napi/lib/**",
+        "lib/napi/quickjs/CMakeLists.txt",
+        "lib/napi/quickjs/cmake/**",
+        "lib/napi/quickjs/src/**",
+        "lib/napi/rust-toolchain.toml",
+        "lib/napi/src/**",
+        "lib/napi/tests/**",
+        "lib/napi/v8/**"
+      ],
+      "text": "Cargo.toml declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of wasmer-napi, MIT license (declared in Cargo.toml), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/napi/quickjs/deps/quickjs/.gitattributes",
+        "lib/napi/quickjs/deps/quickjs/.github/**",
+        "lib/napi/quickjs/deps/quickjs/.gitignore",
+        "lib/napi/quickjs/deps/quickjs/.gitmodules",
+        "lib/napi/quickjs/deps/quickjs/CMakeLists.txt",
+        "lib/napi/quickjs/deps/quickjs/LICENSE",
+        "lib/napi/quickjs/deps/quickjs/Makefile",
+        "lib/napi/quickjs/deps/quickjs/README.md",
+        "lib/napi/quickjs/deps/quickjs/SECURITY.md",
+        "lib/napi/quickjs/deps/quickjs/amalgam.js",
+        "lib/napi/quickjs/deps/quickjs/api-test.c",
+        "lib/napi/quickjs/deps/quickjs/builtin-array-fromasync.h",
+        "lib/napi/quickjs/deps/quickjs/builtin-array-fromasync.js",
+        "lib/napi/quickjs/deps/quickjs/builtin-iterator-zip-keyed.h",
+        "lib/napi/quickjs/deps/quickjs/builtin-iterator-zip-keyed.js",
+        "lib/napi/quickjs/deps/quickjs/builtin-iterator-zip.h",
+        "lib/napi/quickjs/deps/quickjs/builtin-iterator-zip.js",
+        "lib/napi/quickjs/deps/quickjs/ctest.c",
+        "lib/napi/quickjs/deps/quickjs/cutils.h",
+        "lib/napi/quickjs/deps/quickjs/cxxtest.cc",
+        "lib/napi/quickjs/deps/quickjs/docs/.gitignore",
+        "lib/napi/quickjs/deps/quickjs/docs/.nvmrc",
+        "lib/napi/quickjs/deps/quickjs/docs/babel.config.js",
+        "lib/napi/quickjs/deps/quickjs/docs/docs/**",
+        "lib/napi/quickjs/deps/quickjs/docs/docusaurus.config.js",
+        "lib/napi/quickjs/deps/quickjs/docs/package-lock.json",
+        "lib/napi/quickjs/deps/quickjs/docs/package.json",
+        "lib/napi/quickjs/deps/quickjs/docs/sidebars.js",
+        "lib/napi/quickjs/deps/quickjs/docs/src/**",
+        "lib/napi/quickjs/deps/quickjs/docs/static/.nojekyll",
+        "lib/napi/quickjs/deps/quickjs/dtoa.c",
+        "lib/napi/quickjs/deps/quickjs/dtoa.h",
+        "lib/napi/quickjs/deps/quickjs/examples/**",
+        "lib/napi/quickjs/deps/quickjs/fuzz.c",
+        "lib/napi/quickjs/deps/quickjs/gen/**",
+        "lib/napi/quickjs/deps/quickjs/libregexp-opcode.h",
+        "lib/napi/quickjs/deps/quickjs/libregexp.c",
+        "lib/napi/quickjs/deps/quickjs/libregexp.h",
+        "lib/napi/quickjs/deps/quickjs/libunicode-table.h",
+        "lib/napi/quickjs/deps/quickjs/libunicode.c",
+        "lib/napi/quickjs/deps/quickjs/libunicode.h",
+        "lib/napi/quickjs/deps/quickjs/list.h",
+        "lib/napi/quickjs/deps/quickjs/lre-test.c",
+        "lib/napi/quickjs/deps/quickjs/meson.build",
+        "lib/napi/quickjs/deps/quickjs/meson_options.txt",
+        "lib/napi/quickjs/deps/quickjs/qjs-wasi-reactor.c",
+        "lib/napi/quickjs/deps/quickjs/qjs.c",
+        "lib/napi/quickjs/deps/quickjs/qjsc.c",
+        "lib/napi/quickjs/deps/quickjs/quickjs-atom.h",
+        "lib/napi/quickjs/deps/quickjs/quickjs-c-atomics.h",
+        "lib/napi/quickjs/deps/quickjs/quickjs-libc.c",
+        "lib/napi/quickjs/deps/quickjs/quickjs-libc.h",
+        "lib/napi/quickjs/deps/quickjs/quickjs-opcode.h",
+        "lib/napi/quickjs/deps/quickjs/quickjs.c",
+        "lib/napi/quickjs/deps/quickjs/quickjs.h",
+        "lib/napi/quickjs/deps/quickjs/repl.js",
+        "lib/napi/quickjs/deps/quickjs/run-test262.c",
+        "lib/napi/quickjs/deps/quickjs/standalone.js",
+        "lib/napi/quickjs/deps/quickjs/test262-fast.conf",
+        "lib/napi/quickjs/deps/quickjs/test262.conf",
+        "lib/napi/quickjs/deps/quickjs/test262_errors.txt",
+        "lib/napi/quickjs/deps/quickjs/tests/**",
+        "lib/napi/quickjs/deps/quickjs/tests.conf",
+        "lib/napi/quickjs/deps/quickjs/unicode_download.sh",
+        "lib/napi/quickjs/deps/quickjs/unicode_gen.c",
+        "lib/napi/quickjs/deps/quickjs/unicode_gen_def.h",
+        "lib/napi/quickjs/deps/quickjs/update-version.sh"
+      ],
+      "text": "The MIT License (MIT)\n \nCopyright (c) 2017-2026 Fabrice Bellard\nCopyright (c) 2017-2024 Charlie Gordon\nCopyright (c) 2023-2026 Ben Noordhuis\nCopyright (c) 2023-2026 Saúl Ibarra Corretgé\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-2026 Fabrice Bellard; Copyright (c) 2017-2024 Charlie Gordon; Copyright (c) 2023-2026 Ben Noordhuis; Copyright (c) 2023-2026 Saúl Ibarra Corretgé, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi/quickjs/deps/quickjs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/napi/quickjs/deps/quickjs/test262/tools/regexp-generator/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018 Bocoup\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Bocoup, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/napi/quickjs/deps/quickjs/test262/tools/regexp-generator."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/wasix/tests/wasm_tests/wasi_fyi/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Casper Beyer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Casper Beyer, MIT license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/lib/wasix/tests/wasm_tests/wasi_fyi."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "tests/wast/spec/.github/**",
+        "tests/wast/spec/.gitignore",
+        "tests/wast/spec/Contributing.md",
+        "tests/wast/spec/LICENSE",
+        "tests/wast/spec/README.md",
+        "tests/wast/spec/address.wast",
+        "tests/wast/spec/address0.wast",
+        "tests/wast/spec/address1.wast",
+        "tests/wast/spec/address64.wast",
+        "tests/wast/spec/align.wast",
+        "tests/wast/spec/align0.wast",
+        "tests/wast/spec/align64.wast",
+        "tests/wast/spec/annotations.wast",
+        "tests/wast/spec/array.wast",
+        "tests/wast/spec/array_copy.wast",
+        "tests/wast/spec/array_fill.wast",
+        "tests/wast/spec/array_init_data.wast",
+        "tests/wast/spec/array_init_elem.wast",
+        "tests/wast/spec/array_new_data.wast",
+        "tests/wast/spec/array_new_elem.wast",
+        "tests/wast/spec/binary-gc.wast",
+        "tests/wast/spec/binary-leb128.wast",
+        "tests/wast/spec/binary.wast",
+        "tests/wast/spec/binary0.wast",
+        "tests/wast/spec/binary_leb128_64.wast",
+        "tests/wast/spec/block.wast",
+        "tests/wast/spec/br.wast",
+        "tests/wast/spec/br_if.wast",
+        "tests/wast/spec/br_on_cast.wast",
+        "tests/wast/spec/br_on_cast_fail.wast",
+        "tests/wast/spec/br_on_non_null.wast",
+        "tests/wast/spec/br_on_null.wast",
+        "tests/wast/spec/br_table.wast",
+        "tests/wast/spec/bulk.wast",
+        "tests/wast/spec/bulk64.wast",
+        "tests/wast/spec/call.wast",
+        "tests/wast/spec/call_indirect.wast",
+        "tests/wast/spec/call_indirect64.wast",
+        "tests/wast/spec/call_ref.wast",
+        "tests/wast/spec/const.wast",
+        "tests/wast/spec/conversions.wast",
+        "tests/wast/spec/custom/**",
+        "tests/wast/spec/custom.wast",
+        "tests/wast/spec/data.wast",
+        "tests/wast/spec/data0.wast",
+        "tests/wast/spec/data1.wast",
+        "tests/wast/spec/data_drop0.wast",
+        "tests/wast/spec/elem.wast",
+        "tests/wast/spec/endianness.wast",
+        "tests/wast/spec/endianness64.wast",
+        "tests/wast/spec/exports.wast",
+        "tests/wast/spec/exports0.wast",
+        "tests/wast/spec/extern.wast",
+        "tests/wast/spec/extract-parts.sh",
+        "tests/wast/spec/f32.wast",
+        "tests/wast/spec/f32_bitwise.wast",
+        "tests/wast/spec/f32_cmp.wast",
+        "tests/wast/spec/f64.wast",
+        "tests/wast/spec/f64_bitwise.wast",
+        "tests/wast/spec/f64_cmp.wast",
+        "tests/wast/spec/fac.wast",
+        "tests/wast/spec/float_exprs.wast",
+        "tests/wast/spec/float_exprs0.wast",
+        "tests/wast/spec/float_exprs1.wast",
+        "tests/wast/spec/float_literals.wast",
+        "tests/wast/spec/float_memory.wast",
+        "tests/wast/spec/float_memory0.wast",
+        "tests/wast/spec/float_memory64.wast",
+        "tests/wast/spec/float_misc.wast",
+        "tests/wast/spec/forward.wast",
+        "tests/wast/spec/func.wast",
+        "tests/wast/spec/func_ptrs.wast",
+        "tests/wast/spec/global.wast",
+        "tests/wast/spec/i16x8_relaxed_q15mulr_s.wast",
+        "tests/wast/spec/i31.wast",
+        "tests/wast/spec/i32.wast",
+        "tests/wast/spec/i32x4_relaxed_trunc.wast",
+        "tests/wast/spec/i64.wast",
+        "tests/wast/spec/i8x16_relaxed_swizzle.wast",
+        "tests/wast/spec/id.wast",
+        "tests/wast/spec/if.wast",
+        "tests/wast/spec/imports.wast",
+        "tests/wast/spec/imports0.wast",
+        "tests/wast/spec/imports1.wast",
+        "tests/wast/spec/imports2.wast",
+        "tests/wast/spec/imports3.wast",
+        "tests/wast/spec/imports4.wast",
+        "tests/wast/spec/inline-module.wast",
+        "tests/wast/spec/instance.wast",
+        "tests/wast/spec/int_exprs.wast",
+        "tests/wast/spec/int_literals.wast",
+        "tests/wast/spec/labels.wast",
+        "tests/wast/spec/left-to-right.wast",
+        "tests/wast/spec/legacy/**",
+        "tests/wast/spec/linking.wast",
+        "tests/wast/spec/linking0.wast",
+        "tests/wast/spec/linking1.wast",
+        "tests/wast/spec/linking2.wast",
+        "tests/wast/spec/linking3.wast",
+        "tests/wast/spec/load.wast",
+        "tests/wast/spec/load0.wast",
+        "tests/wast/spec/load1.wast",
+        "tests/wast/spec/load2.wast",
+        "tests/wast/spec/load64.wast",
+        "tests/wast/spec/local_get.wast",
+        "tests/wast/spec/local_init.wast",
+        "tests/wast/spec/local_set.wast",
+        "tests/wast/spec/local_tee.wast",
+        "tests/wast/spec/loop.wast",
+        "tests/wast/spec/memory-multi.wast",
+        "tests/wast/spec/memory.wast",
+        "tests/wast/spec/memory64-imports.wast",
+        "tests/wast/spec/memory64.wast",
+        "tests/wast/spec/memory_copy.wast",
+        "tests/wast/spec/memory_copy0.wast",
+        "tests/wast/spec/memory_copy1.wast",
+        "tests/wast/spec/memory_copy64.wast",
+        "tests/wast/spec/memory_fill.wast",
+        "tests/wast/spec/memory_fill0.wast",
+        "tests/wast/spec/memory_fill64.wast",
+        "tests/wast/spec/memory_grow.wast",
+        "tests/wast/spec/memory_grow64.wast",
+        "tests/wast/spec/memory_init.wast",
+        "tests/wast/spec/memory_init0.wast",
+        "tests/wast/spec/memory_init64.wast",
+        "tests/wast/spec/memory_redundancy.wast",
+        "tests/wast/spec/memory_redundancy64.wast",
+        "tests/wast/spec/memory_size.wast",
+        "tests/wast/spec/memory_size0.wast",
+        "tests/wast/spec/memory_size1.wast",
+        "tests/wast/spec/memory_size2.wast",
+        "tests/wast/spec/memory_size3.wast",
+        "tests/wast/spec/memory_size_import.wast",
+        "tests/wast/spec/memory_trap.wast",
+        "tests/wast/spec/memory_trap0.wast",
+        "tests/wast/spec/memory_trap1.wast",
+        "tests/wast/spec/memory_trap64.wast",
+        "tests/wast/spec/names.wast",
+        "tests/wast/spec/nop.wast",
+        "tests/wast/spec/obsolete-keywords.wast",
+        "tests/wast/spec/proposals/**",
+        "tests/wast/spec/ref.wast",
+        "tests/wast/spec/ref_as_non_null.wast",
+        "tests/wast/spec/ref_cast.wast",
+        "tests/wast/spec/ref_eq.wast",
+        "tests/wast/spec/ref_func.wast",
+        "tests/wast/spec/ref_is_null.wast",
+        "tests/wast/spec/ref_null.wast",
+        "tests/wast/spec/ref_test.wast",
+        "tests/wast/spec/relaxed_dot_product.wast",
+        "tests/wast/spec/relaxed_laneselect.wast",
+        "tests/wast/spec/relaxed_madd_nmadd.wast",
+        "tests/wast/spec/relaxed_min_max.wast",
+        "tests/wast/spec/return.wast",
+        "tests/wast/spec/return_call.wast",
+        "tests/wast/spec/return_call_indirect.wast",
+        "tests/wast/spec/return_call_ref.wast",
+        "tests/wast/spec/select.wast",
+        "tests/wast/spec/simd_address.wast",
+        "tests/wast/spec/simd_align.wast",
+        "tests/wast/spec/simd_bit_shift.wast",
+        "tests/wast/spec/simd_bitwise.wast",
+        "tests/wast/spec/simd_boolean.wast",
+        "tests/wast/spec/simd_const.wast",
+        "tests/wast/spec/simd_conversions.wast",
+        "tests/wast/spec/simd_f32x4.wast",
+        "tests/wast/spec/simd_f32x4_arith.wast",
+        "tests/wast/spec/simd_f32x4_cmp.wast",
+        "tests/wast/spec/simd_f32x4_pmin_pmax.wast",
+        "tests/wast/spec/simd_f32x4_rounding.wast",
+        "tests/wast/spec/simd_f64x2.wast",
+        "tests/wast/spec/simd_f64x2_arith.wast",
+        "tests/wast/spec/simd_f64x2_cmp.wast",
+        "tests/wast/spec/simd_f64x2_pmin_pmax.wast",
+        "tests/wast/spec/simd_f64x2_rounding.wast",
+        "tests/wast/spec/simd_i16x8_arith.wast",
+        "tests/wast/spec/simd_i16x8_arith2.wast",
+        "tests/wast/spec/simd_i16x8_cmp.wast",
+        "tests/wast/spec/simd_i16x8_extadd_pairwise_i8x16.wast",
+        "tests/wast/spec/simd_i16x8_extmul_i8x16.wast",
+        "tests/wast/spec/simd_i16x8_q15mulr_sat_s.wast",
+        "tests/wast/spec/simd_i16x8_sat_arith.wast",
+        "tests/wast/spec/simd_i32x4_arith.wast",
+        "tests/wast/spec/simd_i32x4_arith2.wast",
+        "tests/wast/spec/simd_i32x4_cmp.wast",
+        "tests/wast/spec/simd_i32x4_dot_i16x8.wast",
+        "tests/wast/spec/simd_i32x4_extadd_pairwise_i16x8.wast",
+        "tests/wast/spec/simd_i32x4_extmul_i16x8.wast",
+        "tests/wast/spec/simd_i32x4_trunc_sat_f32x4.wast",
+        "tests/wast/spec/simd_i32x4_trunc_sat_f64x2.wast",
+        "tests/wast/spec/simd_i64x2_arith.wast",
+        "tests/wast/spec/simd_i64x2_arith2.wast",
+        "tests/wast/spec/simd_i64x2_cmp.wast",
+        "tests/wast/spec/simd_i64x2_extmul_i32x4.wast",
+        "tests/wast/spec/simd_i8x16_arith.wast",
+        "tests/wast/spec/simd_i8x16_arith2.wast",
+        "tests/wast/spec/simd_i8x16_cmp.wast",
+        "tests/wast/spec/simd_i8x16_sat_arith.wast",
+        "tests/wast/spec/simd_int_to_int_extend.wast",
+        "tests/wast/spec/simd_lane.wast",
+        "tests/wast/spec/simd_linking.wast",
+        "tests/wast/spec/simd_load.wast",
+        "tests/wast/spec/simd_load16_lane.wast",
+        "tests/wast/spec/simd_load32_lane.wast",
+        "tests/wast/spec/simd_load64_lane.wast",
+        "tests/wast/spec/simd_load8_lane.wast",
+        "tests/wast/spec/simd_load_extend.wast",
+        "tests/wast/spec/simd_load_splat.wast",
+        "tests/wast/spec/simd_load_zero.wast",
+        "tests/wast/spec/simd_memory-multi.wast",
+        "tests/wast/spec/simd_select.wast",
+        "tests/wast/spec/simd_splat.wast",
+        "tests/wast/spec/simd_store.wast",
+        "tests/wast/spec/simd_store16_lane.wast",
+        "tests/wast/spec/simd_store32_lane.wast",
+        "tests/wast/spec/simd_store64_lane.wast",
+        "tests/wast/spec/simd_store8_lane.wast",
+        "tests/wast/spec/skip-stack-guard-page.wast",
+        "tests/wast/spec/stack.wast",
+        "tests/wast/spec/start.wast",
+        "tests/wast/spec/start0.wast",
+        "tests/wast/spec/store.wast",
+        "tests/wast/spec/store0.wast",
+        "tests/wast/spec/store1.wast",
+        "tests/wast/spec/store2.wast",
+        "tests/wast/spec/struct.wast",
+        "tests/wast/spec/switch.wast",
+        "tests/wast/spec/table-sub.wast",
+        "tests/wast/spec/table.wast",
+        "tests/wast/spec/table64.wast",
+        "tests/wast/spec/table_copy.wast",
+        "tests/wast/spec/table_copy64.wast",
+        "tests/wast/spec/table_copy_mixed.wast",
+        "tests/wast/spec/table_fill.wast",
+        "tests/wast/spec/table_fill64.wast",
+        "tests/wast/spec/table_get.wast",
+        "tests/wast/spec/table_get64.wast",
+        "tests/wast/spec/table_grow.wast",
+        "tests/wast/spec/table_grow64.wast",
+        "tests/wast/spec/table_init.wast",
+        "tests/wast/spec/table_init64.wast",
+        "tests/wast/spec/table_set.wast",
+        "tests/wast/spec/table_set64.wast",
+        "tests/wast/spec/table_size.wast",
+        "tests/wast/spec/table_size64.wast",
+        "tests/wast/spec/tag.wast",
+        "tests/wast/spec/throw.wast",
+        "tests/wast/spec/throw_ref.wast",
+        "tests/wast/spec/token.wast",
+        "tests/wast/spec/traps.wast",
+        "tests/wast/spec/traps0.wast",
+        "tests/wast/spec/try_table.wast",
+        "tests/wast/spec/type-canon.wast",
+        "tests/wast/spec/type-equivalence.wast",
+        "tests/wast/spec/type-rec.wast",
+        "tests/wast/spec/type-subtyping.wast",
+        "tests/wast/spec/type.wast",
+        "tests/wast/spec/unreachable.wast",
+        "tests/wast/spec/unreached-invalid.wast",
+        "tests/wast/spec/unreached-valid.wast",
+        "tests/wast/spec/unwind.wast",
+        "tests/wast/spec/update-testsuite.py",
+        "tests/wast/spec/utf8-custom-section-id.wast",
+        "tests/wast/spec/utf8-import-field.wast",
+        "tests/wast/spec/utf8-import-module.wast",
+        "tests/wast/spec/utf8-invalid-encoding.wast"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n",
+      "attribution": "the authors of wasmerio/wasmer (tests/wast/spec) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/wasmerio/wasmer/tree/403c4671f48fa9d757141bee5ac8b763f26ac6e8/tests/wast/spec."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock",
+        "lib/napi/Cargo.standalone.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stderr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stdin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stdout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "lib/napi/quickjs/deps/quickjs/meson_options.txt",
+        "lib/napi/quickjs/deps/quickjs/test262_errors.txt",
+        "lib/wasix/src/os/console/txt/welcome_large.txt",
+        "lib/wasix/src/os/console/txt/welcome_medium.txt",
+        "lib/wasix/src/os/console/txt/welcome_small.txt",
+        "lib/wasix/tests/wasm_tests/path/cwd-to-home/hello.txt",
+        "lib/wasix/tests/wasm_tests/path/fs-mount/testfile.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act1/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act1/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act1/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act1/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act1/scene5.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act2/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act2/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act3/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act3/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act3/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act3/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene5.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene6.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act4/scene7.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act5/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_fyi/test_fs/hamlet/act5/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act1/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act1/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act1/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act1/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act1/scene5.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act2/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act2/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act3/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act3/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act3/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act3/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene2.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene3.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene4.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene5.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene6.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act4/scene7.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act5/scene1.txt",
+        "lib/wasix/tests/wasm_tests/wasi_wast/test_fs/hamlet/act5/scene2.txt",
+        "lib/wasix/wia/wasixx_32v1.txt",
+        "lib/wasix/wia/wasixx_64v1.txt",
+        "lib/wasix/wia/wasm_bus.txt",
+        "tests/ignores.txt",
+        "tests/integration/cli/tests/packages/fs-mount/testfile.txt",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/a/data-a.txt",
+        "tests/integration/cli/tests/packages/nested-mounted-paths/b/data-b.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.udl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wasmu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/old_file"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "lib/napi": "https://github.com/wasmerio/napi",
+    "lib/napi/quickjs/deps/quickjs": "https://github.com/wasmerio/quickjs",
+    "lib/napi/quickjs/deps/quickjs/test262": "https://github.com/tc39/test262",
+    "tests/wast/spec": "https://github.com/WebAssembly/testsuite",
+    "wasmer-test-files": "https://github.com/wasmerio/wasmer-test-files"
+  }
+}

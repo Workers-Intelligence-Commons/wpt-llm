@@ -1,0 +1,255 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/systemjs/systemjs",
+  "revision": "9647576d43294e938ddae8fe231beb62255f4e46",
+  "checksum": "sha256:ebcf6be9de23915004d52dbff3c45269a845ba007af0b2c27410e27c354cb00a",
+  "extract": {
+    "exclude": [
+      "test/fixtures/browser/wasm/addbloated.wasm",
+      "test/fixtures/browser/wasm/example.wasm"
+    ]
+  },
+  "history": {
+    "since": "333c0d1663c642908f9512795fd88929d1ec9a44"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n-----------\n\nCopyright (C) 2013-2022 Guy Bedford\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/systemjs/systemjs: Copyright (C) 2013-2022 Guy Bedford, MIT license (LICENSE), https://github.com/systemjs/systemjs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agignore",
+        ".github/**",
+        ".gitignore",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md",
+        "chompfile.toml",
+        "dist/**",
+        "docs/**",
+        "examples/**",
+        "package.json",
+        "src/**",
+        "terser.js",
+        "test/browser/**",
+        "test/fixtures/browser/__esModule.js",
+        "test/fixtures/browser/amd-circular1.js",
+        "test/fixtures/browser/amd-circular2.js",
+        "test/fixtures/browser/amd-dep.js",
+        "test/fixtures/browser/amd-error.js",
+        "test/fixtures/browser/amd-exports.js",
+        "test/fixtures/browser/amd-false-module.js",
+        "test/fixtures/browser/amd-module-esm-dep.js",
+        "test/fixtures/browser/amd-module-meta.js",
+        "test/fixtures/browser/amd-module.js",
+        "test/fixtures/browser/amd-named-simple.js",
+        "test/fixtures/browser/amd-named-single-execute.js",
+        "test/fixtures/browser/amd-named-thing-as-dep.js",
+        "test/fixtures/browser/amd-null-module.js",
+        "test/fixtures/browser/amd-ok.js",
+        "test/fixtures/browser/anonymous-define.js",
+        "test/fixtures/browser/anonymous-register.js",
+        "test/fixtures/browser/auto-import.js",
+        "test/fixtures/browser/base-href-bare.js",
+        "test/fixtures/browser/base-href-relative.js",
+        "test/fixtures/browser/content-type-none.json",
+        "test/fixtures/browser/content-type-xml.json",
+        "test/fixtures/browser/contextual-map-dep.js",
+        "test/fixtures/browser/depcache.js",
+        "test/fixtures/browser/depcache1.js",
+        "test/fixtures/browser/depcache10.js",
+        "test/fixtures/browser/depcache2.js",
+        "test/fixtures/browser/depcache3.js",
+        "test/fixtures/browser/depcache4.js",
+        "test/fixtures/browser/depcache5.js",
+        "test/fixtures/browser/depcache6.js",
+        "test/fixtures/browser/depcache7.js",
+        "test/fixtures/browser/depcache8.js",
+        "test/fixtures/browser/depcache9.js",
+        "test/fixtures/browser/dynamic-import-lazy.js",
+        "test/fixtures/browser/dynamic-import-register.js",
+        "test/fixtures/browser/dynamic-importmap1.json",
+        "test/fixtures/browser/dynamic-importmap2.json",
+        "test/fixtures/browser/error-loader.js",
+        "test/fixtures/browser/error-loader2.js",
+        "test/fixtures/browser/esm.js",
+        "test/fixtures/browser/eval-err.js",
+        "test/fixtures/browser/global.js",
+        "test/fixtures/browser/global2.js",
+        "test/fixtures/browser/global3.js",
+        "test/fixtures/browser/global4.js",
+        "test/fixtures/browser/globals/**",
+        "test/fixtures/browser/importmap-invalid.json",
+        "test/fixtures/browser/importmap.json",
+        "test/fixtures/browser/json-error.json",
+        "test/fixtures/browser/json.json",
+        "test/fixtures/browser/link-error-child.js",
+        "test/fixtures/browser/link-error-child2.js",
+        "test/fixtures/browser/link-error.js",
+        "test/fixtures/browser/multiple-anonymous.js",
+        "test/fixtures/browser/multiple-globals.js",
+        "test/fixtures/browser/named-amd.js",
+        "test/fixtures/browser/named-bundle.js",
+        "test/fixtures/browser/named-instantiate-count.js",
+        "test/fixtures/browser/named-register-single-execute-as-dep.js",
+        "test/fixtures/browser/named-register-single-execute.js",
+        "test/fixtures/browser/named-register.js",
+        "test/fixtures/browser/named-self-import.js",
+        "test/fixtures/browser/nameddefine.js",
+        "test/fixtures/browser/register-default.js",
+        "test/fixtures/browser/resolve.js",
+        "test/fixtures/browser/scope-test/**",
+        "test/fixtures/browser/single-named-module.js",
+        "test/fixtures/browser/string-encoding.js",
+        "test/fixtures/browser/syntax-err.js",
+        "test/fixtures/browser/systemjs-module-early.js",
+        "test/fixtures/browser/systemjs-module-script.js",
+        "test/fixtures/browser/systemjs-module-script2.js",
+        "test/fixtures/browser/umd-default-function-with-named-exports-module.js",
+        "test/fixtures/browser/umd-default-object-with-named-exports-module.js",
+        "test/fixtures/browser/umd-default-object-with-null-prototype-module.js",
+        "test/fixtures/browser/wasm/example.js",
+        "test/fixtures/browser/wasm/example.wast",
+        "test/fixtures/css-modules/**",
+        "test/fixtures/es-modules/**",
+        "test/fixtures/register-modules/**",
+        "test/fixtures/tla/**",
+        "test/fixtures/url-resolution-cases.json",
+        "test/import-map.mjs",
+        "test/mocha-setup.js",
+        "test/server.mjs",
+        "test/system-core.mjs",
+        "test/system-node.mjs",
+        "test/test-base-href.html",
+        "test/test.html",
+        "test/url-resolution.mjs"
+      ],
+      "text": "MIT License\n-----------\n\nCopyright (C) 2013-2022 Guy Bedford\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (C) 2013-2022 Guy Bedford, MIT license (LICENSE), https://github.com/systemjs/systemjs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.agignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

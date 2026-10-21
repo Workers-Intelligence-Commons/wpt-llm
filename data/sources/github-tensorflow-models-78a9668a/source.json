@@ -1,0 +1,934 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tensorflow/models",
+  "revision": "34a21326906b9574fa11c4d6d0a5c534ff039267",
+  "checksum": "sha256:086ba18ee6ebbeb50723423a61d12d478857baa2fc8ad7a03a01cf91483189fd",
+  "extract": {
+    "exclude": [
+      "official/projects/edgetpu/vision/serving/testdata/**",
+      "official/projects/maskconver/docs/**",
+      "official/projects/maxvit/docs/**",
+      "official/projects/movinet/files/jumpingjack.gif",
+      "official/projects/unified_detector/docs/**",
+      "official/projects/videoglue/docs/**",
+      "official/projects/waste_identification_ml/circularnet-docs/static/**",
+      "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/images/**",
+      "official/projects/waste_identification_ml/pre_processing/config/sample_images/**",
+      "official/vision/Images/**",
+      "research/attention_ocr/python/datasets/testdata/fsns/fsns-00000-of-00001",
+      "research/attention_ocr/python/testdata/**",
+      "research/deeplab/evaluation/g3doc/**",
+      "research/deeplab/evaluation/testdata/bird_gt.png",
+      "research/deeplab/evaluation/testdata/bird_pred_class.png",
+      "research/deeplab/evaluation/testdata/bird_pred_instance.png",
+      "research/deeplab/evaluation/testdata/cat_gt.png",
+      "research/deeplab/evaluation/testdata/cat_pred_class.png",
+      "research/deeplab/evaluation/testdata/cat_pred_instance.png",
+      "research/deeplab/evaluation/testdata/coco_gt/**",
+      "research/deeplab/evaluation/testdata/coco_pred/**",
+      "research/deeplab/evaluation/testdata/team_gt_instance.png",
+      "research/deeplab/evaluation/testdata/team_pred_class.png",
+      "research/deeplab/evaluation/testdata/team_pred_instance.png",
+      "research/deeplab/g3doc/img/image1.jpg",
+      "research/deeplab/g3doc/img/image2.jpg",
+      "research/deeplab/g3doc/img/image3.jpg",
+      "research/deeplab/g3doc/img/vis1.png",
+      "research/deeplab/g3doc/img/vis2.png",
+      "research/deeplab/g3doc/img/vis3.png",
+      "research/delf/delf/python/examples/detection_example_1.jpg",
+      "research/delf/delf/python/examples/detection_example_2.jpg",
+      "research/delf/delf/python/examples/matched_images_example.jpg",
+      "research/delf/delf/python/training/matched_images_demo.png",
+      "research/lfads/synth_data/trained_itb/model-65000.data-00000-of-00001",
+      "research/lfads/synth_data/trained_itb/model-65000.index",
+      "research/lstm_object_detection/g3doc/Interleaved_Intro.png",
+      "research/lstm_object_detection/g3doc/lstm_ssd_intro.png",
+      "research/nst_blogpost/Green_Sea_Turtle_grazing_seagrass.jpg",
+      "research/nst_blogpost/The_Great_Wave_off_Kanagawa.jpg",
+      "research/nst_blogpost/wave_turtle.png",
+      "research/object_detection/g3doc/img/**",
+      "research/object_detection/test_data/pets_examples.record",
+      "research/object_detection/test_data/snapshot_serengeti_sequence_examples.record",
+      "research/object_detection/test_images/ducky/**",
+      "research/object_detection/test_images/image1.jpg",
+      "research/object_detection/test_images/image2.jpg",
+      "research/object_detection/test_images/image3.jpg",
+      "research/object_detection/test_images/snapshot_serengeti/S1_E03_R3_PICT0038.jpeg",
+      "research/object_detection/test_images/snapshot_serengeti/S1_E03_R3_PICT0039.jpeg",
+      "research/object_detection/test_images/snapshot_serengeti/S1_E03_R3_PICT0040.jpeg",
+      "research/object_detection/test_images/snapshot_serengeti/S1_E03_R3_PICT0041.jpeg",
+      "research/seq_flow_lite/demo/prado/data/**",
+      "research/seq_flow_lite/third_party/**",
+      "research/slim/nets/mobilenet/g3doc/**",
+      "research/slim/nets/mobilenet/mnet_v1_vs_v2_pixel1_latency.png",
+      "research/slim/nets/mobilenet_v1.png",
+      "research/vid2depth/ops/testdata/**",
+      "research/vid2depth/third_party/**",
+      "research/deeplab/testing/pascal_voc_seg/val-00000-of-00001.tfrecord",
+      "research/lfads/synth_data/trained_itb/model-65000.meta",
+      "research/object_detection/dataset_tools/densepose/UV_symmetry_transforms.mat"
+    ]
+  },
+  "history": {
+    "since": "bbeaa26caf812c8decd14ccdc7a56774167a1e55"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright 2022 Google LLC. All rights reserved.\n\nAll files in the following folders:\n/community\n/official\n/orbit\n/research\n/tensorflow_models\n\nAre licensed as follows:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2016, The Authors.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Commit history of https://github.com/tensorflow/models: Copyright 2022 Google LLC. All rights reserved.; Copyright 2016, The Authors., Apache-2.0 license (LICENSE), https://github.com/tensorflow/models; Thingsym, MIT license (declared in package.json), https://github.com/tensorflow/models/tree/34a21326906b9574fa11c4d6d0a5c534ff039267/official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc; the authors of tensorflow/models (orbit) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/models/tree/34a21326906b9574fa11c4d6d0a5c534ff039267/orbit."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "AUTHORS",
+        "CODEOWNERS",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "ISSUES.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "community/**",
+        "docs/**",
+        "official/README-TPU.md",
+        "official/README.md",
+        "official/__init__.py",
+        "official/common/**",
+        "official/core/**",
+        "official/legacy/**",
+        "official/modeling/**",
+        "official/nightly_requirements.txt",
+        "official/nlp/**",
+        "official/pip_package/**",
+        "official/projects/README.md",
+        "official/projects/__init__.py",
+        "official/projects/assemblenet/**",
+        "official/projects/backbone_reuse/**",
+        "official/projects/basnet/**",
+        "official/projects/bigbird/**",
+        "official/projects/centernet/**",
+        "official/projects/const_cl/**",
+        "official/projects/cots_detector/**",
+        "official/projects/deepmac_maskrcnn/**",
+        "official/projects/detr/**",
+        "official/projects/edgetpu/README.md",
+        "official/projects/edgetpu/nlp/**",
+        "official/projects/edgetpu/vision/README.md",
+        "official/projects/edgetpu/vision/__init__.py",
+        "official/projects/edgetpu/vision/configs/**",
+        "official/projects/edgetpu/vision/dataloaders/**",
+        "official/projects/edgetpu/vision/modeling/**",
+        "official/projects/edgetpu/vision/serving/__init__.py",
+        "official/projects/edgetpu/vision/serving/export_tflite.py",
+        "official/projects/edgetpu/vision/serving/export_tflite_test.py",
+        "official/projects/edgetpu/vision/serving/export_util.py",
+        "official/projects/edgetpu/vision/serving/inference_visualization_tool.ipynb",
+        "official/projects/edgetpu/vision/serving/tflite_imagenet_evaluator.py",
+        "official/projects/edgetpu/vision/serving/tflite_imagenet_evaluator_run.py",
+        "official/projects/edgetpu/vision/serving/tflite_imagenet_evaluator_test.py",
+        "official/projects/edgetpu/vision/tasks/**",
+        "official/projects/edgetpu/vision/train.py",
+        "official/projects/fffner/**",
+        "official/projects/labse/**",
+        "official/projects/longformer/**",
+        "official/projects/lra/**",
+        "official/projects/mae/**",
+        "official/projects/maskconver/README.md",
+        "official/projects/maskconver/__init__.py",
+        "official/projects/maskconver/configs/**",
+        "official/projects/maskconver/dataloaders/**",
+        "official/projects/maskconver/losses/**",
+        "official/projects/maskconver/modeling/**",
+        "official/projects/maskconver/serving/**",
+        "official/projects/maskconver/tasks/**",
+        "official/projects/maskconver/train.py",
+        "official/projects/maxvit/README.md",
+        "official/projects/maxvit/__init__.py",
+        "official/projects/maxvit/configs/**",
+        "official/projects/maxvit/modeling/**",
+        "official/projects/maxvit/registry_imports.py",
+        "official/projects/maxvit/train.py",
+        "official/projects/maxvit/train_test.py",
+        "official/projects/mobilebert/**",
+        "official/projects/mosaic/**",
+        "official/projects/movinet/README.md",
+        "official/projects/movinet/__init__.py",
+        "official/projects/movinet/configs/**",
+        "official/projects/movinet/files/kinetics_600_labels.txt",
+        "official/projects/movinet/modeling/**",
+        "official/projects/movinet/movinet_streaming_model_training_and_inference.ipynb",
+        "official/projects/movinet/movinet_tutorial.ipynb",
+        "official/projects/movinet/requirements.txt",
+        "official/projects/movinet/tools/**",
+        "official/projects/movinet/train.py",
+        "official/projects/movinet/train_test.py",
+        "official/projects/mtop/**",
+        "official/projects/nhnet/**",
+        "official/projects/panoptic/**",
+        "official/projects/perceiver/**",
+        "official/projects/pix2seq/**",
+        "official/projects/pixel/**",
+        "official/projects/pointpillars/**",
+        "official/projects/pruning/**",
+        "official/projects/qat/**",
+        "official/projects/roformer/**",
+        "official/projects/s3d/**",
+        "official/projects/simclr/**",
+        "official/projects/teams/**",
+        "official/projects/text_classification_example/**",
+        "official/projects/tn_bert/**",
+        "official/projects/token_dropping/**",
+        "official/projects/triviaqa/**",
+        "official/projects/unified_detector/README.md",
+        "official/projects/unified_detector/configs/**",
+        "official/projects/unified_detector/data_conversion/**",
+        "official/projects/unified_detector/data_loaders/**",
+        "official/projects/unified_detector/external_configurables.py",
+        "official/projects/unified_detector/modeling/**",
+        "official/projects/unified_detector/registry_imports.py",
+        "official/projects/unified_detector/requirements.txt",
+        "official/projects/unified_detector/run_inference.py",
+        "official/projects/unified_detector/tasks/**",
+        "official/projects/unified_detector/train.py",
+        "official/projects/unified_detector/utils/**",
+        "official/projects/video_ssl/**",
+        "official/projects/videoglue/README.md",
+        "official/projects/videoglue/configs/**",
+        "official/projects/videoglue/datasets/**",
+        "official/projects/videoglue/evaluation/**",
+        "official/projects/videoglue/modeling/**",
+        "official/projects/videoglue/tasks/**",
+        "official/projects/videoglue/tools/**",
+        "official/projects/videoglue/train.py",
+        "official/projects/volumetric_models/**",
+        "official/projects/waste_identification_ml/Deploy/**",
+        "official/projects/waste_identification_ml/README.md",
+        "official/projects/waste_identification_ml/Triton_TF_Cloud_Deployment/**",
+        "official/projects/waste_identification_ml/__init__.py",
+        "official/projects/waste_identification_ml/circularnet-docs/archetypes/**",
+        "official/projects/waste_identification_ml/circularnet-docs/content/**",
+        "official/projects/waste_identification_ml/circularnet-docs/hugo.toml",
+        "official/projects/waste_identification_ml/circularnet-docs/layouts/**",
+        "official/projects/waste_identification_ml/data_generation/**",
+        "official/projects/waste_identification_ml/docker_solution/**",
+        "official/projects/waste_identification_ml/fine_tuning/**",
+        "official/projects/waste_identification_ml/llm_applications/**",
+        "official/projects/waste_identification_ml/model_conversion/**",
+        "official/projects/waste_identification_ml/model_inference/**",
+        "official/projects/waste_identification_ml/model_inference_with_tracking/**",
+        "official/projects/waste_identification_ml/model_retraining/**",
+        "official/projects/waste_identification_ml/pre_processing/JSON_Generation_for_Training.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/coco_to_tfrecord.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/config/categories_list_of_dictionaries.py",
+        "official/projects/waste_identification_ml/pre_processing/config/config.ini",
+        "official/projects/waste_identification_ml/pre_processing/config/data/**",
+        "official/projects/waste_identification_ml/pre_processing/config/sample_json/**",
+        "official/projects/waste_identification_ml/pre_processing/config/visualization.py",
+        "official/projects/waste_identification_ml/pre_processing/deprecated_JSON_Generation_for_Training.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/labelme_to_coco.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/merge_coco_files.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/merge_coco_files_faster.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/split_coco_files.ipynb",
+        "official/projects/waste_identification_ml/pre_processing/visualize_instance_segmentation_annotations.ipynb",
+        "official/projects/yolo/**",
+        "official/projects/yt8m/**",
+        "official/recommendation/**",
+        "official/requirements.txt",
+        "official/utils/**",
+        "official/vision/MODEL_GARDEN.md",
+        "official/vision/README.md",
+        "official/vision/__init__.py",
+        "official/vision/configs/**",
+        "official/vision/data/**",
+        "official/vision/dataloaders/**",
+        "official/vision/docs/**",
+        "official/vision/evaluation/**",
+        "official/vision/examples/**",
+        "official/vision/losses/**",
+        "official/vision/modeling/**",
+        "official/vision/ops/**",
+        "official/vision/registry_imports.py",
+        "official/vision/serving/**",
+        "official/vision/tasks/**",
+        "official/vision/train.py",
+        "official/vision/train_spatial_partitioning.py",
+        "official/vision/utils/**",
+        "research/README.md",
+        "research/adversarial_text/**",
+        "research/attention_ocr/README.md",
+        "research/attention_ocr/python/all_jobs.screenrc",
+        "research/attention_ocr/python/common_flags.py",
+        "research/attention_ocr/python/data_provider.py",
+        "research/attention_ocr/python/data_provider_test.py",
+        "research/attention_ocr/python/datasets/__init__.py",
+        "research/attention_ocr/python/datasets/fsns.py",
+        "research/attention_ocr/python/datasets/fsns_test.py",
+        "research/attention_ocr/python/datasets/testdata/fsns/charset_size=134.txt",
+        "research/attention_ocr/python/datasets/testdata/fsns/download_data.py",
+        "research/attention_ocr/python/datasets/testdata/fsns/links.txt",
+        "research/attention_ocr/python/datasets/unittest_utils.py",
+        "research/attention_ocr/python/datasets/unittest_utils_test.py",
+        "research/attention_ocr/python/demo_inference.py",
+        "research/attention_ocr/python/demo_inference_test.py",
+        "research/attention_ocr/python/eval.py",
+        "research/attention_ocr/python/inception_preprocessing.py",
+        "research/attention_ocr/python/metrics.py",
+        "research/attention_ocr/python/metrics_test.py",
+        "research/attention_ocr/python/model.py",
+        "research/attention_ocr/python/model_export.py",
+        "research/attention_ocr/python/model_export_lib.py",
+        "research/attention_ocr/python/model_export_test.py",
+        "research/attention_ocr/python/model_test.py",
+        "research/attention_ocr/python/sequence_layers.py",
+        "research/attention_ocr/python/sequence_layers_test.py",
+        "research/attention_ocr/python/train.py",
+        "research/attention_ocr/python/utils.py",
+        "research/audioset/**",
+        "research/autoaugment/**",
+        "research/cognitive_planning/**",
+        "research/cvt_text/**",
+        "research/deep_speech/**",
+        "research/deeplab/README.md",
+        "research/deeplab/__init__.py",
+        "research/deeplab/common.py",
+        "research/deeplab/common_test.py",
+        "research/deeplab/convert_to_tflite.py",
+        "research/deeplab/core/**",
+        "research/deeplab/datasets/**",
+        "research/deeplab/deeplab_demo.ipynb",
+        "research/deeplab/deprecated/**",
+        "research/deeplab/eval.py",
+        "research/deeplab/evaluation/README.md",
+        "research/deeplab/evaluation/__init__.py",
+        "research/deeplab/evaluation/base_metric.py",
+        "research/deeplab/evaluation/eval_coco_format.py",
+        "research/deeplab/evaluation/eval_coco_format_test.py",
+        "research/deeplab/evaluation/panoptic_quality.py",
+        "research/deeplab/evaluation/panoptic_quality_test.py",
+        "research/deeplab/evaluation/parsing_covering.py",
+        "research/deeplab/evaluation/parsing_covering_test.py",
+        "research/deeplab/evaluation/streaming_metrics.py",
+        "research/deeplab/evaluation/streaming_metrics_test.py",
+        "research/deeplab/evaluation/test_utils.py",
+        "research/deeplab/evaluation/test_utils_test.py",
+        "research/deeplab/evaluation/testdata/README.md",
+        "research/deeplab/evaluation/testdata/coco_gt.json",
+        "research/deeplab/evaluation/testdata/coco_pred.json",
+        "research/deeplab/export_model.py",
+        "research/deeplab/g3doc/ade20k.md",
+        "research/deeplab/g3doc/cityscapes.md",
+        "research/deeplab/g3doc/export_model.md",
+        "research/deeplab/g3doc/faq.md",
+        "research/deeplab/g3doc/img/image_info.txt",
+        "research/deeplab/g3doc/installation.md",
+        "research/deeplab/g3doc/model_zoo.md",
+        "research/deeplab/g3doc/pascal.md",
+        "research/deeplab/g3doc/quantize.md",
+        "research/deeplab/input_preprocess.py",
+        "research/deeplab/local_test.sh",
+        "research/deeplab/local_test_mobilenetv2.sh",
+        "research/deeplab/model.py",
+        "research/deeplab/model_test.py",
+        "research/deeplab/testing/**",
+        "research/deeplab/train.py",
+        "research/deeplab/utils/**",
+        "research/deeplab/vis.py",
+        "research/delf/.gitignore",
+        "research/delf/DETECTION.md",
+        "research/delf/EXTRACTION_MATCHING.md",
+        "research/delf/INSTALL_INSTRUCTIONS.md",
+        "research/delf/README.md",
+        "research/delf/delf/__init__.py",
+        "research/delf/delf/protos/**",
+        "research/delf/delf/python/__init__.py",
+        "research/delf/delf/python/box_io.py",
+        "research/delf/delf/python/box_io_test.py",
+        "research/delf/delf/python/datasets/**",
+        "research/delf/delf/python/datum_io.py",
+        "research/delf/delf/python/datum_io_test.py",
+        "research/delf/delf/python/delg/**",
+        "research/delf/delf/python/detect_to_retrieve/**",
+        "research/delf/delf/python/examples/__init__.py",
+        "research/delf/delf/python/examples/delf_config_example.pbtxt",
+        "research/delf/delf/python/examples/detector.py",
+        "research/delf/delf/python/examples/extract_boxes.py",
+        "research/delf/delf/python/examples/extract_features.py",
+        "research/delf/delf/python/examples/extractor.py",
+        "research/delf/delf/python/examples/match_images.py",
+        "research/delf/delf/python/feature_aggregation_extractor.py",
+        "research/delf/delf/python/feature_aggregation_extractor_test.py",
+        "research/delf/delf/python/feature_aggregation_similarity.py",
+        "research/delf/delf/python/feature_aggregation_similarity_test.py",
+        "research/delf/delf/python/feature_extractor.py",
+        "research/delf/delf/python/feature_extractor_test.py",
+        "research/delf/delf/python/feature_io.py",
+        "research/delf/delf/python/feature_io_test.py",
+        "research/delf/delf/python/normalization_layers/**",
+        "research/delf/delf/python/pooling_layers/**",
+        "research/delf/delf/python/training/README.md",
+        "research/delf/delf/python/training/__init__.py",
+        "research/delf/delf/python/training/build_image_dataset.py",
+        "research/delf/delf/python/training/download_dataset.sh",
+        "research/delf/delf/python/training/global_features/**",
+        "research/delf/delf/python/training/global_features_utils.py",
+        "research/delf/delf/python/training/install_delf.sh",
+        "research/delf/delf/python/training/losses/**",
+        "research/delf/delf/python/training/model/**",
+        "research/delf/delf/python/training/tensorboard_utils.py",
+        "research/delf/delf/python/training/train.py",
+        "research/delf/delf/python/utils.py",
+        "research/delf/delf/python/utils_test.py",
+        "research/delf/delf/python/whiten.py",
+        "research/delf/delf/python/whiten_test.py",
+        "research/delf/setup.py",
+        "research/efficient-hrl/**",
+        "research/lfads/README.md",
+        "research/lfads/distributions.py",
+        "research/lfads/lfads.py",
+        "research/lfads/plot_lfads.py",
+        "research/lfads/run_lfads.py",
+        "research/lfads/synth_data/generate_chaotic_rnn_data.py",
+        "research/lfads/synth_data/generate_itb_data.py",
+        "research/lfads/synth_data/generate_labeled_rnn_data.py",
+        "research/lfads/synth_data/run_generate_synth_data.sh",
+        "research/lfads/synth_data/synthetic_data_utils.py",
+        "research/lfads/synth_data/trained_itb/model-65000.meta",
+        "research/lfads/utils.py",
+        "research/lstm_object_detection/README.md",
+        "research/lstm_object_detection/__init__.py",
+        "research/lstm_object_detection/builders/**",
+        "research/lstm_object_detection/configs/**",
+        "research/lstm_object_detection/eval.py",
+        "research/lstm_object_detection/evaluator.py",
+        "research/lstm_object_detection/export_tflite_lstd_graph.py",
+        "research/lstm_object_detection/export_tflite_lstd_graph_lib.py",
+        "research/lstm_object_detection/export_tflite_lstd_model.py",
+        "research/lstm_object_detection/g3doc/exporting_models.md",
+        "research/lstm_object_detection/inputs/**",
+        "research/lstm_object_detection/lstm/**",
+        "research/lstm_object_detection/meta_architectures/**",
+        "research/lstm_object_detection/metrics/**",
+        "research/lstm_object_detection/model_builder.py",
+        "research/lstm_object_detection/model_builder_test.py",
+        "research/lstm_object_detection/models/**",
+        "research/lstm_object_detection/protos/**",
+        "research/lstm_object_detection/test_tflite_model.py",
+        "research/lstm_object_detection/tflite/**",
+        "research/lstm_object_detection/train.py",
+        "research/lstm_object_detection/trainer.py",
+        "research/lstm_object_detection/utils/**",
+        "research/marco/**",
+        "research/nst_blogpost/4_Neural_Style_Transfer_with_Eager_Execution.ipynb",
+        "research/object_detection/CONTRIBUTING.md",
+        "research/object_detection/README.md",
+        "research/object_detection/__init__.py",
+        "research/object_detection/anchor_generators/**",
+        "research/object_detection/box_coders/**",
+        "research/object_detection/builders/**",
+        "research/object_detection/colab_tutorials/**",
+        "research/object_detection/configs/**",
+        "research/object_detection/core/**",
+        "research/object_detection/data/**",
+        "research/object_detection/data_decoders/**",
+        "research/object_detection/dataset_tools/**",
+        "research/object_detection/dockerfiles/**",
+        "research/object_detection/eval_util.py",
+        "research/object_detection/eval_util_test.py",
+        "research/object_detection/export_inference_graph.py",
+        "research/object_detection/export_tflite_graph_lib_tf2.py",
+        "research/object_detection/export_tflite_graph_lib_tf2_test.py",
+        "research/object_detection/export_tflite_graph_tf2.py",
+        "research/object_detection/export_tflite_ssd_graph.py",
+        "research/object_detection/export_tflite_ssd_graph_lib.py",
+        "research/object_detection/export_tflite_ssd_graph_lib_tf1_test.py",
+        "research/object_detection/exporter.py",
+        "research/object_detection/exporter_lib_tf2_test.py",
+        "research/object_detection/exporter_lib_v2.py",
+        "research/object_detection/exporter_main_v2.py",
+        "research/object_detection/exporter_tf1_test.py",
+        "research/object_detection/g3doc/challenge_evaluation.md",
+        "research/object_detection/g3doc/configuring_jobs.md",
+        "research/object_detection/g3doc/context_rcnn.md",
+        "research/object_detection/g3doc/deepmac.md",
+        "research/object_detection/g3doc/defining_your_own_model.md",
+        "research/object_detection/g3doc/evaluation_protocols.md",
+        "research/object_detection/g3doc/exporting_models.md",
+        "research/object_detection/g3doc/faq.md",
+        "research/object_detection/g3doc/instance_segmentation.md",
+        "research/object_detection/g3doc/oid_inference_and_evaluation.md",
+        "research/object_detection/g3doc/preparing_inputs.md",
+        "research/object_detection/g3doc/release_notes.md",
+        "research/object_detection/g3doc/running_notebook.md",
+        "research/object_detection/g3doc/running_on_mobile_tensorflowlite.md",
+        "research/object_detection/g3doc/running_on_mobile_tf2.md",
+        "research/object_detection/g3doc/running_pets.md",
+        "research/object_detection/g3doc/tf1.md",
+        "research/object_detection/g3doc/tf1_detection_zoo.md",
+        "research/object_detection/g3doc/tf1_training_and_evaluation.md",
+        "research/object_detection/g3doc/tf2.md",
+        "research/object_detection/g3doc/tf2_classification_zoo.md",
+        "research/object_detection/g3doc/tf2_detection_zoo.md",
+        "research/object_detection/g3doc/tf2_training_and_evaluation.md",
+        "research/object_detection/g3doc/tpu_compatibility.md",
+        "research/object_detection/g3doc/tpu_exporters.md",
+        "research/object_detection/g3doc/using_your_own_dataset.md",
+        "research/object_detection/inference/**",
+        "research/object_detection/inputs.py",
+        "research/object_detection/inputs_test.py",
+        "research/object_detection/legacy/**",
+        "research/object_detection/matchers/**",
+        "research/object_detection/meta_architectures/**",
+        "research/object_detection/metrics/**",
+        "research/object_detection/model_hparams.py",
+        "research/object_detection/model_lib.py",
+        "research/object_detection/model_lib_tf1_test.py",
+        "research/object_detection/model_lib_tf2_test.py",
+        "research/object_detection/model_lib_v2.py",
+        "research/object_detection/model_main.py",
+        "research/object_detection/model_main_tf2.py",
+        "research/object_detection/model_tpu_main.py",
+        "research/object_detection/models/**",
+        "research/object_detection/packages/**",
+        "research/object_detection/predictors/**",
+        "research/object_detection/protos/**",
+        "research/object_detection/samples/**",
+        "research/object_detection/test_data/context_rcnn_camera_trap.config",
+        "research/object_detection/test_data/ssd_mobilenet_v1_fpp.config",
+        "research/object_detection/test_images/image_info.txt",
+        "research/object_detection/test_images/snapshot_serengeti/README.md",
+        "research/object_detection/test_images/snapshot_serengeti/context_rcnn_demo_metadata.json",
+        "research/object_detection/tpu_exporters/**",
+        "research/object_detection/utils/**",
+        "research/pcl_rl/**",
+        "research/rebar/**",
+        "research/seq_flow_lite/.bazelrc",
+        "research/seq_flow_lite/BUILD",
+        "research/seq_flow_lite/CONTRIBUTING.md",
+        "research/seq_flow_lite/README.md",
+        "research/seq_flow_lite/WORKSPACE",
+        "research/seq_flow_lite/configs/**",
+        "research/seq_flow_lite/demo/colab/**",
+        "research/seq_flow_lite/demo/prado/BUILD",
+        "research/seq_flow_lite/demo/prado/prado_tflite_example.cc",
+        "research/seq_flow_lite/export_to_tflite.py",
+        "research/seq_flow_lite/input_fn_reader.py",
+        "research/seq_flow_lite/layers/**",
+        "research/seq_flow_lite/metric_functions.py",
+        "research/seq_flow_lite/models/**",
+        "research/seq_flow_lite/tf_ops/**",
+        "research/seq_flow_lite/tflite_ops/**",
+        "research/seq_flow_lite/trainer.py",
+        "research/seq_flow_lite/trainer_v2.py",
+        "research/seq_flow_lite/utils/**",
+        "research/slim/BUILD",
+        "research/slim/README.md",
+        "research/slim/WORKSPACE",
+        "research/slim/__init__.py",
+        "research/slim/datasets/**",
+        "research/slim/deployment/**",
+        "research/slim/download_and_convert_data.py",
+        "research/slim/eval_image_classifier.py",
+        "research/slim/export_inference_graph.py",
+        "research/slim/export_inference_graph_test.py",
+        "research/slim/nets/__init__.py",
+        "research/slim/nets/alexnet.py",
+        "research/slim/nets/alexnet_test.py",
+        "research/slim/nets/cifarnet.py",
+        "research/slim/nets/cyclegan.py",
+        "research/slim/nets/cyclegan_test.py",
+        "research/slim/nets/dcgan.py",
+        "research/slim/nets/dcgan_test.py",
+        "research/slim/nets/i3d.py",
+        "research/slim/nets/i3d_test.py",
+        "research/slim/nets/i3d_utils.py",
+        "research/slim/nets/inception.py",
+        "research/slim/nets/inception_resnet_v2.py",
+        "research/slim/nets/inception_resnet_v2_test.py",
+        "research/slim/nets/inception_utils.py",
+        "research/slim/nets/inception_v1.py",
+        "research/slim/nets/inception_v1_test.py",
+        "research/slim/nets/inception_v2.py",
+        "research/slim/nets/inception_v2_test.py",
+        "research/slim/nets/inception_v3.py",
+        "research/slim/nets/inception_v3_test.py",
+        "research/slim/nets/inception_v4.py",
+        "research/slim/nets/inception_v4_test.py",
+        "research/slim/nets/lenet.py",
+        "research/slim/nets/mobilenet/README.md",
+        "research/slim/nets/mobilenet/__init__.py",
+        "research/slim/nets/mobilenet/conv_blocks.py",
+        "research/slim/nets/mobilenet/mobilenet.py",
+        "research/slim/nets/mobilenet/mobilenet_example.ipynb",
+        "research/slim/nets/mobilenet/mobilenet_v2.py",
+        "research/slim/nets/mobilenet/mobilenet_v2_test.py",
+        "research/slim/nets/mobilenet/mobilenet_v3.py",
+        "research/slim/nets/mobilenet/mobilenet_v3_test.py",
+        "research/slim/nets/mobilenet_v1.md",
+        "research/slim/nets/mobilenet_v1.py",
+        "research/slim/nets/mobilenet_v1_eval.py",
+        "research/slim/nets/mobilenet_v1_test.py",
+        "research/slim/nets/mobilenet_v1_train.py",
+        "research/slim/nets/nasnet/**",
+        "research/slim/nets/nets_factory.py",
+        "research/slim/nets/nets_factory_test.py",
+        "research/slim/nets/overfeat.py",
+        "research/slim/nets/overfeat_test.py",
+        "research/slim/nets/pix2pix.py",
+        "research/slim/nets/pix2pix_test.py",
+        "research/slim/nets/post_training_quantization.py",
+        "research/slim/nets/resnet_utils.py",
+        "research/slim/nets/resnet_v1.py",
+        "research/slim/nets/resnet_v1_test.py",
+        "research/slim/nets/resnet_v2.py",
+        "research/slim/nets/resnet_v2_test.py",
+        "research/slim/nets/s3dg.py",
+        "research/slim/nets/s3dg_test.py",
+        "research/slim/nets/vgg.py",
+        "research/slim/nets/vgg_test.py",
+        "research/slim/preprocessing/**",
+        "research/slim/scripts/**",
+        "research/slim/setup.py",
+        "research/slim/slim_walkthrough.ipynb",
+        "research/slim/train_image_classifier.py",
+        "research/vid2depth/.bazelrc",
+        "research/vid2depth/BUILD",
+        "research/vid2depth/README.md",
+        "research/vid2depth/WORKSPACE",
+        "research/vid2depth/dataset/**",
+        "research/vid2depth/inference.py",
+        "research/vid2depth/model.py",
+        "research/vid2depth/nets.py",
+        "research/vid2depth/ops/BUILD",
+        "research/vid2depth/ops/__init__.py",
+        "research/vid2depth/ops/icp_grad.py",
+        "research/vid2depth/ops/icp_grad_test.py",
+        "research/vid2depth/ops/icp_op.py",
+        "research/vid2depth/ops/icp_op_kernel.cc",
+        "research/vid2depth/ops/icp_test.py",
+        "research/vid2depth/ops/icp_train_demo.py",
+        "research/vid2depth/ops/icp_util.py",
+        "research/vid2depth/ops/pcl_demo.cc",
+        "research/vid2depth/project.py",
+        "research/vid2depth/reader.py",
+        "research/vid2depth/repo.bzl",
+        "research/vid2depth/train.py",
+        "research/vid2depth/util.py",
+        "tensorflow_models/**"
+      ],
+      "text": "Copyright 2022 Google LLC. All rights reserved.\n\nAll files in the following folders:\n/community\n/official\n/orbit\n/research\n/tensorflow_models\n\nAre licensed as follows:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2016, The Authors.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2022 Google LLC. All rights reserved.; Copyright 2016, The Authors., Apache-2.0 license (LICENSE), https://github.com/tensorflow/models."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/archetypes/**",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/gulpfile.js",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/layouts/**",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/package-lock.json",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/package.json",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/src/**",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/static/**",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/theme.toml",
+        "official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc/webpack.config.js"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Thingsym, MIT license (declared in package.json), https://github.com/tensorflow/models/tree/34a21326906b9574fa11c4d6d0a5c534ff039267/official/projects/waste_identification_ml/circularnet-docs/themes/hugo-theme-techdoc."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "orbit/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of tensorflow/models (orbit) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/models/tree/34a21326906b9574fa11c4d6d0a5c534ff039267/orbit."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asciipb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.meta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbtxt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rcfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.screenrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfrecord"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/command"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

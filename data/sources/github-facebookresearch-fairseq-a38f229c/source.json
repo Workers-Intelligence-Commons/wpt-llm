@@ -1,0 +1,471 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/facebookresearch/fairseq",
+  "revision": "3d262bb25690e4eb2e7d3c1309b1e9c406ca4b99",
+  "checksum": "sha256:ea9b43c6b31ac9274090f0299e5bacbb79dd7c0ddc70913c88478fa9c56cd4f2",
+  "extract": {
+    "exclude": [
+      "docs/fairseq.gif",
+      "docs/fairseq_logo.png",
+      "examples/MMPT/videoclip.png",
+      "examples/MMPT/vlm.png",
+      "examples/flores101/flores_logo.png",
+      "examples/hubert/tests/6313-76958-0021.flac",
+      "examples/hubert/tests/sample.base.L9.npy",
+      "examples/hubert/tests/sample.large.L20.npy",
+      "examples/hubert/tests/sample.xlarge.L30.npy",
+      "examples/m2m_100/tokenizers/thirdparty/**",
+      "examples/textless_nlp/speech-resynth/img/**",
+      "fairseq/model_parallel/megatron/**"
+    ]
+  },
+  "history": {
+    "since": "e75cff5f2c1d62f12dc911e0bf420025eb1a4e33"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Facebook, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/facebookresearch/fairseq: Copyright (c) Facebook, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebookresearch/fairseq."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".pre-commit-config.yaml",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "RELEASE.md",
+        "docs/Makefile",
+        "docs/command_line_tools.rst",
+        "docs/conf.py",
+        "docs/criterions.rst",
+        "docs/data.rst",
+        "docs/docutils.conf",
+        "docs/getting_started.rst",
+        "docs/hydra_integration.md",
+        "docs/index.rst",
+        "docs/lr_scheduler.rst",
+        "docs/make.bat",
+        "docs/models.rst",
+        "docs/modules.rst",
+        "docs/optim.rst",
+        "docs/overview.rst",
+        "docs/tasks.rst",
+        "docs/tutorial_classifying_names.rst",
+        "docs/tutorial_simple_lstm.rst",
+        "examples/.gitignore",
+        "examples/MMPT/.gitignore",
+        "examples/MMPT/CONFIG.md",
+        "examples/MMPT/DATASET.md",
+        "examples/MMPT/README.md",
+        "examples/MMPT/endtask.md",
+        "examples/MMPT/locallaunch.py",
+        "examples/MMPT/mmpt/**",
+        "examples/MMPT/mmpt_cli/**",
+        "examples/MMPT/pretraining.md",
+        "examples/MMPT/projects/**",
+        "examples/MMPT/scripts/**",
+        "examples/MMPT/setup.py",
+        "examples/__init__.py",
+        "examples/adaptive_span/**",
+        "examples/attention_head_selection/**",
+        "examples/audio_nlp/**",
+        "examples/backtranslation/**",
+        "examples/bart/**",
+        "examples/byte_level_bpe/**",
+        "examples/camembert/**",
+        "examples/constrained_decoding/**",
+        "examples/conv_seq2seq/**",
+        "examples/criss/**",
+        "examples/cross_lingual_language_model/**",
+        "examples/data2vec/**",
+        "examples/discriminative_reranking_nmt/**",
+        "examples/emotion_conversion/**",
+        "examples/fast_noisy_channel/**",
+        "examples/flores101/README.md",
+        "examples/fully_sharded_data_parallel/**",
+        "examples/gottbert/**",
+        "examples/hubert/README.md",
+        "examples/hubert/config/**",
+        "examples/hubert/measure_teacher_quality.py",
+        "examples/hubert/simple_kmeans/**",
+        "examples/hubert/tests/sample.base.L9.km500.km",
+        "examples/hubert/tests/sample.base.L9.len",
+        "examples/hubert/tests/sample.large.L20.len",
+        "examples/hubert/tests/sample.large.hypo.word",
+        "examples/hubert/tests/sample.xlarge.L30.len",
+        "examples/hubert/tests/sample.xlarge.hypo.word",
+        "examples/hubert/tests/test_feature_and_unit.sh",
+        "examples/hubert/tests/test_finetuned_asr.sh",
+        "examples/hubert/update_ckpt.py",
+        "examples/joint_alignment_translation/**",
+        "examples/language_model/**",
+        "examples/laser/**",
+        "examples/latent_depth/**",
+        "examples/layerdrop/**",
+        "examples/linformer/**",
+        "examples/m2m_100/README.md",
+        "examples/m2m_100/install_dependecies.sh",
+        "examples/m2m_100/process_data/**",
+        "examples/m2m_100/tok.sh",
+        "examples/m2m_100/tokenizers/README.md",
+        "examples/m2m_100/tokenizers/seg_ja.sh",
+        "examples/m2m_100/tokenizers/seg_ko.sh",
+        "examples/m2m_100/tokenizers/tokenize_indic.py",
+        "examples/m2m_100/tokenizers/tokenize_thai.py",
+        "examples/m2m_100/tokenizers/tokenize_zh.py",
+        "examples/m2m_100/tokenizers/tokenizer_ar.sh",
+        "examples/mbart/**",
+        "examples/megatron_11b/**",
+        "examples/mms/**",
+        "examples/moe_lm/**",
+        "examples/mr_hubert/**",
+        "examples/multilingual/**",
+        "examples/noisychannel/**",
+        "examples/nonautoregressive_translation/**",
+        "examples/normformer/**",
+        "examples/operators/**",
+        "examples/paraphraser/**",
+        "examples/pay_less_attention_paper/**",
+        "examples/pointer_generator/**",
+        "examples/quant_noise/**",
+        "examples/roberta/**",
+        "examples/rxf/**",
+        "examples/scaling_nmt/**",
+        "examples/shuffled_word_order/**",
+        "examples/simultaneous_translation/**",
+        "examples/speech_recognition/**",
+        "examples/speech_synthesis/**",
+        "examples/speech_text_joint_to_text/**",
+        "examples/speech_to_speech/**",
+        "examples/speech_to_text/**",
+        "examples/stories/**",
+        "examples/textless_nlp/dgslm/**",
+        "examples/textless_nlp/gslm/**",
+        "examples/textless_nlp/pgslm/**",
+        "examples/textless_nlp/speech-resynth/README.md",
+        "examples/translation/**",
+        "examples/translation_moe/**",
+        "examples/truncated_bptt/**",
+        "examples/unsupervised_quality_estimation/**",
+        "examples/wav2vec/**",
+        "examples/wmt19/**",
+        "examples/wmt20/**",
+        "examples/wmt21/**",
+        "examples/womens_bios/**",
+        "examples/xformers/**",
+        "examples/xglm/**",
+        "examples/xlmr/**",
+        "examples/xmod/**",
+        "fairseq/__init__.py",
+        "fairseq/benchmark/**",
+        "fairseq/binarizer.py",
+        "fairseq/checkpoint_utils.py",
+        "fairseq/clib/**",
+        "fairseq/config/**",
+        "fairseq/criterions/**",
+        "fairseq/data/**",
+        "fairseq/dataclass/**",
+        "fairseq/distributed/**",
+        "fairseq/file_chunker_utils.py",
+        "fairseq/file_io.py",
+        "fairseq/file_utils.py",
+        "fairseq/hub_utils.py",
+        "fairseq/incremental_decoding_utils.py",
+        "fairseq/iterative_refinement_generator.py",
+        "fairseq/logging/**",
+        "fairseq/model_parallel/__init__.py",
+        "fairseq/model_parallel/criterions/**",
+        "fairseq/model_parallel/megatron_trainer.py",
+        "fairseq/model_parallel/models/**",
+        "fairseq/model_parallel/modules/**",
+        "fairseq/models/**",
+        "fairseq/modules/**",
+        "fairseq/nan_detector.py",
+        "fairseq/ngram_repeat_block.py",
+        "fairseq/optim/**",
+        "fairseq/options.py",
+        "fairseq/pdb.py",
+        "fairseq/quantization_utils.py",
+        "fairseq/registry.py",
+        "fairseq/scoring/**",
+        "fairseq/search.py",
+        "fairseq/sequence_generator.py",
+        "fairseq/sequence_scorer.py",
+        "fairseq/speech_generator.py",
+        "fairseq/tasks/**",
+        "fairseq/token_generation_constraints.py",
+        "fairseq/tokenizer.py",
+        "fairseq/trainer.py",
+        "fairseq/utils.py",
+        "fairseq/version.txt",
+        "fairseq_cli/**",
+        "hubconf.py",
+        "hydra_plugins/**",
+        "pyproject.toml",
+        "release_utils.py",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "tests/**",
+        "train.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) Facebook, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Facebook, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebookresearch/fairseq."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.km"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.len"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.perl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.word"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "fairseq/model_parallel/megatron": "https://github.com/ngoyal2707/Megatron-LM"
+  }
+}

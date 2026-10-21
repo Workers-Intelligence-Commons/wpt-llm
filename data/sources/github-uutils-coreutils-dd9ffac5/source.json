@@ -1,0 +1,1209 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/uutils/coreutils",
+  "revision": "d5a8979c475c03a0bdcb094c00741c590b37cc00",
+  "checksum": "sha256:fd5d7444985780c951fad28cf6a8d3e787f1c90e3b61b145cd346188c1c56426",
+  "extract": {
+    "exclude": [
+      "src/uu/arch/**",
+      "src/uu/b2sum/**",
+      "src/uu/base32/**",
+      "src/uu/base64/**",
+      "src/uu/basename/**",
+      "src/uu/basenc/**",
+      "src/uu/cat/**",
+      "src/uu/chcon/**",
+      "src/uu/checksum_common/**",
+      "src/uu/chgrp/**",
+      "src/uu/chmod/**",
+      "src/uu/chown/**",
+      "src/uu/chroot/**",
+      "src/uu/cksum/**",
+      "src/uu/comm/**",
+      "src/uu/cp/**",
+      "src/uu/csplit/**",
+      "src/uu/cut/**",
+      "src/uu/date/**",
+      "src/uu/dd/**",
+      "src/uu/df/**",
+      "src/uu/dir/**",
+      "src/uu/dircolors/**",
+      "src/uu/dirname/**",
+      "src/uu/du/**",
+      "src/uu/echo/**",
+      "src/uu/env/**",
+      "src/uu/expand/**",
+      "src/uu/expr/**",
+      "src/uu/factor/**",
+      "src/uu/false/**",
+      "src/uu/fmt/**",
+      "src/uu/fold/**",
+      "src/uu/groups/**",
+      "src/uu/head/**",
+      "src/uu/hostid/**",
+      "src/uu/hostname/**",
+      "src/uu/id/**",
+      "src/uu/install/**",
+      "src/uu/join/**",
+      "src/uu/kill/**",
+      "src/uu/link/**",
+      "src/uu/ln/**",
+      "src/uu/logname/**",
+      "src/uu/ls/**",
+      "src/uu/md5sum/**",
+      "src/uu/mkdir/**",
+      "src/uu/mkfifo/**",
+      "src/uu/mknod/**",
+      "src/uu/mktemp/**",
+      "src/uu/more/**",
+      "src/uu/mv/**",
+      "src/uu/nice/**",
+      "src/uu/nl/**",
+      "src/uu/nohup/**",
+      "src/uu/nproc/**",
+      "src/uu/numfmt/**",
+      "src/uu/od/**",
+      "src/uu/paste/**",
+      "src/uu/pathchk/**",
+      "src/uu/pinky/**",
+      "src/uu/pr/**",
+      "src/uu/printenv/**",
+      "src/uu/printf/**",
+      "src/uu/ptx/**",
+      "src/uu/pwd/**",
+      "src/uu/readlink/**",
+      "src/uu/realpath/**",
+      "src/uu/rm/**",
+      "src/uu/rmdir/**",
+      "src/uu/runcon/**",
+      "src/uu/seq/**",
+      "src/uu/sha1sum/**",
+      "src/uu/sha224sum/**",
+      "src/uu/sha256sum/**",
+      "src/uu/sha384sum/**",
+      "src/uu/sha512sum/**",
+      "src/uu/shred/**",
+      "src/uu/shuf/**",
+      "src/uu/sleep/**",
+      "src/uu/sort/**",
+      "src/uu/split/**",
+      "src/uu/stat/**",
+      "src/uu/stdbuf/**",
+      "src/uu/stty/**",
+      "src/uu/sum/**",
+      "src/uu/sync/**",
+      "src/uu/tac/**",
+      "src/uu/tail/**",
+      "src/uu/tee/**",
+      "src/uu/test/**",
+      "src/uu/timeout/**",
+      "src/uu/touch/**",
+      "src/uu/tr/**",
+      "src/uu/true/**",
+      "src/uu/truncate/**",
+      "src/uu/tsort/**",
+      "src/uu/tty/**",
+      "src/uu/uname/**",
+      "src/uu/unexpand/**",
+      "src/uu/uniq/**",
+      "src/uu/unlink/**",
+      "src/uu/uptime/**",
+      "src/uu/users/**",
+      "src/uu/vdir/**",
+      "src/uu/wc/BENCHMARKING.md",
+      "src/uu/wc/Cargo.toml",
+      "src/uu/wc/LICENSE",
+      "src/uu/wc/benches/**",
+      "src/uu/wc/locales/**",
+      "src/uu/wc/src/count_fast.rs",
+      "src/uu/wc/src/countable.rs",
+      "src/uu/wc/src/main.rs",
+      "src/uu/wc/src/wc.rs",
+      "src/uu/wc/src/word_count.rs",
+      "src/uu/who/**",
+      "src/uu/whoami/**",
+      "src/uu/yes/**",
+      "src/uucore/**",
+      "src/uucore_procs/**",
+      "tests/fixtures/cat/256.txt",
+      "tests/fixtures/cksum/raw/blake2b_single_file.expected",
+      "tests/fixtures/cksum/raw/blake3_single_file.expected",
+      "tests/fixtures/cksum/raw/bsd_single_file.expected",
+      "tests/fixtures/cksum/raw/crc32b_single_file.expected",
+      "tests/fixtures/cksum/raw/crc_single_file.expected",
+      "tests/fixtures/cksum/raw/md5_single_file.expected",
+      "tests/fixtures/cksum/raw/sha1_single_file.expected",
+      "tests/fixtures/cksum/raw/sha224_single_file.expected",
+      "tests/fixtures/cksum/raw/sha256_single_file.expected",
+      "tests/fixtures/cksum/raw/sha384_single_file.expected",
+      "tests/fixtures/cksum/raw/sha512_single_file.expected",
+      "tests/fixtures/cksum/raw/sm3_single_file.expected",
+      "tests/fixtures/cksum/zero_multiple_file.expected",
+      "tests/fixtures/cksum/zero_single_file.expected",
+      "tests/fixtures/cut/8bit-delim.txt",
+      "tests/fixtures/dd/all-valid-ascii-chars-37eff01866ba3f538421b30b7cbefcac.test",
+      "tests/fixtures/dd/dd-bytes-alphabet-null.spec",
+      "tests/fixtures/dd/deadbeef-16.spec",
+      "tests/fixtures/dd/deadbeef-16.test",
+      "tests/fixtures/dd/deadbeef-18d99661a1de1fc9af21b0ec2cd67ba3.test",
+      "tests/fixtures/dd/gnudd-conv-atoe-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-atoibm-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-ebcdic-ltou-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-ebcdic-utol-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-etoa-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-ibm-ltou-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-ibm-utol-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-ltou-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-1031-obs-521-deadbeef.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-1031-obs-521-random.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-1031-obs-521-zeros.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-521-obs-1031-deadbeef.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-521-obs-1031-random.spec",
+      "tests/fixtures/dd/gnudd-conv-sync-ibs-521-obs-1031-zeros.spec",
+      "tests/fixtures/dd/gnudd-conv-utol-seq-byte-values.spec",
+      "tests/fixtures/dd/gnudd-deadbeef-first-12345.spec",
+      "tests/fixtures/dd/gnudd-deadbeef-first-16k.spec",
+      "tests/fixtures/dd/gnudd-random-first-32k.spec",
+      "tests/fixtures/dd/lcase-ascii.test",
+      "tests/fixtures/dd/lcase-ebcdic.spec",
+      "tests/fixtures/dd/lcase-ebcdic.test",
+      "tests/fixtures/dd/lcase-ibm.spec",
+      "tests/fixtures/dd/lcase-ibm.test",
+      "tests/fixtures/dd/ones-6ae59e64850377ee5470c854761551ea.test",
+      "tests/fixtures/dd/random-5828891cb1230748e146f34223bbd3b5.test",
+      "tests/fixtures/dd/self-transfer-256k.txt",
+      "tests/fixtures/dd/seq-byte-values-b632a992d3aed5d8d1a59cc5a5a455ba.test",
+      "tests/fixtures/dd/seq-byte-values-odd.spec",
+      "tests/fixtures/dd/seq-byte-values-odd.test",
+      "tests/fixtures/dd/seq-byte-values-swapped.test",
+      "tests/fixtures/dd/seq-byte-values.test",
+      "tests/fixtures/dd/ucase-ascii.test",
+      "tests/fixtures/dd/ucase-ebcdic.spec",
+      "tests/fixtures/dd/ucase-ebcdic.test",
+      "tests/fixtures/dd/ucase-ibm.spec",
+      "tests/fixtures/dd/ucase-ibm.test",
+      "tests/fixtures/dd/zero-256k.txt",
+      "tests/fixtures/dd/zeros-620f0b67a91f7f74151bc5be745b7110.test",
+      "tests/fixtures/du/subdir/links/subwords.txt",
+      "tests/fixtures/fold/non_utf8.expected",
+      "tests/fixtures/fold/non_utf8.input",
+      "tests/fixtures/fold/non_utf8_tab_stops.input",
+      "tests/fixtures/fold/non_utf8_tab_stops_w16.expected",
+      "tests/fixtures/fold/non_utf8_tab_stops_w8.expected",
+      "tests/fixtures/head/zero_terminated.expected",
+      "tests/fixtures/head/zero_terminated.txt",
+      "tests/fixtures/join/non-unicode.expected",
+      "tests/fixtures/join/non-unicode_1.bin",
+      "tests/fixtures/join/non-unicode_2.bin",
+      "tests/fixtures/join/non-unicode_sep.expected",
+      "tests/fixtures/join/null-sep.expected",
+      "tests/fixtures/join/z.expected",
+      "tests/fixtures/sha256sum/binary.png",
+      "tests/fixtures/sort/zero-terminated.expected",
+      "tests/fixtures/sort/zero-terminated.txt",
+      "tests/fixtures/split/separator_nul.txt",
+      "tests/fixtures/tail/foobar_with_null.txt",
+      "tests/fixtures/tail/foobar_with_null_default.expected",
+      "tests/fixtures/uniq/locale-fr-schar.txt",
+      "tests/fixtures/uniq/not-utf8-sequence.txt",
+      "tests/fixtures/uniq/sorted-zero-terminated.expected",
+      "tests/fixtures/uniq/sorted-zero-terminated.txt",
+      "tests/fixtures/uptime/**",
+      "tests/fixtures/users/**",
+      "tests/fixtures/wc/UTF_8_test.txt",
+      "tests/fixtures/wc/files0 with nonexistent.txt",
+      "tests/fixtures/wc/files0_list.txt",
+      "tests/fixtures/wc/files0_list_with_stdin.txt",
+      "tests/uutests/**"
+    ]
+  },
+  "history": {
+    "since": "d4e96b33e343733992fad55ac840c9649cd72ede"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) uutils developers\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n// spell-checker:ignore Sapin\nCopyright (c) Simon Sapin and many others\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/uutils/coreutils: Copyright (c) uutils developers, MIT license (LICENSE), https://github.com/uutils/coreutils; Copyright (c) Simon Sapin and many others, MIT license (LICENSE), https://github.com/uutils/coreutils/tree/d5a8979c475c03a0bdcb094c00741c590b37cc00/src/uu/wc/src/utf8."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".busybox-config",
+        ".cargo/**",
+        ".clippy.toml",
+        ".codecov.yml",
+        ".codespell.rc",
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".envrc",
+        ".github/**",
+        ".gitignore",
+        ".markdownlint.yaml",
+        ".pre-commit-config.yaml",
+        ".rustfmt.toml",
+        ".vscode/**",
+        "AGENTS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "Cross.toml",
+        "DEVELOPMENT.md",
+        "GNUmakefile",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "README.package.md",
+        "SECURITY.md",
+        "build.rs",
+        "deny.toml",
+        "docs/**",
+        "flake.lock",
+        "flake.nix",
+        "fuzz/**",
+        "oranda.json",
+        "renovate.json",
+        "src/bin/**",
+        "src/common/**",
+        "src/lib.rs",
+        "tests/by-util/**",
+        "tests/fixtures/.gitattributes",
+        "tests/fixtures/b2sum/**",
+        "tests/fixtures/base32/**",
+        "tests/fixtures/base64/**",
+        "tests/fixtures/cat/alpha.txt",
+        "tests/fixtures/cat/empty.txt",
+        "tests/fixtures/cat/nonewline.txt",
+        "tests/fixtures/cat/three_directories_and_file_and_stdin.stderr.expected",
+        "tests/fixtures/chgrp/**",
+        "tests/fixtures/cksum/alice_in_wonderland.txt",
+        "tests/fixtures/cksum/base64/**",
+        "tests/fixtures/cksum/blake2b_multiple_files.expected",
+        "tests/fixtures/cksum/blake2b_single_file.expected",
+        "tests/fixtures/cksum/blake2b_stdin.expected",
+        "tests/fixtures/cksum/blake3_multiple_files.expected",
+        "tests/fixtures/cksum/blake3_single_file.expected",
+        "tests/fixtures/cksum/blake3_stdin.expected",
+        "tests/fixtures/cksum/bsd_multiple_files.expected",
+        "tests/fixtures/cksum/bsd_single_file.expected",
+        "tests/fixtures/cksum/bsd_stdin.expected",
+        "tests/fixtures/cksum/chars.txt",
+        "tests/fixtures/cksum/crc32b_multiple_files.expected",
+        "tests/fixtures/cksum/crc32b_single_file.expected",
+        "tests/fixtures/cksum/crc32b_stdin.expected",
+        "tests/fixtures/cksum/crc_multiple_files.expected",
+        "tests/fixtures/cksum/crc_single_file.expected",
+        "tests/fixtures/cksum/crc_stdin.expected",
+        "tests/fixtures/cksum/larger_than_2056_bytes.txt",
+        "tests/fixtures/cksum/length_is_zero.expected",
+        "tests/fixtures/cksum/lorem_ipsum.txt",
+        "tests/fixtures/cksum/md5_multiple_files.expected",
+        "tests/fixtures/cksum/md5_single_file.expected",
+        "tests/fixtures/cksum/md5_stdin.expected",
+        "tests/fixtures/cksum/raw/sysv_single_file.expected",
+        "tests/fixtures/cksum/sha1_multiple_files.expected",
+        "tests/fixtures/cksum/sha1_single_file.expected",
+        "tests/fixtures/cksum/sha1_stdin.expected",
+        "tests/fixtures/cksum/sha224_multiple_files.expected",
+        "tests/fixtures/cksum/sha224_single_file.expected",
+        "tests/fixtures/cksum/sha224_stdin.expected",
+        "tests/fixtures/cksum/sha256_multiple_files.expected",
+        "tests/fixtures/cksum/sha256_single_file.expected",
+        "tests/fixtures/cksum/sha256_stdin.expected",
+        "tests/fixtures/cksum/sha384_multiple_files.expected",
+        "tests/fixtures/cksum/sha384_single_file.expected",
+        "tests/fixtures/cksum/sha384_stdin.expected",
+        "tests/fixtures/cksum/sha3_224_multiple_files.expected",
+        "tests/fixtures/cksum/sha3_224_single_file.expected",
+        "tests/fixtures/cksum/sha3_224_stdin.expected",
+        "tests/fixtures/cksum/sha3_256_multiple_files.expected",
+        "tests/fixtures/cksum/sha3_256_single_file.expected",
+        "tests/fixtures/cksum/sha3_256_stdin.expected",
+        "tests/fixtures/cksum/sha3_384_multiple_files.expected",
+        "tests/fixtures/cksum/sha3_384_single_file.expected",
+        "tests/fixtures/cksum/sha3_384_stdin.expected",
+        "tests/fixtures/cksum/sha3_512_multiple_files.expected",
+        "tests/fixtures/cksum/sha3_512_single_file.expected",
+        "tests/fixtures/cksum/sha3_512_stdin.expected",
+        "tests/fixtures/cksum/sha512_multiple_files.expected",
+        "tests/fixtures/cksum/sha512_single_file.expected",
+        "tests/fixtures/cksum/sha512_stdin.expected",
+        "tests/fixtures/cksum/sm3_multiple_files.expected",
+        "tests/fixtures/cksum/sm3_single_file.expected",
+        "tests/fixtures/cksum/sm3_stdin.expected",
+        "tests/fixtures/cksum/sysv_multiple_files.expected",
+        "tests/fixtures/cksum/sysv_single_file.expected",
+        "tests/fixtures/cksum/sysv_stdin.expected",
+        "tests/fixtures/cksum/untagged/**",
+        "tests/fixtures/cp/**",
+        "tests/fixtures/csplit/**",
+        "tests/fixtures/cut/delimiter_specified.expected",
+        "tests/fixtures/cut/lists.txt",
+        "tests/fixtures/cut/sequences/**",
+        "tests/fixtures/cut/whitespace_delimited.expected",
+        "tests/fixtures/dd/ascii-10k.txt",
+        "tests/fixtures/dd/dd-block-cbs16-win.test",
+        "tests/fixtures/dd/dd-block-cbs16.spec",
+        "tests/fixtures/dd/dd-block-cbs16.test",
+        "tests/fixtures/dd/dd-block-cbs8.spec",
+        "tests/fixtures/dd/dd-block-consecutive-nl-cbs16.spec",
+        "tests/fixtures/dd/dd-block-consecutive-nl-win.test",
+        "tests/fixtures/dd/dd-block-consecutive-nl.test",
+        "tests/fixtures/dd/dd-block8-lowercase.spec",
+        "tests/fixtures/dd/dd-block8-lowercase.test",
+        "tests/fixtures/dd/dd-unblock-cbs16-win.spec",
+        "tests/fixtures/dd/dd-unblock-cbs16.spec",
+        "tests/fixtures/dd/dd-unblock-cbs16.test",
+        "tests/fixtures/dd/dd-unblock-cbs8-win.spec",
+        "tests/fixtures/dd/dd-unblock-cbs8.spec",
+        "tests/fixtures/dd/dd-unblock8-lowercase.spec",
+        "tests/fixtures/dd/dd-unblock8-lowercase.test",
+        "tests/fixtures/dd/null.txt",
+        "tests/fixtures/dd/this-file-exists-excl.txt",
+        "tests/fixtures/dd/this-file-exists-no-noatime.txt",
+        "tests/fixtures/dd/this-file-exists-notrunc.txt",
+        "tests/fixtures/dd/this-file-exists-truncated.txt",
+        "tests/fixtures/dd/this-ifile-exists-noatime.txt",
+        "tests/fixtures/dd/this-ofile-exists-noatime.txt",
+        "tests/fixtures/dd/y-nl-1k.txt",
+        "tests/fixtures/dd/😎💚🦊.txt",
+        "tests/fixtures/dircolors/**",
+        "tests/fixtures/du/empty.txt",
+        "tests/fixtures/du/subdir/deeper/**",
+        "tests/fixtures/du/subdir/links/subwords2.txt",
+        "tests/fixtures/du/words.txt",
+        "tests/fixtures/env/**",
+        "tests/fixtures/expand/**",
+        "tests/fixtures/fmt/**",
+        "tests/fixtures/fold/lorem_ipsum.txt",
+        "tests/fixtures/fold/lorem_ipsum_40_column_hard.expected",
+        "tests/fixtures/fold/lorem_ipsum_40_column_word.expected",
+        "tests/fixtures/fold/lorem_ipsum_80_column.expected",
+        "tests/fixtures/fold/lorem_ipsum_new_line.txt",
+        "tests/fixtures/fold/lorem_ipsum_new_line_80_column.expected",
+        "tests/fixtures/fold/space_separated_words.txt",
+        "tests/fixtures/fold/tab_stops.input",
+        "tests/fixtures/fold/tab_stops_w16.expected",
+        "tests/fixtures/fold/tab_stops_w8.expected",
+        "tests/fixtures/head/emptyfile.txt",
+        "tests/fixtures/head/lorem_ipsum.txt",
+        "tests/fixtures/head/lorem_ipsum_1_line.expected",
+        "tests/fixtures/head/lorem_ipsum_5_chars.expected",
+        "tests/fixtures/head/lorem_ipsum_backwards_15_lines.expected",
+        "tests/fixtures/head/lorem_ipsum_backwards_file.expected",
+        "tests/fixtures/head/lorem_ipsum_default.expected",
+        "tests/fixtures/head/lorem_ipsum_verbose.expected",
+        "tests/fixtures/head/sequence",
+        "tests/fixtures/head/sequence.expected",
+        "tests/fixtures/join/autoformat.expected",
+        "tests/fixtures/join/capitalized.txt",
+        "tests/fixtures/join/case_insensitive.expected",
+        "tests/fixtures/join/contiguous_separators.txt",
+        "tests/fixtures/join/default.expected",
+        "tests/fixtures/join/different_field.expected",
+        "tests/fixtures/join/different_fields.expected",
+        "tests/fixtures/join/different_lengths.txt",
+        "tests/fixtures/join/empty.txt",
+        "tests/fixtures/join/empty_key.expected",
+        "tests/fixtures/join/fields_1.txt",
+        "tests/fixtures/join/fields_2.txt",
+        "tests/fixtures/join/fields_3.txt",
+        "tests/fixtures/join/fields_4.txt",
+        "tests/fixtures/join/fields_5.txt",
+        "tests/fixtures/join/header.expected",
+        "tests/fixtures/join/header_1.txt",
+        "tests/fixtures/join/header_2.txt",
+        "tests/fixtures/join/header_autoformat.expected",
+        "tests/fixtures/join/missing_format_fields.expected",
+        "tests/fixtures/join/multibyte_sep.expected",
+        "tests/fixtures/join/multibyte_sep_1.txt",
+        "tests/fixtures/join/multibyte_sep_2.txt",
+        "tests/fixtures/join/non-line_feeds.expected",
+        "tests/fixtures/join/non-line_feeds_1.txt",
+        "tests/fixtures/join/non-line_feeds_2.txt",
+        "tests/fixtures/join/out_of_bounds_fields.expected",
+        "tests/fixtures/join/semicolon_fields_1.txt",
+        "tests/fixtures/join/semicolon_fields_2.txt",
+        "tests/fixtures/join/semicolon_separated.expected",
+        "tests/fixtures/join/suppress_joined.expected",
+        "tests/fixtures/join/suppress_joined_outer.expected",
+        "tests/fixtures/join/unpaired_lines.expected",
+        "tests/fixtures/join/unpaired_lines_format.expected",
+        "tests/fixtures/join/unpaired_lines_outer.expected",
+        "tests/fixtures/md5sum/**",
+        "tests/fixtures/mv/**",
+        "tests/fixtures/nl/**",
+        "tests/fixtures/nohup/**",
+        "tests/fixtures/numfmt/**",
+        "tests/fixtures/od/**",
+        "tests/fixtures/paste/**",
+        "tests/fixtures/pr/**",
+        "tests/fixtures/ptx/**",
+        "tests/fixtures/sha1sum/**",
+        "tests/fixtures/sha224sum/**",
+        "tests/fixtures/sha256sum/binary.sha256.checkfile",
+        "tests/fixtures/sha256sum/binary.sha256.expected",
+        "tests/fixtures/sha256sum/input.txt",
+        "tests/fixtures/sha256sum/sha256.checkfile",
+        "tests/fixtures/sha256sum/sha256.expected",
+        "tests/fixtures/sha384sum/**",
+        "tests/fixtures/sha512sum/**",
+        "tests/fixtures/shuf/**",
+        "tests/fixtures/sort/blanks.expected",
+        "tests/fixtures/sort/blanks.expected.debug",
+        "tests/fixtures/sort/blanks.txt",
+        "tests/fixtures/sort/check_fail.txt",
+        "tests/fixtures/sort/default_unsorted_ints.expected",
+        "tests/fixtures/sort/default_unsorted_ints.expected.debug",
+        "tests/fixtures/sort/default_unsorted_ints.txt",
+        "tests/fixtures/sort/dictionary_order.expected",
+        "tests/fixtures/sort/dictionary_order.expected.debug",
+        "tests/fixtures/sort/dictionary_order.txt",
+        "tests/fixtures/sort/empty.txt",
+        "tests/fixtures/sort/exponents-positive-numeric.expected",
+        "tests/fixtures/sort/exponents-positive-numeric.expected.debug",
+        "tests/fixtures/sort/exponents-positive-numeric.txt",
+        "tests/fixtures/sort/exponents_general.expected",
+        "tests/fixtures/sort/exponents_general.expected.debug",
+        "tests/fixtures/sort/exponents_general.txt",
+        "tests/fixtures/sort/ext_sort.expected",
+        "tests/fixtures/sort/ext_sort.txt",
+        "tests/fixtures/sort/ext_stable.expected",
+        "tests/fixtures/sort/ext_stable.txt",
+        "tests/fixtures/sort/fix_i18n_collate_inconsistency_1.txt",
+        "tests/fixtures/sort/fix_i18n_collate_inconsistency_2.txt",
+        "tests/fixtures/sort/human-mixed-inputs-reverse.expected",
+        "tests/fixtures/sort/human-mixed-inputs-reverse.txt",
+        "tests/fixtures/sort/human-mixed-inputs-stable.expected",
+        "tests/fixtures/sort/human-mixed-inputs-stable.txt",
+        "tests/fixtures/sort/human-mixed-inputs-unique.expected",
+        "tests/fixtures/sort/human-mixed-inputs-unique.txt",
+        "tests/fixtures/sort/human-mixed-inputs.expected",
+        "tests/fixtures/sort/human-mixed-inputs.txt",
+        "tests/fixtures/sort/human-numeric-whitespace.expected",
+        "tests/fixtures/sort/human-numeric-whitespace.expected.debug",
+        "tests/fixtures/sort/human-numeric-whitespace.txt",
+        "tests/fixtures/sort/human_block_sizes.expected",
+        "tests/fixtures/sort/human_block_sizes.expected.debug",
+        "tests/fixtures/sort/human_block_sizes.txt",
+        "tests/fixtures/sort/ignore_case.expected",
+        "tests/fixtures/sort/ignore_case.expected.debug",
+        "tests/fixtures/sort/ignore_case.txt",
+        "tests/fixtures/sort/keys_blanks.expected",
+        "tests/fixtures/sort/keys_blanks.expected.debug",
+        "tests/fixtures/sort/keys_blanks.txt",
+        "tests/fixtures/sort/keys_closed_range.expected",
+        "tests/fixtures/sort/keys_closed_range.expected.debug",
+        "tests/fixtures/sort/keys_closed_range.txt",
+        "tests/fixtures/sort/keys_custom_separator.expected",
+        "tests/fixtures/sort/keys_custom_separator.expected.debug",
+        "tests/fixtures/sort/keys_custom_separator.txt",
+        "tests/fixtures/sort/keys_ignore_flag.expected",
+        "tests/fixtures/sort/keys_ignore_flag.expected.debug",
+        "tests/fixtures/sort/keys_ignore_flag.txt",
+        "tests/fixtures/sort/keys_multiple_ranges.expected",
+        "tests/fixtures/sort/keys_multiple_ranges.expected.debug",
+        "tests/fixtures/sort/keys_multiple_ranges.txt",
+        "tests/fixtures/sort/keys_negative_size.expected",
+        "tests/fixtures/sort/keys_negative_size.expected.debug",
+        "tests/fixtures/sort/keys_negative_size.txt",
+        "tests/fixtures/sort/keys_no_char_match.expected",
+        "tests/fixtures/sort/keys_no_char_match.expected.debug",
+        "tests/fixtures/sort/keys_no_char_match.txt",
+        "tests/fixtures/sort/keys_no_field_match.expected",
+        "tests/fixtures/sort/keys_no_field_match.expected.debug",
+        "tests/fixtures/sort/keys_no_field_match.txt",
+        "tests/fixtures/sort/keys_open_ended.expected",
+        "tests/fixtures/sort/keys_open_ended.expected.debug",
+        "tests/fixtures/sort/keys_open_ended.txt",
+        "tests/fixtures/sort/merge_ints_interleaved.expected",
+        "tests/fixtures/sort/merge_ints_interleaved_1.txt",
+        "tests/fixtures/sort/merge_ints_interleaved_2.txt",
+        "tests/fixtures/sort/merge_ints_interleaved_3.txt",
+        "tests/fixtures/sort/merge_ints_reversed.expected",
+        "tests/fixtures/sort/merge_ints_reversed_1.txt",
+        "tests/fixtures/sort/merge_ints_reversed_2.txt",
+        "tests/fixtures/sort/merge_ints_reversed_3.txt",
+        "tests/fixtures/sort/merge_stable.expected",
+        "tests/fixtures/sort/merge_stable_1.txt",
+        "tests/fixtures/sort/merge_stable_2.txt",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric.expected",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric.expected.debug",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric.txt",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_stable.expected",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_stable.expected.debug",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_stable.txt",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique.expected",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique.expected.debug",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique.txt",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique_reverse.expected",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique_reverse.expected.debug",
+        "tests/fixtures/sort/mixed_floats_ints_chars_numeric_unique_reverse.txt",
+        "tests/fixtures/sort/month_default.expected",
+        "tests/fixtures/sort/month_default.expected.debug",
+        "tests/fixtures/sort/month_default.txt",
+        "tests/fixtures/sort/month_stable.expected",
+        "tests/fixtures/sort/month_stable.expected.debug",
+        "tests/fixtures/sort/month_stable.txt",
+        "tests/fixtures/sort/months-dedup.expected",
+        "tests/fixtures/sort/months-dedup.expected.debug",
+        "tests/fixtures/sort/months-dedup.txt",
+        "tests/fixtures/sort/months-whitespace.expected",
+        "tests/fixtures/sort/months-whitespace.expected.debug",
+        "tests/fixtures/sort/months-whitespace.txt",
+        "tests/fixtures/sort/multiple_decimals.expected",
+        "tests/fixtures/sort/multiple_decimals_general.expected",
+        "tests/fixtures/sort/multiple_decimals_general.expected.debug",
+        "tests/fixtures/sort/multiple_decimals_general.txt",
+        "tests/fixtures/sort/multiple_decimals_numeric.expected",
+        "tests/fixtures/sort/multiple_decimals_numeric.expected.debug",
+        "tests/fixtures/sort/multiple_decimals_numeric.txt",
+        "tests/fixtures/sort/multiple_files.expected",
+        "tests/fixtures/sort/multiple_files1.txt",
+        "tests/fixtures/sort/multiple_files2.txt",
+        "tests/fixtures/sort/multiple_groupings_numeric.expected",
+        "tests/fixtures/sort/multiple_groupings_numeric.expected.debug",
+        "tests/fixtures/sort/multiple_groupings_numeric.txt",
+        "tests/fixtures/sort/no_trailing_newline1.txt",
+        "tests/fixtures/sort/no_trailing_newline2.txt",
+        "tests/fixtures/sort/numeric-floats-with-nan2.expected",
+        "tests/fixtures/sort/numeric-floats-with-nan2.expected.debug",
+        "tests/fixtures/sort/numeric-floats-with-nan2.txt",
+        "tests/fixtures/sort/numeric_fixed_floats.expected",
+        "tests/fixtures/sort/numeric_fixed_floats.expected.debug",
+        "tests/fixtures/sort/numeric_fixed_floats.txt",
+        "tests/fixtures/sort/numeric_floats.expected",
+        "tests/fixtures/sort/numeric_floats.expected.debug",
+        "tests/fixtures/sort/numeric_floats.txt",
+        "tests/fixtures/sort/numeric_floats_and_ints.expected",
+        "tests/fixtures/sort/numeric_floats_and_ints.expected.debug",
+        "tests/fixtures/sort/numeric_floats_and_ints.txt",
+        "tests/fixtures/sort/numeric_floats_with_nan.expected",
+        "tests/fixtures/sort/numeric_floats_with_nan.expected.debug",
+        "tests/fixtures/sort/numeric_floats_with_nan.txt",
+        "tests/fixtures/sort/numeric_trailing_chars.expected",
+        "tests/fixtures/sort/numeric_trailing_chars.expected.debug",
+        "tests/fixtures/sort/numeric_trailing_chars.txt",
+        "tests/fixtures/sort/numeric_unfixed_floats.expected",
+        "tests/fixtures/sort/numeric_unfixed_floats.expected.debug",
+        "tests/fixtures/sort/numeric_unfixed_floats.txt",
+        "tests/fixtures/sort/numeric_unique.expected",
+        "tests/fixtures/sort/numeric_unique.expected.debug",
+        "tests/fixtures/sort/numeric_unique.txt",
+        "tests/fixtures/sort/numeric_unsorted_ints.expected",
+        "tests/fixtures/sort/numeric_unsorted_ints.expected.debug",
+        "tests/fixtures/sort/numeric_unsorted_ints.txt",
+        "tests/fixtures/sort/numeric_unsorted_ints_unique.expected",
+        "tests/fixtures/sort/numeric_unsorted_ints_unique.expected.debug",
+        "tests/fixtures/sort/numeric_unsorted_ints_unique.txt",
+        "tests/fixtures/sort/version-empty-lines.expected",
+        "tests/fixtures/sort/version-empty-lines.expected.debug",
+        "tests/fixtures/sort/version-empty-lines.txt",
+        "tests/fixtures/sort/version.expected",
+        "tests/fixtures/sort/version.expected.debug",
+        "tests/fixtures/sort/version.txt",
+        "tests/fixtures/sort/words_unique.expected",
+        "tests/fixtures/sort/words_unique.expected.debug",
+        "tests/fixtures/sort/words_unique.txt",
+        "tests/fixtures/sort/zero-terminated.expected.debug",
+        "tests/fixtures/split/asciilowercase.txt",
+        "tests/fixtures/split/fivelines.txt",
+        "tests/fixtures/split/letters.txt",
+        "tests/fixtures/split/ninetyonebytes.txt",
+        "tests/fixtures/split/noeof.txt",
+        "tests/fixtures/split/onehundredlines.txt",
+        "tests/fixtures/split/separator_semicolon.txt",
+        "tests/fixtures/split/sixhundredfiftyonebytes.txt",
+        "tests/fixtures/split/threebytes.txt",
+        "tests/fixtures/split/twohundredfortyonebytes.txt",
+        "tests/fixtures/sum/**",
+        "tests/fixtures/tac/**",
+        "tests/fixtures/tail/follow_name.expected",
+        "tests/fixtures/tail/follow_name.txt",
+        "tests/fixtures/tail/follow_name_short.expected",
+        "tests/fixtures/tail/follow_stdin.expected",
+        "tests/fixtures/tail/foobar.txt",
+        "tests/fixtures/tail/foobar2.txt",
+        "tests/fixtures/tail/foobar_bytes_single.expected",
+        "tests/fixtures/tail/foobar_bytes_stdin.expected",
+        "tests/fixtures/tail/foobar_follow_multiple.expected",
+        "tests/fixtures/tail/foobar_follow_multiple_appended.expected",
+        "tests/fixtures/tail/foobar_multiple_quiet.expected",
+        "tests/fixtures/tail/foobar_single_default.expected",
+        "tests/fixtures/tail/foobar_stdin_default.expected",
+        "tests/fixtures/test/**",
+        "tests/fixtures/tsort/**",
+        "tests/fixtures/unexpand/**",
+        "tests/fixtures/uniq/group-append.expected",
+        "tests/fixtures/uniq/group-both.expected",
+        "tests/fixtures/uniq/group-prepend.expected",
+        "tests/fixtures/uniq/group.expected",
+        "tests/fixtures/uniq/skip-1-char.expected",
+        "tests/fixtures/uniq/skip-2-fields.expected",
+        "tests/fixtures/uniq/skip-21-fields.expected",
+        "tests/fixtures/uniq/skip-3-check-2-chars.expected",
+        "tests/fixtures/uniq/skip-3-check-5-chars.expected",
+        "tests/fixtures/uniq/skip-5-chars.expected",
+        "tests/fixtures/uniq/skip-chars.txt",
+        "tests/fixtures/uniq/skip-fields.txt",
+        "tests/fixtures/uniq/sorted-all-repeated-prepend.expected",
+        "tests/fixtures/uniq/sorted-all-repeated-separate.expected",
+        "tests/fixtures/uniq/sorted-all-repeated.expected",
+        "tests/fixtures/uniq/sorted-counts.expected",
+        "tests/fixtures/uniq/sorted-ignore-case.expected",
+        "tests/fixtures/uniq/sorted-repeated-only.expected",
+        "tests/fixtures/uniq/sorted-simple.expected",
+        "tests/fixtures/uniq/sorted-unique-only.expected",
+        "tests/fixtures/uniq/sorted.txt",
+        "tests/fixtures/util/**",
+        "tests/fixtures/wc/UTF_8_weirdchars.txt",
+        "tests/fixtures/wc/alice in wonderland.txt",
+        "tests/fixtures/wc/alice_in_wonderland.txt",
+        "tests/fixtures/wc/dir with spaces/**",
+        "tests/fixtures/wc/emptyfile.txt",
+        "tests/fixtures/wc/lorem_ipsum.txt",
+        "tests/fixtures/wc/manyemptylines.txt",
+        "tests/fixtures/wc/moby_dick.txt",
+        "tests/fixtures/wc/notrailingnewline.txt",
+        "tests/fixtures/wc/onelongemptyline.txt",
+        "tests/fixtures/wc/onelongword.txt",
+        "tests/test_localization_and_colors.rs",
+        "tests/test_util_name.rs",
+        "tests/test_uudoc.rs",
+        "tests/tests.rs",
+        "tests/uudoc/**",
+        "util/**"
+      ],
+      "text": "Copyright (c) uutils developers\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) uutils developers, MIT license (LICENSE), https://github.com/uutils/coreutils."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "src/uu/wc/src/utf8/**"
+      ],
+      "text": "// spell-checker:ignore Sapin\nCopyright (c) Simon Sapin and many others\n\nPermission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) Simon Sapin and many others, MIT license (LICENSE), https://github.com/uutils/coreutils/tree/d5a8979c475c03a0bdcb094c00741c590b37cc00/src/uu/wc/src/utf8."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.BAT"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "handlebars",
+      "paths": [
+        "**/*.hbs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/GNUmakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.checkfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.debug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/-f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.busybox-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0Fnt-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3-0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3a3f-0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3f-0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/W20l24f-ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a3-0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a3f-0F"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a3f-0Fnt-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/break_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_test_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/l24-FF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/non_empty_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/one_word"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/only"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ref_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/regular_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sequence"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/series"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

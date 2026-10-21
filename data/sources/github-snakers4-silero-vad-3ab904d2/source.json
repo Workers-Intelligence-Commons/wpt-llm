@@ -1,0 +1,310 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/snakers4/silero-vad",
+  "revision": "1e261b036686cd0017d500ee96acd1c4ba572a9d",
+  "checksum": "sha256:a8c0512f6c95815afb649efa0fb3bd28ad9069eac128296cbc13d1119ce24b2d",
+  "extract": {
+    "exclude": [
+      "examples/c++/aepyx.wav",
+      "examples/c++/aepyx_8k.wav",
+      "examples/cpp_libtorch/aepyx.wav",
+      "examples/cpp_libtorch/silero",
+      "examples/cpp_libtorch_deprecated/aepyx.wav",
+      "examples/cpp_libtorch_deprecated/silero",
+      "files/**",
+      "src/silero_vad/data/silero_vad.onnx",
+      "src/silero_vad/data/silero_vad_16k.safetensors",
+      "src/silero_vad/data/silero_vad_16k_op15.onnx",
+      "src/silero_vad/data/silero_vad_16k_sequence.onnx",
+      "src/silero_vad/data/silero_vad_half.onnx",
+      "src/silero_vad/data/silero_vad_op18_ifless.onnx",
+      "src/silero_vad/data/silero_vad_openvino_16k.onnx",
+      "tests/data/**",
+      "tuning/example_dataframe.feather",
+      "src/silero_vad/data/silero_vad.jit"
+    ]
+  },
+  "history": {
+    "since": "caddb3b7ce1dee88a14d5621a0e9a8fdeb2c2c48"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020-present Silero Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/snakers4/silero-vad: Copyright (c) 2020-present Silero Team, MIT license (LICENSE), https://github.com/snakers4/silero-vad."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "CITATION.cff",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "README.md",
+        "datasets/**",
+        "examples/c++/README.md",
+        "examples/c++/main.cc",
+        "examples/c++/silero.cc",
+        "examples/c++/silero.h",
+        "examples/c++/wav.h",
+        "examples/colab_record_example.ipynb",
+        "examples/cpp/**",
+        "examples/cpp_libtorch/README.md",
+        "examples/cpp_libtorch/main.cc",
+        "examples/cpp_libtorch/silero_torch.cc",
+        "examples/cpp_libtorch/silero_torch.h",
+        "examples/cpp_libtorch/wav.h",
+        "examples/cpp_libtorch_deprecated/README.md",
+        "examples/cpp_libtorch_deprecated/main.cc",
+        "examples/cpp_libtorch_deprecated/silero_torch.cc",
+        "examples/cpp_libtorch_deprecated/silero_torch.h",
+        "examples/cpp_libtorch_deprecated/wav.h",
+        "examples/csharp/**",
+        "examples/go/**",
+        "examples/haskell/**",
+        "examples/java-example/**",
+        "examples/java-wav-file-example/**",
+        "examples/microphone_and_webRTC_integration/**",
+        "examples/onnx_sequence/**",
+        "examples/openvino/**",
+        "examples/parallel_example.ipynb",
+        "examples/pyaudio-streaming/**",
+        "examples/rust-example/**",
+        "examples/rust-wav-processing-with-wavekat-vad/**",
+        "hubconf.py",
+        "pyproject.toml",
+        "silero-vad.ipynb",
+        "src/silero_vad/__init__.py",
+        "src/silero_vad/data/__init__.py",
+        "src/silero_vad/data/silero_vad.jit",
+        "src/silero_vad/model.py",
+        "src/silero_vad/sequence_vad.py",
+        "src/silero_vad/tinygrad_model.py",
+        "src/silero_vad/utils_vad.py",
+        "tests/conftest.py",
+        "tests/test_audio_backends.py",
+        "tests/test_basic.py",
+        "tests/test_optional_deps.py",
+        "tests/test_sequence_parity.py",
+        "tests/test_vad_iterator.py",
+        "tuning/README.md",
+        "tuning/__init__.py",
+        "tuning/config.yml",
+        "tuning/search_thresholds.py",
+        "tuning/tune.py",
+        "tuning/utils.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020-present Silero Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2020-present Silero Team, MIT license (LICENSE), https://github.com/snakers4/silero-vad."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cabal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/haskell/stack.yaml.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

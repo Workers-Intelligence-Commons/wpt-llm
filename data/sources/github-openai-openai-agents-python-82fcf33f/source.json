@@ -1,0 +1,386 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/openai/openai-agents-python",
+  "revision": "17d994bd3045dae71acda676a4ef4762ed8ecd94",
+  "checksum": "sha256:6ff2bec82b45b54225df7b3e63a63bb948a6b1dd9e68c73d0ddc48ba0159f7a4",
+  "extract": {
+    "exclude": [
+      "docs/assets/images/graph.png",
+      "docs/assets/images/harness_with_compute.png",
+      "docs/assets/images/mcp-tracing.jpg",
+      "docs/assets/images/orchestration.png",
+      "examples/basic/media/**",
+      "examples/sandbox/data/**",
+      "examples/sandbox/tutorials/vision_website_clone/reference-site.png"
+    ]
+  },
+  "history": {
+    "since": "aaec57a426b35079480d96cef473a7494c95b0ad"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 OpenAI\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/openai/openai-agents-python: Copyright (c) 2025 OpenAI, MIT license (LICENSE), https://github.com/openai/openai-agents-python."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".prettierrc",
+        ".release-please-manifest.json",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "PLANS.md",
+        "README.md",
+        "SECURITY.md",
+        "docs/agents.md",
+        "docs/assets/images/favicon-platform.svg",
+        "docs/assets/logo.svg",
+        "docs/config.md",
+        "docs/context.md",
+        "docs/examples.md",
+        "docs/guardrails.md",
+        "docs/handoffs.md",
+        "docs/human_in_the_loop.md",
+        "docs/index.md",
+        "docs/ja/**",
+        "docs/ko/**",
+        "docs/llms-full.txt",
+        "docs/llms.txt",
+        "docs/mcp.md",
+        "docs/models/**",
+        "docs/multi_agent.md",
+        "docs/quickstart.md",
+        "docs/realtime/**",
+        "docs/ref/**",
+        "docs/release.md",
+        "docs/repl.md",
+        "docs/results.md",
+        "docs/running_agents.md",
+        "docs/sandbox/**",
+        "docs/sandbox_agents.md",
+        "docs/scripts/**",
+        "docs/sessions/**",
+        "docs/streaming.md",
+        "docs/stylesheets/**",
+        "docs/testing.md",
+        "docs/tools.md",
+        "docs/tracing.md",
+        "docs/usage.md",
+        "docs/visualization.md",
+        "docs/voice/**",
+        "docs/zh/**",
+        "examples/README.md",
+        "examples/__init__.py",
+        "examples/agent_patterns/**",
+        "examples/auto_mode.py",
+        "examples/basic/agent_lifecycle_example.py",
+        "examples/basic/dynamic_system_prompt.py",
+        "examples/basic/hello_world.py",
+        "examples/basic/hello_world_gpt_5.py",
+        "examples/basic/hello_world_gpt_oss.py",
+        "examples/basic/hello_world_jupyter.ipynb",
+        "examples/basic/image_tool_output.py",
+        "examples/basic/lifecycle_example.py",
+        "examples/basic/local_file.py",
+        "examples/basic/local_image.py",
+        "examples/basic/non_strict_output_type.py",
+        "examples/basic/previous_response_id.py",
+        "examples/basic/prompt_template.py",
+        "examples/basic/remote_image.py",
+        "examples/basic/remote_pdf.py",
+        "examples/basic/retry.py",
+        "examples/basic/retry_litellm.py",
+        "examples/basic/stream_function_call_args.py",
+        "examples/basic/stream_items.py",
+        "examples/basic/stream_text.py",
+        "examples/basic/stream_ws.py",
+        "examples/basic/tool_guardrails.py",
+        "examples/basic/tools.py",
+        "examples/basic/trace_redaction.py",
+        "examples/basic/usage_tracking.py",
+        "examples/customer_service/**",
+        "examples/decisions/**",
+        "examples/financial_research_agent/**",
+        "examples/handoffs/**",
+        "examples/hosted_mcp/**",
+        "examples/live/**",
+        "examples/mcp/**",
+        "examples/memory/**",
+        "examples/model_providers/**",
+        "examples/realtime/**",
+        "examples/reasoning_content/**",
+        "examples/research_bot/**",
+        "examples/run_examples.py",
+        "examples/sandbox/README.md",
+        "examples/sandbox/__init__.py",
+        "examples/sandbox/basic.py",
+        "examples/sandbox/docker/**",
+        "examples/sandbox/docs/**",
+        "examples/sandbox/extensions/**",
+        "examples/sandbox/handoffs.py",
+        "examples/sandbox/healthcare_support/**",
+        "examples/sandbox/memory.py",
+        "examples/sandbox/memory_multi_agent_multiturn.py",
+        "examples/sandbox/memory_s3.py",
+        "examples/sandbox/misc/**",
+        "examples/sandbox/sandbox_agent_capabilities.py",
+        "examples/sandbox/sandbox_agent_with_remote_snapshot.py",
+        "examples/sandbox/sandbox_agent_with_tools.py",
+        "examples/sandbox/sandbox_agents_as_tools.py",
+        "examples/sandbox/shared_session_workdirs.py",
+        "examples/sandbox/tax_prep.py",
+        "examples/sandbox/tutorials/Dockerfile",
+        "examples/sandbox/tutorials/__init__.py",
+        "examples/sandbox/tutorials/data/**",
+        "examples/sandbox/tutorials/dataroom_metric_extract/**",
+        "examples/sandbox/tutorials/dataroom_qa/**",
+        "examples/sandbox/tutorials/misc.py",
+        "examples/sandbox/tutorials/repo_code_review/**",
+        "examples/sandbox/tutorials/sandbox_resume/**",
+        "examples/sandbox/tutorials/vision_website_clone/README.md",
+        "examples/sandbox/tutorials/vision_website_clone/__init__.py",
+        "examples/sandbox/tutorials/vision_website_clone/main.py",
+        "examples/sandbox/tutorials/vision_website_clone/skills/**",
+        "examples/sandbox/unix_local_pty.py",
+        "examples/sandbox/unix_local_runner.py",
+        "examples/tools/**",
+        "examples/voice/**",
+        "examples/web_search_utils.py",
+        "integration_tests/**",
+        "mkdocs.yml",
+        "pyproject.toml",
+        "pyrightconfig.json",
+        "release-please-config.json",
+        "src/**",
+        "tests/**",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 OpenAI\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 OpenAI, MIT license (LICENSE), https://github.com/openai/openai-agents-python."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ico"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mount"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

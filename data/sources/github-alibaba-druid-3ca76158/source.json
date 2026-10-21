@@ -1,0 +1,682 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/alibaba/druid",
+  "revision": "fa8dc9912637a2f729eef9f55356621fec18d40e",
+  "checksum": "sha256:d3b5fa2349b4b7c2921807a03774c6b2d48b31c29e52437a3fa50dda9705d486",
+  "extract": {
+    "exclude": [
+      ".mvn/wrapper/maven-wrapper.jar",
+      "core/src/main/java/com/alibaba/druid/pool/vendor/**",
+      "core/src/test/java/com/alibaba/druid/bvt/pool/vendor/**",
+      "core/src/test/resources/**",
+      "doc/**",
+      "druid-demo-petclinic/.mvn/wrapper/maven-wrapper.jar",
+      "druid-demo-petclinic/gradle/wrapper/gradle-wrapper.jar",
+      "druid-demo-petclinic/img.png",
+      "druid-demo-petclinic/img_1.png",
+      "druid-demo-petclinic/img_2.png",
+      "druid-demo-petclinic/img_3.png",
+      "druid-demo-petclinic/src/main/resources/messages/messages_de.properties",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/montserrat-webfont.eot",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/montserrat-webfont.ttf",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/montserrat-webfont.woff",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/varela_round-webfont.eot",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/varela_round-webfont.ttf",
+      "druid-demo-petclinic/src/main/resources/static/resources/fonts/varela_round-webfont.woff",
+      "druid-demo-petclinic/src/main/resources/static/resources/images/**",
+      "druid-logo.jpg"
+    ]
+  },
+  "history": {
+    "since": "0ee95f2e4f6c2ae715f105ebd4b5e3b999d91460"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE:\n\nAlibaba Druid\nCopyright 1999-2021 Alibaba Group Holding Ltd.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/alibaba/druid: Copyright 1999-2021 Alibaba Group Holding Ltd., Apache-2.0 license (license.txt), https://github.com/alibaba/druid; the authors of alibaba/druid (druid-demo-petclinic) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/alibaba/druid/tree/fa8dc9912637a2f729eef9f55356621fec18d40e/druid-demo-petclinic."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".cursor/**",
+        ".github/**",
+        ".gitignore",
+        ".mvn/wrapper/MavenWrapperDownloader.java",
+        ".mvn/wrapper/maven-wrapper.properties",
+        ".qoder/**",
+        ".travis.yml",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "NOTICE",
+        "QWEN.md",
+        "README.md",
+        "README_EN.md",
+        "SECURITY.md",
+        "codecov.yml",
+        "core/.gitignore",
+        "core/pom.xml",
+        "core/src/main/java/META-INF/**",
+        "core/src/main/java/com/alibaba/druid/Constants.java",
+        "core/src/main/java/com/alibaba/druid/DbType.java",
+        "core/src/main/java/com/alibaba/druid/DruidRuntimeException.java",
+        "core/src/main/java/com/alibaba/druid/FastsqlColumnAmbiguousException.java",
+        "core/src/main/java/com/alibaba/druid/FastsqlException.java",
+        "core/src/main/java/com/alibaba/druid/TransactionTimeoutException.java",
+        "core/src/main/java/com/alibaba/druid/VERSION.java",
+        "core/src/main/java/com/alibaba/druid/filter/**",
+        "core/src/main/java/com/alibaba/druid/mock/**",
+        "core/src/main/java/com/alibaba/druid/pool/DataSourceClosedException.java",
+        "core/src/main/java/com/alibaba/druid/pool/DataSourceDisableException.java",
+        "core/src/main/java/com/alibaba/druid/pool/DataSourceNotAvailableException.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidAbstractDataSource.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidAbstractDataSourceMBean.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidConnectionHolder.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSource.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceC3P0Adapter.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceC3P0AdapterMBean.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceFactory.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceMBean.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceStatLogger.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceStatLoggerAdapter.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceStatLoggerImpl.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidDataSourceStatValue.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidPooledCallableStatement.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidPooledConnection.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidPooledPreparedStatement.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidPooledResultSet.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidPooledStatement.java",
+        "core/src/main/java/com/alibaba/druid/pool/DruidStatementConnection.java",
+        "core/src/main/java/com/alibaba/druid/pool/ExceptionSorter.java",
+        "core/src/main/java/com/alibaba/druid/pool/GetConnectionTimeoutException.java",
+        "core/src/main/java/com/alibaba/druid/pool/JDBC4ValidConnectionChecker.java",
+        "core/src/main/java/com/alibaba/druid/pool/ManagedDataSource.java",
+        "core/src/main/java/com/alibaba/druid/pool/PoolableWrapper.java",
+        "core/src/main/java/com/alibaba/druid/pool/PreparedStatementHolder.java",
+        "core/src/main/java/com/alibaba/druid/pool/PreparedStatementPool.java",
+        "core/src/main/java/com/alibaba/druid/pool/ValidConnectionChecker.java",
+        "core/src/main/java/com/alibaba/druid/pool/ValidConnectionCheckerAdapter.java",
+        "core/src/main/java/com/alibaba/druid/pool/WrapperAdapter.java",
+        "core/src/main/java/com/alibaba/druid/pool/ha/**",
+        "core/src/main/java/com/alibaba/druid/pool/xa/**",
+        "core/src/main/java/com/alibaba/druid/proxy/**",
+        "core/src/main/java/com/alibaba/druid/sql/**",
+        "core/src/main/java/com/alibaba/druid/stat/**",
+        "core/src/main/java/com/alibaba/druid/support/**",
+        "core/src/main/java/com/alibaba/druid/util/**",
+        "core/src/main/java/com/alibaba/druid/wall/**",
+        "core/src/main/resources/**",
+        "core/src/main/scripts/**",
+        "core/src/test/java/com/alibaba/druid/Bug_for_alibank.java",
+        "core/src/test/java/com/alibaba/druid/DBCPTest.java",
+        "core/src/test/java/com/alibaba/druid/DbTestCase.java",
+        "core/src/test/java/com/alibaba/druid/DragoonMetaInfTest.java",
+        "core/src/test/java/com/alibaba/druid/LockTest.java",
+        "core/src/test/java/com/alibaba/druid/PoolTestCase.java",
+        "core/src/test/java/com/alibaba/druid/TestForZY.java",
+        "core/src/test/java/com/alibaba/druid/TestHibernateCRUDWithTransactional.java",
+        "core/src/test/java/com/alibaba/druid/TestHistogram.java",
+        "core/src/test/java/com/alibaba/druid/TestIdel3.java",
+        "core/src/test/java/com/alibaba/druid/TestLRU.java",
+        "core/src/test/java/com/alibaba/druid/TestLockCount.java",
+        "core/src/test/java/com/alibaba/druid/TestOracle.java",
+        "core/src/test/java/com/alibaba/druid/TestOraclePing.java",
+        "core/src/test/java/com/alibaba/druid/TestReplaceLicense.java",
+        "core/src/test/java/com/alibaba/druid/TestRollBack.java",
+        "core/src/test/java/com/alibaba/druid/TestSqlServer.java",
+        "core/src/test/java/com/alibaba/druid/TestTraceFilter.java",
+        "core/src/test/java/com/alibaba/druid/TestUtil.java",
+        "core/src/test/java/com/alibaba/druid/benckmark/**",
+        "core/src/test/java/com/alibaba/druid/bvt/AlipayUseCaseTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/DbTypeMaskTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/OrTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/bug/**",
+        "core/src/test/java/com/alibaba/druid/bvt/filter/**",
+        "core/src/test/java/com/alibaba/druid/bvt/hibernate/**",
+        "core/src/test/java/com/alibaba/druid/bvt/jmx/**",
+        "core/src/test/java/com/alibaba/druid/bvt/log/**",
+        "core/src/test/java/com/alibaba/druid/bvt/mock/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/AsyncInitTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/AsyncInitTest_1_scheduler.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Bug_for_dupCloseStmtError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/CallableStatmentTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Case0.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Case1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Case2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Case3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ClosedTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ConfigErrorTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ConfigErrorTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ConfigErrorTest3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ConfigErrorTestMysql.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/CreateSchedulerTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/CreateSchedulerTest_directCreate.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DataSourceDisableExceptionTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DestorySchedulerTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidConnectionHolderTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidConnectionHolderTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidConnectionHolderTest3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidConnectionHolderTest4.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceAsyncCloseTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceC3P0AdapterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceConverterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceDecryptTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceFactoryTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceFactoryTest0.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceFactoryTest1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceFactoryTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceFilterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceShrinkTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest10.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest4.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest5.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest6.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest7.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest8.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest9_phyMaxUseCount.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTestValidConnectionChecker.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_autocommit.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_autocommit2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_autocommit3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_autocommit4.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_clearCache.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_closeError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_createError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_enable.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_exceptionSorter.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_exceptionSorter_extend.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_fill.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_fill2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_getConnection.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_getConnection_2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_getPooledConnection.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_getPoolingPeakTime.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_getProperties.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_initSql.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_initSql_factory.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_initSqls.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_interrupt.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_interrupt2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_interrupt3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_lastCreateError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_lastError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_loadSysPropertyFilter.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_maxActive1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_maxActive2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_maxActive3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_maxActive4.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_maxWait.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_notEmptyWait.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_notEmptyWait2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_oracle.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_oracle2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_oracle3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_oracle_error.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_recycle.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_recycle2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_testOnBorrowFailed.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_testOnWhileIdleFailed.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_tryGet.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidDataSourceTest_wrapDriverFilters.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledCallableStatementTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledConnectionTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledConnectionTest1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledConnectionTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledConnectionTest_prepareError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledPreparedStatementTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledPreparedStatementTest1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledResultSetTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledResultSetTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DruidPooledStatementTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/DumpTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ExceptionSorterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/FullTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/HoldableUnsupportTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/InitExceptionThrowTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/Issue4316.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/JdbcDataSourceStatTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/KeepAliveTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/KeepAliveTest_scheduler.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/LastActiveTest_0.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/LockFairTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ManagedDataSourceTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/MaxWaitTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/OnFatalErrorMaxActiveTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/OnFatalErrorMaxActiveTest_1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PSCacheTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PSCacheTest1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PSCacheTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PSCacheTest3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PSCacheTest4.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ParamTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PasswordCallbackTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PreparedStatementKeyTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/PreparedStatementProxyImplTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/RegisterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/SavepointTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/SlowSqlMillisTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/SlowSqlMillisTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/SpringIbatisFilterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/SpringMybatisFilterTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestActiveTrace.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestClone.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestClose_0.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestClose_1.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestClose_2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestConnectError.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestConnectTimeout.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestDefault.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestDisable.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestDruidDataSource.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestGetUpdateCount.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestGraceShutdown.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestH2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestIdle.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestIdle2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestIdle3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestLogLongTimeTransaction.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOnBorrowFileAndNameTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOraclePrefetch.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWall.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWall2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWall3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWallJdbc3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWrap.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestOracleWrap2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestPoolPreparedStatement.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestPoolPreparedStatement2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestRemoveAbandoned.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestRemoveAbandoned2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestSharePreparedStatements.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TestStat.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TimeBetweenLogStatsMillisTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TimeBetweenLogStatsMillisTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TimeBetweenLogStatsMillisTest3.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/TransactionTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UnwrapTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UnwrapTest2.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UnwrapTest_filter.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UrlNotSetTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UserPasswordVersionTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UsingDefaultLockModeBenchmarkTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UsingFairLockBenchmarkTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/UsingUnfairLockBenchmarkTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ValidationQueryLogDB2Test.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/ValidationQueryLogTest.java",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/adapter/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/basic/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/dynamic/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/exception/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/profile/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/property/**",
+        "core/src/test/java/com/alibaba/druid/bvt/pool/xa/**",
+        "core/src/test/java/com/alibaba/druid/bvt/proxy/**",
+        "core/src/test/java/com/alibaba/druid/bvt/spring/**",
+        "core/src/test/java/com/alibaba/druid/bvt/sql/**",
+        "core/src/test/java/com/alibaba/druid/bvt/stat/**",
+        "core/src/test/java/com/alibaba/druid/bvt/support/**",
+        "core/src/test/java/com/alibaba/druid/bvt/utils/**",
+        "core/src/test/java/com/alibaba/druid/demo/**",
+        "core/src/test/java/com/alibaba/druid/filter/**",
+        "core/src/test/java/com/alibaba/druid/kylin/**",
+        "core/src/test/java/com/alibaba/druid/mysql/**",
+        "core/src/test/java/com/alibaba/druid/not_support/**",
+        "core/src/test/java/com/alibaba/druid/oceanbase/**",
+        "core/src/test/java/com/alibaba/druid/oracle/**",
+        "core/src/test/java/com/alibaba/druid/polardb/**",
+        "core/src/test/java/com/alibaba/druid/polardb2/**",
+        "core/src/test/java/com/alibaba/druid/pool/**",
+        "core/src/test/java/com/alibaba/druid/postgresql/**",
+        "core/src/test/java/com/alibaba/druid/proxy/**",
+        "core/src/test/java/com/alibaba/druid/pvt/**",
+        "core/src/test/java/com/alibaba/druid/spring/**",
+        "core/src/test/java/com/alibaba/druid/sql/**",
+        "core/src/test/java/com/alibaba/druid/stat/**",
+        "core/src/test/java/com/alibaba/druid/support/**",
+        "core/src/test/java/com/alibaba/druid/test/**",
+        "core/src/test/java/com/alibaba/druid/util/**",
+        "docs/**",
+        "druid-admin/**",
+        "druid-spring-boot-3-starter/**",
+        "druid-spring-boot-4-starter/**",
+        "druid-spring-boot-starter/**",
+        "druid-wrapper/**",
+        "license.txt",
+        "mvnw",
+        "mvnw.cmd",
+        "openspec/**",
+        "pom.xml",
+        "src/**",
+        "vtune.sh"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nNOTICE:\n\nAlibaba Druid\nCopyright 1999-2021 Alibaba Group Holding Ltd.\n",
+      "attribution": "Copyright 1999-2021 Alibaba Group Holding Ltd., Apache-2.0 license (license.txt), https://github.com/alibaba/druid."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "druid-demo-petclinic/.devcontainer/**",
+        "druid-demo-petclinic/.editorconfig",
+        "druid-demo-petclinic/.github/**",
+        "druid-demo-petclinic/.gitignore",
+        "druid-demo-petclinic/.gitpod.yml",
+        "druid-demo-petclinic/.mvn/wrapper/MavenWrapperDownloader.java",
+        "druid-demo-petclinic/.mvn/wrapper/maven-wrapper.properties",
+        "druid-demo-petclinic/.springjavaformatconfig",
+        "druid-demo-petclinic/LICENSE.txt",
+        "druid-demo-petclinic/build.gradle",
+        "druid-demo-petclinic/docker-compose.yml",
+        "druid-demo-petclinic/gradle/wrapper/gradle-wrapper.properties",
+        "druid-demo-petclinic/gradlew",
+        "druid-demo-petclinic/gradlew.bat",
+        "druid-demo-petclinic/mvnw",
+        "druid-demo-petclinic/mvnw.cmd",
+        "druid-demo-petclinic/pom.xml",
+        "druid-demo-petclinic/readme.md",
+        "druid-demo-petclinic/settings.gradle",
+        "druid-demo-petclinic/src/checkstyle/**",
+        "druid-demo-petclinic/src/main/java/**",
+        "druid-demo-petclinic/src/main/resources/application-mysql.properties",
+        "druid-demo-petclinic/src/main/resources/application-postgres.properties",
+        "druid-demo-petclinic/src/main/resources/application.properties",
+        "druid-demo-petclinic/src/main/resources/banner.txt",
+        "druid-demo-petclinic/src/main/resources/db/**",
+        "druid-demo-petclinic/src/main/resources/messages/messages.properties",
+        "druid-demo-petclinic/src/main/resources/messages/messages_en.properties",
+        "druid-demo-petclinic/src/main/resources/messages/messages_es.properties",
+        "druid-demo-petclinic/src/main/resources/static/resources/css/**",
+        "druid-demo-petclinic/src/main/resources/static/resources/fonts/montserrat-webfont.svg",
+        "druid-demo-petclinic/src/main/resources/static/resources/fonts/varela_round-webfont.svg",
+        "druid-demo-petclinic/src/main/resources/templates/**",
+        "druid-demo-petclinic/src/main/scss/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of alibaba/druid (druid-demo-petclinic) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/alibaba/druid/tree/fa8dc9912637a2f729eef9f55356621fec18d40e/druid-demo-petclinic."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Driver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.factories"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.handlers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.imports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.schemas"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.springjavaformatconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SQLASTOutputVisitorTest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alias_keywords"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builtin_aggreagte_functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builtin_datatypes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builtin_functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builtin_tables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/keywords"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvnw"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

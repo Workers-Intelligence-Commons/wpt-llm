@@ -1,0 +1,1819 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/shadowsocks/ShadowsocksX-NG",
+  "revision": "719203afc60e1dbab00e459ebcfecc468e7700bd",
+  "checksum": "sha256:7a7ed0a79222d659b2c12b6a1da6ffc838ee3992d71b827b44d6a3c77919718b",
+  "extract": {
+    "exclude": [
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_128x128.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_128x128@2x.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_16x16.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_16x16@2x.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_256x256.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_256x256@2x.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_32x32.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_32x32@2x.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_512x512.png",
+      "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Icon_512x512@2x.png",
+      "ShadowsocksX-NG/images/**",
+      "deps/Makefile",
+      "deps/c-ares/**",
+      "deps/kcptun",
+      "deps/libsodium/contrib/**",
+      "deps/libsodium/logo.png",
+      "deps/mbedtls/3rdparty/**",
+      "deps/mbedtls/programs/fuzz/corpuses/**",
+      "deps/mbedtls/tests/data_files/base64/def_b64_ff.bin",
+      "deps/mbedtls/tests/data_files/cli-rsa-sha256-badalg.crt.der",
+      "deps/mbedtls/tests/data_files/cli-rsa-sha256.crt.der",
+      "deps/mbedtls/tests/data_files/cli-rsa-sha256.key.der",
+      "deps/mbedtls/tests/data_files/cli-rsa.key.der",
+      "deps/mbedtls/tests/data_files/cli2.crt.der",
+      "deps/mbedtls/tests/data_files/cli2.key.der",
+      "deps/mbedtls/tests/data_files/dh.optlen.der",
+      "deps/mbedtls/tests/data_files/ec_prv.pk8.der",
+      "deps/mbedtls/tests/data_files/ec_prv.pk8.pw.der",
+      "deps/mbedtls/tests/data_files/ec_prv.pk8nopub.der",
+      "deps/mbedtls/tests/data_files/ec_prv.pk8nopubparam.der",
+      "deps/mbedtls/tests/data_files/ec_prv.pk8param.der",
+      "deps/mbedtls/tests/data_files/ec_prv.sec1.der",
+      "deps/mbedtls/tests/data_files/ec_prv.specdom.der",
+      "deps/mbedtls/tests/data_files/ec_pub.der",
+      "deps/mbedtls/tests/data_files/format_pkcs12.fmt",
+      "deps/mbedtls/tests/data_files/hash_file_1",
+      "deps/mbedtls/tests/data_files/hash_file_2",
+      "deps/mbedtls/tests/data_files/hash_file_3",
+      "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_public.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_1024_public.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_2048_public.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_2des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_rc4_128.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_2des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_rc4_128.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_2des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_rc4_128.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha512.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha512.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha512.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha512.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha512.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha224.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha256.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha384.der",
+      "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha512.der",
+      "deps/mbedtls/tests/data_files/server1.ca.der",
+      "deps/mbedtls/tests/data_files/server1.crt.der",
+      "deps/mbedtls/tests/data_files/server1.der",
+      "deps/mbedtls/tests/data_files/server2-sha256.crt.der",
+      "deps/mbedtls/tests/data_files/server2.crt.der",
+      "deps/mbedtls/tests/data_files/server2.der",
+      "deps/mbedtls/tests/data_files/server2.key.der",
+      "deps/mbedtls/tests/data_files/server5-der0.crt",
+      "deps/mbedtls/tests/data_files/server5-der1a.crt",
+      "deps/mbedtls/tests/data_files/server5-der1b.crt",
+      "deps/mbedtls/tests/data_files/server5-der2.crt",
+      "deps/mbedtls/tests/data_files/server5-der4.crt",
+      "deps/mbedtls/tests/data_files/server5-der8.crt",
+      "deps/mbedtls/tests/data_files/server5-der9.crt",
+      "deps/mbedtls/tests/data_files/server5.crt.der",
+      "deps/mbedtls/tests/data_files/server5.key.der",
+      "deps/mbedtls/tests/data_files/test-ca-sha1.crt.der",
+      "deps/mbedtls/tests/data_files/test-ca-sha256.crt.der",
+      "deps/mbedtls/tests/data_files/test-ca.crt.der",
+      "deps/mbedtls/tests/data_files/test-ca.der",
+      "deps/mbedtls/tests/data_files/test-ca.key.der",
+      "deps/mbedtls/tests/data_files/test-ca2.crt.der",
+      "deps/mbedtls/tests/data_files/test-ca2.key.der",
+      "deps/patch/**",
+      "deps/shadowsocks-libev/.copr/**",
+      "deps/shadowsocks-libev/.dockerignore",
+      "deps/shadowsocks-libev/.github/**",
+      "deps/shadowsocks-libev/.gitignore",
+      "deps/shadowsocks-libev/.gitmodules",
+      "deps/shadowsocks-libev/.travis.yml",
+      "deps/shadowsocks-libev/.uncrustify.cfg",
+      "deps/shadowsocks-libev/AUTHORS",
+      "deps/shadowsocks-libev/CMakeLists.txt",
+      "deps/shadowsocks-libev/COPYING",
+      "deps/shadowsocks-libev/Changes",
+      "deps/shadowsocks-libev/INSTALL",
+      "deps/shadowsocks-libev/LICENSE",
+      "deps/shadowsocks-libev/Makefile.am",
+      "deps/shadowsocks-libev/README.md",
+      "deps/shadowsocks-libev/acl/**",
+      "deps/shadowsocks-libev/autogen.sh",
+      "deps/shadowsocks-libev/build/**",
+      "deps/shadowsocks-libev/cmake/**",
+      "deps/shadowsocks-libev/completions/**",
+      "deps/shadowsocks-libev/configure.ac",
+      "deps/shadowsocks-libev/debian/**",
+      "deps/shadowsocks-libev/doc/**",
+      "deps/shadowsocks-libev/docker/**",
+      "deps/shadowsocks-libev/libbloom/misc/collisions/collision_data_v1.2.gz",
+      "deps/shadowsocks-libev/libbloom/misc/collisions/collision_data_v1.2.gz.png",
+      "deps/shadowsocks-libev/libbloom/misc/collisions/collision_data_v1.3.gz",
+      "deps/shadowsocks-libev/libbloom/misc/collisions/collision_data_v1.3.gz.png",
+      "deps/shadowsocks-libev/libcork/tests/**",
+      "deps/shadowsocks-libev/m4/**",
+      "deps/shadowsocks-libev/rpm/**",
+      "deps/shadowsocks-libev/scripts/**",
+      "deps/shadowsocks-libev/shadowsocks-libev.pc.in",
+      "deps/shadowsocks-libev/snap/**",
+      "deps/shadowsocks-libev/src/**",
+      "deps/shadowsocks-libev/tests/**",
+      "deps/simple-obfs/.gitignore",
+      "deps/simple-obfs/.gitmodules",
+      "deps/simple-obfs/.travis.yml",
+      "deps/simple-obfs/.uncrustify.cfg",
+      "deps/simple-obfs/APKBUILD",
+      "deps/simple-obfs/AUTHORS",
+      "deps/simple-obfs/COPYING",
+      "deps/simple-obfs/Changes",
+      "deps/simple-obfs/INSTALL",
+      "deps/simple-obfs/LICENSE",
+      "deps/simple-obfs/Makefile.am",
+      "deps/simple-obfs/README.md",
+      "deps/simple-obfs/autogen.sh",
+      "deps/simple-obfs/configure.ac",
+      "deps/simple-obfs/debian/**",
+      "deps/simple-obfs/doc/**",
+      "deps/simple-obfs/libcork/tests/**",
+      "deps/simple-obfs/m4/**",
+      "deps/simple-obfs/rpm/**",
+      "deps/simple-obfs/scripts/**",
+      "deps/simple-obfs/src/**"
+    ]
+  },
+  "history": {
+    "since": "c34fc2417ba8fb901ddb5b1af00e407a272fcfbf"
+  },
+  "licenses": [
+    {
+      "license": "GPL-3.0-or-later AND MIT AND BSD-3-Clause AND BSD-2-Clause AND ISC AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nthe GNU General Public License is intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.  We, the Free Software Foundation, use the\nGNU General Public License for most of our software; it applies also to\nany other work released this way by its authors.  You can apply it to\nyour programs, too.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  To protect your rights, we need to prevent others from denying you\nthese rights or asking you to surrender the rights.  Therefore, you have\ncertain responsibilities if you distribute copies of the software, or if\nyou modify it: responsibilities to respect the freedom of others.\n\n  For example, if you distribute copies of such a program, whether\ngratis or for a fee, you must pass on to the recipients the same\nfreedoms that you received.  You must make sure that they, too, receive\nor can get the source code.  And you must show them these terms so they\nknow their rights.\n\n  Developers that use the GNU GPL protect your rights with two steps:\n(1) assert copyright on the software, and (2) offer you this License\ngiving you legal permission to copy, distribute and/or modify it.\n\n  For the developers' and authors' protection, the GPL clearly explains\nthat there is no warranty for this free software.  For both users' and\nauthors' sake, the GPL requires that modified versions be marked as\nchanged, so that their problems will not be attributed erroneously to\nauthors of previous versions.\n\n  Some devices are designed to deny users access to install or run\nmodified versions of the software inside them, although the manufacturer\ncan do so.  This is fundamentally incompatible with the aim of\nprotecting users' freedom to change the software.  The systematic\npattern of such abuse occurs in the area of products for individuals to\nuse, which is precisely where it is most unacceptable.  Therefore, we\nhave designed this version of the GPL to prohibit the practice for those\nproducts.  If such problems arise substantially in other domains, we\nstand ready to extend this provision to those domains in future versions\nof the GPL, as needed to protect the freedom of users.\n\n  Finally, every program is threatened constantly by software patents.\nStates should not allow patents to restrict development and use of\nsoftware on general-purpose computers, but in those that do, we wish to\navoid the special danger that patents applied to a free program could\nmake it effectively proprietary.  To prevent this, the GPL assures that\npatents cannot be used to render the program non-free.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Use with the GNU Affero General Public License.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU Affero General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the special requirements of the GNU Affero General Public License,\nsection 13, concerning interaction through a network will apply to the\ncombination as such.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU General Public License from time to time.  Such new versions will\nbe similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If the program does terminal interaction, make it output a short\nnotice like this when it starts in an interactive mode:\n\n    <program>  Copyright (C) <year>  <name of author>\n    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n    This is free software, and you are welcome to redistribute it\n    under certain conditions; type `show c' for details.\n\nThe hypothetical commands `show w' and `show c' should show the appropriate\nparts of the General Public License.  Of course, your program's commands\nmight be different; for a GUI interface, you would use an \"about box\".\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU GPL, see\n<http://www.gnu.org/licenses/>.\n\n  The GNU General Public License does not permit incorporating your program\ninto proprietary programs.  If your program is a subroutine library, you\nmay consider it more useful to permit linking proprietary applications with\nthe library.  If this is what you want to do, use the GNU Lesser General\nPublic License instead of this License.  But first, please read\n<http://www.gnu.org/philosophy/why-not-lgpl.html>.\n\n\nVersion: No file states a version of the License; its section 14 lets any version published by the Free Software Foundation be chosen, so it reads as version 3 or any later version.\n\nCopyright (c) 2014-2021 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\n(The MIT License)\n\nCopyright © 2013-2015 Stephen Celis (<stephen@stephencelis.com>)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\nCopyright (c) 2012-2014, Pierre-Olivier Latour\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * The name of Pierre-Olivier Latour may not be used to endorse\n      or promote products derived from this software without specific\n      prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL PIERRE-OLIVIER LATOUR BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2012-2013, Vadim Shpakovski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n**The MIT License**\n**Copyright © 2015 Krunoslav Zaher, Shai Mishali**\n**All rights reserved.**\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n/*\n * ISC License\n *\n * Copyright (c) 2013-2019\n * Frank Denis <j at pureftpd dot org>\n *\n * Permission to use, copy, modify, and/or distribute this software for any\n * purpose with or without fee is hereby granted, provided that the above\n * copyright notice and this permission notice appear in all copies.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\n * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\n * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\n * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\n * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\n * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\n * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n */\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nCopyright (c) 2012, Jyri J. Virkki\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1. Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\nnotice, this list of conditions and the following disclaimer in the\ndocumentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright © 2011-2012, RedJack, LLC.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  • Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  • Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  • Neither the name of RedJack Software, LLC nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright © 2009-2013, RedJack, LLC.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  • Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  • Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  • Neither the name of RedJack Software, LLC nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nMIT License\n\nCopyright (c) 2019 by Max Lv <max.c.lv@gmail.com>  \nCopyright (C) 2019 by Mygod Studio <contact-v2ray-plugin@mygod.be>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/shadowsocks/ShadowsocksX-NG: the authors of shadowsocks/ShadowsocksX-NG (the license file names no copyright line), GPL-3.0-or-later license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG; Copyright (c) 2014-2021 Alamofire Software Foundation (http://alamofire.org/), MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/Alamofire; Copyright © 2013-2015 Stephen Celis (<stephen@stephencelis.com>), MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/BRLOptionParser; Copyright (c) 2012-2014, Pierre-Olivier Latour, BSD-3-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/GCDWebServer; Copyright (c) 2012-2013, Vadim Shpakovski, BSD-2-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/MASShortcut; the authors of shadowsocks/ShadowsocksX-NG (Pods/RxCocoa) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxCocoa; the authors of shadowsocks/ShadowsocksX-NG (Pods/RxRelay) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxRelay; the authors of shadowsocks/ShadowsocksX-NG (Pods/RxSwift) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxSwift; the authors of shadowsocks/ShadowsocksX-NG (deps/libsodium) (the license file names no copyright line), ISC license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/libsodium; the authors of shadowsocks/ShadowsocksX-NG (deps/mbedtls) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/mbedtls; Copyright (c) 2012, Jyri J. Virkki, BSD-2-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libbloom; Copyright © 2011-2012, RedJack, LLC., BSD-3-Clause license (COPYING), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libcork; Copyright © 2009-2013, RedJack, LLC., BSD-3-Clause license (LICENSE.txt), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libipset; Copyright © 2011-2012, RedJack, LLC., BSD-3-Clause license (COPYING), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/simple-obfs/libcork; Copyright (c) 2019 by Max Lv <max.c.lv@gmail.com>; Copyright (C) 2019 by Mygod Studio <contact-v2ray-plugin@mygod.be>, MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/v2ray-plugin."
+    },
+    {
+      "license": "GPL-3.0-or-later",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        "LICENSE",
+        "LaunchHelper/**",
+        "Makefile",
+        "Podfile",
+        "Podfile.lock",
+        "Pods/Headers/**",
+        "Pods/Manifest.lock",
+        "Pods/Pods.xcodeproj/**",
+        "Pods/Target Support Files/**",
+        "README.md",
+        "ShadowsocksX-NG/AppDelegate.swift",
+        "ShadowsocksX-NG/Assets.xcassets/AppIcon.appiconset/Contents.json",
+        "ShadowsocksX-NG/Assets.xcassets/Contents.json",
+        "ShadowsocksX-NG/Base.lproj/**",
+        "ShadowsocksX-NG/Credits.rtf",
+        "ShadowsocksX-NG/Diagnose.swift",
+        "ShadowsocksX-NG/ImportWindowController.swift",
+        "ShadowsocksX-NG/Info.plist",
+        "ShadowsocksX-NG/LaunchAgentUtils.swift",
+        "ShadowsocksX-NG/LaunchAtLoginController.h",
+        "ShadowsocksX-NG/LaunchAtLoginController.m",
+        "ShadowsocksX-NG/Notifications.swift",
+        "ShadowsocksX-NG/PACURLFormatter.swift",
+        "ShadowsocksX-NG/PACUtils.swift",
+        "ShadowsocksX-NG/PreferencesWinController.swift",
+        "ShadowsocksX-NG/PreferencesWindowController.swift",
+        "ShadowsocksX-NG/ProxyConfHelper.h",
+        "ShadowsocksX-NG/ProxyConfHelper.m",
+        "ShadowsocksX-NG/ProxyConfTool.h",
+        "ShadowsocksX-NG/ProxyConfTool.m",
+        "ShadowsocksX-NG/ProxyInterfacesViewCtrl.swift",
+        "ShadowsocksX-NG/SWBApplication.h",
+        "ShadowsocksX-NG/SWBApplication.m",
+        "ShadowsocksX-NG/SWBQRCodeWindowController.h",
+        "ShadowsocksX-NG/SWBQRCodeWindowController.m",
+        "ShadowsocksX-NG/SWBQRCodeWindowController.xib",
+        "ShadowsocksX-NG/ServerProfile.swift",
+        "ShadowsocksX-NG/ServerProfileManager.swift",
+        "ShadowsocksX-NG/ShadowsocksX-NG-Bridging-Header.h",
+        "ShadowsocksX-NG/ShareServerProfilesWindowController.swift",
+        "ShadowsocksX-NG/ShortcutsController.h",
+        "ShadowsocksX-NG/ShortcutsController.m",
+        "ShadowsocksX-NG/ToastWindowController.swift",
+        "ShadowsocksX-NG/ToastWindowController.xib",
+        "ShadowsocksX-NG/UserRulesController.swift",
+        "ShadowsocksX-NG/Utils.h",
+        "ShadowsocksX-NG/Utils.m",
+        "ShadowsocksX-NG/Utils.swift",
+        "ShadowsocksX-NG/abp.js",
+        "ShadowsocksX-NG/fix_dir_owner.sh",
+        "ShadowsocksX-NG/gfwlist.txt",
+        "ShadowsocksX-NG/install_helper.sh",
+        "ShadowsocksX-NG/kcptun/**",
+        "ShadowsocksX-NG/privoxy/**",
+        "ShadowsocksX-NG/proxy_conf_helper_version.h",
+        "ShadowsocksX-NG/simple-obfs/**",
+        "ShadowsocksX-NG/ss-local/**",
+        "ShadowsocksX-NG/user-rule.txt",
+        "ShadowsocksX-NG/v2ray-plugin/**",
+        "ShadowsocksX-NG/zh-Hans.lproj/**",
+        "ShadowsocksX-NG.xcodeproj/**",
+        "ShadowsocksX-NG.xcworkspace/**",
+        "ShadowsocksX-NGTests/**",
+        "_config.yml",
+        "genstrings.py",
+        "proxy_conf_helper/**"
+      ],
+      "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nthe GNU General Public License is intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.  We, the Free Software Foundation, use the\nGNU General Public License for most of our software; it applies also to\nany other work released this way by its authors.  You can apply it to\nyour programs, too.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  To protect your rights, we need to prevent others from denying you\nthese rights or asking you to surrender the rights.  Therefore, you have\ncertain responsibilities if you distribute copies of the software, or if\nyou modify it: responsibilities to respect the freedom of others.\n\n  For example, if you distribute copies of such a program, whether\ngratis or for a fee, you must pass on to the recipients the same\nfreedoms that you received.  You must make sure that they, too, receive\nor can get the source code.  And you must show them these terms so they\nknow their rights.\n\n  Developers that use the GNU GPL protect your rights with two steps:\n(1) assert copyright on the software, and (2) offer you this License\ngiving you legal permission to copy, distribute and/or modify it.\n\n  For the developers' and authors' protection, the GPL clearly explains\nthat there is no warranty for this free software.  For both users' and\nauthors' sake, the GPL requires that modified versions be marked as\nchanged, so that their problems will not be attributed erroneously to\nauthors of previous versions.\n\n  Some devices are designed to deny users access to install or run\nmodified versions of the software inside them, although the manufacturer\ncan do so.  This is fundamentally incompatible with the aim of\nprotecting users' freedom to change the software.  The systematic\npattern of such abuse occurs in the area of products for individuals to\nuse, which is precisely where it is most unacceptable.  Therefore, we\nhave designed this version of the GPL to prohibit the practice for those\nproducts.  If such problems arise substantially in other domains, we\nstand ready to extend this provision to those domains in future versions\nof the GPL, as needed to protect the freedom of users.\n\n  Finally, every program is threatened constantly by software patents.\nStates should not allow patents to restrict development and use of\nsoftware on general-purpose computers, but in those that do, we wish to\navoid the special danger that patents applied to a free program could\nmake it effectively proprietary.  To prevent this, the GPL assures that\npatents cannot be used to render the program non-free.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Use with the GNU Affero General Public License.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU Affero General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the special requirements of the GNU Affero General Public License,\nsection 13, concerning interaction through a network will apply to the\ncombination as such.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU General Public License from time to time.  Such new versions will\nbe similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with this program.  If not, see <http://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If the program does terminal interaction, make it output a short\nnotice like this when it starts in an interactive mode:\n\n    <program>  Copyright (C) <year>  <name of author>\n    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n    This is free software, and you are welcome to redistribute it\n    under certain conditions; type `show c' for details.\n\nThe hypothetical commands `show w' and `show c' should show the appropriate\nparts of the General Public License.  Of course, your program's commands\nmight be different; for a GUI interface, you would use an \"about box\".\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU GPL, see\n<http://www.gnu.org/licenses/>.\n\n  The GNU General Public License does not permit incorporating your program\ninto proprietary programs.  If your program is a subroutine library, you\nmay consider it more useful to permit linking proprietary applications with\nthe library.  If this is what you want to do, use the GNU Lesser General\nPublic License instead of this License.  But first, please read\n<http://www.gnu.org/philosophy/why-not-lgpl.html>.\n\n\nVersion: No file states a version of the License; its section 14 lets any version published by the Free Software Foundation be chosen, so it reads as version 3 or any later version.",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (the license file names no copyright line), GPL-3.0-or-later license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Pods/Alamofire/**"
+      ],
+      "text": "Copyright (c) 2014-2021 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014-2021 Alamofire Software Foundation (http://alamofire.org/), MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/Alamofire."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Pods/BRLOptionParser/**"
+      ],
+      "text": "(The MIT License)\n\nCopyright © 2013-2015 Stephen Celis (<stephen@stephencelis.com>)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright © 2013-2015 Stephen Celis (<stephen@stephencelis.com>), MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/BRLOptionParser."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "Pods/GCDWebServer/**"
+      ],
+      "text": "Copyright (c) 2012-2014, Pierre-Olivier Latour\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * The name of Pierre-Olivier Latour may not be used to endorse\n      or promote products derived from this software without specific\n      prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL PIERRE-OLIVIER LATOUR BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012-2014, Pierre-Olivier Latour, BSD-3-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/GCDWebServer."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "Pods/MASShortcut/**"
+      ],
+      "text": "Copyright (c) 2012-2013, Vadim Shpakovski\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012-2013, Vadim Shpakovski, BSD-2-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/MASShortcut."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Pods/RxCocoa/**"
+      ],
+      "text": "**The MIT License**\n**Copyright © 2015 Krunoslav Zaher, Shai Mishali**\n**All rights reserved.**\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (Pods/RxCocoa) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxCocoa."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Pods/RxRelay/**"
+      ],
+      "text": "**The MIT License**\n**Copyright © 2015 Krunoslav Zaher, Shai Mishali**\n**All rights reserved.**\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (Pods/RxRelay) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxRelay."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Pods/RxSwift/**"
+      ],
+      "text": "**The MIT License**\n**Copyright © 2015 Krunoslav Zaher, Shai Mishali**\n**All rights reserved.**\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (Pods/RxSwift) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/Pods/RxSwift."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "deps/libsodium/.gitignore",
+        "deps/libsodium/.travis.yml",
+        "deps/libsodium/AUTHORS",
+        "deps/libsodium/ChangeLog",
+        "deps/libsodium/LICENSE",
+        "deps/libsodium/Makefile.am",
+        "deps/libsodium/README.markdown",
+        "deps/libsodium/THANKS",
+        "deps/libsodium/appveyor.yml",
+        "deps/libsodium/autogen.sh",
+        "deps/libsodium/azure-pipelines.yml",
+        "deps/libsodium/builds/**",
+        "deps/libsodium/configure.ac",
+        "deps/libsodium/dist-build/**",
+        "deps/libsodium/lgtm.yml",
+        "deps/libsodium/libsodium-uninstalled.pc.in",
+        "deps/libsodium/libsodium.pc.in",
+        "deps/libsodium/libsodium.sln",
+        "deps/libsodium/libsodium.vcxproj",
+        "deps/libsodium/libsodium.vcxproj.filters",
+        "deps/libsodium/m4/**",
+        "deps/libsodium/msvc-scripts/**",
+        "deps/libsodium/packaging/**",
+        "deps/libsodium/regen-msvc/**",
+        "deps/libsodium/src/**",
+        "deps/libsodium/test/**"
+      ],
+      "text": "/*\n * ISC License\n *\n * Copyright (c) 2013-2019\n * Frank Denis <j at pureftpd dot org>\n *\n * Permission to use, copy, modify, and/or distribute this software for any\n * purpose with or without fee is hereby granted, provided that the above\n * copyright notice and this permission notice appear in all copies.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\n * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\n * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\n * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\n * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\n * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\n * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n */\n",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (deps/libsodium) (the license file names no copyright line), ISC license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/libsodium."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "deps/mbedtls/.gitattributes",
+        "deps/mbedtls/.github/**",
+        "deps/mbedtls/.gitignore",
+        "deps/mbedtls/.globalrc",
+        "deps/mbedtls/.mypy.ini",
+        "deps/mbedtls/.pylintrc",
+        "deps/mbedtls/.travis.yml",
+        "deps/mbedtls/BRANCHES.md",
+        "deps/mbedtls/BUGS.md",
+        "deps/mbedtls/CMakeLists.txt",
+        "deps/mbedtls/CONTRIBUTING.md",
+        "deps/mbedtls/ChangeLog",
+        "deps/mbedtls/ChangeLog.d/**",
+        "deps/mbedtls/DartConfiguration.tcl",
+        "deps/mbedtls/LICENSE",
+        "deps/mbedtls/Makefile",
+        "deps/mbedtls/README.md",
+        "deps/mbedtls/SECURITY.md",
+        "deps/mbedtls/SUPPORT.md",
+        "deps/mbedtls/configs/**",
+        "deps/mbedtls/dco.txt",
+        "deps/mbedtls/docs/**",
+        "deps/mbedtls/doxygen/**",
+        "deps/mbedtls/include/**",
+        "deps/mbedtls/library/**",
+        "deps/mbedtls/programs/.gitignore",
+        "deps/mbedtls/programs/CMakeLists.txt",
+        "deps/mbedtls/programs/Makefile",
+        "deps/mbedtls/programs/README.md",
+        "deps/mbedtls/programs/aes/**",
+        "deps/mbedtls/programs/fuzz/.gitignore",
+        "deps/mbedtls/programs/fuzz/CMakeLists.txt",
+        "deps/mbedtls/programs/fuzz/Makefile",
+        "deps/mbedtls/programs/fuzz/README.md",
+        "deps/mbedtls/programs/fuzz/common.c",
+        "deps/mbedtls/programs/fuzz/common.h",
+        "deps/mbedtls/programs/fuzz/fuzz_client.c",
+        "deps/mbedtls/programs/fuzz/fuzz_client.options",
+        "deps/mbedtls/programs/fuzz/fuzz_dtlsclient.c",
+        "deps/mbedtls/programs/fuzz/fuzz_dtlsclient.options",
+        "deps/mbedtls/programs/fuzz/fuzz_dtlsserver.c",
+        "deps/mbedtls/programs/fuzz/fuzz_dtlsserver.options",
+        "deps/mbedtls/programs/fuzz/fuzz_privkey.c",
+        "deps/mbedtls/programs/fuzz/fuzz_privkey.options",
+        "deps/mbedtls/programs/fuzz/fuzz_pubkey.c",
+        "deps/mbedtls/programs/fuzz/fuzz_pubkey.options",
+        "deps/mbedtls/programs/fuzz/fuzz_server.c",
+        "deps/mbedtls/programs/fuzz/fuzz_server.options",
+        "deps/mbedtls/programs/fuzz/fuzz_x509crl.c",
+        "deps/mbedtls/programs/fuzz/fuzz_x509crl.options",
+        "deps/mbedtls/programs/fuzz/fuzz_x509crt.c",
+        "deps/mbedtls/programs/fuzz/fuzz_x509crt.options",
+        "deps/mbedtls/programs/fuzz/fuzz_x509csr.c",
+        "deps/mbedtls/programs/fuzz/fuzz_x509csr.options",
+        "deps/mbedtls/programs/fuzz/onefile.c",
+        "deps/mbedtls/programs/hash/**",
+        "deps/mbedtls/programs/pkey/**",
+        "deps/mbedtls/programs/psa/**",
+        "deps/mbedtls/programs/random/**",
+        "deps/mbedtls/programs/ssl/**",
+        "deps/mbedtls/programs/test/**",
+        "deps/mbedtls/programs/util/**",
+        "deps/mbedtls/programs/wince_main.c",
+        "deps/mbedtls/programs/x509/**",
+        "deps/mbedtls/scripts/**",
+        "deps/mbedtls/tests/.gitignore",
+        "deps/mbedtls/tests/.jenkins/**",
+        "deps/mbedtls/tests/CMakeLists.txt",
+        "deps/mbedtls/tests/Descriptions.txt",
+        "deps/mbedtls/tests/Makefile",
+        "deps/mbedtls/tests/compat-in-docker.sh",
+        "deps/mbedtls/tests/compat.sh",
+        "deps/mbedtls/tests/configs/**",
+        "deps/mbedtls/tests/context-info.sh",
+        "deps/mbedtls/tests/data_files/.gitignore",
+        "deps/mbedtls/tests/data_files/Makefile",
+        "deps/mbedtls/tests/data_files/Readme-x509.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_cid.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_ciphersuite.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_def.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_min_cfg.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_alpn.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_keep_cert.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_mfl.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_packing.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_1.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_2.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_3.txt",
+        "deps/mbedtls/tests/data_files/base64/def_bad_b64.txt",
+        "deps/mbedtls/tests/data_files/base64/empty.txt",
+        "deps/mbedtls/tests/data_files/base64/mfl_1024.txt",
+        "deps/mbedtls/tests/data_files/base64/mtu_10000.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_cid.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_ciphersuite.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_def.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_min_cfg.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_alpn.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_keep_cert.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_mfl.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_packing.txt",
+        "deps/mbedtls/tests/data_files/base64/v2.19.1.txt",
+        "deps/mbedtls/tests/data_files/bitstring-in-dn.pem",
+        "deps/mbedtls/tests/data_files/cert_example_multi.crt",
+        "deps/mbedtls/tests/data_files/cert_example_multi_nocn.crt",
+        "deps/mbedtls/tests/data_files/cert_example_wildcard.crt",
+        "deps/mbedtls/tests/data_files/cert_md2.crt",
+        "deps/mbedtls/tests/data_files/cert_md2.csr",
+        "deps/mbedtls/tests/data_files/cert_md4.crt",
+        "deps/mbedtls/tests/data_files/cert_md4.csr",
+        "deps/mbedtls/tests/data_files/cert_md5.crt",
+        "deps/mbedtls/tests/data_files/cert_md5.csr",
+        "deps/mbedtls/tests/data_files/cert_sha1.crt",
+        "deps/mbedtls/tests/data_files/cert_sha224.crt",
+        "deps/mbedtls/tests/data_files/cert_sha256.crt",
+        "deps/mbedtls/tests/data_files/cert_sha384.crt",
+        "deps/mbedtls/tests/data_files/cert_sha512.crt",
+        "deps/mbedtls/tests/data_files/cert_v1_with_ext.crt",
+        "deps/mbedtls/tests/data_files/cli-rsa-sha1.crt",
+        "deps/mbedtls/tests/data_files/cli-rsa-sha256.crt",
+        "deps/mbedtls/tests/data_files/cli-rsa.key",
+        "deps/mbedtls/tests/data_files/cli.opensslconf",
+        "deps/mbedtls/tests/data_files/cli2.crt",
+        "deps/mbedtls/tests/data_files/cli2.key",
+        "deps/mbedtls/tests/data_files/crl-ec-sha1.pem",
+        "deps/mbedtls/tests/data_files/crl-ec-sha224.pem",
+        "deps/mbedtls/tests/data_files/crl-ec-sha256.pem",
+        "deps/mbedtls/tests/data_files/crl-ec-sha384.pem",
+        "deps/mbedtls/tests/data_files/crl-ec-sha512.pem",
+        "deps/mbedtls/tests/data_files/crl-future.pem",
+        "deps/mbedtls/tests/data_files/crl-futureRevocationDate.pem",
+        "deps/mbedtls/tests/data_files/crl-idp.pem",
+        "deps/mbedtls/tests/data_files/crl-idpnc.pem",
+        "deps/mbedtls/tests/data_files/crl-malformed-trailing-spaces.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha1-badsign.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha1.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha224.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha256.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha384.pem",
+        "deps/mbedtls/tests/data_files/crl-rsa-pss-sha512.pem",
+        "deps/mbedtls/tests/data_files/crl.pem",
+        "deps/mbedtls/tests/data_files/crl_cat_ec-rsa.pem",
+        "deps/mbedtls/tests/data_files/crl_cat_ecfut-rsa.pem",
+        "deps/mbedtls/tests/data_files/crl_cat_rsa-ec.pem",
+        "deps/mbedtls/tests/data_files/crl_cat_rsabadpem-ec.pem",
+        "deps/mbedtls/tests/data_files/crl_expired.pem",
+        "deps/mbedtls/tests/data_files/crl_md2.pem",
+        "deps/mbedtls/tests/data_files/crl_md4.pem",
+        "deps/mbedtls/tests/data_files/crl_md5.pem",
+        "deps/mbedtls/tests/data_files/crl_sha1.pem",
+        "deps/mbedtls/tests/data_files/crl_sha224.pem",
+        "deps/mbedtls/tests/data_files/crl_sha256.pem",
+        "deps/mbedtls/tests/data_files/crl_sha384.pem",
+        "deps/mbedtls/tests/data_files/crl_sha512.pem",
+        "deps/mbedtls/tests/data_files/crt_cat_rsaexp-ec.pem",
+        "deps/mbedtls/tests/data_files/dh.1000.pem",
+        "deps/mbedtls/tests/data_files/dh.998.pem",
+        "deps/mbedtls/tests/data_files/dh.999.pem",
+        "deps/mbedtls/tests/data_files/dh.optlen.pem",
+        "deps/mbedtls/tests/data_files/dhparams.pem",
+        "deps/mbedtls/tests/data_files/dir-maxpath/**",
+        "deps/mbedtls/tests/data_files/dir1/**",
+        "deps/mbedtls/tests/data_files/dir2/**",
+        "deps/mbedtls/tests/data_files/dir3/**",
+        "deps/mbedtls/tests/data_files/dir4/**",
+        "deps/mbedtls/tests/data_files/ec_224_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_224_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_256_long_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_256_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_256_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_384_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_384_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_521_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_521_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_521_short_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_bp256_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_bp256_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_bp384_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_bp384_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_bp512_prv.pem",
+        "deps/mbedtls/tests/data_files/ec_bp512_pub.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.pk8.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.pk8.pw.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.pk8nopub.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.pk8nopubparam.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.pk8param.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.sec1.pem",
+        "deps/mbedtls/tests/data_files/ec_prv.sec1.pw.pem",
+        "deps/mbedtls/tests/data_files/ec_pub.pem",
+        "deps/mbedtls/tests/data_files/enco-ca-prstr.pem",
+        "deps/mbedtls/tests/data_files/enco-cert-utf8str.pem",
+        "deps/mbedtls/tests/data_files/format_gen.key",
+        "deps/mbedtls/tests/data_files/format_gen.pub",
+        "deps/mbedtls/tests/data_files/format_rsa.key",
+        "deps/mbedtls/tests/data_files/hash_file_4",
+        "deps/mbedtls/tests/data_files/hash_file_5",
+        "deps/mbedtls/tests/data_files/keyUsage.decipherOnly.crt",
+        "deps/mbedtls/tests/data_files/mpi_16",
+        "deps/mbedtls/tests/data_files/mpi_too_big",
+        "deps/mbedtls/tests/data_files/multiple_san.crt",
+        "deps/mbedtls/tests/data_files/non-ascii-string-in-issuer.crt",
+        "deps/mbedtls/tests/data_files/passwd.psk",
+        "deps/mbedtls/tests/data_files/print_c.pl",
+        "deps/mbedtls/tests/data_files/rsa4096_prv.pem",
+        "deps/mbedtls/tests/data_files/rsa4096_pub.pem",
+        "deps/mbedtls/tests/data_files/rsa512.key",
+        "deps/mbedtls/tests/data_files/rsa521.key",
+        "deps/mbedtls/tests/data_files/rsa522.key",
+        "deps/mbedtls/tests/data_files/rsa528.key",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_aes128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_aes192.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_aes256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_clear.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_1024_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_aes128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_aes192.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_aes256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_clear.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_2048_public.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_aes128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_aes192.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_aes256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_clear.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs1_4096_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_2048_public.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_2des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_1024_rc4_128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_2des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_2048_rc4_128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_2des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbe_sha1_4096_rc4_128.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_3des_sha512.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_1024_des_sha512.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_3des_sha512.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_2048_des_sha512.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_3des_sha512.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha224.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha256.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha384.pem",
+        "deps/mbedtls/tests/data_files/rsa_pkcs8_pbes2_pbkdf2_4096_des_sha512.pem",
+        "deps/mbedtls/tests/data_files/server1-ms.req.sha256",
+        "deps/mbedtls/tests/data_files/server1-nospace.crt",
+        "deps/mbedtls/tests/data_files/server1-v1.crt",
+        "deps/mbedtls/tests/data_files/server1.ca.crt",
+        "deps/mbedtls/tests/data_files/server1.ca_noauthid.crt",
+        "deps/mbedtls/tests/data_files/server1.cert_type.crt",
+        "deps/mbedtls/tests/data_files/server1.cert_type.crt.openssl.v3_ext",
+        "deps/mbedtls/tests/data_files/server1.cert_type_noauthid.crt",
+        "deps/mbedtls/tests/data_files/server1.commas.crt",
+        "deps/mbedtls/tests/data_files/server1.crt",
+        "deps/mbedtls/tests/data_files/server1.crt.openssl.v3_ext",
+        "deps/mbedtls/tests/data_files/server1.csr",
+        "deps/mbedtls/tests/data_files/server1.ext_ku.crt",
+        "deps/mbedtls/tests/data_files/server1.key",
+        "deps/mbedtls/tests/data_files/server1.key_usage.crt",
+        "deps/mbedtls/tests/data_files/server1.key_usage.crt.openssl.v3_ext",
+        "deps/mbedtls/tests/data_files/server1.key_usage_noauthid.crt",
+        "deps/mbedtls/tests/data_files/server1.noauthid.crt",
+        "deps/mbedtls/tests/data_files/server1.pubkey",
+        "deps/mbedtls/tests/data_files/server1.req.cert_type",
+        "deps/mbedtls/tests/data_files/server1.req.cert_type_empty",
+        "deps/mbedtls/tests/data_files/server1.req.commas.sha256",
+        "deps/mbedtls/tests/data_files/server1.req.key_usage",
+        "deps/mbedtls/tests/data_files/server1.req.key_usage_empty",
+        "deps/mbedtls/tests/data_files/server1.req.ku-ct",
+        "deps/mbedtls/tests/data_files/server1.req.md4",
+        "deps/mbedtls/tests/data_files/server1.req.md5",
+        "deps/mbedtls/tests/data_files/server1.req.sha1",
+        "deps/mbedtls/tests/data_files/server1.req.sha224",
+        "deps/mbedtls/tests/data_files/server1.req.sha256",
+        "deps/mbedtls/tests/data_files/server1.req.sha256.ext",
+        "deps/mbedtls/tests/data_files/server1.req.sha384",
+        "deps/mbedtls/tests/data_files/server1.req.sha512",
+        "deps/mbedtls/tests/data_files/server1.v1.crt",
+        "deps/mbedtls/tests/data_files/server10-badsign.crt",
+        "deps/mbedtls/tests/data_files/server10-bs_int3.pem",
+        "deps/mbedtls/tests/data_files/server10.crt",
+        "deps/mbedtls/tests/data_files/server10.key",
+        "deps/mbedtls/tests/data_files/server10_int3-bs.pem",
+        "deps/mbedtls/tests/data_files/server10_int3_int-ca2.crt",
+        "deps/mbedtls/tests/data_files/server10_int3_int-ca2_ca.crt",
+        "deps/mbedtls/tests/data_files/server10_int3_spurious_int-ca2.crt",
+        "deps/mbedtls/tests/data_files/server1_ca.crt",
+        "deps/mbedtls/tests/data_files/server1_csr.opensslconf",
+        "deps/mbedtls/tests/data_files/server1_pathlen_int_max-1.crt",
+        "deps/mbedtls/tests/data_files/server1_pathlen_int_max.crt",
+        "deps/mbedtls/tests/data_files/server2-badsign.crt",
+        "deps/mbedtls/tests/data_files/server2-sha256.crt",
+        "deps/mbedtls/tests/data_files/server2-v1-chain.crt",
+        "deps/mbedtls/tests/data_files/server2-v1.crt",
+        "deps/mbedtls/tests/data_files/server2.crt",
+        "deps/mbedtls/tests/data_files/server2.key",
+        "deps/mbedtls/tests/data_files/server2.key.enc",
+        "deps/mbedtls/tests/data_files/server2.ku-ds.crt",
+        "deps/mbedtls/tests/data_files/server2.ku-ds_ke.crt",
+        "deps/mbedtls/tests/data_files/server2.ku-ka.crt",
+        "deps/mbedtls/tests/data_files/server2.ku-ke.crt",
+        "deps/mbedtls/tests/data_files/server3.crt",
+        "deps/mbedtls/tests/data_files/server3.key",
+        "deps/mbedtls/tests/data_files/server4.crt",
+        "deps/mbedtls/tests/data_files/server4.key",
+        "deps/mbedtls/tests/data_files/server5-badsign.crt",
+        "deps/mbedtls/tests/data_files/server5-expired.crt",
+        "deps/mbedtls/tests/data_files/server5-fan.crt",
+        "deps/mbedtls/tests/data_files/server5-future.crt",
+        "deps/mbedtls/tests/data_files/server5-nonprintable_othername.crt",
+        "deps/mbedtls/tests/data_files/server5-othername.crt",
+        "deps/mbedtls/tests/data_files/server5-selfsigned.crt",
+        "deps/mbedtls/tests/data_files/server5-sha1.crt",
+        "deps/mbedtls/tests/data_files/server5-sha224.crt",
+        "deps/mbedtls/tests/data_files/server5-sha384.crt",
+        "deps/mbedtls/tests/data_files/server5-sha512.crt",
+        "deps/mbedtls/tests/data_files/server5-ss-expired.crt",
+        "deps/mbedtls/tests/data_files/server5-ss-forgeca.crt",
+        "deps/mbedtls/tests/data_files/server5-tricky-ip-san.crt",
+        "deps/mbedtls/tests/data_files/server5-unsupported_othername.crt",
+        "deps/mbedtls/tests/data_files/server5.crt",
+        "deps/mbedtls/tests/data_files/server5.eku-cli.crt",
+        "deps/mbedtls/tests/data_files/server5.eku-cs.crt",
+        "deps/mbedtls/tests/data_files/server5.eku-cs_any.crt",
+        "deps/mbedtls/tests/data_files/server5.eku-srv.crt",
+        "deps/mbedtls/tests/data_files/server5.eku-srv_cli.crt",
+        "deps/mbedtls/tests/data_files/server5.key",
+        "deps/mbedtls/tests/data_files/server5.key.enc",
+        "deps/mbedtls/tests/data_files/server5.ku-ds.crt",
+        "deps/mbedtls/tests/data_files/server5.ku-ka.crt",
+        "deps/mbedtls/tests/data_files/server5.ku-ke.crt",
+        "deps/mbedtls/tests/data_files/server5.req.ku.sha1",
+        "deps/mbedtls/tests/data_files/server5.req.sha1",
+        "deps/mbedtls/tests/data_files/server5.req.sha224",
+        "deps/mbedtls/tests/data_files/server5.req.sha256",
+        "deps/mbedtls/tests/data_files/server5.req.sha384",
+        "deps/mbedtls/tests/data_files/server5.req.sha512",
+        "deps/mbedtls/tests/data_files/server6-ss-child.crt",
+        "deps/mbedtls/tests/data_files/server6.crt",
+        "deps/mbedtls/tests/data_files/server6.key",
+        "deps/mbedtls/tests/data_files/server7-badsign.crt",
+        "deps/mbedtls/tests/data_files/server7-expired.crt",
+        "deps/mbedtls/tests/data_files/server7-future.crt",
+        "deps/mbedtls/tests/data_files/server7.crt",
+        "deps/mbedtls/tests/data_files/server7.key",
+        "deps/mbedtls/tests/data_files/server7_all_space.crt",
+        "deps/mbedtls/tests/data_files/server7_int-ca-exp.crt",
+        "deps/mbedtls/tests/data_files/server7_int-ca.crt",
+        "deps/mbedtls/tests/data_files/server7_int-ca_ca2.crt",
+        "deps/mbedtls/tests/data_files/server7_pem_space.crt",
+        "deps/mbedtls/tests/data_files/server7_spurious_int-ca.crt",
+        "deps/mbedtls/tests/data_files/server7_trailing_space.crt",
+        "deps/mbedtls/tests/data_files/server8.crt",
+        "deps/mbedtls/tests/data_files/server8.key",
+        "deps/mbedtls/tests/data_files/server8_int-ca2.crt",
+        "deps/mbedtls/tests/data_files/server9-bad-mgfhash.crt",
+        "deps/mbedtls/tests/data_files/server9-bad-saltlen.crt",
+        "deps/mbedtls/tests/data_files/server9-badsign.crt",
+        "deps/mbedtls/tests/data_files/server9-defaults.crt",
+        "deps/mbedtls/tests/data_files/server9-sha224.crt",
+        "deps/mbedtls/tests/data_files/server9-sha256.crt",
+        "deps/mbedtls/tests/data_files/server9-sha384.crt",
+        "deps/mbedtls/tests/data_files/server9-sha512.crt",
+        "deps/mbedtls/tests/data_files/server9-with-ca.crt",
+        "deps/mbedtls/tests/data_files/server9.crt",
+        "deps/mbedtls/tests/data_files/server9.key",
+        "deps/mbedtls/tests/data_files/server9.req.sha1",
+        "deps/mbedtls/tests/data_files/server9.req.sha224",
+        "deps/mbedtls/tests/data_files/server9.req.sha256",
+        "deps/mbedtls/tests/data_files/server9.req.sha384",
+        "deps/mbedtls/tests/data_files/server9.req.sha512",
+        "deps/mbedtls/tests/data_files/test-ca-alt-good.crt",
+        "deps/mbedtls/tests/data_files/test-ca-alt.crt",
+        "deps/mbedtls/tests/data_files/test-ca-alt.csr",
+        "deps/mbedtls/tests/data_files/test-ca-alt.key",
+        "deps/mbedtls/tests/data_files/test-ca-any_policy.crt",
+        "deps/mbedtls/tests/data_files/test-ca-any_policy_ec.crt",
+        "deps/mbedtls/tests/data_files/test-ca-any_policy_with_qualifier.crt",
+        "deps/mbedtls/tests/data_files/test-ca-any_policy_with_qualifier_ec.crt",
+        "deps/mbedtls/tests/data_files/test-ca-good-alt.crt",
+        "deps/mbedtls/tests/data_files/test-ca-multi_policy.crt",
+        "deps/mbedtls/tests/data_files/test-ca-multi_policy_ec.crt",
+        "deps/mbedtls/tests/data_files/test-ca-sha1.crt",
+        "deps/mbedtls/tests/data_files/test-ca-sha256.crt",
+        "deps/mbedtls/tests/data_files/test-ca-unsupported_policy.crt",
+        "deps/mbedtls/tests/data_files/test-ca-unsupported_policy_ec.crt",
+        "deps/mbedtls/tests/data_files/test-ca-v1.crt",
+        "deps/mbedtls/tests/data_files/test-ca.crt",
+        "deps/mbedtls/tests/data_files/test-ca.key",
+        "deps/mbedtls/tests/data_files/test-ca.opensslconf",
+        "deps/mbedtls/tests/data_files/test-ca.server1.db",
+        "deps/mbedtls/tests/data_files/test-ca.server1.future-crl.db",
+        "deps/mbedtls/tests/data_files/test-ca.server1.future-crl.opensslconf",
+        "deps/mbedtls/tests/data_files/test-ca.server1.opensslconf",
+        "deps/mbedtls/tests/data_files/test-ca2-expired.crt",
+        "deps/mbedtls/tests/data_files/test-ca2.crt",
+        "deps/mbedtls/tests/data_files/test-ca2.key",
+        "deps/mbedtls/tests/data_files/test-ca2.key.enc",
+        "deps/mbedtls/tests/data_files/test-ca2.ku-crl.crt",
+        "deps/mbedtls/tests/data_files/test-ca2.ku-crt.crt",
+        "deps/mbedtls/tests/data_files/test-ca2.ku-crt_crl.crt",
+        "deps/mbedtls/tests/data_files/test-ca2.ku-ds.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-future-invalid.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-future-present.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-past-invalid.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-past-present.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-present-future.crt",
+        "deps/mbedtls/tests/data_files/test-ca2_cat-present-past.crt",
+        "deps/mbedtls/tests/data_files/test-ca_cat12.crt",
+        "deps/mbedtls/tests/data_files/test-ca_cat21.crt",
+        "deps/mbedtls/tests/data_files/test-ca_printable.crt",
+        "deps/mbedtls/tests/data_files/test-ca_uppercase.crt",
+        "deps/mbedtls/tests/data_files/test-ca_utf8.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca-exp.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca.key",
+        "deps/mbedtls/tests/data_files/test-int-ca2.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca2.key",
+        "deps/mbedtls/tests/data_files/test-int-ca3-badsign.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca3.crt",
+        "deps/mbedtls/tests/data_files/test-int-ca3.key",
+        "deps/mbedtls/tests/docker/**",
+        "deps/mbedtls/tests/git-scripts/**",
+        "deps/mbedtls/tests/include/**",
+        "deps/mbedtls/tests/make-in-docker.sh",
+        "deps/mbedtls/tests/scripts/**",
+        "deps/mbedtls/tests/src/**",
+        "deps/mbedtls/tests/ssl-opt-in-docker.sh",
+        "deps/mbedtls/tests/ssl-opt.sh",
+        "deps/mbedtls/tests/suites/**",
+        "deps/mbedtls/visualc/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of shadowsocks/ShadowsocksX-NG (deps/mbedtls) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/mbedtls."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "deps/shadowsocks-libev/libbloom/.gitignore",
+        "deps/shadowsocks-libev/libbloom/LICENSE",
+        "deps/shadowsocks-libev/libbloom/Makefile.am",
+        "deps/shadowsocks-libev/libbloom/README",
+        "deps/shadowsocks-libev/libbloom/bloom.c",
+        "deps/shadowsocks-libev/libbloom/bloom.h",
+        "deps/shadowsocks-libev/libbloom/misc/.gitignore",
+        "deps/shadowsocks-libev/libbloom/misc/1.0/**",
+        "deps/shadowsocks-libev/libbloom/misc/1.1/**",
+        "deps/shadowsocks-libev/libbloom/misc/colcmp",
+        "deps/shadowsocks-libev/libbloom/misc/colgraph",
+        "deps/shadowsocks-libev/libbloom/misc/collisions/dograph",
+        "deps/shadowsocks-libev/libbloom/misc/test/**",
+        "deps/shadowsocks-libev/libbloom/murmur2/**"
+      ],
+      "text": "\nCopyright (c) 2012, Jyri J. Virkki\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1. Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\nnotice, this list of conditions and the following disclaimer in the\ndocumentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012, Jyri J. Virkki, BSD-2-Clause license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libbloom."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "deps/shadowsocks-libev/libcork/.buzzy/**",
+        "deps/shadowsocks-libev/libcork/.gitignore",
+        "deps/shadowsocks-libev/libcork/.travis/**",
+        "deps/shadowsocks-libev/libcork/.travis.yml",
+        "deps/shadowsocks-libev/libcork/CMakeLists.txt",
+        "deps/shadowsocks-libev/libcork/COPYING",
+        "deps/shadowsocks-libev/libcork/INSTALL",
+        "deps/shadowsocks-libev/libcork/Makefile.am",
+        "deps/shadowsocks-libev/libcork/README.markdown",
+        "deps/shadowsocks-libev/libcork/cmake/**",
+        "deps/shadowsocks-libev/libcork/docs/**",
+        "deps/shadowsocks-libev/libcork/extras/**",
+        "deps/shadowsocks-libev/libcork/include/**",
+        "deps/shadowsocks-libev/libcork/make-dist.sh",
+        "deps/shadowsocks-libev/libcork/run.sh",
+        "deps/shadowsocks-libev/libcork/share/**",
+        "deps/shadowsocks-libev/libcork/src/**",
+        "deps/shadowsocks-libev/libcork/version.sh"
+      ],
+      "text": "Copyright © 2011-2012, RedJack, LLC.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  • Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  • Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  • Neither the name of RedJack Software, LLC nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright © 2011-2012, RedJack, LLC., BSD-3-Clause license (COPYING), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libcork."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "deps/shadowsocks-libev/libipset/**"
+      ],
+      "text": "Copyright © 2009-2013, RedJack, LLC.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  • Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  • Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  • Neither the name of RedJack Software, LLC nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright © 2009-2013, RedJack, LLC., BSD-3-Clause license (LICENSE.txt), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/shadowsocks-libev/libipset."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "deps/simple-obfs/libcork/.buzzy/**",
+        "deps/simple-obfs/libcork/.gitignore",
+        "deps/simple-obfs/libcork/.travis/**",
+        "deps/simple-obfs/libcork/.travis.yml",
+        "deps/simple-obfs/libcork/CMakeLists.txt",
+        "deps/simple-obfs/libcork/COPYING",
+        "deps/simple-obfs/libcork/INSTALL",
+        "deps/simple-obfs/libcork/Makefile.am",
+        "deps/simple-obfs/libcork/README.markdown",
+        "deps/simple-obfs/libcork/cmake/**",
+        "deps/simple-obfs/libcork/docs/**",
+        "deps/simple-obfs/libcork/extras/**",
+        "deps/simple-obfs/libcork/include/**",
+        "deps/simple-obfs/libcork/make-dist.sh",
+        "deps/simple-obfs/libcork/run.sh",
+        "deps/simple-obfs/libcork/share/**",
+        "deps/simple-obfs/libcork/src/**",
+        "deps/simple-obfs/libcork/version.sh"
+      ],
+      "text": "Copyright © 2011-2012, RedJack, LLC.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  • Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  • Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  • Neither the name of RedJack Software, LLC nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright © 2011-2012, RedJack, LLC., BSD-3-Clause license (COPYING), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/simple-obfs/libcork."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "deps/v2ray-plugin/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 by Max Lv <max.c.lv@gmail.com>  \nCopyright (C) 2019 by Mygod Studio <contact-v2ray-plugin@mygod.be>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 by Max Lv <max.c.lv@gmail.com>; Copyright (C) 2019 by Mygod Studio <contact-v2ray-plugin@mygod.be>, MIT license (LICENSE), https://github.com/shadowsocks/ShadowsocksX-NG/tree/719203afc60e1dbab00e459ebcfecc468e7700bd/deps/v2ray-plugin."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/Jenkinsfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Podfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tcl",
+      "paths": [
+        "**/*.tcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.001"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.am"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cert_type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cert_type_empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cocci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.enc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fmt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.function"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gsl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key_usage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key_usage_empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ku-ct"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.m4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.md4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.md5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.modulemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.opensslconf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pubkey"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rtf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha224"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha384"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha512"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.strings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "ShadowsocksX-NG/gfwlist.txt",
+        "ShadowsocksX-NG/user-rule.txt",
+        "deps/mbedtls/configs/README.txt",
+        "deps/mbedtls/dco.txt",
+        "deps/mbedtls/programs/pkey/dh_prime.txt",
+        "deps/mbedtls/programs/pkey/rsa_priv.txt",
+        "deps/mbedtls/programs/pkey/rsa_pub.txt",
+        "deps/mbedtls/scripts/ci.requirements.txt",
+        "deps/mbedtls/scripts/data_files/rename-1.3-2.0.txt",
+        "deps/mbedtls/scripts/maintainer.requirements.txt",
+        "deps/mbedtls/tests/Descriptions.txt",
+        "deps/mbedtls/tests/data_files/Readme-x509.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_cid.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_ciphersuite.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_def.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_min_cfg.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_alpn.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_keep_cert.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_mfl.txt",
+        "deps/mbedtls/tests/data_files/base64/cli_no_packing.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_1.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_2.txt",
+        "deps/mbedtls/tests/data_files/base64/def_b64_too_big_3.txt",
+        "deps/mbedtls/tests/data_files/base64/def_bad_b64.txt",
+        "deps/mbedtls/tests/data_files/base64/empty.txt",
+        "deps/mbedtls/tests/data_files/base64/mfl_1024.txt",
+        "deps/mbedtls/tests/data_files/base64/mtu_10000.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_cid.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_ciphersuite.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_def.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_min_cfg.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_alpn.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_keep_cert.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_mfl.txt",
+        "deps/mbedtls/tests/data_files/base64/srv_no_packing.txt",
+        "deps/mbedtls/tests/data_files/base64/v2.19.1.txt",
+        "deps/mbedtls/tests/data_files/dir-maxpath/Readme.txt",
+        "deps/shadowsocks-libev/libipset/LICENSE.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.v3_ext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.globalrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChangeLog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Readme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/THANKS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alpine-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ccram"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/centos-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/colcmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/colgraph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/debian-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dograph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fedora-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hash_file_4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hash_file_5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mpi_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mpi_too_big"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensuse-x64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pack"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tile-test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ubuntu-x64"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "deps/c-ares": "https://github.com/c-ares/c-ares",
+    "deps/libsodium": "https://github.com/jedisct1/libsodium",
+    "deps/mbedtls": "https://github.com/Mbed-TLS/mbedtls",
+    "deps/shadowsocks-libev": "https://github.com/shadowsocks/shadowsocks-libev",
+    "deps/shadowsocks-libev/libbloom": "https://github.com/shadowsocks/libbloom",
+    "deps/shadowsocks-libev/libcork": "https://github.com/shadowsocks/libcork",
+    "deps/shadowsocks-libev/libipset": "https://github.com/shadowsocks/ipset",
+    "deps/simple-obfs": "https://github.com/shadowsocks/simple-obfs",
+    "deps/simple-obfs/libcork": "https://github.com/shadowsocks/libcork",
+    "deps/v2ray-plugin": "https://github.com/shadowsocks/v2ray-plugin"
+  }
+}

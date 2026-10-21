@@ -1,0 +1,400 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/yhirose/cpp-httplib",
+  "revision": "4a1700cb5ea118f59ae3c258a5cc4f362c4d538d",
+  "checksum": "sha256:bd26095051600d7f194b0f093cd7a9b6ec4daa5d1504446d84192a8e13b73daf",
+  "extract": {
+    "exclude": [
+      "docs-src/pages/en/llm-app/app.png",
+      "docs-src/pages/en/llm-app/webui.png",
+      "test/fuzzing/corpus/3",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-header_parser_fuzzer-4645558454386688",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5042094968537088",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5372331946541056",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5386708825800704",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5667822731132928",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5886572146327552",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-5942767436562432",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-6007379124158464",
+      "test/fuzzing/corpus/clusterfuzz-testcase-minimized-server_fuzzer-6508706672541696",
+      "test/fuzzing/corpus/issue1264",
+      "test/image.jpg"
+    ]
+  },
+  "history": {
+    "since": "ca7b942196d4699349e1da3344be2869e6231095"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Commit history of https://github.com/yhirose/cpp-httplib: Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/yhirose/cpp-httplib."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clang-format",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CMakeLists.txt",
+        "Dockerfile",
+        "LICENSE",
+        "README-sse.md",
+        "README-stream.md",
+        "README-websocket.md",
+        "README.md",
+        "benchmark/**",
+        "cmake/**",
+        "docker/**",
+        "docker-compose.yml",
+        "docs-src/config.toml",
+        "docs-src/pages/en/cookbook/**",
+        "docs-src/pages/en/index.md",
+        "docs-src/pages/en/llm-app/ch01-setup.md",
+        "docs-src/pages/en/llm-app/ch02-rest-api.md",
+        "docs-src/pages/en/llm-app/ch03-sse-streaming.md",
+        "docs-src/pages/en/llm-app/ch04-model-management.md",
+        "docs-src/pages/en/llm-app/ch05-web-ui.md",
+        "docs-src/pages/en/llm-app/ch06-desktop-app.md",
+        "docs-src/pages/en/llm-app/ch07-code-reading.md",
+        "docs-src/pages/en/llm-app/ch08-customization.md",
+        "docs-src/pages/en/llm-app/index.md",
+        "docs-src/pages/en/llm-app/kv-cache.svg",
+        "docs-src/pages/en/llm-app/slots.svg",
+        "docs-src/pages/en/tour/**",
+        "docs-src/pages/ja/**",
+        "docs-util/**",
+        "example/**",
+        "generate_module.py",
+        "httplib.h",
+        "justfile",
+        "meson.build",
+        "meson_options.txt",
+        "scripts/**",
+        "split.py",
+        "test/CMakeLists.txt",
+        "test/Makefile",
+        "test/ca-bundle.crt",
+        "test/dns_test_fixture.py",
+        "test/fuzzing/CMakeLists.txt",
+        "test/fuzzing/Makefile",
+        "test/fuzzing/client_fuzzer.cc",
+        "test/fuzzing/corpus/1",
+        "test/fuzzing/corpus/2",
+        "test/fuzzing/corpus/clusterfuzz-testcase-minimized-client_fuzzer-5188033728282624",
+        "test/fuzzing/corpus/clusterfuzz-testcase-minimized-client_fuzzer-6561074643271680",
+        "test/fuzzing/header_parser_fuzzer.cc",
+        "test/fuzzing/multipart_parser_fuzzer.cc",
+        "test/fuzzing/server_fuzzer.cc",
+        "test/fuzzing/server_fuzzer.dict",
+        "test/fuzzing/standalone_fuzz_target_runner.cpp",
+        "test/fuzzing/url_parser_fuzzer.cc",
+        "test/gen-certs.sh",
+        "test/gtest/**",
+        "test/include_httplib.cc",
+        "test/include_windows_h.cc",
+        "test/lsan_suppressions.txt",
+        "test/make-shared-library.sh",
+        "test/meson.build",
+        "test/proxy/**",
+        "test/run_issue_2431_repro.sh",
+        "test/test.cc",
+        "test/test.conf",
+        "test/test.rootCA.conf",
+        "test/test.sln",
+        "test/test.vcxproj",
+        "test/test_32bit_build.cpp",
+        "test/test_benchmark.cc",
+        "test/test_proxy.cc",
+        "test/test_thread_pool.cc",
+        "test/test_websocket_heartbeat.cc",
+        "test/test_websocket_thread_safety.cc",
+        "test/www/**",
+        "test/www2/**",
+        "test/www3/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/yhirose/cpp-httplib."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.abcde"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hello"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "meson_options.txt",
+        "test/lsan_suppressions.txt",
+        "test/www/dir/1MB.txt",
+        "test/www/日本語Dir/日本語File.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic_passwd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clusterfuzz-testcase-minimized-client_fuzzer-5188033728282624"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clusterfuzz-testcase-minimized-client_fuzzer-6561074643271680"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/digest_passwd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

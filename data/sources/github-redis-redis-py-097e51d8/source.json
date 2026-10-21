@@ -1,0 +1,383 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/redis/redis-py",
+  "revision": "c0e752ecb28058b677e2d2e01c3f5f39229d8a33",
+  "checksum": "sha256:53ba12355baa0202c1a23ad248d910d8de65f2f240770c56d61fd422129bd1b0",
+  "extract": {
+    "exclude": [
+      "docs/examples/opentelemetry/image/**",
+      "docs/images/**",
+      "tests/test_asyncio/testdata/will_play_text.csv.bz2",
+      "tests/testdata/will_play_text.csv.bz2"
+    ]
+  },
+  "history": {
+    "since": "175c16108459444332c5937245e2567564970f67"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022-2023, Redis, inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/redis/redis-py: Copyright (c) 2022-2023, Redis, inc., MIT license (LICENSE), https://github.com/redis/redis-py."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".coveragerc",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".mypy.ini",
+        ".readthedocs.yml",
+        "AGENTS.md",
+        "CHANGES",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "benchmarks/**",
+        "codecov.yml",
+        "dev_requirements.txt",
+        "docker-compose.yml",
+        "dockers/**",
+        "docs/Makefile",
+        "docs/_static/**",
+        "docs/_templates/**",
+        "docs/advanced_features.rst",
+        "docs/backoff.rst",
+        "docs/clustering.rst",
+        "docs/commands.rst",
+        "docs/conf.py",
+        "docs/connections.rst",
+        "docs/examples/README.md",
+        "docs/examples/asyncio_examples.ipynb",
+        "docs/examples/connection_examples.ipynb",
+        "docs/examples/hash_examples.ipynb",
+        "docs/examples/opentelemetry/README.md",
+        "docs/examples/opentelemetry/config/**",
+        "docs/examples/opentelemetry/docker-compose.yml",
+        "docs/examples/opentelemetry/main.py",
+        "docs/examples/opentelemetry/requirements.txt",
+        "docs/examples/opentelemetry/uptrace.yml",
+        "docs/examples/opentelemetry_api_examples.ipynb",
+        "docs/examples/pipeline_examples.ipynb",
+        "docs/examples/pubsub_examples.ipynb",
+        "docs/examples/redis-stream-example.ipynb",
+        "docs/examples/search_json_examples.ipynb",
+        "docs/examples/search_vector_similarity_examples.ipynb",
+        "docs/examples/set_and_get_examples.ipynb",
+        "docs/examples/ssl_connection_examples.ipynb",
+        "docs/examples/timeseries_examples.ipynb",
+        "docs/examples.rst",
+        "docs/exceptions.rst",
+        "docs/genindex.rst",
+        "docs/geographic_failover.rst",
+        "docs/index.rst",
+        "docs/lock.rst",
+        "docs/lua_scripting.rst",
+        "docs/opentelemetry.rst",
+        "docs/redismodules.rst",
+        "docs/requirements.txt",
+        "docs/resp3_features.rst",
+        "docs/retry.rst",
+        "docs/unified_responses.rst",
+        "doctests/**",
+        "pyproject.toml",
+        "redis/**",
+        "specs/**",
+        "tasks.py",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/entraid_utils.py",
+        "tests/helpers.py",
+        "tests/maint_notifications/**",
+        "tests/mocks.py",
+        "tests/ssl_utils.py",
+        "tests/test_asyncio/__init__.py",
+        "tests/test_asyncio/compat.py",
+        "tests/test_asyncio/conftest.py",
+        "tests/test_asyncio/helpers.py",
+        "tests/test_asyncio/mocks.py",
+        "tests/test_asyncio/test_bloom.py",
+        "tests/test_asyncio/test_client.py",
+        "tests/test_asyncio/test_cluster.py",
+        "tests/test_asyncio/test_cluster_transaction.py",
+        "tests/test_asyncio/test_command_metadata.py",
+        "tests/test_asyncio/test_command_parser.py",
+        "tests/test_asyncio/test_command_policies.py",
+        "tests/test_asyncio/test_commands.py",
+        "tests/test_asyncio/test_connect.py",
+        "tests/test_asyncio/test_connection.py",
+        "tests/test_asyncio/test_connection_pool.py",
+        "tests/test_asyncio/test_credentials.py",
+        "tests/test_asyncio/test_cwe_404.py",
+        "tests/test_asyncio/test_encoding.py",
+        "tests/test_asyncio/test_hash.py",
+        "tests/test_asyncio/test_himport_integration.py",
+        "tests/test_asyncio/test_json.py",
+        "tests/test_asyncio/test_keyspace_notifications.py",
+        "tests/test_asyncio/test_lock.py",
+        "tests/test_asyncio/test_monitor.py",
+        "tests/test_asyncio/test_multidb/**",
+        "tests/test_asyncio/test_observability/**",
+        "tests/test_asyncio/test_pipeline.py",
+        "tests/test_asyncio/test_pubsub.py",
+        "tests/test_asyncio/test_retry.py",
+        "tests/test_asyncio/test_scenario/**",
+        "tests/test_asyncio/test_scripting.py",
+        "tests/test_asyncio/test_search.py",
+        "tests/test_asyncio/test_sentinel.py",
+        "tests/test_asyncio/test_sentinel_managed_connection.py",
+        "tests/test_asyncio/test_ssl.py",
+        "tests/test_asyncio/test_timeseries.py",
+        "tests/test_asyncio/test_usage_counter.py",
+        "tests/test_asyncio/test_utils.py",
+        "tests/test_asyncio/test_vsets.py",
+        "tests/test_asyncio/testdata/jsontestdata.py",
+        "tests/test_asyncio/testdata/titles.csv",
+        "tests/test_auth/**",
+        "tests/test_background.py",
+        "tests/test_backoff.py",
+        "tests/test_bloom.py",
+        "tests/test_cache.py",
+        "tests/test_client.py",
+        "tests/test_cluster.py",
+        "tests/test_cluster_transaction.py",
+        "tests/test_command_metadata.py",
+        "tests/test_command_parser.py",
+        "tests/test_command_policies.py",
+        "tests/test_commands.py",
+        "tests/test_connect.py",
+        "tests/test_connection.py",
+        "tests/test_connection_pool.py",
+        "tests/test_crc.py",
+        "tests/test_credentials.py",
+        "tests/test_data_structure.py",
+        "tests/test_defaults.py",
+        "tests/test_driver_info.py",
+        "tests/test_encoding.py",
+        "tests/test_event.py",
+        "tests/test_exceptions.py",
+        "tests/test_function.py",
+        "tests/test_hash.py",
+        "tests/test_helpers.py",
+        "tests/test_himport.py",
+        "tests/test_himport_integration.py",
+        "tests/test_http/**",
+        "tests/test_json.py",
+        "tests/test_keyspace_notifications.py",
+        "tests/test_legacy_responses_arg.py",
+        "tests/test_lock.py",
+        "tests/test_max_connections_error.py",
+        "tests/test_monitor.py",
+        "tests/test_multidb/**",
+        "tests/test_multiprocessing.py",
+        "tests/test_observability/**",
+        "tests/test_parsers/**",
+        "tests/test_pipeline.py",
+        "tests/test_pubsub.py",
+        "tests/test_retry.py",
+        "tests/test_scenario/**",
+        "tests/test_scripting.py",
+        "tests/test_search.py",
+        "tests/test_search_aggregation.py",
+        "tests/test_search_querystring.py",
+        "tests/test_search_result.py",
+        "tests/test_sentinel.py",
+        "tests/test_sentinel_managed_connection.py",
+        "tests/test_ssl.py",
+        "tests/test_timeseries.py",
+        "tests/test_utils.py",
+        "tests/test_vsets.py",
+        "tests/testdata/jsontestdata.py",
+        "tests/testdata/titles.csv",
+        "util/**",
+        "whitelist.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022-2023, Redis, inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2022-2023, Redis, inc., MIT license (LICENSE), https://github.com/redis/redis-py."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

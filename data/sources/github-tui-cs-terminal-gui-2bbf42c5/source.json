@@ -1,0 +1,741 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tui-cs/Terminal.Gui",
+  "revision": "37a7e518855b075103fc7b059820cb17d606f928",
+  "checksum": "sha256:bc5bfb4f87a861b67151ce8038e844666a4b716f8c9a3f354d45ccedbd9680e9",
+  "extract": {
+    "exclude": [
+      "Examples/UICatalog/Scenarios/AnimationScenario/Spinning_globe_dark_small.gif",
+      "Examples/UICatalog/Scenarios/CharacterMap/CharacterMap.gif",
+      "Examples/UICatalog/Scenarios/SpectreViewScenario.gif",
+      "Examples/UICatalog/generic_screenshot.png",
+      "Examples/UICatalog/screenshot.png",
+      "Scripts/.testloop.sh.swp",
+      "Terminal.Gui/Drivers/Keyboard/ConsoleKeyInfoExtensions.cs",
+      "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/ToAnsiTests.cs",
+      "docfx/_exported_templates/modern/public/bootstrap-icons-OCU552PF.woff",
+      "docfx/_exported_templates/modern/public/bootstrap-icons-X6UQXWUS.woff2",
+      "docfx/aboutbox.png",
+      "docfx/images/**"
+    ]
+  },
+  "history": {
+    "since": "38af4cfcb886d29f1c5f84dc622437e9d27ad7b1"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright 2007-2011 Novell Inc\nCopyright 2017 Microsoft Corp\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n// The MIT License (MIT)\n// Copyright © 2024 Brandon Thetford (@dodexahedron)\n//\n// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation\n// files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy,\n// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the\n// Software is furnished to do so, subject to the following conditions:\n//\n// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n//\n// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\n// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\n// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\n// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n",
+      "attribution": "Commit history of https://github.com/tui-cs/Terminal.Gui: Copyright 2007-2011 Novell Inc; Copyright 2017 Microsoft Corp, MIT license (LICENSE), https://github.com/tui-cs/Terminal.Gui; the authors of tui-cs/Terminal.Gui (Scripts) (the license file names no copyright line), MIT license (COPYRIGHT), https://github.com/tui-cs/Terminal.Gui/tree/37a7e518855b075103fc7b059820cb17d606f928/Scripts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".aider.md",
+        ".claude/**",
+        ".config/**",
+        ".cursorrules",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".tg-docs/**",
+        ".vscode/**",
+        ".vsconfig",
+        ".windsurfrules",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "Examples/README.md",
+        "Examples/ScenarioRunner/**",
+        "Examples/UICatalog/.gitignore",
+        "Examples/UICatalog/BenchmarkResults.cs",
+        "Examples/UICatalog/Dockerfile",
+        "Examples/UICatalog/Logo.cs",
+        "Examples/UICatalog/NumberToWords.cs",
+        "Examples/UICatalog/Properties/**",
+        "Examples/UICatalog/README.md",
+        "Examples/UICatalog/Resources/**",
+        "Examples/UICatalog/Runner.cs",
+        "Examples/UICatalog/Scenario.cs",
+        "Examples/UICatalog/ScenarioCategory.cs",
+        "Examples/UICatalog/ScenarioLogCapture.cs",
+        "Examples/UICatalog/ScenarioMetadata.cs",
+        "Examples/UICatalog/Scenarios/Adornments.cs",
+        "Examples/UICatalog/Scenarios/AllViewsTester.cs",
+        "Examples/UICatalog/Scenarios/AnimationScenario/AnimationScenario.cs",
+        "Examples/UICatalog/Scenarios/AnimationScenario/spinning-globe-attribution.txt",
+        "Examples/UICatalog/Scenarios/AnsiRequestsScenario.cs",
+        "Examples/UICatalog/Scenarios/Arrangement.cs",
+        "Examples/UICatalog/Scenarios/Bars.cs",
+        "Examples/UICatalog/Scenarios/BracketedPasteDemo.cs",
+        "Examples/UICatalog/Scenarios/Buttons.cs",
+        "Examples/UICatalog/Scenarios/CharacterMap/CharacterMap.cs",
+        "Examples/UICatalog/Scenarios/ChineseUI.cs",
+        "Examples/UICatalog/Scenarios/ClassExplorer.cs",
+        "Examples/UICatalog/Scenarios/Clipping.cs",
+        "Examples/UICatalog/Scenarios/CodeViewDemo.cs",
+        "Examples/UICatalog/Scenarios/CollectionNavigatorTester.cs",
+        "Examples/UICatalog/Scenarios/ColorPicker.cs",
+        "Examples/UICatalog/Scenarios/CombiningMarks.cs",
+        "Examples/UICatalog/Scenarios/ComputedLayout.cs",
+        "Examples/UICatalog/Scenarios/ConfigurationEditor.cs",
+        "Examples/UICatalog/Scenarios/CsvEditor.cs",
+        "Examples/UICatalog/Scenarios/DatePickers.cs",
+        "Examples/UICatalog/Scenarios/Deepdives.cs",
+        "Examples/UICatalog/Scenarios/Dialogs.cs",
+        "Examples/UICatalog/Scenarios/DimAutoDemo.cs",
+        "Examples/UICatalog/Scenarios/DropDownListExample.cs",
+        "Examples/UICatalog/Scenarios/DynamicStatusBar.cs",
+        "Examples/UICatalog/Scenarios/EditorsAndHelpers/**",
+        "Examples/UICatalog/Scenarios/FileDialogExamples.cs",
+        "Examples/UICatalog/Scenarios/Generic.cs",
+        "Examples/UICatalog/Scenarios/GenericListView.cs",
+        "Examples/UICatalog/Scenarios/GraphViewExample.cs",
+        "Examples/UICatalog/Scenarios/HexEditor.cs",
+        "Examples/UICatalog/Scenarios/HotKeys.cs",
+        "Examples/UICatalog/Scenarios/Images/**",
+        "Examples/UICatalog/Scenarios/InteractiveTree.cs",
+        "Examples/UICatalog/Scenarios/KeyBindings.cs",
+        "Examples/UICatalog/Scenarios/Keys.cs",
+        "Examples/UICatalog/Scenarios/LineDrawing.cs",
+        "Examples/UICatalog/Scenarios/LineExample.cs",
+        "Examples/UICatalog/Scenarios/LinearRanges.cs",
+        "Examples/UICatalog/Scenarios/Links.cs",
+        "Examples/UICatalog/Scenarios/ListColumns.cs",
+        "Examples/UICatalog/Scenarios/ListViewWithSelection.cs",
+        "Examples/UICatalog/Scenarios/Localization.cs",
+        "Examples/UICatalog/Scenarios/Mandelbrot.cs",
+        "Examples/UICatalog/Scenarios/MandelbrotImageView.cs",
+        "Examples/UICatalog/Scenarios/MarkdownTester.cs",
+        "Examples/UICatalog/Scenarios/Mazing.cs",
+        "Examples/UICatalog/Scenarios/MenuBars.cs",
+        "Examples/UICatalog/Scenarios/MenuBarsWithoutPopovers.cs",
+        "Examples/UICatalog/Scenarios/Menus.cs",
+        "Examples/UICatalog/Scenarios/MessageBoxes.cs",
+        "Examples/UICatalog/Scenarios/MinimalSpinnerDemo.cs",
+        "Examples/UICatalog/Scenarios/MouseTester.cs",
+        "Examples/UICatalog/Scenarios/MultiColouredTable.cs",
+        "Examples/UICatalog/Scenarios/Navigation.cs",
+        "Examples/UICatalog/Scenarios/Notepad.cs",
+        "Examples/UICatalog/Scenarios/NumericUpDownDemo.cs",
+        "Examples/UICatalog/Scenarios/Osc94ProgressIndicator.cs",
+        "Examples/UICatalog/Scenarios/PopoverMenus.cs",
+        "Examples/UICatalog/Scenarios/Popovers.cs",
+        "Examples/UICatalog/Scenarios/PosAlignDemo.cs",
+        "Examples/UICatalog/Scenarios/ProcessTable.cs",
+        "Examples/UICatalog/Scenarios/Progress.cs",
+        "Examples/UICatalog/Scenarios/ProgressBarStyles.cs",
+        "Examples/UICatalog/Scenarios/RegionScenario.cs",
+        "Examples/UICatalog/Scenarios/RunTExample.cs",
+        "Examples/UICatalog/Scenarios/RuneWidthGreaterThanOne.cs",
+        "Examples/UICatalog/Scenarios/ScrollBarDemo.cs",
+        "Examples/UICatalog/Scenarios/Scrolling.cs",
+        "Examples/UICatalog/Scenarios/Selectors.cs",
+        "Examples/UICatalog/Scenarios/ShadowStyleDemo.cs",
+        "Examples/UICatalog/Scenarios/Shortcuts.cs",
+        "Examples/UICatalog/Scenarios/SingleBackgroundWorker.cs",
+        "Examples/UICatalog/Scenarios/Snake.cs",
+        "Examples/UICatalog/Scenarios/SpectreViewScenario.cs",
+        "Examples/UICatalog/Scenarios/SpinnerStyles.cs",
+        "Examples/UICatalog/Scenarios/TableEditor.cs",
+        "Examples/UICatalog/Scenarios/TableViewTest.cs",
+        "Examples/UICatalog/Scenarios/TabsExample.cs",
+        "Examples/UICatalog/Scenarios/TextAlignmentAndDirection.cs",
+        "Examples/UICatalog/Scenarios/TextEffectsScenario.cs",
+        "Examples/UICatalog/Scenarios/TextFormatterDemo.cs",
+        "Examples/UICatalog/Scenarios/TextInputControls.cs",
+        "Examples/UICatalog/Scenarios/TextStyles.cs",
+        "Examples/UICatalog/Scenarios/ThemeFallback.cs",
+        "Examples/UICatalog/Scenarios/Themes.cs",
+        "Examples/UICatalog/Scenarios/Threading.cs",
+        "Examples/UICatalog/Scenarios/TimeAndDate.cs",
+        "Examples/UICatalog/Scenarios/Transparent.cs",
+        "Examples/UICatalog/Scenarios/TreeUseCases.MiddleEarthArmy.cs",
+        "Examples/UICatalog/Scenarios/TreeUseCases.cs",
+        "Examples/UICatalog/Scenarios/TreeViewFileSystem.cs",
+        "Examples/UICatalog/Scenarios/Unicode.cs",
+        "Examples/UICatalog/Scenarios/ViewportSettings.cs",
+        "Examples/UICatalog/Scenarios/WideGlyphs.cs",
+        "Examples/UICatalog/Scenarios/WindowsAndFrameViews.cs",
+        "Examples/UICatalog/Scenarios/Wizards.cs",
+        "Examples/UICatalog/UICatalog.cs",
+        "Examples/UICatalog/UICatalog.csproj",
+        "Examples/UICatalog/UICatalog.csproj.DotSettings",
+        "Examples/UICatalog/UICatalogCommandLineOptions.cs",
+        "Examples/UICatalog/UICatalogRunnable.cs",
+        "GitVersion.yml",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "Terminal.Gui/App/**",
+        "Terminal.Gui/Configuration/**",
+        "Terminal.Gui/Directory.Build.props",
+        "Terminal.Gui/Drawing/**",
+        "Terminal.Gui/Drivers/AnsiDriver/**",
+        "Terminal.Gui/Drivers/AnsiHandling/**",
+        "Terminal.Gui/Drivers/ComponentFactoryImpl.cs",
+        "Terminal.Gui/Drivers/Cursor.cs",
+        "Terminal.Gui/Drivers/CursorStyle.cs",
+        "Terminal.Gui/Drivers/DotNetDriver/**",
+        "Terminal.Gui/Drivers/Driver.cs",
+        "Terminal.Gui/Drivers/DriverImpl.cs",
+        "Terminal.Gui/Drivers/DriverRegistry.cs",
+        "Terminal.Gui/Drivers/IComponentFactory.cs",
+        "Terminal.Gui/Drivers/IDriver.cs",
+        "Terminal.Gui/Drivers/ISizeMonitor.cs",
+        "Terminal.Gui/Drivers/Input/**",
+        "Terminal.Gui/Drivers/Keyboard/ConsoleKeyMapping.cs",
+        "Terminal.Gui/Drivers/Keyboard/IKeyConverter.cs",
+        "Terminal.Gui/Drivers/Keyboard/KeyCode.cs",
+        "Terminal.Gui/Drivers/Keyboard/VK.cs",
+        "Terminal.Gui/Drivers/Mouse/**",
+        "Terminal.Gui/Drivers/Output/**",
+        "Terminal.Gui/Drivers/PlatformDetection.cs",
+        "Terminal.Gui/Drivers/SizeDetectionMode.cs",
+        "Terminal.Gui/Drivers/SizeMonitorImpl.cs",
+        "Terminal.Gui/Drivers/TerminalDevice.cs",
+        "Terminal.Gui/Drivers/TerminalEnvironment/**",
+        "Terminal.Gui/Drivers/TuiPlatform.cs",
+        "Terminal.Gui/Drivers/UnixHelpers/**",
+        "Terminal.Gui/Drivers/WindowsDriver/**",
+        "Terminal.Gui/Drivers/WindowsHelpers/**",
+        "Terminal.Gui/FileServices/**",
+        "Terminal.Gui/Input/**",
+        "Terminal.Gui/ModuleInitializers.cs",
+        "Terminal.Gui/README.md",
+        "Terminal.Gui/Resources/**",
+        "Terminal.Gui/Terminal.Gui.csproj",
+        "Terminal.Gui/Terminal.Gui.csproj.DotSettings",
+        "Terminal.Gui/Testing/**",
+        "Terminal.Gui/Text/**",
+        "Terminal.Gui/Time/**",
+        "Terminal.Gui/ViewBase/**",
+        "Terminal.Gui/Views/**",
+        "Terminal.Gui.Analyzers.Internal/**",
+        "Terminal.Gui.Interop.Spectre/**",
+        "Terminal.sln.DotSettings",
+        "Terminal.sln.ToDo.DotSettings",
+        "Terminal.slnx",
+        "Tests/AppTestHelpers/**",
+        "Tests/AppTestHelpers.XunitHelpers/**",
+        "Tests/AppTestHelpers.XunitHelpers.Generator/**",
+        "Tests/Benchmarks/**",
+        "Tests/Directory.Build.props",
+        "Tests/IntegrationTests/**",
+        "Tests/NativeAotSmoke/**",
+        "Tests/PerformanceTests/**",
+        "Tests/README.md",
+        "Tests/StressTests/**",
+        "Tests/TestAssets/**",
+        "Tests/TestEnvironmentSetup.cs",
+        "Tests/UnitTests.Legacy/**",
+        "Tests/UnitTests.NonParallelizable/**",
+        "Tests/UnitTestsParallelizable/AppTestHelpers/**",
+        "Tests/UnitTestsParallelizable/Application/**",
+        "Tests/UnitTestsParallelizable/AssemblyInfo.cs",
+        "Tests/UnitTestsParallelizable/Configuration/**",
+        "Tests/UnitTestsParallelizable/Drawing/**",
+        "Tests/UnitTestsParallelizable/Drivers/AllDriverTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/Ansi/**",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiDriver/**",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiBracketedPasteTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiKeyboardEncoderTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiKeyboardParserTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiMouseParserDebugTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiMouseParserTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiParserSecurityTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiRequestSchedulerCollisionTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiRequestSchedulerRaceTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiRequestSchedulerTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiResponseExpectationTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiResponseParserTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/AnsiStartupGateTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/EscSeqRequestsTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/EscSeqUtilsResetColorTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/EscSeqUtilsTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/KittyAlternateKeyTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/KittyKeyboardParsingTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/KittyKeyboardPipelineTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/KittyKeyboardProtocolDetectorTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/ProgressIndicatorTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/TerminalColorDetectionTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/AnsiHandling/UrlHyperlinkerTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/Dotnet/**",
+        "Tests/UnitTestsParallelizable/Drivers/DotnetDriver/**",
+        "Tests/UnitTestsParallelizable/Drivers/DriverColorTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/DriverImplClipboardTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/GraphicsSupportSetterTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/Keyboard/**",
+        "Tests/UnitTestsParallelizable/Drivers/LegacyConsoleTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/MouseTests/**",
+        "Tests/UnitTestsParallelizable/Drivers/Output/**",
+        "Tests/UnitTestsParallelizable/Drivers/PlatformDetectionTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/SizeMonitorTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/TerminalDeviceTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/UnixIOHelperTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/WSLClipboardTests.cs",
+        "Tests/UnitTestsParallelizable/Drivers/Windows/**",
+        "Tests/UnitTestsParallelizable/Drivers/WindowsDriver/**",
+        "Tests/UnitTestsParallelizable/FileServices/**",
+        "Tests/UnitTestsParallelizable/Input/**",
+        "Tests/UnitTestsParallelizable/Interop/**",
+        "Tests/UnitTestsParallelizable/README.md",
+        "Tests/UnitTestsParallelizable/Resources/**",
+        "Tests/UnitTestsParallelizable/Scenarios/**",
+        "Tests/UnitTestsParallelizable/TestDateAttribute.cs",
+        "Tests/UnitTestsParallelizable/Text/**",
+        "Tests/UnitTestsParallelizable/Time/**",
+        "Tests/UnitTestsParallelizable/UnitTests.Parallelizable.csproj",
+        "Tests/UnitTestsParallelizable/UnitTests.Parallelizable.csproj.DotSettings",
+        "Tests/UnitTestsParallelizable/ViewBase/**",
+        "Tests/UnitTestsParallelizable/Views/**",
+        "Tests/UnitTestsParallelizable/runsettings.coverage.xml",
+        "Tests/UnitTestsParallelizable/runsettings.xml",
+        "Tests/UnitTestsParallelizable/xunit.runner.json",
+        "Tools/**",
+        "ai-v2-primer.md",
+        "codecov.yml",
+        "docfx/EditorRef/**",
+        "docfx/README.md",
+        "docfx/_exported_templates/modern/ApiPage.html.primary.js",
+        "docfx/_exported_templates/modern/ApiPage.html.primary.tmpl",
+        "docfx/_exported_templates/modern/layout/**",
+        "docfx/_exported_templates/modern/partials/**",
+        "docfx/_exported_templates/modern/public/blockDiagram-9f4a6865-KQGFBXS7.min.js",
+        "docfx/_exported_templates/modern/public/blockDiagram-9f4a6865-KQGFBXS7.min.js.map",
+        "docfx/_exported_templates/modern/public/c4Diagram-ae766693-CZAYTAZR.min.js",
+        "docfx/_exported_templates/modern/public/c4Diagram-ae766693-CZAYTAZR.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-5FWMXAFW.min.js",
+        "docfx/_exported_templates/modern/public/chunk-5FWMXAFW.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-CA32PY7O.min.js",
+        "docfx/_exported_templates/modern/public/chunk-CA32PY7O.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-K2MRC2FE.min.js",
+        "docfx/_exported_templates/modern/public/chunk-K2MRC2FE.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-K4EHOM77.min.js",
+        "docfx/_exported_templates/modern/public/chunk-K4EHOM77.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-LUX5WYVM.min.js",
+        "docfx/_exported_templates/modern/public/chunk-LUX5WYVM.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-LXB37CFX.min.js",
+        "docfx/_exported_templates/modern/public/chunk-LXB37CFX.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-M7PQX5EB.min.js",
+        "docfx/_exported_templates/modern/public/chunk-M7PQX5EB.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-N4EFGQ5G.min.js",
+        "docfx/_exported_templates/modern/public/chunk-N4EFGQ5G.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-NRE4YRK7.min.js",
+        "docfx/_exported_templates/modern/public/chunk-NRE4YRK7.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-QRBMAIWT.min.js",
+        "docfx/_exported_templates/modern/public/chunk-QRBMAIWT.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-RNO6SWHZ.min.js",
+        "docfx/_exported_templates/modern/public/chunk-RNO6SWHZ.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-XUHMPXWX.min.js",
+        "docfx/_exported_templates/modern/public/chunk-XUHMPXWX.min.js.map",
+        "docfx/_exported_templates/modern/public/chunk-YEACHCAA.min.js",
+        "docfx/_exported_templates/modern/public/chunk-YEACHCAA.min.js.map",
+        "docfx/_exported_templates/modern/public/classDiagram-fb54d2a0-HROX7LLG.min.js",
+        "docfx/_exported_templates/modern/public/classDiagram-fb54d2a0-HROX7LLG.min.js.map",
+        "docfx/_exported_templates/modern/public/classDiagram-v2-a2b738ad-P3OHMUUZ.min.js",
+        "docfx/_exported_templates/modern/public/classDiagram-v2-a2b738ad-P3OHMUUZ.min.js.map",
+        "docfx/_exported_templates/modern/public/docfx.min.css",
+        "docfx/_exported_templates/modern/public/docfx.min.css.map",
+        "docfx/_exported_templates/modern/public/docfx.min.js",
+        "docfx/_exported_templates/modern/public/docfx.min.js.map",
+        "docfx/_exported_templates/modern/public/erDiagram-09d1c15f-DTEA6AXO.min.js",
+        "docfx/_exported_templates/modern/public/erDiagram-09d1c15f-DTEA6AXO.min.js.map",
+        "docfx/_exported_templates/modern/public/es-NKDSMAKG.min.js",
+        "docfx/_exported_templates/modern/public/es-NKDSMAKG.min.js.map",
+        "docfx/_exported_templates/modern/public/flowDiagram-b222e15a-KHGBC5KH.min.js",
+        "docfx/_exported_templates/modern/public/flowDiagram-b222e15a-KHGBC5KH.min.js.map",
+        "docfx/_exported_templates/modern/public/flowDiagram-v2-13329dc7-7HQDDRUE.min.js",
+        "docfx/_exported_templates/modern/public/flowDiagram-v2-13329dc7-7HQDDRUE.min.js.map",
+        "docfx/_exported_templates/modern/public/flowchart-elk-definition-ae0efee6-MAQF265M.min.js",
+        "docfx/_exported_templates/modern/public/flowchart-elk-definition-ae0efee6-MAQF265M.min.js.map",
+        "docfx/_exported_templates/modern/public/ganttDiagram-b62c793e-AG7E44IT.min.js",
+        "docfx/_exported_templates/modern/public/ganttDiagram-b62c793e-AG7E44IT.min.js.map",
+        "docfx/_exported_templates/modern/public/gitGraphDiagram-942e62fe-MKYST3PD.min.js",
+        "docfx/_exported_templates/modern/public/gitGraphDiagram-942e62fe-MKYST3PD.min.js.map",
+        "docfx/_exported_templates/modern/public/infoDiagram-94cd232f-QDJEABPW.min.js",
+        "docfx/_exported_templates/modern/public/infoDiagram-94cd232f-QDJEABPW.min.js.map",
+        "docfx/_exported_templates/modern/public/journeyDiagram-6625b456-5PROY5YP.min.js",
+        "docfx/_exported_templates/modern/public/journeyDiagram-6625b456-5PROY5YP.min.js.map",
+        "docfx/_exported_templates/modern/public/katex-F45OXAZ7.min.js",
+        "docfx/_exported_templates/modern/public/katex-F45OXAZ7.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ar-JYYLL55L.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ar-JYYLL55L.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.da-ABNGX3GR.min.js",
+        "docfx/_exported_templates/modern/public/lunr.da-ABNGX3GR.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.de-N7IL7F5Q.min.js",
+        "docfx/_exported_templates/modern/public/lunr.de-N7IL7F5Q.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.du-4P4FUVNV.min.js",
+        "docfx/_exported_templates/modern/public/lunr.du-4P4FUVNV.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.el-XMPY4SDR.min.js",
+        "docfx/_exported_templates/modern/public/lunr.el-XMPY4SDR.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.es-QJ3NV5ZH.min.js",
+        "docfx/_exported_templates/modern/public/lunr.es-QJ3NV5ZH.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.fi-OGLGHFAM.min.js",
+        "docfx/_exported_templates/modern/public/lunr.fi-OGLGHFAM.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.fr-6WMI3F4I.min.js",
+        "docfx/_exported_templates/modern/public/lunr.fr-6WMI3F4I.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.he-EZUSRANM.min.js",
+        "docfx/_exported_templates/modern/public/lunr.he-EZUSRANM.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.hi-GKOIC2XP.min.js",
+        "docfx/_exported_templates/modern/public/lunr.hi-GKOIC2XP.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.hu-XPANPY4P.min.js",
+        "docfx/_exported_templates/modern/public/lunr.hu-XPANPY4P.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.hy-E2P7YR63.min.js",
+        "docfx/_exported_templates/modern/public/lunr.hy-E2P7YR63.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.it-RN72ONT7.min.js",
+        "docfx/_exported_templates/modern/public/lunr.it-RN72ONT7.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ja-RG3AQVTE.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ja-RG3AQVTE.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.jp-P5CLAZPO.min.js",
+        "docfx/_exported_templates/modern/public/lunr.jp-P5CLAZPO.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.kn-5Z3IOBMD.min.js",
+        "docfx/_exported_templates/modern/public/lunr.kn-5Z3IOBMD.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ko-XMG7MEQU.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ko-XMG7MEQU.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.nl-XJLTQY4R.min.js",
+        "docfx/_exported_templates/modern/public/lunr.nl-XJLTQY4R.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.no-E5T5VKQC.min.js",
+        "docfx/_exported_templates/modern/public/lunr.no-E5T5VKQC.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.pt-KEDPJIZQ.min.js",
+        "docfx/_exported_templates/modern/public/lunr.pt-KEDPJIZQ.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ro-WWA7JY55.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ro-WWA7JY55.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ru-NQVTAHVP.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ru-NQVTAHVP.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.sa-R4RRHON7.min.js",
+        "docfx/_exported_templates/modern/public/lunr.sa-R4RRHON7.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.sv-GCGNSHUK.min.js",
+        "docfx/_exported_templates/modern/public/lunr.sv-GCGNSHUK.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.ta-KO56CLDU.min.js",
+        "docfx/_exported_templates/modern/public/lunr.ta-KO56CLDU.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.te-2RZIMFIT.min.js",
+        "docfx/_exported_templates/modern/public/lunr.te-2RZIMFIT.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.th-RUK2AEUT.min.js",
+        "docfx/_exported_templates/modern/public/lunr.th-RUK2AEUT.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.tr-2MGZGM7A.min.js",
+        "docfx/_exported_templates/modern/public/lunr.tr-2MGZGM7A.min.js.map",
+        "docfx/_exported_templates/modern/public/lunr.vi-QNO46JPR.min.js",
+        "docfx/_exported_templates/modern/public/lunr.vi-QNO46JPR.min.js.map",
+        "docfx/_exported_templates/modern/public/main.css",
+        "docfx/_exported_templates/modern/public/main.js",
+        "docfx/_exported_templates/modern/public/mermaid.core-SEZKZMNB.min.js",
+        "docfx/_exported_templates/modern/public/mermaid.core-SEZKZMNB.min.js.map",
+        "docfx/_exported_templates/modern/public/mindmap-definition-307c710a-X5KDYKIG.min.js",
+        "docfx/_exported_templates/modern/public/mindmap-definition-307c710a-X5KDYKIG.min.js.map",
+        "docfx/_exported_templates/modern/public/pieDiagram-bb1d19e5-S5GML3CT.min.js",
+        "docfx/_exported_templates/modern/public/pieDiagram-bb1d19e5-S5GML3CT.min.js.map",
+        "docfx/_exported_templates/modern/public/quadrantDiagram-c759a472-M63GQYLB.min.js",
+        "docfx/_exported_templates/modern/public/quadrantDiagram-c759a472-M63GQYLB.min.js.map",
+        "docfx/_exported_templates/modern/public/requirementDiagram-87253d64-XJI5VOSH.min.js",
+        "docfx/_exported_templates/modern/public/requirementDiagram-87253d64-XJI5VOSH.min.js.map",
+        "docfx/_exported_templates/modern/public/sankeyDiagram-707fac0f-3GVBJS6H.min.js",
+        "docfx/_exported_templates/modern/public/sankeyDiagram-707fac0f-3GVBJS6H.min.js.map",
+        "docfx/_exported_templates/modern/public/search-worker.min.js",
+        "docfx/_exported_templates/modern/public/search-worker.min.js.map",
+        "docfx/_exported_templates/modern/public/sequenceDiagram-6894f283-AJU5ZNMQ.min.js",
+        "docfx/_exported_templates/modern/public/sequenceDiagram-6894f283-AJU5ZNMQ.min.js.map",
+        "docfx/_exported_templates/modern/public/stateDiagram-5dee940d-56243UMQ.min.js",
+        "docfx/_exported_templates/modern/public/stateDiagram-5dee940d-56243UMQ.min.js.map",
+        "docfx/_exported_templates/modern/public/stateDiagram-v2-1992cada-ZUI7IUPQ.min.js",
+        "docfx/_exported_templates/modern/public/stateDiagram-v2-1992cada-ZUI7IUPQ.min.js.map",
+        "docfx/_exported_templates/modern/public/tex-svg-full-JPZ3Q247.min.js",
+        "docfx/_exported_templates/modern/public/tex-svg-full-JPZ3Q247.min.js.map",
+        "docfx/_exported_templates/modern/public/timeline-definition-bf702344-YJZ3MVX7.min.js",
+        "docfx/_exported_templates/modern/public/timeline-definition-bf702344-YJZ3MVX7.min.js.map",
+        "docfx/_exported_templates/modern/public/xychartDiagram-f11f50a6-N45Z7OOP.min.js",
+        "docfx/_exported_templates/modern/public/xychartDiagram-f11f50a6-N45Z7OOP.min.js.map",
+        "docfx/apispec/**",
+        "docfx/docfx.json",
+        "docfx/docs/**",
+        "docfx/includes/**",
+        "docfx/index.md",
+        "docfx/schemas/**",
+        "docfx/scripts/**",
+        "docfx/toc.yml",
+        "global.json",
+        "llms.txt",
+        "nuget.config",
+        "plans/**",
+        "pull_request_template.md",
+        "specs/**",
+        "testenvironments.json"
+      ],
+      "text": "Copyright 2007-2011 Novell Inc\nCopyright 2017 Microsoft Corp\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2007-2011 Novell Inc; Copyright 2017 Microsoft Corp, MIT license (LICENSE), https://github.com/tui-cs/Terminal.Gui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Scripts/BackingFieldReorderer/**",
+        "Scripts/COPYRIGHT",
+        "Scripts/CleanupAgent.ps1",
+        "Scripts/DocSnippetValidator/**",
+        "Scripts/FindDuplicateTestMethodsInSameFileName.ps1",
+        "Scripts/FindDuplicateTests.ps1",
+        "Scripts/PartialSplitter/**",
+        "Scripts/README.md",
+        "Scripts/Run-LocalCoverage.ps1",
+        "Scripts/Terminal.Gui.PowerShell.Build.psd1",
+        "Scripts/Terminal.Gui.PowerShell.Build.psm1",
+        "Scripts/Terminal.Gui.PowerShell.Core.psd1",
+        "Scripts/Terminal.Gui.PowerShell.Core.psm1",
+        "Scripts/Terminal.Gui.PowerShell.Git.psd1",
+        "Scripts/Terminal.Gui.PowerShell.Git.psm1",
+        "Scripts/Terminal.Gui.PowerShell.psd1",
+        "Scripts/delist-nuget.ps1",
+        "Scripts/lint-agent-docs.ps1",
+        "Scripts/testloop.sh",
+        "Scripts/tuirec/**"
+      ],
+      "text": "/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n// The MIT License (MIT)\n// Copyright © 2024 Brandon Thetford (@dodexahedron)\n//\n// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation\n// files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy,\n// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the\n// Software is furnished to do so, subject to the following conditions:\n//\n// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n//\n// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\n// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\n// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\n// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n",
+      "attribution": "the authors of tui-cs/Terminal.Gui (Scripts) (the license file names no copyright line), MIT license (COPYRIGHT), https://github.com/tui-cs/Terminal.Gui/tree/37a7e518855b075103fc7b059820cb17d606f928/Scripts."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.psm1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.DotSettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.partial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psd1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slnx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cursorrules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vsconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.windsurfrules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYRIGHT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.resx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

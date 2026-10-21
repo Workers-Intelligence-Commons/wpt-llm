@@ -1,0 +1,1450 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/seaweedfs/seaweedfs",
+  "revision": "3659c369e0eaa26810ccc08eb55e59236d9fc8bf",
+  "checksum": "sha256:bb57174999719fd4474fe344a0ca2c994a2f78c8d5cdaaa4c8bf49e3355dd1f0",
+  "extract": {
+    "exclude": [
+      "note/SeaweedFS_Architecture.png",
+      "note/SeaweedFS_Cluster_Backup.png",
+      "note/SeaweedFS_Filer_Backup.png",
+      "note/SeaweedFS_Gateway_RemoteObjectStore.png",
+      "note/SeaweedFS_RemoteMount.png",
+      "note/SeaweedFS_XDR.png",
+      "note/SeaweedMQ_Architecture.png",
+      "note/keepsec.png",
+      "note/piknik.png",
+      "note/seaweedfs.png",
+      "note/slides/object-store-layout.png",
+      "note/sponsor_nodion.png",
+      "note/sponsor_zyner.png",
+      "seaweed-volume/src/server/favicon.ico",
+      "test/data/187.idx",
+      "weed/admin/static/css/fonts/**",
+      "weed/admin/static/favicon.ico",
+      "weed/admin/static_gz/**",
+      "weed/images/sample1.jpg",
+      "weed/images/sample2.webp",
+      "weed/s3api/iceberg/testdata/**",
+      "weed/static/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.eot",
+      "weed/static/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.ttf",
+      "weed/static/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.woff",
+      "weed/static/favicon.ico",
+      "weed/static/images/**",
+      "weed/static/seaweed50x50.png",
+      "weed/storage/erasure_coding/1.dat",
+      "weed/storage/erasure_coding/1.idx",
+      "weed/storage/idx/test_files/**",
+      "weed/storage/needle/43.dat",
+      "weed/storage/test_files/bitrot_volume.dat",
+      "weed/storage/test_files/bitrot_volume.idx",
+      "weed/storage/test_files/empty_volume.dat",
+      "weed/storage/test_files/healthy_volume.dat",
+      "weed/storage/test_files/healthy_volume.idx",
+      "weed/worker/tasks/iceberg/testdata/**",
+      "mount.test",
+      "test/data/sample.idx",
+      "test/kafka/kafka-client-loadtest/loadtest",
+      "test/kafka/kafka-client-loadtest/tools/simple-test",
+      "test/kafka/simple-consumer/simple-consumer",
+      "test/kafka/simple-publisher/simple-publisher",
+      "weed/storage/erasure_coding/test_files/389.ecx"
+    ]
+  },
+  "history": {
+    "since": "fe8dc26849cecc92fd63331db9bc3a51c0327474"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2025 Chris Lu\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\nMIT License\n\nCopyright (c) 2017 Darren Ldl\nCopyright (c) 2015, 2016 Nicolas Trangez\nCopyright (c) 2015 Klaus Post\nCopyright (c) 2015 Backblaze\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and\ndistribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright\nowner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities\nthat control, are controlled by, or are under common control with that entity.\nFor the purposes of this definition, \"control\" means (i) the power, direct or\nindirect, to cause the direction or management of such entity, whether by\ncontract or otherwise, or (ii) ownership of fifty percent (50%) or more of the\noutstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising\npermissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including\nbut not limited to software source code, documentation source, and configuration\nfiles.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or\ntranslation of a Source form, including but not limited to compiled object code,\ngenerated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made\navailable under the License, as indicated by a copyright notice that is included\nin or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that\nis based on (or derived from) the Work and for which the editorial revisions,\nannotations, elaborations, or other modifications represent, as a whole, an\noriginal work of authorship. For the purposes of this License, Derivative Works\nshall not include works that remain separable from, or merely link (or bind by\nname) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version\nof the Work and any modifications or additions to that Work or Derivative Works\nthereof, that is intentionally submitted to Licensor for inclusion in the Work\nby the copyright owner or by an individual or Legal Entity authorized to submit\non behalf of the copyright owner. For the purposes of this definition,\n\"submitted\" means any form of electronic, verbal, or written communication sent\nto the Licensor or its representatives, including but not limited to\ncommunication on electronic mailing lists, source code control systems, and\nissue tracking systems that are managed by, or on behalf of, the Licensor for\nthe purpose of discussing and improving the Work, but excluding communication\nthat is conspicuously marked or otherwise designated in writing by the copyright\nowner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf\nof whom a Contribution has been received by Licensor and subsequently\nincorporated within the Work.\n\n2. Grant of Copyright License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable copyright license to reproduce, prepare Derivative Works of,\npublicly display, publicly perform, sublicense, and distribute the Work and such\nDerivative Works in Source or Object form.\n\n3. Grant of Patent License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable (except as stated in this section) patent license to make, have\nmade, use, offer to sell, sell, import, and otherwise transfer the Work, where\nsuch license applies only to those patent claims licensable by such Contributor\nthat are necessarily infringed by their Contribution(s) alone or by combination\nof their Contribution(s) with the Work to which such Contribution(s) was\nsubmitted. If You institute patent litigation against any entity (including a\ncross-claim or counterclaim in a lawsuit) alleging that the Work or a\nContribution incorporated within the Work constitutes direct or contributory\npatent infringement, then any patent licenses granted to You under this License\nfor that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution.\n\nYou may reproduce and distribute copies of the Work or Derivative Works thereof\nin any medium, with or without modifications, and in Source or Object form,\nprovided that You meet the following conditions:\n\nYou must give any other recipients of the Work or Derivative Works a copy of\nthis License; and\nYou must cause any modified files to carry prominent notices stating that You\nchanged the files; and\nYou must retain, in the Source form of any Derivative Works that You distribute,\nall copyright, patent, trademark, and attribution notices from the Source form\nof the Work, excluding those notices that do not pertain to any part of the\nDerivative Works; and\nIf the Work includes a \"NOTICE\" text file as part of its distribution, then any\nDerivative Works that You distribute must include a readable copy of the\nattribution notices contained within such NOTICE file, excluding those notices\nthat do not pertain to any part of the Derivative Works, in at least one of the\nfollowing places: within a NOTICE text file distributed as part of the\nDerivative Works; within the Source form or documentation, if provided along\nwith the Derivative Works; or, within a display generated by the Derivative\nWorks, if and wherever such third-party notices normally appear. The contents of\nthe NOTICE file are for informational purposes only and do not modify the\nLicense. You may add Your own attribution notices within Derivative Works that\nYou distribute, alongside or as an addendum to the NOTICE text from the Work,\nprovided that such additional attribution notices cannot be construed as\nmodifying the License.\nYou may add Your own copyright statement to Your modifications and may provide\nadditional or different license terms and conditions for use, reproduction, or\ndistribution of Your modifications, or for any such Derivative Works as a whole,\nprovided Your use, reproduction, and distribution of the Work otherwise complies\nwith the conditions stated in this License.\n\n5. Submission of Contributions.\n\nUnless You explicitly state otherwise, any Contribution intentionally submitted\nfor inclusion in the Work by You to the Licensor shall be under the terms and\nconditions of this License, without any additional terms or conditions.\nNotwithstanding the above, nothing herein shall supersede or modify the terms of\nany separate license agreement you may have executed with Licensor regarding\nsuch Contributions.\n\n6. Trademarks.\n\nThis License does not grant permission to use the trade names, trademarks,\nservice marks, or product names of the Licensor, except as required for\nreasonable and customary use in describing the origin of the Work and\nreproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty.\n\nUnless required by applicable law or agreed to in writing, Licensor provides the\nWork (and each Contributor provides its Contributions) on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,\nincluding, without limitation, any warranties or conditions of TITLE,\nNON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are\nsolely responsible for determining the appropriateness of using or\nredistributing the Work and assume any risks associated with Your exercise of\npermissions under this License.\n\n8. Limitation of Liability.\n\nIn no event and under no legal theory, whether in tort (including negligence),\ncontract, or otherwise, unless required by applicable law (such as deliberate\nand grossly negligent acts) or agreed to in writing, shall any Contributor be\nliable to You for damages, including any direct, indirect, special, incidental,\nor consequential damages of any character arising as a result of this License or\nout of the use or inability to use the Work (including but not limited to\ndamages for loss of goodwill, work stoppage, computer failure or malfunction, or\nany and all other commercial damages or losses), even if such Contributor has\nbeen advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability.\n\nWhile redistributing the Work or Derivative Works thereof, You may choose to\noffer, and charge a fee for, acceptance of support, warranty, indemnity, or\nother liability obligations and/or rights consistent with this License. However,\nin accepting such obligations, You may act only on Your own behalf and on Your\nsole responsibility, not on behalf of any other Contributor, and only if You\nagree to indemnify, defend, and hold each Contributor harmless for any liability\nincurred by, or claims asserted against, such Contributor by reason of your\naccepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work\n\nTo apply the Apache License to your work, attach the following boilerplate\nnotice, with the fields enclosed by brackets \"[]\" replaced with your own\nidentifying information. (Don't include the brackets!) The text should be\nenclosed in the appropriate comment syntax for the file format. We also\nrecommend that a file or class name and description of purpose be included on\nthe same \"printed page\" as the copyright notice for easier identification within\nthird-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/seaweedfs/seaweedfs: Copyright 2025 Chris Lu, Apache-2.0 license (LICENSE), https://github.com/seaweedfs/seaweedfs; Copyright (c) 2017 Darren Ldl; Copyright (c) 2015, 2016 Nicolas Trangez; Copyright (c) 2015 Klaus Post; Copyright (c) 2015 Backblaze, MIT license (LICENSE), https://github.com/seaweedfs/seaweedfs/tree/3659c369e0eaa26810ccc08eb55e59236d9fc8bf/seaweed-volume/vendor/reed-solomon-erasure; the authors of seaweedfs/seaweedfs (weed/glog) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/seaweedfs/seaweedfs/tree/3659c369e0eaa26810ccc08eb55e59236d9fc8bf/weed/glog."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".codespellrc",
+        ".github/**",
+        ".gitignore",
+        ".superset/**",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "REST_API.md",
+        "S3_LIFECYCLE_REDESIGN.md",
+        "SECURITY.md",
+        "VOLUME_SERVER_RUST_PLAN.md",
+        "backers.md",
+        "cmd/**",
+        "design-bucket-config-serialization.md",
+        "design-cloudstack-provider.md",
+        "design-lance-catalog.md",
+        "docker/**",
+        "go.mod",
+        "go.sum",
+        "install.sh",
+        "k8s/**",
+        "mount.test",
+        "note/icon.svg",
+        "note/seaweedfs.svg",
+        "note/slides/Makefile",
+        "note/slides/seaweedfs-production-setup.md",
+        "note/star_history.svg",
+        "other/**",
+        "postgres-examples/**",
+        "seaweed-common/**",
+        "seaweed-volume/Cargo.lock",
+        "seaweed-volume/Cargo.toml",
+        "seaweed-volume/DEV_PLAN.md",
+        "seaweed-volume/MISSING_FEATURES.md",
+        "seaweed-volume/PARITY_PLAN.md",
+        "seaweed-volume/README.md",
+        "seaweed-volume/build.rs",
+        "seaweed-volume/proto/**",
+        "seaweed-volume/src/config.rs",
+        "seaweed-volume/src/images.rs",
+        "seaweed-volume/src/lib.rs",
+        "seaweed-volume/src/main.rs",
+        "seaweed-volume/src/malloc_tuning.rs",
+        "seaweed-volume/src/metrics.rs",
+        "seaweed-volume/src/remote_storage/**",
+        "seaweed-volume/src/security/**",
+        "seaweed-volume/src/security.rs",
+        "seaweed-volume/src/server/debug.rs",
+        "seaweed-volume/src/server/grpc_client.rs",
+        "seaweed-volume/src/server/grpc_server.rs",
+        "seaweed-volume/src/server/handlers.rs",
+        "seaweed-volume/src/server/heartbeat.rs",
+        "seaweed-volume/src/server/memory_status.rs",
+        "seaweed-volume/src/server/mod.rs",
+        "seaweed-volume/src/server/profiling.rs",
+        "seaweed-volume/src/server/request_id.rs",
+        "seaweed-volume/src/server/server_stats.rs",
+        "seaweed-volume/src/server/store_ec.rs",
+        "seaweed-volume/src/server/ui.rs",
+        "seaweed-volume/src/server/volume_server.rs",
+        "seaweed-volume/src/server/write_queue.rs",
+        "seaweed-volume/src/storage/**",
+        "seaweed-volume/src/version.rs",
+        "seaweed-volume/tests/**",
+        "seaweed-volume/tools/**",
+        "seaweed-worker/**",
+        "snap/**",
+        "sw-block/**",
+        "telemetry/**",
+        "terraform/**",
+        "test/benchmark/**",
+        "test/data/sample.idx",
+        "test/erasure_coding/**",
+        "test/foundationdb/**",
+        "test/fuse_dlm/**",
+        "test/fuse_failover/**",
+        "test/fuse_integration/**",
+        "test/fuse_p2p/**",
+        "test/java/**",
+        "test/kafka/**",
+        "test/kms/**",
+        "test/master_cold_start/**",
+        "test/metadata_subscribe/**",
+        "test/mount_bench/**",
+        "test/mq/**",
+        "test/multi_master/**",
+        "test/perf/**",
+        "test/pjdfstest/**",
+        "test/plugin_workers/**",
+        "test/postgres/**",
+        "test/random_access/**",
+        "test/s3/**",
+        "test/s3tables/**",
+        "test/samba/**",
+        "test/sftp/**",
+        "test/testutil/**",
+        "test/tls_rotation/**",
+        "test/tus/**",
+        "test/vacuum/**",
+        "test/volume_server/**",
+        "test/winfsp/**",
+        "test/winfsp-conformance/**",
+        "unmaintained/**",
+        "util/**",
+        "weed/Makefile",
+        "weed/admin/Makefile",
+        "weed/admin/config/**",
+        "weed/admin/dash/**",
+        "weed/admin/gen_static_gz.go",
+        "weed/admin/handlers/**",
+        "weed/admin/internal/**",
+        "weed/admin/maintenance/**",
+        "weed/admin/plugin/**",
+        "weed/admin/static/css/admin.css",
+        "weed/admin/static/css/bootstrap-icons.min.css",
+        "weed/admin/static/css/bootstrap.min.css",
+        "weed/admin/static/css/bootstrap.min.css.map",
+        "weed/admin/static/js/**",
+        "weed/admin/static/licenses/**",
+        "weed/admin/static_embed.go",
+        "weed/admin/static_handler.go",
+        "weed/admin/static_handler_test.go",
+        "weed/admin/topology/**",
+        "weed/admin/view/**",
+        "weed/cluster/**",
+        "weed/command/**",
+        "weed/credential/**",
+        "weed/ec/**",
+        "weed/filer/**",
+        "weed/filer_client/**",
+        "weed/iam/**",
+        "weed/iamapi/**",
+        "weed/images/cropping.go",
+        "weed/images/cropping_test.go",
+        "weed/images/gateway/**",
+        "weed/images/orientation.go",
+        "weed/images/orientation_test.go",
+        "weed/images/resizing.go",
+        "weed/images/resizing_test.go",
+        "weed/kms/**",
+        "weed/mount/**",
+        "weed/mq/**",
+        "weed/notification/**",
+        "weed/operation/**",
+        "weed/pb/**",
+        "weed/placement/**",
+        "weed/plugin/**",
+        "weed/query/**",
+        "weed/remote_storage/**",
+        "weed/replication/**",
+        "weed/s3api/AmazonS3.xsd",
+        "weed/s3api/README.txt",
+        "weed/s3api/auth_account_collapse_test.go",
+        "weed/s3api/auth_audit_requester_test.go",
+        "weed/s3api/auth_config_default_deny_test.go",
+        "weed/s3api/auth_copy_source_test.go",
+        "weed/s3api/auth_credentials.go",
+        "weed/s3api/auth_credentials_native_floor_test.go",
+        "weed/s3api/auth_credentials_policy_document.go",
+        "weed/s3api/auth_credentials_policy_document_test.go",
+        "weed/s3api/auth_credentials_policy_sync_test.go",
+        "weed/s3api/auth_credentials_static_config_test.go",
+        "weed/s3api/auth_credentials_subscribe.go",
+        "weed/s3api/auth_credentials_subscribe_test.go",
+        "weed/s3api/auth_credentials_trust.go",
+        "weed/s3api/auth_jwt_streaming_unsigned_test.go",
+        "weed/s3api/auth_presigned_semicolon_test.go",
+        "weed/s3api/auth_proxy_integration_test.go",
+        "weed/s3api/auth_prune_bucket_test.go",
+        "weed/s3api/auth_security_test.go",
+        "weed/s3api/auth_signature_v2.go",
+        "weed/s3api/auth_signature_v2_test.go",
+        "weed/s3api/auth_signature_v4.go",
+        "weed/s3api/auth_signature_v4_sts_test.go",
+        "weed/s3api/auth_signature_v4_test.go",
+        "weed/s3api/auth_signature_v4_unsigned_headers_test.go",
+        "weed/s3api/auth_static_session_token_test.go",
+        "weed/s3api/auth_sts_identity_test.go",
+        "weed/s3api/auth_sts_session_token_test.go",
+        "weed/s3api/auth_sts_v4_test.go",
+        "weed/s3api/auto_signature_v4_test.go",
+        "weed/s3api/bucket_metadata.go",
+        "weed/s3api/bucket_metadata_test.go",
+        "weed/s3api/bucket_owner_identity_test.go",
+        "weed/s3api/bucket_paths.go",
+        "weed/s3api/bucket_size_metrics.go",
+        "weed/s3api/bucket_size_metrics_test.go",
+        "weed/s3api/chunked_bug_reproduction_test.go",
+        "weed/s3api/chunked_reader_trailer_split_test.go",
+        "weed/s3api/chunked_reader_v4.go",
+        "weed/s3api/chunked_reader_v4_bucket_policy_test.go",
+        "weed/s3api/chunked_reader_v4_test.go",
+        "weed/s3api/copy_source_decode_test.go",
+        "weed/s3api/cors/**",
+        "weed/s3api/crc_combine.go",
+        "weed/s3api/crc_combine_test.go",
+        "weed/s3api/credential_iam_errors.go",
+        "weed/s3api/custom_types.go",
+        "weed/s3api/filer_multipart.go",
+        "weed/s3api/filer_multipart_abort_test.go",
+        "weed/s3api/filer_multipart_checksum_test.go",
+        "weed/s3api/filer_multipart_etag_test.go",
+        "weed/s3api/filer_multipart_initiate_acl_test.go",
+        "weed/s3api/filer_multipart_sse_s3_test.go",
+        "weed/s3api/filer_util.go",
+        "weed/s3api/filer_util_delete_test.go",
+        "weed/s3api/filer_util_list_retry_test.go",
+        "weed/s3api/filer_util_tags.go",
+        "weed/s3api/iam_batch_delete_test.go",
+        "weed/s3api/iam_defaults_test.go",
+        "weed/s3api/iam_list_prefix_regression_test.go",
+        "weed/s3api/iam_optional_test.go",
+        "weed/s3api/iceberg/commit_helpers.go",
+        "weed/s3api/iceberg/commit_updates.go",
+        "weed/s3api/iceberg/handlers_commit.go",
+        "weed/s3api/iceberg/handlers_metrics.go",
+        "weed/s3api/iceberg/handlers_metrics_test.go",
+        "weed/s3api/iceberg/handlers_namespace.go",
+        "weed/s3api/iceberg/handlers_oauth.go",
+        "weed/s3api/iceberg/handlers_oauth_test.go",
+        "weed/s3api/iceberg/handlers_table.go",
+        "weed/s3api/iceberg/handlers_transaction.go",
+        "weed/s3api/iceberg/handlers_view.go",
+        "weed/s3api/iceberg/handlers_view_update.go",
+        "weed/s3api/iceberg/iceberg.go",
+        "weed/s3api/iceberg/iceberg_access_delegation_test.go",
+        "weed/s3api/iceberg/iceberg_commit_location_test.go",
+        "weed/s3api/iceberg/iceberg_commit_updates_test.go",
+        "weed/s3api/iceberg/iceberg_create_table_test.go",
+        "weed/s3api/iceberg/iceberg_create_view_test.go",
+        "weed/s3api/iceberg/iceberg_credential_vending_test.go",
+        "weed/s3api/iceberg/iceberg_invalid_name_test.go",
+        "weed/s3api/iceberg/iceberg_issue_9103_test.go",
+        "weed/s3api/iceberg/iceberg_namespace_properties_test.go",
+        "weed/s3api/iceberg/iceberg_pagination_test.go",
+        "weed/s3api/iceberg/iceberg_register_table_test.go",
+        "weed/s3api/iceberg/iceberg_rename_table_test.go",
+        "weed/s3api/iceberg/iceberg_snapshots_param_test.go",
+        "weed/s3api/iceberg/iceberg_transaction_test.go",
+        "weed/s3api/iceberg/iceberg_update_namespace_properties_test.go",
+        "weed/s3api/iceberg/iceberg_view_test.go",
+        "weed/s3api/iceberg/iceberg_warehouse_test.go",
+        "weed/s3api/iceberg/manifest_repair.go",
+        "weed/s3api/iceberg/manifest_repair_test.go",
+        "weed/s3api/iceberg/metadata_compliance.go",
+        "weed/s3api/iceberg/metadata_compliance_test.go",
+        "weed/s3api/iceberg/metadata_files.go",
+        "weed/s3api/iceberg/metadata_files_test.go",
+        "weed/s3api/iceberg/name_mapping.go",
+        "weed/s3api/iceberg/name_mapping_test.go",
+        "weed/s3api/iceberg/path_validation.go",
+        "weed/s3api/iceberg/path_validation_test.go",
+        "weed/s3api/iceberg/requirements.go",
+        "weed/s3api/iceberg/requirements_test.go",
+        "weed/s3api/iceberg/server.go",
+        "weed/s3api/iceberg/server_auth_test.go",
+        "weed/s3api/iceberg/server_routes_test.go",
+        "weed/s3api/iceberg/stage_create.go",
+        "weed/s3api/iceberg/types.go",
+        "weed/s3api/iceberg/utils.go",
+        "weed/s3api/identity_reflection_test.go",
+        "weed/s3api/kms_azure.go",
+        "weed/s3api/lance/**",
+        "weed/s3api/lifecycle_xml/**",
+        "weed/s3api/object_lock_utils.go",
+        "weed/s3api/policy/**",
+        "weed/s3api/policy_engine/**",
+        "weed/s3api/request_body.go",
+        "weed/s3api/request_body_test.go",
+        "weed/s3api/s3_action_resolver.go",
+        "weed/s3api/s3_action_resolver_test.go",
+        "weed/s3api/s3_bucket_encryption.go",
+        "weed/s3api/s3_constants/**",
+        "weed/s3api/s3_content_encoding_test.go",
+        "weed/s3api/s3_encodepath_test.go",
+        "weed/s3api/s3_end_to_end_test.go",
+        "weed/s3api/s3_error_utils.go",
+        "weed/s3api/s3_existing_object_tag_test.go",
+        "weed/s3api/s3_granular_action_security_test.go",
+        "weed/s3api/s3_iam_bearer_trust_policy_test.go",
+        "weed/s3api/s3_iam_group_role_abac_test.go",
+        "weed/s3api/s3_iam_middleware.go",
+        "weed/s3api/s3_iam_role_selection_test.go",
+        "weed/s3api/s3_jwt_auth_test.go",
+        "weed/s3api/s3_list_parts_action_test.go",
+        "weed/s3api/s3_metadata_util.go",
+        "weed/s3api/s3_objectlock/**",
+        "weed/s3api/s3_sse_c.go",
+        "weed/s3api/s3_sse_ctr_test.go",
+        "weed/s3api/s3_sse_kms.go",
+        "weed/s3api/s3_sse_kms_utils.go",
+        "weed/s3api/s3_sse_metadata.go",
+        "weed/s3api/s3_sse_s3.go",
+        "weed/s3api/s3_sse_s3_integration_test.go",
+        "weed/s3api/s3_sse_s3_kek_passphrase_test.go",
+        "weed/s3api/s3_sse_s3_multipart_test.go",
+        "weed/s3api/s3_sse_test_utils_test.go",
+        "weed/s3api/s3_sse_utils.go",
+        "weed/s3api/s3_token_differentiation_test.go",
+        "weed/s3api/s3_validation_utils.go",
+        "weed/s3api/s3_validation_utils_require_test.go",
+        "weed/s3api/s3api_acl_header_parser_test.go",
+        "weed/s3api/s3api_acl_helper.go",
+        "weed/s3api/s3api_acp.go",
+        "weed/s3api/s3api_ambiguous_subresource_test.go",
+        "weed/s3api/s3api_auth.go",
+        "weed/s3api/s3api_bucket_config.go",
+        "weed/s3api/s3api_bucket_config_stubs.go",
+        "weed/s3api/s3api_bucket_config_stubs_test.go",
+        "weed/s3api/s3api_bucket_config_update_test.go",
+        "weed/s3api/s3api_bucket_cors_handlers.go",
+        "weed/s3api/s3api_bucket_default_encryption_test.go",
+        "weed/s3api/s3api_bucket_delete_test.go",
+        "weed/s3api/s3api_bucket_handlers.go",
+        "weed/s3api/s3api_bucket_handlers_list_test.go",
+        "weed/s3api/s3api_bucket_handlers_misc.go",
+        "weed/s3api/s3api_bucket_handlers_misc_test.go",
+        "weed/s3api/s3api_bucket_handlers_object_lock_config.go",
+        "weed/s3api/s3api_bucket_lifecycle_config.go",
+        "weed/s3api/s3api_bucket_lifecycle_fastpath_warn.go",
+        "weed/s3api/s3api_bucket_lifecycle_fastpath_warn_test.go",
+        "weed/s3api/s3api_bucket_lifecycle_response_test.go",
+        "weed/s3api/s3api_bucket_metadata_test.go",
+        "weed/s3api/s3api_bucket_owner_index.go",
+        "weed/s3api/s3api_bucket_owner_index_test.go",
+        "weed/s3api/s3api_bucket_policy_arn_test.go",
+        "weed/s3api/s3api_bucket_policy_authz_test.go",
+        "weed/s3api/s3api_bucket_policy_engine.go",
+        "weed/s3api/s3api_bucket_policy_handlers.go",
+        "weed/s3api/s3api_bucket_policy_identity_deny_test.go",
+        "weed/s3api/s3api_bucket_policy_mirror_test.go",
+        "weed/s3api/s3api_bucket_quota_handlers.go",
+        "weed/s3api/s3api_bucket_quota_handlers_test.go",
+        "weed/s3api/s3api_bucket_subresource_routing_test.go",
+        "weed/s3api/s3api_bucket_tagging_handlers.go",
+        "weed/s3api/s3api_chunk_manifest.go",
+        "weed/s3api/s3api_chunk_manifest_test.go",
+        "weed/s3api/s3api_circuit_breaker.go",
+        "weed/s3api/s3api_circuit_breaker_test.go",
+        "weed/s3api/s3api_copy_size_calculation.go",
+        "weed/s3api/s3api_copy_source_classify_test.go",
+        "weed/s3api/s3api_copy_validation.go",
+        "weed/s3api/s3api_copy_validation_test.go",
+        "weed/s3api/s3api_directory_marker.go",
+        "weed/s3api/s3api_domain_test.go",
+        "weed/s3api/s3api_embedded_iam.go",
+        "weed/s3api/s3api_embedded_iam_authz_test.go",
+        "weed/s3api/s3api_embedded_iam_oidc.go",
+        "weed/s3api/s3api_embedded_iam_role.go",
+        "weed/s3api/s3api_embedded_iam_test.go",
+        "weed/s3api/s3api_embedded_iam_user_tags_test.go",
+        "weed/s3api/s3api_encrypted_volume_copy_test.go",
+        "weed/s3api/s3api_governance_permissions_test.go",
+        "weed/s3api/s3api_handlers.go",
+        "weed/s3api/s3api_handlers_failover_test.go",
+        "weed/s3api/s3api_head_bucket_test.go",
+        "weed/s3api/s3api_iam_oidc_test.go",
+        "weed/s3api/s3api_iam_role_test.go",
+        "weed/s3api/s3api_iceberg_credentials.go",
+        "weed/s3api/s3api_iceberg_credentials_test.go",
+        "weed/s3api/s3api_implicit_directory_test.go",
+        "weed/s3api/s3api_inline_policy_condition_test.go",
+        "weed/s3api/s3api_internal_lifecycle.go",
+        "weed/s3api/s3api_internal_lifecycle_test.go",
+        "weed/s3api/s3api_list_normalization_test.go",
+        "weed/s3api/s3api_list_parts_no_such_upload_test.go",
+        "weed/s3api/s3api_local_read_fallback_test.go",
+        "weed/s3api/s3api_multipart_path_validation_test.go",
+        "weed/s3api/s3api_multipart_ssekms_test.go",
+        "weed/s3api/s3api_multipart_upload_entry_test.go",
+        "weed/s3api/s3api_nextmarker_test.go",
+        "weed/s3api/s3api_object_acl_permissions_test.go",
+        "weed/s3api/s3api_object_ambiguous_route_test.go",
+        "weed/s3api/s3api_object_anonymous_cache_test.go",
+        "weed/s3api/s3api_object_anonymous_read.go",
+        "weed/s3api/s3api_object_anonymous_read_test.go",
+        "weed/s3api/s3api_object_handlers.go",
+        "weed/s3api/s3api_object_handlers_acl.go",
+        "weed/s3api/s3api_object_handlers_acl_test.go",
+        "weed/s3api/s3api_object_handlers_attributes.go",
+        "weed/s3api/s3api_object_handlers_attributes_test.go",
+        "weed/s3api/s3api_object_handlers_conditional_read_test.go",
+        "weed/s3api/s3api_object_handlers_copy.go",
+        "weed/s3api/s3api_object_handlers_copy_acl_test.go",
+        "weed/s3api/s3api_object_handlers_copy_alloc_test.go",
+        "weed/s3api/s3api_object_handlers_copy_bench_test.go",
+        "weed/s3api/s3api_object_handlers_copy_checksum_test.go",
+        "weed/s3api/s3api_object_handlers_copy_chunk_upload_test.go",
+        "weed/s3api/s3api_object_handlers_copy_collection_test.go",
+        "weed/s3api/s3api_object_handlers_copy_default_encryption_test.go",
+        "weed/s3api/s3api_object_handlers_copy_etag_test.go",
+        "weed/s3api/s3api_object_handlers_copy_mime_test.go",
+        "weed/s3api/s3api_object_handlers_copy_part_sse.go",
+        "weed/s3api/s3api_object_handlers_copy_self_reuse_test.go",
+        "weed/s3api/s3api_object_handlers_copy_stream.go",
+        "weed/s3api/s3api_object_handlers_copy_unified.go",
+        "weed/s3api/s3api_object_handlers_delete.go",
+        "weed/s3api/s3api_object_handlers_delete_test.go",
+        "weed/s3api/s3api_object_handlers_dir_test.go",
+        "weed/s3api/s3api_object_handlers_legal_hold.go",
+        "weed/s3api/s3api_object_handlers_list.go",
+        "weed/s3api/s3api_object_handlers_list_deleted_prefix_test.go",
+        "weed/s3api/s3api_object_handlers_list_directory_marker_test.go",
+        "weed/s3api/s3api_object_handlers_list_directory_test.go",
+        "weed/s3api/s3api_object_handlers_list_marker_before_prefix_test.go",
+        "weed/s3api/s3api_object_handlers_list_test.go",
+        "weed/s3api/s3api_object_handlers_list_versioned_test.go",
+        "weed/s3api/s3api_object_handlers_multipart.go",
+        "weed/s3api/s3api_object_handlers_postpolicy.go",
+        "weed/s3api/s3api_object_handlers_postpolicy_authz_test.go",
+        "weed/s3api/s3api_object_handlers_postpolicy_test.go",
+        "weed/s3api/s3api_object_handlers_put.go",
+        "weed/s3api/s3api_object_handlers_put_ambiguous_test.go",
+        "weed/s3api/s3api_object_handlers_put_checksum_test.go",
+        "weed/s3api/s3api_object_handlers_put_chunksize_test.go",
+        "weed/s3api/s3api_object_handlers_put_error_test.go",
+        "weed/s3api/s3api_object_handlers_readonly_test.go",
+        "weed/s3api/s3api_object_handlers_rename.go",
+        "weed/s3api/s3api_object_handlers_rename_test.go",
+        "weed/s3api/s3api_object_handlers_retention.go",
+        "weed/s3api/s3api_object_handlers_tagging.go",
+        "weed/s3api/s3api_object_lifecycle_ttl.go",
+        "weed/s3api/s3api_object_lifecycle_ttl_test.go",
+        "weed/s3api/s3api_object_lock_actions_authz_test.go",
+        "weed/s3api/s3api_object_lock_authz_test.go",
+        "weed/s3api/s3api_object_lock_fix_test.go",
+        "weed/s3api/s3api_object_lock_headers_test.go",
+        "weed/s3api/s3api_object_ownership_test.go",
+        "weed/s3api/s3api_object_part_number_test.go",
+        "weed/s3api/s3api_object_range_test.go",
+        "weed/s3api/s3api_object_retention.go",
+        "weed/s3api/s3api_object_retention_test.go",
+        "weed/s3api/s3api_object_routed_read.go",
+        "weed/s3api/s3api_object_routed_read_test.go",
+        "weed/s3api/s3api_object_routed_write.go",
+        "weed/s3api/s3api_object_routed_write_test.go",
+        "weed/s3api/s3api_object_upload_acl.go",
+        "weed/s3api/s3api_object_upload_acl_test.go",
+        "weed/s3api/s3api_object_versioned_finalize.go",
+        "weed/s3api/s3api_object_versioning.go",
+        "weed/s3api/s3api_object_versioning_heal_test.go",
+        "weed/s3api/s3api_object_versioning_list_prefix_test.go",
+        "weed/s3api/s3api_object_versioning_lookup_retry_test.go",
+        "weed/s3api/s3api_object_versioning_pagination_test.go",
+        "weed/s3api/s3api_object_versioning_self_heal_test.go",
+        "weed/s3api/s3api_part_boundary_test.go",
+        "weed/s3api/s3api_path_validation.go",
+        "weed/s3api/s3api_path_validation_test.go",
+        "weed/s3api/s3api_put_handlers.go",
+        "weed/s3api/s3api_put_object_helper.go",
+        "weed/s3api/s3api_put_object_helper_test.go",
+        "weed/s3api/s3api_remote_storage_test.go",
+        "weed/s3api/s3api_remote_versioned_path_test.go",
+        "weed/s3api/s3api_server.go",
+        "weed/s3api/s3api_server_advertise_test.go",
+        "weed/s3api/s3api_server_grpc.go",
+        "weed/s3api/s3api_server_grpc_test.go",
+        "weed/s3api/s3api_server_routing_test.go",
+        "weed/s3api/s3api_sosapi.go",
+        "weed/s3api/s3api_sse_decrypt_test.go",
+        "weed/s3api/s3api_sse_s3_upload_test.go",
+        "weed/s3api/s3api_sse_stream_status_test.go",
+        "weed/s3api/s3api_status_handlers.go",
+        "weed/s3api/s3api_stream_error_test.go",
+        "weed/s3api/s3api_sts.go",
+        "weed/s3api/s3api_sts_assume_role_admin_scope_test.go",
+        "weed/s3api/s3api_sts_assume_role_arn_shape_test.go",
+        "weed/s3api/s3api_sts_assume_role_authz_test.go",
+        "weed/s3api/s3api_sts_assume_role_dispatch_test.go",
+        "weed/s3api/s3api_sts_assume_role_empty_arn_test.go",
+        "weed/s3api/s3api_sts_assume_role_test.go",
+        "weed/s3api/s3api_sts_audit_routing_test.go",
+        "weed/s3api/s3api_sts_duration_test.go",
+        "weed/s3api/s3api_sts_get_caller_identity_handler_test.go",
+        "weed/s3api/s3api_sts_get_caller_identity_test.go",
+        "weed/s3api/s3api_sts_get_federation_token_test.go",
+        "weed/s3api/s3api_sts_web_identity_http_test.go",
+        "weed/s3api/s3api_tables.go",
+        "weed/s3api/s3api_tables_auth_test.go",
+        "weed/s3api/s3api_tables_maintenance_rest_test.go",
+        "weed/s3api/s3api_tables_rest_validation_test.go",
+        "weed/s3api/s3api_tables_routing_test.go",
+        "weed/s3api/s3api_test.go",
+        "weed/s3api/s3api_version_id.go",
+        "weed/s3api/s3api_version_id_test.go",
+        "weed/s3api/s3api_versioning_heal_log_test.go",
+        "weed/s3api/s3api_versioning_reconciler.go",
+        "weed/s3api/s3api_versioning_reconciler_test.go",
+        "weed/s3api/s3api_xml_timestamp_test.go",
+        "weed/s3api/s3api_xsd_generated.go",
+        "weed/s3api/s3api_xsd_generated_helper.go",
+        "weed/s3api/s3bucket/**",
+        "weed/s3api/s3err/**",
+        "weed/s3api/s3lifecycle/**",
+        "weed/s3api/s3tables/**",
+        "weed/s3api/sses3_multipart_repro_test.go",
+        "weed/s3api/stats.go",
+        "weed/s3api/stats_test.go",
+        "weed/s3api/sts_packed_policy_test.go",
+        "weed/s3api/sts_params_test.go",
+        "weed/s3api/sts_session_name_test.go",
+        "weed/s3api/tags.go",
+        "weed/s3api/tags_test.go",
+        "weed/security/**",
+        "weed/sequence/**",
+        "weed/server/**",
+        "weed/sftpd/**",
+        "weed/shell/**",
+        "weed/static/bootstrap/3.3.1/css/**",
+        "weed/static/bootstrap/3.3.1/fonts/glyphicons-halflings-regular.svg",
+        "weed/static/javascript/**",
+        "weed/stats/**",
+        "weed/storage/backend/**",
+        "weed/storage/dir_scan.go",
+        "weed/storage/dir_scan_test.go",
+        "weed/storage/disk_location.go",
+        "weed/storage/disk_location_ec.go",
+        "weed/storage/disk_location_ec_realworld_test.go",
+        "weed/storage/disk_location_ec_shard_size_test.go",
+        "weed/storage/disk_location_ec_test.go",
+        "weed/storage/disk_location_scan_order_test.go",
+        "weed/storage/disk_location_test.go",
+        "weed/storage/ec_startup_shard_safety_test.go",
+        "weed/storage/erasure_coding/distribution/**",
+        "weed/storage/erasure_coding/ec_bitrot.go",
+        "weed/storage/erasure_coding/ec_bitrot_interop_test.go",
+        "weed/storage/erasure_coding/ec_bitrot_test.go",
+        "weed/storage/erasure_coding/ec_consistency_test.go",
+        "weed/storage/erasure_coding/ec_context.go",
+        "weed/storage/erasure_coding/ec_decoder.go",
+        "weed/storage/erasure_coding/ec_decoder_completeness_test.go",
+        "weed/storage/erasure_coding/ec_decoder_multidisk_test.go",
+        "weed/storage/erasure_coding/ec_decoder_test.go",
+        "weed/storage/erasure_coding/ec_encoder.go",
+        "weed/storage/erasure_coding/ec_locate.go",
+        "weed/storage/erasure_coding/ec_parity_shards_ratio_test.go",
+        "weed/storage/erasure_coding/ec_rebuild_safety_test.go",
+        "weed/storage/erasure_coding/ec_roundtrip_test.go",
+        "weed/storage/erasure_coding/ec_scrub_local_test.go",
+        "weed/storage/erasure_coding/ec_shard.go",
+        "weed/storage/erasure_coding/ec_shard_info.go",
+        "weed/storage/erasure_coding/ec_shards_info.go",
+        "weed/storage/erasure_coding/ec_shards_info_test.go",
+        "weed/storage/erasure_coding/ec_teardown.go",
+        "weed/storage/erasure_coding/ec_test.go",
+        "weed/storage/erasure_coding/ec_uniform_layout_test.go",
+        "weed/storage/erasure_coding/ec_volume.go",
+        "weed/storage/erasure_coding/ec_volume_counts_test.go",
+        "weed/storage/erasure_coding/ec_volume_delete.go",
+        "weed/storage/erasure_coding/ec_volume_ecj_compact_test.go",
+        "weed/storage/erasure_coding/ec_volume_ecj_test.go",
+        "weed/storage/erasure_coding/ec_volume_info.go",
+        "weed/storage/erasure_coding/ec_volume_info_test.go",
+        "weed/storage/erasure_coding/ec_volume_merge.go",
+        "weed/storage/erasure_coding/ec_volume_scrub.go",
+        "weed/storage/erasure_coding/ec_volume_sidecar_layout_test.go",
+        "weed/storage/erasure_coding/ec_volume_test.go",
+        "weed/storage/erasure_coding/ec_volume_vif_test.go",
+        "weed/storage/erasure_coding/ecbalancer/**",
+        "weed/storage/erasure_coding/ecj_merge.go",
+        "weed/storage/erasure_coding/ecj_merge_test.go",
+        "weed/storage/erasure_coding/ecj_registry.go",
+        "weed/storage/erasure_coding/shard_distribution.go",
+        "weed/storage/erasure_coding/test_files/**",
+        "weed/storage/erasure_coding/verification.go",
+        "weed/storage/erasure_coding/verification_test.go",
+        "weed/storage/idx/check.go",
+        "weed/storage/idx/check_test.go",
+        "weed/storage/idx/walk.go",
+        "weed/storage/io_error.go",
+        "weed/storage/io_error_other.go",
+        "weed/storage/io_error_windows.go",
+        "weed/storage/needle/README.md",
+        "weed/storage/needle/async_request.go",
+        "weed/storage/needle/crc.go",
+        "weed/storage/needle/file_id.go",
+        "weed/storage/needle/file_id_test.go",
+        "weed/storage/needle/needle.go",
+        "weed/storage/needle/needle_parse_upload.go",
+        "weed/storage/needle/needle_parse_upload_alloc_test.go",
+        "weed/storage/needle/needle_parse_upload_stream_test.go",
+        "weed/storage/needle/needle_read.go",
+        "weed/storage/needle/needle_read_page.go",
+        "weed/storage/needle/needle_read_tail.go",
+        "weed/storage/needle/needle_read_tail_test.go",
+        "weed/storage/needle/needle_read_test.go",
+        "weed/storage/needle/needle_test.go",
+        "weed/storage/needle/needle_write.go",
+        "weed/storage/needle/needle_write_legacy.go",
+        "weed/storage/needle/needle_write_test.go",
+        "weed/storage/needle/needle_write_v1.go",
+        "weed/storage/needle/needle_write_v2.go",
+        "weed/storage/needle/needle_write_v3.go",
+        "weed/storage/needle/needle_write_version.go",
+        "weed/storage/needle/volume_id.go",
+        "weed/storage/needle/volume_id_test.go",
+        "weed/storage/needle/volume_ttl.go",
+        "weed/storage/needle/volume_ttl_test.go",
+        "weed/storage/needle/volume_version.go",
+        "weed/storage/needle_map/**",
+        "weed/storage/needle_map.go",
+        "weed/storage/needle_map_file_pool.go",
+        "weed/storage/needle_map_file_pool_test.go",
+        "weed/storage/needle_map_leveldb.go",
+        "weed/storage/needle_map_leveldb_test.go",
+        "weed/storage/needle_map_memory.go",
+        "weed/storage/needle_map_metric.go",
+        "weed/storage/needle_map_metric_test.go",
+        "weed/storage/needle_map_sorted_file.go",
+        "weed/storage/needle_map_sorted_file_test.go",
+        "weed/storage/remote_tier_integration_test.go",
+        "weed/storage/store.go",
+        "weed/storage/store_collection_metrics_test.go",
+        "weed/storage/store_consolidate_index_test.go",
+        "weed/storage/store_delete_collection_test.go",
+        "weed/storage/store_delete_volume_test.go",
+        "weed/storage/store_disk_space_test.go",
+        "weed/storage/store_duplicate_vid_test.go",
+        "weed/storage/store_ec.go",
+        "weed/storage/store_ec_9plus3_reboot_repro_test.go",
+        "weed/storage/store_ec_delete.go",
+        "weed/storage/store_ec_disk_type_test.go",
+        "weed/storage/store_ec_hybrid_repro_test.go",
+        "weed/storage/store_ec_interval_read_test.go",
+        "weed/storage/store_ec_journal.go",
+        "weed/storage/store_ec_journal_test.go",
+        "weed/storage/store_ec_location_cache_test.go",
+        "weed/storage/store_ec_mirror.go",
+        "weed/storage/store_ec_mirror_test.go",
+        "weed/storage/store_ec_mount_cross_disk_test.go",
+        "weed/storage/store_ec_multidisk_lifecycle_test.go",
+        "weed/storage/store_ec_orphan_shard_test.go",
+        "weed/storage/store_ec_phantom_dat_test.go",
+        "weed/storage/store_ec_reconcile.go",
+        "weed/storage/store_ec_reconstruct_test.go",
+        "weed/storage/store_ec_recover.go",
+        "weed/storage/store_ec_recover_fanout_test.go",
+        "weed/storage/store_ec_recover_test.go",
+        "weed/storage/store_ec_recovery_test.go",
+        "weed/storage/store_ec_scrub.go",
+        "weed/storage/store_ec_scrub_reads_test.go",
+        "weed/storage/store_ec_target_location_test.go",
+        "weed/storage/store_heartbeat_bench_test.go",
+        "weed/storage/store_heartbeat_digest_test.go",
+        "weed/storage/store_load_balancing_simple_test.go",
+        "weed/storage/store_load_balancing_test.go",
+        "weed/storage/store_mark_readonly_can_delete_test.go",
+        "weed/storage/store_maxvolume_deadzone_test.go",
+        "weed/storage/store_mount_validation_test.go",
+        "weed/storage/store_state.go",
+        "weed/storage/store_status_test.go",
+        "weed/storage/store_vacuum.go",
+        "weed/storage/store_vacuum_fs_unix.go",
+        "weed/storage/store_vacuum_fs_windows.go",
+        "weed/storage/store_vacuum_test.go",
+        "weed/storage/store_volume_report.go",
+        "weed/storage/store_volume_report_test.go",
+        "weed/storage/super_block/**",
+        "weed/storage/test_files/empty_volume.idx",
+        "weed/storage/types/**",
+        "weed/storage/volume.go",
+        "weed/storage/volume_async_worker_test.go",
+        "weed/storage/volume_backup.go",
+        "weed/storage/volume_backup_test.go",
+        "weed/storage/volume_checking.go",
+        "weed/storage/volume_checking_test.go",
+        "weed/storage/volume_destroy_ec_vif_test.go",
+        "weed/storage/volume_idx_rebuild.go",
+        "weed/storage/volume_idx_rebuild_test.go",
+        "weed/storage/volume_idx_repair.go",
+        "weed/storage/volume_idx_repair_test.go",
+        "weed/storage/volume_info/**",
+        "weed/storage/volume_info.go",
+        "weed/storage/volume_info_counts_test.go",
+        "weed/storage/volume_info_intern_test.go",
+        "weed/storage/volume_info_layout_test.go",
+        "weed/storage/volume_info_test.go",
+        "weed/storage/volume_io_error_test.go",
+        "weed/storage/volume_loading.go",
+        "weed/storage/volume_loading_corrupt_idx_test.go",
+        "weed/storage/volume_loading_open_fail_test.go",
+        "weed/storage/volume_mark_writable_test.go",
+        "weed/storage/volume_read.go",
+        "weed/storage/volume_read_all.go",
+        "weed/storage/volume_read_test.go",
+        "weed/storage/volume_replica/**",
+        "weed/storage/volume_report_hash.go",
+        "weed/storage/volume_super_block.go",
+        "weed/storage/volume_super_block_replication_test.go",
+        "weed/storage/volume_tier.go",
+        "weed/storage/volume_tier_intern_test.go",
+        "weed/storage/volume_ttl_expiry_test.go",
+        "weed/storage/volume_vacuum.go",
+        "weed/storage/volume_vacuum_5byte_offset_test.go",
+        "weed/storage/volume_vacuum_crash_safe_test.go",
+        "weed/storage/volume_vacuum_test.go",
+        "weed/storage/volume_write.go",
+        "weed/storage/volume_write_fsync_test.go",
+        "weed/storage/volume_write_test.go",
+        "weed/telemetry/**",
+        "weed/topology/**",
+        "weed/util/**",
+        "weed/wdclient/**",
+        "weed/weed.go",
+        "weed/worker/client.go",
+        "weed/worker/log_adapter.go",
+        "weed/worker/tasks/balance/**",
+        "weed/worker/tasks/base/**",
+        "weed/worker/tasks/config_update_registry.go",
+        "weed/worker/tasks/ec_balance/**",
+        "weed/worker/tasks/erasure_coding/**",
+        "weed/worker/tasks/iceberg/compact.go",
+        "weed/worker/tasks/iceberg/compact_order.go",
+        "weed/worker/tasks/iceberg/compact_order_test.go",
+        "weed/worker/tasks/iceberg/compact_rowgroup_test.go",
+        "weed/worker/tasks/iceberg/compact_stats.go",
+        "weed/worker/tasks/iceberg/compact_stats_test.go",
+        "weed/worker/tasks/iceberg/config.go",
+        "weed/worker/tasks/iceberg/delete_rewrite.go",
+        "weed/worker/tasks/iceberg/delete_rewrite_schema_test.go",
+        "weed/worker/tasks/iceberg/deletion_vector_test.go",
+        "weed/worker/tasks/iceberg/detection.go",
+        "weed/worker/tasks/iceberg/exec_test.go",
+        "weed/worker/tasks/iceberg/filer_io.go",
+        "weed/worker/tasks/iceberg/filer_io_save_test.go",
+        "weed/worker/tasks/iceberg/foreign_format_scan_test.go",
+        "weed/worker/tasks/iceberg/foreign_format_test.go",
+        "weed/worker/tasks/iceberg/handler.go",
+        "weed/worker/tasks/iceberg/handler_test.go",
+        "weed/worker/tasks/iceberg/job_status.go",
+        "weed/worker/tasks/iceberg/operations.go",
+        "weed/worker/tasks/iceberg/operations_test.go",
+        "weed/worker/tasks/iceberg/planning_index.go",
+        "weed/worker/tasks/iceberg/platform_test.go",
+        "weed/worker/tasks/iceberg/resource_groups.go",
+        "weed/worker/tasks/iceberg/row_lineage.go",
+        "weed/worker/tasks/iceberg/row_lineage_test.go",
+        "weed/worker/tasks/iceberg/snapshot_summary.go",
+        "weed/worker/tasks/iceberg/sort_merge_test.go",
+        "weed/worker/tasks/iceberg/sort_strategy.go",
+        "weed/worker/tasks/iceberg/statistics_orphans_test.go",
+        "weed/worker/tasks/iceberg/table_config.go",
+        "weed/worker/tasks/iceberg/table_config_test.go",
+        "weed/worker/tasks/iceberg/testing_api.go",
+        "weed/worker/tasks/iceberg/where_filter.go",
+        "weed/worker/tasks/iceberg/where_filter_test.go",
+        "weed/worker/tasks/registry.go",
+        "weed/worker/tasks/s3_lifecycle/**",
+        "weed/worker/tasks/schema_provider.go",
+        "weed/worker/tasks/task.go",
+        "weed/worker/tasks/task_log_handler.go",
+        "weed/worker/tasks/task_logger.go",
+        "weed/worker/tasks/ui_base.go",
+        "weed/worker/tasks/util/**",
+        "weed/worker/tasks/vacuum/**",
+        "weed/worker/types/**",
+        "weed/worker/worker.go",
+        "weed/worker/worker_shutdown_test.go"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2025 Chris Lu\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Copyright 2025 Chris Lu, Apache-2.0 license (LICENSE), https://github.com/seaweedfs/seaweedfs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "seaweed-volume/vendor/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Darren Ldl\nCopyright (c) 2015, 2016 Nicolas Trangez\nCopyright (c) 2015 Klaus Post\nCopyright (c) 2015 Backblaze\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Darren Ldl; Copyright (c) 2015, 2016 Nicolas Trangez; Copyright (c) 2015 Klaus Post; Copyright (c) 2015 Backblaze, MIT license (LICENSE), https://github.com/seaweedfs/seaweedfs/tree/3659c369e0eaa26810ccc08eb55e59236d9fc8bf/seaweed-volume/vendor/reed-solomon-erasure."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "weed/glog/**"
+      ],
+      "text": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and\ndistribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright\nowner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities\nthat control, are controlled by, or are under common control with that entity.\nFor the purposes of this definition, \"control\" means (i) the power, direct or\nindirect, to cause the direction or management of such entity, whether by\ncontract or otherwise, or (ii) ownership of fifty percent (50%) or more of the\noutstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising\npermissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including\nbut not limited to software source code, documentation source, and configuration\nfiles.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or\ntranslation of a Source form, including but not limited to compiled object code,\ngenerated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made\navailable under the License, as indicated by a copyright notice that is included\nin or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that\nis based on (or derived from) the Work and for which the editorial revisions,\nannotations, elaborations, or other modifications represent, as a whole, an\noriginal work of authorship. For the purposes of this License, Derivative Works\nshall not include works that remain separable from, or merely link (or bind by\nname) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version\nof the Work and any modifications or additions to that Work or Derivative Works\nthereof, that is intentionally submitted to Licensor for inclusion in the Work\nby the copyright owner or by an individual or Legal Entity authorized to submit\non behalf of the copyright owner. For the purposes of this definition,\n\"submitted\" means any form of electronic, verbal, or written communication sent\nto the Licensor or its representatives, including but not limited to\ncommunication on electronic mailing lists, source code control systems, and\nissue tracking systems that are managed by, or on behalf of, the Licensor for\nthe purpose of discussing and improving the Work, but excluding communication\nthat is conspicuously marked or otherwise designated in writing by the copyright\nowner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf\nof whom a Contribution has been received by Licensor and subsequently\nincorporated within the Work.\n\n2. Grant of Copyright License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable copyright license to reproduce, prepare Derivative Works of,\npublicly display, publicly perform, sublicense, and distribute the Work and such\nDerivative Works in Source or Object form.\n\n3. Grant of Patent License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable (except as stated in this section) patent license to make, have\nmade, use, offer to sell, sell, import, and otherwise transfer the Work, where\nsuch license applies only to those patent claims licensable by such Contributor\nthat are necessarily infringed by their Contribution(s) alone or by combination\nof their Contribution(s) with the Work to which such Contribution(s) was\nsubmitted. If You institute patent litigation against any entity (including a\ncross-claim or counterclaim in a lawsuit) alleging that the Work or a\nContribution incorporated within the Work constitutes direct or contributory\npatent infringement, then any patent licenses granted to You under this License\nfor that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution.\n\nYou may reproduce and distribute copies of the Work or Derivative Works thereof\nin any medium, with or without modifications, and in Source or Object form,\nprovided that You meet the following conditions:\n\nYou must give any other recipients of the Work or Derivative Works a copy of\nthis License; and\nYou must cause any modified files to carry prominent notices stating that You\nchanged the files; and\nYou must retain, in the Source form of any Derivative Works that You distribute,\nall copyright, patent, trademark, and attribution notices from the Source form\nof the Work, excluding those notices that do not pertain to any part of the\nDerivative Works; and\nIf the Work includes a \"NOTICE\" text file as part of its distribution, then any\nDerivative Works that You distribute must include a readable copy of the\nattribution notices contained within such NOTICE file, excluding those notices\nthat do not pertain to any part of the Derivative Works, in at least one of the\nfollowing places: within a NOTICE text file distributed as part of the\nDerivative Works; within the Source form or documentation, if provided along\nwith the Derivative Works; or, within a display generated by the Derivative\nWorks, if and wherever such third-party notices normally appear. The contents of\nthe NOTICE file are for informational purposes only and do not modify the\nLicense. You may add Your own attribution notices within Derivative Works that\nYou distribute, alongside or as an addendum to the NOTICE text from the Work,\nprovided that such additional attribution notices cannot be construed as\nmodifying the License.\nYou may add Your own copyright statement to Your modifications and may provide\nadditional or different license terms and conditions for use, reproduction, or\ndistribution of Your modifications, or for any such Derivative Works as a whole,\nprovided Your use, reproduction, and distribution of the Work otherwise complies\nwith the conditions stated in this License.\n\n5. Submission of Contributions.\n\nUnless You explicitly state otherwise, any Contribution intentionally submitted\nfor inclusion in the Work by You to the Licensor shall be under the terms and\nconditions of this License, without any additional terms or conditions.\nNotwithstanding the above, nothing herein shall supersede or modify the terms of\nany separate license agreement you may have executed with Licensor regarding\nsuch Contributions.\n\n6. Trademarks.\n\nThis License does not grant permission to use the trade names, trademarks,\nservice marks, or product names of the Licensor, except as required for\nreasonable and customary use in describing the origin of the Work and\nreproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty.\n\nUnless required by applicable law or agreed to in writing, Licensor provides the\nWork (and each Contributor provides its Contributions) on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,\nincluding, without limitation, any warranties or conditions of TITLE,\nNON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are\nsolely responsible for determining the appropriateness of using or\nredistributing the Work and assume any risks associated with Your exercise of\npermissions under this License.\n\n8. Limitation of Liability.\n\nIn no event and under no legal theory, whether in tort (including negligence),\ncontract, or otherwise, unless required by applicable law (such as deliberate\nand grossly negligent acts) or agreed to in writing, shall any Contributor be\nliable to You for damages, including any direct, indirect, special, incidental,\nor consequential damages of any character arising as a result of this License or\nout of the use or inability to use the Work (including but not limited to\ndamages for loss of goodwill, work stoppage, computer failure or malfunction, or\nany and all other commercial damages or losses), even if such Contributor has\nbeen advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability.\n\nWhile redistributing the Work or Derivative Works thereof, You may choose to\noffer, and charge a fee for, acceptance of support, warranty, indemnity, or\nother liability obligations and/or rights consistent with this License. However,\nin accepting such obligations, You may act only on Your own behalf and on Your\nsole responsibility, not on behalf of any other Contributor, and only if You\nagree to indemnify, defend, and hold each Contributor harmless for any liability\nincurred by, or claims asserted against, such Contributor by reason of your\naccepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work\n\nTo apply the Apache License to your work, attach the following boilerplate\nnotice, with the fields enclosed by brackets \"[]\" replaced with your own\nidentifying information. (Don't include the brackets!) The text should be\nenclosed in the appropriate comment syntax for the file format. We also\nrecommend that a file or class name and description of purpose be included on\nthe same \"printed page\" as the copyright notice for easier identification within\nthird-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of seaweedfs/seaweedfs (weed/glog) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/seaweedfs/seaweedfs/tree/3659c369e0eaa26810ccc08eb55e59236d9fc8bf/weed/glog."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.client"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.delta-rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.e2e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ecx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fdb-arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.foundationdb_large"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.go_build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.kafka-gateway"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lance"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.loadtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.orig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.producer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyiceberg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.reader"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocksdb_dev_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocksdb_large"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocksdb_large_local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rockspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s3tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.seaweedfs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.seed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.seektest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.templ"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test-setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tftpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.writer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cargo-ok"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/apt-install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gostd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/loadtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-consumer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-publisher"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-test"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

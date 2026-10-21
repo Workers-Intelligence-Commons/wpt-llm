@@ -1,0 +1,799 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/spring-projects/spring-framework",
+  "revision": "3a73c04eae39c272c6d4d9263755ff0824c4cfb4",
+  "checksum": "sha256:ebf0d5e6d09f59e5d38d1ca44260048b954499913ec661044d30f701f32aa0d5",
+  "extract": {
+    "exclude": [
+      "framework-docs/modules/ROOT/assets/images/DataAccessException.png",
+      "framework-docs/modules/ROOT/assets/images/aop-proxy-call.png",
+      "framework-docs/modules/ROOT/assets/images/aop-proxy-plain-pojo-call.png",
+      "framework-docs/modules/ROOT/assets/images/container-magic.png",
+      "framework-docs/modules/ROOT/assets/images/message-flow-broker-relay.png",
+      "framework-docs/modules/ROOT/assets/images/message-flow-simple-broker.png",
+      "framework-docs/modules/ROOT/assets/images/mvc-context-hierarchy.png",
+      "framework-docs/modules/ROOT/assets/images/oxm-exceptions.png",
+      "framework-docs/modules/ROOT/assets/images/prototype.png",
+      "framework-docs/modules/ROOT/assets/images/singleton.png",
+      "framework-docs/modules/ROOT/assets/images/spring-mvc-and-webflux-venn.png",
+      "framework-docs/modules/ROOT/assets/images/tx.png",
+      "framework-docs/modules/ROOT/assets/images/tx_prop_required.png",
+      "framework-docs/modules/ROOT/assets/images/tx_prop_requires_new.png",
+      "framework-docs/src/docs/dist/**",
+      "framework-docs/src/docs/spring-framework.png",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "spring-aop/src/main/resources/org/springframework/aop/config/spring-aop.gif",
+      "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-beans.gif",
+      "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-util.gif",
+      "spring-context/src/main/resources/org/springframework/cache/config/spring-cache.gif",
+      "spring-context/src/main/resources/org/springframework/context/config/spring-context.gif",
+      "spring-context/src/main/resources/org/springframework/ejb/config/spring-jee.gif",
+      "spring-context/src/main/resources/org/springframework/scheduling/config/spring-task.gif",
+      "spring-context/src/main/resources/org/springframework/scripting/config/spring-lang.gif",
+      "spring-core-test/src/test/resources/**",
+      "spring-jdbc/src/main/resources/org/springframework/jdbc/config/spring-jdbc.gif",
+      "spring-jms/src/main/resources/org/springframework/jms/config/spring-jms.gif",
+      "spring-orm/src/main/java/org/springframework/orm/jpa/vendor/**",
+      "spring-orm/src/test/resources/org/springframework/orm/jpa/jpa-archive.jar",
+      "spring-oxm/src/main/resources/org/springframework/oxm/config/spring-oxm.gif",
+      "spring-oxm/src/test/resources/org/springframework/oxm/jaxb/spring-ws.png",
+      "spring-test/src/test/resources/org/springframework/test/context/env/test-ISO-8859-1.properties",
+      "spring-tx/src/main/resources/org/springframework/transaction/config/spring-tx.gif",
+      "spring-web/src/test/resources/org/springframework/http/converter/logo.jpg",
+      "spring-web/src/test/resources/org/springframework/http/multipart/garbage-1.multipart",
+      "spring-web/src/test/resources/org/springframework/web/spring.png",
+      "spring-webflux/src/test/resources/org/springframework/web/reactive/config/index_ISO-8859-1.ftl",
+      "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/images/**",
+      "spring-webflux/src/test/resources/org/springframework/web/reactive/result/method/**",
+      "spring-webflux/src/test/resources/org/springframework/web/reactive/spring.png",
+      "spring-webmvc/src/main/resources/org/springframework/web/servlet/config/spring-mvc.gif",
+      "spring-webmvc/src/test/resources/org/springframework/web/servlet/mvc/**",
+      "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/images/**",
+      "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/document/**",
+      "spring-websocket/src/main/resources/org/springframework/web/socket/config/spring-websocket.gif"
+    ]
+  },
+  "history": {
+    "since": "5053df55b6d23d3ef66de741fa77c1a3ccdba907"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/spring-projects/spring-framework: the authors of spring-projects/spring-framework (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-framework."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        ".sdkmanrc",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "README.md",
+        "SECURITY.md",
+        "build.gradle",
+        "buildSrc/**",
+        "framework-api/**",
+        "framework-bom/**",
+        "framework-docs/antora-playbook.yml",
+        "framework-docs/antora.yml",
+        "framework-docs/framework-docs.gradle",
+        "framework-docs/modules/ROOT/assets/images/mvc-context-hierarchy.svg",
+        "framework-docs/modules/ROOT/assets/images/oxm-exceptions.graffle",
+        "framework-docs/modules/ROOT/examples/**",
+        "framework-docs/modules/ROOT/nav.adoc",
+        "framework-docs/modules/ROOT/pages/**",
+        "framework-docs/modules/ROOT/partials/**",
+        "framework-docs/package.json",
+        "framework-docs/src/docs/api/**",
+        "framework-docs/src/main/**",
+        "framework-platform/**",
+        "gradle/ide.gradle",
+        "gradle/publications.gradle",
+        "gradle/spring-module.gradle",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "import-into-eclipse.md",
+        "import-into-intellij-idea.md",
+        "integration-tests/**",
+        "settings.gradle",
+        "spring-aop/spring-aop.gradle",
+        "spring-aop/src/main/java/**",
+        "spring-aop/src/main/resources/META-INF/**",
+        "spring-aop/src/main/resources/org/springframework/aop/config/spring-aop.xsd",
+        "spring-aop/src/test/**",
+        "spring-aop/src/testFixtures/**",
+        "spring-aspects/**",
+        "spring-beans/spring-beans.gradle",
+        "spring-beans/src/jmh/**",
+        "spring-beans/src/main/java/**",
+        "spring-beans/src/main/kotlin/**",
+        "spring-beans/src/main/resources/META-INF/**",
+        "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-beans.dtd",
+        "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-beans.xsd",
+        "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-tool.xsd",
+        "spring-beans/src/main/resources/org/springframework/beans/factory/xml/spring-util.xsd",
+        "spring-beans/src/test/**",
+        "spring-beans/src/testFixtures/**",
+        "spring-context/.springBeans",
+        "spring-context/spring-context.gradle",
+        "spring-context/src/jmh/**",
+        "spring-context/src/main/java/**",
+        "spring-context/src/main/kotlin/**",
+        "spring-context/src/main/resources/META-INF/**",
+        "spring-context/src/main/resources/org/springframework/cache/config/spring-cache.xsd",
+        "spring-context/src/main/resources/org/springframework/context/config/spring-context.xsd",
+        "spring-context/src/main/resources/org/springframework/ejb/config/spring-jee.xsd",
+        "spring-context/src/main/resources/org/springframework/scheduling/config/spring-task.xsd",
+        "spring-context/src/main/resources/org/springframework/scripting/config/spring-lang.xsd",
+        "spring-context/src/test/**",
+        "spring-context/src/testFixtures/**",
+        "spring-context-indexer/**",
+        "spring-context-support/**",
+        "spring-core/**",
+        "spring-core-test/spring-core-test.gradle",
+        "spring-core-test/src/main/**",
+        "spring-core-test/src/test/java/**",
+        "spring-expression/**",
+        "spring-instrument/**",
+        "spring-jdbc/spring-jdbc.gradle",
+        "spring-jdbc/src/main/java/**",
+        "spring-jdbc/src/main/kotlin/**",
+        "spring-jdbc/src/main/resources/META-INF/**",
+        "spring-jdbc/src/main/resources/org/springframework/jdbc/config/spring-jdbc.xsd",
+        "spring-jdbc/src/main/resources/org/springframework/jdbc/support/**",
+        "spring-jdbc/src/test/**",
+        "spring-jms/spring-jms.gradle",
+        "spring-jms/src/main/java/**",
+        "spring-jms/src/main/resources/META-INF/**",
+        "spring-jms/src/main/resources/org/springframework/jms/config/spring-jms.xsd",
+        "spring-jms/src/test/**",
+        "spring-messaging/**",
+        "spring-orm/spring-orm.gradle",
+        "spring-orm/src/main/java/org/springframework/orm/ObjectOptimisticLockingFailureException.java",
+        "spring-orm/src/main/java/org/springframework/orm/ObjectRetrievalFailureException.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/AbstractEntityManagerFactoryBean.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/DefaultJpaDialect.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerFactoryAccessor.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerFactoryInfo.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerFactoryUtils.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerHolder.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerProxy.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/EntityManagerRuntimeHints.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/ExtendedEntityManagerCreator.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaDialect.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaObjectRetrievalFailureException.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaOptimisticLockingFailureException.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaSystemException.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaTransactionManager.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/JpaVendorAdapter.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/LocalContainerEntityManagerFactoryBean.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/LocalEntityManagerFactoryBean.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/SharedEntityManagerCreator.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/hibernate/**",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/package-info.java",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/persistenceunit/**",
+        "spring-orm/src/main/java/org/springframework/orm/jpa/support/**",
+        "spring-orm/src/main/java/org/springframework/orm/package-info.java",
+        "spring-orm/src/main/resources/**",
+        "spring-orm/src/test/java/**",
+        "spring-orm/src/test/resources/log4j2-test.xml",
+        "spring-orm/src/test/resources/order-supplemental.jar",
+        "spring-orm/src/test/resources/order.jar",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/META-INF/**",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/domain/**",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/eclipselink/**",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/hibernate/**",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/inject.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/insertPerson.sql",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/memdb.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/multi-jpa-emf.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-complex.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example1.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example2.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example3.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example4.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example5.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-example6.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-exclude-1.0.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-exclude-2.0.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-invalid.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistence-no-schema.xml",
+        "spring-orm/src/test/resources/org/springframework/orm/jpa/persistenceunit/**",
+        "spring-oxm/spring-oxm.gradle",
+        "spring-oxm/src/main/java/**",
+        "spring-oxm/src/main/resources/META-INF/**",
+        "spring-oxm/src/main/resources/org/springframework/oxm/config/spring-oxm.xsd",
+        "spring-oxm/src/test/java/**",
+        "spring-oxm/src/test/resources/log4j2-test.xml",
+        "spring-oxm/src/test/resources/org/springframework/oxm/config/**",
+        "spring-oxm/src/test/resources/org/springframework/oxm/jaxb/jaxb2.xml",
+        "spring-oxm/src/test/resources/org/springframework/oxm/jibx/**",
+        "spring-oxm/src/test/schema/**",
+        "spring-r2dbc/**",
+        "spring-test/.springBeans",
+        "spring-test/spring-test.gradle",
+        "spring-test/src/main/**",
+        "spring-test/src/test/java/**",
+        "spring-test/src/test/kotlin/**",
+        "spring-test/src/test/resources/META-INF/**",
+        "spring-test/src/test/resources/log4j2-test.xml",
+        "spring-test/src/test/resources/org/springframework/test/context/AutowiredQualifierTests-context.xml",
+        "spring-test/src/test/resources/org/springframework/test/context/aot/**",
+        "spring-test/src/test/resources/org/springframework/test/context/config/**",
+        "spring-test/src/test/resources/org/springframework/test/context/configuration/**",
+        "spring-test/src/test/resources/org/springframework/test/context/env/ApplicationPropertyOverridePropertiesFileTestPropertySourceTests.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/DefaultPropertiesFileDetectionTestPropertySourceTests.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/ExtendedDefaultPropertiesFileDetectionTestPropertySourceTests.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/SystemPropertyOverridePropertiesFileTestPropertySourceTests.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/explicit.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/extended.properties",
+        "spring-test/src/test/resources/org/springframework/test/context/env/pattern/**",
+        "spring-test/src/test/resources/org/springframework/test/context/env/repeatable/**",
+        "spring-test/src/test/resources/org/springframework/test/context/env/test-properties.yaml",
+        "spring-test/src/test/resources/org/springframework/test/context/expression/**",
+        "spring-test/src/test/resources/org/springframework/test/context/groovy/**",
+        "spring-test/src/test/resources/org/springframework/test/context/hierarchies/**",
+        "spring-test/src/test/resources/org/springframework/test/context/hybrid/**",
+        "spring-test/src/test/resources/org/springframework/test/context/inheritance/**",
+        "spring-test/src/test/resources/org/springframework/test/context/initializers/**",
+        "spring-test/src/test/resources/org/springframework/test/context/jdbc/**",
+        "spring-test/src/test/resources/org/springframework/test/context/junit4/**",
+        "spring-test/src/test/resources/org/springframework/test/context/orm/**",
+        "spring-test/src/test/resources/org/springframework/test/context/profile/**",
+        "spring-test/src/test/resources/org/springframework/test/context/support/**",
+        "spring-test/src/test/resources/org/springframework/test/context/testng/**",
+        "spring-test/src/test/resources/org/springframework/test/context/transaction/**",
+        "spring-test/src/test/resources/org/springframework/test/context/web/**",
+        "spring-test/src/test/resources/org/springframework/test/jdbc/**",
+        "spring-test/src/test/resources/org/springframework/test/json/**",
+        "spring-test/src/test/resources/org/springframework/test/web/**",
+        "spring-test/src/test/webapp/**",
+        "spring-tx/spring-tx.gradle",
+        "spring-tx/src/main/java/**",
+        "spring-tx/src/main/kotlin/**",
+        "spring-tx/src/main/resources/META-INF/**",
+        "spring-tx/src/main/resources/org/springframework/jca/**",
+        "spring-tx/src/main/resources/org/springframework/transaction/config/spring-tx.xsd",
+        "spring-tx/src/test/**",
+        "spring-tx/src/testFixtures/**",
+        "spring-web/spring-web.gradle",
+        "spring-web/src/jmh/**",
+        "spring-web/src/main/**",
+        "spring-web/src/test/java/**",
+        "spring-web/src/test/kotlin/**",
+        "spring-web/src/test/proto/**",
+        "spring-web/src/test/resources/log4j2-test.xml",
+        "spring-web/src/test/resources/org/springframework/http/converter/byterangeresource.txt",
+        "spring-web/src/test/resources/org/springframework/http/converter/feed/**",
+        "spring-web/src/test/resources/org/springframework/http/converter/xml/**",
+        "spring-web/src/test/resources/org/springframework/http/multipart/chrome.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/empty-part-last.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/empty-part.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/files.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/firefox.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/invalid.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/large-file.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/no-body.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/no-end-body.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/no-end-boundary.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/no-end-header.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/no-header.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/part-no-end-boundary.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/part-no-header.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/safari.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/servlet-empty-last-part.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/servlet-empty-part.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/simple.multipart",
+        "spring-web/src/test/resources/org/springframework/http/multipart/utf8.multipart",
+        "spring-web/src/test/resources/org/springframework/web/client/**",
+        "spring-web/src/test/resources/org/springframework/web/context/**",
+        "spring-web/src/test/resources/org/springframework/web/util/**",
+        "spring-web/src/testFixtures/**",
+        "spring-webflux/spring-webflux.gradle",
+        "spring-webflux/src/main/**",
+        "spring-webflux/src/test/java/**",
+        "spring-webflux/src/test/kotlin/**",
+        "spring-webflux/src/test/proto/**",
+        "spring-webflux/src/test/resources/META-INF/**",
+        "spring-webflux/src/test/resources/jul-test.properties",
+        "spring-webflux/src/test/resources/log4j2-test.xml",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/config/index_UTF-8.ftl",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/config/testStylesheet.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/function/**",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/handler/**",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/bar.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/empty_url_function.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/error.appcache",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/external.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo foo.txt",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo with spaces.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo.bar",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo.html",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/foo.txt",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/js/**",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/main.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/test%file.txt",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/test.appcache",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/test/unclosed_url_function.css",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/testalternatepath/**",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/resource/testsecret/**",
+        "spring-webflux/src/test/resources/org/springframework/web/reactive/result/view/**",
+        "spring-webmvc/spring-webmvc.gradle",
+        "spring-webmvc/src/main/java/**",
+        "spring-webmvc/src/main/kotlin/**",
+        "spring-webmvc/src/main/resources/META-INF/**",
+        "spring-webmvc/src/main/resources/org/springframework/web/servlet/DispatcherServlet.properties",
+        "spring-webmvc/src/main/resources/org/springframework/web/servlet/config/spring-mvc.xsd",
+        "spring-webmvc/src/main/resources/org/springframework/web/servlet/view/**",
+        "spring-webmvc/src/test/java/**",
+        "spring-webmvc/src/test/kotlin/**",
+        "spring-webmvc/src/test/resources/log4j2-test.xml",
+        "spring-webmvc/src/test/resources/org/springframework/web/context/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/config/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/function/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/handler/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/META-INF/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/bar.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/bar.min.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/empty_url_function.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/error.appcache",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/external.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo with spaces.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo-bar/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo.bar",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo.html",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/foo.txt",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/js/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/main.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/test%file.txt",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/test.appcache",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/test/unclosed_url_function.css",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/testalternatepath/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/resource/testsecret/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/freemarker/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/groovy/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/script/**",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/testviews.properties",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/testviews_en.properties",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/testviews_fr.properties",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/views.xml",
+        "spring-webmvc/src/test/resources/org/springframework/web/servlet/view/xslt/**",
+        "spring-websocket/spring-websocket.gradle",
+        "spring-websocket/src/main/java/**",
+        "spring-websocket/src/main/resources/META-INF/**",
+        "spring-websocket/src/main/resources/org/springframework/web/socket/config/spring-websocket.xsd",
+        "spring-websocket/src/test/**",
+        "src/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of spring-projects/spring-framework (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-framework."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BlockHoundIntegration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MockResolver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ServletContainerInitializer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TestExecutionListener"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.all"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.appcache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.components"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.custom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dtd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.factories"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.graffle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.groovyb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.handlers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.multipart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prefs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.schemas"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.text"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tooling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.sdkmanrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.springBeans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

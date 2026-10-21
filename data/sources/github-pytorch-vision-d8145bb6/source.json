@@ -1,0 +1,416 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pytorch/vision",
+  "revision": "268ddfce8e7938226c4ec8ed23fc7b9c46b97316",
+  "checksum": "sha256:f160ebcdff6dbe9c9a8ba4509ffbc3da907004a4a7b7892695b07b43a3d8fc05",
+  "extract": {
+    "exclude": [
+      "docs/source/_static/img/pytorch-logo-dark.png",
+      "docs/source/_static/img/pytorch-logo-flame.png",
+      "gallery/assets/FudanPed00054.png",
+      "gallery/assets/FudanPed00054_mask.png",
+      "gallery/assets/astronaut.jpg",
+      "gallery/assets/basketball.mp4",
+      "gallery/assets/dog1.jpg",
+      "gallery/assets/dog2.jpg",
+      "gallery/assets/leaning_tower.jpg",
+      "gallery/assets/person1.jpg",
+      "gallery/assets/pottery.jpg",
+      "gallery/assets/repurposing_annotations_thumbnail.png",
+      "gallery/assets/transforms_thumbnail.png",
+      "gallery/assets/visualization_utils_thumbnail2.png",
+      "references/depth/stereo/assets/**",
+      "test/assets/damaged_jpeg/bad_huffman.jpg",
+      "test/assets/damaged_jpeg/corrupt.jpg",
+      "test/assets/damaged_jpeg/corrupt34_2.jpg",
+      "test/assets/damaged_jpeg/corrupt34_3.jpg",
+      "test/assets/damaged_jpeg/corrupt34_4.jpg",
+      "test/assets/damaged_png/**",
+      "test/assets/encode_jpeg/**",
+      "test/assets/expected_flow.pt",
+      "test/assets/fakedata/**",
+      "test/assets/gaussian_blur_opencv_results.pt",
+      "test/assets/interlaced_png/**",
+      "test/assets/labeled_image.png",
+      "test/assets/masks.tiff",
+      "test/assets/toosmall_png/**",
+      "test/assets/videos/R6llTwEh07w.mp4",
+      "test/assets/videos/RATRACE_wave_f_nm_np1_fr_goo_37.avi",
+      "test/assets/videos/SOX5yA1l24A.mp4",
+      "test/assets/videos/SchoolRulesHowTheyHelpUs_wave_f_nm_np1_ba_med_0.avi",
+      "test/assets/videos/TrumanShow_wave_f_nm_np1_fr_med_26.avi",
+      "test/assets/videos/WUzgd7C1pWA.mp4",
+      "test/assets/videos/hmdb51_Turnk_r_Pippi_Michel_cartwheel_f_cm_np2_le_med_6.avi",
+      "test/assets/videos/v_SoccerJuggling_g23_c01.avi",
+      "test/assets/videos/v_SoccerJuggling_g24_c01.avi",
+      "test/expect/**"
+    ]
+  },
+  "history": {
+    "since": "b3e33b7ba0cc215e8ca49dc392768a7f5a6915ad"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) Soumith Chintala 2016, \nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/pytorch/vision: Copyright (c) Soumith Chintala 2016,, BSD-3-Clause license (LICENSE), https://github.com/pytorch/vision."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CITATION.cff",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "CONTRIBUTING_MODELS.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "benchmarks/**",
+        "cmake/**",
+        "docs/Makefile",
+        "docs/make.bat",
+        "docs/requirements.txt",
+        "docs/source/_static/css/**",
+        "docs/source/_static/img/pytorch-logo-dark.svg",
+        "docs/source/_static/img/pytorch-logo-flame.svg",
+        "docs/source/_templates/**",
+        "docs/source/beta_status.py",
+        "docs/source/conf.py",
+        "docs/source/datasets.rst",
+        "docs/source/docutils.conf",
+        "docs/source/feature_extraction.rst",
+        "docs/source/index.rst",
+        "docs/source/io.rst",
+        "docs/source/models/**",
+        "docs/source/models.rst",
+        "docs/source/ops.rst",
+        "docs/source/training_references.rst",
+        "docs/source/transforms.rst",
+        "docs/source/tv_tensors.rst",
+        "docs/source/utils.rst",
+        "examples/**",
+        "gallery/README.rst",
+        "gallery/assets/coco/**",
+        "gallery/assets/imagenet_class_index.json",
+        "gallery/others/**",
+        "gallery/transforms/**",
+        "hubconf.py",
+        "maintainer_guide.md",
+        "mypy.ini",
+        "packaging/**",
+        "pyproject.toml",
+        "pytest.ini",
+        "references/classification/**",
+        "references/depth/stereo/README.md",
+        "references/depth/stereo/__init__.py",
+        "references/depth/stereo/cascade_evaluation.py",
+        "references/depth/stereo/parsing.py",
+        "references/depth/stereo/presets.py",
+        "references/depth/stereo/train.py",
+        "references/depth/stereo/transforms.py",
+        "references/depth/stereo/utils/**",
+        "references/depth/stereo/visualization.py",
+        "references/detection/**",
+        "references/optical_flow/**",
+        "references/segmentation/**",
+        "references/similarity/**",
+        "references/video_classification/**",
+        "release/**",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "test/_utils_internal.py",
+        "test/assets/damaged_jpeg/TensorFlow-LICENSE",
+        "test/assets/videos/README",
+        "test/common_extended_utils.py",
+        "test/common_utils.py",
+        "test/conftest.py",
+        "test/cpp/**",
+        "test/datasets_utils.py",
+        "test/optests_failures_dict.json",
+        "test/preprocess-bench.py",
+        "test/smoke_test.py",
+        "test/test_architecture_ops.py",
+        "test/test_backbone_utils.py",
+        "test/test_datasets.py",
+        "test/test_datasets_download.py",
+        "test/test_datasets_samplers.py",
+        "test/test_datasets_utils.py",
+        "test/test_datasets_video_utils.py",
+        "test/test_extended_models.py",
+        "test/test_functional_tensor.py",
+        "test/test_image.py",
+        "test/test_internal_utils.py",
+        "test/test_internet.py",
+        "test/test_io.py",
+        "test/test_models.py",
+        "test/test_models_detection_anchor_utils.py",
+        "test/test_models_detection_negative_samples.py",
+        "test/test_models_detection_utils.py",
+        "test/test_onnx.py",
+        "test/test_ops.py",
+        "test/test_transforms.py",
+        "test/test_transforms_tensor.py",
+        "test/test_transforms_v2.py",
+        "test/test_transforms_v2_utils.py",
+        "test/test_transforms_video.py",
+        "test/test_tv_tensors.py",
+        "test/test_utils.py",
+        "torchvision/**",
+        "version.txt"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) Soumith Chintala 2016, \nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) Soumith Chintala 2016,, BSD-3-Clause license (LICENSE), https://github.com/pytorch/vision."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "docs/requirements.txt",
+        "version.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TensorFlow-LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,906 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/Wilfred/difftastic",
+  "revision": "6ee8d012d9b9fc2acb4fbe48af6dfcb64ea33381",
+  "checksum": "sha256:461fc1e1d940bc1d64db3fee3b1725e0baaabb0c4b0d726b6d3ee23fe17fefec",
+  "extract": {
+    "exclude": [
+      "homepage/favicon.ico",
+      "homepage/home_img/add_wrap.png",
+      "homepage/home_img/change_wrap.png",
+      "homepage/home_img/difft_screenshot.png",
+      "homepage/home_img/git_difftool.png",
+      "homepage/home_img/line_numbers.png",
+      "homepage/home_img/reformat.png",
+      "homepage/home_img/wrap_struct.png",
+      "img/**",
+      "sample_files/cli_tests/MainWindowViewModel.cs",
+      "sample_files/utf16_1.py",
+      "sample_files/utf16_2.py",
+      "sample_files/windows1251_1.txt",
+      "sample_files/windows1251_2.txt"
+    ]
+  },
+  "history": {
+    "since": "d01f04d5b7a0a7b1e3b19ac7ddc346989847bc7a"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021-2025 Wilfred Hughes\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 Patrick Förster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/Wilfred/difftastic: Copyright (c) 2021-2025 Wilfred Hughes, MIT license (LICENSE), https://github.com/Wilfred/difftastic; Copyright (c) 2021 Patrick Förster, MIT license (LICENSE), https://github.com/Wilfred/difftastic/tree/6ee8d012d9b9fc2acb4fbe48af6dfcb64ea33381/vendored_parsers/tree-sitter-latex."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".aiderignore",
+        ".codecov.yml",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".rustfmt.toml",
+        ".typos.toml",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CHANGELOG.md",
+        "CITATION.cff",
+        "CLAUDE.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "LICENSE",
+        "README.md",
+        "build.rs",
+        "clippy.toml",
+        "demo_files/**",
+        "difft.1",
+        "difft.1.md",
+        "homepage/home_img/braces.svg",
+        "homepage/home_img/clojure.svg",
+        "homepage/home_img/cplusplus.svg",
+        "homepage/home_img/csharp.svg",
+        "homepage/home_img/dart.svg",
+        "homepage/home_img/erlang.svg",
+        "homepage/home_img/github.svg",
+        "homepage/home_img/go.svg",
+        "homepage/home_img/haskell.svg",
+        "homepage/home_img/html5.svg",
+        "homepage/home_img/java.svg",
+        "homepage/home_img/javascript.svg",
+        "homepage/home_img/json.svg",
+        "homepage/home_img/kotlin.svg",
+        "homepage/home_img/lisp.svg",
+        "homepage/home_img/lua.svg",
+        "homepage/home_img/ocaml.svg",
+        "homepage/home_img/php.svg",
+        "homepage/home_img/python.svg",
+        "homepage/home_img/r.svg",
+        "homepage/home_img/ruby.svg",
+        "homepage/home_img/rust.svg",
+        "homepage/home_img/scala.svg",
+        "homepage/home_img/typescript.svg",
+        "homepage/home_img/yaml.svg",
+        "homepage/home_static/**",
+        "homepage/index.html",
+        "justfile",
+        "manual/**",
+        "rust-toolchain.toml",
+        "sample_files/Session_1.kt",
+        "sample_files/Session_2.kt",
+        "sample_files/ada_1.adb",
+        "sample_files/ada_2.adb",
+        "sample_files/added_line_1.txt",
+        "sample_files/added_line_2.txt",
+        "sample_files/align_footer_1.txt",
+        "sample_files/align_footer_2.txt",
+        "sample_files/all_changed_1.js",
+        "sample_files/all_changed_2.js",
+        "sample_files/apex_1.trigger",
+        "sample_files/apex_2.trigger",
+        "sample_files/asm_1.s",
+        "sample_files/asm_2.s",
+        "sample_files/b2_math_1.h",
+        "sample_files/b2_math_2.h",
+        "sample_files/bad_combine_1.rs",
+        "sample_files/bad_combine_2.rs",
+        "sample_files/big_text_hunk_1.txt",
+        "sample_files/big_text_hunk_2.txt",
+        "sample_files/change_outer_1.el",
+        "sample_files/change_outer_2.el",
+        "sample_files/chinese_1.po",
+        "sample_files/chinese_2.po",
+        "sample_files/cli_tests/bad_yaml_1.yml",
+        "sample_files/cli_tests/bad_yaml_2.yml",
+        "sample_files/cli_tests/changes_at_end_1.txt",
+        "sample_files/cli_tests/changes_at_end_2.txt",
+        "sample_files/cli_tests/empty.js",
+        "sample_files/cli_tests/gitconfig_1.gitconfig",
+        "sample_files/cli_tests/gitconfig_2.gitconfig",
+        "sample_files/cli_tests/makefile_1.mk",
+        "sample_files/cli_tests/makefile_2.mk",
+        "sample_files/cli_tests/x_mod_false_positive.js",
+        "sample_files/clojure_1.clj",
+        "sample_files/clojure_2.clj",
+        "sample_files/comma_1.js",
+        "sample_files/comma_2.js",
+        "sample_files/comma_and_comment_1.js",
+        "sample_files/comma_and_comment_2.js",
+        "sample_files/comments_1.rs",
+        "sample_files/comments_2.rs",
+        "sample_files/compare.expected",
+        "sample_files/compare_all.sh",
+        "sample_files/conflicts.el",
+        "sample_files/context_1.rs",
+        "sample_files/context_2.rs",
+        "sample_files/contiguous_1.js",
+        "sample_files/contiguous_2.js",
+        "sample_files/css_1.css",
+        "sample_files/css_2.css",
+        "sample_files/dart_1.dart",
+        "sample_files/dart_2.dart",
+        "sample_files/devicetree_1.dts",
+        "sample_files/devicetree_2.dts",
+        "sample_files/dir_1/**",
+        "sample_files/dir_2/**",
+        "sample_files/elisp_1.el",
+        "sample_files/elisp_2.el",
+        "sample_files/elisp_contiguous_1.el",
+        "sample_files/elisp_contiguous_2.el",
+        "sample_files/elixir_1.ex",
+        "sample_files/elixir_2.ex",
+        "sample_files/elm_1.elm",
+        "sample_files/elm_2.elm",
+        "sample_files/erlang_1.erl",
+        "sample_files/erlang_2.erl",
+        "sample_files/fish_1.fish",
+        "sample_files/fish_2.fish",
+        "sample_files/flat_1.json",
+        "sample_files/flat_2.json",
+        "sample_files/fortran_1.f90",
+        "sample_files/fortran_2.f90",
+        "sample_files/hack_1.php",
+        "sample_files/hack_2.php",
+        "sample_files/haskell_1.hs",
+        "sample_files/haskell_2.hs",
+        "sample_files/hcl_1.hcl",
+        "sample_files/hcl_2.hcl",
+        "sample_files/helpful-unit-test-after.el",
+        "sample_files/helpful-unit-test-before.el",
+        "sample_files/helpful_1.el",
+        "sample_files/helpful_2.el",
+        "sample_files/hidden_1/**",
+        "sample_files/hidden_2/**",
+        "sample_files/html_1.html",
+        "sample_files/html_2.html",
+        "sample_files/html_simple_1.html",
+        "sample_files/html_simple_2.html",
+        "sample_files/huge_cpp_1.cpp",
+        "sample_files/huge_cpp_2.cpp",
+        "sample_files/hyphen_subwords_1.json",
+        "sample_files/hyphen_subwords_2.json",
+        "sample_files/identical_1.scala",
+        "sample_files/identical_2.scala",
+        "sample_files/if_1.py",
+        "sample_files/if_2.py",
+        "sample_files/insert_blank_1.txt",
+        "sample_files/insert_blank_2.txt",
+        "sample_files/janet_1.janet",
+        "sample_files/janet_2.janet",
+        "sample_files/java_1.java",
+        "sample_files/java_2.java",
+        "sample_files/javascript_1.js",
+        "sample_files/javascript_2.js",
+        "sample_files/javascript_simple_1.js",
+        "sample_files/javascript_simple_2.js",
+        "sample_files/json_1.json",
+        "sample_files/json_2.json",
+        "sample_files/jsx_1.jsx",
+        "sample_files/jsx_2.jsx",
+        "sample_files/julia_1.jl",
+        "sample_files/julia_2.jl",
+        "sample_files/load_1.js",
+        "sample_files/load_2.js",
+        "sample_files/long_line_1.txt",
+        "sample_files/long_line_2.txt",
+        "sample_files/lua_1.lua",
+        "sample_files/lua_2.lua",
+        "sample_files/makefile_1.mk",
+        "sample_files/makefile_2.mk",
+        "sample_files/many_newlines_1.txt",
+        "sample_files/many_newlines_2.txt",
+        "sample_files/metadata_1.clj",
+        "sample_files/metadata_2.clj",
+        "sample_files/modules_1.ml",
+        "sample_files/modules_2.ml",
+        "sample_files/multibyte_1.py",
+        "sample_files/multibyte_2.py",
+        "sample_files/multiline_string_1.ml",
+        "sample_files/multiline_string_2.ml",
+        "sample_files/multiline_string_eof_1.yml",
+        "sample_files/multiline_string_eof_2.yml",
+        "sample_files/nest_1.rs",
+        "sample_files/nest_2.rs",
+        "sample_files/nested_slider_1.el",
+        "sample_files/nested_slider_1.rs",
+        "sample_files/nested_slider_2.el",
+        "sample_files/nested_slider_2.rs",
+        "sample_files/nesting_1.el",
+        "sample_files/nesting_2.el",
+        "sample_files/newick_1.nwk",
+        "sample_files/newick_2.nwk",
+        "sample_files/nix_1.nix",
+        "sample_files/nix_2.nix",
+        "sample_files/nullable_1.kt",
+        "sample_files/nullable_2.kt",
+        "sample_files/objc_header_1.h",
+        "sample_files/objc_header_2.h",
+        "sample_files/objc_module_1.m",
+        "sample_files/objc_module_2.m",
+        "sample_files/ocaml_1.ml",
+        "sample_files/ocaml_2.ml",
+        "sample_files/outer_delimiter_1.el",
+        "sample_files/outer_delimiter_2.el",
+        "sample_files/pascal_1.pascal",
+        "sample_files/pascal_2.pascal",
+        "sample_files/perl_1.pl",
+        "sample_files/perl_2.pl",
+        "sample_files/prefer_outer_1.el",
+        "sample_files/prefer_outer_2.el",
+        "sample_files/preprocessor_1.h",
+        "sample_files/preprocessor_2.h",
+        "sample_files/qml_1.qml",
+        "sample_files/qml_2.qml",
+        "sample_files/r_1.R",
+        "sample_files/r_2.R",
+        "sample_files/racket_1.rkt",
+        "sample_files/racket_2.rkt",
+        "sample_files/repeated_line_no_eol_1.txt",
+        "sample_files/repeated_line_no_eol_2.txt",
+        "sample_files/ruby_1.rb",
+        "sample_files/ruby_2.rb",
+        "sample_files/scala_1.scala",
+        "sample_files/scala_2.scala",
+        "sample_files/scheme_1.scm",
+        "sample_files/scheme_2.scm",
+        "sample_files/simple_1.js",
+        "sample_files/simple_1.txt",
+        "sample_files/simple_2.js",
+        "sample_files/simple_2.txt",
+        "sample_files/slider_1.rs",
+        "sample_files/slider_2.rs",
+        "sample_files/slider_at_end_1.json",
+        "sample_files/slider_at_end_2.json",
+        "sample_files/slow_1.rs",
+        "sample_files/slow_2.rs",
+        "sample_files/small_1.js",
+        "sample_files/small_2.js",
+        "sample_files/sql_1.sql",
+        "sample_files/sql_2.sql",
+        "sample_files/string_subwords_1.el",
+        "sample_files/string_subwords_2.el",
+        "sample_files/strings_1.el",
+        "sample_files/strings_2.el",
+        "sample_files/swift_1.swift",
+        "sample_files/swift_2.swift",
+        "sample_files/syntax_error_1.js",
+        "sample_files/syntax_error_2.js",
+        "sample_files/tab_1.c",
+        "sample_files/tab_1.txt",
+        "sample_files/tab_2.c",
+        "sample_files/tab_2.txt",
+        "sample_files/tailwind_1.css",
+        "sample_files/tailwind_2.css",
+        "sample_files/text_1.txt",
+        "sample_files/text_2.txt",
+        "sample_files/todomvc_1.gleam",
+        "sample_files/todomvc_2.gleam",
+        "sample_files/toml_1.toml",
+        "sample_files/toml_2.toml",
+        "sample_files/trailing_commas_1.js",
+        "sample_files/trailing_commas_2.js",
+        "sample_files/trailling_newline_1.yaml",
+        "sample_files/trailling_newline_2.yaml",
+        "sample_files/typescript_1.ts",
+        "sample_files/typescript_2.ts",
+        "sample_files/typing_1.ml",
+        "sample_files/typing_2.ml",
+        "sample_files/vhdl_1.vhd",
+        "sample_files/vhdl_2.vhd",
+        "sample_files/whitespace_1.tsx",
+        "sample_files/whitespace_2.tsx",
+        "sample_files/xml_1.xml",
+        "sample_files/xml_2.xml",
+        "sample_files/yaml_1.yaml",
+        "sample_files/yaml_2.yaml",
+        "sample_files/zig_1.zig",
+        "sample_files/zig_2.zig",
+        "src/**",
+        "tests/**",
+        "translation/**",
+        "vendored_parsers/highlights/**",
+        "vendored_parsers/tree-sitter-janet-simple/**",
+        "vendored_parsers/tree-sitter-janet-simple-src",
+        "vendored_parsers/tree-sitter-latex-src"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021-2025 Wilfred Hughes\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021-2025 Wilfred Hughes, MIT license (LICENSE), https://github.com/Wilfred/difftastic."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendored_parsers/tree-sitter-latex/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Patrick Förster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Patrick Förster, MIT license (LICENSE), https://github.com/Wilfred/difftastic/tree/6ee8d012d9b9fc2acb4fbe48af6dfcb64ea33381/vendored_parsers/tree-sitter-latex."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ada",
+      "paths": [
+        "**/*.adb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elisp",
+      "paths": [
+        "**/*.el"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.ex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elm",
+      "paths": [
+        "**/*.elm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erlang",
+      "paths": [
+        "**/*.erl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fortran",
+      "paths": [
+        "**/*.f90"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "julia",
+      "paths": [
+        "**/*.jl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ocaml",
+      "paths": [
+        "**/*.ml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.R"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "racket",
+      "paths": [
+        "**/*.rkt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scheme",
+      "paths": [
+        "**/*.scm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gitconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gleam"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gyp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.janet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nwk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pascal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.trigger"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vhd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.aiderignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

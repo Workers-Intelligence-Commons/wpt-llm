@@ -1,0 +1,531 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dotnet/efcore",
+  "revision": "8ff653707470fffbad8e85a5f734cfc87eae78b3",
+  "checksum": "sha256:ed89b43308857ea55d491ee1cc9c36ffbc6c3444be46dd4e0629422289ab820e",
+  "extract": {
+    "exclude": [
+      "benchmark/EFCore.Sqlite.Benchmarks/AdventureWorks2014.db",
+      "docs/rate_limiting.png",
+      "logo/ef-logo.png",
+      "test/EFCore.SqlServer.FunctionalTests/Northwind.sql",
+      "test/EFCore.SqlServer.FunctionalTests/SqlAzure/adventureworks.sql",
+      "test/EFCore.Sqlite.FunctionalTests/northwind.db"
+    ]
+  },
+  "history": {
+    "since": "7b5f579c3d5e8664be77dbe231771610e5803799"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) .NET Foundation and Contributors\n\nAll rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/dotnet/efcore: Copyright (c) .NET Foundation and Contributors, MIT license (LICENSE.txt), https://github.com/dotnet/efcore."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".azuredevops/**",
+        ".claude/**",
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "Directory.Build.props",
+        "Directory.Build.targets",
+        "Directory.Packages.props",
+        "EFCore.Cosmos.slnf",
+        "EFCore.Relational.slnf",
+        "EFCore.Runtime.slnf",
+        "EFCore.Sqlite.slnf",
+        "EFCore.Tools.slnf",
+        "EFCore.slnx",
+        "EFCore.slnx.DotSettings",
+        "LICENSE.txt",
+        "Microsoft.Data.Sqlite.slnf",
+        "NuGet.config",
+        "README.md",
+        "activate.ps1",
+        "activate.sh",
+        "azure-pipelines-internal-tests.yml",
+        "azure-pipelines-public.yml",
+        "azure-pipelines.yml",
+        "benchmark/Directory.Build.props",
+        "benchmark/Directory.Packages.props",
+        "benchmark/EFCore.Benchmarks/**",
+        "benchmark/EFCore.SqlServer.Benchmarks/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/ChangeTracker/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/EFCore.Sqlite.Benchmarks.csproj",
+        "benchmark/EFCore.Sqlite.Benchmarks/Initialization/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/Models/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/Query/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/Support/**",
+        "benchmark/EFCore.Sqlite.Benchmarks/UpdatePipeline/**",
+        "build.cmd",
+        "build.sh",
+        "docs/DailyBuilds.md",
+        "docs/getting-and-building-the-code.md",
+        "docs/security.md",
+        "docs/threat_model.md",
+        "eng/**",
+        "es-metadata.yml",
+        "github-merge-flow.jsonc",
+        "global.json",
+        "helix.cmd",
+        "helix.sh",
+        "logo/ef-logo.svg",
+        "restore.cmd",
+        "restore.sh",
+        "rulesets/**",
+        "src/**",
+        "startvs.cmd",
+        "stylecop.json",
+        "test/.editorconfig",
+        "test/Directory.Build.props",
+        "test/Directory.Build.targets",
+        "test/Directory.Packages.props",
+        "test/EFCore.Analyzers.Tests/**",
+        "test/EFCore.ApiBaseline.Tests/**",
+        "test/EFCore.AspNet.InMemory.FunctionalTests/**",
+        "test/EFCore.AspNet.Specification.Tests/**",
+        "test/EFCore.AspNet.SqlServer.FunctionalTests/**",
+        "test/EFCore.AspNet.Sqlite.FunctionalTests/**",
+        "test/EFCore.Cosmos.FunctionalTests/**",
+        "test/EFCore.Cosmos.Tests/**",
+        "test/EFCore.CrossStore.FunctionalTests/**",
+        "test/EFCore.Design.Tests/**",
+        "test/EFCore.FSharp.FunctionalTests/**",
+        "test/EFCore.InMemory.FunctionalTests/**",
+        "test/EFCore.InMemory.Tests/**",
+        "test/EFCore.NativeAotTests/**",
+        "test/EFCore.OData.FunctionalTests/**",
+        "test/EFCore.Proxies.Tests/**",
+        "test/EFCore.Relational.Specification.Tests/**",
+        "test/EFCore.Relational.Tests/**",
+        "test/EFCore.Specification.Tests/**",
+        "test/EFCore.SqlServer.FunctionalTests/**",
+        "test/EFCore.SqlServer.HierarchyId.Tests/**",
+        "test/EFCore.SqlServer.Tests/**",
+        "test/EFCore.Sqlite.FunctionalTests/AutoincrementTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/BadDataJsonDeserializationSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/BuiltInDataTypesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/BulkUpdates/**",
+        "test/EFCore.Sqlite.FunctionalTests/CommandConfigurationTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/CommandInterceptionSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ComplexTypesTrackingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/CompositeKeyEndToEndSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ConcurrencyDetectorDisabledSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ConcurrencyDetectorEnabledSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ConferencePlannerSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ConnectionInterceptionSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ConvertToProviderTypesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/CustomConvertersSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/DataAnnotationSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/DataBindingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/DefaultValuesTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/DesignTimeSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/EFCore.Sqlite.FunctionalTests.csproj",
+        "test/EFCore.Sqlite.FunctionalTests/EntitySplittingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/F1SqliteFixture.cs",
+        "test/EFCore.Sqlite.FunctionalTests/FieldMappingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/FieldsOnlyLoadSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/FindSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/GraphUpdates/**",
+        "test/EFCore.Sqlite.FunctionalTests/JsonTypesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/KeysWithConvertersSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/LazyLoadProxySqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/LoadExistingEntityStateSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/LoadSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/LoggingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ManyToManyFieldsLoadSqliteTestBase.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ManyToManyLoadProxySqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ManyToManyLoadSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ManyToManyLoadSqliteTestBase.cs",
+        "test/EFCore.Sqlite.FunctionalTests/ManyToManyTrackingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/MaterializationInterceptionSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/Migrations/**",
+        "test/EFCore.Sqlite.FunctionalTests/ModelBuilding/**",
+        "test/EFCore.Sqlite.FunctionalTests/ModelBuilding101SqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/MonsterFixupChangedOnlySqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/MusicStoreSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/NonLoadingNavigationsManyToManyLoadSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/NotificationEntitiesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/OptimisticConcurrencySqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/OptionalEntitySplittingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/OverzealousInitializationSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/PropertyValuesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/Query/**",
+        "test/EFCore.Sqlite.FunctionalTests/QueryExpressionInterceptionSqliteTestBase.cs",
+        "test/EFCore.Sqlite.FunctionalTests/RuntimeMigrationSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SaveChangesInterceptionSqliteTestBase.cs",
+        "test/EFCore.Sqlite.FunctionalTests/Scaffolding/**",
+        "test/EFCore.Sqlite.FunctionalTests/SeedingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SerializationSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SpatialSqliteFixture.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SpatialSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteApiConsistencyTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteComplianceTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteDatabaseCreatorTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteDatabaseFacadeTestExtensions.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteServiceCollectionExtensionsTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/SqliteValueGenerationScenariosTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/StoreGeneratedFixupSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/StoreGeneratedSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/TPTTableSplittingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/TableSplittingSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/TestModels/**",
+        "test/EFCore.Sqlite.FunctionalTests/TestUtilities/**",
+        "test/EFCore.Sqlite.FunctionalTests/TransactionInterceptionSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/TransactionSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/TwoDatabasesSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/Types/**",
+        "test/EFCore.Sqlite.FunctionalTests/Update/**",
+        "test/EFCore.Sqlite.FunctionalTests/ValueConvertersEndToEndSqliteTest.cs",
+        "test/EFCore.Sqlite.FunctionalTests/WithConstructorsSqliteTest.cs",
+        "test/EFCore.Sqlite.Tests/**",
+        "test/EFCore.Tests/**",
+        "test/EFCore.TrimmingTests/**",
+        "test/EFCore.VisualBasic.FunctionalTests/**",
+        "test/Microsoft.Data.Sqlite.Tests/**",
+        "test/Shared/**",
+        "test/dotnet-ef.Tests/**",
+        "test/ef.Tests/**",
+        "test.cmd",
+        "test.sh",
+        "tools/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) .NET Foundation and Contributors\n\nAll rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) .NET Foundation and Contributors, MIT license (LICENSE.txt), https://github.com/dotnet/efcore."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fsharp",
+      "paths": [
+        "**/*.fs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.psm1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.DotSettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*._"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cs,"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fsproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.proj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psd1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ruleset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slnx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vbproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gdnbaselines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.resx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.targets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

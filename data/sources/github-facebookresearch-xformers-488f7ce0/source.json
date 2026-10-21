@@ -1,0 +1,422 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/facebookresearch/xformers",
+  "revision": "4f701fad69a6308e6b9f0c3f7863c40c881b30a7",
+  "checksum": "sha256:3d23f2ec7c3ba0c874812f06fc848f424d1b148ba38c970ccf1380b1c1d82c91",
+  "extract": {
+    "exclude": [
+      "docs/assets/**",
+      "docs/plots/**",
+      "docs/source/_static/block_diag_bias.png",
+      "docs/source/_static/block_diag_cat_split.png",
+      "docs/source/_static/causal_bottom_right.png",
+      "docs/source/_static/causal_bottom_right_local.png",
+      "docs/source/_static/local_attn.png",
+      "docs/source/_static/logo.png",
+      "third_party/cutlass/.github/**",
+      "third_party/cutlass/.gitignore",
+      "third_party/cutlass/.gitmodules",
+      "third_party/cutlass/CHANGELOG.md",
+      "third_party/cutlass/CITATION.cff",
+      "third_party/cutlass/CMakeLists.txt",
+      "third_party/cutlass/CONTRIBUTORS.md",
+      "third_party/cutlass/CUDA.cmake",
+      "third_party/cutlass/Doxyfile",
+      "third_party/cutlass/EULA.txt",
+      "third_party/cutlass/LICENSE.txt",
+      "third_party/cutlass/PUBLICATIONS.md",
+      "third_party/cutlass/README.md",
+      "third_party/cutlass/bin2hex.cmake",
+      "third_party/cutlass/cmake/**",
+      "third_party/cutlass/cuBLAS.cmake",
+      "third_party/cutlass/cuDNN.cmake",
+      "third_party/cutlass/customConfigs.cmake",
+      "third_party/cutlass/docs/**",
+      "third_party/cutlass/examples/**",
+      "third_party/cutlass/include/**",
+      "third_party/cutlass/media/**",
+      "third_party/cutlass/pyproject.toml",
+      "third_party/cutlass/python/docs/_sources/externals/**",
+      "third_party/cutlass/python/docs/_static/cutlass-logo-small.png",
+      "third_party/cutlass/python/docs/_static/file.png",
+      "third_party/cutlass/python/docs/_static/logo-dark-mode.png",
+      "third_party/cutlass/python/docs/_static/logo-light-mode.png",
+      "third_party/cutlass/python/docs/_static/minus.png",
+      "third_party/cutlass/python/docs/_static/plus.png",
+      "third_party/cutlass/python/docs/externals/**",
+      "third_party/cutlass/python/docs/objects.inv",
+      "third_party/cutlass/python/docs_src/source/_static/**",
+      "third_party/cutlass/python/docs_src/source/externals/**",
+      "third_party/cutlass/setup.cfg",
+      "third_party/cutlass/test/**",
+      "third_party/cutlass/tools/**"
+    ]
+  },
+  "history": {
+    "since": "dd96b8d8beda5308fb433c1ef3ff04b7f178c263"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "From xFormers:\n\nCopyright (c) Facebook, Inc. and its affiliates\n\n\n===\n\nBSD 3-Clause License\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\n3. Neither the names of Facebook, Deepmind Technologies, NYU, NEC Laboratories America\n   and IDIAP Research Institute nor the names of its contributors may be\n   used to endorse or promote products derived from this software without\n   specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2017 - 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.\nSPDX-License-Identifier: BSD-3-Clause\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\nlist of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\nthis list of conditions and the following disclaimer in the documentation\nand/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/facebookresearch/xformers: Copyright (c) Facebook, Inc. and its affiliates, BSD-3-Clause license (LICENSE), https://github.com/facebookresearch/xformers; Copyright (c) 2017 - 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved., BSD-3-Clause license (LICENSE.txt), https://github.com/facebookresearch/xformers/tree/4f701fad69a6308e6b9f0c3f7863c40c881b30a7/third_party/cutlass/python."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".coveragerc",
+        ".editorconfig",
+        ".flake8",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".isort.cfg",
+        ".markdownlint.json",
+        ".pre-commit-config.yaml",
+        ".pyre_configuration",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "docs/Makefile",
+        "docs/requirements.txt",
+        "docs/source/2d_attention_patterns.ipynb",
+        "docs/source/_static/css/**",
+        "docs/source/_templates/**",
+        "docs/source/components/**",
+        "docs/source/conf.py",
+        "docs/source/index.rst",
+        "docs/source/swin_transformer.ipynb",
+        "docs/source/what_is_xformers.rst",
+        "examples/**",
+        "pyproject.toml",
+        "requirements-benchmark.txt",
+        "requirements-test.txt",
+        "requirements.txt",
+        "setup.cfg",
+        "setup.py",
+        "stubs/**",
+        "tests/**",
+        "version.txt",
+        "xformers/**"
+      ],
+      "text": "From xFormers:\n\nCopyright (c) Facebook, Inc. and its affiliates\n\n\n===\n\nBSD 3-Clause License\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\n3. Neither the names of Facebook, Deepmind Technologies, NYU, NEC Laboratories America\n   and IDIAP Research Institute nor the names of its contributors may be\n   used to endorse or promote products derived from this software without\n   specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\nLIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\nCONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\nSUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\nINTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\nCONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\nARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) Facebook, Inc. and its affiliates, BSD-3-Clause license (LICENSE), https://github.com/facebookresearch/xformers."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "third_party/cutlass/python/CuTeDSL/**",
+        "third_party/cutlass/python/LICENSE.txt",
+        "third_party/cutlass/python/README.md",
+        "third_party/cutlass/python/cutlass_cppgen/**",
+        "third_party/cutlass/python/cutlass_library/**",
+        "third_party/cutlass/python/docs/.buildinfo",
+        "third_party/cutlass/python/docs/_modules/**",
+        "third_party/cutlass/python/docs/_sources/contribute.md.txt",
+        "third_party/cutlass/python/docs/_sources/cutlass.emit.rst.txt",
+        "third_party/cutlass/python/docs/_sources/cutlass.op.rst.txt",
+        "third_party/cutlass/python/docs/_sources/cutlass.rst.txt",
+        "third_party/cutlass/python/docs/_sources/cutlass.utils.rst.txt",
+        "third_party/cutlass/python/docs/_sources/examples.rst.txt",
+        "third_party/cutlass/python/docs/_sources/index.rst.txt",
+        "third_party/cutlass/python/docs/_sources/install.md.txt",
+        "third_party/cutlass/python/docs/_sources/modules.rst.txt",
+        "third_party/cutlass/python/docs/_static/basic.css",
+        "third_party/cutlass/python/docs/_static/check-solid.svg",
+        "third_party/cutlass/python/docs/_static/clipboard.min.js",
+        "third_party/cutlass/python/docs/_static/copy-button.svg",
+        "third_party/cutlass/python/docs/_static/copybutton.css",
+        "third_party/cutlass/python/docs/_static/copybutton.js",
+        "third_party/cutlass/python/docs/_static/copybutton_funcs.js",
+        "third_party/cutlass/python/docs/_static/debug.css",
+        "third_party/cutlass/python/docs/_static/doctools.js",
+        "third_party/cutlass/python/docs/_static/documentation_options.js",
+        "third_party/cutlass/python/docs/_static/language_data.js",
+        "third_party/cutlass/python/docs/_static/nbsphinx-broken-thumbnail.svg",
+        "third_party/cutlass/python/docs/_static/nbsphinx-code-cells.css",
+        "third_party/cutlass/python/docs/_static/nbsphinx-gallery.css",
+        "third_party/cutlass/python/docs/_static/nbsphinx-no-thumbnail.svg",
+        "third_party/cutlass/python/docs/_static/pygments.css",
+        "third_party/cutlass/python/docs/_static/scripts/**",
+        "third_party/cutlass/python/docs/_static/searchtools.js",
+        "third_party/cutlass/python/docs/_static/skeleton.css",
+        "third_party/cutlass/python/docs/_static/sphinx_highlight.js",
+        "third_party/cutlass/python/docs/_static/styles/**",
+        "third_party/cutlass/python/docs/_static/tabs.css",
+        "third_party/cutlass/python/docs/_static/tabs.js",
+        "third_party/cutlass/python/docs/contribute.html",
+        "third_party/cutlass/python/docs/cutlass.emit.html",
+        "third_party/cutlass/python/docs/cutlass.html",
+        "third_party/cutlass/python/docs/cutlass.op.html",
+        "third_party/cutlass/python/docs/cutlass.utils.html",
+        "third_party/cutlass/python/docs/examples.html",
+        "third_party/cutlass/python/docs/genindex.html",
+        "third_party/cutlass/python/docs/index.html",
+        "third_party/cutlass/python/docs/install.html",
+        "third_party/cutlass/python/docs/modules.html",
+        "third_party/cutlass/python/docs/py-modindex.html",
+        "third_party/cutlass/python/docs/search.html",
+        "third_party/cutlass/python/docs/searchindex.js",
+        "third_party/cutlass/python/docs_src/Makefile",
+        "third_party/cutlass/python/docs_src/make.bat",
+        "third_party/cutlass/python/docs_src/source/_templates/**",
+        "third_party/cutlass/python/docs_src/source/conf.py",
+        "third_party/cutlass/python/docs_src/source/contribute.md",
+        "third_party/cutlass/python/docs_src/source/cutlass.emit.rst",
+        "third_party/cutlass/python/docs_src/source/cutlass.op.rst",
+        "third_party/cutlass/python/docs_src/source/cutlass.rst",
+        "third_party/cutlass/python/docs_src/source/cutlass.utils.rst",
+        "third_party/cutlass/python/docs_src/source/examples.rst",
+        "third_party/cutlass/python/docs_src/source/index.rst",
+        "third_party/cutlass/python/docs_src/source/install.md",
+        "third_party/cutlass/python/docs_src/source/modules.rst",
+        "third_party/cutlass/python/pycute/**",
+        "third_party/cutlass/python/setup_cutlass.py",
+        "third_party/cutlass/python/setup_library.py",
+        "third_party/cutlass/python/setup_pycute.py"
+      ],
+      "text": "Copyright (c) 2017 - 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.\nSPDX-License-Identifier: BSD-3-Clause\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\nlist of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\nthis list of conditions and the following disclaimer in the documentation\nand/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2017 - 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved., BSD-3-Clause license (LICENSE.txt), https://github.com/facebookresearch/xformers/tree/4f701fad69a6308e6b9f0c3f7863c40c881b30a7/third_party/cutlass/python."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.buildinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pyre_configuration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "third_party/cutlass": "https://github.com/NVIDIA/cutlass"
+  }
+}

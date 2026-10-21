@@ -1,0 +1,1697 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nomic-ai/gpt4all",
+  "revision": "b666d16db5aeab8b91aaf7963adcee9c643734d7",
+  "checksum": "sha256:07a79f10b1a0fbf857987efc9ad8e528dfbe7aca5db2b64f3028a0abd169bc72",
+  "extract": {
+    "exclude": [
+      "gpt4all-backend/deps/llama.cpp-mainline/docs/development/llama-star/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf-hash/deps/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-hdpi/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-mdpi/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-xhdpi/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-xxhdpi/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-xxxhdpi/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/favicon.ico",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/simplechat_screens.webp",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/buttons-top/buttons_top.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/buttons-top/favicon.ico",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/favicon.ico",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/llama_cpp.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/llamapattern.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/wild.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/kompute/**",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/llama-leader.jpeg",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/llama0-banner.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/llama0-logo.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/llama1-banner.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/llama1-logo.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/media/matmul.png",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-aquila.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-baichuan.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-bert-bge.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-command-r.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-coder.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-llm.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-falcon.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-gpt-2.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-gpt-neox.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-bpe.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-spm.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-mpt.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-phi-3.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-qwen2.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-refact.gguf",
+      "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-starcoder.gguf",
+      "gpt4all-bindings/python/docs/assets/add.png",
+      "gpt4all-bindings/python/docs/assets/add_model_gpt4.png",
+      "gpt4all-bindings/python/docs/assets/attach_spreadsheet.png",
+      "gpt4all-bindings/python/docs/assets/baelor.png",
+      "gpt4all-bindings/python/docs/assets/before_first_chat.png",
+      "gpt4all-bindings/python/docs/assets/chat_window.png",
+      "gpt4all-bindings/python/docs/assets/closed_chat_panel.png",
+      "gpt4all-bindings/python/docs/assets/configure_doc_collection.png",
+      "gpt4all-bindings/python/docs/assets/disney_spreadsheet.png",
+      "gpt4all-bindings/python/docs/assets/download.png",
+      "gpt4all-bindings/python/docs/assets/download_llama.png",
+      "gpt4all-bindings/python/docs/assets/explore.png",
+      "gpt4all-bindings/python/docs/assets/explore_models.png",
+      "gpt4all-bindings/python/docs/assets/favicon.ico",
+      "gpt4all-bindings/python/docs/assets/good_tyrion.png",
+      "gpt4all-bindings/python/docs/assets/got_docs_ready.png",
+      "gpt4all-bindings/python/docs/assets/got_done.png",
+      "gpt4all-bindings/python/docs/assets/gpt4all_home.png",
+      "gpt4all-bindings/python/docs/assets/gpt4all_xlsx_attachment.mp4",
+      "gpt4all-bindings/python/docs/assets/installed_models.png",
+      "gpt4all-bindings/python/docs/assets/linux.png",
+      "gpt4all-bindings/python/docs/assets/local_embed.gif",
+      "gpt4all-bindings/python/docs/assets/mac.png",
+      "gpt4all-bindings/python/docs/assets/models_page_icon.png",
+      "gpt4all-bindings/python/docs/assets/new_docs_annotated.png",
+      "gpt4all-bindings/python/docs/assets/new_docs_annotated_filled.png",
+      "gpt4all-bindings/python/docs/assets/new_first_chat.png",
+      "gpt4all-bindings/python/docs/assets/no_docs.png",
+      "gpt4all-bindings/python/docs/assets/no_models.png",
+      "gpt4all-bindings/python/docs/assets/no_models_tiny.png",
+      "gpt4all-bindings/python/docs/assets/nomic.png",
+      "gpt4all-bindings/python/docs/assets/obsidian_adding_collection.png",
+      "gpt4all-bindings/python/docs/assets/obsidian_docs.png",
+      "gpt4all-bindings/python/docs/assets/obsidian_response.png",
+      "gpt4all-bindings/python/docs/assets/obsidian_sources.png",
+      "gpt4all-bindings/python/docs/assets/open_chat_panel.png",
+      "gpt4all-bindings/python/docs/assets/open_local_docs.png",
+      "gpt4all-bindings/python/docs/assets/open_sources.png",
+      "gpt4all-bindings/python/docs/assets/osbsidian_user_interaction.png",
+      "gpt4all-bindings/python/docs/assets/search_mistral.png",
+      "gpt4all-bindings/python/docs/assets/search_settings.png",
+      "gpt4all-bindings/python/docs/assets/spreadsheet_chat.png",
+      "gpt4all-bindings/python/docs/assets/syrio_snippets.png",
+      "gpt4all-bindings/python/docs/assets/three_model_options.png",
+      "gpt4all-bindings/python/docs/assets/windows.png",
+      "gpt4all-chat/.flake8",
+      "gpt4all-chat/CHANGELOG.md",
+      "gpt4all-chat/CMakeLists.txt",
+      "gpt4all-chat/LICENSE",
+      "gpt4all-chat/build_and_run.md",
+      "gpt4all-chat/cmake/**",
+      "gpt4all-chat/contributing_translations.md",
+      "gpt4all-chat/deps/CMakeLists.txt",
+      "gpt4all-chat/deps/DuckX/img/**",
+      "gpt4all-chat/deps/DuckX/samples/my_test.docx",
+      "gpt4all-chat/deps/DuckX/test/my_test.docx",
+      "gpt4all-chat/deps/DuckX/thirdparty/**",
+      "gpt4all-chat/deps/QXlsx/HelloAndroid/test.xlsx",
+      "gpt4all-chat/deps/QXlsx/IssueTest/91.xlsx",
+      "gpt4all-chat/deps/QXlsx/IssueTest/test.xlsx",
+      "gpt4all-chat/deps/QXlsx/Pump/**",
+      "gpt4all-chat/deps/QXlsx/ReadColor/color.xlsx",
+      "gpt4all-chat/deps/QXlsx/WebServer/test.xlsx",
+      "gpt4all-chat/deps/QXlsx/chartsquestions/**",
+      "gpt4all-chat/deps/QXlsx/csv/test.xlsx",
+      "gpt4all-chat/deps/QXlsx/markdown.data/01.align.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/01.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/02.calendar.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/02.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/03.book1.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/03.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/04.chart.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/04.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/05.chartsheet.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/05.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/06.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/06.validation.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/07.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/08.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/09.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/10.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/11.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/12.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/13.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/IMG_0016.PNG",
+      "gpt4all-chat/deps/QXlsx/markdown.data/LibreOffice-Google-XLSX.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/QXlsx-Desktop.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/QXlsx2.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/QXlsx3.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/QtDesktop.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/XLSX-64.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/android.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/arcvalut.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/comp.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/copycat.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/copycat2.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/cxx.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/mit-license.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/qt-64.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/qxlsx-badge1.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/read-color.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/show-console.jpg",
+      "gpt4all-chat/deps/QXlsx/markdown.data/spreadsheet-demo.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/testexcel.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/webserver.png",
+      "gpt4all-chat/deps/QXlsx/markdown.data/xlsx-file-format-extension.png",
+      "gpt4all-chat/deps/SingleApplication/**",
+      "gpt4all-chat/deps/fmt/**",
+      "gpt4all-chat/deps/json/docs/avatars.png",
+      "gpt4all-chat/deps/json/docs/docset/icon.png",
+      "gpt4all-chat/deps/json/docs/docset/icon@2x.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/home/**",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/callback_events.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/customers.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/json.gif",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/json_syntax_number.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/CPM.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/vcpkg.png",
+      "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/nuget/**",
+      "gpt4all-chat/deps/json/include/nlohmann/thirdparty/**",
+      "gpt4all-chat/deps/json/tests/reports/2016-08-29-fuzz/exec_speed.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-08-29-fuzz/fuzz.tiff",
+      "gpt4all-chat/deps/json/tests/reports/2016-08-29-fuzz/high_freq.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-08-29-fuzz/low_freq.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/conformance_overall_Result.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_1._Parse_Memory_(byte).png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_1._Parse_Time_(ms).png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_2._Stringify_Time_(ms).png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_3._Prettify_Time_(ms).png",
+      "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_7._Code_size_FileSize_(byte).png",
+      "gpt4all-chat/deps/json/tests/reports/2016-10-02-fuzz/exec_speed.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-10-02-fuzz/fuzz.tiff",
+      "gpt4all-chat/deps/json/tests/reports/2016-10-02-fuzz/high_freq.png",
+      "gpt4all-chat/deps/json/tests/reports/2016-10-02-fuzz/low_freq.png",
+      "gpt4all-chat/deps/json/tests/thirdparty/**",
+      "gpt4all-chat/deps/json/tools/serve_header/demo.png",
+      "gpt4all-chat/deps/usearch/assets/**",
+      "gpt4all-chat/deps/usearch/fp16/third-party/**",
+      "gpt4all-chat/dev-requirements.txt",
+      "gpt4all-chat/flatpak-manifest/**",
+      "gpt4all-chat/icons/**",
+      "gpt4all-chat/main.qml",
+      "gpt4all-chat/metadata/**",
+      "gpt4all-chat/pyproject.toml",
+      "gpt4all-chat/qa_checklist.md",
+      "gpt4all-chat/qml/**",
+      "gpt4all-chat/resources/**",
+      "gpt4all-chat/src/**",
+      "gpt4all-chat/system_requirements.md",
+      "gpt4all-chat/test-requirements.txt",
+      "gpt4all-chat/tests/**",
+      "gpt4all-chat/translations/**",
+      "gpt4all-lora-demo.gif",
+      "gpt4all-training/figs/**"
+    ]
+  },
+  "history": {
+    "since": "9f69513d72e1bedc31f8a880374701fdb6c81c28"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2023 Nomic, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023-2024 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2023 Nomic, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nMIT License\n\nCopyright (c) 2019 AMIR\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2011 Bay Citizen & Texas Tribune\n\nOriginal ReadTheDocs.org code\nCopyright (c) 2010 Charles Leifer, Eric Holscher, Bobby Grace\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n\n\n\nThe MIT License\n\nCopyright 2017-, https://github.com/j2doll/QXlsx\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License \n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright 2024 Google LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 Facebook Inc.\nCopyright (c) 2017 Georgia Institute of Technology\nCopyright 2019 Google LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nomic-ai/gpt4all: Copyright (c) 2023 Nomic, Inc., MIT license (LICENSE.txt), https://github.com/nomic-ai/gpt4all; Copyright (c) 2023-2024 The ggml authors, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-backend/deps/llama.cpp-mainline; Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-backend/deps/llama.cpp-mainline/gguf-py; Copyright (c) 2023 Nomic, Inc., MIT license (LICENSE.txt), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-bindings/python; Copyright (c) 2019 AMIR, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/DuckX; Copyright (c) 2011 Bay Citizen & Texas Tribune; Copyright (c) 2010 Charles Leifer, Eric Holscher, Bobby Grace, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/DuckX/docs/_themes/armstrong; Copyright 2017-, https://github.com/j2doll/QXlsx, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/QXlsx; Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE.MIT), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/json; Copyright 2024 Google LLC, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/minja; Ash Vardanian (https://ashvardanian.com/), Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch; Copyright (c) 2017 Facebook Inc.; Copyright (c) 2017 Georgia Institute of Technology; Copyright 2019 Google LLC, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/fp16; Ash Vardanian, Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/simsimd; Ash Vardanian, Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/stringzilla."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".circleci/**",
+        ".codespellrc",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "MAINTAINERS.md",
+        "README.md",
+        "common/**",
+        "gpt4all-backend/CMakeLists.txt",
+        "gpt4all-backend/README.md",
+        "gpt4all-backend/include/**",
+        "gpt4all-backend/llama.cpp.cmake",
+        "gpt4all-backend/src/**",
+        "gpt4all-bindings/README.md",
+        "gpt4all-bindings/cli/**",
+        "gpt4all-bindings/typescript/**",
+        "gpt4all-training/GPT-J_MAP.md",
+        "gpt4all-training/README.md",
+        "gpt4all-training/TRAINING_LOG.md",
+        "gpt4all-training/build_map.py",
+        "gpt4all-training/clean.py",
+        "gpt4all-training/configs/**",
+        "gpt4all-training/create_hostname.sh",
+        "gpt4all-training/data.py",
+        "gpt4all-training/env.yaml",
+        "gpt4all-training/eval_figures.py",
+        "gpt4all-training/eval_self_instruct.py",
+        "gpt4all-training/generate.py",
+        "gpt4all-training/inference.py",
+        "gpt4all-training/launcher.sh",
+        "gpt4all-training/old-README.md",
+        "gpt4all-training/read.py",
+        "gpt4all-training/requirements.txt",
+        "gpt4all-training/train.py",
+        "roadmap.md"
+      ],
+      "text": "Copyright (c) 2023 Nomic, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Nomic, Inc., MIT license (LICENSE.txt), https://github.com/nomic-ai/gpt4all."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-backend/deps/llama.cpp-mainline/.clang-tidy",
+        "gpt4all-backend/deps/llama.cpp-mainline/.devops/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/.dockerignore",
+        "gpt4all-backend/deps/llama.cpp-mainline/.ecrc",
+        "gpt4all-backend/deps/llama.cpp-mainline/.editorconfig",
+        "gpt4all-backend/deps/llama.cpp-mainline/.flake8",
+        "gpt4all-backend/deps/llama.cpp-mainline/.github/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/.gitignore",
+        "gpt4all-backend/deps/llama.cpp-mainline/.gitmodules",
+        "gpt4all-backend/deps/llama.cpp-mainline/.pre-commit-config.yaml",
+        "gpt4all-backend/deps/llama.cpp-mainline/AUTHORS",
+        "gpt4all-backend/deps/llama.cpp-mainline/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/CMakePresets.json",
+        "gpt4all-backend/deps/llama.cpp-mainline/CONTRIBUTING.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/LICENSE",
+        "gpt4all-backend/deps/llama.cpp-mainline/Makefile",
+        "gpt4all-backend/deps/llama.cpp-mainline/Package.swift",
+        "gpt4all-backend/deps/llama.cpp-mainline/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/SECURITY.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/ci/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/cmake/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/common/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/convert_hf_to_gguf.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/convert_hf_to_gguf_update.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/convert_llama_ggml_to_gguf.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/convert_lora_to_gguf.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/android.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/backend/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/build.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/development/HOWTO-add-model.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/development/debugging-tests.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/development/token_generation_performance_tips.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/docker.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/docs/install.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/Miku.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/baby-llama/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/base-translate.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/batched/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/batched-bench/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/batched.swift/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/chat-13B.bat",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/chat-13B.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/chat-persistent.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/chat-vicuna.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/chat.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/convert-llama2c-to-ggml/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/convert_legacy_llama.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/cvector-generator/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/deprecation-warning/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/embedding/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/eval-callback/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/export-lora/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gbnf-validator/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gen-docs/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf-hash/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf-hash/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf-hash/gguf-hash.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gguf-split/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/gritlm/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/imatrix/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/infill/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/jeopardy/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/json_schema_pydantic_example.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/json_schema_to_grammar.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama-bench/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/.gitignore",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/.gitignore",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/build.gradle.kts",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/proguard-rules.pro",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/AndroidManifest.xml",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/java/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/drawable/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/mipmap-anydpi/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/values/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/app/src/main/res/xml/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/build.gradle.kts",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/gradle/wrapper/gradle-wrapper.properties",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/gradle.properties",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/gradlew",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/llama/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.android/settings.gradle.kts",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.swiftui/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llama.vim",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llava/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llm.vim",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/lookahead/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/lookup/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/main/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/main-cmake-pkg/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/parallel/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/passkey/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/perplexity/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/pydantic_models_to_grammar.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/pydantic_models_to_grammar_examples.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/quantize/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/quantize-stats/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/reason-act.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/regex_to_grammar.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/retrieval/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/rpc/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/save-load-state/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/bench/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/chat-llama2.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/chat.mjs",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/chat.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/deps.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/httplib.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/colorthemes.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/completion.js",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/index-new.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/index.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/index.js",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/json-schema-to-grammar.mjs",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/loading.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/prompt-formats.js",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/style.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/system-prompts.js",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-beeninorder.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-ketivah.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-mangotango.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-playground.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-polarnight.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public/theme-snowstorm.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/datautils.mjs",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/index.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/readme.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/simplechat.css",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/simplechat.js",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/public_simplechat/ui.mjs",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/server.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/tests/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/buttons-top/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/buttons-top/index.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/README.md",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/themes/wild/index.html",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/utils.hpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server-llama2-13B.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server_embd.py",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/simple/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/speculative/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/sycl/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/tokenize/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/ts-type-to-grammar.sh",
+        "gpt4all-backend/deps/llama.cpp-mainline/flake.lock",
+        "gpt4all-backend/deps/llama.cpp-mainline/flake.nix",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/.gitignore",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/cmake/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/include/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/CMakeLists.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-aarch64.c",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-aarch64.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-alloc.c",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-backend-impl.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-backend.c",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-blas.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-cann/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-cann.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-common.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-cpu-impl.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-cuda/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-cuda.cu",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-impl.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-kompute.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-metal.m",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-metal.metal",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-quants.c",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-quants.h",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-rocm",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-rocm.cu",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-rpc.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-sycl/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-sycl.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml-vulkan.cpp",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/ggml.c",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/kompute-shaders/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/llamafile/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/vulkan-shaders/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/grammars/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/include/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/media/matmul.svg",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/.editorconfig",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-bert-bge.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-bert-bge.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-chameleon.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-chameleon.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-command-r.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-command-r.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-coder.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-coder.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-llm.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-deepseek-llm.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-falcon.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-falcon.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-gpt-2.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-gpt-2.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-bpe.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-bpe.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-spm.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-llama-spm.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-mpt.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-mpt.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-phi-3.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-phi-3.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-qwen2.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-qwen2.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-refact.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-refact.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-starcoder.gguf.inp",
+        "gpt4all-backend/deps/llama.cpp-mainline/models/ggml-vocab-starcoder.gguf.out",
+        "gpt4all-backend/deps/llama.cpp-mainline/mypy.ini",
+        "gpt4all-backend/deps/llama.cpp-mainline/pocs/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/poetry.lock",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/pyproject.toml",
+        "gpt4all-backend/deps/llama.cpp-mainline/pyrightconfig.json",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/scripts/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/spm-headers/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/src/**",
+        "gpt4all-backend/deps/llama.cpp-mainline/tests/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2024 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2024 The ggml authors, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-backend/deps/llama.cpp-mainline."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-backend/deps/llama.cpp-mainline/gguf-py/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-backend/deps/llama.cpp-mainline/gguf-py."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-bindings/python/.gitignore",
+        "gpt4all-bindings/python/.isort.cfg",
+        "gpt4all-bindings/python/CHANGELOG.md",
+        "gpt4all-bindings/python/LICENSE.txt",
+        "gpt4all-bindings/python/MANIFEST.in",
+        "gpt4all-bindings/python/README.md",
+        "gpt4all-bindings/python/docs/assets/ubuntu.svg",
+        "gpt4all-bindings/python/docs/css/**",
+        "gpt4all-bindings/python/docs/gpt4all_api_server/**",
+        "gpt4all-bindings/python/docs/gpt4all_desktop/**",
+        "gpt4all-bindings/python/docs/gpt4all_help/**",
+        "gpt4all-bindings/python/docs/gpt4all_python/**",
+        "gpt4all-bindings/python/docs/index.md",
+        "gpt4all-bindings/python/docs/old/**",
+        "gpt4all-bindings/python/gpt4all/**",
+        "gpt4all-bindings/python/makefile",
+        "gpt4all-bindings/python/mkdocs.yml",
+        "gpt4all-bindings/python/setup.py"
+      ],
+      "text": "Copyright (c) 2023 Nomic, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2023 Nomic, Inc., MIT license (LICENSE.txt), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-bindings/python."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/DuckX/.clang-format",
+        "gpt4all-chat/deps/DuckX/.github/**",
+        "gpt4all-chat/deps/DuckX/.gitignore",
+        "gpt4all-chat/deps/DuckX/.travis.yml",
+        "gpt4all-chat/deps/DuckX/CMakeLists.txt",
+        "gpt4all-chat/deps/DuckX/CONTRIBUTING.md",
+        "gpt4all-chat/deps/DuckX/LICENSE",
+        "gpt4all-chat/deps/DuckX/README.md",
+        "gpt4all-chat/deps/DuckX/docs/Makefile",
+        "gpt4all-chat/deps/DuckX/docs/conf.py",
+        "gpt4all-chat/deps/DuckX/docs/index.rst",
+        "gpt4all-chat/deps/DuckX/include/**",
+        "gpt4all-chat/deps/DuckX/samples/sample1.cpp",
+        "gpt4all-chat/deps/DuckX/samples/sample2.cpp",
+        "gpt4all-chat/deps/DuckX/src/**",
+        "gpt4all-chat/deps/DuckX/test/CMakeLists.txt",
+        "gpt4all-chat/deps/DuckX/test/basic_tests.cpp",
+        "gpt4all-chat/deps/DuckX/test/doctest.h",
+        "gpt4all-chat/deps/DuckX/test/iterator_tests.cpp"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 AMIR\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 AMIR, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/DuckX."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/DuckX/docs/_themes/**"
+      ],
+      "text": "Copyright (c) 2011 Bay Citizen & Texas Tribune\n\nOriginal ReadTheDocs.org code\nCopyright (c) 2010 Charles Leifer, Eric Holscher, Bobby Grace\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2011 Bay Citizen & Texas Tribune; Copyright (c) 2010 Charles Leifer, Eric Holscher, Bobby Grace, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/DuckX/docs/_themes/armstrong."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/QXlsx/.clang-format",
+        "gpt4all-chat/deps/QXlsx/.github/**",
+        "gpt4all-chat/deps/QXlsx/.gitignore",
+        "gpt4all-chat/deps/QXlsx/.licrc",
+        "gpt4all-chat/deps/QXlsx/.pre-commit-config.yaml",
+        "gpt4all-chat/deps/QXlsx/.travis.yml",
+        "gpt4all-chat/deps/QXlsx/DateTime/**",
+        "gpt4all-chat/deps/QXlsx/Example.md",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/DynArray2D.h",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/HelloAndroid.pro",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/XlsxTableModel.cpp",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/XlsxTableModel.h",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/main.cpp",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/main.qml",
+        "gpt4all-chat/deps/QXlsx/HelloAndroid/qml.qrc",
+        "gpt4all-chat/deps/QXlsx/HelloWorld/**",
+        "gpt4all-chat/deps/QXlsx/HowToSetProject-cmake.ko.md",
+        "gpt4all-chat/deps/QXlsx/HowToSetProject-cmake.md",
+        "gpt4all-chat/deps/QXlsx/HowToSetProject.ko.md",
+        "gpt4all-chat/deps/QXlsx/HowToSetProject.md",
+        "gpt4all-chat/deps/QXlsx/IssueTest/IssueTest.pro",
+        "gpt4all-chat/deps/QXlsx/IssueTest/WriteSharedFormula.py",
+        "gpt4all-chat/deps/QXlsx/IssueTest/main.cpp",
+        "gpt4all-chat/deps/QXlsx/IssueTest/run.cmd",
+        "gpt4all-chat/deps/QXlsx/IssueTest/test.cpp",
+        "gpt4all-chat/deps/QXlsx/IssueTest/test.qrc",
+        "gpt4all-chat/deps/QXlsx/LICENSE",
+        "gpt4all-chat/deps/QXlsx/QXlsx/**",
+        "gpt4all-chat/deps/QXlsx/README.RU.md",
+        "gpt4all-chat/deps/QXlsx/README.ko.md",
+        "gpt4all-chat/deps/QXlsx/README.md",
+        "gpt4all-chat/deps/QXlsx/ReadColor/ReadColor.pro",
+        "gpt4all-chat/deps/QXlsx/ReadColor/color.qrc",
+        "gpt4all-chat/deps/QXlsx/ReadColor/main.cpp",
+        "gpt4all-chat/deps/QXlsx/ShowConsole/**",
+        "gpt4all-chat/deps/QXlsx/TestEnv.md",
+        "gpt4all-chat/deps/QXlsx/TestExcel/**",
+        "gpt4all-chat/deps/QXlsx/ToTest.md",
+        "gpt4all-chat/deps/QXlsx/ToUpgrade.md",
+        "gpt4all-chat/deps/QXlsx/Vision.md",
+        "gpt4all-chat/deps/QXlsx/WebServer/WebServer.pro",
+        "gpt4all-chat/deps/QXlsx/WebServer/context.hpp",
+        "gpt4all-chat/deps/QXlsx/WebServer/main.cpp",
+        "gpt4all-chat/deps/QXlsx/WebServer/recurse.hpp",
+        "gpt4all-chat/deps/QXlsx/WebServer/request.hpp",
+        "gpt4all-chat/deps/QXlsx/WebServer/response.hpp",
+        "gpt4all-chat/deps/QXlsx/WebServer/ws.qrc",
+        "gpt4all-chat/deps/QXlsx/WhatType/**",
+        "gpt4all-chat/deps/QXlsx/_config.yml",
+        "gpt4all-chat/deps/QXlsx/appveyor.yml",
+        "gpt4all-chat/deps/QXlsx/csv/csv.pro",
+        "gpt4all-chat/deps/QXlsx/csv/main.cpp",
+        "gpt4all-chat/deps/QXlsx/csv/test.qrc",
+        "gpt4all-chat/deps/QXlsx/markdown.data/test-env.md"
+      ],
+      "text": "\nThe MIT License\n\nCopyright 2017-, https://github.com/j2doll/QXlsx\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2017-, https://github.com/j2doll/QXlsx, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/QXlsx."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/json/.cirrus.yml",
+        "gpt4all-chat/deps/json/.clang-tidy",
+        "gpt4all-chat/deps/json/.github/**",
+        "gpt4all-chat/deps/json/.gitignore",
+        "gpt4all-chat/deps/json/.reuse/**",
+        "gpt4all-chat/deps/json/BUILD.bazel",
+        "gpt4all-chat/deps/json/CITATION.cff",
+        "gpt4all-chat/deps/json/CMakeLists.txt",
+        "gpt4all-chat/deps/json/ChangeLog.md",
+        "gpt4all-chat/deps/json/FILES.md",
+        "gpt4all-chat/deps/json/LICENSE.MIT",
+        "gpt4all-chat/deps/json/LICENSES/**",
+        "gpt4all-chat/deps/json/MODULE.bazel",
+        "gpt4all-chat/deps/json/Makefile",
+        "gpt4all-chat/deps/json/Package.swift",
+        "gpt4all-chat/deps/json/README.md",
+        "gpt4all-chat/deps/json/cmake/**",
+        "gpt4all-chat/deps/json/docs/Makefile",
+        "gpt4all-chat/deps/json/docs/README.md",
+        "gpt4all-chat/deps/json/docs/docset/Info.plist",
+        "gpt4all-chat/deps/json/docs/docset/Makefile",
+        "gpt4all-chat/deps/json/docs/docset/README.md",
+        "gpt4all-chat/deps/json/docs/docset/docSet.sql",
+        "gpt4all-chat/deps/json/docs/docset/docset.json",
+        "gpt4all-chat/deps/json/docs/mkdocs/Makefile",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/api/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/community/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/css/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/examples/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/features/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/bazel.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/conan.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/conda.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/homebrew.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/macports.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/meson.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/nuget.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/spack.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/swift.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/package_managers/xmake.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/range-begin-end.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/images/range-rbegin-rend.svg",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/index.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/bazel/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/cget/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/cmake.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/conan/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/conda/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/cpm/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/example.cpp",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/homebrew/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/hunter/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/index.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/macports/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/meson/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/migration_guide.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/package_managers.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/pkg-config.md",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/spack/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/vcpkg/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/xmake/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/includes/**",
+        "gpt4all-chat/deps/json/docs/mkdocs/mkdocs.yml",
+        "gpt4all-chat/deps/json/docs/mkdocs/requirements.txt",
+        "gpt4all-chat/deps/json/docs/mkdocs/scripts/**",
+        "gpt4all-chat/deps/json/include/nlohmann/adl_serializer.hpp",
+        "gpt4all-chat/deps/json/include/nlohmann/byte_container_with_subtype.hpp",
+        "gpt4all-chat/deps/json/include/nlohmann/detail/**",
+        "gpt4all-chat/deps/json/include/nlohmann/json.hpp",
+        "gpt4all-chat/deps/json/include/nlohmann/json_fwd.hpp",
+        "gpt4all-chat/deps/json/include/nlohmann/ordered_map.hpp",
+        "gpt4all-chat/deps/json/meson.build",
+        "gpt4all-chat/deps/json/nlohmann_json.natvis",
+        "gpt4all-chat/deps/json/single_include/**",
+        "gpt4all-chat/deps/json/tests/CMakeLists.txt",
+        "gpt4all-chat/deps/json/tests/Makefile",
+        "gpt4all-chat/deps/json/tests/abi/**",
+        "gpt4all-chat/deps/json/tests/benchmarks/**",
+        "gpt4all-chat/deps/json/tests/cmake_add_subdirectory/**",
+        "gpt4all-chat/deps/json/tests/cmake_fetch_content/**",
+        "gpt4all-chat/deps/json/tests/cmake_fetch_content2/**",
+        "gpt4all-chat/deps/json/tests/cmake_import/**",
+        "gpt4all-chat/deps/json/tests/cmake_import_minver/**",
+        "gpt4all-chat/deps/json/tests/cmake_target_include_directories/**",
+        "gpt4all-chat/deps/json/tests/cuda_example/**",
+        "gpt4all-chat/deps/json/tests/fuzzing.md",
+        "gpt4all-chat/deps/json/tests/reports/2016-08-29-fuzz/index.html",
+        "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/README.md",
+        "gpt4all-chat/deps/json/tests/reports/2016-09-09-nativejson_benchmark/conformance_Nlohmann (C++11).md",
+        "gpt4all-chat/deps/json/tests/reports/2016-10-02-fuzz/index.html",
+        "gpt4all-chat/deps/json/tests/src/**",
+        "gpt4all-chat/deps/json/tools/amalgamate/**",
+        "gpt4all-chat/deps/json/tools/astyle/**",
+        "gpt4all-chat/deps/json/tools/gdb_pretty_printer/**",
+        "gpt4all-chat/deps/json/tools/generate_natvis/**",
+        "gpt4all-chat/deps/json/tools/macro_builder/**",
+        "gpt4all-chat/deps/json/tools/serve_header/README.md",
+        "gpt4all-chat/deps/json/tools/serve_header/requirements.txt",
+        "gpt4all-chat/deps/json/tools/serve_header/serve_header.py",
+        "gpt4all-chat/deps/json/tools/serve_header/serve_header.yml.example",
+        "gpt4all-chat/deps/json/wsjcpp.yml"
+      ],
+      "text": "MIT License \n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE.MIT), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/json."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/minja/**"
+      ],
+      "text": "Copyright 2024 Google LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright 2024 Google LLC, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/minja."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "gpt4all-chat/deps/usearch/.clang-format",
+        "gpt4all-chat/deps/usearch/.clang-tidy",
+        "gpt4all-chat/deps/usearch/.cmake-format.py",
+        "gpt4all-chat/deps/usearch/.dockerignore",
+        "gpt4all-chat/deps/usearch/.gitattributes",
+        "gpt4all-chat/deps/usearch/.github/**",
+        "gpt4all-chat/deps/usearch/.gitignore",
+        "gpt4all-chat/deps/usearch/.gitmodules",
+        "gpt4all-chat/deps/usearch/.npmignore",
+        "gpt4all-chat/deps/usearch/.releaserc",
+        "gpt4all-chat/deps/usearch/.swift-format",
+        "gpt4all-chat/deps/usearch/.vscode/**",
+        "gpt4all-chat/deps/usearch/BENCHMARKS.md",
+        "gpt4all-chat/deps/usearch/CITATION.cff",
+        "gpt4all-chat/deps/usearch/CMakeLists.txt",
+        "gpt4all-chat/deps/usearch/CODE_OF_CONDUCT.md",
+        "gpt4all-chat/deps/usearch/CONTRIBUTING.md",
+        "gpt4all-chat/deps/usearch/Cargo.lock",
+        "gpt4all-chat/deps/usearch/Cargo.toml",
+        "gpt4all-chat/deps/usearch/Dockerfile",
+        "gpt4all-chat/deps/usearch/LICENSE",
+        "gpt4all-chat/deps/usearch/Package.swift",
+        "gpt4all-chat/deps/usearch/README.md",
+        "gpt4all-chat/deps/usearch/VERSION",
+        "gpt4all-chat/deps/usearch/binding.gyp",
+        "gpt4all-chat/deps/usearch/build.gradle",
+        "gpt4all-chat/deps/usearch/build.rs",
+        "gpt4all-chat/deps/usearch/c/**",
+        "gpt4all-chat/deps/usearch/cmake/**",
+        "gpt4all-chat/deps/usearch/conanfile.py",
+        "gpt4all-chat/deps/usearch/cpp/**",
+        "gpt4all-chat/deps/usearch/csharp/**",
+        "gpt4all-chat/deps/usearch/docs/**",
+        "gpt4all-chat/deps/usearch/golang/**",
+        "gpt4all-chat/deps/usearch/include/**",
+        "gpt4all-chat/deps/usearch/java/**",
+        "gpt4all-chat/deps/usearch/javascript/**",
+        "gpt4all-chat/deps/usearch/objc/**",
+        "gpt4all-chat/deps/usearch/package-ci.json",
+        "gpt4all-chat/deps/usearch/package-lock.json",
+        "gpt4all-chat/deps/usearch/package.json",
+        "gpt4all-chat/deps/usearch/pyproject.toml",
+        "gpt4all-chat/deps/usearch/python/**",
+        "gpt4all-chat/deps/usearch/rust/**",
+        "gpt4all-chat/deps/usearch/setup.py",
+        "gpt4all-chat/deps/usearch/sqlite/**",
+        "gpt4all-chat/deps/usearch/swift/**",
+        "gpt4all-chat/deps/usearch/wasm/**",
+        "gpt4all-chat/deps/usearch/wasmer.toml",
+        "gpt4all-chat/deps/usearch/winlibinstaller.bat",
+        "gpt4all-chat/deps/usearch/wolfram/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Ash Vardanian (https://ashvardanian.com/), Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gpt4all-chat/deps/usearch/fp16/.gitignore",
+        "gpt4all-chat/deps/usearch/fp16/CMakeLists.txt",
+        "gpt4all-chat/deps/usearch/fp16/LICENSE",
+        "gpt4all-chat/deps/usearch/fp16/README.md",
+        "gpt4all-chat/deps/usearch/fp16/bench/**",
+        "gpt4all-chat/deps/usearch/fp16/cmake/**",
+        "gpt4all-chat/deps/usearch/fp16/configure.py",
+        "gpt4all-chat/deps/usearch/fp16/confu.yaml",
+        "gpt4all-chat/deps/usearch/fp16/include/**",
+        "gpt4all-chat/deps/usearch/fp16/jni/**",
+        "gpt4all-chat/deps/usearch/fp16/test/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 Facebook Inc.\nCopyright (c) 2017 Georgia Institute of Technology\nCopyright 2019 Google LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Facebook Inc.; Copyright (c) 2017 Georgia Institute of Technology; Copyright 2019 Google LLC, MIT license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/fp16."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "gpt4all-chat/deps/usearch/simsimd/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Ash Vardanian, Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/simsimd."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "gpt4all-chat/deps/usearch/stringzilla/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Ash Vardanian, Apache-2.0 license (LICENSE), https://github.com/nomic-ai/gpt4all/tree/b666d16db5aeab8b91aaf7963adcee9c643734d7/gpt4all-chat/deps/usearch/stringzilla."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cxx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.css_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.feature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gbnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gyp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.last"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.link"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "gpt4all-backend/deps/llama.cpp-mainline/flake.lock",
+        "gpt4all-backend/deps/llama.cpp-mainline/poetry.lock",
+        "gpt4all-bindings/typescript/yarn.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.modulemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.orig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pri"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "LICENSE.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/cvector-generator/completions.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/cvector-generator/negative.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/cvector-generator/positive.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/jeopardy/questions.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/llava/requirements.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/bench/requirements.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/examples/server/tests/requirements.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/LLM-questions.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/alpaca.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/assistant.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat-with-baichuan.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat-with-bob.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat-with-qwen.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat-with-vicuna-v0.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat-with-vicuna-v1.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/chat.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/dan-modified.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/dan.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/mnemonics.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/parallel-questions.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/prompts/reason-act.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-all.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-compare-llama-bench.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-convert_hf_to_gguf.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-convert_hf_to_gguf_update.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-convert_legacy_llama.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-convert_llama_ggml_to_gguf.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-convert_lora_to_gguf.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-pydantic.txt",
+        "gpt4all-backend/deps/llama.cpp-mainline/requirements/requirements-test-tokenizer-random.txt",
+        "gpt4all-bindings/python/LICENSE.txt",
+        "gpt4all-chat/deps/json/LICENSES/Apache-2.0.txt",
+        "gpt4all-chat/deps/json/LICENSES/BSD-3-Clause.txt",
+        "gpt4all-chat/deps/json/LICENSES/GPL-3.0-only.txt",
+        "gpt4all-chat/deps/json/LICENSES/MIT.txt",
+        "gpt4all-chat/deps/json/cmake/requirements/requirements-cppcheck.txt",
+        "gpt4all-chat/deps/json/cmake/requirements/requirements-cpplint.txt",
+        "gpt4all-chat/deps/json/cmake/requirements/requirements-reuse.txt",
+        "gpt4all-chat/deps/json/docs/mkdocs/docs/integration/conan/Conanfile.txt",
+        "gpt4all-chat/deps/json/docs/mkdocs/requirements.txt",
+        "gpt4all-chat/deps/json/tools/astyle/requirements.txt",
+        "gpt4all-chat/deps/json/tools/generate_natvis/requirements.txt",
+        "gpt4all-chat/deps/json/tools/serve_header/requirements.txt",
+        "gpt4all-chat/deps/minja/requirements.txt",
+        "gpt4all-chat/deps/usearch/docs/requirements.txt",
+        "gpt4all-training/requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.astylerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ecrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.licrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.releaserc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.swift-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cloud-v-pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dep5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "gpt4all-backend/deps/llama.cpp-mainline": "https://github.com/nomic-ai/llama.cpp",
+    "gpt4all-backend/deps/llama.cpp-mainline/ggml/src/kompute": "https://github.com/nomic-ai/kompute",
+    "gpt4all-chat/deps/DuckX": "https://github.com/nomic-ai/DuckX",
+    "gpt4all-chat/deps/QXlsx": "https://github.com/nomic-ai/QXlsx",
+    "gpt4all-chat/deps/SingleApplication": "https://github.com/nomic-ai/SingleApplication",
+    "gpt4all-chat/deps/fmt": "https://github.com/fmtlib/fmt",
+    "gpt4all-chat/deps/json": "https://github.com/nlohmann/json",
+    "gpt4all-chat/deps/minja": "https://github.com/nomic-ai/minja",
+    "gpt4all-chat/deps/usearch": "https://github.com/nomic-ai/usearch",
+    "gpt4all-chat/deps/usearch/fp16": "https://github.com/maratyszcza/fp16",
+    "gpt4all-chat/deps/usearch/simsimd": "https://github.com/ashvardanian/simsimd",
+    "gpt4all-chat/deps/usearch/stringzilla": "https://github.com/ashvardanian/stringzilla"
+  }
+}

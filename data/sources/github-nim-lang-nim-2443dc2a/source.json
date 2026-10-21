@@ -1,0 +1,872 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nim-lang/Nim",
+  "revision": "2a34e3109a8c8085daa5c2b451b203f6c70b26ea",
+  "checksum": "sha256:733dd769bc7b05aabd37f5c0044810bcca3f7e91e1e4b59c0345c29d55756c79",
+  "extract": {
+    "exclude": [
+      "icons/koch-amd64-windows-vcc.res",
+      "icons/koch-i386-windows-vcc.res",
+      "icons/koch.ico",
+      "icons/koch.res",
+      "icons/koch_icon.o",
+      "icons/nim-amd64-windows-vcc.res",
+      "icons/nim-i386-windows-vcc.res",
+      "icons/nim.ico",
+      "icons/nim.res",
+      "icons/nim_icon.o",
+      "tests/metatype/deps/**",
+      "tests/stdlib/tjsontestsuite.nim",
+      "tools/niminst/nim-file.ico",
+      "tools/niminst/setup.ico",
+      "tools/niminst/uninstall.ico"
+    ]
+  },
+  "history": {
+    "since": "1c9b4e5d33ff6bca8f345951b72018171d47e251"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "=====================================================\nNim -- a Compiler for Nim. https://nim-lang.org/\n\nCopyright (C) 2006-2026 Andreas Rumpf. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n[ MIT license: https://www.opensource.org/licenses/mit-license.php ]\n\n\nCopyright (c) 2010-2014, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2013, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/nim-lang/Nim: Copyright (C) 2006-2026 Andreas Rumpf. All rights reserved., MIT license (copying.txt), https://github.com/nim-lang/Nim; Copyright (c) 2010-2014, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2013, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-2-Clause license (LICENSE.txt), https://github.com/nim-lang/Nim/tree/2a34e3109a8c8085daa5c2b451b203f6c70b26ea/lib/wrappers/linenoise."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "bin/**",
+        "build/**",
+        "build_all.bat",
+        "build_all.sh",
+        "changelog.md",
+        "changelogs/**",
+        "ci/**",
+        "compiler/**",
+        "config/**",
+        "copying.txt",
+        "doc/**",
+        "drnim/**",
+        "icons/koch.rc",
+        "icons/nim.rc",
+        "koch.nim",
+        "koch.nim.cfg",
+        "lib/arch/**",
+        "lib/core/**",
+        "lib/cycle.h",
+        "lib/deprecated/**",
+        "lib/deps.txt",
+        "lib/experimental/**",
+        "lib/genode/**",
+        "lib/genode_cpp/**",
+        "lib/impure/**",
+        "lib/js/**",
+        "lib/nimbase.h",
+        "lib/nimhcr.nim",
+        "lib/nimhcr.nim.cfg",
+        "lib/nimrtl.nim",
+        "lib/nimrtl.nim.cfg",
+        "lib/packages/**",
+        "lib/posix/**",
+        "lib/pure/**",
+        "lib/std/**",
+        "lib/stdlib.nimble",
+        "lib/system/**",
+        "lib/system.nim",
+        "lib/system_overview.rst",
+        "lib/windows/**",
+        "lib/wrappers/openssl.nim",
+        "lib/wrappers/pcre.nim",
+        "lib/wrappers/tinyc.nim",
+        "nim.nimble",
+        "nimdoc/**",
+        "nimpretty/**",
+        "nimsuggest/**",
+        "readme.md",
+        "security.md",
+        "testament/**",
+        "tests/alias/**",
+        "tests/align/**",
+        "tests/alloc/**",
+        "tests/arc/**",
+        "tests/array/**",
+        "tests/assert/**",
+        "tests/assign/**",
+        "tests/ast_pattern_matching.nim",
+        "tests/astoverload/**",
+        "tests/astspec/**",
+        "tests/async/**",
+        "tests/avr/**",
+        "tests/benchmarks/**",
+        "tests/c/**",
+        "tests/casestmt/**",
+        "tests/cast/**",
+        "tests/ccg/**",
+        "tests/ccgbugs/**",
+        "tests/ccgbugs2/**",
+        "tests/closure/**",
+        "tests/codegen/**",
+        "tests/collections/**",
+        "tests/compileoption/**",
+        "tests/compiler/**",
+        "tests/compilerapi/**",
+        "tests/compiles/**",
+        "tests/concepts/**",
+        "tests/config.nims",
+        "tests/constructors/**",
+        "tests/consts/**",
+        "tests/controlflow/**",
+        "tests/converter/**",
+        "tests/coroutines/**",
+        "tests/cpp/**",
+        "tests/defer/**",
+        "tests/destructor/**",
+        "tests/dir with space/**",
+        "tests/discard/**",
+        "tests/distinct/**",
+        "tests/dll/**",
+        "tests/dummy.txt",
+        "tests/effects/**",
+        "tests/enum/**",
+        "tests/errmsgs/**",
+        "tests/exception/**",
+        "tests/exprs/**",
+        "tests/float/**",
+        "tests/fragmentation/**",
+        "tests/gc/**",
+        "tests/generic/**",
+        "tests/generics/**",
+        "tests/global/**",
+        "tests/ic/**",
+        "tests/import/**",
+        "tests/import_in_config/**",
+        "tests/importalls/**",
+        "tests/init/**",
+        "tests/int/**",
+        "tests/isolate/**",
+        "tests/iter/**",
+        "tests/js/**",
+        "tests/js.html",
+        "tests/js.nim",
+        "tests/lent/**",
+        "tests/let/**",
+        "tests/lexer/**",
+        "tests/lookups/**",
+        "tests/m14634.nim",
+        "tests/macros/**",
+        "tests/manyloc/**",
+        "tests/metatype/tbindtypedesc.nim",
+        "tests/metatype/tcisaorb.nim",
+        "tests/metatype/tcompositetypeclasses.nim",
+        "tests/metatype/tcps.nim",
+        "tests/metatype/tmatrix1.nim",
+        "tests/metatype/tmatrix2.nim",
+        "tests/metatype/tmatrix3.nim",
+        "tests/metatype/tmatrix4.nim",
+        "tests/metatype/tmeta_typeclasses.nim",
+        "tests/metatype/tmetatype_issues.nim",
+        "tests/metatype/tmetatype_various.nim",
+        "tests/metatype/tmetatypematrix.nim",
+        "tests/metatype/tsemistatic.nim",
+        "tests/metatype/tshacontext.nim",
+        "tests/metatype/tstatic_generic_typeclass.nim",
+        "tests/metatype/tstaticparammacro.nim",
+        "tests/metatype/tstaticparams.nim",
+        "tests/metatype/tstaticvector.nim",
+        "tests/metatype/ttensor.nim",
+        "tests/metatype/ttypedesc1.nim",
+        "tests/metatype/ttypedesc2.nim",
+        "tests/metatype/ttypedesc3.nim",
+        "tests/metatype/ttypedescnotnimnode.nim",
+        "tests/metatype/ttypeselectors.nim",
+        "tests/metatype/ttypetraits.nim",
+        "tests/metatype/tunresolved_return_type.nim",
+        "tests/metatype/tvoid_must_not_match.nim",
+        "tests/metatype/twildtypedesc.nim",
+        "tests/metatype/twrong_same_type.nim",
+        "tests/metatype/tymatrix.nim",
+        "tests/metatype/typeclassinference.nim",
+        "tests/metatype/typedesc_as_value.nim",
+        "tests/metatype/utypeclasses.nim",
+        "tests/method/**",
+        "tests/misc/**",
+        "tests/mmaptest.nim",
+        "tests/modules/**",
+        "tests/msgs/**",
+        "tests/navigator/**",
+        "tests/newconfig/**",
+        "tests/nimble/**",
+        "tests/nimdoc/**",
+        "tests/niminaction/**",
+        "tests/notnil/**",
+        "tests/objects/**",
+        "tests/objvariant/**",
+        "tests/openarray/**",
+        "tests/options/**",
+        "tests/osproc/**",
+        "tests/overflow/**",
+        "tests/overload/**",
+        "tests/package/**",
+        "tests/package_level_objects/**",
+        "tests/parallel/**",
+        "tests/parser/**",
+        "tests/pragmas/**",
+        "tests/proc/**",
+        "tests/range/**",
+        "tests/readme.md",
+        "tests/realtimeGC/**",
+        "tests/rectest.nim",
+        "tests/refc/**",
+        "tests/sandwich/**",
+        "tests/set/**",
+        "tests/sets/**",
+        "tests/showoff/**",
+        "tests/specialops/**",
+        "tests/statictypes/**",
+        "tests/stckovfl.nim",
+        "tests/stdlib/concurrency/**",
+        "tests/stdlib/config.nims",
+        "tests/stdlib/genericstrformat.nim",
+        "tests/stdlib/mgenast.nim",
+        "tests/stdlib/mimportutils.nim",
+        "tests/stdlib/mintsets.nim",
+        "tests/stdlib/mjsonexternproc.nim",
+        "tests/stdlib/mjsonutilssandwich.nim",
+        "tests/stdlib/mstackframes.nim",
+        "tests/stdlib/mstrscans_undecl_scanf.nim",
+        "tests/stdlib/nre/**",
+        "tests/stdlib/osproctest.nim",
+        "tests/stdlib/somesql.sql",
+        "tests/stdlib/t10231.nim",
+        "tests/stdlib/t14139.nim",
+        "tests/stdlib/t15663.nim",
+        "tests/stdlib/t19304.nim",
+        "tests/stdlib/t20023.nim",
+        "tests/stdlib/t21251.nim",
+        "tests/stdlib/t21406.nim",
+        "tests/stdlib/t21564.nim",
+        "tests/stdlib/t26134.nim",
+        "tests/stdlib/t7686.nim",
+        "tests/stdlib/t8925.nim",
+        "tests/stdlib/t9566.nim",
+        "tests/stdlib/t9754.nim",
+        "tests/stdlib/talgorithm.nim",
+        "tests/stdlib/talpineabi.nim",
+        "tests/stdlib/tarithmetics.nim",
+        "tests/stdlib/tasynchttpserver.nim",
+        "tests/stdlib/tasynchttpserver_maxbody.nim",
+        "tests/stdlib/tasynchttpserver_readtimeout.nim",
+        "tests/stdlib/tasynchttpserver_transferencoding.nim",
+        "tests/stdlib/tbase64.nim",
+        "tests/stdlib/tbitops.nim",
+        "tests/stdlib/tbitops.nim.cfg",
+        "tests/stdlib/tbitops_utils.nim",
+        "tests/stdlib/tcasts.nim",
+        "tests/stdlib/tcgi.nim",
+        "tests/stdlib/tclosures.nim",
+        "tests/stdlib/tcmdline.nim",
+        "tests/stdlib/tcomplex.nim",
+        "tests/stdlib/tcookies.nim",
+        "tests/stdlib/tcritbits.nim",
+        "tests/stdlib/tcstring.nim",
+        "tests/stdlib/tcstrutils.nim",
+        "tests/stdlib/tdb.nim",
+        "tests/stdlib/tdb.nims",
+        "tests/stdlib/tdb_mysql.nim",
+        "tests/stdlib/tdecls.nim",
+        "tests/stdlib/tdecode_helpers.nim",
+        "tests/stdlib/tdeques.nim",
+        "tests/stdlib/tdiff.nim",
+        "tests/stdlib/tdistros_detect.nim",
+        "tests/stdlib/tdochelpers.nim",
+        "tests/stdlib/teditdistance.nim",
+        "tests/stdlib/tencodings.nim",
+        "tests/stdlib/tenumerate.nim",
+        "tests/stdlib/tenumutils.nim",
+        "tests/stdlib/tenvvars.nim",
+        "tests/stdlib/texitprocs.nim",
+        "tests/stdlib/tfdleak.nim",
+        "tests/stdlib/tfdleak_multiple.nim",
+        "tests/stdlib/tfenv.nim",
+        "tests/stdlib/tfilesanddirs.nim",
+        "tests/stdlib/tfrexp1.nim",
+        "tests/stdlib/tgenast.nim",
+        "tests/stdlib/tgetaddrinfo.nim",
+        "tests/stdlib/tgetfileinfo.nim",
+        "tests/stdlib/tgetprotobyname.nim",
+        "tests/stdlib/tglobs.nim",
+        "tests/stdlib/thashes.nim",
+        "tests/stdlib/theapqueue.nim",
+        "tests/stdlib/thighlite.nim",
+        "tests/stdlib/thtmlparser.nim",
+        "tests/stdlib/thttpclient.nim",
+        "tests/stdlib/thttpclient_ssl.nim",
+        "tests/stdlib/thttpclient_ssl_cert.pem",
+        "tests/stdlib/thttpclient_ssl_key.pem",
+        "tests/stdlib/thttpclient_standalone.nim",
+        "tests/stdlib/thttpcore.nim",
+        "tests/stdlib/timportutils.nim",
+        "tests/stdlib/tintsets.nim",
+        "tests/stdlib/tio.nim",
+        "tests/stdlib/tisolation.nim",
+        "tests/stdlib/tjsbigints.nim",
+        "tests/stdlib/tjson.nim",
+        "tests/stdlib/tjsonexternproc.nim",
+        "tests/stdlib/tjsonmacro.nim",
+        "tests/stdlib/tjsonmacro_reject.nim",
+        "tests/stdlib/tjsonutils.nim",
+        "tests/stdlib/tjsonutilssandwich.nim",
+        "tests/stdlib/tlists.nim",
+        "tests/stdlib/tlocks.nim",
+        "tests/stdlib/tlwip.nim",
+        "tests/stdlib/tmacros.nim",
+        "tests/stdlib/tmarshal.nim",
+        "tests/stdlib/tmarshalsegfault.nim",
+        "tests/stdlib/tmath.nim",
+        "tests/stdlib/tmemfiles1.nim",
+        "tests/stdlib/tmemfiles2.nim",
+        "tests/stdlib/tmemlines.nim",
+        "tests/stdlib/tmemlinesBuf.nim",
+        "tests/stdlib/tmemmapstreams.nim",
+        "tests/stdlib/tmemslices.nim",
+        "tests/stdlib/tmersenne.nim",
+        "tests/stdlib/tmget.nim",
+        "tests/stdlib/tmimetypes.nim",
+        "tests/stdlib/tmisc_issues.nim",
+        "tests/stdlib/tmitems.nim",
+        "tests/stdlib/tmonotimes.nim",
+        "tests/stdlib/tnativesockets.nim",
+        "tests/stdlib/tnet.nim",
+        "tests/stdlib/tnet_ll.nim",
+        "tests/stdlib/tnetbind.nim",
+        "tests/stdlib/tnetconnect.nim",
+        "tests/stdlib/tnetdial.nim",
+        "tests/stdlib/tnetretry.nim",
+        "tests/stdlib/tnetsend.nim",
+        "tests/stdlib/tnre.nim",
+        "tests/stdlib/tnre2.nim",
+        "tests/stdlib/tnre2.nims",
+        "tests/stdlib/tntpath.nim",
+        "tests/stdlib/tobjectdollar.nim",
+        "tests/stdlib/toids.nim",
+        "tests/stdlib/topenssl.nim",
+        "tests/stdlib/toptions.nim",
+        "tests/stdlib/tos.nim",
+        "tests/stdlib/tos_unc.nim",
+        "tests/stdlib/tosenv.nim",
+        "tests/stdlib/toserrors.nim",
+        "tests/stdlib/tosproc.nim",
+        "tests/stdlib/tosprocterminate.nim",
+        "tests/stdlib/tpackedsets.nim",
+        "tests/stdlib/tparsecfg.nim",
+        "tests/stdlib/tparsecsv.nim",
+        "tests/stdlib/tparseipv6.nim",
+        "tests/stdlib/tparsesql.nim",
+        "tests/stdlib/tparseuints.nim",
+        "tests/stdlib/tparseutils.nim",
+        "tests/stdlib/tparsopt.nim",
+        "tests/stdlib/tpathnorm.nim",
+        "tests/stdlib/tpaths.nim",
+        "tests/stdlib/tpegs.nim",
+        "tests/stdlib/tposix.nim",
+        "tests/stdlib/tposixscalars.nim",
+        "tests/stdlib/tprelude.nim",
+        "tests/stdlib/tpthreadattrs.nim",
+        "tests/stdlib/trandom.nim",
+        "tests/stdlib/trat_float.nim",
+        "tests/stdlib/trat_init.nim",
+        "tests/stdlib/trationals.nim",
+        "tests/stdlib/tre.nim",
+        "tests/stdlib/treadln.nim",
+        "tests/stdlib/tregex.nim",
+        "tests/stdlib/tregistry.nim",
+        "tests/stdlib/trepr.nim",
+        "tests/stdlib/trlocks.nim",
+        "tests/stdlib/tropes.nim",
+        "tests/stdlib/trst.nim",
+        "tests/stdlib/trstgen.nim",
+        "tests/stdlib/tsequtils.nim",
+        "tests/stdlib/tsetutils.nim",
+        "tests/stdlib/tsharedlist.nim",
+        "tests/stdlib/tsharedtable.nim",
+        "tests/stdlib/tsince.nim",
+        "tests/stdlib/tsocketstreams.nim",
+        "tests/stdlib/tsortcall.nim",
+        "tests/stdlib/tsqlitebindatas.nim",
+        "tests/stdlib/tsqlparser.nim",
+        "tests/stdlib/tssl.nim",
+        "tests/stdlib/tssl.nims",
+        "tests/stdlib/tstackframes.nim",
+        "tests/stdlib/tstaticos.nim",
+        "tests/stdlib/tstats.nim",
+        "tests/stdlib/tstdlib_issues.nim",
+        "tests/stdlib/tstdlib_various.nim",
+        "tests/stdlib/tstrbasics.nim",
+        "tests/stdlib/tstreams.nim",
+        "tests/stdlib/tstrformat.nim",
+        "tests/stdlib/tstrformatlineinfo.nim",
+        "tests/stdlib/tstrimpl.nim",
+        "tests/stdlib/tstring.nim",
+        "tests/stdlib/tstrmiscs.nim",
+        "tests/stdlib/tstrscans.nim",
+        "tests/stdlib/tstrscans_errs.nim",
+        "tests/stdlib/tstrscans_undecl_scanf.nim",
+        "tests/stdlib/tstrset.nim",
+        "tests/stdlib/tstrtabs.nim",
+        "tests/stdlib/tstrtabs.nims",
+        "tests/stdlib/tstrtabs2.nim",
+        "tests/stdlib/tstrutils.nim",
+        "tests/stdlib/tsugar.nim",
+        "tests/stdlib/tsums.nim",
+        "tests/stdlib/tsysrand.nim",
+        "tests/stdlib/tsystem.nim",
+        "tests/stdlib/ttables.nim",
+        "tests/stdlib/ttasks.nim",
+        "tests/stdlib/ttempfiles.nim",
+        "tests/stdlib/tterminal.nim",
+        "tests/stdlib/tterminal_12759.nim",
+        "tests/stdlib/tterminal_15874.nim",
+        "tests/stdlib/ttestutils.nim",
+        "tests/stdlib/tthreadpool.nim",
+        "tests/stdlib/ttimes.nim",
+        "tests/stdlib/ttypeinfo.nim",
+        "tests/stdlib/ttypeinfo.nims",
+        "tests/stdlib/ttypetraits.nim",
+        "tests/stdlib/tunicode.nim",
+        "tests/stdlib/tunidecode.nim",
+        "tests/stdlib/tunittest.nim",
+        "tests/stdlib/tunittest_error.nim",
+        "tests/stdlib/tunittestcheckonce.nim",
+        "tests/stdlib/tunittestexceptiontype.nim",
+        "tests/stdlib/tunittestpass.nim",
+        "tests/stdlib/tunittesttemplate.nim",
+        "tests/stdlib/tunixsocket.nim",
+        "tests/stdlib/turi.nim",
+        "tests/stdlib/tuserlocks.nim",
+        "tests/stdlib/tvarargs.nim",
+        "tests/stdlib/tvarints.nim",
+        "tests/stdlib/tvmutils.nim",
+        "tests/stdlib/tvolatile.nim",
+        "tests/stdlib/twchartoutf8.nim",
+        "tests/stdlib/twith.nim",
+        "tests/stdlib/twordwrap.nim",
+        "tests/stdlib/twrapnils.nim",
+        "tests/stdlib/twrongstattype.nim",
+        "tests/stdlib/txmltree.nim",
+        "tests/stdlib/tyield.nim",
+        "tests/stdlib/unixsockettest.nim",
+        "tests/stdlib/uselocks.nim",
+        "tests/stmt/**",
+        "tests/strictnotnil/**",
+        "tests/stylecheck/**",
+        "tests/sumtypes/**",
+        "tests/system/**",
+        "tests/template/**",
+        "tests/test_nimscript.nims",
+        "tests/testament/**",
+        "tests/testdata/**",
+        "tests/threads/**",
+        "tests/tools/**",
+        "tests/trmacros/**",
+        "tests/tuples/**",
+        "tests/typerel/**",
+        "tests/types/**",
+        "tests/untestable/**",
+        "tests/usingstmt/**",
+        "tests/valgrind/**",
+        "tests/varres/**",
+        "tests/varstmt/**",
+        "tests/views/**",
+        "tests/vm/**",
+        "tests/whenstmt/**",
+        "tests/xml/**",
+        "tests/yrc/**",
+        "tests_disabled/**",
+        "tools/UnicodeData.txt",
+        "tools/atlas/**",
+        "tools/bif2nif.nim",
+        "tools/ci_generate.nim",
+        "tools/ci_testresults.nim",
+        "tools/cmerge.nim",
+        "tools/compiler.gdb",
+        "tools/compiler.lldb",
+        "tools/debug/**",
+        "tools/deps.nim",
+        "tools/detect/**",
+        "tools/dochack/**",
+        "tools/downloader.nim",
+        "tools/enumgen.nim",
+        "tools/fakedeps.nim",
+        "tools/finish.nim",
+        "tools/grammar_nanny.nim",
+        "tools/heapdump2dot.nim",
+        "tools/heapdumprepl.nim",
+        "tools/icgrind/**",
+        "tools/kochdocs.nim",
+        "tools/nim.bash-completion",
+        "tools/nim.zsh-completion",
+        "tools/nimblepkglist.nim",
+        "tools/nimgrab.nim",
+        "tools/nimgrep.bash-completion",
+        "tools/nimgrep.nim",
+        "tools/nimgrind.supp",
+        "tools/niminst/EnvVarUpdate.nsh",
+        "tools/niminst/buildbat.nimf",
+        "tools/niminst/buildsh.nimf",
+        "tools/niminst/debcreation.nim",
+        "tools/niminst/deinstall.nimf",
+        "tools/niminst/inno.nimf",
+        "tools/niminst/install.nimf",
+        "tools/niminst/makefile.nimf",
+        "tools/niminst/niminst.nim",
+        "tools/niminst/nsis.nimf",
+        "tools/nimpretty.bash-completion",
+        "tools/nimsuggest.bash-completion",
+        "tools/officialpackages.nim",
+        "tools/restorecc.nim",
+        "tools/ssl_config_parser.nim",
+        "tools/ssl_config_parser.nims",
+        "tools/start.bat",
+        "tools/trimcc.nim",
+        "tools/unicode_parsedata.nim",
+        "tools/vccexe/**",
+        "tools/winrelease.nim"
+      ],
+      "text": "=====================================================\nNim -- a Compiler for Nim. https://nim-lang.org/\n\nCopyright (C) 2006-2026 Andreas Rumpf. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n[ MIT license: https://www.opensource.org/licenses/mit-license.php ]\n",
+      "attribution": "Copyright (C) 2006-2026 Andreas Rumpf. All rights reserved., MIT license (copying.txt), https://github.com/nim-lang/Nim."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "lib/wrappers/linenoise/**"
+      ],
+      "text": "Copyright (c) 2010-2014, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2013, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2010-2014, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2013, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-2-Clause license (LICENSE.txt), https://github.com/nim-lang/Nim/tree/2a34e3109a8c8085daa5c2b451b203f6c70b26ea/lib/wrappers/linenoise."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nim",
+      "paths": [
+        "**/*.nim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.babel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bash-completion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.customext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lldb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nimble"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nimble-link"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nimcfg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nimf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nims"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.old"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prompt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zsh-completion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nim-gdb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

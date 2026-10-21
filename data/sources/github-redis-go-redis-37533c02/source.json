@@ -1,0 +1,460 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/redis/go-redis",
+  "revision": "b57341e5a0e407cd8e557f3a27fd9629b97bc119",
+  "checksum": "sha256:fb484b18fd029d2bc973097dc6cfbc5cd5e5aa9ea01b2e964e589414ea11a91c",
+  "extract": {
+    "exclude": [
+      "example/otel/image/**"
+    ]
+  },
+  "history": {
+    "since": "4ef326c3abf62f64d37ecdfe6933f12fe5a41de2"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/redis/go-redis: Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis; Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/rediscensus; Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/rediscmd; Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisotel; Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisotel-native; Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisprometheus."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".claude/**",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".prettierrc.yml",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "RELEASE-NOTES.md",
+        "RELEASING.md",
+        "SECURITY.md",
+        "acl_commands.go",
+        "acl_commands_test.go",
+        "adapters.go",
+        "adaptive_delay_test.go",
+        "array_commands.go",
+        "array_commands_test.go",
+        "async_handoff_integration_test.go",
+        "auth/**",
+        "autopipeline.go",
+        "autopipeline_bench_README.md",
+        "autopipeline_bench_test.go",
+        "autopipeline_cluster_fd.go",
+        "autopipeline_fd_pipeline.go",
+        "autopipeline_fd_pipeline_test.go",
+        "autopipeline_fd_shards.go",
+        "autopipeline_fdqueue.go",
+        "autopipeline_fullduplex.go",
+        "autopipeline_fullduplex_test.go",
+        "autopipeline_internal_test.go",
+        "autopipeline_test.go",
+        "bench_test.go",
+        "bitmap_commands.go",
+        "bitmap_commands_test.go",
+        "bless_commands.go",
+        "bless_commands_test.go",
+        "bless_commands_unit_test.go",
+        "client_info_internal_test.go",
+        "cluster_commands.go",
+        "command.go",
+        "command_cluster_shards_test.go",
+        "command_desync_test.go",
+        "command_digest_test.go",
+        "command_entry_array_desync_test.go",
+        "command_entry_len_test.go",
+        "command_flat_reply_test.go",
+        "command_keypos_migrate_test.go",
+        "command_keypos_raw_test.go",
+        "command_keypos_test.go",
+        "command_nil_element_desync_test.go",
+        "command_policy_resolver.go",
+        "command_recorder_test.go",
+        "command_test.go",
+        "commands.go",
+        "commands_test.go",
+        "csc_applyfast_test.go",
+        "csc_cachekey_test.go",
+        "csc_coalesce_options_test.go",
+        "csc_commands.go",
+        "csc_e2e_test.go",
+        "csc_extractkeys_test.go",
+        "csc_integration.go",
+        "csc_inval_batch.go",
+        "csc_inval_batch_accounting_test.go",
+        "csc_inval_batch_test.go",
+        "csc_keygate_test.go",
+        "csc_keypos_negative_test.go",
+        "csc_keyspan_test.go",
+        "csc_miss_coalesce.go",
+        "csc_miss_coalesce_modes.go",
+        "csc_miss_coalesce_modes_test.go",
+        "csc_refresh_on_invalidate.go",
+        "csc_refresh_on_invalidate_test.go",
+        "csc_refresh_restore_test.go",
+        "csc_refresh_support.go",
+        "csc_refresh_support_test.go",
+        "csc_stats.go",
+        "csc_test.go",
+        "csc_wirebudget_test.go",
+        "dial_retry_backoff.go",
+        "digest_test.go",
+        "doc.go",
+        "docker-compose.yml",
+        "dockers/**",
+        "doctests/**",
+        "error.go",
+        "error_test.go",
+        "error_wrapping_test.go",
+        "example/autopipeline/**",
+        "example/autopipeline-fullduplex/**",
+        "example/autopipeline-fullduplex-async/**",
+        "example/client-side-caching/**",
+        "example/cluster-mget/**",
+        "example/del-keys-without-ttl/**",
+        "example/digest-optimistic-locking/**",
+        "example/disable-maintnotifications/**",
+        "example/ft-aliaslist/**",
+        "example/himport/**",
+        "example/hll/**",
+        "example/hset-struct/**",
+        "example/lua-scripting/**",
+        "example/maintnotifiations-pubsub/**",
+        "example/otel/README.md",
+        "example/otel/client.go",
+        "example/otel/config/**",
+        "example/otel/docker-compose.yml",
+        "example/otel/go.mod",
+        "example/otel/go.sum",
+        "example/otel/uptrace.yml",
+        "example/otel-metrics/**",
+        "example/redis-bloom/**",
+        "example/scan-struct/**",
+        "example/search-aggregate-collect/**",
+        "example/search-aggregate-steps/**",
+        "example/tls-cert-auth/**",
+        "example/tls-connection/**",
+        "example/ts-querylabels/**",
+        "example/zerocopy-buffer/**",
+        "example_instrumentation_test.go",
+        "example_test.go",
+        "expiration_commands_unit_test.go",
+        "export_test.go",
+        "fuzz/**",
+        "generic_commands.go",
+        "geo_commands.go",
+        "go.mod",
+        "go.sum",
+        "hash_commands.go",
+        "helper/**",
+        "himport.go",
+        "himport_cluster.go",
+        "himport_commands.go",
+        "himport_commands_test.go",
+        "himport_mock_test.go",
+        "himport_test.go",
+        "hooks_current_race_test.go",
+        "hotkeys_commands.go",
+        "hotkeys_commands_test.go",
+        "hset_benchmark_test.go",
+        "hyperloglog_commands.go",
+        "internal/**",
+        "internal_maint_notif_test.go",
+        "internal_test.go",
+        "iterator.go",
+        "iterator_test.go",
+        "json.go",
+        "json_desync_test.go",
+        "json_test.go",
+        "languages_test.go",
+        "list_commands.go",
+        "local_cache.go",
+        "local_cache_batch_read_bit_test.go",
+        "local_cache_test.go",
+        "log_global_race_test.go",
+        "logging/**",
+        "main_test.go",
+        "maintnotifications/**",
+        "metrics_nil_reply_test.go",
+        "moduleloadex_nil_test.go",
+        "monitor_test.go",
+        "newclient_panic_cleanup_test.go",
+        "options.go",
+        "options_test.go",
+        "osscluster.go",
+        "osscluster_closest_node_test.go",
+        "osscluster_commands.go",
+        "osscluster_latency_tolerance_test.go",
+        "osscluster_lazy_reload_test.go",
+        "osscluster_maintnotifications_test.go",
+        "osscluster_maintnotifications_unit_test.go",
+        "osscluster_router.go",
+        "osscluster_router_test.go",
+        "osscluster_test.go",
+        "otel.go",
+        "pipeline.go",
+        "pipeline_buffer_test.go",
+        "pipeline_exec_test.go",
+        "pipeline_pool_gate_test.go",
+        "pipeline_pool_getter_test.go",
+        "pipeline_pool_options_test.go",
+        "pipeline_pool_test.go",
+        "pipeline_spill_test.go",
+        "pipeline_test.go",
+        "pool_pubsub_bench_test.go",
+        "pool_test.go",
+        "probabilistic.go",
+        "probabilistic_test.go",
+        "probabilistic_unit_test.go",
+        "probe_internal_test.go",
+        "probe_test.go",
+        "pubsub.go",
+        "pubsub_commands.go",
+        "pubsub_opt_race_test.go",
+        "pubsub_test.go",
+        "push/**",
+        "push_notifications.go",
+        "race_test.go",
+        "re_endpoints_test.go",
+        "redis.go",
+        "redis_test.go",
+        "result.go",
+        "ring.go",
+        "ring_sharding_race_test.go",
+        "ring_test.go",
+        "script.go",
+        "script_server_sha_integration_test.go",
+        "script_server_sha_unit_test.go",
+        "scripting_commands.go",
+        "scripts/**",
+        "search_aliaslist_integration_test.go",
+        "search_aliaslist_unit_test.go",
+        "search_builders.go",
+        "search_builders_test.go",
+        "search_collect.go",
+        "search_collect_integration_test.go",
+        "search_collect_test.go",
+        "search_commands.go",
+        "search_commands_parse_test.go",
+        "search_commands_unit_test.go",
+        "search_hybrid_desync_test.go",
+        "search_resp_test.go",
+        "search_test.go",
+        "sentinel.go",
+        "sentinel_test.go",
+        "set_commands.go",
+        "sortedset_commands.go",
+        "stream_commands.go",
+        "stream_commands_unit_test.go",
+        "string_commands.go",
+        "string_commands_unit_test.go",
+        "timeseries_commands.go",
+        "timeseries_commands_test.go",
+        "timeseries_querylabels_integration_test.go",
+        "timeseries_querylabels_unit_test.go",
+        "tls_cert_auth_test.go",
+        "tls_cluster_test.go",
+        "tls_standalone_test.go",
+        "tls_test.go",
+        "tx.go",
+        "tx_test.go",
+        "tx_unwatch_test.go",
+        "unit_test.go",
+        "universal.go",
+        "universal_test.go",
+        "vectorset_commands.go",
+        "vectorset_commands_integration_test.go",
+        "vectorset_commands_test.go",
+        "version.go"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "extra/rediscensus/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/rediscensus."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "extra/rediscmd/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/rediscmd."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "extra/redisotel/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisotel."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "extra/redisotel-native/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisotel-native."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "extra/redisprometheus/**"
+      ],
+      "text": "Copyright (c) 2013 The github.com/redis/go-redis Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013 The github.com/redis/go-redis Authors., BSD-2-Clause license (LICENSE), https://github.com/redis/go-redis/tree/b57341e5a0e407cd8e557f3a27fd9629b97bc119/extra/redisprometheus."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

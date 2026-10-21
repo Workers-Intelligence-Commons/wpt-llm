@@ -1,0 +1,3350 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/google/skia",
+  "revision": "8c45d63f01bf694213b19d9e24e8c5044e77ca20",
+  "checksum": "sha256:d9c8af5690d60e152a19c2483c79a8f58b866aa793072d6fa3be905faf023079",
+  "extract": {
+    "exclude": [
+      "bazel/external/**",
+      "demos.skia.org/demos/mesh2d/BeanEater-1s-200px.gif",
+      "demos.skia.org/demos/mesh2d/baby_tux.png",
+      "demos.skia.org/demos/textures/testimg.png",
+      "infra/bots/deps/**",
+      "modules/canvaskit/fonts/NotoMono-Regular.ttf",
+      "modules/canvaskit/tests/assets/Bungee-Regular.ttf",
+      "modules/canvaskit/tests/assets/NotoColorEmoji.ttf",
+      "modules/canvaskit/tests/assets/NotoSerif-BoldItalic.ttf",
+      "modules/canvaskit/tests/assets/NotoSerif-Regular.ttf",
+      "modules/canvaskit/tests/assets/Roboto-Regular.otf",
+      "modules/canvaskit/tests/assets/Roboto-Regular.woff",
+      "modules/canvaskit/tests/assets/Roboto-Regular.woff2",
+      "modules/canvaskit/tests/assets/RobotoSlab-VariableFont_wght.ttf",
+      "modules/canvaskit/tests/assets/brickwork-texture.jpg",
+      "modules/canvaskit/tests/assets/color_wheel.gif",
+      "modules/canvaskit/tests/assets/color_wheel.webp",
+      "modules/canvaskit/tests/assets/exif_rotated_heart.jpg",
+      "modules/canvaskit/tests/assets/flightAnim.gif",
+      "modules/canvaskit/tests/assets/flutter_106433.png",
+      "modules/canvaskit/tests/assets/mandrill_16.png",
+      "modules/canvaskit/tests/assets/mandrill_512.png",
+      "modules/canvaskit/tests/assets/mandrill_h1v1.jpg",
+      "modules/canvaskit/tests/assets/red_line.skp",
+      "modules/canvaskit/tests/assets/test.ttc",
+      "modules/canvaskit/tests/assets/test_glyphs-glyf_colr_1.ttf",
+      "platform_tools/android/apps/gradle/wrapper/gradle-wrapper.jar",
+      "platform_tools/android/apps/skottie/perfetto_config.pb",
+      "platform_tools/android/bin/mac/**",
+      "resources/crbug769134.fil",
+      "resources/diff_canvas_traces/**",
+      "resources/empty_images/**",
+      "resources/fonts/7630.otf",
+      "resources/fonts/DejaVuSans.subset.ttf",
+      "resources/fonts/DejaVuSans.subset_noHx.ttf",
+      "resources/fonts/Distortable.ttf",
+      "resources/fonts/Em.ttf",
+      "resources/fonts/Funkster.ttf",
+      "resources/fonts/HangingS.ttf",
+      "resources/fonts/NotoSansCJK-VF-subset.otf.ttc",
+      "resources/fonts/ReallyBigA.ttf",
+      "resources/fonts/Roboto-Regular.ttf",
+      "resources/fonts/Roboto2-Regular.pfb",
+      "resources/fonts/Roboto2-Regular_NoEmbed.ttf",
+      "resources/fonts/SampleSVG.ttf",
+      "resources/fonts/SpiderSymbol.ttf",
+      "resources/fonts/SpiderSymbol.woff",
+      "resources/fonts/SpiderSymbol.woff2",
+      "resources/fonts/Stroking.otf",
+      "resources/fonts/Stroking.ttf",
+      "resources/fonts/Variable.ttf",
+      "resources/fonts/VaryAlongQuads.ttf",
+      "resources/fonts/abc/abc+agrave.ttf",
+      "resources/fonts/abc/abc+grave.ttf",
+      "resources/fonts/abc/abc.ttf",
+      "resources/fonts/ahem.ttf",
+      "resources/fonts/cbdt.ttf",
+      "resources/fonts/cbdt_fmt1.ttf",
+      "resources/fonts/cbdt_fmt2.ttf",
+      "resources/fonts/cbdt_fmt6.ttf",
+      "resources/fonts/cbdt_fmt7.ttf",
+      "resources/fonts/colr.ttf",
+      "resources/fonts/cond-bold-italic.ttf",
+      "resources/fonts/ebdt_fmt1.ttf",
+      "resources/fonts/ebdt_fmt2.ttf",
+      "resources/fonts/ebdt_fmt6.ttf",
+      "resources/fonts/ebdt_fmt7.ttf",
+      "resources/fonts/ebdt_glyf.ttf",
+      "resources/fonts/hintgasp.ttf",
+      "resources/fonts/planetcbdt.ttf",
+      "resources/fonts/planetcolr.ttf",
+      "resources/fonts/planetsbix.ttf",
+      "resources/fonts/sbix.ttf",
+      "resources/fonts/sbix_uncompressed_flags.ttf",
+      "resources/fonts/test.ttc",
+      "resources/fonts/test_glyphs-glyf_colr_1.ttf",
+      "resources/fonts/test_glyphs-glyf_colr_1_variable.ttf",
+      "resources/icc_profiles/AdobeRGB1998.icc",
+      "resources/icc_profiles/HP_Z32x.icc",
+      "resources/icc_profiles/HP_ZR30w.icc",
+      "resources/icc_profiles/apng19.icc",
+      "resources/icc_profiles/chromium/**",
+      "resources/icc_profiles/color.org/**",
+      "resources/icc_profiles/fuzz/**",
+      "resources/icc_profiles/misc/AdobeColorSpin.icc",
+      "resources/icc_profiles/misc/AdobeRGB.icc",
+      "resources/icc_profiles/misc/AppleHagc.icc",
+      "resources/icc_profiles/misc/Apple_Color_LCD.icc",
+      "resources/icc_profiles/misc/Apple_Wide_Color.icc",
+      "resources/icc_profiles/misc/Apple_pq_hagc_hdgm2.icc",
+      "resources/icc_profiles/misc/BenQ_GL2450.icc",
+      "resources/icc_profiles/misc/BenQ_RL2455.icc",
+      "resources/icc_profiles/misc/Calibrated_A2B_XYZ_Mismatch.icc",
+      "resources/icc_profiles/misc/Coated_FOGRA27_CMYK.icc",
+      "resources/icc_profiles/misc/Coated_FOGRA39_CMYK.icc",
+      "resources/icc_profiles/misc/ColorGATE_Sihl_PhotoPaper.icc",
+      "resources/icc_profiles/misc/Color_Spin_Gamma_18.icc",
+      "resources/icc_profiles/misc/DisplayCal_ASUS_NonMonotonic.icc",
+      "resources/icc_profiles/misc/Generic_RGB_Gamma_18.icc",
+      "resources/icc_profiles/misc/Gray_Gamma_22.icc",
+      "resources/icc_profiles/misc/HD_709.icc",
+      "resources/icc_profiles/misc/Japan_Color_2001_Coated.icc",
+      "resources/icc_profiles/misc/Kodak_sRGB.icc",
+      "resources/icc_profiles/misc/Lexmark_X110.icc",
+      "resources/icc_profiles/misc/MR2416GSDF.icc",
+      "resources/icc_profiles/misc/MartiMaria_browsertest_A2B.icc",
+      "resources/icc_profiles/misc/MartiMaria_browsertest_HARD.icc",
+      "resources/icc_profiles/misc/P3_PQ_cicp.icc",
+      "resources/icc_profiles/misc/Phase_One_P25.icc",
+      "resources/icc_profiles/misc/Rec2020_HLG_cicp.icc",
+      "resources/icc_profiles/misc/Rec2020_PQ_cicp.icc",
+      "resources/icc_profiles/misc/SM245B.icc",
+      "resources/icc_profiles/misc/SWOP_Coated_20_GCR_CMYK.icc",
+      "resources/icc_profiles/misc/ThinkpadX1YogaV2.icc",
+      "resources/icc_profiles/misc/US_Web_Coated_SWOP_CMYK.icc",
+      "resources/icc_profiles/misc/XPS13_9360.icc",
+      "resources/icc_profiles/misc/bad_pcs.icc",
+      "resources/icc_profiles/misc/calibrated_nonzero_black.icc",
+      "resources/icc_profiles/misc/crbug_1017960_19.icc",
+      "resources/icc_profiles/misc/crbug_976551.icc",
+      "resources/icc_profiles/misc/sRGB_Calibrated_Heterogeneous.icc",
+      "resources/icc_profiles/misc/sRGB_Calibrated_Homogeneous.icc",
+      "resources/icc_profiles/misc/sRGB_Facebook.icc",
+      "resources/icc_profiles/misc/sRGB_HP.icc",
+      "resources/icc_profiles/misc/sRGB_HP_2.icc",
+      "resources/icc_profiles/misc/sRGB_ICC_v4_beta.icc",
+      "resources/icc_profiles/misc/sRGB_black_scaled.icc",
+      "resources/icc_profiles/misc/sRGB_lcms.icc",
+      "resources/icc_profiles/mobile/**",
+      "resources/icc_profiles/mu_gray.icc",
+      "resources/icc_profiles/pq_hdr.icc",
+      "resources/icc_profiles/srgb_lab_pcs.icc",
+      "resources/icc_profiles/swapped.icc",
+      "resources/icc_profiles/tiles.icc",
+      "resources/icc_profiles/upperLeft.icc",
+      "resources/icc_profiles/upperRight.icc",
+      "resources/images/**",
+      "resources/invalid_images/**",
+      "resources/skottie/images/**",
+      "resources/sksl/errors/Ossfuzz38107.sksl",
+      "resources/sksl/errors/Ossfuzz44555.sksl",
+      "resources/sksl/errors/Ossfuzz44559.sksl",
+      "resources/sksl/errors/Ossfuzz44565.sksl",
+      "resources/sksl/errors/Ossfuzz519154489.sksl",
+      "site/docs/dev/contrib/**",
+      "site/docs/dev/design/PdfLogicalDocumentStructure.png",
+      "site/docs/dev/gardening/skia_perf_columns.png",
+      "site/docs/dev/gardening/skia_perf_graph.png",
+      "site/docs/dev/gardening/skia_perf_mini_graph.png",
+      "site/docs/dev/gardening/skia_perf_mini_graph_triaged.png",
+      "site/docs/dev/gardening/skia_perf_view.png",
+      "site/docs/dev/gardening/skia_status_view.png",
+      "site/docs/dev/testing/BlameView.png",
+      "site/docs/dev/testing/ByTest.png",
+      "site/docs/dev/testing/Cluster.png",
+      "site/docs/dev/testing/ClusterConfig.png",
+      "site/docs/dev/testing/Digests.png",
+      "site/docs/dev/testing/DotDiagram.png",
+      "site/docs/dev/testing/Grid.png",
+      "site/docs/dev/testing/Ignores.png",
+      "site/docs/dev/testing/Isolate.png",
+      "site/docs/dev/testing/IssueHighlight.png",
+      "site/docs/dev/testing/Perf.png",
+      "site/docs/dev/testing/Regression.png",
+      "site/docs/dev/testing/Search.png",
+      "site/docs/dev/testing/Status.png",
+      "site/docs/dev/testing/pprof_cpu_flame.png",
+      "site/docs/dev/testing/pprof_cpu_web.png",
+      "site/docs/dev/testing/pprof_cpu_weblist.png",
+      "site/docs/dev/testing/pprof_mem_web.png",
+      "site/docs/dev/testing/pprof_mem_weblist.png",
+      "site/docs/dev/testing/pprof_webview.png",
+      "site/docs/dev/tools/android_gdb.png",
+      "site/docs/dev/tools/buttons.png",
+      "site/docs/dev/tools/crosshair.png",
+      "site/docs/dev/tools/debugger.png",
+      "site/docs/dev/tools/end.png",
+      "site/docs/dev/tools/expand.png",
+      "site/docs/dev/tools/eye_icon.png",
+      "site/docs/dev/tools/frameplayback.png",
+      "site/docs/dev/tools/gpuop.png",
+      "site/docs/dev/tools/image.png",
+      "site/docs/dev/tools/layers.png",
+      "site/docs/dev/tools/onlinedebugger.png",
+      "site/docs/dev/tools/playcommands.png",
+      "site/docs/dev/tools/resources.png",
+      "site/docs/dev/tools/settings.png",
+      "site/docs/dev/tools/tracing.png",
+      "site/docs/dev/tools/tracing_load.png",
+      "site/docs/user/modules/PathKit_effects.png",
+      "site/featured-background.png",
+      "tests/sksl/errors/Ossfuzz44555.glsl",
+      "tests/sksl/errors/Ossfuzz44559.glsl",
+      "tests/sksl/errors/Ossfuzz44565.glsl",
+      "tests/sksl/errors/Ossfuzz519154489.glsl",
+      "third_party/BUILD.gn",
+      "third_party/README",
+      "third_party/angle2/**",
+      "third_party/brotli/**",
+      "third_party/cpu-features/**",
+      "third_party/d3d12allocator/**",
+      "third_party/dawn/**",
+      "third_party/delaunator/**",
+      "third_party/dng_sdk/**",
+      "third_party/etc1/**",
+      "third_party/freetype2/**",
+      "third_party/go.mod",
+      "third_party/highway/**",
+      "third_party/icu/**",
+      "third_party/icu4x/**",
+      "third_party/icu_bidi/**",
+      "third_party/imgui/**",
+      "third_party/libavif/**",
+      "third_party/libgav1/**",
+      "third_party/libgrapheme/**",
+      "third_party/libjpeg-turbo/**",
+      "third_party/libjxl/**",
+      "third_party/libpng/**",
+      "third_party/libwebp/**",
+      "third_party/libyuv/**",
+      "third_party/lua/**",
+      "third_party/native_app_glue/**",
+      "third_party/oboe/**",
+      "third_party/perfetto/**",
+      "third_party/piex/**",
+      "third_party/spirv-cross/**",
+      "third_party/third_party.gni",
+      "third_party/vello/**",
+      "third_party/zlib/**",
+      "tools/doxygen/logo.png",
+      "tools/perf-canvaskit-puppeteer/canvas_perf_assets/**",
+      "tools/raster_pipeline/llvm_mca_analysis.png",
+      "platform_tools/android/bin/linux/perfhost",
+      "resources/icc_profiles/misc/ColorLogic_ISO_Coated_CMYK.icc",
+      "resources/icc_profiles/misc/PrintOpen_ISO_Coated_CMYK.icc",
+      "resources/icc_profiles/misc/XRite_GRACol7_340_CMYK.icc",
+      "site/docs/dev/tools/calendar.mskp"
+    ]
+  },
+  "history": {
+    "since": "005327b9ddbf0bb2890c7d563b3d9a8ea8a284f6"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND Apache-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2011 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  * Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2021 Google LLC\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n// Copyright (c) 2018 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n\n\n// Copyright (c) 2011 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n\n\n// Copyright (c) 2021 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/google/skia: Copyright (c) 2011 Google Inc. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/skia; Copyright 2021 Google LLC, Apache-2.0 license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/bazel/rbe/gce_linux; the authors of google/skia (include/third_party/vulkan) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/include/third_party/vulkan; the authors of google/skia (modules/canvaskit/npm_build) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/modules/canvaskit/npm_build; the authors of google/skia (modules/skcms) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/modules/skcms; the authors of google/skia (third_party/expat) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/expat; the authors of google/skia (third_party/harfbuzz) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/harfbuzz; the authors of google/skia (third_party/wuffs) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/wuffs; the authors of perf-canvaskit-puppeteer, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/perf-canvaskit-puppeteer; the authors of run-wasm-gm-tests, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/run-wasm-gm-tests; the authors of skottie-wasm-perf, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/skottie-wasm-perf."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".bazelignore",
+        ".bazeliskrc",
+        ".bazelproject",
+        ".bazelrc",
+        ".bazelversion",
+        ".clang-format",
+        ".clang-tidy",
+        ".dockerignore",
+        ".gitignore",
+        ".gn",
+        "AUTHORS",
+        "BUILD.bazel",
+        "BUILD.gn",
+        "CONTRIBUTING",
+        "CQ_COMMITTERS",
+        "DEPS",
+        "DIR_METADATA",
+        "LICENSE",
+        "MODULE.bazel",
+        "MODULE.bazel.lock",
+        "OWNERS",
+        "OWNERS.android",
+        "PRESUBMIT.py",
+        "PRESUBMIT_test.py",
+        "PRESUBMIT_test_mocks.py",
+        "README",
+        "README.chromium",
+        "RELEASE_NOTES.md",
+        "WORKSPACE.bazel",
+        "agents/**",
+        "bazel/BUILD.bazel",
+        "bazel/Makefile",
+        "bazel/buildrc",
+        "bazel/cipd_deps.bzl",
+        "bazel/cipd_install.bzl",
+        "bazel/common_config_settings/**",
+        "bazel/cpp_modules.bzl",
+        "bazel/deps.json",
+        "bazel/deps_parser/**",
+        "bazel/device_specific_configs/**",
+        "bazel/devicesrc",
+        "bazel/download_config_files.bzl",
+        "bazel/exporter/**",
+        "bazel/exporter_tool/**",
+        "bazel/flags.bzl",
+        "bazel/gcs_mirror/**",
+        "bazel/gcs_mirror.bzl",
+        "bazel/gen_compile_flags_txt_linux_amd64.bzl",
+        "bazel/generate_cpp_files_for_headers.bzl",
+        "bazel/go_googleapis_compatibility_hack.bzl",
+        "bazel/karma/**",
+        "bazel/macros.bzl",
+        "bazel/platform/**",
+        "bazel/rbe/Makefile",
+        "bazel/rbe/README.md",
+        "bazel/rbe/gce_linux_container/**",
+        "bazel/remove_indentation.bzl",
+        "bazel/run_cxxbridge_cmd.bzl",
+        "bazel/rust_cxx_bridge.bzl",
+        "bazel/skia_rules.bzl",
+        "bazel/user/**",
+        "bench/**",
+        "bin/**",
+        "build_overrides/**",
+        "client_utils/**",
+        "codereview.settings",
+        "demos.skia.org/.gitignore",
+        "demos.skia.org/Makefile",
+        "demos.skia.org/README.md",
+        "demos.skia.org/demos/canvas_edit/**",
+        "demos.skia.org/demos/hello_world/**",
+        "demos.skia.org/demos/image_decode_web_worker/**",
+        "demos.skia.org/demos/image_sampling/**",
+        "demos.skia.org/demos/mesh2d/index.html",
+        "demos.skia.org/demos/path_performance/**",
+        "demos.skia.org/demos/sampling_types/**",
+        "demos.skia.org/demos/spreadsheet/**",
+        "demos.skia.org/demos/textedit/**",
+        "demos.skia.org/demos/textures/index.html",
+        "demos.skia.org/demos/up_scaling/**",
+        "demos.skia.org/demos/web_worker/**",
+        "demos.skia.org/demos/webgpu/**",
+        "dm/**",
+        "docs/**",
+        "example/**",
+        "experimental/**",
+        "fuzz/**",
+        "gm/**",
+        "gn/**",
+        "go.mod",
+        "go.sum",
+        "include/BUILD.bazel",
+        "include/OWNERS",
+        "include/android/**",
+        "include/codec/**",
+        "include/config/**",
+        "include/core/**",
+        "include/cpu/**",
+        "include/docs/**",
+        "include/effects/**",
+        "include/encode/**",
+        "include/gpu/**",
+        "include/pathops/**",
+        "include/ports/**",
+        "include/private/**",
+        "include/sksl/**",
+        "include/svg/**",
+        "include/utils/**",
+        "infra/BUILD.bazel",
+        "infra/README.md",
+        "infra/bots/BUILD.bazel",
+        "infra/bots/Makefile",
+        "infra/bots/README.md",
+        "infra/bots/README.recipes.md",
+        "infra/bots/analysis/**",
+        "infra/bots/assets/**",
+        "infra/bots/build_task_drivers.sh",
+        "infra/bots/buildstats/**",
+        "infra/bots/bundle_recipes.sh",
+        "infra/bots/cfg.json",
+        "infra/bots/check_deps.py",
+        "infra/bots/find_tasks.py",
+        "infra/bots/format_jobs_json/**",
+        "infra/bots/gen_tasks.go",
+        "infra/bots/gen_tasks_logic/**",
+        "infra/bots/git_utils.py",
+        "infra/bots/infra_tests.py",
+        "infra/bots/jobs.json",
+        "infra/bots/recipe_modules/**",
+        "infra/bots/recipes/**",
+        "infra/bots/recipes.py",
+        "infra/bots/run_recipe.py",
+        "infra/bots/task_drivers/**",
+        "infra/bots/tasks.json",
+        "infra/bots/test_utils.py",
+        "infra/bots/tools/**",
+        "infra/bots/utils.py",
+        "infra/bots/zip_utils.py",
+        "infra/bots/zip_utils_test.py",
+        "infra/canvaskit/**",
+        "infra/cmake/**",
+        "infra/config/**",
+        "infra/cross-compile/**",
+        "infra/debugger-app/**",
+        "infra/docker/**",
+        "infra/fiddler-backend/**",
+        "infra/gcc/**",
+        "infra/jsfiddle/**",
+        "infra/lottiecap/**",
+        "infra/project-config/**",
+        "infra/shaders/**",
+        "infra/skcq.json",
+        "infra/skottie/**",
+        "infra/wasm-common/**",
+        "libskia_blocklist.txt",
+        "modules/audioplayer/**",
+        "modules/bentleyottmann/**",
+        "modules/canvaskit/.gitignore",
+        "modules/canvaskit/BUILD.bazel",
+        "modules/canvaskit/BUILD.gn",
+        "modules/canvaskit/CHANGELOG.md",
+        "modules/canvaskit/Makefile",
+        "modules/canvaskit/README.md",
+        "modules/canvaskit/WasmCommon.h",
+        "modules/canvaskit/bidi.js",
+        "modules/canvaskit/bidi_bindings.cpp",
+        "modules/canvaskit/bidi_bindings_gen.cpp",
+        "modules/canvaskit/canvaskit.gni",
+        "modules/canvaskit/canvaskit_bindings.cpp",
+        "modules/canvaskit/catchExceptionNop.js",
+        "modules/canvaskit/color.js",
+        "modules/canvaskit/compile.sh",
+        "modules/canvaskit/compile_gm.sh",
+        "modules/canvaskit/cpu.js",
+        "modules/canvaskit/debug.js",
+        "modules/canvaskit/debugger.js",
+        "modules/canvaskit/debugger_bindings.cpp",
+        "modules/canvaskit/external_test/**",
+        "modules/canvaskit/externs.js",
+        "modules/canvaskit/font.js",
+        "modules/canvaskit/fonts/README.md",
+        "modules/canvaskit/future_apis/**",
+        "modules/canvaskit/gm.js",
+        "modules/canvaskit/gm_bindings.cpp",
+        "modules/canvaskit/go/**",
+        "modules/canvaskit/htmlcanvas/**",
+        "modules/canvaskit/interface.js",
+        "modules/canvaskit/karma.bazel.js",
+        "modules/canvaskit/karma.conf.js",
+        "modules/canvaskit/make_version.sh",
+        "modules/canvaskit/matrix.js",
+        "modules/canvaskit/memory.js",
+        "modules/canvaskit/package-lock.json",
+        "modules/canvaskit/package.json",
+        "modules/canvaskit/paragraph.js",
+        "modules/canvaskit/paragraph_bindings.cpp",
+        "modules/canvaskit/paragraph_bindings_gen.cpp",
+        "modules/canvaskit/pathops.js",
+        "modules/canvaskit/postamble.js",
+        "modules/canvaskit/preamble.js",
+        "modules/canvaskit/release.js",
+        "modules/canvaskit/rt_shader.js",
+        "modules/canvaskit/skottie.js",
+        "modules/canvaskit/skottie_bindings.cpp",
+        "modules/canvaskit/skp.js",
+        "modules/canvaskit/tests/assets/BUILD.bazel",
+        "modules/canvaskit/tests/assets/animated_gif.json",
+        "modules/canvaskit/tests/assets/audio_external.json",
+        "modules/canvaskit/tests/assets/map-shield.json",
+        "modules/canvaskit/tests/assets/skottie_basic_slots.json",
+        "modules/canvaskit/tests/assets/skottie_inline_font.json",
+        "modules/canvaskit/tests/assets/text_edit.json",
+        "modules/canvaskit/tests/bazel_test_reporter.js",
+        "modules/canvaskit/tests/bidi_test.js",
+        "modules/canvaskit/tests/canvas2d_test.js",
+        "modules/canvaskit/tests/canvas_test.js",
+        "modules/canvaskit/tests/core_test.js",
+        "modules/canvaskit/tests/font_test.js",
+        "modules/canvaskit/tests/init_with_gold_server.js",
+        "modules/canvaskit/tests/legacy_init.js",
+        "modules/canvaskit/tests/legacy_test_reporter.js",
+        "modules/canvaskit/tests/matrix_test.js",
+        "modules/canvaskit/tests/paragraph_test.js",
+        "modules/canvaskit/tests/path_test.js",
+        "modules/canvaskit/tests/rtshader_test.js",
+        "modules/canvaskit/tests/skottie_test.js",
+        "modules/canvaskit/tests/util.js",
+        "modules/canvaskit/util.js",
+        "modules/canvaskit/viewer_bindings.cpp",
+        "modules/canvaskit/wasm_tools/**",
+        "modules/canvaskit/webgl.js",
+        "modules/canvaskit/webgpu.js",
+        "modules/jsonreader/**",
+        "modules/pathops/**",
+        "modules/skottie/**",
+        "modules/skparagraph/**",
+        "modules/skplaintexteditor/**",
+        "modules/skresources/**",
+        "modules/sksg/**",
+        "modules/skshaper/**",
+        "modules/skunicode/**",
+        "modules/svg/**",
+        "package-lock.json",
+        "package.json",
+        "platform_tools/android/.gitignore",
+        "platform_tools/android/apps/build.gradle",
+        "platform_tools/android/apps/gradle/wrapper/gradle-wrapper.properties",
+        "platform_tools/android/apps/gradle.properties",
+        "platform_tools/android/apps/gradlew",
+        "platform_tools/android/apps/robotium.cfg",
+        "platform_tools/android/apps/settings.gradle",
+        "platform_tools/android/apps/skottie/build.gradle",
+        "platform_tools/android/apps/skottie/collect.sh",
+        "platform_tools/android/apps/skottie/run_perf.sh",
+        "platform_tools/android/apps/skottie/skottie_metric.proto",
+        "platform_tools/android/apps/skottie/skottie_metric.sql",
+        "platform_tools/android/apps/skottie/skottielib/**",
+        "platform_tools/android/apps/skottie/src/**",
+        "platform_tools/android/apps/skqp/**",
+        "platform_tools/android/apps/viewer/**",
+        "platform_tools/android/bin/adb_pull_if_needed",
+        "platform_tools/android/bin/adb_push_if_needed",
+        "platform_tools/android/bin/android_build_app",
+        "platform_tools/android/bin/android_build_universal_viewer",
+        "platform_tools/android/bin/android_gdb_app",
+        "platform_tools/android/bin/android_gdb_native",
+        "platform_tools/android/bin/android_gdbserver",
+        "platform_tools/android/bin/android_install_app",
+        "platform_tools/android/bin/android_launch_app",
+        "platform_tools/android/bin/android_perf",
+        "platform_tools/android/bin/android_run_skia",
+        "platform_tools/android/bin/linux/**",
+        "platform_tools/android/bin/utils/**",
+        "platform_tools/android/gclient.config",
+        "platform_tools/android/skp_gen/**",
+        "platform_tools/android/tradefed/**",
+        "platform_tools/android/vulkan/**",
+        "platform_tools/android/whitespace.txt",
+        "platform_tools/debugging/**",
+        "platform_tools/ios/**",
+        "platform_tools/libraries/**",
+        "relnotes/**",
+        "requirements.txt",
+        "resources/BUILD.bazel",
+        "resources/Cowboy.svg",
+        "resources/README",
+        "resources/android_fonts/**",
+        "resources/fonts/Roboto2-Regular.pfa",
+        "resources/fonts/abc/abc+agrave.ttx",
+        "resources/fonts/abc/abc+grave.ttx",
+        "resources/fonts/abc/abc.ttx",
+        "resources/fonts/fonts.xml",
+        "resources/fonts/svg/**",
+        "resources/icc_profiles/misc/ColorLogic_ISO_Coated_CMYK.icc",
+        "resources/icc_profiles/misc/PrintOpen_ISO_Coated_CMYK.icc",
+        "resources/icc_profiles/misc/XRite_GRACol7_340_CMYK.icc",
+        "resources/nov-talk-sequence.txt",
+        "resources/pdf_command_stream.txt",
+        "resources/skottie/skottie-3d-2planes.json",
+        "resources/skottie/skottie-3d-3planes.json",
+        "resources/skottie/skottie-3d-parenting-camera.json",
+        "resources/skottie/skottie-3d-parenting-nocamera.json",
+        "resources/skottie/skottie-3d-rotation-order.json",
+        "resources/skottie/skottie-auto-orient-2.json",
+        "resources/skottie/skottie-auto-orient.json",
+        "resources/skottie/skottie-bezier-extranormal.json",
+        "resources/skottie/skottie-blackandwhite-effect.json",
+        "resources/skottie/skottie-blendmode-hardmix.json",
+        "resources/skottie/skottie-brightnesscontrast-legacy.json",
+        "resources/skottie/skottie-brightnesscontrast.json",
+        "resources/skottie/skottie-bulge.json",
+        "resources/skottie/skottie-camera-one-node.json",
+        "resources/skottie/skottie-camera-parent-1.json",
+        "resources/skottie/skottie-camera-parent-2.json",
+        "resources/skottie/skottie-camera-parent-3.json",
+        "resources/skottie/skottie-camera-precomp.json",
+        "resources/skottie/skottie-camera-rotation.json",
+        "resources/skottie/skottie-cctoner.json",
+        "resources/skottie/skottie-chained-mattes.json",
+        "resources/skottie/skottie-coloroverlay-style.json",
+        "resources/skottie/skottie-corner-pin-effect.json",
+        "resources/skottie/skottie-directional-blur.json",
+        "resources/skottie/skottie-displacement-expand.json",
+        "resources/skottie/skottie-displacement-hsla.json",
+        "resources/skottie/skottie-displacement-lfho.json",
+        "resources/skottie/skottie-displacement-rgba.json",
+        "resources/skottie/skottie-displacement-tiling.json",
+        "resources/skottie/skottie-dropshadow-ramp.json",
+        "resources/skottie/skottie-dropshadow-style.json",
+        "resources/skottie/skottie-effects-transform.json",
+        "resources/skottie/skottie-fill-effect.json",
+        "resources/skottie/skottie-fractalnoise-basic.json",
+        "resources/skottie/skottie-fractalnoise-block.json",
+        "resources/skottie/skottie-fractalnoise-cycle.json",
+        "resources/skottie/skottie-fractalnoise-linear.json",
+        "resources/skottie/skottie-fractalnoise-scalerotate.json",
+        "resources/skottie/skottie-fractalnoise-softlinear.json",
+        "resources/skottie/skottie-fractalnoise-sphere.json",
+        "resources/skottie/skottie-fractalnoise-suboptions.json",
+        "resources/skottie/skottie-fractalnoise-turbulentbasic.json",
+        "resources/skottie/skottie-fractalnoise-turbulentsharp.json",
+        "resources/skottie/skottie-fractalnoise-turbulentsmooth.json",
+        "resources/skottie/skottie-gaussian-blur.json",
+        "resources/skottie/skottie-glow-spread.json",
+        "resources/skottie/skottie-gradient-opacity.json",
+        "resources/skottie/skottie-gradient-radial-highlight.json",
+        "resources/skottie/skottie-gradient-ramp.json",
+        "resources/skottie/skottie-hidden-shapes-layers.json",
+        "resources/skottie/skottie-huesaturation-animated.json",
+        "resources/skottie/skottie-huesaturation-effect.json",
+        "resources/skottie/skottie-inline-fonts.json",
+        "resources/skottie/skottie-innerglow-style.json",
+        "resources/skottie/skottie-innershadow-style.json",
+        "resources/skottie/skottie-invert-effect-yiq.json",
+        "resources/skottie/skottie-invert-effect.json",
+        "resources/skottie/skottie-levels-effect.json",
+        "resources/skottie/skottie-line-height.json",
+        "resources/skottie/skottie-linear-wipe-effect.json",
+        "resources/skottie/skottie-luma-matte.json",
+        "resources/skottie/skottie-mask-feather.json",
+        "resources/skottie/skottie-masking-opaque.json",
+        "resources/skottie/skottie-masking-translucent.json",
+        "resources/skottie/skottie-matte-blendmode.json",
+        "resources/skottie/skottie-matte-nonsequential.json",
+        "resources/skottie/skottie-matte-visible.json",
+        "resources/skottie/skottie-mergepaths-effect.json",
+        "resources/skottie/skottie-motion-blur-mask.json",
+        "resources/skottie/skottie-motion-blur-ph-360.json",
+        "resources/skottie/skottie-motion-blur-ph0.json",
+        "resources/skottie/skottie-motion-blur-ph360.json",
+        "resources/skottie/skottie-motiontile-effect-phase.json",
+        "resources/skottie/skottie-motiontile-effect.json",
+        "resources/skottie/skottie-multi-range-selectors.json",
+        "resources/skottie/skottie-nested-animation.json",
+        "resources/skottie/skottie-offsetpaths-effect.json",
+        "resources/skottie/skottie-outerglow-style.json",
+        "resources/skottie/skottie-phonehub-connecting.json",
+        "resources/skottie/skottie-phonehub-connecting_min.json",
+        "resources/skottie/skottie-phonehub-generic-error.json",
+        "resources/skottie/skottie-phonehub-generic-error_min.json",
+        "resources/skottie/skottie-phonehub-onboard.json",
+        "resources/skottie/skottie-phonehub-onboard_min.json",
+        "resources/skottie/skottie-phonehub-svgo-connecting.json",
+        "resources/skottie/skottie-phonehub-svgo-connecting_min.json",
+        "resources/skottie/skottie-phonehub-svgo-generic-error.json",
+        "resources/skottie/skottie-phonehub-svgo-generic-error_min.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-connecting.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-connecting_min.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-generic-error.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-generic-error_min.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-onboard.json",
+        "resources/skottie/skottie-phonehub-svgo-no-frills-onboard_min.json",
+        "resources/skottie/skottie-phonehub-svgo-no-masks-connecting.json",
+        "resources/skottie/skottie-phonehub-svgo-no-masks-connecting_min.json",
+        "resources/skottie/skottie-phonehub-svgo-no-masks-onboard.json",
+        "resources/skottie/skottie-phonehub-svgo-no-masks-onboard_min.json",
+        "resources/skottie/skottie-phonehub-svgo-onboard.json",
+        "resources/skottie/skottie-phonehub-svgo-onboard_min.json",
+        "resources/skottie/skottie-prolevels-effect.json",
+        "resources/skottie/skottie-puckerbloat-effect.json",
+        "resources/skottie/skottie-radial-wipe-effect.json",
+        "resources/skottie/skottie-repeater.json",
+        "resources/skottie/skottie-sharpen.json",
+        "resources/skottie/skottie-shift-channels-effect.json",
+        "resources/skottie/skottie-shift-channels-fullon-alpha.json",
+        "resources/skottie/skottie-sksl-color-filter.json",
+        "resources/skottie/skottie-sksl-effect-2.json",
+        "resources/skottie/skottie-sksl-effect.json",
+        "resources/skottie/skottie-slots.json",
+        "resources/skottie/skottie-spatial-supernormal.json",
+        "resources/skottie/skottie-sphere-controls.json",
+        "resources/skottie/skottie-sphere-effect.json",
+        "resources/skottie/skottie-sphere-lighting-types.json",
+        "resources/skottie/skottie-sphere-lighting.json",
+        "resources/skottie/skottie-sphere-transparecy.json",
+        "resources/skottie/skottie-text-allcaps.json",
+        "resources/skottie/skottie-text-animatedglyphs-01.json",
+        "resources/skottie/skottie-text-animatedglyphs-02.json",
+        "resources/skottie/skottie-text-animatedglyphs-03.json",
+        "resources/skottie/skottie-text-animatedglyphs-04.json",
+        "resources/skottie/skottie-text-animator-1.json",
+        "resources/skottie/skottie-text-animator-2.json",
+        "resources/skottie/skottie-text-animator-3.json",
+        "resources/skottie/skottie-text-animator-4.json",
+        "resources/skottie/skottie-text-animator-5.json",
+        "resources/skottie/skottie-text-animator-6.json",
+        "resources/skottie/skottie-text-animator-7.json",
+        "resources/skottie/skottie-text-animator-8.json",
+        "resources/skottie/skottie-text-animator-fillstrokeopacity.json",
+        "resources/skottie/skottie-text-animator-linespacing.json",
+        "resources/skottie/skottie-text-animator-opacity.json",
+        "resources/skottie/skottie-text-animator-randomize-1.json",
+        "resources/skottie/skottie-text-animator-randomize-2.json",
+        "resources/skottie/skottie-text-animator-strokewidth.json",
+        "resources/skottie/skottie-text-baseline-shift.json",
+        "resources/skottie/skottie-text-blur.json",
+        "resources/skottie/skottie-text-emptylines.json",
+        "resources/skottie/skottie-text-fill-over-stroke.json",
+        "resources/skottie/skottie-text-grouping-alignment-2.json",
+        "resources/skottie/skottie-text-grouping-alignment.json",
+        "resources/skottie/skottie-text-perchar-3d.json",
+        "resources/skottie/skottie-text-pointmode-downscaletofit.json",
+        "resources/skottie/skottie-text-pointmode-scaletofit.json",
+        "resources/skottie/skottie-text-resize-to-fit.json",
+        "resources/skottie/skottie-text-rtl.json",
+        "resources/skottie/skottie-text-scale-to-fit-maxlines.json",
+        "resources/skottie/skottie-text-scale-to-fit-minmax.json",
+        "resources/skottie/skottie-text-scale-to-fit.json",
+        "resources/skottie/skottie-text-strokejoin.json",
+        "resources/skottie/skottie-text-strokescale.json",
+        "resources/skottie/skottie-text-tracking.json",
+        "resources/skottie/skottie-text-valign-2.json",
+        "resources/skottie/skottie-text-valign-bottom.json",
+        "resources/skottie/skottie-text-valign-scaletofit.json",
+        "resources/skottie/skottie-text-valign-visual-2.json",
+        "resources/skottie/skottie-text-valign-visual-scaletofit.json",
+        "resources/skottie/skottie-text-valign.json",
+        "resources/skottie/skottie-text-variations.json",
+        "resources/skottie/skottie-text-vertical-clip.json",
+        "resources/skottie/skottie-text-whitespace-align.json",
+        "resources/skottie/skottie-text-words-linebreak.json",
+        "resources/skottie/skottie-textpath-01.json",
+        "resources/skottie/skottie-textpath-02.json",
+        "resources/skottie/skottie-textpath-03.json",
+        "resources/skottie/skottie-textpath-04.json",
+        "resources/skottie/skottie-textpath-05.json",
+        "resources/skottie/skottie-textpath-paragraph-01.json",
+        "resources/skottie/skottie-textpath-paragraph-02.json",
+        "resources/skottie/skottie-textpath-paragraph-03.json",
+        "resources/skottie/skottie-textpath-tracking.json",
+        "resources/skottie/skottie-threshold-compositing.json",
+        "resources/skottie/skottie-threshold-effect.json",
+        "resources/skottie/skottie-time-reverse.json",
+        "resources/skottie/skottie-transform-effect.json",
+        "resources/skottie/skottie-transform-skew.json",
+        "resources/skottie/skottie-trimpath-fill.json",
+        "resources/skottie/skottie-trimpath-modes.json",
+        "resources/skottie/skottie-tritone-effect.json",
+        "resources/skottie/skottie-venetianblinds-effect.json",
+        "resources/skottie/skottie_fill_rule.json",
+        "resources/skottie/skottie_sample_1.json",
+        "resources/skottie/skottie_sample_2.json",
+        "resources/skottie/skottie_sample_multiframe.json",
+        "resources/skottie/skottie_sample_search.json",
+        "resources/skottie/skottie_sample_webfont.json",
+        "resources/sksl/BUILD.bazel",
+        "resources/sksl/README.txt",
+        "resources/sksl/blend/**",
+        "resources/sksl/compute/**",
+        "resources/sksl/errors/ArgumentCountMismatch.rts",
+        "resources/sksl/errors/ArgumentMismatch.rts",
+        "resources/sksl/errors/ArgumentModifiers.rts",
+        "resources/sksl/errors/ArrayConstructorElementCount.sksl",
+        "resources/sksl/errors/ArrayIndexOutOfRange.rts",
+        "resources/sksl/errors/ArrayInlinedIndexOutOfRange.sksl",
+        "resources/sksl/errors/ArrayNegation.rts",
+        "resources/sksl/errors/ArrayOfInvalidSize.rts",
+        "resources/sksl/errors/ArrayOfVoid.rts",
+        "resources/sksl/errors/ArrayPlus.rts",
+        "resources/sksl/errors/ArrayReturnTypes.rts",
+        "resources/sksl/errors/ArraySplitDimensions.rts",
+        "resources/sksl/errors/ArraySplitDimensionsInFuncBody.rts",
+        "resources/sksl/errors/ArraySplitDimensionsInFuncDecl.rts",
+        "resources/sksl/errors/ArraySplitDimensionsInStruct.rts",
+        "resources/sksl/errors/ArrayTooManyDimensions.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncBody.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncBodyUnsized1.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncBodyUnsized2.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncDecl.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncDeclUnsized1.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInFuncDeclUnsized2.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInStruct.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInStructUnsized1.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsInStructUnsized2.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsUnsized1.rts",
+        "resources/sksl/errors/ArrayTooManyDimensionsUnsized2.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensions.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncBody.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncBodyUnsized1.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncBodyUnsized2.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncDecl.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncDeclUnsized1.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInFuncDeclUnsized2.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInStruct.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInStructUnsized1.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsInStructUnsized2.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsUnsized1.rts",
+        "resources/sksl/errors/ArrayTypeTooManyDimensionsUnsized2.rts",
+        "resources/sksl/errors/ArrayUnspecifiedDimensions.sksl",
+        "resources/sksl/errors/AssignmentTypeMismatch.rts",
+        "resources/sksl/errors/BadCaps.sksl",
+        "resources/sksl/errors/BadConstInitializers.rts",
+        "resources/sksl/errors/BadFieldAccess.rts",
+        "resources/sksl/errors/BadIndex.rts",
+        "resources/sksl/errors/BadModifiers.sksl",
+        "resources/sksl/errors/BadOctal.rts",
+        "resources/sksl/errors/BinaryInvalidType.rts",
+        "resources/sksl/errors/BinaryTypeCoercion.sksl",
+        "resources/sksl/errors/BinaryTypeMismatch.rts",
+        "resources/sksl/errors/BitShiftFloat.rts",
+        "resources/sksl/errors/BitShiftFloatMatrix.rts",
+        "resources/sksl/errors/BitShiftFloatVector.rts",
+        "resources/sksl/errors/BooleanArithmetic.sksl",
+        "resources/sksl/errors/BreakOutsideLoop.rts",
+        "resources/sksl/errors/CallMain.rts",
+        "resources/sksl/errors/CallNonFunction.rts",
+        "resources/sksl/errors/CanExitWithoutReturningValue.sksl",
+        "resources/sksl/errors/CommasAsConstantExpressions.rts",
+        "resources/sksl/errors/CommasWithArrays.sksl",
+        "resources/sksl/errors/ComparisonDimensional.rts",
+        "resources/sksl/errors/ConstructorArgumentCount.rts",
+        "resources/sksl/errors/ConstructorTypeMismatch.rts",
+        "resources/sksl/errors/ContinueOutsideLoop.rts",
+        "resources/sksl/errors/DivideByZero.rts",
+        "resources/sksl/errors/DoTypeMismatch.sksl",
+        "resources/sksl/errors/DuplicateBinding.sksl",
+        "resources/sksl/errors/DuplicateBuiltinFunction.rts",
+        "resources/sksl/errors/DuplicateFunction.rts",
+        "resources/sksl/errors/DuplicateInterfaceBlockField.sksl",
+        "resources/sksl/errors/DuplicateInterfaceBlockName.sksl",
+        "resources/sksl/errors/DuplicateOutput.sksl",
+        "resources/sksl/errors/DuplicateRTAdjust.sksl",
+        "resources/sksl/errors/DuplicateSkClockwise.sksl",
+        "resources/sksl/errors/DuplicateSymbol.rts",
+        "resources/sksl/errors/DuplicateSymbolInSwitch.rts",
+        "resources/sksl/errors/DuplicateWorkgroupSize.compute",
+        "resources/sksl/errors/EmptyArray.rts",
+        "resources/sksl/errors/EmptyBuffer.sksl",
+        "resources/sksl/errors/EmptyStruct.rts",
+        "resources/sksl/errors/ErrorsInDeadCode.rts",
+        "resources/sksl/errors/FloatRemainder.rts",
+        "resources/sksl/errors/ForInitStmt.sksl",
+        "resources/sksl/errors/ForLoopInductionVariableScope.sksl",
+        "resources/sksl/errors/ForLoopNEQOverflow.rts",
+        "resources/sksl/errors/ForLoopOverflow.rts",
+        "resources/sksl/errors/ForTypeMismatch.rts",
+        "resources/sksl/errors/FunctionParamBadType.rts",
+        "resources/sksl/errors/FunctionParamShadowedByLocal.rts",
+        "resources/sksl/errors/FunctionParameterOfVoid.rts",
+        "resources/sksl/errors/GenericArgumentMismatch.rts",
+        "resources/sksl/errors/IfTypeMismatch.rts",
+        "resources/sksl/errors/IllegalRecursionComplex.rts",
+        "resources/sksl/errors/IllegalRecursionMutual.rts",
+        "resources/sksl/errors/IllegalRecursionSimple.rts",
+        "resources/sksl/errors/InVarWithInitializerExpression.sksl",
+        "resources/sksl/errors/IncompleteExpression.rts",
+        "resources/sksl/errors/IncompleteFunctionCall.rts",
+        "resources/sksl/errors/InterfaceBlockMemberReservedName.sksl",
+        "resources/sksl/errors/InterfaceBlockMixedCommasAndSemicolons.sksl",
+        "resources/sksl/errors/InterfaceBlockPrivateType.sksl",
+        "resources/sksl/errors/InterfaceBlockReservedName.sksl",
+        "resources/sksl/errors/InterfaceBlockScope.sksl",
+        "resources/sksl/errors/InterfaceBlockStorageModifiers.sksl",
+        "resources/sksl/errors/InterfaceBlockWithArrayOfStructOfBool.sksl",
+        "resources/sksl/errors/InterfaceBlockWithInvalidNestedStruct.sksl",
+        "resources/sksl/errors/InterfaceBlockWithInvalidStruct.sksl",
+        "resources/sksl/errors/InterfaceBlockWithNoMembers.sksl",
+        "resources/sksl/errors/IntrinsicInGlobalVariable.sksl",
+        "resources/sksl/errors/InvalidAssignment.rts",
+        "resources/sksl/errors/InvalidAssignmentPipelineInputs.sksl",
+        "resources/sksl/errors/InvalidAtomicDeclarations.compute",
+        "resources/sksl/errors/InvalidAtomicOperations.compute",
+        "resources/sksl/errors/InvalidBackendBindingFlagsMetal.sksl",
+        "resources/sksl/errors/InvalidBackendBindingFlagsSPIRV.sksl",
+        "resources/sksl/errors/InvalidBackendBindingFlagsWGSL.sksl",
+        "resources/sksl/errors/InvalidCapsUsage.sksl",
+        "resources/sksl/errors/InvalidComputeMainParameters.compute",
+        "resources/sksl/errors/InvalidComputeMainReturn.compute",
+        "resources/sksl/errors/InvalidExtensionDirective.sksl",
+        "resources/sksl/errors/InvalidInOutType.compute",
+        "resources/sksl/errors/InvalidLocalSizeQualifier.compute",
+        "resources/sksl/errors/InvalidMeshFragmentMainParameters.mfrag",
+        "resources/sksl/errors/InvalidMeshFragmentMainReturn.mfrag",
+        "resources/sksl/errors/InvalidMeshVertexMainParameters.mvert",
+        "resources/sksl/errors/InvalidMeshVertexMainReturn.mvert",
+        "resources/sksl/errors/InvalidOutParams.sksl",
+        "resources/sksl/errors/InvalidToken.rts",
+        "resources/sksl/errors/InvalidUnary.rts",
+        "resources/sksl/errors/InvalidUniformTypes.sksl",
+        "resources/sksl/errors/InvalidUnsizedArray.compute",
+        "resources/sksl/errors/InvalidVersionDirective.sksl",
+        "resources/sksl/errors/InvalidWorkgroupCompute.compute",
+        "resources/sksl/errors/InvalidWorkgroupRTS.rts",
+        "resources/sksl/errors/LayoutInFunctions.sksl",
+        "resources/sksl/errors/LayoutInInterfaceBlock.sksl",
+        "resources/sksl/errors/LayoutInStruct.sksl",
+        "resources/sksl/errors/LayoutRepeatedQualifiers.sksl",
+        "resources/sksl/errors/MatrixIndexOutOfRange.rts",
+        "resources/sksl/errors/MatrixIndexOutOfRangeES3.sksl",
+        "resources/sksl/errors/MatrixInlinedIndexOutOfRange.sksl",
+        "resources/sksl/errors/MatrixToVectorCast3x3.rts",
+        "resources/sksl/errors/MatrixToVectorCastBoolean.rts",
+        "resources/sksl/errors/MatrixToVectorCastInteger.rts",
+        "resources/sksl/errors/MatrixToVectorCastTooSmall.rts",
+        "resources/sksl/errors/MeshVertexWithBlender.mvert",
+        "resources/sksl/errors/MeshVertexWithColorFilter.mvert",
+        "resources/sksl/errors/MeshVertexWithShader.mvert",
+        "resources/sksl/errors/MismatchedNumbers.rts",
+        "resources/sksl/errors/MismatchedNumbersES3.sksl",
+        "resources/sksl/errors/MisplacedLocalSizeQualifier.sksl",
+        "resources/sksl/errors/MissingWorkgroupSize.compute",
+        "resources/sksl/errors/ModifiersInStruct.rts",
+        "resources/sksl/errors/ModifiersRepeated.sksl",
+        "resources/sksl/errors/MultipleBackendFlags.sksl",
+        "resources/sksl/errors/MultipleFields.rts",
+        "resources/sksl/errors/MultipleFieldsInInterfaceBlocks.sksl",
+        "resources/sksl/errors/NoES3ModifierInUserCode.sksl",
+        "resources/sksl/errors/OpaqueTypeAssignment.sksl",
+        "resources/sksl/errors/OpaqueTypeConstruction.sksl",
+        "resources/sksl/errors/OpaqueTypeInArray.sksl",
+        "resources/sksl/errors/OpaqueTypeInInterfaceBlock.sksl",
+        "resources/sksl/errors/OpaqueTypeInStruct.sksl",
+        "resources/sksl/errors/OpaqueTypeOutParam.sksl",
+        "resources/sksl/errors/OpenArray.rts",
+        "resources/sksl/errors/Ossfuzz26700.sksl",
+        "resources/sksl/errors/Ossfuzz27614.sksl",
+        "resources/sksl/errors/Ossfuzz27650.sksl",
+        "resources/sksl/errors/Ossfuzz27663.sksl",
+        "resources/sksl/errors/Ossfuzz28050.sksl",
+        "resources/sksl/errors/Ossfuzz29444.sksl",
+        "resources/sksl/errors/Ossfuzz29845.sksl",
+        "resources/sksl/errors/Ossfuzz29849.sksl",
+        "resources/sksl/errors/Ossfuzz31410.sksl",
+        "resources/sksl/errors/Ossfuzz31469.sksl",
+        "resources/sksl/errors/Ossfuzz32156.sksl",
+        "resources/sksl/errors/Ossfuzz32587.sksl",
+        "resources/sksl/errors/Ossfuzz32851.sksl",
+        "resources/sksl/errors/Ossfuzz36850.sksl",
+        "resources/sksl/errors/Ossfuzz37457.sksl",
+        "resources/sksl/errors/Ossfuzz37465.sksl",
+        "resources/sksl/errors/Ossfuzz37469.sksl",
+        "resources/sksl/errors/Ossfuzz37620.sksl",
+        "resources/sksl/errors/Ossfuzz38106.sksl",
+        "resources/sksl/errors/Ossfuzz38108.sksl",
+        "resources/sksl/errors/Ossfuzz38140.sksl",
+        "resources/sksl/errors/Ossfuzz38560.sksl",
+        "resources/sksl/errors/Ossfuzz38831.sksl",
+        "resources/sksl/errors/Ossfuzz38865.sksl",
+        "resources/sksl/errors/Ossfuzz38944.sksl",
+        "resources/sksl/errors/Ossfuzz39000.sksl",
+        "resources/sksl/errors/Ossfuzz40427.sksl",
+        "resources/sksl/errors/Ossfuzz40428.sksl",
+        "resources/sksl/errors/Ossfuzz40479.sksl",
+        "resources/sksl/errors/Ossfuzz40660.sksl",
+        "resources/sksl/errors/Ossfuzz44045.sksl",
+        "resources/sksl/errors/Ossfuzz44551.sksl",
+        "resources/sksl/errors/Ossfuzz44557.sksl",
+        "resources/sksl/errors/Ossfuzz44561.sksl",
+        "resources/sksl/errors/Ossfuzz47935.sksl",
+        "resources/sksl/errors/Ossfuzz48592.sksl",
+        "resources/sksl/errors/Ossfuzz49558.sksl",
+        "resources/sksl/errors/Ossfuzz50798.sksl",
+        "resources/sksl/errors/Ossfuzz50922.sksl",
+        "resources/sksl/errors/Ossfuzz515515145.sksl",
+        "resources/sksl/errors/Ossfuzz516126015.sksl",
+        "resources/sksl/errors/Ossfuzz56373.sksl",
+        "resources/sksl/errors/Ossfuzz58037.sksl",
+        "resources/sksl/errors/Ossfuzz58375.sksl",
+        "resources/sksl/errors/Ossfuzz63793.sksl",
+        "resources/sksl/errors/Ossfuzz70643.sksl",
+        "resources/sksl/errors/OverflowFloatIntrinsic.sksl",
+        "resources/sksl/errors/OverflowFloatLiteral.rts",
+        "resources/sksl/errors/OverflowInlinedLiteral.sksl",
+        "resources/sksl/errors/OverflowInt64Literal.rts",
+        "resources/sksl/errors/OverflowIntLiteral.rts",
+        "resources/sksl/errors/OverflowParamArraySize.rts",
+        "resources/sksl/errors/OverflowShortLiteral.sksl",
+        "resources/sksl/errors/OverflowUintLiteral.sksl",
+        "resources/sksl/errors/OverloadedBuiltin.sksl",
+        "resources/sksl/errors/OverloadedMain.sksl",
+        "resources/sksl/errors/PixelFormatMismatch.compute",
+        "resources/sksl/errors/PixelFormatMissing.compute",
+        "resources/sksl/errors/PixelFormatOverloads.compute",
+        "resources/sksl/errors/PrecisionQualifiersDisallowed.sksl",
+        "resources/sksl/errors/PrivateTypes.rts",
+        "resources/sksl/errors/PrivateVariables.rts",
+        "resources/sksl/errors/ProgramTooLarge_Globals.rts",
+        "resources/sksl/errors/ProgramTooLarge_InterfaceBlock.sksl",
+        "resources/sksl/errors/ProgramTooLarge_Parameters.rts",
+        "resources/sksl/errors/ProgramTooLarge_Stack.rts",
+        "resources/sksl/errors/ProgramTooLarge_Struct.rts",
+        "resources/sksl/errors/PrototypeInFuncBody.rts",
+        "resources/sksl/errors/RTAdjustType.sksl",
+        "resources/sksl/errors/ReadonlyWriteonly.compute",
+        "resources/sksl/errors/RedeclareBasicType.rts",
+        "resources/sksl/errors/RedeclareBuiltinVariables.sksl",
+        "resources/sksl/errors/RedeclareSamplerType.sksl",
+        "resources/sksl/errors/RedeclareShaderType.rts",
+        "resources/sksl/errors/RedeclareStruct.rts",
+        "resources/sksl/errors/RedeclareStructTypeWithName.rts",
+        "resources/sksl/errors/RedeclareUserType.rts",
+        "resources/sksl/errors/RedeclareVariable.rts",
+        "resources/sksl/errors/ReservedNameAsm.rts",
+        "resources/sksl/errors/ReservedNameAtomic.rts",
+        "resources/sksl/errors/ReservedNameAttribute.rts",
+        "resources/sksl/errors/ReservedNameCast.rts",
+        "resources/sksl/errors/ReservedNameDmat2.rts",
+        "resources/sksl/errors/ReservedNameDmat3.rts",
+        "resources/sksl/errors/ReservedNameDmat4.rts",
+        "resources/sksl/errors/ReservedNameDouble.rts",
+        "resources/sksl/errors/ReservedNameDvec2.rts",
+        "resources/sksl/errors/ReservedNameDvec3.rts",
+        "resources/sksl/errors/ReservedNameDvec4.rts",
+        "resources/sksl/errors/ReservedNameEnum.rts",
+        "resources/sksl/errors/ReservedNameExtern.rts",
+        "resources/sksl/errors/ReservedNameExternal.rts",
+        "resources/sksl/errors/ReservedNameFixed.rts",
+        "resources/sksl/errors/ReservedNameFvec2.rts",
+        "resources/sksl/errors/ReservedNameFvec3.rts",
+        "resources/sksl/errors/ReservedNameFvec4.rts",
+        "resources/sksl/errors/ReservedNameGoto.rts",
+        "resources/sksl/errors/ReservedNameHvec2.rts",
+        "resources/sksl/errors/ReservedNameHvec3.rts",
+        "resources/sksl/errors/ReservedNameHvec4.rts",
+        "resources/sksl/errors/ReservedNameImage.rts",
+        "resources/sksl/errors/ReservedNameInput.rts",
+        "resources/sksl/errors/ReservedNameInterface.rts",
+        "resources/sksl/errors/ReservedNameInvariant.rts",
+        "resources/sksl/errors/ReservedNameLong.rts",
+        "resources/sksl/errors/ReservedNameNamespace.rts",
+        "resources/sksl/errors/ReservedNameOutput.rts",
+        "resources/sksl/errors/ReservedNamePacked.rts",
+        "resources/sksl/errors/ReservedNamePrecision.rts",
+        "resources/sksl/errors/ReservedNamePublic.rts",
+        "resources/sksl/errors/ReservedNameSampler.rts",
+        "resources/sksl/errors/ReservedNameSizeof.rts",
+        "resources/sksl/errors/ReservedNameStatic.rts",
+        "resources/sksl/errors/ReservedNameSubpassInput.rts",
+        "resources/sksl/errors/ReservedNameSuperp.rts",
+        "resources/sksl/errors/ReservedNameTemplate.rts",
+        "resources/sksl/errors/ReservedNameTexture.rts",
+        "resources/sksl/errors/ReservedNameThis.rts",
+        "resources/sksl/errors/ReservedNameTypedef.rts",
+        "resources/sksl/errors/ReservedNameUnion.rts",
+        "resources/sksl/errors/ReservedNameUnsigned.rts",
+        "resources/sksl/errors/ReservedNameUsing.rts",
+        "resources/sksl/errors/ReservedNameVarying.rts",
+        "resources/sksl/errors/ReservedNameVolatile.rts",
+        "resources/sksl/errors/ReturnDifferentType.rts",
+        "resources/sksl/errors/ReturnFromVoid.rts",
+        "resources/sksl/errors/ReturnMissingValue.rts",
+        "resources/sksl/errors/ReturnTypeMismatch.rts",
+        "resources/sksl/errors/SamplerExternalOES.frag",
+        "resources/sksl/errors/SelfReferentialInitializerExpression.rts",
+        "resources/sksl/errors/SpuriousFloat.rts",
+        "resources/sksl/errors/StructMemberReservedName.rts",
+        "resources/sksl/errors/StructNameWithoutIdentifier.rts",
+        "resources/sksl/errors/StructRedefinition.rts",
+        "resources/sksl/errors/StructTooDeeplyNested.rts",
+        "resources/sksl/errors/StructVariableReservedName.rts",
+        "resources/sksl/errors/SwitchDuplicateCase.rts",
+        "resources/sksl/errors/SwitchDuplicateDefault.rts",
+        "resources/sksl/errors/SwitchDuplicateVariable.rts",
+        "resources/sksl/errors/SwitchHoistingAtomicArray.sksl",
+        "resources/sksl/errors/SwitchTypes.rts",
+        "resources/sksl/errors/SwitchVariableScope.rts",
+        "resources/sksl/errors/SwitchWithContinueInside.sksl",
+        "resources/sksl/errors/SwizzleConstantOutput.rts",
+        "resources/sksl/errors/SwizzleDomain.rts",
+        "resources/sksl/errors/SwizzleMatrix.rts",
+        "resources/sksl/errors/SwizzleOnlyLiterals.rts",
+        "resources/sksl/errors/SwizzleOutOfBounds.rts",
+        "resources/sksl/errors/SwizzleTooManyComponents.rts",
+        "resources/sksl/errors/TernaryMismatch.rts",
+        "resources/sksl/errors/UnassignedOutParameter.rts",
+        "resources/sksl/errors/UndeclaredFunction.rts",
+        "resources/sksl/errors/UndefinedFunction.rts",
+        "resources/sksl/errors/UndefinedSymbol.rts",
+        "resources/sksl/errors/UniformStructFanOut.sksl",
+        "resources/sksl/errors/UniformVarWithInitializerExpression.rts",
+        "resources/sksl/errors/UnknownDivideByZero.sksl",
+        "resources/sksl/errors/UnscopedVariableInDoWhile.sksl",
+        "resources/sksl/errors/UnscopedVariableInElse.rts",
+        "resources/sksl/errors/UnscopedVariableInFor.rts",
+        "resources/sksl/errors/UnscopedVariableInIf.rts",
+        "resources/sksl/errors/UnscopedVariableInWhile.sksl",
+        "resources/sksl/errors/UnsupportedGLSLIdentifiers.rts",
+        "resources/sksl/errors/UsingInvalidValue.rts",
+        "resources/sksl/errors/VectorIndexOutOfRange.rts",
+        "resources/sksl/errors/VectorInlinedIndexOutOfRange.sksl",
+        "resources/sksl/errors/VectorSlice.rts",
+        "resources/sksl/errors/VertexEarlyReturn.vert",
+        "resources/sksl/errors/VoidConstructor.rts",
+        "resources/sksl/errors/VoidInStruct.rts",
+        "resources/sksl/errors/VoidVariable.rts",
+        "resources/sksl/errors/WhileTypeMismatch.sksl",
+        "resources/sksl/es2_conformance/**",
+        "resources/sksl/folding/**",
+        "resources/sksl/glsl/**",
+        "resources/sksl/inliner/**",
+        "resources/sksl/intrinsics/**",
+        "resources/sksl/mesh/**",
+        "resources/sksl/metal/**",
+        "resources/sksl/realistic/**",
+        "resources/sksl/runtime/**",
+        "resources/sksl/runtime_errors/**",
+        "resources/sksl/shared/**",
+        "resources/sksl/skrp/**",
+        "resources/sksl/spirv/**",
+        "resources/sksl/update_fuzzer.py",
+        "resources/sksl/wgsl/**",
+        "resources/sksl/workarounds/**",
+        "resources/text/**",
+        "rust/**",
+        "serve-bazel-test-undeclared-outputs.sh",
+        "site/_index.html",
+        "site/about/**",
+        "site/blog/**",
+        "site/config.toml",
+        "site/docs/_index.md",
+        "site/docs/dev/_index.md",
+        "site/docs/dev/chrome/**",
+        "site/docs/dev/design/_index.md",
+        "site/docs/dev/design/aaa.md",
+        "site/docs/dev/design/conical/**",
+        "site/docs/dev/design/dangling_pointer_detector.md",
+        "site/docs/dev/design/pdftheory.md",
+        "site/docs/dev/design/raster_tragedy/**",
+        "site/docs/dev/design/text_c2d.md",
+        "site/docs/dev/design/text_overview.md",
+        "site/docs/dev/design/text_shaper.md",
+        "site/docs/dev/design/uni_characterize.md",
+        "site/docs/dev/gardening/_index.md",
+        "site/docs/dev/gardening/android.md",
+        "site/docs/dev/gardening/gpu.md",
+        "site/docs/dev/gardening/infra.md",
+        "site/docs/dev/internal/**",
+        "site/docs/dev/present/**",
+        "site/docs/dev/testing/_index.md",
+        "site/docs/dev/testing/automated_testing.md",
+        "site/docs/dev/testing/download.md",
+        "site/docs/dev/testing/fonts.md",
+        "site/docs/dev/testing/fuzz.md",
+        "site/docs/dev/testing/ios.md",
+        "site/docs/dev/testing/profiling.md",
+        "site/docs/dev/testing/skiagold.md",
+        "site/docs/dev/testing/skiaperf.md",
+        "site/docs/dev/testing/skqp.md",
+        "site/docs/dev/testing/swarmingbots.md",
+        "site/docs/dev/testing/testing.md",
+        "site/docs/dev/testing/tests.md",
+        "site/docs/dev/testing/xsan.md",
+        "site/docs/dev/tools/_index.md",
+        "site/docs/dev/tools/android-capture.md",
+        "site/docs/dev/tools/android_gdb.md",
+        "site/docs/dev/tools/calendar.mskp",
+        "site/docs/dev/tools/codesearch.md",
+        "site/docs/dev/tools/debugger.md",
+        "site/docs/dev/tools/debugvis.md",
+        "site/docs/dev/tools/markdown.md",
+        "site/docs/dev/tools/sk.md",
+        "site/docs/dev/tools/tracing.md",
+        "site/docs/roles.md",
+        "site/docs/user/_index.md",
+        "site/docs/user/api/**",
+        "site/docs/user/build.md",
+        "site/docs/user/color.md",
+        "site/docs/user/coordinates.md",
+        "site/docs/user/download.md",
+        "site/docs/user/issue-tracker.md",
+        "site/docs/user/modules/_index.md",
+        "site/docs/user/modules/canvaskit.md",
+        "site/docs/user/modules/quickstart.md",
+        "site/docs/user/modules/skottie.md",
+        "site/docs/user/privacy.md",
+        "site/docs/user/release/**",
+        "site/docs/user/sample/**",
+        "site/docs/user/sksl.md",
+        "site/docs/user/special/**",
+        "site/docs/user/tips.md",
+        "site/search.md",
+        "specs/**",
+        "src/**",
+        "tests/AAClipTest.cpp",
+        "tests/AdvancedBlendTest.cpp",
+        "tests/AndroidCodecTest.cpp",
+        "tests/AnimatedImageTest.cpp",
+        "tests/AnnotationTest.cpp",
+        "tests/ApplyGammaTest.cpp",
+        "tests/ArenaAllocTest.cpp",
+        "tests/AsADashTest.cpp",
+        "tests/AtlasOobTest.cpp",
+        "tests/AvifTest.cpp",
+        "tests/BRDTest.cpp",
+        "tests/BUILD.bazel",
+        "tests/BackendAllocationTest.cpp",
+        "tests/BackendSurfaceMutableStateTest.cpp",
+        "tests/BadIcoTest.cpp",
+        "tests/BezierCurveTest.cpp",
+        "tests/BigImageTest.cpp",
+        "tests/BitSetTest.cpp",
+        "tests/BitmapCopyTest.cpp",
+        "tests/BitmapGetColorTest.cpp",
+        "tests/BitmapTest.cpp",
+        "tests/BlendTest.cpp",
+        "tests/BlitMaskClip.cpp",
+        "tests/BlurTest.cpp",
+        "tests/BulkRectTest.cpp",
+        "tests/CPUBackendTest.cpp",
+        "tests/CPUContextRecorderTest.cpp",
+        "tests/CachedDataTest.cpp",
+        "tests/CachedDecodingPixelRefTest.cpp",
+        "tests/CanvasStateHelpers.cpp",
+        "tests/CanvasStateHelpers.h",
+        "tests/CanvasStateTest.cpp",
+        "tests/CanvasTest.cpp",
+        "tests/CappedHairlinesTest.cpp",
+        "tests/CharToGlyphCache.cpp",
+        "tests/ChecksumTest.cpp",
+        "tests/ClearTest.cpp",
+        "tests/ClipCubicTest.cpp",
+        "tests/ClipStackTest.cpp",
+        "tests/ClipperTest.cpp",
+        "tests/CodecAnimTest.cpp",
+        "tests/CodecExactReadTest.cpp",
+        "tests/CodecPartialTest.cpp",
+        "tests/CodecPriv.h",
+        "tests/CodecRecommendedTypeTest.cpp",
+        "tests/CodecTest.cpp",
+        "tests/ColorFilterTest.cpp",
+        "tests/ColorMatrixTest.cpp",
+        "tests/ColorPrivTest.cpp",
+        "tests/ColorSpaceTest.cpp",
+        "tests/ColorTest.cpp",
+        "tests/ComparePixels.cpp",
+        "tests/ComparePixels.h",
+        "tests/CompressedBackendAllocationTest.cpp",
+        "tests/ConvertPixelsTest.cpp",
+        "tests/CopySurfaceTest.cpp",
+        "tests/CoreBlittersTest.cpp",
+        "tests/CtsEnforcement.cpp",
+        "tests/CtsEnforcement.h",
+        "tests/CubicChopTest.cpp",
+        "tests/CubicMapTest.cpp",
+        "tests/CubicRootsTest.cpp",
+        "tests/CullTestTest.cpp",
+        "tests/DMSAATest.cpp",
+        "tests/DashPathEffectTest.cpp",
+        "tests/DashPathEffectTestGanesh.cpp",
+        "tests/DataRefTest.cpp",
+        "tests/DebugLayerManagerTest.cpp",
+        "tests/DefaultPathRendererTest.cpp",
+        "tests/DeferredDisplayListTest.cpp",
+        "tests/DequeTest.cpp",
+        "tests/DescriptorTest.cpp",
+        "tests/DeviceTest.cpp",
+        "tests/DirectMaskLimitTest.cpp",
+        "tests/DiscardableMemoryPoolTest.cpp",
+        "tests/DiscardableMemoryTest.cpp",
+        "tests/DrawBitmapRectTest.cpp",
+        "tests/DrawOpAtlasTest.cpp",
+        "tests/DrawPathTest.cpp",
+        "tests/DrawTextTest.cpp",
+        "tests/EGLImageTest.cpp",
+        "tests/EdgeTest.cpp",
+        "tests/EmptyPathTest.cpp",
+        "tests/EncodeTest.cpp",
+        "tests/EncodedInfoTest.cpp",
+        "tests/ExecutorTest.cpp",
+        "tests/ExifTest.cpp",
+        "tests/ExtendedSkColorTypeTests.cpp",
+        "tests/F16DrawTest.cpp",
+        "tests/F16StagesTest.cpp",
+        "tests/FCITest.cpp",
+        "tests/FakeStreams.h",
+        "tests/FillPathTest.cpp",
+        "tests/FilterResultTest.cpp",
+        "tests/FindCubicConvex180ChopsTest.cpp",
+        "tests/FitsInTest.cpp",
+        "tests/FlattenDrawableTest.cpp",
+        "tests/FlattenableFactoryToName.cpp",
+        "tests/FlattenableNameToFactory.cpp",
+        "tests/Float16Test.cpp",
+        "tests/FloatingPointTest.cpp",
+        "tests/FloatingPointTextureTest.cpp",
+        "tests/FontHostStreamTest.cpp",
+        "tests/FontHostTest.cpp",
+        "tests/FontMgrAndroidParserTest.cpp",
+        "tests/FontMgrFlags.cpp",
+        "tests/FontMgrFontConfigTest.cpp",
+        "tests/FontMgrTest.cpp",
+        "tests/FontNamesTest.cpp",
+        "tests/FontScanner.cpp",
+        "tests/FontScanner.h",
+        "tests/FontScanner_FontationsTest.cpp",
+        "tests/FontScanner_FreeTypeTest.cpp",
+        "tests/FontTest.cpp",
+        "tests/FontationsFtCompTest.cpp",
+        "tests/FontationsTest.cpp",
+        "tests/FrontBufferedStreamTest.cpp",
+        "tests/GLBackendSurfaceTest.cpp",
+        "tests/GLFramebufferDeletionTest.cpp",
+        "tests/GainmapShaderTest.cpp",
+        "tests/GainmapTestCommon.h",
+        "tests/GaneshContextRecorderTest.cpp",
+        "tests/GaneshTestUtils.h",
+        "tests/GeometryTest.cpp",
+        "tests/GifTest.cpp",
+        "tests/GpuDrawPathTest.cpp",
+        "tests/GpuRectanizerTest.cpp",
+        "tests/GrAHardwareBufferTest.cpp",
+        "tests/GrClipStackTest.cpp",
+        "tests/GrContextAbandonTest.cpp",
+        "tests/GrContextFactoryTest.cpp",
+        "tests/GrContextOOM.cpp",
+        "tests/GrDDLImageTest.cpp",
+        "tests/GrFinishedFlushTest.cpp",
+        "tests/GrGLExtensionsTest.cpp",
+        "tests/GrGlyphVectorTest.cpp",
+        "tests/GrGpuBufferTest.cpp",
+        "tests/GrMemoryPoolTest.cpp",
+        "tests/GrMeshTest.cpp",
+        "tests/GrMipMappedTest.cpp",
+        "tests/GrOpListFlushTest.cpp",
+        "tests/GrPipelineDynamicStateTest.cpp",
+        "tests/GrPorterDuffTest.cpp",
+        "tests/GrQuadBufferTest.cpp",
+        "tests/GrQuadCropTest.cpp",
+        "tests/GrRenderTaskClusterTest.cpp",
+        "tests/GrStyledShapeTest.cpp",
+        "tests/GrSubmittedFlushTest.cpp",
+        "tests/GrSurfaceResolveTest.cpp",
+        "tests/GrSurfaceTest.cpp",
+        "tests/GrTextBlobTest.cpp",
+        "tests/GrTextureMipMapInvalidationTest.cpp",
+        "tests/GrThreadSafeCacheTest.cpp",
+        "tests/GrUniqueProxyTest.cpp",
+        "tests/GradientTest.cpp",
+        "tests/HSVRoundTripTest.cpp",
+        "tests/HashTest.cpp",
+        "tests/HdrMetadataTest.cpp",
+        "tests/HighContrastFilterTest.cpp",
+        "tests/ICCTest.cpp",
+        "tests/ImageBitmapTest.cpp",
+        "tests/ImageCacheTest.cpp",
+        "tests/ImageFilterCacheTest.cpp",
+        "tests/ImageFilterTest.cpp",
+        "tests/ImageFrom565Bitmap.cpp",
+        "tests/ImageGeneratorOrientationTest.cpp",
+        "tests/ImageGeneratorTest.cpp",
+        "tests/ImageIsOpaqueTest.cpp",
+        "tests/ImageNewShaderTest.cpp",
+        "tests/ImageTest.cpp",
+        "tests/IncrTopoSortTest.cpp",
+        "tests/IndexedPngOverflowTest.cpp",
+        "tests/InfRectTest.cpp",
+        "tests/InsetConvexPolyTest.cpp",
+        "tests/InvalidIndexedPngTest.cpp",
+        "tests/IsClosedSingleContourTest.cpp",
+        "tests/JSONTest.cpp",
+        "tests/JpegGainmapTest.cpp",
+        "tests/JpegxlTest.cpp",
+        "tests/LListTest.cpp",
+        "tests/LRUCacheTest.cpp",
+        "tests/LazyProxyTest.cpp",
+        "tests/LazyStencilAttachmentTest.cpp",
+        "tests/M44Test.cpp",
+        "tests/MD5Test.cpp",
+        "tests/MallocPixelRefTest.cpp",
+        "tests/MaskCacheTest.cpp",
+        "tests/MathTest.cpp",
+        "tests/MatrixColorFilterTest.cpp",
+        "tests/MatrixProcsTest.cpp",
+        "tests/MatrixTest.cpp",
+        "tests/MemoryTest.cpp",
+        "tests/MemsetTest.cpp",
+        "tests/MeshTest.cpp",
+        "tests/MessageBusTest.cpp",
+        "tests/MetaDataTest.cpp",
+        "tests/MipMapTest.cpp",
+        "tests/MtlBackendAllocationTest.cc",
+        "tests/MtlCopySurfaceTest.cc",
+        "tests/MultiPictureDocumentTest.cpp",
+        "tests/NdkDecodeTest.cpp",
+        "tests/NdkEncodeTest.cpp",
+        "tests/NonlinearBlendingTest.cpp",
+        "tests/OSPathTest.cpp",
+        "tests/OffsetSimplePolyTest.cpp",
+        "tests/OnceTest.cpp",
+        "tests/OpChainTest.cpp",
+        "tests/OverAlignedTest.cpp",
+        "tests/PDFDeflateWStreamTest.cpp",
+        "tests/PDFDocumentTest.cpp",
+        "tests/PDFGlyphsToUnicodeTest.cpp",
+        "tests/PDFJpegEmbedTest.cpp",
+        "tests/PDFMetadataAttributeTest.cpp",
+        "tests/PDFOpaqueSrcModeToSrcOverTest.cpp",
+        "tests/PDFPrimitivesTest.cpp",
+        "tests/PDFTaggedLinkTest.cpp",
+        "tests/PDFTaggedTableTest.cpp",
+        "tests/PDFTaggedTest.cpp",
+        "tests/PaintTest.cpp",
+        "tests/ParametricStageTest.cpp",
+        "tests/ParseColorTest.cpp",
+        "tests/ParsePathTest.cpp",
+        "tests/PathBuilderTest.cpp",
+        "tests/PathCoverageTest.cpp",
+        "tests/PathDataTest.cpp",
+        "tests/PathMeasureTest.cpp",
+        "tests/PathOpsAngleIdeas.cpp",
+        "tests/PathOpsAngleTest.cpp",
+        "tests/PathOpsAsWindingTest.cpp",
+        "tests/PathOpsBattles.cpp",
+        "tests/PathOpsBoundsTest.cpp",
+        "tests/PathOpsBuildUseTest.cpp",
+        "tests/PathOpsBuilderConicTest.cpp",
+        "tests/PathOpsBuilderTest.cpp",
+        "tests/PathOpsChalkboardTest.cpp",
+        "tests/PathOpsConicIntersectionTest.cpp",
+        "tests/PathOpsConicLineIntersectionTest.cpp",
+        "tests/PathOpsConicQuadIntersectionTest.cpp",
+        "tests/PathOpsCubicConicIntersectionTest.cpp",
+        "tests/PathOpsCubicIntersectionTest.cpp",
+        "tests/PathOpsCubicIntersectionTestData.cpp",
+        "tests/PathOpsCubicIntersectionTestData.h",
+        "tests/PathOpsCubicLineIntersectionIdeas.cpp",
+        "tests/PathOpsCubicLineIntersectionTest.cpp",
+        "tests/PathOpsCubicQuadIntersectionTest.cpp",
+        "tests/PathOpsCubicReduceOrderTest.cpp",
+        "tests/PathOpsDCubicTest.cpp",
+        "tests/PathOpsDLineTest.cpp",
+        "tests/PathOpsDPointTest.cpp",
+        "tests/PathOpsDRectTest.cpp",
+        "tests/PathOpsDVectorTest.cpp",
+        "tests/PathOpsDebug.cpp",
+        "tests/PathOpsDebug.h",
+        "tests/PathOpsExtendedTest.cpp",
+        "tests/PathOpsExtendedTest.h",
+        "tests/PathOpsFuzz763Test.cpp",
+        "tests/PathOpsInverseTest.cpp",
+        "tests/PathOpsIssue3651.cpp",
+        "tests/PathOpsLineIntersectionTest.cpp",
+        "tests/PathOpsLineParametetersTest.cpp",
+        "tests/PathOpsOpCircleThreadedTest.cpp",
+        "tests/PathOpsOpCubicThreadedTest.cpp",
+        "tests/PathOpsOpLoopThreadedTest.cpp",
+        "tests/PathOpsOpRectThreadedTest.cpp",
+        "tests/PathOpsOpTest.cpp",
+        "tests/PathOpsQuadIntersectionTest.cpp",
+        "tests/PathOpsQuadIntersectionTestData.cpp",
+        "tests/PathOpsQuadIntersectionTestData.h",
+        "tests/PathOpsQuadLineIntersectionTest.cpp",
+        "tests/PathOpsQuadLineIntersectionThreadedTest.cpp",
+        "tests/PathOpsQuadReduceOrderTest.cpp",
+        "tests/PathOpsSimplifyDegenerateThreadedTest.cpp",
+        "tests/PathOpsSimplifyFailTest.cpp",
+        "tests/PathOpsSimplifyQuadThreadedTest.cpp",
+        "tests/PathOpsSimplifyQuadralateralsThreadedTest.cpp",
+        "tests/PathOpsSimplifyRectThreadedTest.cpp",
+        "tests/PathOpsSimplifyTest.cpp",
+        "tests/PathOpsSimplifyTrianglesThreadedTest.cpp",
+        "tests/PathOpsSkpTest.cpp",
+        "tests/PathOpsTSectDebug.h",
+        "tests/PathOpsTestCommon.cpp",
+        "tests/PathOpsTestCommon.h",
+        "tests/PathOpsThreadedCommon.cpp",
+        "tests/PathOpsThreadedCommon.h",
+        "tests/PathOpsThreeWayTest.cpp",
+        "tests/PathOpsTigerTest.cpp",
+        "tests/PathOpsTightBoundsTest.cpp",
+        "tests/PathOpsTypesTest.cpp",
+        "tests/PathRawShapesTest.cpp",
+        "tests/PathRawTest.cpp",
+        "tests/PathRendererCacheTests.cpp",
+        "tests/PathTest.cpp",
+        "tests/PictureBBHTest.cpp",
+        "tests/PictureShaderTest.cpp",
+        "tests/PictureTest.cpp",
+        "tests/PinnedImageTest.cpp",
+        "tests/PixelRefTest.cpp",
+        "tests/PixelsRecTest.cpp",
+        "tests/PngGainmapTest.cpp",
+        "tests/Point3Test.cpp",
+        "tests/PointTest.cpp",
+        "tests/PolyUtilsTest.cpp",
+        "tests/PreChopPathCurvesTest.cpp",
+        "tests/PremulAlphaRoundTripTest.cpp",
+        "tests/PrimitiveProcessorTest.cpp",
+        "tests/ProcessorTest.cpp",
+        "tests/ProgramsTest.cpp",
+        "tests/PromiseImageTest.cpp",
+        "tests/ProtectedTest.cpp",
+        "tests/ProxyConversionTest.cpp",
+        "tests/ProxyRefTest.cpp",
+        "tests/ProxyTest.cpp",
+        "tests/QuadRootsTest.cpp",
+        "tests/QuickRejectTest.cpp",
+        "tests/RRectInPathTest.cpp",
+        "tests/RTreeTest.cpp",
+        "tests/RandomTest.cpp",
+        "tests/RasterPipelineBuilderTest.cpp",
+        "tests/RasterPipelineCodeGeneratorTest.cpp",
+        "tests/RawPtrTest.cpp",
+        "tests/ReadPixelsTest.cpp",
+        "tests/ReadWritePixelsGpuTest.cpp",
+        "tests/RecordDrawTest.cpp",
+        "tests/RecordOptsTest.cpp",
+        "tests/RecordPatternTest.cpp",
+        "tests/RecordTest.cpp",
+        "tests/RecordTestUtils.h",
+        "tests/RecorderTest.cpp",
+        "tests/RecordingXfermodeTest.cpp",
+        "tests/RectTest.cpp",
+        "tests/RectangleTextureTest.cpp",
+        "tests/RefCntTest.cpp",
+        "tests/RegionTest.cpp",
+        "tests/RepeatedClippedBlurTest.cpp",
+        "tests/ResourceAllocatorTest.cpp",
+        "tests/ResourceCacheTest.cpp",
+        "tests/RoundRectTest.cpp",
+        "tests/RuntimeBlendTest.cpp",
+        "tests/RustExifTest.cpp",
+        "tests/RustIccTest.cpp",
+        "tests/SRGBReadWritePixelsTest.cpp",
+        "tests/SRGBTest.cpp",
+        "tests/SVGDeviceTest.cpp",
+        "tests/SafeMathTest.cpp",
+        "tests/SamplingTest.cpp",
+        "tests/SaveLayerOriginTest.cpp",
+        "tests/ScalarTest.cpp",
+        "tests/ScaleToSidesTest.cpp",
+        "tests/SerialProcsTest.cpp",
+        "tests/SerializationTest.cpp",
+        "tests/ShaderImageFilterTest.cpp",
+        "tests/ShaderOpacityTest.cpp",
+        "tests/ShaderTest.cpp",
+        "tests/ShadowTest.cpp",
+        "tests/SimplifyPaintTest.cpp",
+        "tests/SizeTest.cpp",
+        "tests/SkBase64Test.cpp",
+        "tests/SkBlockAllocatorTest.cpp",
+        "tests/SkBmpRustDecoderTest.cpp",
+        "tests/SkColor4fTest.cpp",
+        "tests/SkColorSpaceXformStepsTest.cpp",
+        "tests/SkContainersTest.cpp",
+        "tests/SkDOMTest.cpp",
+        "tests/SkEnumBitMaskTest.cpp",
+        "tests/SkFontMetricsPrivTest.cpp",
+        "tests/SkGaussFilterTest.cpp",
+        "tests/SkGlyphTest.cpp",
+        "tests/SkIcoRustDecoderTest.cpp",
+        "tests/SkImageTest.cpp",
+        "tests/SkJpegRustCodecTest.cpp",
+        "tests/SkJpegXmpTest.cpp",
+        "tests/SkMallocTest.cpp",
+        "tests/SkPathRangeIterTest.cpp",
+        "tests/SkPngRustDecoderTest.cpp",
+        "tests/SkPngRustEncoderTest.cpp",
+        "tests/SkRasterPipelineOptsTest.cpp",
+        "tests/SkRasterPipelineTest.cpp",
+        "tests/SkRemoteGlyphCacheTest.cpp",
+        "tests/SkResourceCacheTest.cpp",
+        "tests/SkRuntimeEffectTest.cpp",
+        "tests/SkSLCross.cpp",
+        "tests/SkSLDebugTracePlayerTest.cpp",
+        "tests/SkSLDebugTraceTest.cpp",
+        "tests/SkSLES2ConformanceTest.cpp",
+        "tests/SkSLErrorTest.cpp",
+        "tests/SkSLGLSLTestbed.cpp",
+        "tests/SkSLMemoryLayoutTest.cpp",
+        "tests/SkSLMetalTestbed.cpp",
+        "tests/SkSLPipelineStageTestbed.cpp",
+        "tests/SkSLSPIRVTestbed.cpp",
+        "tests/SkSLTest.cpp",
+        "tests/SkSLTypeTest.cpp",
+        "tests/SkSLWGSLTestbed.cpp",
+        "tests/SkSharedMutexTest.cpp",
+        "tests/SkSpanTest.cpp",
+        "tests/SkStrikeCacheTest.cpp",
+        "tests/SkStrikeTest.cpp",
+        "tests/SkStringViewTest.cpp",
+        "tests/SkTBlockListTest.cpp",
+        "tests/SkUTFTest.cpp",
+        "tests/SkVxTest.cpp",
+        "tests/SkXmpTest.cpp",
+        "tests/SkYUVAInfoTest.cpp",
+        "tests/Skbug12214.cpp",
+        "tests/Skbug5221.cpp",
+        "tests/Skbug6389.cpp",
+        "tests/Skbug6653.cpp",
+        "tests/SlugTest.cpp",
+        "tests/SmallPathRendererTest.cpp",
+        "tests/SortTest.cpp",
+        "tests/SpecialImageTest.cpp",
+        "tests/SrcOverTest.cpp",
+        "tests/SrcSrcOverBatchTest.cpp",
+        "tests/StencilClearTest.cpp",
+        "tests/StreamTest.cpp",
+        "tests/StrikeForGPUTest.cpp",
+        "tests/StringTest.cpp",
+        "tests/StrokeTest.cpp",
+        "tests/StrokerTest.cpp",
+        "tests/SubsetPath.cpp",
+        "tests/SubsetPath.h",
+        "tests/SurfaceDrawContextTest.cpp",
+        "tests/SurfaceSemaphoreTest.cpp",
+        "tests/SurfaceTest.cpp",
+        "tests/SwizzlerTest.cpp",
+        "tests/TArrayTest.cpp",
+        "tests/TDPQueueTest.cpp",
+        "tests/TLazyTest.cpp",
+        "tests/TemplatesTest.cpp",
+        "tests/Test.cpp",
+        "tests/Test.h",
+        "tests/TestHarness.cpp",
+        "tests/TestHarness.h",
+        "tests/TestTest.cpp",
+        "tests/TestType.h",
+        "tests/TextBlobCacheTest.cpp",
+        "tests/TextBlobTest.cpp",
+        "tests/TextureBindingsResetTest.cpp",
+        "tests/TextureOpTest.cpp",
+        "tests/TextureProxyTest.cpp",
+        "tests/TextureSizeTest.cpp",
+        "tests/TextureStripAtlasManagerTest.cpp",
+        "tests/Time.cpp",
+        "tests/TopoSortTest.cpp",
+        "tests/TraceMemoryDumpTest.cpp",
+        "tests/TracingTest.cpp",
+        "tests/TransferPixelsTest.cpp",
+        "tests/TriangulatingPathRendererTests.cpp",
+        "tests/TypefaceMacTest.cpp",
+        "tests/TypefaceTest.cpp",
+        "tests/UnicodeTest.cpp",
+        "tests/UtilsTest.cpp",
+        "tests/VerticesTest.cpp",
+        "tests/VkBackendSurfaceTest.cpp",
+        "tests/VkDrawableTest.cpp",
+        "tests/VkHardwareBufferTest.cpp",
+        "tests/VkPreferredFeaturesTest.cpp",
+        "tests/VkPriorityExtensionTest.cpp",
+        "tests/VkProtectedContextTest.cpp",
+        "tests/VkWrapTests.cpp",
+        "tests/VkYcbcrSamplerTest.cpp",
+        "tests/WangsFormulaTest.cpp",
+        "tests/WebpTest.cpp",
+        "tests/WindowRectanglesTest.cpp",
+        "tests/WrappedSurfaceCopyOnWriteTest.cpp",
+        "tests/WritePixelsTest.cpp",
+        "tests/Writer32Test.cpp",
+        "tests/YUVCacheTest.cpp",
+        "tests/YUVTest.cpp",
+        "tests/crbug_500172224.cpp",
+        "tests/ganesh/**",
+        "tests/graphite/**",
+        "tests/sksl/README.txt",
+        "tests/sksl/blend/**",
+        "tests/sksl/compute/**",
+        "tests/sksl/errors/ArgumentCountMismatch.glsl",
+        "tests/sksl/errors/ArgumentMismatch.glsl",
+        "tests/sksl/errors/ArgumentModifiers.glsl",
+        "tests/sksl/errors/ArrayConstructorElementCount.glsl",
+        "tests/sksl/errors/ArrayIndexOutOfRange.glsl",
+        "tests/sksl/errors/ArrayInlinedIndexOutOfRange.glsl",
+        "tests/sksl/errors/ArrayNegation.glsl",
+        "tests/sksl/errors/ArrayOfInvalidSize.glsl",
+        "tests/sksl/errors/ArrayOfVoid.glsl",
+        "tests/sksl/errors/ArrayPlus.glsl",
+        "tests/sksl/errors/ArrayReturnTypes.glsl",
+        "tests/sksl/errors/ArraySplitDimensions.glsl",
+        "tests/sksl/errors/ArraySplitDimensionsInFuncBody.glsl",
+        "tests/sksl/errors/ArraySplitDimensionsInFuncDecl.glsl",
+        "tests/sksl/errors/ArraySplitDimensionsInStruct.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensions.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncBody.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncBodyUnsized1.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncBodyUnsized2.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncDecl.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncDeclUnsized1.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInFuncDeclUnsized2.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInStruct.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInStructUnsized1.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsInStructUnsized2.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsUnsized1.glsl",
+        "tests/sksl/errors/ArrayTooManyDimensionsUnsized2.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensions.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncBody.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncBodyUnsized1.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncBodyUnsized2.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncDecl.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncDeclUnsized1.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInFuncDeclUnsized2.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInStruct.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInStructUnsized1.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsInStructUnsized2.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsUnsized1.glsl",
+        "tests/sksl/errors/ArrayTypeTooManyDimensionsUnsized2.glsl",
+        "tests/sksl/errors/ArrayUnspecifiedDimensions.asm.frag",
+        "tests/sksl/errors/ArrayUnspecifiedDimensions.glsl",
+        "tests/sksl/errors/AssignmentTypeMismatch.glsl",
+        "tests/sksl/errors/BadCaps.glsl",
+        "tests/sksl/errors/BadConstInitializers.glsl",
+        "tests/sksl/errors/BadFieldAccess.glsl",
+        "tests/sksl/errors/BadIndex.glsl",
+        "tests/sksl/errors/BadModifiers.glsl",
+        "tests/sksl/errors/BadOctal.glsl",
+        "tests/sksl/errors/BinaryInvalidType.glsl",
+        "tests/sksl/errors/BinaryTypeCoercion.glsl",
+        "tests/sksl/errors/BinaryTypeMismatch.glsl",
+        "tests/sksl/errors/BitShiftFloat.glsl",
+        "tests/sksl/errors/BitShiftFloatMatrix.glsl",
+        "tests/sksl/errors/BitShiftFloatVector.glsl",
+        "tests/sksl/errors/BooleanArithmetic.glsl",
+        "tests/sksl/errors/BreakOutsideLoop.glsl",
+        "tests/sksl/errors/CallMain.glsl",
+        "tests/sksl/errors/CallNonFunction.glsl",
+        "tests/sksl/errors/CanExitWithoutReturningValue.glsl",
+        "tests/sksl/errors/CommasAsConstantExpressions.glsl",
+        "tests/sksl/errors/CommasWithArrays.glsl",
+        "tests/sksl/errors/ComparisonDimensional.glsl",
+        "tests/sksl/errors/ConstructorArgumentCount.glsl",
+        "tests/sksl/errors/ConstructorTypeMismatch.glsl",
+        "tests/sksl/errors/ContinueOutsideLoop.glsl",
+        "tests/sksl/errors/DivideByZero.glsl",
+        "tests/sksl/errors/DoTypeMismatch.glsl",
+        "tests/sksl/errors/DuplicateBinding.glsl",
+        "tests/sksl/errors/DuplicateBuiltinFunction.glsl",
+        "tests/sksl/errors/DuplicateFunction.glsl",
+        "tests/sksl/errors/DuplicateInterfaceBlockField.glsl",
+        "tests/sksl/errors/DuplicateInterfaceBlockName.glsl",
+        "tests/sksl/errors/DuplicateOutput.glsl",
+        "tests/sksl/errors/DuplicateRTAdjust.glsl",
+        "tests/sksl/errors/DuplicateSkClockwise.glsl",
+        "tests/sksl/errors/DuplicateSymbol.glsl",
+        "tests/sksl/errors/DuplicateSymbolInSwitch.glsl",
+        "tests/sksl/errors/DuplicateWorkgroupSize.glsl",
+        "tests/sksl/errors/EmptyArray.glsl",
+        "tests/sksl/errors/EmptyBuffer.glsl",
+        "tests/sksl/errors/EmptyStruct.glsl",
+        "tests/sksl/errors/ErrorsInDeadCode.glsl",
+        "tests/sksl/errors/FloatRemainder.glsl",
+        "tests/sksl/errors/ForInitStmt.glsl",
+        "tests/sksl/errors/ForLoopInductionVariableScope.glsl",
+        "tests/sksl/errors/ForLoopNEQOverflow.glsl",
+        "tests/sksl/errors/ForLoopOverflow.glsl",
+        "tests/sksl/errors/ForTypeMismatch.glsl",
+        "tests/sksl/errors/FunctionParamBadType.glsl",
+        "tests/sksl/errors/FunctionParamShadowedByLocal.glsl",
+        "tests/sksl/errors/FunctionParameterOfVoid.glsl",
+        "tests/sksl/errors/GenericArgumentMismatch.glsl",
+        "tests/sksl/errors/IfTypeMismatch.glsl",
+        "tests/sksl/errors/IllegalRecursionComplex.glsl",
+        "tests/sksl/errors/IllegalRecursionMutual.glsl",
+        "tests/sksl/errors/IllegalRecursionSimple.glsl",
+        "tests/sksl/errors/InVarWithInitializerExpression.glsl",
+        "tests/sksl/errors/IncompleteExpression.glsl",
+        "tests/sksl/errors/IncompleteFunctionCall.glsl",
+        "tests/sksl/errors/InterfaceBlockMemberReservedName.glsl",
+        "tests/sksl/errors/InterfaceBlockMixedCommasAndSemicolons.glsl",
+        "tests/sksl/errors/InterfaceBlockPrivateType.glsl",
+        "tests/sksl/errors/InterfaceBlockReservedName.glsl",
+        "tests/sksl/errors/InterfaceBlockScope.glsl",
+        "tests/sksl/errors/InterfaceBlockStorageModifiers.glsl",
+        "tests/sksl/errors/InterfaceBlockWithArrayOfStructOfBool.glsl",
+        "tests/sksl/errors/InterfaceBlockWithInvalidNestedStruct.glsl",
+        "tests/sksl/errors/InterfaceBlockWithInvalidStruct.glsl",
+        "tests/sksl/errors/InterfaceBlockWithNoMembers.glsl",
+        "tests/sksl/errors/IntrinsicInGlobalVariable.glsl",
+        "tests/sksl/errors/InvalidAssignment.glsl",
+        "tests/sksl/errors/InvalidAssignmentPipelineInputs.glsl",
+        "tests/sksl/errors/InvalidAtomicDeclarations.glsl",
+        "tests/sksl/errors/InvalidAtomicOperations.glsl",
+        "tests/sksl/errors/InvalidBackendBindingFlagsMetal.glsl",
+        "tests/sksl/errors/InvalidBackendBindingFlagsSPIRV.glsl",
+        "tests/sksl/errors/InvalidBackendBindingFlagsWGSL.glsl",
+        "tests/sksl/errors/InvalidCapsUsage.glsl",
+        "tests/sksl/errors/InvalidComputeMainParameters.glsl",
+        "tests/sksl/errors/InvalidComputeMainReturn.glsl",
+        "tests/sksl/errors/InvalidExtensionDirective.glsl",
+        "tests/sksl/errors/InvalidInOutType.glsl",
+        "tests/sksl/errors/InvalidLocalSizeQualifier.glsl",
+        "tests/sksl/errors/InvalidMeshFragmentMainParameters.stage",
+        "tests/sksl/errors/InvalidMeshFragmentMainReturn.stage",
+        "tests/sksl/errors/InvalidMeshVertexMainParameters.stage",
+        "tests/sksl/errors/InvalidMeshVertexMainReturn.stage",
+        "tests/sksl/errors/InvalidOutParams.glsl",
+        "tests/sksl/errors/InvalidToken.glsl",
+        "tests/sksl/errors/InvalidUnary.glsl",
+        "tests/sksl/errors/InvalidUniformTypes.glsl",
+        "tests/sksl/errors/InvalidUnsizedArray.glsl",
+        "tests/sksl/errors/InvalidVersionDirective.glsl",
+        "tests/sksl/errors/InvalidWorkgroupCompute.glsl",
+        "tests/sksl/errors/InvalidWorkgroupRTS.glsl",
+        "tests/sksl/errors/LayoutInFunctions.glsl",
+        "tests/sksl/errors/LayoutInInterfaceBlock.asm.frag",
+        "tests/sksl/errors/LayoutInInterfaceBlock.glsl",
+        "tests/sksl/errors/LayoutInStruct.asm.frag",
+        "tests/sksl/errors/LayoutInStruct.glsl",
+        "tests/sksl/errors/LayoutRepeatedQualifiers.glsl",
+        "tests/sksl/errors/MatrixIndexOutOfRange.glsl",
+        "tests/sksl/errors/MatrixIndexOutOfRangeES3.glsl",
+        "tests/sksl/errors/MatrixInlinedIndexOutOfRange.glsl",
+        "tests/sksl/errors/MatrixToVectorCast3x3.glsl",
+        "tests/sksl/errors/MatrixToVectorCastBoolean.glsl",
+        "tests/sksl/errors/MatrixToVectorCastInteger.glsl",
+        "tests/sksl/errors/MatrixToVectorCastTooSmall.glsl",
+        "tests/sksl/errors/MeshVertexWithBlender.stage",
+        "tests/sksl/errors/MeshVertexWithColorFilter.stage",
+        "tests/sksl/errors/MeshVertexWithShader.stage",
+        "tests/sksl/errors/MismatchedNumbers.glsl",
+        "tests/sksl/errors/MismatchedNumbersES3.glsl",
+        "tests/sksl/errors/MisplacedLocalSizeQualifier.glsl",
+        "tests/sksl/errors/MissingWorkgroupSize.glsl",
+        "tests/sksl/errors/ModifiersInStruct.glsl",
+        "tests/sksl/errors/ModifiersRepeated.glsl",
+        "tests/sksl/errors/MultipleBackendFlags.glsl",
+        "tests/sksl/errors/MultipleFields.glsl",
+        "tests/sksl/errors/MultipleFieldsInInterfaceBlocks.glsl",
+        "tests/sksl/errors/NoES3ModifierInUserCode.glsl",
+        "tests/sksl/errors/OpaqueTypeAssignment.glsl",
+        "tests/sksl/errors/OpaqueTypeConstruction.glsl",
+        "tests/sksl/errors/OpaqueTypeInArray.glsl",
+        "tests/sksl/errors/OpaqueTypeInInterfaceBlock.glsl",
+        "tests/sksl/errors/OpaqueTypeInStruct.glsl",
+        "tests/sksl/errors/OpaqueTypeOutParam.glsl",
+        "tests/sksl/errors/OpenArray.glsl",
+        "tests/sksl/errors/Ossfuzz26700.glsl",
+        "tests/sksl/errors/Ossfuzz27614.glsl",
+        "tests/sksl/errors/Ossfuzz27650.glsl",
+        "tests/sksl/errors/Ossfuzz27663.glsl",
+        "tests/sksl/errors/Ossfuzz28050.glsl",
+        "tests/sksl/errors/Ossfuzz29444.glsl",
+        "tests/sksl/errors/Ossfuzz29845.glsl",
+        "tests/sksl/errors/Ossfuzz29849.glsl",
+        "tests/sksl/errors/Ossfuzz31410.glsl",
+        "tests/sksl/errors/Ossfuzz31469.glsl",
+        "tests/sksl/errors/Ossfuzz32156.glsl",
+        "tests/sksl/errors/Ossfuzz32587.glsl",
+        "tests/sksl/errors/Ossfuzz32851.glsl",
+        "tests/sksl/errors/Ossfuzz36850.asm.frag",
+        "tests/sksl/errors/Ossfuzz37457.glsl",
+        "tests/sksl/errors/Ossfuzz37465.glsl",
+        "tests/sksl/errors/Ossfuzz37469.asm.frag",
+        "tests/sksl/errors/Ossfuzz37620.glsl",
+        "tests/sksl/errors/Ossfuzz38106.glsl",
+        "tests/sksl/errors/Ossfuzz38107.glsl",
+        "tests/sksl/errors/Ossfuzz38108.glsl",
+        "tests/sksl/errors/Ossfuzz38140.glsl",
+        "tests/sksl/errors/Ossfuzz38560.glsl",
+        "tests/sksl/errors/Ossfuzz38831.glsl",
+        "tests/sksl/errors/Ossfuzz38865.glsl",
+        "tests/sksl/errors/Ossfuzz38944.glsl",
+        "tests/sksl/errors/Ossfuzz39000.glsl",
+        "tests/sksl/errors/Ossfuzz40427.glsl",
+        "tests/sksl/errors/Ossfuzz40428.glsl",
+        "tests/sksl/errors/Ossfuzz40479.glsl",
+        "tests/sksl/errors/Ossfuzz40660.glsl",
+        "tests/sksl/errors/Ossfuzz44045.glsl",
+        "tests/sksl/errors/Ossfuzz44551.glsl",
+        "tests/sksl/errors/Ossfuzz44557.glsl",
+        "tests/sksl/errors/Ossfuzz44561.glsl",
+        "tests/sksl/errors/Ossfuzz47935.glsl",
+        "tests/sksl/errors/Ossfuzz48592.glsl",
+        "tests/sksl/errors/Ossfuzz49558.glsl",
+        "tests/sksl/errors/Ossfuzz50798.glsl",
+        "tests/sksl/errors/Ossfuzz50922.glsl",
+        "tests/sksl/errors/Ossfuzz515515145.glsl",
+        "tests/sksl/errors/Ossfuzz516126015.glsl",
+        "tests/sksl/errors/Ossfuzz56373.glsl",
+        "tests/sksl/errors/Ossfuzz58037.glsl",
+        "tests/sksl/errors/Ossfuzz58375.glsl",
+        "tests/sksl/errors/Ossfuzz63793.glsl",
+        "tests/sksl/errors/Ossfuzz70643.glsl",
+        "tests/sksl/errors/OverflowFloatIntrinsic.glsl",
+        "tests/sksl/errors/OverflowFloatLiteral.glsl",
+        "tests/sksl/errors/OverflowInlinedLiteral.glsl",
+        "tests/sksl/errors/OverflowInt64Literal.glsl",
+        "tests/sksl/errors/OverflowIntLiteral.glsl",
+        "tests/sksl/errors/OverflowParamArraySize.glsl",
+        "tests/sksl/errors/OverflowShortLiteral.glsl",
+        "tests/sksl/errors/OverflowUintLiteral.glsl",
+        "tests/sksl/errors/OverloadedBuiltin.glsl",
+        "tests/sksl/errors/OverloadedMain.glsl",
+        "tests/sksl/errors/PixelFormatMismatch.glsl",
+        "tests/sksl/errors/PixelFormatMissing.glsl",
+        "tests/sksl/errors/PixelFormatOverloads.glsl",
+        "tests/sksl/errors/PrecisionQualifiersDisallowed.glsl",
+        "tests/sksl/errors/PrivateTypes.glsl",
+        "tests/sksl/errors/PrivateVariables.glsl",
+        "tests/sksl/errors/ProgramTooLarge_Globals.glsl",
+        "tests/sksl/errors/ProgramTooLarge_InterfaceBlock.glsl",
+        "tests/sksl/errors/ProgramTooLarge_Parameters.glsl",
+        "tests/sksl/errors/ProgramTooLarge_Stack.glsl",
+        "tests/sksl/errors/ProgramTooLarge_Struct.glsl",
+        "tests/sksl/errors/PrototypeInFuncBody.glsl",
+        "tests/sksl/errors/RTAdjustType.glsl",
+        "tests/sksl/errors/ReadonlyWriteonly.glsl",
+        "tests/sksl/errors/RedeclareBasicType.glsl",
+        "tests/sksl/errors/RedeclareBuiltinVariables.glsl",
+        "tests/sksl/errors/RedeclareSamplerType.glsl",
+        "tests/sksl/errors/RedeclareShaderType.glsl",
+        "tests/sksl/errors/RedeclareStruct.glsl",
+        "tests/sksl/errors/RedeclareStructTypeWithName.glsl",
+        "tests/sksl/errors/RedeclareUserType.glsl",
+        "tests/sksl/errors/RedeclareVariable.glsl",
+        "tests/sksl/errors/ReservedNameAsm.glsl",
+        "tests/sksl/errors/ReservedNameAtomic.glsl",
+        "tests/sksl/errors/ReservedNameAttribute.glsl",
+        "tests/sksl/errors/ReservedNameCast.glsl",
+        "tests/sksl/errors/ReservedNameDmat2.glsl",
+        "tests/sksl/errors/ReservedNameDmat3.glsl",
+        "tests/sksl/errors/ReservedNameDmat4.glsl",
+        "tests/sksl/errors/ReservedNameDouble.glsl",
+        "tests/sksl/errors/ReservedNameDvec2.glsl",
+        "tests/sksl/errors/ReservedNameDvec3.glsl",
+        "tests/sksl/errors/ReservedNameDvec4.glsl",
+        "tests/sksl/errors/ReservedNameEnum.glsl",
+        "tests/sksl/errors/ReservedNameExtern.glsl",
+        "tests/sksl/errors/ReservedNameExternal.glsl",
+        "tests/sksl/errors/ReservedNameFixed.glsl",
+        "tests/sksl/errors/ReservedNameFvec2.glsl",
+        "tests/sksl/errors/ReservedNameFvec3.glsl",
+        "tests/sksl/errors/ReservedNameFvec4.glsl",
+        "tests/sksl/errors/ReservedNameGoto.glsl",
+        "tests/sksl/errors/ReservedNameHvec2.glsl",
+        "tests/sksl/errors/ReservedNameHvec3.glsl",
+        "tests/sksl/errors/ReservedNameHvec4.glsl",
+        "tests/sksl/errors/ReservedNameImage.glsl",
+        "tests/sksl/errors/ReservedNameInput.glsl",
+        "tests/sksl/errors/ReservedNameInterface.glsl",
+        "tests/sksl/errors/ReservedNameInvariant.glsl",
+        "tests/sksl/errors/ReservedNameLong.glsl",
+        "tests/sksl/errors/ReservedNameNamespace.glsl",
+        "tests/sksl/errors/ReservedNameOutput.glsl",
+        "tests/sksl/errors/ReservedNamePacked.glsl",
+        "tests/sksl/errors/ReservedNamePrecision.glsl",
+        "tests/sksl/errors/ReservedNamePublic.glsl",
+        "tests/sksl/errors/ReservedNameSampler.glsl",
+        "tests/sksl/errors/ReservedNameSampler1DShadow.glsl",
+        "tests/sksl/errors/ReservedNameSampler2DRectShadow.glsl",
+        "tests/sksl/errors/ReservedNameSampler2DShadow.glsl",
+        "tests/sksl/errors/ReservedNameSampler3DRect.glsl",
+        "tests/sksl/errors/ReservedNameSamplerCube.glsl",
+        "tests/sksl/errors/ReservedNameSizeof.glsl",
+        "tests/sksl/errors/ReservedNameStatic.glsl",
+        "tests/sksl/errors/ReservedNameSubpassInput.glsl",
+        "tests/sksl/errors/ReservedNameSuperp.glsl",
+        "tests/sksl/errors/ReservedNameTemplate.glsl",
+        "tests/sksl/errors/ReservedNameTexture.glsl",
+        "tests/sksl/errors/ReservedNameThis.glsl",
+        "tests/sksl/errors/ReservedNameTypedef.glsl",
+        "tests/sksl/errors/ReservedNameUnion.glsl",
+        "tests/sksl/errors/ReservedNameUnsigned.glsl",
+        "tests/sksl/errors/ReservedNameUsing.glsl",
+        "tests/sksl/errors/ReservedNameVarying.glsl",
+        "tests/sksl/errors/ReservedNameVolatile.glsl",
+        "tests/sksl/errors/ReturnDifferentType.glsl",
+        "tests/sksl/errors/ReturnFromVoid.glsl",
+        "tests/sksl/errors/ReturnMissingValue.glsl",
+        "tests/sksl/errors/ReturnTypeMismatch.glsl",
+        "tests/sksl/errors/SamplerExternalOES.glsl",
+        "tests/sksl/errors/SelfReferentialInitializerExpression.glsl",
+        "tests/sksl/errors/SpuriousFloat.glsl",
+        "tests/sksl/errors/StructMemberReservedName.glsl",
+        "tests/sksl/errors/StructNameWithoutIdentifier.glsl",
+        "tests/sksl/errors/StructRedefinition.glsl",
+        "tests/sksl/errors/StructTooDeeplyNested.glsl",
+        "tests/sksl/errors/StructVariableReservedName.glsl",
+        "tests/sksl/errors/SwitchDuplicateCase.glsl",
+        "tests/sksl/errors/SwitchDuplicateDefault.glsl",
+        "tests/sksl/errors/SwitchDuplicateVariable.glsl",
+        "tests/sksl/errors/SwitchHoistingAtomicArray.glsl",
+        "tests/sksl/errors/SwitchTypes.glsl",
+        "tests/sksl/errors/SwitchVariableScope.glsl",
+        "tests/sksl/errors/SwitchWithContinueInside.glsl",
+        "tests/sksl/errors/SwizzleConstantOutput.glsl",
+        "tests/sksl/errors/SwizzleDomain.glsl",
+        "tests/sksl/errors/SwizzleMatrix.glsl",
+        "tests/sksl/errors/SwizzleOnlyLiterals.glsl",
+        "tests/sksl/errors/SwizzleOutOfBounds.glsl",
+        "tests/sksl/errors/SwizzleTooManyComponents.glsl",
+        "tests/sksl/errors/TernaryMismatch.glsl",
+        "tests/sksl/errors/UnassignedOutParameter.glsl",
+        "tests/sksl/errors/UndeclaredFunction.glsl",
+        "tests/sksl/errors/UndefinedFunction.asm.frag",
+        "tests/sksl/errors/UndefinedFunction.glsl",
+        "tests/sksl/errors/UndefinedSymbol.glsl",
+        "tests/sksl/errors/UniformStructFanOut.glsl",
+        "tests/sksl/errors/UniformVarWithInitializerExpression.glsl",
+        "tests/sksl/errors/UnknownDivideByZero.glsl",
+        "tests/sksl/errors/UnscopedVariableInDoWhile.glsl",
+        "tests/sksl/errors/UnscopedVariableInElse.glsl",
+        "tests/sksl/errors/UnscopedVariableInFor.glsl",
+        "tests/sksl/errors/UnscopedVariableInIf.glsl",
+        "tests/sksl/errors/UnscopedVariableInWhile.glsl",
+        "tests/sksl/errors/UnsupportedGLSLIdentifiers.glsl",
+        "tests/sksl/errors/UsingInvalidValue.glsl",
+        "tests/sksl/errors/VectorIndexOutOfRange.glsl",
+        "tests/sksl/errors/VectorInlinedIndexOutOfRange.glsl",
+        "tests/sksl/errors/VectorSlice.glsl",
+        "tests/sksl/errors/VertexEarlyReturn.glsl",
+        "tests/sksl/errors/VoidConstructor.glsl",
+        "tests/sksl/errors/VoidInStruct.glsl",
+        "tests/sksl/errors/VoidVariable.glsl",
+        "tests/sksl/errors/WhileTypeMismatch.glsl",
+        "tests/sksl/folding/**",
+        "tests/sksl/glsl/**",
+        "tests/sksl/inliner/**",
+        "tests/sksl/intrinsics/**",
+        "tests/sksl/mesh/**",
+        "tests/sksl/metal/**",
+        "tests/sksl/realistic/**",
+        "tests/sksl/runtime/**",
+        "tests/sksl/shared/**",
+        "tests/sksl/skrp/**",
+        "tests/sksl/spirv/**",
+        "tests/sksl/wgsl/**",
+        "tests/sksl/workarounds/**",
+        "toolchain/**",
+        "tools/AndroidSkDebugToStdOut.cpp",
+        "tools/AutoreleasePool.h",
+        "tools/AutoreleasePool.mm",
+        "tools/BUILD.bazel",
+        "tools/BUILD_simulator.py",
+        "tools/CodecUtils.h",
+        "tools/CrashHandler.cpp",
+        "tools/CrashHandler.h",
+        "tools/DecodeUtils.cpp",
+        "tools/DecodeUtils.h",
+        "tools/EncodeUtils.cpp",
+        "tools/EncodeUtils.h",
+        "tools/GpuToolUtils.h",
+        "tools/HashAndEncode.cpp",
+        "tools/HashAndEncode.h",
+        "tools/LsanSuppressions.cpp",
+        "tools/MSKPPlayer.cpp",
+        "tools/MSKPPlayer.h",
+        "tools/OverwriteLine.h",
+        "tools/ProcStats.cpp",
+        "tools/ProcStats.h",
+        "tools/ProcsUtils.cpp",
+        "tools/ProcsUtils.h",
+        "tools/Registry.h",
+        "tools/ResourceFactory.h",
+        "tools/Resources.cpp",
+        "tools/Resources.h",
+        "tools/RuntimeBlendUtils.cpp",
+        "tools/RuntimeBlendUtils.h",
+        "tools/SkMetaData.cpp",
+        "tools/SkMetaData.h",
+        "tools/SkSharingProc.cpp",
+        "tools/SkSharingProc.h",
+        "tools/Stats.h",
+        "tools/SvgPathExtractor.cpp",
+        "tools/SvgPathExtractor.h",
+        "tools/TestFontDataProvider.cpp",
+        "tools/TestFontDataProvider.h",
+        "tools/ToolUtils.cpp",
+        "tools/ToolUtils.h",
+        "tools/TsanSuppressions.cpp",
+        "tools/UrlDataManager.cpp",
+        "tools/UrlDataManager.h",
+        "tools/__init__.py",
+        "tools/abandon_gerrit_cls.py",
+        "tools/bloaty_treemap.py",
+        "tools/blob_cache_sim.cpp",
+        "tools/build_with_reclient.sh",
+        "tools/build_workaround_header.py",
+        "tools/calmbench/**",
+        "tools/check-headers-self-sufficient",
+        "tools/chrome_fuzz.cpp",
+        "tools/clang-tidy.sh",
+        "tools/convert-to-nia.cpp",
+        "tools/debugger/**",
+        "tools/doxygen/Doxyfile",
+        "tools/doxygen/ProdDoxyfile",
+        "tools/doxygen/README.md",
+        "tools/doxygen/customdoxygen.css",
+        "tools/doxygen/footer.html",
+        "tools/doxygen/mainpage/**",
+        "tools/doxygen_footer.txt",
+        "tools/dump_base.h",
+        "tools/dump_capture.cpp",
+        "tools/dump_record.cpp",
+        "tools/embed_resources.py",
+        "tools/fiddle/**",
+        "tools/find_run_binary.py",
+        "tools/fix_pythonpath.py",
+        "tools/flags/**",
+        "tools/fonts/**",
+        "tools/force_older_glibc_math.h",
+        "tools/ganesh/**",
+        "tools/gcov_shim",
+        "tools/gdb/**",
+        "tools/generate_patches.py",
+        "tools/get_current_monitor_profile.cpp",
+        "tools/get_images_from_skps.cpp",
+        "tools/git-sync-deps",
+        "tools/gpu/**",
+        "tools/graphite/**",
+        "tools/image_diff_metric.cpp",
+        "tools/imgcvt.cpp",
+        "tools/infra/**",
+        "tools/install_dependencies.sh",
+        "tools/ios_test_app_main.mm",
+        "tools/ios_utils.h",
+        "tools/ios_utils.m",
+        "tools/library/**",
+        "tools/lottie-web-perf/**",
+        "tools/lottiecap/**",
+        "tools/macsdk_dir.py",
+        "tools/malisc/**",
+        "tools/merge_static_libs.py",
+        "tools/milestone.py",
+        "tools/mirror-dev.sh",
+        "tools/misc_utils.py",
+        "tools/parse_llvm_coverage.py",
+        "tools/partition_alloc/**",
+        "tools/pathops_sorter.htm",
+        "tools/pathops_visualizer.htm",
+        "tools/public_headers_warnings_check.cpp",
+        "tools/raster_pipeline/README.md",
+        "tools/raster_pipeline/llvm_mca_analysis.py",
+        "tools/raster_pipeline/run_benchmarks.py",
+        "tools/reformat-json.py",
+        "tools/rewrite_includes.py",
+        "tools/sanitize_source_files.py",
+        "tools/serve_wasm.py",
+        "tools/sk_app/**",
+        "tools/skdiff/**",
+        "tools/skia-client-search.html",
+        "tools/skottie2movie.cpp",
+        "tools/skottie_ios_app/**",
+        "tools/skp/**",
+        "tools/skp_parser.cpp",
+        "tools/skpbench/**",
+        "tools/skpinfo.cpp",
+        "tools/skqp/**",
+        "tools/sksl-minify/**",
+        "tools/skslc/**",
+        "tools/sksltrace/**",
+        "tools/skui/**",
+        "tools/svg/**",
+        "tools/test_all.py",
+        "tools/test_pdfs.py",
+        "tools/text/**",
+        "tools/timer/**",
+        "tools/trace/**",
+        "tools/unicode_comparison/**",
+        "tools/unsafe_buffers/**",
+        "tools/using_skia_and_harfbuzz.cpp",
+        "tools/viewer/**",
+        "tools/win_lcid.cpp",
+        "tools/window/**",
+        "tools/xsan.supp",
+        "tools.go",
+        "vpython.toml",
+        "whitespace.txt"
+      ],
+      "text": "Copyright (c) 2011 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  * Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived\n    from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2011 Google Inc. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/skia."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "bazel/rbe/gce_linux/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2021 Google LLC\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Copyright 2021 Google LLC, Apache-2.0 license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/bazel/rbe/gce_linux."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "include/third_party/**"
+      ],
+      "text": "// Copyright (c) 2018 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (include/third_party/vulkan) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/include/third_party/vulkan."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "modules/canvaskit/npm_build/**"
+      ],
+      "text": "// Copyright (c) 2011 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (modules/canvaskit/npm_build) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/modules/canvaskit/npm_build."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "modules/skcms/**"
+      ],
+      "text": "// Copyright (c) 2018 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (modules/skcms) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/modules/skcms."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "third_party/expat/**"
+      ],
+      "text": "// Copyright (c) 2021 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (third_party/expat) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/expat."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "third_party/harfbuzz/**"
+      ],
+      "text": "// Copyright (c) 2021 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (third_party/harfbuzz) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/harfbuzz."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "third_party/wuffs/**"
+      ],
+      "text": "// Copyright (c) 2018 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+      "attribution": "the authors of google/skia (third_party/wuffs) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/third_party/wuffs."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tools/perf-canvaskit-puppeteer/Makefile",
+        "tools/perf-canvaskit-puppeteer/README.md",
+        "tools/perf-canvaskit-puppeteer/benchmark.js",
+        "tools/perf-canvaskit-puppeteer/canvas_perf.html",
+        "tools/perf-canvaskit-puppeteer/canvas_perf.js",
+        "tools/perf-canvaskit-puppeteer/package-lock.json",
+        "tools/perf-canvaskit-puppeteer/package.json",
+        "tools/perf-canvaskit-puppeteer/path-transform.html",
+        "tools/perf-canvaskit-puppeteer/path_translate_assets/**",
+        "tools/perf-canvaskit-puppeteer/perf-canvaskit-with-puppeteer.js",
+        "tools/perf-canvaskit-puppeteer/perf_all_skps.sh",
+        "tools/perf-canvaskit-puppeteer/render-skp.html",
+        "tools/perf-canvaskit-puppeteer/skottie-frames.html",
+        "tools/perf-canvaskit-puppeteer/skp_data_prep.js"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of perf-canvaskit-puppeteer, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/perf-canvaskit-puppeteer."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tools/run-wasm-gm-tests/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of run-wasm-gm-tests, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/run-wasm-gm-tests."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tools/skottie-wasm-perf/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of skottie-wasm-perf, ISC license (declared in package.json), https://github.com/google/skia/tree/8c45d63f01bf694213b19d9e24e8c5044e77ca20/tools/skottie-wasm-perf."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hlsl",
+      "paths": [
+        "**/*.hlsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.htm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.android"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.chromium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.compute"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cppm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ensure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "BUILD.gn",
+        "experimental/ffmpeg/BUILD.gn",
+        "experimental/minimal_ios_mtl_skia_app/BUILD.gn",
+        "experimental/sktext/BUILD.gn",
+        "gn/BUILDCONFIG.gn",
+        "gn/portable/BUILD.gn",
+        "gn/skia/BUILD.gn",
+        "gn/toolchain/BUILD.gn",
+        "gn/toolchain/emsdk/BUILD.gn",
+        "modules/audioplayer/BUILD.gn",
+        "modules/bentleyottmann/BUILD.gn",
+        "modules/canvaskit/BUILD.gn",
+        "modules/jsonreader/BUILD.gn",
+        "modules/skcms/BUILD.gn",
+        "modules/skottie/BUILD.gn",
+        "modules/skparagraph/BUILD.gn",
+        "modules/skplaintexteditor/BUILD.gn",
+        "modules/skresources/BUILD.gn",
+        "modules/sksg/BUILD.gn",
+        "modules/skshaper/BUILD.gn",
+        "modules/skunicode/BUILD.gn",
+        "modules/svg/BUILD.gn",
+        "src/gpu/vk/vulkanmemoryallocator/BUILD.gn",
+        "src/partition_alloc/BUILD.gn",
+        "third_party/expat/BUILD.gn",
+        "third_party/harfbuzz/BUILD.gn",
+        "third_party/wuffs/BUILD.gn",
+        "tools/partition_alloc/BUILD.gn",
+        "tools/skottie_ios_app/BUILD.gn",
+        "tools/window/BUILD.gn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gni"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.icc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mfrag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.modulemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mskp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mvert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.old"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pfa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.privrts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rtb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rtcf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.skrp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sksl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ttx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "agents/skills/skia-gn-workflow/assets/example_asset.txt",
+        "libskia_blocklist.txt",
+        "modules/canvaskit/wasm_tools/SIMD/wasm_simd_types.txt",
+        "platform_tools/android/whitespace.txt",
+        "requirements.txt",
+        "resources/nov-talk-sequence.txt",
+        "resources/pdf_command_stream.txt",
+        "resources/sksl/README.txt",
+        "resources/text/arabic.txt",
+        "resources/text/armenian.txt",
+        "resources/text/balinese.txt",
+        "resources/text/bengali.txt",
+        "resources/text/buginese.txt",
+        "resources/text/cherokee.txt",
+        "resources/text/cyrillic.txt",
+        "resources/text/devanagari.txt",
+        "resources/text/emoji.txt",
+        "resources/text/english.txt",
+        "resources/text/ethiopic.txt",
+        "resources/text/greek.txt",
+        "resources/text/han_simplified.txt",
+        "resources/text/han_traditional.txt",
+        "resources/text/hangul.txt",
+        "resources/text/hebrew.txt",
+        "resources/text/javanese.txt",
+        "resources/text/kana.txt",
+        "resources/text/khmer.txt",
+        "resources/text/lao.txt",
+        "resources/text/mandaic.txt",
+        "resources/text/myanmar.txt",
+        "resources/text/newtailue.txt",
+        "resources/text/nko.txt",
+        "resources/text/sinhala.txt",
+        "resources/text/sundanese.txt",
+        "resources/text/syriac.txt",
+        "resources/text/taitham.txt",
+        "resources/text/tamil.txt",
+        "resources/text/thaana.txt",
+        "resources/text/thai.txt",
+        "resources/text/tibetan.txt",
+        "resources/text/tifnagh.txt",
+        "resources/text/vai.txt",
+        "src/gpu/gpu_workaround_list.txt",
+        "tests/sksl/README.txt",
+        "tools/doxygen_footer.txt",
+        "tools/svg/svg_images.txt",
+        "tools/svg/svgs.txt",
+        "tools/svg/svgs_parse_only.txt",
+        "tools/unsafe_buffers/unsafe_buffers_mappings.txt",
+        "whitespace.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazeliskrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelproject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CQ_COMMITTERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DEPS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DIR_METADATA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ProdDoxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/activate-emsdk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/adb_pull_if_needed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/adb_push_if_needed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_build_app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_build_universal_viewer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_gdb_app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_gdb_native"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_gdbserver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_install_app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_launch_app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_perf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/android_run_skia"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/buildrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builtin_include_directory_paths"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-headers-self-sufficient"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compare"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/devicesrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/droid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-fonts-testdata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-gn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-ninja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-sk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-skps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-svgs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcov_shim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate-unicode-test-txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gerrit-number"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gerrit_percent_encode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-sync-deps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_cat_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_mkdir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_path_exists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_pull_if_needed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_push_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_push_if_needed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_restart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ios_rm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/list-skia-bots"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_universal_apk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/page_set_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/parse-fiddle-output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/perfhost"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_skqp_exe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/set-change-id-hook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup_resources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sync"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sysopen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/try-clients"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/web_to_mskp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/web_to_skp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

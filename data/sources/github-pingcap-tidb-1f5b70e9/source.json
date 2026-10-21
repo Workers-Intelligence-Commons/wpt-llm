@@ -1,0 +1,1905 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pingcap/tidb",
+  "revision": "7193401b6746fd78c25fbb758c6db75273f61ac9",
+  "checksum": "sha256:5caf0dc32548e60ace883f0f17db9027013f33c03783f80ceccab37bedc96d25",
+  "extract": {
+    "exclude": [
+      "br/pkg/task/show/testdata/**",
+      "docs/architecture.png",
+      "docs/contribution-map.png",
+      "docs/design/2026-09-09-sampling-based-ndv-for-large-tables/analyze-workflow.png",
+      "docs/design/2026-09-09-sampling-based-ndv-for-large-tables/tikv-analyze-cpu.png",
+      "docs/design/2026-09-09-sampling-based-ndv-for-large-tables/tikv-analyze-flamegraph.jpg",
+      "docs/design/active-active-case1.png",
+      "docs/design/active-active-case2.png",
+      "docs/design/active-active-case3.png",
+      "docs/design/active-active-case4.png",
+      "docs/design/active-active-case5.png",
+      "docs/design/active-active-case6.png",
+      "docs/design/active-active-case7.png",
+      "docs/design/active-active-case8.png",
+      "docs/design/active-active-case9.png",
+      "docs/design/active-active-cdc-arch.jpeg",
+      "docs/design/active-active-group.png",
+      "docs/design/active-active-last-write-wins.PNG",
+      "docs/design/active-actve-lww-delete.png",
+      "docs/design/column-level-masking-1.png",
+      "docs/design/column-level-masking-2.png",
+      "docs/design/column-level-masking-3.png",
+      "docs/design/imgs/**",
+      "docs/tidb-architecture.png",
+      "docs/tidb-logo-with-text.png",
+      "docs/tidb-logo.png",
+      "lightning/pkg/importer/testdata/**",
+      "lightning/tests/lightning_character_sets/gb18030/charsets.gb18030-schema.sql",
+      "lightning/tests/lightning_character_sets/latin1/charsets.latin1-schema.sql",
+      "lightning/tests/lightning_character_sets/latin1/charsets.latin1.csv",
+      "lightning/tests/lightning_character_sets/mixed/charsets.mixed-schema.sql",
+      "lightning/tests/lightning_compress/data.gzip/**",
+      "lightning/tests/lightning_compress/data.snappy/**",
+      "lightning/tests/lightning_compress/data.zstd/**",
+      "lightning/tests/lightning_csv/data/csv.escapes.CSV",
+      "lightning/tests/lightning_new_collation/data-gbk/**",
+      "lightning/tests/lightning_parquet/data/test/**",
+      "pkg/dumpformat/parquetfile/testfiles/**",
+      "pkg/extension/enterprise",
+      "pkg/infoschema/perfschema/testdata/**",
+      "pkg/lightning/mydump/csv/gb18030_test_file.csv",
+      "pkg/lightning/mydump/csv/split_large_file.csv.zst",
+      "pkg/lightning/tikv/sst-examples/**",
+      "pkg/planner/core/casetest/cbotest/testdata/stats.zip",
+      "pkg/testkit/external/**",
+      "pkg/util/profile/testdata/**",
+      "tests/integrationtest/r/ddl/column_type_change.result",
+      "tests/integrationtest/r/executor/aggregate.result",
+      "tests/integrationtest/r/executor/charset.result",
+      "tests/integrationtest/r/executor/executor.result",
+      "tests/integrationtest/r/executor/insert.result",
+      "tests/integrationtest/r/expression/builtin.result",
+      "tests/integrationtest/r/expression/charset_and_collation.result",
+      "tests/integrationtest/r/expression/issues.result",
+      "tests/integrationtest/r/new_character_set.result",
+      "tests/integrationtest/r/new_character_set_builtin.result",
+      "tests/integrationtest/r/planner/core/casetest/physicalplantest/**",
+      "tests/integrationtest/r/planner/core/integration.result",
+      "tests/integrationtest/r/planner/core/integration_partition.result",
+      "tests/integrationtest/r/planner/core/plan_cache.result",
+      "tests/integrationtest/r/planner/core/point_get_plan.result",
+      "tests/integrationtest/r/planner/core/tests/prepare/issue.result",
+      "tests/integrationtest/r/util/ranger.result",
+      "tests/integrationtest/s.zip",
+      "tests/realtikvtest/importintotest/logical-time-nanos.parquet",
+      "tests/realtikvtest/importintotest/part0.parquet",
+      "tests/realtikvtest/importintotest/part1.parquet",
+      "tests/realtikvtest/importintotest/spark-legacy-date.gz.parquet",
+      "tests/realtikvtest/importintotest/spark-legacy-datetime.gz.parquet",
+      "tests/realtikvtest/importintotest/test.parquet",
+      "tests/realtikvtest/statisticstest/analyze_v1_compat_v855.json.gz",
+      "pkg/util/collate/gb18030_weight.data"
+    ]
+  },
+  "history": {
+    "since": "bbffc220edacbe3cc766b9cd17a67d4e72d2feb2"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nApache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/pingcap/tidb: Copyright {}, Apache-2.0 license (LICENSE), https://github.com/pingcap/tidb; the authors of pingcap/tidb (br) (the license file names no copyright line), Apache-2.0 license (LICENSE.md), https://github.com/pingcap/tidb/tree/7193401b6746fd78c25fbb758c6db75273f61ac9/br; the authors of pingcap/tidb (pkg/parser) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/pingcap/tidb/tree/7193401b6746fd78c25fbb758c6db75273f61ac9/pkg/parser."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".bazelrc",
+        ".bazelversion",
+        ".claude/**",
+        ".codecov.yml",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".golangci.yml",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "BUILD.bazel",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEPS.bzl",
+        "Dockerfile",
+        "Dockerfile.enterprise",
+        "Jenkinsfile",
+        "LICENSE",
+        "LICENSES/**",
+        "MODULE.bazel",
+        "Makefile",
+        "Makefile.common",
+        "OWNERS",
+        "OWNERS_ALIASES",
+        "PLANS.md",
+        "README.md",
+        "SECURITY.md",
+        "ThirdPartyNotices.txt",
+        "WORKSPACE",
+        "WORKSPACE.patchgo",
+        "build/**",
+        "checklist.md",
+        "ci.md",
+        "cmd/**",
+        "code_review_guide.md",
+        "docs/agents/**",
+        "docs/design/2018-07-01-refactor-aggregate-framework.md",
+        "docs/design/2018-07-19-row-format.md",
+        "docs/design/2018-07-22-enhance-propagations.md",
+        "docs/design/2018-08-10-restore-dropped-table.md",
+        "docs/design/2018-08-29-new-planner.md",
+        "docs/design/2018-09-04-histograms-in-plan.md",
+        "docs/design/2018-09-10-adding-tz-env.md",
+        "docs/design/2018-09-21-radix-hashjoin.md",
+        "docs/design/2018-10-08-online-DDL.md",
+        "docs/design/2018-10-19-table-partition.md",
+        "docs/design/2018-10-20-join-reorder-dp-v1.md",
+        "docs/design/2018-10-22-the-column-pool.md",
+        "docs/design/2018-10-24-view-support.md",
+        "docs/design/2018-10-31-window-functions.md",
+        "docs/design/2018-11-29-ast-to-sql-text.md",
+        "docs/design/2018-12-10-plugin-framework.md",
+        "docs/design/2018-12-11-sql-plan-management.md",
+        "docs/design/2019-01-25-skyline-pruning.md",
+        "docs/design/2019-04-11-indexmerge.md",
+        "docs/design/2019-11-05-index-advisor.md",
+        "docs/design/2019-11-14-tidb-builtin-diagnostics-zh_CN.md",
+        "docs/design/2019-11-14-tidb-builtin-diagnostics.md",
+        "docs/design/2019-11-18-tidb-with-wasm.md",
+        "docs/design/2020-01-24-collations.md",
+        "docs/design/2020-03-12-invisible-index.md",
+        "docs/design/2020-04-17-sql-sequence.md",
+        "docs/design/2020-04-20-brie.md",
+        "docs/design/2020-05-08-cluster-index.md",
+        "docs/design/2020-05-08-standardize-error-codes-and-messages.md",
+        "docs/design/2020-05-11-heap-profile-record.md",
+        "docs/design/2020-06-01-global-kill.md",
+        "docs/design/2020-06-24-placement-rules-in-sql.md",
+        "docs/design/2020-07-07-change-column-types.md",
+        "docs/design/2020-08-04-global-index.md",
+        "docs/design/2020-09-12-utf8mb4-pinyin-order.md",
+        "docs/design/2020-09-30-index-usage-information.md",
+        "docs/design/2021-03-01-pipelined-window-functions.md",
+        "docs/design/2021-03-09-dynamic-privileges.md",
+        "docs/design/2021-03-09-security-enhanced-mode.md",
+        "docs/design/2021-03-30-small-table-caching.md",
+        "docs/design/2021-04-18-common-table-expression.md",
+        "docs/design/2021-04-20-temporary-table.md",
+        "docs/design/2021-04-21-unify-log-library.md",
+        "docs/design/2021-04-26-lock-view.md",
+        "docs/design/2021-06-23-restricted-read-only.md",
+        "docs/design/2021-06-23-spilled-unparallel-hashagg.md",
+        "docs/design/2021-06-27-restructure-tests.md",
+        "docs/design/2021-07-07-rule-based-index-selection.md",
+        "docs/design/2021-07-29-hidden-sysvars.md",
+        "docs/design/2021-08-18-charsets.md",
+        "docs/design/2021-09-13-parser-as-submodule-of-tidb.md",
+        "docs/design/2021-09-22-data-consistency.md",
+        "docs/design/2021-09-22-stale-read.md",
+        "docs/design/2021-09-29-merge-dumpling-into-tidb.md",
+        "docs/design/2021-09-29-secure-bootstrap.md",
+        "docs/design/2021-10-09-select-for-update-of-tables.md",
+        "docs/design/2021-10-20-table-attributes.md",
+        "docs/design/2021-12-08-instance-scope.md",
+        "docs/design/2021-12-09-TiDB-log-based-incremental-backup.md",
+        "docs/design/2022-01-04-integer-shard-index.md",
+        "docs/design/2022-03-03-rc-read-tso-optimization.md",
+        "docs/design/2022-03-09-optimize-gc-for-internal-transaction.md",
+        "docs/design/2022-03-10-backup-with-batch-create-table.md",
+        "docs/design/2022-03-16-functional-dependency.md",
+        "docs/design/2022-03-24-get-lock.md",
+        "docs/design/2022-03-25-non-transactional-dml.md",
+        "docs/design/2022-04-15-multi-schema-change.md",
+        "docs/design/2022-06-07-adding-index-acceleration.md",
+        "docs/design/2022-06-22-foreign-key.md",
+        "docs/design/2022-07-03-block-storage-snapshot-based-backup-restore.md",
+        "docs/design/2022-07-20-session-manager.md",
+        "docs/design/2022-07-22-transaction-savepoint.md",
+        "docs/design/2022-08-02-stats-lru-cache.md",
+        "docs/design/2022-08-04-pessimistic-lazy-constraint-check.md",
+        "docs/design/2022-09-19-distributed-ddl-reorg.md",
+        "docs/design/2022-09-22-global-memory-control.md",
+        "docs/design/2022-09-29-reorganize-partition.md",
+        "docs/design/2022-10-13-mysql-compatible-auto-increment.md",
+        "docs/design/2022-11-17-ttl-table.md",
+        "docs/design/2022-11-22-view-hint.md",
+        "docs/design/2022-11-23-batch-cop.md",
+        "docs/design/2022-11-25-global-resource-control.md",
+        "docs/design/2022-12-06-support-late-materialization.md",
+        "docs/design/2022-12-07-keyspace.md",
+        "docs/design/2023-03-14-multi-valued-index.md",
+        "docs/design/2023-03-17-non-prepared-plan-cache.md",
+        "docs/design/2023-04-11-dist-task.md",
+        "docs/design/2023-04-11-pause-user-ddl-when-upgrading.md",
+        "docs/design/2023-04-15-ddl-pause-resume.md",
+        "docs/design/2023-06-16-runaway-queries-management.md",
+        "docs/design/2023-06-30-configurable-kv-timeout.md",
+        "docs/design/2023-08-24-background-tasks-control.md",
+        "docs/design/2023-09-12-grouping-sets.md",
+        "docs/design/2023-11-29-priority-queue-for-auto-analyze.md",
+        "docs/design/2024-01-09-pipelined-DML.md",
+        "docs/design/2024-05-10-extension-authentication-plugin.md",
+        "docs/design/2024-05-11-hash-join-v2.md",
+        "docs/design/2024-05-23-predicate-columns.md",
+        "docs/design/2024-07-12-support-vector-index.md",
+        "docs/design/2024-09-06-maintain-priority-queue-in-memory.md",
+        "docs/design/2024-10-11-put-and-verify-transactions-for-external-storages.md",
+        "docs/design/2025-03-17-sys-session-manage-enhancement.md",
+        "docs/design/2025-04-15-global-memory-arbitrator.md",
+        "docs/design/2025-05-26-refresh-stats-command.md",
+        "docs/design/2025-07-24-index-lookup-push-down.md",
+        "docs/design/2025-11-05-active-active.md",
+        "docs/design/2026-01-19-topru-design.md",
+        "docs/design/2026-02-26-br-backup-repository-layout.md",
+        "docs/design/2026-02-27-column-level-masking.md",
+        "docs/design/2026-03-11-max-keys-read.md",
+        "docs/design/2026-03-16-null-reject-proof-framework.md",
+        "docs/design/2026-05-19-ttl-index-scan-optimization.md",
+        "docs/design/2026-06-22-integrate-analyze-into-background-task-resource-control.md",
+        "docs/design/2026-07-29-geospatial-basic.md",
+        "docs/design/2026-07-29-query-level-per-store-cop-request-limiter.md",
+        "docs/design/2026-07-31-adaptive-limit-scan.md",
+        "docs/design/2026-08-05-batch-analyze.md",
+        "docs/design/2026-09-09-sampling-based-ndv-for-large-tables/fmsketch-format.svg",
+        "docs/design/2026-09-09-sampling-based-ndv-for-large-tables.md",
+        "docs/design/README.md",
+        "docs/design/TEMPLATE.md",
+        "docs/tidb_http_api.md",
+        "dumpling/**",
+        "errors.toml",
+        "go.mod",
+        "go.sum",
+        "hooks/**",
+        "lightning/.gitignore",
+        "lightning/OWNERS",
+        "lightning/README.md",
+        "lightning/cmd/**",
+        "lightning/pkg/checkpoints/**",
+        "lightning/pkg/errormanager/**",
+        "lightning/pkg/importer/BUILD.bazel",
+        "lightning/pkg/importer/check_info.go",
+        "lightning/pkg/importer/check_info_test.go",
+        "lightning/pkg/importer/check_template.go",
+        "lightning/pkg/importer/checksum_helper.go",
+        "lightning/pkg/importer/chunk_process.go",
+        "lightning/pkg/importer/chunk_process_test.go",
+        "lightning/pkg/importer/dup_detect.go",
+        "lightning/pkg/importer/dup_detect_test.go",
+        "lightning/pkg/importer/get_pre_info.go",
+        "lightning/pkg/importer/get_pre_info_test.go",
+        "lightning/pkg/importer/import.go",
+        "lightning/pkg/importer/import_test.go",
+        "lightning/pkg/importer/meta_manager.go",
+        "lightning/pkg/importer/meta_manager_test.go",
+        "lightning/pkg/importer/meta_service_group_test.go",
+        "lightning/pkg/importer/mock/**",
+        "lightning/pkg/importer/opts/**",
+        "lightning/pkg/importer/precheck.go",
+        "lightning/pkg/importer/precheck_impl.go",
+        "lightning/pkg/importer/precheck_impl_test.go",
+        "lightning/pkg/importer/precheck_test.go",
+        "lightning/pkg/importer/table_import.go",
+        "lightning/pkg/importer/table_import_test.go",
+        "lightning/pkg/importer/tidb.go",
+        "lightning/pkg/importer/tidb_test.go",
+        "lightning/pkg/importinto/**",
+        "lightning/pkg/precheck/**",
+        "lightning/pkg/progress/**",
+        "lightning/pkg/server/**",
+        "lightning/tests/README.md",
+        "lightning/tests/config/**",
+        "lightning/tests/download_integration_test_binaries.sh",
+        "lightning/tests/lightning_add_index/**",
+        "lightning/tests/lightning_alter_random/**",
+        "lightning/tests/lightning_auto_columns/**",
+        "lightning/tests/lightning_auto_random_default/**",
+        "lightning/tests/lightning_bom_file/**",
+        "lightning/tests/lightning_character_sets/auto.toml",
+        "lightning/tests/lightning_character_sets/binary.toml",
+        "lightning/tests/lightning_character_sets/gb18030/charsets-schema-create.sql",
+        "lightning/tests/lightning_character_sets/gb18030/charsets.gb18030.sql",
+        "lightning/tests/lightning_character_sets/gb18030.toml",
+        "lightning/tests/lightning_character_sets/greek/**",
+        "lightning/tests/lightning_character_sets/greek.toml",
+        "lightning/tests/lightning_character_sets/latin1/charsets-schema-create.sql",
+        "lightning/tests/lightning_character_sets/latin1-only-schema.toml",
+        "lightning/tests/lightning_character_sets/latin1.toml",
+        "lightning/tests/lightning_character_sets/mixed/charsets-schema-create.sql",
+        "lightning/tests/lightning_character_sets/mixed/charsets.mixed.sql",
+        "lightning/tests/lightning_character_sets/run.sh",
+        "lightning/tests/lightning_character_sets/utf8mb4/**",
+        "lightning/tests/lightning_character_sets/utf8mb4.toml",
+        "lightning/tests/lightning_check_partial_imported/**",
+        "lightning/tests/lightning_checkpoint/**",
+        "lightning/tests/lightning_checkpoint_chunks/**",
+        "lightning/tests/lightning_checkpoint_columns/**",
+        "lightning/tests/lightning_checkpoint_dirty_tableid/**",
+        "lightning/tests/lightning_checkpoint_engines/**",
+        "lightning/tests/lightning_checkpoint_engines_order/**",
+        "lightning/tests/lightning_checkpoint_error_destroy/**",
+        "lightning/tests/lightning_checkpoint_parquet/**",
+        "lightning/tests/lightning_checkpoint_timestamp/**",
+        "lightning/tests/lightning_checksum_mismatch/**",
+        "lightning/tests/lightning_cmdline_override/**",
+        "lightning/tests/lightning_column_permutation/**",
+        "lightning/tests/lightning_common_handle/**",
+        "lightning/tests/lightning_compress/local-config.toml",
+        "lightning/tests/lightning_compress/run.sh",
+        "lightning/tests/lightning_compress/tidb-config.toml",
+        "lightning/tests/lightning_concurrent-restore/**",
+        "lightning/tests/lightning_config_max_error/**",
+        "lightning/tests/lightning_config_skip_csv_header/**",
+        "lightning/tests/lightning_csv/config-checksum-off.toml",
+        "lightning/tests/lightning_csv/config-pause-global.toml",
+        "lightning/tests/lightning_csv/config.toml",
+        "lightning/tests/lightning_csv/data/auto_incr_id-schema-create.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.clustered-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.clustered.0.csv",
+        "lightning/tests/lightning_csv/data/auto_incr_id.clustered_cache1-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.clustered_cache1.0.csv",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered.0.csv",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1.0.csv",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1_initial_autoid-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1_initial_autoid.0.csv",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1_shard_autorowid-schema.sql",
+        "lightning/tests/lightning_csv/data/auto_incr_id.nonclustered_cache1_shard_autorowid.0.csv",
+        "lightning/tests/lightning_csv/data/csv-schema-create.sql",
+        "lightning/tests/lightning_csv/data/csv.empty_strings-schema.sql",
+        "lightning/tests/lightning_csv/data/csv.empty_strings.csv",
+        "lightning/tests/lightning_csv/data/csv.escapes-schema.sql",
+        "lightning/tests/lightning_csv/data/csv.threads-schema.sql",
+        "lightning/tests/lightning_csv/data/csv.threads.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id-schema-create.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.clustered-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.clustered.0.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.clustered_cache1-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.clustered_cache1.0.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.no_pk-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.no_pk.0.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.no_pk_cache1-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.no_pk_cache1.0.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.nonclustered-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.nonclustered.0.csv",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.nonclustered_cache1-schema.sql",
+        "lightning/tests/lightning_csv/data/no_auto_incr_id.nonclustered_cache1.0.csv",
+        "lightning/tests/lightning_csv/errData/**",
+        "lightning/tests/lightning_csv/run.sh",
+        "lightning/tests/lightning_default-columns/**",
+        "lightning/tests/lightning_disable_scheduler_by_key_range/**",
+        "lightning/tests/lightning_disk_quota/**",
+        "lightning/tests/lightning_distributed_import/**",
+        "lightning/tests/lightning_drop_other_tables_halfway/**",
+        "lightning/tests/lightning_duplicate_detection/**",
+        "lightning/tests/lightning_duplicate_detection_new/**",
+        "lightning/tests/lightning_duplicate_resolution_error/**",
+        "lightning/tests/lightning_duplicate_resolution_error_pk_multiple_files/**",
+        "lightning/tests/lightning_duplicate_resolution_error_uk_multiple_files/**",
+        "lightning/tests/lightning_duplicate_resolution_error_uk_multiple_files_multicol_index/**",
+        "lightning/tests/lightning_duplicate_resolution_incremental/**",
+        "lightning/tests/lightning_duplicate_resolution_merge/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_multiple_keys_clustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_multiple_keys_nonclustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_multiple_unique_keys_clustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_multiple_unique_keys_nonclustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_key/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_key_multiple_conflicts_clustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_key_multiple_conflicts_nonclustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_unique_key_clustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_unique_key_multiple_conflicts_clustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_unique_key_multiple_conflicts_nonclustered_pk/**",
+        "lightning/tests/lightning_duplicate_resolution_replace_one_unique_key_nonclustered_varchar_pk/**",
+        "lightning/tests/lightning_error_summary/**",
+        "lightning/tests/lightning_examples/**",
+        "lightning/tests/lightning_exotic_filenames/**",
+        "lightning/tests/lightning_extend_routes/**",
+        "lightning/tests/lightning_fail_fast/**",
+        "lightning/tests/lightning_fail_fast_on_nonretry_err/**",
+        "lightning/tests/lightning_file_routing/**",
+        "lightning/tests/lightning_foreign_key/**",
+        "lightning/tests/lightning_gcs/**",
+        "lightning/tests/lightning_generated_columns/**",
+        "lightning/tests/lightning_ignore_columns/**",
+        "lightning/tests/lightning_import_compress/**",
+        "lightning/tests/lightning_import_into/**",
+        "lightning/tests/lightning_incremental/**",
+        "lightning/tests/lightning_issue_282/**",
+        "lightning/tests/lightning_issue_40657/**",
+        "lightning/tests/lightning_issue_410/**",
+        "lightning/tests/lightning_issue_519/**",
+        "lightning/tests/lightning_local_backend/**",
+        "lightning/tests/lightning_max_incr/**",
+        "lightning/tests/lightning_max_random/**",
+        "lightning/tests/lightning_multi_valued_index/**",
+        "lightning/tests/lightning_new_collation/config.toml",
+        "lightning/tests/lightning_new_collation/data/**",
+        "lightning/tests/lightning_new_collation/gbk.toml",
+        "lightning/tests/lightning_new_collation/run.sh",
+        "lightning/tests/lightning_new_collation/tidb-new-collation.toml",
+        "lightning/tests/lightning_no_schema/**",
+        "lightning/tests/lightning_parquet/config.toml",
+        "lightning/tests/lightning_parquet/data/export_info_ci.json",
+        "lightning/tests/lightning_parquet/data/export_tables_info_ci_from_1_to_9.json",
+        "lightning/tests/lightning_parquet/db.sql",
+        "lightning/tests/lightning_parquet/run.sh",
+        "lightning/tests/lightning_partition_incremental/**",
+        "lightning/tests/lightning_partitioned-table/**",
+        "lightning/tests/lightning_pd_leader_switch/**",
+        "lightning/tests/lightning_record_network/**",
+        "lightning/tests/lightning_reload_cert/**",
+        "lightning/tests/lightning_restore/**",
+        "lightning/tests/lightning_routes/**",
+        "lightning/tests/lightning_routes_panic/**",
+        "lightning/tests/lightning_row-format-v2/**",
+        "lightning/tests/lightning_s3/**",
+        "lightning/tests/lightning_shard_rowid/**",
+        "lightning/tests/lightning_source_linkfile/**",
+        "lightning/tests/lightning_sqlmode/**",
+        "lightning/tests/lightning_tidb_duplicate_data/**",
+        "lightning/tests/lightning_tidb_rowid/**",
+        "lightning/tests/lightning_tiflash/**",
+        "lightning/tests/lightning_tikv_multi_rocksdb/**",
+        "lightning/tests/lightning_too_many_columns/**",
+        "lightning/tests/lightning_tool_135/**",
+        "lightning/tests/lightning_tool_1420/**",
+        "lightning/tests/lightning_tool_1472/**",
+        "lightning/tests/lightning_tool_241/**",
+        "lightning/tests/lightning_ttl/**",
+        "lightning/tests/lightning_unused_config_keys/**",
+        "lightning/tests/lightning_various_types/**",
+        "lightning/tests/lightning_view/**",
+        "lightning/tests/lightning_view_dependency/**",
+        "lightning/tests/lightning_write_batch/**",
+        "lightning/tests/lightning_write_limit/**",
+        "lightning/tests/lightning_write_timeout/**",
+        "lightning/tests/run.sh",
+        "lightning/tests/run_group_lightning_tests.sh",
+        "lightning/tests/run_local_sst_test.sh",
+        "lightning/tidb-lightning.toml",
+        "llms.txt",
+        "pkg/autoid_service/**",
+        "pkg/bindinfo/**",
+        "pkg/config/**",
+        "pkg/ddl/**",
+        "pkg/distsql/**",
+        "pkg/domain/**",
+        "pkg/dumpformat/BUILD.bazel",
+        "pkg/dumpformat/OWNERS",
+        "pkg/dumpformat/csvfile/**",
+        "pkg/dumpformat/kind.go",
+        "pkg/dumpformat/parquetfile/BUILD.bazel",
+        "pkg/dumpformat/parquetfile/benchmark_decimal_test.go",
+        "pkg/dumpformat/parquetfile/column_buffer.go",
+        "pkg/dumpformat/parquetfile/column_type.go",
+        "pkg/dumpformat/parquetfile/column_type_mapping_test.go",
+        "pkg/dumpformat/parquetfile/column_value.go",
+        "pkg/dumpformat/parquetfile/column_value_conversion_test.go",
+        "pkg/dumpformat/parquetfile/parser.go",
+        "pkg/dumpformat/parquetfile/parser_test.go",
+        "pkg/dumpformat/parquetfile/reader_wrapper.go",
+        "pkg/dumpformat/parquetfile/schema_builder.go",
+        "pkg/dumpformat/parquetfile/spark_rebase.go",
+        "pkg/dumpformat/parquetfile/spark_rebase_micros_generated.go",
+        "pkg/dumpformat/parquetfile/type_converter.go",
+        "pkg/dumpformat/parquetfile/writer.go",
+        "pkg/dumpformat/parquetfile/writer_behavior_test.go",
+        "pkg/dumpformat/parquetfile/writer_core_test.go",
+        "pkg/dumpformat/parquetfile/writer_test_helpers_test.go",
+        "pkg/dumpformat/parsedef/**",
+        "pkg/dumpformat/sqlfile/**",
+        "pkg/dumpformat/testutils/**",
+        "pkg/dxf/**",
+        "pkg/errctx/**",
+        "pkg/errno/**",
+        "pkg/executor/**",
+        "pkg/expression/**",
+        "pkg/extension/**",
+        "pkg/extworkload/**",
+        "pkg/format/**",
+        "pkg/importsdk/**",
+        "pkg/inference/**",
+        "pkg/infoschema/BUILD.bazel",
+        "pkg/infoschema/OWNERS",
+        "pkg/infoschema/bench_test.go",
+        "pkg/infoschema/builder.go",
+        "pkg/infoschema/builder_misc.go",
+        "pkg/infoschema/builder_mview_test.go",
+        "pkg/infoschema/builder_test.go",
+        "pkg/infoschema/bundle_builder.go",
+        "pkg/infoschema/cache.go",
+        "pkg/infoschema/cluster.go",
+        "pkg/infoschema/context/**",
+        "pkg/infoschema/error.go",
+        "pkg/infoschema/infoschema.go",
+        "pkg/infoschema/infoschema_nokit_test.go",
+        "pkg/infoschema/infoschema_test.go",
+        "pkg/infoschema/infoschema_v2.go",
+        "pkg/infoschema/infoschema_v2_test.go",
+        "pkg/infoschema/infoschemav2_cache_test.go",
+        "pkg/infoschema/interface.go",
+        "pkg/infoschema/internal/**",
+        "pkg/infoschema/issyncer/**",
+        "pkg/infoschema/isvalidator/**",
+        "pkg/infoschema/main_test.go",
+        "pkg/infoschema/metric_table_def.go",
+        "pkg/infoschema/metrics/**",
+        "pkg/infoschema/metrics.go",
+        "pkg/infoschema/metrics_schema.go",
+        "pkg/infoschema/metrics_schema_test.go",
+        "pkg/infoschema/perfschema/BUILD.bazel",
+        "pkg/infoschema/perfschema/const.go",
+        "pkg/infoschema/perfschema/init.go",
+        "pkg/infoschema/perfschema/main_test.go",
+        "pkg/infoschema/perfschema/tables.go",
+        "pkg/infoschema/perfschema/tables_test.go",
+        "pkg/infoschema/sieve.go",
+        "pkg/infoschema/sieve_test.go",
+        "pkg/infoschema/tables.go",
+        "pkg/infoschema/tables_test.go",
+        "pkg/infoschema/test/**",
+        "pkg/infoschema/validatorapi/**",
+        "pkg/ingestor/**",
+        "pkg/keyspace/**",
+        "pkg/kv/**",
+        "pkg/lightning/OWNERS",
+        "pkg/lightning/backend/**",
+        "pkg/lightning/common/**",
+        "pkg/lightning/config/**",
+        "pkg/lightning/duplicate/**",
+        "pkg/lightning/importdef/**",
+        "pkg/lightning/log/**",
+        "pkg/lightning/manual/**",
+        "pkg/lightning/membuf/**",
+        "pkg/lightning/metric/**",
+        "pkg/lightning/mydump/BUILD.bazel",
+        "pkg/lightning/mydump/bytes.go",
+        "pkg/lightning/mydump/charset_convertor.go",
+        "pkg/lightning/mydump/charset_convertor_test.go",
+        "pkg/lightning/mydump/csv/split_large_file.csv",
+        "pkg/lightning/mydump/csv/utf8_test_file.csv",
+        "pkg/lightning/mydump/csv_parser.go",
+        "pkg/lightning/mydump/csv_parser_test.go",
+        "pkg/lightning/mydump/examples/**",
+        "pkg/lightning/mydump/loader.go",
+        "pkg/lightning/mydump/loader_test.go",
+        "pkg/lightning/mydump/main_test.go",
+        "pkg/lightning/mydump/parser.go",
+        "pkg/lightning/mydump/parser.rl",
+        "pkg/lightning/mydump/parser_generated.go",
+        "pkg/lightning/mydump/parser_test.go",
+        "pkg/lightning/mydump/reader.go",
+        "pkg/lightning/mydump/reader_test.go",
+        "pkg/lightning/mydump/region.go",
+        "pkg/lightning/mydump/region_test.go",
+        "pkg/lightning/mydump/router.go",
+        "pkg/lightning/mydump/router_test.go",
+        "pkg/lightning/mydump/schema_import.go",
+        "pkg/lightning/mydump/schema_import_test.go",
+        "pkg/lightning/mydump/view_import.go",
+        "pkg/lightning/mydump/view_import_test.go",
+        "pkg/lightning/tikv/BUILD.bazel",
+        "pkg/lightning/tikv/local_sst_writer.go",
+        "pkg/lightning/tikv/local_sst_writer_test.go",
+        "pkg/lightning/tikv/prop_collector.go",
+        "pkg/lightning/tikv/tikv.go",
+        "pkg/lightning/tikv/tikv_test.go",
+        "pkg/lightning/verification/**",
+        "pkg/lightning/worker/**",
+        "pkg/lock/**",
+        "pkg/meta/**",
+        "pkg/metaservice/**",
+        "pkg/metrics/**",
+        "pkg/objstore/**",
+        "pkg/owner/**",
+        "pkg/param/**",
+        "pkg/planner/BUILD.bazel",
+        "pkg/planner/OWNERS",
+        "pkg/planner/cardinality/**",
+        "pkg/planner/cascades/**",
+        "pkg/planner/core/BUILD.bazel",
+        "pkg/planner/core/access/**",
+        "pkg/planner/core/access_object.go",
+        "pkg/planner/core/base/**",
+        "pkg/planner/core/casetest/BUILD.bazel",
+        "pkg/planner/core/casetest/binaryplan/**",
+        "pkg/planner/core/casetest/cascades/**",
+        "pkg/planner/core/casetest/cbotest/BUILD.bazel",
+        "pkg/planner/core/casetest/cbotest/cbo_test.go",
+        "pkg/planner/core/casetest/cbotest/main_test.go",
+        "pkg/planner/core/casetest/cbotest/testdata/analyze_suite_in.json",
+        "pkg/planner/core/casetest/cbotest/testdata/analyze_suite_out.json",
+        "pkg/planner/core/casetest/cbotest/testdata/analyze_suite_xut.json",
+        "pkg/planner/core/casetest/ch/**",
+        "pkg/planner/core/casetest/correlated/**",
+        "pkg/planner/core/casetest/dag/**",
+        "pkg/planner/core/casetest/enforcempp/**",
+        "pkg/planner/core/casetest/flatplan/**",
+        "pkg/planner/core/casetest/fulljoin/**",
+        "pkg/planner/core/casetest/hint/**",
+        "pkg/planner/core/casetest/index/**",
+        "pkg/planner/core/casetest/indexmerge/**",
+        "pkg/planner/core/casetest/instanceplancache/**",
+        "pkg/planner/core/casetest/integration_test.go",
+        "pkg/planner/core/casetest/join/**",
+        "pkg/planner/core/casetest/logicalplan/**",
+        "pkg/planner/core/casetest/main_test.go",
+        "pkg/planner/core/casetest/mpp/**",
+        "pkg/planner/core/casetest/parallelapply/**",
+        "pkg/planner/core/casetest/partition/**",
+        "pkg/planner/core/casetest/physicalplantest/**",
+        "pkg/planner/core/casetest/plan_test.go",
+        "pkg/planner/core/casetest/plancache/**",
+        "pkg/planner/core/casetest/planstats/**",
+        "pkg/planner/core/casetest/pushdown/**",
+        "pkg/planner/core/casetest/rule/**",
+        "pkg/planner/core/casetest/scalarsubquery/**",
+        "pkg/planner/core/casetest/schema/**",
+        "pkg/planner/core/casetest/stats_test.go",
+        "pkg/planner/core/casetest/testdata/**",
+        "pkg/planner/core/casetest/tiflash_predicate_push_down_test.go",
+        "pkg/planner/core/casetest/tpcds/**",
+        "pkg/planner/core/casetest/tpch/**",
+        "pkg/planner/core/casetest/vectorsearch/**",
+        "pkg/planner/core/casetest/windows/**",
+        "pkg/planner/core/cbo_test.go",
+        "pkg/planner/core/columnar_index_utils.go",
+        "pkg/planner/core/common_plans.go",
+        "pkg/planner/core/common_plans_test.go",
+        "pkg/planner/core/constraint/**",
+        "pkg/planner/core/core_init.go",
+        "pkg/planner/core/cost/**",
+        "pkg/planner/core/encode.go",
+        "pkg/planner/core/enforce_mpp_test.go",
+        "pkg/planner/core/exhaust_physical_plans.go",
+        "pkg/planner/core/exhaust_physical_plans_test.go",
+        "pkg/planner/core/explain_ru_test.go",
+        "pkg/planner/core/expression_codec_fn.go",
+        "pkg/planner/core/expression_rewriter.go",
+        "pkg/planner/core/expression_test.go",
+        "pkg/planner/core/find_best_task.go",
+        "pkg/planner/core/find_best_task_test.go",
+        "pkg/planner/core/flat_plan.go",
+        "pkg/planner/core/fts_resolve_index.go",
+        "pkg/planner/core/fts_resolve_index_test.go",
+        "pkg/planner/core/fulltext_to_like.go",
+        "pkg/planner/core/fulltext_to_like_test.go",
+        "pkg/planner/core/generator/**",
+        "pkg/planner/core/hint_test.go",
+        "pkg/planner/core/hint_utils.go",
+        "pkg/planner/core/index_join_path.go",
+        "pkg/planner/core/indexmerge_path.go",
+        "pkg/planner/core/indexmerge_unfinished_path.go",
+        "pkg/planner/core/initialize.go",
+        "pkg/planner/core/integration_test.go",
+        "pkg/planner/core/issuetest/**",
+        "pkg/planner/core/joinorder/**",
+        "pkg/planner/core/lateral_join_test.go",
+        "pkg/planner/core/logical_initialize.go",
+        "pkg/planner/core/logical_plan_builder.go",
+        "pkg/planner/core/logical_plans_test.go",
+        "pkg/planner/core/main_test.go",
+        "pkg/planner/core/memtable_infoschema_extractor.go",
+        "pkg/planner/core/memtable_predicate_extractor.go",
+        "pkg/planner/core/metrics/**",
+        "pkg/planner/core/operator/**",
+        "pkg/planner/core/optimizer.go",
+        "pkg/planner/core/optimizer_test.go",
+        "pkg/planner/core/panicrisk_regression_test.go",
+        "pkg/planner/core/partidx/**",
+        "pkg/planner/core/pb_to_plan.go",
+        "pkg/planner/core/physical_plan_test.go",
+        "pkg/planner/core/plan.go",
+        "pkg/planner/core/plan_cache.go",
+        "pkg/planner/core/plan_cache_instance.go",
+        "pkg/planner/core/plan_cache_instance_test.go",
+        "pkg/planner/core/plan_cache_lru.go",
+        "pkg/planner/core/plan_cache_lru_test.go",
+        "pkg/planner/core/plan_cache_param.go",
+        "pkg/planner/core/plan_cache_rebuild.go",
+        "pkg/planner/core/plan_cache_utils.go",
+        "pkg/planner/core/plan_cacheable_checker.go",
+        "pkg/planner/core/plan_clone_utils.go",
+        "pkg/planner/core/plan_cost_ver1.go",
+        "pkg/planner/core/plan_cost_ver2.go",
+        "pkg/planner/core/plan_cost_ver2_test.go",
+        "pkg/planner/core/plan_replayer_capture_test.go",
+        "pkg/planner/core/plan_test.go",
+        "pkg/planner/core/plan_to_pb_test.go",
+        "pkg/planner/core/planbuilder.go",
+        "pkg/planner/core/planbuilder_test.go",
+        "pkg/planner/core/point_get_plan.go",
+        "pkg/planner/core/preprocess.go",
+        "pkg/planner/core/preprocess_test.go",
+        "pkg/planner/core/property_cols_prune.go",
+        "pkg/planner/core/recheck_cte.go",
+        "pkg/planner/core/resolve/**",
+        "pkg/planner/core/resolve_indices.go",
+        "pkg/planner/core/rule/**",
+        "pkg/planner/core/rule_aggregation_elimination.go",
+        "pkg/planner/core/rule_aggregation_push_down.go",
+        "pkg/planner/core/rule_aggregation_skew_rewrite.go",
+        "pkg/planner/core/rule_correlate.go",
+        "pkg/planner/core/rule_decorrelate.go",
+        "pkg/planner/core/rule_derive_topn_from_window.go",
+        "pkg/planner/core/rule_eliminate_empty_selection.go",
+        "pkg/planner/core/rule_eliminate_projection.go",
+        "pkg/planner/core/rule_eliminate_unionall_dual_item.go",
+        "pkg/planner/core/rule_generate_column_substitute.go",
+        "pkg/planner/core/rule_generate_column_substitute_test.go",
+        "pkg/planner/core/rule_inject_extra_projection.go",
+        "pkg/planner/core/rule_join_elimination.go",
+        "pkg/planner/core/rule_join_reorder.go",
+        "pkg/planner/core/rule_join_reorder_dp.go",
+        "pkg/planner/core/rule_join_reorder_dp_test.go",
+        "pkg/planner/core/rule_join_reorder_greedy.go",
+        "pkg/planner/core/rule_join_reorder_projection_inline.go",
+        "pkg/planner/core/rule_predicate_push_down.go",
+        "pkg/planner/core/rule_push_down_sequence.go",
+        "pkg/planner/core/rule_resolve_grouping_expand.go",
+        "pkg/planner/core/rule_result_reorder.go",
+        "pkg/planner/core/rule_semi_join_rewrite.go",
+        "pkg/planner/core/rule_topn_push_down.go",
+        "pkg/planner/core/runtime_filter_generator.go",
+        "pkg/planner/core/runtime_filter_generator_test.go",
+        "pkg/planner/core/scalar_subq_expression.go",
+        "pkg/planner/core/schema_table_key.go",
+        "pkg/planner/core/show_predicate_extractor.go",
+        "pkg/planner/core/stats/**",
+        "pkg/planner/core/stats.go",
+        "pkg/planner/core/stats_test.go",
+        "pkg/planner/core/stringer.go",
+        "pkg/planner/core/stringer_test.go",
+        "pkg/planner/core/subquery_plan_builder.go",
+        "pkg/planner/core/task.go",
+        "pkg/planner/core/task_heavy_function_optimize_test.go",
+        "pkg/planner/core/task_test.go",
+        "pkg/planner/core/telemetry.go",
+        "pkg/planner/core/testdata/**",
+        "pkg/planner/core/tests/**",
+        "pkg/planner/core/trace.go",
+        "pkg/planner/core/util.go",
+        "pkg/planner/core/util_test.go",
+        "pkg/planner/extstore/**",
+        "pkg/planner/funcdep/**",
+        "pkg/planner/implementation/**",
+        "pkg/planner/indexadvisor/**",
+        "pkg/planner/memo/**",
+        "pkg/planner/optimize.go",
+        "pkg/planner/planctx/**",
+        "pkg/planner/plannersession/**",
+        "pkg/planner/property/**",
+        "pkg/planner/util/**",
+        "pkg/plugin/**",
+        "pkg/privilege/**",
+        "pkg/resourcegroup/**",
+        "pkg/resourcemanager/**",
+        "pkg/server/**",
+        "pkg/session/**",
+        "pkg/sessionctx/**",
+        "pkg/sessiontxn/**",
+        "pkg/standby/**",
+        "pkg/statistics/**",
+        "pkg/store/**",
+        "pkg/structure/**",
+        "pkg/table/**",
+        "pkg/tablecodec/**",
+        "pkg/telemetry/**",
+        "pkg/testkit/BUILD.bazel",
+        "pkg/testkit/analyzehelper/**",
+        "pkg/testkit/asynctestkit.go",
+        "pkg/testkit/db_driver.go",
+        "pkg/testkit/db_driver_test.go",
+        "pkg/testkit/dbtestkit.go",
+        "pkg/testkit/ddlhelper/**",
+        "pkg/testkit/mocksessionmanager.go",
+        "pkg/testkit/mockstore.go",
+        "pkg/testkit/result.go",
+        "pkg/testkit/stepped.go",
+        "pkg/testkit/testdata/**",
+        "pkg/testkit/testenv/**",
+        "pkg/testkit/testfailpoint/**",
+        "pkg/testkit/testflag/**",
+        "pkg/testkit/testfork/**",
+        "pkg/testkit/testkit.go",
+        "pkg/testkit/testkit_test.go",
+        "pkg/testkit/testmain/**",
+        "pkg/testkit/testsetup/**",
+        "pkg/testkit/testutil/**",
+        "pkg/tidbmanager/**",
+        "pkg/timer/**",
+        "pkg/ttl/**",
+        "pkg/types/**",
+        "pkg/util/BUILD.bazel",
+        "pkg/util/admin/**",
+        "pkg/util/arena/**",
+        "pkg/util/backoff/**",
+        "pkg/util/benchdaily/**",
+        "pkg/util/bitmap/**",
+        "pkg/util/breakpoint/**",
+        "pkg/util/cdcutil/**",
+        "pkg/util/cgmon/**",
+        "pkg/util/cgroup/**",
+        "pkg/util/channel/**",
+        "pkg/util/checksum/**",
+        "pkg/util/chunk/**",
+        "pkg/util/codec/**",
+        "pkg/util/collate/**",
+        "pkg/util/column-mapping/**",
+        "pkg/util/compress/**",
+        "pkg/util/config/**",
+        "pkg/util/context/**",
+        "pkg/util/cpu/**",
+        "pkg/util/cpu_posix.go",
+        "pkg/util/cpu_windows.go",
+        "pkg/util/cpuprofile/**",
+        "pkg/util/cteutil/**",
+        "pkg/util/dbterror/**",
+        "pkg/util/dbutil/**",
+        "pkg/util/ddl-checker/**",
+        "pkg/util/deadlockhistory/**",
+        "pkg/util/deeptest/**",
+        "pkg/util/diagclient/**",
+        "pkg/util/disjointset/**",
+        "pkg/util/disk/**",
+        "pkg/util/disttask/**",
+        "pkg/util/domainutil/**",
+        "pkg/util/encrypt/**",
+        "pkg/util/engine/**",
+        "pkg/util/errmsg/**",
+        "pkg/util/errors.go",
+        "pkg/util/errors_test.go",
+        "pkg/util/etcd/**",
+        "pkg/util/etcd.go",
+        "pkg/util/execdetails/**",
+        "pkg/util/expensivequery/**",
+        "pkg/util/extsort/**",
+        "pkg/util/fastrand/**",
+        "pkg/util/filter/**",
+        "pkg/util/format/**",
+        "pkg/util/gctuner/**",
+        "pkg/util/gcutil/**",
+        "pkg/util/generatedexpr/**",
+        "pkg/util/generic/**",
+        "pkg/util/globalconn/**",
+        "pkg/util/gogc.go",
+        "pkg/util/hack/**",
+        "pkg/util/hint/**",
+        "pkg/util/httputil/**",
+        "pkg/util/id_generator.go",
+        "pkg/util/importer/**",
+        "pkg/util/injectfailpoint/**",
+        "pkg/util/intest/**",
+        "pkg/util/intset/**",
+        "pkg/util/israce/**",
+        "pkg/util/keydecoder/**",
+        "pkg/util/kvcache/**",
+        "pkg/util/linter/**",
+        "pkg/util/logutil/**",
+        "pkg/util/main_test.go",
+        "pkg/util/mathutil/**",
+        "pkg/util/memory/**",
+        "pkg/util/memoryusagealarm/**",
+        "pkg/util/metricsutil/**",
+        "pkg/util/misc.go",
+        "pkg/util/misc_test.go",
+        "pkg/util/mock/**",
+        "pkg/util/mviewutil/**",
+        "pkg/util/mvmap/**",
+        "pkg/util/naming/**",
+        "pkg/util/nocopy/**",
+        "pkg/util/paging/**",
+        "pkg/util/parser/**",
+        "pkg/util/partialjson/**",
+        "pkg/util/password-validation/**",
+        "pkg/util/plancodec/**",
+        "pkg/util/ppcpuusage/**",
+        "pkg/util/prefetch/**",
+        "pkg/util/prefix_helper.go",
+        "pkg/util/prefix_helper_test.go",
+        "pkg/util/printer/**",
+        "pkg/util/printer.go",
+        "pkg/util/profile/BUILD.bazel",
+        "pkg/util/profile/flamegraph.go",
+        "pkg/util/profile/flamegraph_test.go",
+        "pkg/util/profile/main_test.go",
+        "pkg/util/profile/profile.go",
+        "pkg/util/profile/profile_test.go",
+        "pkg/util/promutil/**",
+        "pkg/util/queue/**",
+        "pkg/util/ranger/**",
+        "pkg/util/redact/**",
+        "pkg/util/regexpr-router/**",
+        "pkg/util/regionsplit/**",
+        "pkg/util/replayer/**",
+        "pkg/util/resourcegrouptag/**",
+        "pkg/util/rlimit_other.go",
+        "pkg/util/rlimit_windows.go",
+        "pkg/util/rowDecoder/**",
+        "pkg/util/rowcodec/**",
+        "pkg/util/schemacmp/**",
+        "pkg/util/security.go",
+        "pkg/util/security_test.go",
+        "pkg/util/selection/**",
+        "pkg/util/sem/**",
+        "pkg/util/serialization/**",
+        "pkg/util/servermemorylimit/**",
+        "pkg/util/service_url.go",
+        "pkg/util/service_url_test.go",
+        "pkg/util/session_pool.go",
+        "pkg/util/session_pool_test.go",
+        "pkg/util/set/**",
+        "pkg/util/signal/**",
+        "pkg/util/size/**",
+        "pkg/util/skip/**",
+        "pkg/util/sli/**",
+        "pkg/util/slice/**",
+        "pkg/util/split.go",
+        "pkg/util/split_test.go",
+        "pkg/util/sqlescape/**",
+        "pkg/util/sqlexec/**",
+        "pkg/util/sqlkiller/**",
+        "pkg/util/stmtsummary/**",
+        "pkg/util/stringutil/**",
+        "pkg/util/syncutil/**",
+        "pkg/util/sys/**",
+        "pkg/util/systimemon/**",
+        "pkg/util/table-filter/**",
+        "pkg/util/table-router/**",
+        "pkg/util/table-rule-selector/**",
+        "pkg/util/tableutil/**",
+        "pkg/util/texttree/**",
+        "pkg/util/tiflash/**",
+        "pkg/util/tiflashcompute/**",
+        "pkg/util/tikvutil/**",
+        "pkg/util/timeutil/**",
+        "pkg/util/tls/**",
+        "pkg/util/tokenlimiter.go",
+        "pkg/util/topsql/**",
+        "pkg/util/traceevent/**",
+        "pkg/util/tracing/**",
+        "pkg/util/trxevents/**",
+        "pkg/util/urls.go",
+        "pkg/util/urls_test.go",
+        "pkg/util/util.go",
+        "pkg/util/util_test.go",
+        "pkg/util/versioninfo/**",
+        "pkg/util/vitess/**",
+        "pkg/util/wait_group_wrapper.go",
+        "pkg/util/wait_group_wrapper_test.go",
+        "pkg/util/watcher/**",
+        "pkg/util/worker_pool.go",
+        "pkg/util/workloadrepo/**",
+        "pkg/util/zeropool/**",
+        "pkg/workloadlearning/**",
+        "roadmap.md",
+        "tests/_utils/**",
+        "tests/clusterintegrationtest/**",
+        "tests/cncheckcert/**",
+        "tests/globalkilltest/**",
+        "tests/graceshutdown/**",
+        "tests/integrationtest/README.md",
+        "tests/integrationtest/config.toml",
+        "tests/integrationtest/disable_new_collation.toml",
+        "tests/integrationtest/r/access_path_selection.result",
+        "tests/integrationtest/r/agg_predicate_pushdown.result",
+        "tests/integrationtest/r/bindinfo/**",
+        "tests/integrationtest/r/black_list.result",
+        "tests/integrationtest/r/clustered_index.result",
+        "tests/integrationtest/r/collation_agg_func_disabled.result",
+        "tests/integrationtest/r/collation_agg_func_enabled.result",
+        "tests/integrationtest/r/collation_check_use_collation_disabled.result",
+        "tests/integrationtest/r/collation_check_use_collation_enabled.result",
+        "tests/integrationtest/r/collation_misc_disabled.result",
+        "tests/integrationtest/r/collation_misc_enabled.result",
+        "tests/integrationtest/r/collation_pointget_disabled.result",
+        "tests/integrationtest/r/collation_pointget_enabled.result",
+        "tests/integrationtest/r/common_collation.result",
+        "tests/integrationtest/r/cte.result",
+        "tests/integrationtest/r/db_integration.result",
+        "tests/integrationtest/r/ddl/affinity.result",
+        "tests/integrationtest/r/ddl/attributes_sql.result",
+        "tests/integrationtest/r/ddl/bdr_mode.result",
+        "tests/integrationtest/r/ddl/column.result",
+        "tests/integrationtest/r/ddl/column_change.result",
+        "tests/integrationtest/r/ddl/column_modify.result",
+        "tests/integrationtest/r/ddl/constraint.result",
+        "tests/integrationtest/r/ddl/db.result",
+        "tests/integrationtest/r/ddl/db_cache.result",
+        "tests/integrationtest/r/ddl/db_change.result",
+        "tests/integrationtest/r/ddl/db_foreign_key.result",
+        "tests/integrationtest/r/ddl/db_integration.result",
+        "tests/integrationtest/r/ddl/db_partition.result",
+        "tests/integrationtest/r/ddl/db_rename.result",
+        "tests/integrationtest/r/ddl/db_table.result",
+        "tests/integrationtest/r/ddl/ddl_error.result",
+        "tests/integrationtest/r/ddl/ddl_tiflash.result",
+        "tests/integrationtest/r/ddl/default_as_expression.result",
+        "tests/integrationtest/r/ddl/exchange_partition_global_index.result",
+        "tests/integrationtest/r/ddl/fail_db.result",
+        "tests/integrationtest/r/ddl/foreign_key.result",
+        "tests/integrationtest/r/ddl/index_modify.result",
+        "tests/integrationtest/r/ddl/integration.result",
+        "tests/integrationtest/r/ddl/modify_column.result",
+        "tests/integrationtest/r/ddl/multi_schema_change.result",
+        "tests/integrationtest/r/ddl/partition.result",
+        "tests/integrationtest/r/ddl/primary_key_handle.result",
+        "tests/integrationtest/r/ddl/reorg_partition.result",
+        "tests/integrationtest/r/ddl/resource_group.result",
+        "tests/integrationtest/r/ddl/sequence.result",
+        "tests/integrationtest/r/ddl/serial.result",
+        "tests/integrationtest/r/ddl/storage_class.result",
+        "tests/integrationtest/r/ddl/table_create_compat.result",
+        "tests/integrationtest/r/ddl/table_modify.result",
+        "tests/integrationtest/r/executor/adapter.result",
+        "tests/integrationtest/r/executor/admin.result",
+        "tests/integrationtest/r/executor/analyze.result",
+        "tests/integrationtest/r/executor/autoid.result",
+        "tests/integrationtest/r/executor/batch_point_get.result",
+        "tests/integrationtest/r/executor/chunk_reuse.result",
+        "tests/integrationtest/r/executor/cluster_table.result",
+        "tests/integrationtest/r/executor/compact_table.result",
+        "tests/integrationtest/r/executor/cte.result",
+        "tests/integrationtest/r/executor/ddl.result",
+        "tests/integrationtest/r/executor/delete.result",
+        "tests/integrationtest/r/executor/distsql.result",
+        "tests/integrationtest/r/executor/dual_password.result",
+        "tests/integrationtest/r/executor/executor_txn.result",
+        "tests/integrationtest/r/executor/expand.result",
+        "tests/integrationtest/r/executor/explain.result",
+        "tests/integrationtest/r/executor/explainfor.result",
+        "tests/integrationtest/r/executor/foreign_key.result",
+        "tests/integrationtest/r/executor/grant.result",
+        "tests/integrationtest/r/executor/import_into.result",
+        "tests/integrationtest/r/executor/index_lookup_join.result",
+        "tests/integrationtest/r/executor/index_lookup_merge_join.result",
+        "tests/integrationtest/r/executor/index_lookup_pushdown.result",
+        "tests/integrationtest/r/executor/index_lookup_pushdown_partition.result",
+        "tests/integrationtest/r/executor/index_merge_reader.result",
+        "tests/integrationtest/r/executor/infoschema_reader.result",
+        "tests/integrationtest/r/executor/inspection_common.result",
+        "tests/integrationtest/r/executor/issues.result",
+        "tests/integrationtest/r/executor/jointest/**",
+        "tests/integrationtest/r/executor/kv.result",
+        "tests/integrationtest/r/executor/max_keys_read.result",
+        "tests/integrationtest/r/executor/merge_join.result",
+        "tests/integrationtest/r/executor/mixed_null_join_keys.result",
+        "tests/integrationtest/r/executor/mview_log_dml.result",
+        "tests/integrationtest/r/executor/outfile_line_prefix.result",
+        "tests/integrationtest/r/executor/parallel_apply.result",
+        "tests/integrationtest/r/executor/partition/**",
+        "tests/integrationtest/r/executor/password_management.result",
+        "tests/integrationtest/r/executor/perfschema.result",
+        "tests/integrationtest/r/executor/point_get.result",
+        "tests/integrationtest/r/executor/prepared.result",
+        "tests/integrationtest/r/executor/revoke.result",
+        "tests/integrationtest/r/executor/rowid.result",
+        "tests/integrationtest/r/executor/ru_write_units.result",
+        "tests/integrationtest/r/executor/sample.result",
+        "tests/integrationtest/r/executor/set.result",
+        "tests/integrationtest/r/executor/show.result",
+        "tests/integrationtest/r/executor/simple.result",
+        "tests/integrationtest/r/executor/split_table.result",
+        "tests/integrationtest/r/executor/stale_txn.result",
+        "tests/integrationtest/r/executor/statement_context.result",
+        "tests/integrationtest/r/executor/union_scan.result",
+        "tests/integrationtest/r/executor/update.result",
+        "tests/integrationtest/r/executor/window.result",
+        "tests/integrationtest/r/executor/write.result",
+        "tests/integrationtest/r/explain-non-select-stmt.result",
+        "tests/integrationtest/r/explain.result",
+        "tests/integrationtest/r/explain_complex.result",
+        "tests/integrationtest/r/explain_complex_stats.result",
+        "tests/integrationtest/r/explain_cte.result",
+        "tests/integrationtest/r/explain_easy.result",
+        "tests/integrationtest/r/explain_easy_stats.result",
+        "tests/integrationtest/r/explain_foreign_key.result",
+        "tests/integrationtest/r/explain_generate_column_substitute.result",
+        "tests/integrationtest/r/explain_indexmerge_stats.result",
+        "tests/integrationtest/r/explain_join_stats.result",
+        "tests/integrationtest/r/explain_shard_index.result",
+        "tests/integrationtest/r/explain_stats.result",
+        "tests/integrationtest/r/explain_union_scan.result",
+        "tests/integrationtest/r/expression/cast.result",
+        "tests/integrationtest/r/expression/constant_fold.result",
+        "tests/integrationtest/r/expression/enum_set.result",
+        "tests/integrationtest/r/expression/explain.result",
+        "tests/integrationtest/r/expression/format.result",
+        "tests/integrationtest/r/expression/json.result",
+        "tests/integrationtest/r/expression/misc.result",
+        "tests/integrationtest/r/expression/multi_valued_index.result",
+        "tests/integrationtest/r/expression/noop_functions.result",
+        "tests/integrationtest/r/expression/plan_cache.result",
+        "tests/integrationtest/r/expression/time.result",
+        "tests/integrationtest/r/expression/uuid.result",
+        "tests/integrationtest/r/expression/vitess_hash.result",
+        "tests/integrationtest/r/generated_columns.result",
+        "tests/integrationtest/r/globalindex/**",
+        "tests/integrationtest/r/imdbload.result",
+        "tests/integrationtest/r/index_join.result",
+        "tests/integrationtest/r/index_merge.result",
+        "tests/integrationtest/r/infoschema/**",
+        "tests/integrationtest/r/naaj.result",
+        "tests/integrationtest/r/new_character_set_invalid.result",
+        "tests/integrationtest/r/null_rejected.result",
+        "tests/integrationtest/r/parser/**",
+        "tests/integrationtest/r/partition.result",
+        "tests/integrationtest/r/planner/cardinality/**",
+        "tests/integrationtest/r/planner/cascades/**",
+        "tests/integrationtest/r/planner/core/binary_plan.result",
+        "tests/integrationtest/r/planner/core/casetest/expression_rewriter.result",
+        "tests/integrationtest/r/planner/core/casetest/hint/**",
+        "tests/integrationtest/r/planner/core/casetest/index/**",
+        "tests/integrationtest/r/planner/core/casetest/integration.result",
+        "tests/integrationtest/r/planner/core/casetest/partition/**",
+        "tests/integrationtest/r/planner/core/casetest/point_get_plan.result",
+        "tests/integrationtest/r/planner/core/casetest/predicate_simplification.result",
+        "tests/integrationtest/r/planner/core/casetest/pushdown/**",
+        "tests/integrationtest/r/planner/core/casetest/rule/**",
+        "tests/integrationtest/r/planner/core/cbo.result",
+        "tests/integrationtest/r/planner/core/enforce_mpp.result",
+        "tests/integrationtest/r/planner/core/expression_rewriter.result",
+        "tests/integrationtest/r/planner/core/fulltext_search.result",
+        "tests/integrationtest/r/planner/core/grouped_ranges_order_by.result",
+        "tests/integrationtest/r/planner/core/index_advisor.result",
+        "tests/integrationtest/r/planner/core/indexjoin.result",
+        "tests/integrationtest/r/planner/core/indexmerge_intersection.result",
+        "tests/integrationtest/r/planner/core/indexmerge_path.result",
+        "tests/integrationtest/r/planner/core/issuetest/**",
+        "tests/integrationtest/r/planner/core/join_key_type_cast.result",
+        "tests/integrationtest/r/planner/core/join_reorder2.result",
+        "tests/integrationtest/r/planner/core/join_reorder_through_projection.result",
+        "tests/integrationtest/r/planner/core/lateral_join.result",
+        "tests/integrationtest/r/planner/core/memtable_predicate_extractor.result",
+        "tests/integrationtest/r/planner/core/partial_order_topn.result",
+        "tests/integrationtest/r/planner/core/partition_pruner.result",
+        "tests/integrationtest/r/planner/core/physical_plan.result",
+        "tests/integrationtest/r/planner/core/plan.result",
+        "tests/integrationtest/r/planner/core/plan_cost_ver2.result",
+        "tests/integrationtest/r/planner/core/preprocess.result",
+        "tests/integrationtest/r/planner/core/range_scan_for_like.result",
+        "tests/integrationtest/r/planner/core/rule_constant_propagation.result",
+        "tests/integrationtest/r/planner/core/rule_join_reorder.result",
+        "tests/integrationtest/r/planner/core/rule_outer2inner.result",
+        "tests/integrationtest/r/planner/core/rule_result_reorder.result",
+        "tests/integrationtest/r/planner/core/tests/prepare/prepare.result",
+        "tests/integrationtest/r/planner/core/topn_heavy_function_optimize.result",
+        "tests/integrationtest/r/planner/funcdep/**",
+        "tests/integrationtest/r/privilege/**",
+        "tests/integrationtest/r/select.result",
+        "tests/integrationtest/r/session/**",
+        "tests/integrationtest/r/sessionctx/**",
+        "tests/integrationtest/r/sessiontxn/**",
+        "tests/integrationtest/r/show.result",
+        "tests/integrationtest/r/statistics/**",
+        "tests/integrationtest/r/subquery.result",
+        "tests/integrationtest/r/table/**",
+        "tests/integrationtest/r/topn_push_down.result",
+        "tests/integrationtest/r/topn_pushdown.result",
+        "tests/integrationtest/r/tpch.result",
+        "tests/integrationtest/r/types/**",
+        "tests/integrationtest/r/util/admin.result",
+        "tests/integrationtest/r/window_function.result",
+        "tests/integrationtest/run-tests-next-gen.sh",
+        "tests/integrationtest/run-tests.sh",
+        "tests/integrationtest/t/**",
+        "tests/integrationtest2/**",
+        "tests/llmtest/**",
+        "tests/readonlytest/**",
+        "tests/realtikvtest/BUILD.bazel",
+        "tests/realtikvtest/addindextest/**",
+        "tests/realtikvtest/addindextest1/**",
+        "tests/realtikvtest/addindextest2/**",
+        "tests/realtikvtest/addindextest3/**",
+        "tests/realtikvtest/addindextest4/**",
+        "tests/realtikvtest/brietest/**",
+        "tests/realtikvtest/configs/**",
+        "tests/realtikvtest/ddltest/**",
+        "tests/realtikvtest/flashbacktest/**",
+        "tests/realtikvtest/importintotest/BUILD.bazel",
+        "tests/realtikvtest/importintotest/detach_test.go",
+        "tests/realtikvtest/importintotest/import_into_test.go",
+        "tests/realtikvtest/importintotest/job_test.go",
+        "tests/realtikvtest/importintotest/main_test.go",
+        "tests/realtikvtest/importintotest/one_parquet_test.go",
+        "tests/realtikvtest/importintotest/parquet_test.go",
+        "tests/realtikvtest/importintotest/precheck_test.go",
+        "tests/realtikvtest/importintotest/sdk_test.go",
+        "tests/realtikvtest/importintotest/util_test.go",
+        "tests/realtikvtest/importintotest2/**",
+        "tests/realtikvtest/importintotest3/**",
+        "tests/realtikvtest/importintotest4/**",
+        "tests/realtikvtest/pessimistictest/**",
+        "tests/realtikvtest/pipelineddmltest/**",
+        "tests/realtikvtest/pushdowntest/**",
+        "tests/realtikvtest/scripts/**",
+        "tests/realtikvtest/sessiontest/**",
+        "tests/realtikvtest/startertest/**",
+        "tests/realtikvtest/statisticstest/BUILD.bazel",
+        "tests/realtikvtest/statisticstest/main_test.go",
+        "tests/realtikvtest/statisticstest/statistics_test.go",
+        "tests/realtikvtest/testkit.go",
+        "tests/realtikvtest/testutils/**",
+        "tests/realtikvtest/txntest/**",
+        "tools/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright {}, Apache-2.0 license (LICENSE), https://github.com/pingcap/tidb."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "br/.dockerignore",
+        "br/.editorconfig",
+        "br/.gitattributes",
+        "br/.gitignore",
+        "br/.golangci.yml",
+        "br/COMPATIBILITY_TEST.md",
+        "br/CONTRIBUTING.md",
+        "br/LICENSE.md",
+        "br/OWNERS",
+        "br/README.md",
+        "br/SECURITY.md",
+        "br/cmd/**",
+        "br/compatibility/**",
+        "br/docker/**",
+        "br/docker-compose.yaml",
+        "br/docs/**",
+        "br/errors.toml",
+        "br/images/**",
+        "br/metrics/**",
+        "br/pkg/aws/**",
+        "br/pkg/backup/**",
+        "br/pkg/checkpoint/**",
+        "br/pkg/checksum/**",
+        "br/pkg/common/**",
+        "br/pkg/config/**",
+        "br/pkg/conn/**",
+        "br/pkg/encryption/**",
+        "br/pkg/errors/**",
+        "br/pkg/gc/**",
+        "br/pkg/glue/**",
+        "br/pkg/gluetidb/**",
+        "br/pkg/gluetikv/**",
+        "br/pkg/kms/**",
+        "br/pkg/logutil/**",
+        "br/pkg/metautil/**",
+        "br/pkg/mock/**",
+        "br/pkg/operation/**",
+        "br/pkg/pdutil/**",
+        "br/pkg/registry/**",
+        "br/pkg/repo/**",
+        "br/pkg/restore/**",
+        "br/pkg/rtree/**",
+        "br/pkg/stream/**",
+        "br/pkg/streamhelper/**",
+        "br/pkg/summary/**",
+        "br/pkg/task/BUILD.bazel",
+        "br/pkg/task/backup.go",
+        "br/pkg/task/backup_ebs.go",
+        "br/pkg/task/backup_ebs_test.go",
+        "br/pkg/task/backup_raw.go",
+        "br/pkg/task/backup_test.go",
+        "br/pkg/task/backup_txn.go",
+        "br/pkg/task/common/**",
+        "br/pkg/task/common.go",
+        "br/pkg/task/common_test.go",
+        "br/pkg/task/config_test.go",
+        "br/pkg/task/encryption.go",
+        "br/pkg/task/encryption_test.go",
+        "br/pkg/task/meta_service_group_test.go",
+        "br/pkg/task/operator/**",
+        "br/pkg/task/repo/**",
+        "br/pkg/task/restore.go",
+        "br/pkg/task/restore_data.go",
+        "br/pkg/task/restore_ebs_meta.go",
+        "br/pkg/task/restore_nokit_test.go",
+        "br/pkg/task/restore_raw.go",
+        "br/pkg/task/restore_test.go",
+        "br/pkg/task/restore_txn.go",
+        "br/pkg/task/show/BUILD.bazel",
+        "br/pkg/task/show/cmd.go",
+        "br/pkg/task/show/cmd_test.go",
+        "br/pkg/task/stream.go",
+        "br/pkg/task/stream_test.go",
+        "br/pkg/trace/**",
+        "br/pkg/utils/**",
+        "br/pkg/utiltest/**",
+        "br/pkg/version/**",
+        "br/revive.toml",
+        "br/tests/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of pingcap/tidb (br) (the license file names no copyright line), Apache-2.0 license (LICENSE.md), https://github.com/pingcap/tidb/tree/7193401b6746fd78c25fbb758c6db75273f61ac9/br."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "pkg/parser/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of pingcap/tidb (pkg/parser) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/pingcap/tidb/tree/7193401b6746fd78c25fbb758c6db75273f61ac9/pkg/parser."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/Jenkinsfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "tests/realtikvtest/startertest/docker-compose/Dockerfile.test.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.enterprise"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.patchgo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.result"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ci_bazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OWNERS_ALIASES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/QL-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/STRUTIL-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Unicode-DFS-2016-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/backupmeta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/br_tikv_outage_util"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/centos7_jenkins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_cluster_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_contains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_lightning_log_contains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_not_contains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_sync_diff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file_not_exist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file_should_exist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate_certs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_tiflash_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/parser_test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/read_result"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_br"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_cdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_curl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_dumpling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_lightning"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_lightning_ctl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_pd_ctl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_services"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_sql_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_sql_in_container"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_user_sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/workload"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/triton-lang/triton",
+  "revision": "e6f4c919fb18a99ed08f1cf3713ae15c686790d3",
+  "checksum": "sha256:bc5b544e0a38bbe3018404eaa08a30c27a0f64db4efedbcf53e15ce9cb0b6a63",
+  "extract": {
+    "exclude": [
+      "docs/getting-started/tutorials/**",
+      "docs/meetups/02-20-2024/Proton.pdf",
+      "docs/meetups/08-22-2023/amd-update.pdf",
+      "docs/meetups/08-22-2023/intel-xpu-update.pptx",
+      "docs/meetups/10-25-2023/intel-xpu-update.pdf",
+      "docs/meetups/10-25-2023/triton-shared.pptx",
+      "docs/programming-guide/chapter-1/cuda-parallel-matmul.png",
+      "docs/programming-guide/chapter-1/triton-parallel-matmul.png",
+      "docs/programming-guide/chapter-2/halide-iteration.png",
+      "docs/programming-guide/chapter-2/polyhedral-iteration.png",
+      "third_party/amd/**",
+      "third_party/nvidia/**",
+      "third_party/proton/**"
+    ]
+  },
+  "history": {
+    "since": "6d7cf351236b7b2f7257c4301590a0130c3c1407"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "/*\n* Copyright 2018-2020 Philippe Tillet\n* Copyright 2020-2022 OpenAI\n*\n* Permission is hereby granted, free of charge, to any person obtaining\n* a copy of this software and associated documentation files\n* (the \"Software\"), to deal in the Software without restriction,\n* including without limitation the rights to use, copy, modify, merge,\n* publish, distribute, sublicense, and/or sell copies of the Software,\n* and to permit persons to whom the Software is furnished to do so,\n* subject to the following conditions:\n*\n* The above copyright notice and this permission notice shall be\n* included in all copies or substantial portions of the Software.\n*\n* THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\n* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\n* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n*/\n\n\nCopyright 2023 Adam P. Goucher, Hatsya Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/triton-lang/triton: the authors of triton-lang/triton (the license file names no copyright line), MIT license (LICENSE), https://github.com/triton-lang/triton; Copyright 2023 Adam P. Goucher, Hatsya Limited, MIT license (LICENCE.txt), https://github.com/triton-lang/triton/tree/e6f4c919fb18a99ed08f1cf3713ae15c686790d3/third_party/f2reduce."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clang-format",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "README.md",
+        "RELEASE.md",
+        "bin/**",
+        "cmake/**",
+        "docs/Makefile",
+        "docs/_templates/**",
+        "docs/backend/**",
+        "docs/conf.py",
+        "docs/getting-started/installation.rst",
+        "docs/gluon/**",
+        "docs/index.rst",
+        "docs/meetups/01-06-2026/**",
+        "docs/meetups/01-24-2024/**",
+        "docs/meetups/02-20-2024/notes.md",
+        "docs/meetups/03-04-2026/**",
+        "docs/meetups/03-12-2025/**",
+        "docs/meetups/04-02-2024/**",
+        "docs/meetups/05-01-2025/**",
+        "docs/meetups/05-05-2026/**",
+        "docs/meetups/05-07-2024/**",
+        "docs/meetups/07-08-2026/**",
+        "docs/meetups/07-09-2025/**",
+        "docs/meetups/07-18-2023/**",
+        "docs/meetups/08-06-2024/**",
+        "docs/meetups/08-22-2023/notes.md",
+        "docs/meetups/09-03-2025/**",
+        "docs/meetups/09-03-2026/**",
+        "docs/meetups/10-25-2023/notes.md",
+        "docs/meetups/11-05-2025/**",
+        "docs/meetups/12-13-2023/**",
+        "docs/meetups/dev-meetup-2023.md",
+        "docs/meetups/dev_conference_2024.md",
+        "docs/meetups/dev_conference_2025.md",
+        "docs/meetups/for_moderators/**",
+        "docs/programming-guide/chapter-1/introduction.rst",
+        "docs/programming-guide/chapter-2/related-work.rst",
+        "docs/programming-guide/chapter-3/**",
+        "docs/python-api/**",
+        "docs/requirements.txt",
+        "examples/**",
+        "include/**",
+        "lib/**",
+        "pyproject.toml",
+        "pytest.ini",
+        "python/**",
+        "scripts/**",
+        "setup.py",
+        "test/**",
+        "unittest/**",
+        "utils/**"
+      ],
+      "text": "/*\n* Copyright 2018-2020 Philippe Tillet\n* Copyright 2020-2022 OpenAI\n*\n* Permission is hereby granted, free of charge, to any person obtaining\n* a copy of this software and associated documentation files\n* (the \"Software\"), to deal in the Software without restriction,\n* including without limitation the rights to use, copy, modify, merge,\n* publish, distribute, sublicense, and/or sell copies of the Software,\n* and to permit persons to whom the Software is furnished to do so,\n* subject to the following conditions:\n*\n* The above copyright notice and this permission notice shall be\n* included in all copies or substantial portions of the Software.\n*\n* THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\n* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\n* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n*/\n",
+      "attribution": "the authors of triton-lang/triton (the license file names no copyright line), MIT license (LICENSE), https://github.com/triton-lang/triton."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "third_party/f2reduce/**"
+      ],
+      "text": "Copyright 2023 Adam P. Goucher, Hatsya Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2023 Adam P. Goucher, Hatsya Limited, MIT license (LICENCE.txt), https://github.com/triton-lang/triton/tree/e6f4c919fb18a99ed08f1cf3713ae15c686790d3/third_party/f2reduce."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mlir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nyi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pypirc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.td"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "cmake/json-version.txt",
+        "docs/requirements.txt",
+        "include/triton/Dialect/Gluon/CMakeCache.txt",
+        "python/requirements.txt",
+        "python/test-requirements.txt",
+        "python/tutorials/requirements.txt",
+        "third_party/f2reduce/LICENCE.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer",
+  "revision": "4a935fc9fbccafe291deea088f41204eb2290cb0",
+  "checksum": "sha256:8a590015a72b2b8f18f5560eea5d78ac9045427437b88ab6958695a177cd78f5",
+  "extract": {
+    "exclude": [
+      "logo.png",
+      "tests/Fixtures/empty.phar"
+    ]
+  },
+  "history": {
+    "since": "bca076a03086f6e1e749874c95d0ce4fa524a762"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2012+ Fabien Potencier, Dariusz Rumiński\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished\nto do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/PHP-CS-Fixer/PHP-CS-Fixer: Copyright (c) 2012+ Fabien Potencier, Dariusz Rumiński, MIT license (LICENSE), https://github.com/PHP-CS-Fixer/PHP-CS-Fixer."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".editorconfig",
+        ".env.example",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mdlrc",
+        ".php-cs-fixer.dist.php",
+        ".php-cs-fixer.php-highest.php",
+        ".php-cs-fixer.php-lowest.php",
+        ".yamllint.yml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "UPGRADE-v3.md",
+        "box.json.dist",
+        "compose.override.dist.yaml",
+        "compose.yaml",
+        "composer-dependency-analyser.php",
+        "composer.json",
+        "dev-tools/**",
+        "doc/**",
+        "docker/**",
+        "feature-or-bug.rst",
+        "infection.json5.dist",
+        "logo.md",
+        "php-cs-fixer",
+        "phpbench.json",
+        "phpstan.dist.neon",
+        "phpunit.xml.dist",
+        "resources/**",
+        "src/**",
+        "tests/AbstractDoctrineAnnotationFixerTestCase.php",
+        "tests/AbstractFixerTest.php",
+        "tests/AbstractFunctionReferenceFixerTest.php",
+        "tests/AbstractProxyFixerTest.php",
+        "tests/AutoReview/**",
+        "tests/Benchmark/**",
+        "tests/Cache/**",
+        "tests/ComposerJsonReaderTest.php",
+        "tests/Config/**",
+        "tests/ConfigTest.php",
+        "tests/ConfigurationException/**",
+        "tests/Console/**",
+        "tests/Differ/**",
+        "tests/DocBlock/**",
+        "tests/Doctrine/**",
+        "tests/Documentation/**",
+        "tests/Error/**",
+        "tests/ExecutorWithoutErrorHandlerExceptionTest.php",
+        "tests/ExecutorWithoutErrorHandlerTest.php",
+        "tests/FileReaderTest.php",
+        "tests/FileRemovalTest.php",
+        "tests/FinderTest.php",
+        "tests/Fixer/**",
+        "tests/FixerConfiguration/**",
+        "tests/FixerDefinition/**",
+        "tests/FixerFactoryTest.php",
+        "tests/FixerNameValidatorTest.php",
+        "tests/Fixtures/.php-cs-fixer.append-non-existing-file.php",
+        "tests/Fixtures/.php-cs-fixer.custom.php",
+        "tests/Fixtures/.php-cs-fixer.one-time-proxy.php",
+        "tests/Fixtures/.php-cs-fixer.parallel.php",
+        "tests/Fixtures/.php-cs-fixer.sequential.php",
+        "tests/Fixtures/.php-cs-fixer.vanilla.php",
+        "tests/Fixtures/.php_cs.empty-cache",
+        "tests/Fixtures/ConfigurationResolverConfigFile/**",
+        "tests/Fixtures/ConfigurationResolverPathsIntersection/**",
+        "tests/Fixtures/DescribeCommand/**",
+        "tests/Fixtures/ExternalRuleSet/**",
+        "tests/Fixtures/FinderDirectory/**",
+        "tests/Fixtures/FixCommand/**",
+        "tests/Fixtures/FixerTest/**",
+        "tests/Fixtures/Integration/**",
+        "tests/Fixtures/Linter/**",
+        "tests/Fixtures/ListFilesTest/**",
+        "tests/Fixtures/Test/**",
+        "tests/Fixtures/TestRuleSet.php",
+        "tests/Fixtures/api_github_com_tags.json",
+        "tests/Fixtures/cache-file-handler/**",
+        "tests/Fixtures/ci-integration/**",
+        "tests/Fixtures/dummy-file.php",
+        "tests/Fixtures/empty.php",
+        "tests/FutureTest.php",
+        "tests/HasherTest.php",
+        "tests/IntegrationTest.php",
+        "tests/Linter/**",
+        "tests/PharCheckerTest.php",
+        "tests/PregExceptionTest.php",
+        "tests/PregTest.php",
+        "tests/RuleSet/**",
+        "tests/RuleSetNameValidatorTest.php",
+        "tests/Runner/**",
+        "tests/Smoke/**",
+        "tests/StdinFileInfoTest.php",
+        "tests/Test/**",
+        "tests/TestCase.php",
+        "tests/TextDiffTest.php",
+        "tests/Tokenizer/**",
+        "tests/ToolInfoTest.php",
+        "tests/UtilsTest.php",
+        "tests/WhitespacesFixerConfigTest.php",
+        "tests/WordMatcherTest.php",
+        "tests/bootstrap.php"
+      ],
+      "text": "Copyright (c) 2012+ Fabien Potencier, Dariusz Rumiński\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished\nto do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2012+ Fabien Potencier, Dariusz Rumiński, MIT license (LICENSE), https://github.com/PHP-CS-Fixer/PHP-CS-Fixer."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.empty-cache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.neon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mdlrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.phpcs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cache-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/php-cs-fixer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/php-cs-fixer-internal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

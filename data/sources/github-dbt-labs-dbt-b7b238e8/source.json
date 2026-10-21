@@ -1,0 +1,942 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dbt-labs/dbt",
+  "revision": "ba21daa05a46cd650a2c9badd03e0cf1da5e43a8",
+  "checksum": "sha256:138f86eee4d23660364a22eaf981f6b2f6d29abc5fec3361799b8228da3a00c2",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "certificates/root.crt",
+      "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/deps/**",
+      "crates/dbt-docs-server/web/src/test/fixtures/parquet/**",
+      "crates/dbt-jinja/artwork/**",
+      "crates/dbt-jinja/minijinja/**",
+      "crates/dbt-jinja/minijinja-autoreload/**",
+      "crates/dbt-jinja/minijinja-contrib/**",
+      "crates/dbt-jinja/minijinja-embed/**",
+      "crates/dbt-login/src/**",
+      "crates/dbt-metricflow/tests/data/bigquery_recordings.parquet",
+      "crates/dbt-metricflow/tests/data/databricks_recordings.parquet",
+      "crates/dbt-metricflow/tests/data/redshift_recordings.parquet",
+      "crates/dbt-metricflow/tests/data/snowflake_recordings.parquet",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/add_query/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/create_schema/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_schema/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation_missing/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_from_cache/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_no_hydration/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment_with_split/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/rename_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_0/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_1/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_2/recordings.db",
+      "crates/dbt-sa-adapter-tests/tests/data/adapter/truncate_relation/golden/clickhouse/recordings.db",
+      "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/deps/**",
+      "crates/dbt-telemetry/src/gen/dbtlabs_proto_public.bin",
+      "crates/proto-rust/src/gen/dbtlabs_proto_public.bin",
+      "docs/roadmap/assets/**"
+    ]
+  },
+  "history": {
+    "since": "5c905eafdd96f03d19e4d56b514d05eae8055408"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2026 dbt Labs, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright 2025 dbt Labs, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\n                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Commit history of https://github.com/dbt-labs/dbt: Copyright 2026 dbt Labs, Inc., Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt; Copyright 2025 dbt Labs, Inc., Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt/tree/ba21daa05a46cd650a2c9badd03e0cf1da5e43a8/crates/dbt-jinja; Armin Ronacher, Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt/tree/ba21daa05a46cd650a2c9badd03e0cf1da5e43a8/crates/dbt-jinja/minijinja-py."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".cargo/**",
+        ".changes/**",
+        ".changie.yaml",
+        ".claude/**",
+        ".github/**",
+        ".gitignore",
+        "AGENTS.md",
+        "CHANGELOG-dbt.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "Cargo.toml",
+        "LICENSE",
+        "README.md",
+        "certificates/dbt_labs_inc.crt",
+        "certificates/intermediate.crt",
+        "crates/adbc-record-replay/**",
+        "crates/dbt-adapter/**",
+        "crates/dbt-adapter-core/**",
+        "crates/dbt-adapter-engine/**",
+        "crates/dbt-adapter-sql/**",
+        "crates/dbt-adbc/**",
+        "crates/dbt-agate/**",
+        "crates/dbt-artifact-download/**",
+        "crates/dbt-auth/**",
+        "crates/dbt-base/**",
+        "crates/dbt-ci/**",
+        "crates/dbt-clap-core/**",
+        "crates/dbt-classification-types/**",
+        "crates/dbt-cloud-api/**",
+        "crates/dbt-cloud-config/**",
+        "crates/dbt-common/**",
+        "crates/dbt-compilation/**",
+        "crates/dbt-csv/**",
+        "crates/dbt-dag/**",
+        "crates/dbt-datafusion-errors/**",
+        "crates/dbt-defer/**",
+        "crates/dbt-deps/**",
+        "crates/dbt-df-providers/**",
+        "crates/dbt-dist/**",
+        "crates/dbt-dist-classify/**",
+        "crates/dbt-docs-core/**",
+        "crates/dbt-docs-server/.dockerignore",
+        "crates/dbt-docs-server/API-CONTRACTS.md",
+        "crates/dbt-docs-server/Cargo.toml",
+        "crates/dbt-docs-server/Dockerfile",
+        "crates/dbt-docs-server/README.md",
+        "crates/dbt-docs-server/build.rs",
+        "crates/dbt-docs-server/dbt-docs-lib/**",
+        "crates/dbt-docs-server/docker-compose.yml",
+        "crates/dbt-docs-server/src/**",
+        "crates/dbt-docs-server/web/.gitignore",
+        "crates/dbt-docs-server/web/.prettierrc.cjs",
+        "crates/dbt-docs-server/web/.storybook/**",
+        "crates/dbt-docs-server/web/.tool-versions",
+        "crates/dbt-docs-server/web/dist/**",
+        "crates/dbt-docs-server/web/eslint.config.mjs",
+        "crates/dbt-docs-server/web/index.html",
+        "crates/dbt-docs-server/web/package.json",
+        "crates/dbt-docs-server/web/pnpm-lock.yaml",
+        "crates/dbt-docs-server/web/postcss.config.cjs",
+        "crates/dbt-docs-server/web/src/App.stories.tsx",
+        "crates/dbt-docs-server/web/src/App.test.tsx",
+        "crates/dbt-docs-server/web/src/App.tsx",
+        "crates/dbt-docs-server/web/src/app.css",
+        "crates/dbt-docs-server/web/src/components/**",
+        "crates/dbt-docs-server/web/src/hooks/**",
+        "crates/dbt-docs-server/web/src/index.css",
+        "crates/dbt-docs-server/web/src/lib/**",
+        "crates/dbt-docs-server/web/src/main.tsx",
+        "crates/dbt-docs-server/web/src/pages/**",
+        "crates/dbt-docs-server/web/src/proto/about.json",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/index.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/index.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/common/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/agent_interaction_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/beacon_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/canvas_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/copilot_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/dbt_index_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/dbt_wizard_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/docs_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/artifact/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/asset/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/compat/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/dev/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/generic/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/hook/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/index.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/invocation/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/log/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/node/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/onboarding/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/phase/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/process/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/query/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion/update/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion_onboarding_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/fusion_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/index.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/insights_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/litellm_gateway_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/mcp_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/metadata_telemetry_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/vortex_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/events/vscode_pb.ts",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/fields/**",
+        "crates/dbt-docs-server/web/src/proto/dbtlabs/proto/v1/index.ts",
+        "crates/dbt-docs-server/web/src/queryClient.ts",
+        "crates/dbt-docs-server/web/src/routes.tsx",
+        "crates/dbt-docs-server/web/src/shared/**",
+        "crates/dbt-docs-server/web/src/stores/**",
+        "crates/dbt-docs-server/web/src/styles/**",
+        "crates/dbt-docs-server/web/src/test/fixtures/details/**",
+        "crates/dbt-docs-server/web/src/test/fixtures/info-schema/**",
+        "crates/dbt-docs-server/web/src/test/renderWithProviders.tsx",
+        "crates/dbt-docs-server/web/src/test/wireFixtures.tsx",
+        "crates/dbt-docs-server/web/src/types.ts",
+        "crates/dbt-docs-server/web/src/vite-env.d.ts",
+        "crates/dbt-docs-server/web/tailwind.config.cjs",
+        "crates/dbt-docs-server/web/tsconfig.json",
+        "crates/dbt-docs-server/web/tsconfig.node.json",
+        "crates/dbt-docs-server/web/vite-dev-site.ts",
+        "crates/dbt-docs-server/web/vite.config.ts",
+        "crates/dbt-docs-server/web/vitest.config.ts",
+        "crates/dbt-docs-server/web/vitest.setup.ts",
+        "crates/dbt-env/**",
+        "crates/dbt-error/**",
+        "crates/dbt-features/**",
+        "crates/dbt-file-security/**",
+        "crates/dbt-flags/**",
+        "crates/dbt-freshness/**",
+        "crates/dbt-frontend-common/**",
+        "crates/dbt-goldie/**",
+        "crates/dbt-handles/**",
+        "crates/dbt-index-core/**",
+        "crates/dbt-init/**",
+        "crates/dbt-jinja-ctx/**",
+        "crates/dbt-jinja-filters/**",
+        "crates/dbt-jinja-utils/**",
+        "crates/dbt-jinja-vars/**",
+        "crates/dbt-lease/**",
+        "crates/dbt-lineage-core/**",
+        "crates/dbt-loader/**",
+        "crates/dbt-login/Cargo.toml",
+        "crates/dbt-main/**",
+        "crates/dbt-metadata/**",
+        "crates/dbt-metadata-parquet/**",
+        "crates/dbt-metricflow/Cargo.toml",
+        "crates/dbt-metricflow/docs/**",
+        "crates/dbt-metricflow/src/**",
+        "crates/dbt-metricflow/tests/bigquery_compat.rs",
+        "crates/dbt-metricflow/tests/cli_smoke.rs",
+        "crates/dbt-metricflow/tests/common/**",
+        "crates/dbt-metricflow/tests/data/README.md",
+        "crates/dbt-metricflow/tests/data/convert_python_tests.py",
+        "crates/dbt-metricflow/tests/data/generate_ddl.py",
+        "crates/dbt-metricflow/tests/data/manifests/**",
+        "crates/dbt-metricflow/tests/data/ported_test_cases.json",
+        "crates/dbt-metricflow/tests/data/tables_extended_date_model.sql",
+        "crates/dbt-metricflow/tests/data/tables_multi_hop_model.sql",
+        "crates/dbt-metricflow/tests/data/tables_scd_model.sql",
+        "crates/dbt-metricflow/tests/data/tables_simple_model_extra.sql",
+        "crates/dbt-metricflow/tests/data/tables_time_spine.sql",
+        "crates/dbt-metricflow/tests/databricks_compat.rs",
+        "crates/dbt-metricflow/tests/docs_examples.rs",
+        "crates/dbt-metricflow/tests/metricflow_compat.rs",
+        "crates/dbt-metricflow/tests/redshift_compat.rs",
+        "crates/dbt-metricflow/tests/snowflake_compat.rs",
+        "crates/dbt-parser/**",
+        "crates/dbt-platform/**",
+        "crates/dbt-platform-auth/**",
+        "crates/dbt-pretty-table/**",
+        "crates/dbt-proc-macros/**",
+        "crates/dbt-profile/**",
+        "crates/dbt-profile-schemas/**",
+        "crates/dbt-python-core/**",
+        "crates/dbt-runtime/**",
+        "crates/dbt-runtime-macros/**",
+        "crates/dbt-sa-adapter-tests/Cargo.toml",
+        "crates/dbt-sa-adapter-tests/tests/adapter/**",
+        "crates/dbt-sa-adapter-tests/tests/common/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/add_query/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/add_query/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/add_query/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/add_query/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/api_relation_create/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/README.md",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/check_schema_exists/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/column_methods/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/convert_type/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/create_schema/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/create_schema/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/create_schema/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/create_schema/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_schema/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_schema/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_schema/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/drop_schema/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/flags/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation_missing/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation_missing/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_columns_in_relation_missing/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/README.md",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_missing_columns/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_from_cache/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_from_cache/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_from_cache/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_from_cache/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_no_hydration/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_no_hydration/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/get_relation_no_hydration/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/README.md",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/list_schemas/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/README.md",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/load_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/metadata_source_freshness/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/metadata_source_schemas/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment_with_split/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment_with_split/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment_with_split/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/query_comment_with_split/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/quote_as_configured_default/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/quote_as_configured_provided/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/rename_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/rename_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/rename_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/rename_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_0/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_1/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/golden/clickhouse/run_2/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/store_failures/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/truncate_relation/dbt_project.yml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/truncate_relation/golden/clickhouse/recordings.yaml",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/truncate_relation/macros/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/truncate_relation/models/**",
+        "crates/dbt-sa-adapter-tests/tests/data/adapter/verify_database/**",
+        "crates/dbt-sa-adapter-tests/tests/data/clickhouse_basic_replay/**",
+        "crates/dbt-sa-adapter-tests/tests/dbt_sa_adapter_tests_tests.rs",
+        "crates/dbt-sa-adapter-tests/tests/golden/**",
+        "crates/dbt-sa-cli/**",
+        "crates/dbt-sa-python/**",
+        "crates/dbt-scheduler/**",
+        "crates/dbt-schema-store/**",
+        "crates/dbt-schemas/**",
+        "crates/dbt-selector-parser/**",
+        "crates/dbt-skills/**",
+        "crates/dbt-sql/**",
+        "crates/dbt-sql-base/**",
+        "crates/dbt-sql-keywords/**",
+        "crates/dbt-state/**",
+        "crates/dbt-tasks-core/**",
+        "crates/dbt-tasks-sa/**",
+        "crates/dbt-telemetry/Cargo.toml",
+        "crates/dbt-telemetry/README.md",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/artifact/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/asset/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/compat/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/dev/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/generic/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/hook/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/invocation/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/log/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/node/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/onboarding/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/phase/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/process/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/query/**",
+        "crates/dbt-telemetry/include/dbtlabs/proto/public/v1/events/fusion/update/**",
+        "crates/dbt-telemetry/src/attributes/**",
+        "crates/dbt-telemetry/src/gen/mod.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.artifact.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.artifact.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.asset.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.asset.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.compat.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.deps.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.deps.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.dev.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.dev.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.generic.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.generic.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.hook.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.hook.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.invocation.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.invocation.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.log.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.log.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.node.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.node.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.onboarding.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.onboarding.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.phase.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.phase.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.process.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.process.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.query.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.query.serde.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.update.rs",
+        "crates/dbt-telemetry/src/gen/v1.public.events.fusion.update.serde.rs",
+        "crates/dbt-telemetry/src/impls/**",
+        "crates/dbt-telemetry/src/lib.rs",
+        "crates/dbt-telemetry/src/macros.rs",
+        "crates/dbt-telemetry/src/schemas/**",
+        "crates/dbt-telemetry/src/serialize/**",
+        "crates/dbt-telemetry/src/test_utils.rs",
+        "crates/dbt-test-containers/**",
+        "crates/dbt-test-primitives/**",
+        "crates/dbt-test-utils/**",
+        "crates/dbt-tracing/**",
+        "crates/dbt-tracked-stmt/**",
+        "crates/dbt-tui-progress/**",
+        "crates/dbt-vortex/**",
+        "crates/minijinja-typecheck-builtins/**",
+        "crates/proto-rust/Cargo.toml",
+        "crates/proto-rust/README.md",
+        "crates/proto-rust/include/**",
+        "crates/proto-rust/src/gen/v1.events.vortex.rs",
+        "crates/proto-rust/src/gen/v1.public.common.rs",
+        "crates/proto-rust/src/gen/v1.public.common.vortex_telemetry_contexts.rs",
+        "crates/proto-rust/src/gen/v1.public.events.fusion.rs",
+        "crates/proto-rust/src/gen/v1.public.fields.adapter_types.rs",
+        "crates/proto-rust/src/gen/v1.public.fields.core_types.rs",
+        "crates/proto-rust/src/lib.rs",
+        "crates/proto-rust/src/serde_timestamp_micros.rs",
+        "crates/proto-rust-macros/**",
+        "crates/vortex-client/**",
+        "crates/vortex-events/**",
+        "docs/databricks-unity-catalog.md",
+        "docs/roadmap/2022-05-dbt-a-core-story.md",
+        "docs/roadmap/2022-08-back-for-more.md",
+        "docs/roadmap/2023-02-back-to-basics.md",
+        "docs/roadmap/2023-11-dbt-tng.md",
+        "docs/roadmap/2024-12-play-on.md",
+        "docs/roadmap/2025-05-new-engine-same-language.md",
+        "docs/roadmap/2025-12-magic-to-do.md",
+        "docs/roadmap/2026-06-announcing-v2.md",
+        "lib/**",
+        "pyproject.toml",
+        "rust-toolchain.toml"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2026 dbt Labs, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Copyright 2026 dbt Labs, Inc., Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "crates/dbt-jinja/.cargo/**",
+        "crates/dbt-jinja/.clippy.toml",
+        "crates/dbt-jinja/.devcontainer/**",
+        "crates/dbt-jinja/.github/**",
+        "crates/dbt-jinja/.gitignore",
+        "crates/dbt-jinja/.vscode/**",
+        "crates/dbt-jinja/CHANGELOG.md",
+        "crates/dbt-jinja/COMPATIBILITY.md",
+        "crates/dbt-jinja/CONTRIBUTING.md",
+        "crates/dbt-jinja/Cargo.lock.msrv",
+        "crates/dbt-jinja/LICENSE",
+        "crates/dbt-jinja/Makefile",
+        "crates/dbt-jinja/README.md",
+        "crates/dbt-jinja/UPDATING.md",
+        "crates/dbt-jinja/_typos.toml",
+        "crates/dbt-jinja/benchmarks/**",
+        "crates/dbt-jinja/dist-workspace.toml",
+        "crates/dbt-jinja/doc-header.html",
+        "crates/dbt-jinja/examples/**",
+        "crates/dbt-jinja/fuzz/**",
+        "crates/dbt-jinja/minijinja-cabi/**",
+        "crates/dbt-jinja/minijinja-cli/**",
+        "crates/dbt-jinja/scripts/**"
+      ],
+      "text": "                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright 2025 dbt Labs, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Copyright 2025 dbt Labs, Inc., Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt/tree/ba21daa05a46cd650a2c9badd03e0cf1da5e43a8/crates/dbt-jinja."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "crates/dbt-jinja/minijinja-py/**"
+      ],
+      "text": "                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Armin Ronacher, Apache-2.0 license (LICENSE), https://github.com/dbt-labs/dbt/tree/ba21daa05a46cd650a2c9badd03e0cf1da5e43a8/crates/dbt-jinja/minijinja-py."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.conformance"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.entitlements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.interp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msrv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stderr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stdout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tokens"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.adbc-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keepme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.tool-versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autoescape"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/block"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/call"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-float"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-func"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-getattr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-integer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expr-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/extends"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/if"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/if-elif-else"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/if-else"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/loop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/macro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,462 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/healthchecks/healthchecks",
+  "revision": "08617cba925eae3573c00cdc62e94071f0450566",
+  "checksum": "sha256:a14b18b17e10f7cd30c00f1063f8538084ec9e0b63f036c972c0b3941d147155",
+  "extract": {
+    "exclude": [
+      "hc/integrations/apprise/static/**",
+      "hc/integrations/call/static/**",
+      "hc/integrations/discord/static/**",
+      "hc/integrations/email/static/**",
+      "hc/integrations/github/static/**",
+      "hc/integrations/googlechat/static/**",
+      "hc/integrations/gotify/static/**",
+      "hc/integrations/group/static/**",
+      "hc/integrations/matrix/static/**",
+      "hc/integrations/mattermost/static/**",
+      "hc/integrations/msteamsw/static/**",
+      "hc/integrations/ntfy/static/img/**",
+      "hc/integrations/opsgenie/static/**",
+      "hc/integrations/pagertree/static/**",
+      "hc/integrations/pd/static/**",
+      "hc/integrations/po/static/img/**",
+      "hc/integrations/prometheus/static/**",
+      "hc/integrations/pushbullet/static/**",
+      "hc/integrations/rocketchat/static/**",
+      "hc/integrations/shell/static/**",
+      "hc/integrations/signal/static/img/**",
+      "hc/integrations/slack/static/**",
+      "hc/integrations/sms/static/**",
+      "hc/integrations/spike/static/**",
+      "hc/integrations/telegram/static/**",
+      "hc/integrations/trello/static/img/**",
+      "hc/integrations/victorops/static/**",
+      "hc/integrations/webhook/static/img/**",
+      "hc/integrations/whatsapp/static/**",
+      "hc/integrations/zulip/static/img/**",
+      "search.db",
+      "static/fonts/**",
+      "static/img/badges.png",
+      "static/img/badges@2x.png",
+      "static/img/check_details.png",
+      "static/img/check_details@2x.png",
+      "static/img/cron.png",
+      "static/img/cron@2x.png",
+      "static/img/docs/**",
+      "static/img/down.png",
+      "static/img/favicon.ico",
+      "static/img/logo.png",
+      "static/img/missing.png",
+      "static/img/my_checks.png",
+      "static/img/my_checks@2x.png",
+      "static/img/period_grace.png",
+      "static/img/period_grace@2x.png",
+      "static/img/theme-dark.png",
+      "static/img/theme-light.png",
+      "static/img/theme-system.png",
+      "static/img/up.png"
+    ]
+  },
+  "history": {
+    "since": "f5ef17a6613636e4fbb1e63c772cc1bcbb991c65"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2015, Pēteris Caune and other contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Commit history of https://github.com/healthchecks/healthchecks: Copyright (c) 2015, Pēteris Caune and other contributors, BSD-3-Clause license (LICENSE), https://github.com/healthchecks/healthchecks."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docker/**",
+        "hc/__init__.py",
+        "hc/accounts/**",
+        "hc/api/**",
+        "hc/front/**",
+        "hc/integrations/__init__.py",
+        "hc/integrations/apprise/__init__.py",
+        "hc/integrations/apprise/apps.py",
+        "hc/integrations/apprise/forms.py",
+        "hc/integrations/apprise/templates/**",
+        "hc/integrations/apprise/tests/**",
+        "hc/integrations/apprise/transport.py",
+        "hc/integrations/apprise/urls.py",
+        "hc/integrations/apprise/views.py",
+        "hc/integrations/call/__init__.py",
+        "hc/integrations/call/templates/**",
+        "hc/integrations/call/tests/**",
+        "hc/integrations/call/transport.py",
+        "hc/integrations/call/urls.py",
+        "hc/integrations/call/views.py",
+        "hc/integrations/discord/__init__.py",
+        "hc/integrations/discord/templates/**",
+        "hc/integrations/discord/tests/**",
+        "hc/integrations/discord/transport.py",
+        "hc/integrations/discord/urls.py",
+        "hc/integrations/discord/views.py",
+        "hc/integrations/email/__init__.py",
+        "hc/integrations/email/forms.py",
+        "hc/integrations/email/templates/**",
+        "hc/integrations/email/tests/**",
+        "hc/integrations/email/transport.py",
+        "hc/integrations/email/urls.py",
+        "hc/integrations/email/views.py",
+        "hc/integrations/github/__init__.py",
+        "hc/integrations/github/client.py",
+        "hc/integrations/github/forms.py",
+        "hc/integrations/github/templates/**",
+        "hc/integrations/github/tests/**",
+        "hc/integrations/github/transport.py",
+        "hc/integrations/github/urls.py",
+        "hc/integrations/github/views.py",
+        "hc/integrations/googlechat/__init__.py",
+        "hc/integrations/googlechat/templates/**",
+        "hc/integrations/googlechat/tests/**",
+        "hc/integrations/googlechat/transport.py",
+        "hc/integrations/googlechat/urls.py",
+        "hc/integrations/googlechat/views.py",
+        "hc/integrations/gotify/__init__.py",
+        "hc/integrations/gotify/forms.py",
+        "hc/integrations/gotify/templates/**",
+        "hc/integrations/gotify/tests/**",
+        "hc/integrations/gotify/transport.py",
+        "hc/integrations/gotify/urls.py",
+        "hc/integrations/gotify/views.py",
+        "hc/integrations/group/__init__.py",
+        "hc/integrations/group/forms.py",
+        "hc/integrations/group/templates/**",
+        "hc/integrations/group/tests/**",
+        "hc/integrations/group/transport.py",
+        "hc/integrations/group/urls.py",
+        "hc/integrations/group/views.py",
+        "hc/integrations/matrix/__init__.py",
+        "hc/integrations/matrix/client.py",
+        "hc/integrations/matrix/forms.py",
+        "hc/integrations/matrix/templates/**",
+        "hc/integrations/matrix/tests/**",
+        "hc/integrations/matrix/transport.py",
+        "hc/integrations/matrix/urls.py",
+        "hc/integrations/matrix/views.py",
+        "hc/integrations/mattermost/__init__.py",
+        "hc/integrations/mattermost/templates/**",
+        "hc/integrations/mattermost/tests/**",
+        "hc/integrations/mattermost/transport.py",
+        "hc/integrations/mattermost/urls.py",
+        "hc/integrations/mattermost/views.py",
+        "hc/integrations/msteamsw/__init__.py",
+        "hc/integrations/msteamsw/templates/**",
+        "hc/integrations/msteamsw/tests/**",
+        "hc/integrations/msteamsw/transport.py",
+        "hc/integrations/msteamsw/urls.py",
+        "hc/integrations/msteamsw/views.py",
+        "hc/integrations/ntfy/__init__.py",
+        "hc/integrations/ntfy/forms.py",
+        "hc/integrations/ntfy/static/js/**",
+        "hc/integrations/ntfy/templates/**",
+        "hc/integrations/ntfy/tests/**",
+        "hc/integrations/ntfy/transport.py",
+        "hc/integrations/ntfy/urls.py",
+        "hc/integrations/ntfy/views.py",
+        "hc/integrations/opsgenie/__init__.py",
+        "hc/integrations/opsgenie/forms.py",
+        "hc/integrations/opsgenie/templates/**",
+        "hc/integrations/opsgenie/tests/**",
+        "hc/integrations/opsgenie/transport.py",
+        "hc/integrations/opsgenie/urls.py",
+        "hc/integrations/opsgenie/views.py",
+        "hc/integrations/pagertree/__init__.py",
+        "hc/integrations/pagertree/templates/**",
+        "hc/integrations/pagertree/tests/**",
+        "hc/integrations/pagertree/transport.py",
+        "hc/integrations/pagertree/urls.py",
+        "hc/integrations/pagertree/views.py",
+        "hc/integrations/pd/__init__.py",
+        "hc/integrations/pd/forms.py",
+        "hc/integrations/pd/templates/**",
+        "hc/integrations/pd/tests/**",
+        "hc/integrations/pd/transport.py",
+        "hc/integrations/pd/urls.py",
+        "hc/integrations/pd/views.py",
+        "hc/integrations/po/__init__.py",
+        "hc/integrations/po/forms.py",
+        "hc/integrations/po/static/js/**",
+        "hc/integrations/po/templates/**",
+        "hc/integrations/po/tests/**",
+        "hc/integrations/po/transport.py",
+        "hc/integrations/po/urls.py",
+        "hc/integrations/po/views.py",
+        "hc/integrations/prometheus/__init__.py",
+        "hc/integrations/prometheus/templates/**",
+        "hc/integrations/prometheus/tests/**",
+        "hc/integrations/prometheus/urls.py",
+        "hc/integrations/prometheus/views.py",
+        "hc/integrations/pushbullet/__init__.py",
+        "hc/integrations/pushbullet/templates/**",
+        "hc/integrations/pushbullet/tests/**",
+        "hc/integrations/pushbullet/transport.py",
+        "hc/integrations/pushbullet/urls.py",
+        "hc/integrations/pushbullet/views.py",
+        "hc/integrations/rocketchat/__init__.py",
+        "hc/integrations/rocketchat/templates/**",
+        "hc/integrations/rocketchat/tests/**",
+        "hc/integrations/rocketchat/transport.py",
+        "hc/integrations/rocketchat/urls.py",
+        "hc/integrations/rocketchat/views.py",
+        "hc/integrations/shell/__init__.py",
+        "hc/integrations/shell/forms.py",
+        "hc/integrations/shell/templates/**",
+        "hc/integrations/shell/tests/**",
+        "hc/integrations/shell/transport.py",
+        "hc/integrations/shell/urls.py",
+        "hc/integrations/shell/views.py",
+        "hc/integrations/signal/__init__.py",
+        "hc/integrations/signal/forms.py",
+        "hc/integrations/signal/static/js/**",
+        "hc/integrations/signal/templates/**",
+        "hc/integrations/signal/tests/**",
+        "hc/integrations/signal/transport.py",
+        "hc/integrations/signal/urls.py",
+        "hc/integrations/signal/views.py",
+        "hc/integrations/slack/__init__.py",
+        "hc/integrations/slack/templates/**",
+        "hc/integrations/slack/tests/**",
+        "hc/integrations/slack/transport.py",
+        "hc/integrations/slack/urls.py",
+        "hc/integrations/slack/views.py",
+        "hc/integrations/sms/__init__.py",
+        "hc/integrations/sms/templates/**",
+        "hc/integrations/sms/tests/**",
+        "hc/integrations/sms/transport.py",
+        "hc/integrations/sms/urls.py",
+        "hc/integrations/sms/views.py",
+        "hc/integrations/spike/__init__.py",
+        "hc/integrations/spike/templates/**",
+        "hc/integrations/spike/tests/**",
+        "hc/integrations/spike/transport.py",
+        "hc/integrations/spike/urls.py",
+        "hc/integrations/spike/views.py",
+        "hc/integrations/telegram/__init__.py",
+        "hc/integrations/telegram/forms.py",
+        "hc/integrations/telegram/templates/**",
+        "hc/integrations/telegram/tests/**",
+        "hc/integrations/telegram/transport.py",
+        "hc/integrations/telegram/urls.py",
+        "hc/integrations/telegram/views.py",
+        "hc/integrations/trello/__init__.py",
+        "hc/integrations/trello/forms.py",
+        "hc/integrations/trello/static/js/**",
+        "hc/integrations/trello/templates/**",
+        "hc/integrations/trello/tests/**",
+        "hc/integrations/trello/transport.py",
+        "hc/integrations/trello/urls.py",
+        "hc/integrations/trello/views.py",
+        "hc/integrations/victorops/__init__.py",
+        "hc/integrations/victorops/templates/**",
+        "hc/integrations/victorops/tests/**",
+        "hc/integrations/victorops/transport.py",
+        "hc/integrations/victorops/urls.py",
+        "hc/integrations/victorops/views.py",
+        "hc/integrations/webhook/__init__.py",
+        "hc/integrations/webhook/forms.py",
+        "hc/integrations/webhook/static/js/**",
+        "hc/integrations/webhook/templates/**",
+        "hc/integrations/webhook/tests/**",
+        "hc/integrations/webhook/transport.py",
+        "hc/integrations/webhook/urls.py",
+        "hc/integrations/webhook/views.py",
+        "hc/integrations/whatsapp/__init__.py",
+        "hc/integrations/whatsapp/apps.py",
+        "hc/integrations/whatsapp/templates/**",
+        "hc/integrations/whatsapp/tests/**",
+        "hc/integrations/whatsapp/transport.py",
+        "hc/integrations/whatsapp/urls.py",
+        "hc/integrations/whatsapp/views.py",
+        "hc/integrations/zulip/__init__.py",
+        "hc/integrations/zulip/forms.py",
+        "hc/integrations/zulip/static/js/**",
+        "hc/integrations/zulip/templates/**",
+        "hc/integrations/zulip/tests/**",
+        "hc/integrations/zulip/transport.py",
+        "hc/integrations/zulip/urls.py",
+        "hc/integrations/zulip/views.py",
+        "hc/lib/**",
+        "hc/local_settings.py.example",
+        "hc/logs/**",
+        "hc/payments/**",
+        "hc/settings.py",
+        "hc/test.py",
+        "hc/urls.py",
+        "hc/wsgi.py",
+        "manage.py",
+        "mypy.ini",
+        "requirements-dev.txt",
+        "requirements.txt",
+        "static/css/**",
+        "static/img/favicon.svg",
+        "static/img/favicon_down.svg",
+        "static/js/**",
+        "stuff/**",
+        "templates/**"
+      ],
+      "text": "Copyright (c) 2015, Pēteris Caune and other contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Copyright (c) 2015, Pēteris Caune and other contributors, BSD-3-Clause license (LICENSE), https://github.com/healthchecks/healthchecks."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.html-fragment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vcf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

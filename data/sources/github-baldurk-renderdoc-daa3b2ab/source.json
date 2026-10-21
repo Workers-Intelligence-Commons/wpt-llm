@@ -1,0 +1,1233 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/baldurk/renderdoc",
+  "revision": "45e91661ee457e64279ff86265abdbe214aa6be0",
+  "checksum": "sha256:bdd3bf479247438164e6b0deda2535d5a77c8a77f0ccab6a7e6d7a3c333ee40a",
+  "extract": {
+    "exclude": [
+      "docs/imgs/**",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/da/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/de/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/en/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/es/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/et/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/fa_IR/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/fr/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/hr/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/hu/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/it/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/lt/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/nl/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/pl/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/pt/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/pt_BR/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/ru/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/sv/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/tr/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/zh_CN/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/locale/zh_TW/LC_MESSAGES/sphinx.mo",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/Roboto-Slab-Bold.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/Roboto-Slab-Bold.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/Roboto-Slab-Regular.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/Roboto-Slab-Regular.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/fontawesome-webfont.eot",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/fontawesome-webfont.ttf",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/fontawesome-webfont.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/fontawesome-webfont.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-bold-italic.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-bold-italic.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-bold.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-bold.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-normal-italic.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-normal-italic.woff2",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-normal.woff",
+      "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/lato-normal.woff2",
+      "qrenderdoc/3rdparty/flowlayout/**",
+      "qrenderdoc/3rdparty/pyside/**",
+      "qrenderdoc/3rdparty/python/**",
+      "qrenderdoc/3rdparty/pythoncapi_compat.h",
+      "qrenderdoc/3rdparty/qt/**",
+      "qrenderdoc/3rdparty/scintilla/**",
+      "qrenderdoc/3rdparty/swig/**",
+      "qrenderdoc/Resources/action.png",
+      "qrenderdoc/Resources/action@2x.png",
+      "qrenderdoc/Resources/action_hover.png",
+      "qrenderdoc/Resources/action_hover@2x.png",
+      "qrenderdoc/Resources/add.png",
+      "qrenderdoc/Resources/add@2x.png",
+      "qrenderdoc/Resources/align.png",
+      "qrenderdoc/Resources/align@2x.png",
+      "qrenderdoc/Resources/arrow_in.png",
+      "qrenderdoc/Resources/arrow_in@2x.png",
+      "qrenderdoc/Resources/arrow_join.png",
+      "qrenderdoc/Resources/arrow_join@2x.png",
+      "qrenderdoc/Resources/arrow_left.png",
+      "qrenderdoc/Resources/arrow_left@2x.png",
+      "qrenderdoc/Resources/arrow_out.png",
+      "qrenderdoc/Resources/arrow_out@2x.png",
+      "qrenderdoc/Resources/arrow_refresh.png",
+      "qrenderdoc/Resources/arrow_refresh@2x.png",
+      "qrenderdoc/Resources/arrow_right.png",
+      "qrenderdoc/Resources/arrow_right@2x.png",
+      "qrenderdoc/Resources/arrow_undo.png",
+      "qrenderdoc/Resources/arrow_undo@2x.png",
+      "qrenderdoc/Resources/asterisk_orange.png",
+      "qrenderdoc/Resources/asterisk_orange@2x.png",
+      "qrenderdoc/Resources/bookmark_blue.png",
+      "qrenderdoc/Resources/bookmark_blue@2x.png",
+      "qrenderdoc/Resources/bug.png",
+      "qrenderdoc/Resources/bug@2x.png",
+      "qrenderdoc/Resources/chart_curve.png",
+      "qrenderdoc/Resources/chart_curve@2x.png",
+      "qrenderdoc/Resources/checkerboard.png",
+      "qrenderdoc/Resources/checkerboard@2x.png",
+      "qrenderdoc/Resources/cog.png",
+      "qrenderdoc/Resources/cog@2x.png",
+      "qrenderdoc/Resources/color_wheel.png",
+      "qrenderdoc/Resources/color_wheel@2x.png",
+      "qrenderdoc/Resources/connect.png",
+      "qrenderdoc/Resources/connect@2x.png",
+      "qrenderdoc/Resources/control_base_blue.png",
+      "qrenderdoc/Resources/control_base_blue@2x.png",
+      "qrenderdoc/Resources/control_cursor_blue.png",
+      "qrenderdoc/Resources/control_cursor_blue@2x.png",
+      "qrenderdoc/Resources/control_end_blue.png",
+      "qrenderdoc/Resources/control_end_blue@2x.png",
+      "qrenderdoc/Resources/control_nan_blue.png",
+      "qrenderdoc/Resources/control_nan_blue@2x.png",
+      "qrenderdoc/Resources/control_play_blue.png",
+      "qrenderdoc/Resources/control_play_blue@2x.png",
+      "qrenderdoc/Resources/control_reverse_base_blue.png",
+      "qrenderdoc/Resources/control_reverse_base_blue@2x.png",
+      "qrenderdoc/Resources/control_reverse_blue.png",
+      "qrenderdoc/Resources/control_reverse_blue@2x.png",
+      "qrenderdoc/Resources/control_reverse_cursor_blue.png",
+      "qrenderdoc/Resources/control_reverse_cursor_blue@2x.png",
+      "qrenderdoc/Resources/control_reverse_nan_blue.png",
+      "qrenderdoc/Resources/control_reverse_nan_blue@2x.png",
+      "qrenderdoc/Resources/control_reverse_sample_blue.png",
+      "qrenderdoc/Resources/control_reverse_sample_blue@2x.png",
+      "qrenderdoc/Resources/control_sample_blue.png",
+      "qrenderdoc/Resources/control_sample_blue@2x.png",
+      "qrenderdoc/Resources/control_start_blue.png",
+      "qrenderdoc/Resources/control_start_blue@2x.png",
+      "qrenderdoc/Resources/copy.png",
+      "qrenderdoc/Resources/copy@2x.png",
+      "qrenderdoc/Resources/cross.png",
+      "qrenderdoc/Resources/cross@2x.png",
+      "qrenderdoc/Resources/cut.png",
+      "qrenderdoc/Resources/cut@2x.png",
+      "qrenderdoc/Resources/del.png",
+      "qrenderdoc/Resources/del@2x.png",
+      "qrenderdoc/Resources/disconnect.png",
+      "qrenderdoc/Resources/disconnect@2x.png",
+      "qrenderdoc/Resources/draw_vertex.png",
+      "qrenderdoc/Resources/draw_vertex@2x.png",
+      "qrenderdoc/Resources/filter.png",
+      "qrenderdoc/Resources/filter@2x.png",
+      "qrenderdoc/Resources/filter_reapply.png",
+      "qrenderdoc/Resources/filter_reapply@2x.png",
+      "qrenderdoc/Resources/find.png",
+      "qrenderdoc/Resources/find@2x.png",
+      "qrenderdoc/Resources/flag_green.png",
+      "qrenderdoc/Resources/flag_green@2x.png",
+      "qrenderdoc/Resources/flip_y.png",
+      "qrenderdoc/Resources/flip_y@2x.png",
+      "qrenderdoc/Resources/folder.png",
+      "qrenderdoc/Resources/folder@2x.png",
+      "qrenderdoc/Resources/folder_page_white.png",
+      "qrenderdoc/Resources/folder_page_white@2x.png",
+      "qrenderdoc/Resources/help.png",
+      "qrenderdoc/Resources/help@2x.png",
+      "qrenderdoc/Resources/hourglass.png",
+      "qrenderdoc/Resources/hourglass@2x.png",
+      "qrenderdoc/Resources/house.png",
+      "qrenderdoc/Resources/house@2x.png",
+      "qrenderdoc/Resources/icon.ico",
+      "qrenderdoc/Resources/information.png",
+      "qrenderdoc/Resources/information@2x.png",
+      "qrenderdoc/Resources/link.png",
+      "qrenderdoc/Resources/link@2x.png",
+      "qrenderdoc/Resources/page_go.png",
+      "qrenderdoc/Resources/page_go@2x.png",
+      "qrenderdoc/Resources/page_white_code.png",
+      "qrenderdoc/Resources/page_white_code@2x.png",
+      "qrenderdoc/Resources/page_white_database.png",
+      "qrenderdoc/Resources/page_white_database@2x.png",
+      "qrenderdoc/Resources/page_white_delete.png",
+      "qrenderdoc/Resources/page_white_delete@2x.png",
+      "qrenderdoc/Resources/page_white_edit.png",
+      "qrenderdoc/Resources/page_white_edit@2x.png",
+      "qrenderdoc/Resources/page_white_link.png",
+      "qrenderdoc/Resources/page_white_link@2x.png",
+      "qrenderdoc/Resources/page_white_stack.png",
+      "qrenderdoc/Resources/page_white_stack@2x.png",
+      "qrenderdoc/Resources/paste.png",
+      "qrenderdoc/Resources/paste@2x.png",
+      "qrenderdoc/Resources/pixel_history.png",
+      "qrenderdoc/Resources/pixel_history@2x.png",
+      "qrenderdoc/Resources/plugin.png",
+      "qrenderdoc/Resources/plugin@2x.png",
+      "qrenderdoc/Resources/plugin_add.png",
+      "qrenderdoc/Resources/plugin_add@2x.png",
+      "qrenderdoc/Resources/qrenderdoc.rc",
+      "qrenderdoc/Resources/save.png",
+      "qrenderdoc/Resources/save@2x.png",
+      "qrenderdoc/Resources/text_add.png",
+      "qrenderdoc/Resources/text_add@2x.png",
+      "qrenderdoc/Resources/tick.png",
+      "qrenderdoc/Resources/tick@2x.png",
+      "qrenderdoc/Resources/time.png",
+      "qrenderdoc/Resources/time@2x.png",
+      "qrenderdoc/Resources/timeline_marker.png",
+      "qrenderdoc/Resources/timeline_marker@2x.png",
+      "qrenderdoc/Resources/update.png",
+      "qrenderdoc/Resources/update@2x.png",
+      "qrenderdoc/Resources/upfolder.png",
+      "qrenderdoc/Resources/upfolder@2x.png",
+      "qrenderdoc/Resources/wand.png",
+      "qrenderdoc/Resources/wand@2x.png",
+      "qrenderdoc/Resources/wireframe_mesh.png",
+      "qrenderdoc/Resources/wireframe_mesh@2x.png",
+      "qrenderdoc/Resources/wrench.png",
+      "qrenderdoc/Resources/wrench@2x.png",
+      "qrenderdoc/Resources/zoom.png",
+      "qrenderdoc/Resources/zoom@2x.png",
+      "renderdoc/3rdparty/breakpad/**",
+      "renderdoc/3rdparty/compressonator/**",
+      "renderdoc/3rdparty/dbghelp/**",
+      "renderdoc/3rdparty/glslang/**",
+      "renderdoc/3rdparty/jpeg-compressor/**",
+      "renderdoc/3rdparty/md5/**",
+      "renderdoc/3rdparty/miniz/**",
+      "renderdoc/3rdparty/plthook/**",
+      "renderdoc/3rdparty/stb/**",
+      "renderdoc/3rdparty/superluminal/**",
+      "renderdoc/3rdparty/tinyexr/**",
+      "renderdoc/3rdparty/tinyfiledialogs/**",
+      "renderdoc/data/renderdoc.rc",
+      "renderdoc/data/sourcecodepro.ttf",
+      "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/vendor/**",
+      "renderdoc/driver/ihv/nv/official/PerfKit/PerfKitEULA.txt",
+      "renderdoc/driver/ihv/nv/official/PerfSDK/redist/NVIDIA Nsight Perf SDK License (28Sept2022).pdf",
+      "renderdoc/driver/ihv/nv/official/PerfSDK/redist/NvPerfUtility/**",
+      "renderdoccmd/3rdparty/**",
+      "renderdoccmd/android/icon.png",
+      "renderdoccmd/renderdoccmd.rc",
+      "renderdoccmd/resource.h",
+      "util/clangformat/clang-format-15.0.exe",
+      "util/installer/LICENSE.rtf",
+      "util/installer/bannrbmp.bmp",
+      "util/installer/chm.ico",
+      "util/installer/dlgbmp.bmp",
+      "util/test/data/demos/h264_yu420p_192x108_24fps.mp4",
+      "util/test/demos/3rdparty/VulkanMemoryAllocator/**",
+      "util/test/demos/3rdparty/fmt/**",
+      "util/test/demos/3rdparty/glad/**",
+      "util/test/demos/3rdparty/lz4/**",
+      "util/test/demos/3rdparty/md5/**",
+      "util/test/demos/3rdparty/nuklear/**",
+      "util/test/demos/3rdparty/shaderc/**",
+      "util/test/demos/3rdparty/volk/**",
+      "util/test/demos/android/icon.png",
+      "util/test/demos/vk/vk_descriptor_buffer_analyse.cpp",
+      "util/clangformat/clang-format-15.0"
+    ]
+  },
+  "history": {
+    "since": "b5c7944038572eebffde32e1279c45c4f6d84153"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND 0BSD AND BSL-1.0 AND Zlib AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "# The MIT License (MIT)\n\nCopyright (c) 2015-2026 Baldur Karlsson\n\nCopyright (c) 2014 Crytek\n\nCopyright (c) 1998-2018 [Third party code and tools](docs/credits_acknowledgements.rst)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2018 Chris Holdgraf\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThis is the MIT license: http://www.opensource.org/licenses/mit-license.php\n\nCopyright (C) by Michael Bayer.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this\nsoftware and associated documentation files (the \"Software\"), to deal in the Software\nwithout restriction, including without limitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of the Software, and to permit persons\nto whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or\nsubstantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,\nINCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR\nPURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE\nFOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\nOTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nBSD Zero Clause Licence\n\nCopyright 2022, Adam Turner\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\nPERFORMANCE OF THIS SOFTWARE.\n\n\nBoost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 Pavel Strakhov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThe MIT License\n\nCopyright (c) 2012-2019 Christian Rau\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright (c) 2016 Eveline Jarosz\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgement in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017 Google Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nLZ4 Library\nCopyright (c) 2011-2016, Yann Collet\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n## License\nThis library is available to anybody free of charge, under the terms of MIT License:\n\nCopyright (c) 2006-2018 Arseny Kapoulkine\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n\n\nBSD License\n\nFor Zstandard software\n\nCopyright (c) 2016-present, Facebook, Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n * Neither the name Facebook nor the names of its contributors may be used to\n   endorse or promote products derived from this software without specific\n   prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2016-2024 Advanced Micro Devices, Inc. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright (c) 2015 Advanced Micro Devices, Inc. All rights reserved.\n \nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n \nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n \nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\n\n * Copyright (c) 1996-1998 John D. Polstra.\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n\n\nCopyright (c) 2020 Samsung Electronics (UK) Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2019-2022 Arm Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/baldurk/renderdoc: Copyright (c) 2015-2026 Baldur Karlsson; Copyright (c) 2014 Crytek; Copyright (c) 1998-2018 [Third party code and tools](docs/credits_acknowledgements.rst), MIT license (LICENSE.md), https://github.com/baldurk/renderdoc; Copyright (c) 2018 Chris Holdgraf, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinx_copybutton; Copyright (C) by Michael Bayer., MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinx_paramlinks; Copyright 2022, Adam Turner, 0BSD license (LICENCE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinxcontrib_jquery; the authors of baldurk/renderdoc (qrenderdoc/3rdparty/catch) (the license file names no copyright line), BSL-1.0 license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/qrenderdoc/3rdparty/catch; Copyright (c) 2014 Pavel Strakhov, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/qrenderdoc/3rdparty/toolwindowmanager; the authors of baldurk/renderdoc (renderdoc/3rdparty/catch) (the license file names no copyright line), BSL-1.0 license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/catch; Copyright (c) 2012-2019 Christian Rau, MIT license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/half; Copyright (c) 2016 Eveline Jarosz, Zlib license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/include-bin; Copyright 2017 Google Inc., Apache-2.0 license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/interceptor-lib; Copyright (c) 2011-2016, Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/lz4; Copyright (c) 2006-2018 Arseny Kapoulkine, MIT license (LICENSE.md), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/pugixml; Copyright (c) 2016-present, Facebook, Inc. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/zstd; Copyright (c) 2016-2024 Advanced Micro Devices, Inc. All rights reserved., MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/GPUPerfAPI; Copyright (c) 2015 Advanced Micro Devices, Inc. All rights reserved., MIT license (License.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/RGA/Common; the authors of baldurk/renderdoc (renderdoc/driver/ihv/amd/official/RGA/elf) (the license file names no copyright line), BSD-2-Clause license (LICENSE.md), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/RGA/elf; Copyright (c) 2020 Samsung Electronics (UK) Limited, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/arm/official/lizard; Copyright (c) 2019-2022 Arm Limited, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe; Copyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved., MIT license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/util/test/demos/3rdparty/ags."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clang-format",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CMakeLists.txt",
+        "LICENSE.md",
+        "README.md",
+        "docs/CODE_OF_CONDUCT.md",
+        "docs/CONTRIBUTING/**",
+        "docs/CONTRIBUTING.md",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/behind_scenes/**",
+        "docs/check_stubs.py",
+        "docs/conf.py",
+        "docs/credits_acknowledgements.rst",
+        "docs/getting_started/**",
+        "docs/how/**",
+        "docs/in_application_api.rst",
+        "docs/include/**",
+        "docs/index.rst",
+        "docs/introduction.rst",
+        "docs/make.bat",
+        "docs/make.sh",
+        "docs/python_api/**",
+        "docs/regenerate_stubs.py",
+        "docs/remove_lines.py",
+        "docs/renderdoc.hhk",
+        "docs/spelling_english.txt",
+        "docs/spelling_general.txt",
+        "docs/spelling_graphics.txt",
+        "docs/sphinx_rtd_theme_chm_friendly/breadcrumbs.html",
+        "docs/sphinx_rtd_theme_chm_friendly/footer.html",
+        "docs/sphinx_rtd_theme_chm_friendly/layout.html",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/da/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/de/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/en/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/es/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/et/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/fa_IR/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/fr/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/hr/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/hu/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/it/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/lt/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/nl/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/pl/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/pt/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/pt_BR/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/ru/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/sphinx.pot",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/sv/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/tr/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/zh_CN/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/locale/zh_TW/LC_MESSAGES/sphinx.po",
+        "docs/sphinx_rtd_theme_chm_friendly/search.html",
+        "docs/sphinx_rtd_theme_chm_friendly/searchbox.html",
+        "docs/sphinx_rtd_theme_chm_friendly/static/css/badge_only.css",
+        "docs/sphinx_rtd_theme_chm_friendly/static/css/fonts/fontawesome-webfont.svg",
+        "docs/sphinx_rtd_theme_chm_friendly/static/css/theme.css",
+        "docs/sphinx_rtd_theme_chm_friendly/static/js/**",
+        "docs/sphinx_rtd_theme_chm_friendly/theme.conf",
+        "docs/sphinx_rtd_theme_chm_friendly/versions.html",
+        "docs/stubgen.py",
+        "docs/verify-docstrings.py",
+        "docs/window/**",
+        "qrenderdoc/CMakeLists.txt",
+        "qrenderdoc/Code/**",
+        "qrenderdoc/README.md",
+        "qrenderdoc/Resources/README.md",
+        "qrenderdoc/Resources/logo.svg",
+        "qrenderdoc/Resources/qt.conf",
+        "qrenderdoc/Resources/qtconf.qrc",
+        "qrenderdoc/Resources/resources.qrc",
+        "qrenderdoc/Resources/topologies/**",
+        "qrenderdoc/Styles/**",
+        "qrenderdoc/Widgets/**",
+        "qrenderdoc/Windows/**",
+        "qrenderdoc/custom_qt.props",
+        "qrenderdoc/custom_qt_sheet.xml",
+        "qrenderdoc/python36.natvis",
+        "qrenderdoc/python38.natvis",
+        "qrenderdoc/qrenderdoc.pro",
+        "qrenderdoc/qrenderdoc_local.vcxproj",
+        "qrenderdoc/qrenderdoc_local.vcxproj.filters",
+        "qrenderdoc/renderdocui_stub.cpp",
+        "qrenderdoc/renderdocui_stub.vcxproj",
+        "qrenderdoc/renderdocui_stub.vcxproj.filters",
+        "qrenderdoc/share/**",
+        "qrenderdoc/sort_qt_ui.py",
+        "qrenderdoc/va_stdafx.h",
+        "renderdoc/CMakeLists.txt",
+        "renderdoc/android/**",
+        "renderdoc/api/**",
+        "renderdoc/common/**",
+        "renderdoc/core/**",
+        "renderdoc/data/embedded_files.h",
+        "renderdoc/data/glsl/**",
+        "renderdoc/data/glsl_shaders.cpp",
+        "renderdoc/data/glsl_shaders.h",
+        "renderdoc/data/hlsl/**",
+        "renderdoc/data/resource.h",
+        "renderdoc/driver/d3d11/**",
+        "renderdoc/driver/d3d12/**",
+        "renderdoc/driver/dx/**",
+        "renderdoc/driver/dxgi/**",
+        "renderdoc/driver/gl/**",
+        "renderdoc/driver/ihv/amd/AMD.vcxproj",
+        "renderdoc/driver/ihv/amd/AMD.vcxproj.filters",
+        "renderdoc/driver/ihv/amd/AMD_RGP.vcxproj",
+        "renderdoc/driver/ihv/amd/AMD_RGP.vcxproj.filters",
+        "renderdoc/driver/ihv/amd/CMakeLists.txt",
+        "renderdoc/driver/ihv/amd/ags_wrapper.cpp",
+        "renderdoc/driver/ihv/amd/ags_wrapper.h",
+        "renderdoc/driver/ihv/amd/amd_counters.cpp",
+        "renderdoc/driver/ihv/amd/amd_counters.h",
+        "renderdoc/driver/ihv/amd/amd_hooks.cpp",
+        "renderdoc/driver/ihv/amd/amd_isa.cpp",
+        "renderdoc/driver/ihv/amd/amd_isa.h",
+        "renderdoc/driver/ihv/amd/amd_isa_devices.cpp",
+        "renderdoc/driver/ihv/amd/amd_isa_devices.h",
+        "renderdoc/driver/ihv/amd/amd_isa_posix.cpp",
+        "renderdoc/driver/ihv/amd/amd_isa_win32.cpp",
+        "renderdoc/driver/ihv/amd/amd_rgp.cpp",
+        "renderdoc/driver/ihv/amd/amd_rgp.h",
+        "renderdoc/driver/ihv/amd/official/DXExt/**",
+        "renderdoc/driver/ihv/amd/official/RGP/**",
+        "renderdoc/driver/ihv/amd/official/ags/**",
+        "renderdoc/driver/ihv/arm/ARM.vcxproj",
+        "renderdoc/driver/ihv/arm/ARM.vcxproj.filters",
+        "renderdoc/driver/ihv/arm/CMakeLists.txt",
+        "renderdoc/driver/ihv/arm/arm_counters.cpp",
+        "renderdoc/driver/ihv/arm/arm_counters.h",
+        "renderdoc/driver/ihv/arm/arm_counters_stub.cpp",
+        "renderdoc/driver/ihv/intel/**",
+        "renderdoc/driver/ihv/nv/CMakeLists.txt",
+        "renderdoc/driver/ihv/nv/NV.vcxproj",
+        "renderdoc/driver/ihv/nv/NV.vcxproj.filters",
+        "renderdoc/driver/ihv/nv/nv_aftermath.cpp",
+        "renderdoc/driver/ihv/nv/nv_aftermath.h",
+        "renderdoc/driver/ihv/nv/nv_counter_enumerator.cpp",
+        "renderdoc/driver/ihv/nv/nv_counter_enumerator.h",
+        "renderdoc/driver/ihv/nv/nv_counters.cpp",
+        "renderdoc/driver/ihv/nv/nv_counters.h",
+        "renderdoc/driver/ihv/nv/nv_d3d11_counters.cpp",
+        "renderdoc/driver/ihv/nv/nv_d3d11_counters.h",
+        "renderdoc/driver/ihv/nv/nv_d3d12_counters.cpp",
+        "renderdoc/driver/ihv/nv/nv_d3d12_counters.h",
+        "renderdoc/driver/ihv/nv/nv_gl_counters.cpp",
+        "renderdoc/driver/ihv/nv/nv_gl_counters.h",
+        "renderdoc/driver/ihv/nv/nv_vk_counters.cpp",
+        "renderdoc/driver/ihv/nv/nv_vk_counters.h",
+        "renderdoc/driver/ihv/nv/nvapi_hooks.cpp",
+        "renderdoc/driver/ihv/nv/nvapi_wrapper.cpp",
+        "renderdoc/driver/ihv/nv/nvapi_wrapper.h",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKitReleaseNotes-3.2.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKitReleaseNotes.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKit_Windows.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/include/**",
+        "renderdoc/driver/ihv/nv/official/PerfSDK/redist/README",
+        "renderdoc/driver/ihv/nv/official/PerfSDK/redist/include/**",
+        "renderdoc/driver/ihv/nv/official/aftermath/**",
+        "renderdoc/driver/ihv/nv/official/nvapi/**",
+        "renderdoc/driver/metal/**",
+        "renderdoc/driver/shaders/**",
+        "renderdoc/driver/vulkan/**",
+        "renderdoc/hooks/**",
+        "renderdoc/librenderdoc.so-gdb.py",
+        "renderdoc/maths/**",
+        "renderdoc/os/**",
+        "renderdoc/rdocself.version",
+        "renderdoc/renderdoc.natvis",
+        "renderdoc/renderdoc.vcxproj",
+        "renderdoc/renderdoc.vcxproj.filters",
+        "renderdoc/renderdoc.version",
+        "renderdoc/renderdoc_version.vcxproj",
+        "renderdoc/renderdoc_version.vcxproj.filters",
+        "renderdoc/replay/**",
+        "renderdoc/serialise/**",
+        "renderdoc/shaders/**",
+        "renderdoc/strings/**",
+        "renderdoc.sln",
+        "renderdoccmd/CMakeLists.txt",
+        "renderdoccmd/android/AndroidManifest.xml",
+        "renderdoccmd/android/Loader.java",
+        "renderdoccmd/android/wrap.sh",
+        "renderdoccmd/apple/**",
+        "renderdoccmd/renderdoccmd.config",
+        "renderdoccmd/renderdoccmd.cpp",
+        "renderdoccmd/renderdoccmd.creator",
+        "renderdoccmd/renderdoccmd.files",
+        "renderdoccmd/renderdoccmd.h",
+        "renderdoccmd/renderdoccmd.includes",
+        "renderdoccmd/renderdoccmd.vcxproj",
+        "renderdoccmd/renderdoccmd.vcxproj.filters",
+        "renderdoccmd/renderdoccmd_android.cpp",
+        "renderdoccmd/renderdoccmd_apple.cpp",
+        "renderdoccmd/renderdoccmd_linux.cpp",
+        "renderdoccmd/renderdoccmd_win32.cpp",
+        "renderdoccmd/targetver.h",
+        "renderdocshim/**",
+        "util/LINUX_DIST_README",
+        "util/WindowsSDKFix.props",
+        "util/WindowsSDKTarget.props",
+        "util/buildscripts/**",
+        "util/clang_format_all.sh",
+        "util/clangformat/README.md",
+        "util/clangformat/build.sh",
+        "util/clangformat/clang-format-15.0",
+        "util/installer/Installer32.wxs",
+        "util/installer/Installer64.wxs",
+        "util/installer/customtext.wxl",
+        "util/make_python_lib_zip.py",
+        "util/sdkfix/**",
+        "util/set_plist_version.sh",
+        "util/spirv-plugins/**",
+        "util/test/.gitignore",
+        "util/test/README.md",
+        "util/test/data/demos/README.md",
+        "util/test/demos/CMakeLists.txt",
+        "util/test/demos/android/AndroidManifest.xml",
+        "util/test/demos/android/Loader.java",
+        "util/test/demos/android/android_platform.cpp",
+        "util/test/demos/android/android_platform.h",
+        "util/test/demos/android/android_window.cpp",
+        "util/test/demos/android/android_window.h",
+        "util/test/demos/android/wrap.sh",
+        "util/test/demos/apple/**",
+        "util/test/demos/build_standalone_release.sh",
+        "util/test/demos/d3d11/**",
+        "util/test/demos/d3d12/**",
+        "util/test/demos/demos.vcxproj",
+        "util/test/demos/demos.vcxproj.filters",
+        "util/test/demos/dx/**",
+        "util/test/demos/gl/**",
+        "util/test/demos/linux/**",
+        "util/test/demos/main.cpp",
+        "util/test/demos/renderdoc_app.h",
+        "util/test/demos/test_common.cpp",
+        "util/test/demos/test_common.h",
+        "util/test/demos/texture_zoo.cpp",
+        "util/test/demos/vk/official/**",
+        "util/test/demos/vk/vk_adv_cbuffer_zoo.cpp",
+        "util/test/demos/vk/vk_annotations.cpp",
+        "util/test/demos/vk/vk_blend.cpp",
+        "util/test/demos/vk/vk_buffer_truncation.cpp",
+        "util/test/demos/vk/vk_cbuffer_zoo.cpp",
+        "util/test/demos/vk/vk_compute_only.cpp",
+        "util/test/demos/vk/vk_counters.cpp",
+        "util/test/demos/vk/vk_custom_border_color.cpp",
+        "util/test/demos/vk/vk_custom_resolve.cpp",
+        "util/test/demos/vk/vk_dedicated_allocation.cpp",
+        "util/test/demos/vk/vk_descriptor_buffer.cpp",
+        "util/test/demos/vk/vk_descriptor_index.cpp",
+        "util/test/demos/vk/vk_descriptor_reuse.cpp",
+        "util/test/demos/vk/vk_descriptor_variable_count.cpp",
+        "util/test/demos/vk/vk_discard_rects.cpp",
+        "util/test/demos/vk/vk_discard_zoo.cpp",
+        "util/test/demos/vk/vk_draw_zoo.cpp",
+        "util/test/demos/vk/vk_dynamic_rendering.cpp",
+        "util/test/demos/vk/vk_empty_capture.cpp",
+        "util/test/demos/vk/vk_ext_buffer_address.cpp",
+        "util/test/demos/vk/vk_extended_dyn_state.cpp",
+        "util/test/demos/vk/vk_graphics_pipeline.cpp",
+        "util/test/demos/vk/vk_groupshared.cpp",
+        "util/test/demos/vk/vk_headers.h",
+        "util/test/demos/vk/vk_helpers.cpp",
+        "util/test/demos/vk/vk_helpers.h",
+        "util/test/demos/vk/vk_image_layouts.cpp",
+        "util/test/demos/vk/vk_imageless_framebuffer.cpp",
+        "util/test/demos/vk/vk_indirect.cpp",
+        "util/test/demos/vk/vk_int8_ibuffer.cpp",
+        "util/test/demos/vk/vk_khr_buffer_address.cpp",
+        "util/test/demos/vk/vk_large_buffer.cpp",
+        "util/test/demos/vk/vk_large_descriptor_sets.cpp",
+        "util/test/demos/vk/vk_leak_check.cpp",
+        "util/test/demos/vk/vk_line_raster.cpp",
+        "util/test/demos/vk/vk_load_store_none.cpp",
+        "util/test/demos/vk/vk_mem_bench.cpp",
+        "util/test/demos/vk/vk_mesh_shader.cpp",
+        "util/test/demos/vk/vk_mesh_zoo.cpp",
+        "util/test/demos/vk/vk_misaligned_dirty.cpp",
+        "util/test/demos/vk/vk_multi_entry.cpp",
+        "util/test/demos/vk/vk_multi_present.cpp",
+        "util/test/demos/vk/vk_multi_thread_windows.cpp",
+        "util/test/demos/vk/vk_multi_view.cpp",
+        "util/test/demos/vk/vk_overlay_test.cpp",
+        "util/test/demos/vk/vk_parameter_zoo.cpp",
+        "util/test/demos/vk/vk_pixel_history.cpp",
+        "util/test/demos/vk/vk_postponed.cpp",
+        "util/test/demos/vk/vk_query_pool.cpp",
+        "util/test/demos/vk/vk_ray_query.cpp",
+        "util/test/demos/vk/vk_read_before_overwrite.cpp",
+        "util/test/demos/vk/vk_resource_lifetimes.cpp",
+        "util/test/demos/vk/vk_resource_usage.cpp",
+        "util/test/demos/vk/vk_robustness2.cpp",
+        "util/test/demos/vk/vk_sample_locations.cpp",
+        "util/test/demos/vk/vk_secondary_cmdbuf.cpp",
+        "util/test/demos/vk/vk_separate_depth_stencil_layouts.cpp",
+        "util/test/demos/vk/vk_shader_debug_zoo.cpp",
+        "util/test/demos/vk/vk_shader_editing.cpp",
+        "util/test/demos/vk/vk_shader_isa.cpp",
+        "util/test/demos/vk/vk_shader_printf.cpp",
+        "util/test/demos/vk/vk_simple_triangle.cpp",
+        "util/test/demos/vk/vk_spec_constants.cpp",
+        "util/test/demos/vk/vk_spirv_13_shaders.cpp",
+        "util/test/demos/vk/vk_structured_buffer_nested.cpp",
+        "util/test/demos/vk/vk_subgroup_zoo.cpp",
+        "util/test/demos/vk/vk_sync2.cpp",
+        "util/test/demos/vk/vk_template.cpp",
+        "util/test/demos/vk/vk_test.cpp",
+        "util/test/demos/vk/vk_test.h",
+        "util/test/demos/vk/vk_texture_zoo.cpp",
+        "util/test/demos/vk/vk_triangle_fan.cpp",
+        "util/test/demos/vk/vk_validation_use.cpp",
+        "util/test/demos/vk/vk_vertex_attr_zoo.cpp",
+        "util/test/demos/vk/vk_video_textures.cpp",
+        "util/test/demos/vk/vk_vrs.cpp",
+        "util/test/demos/vk/vk_vs_max_desc_set.cpp",
+        "util/test/demos/vk/vk_workgroup_zoo.cpp",
+        "util/test/demos/win32/**",
+        "util/test/demos.sln",
+        "util/test/rdtest/**",
+        "util/test/run_tests.py",
+        "util/test/tests/**",
+        "util/test/ui_harness/**",
+        "util/valgrind.supp"
+      ],
+      "text": "# The MIT License (MIT)\n\nCopyright (c) 2015-2026 Baldur Karlsson\n\nCopyright (c) 2014 Crytek\n\nCopyright (c) 1998-2018 [Third party code and tools](docs/credits_acknowledgements.rst)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015-2026 Baldur Karlsson; Copyright (c) 2014 Crytek; Copyright (c) 1998-2018 [Third party code and tools](docs/credits_acknowledgements.rst), MIT license (LICENSE.md), https://github.com/baldurk/renderdoc."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/sphinx_exts/sphinx_copybutton/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018 Chris Holdgraf\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Chris Holdgraf, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinx_copybutton."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/sphinx_exts/sphinx_paramlinks/**"
+      ],
+      "text": "This is the MIT license: http://www.opensource.org/licenses/mit-license.php\n\nCopyright (C) by Michael Bayer.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this\nsoftware and associated documentation files (the \"Software\"), to deal in the Software\nwithout restriction, including without limitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of the Software, and to permit persons\nto whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or\nsubstantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,\nINCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR\nPURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE\nFOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\nOTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (C) by Michael Bayer., MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinx_paramlinks."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "docs/sphinx_exts/sphinxcontrib_jquery/**"
+      ],
+      "text": "BSD Zero Clause Licence\n\nCopyright 2022, Adam Turner\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\nPERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright 2022, Adam Turner, 0BSD license (LICENCE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/docs/sphinx_exts/sphinxcontrib_jquery."
+    },
+    {
+      "license": "BSL-1.0",
+      "paths": [
+        "qrenderdoc/3rdparty/catch/**"
+      ],
+      "text": "Boost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of baldurk/renderdoc (qrenderdoc/3rdparty/catch) (the license file names no copyright line), BSL-1.0 license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/qrenderdoc/3rdparty/catch."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "qrenderdoc/3rdparty/toolwindowmanager/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Pavel Strakhov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2014 Pavel Strakhov, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/qrenderdoc/3rdparty/toolwindowmanager."
+    },
+    {
+      "license": "BSL-1.0",
+      "paths": [
+        "renderdoc/3rdparty/catch/**"
+      ],
+      "text": "Boost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of baldurk/renderdoc (renderdoc/3rdparty/catch) (the license file names no copyright line), BSL-1.0 license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/catch."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/3rdparty/half/**"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2012-2019 Christian Rau\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2012-2019 Christian Rau, MIT license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/half."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "renderdoc/3rdparty/include-bin/**"
+      ],
+      "text": "Copyright (c) 2016 Eveline Jarosz\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgement in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2016 Eveline Jarosz, Zlib license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/include-bin."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "renderdoc/3rdparty/interceptor-lib/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017 Google Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2017 Google Inc., Apache-2.0 license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/interceptor-lib."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "renderdoc/3rdparty/lz4/**"
+      ],
+      "text": "LZ4 Library\nCopyright (c) 2011-2016, Yann Collet\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2011-2016, Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/lz4."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/3rdparty/pugixml/**"
+      ],
+      "text": "## License\nThis library is available to anybody free of charge, under the terms of MIT License:\n\nCopyright (c) 2006-2018 Arseny Kapoulkine\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2006-2018 Arseny Kapoulkine, MIT license (LICENSE.md), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/pugixml."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "renderdoc/3rdparty/zstd/**"
+      ],
+      "text": "BSD License\n\nFor Zstandard software\n\nCopyright (c) 2016-present, Facebook, Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n * Neither the name Facebook nor the names of its contributors may be used to\n   endorse or promote products derived from this software without specific\n   prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2016-present, Facebook, Inc. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/3rdparty/zstd."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/driver/ihv/amd/official/GPUPerfAPI/**"
+      ],
+      "text": "Copyright (c) 2016-2024 Advanced Micro Devices, Inc. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-2024 Advanced Micro Devices, Inc. All rights reserved., MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/GPUPerfAPI."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/driver/ihv/amd/official/RGA/Common/**"
+      ],
+      "text": "Copyright (c) 2015 Advanced Micro Devices, Inc. All rights reserved.\n \nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n \nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n \nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2015 Advanced Micro Devices, Inc. All rights reserved., MIT license (License.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/RGA/Common."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "renderdoc/driver/ihv/amd/official/RGA/elf/**"
+      ],
+      "text": " * Copyright (c) 1996-1998 John D. Polstra.\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n *\n * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n",
+      "attribution": "the authors of baldurk/renderdoc (renderdoc/driver/ihv/amd/official/RGA/elf) (the license file names no copyright line), BSD-2-Clause license (LICENSE.md), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/amd/official/RGA/elf."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/driver/ihv/arm/official/lizard/LICENSE",
+        "renderdoc/driver/ihv/arm/official/lizard/README.md",
+        "renderdoc/driver/ihv/arm/official/lizard/gator_api.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gator_api.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gator_constants.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gator_message.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gator_message.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gatord_xml_reader.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/gatord_xml_reader.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/hwcpipe_api.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/hwcpipe_api.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/hwcpipe_communication.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/hwcpipe_communication.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/include/**",
+        "renderdoc/driver/ihv/arm/official/lizard/lizard.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/lizard_api.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/lizard_communication.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/lizard_communication.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/lizard_counter.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/message_util.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/message_util.hpp",
+        "renderdoc/driver/ihv/arm/official/lizard/socket.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/socket.hpp"
+      ],
+      "text": "Copyright (c) 2020 Samsung Electronics (UK) Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Samsung Electronics (UK) Limited, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/arm/official/lizard."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/LICENSE",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/README.md",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/cpu_profiler.h",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/gpu_profiler.h",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/hwcpipe.cpp",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/hwcpipe.h",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/hwcpipe_log.h",
+        "renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe/value.h"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019-2022 Arm Limited\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019-2022 Arm Limited, MIT license (LICENSE), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/renderdoc/driver/ihv/arm/official/lizard/thirdparty/hwcpipe."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "util/test/demos/3rdparty/ags/**"
+      ],
+      "text": "Copyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Advanced Micro Devices, Inc. All rights reserved., MIT license (LICENSE.txt), https://github.com/baldurk/renderdoc/tree/45e91661ee457e64279ff86265abdbe214aa6be0/util/test/demos/3rdparty/ags."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hlsl",
+      "paths": [
+        "**/*.hlsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.creator"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dxbc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.files"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.geom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hhk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.i"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.includes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.js_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.thumbnailer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "docs/spelling_english.txt",
+        "docs/spelling_general.txt",
+        "docs/spelling_graphics.txt",
+        "qrenderdoc/3rdparty/catch/LICENSE.txt",
+        "renderdoc/3rdparty/catch/LICENSE.txt",
+        "renderdoc/3rdparty/half/LICENSE.txt",
+        "renderdoc/3rdparty/half/README.txt",
+        "renderdoc/driver/ihv/amd/official/GPUPerfAPI/NOTICES.txt",
+        "renderdoc/driver/ihv/amd/official/GPUPerfAPI/version.txt",
+        "renderdoc/driver/ihv/amd/official/RGA/Common/License.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKitReleaseNotes-3.2.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKitReleaseNotes.txt",
+        "renderdoc/driver/ihv/nv/official/PerfKit/PerfKit_Windows.txt",
+        "renderdoc/driver/shaders/spirv/all_capabilities.txt",
+        "renderdoc/driver/shaders/spirv/all_exts.txt",
+        "renderdoc/driver/vulkan/all_exts.txt",
+        "util/test/demos/3rdparty/ags/LICENSE.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ui"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENCE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LINUX_DIST_README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PKG-INFO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/magic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/menu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

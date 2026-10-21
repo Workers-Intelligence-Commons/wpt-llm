@@ -1,0 +1,602 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nuxt/nuxt",
+  "revision": "4caed0f26ff819455b16d2651efba24dcbf74500",
+  "checksum": "sha256:5ac77ffed4db15332aaeddec297cae70284eef587e14190541b7c9adb847b7ac",
+  "extract": {
+    "exclude": [
+      ".github/assets/banner.avif",
+      ".github/assets/documentation.png",
+      ".github/assets/examples.png",
+      ".github/assets/modules.png",
+      ".github/assets/questions.png",
+      ".github/assets/reporting-bugs.png",
+      ".github/assets/suggestions.png",
+      "packages/nuxt/test/__snapshots__/components-tree-shake.test.ts.snap",
+      "packages/nuxt/test/package-fixture/root/**",
+      "test/fixtures/basic/deps/**",
+      "test/fixtures/basic/extends/node_modules/**",
+      "test/fixtures/basic-types/extends/node_modules/**",
+      "test/fixtures/runtime-compiler/public/**",
+      "test/fixtures/worker-assets/app/shared.wasm"
+    ]
+  },
+  "history": {
+    "since": "83cf17322f7eecd5389fb94e4688955fe261373b"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-present - Nuxt Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nuxt/nuxt: Copyright (c) 2016-present - Nuxt Team, MIT license (LICENSE), https://github.com/nuxt/nuxt."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/FUNDING.yml",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/assets/banner.svg",
+        ".github/assets/bluesky.svg",
+        ".github/assets/discord.svg",
+        ".github/assets/github.svg",
+        ".github/assets/twitter.svg",
+        ".github/logo-light.svg",
+        ".github/logo.svg",
+        ".github/workflows/**",
+        ".gitignore",
+        ".gitpod/**",
+        ".idea/**",
+        ".markdownlint.yml",
+        ".nuxtrc",
+        ".stackblitz/**",
+        ".vscode/**",
+        "AGENTS.md",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docs/**",
+        "eslint.config.mjs",
+        "examples/**",
+        "internal.d.ts",
+        "knip.json",
+        "lychee.toml",
+        "nano-staged.mjs",
+        "nuxt.config.ts",
+        "package.json",
+        "packages/kit/**",
+        "packages/nitro-server/**",
+        "packages/nuxi/**",
+        "packages/nuxt/.attw.json",
+        "packages/nuxt/app.d.ts",
+        "packages/nuxt/bin/**",
+        "packages/nuxt/config.d.ts",
+        "packages/nuxt/config.js",
+        "packages/nuxt/index.d.ts",
+        "packages/nuxt/kit.d.ts",
+        "packages/nuxt/kit.js",
+        "packages/nuxt/meta.d.ts",
+        "packages/nuxt/meta.js",
+        "packages/nuxt/package.json",
+        "packages/nuxt/schema.d.ts",
+        "packages/nuxt/schema.js",
+        "packages/nuxt/src/**",
+        "packages/nuxt/test/__snapshots__/pages-override-meta-disabled.test.ts.snap",
+        "packages/nuxt/test/__snapshots__/pages-override-meta-enabled.test.ts.snap",
+        "packages/nuxt/test/__snapshots__/server-routes.test.ts.snap",
+        "packages/nuxt/test/app-config.test.ts",
+        "packages/nuxt/test/app-secret.test.ts",
+        "packages/nuxt/test/app-url-safety.test.ts",
+        "packages/nuxt/test/app-utils.test.ts",
+        "packages/nuxt/test/app.test.ts",
+        "packages/nuxt/test/auto-imports.test.ts",
+        "packages/nuxt/test/build-plugins.bench.ts",
+        "packages/nuxt/test/build.bench.ts",
+        "packages/nuxt/test/builder.test.ts",
+        "packages/nuxt/test/cache.test.ts",
+        "packages/nuxt/test/compiler.test.ts",
+        "packages/nuxt/test/component-client-stub.test.ts",
+        "packages/nuxt/test/component-layer-priority.test.ts",
+        "packages/nuxt/test/component-loader.test.ts",
+        "packages/nuxt/test/component-names.test.ts",
+        "packages/nuxt/test/components-fixture/**",
+        "packages/nuxt/test/components-islands-template.test.ts",
+        "packages/nuxt/test/components-templates.test.ts",
+        "packages/nuxt/test/components-transform.test.ts",
+        "packages/nuxt/test/components-tree-shake.test.ts",
+        "packages/nuxt/test/components-watch-dirs.test.ts",
+        "packages/nuxt/test/cookie-attributes.test.ts",
+        "packages/nuxt/test/decode-route-path.test.ts",
+        "packages/nuxt/test/dev-error-broadcast.test.ts",
+        "packages/nuxt/test/dev-error-reporter.test.ts",
+        "packages/nuxt/test/dev-error-sourcemap.test.ts",
+        "packages/nuxt/test/dev-peer.test.ts",
+        "packages/nuxt/test/devonly.test.ts",
+        "packages/nuxt/test/diagnostics-catalog.test.ts",
+        "packages/nuxt/test/disabled-modules-fixture/**",
+        "packages/nuxt/test/disabled-modules.test.ts",
+        "packages/nuxt/test/early-404-patterns.test.ts",
+        "packages/nuxt/test/emitted-imports.test.ts",
+        "packages/nuxt/test/extract-async-data-handlers.test.ts",
+        "packages/nuxt/test/hash.test.ts",
+        "packages/nuxt/test/import-protection.test.ts",
+        "packages/nuxt/test/imports-preset-fixture/**",
+        "packages/nuxt/test/imports-preset-resolution.test.ts",
+        "packages/nuxt/test/is-serializable.test.ts",
+        "packages/nuxt/test/island-hash.test.ts",
+        "packages/nuxt/test/island-transform.test.ts",
+        "packages/nuxt/test/keyed-function-factories.test.ts",
+        "packages/nuxt/test/keyed-functions.test.ts",
+        "packages/nuxt/test/layer-aliasing.test.ts",
+        "packages/nuxt/test/layers-fixture/**",
+        "packages/nuxt/test/lazy-hydration-macro-transform.test.ts",
+        "packages/nuxt/test/load-nuxt.bench.ts",
+        "packages/nuxt/test/load-nuxt.test.ts",
+        "packages/nuxt/test/module-id-utils.test.ts",
+        "packages/nuxt/test/modules-fixture/**",
+        "packages/nuxt/test/modules.test.ts",
+        "packages/nuxt/test/naming.test.ts",
+        "packages/nuxt/test/navigate-to-early-return.test.ts",
+        "packages/nuxt/test/nitro/**",
+        "packages/nuxt/test/nitro-ssr-routes.test.ts",
+        "packages/nuxt/test/normalize-routes.test.ts",
+        "packages/nuxt/test/nuxt-link-ssr.test.ts",
+        "packages/nuxt/test/nuxt-link.test.ts",
+        "packages/nuxt/test/package-fixture/pkg/**",
+        "packages/nuxt/test/page-metadata.test.ts",
+        "packages/nuxt/test/pages-dev.bench.ts",
+        "packages/nuxt/test/pages-fixture/**",
+        "packages/nuxt/test/pages-module-workflow.test.ts",
+        "packages/nuxt/test/pages.test.ts",
+        "packages/nuxt/test/payload-route-rules.test.ts",
+        "packages/nuxt/test/plugin-metadata.test.ts",
+        "packages/nuxt/test/plugin-utils.test.ts",
+        "packages/nuxt/test/prefetch-scheduler.test.ts",
+        "packages/nuxt/test/prehydrate.test.ts",
+        "packages/nuxt/test/proxy.test.ts",
+        "packages/nuxt/test/public-assets.test.ts",
+        "packages/nuxt/test/render.bench.ts",
+        "packages/nuxt/test/renderer/**",
+        "packages/nuxt/test/route-coverage.test.ts",
+        "packages/nuxt/test/route-injection.test.ts",
+        "packages/nuxt/test/route-rules-template.test.ts",
+        "packages/nuxt/test/route-rules.test.ts",
+        "packages/nuxt/test/scan-components.test.ts",
+        "packages/nuxt/test/serialize-types.spec.ts",
+        "packages/nuxt/test/server-app-config.test.ts",
+        "packages/nuxt/test/server-cors.test.ts",
+        "packages/nuxt/test/server-fetch.test.ts",
+        "packages/nuxt/test/server-hooks.test.ts",
+        "packages/nuxt/test/server-parity.test.ts",
+        "packages/nuxt/test/server-routes.test.ts",
+        "packages/nuxt/test/server-secret.test.ts",
+        "packages/nuxt/test/server-session.test.ts",
+        "packages/nuxt/test/server-surface.test.ts",
+        "packages/nuxt/test/server-validate.test.ts",
+        "packages/nuxt/test/shared-dir-config.test.ts",
+        "packages/nuxt/test/static-imports.test.ts",
+        "packages/nuxt/test/template-dependencies.test.ts",
+        "packages/nuxt/test/templates.test.ts",
+        "packages/nuxt/test/tracing-channel.test.ts",
+        "packages/nuxt/test/tree-shake.test.ts",
+        "packages/nuxt/test/typed-fetch-budget.test.ts",
+        "packages/nuxt/test/unctx-transform.test.ts",
+        "packages/nuxt/test/unhead-imports.test.ts",
+        "packages/nuxt/test/unique-by.test.ts",
+        "packages/nuxt/test/utils.test.ts",
+        "packages/nuxt/test/utils.ts",
+        "packages/nuxt/test/vfor.test.ts",
+        "packages/nuxt/test/virtual.test.ts",
+        "packages/nuxt/tsconfig.build.json",
+        "packages/nuxt/tsdown.config.ts",
+        "packages/nuxt/types.d.mts",
+        "packages/nuxt/types.d.ts",
+        "packages/nuxt/types.dev.d.ts",
+        "packages/rspack/**",
+        "packages/schema/**",
+        "packages/test-utils/**",
+        "packages/ui-templates/**",
+        "packages/vite/**",
+        "packages/vite-server/**",
+        "packages/webpack/**",
+        "patches/**",
+        "playground/**",
+        "playwright.config.ts",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "renovate.json",
+        "scripts/**",
+        "test/base-url.test.ts",
+        "test/basic.test.ts",
+        "test/build-assets-dir-collision.test.ts",
+        "test/bundle.test.ts",
+        "test/dev-error-build.test.ts",
+        "test/dev-error-default-page.test.ts",
+        "test/dev-error-plugin.test.ts",
+        "test/dev-error-server.test.ts",
+        "test/dev-error-sourcemap-edits.test.ts",
+        "test/dev-error-sourcemap.test.ts",
+        "test/dev-error-space-in-path.test.ts",
+        "test/dev-error-utils.ts",
+        "test/dynamic-paths.test.ts",
+        "test/e2e/**",
+        "test/ensure-prepared.ts",
+        "test/external-vue-resolution.test.ts",
+        "test/fixture-copy.ts",
+        "test/fixture-prepare.ts",
+        "test/fixtures/base-url/**",
+        "test/fixtures/basic/.gitignore",
+        "test/fixtures/basic/.nuxtignore",
+        "test/fixtures/basic/app/**",
+        "test/fixtures/basic/custom-modules/**",
+        "test/fixtures/basic/custom-public/**",
+        "test/fixtures/basic/extends/bar/**",
+        "test/fixtures/basic/layers/**",
+        "test/fixtures/basic/modules/**",
+        "test/fixtures/basic/nuxt.config.ts",
+        "test/fixtures/basic/package.json",
+        "test/fixtures/basic/postcss/**",
+        "test/fixtures/basic/public/**",
+        "test/fixtures/basic/server/**",
+        "test/fixtures/basic/tsconfig.json",
+        "test/fixtures/basic-types/.gitignore",
+        "test/fixtures/basic-types/_local-modules/**",
+        "test/fixtures/basic-types/app/**",
+        "test/fixtures/basic-types/config-types.ts",
+        "test/fixtures/basic-types/extends/bar/**",
+        "test/fixtures/basic-types/index.d.ts",
+        "test/fixtures/basic-types/modules/**",
+        "test/fixtures/basic-types/nuxt.config.ts",
+        "test/fixtures/basic-types/nuxt.schema.ts",
+        "test/fixtures/basic-types/package.json",
+        "test/fixtures/basic-types/server/**",
+        "test/fixtures/basic-types/shared/**",
+        "test/fixtures/basic-types/tsconfig.json",
+        "test/fixtures/build-assets-dir-collision/**",
+        "test/fixtures/chunk-error/**",
+        "test/fixtures/dev-error-client/**",
+        "test/fixtures/dev-error-default-page/**",
+        "test/fixtures/dev-error-plugin/**",
+        "test/fixtures/dev-error-sourcemap/**",
+        "test/fixtures/dynamic-paths/**",
+        "test/fixtures/external-vue-resolution/**",
+        "test/fixtures/hmr/**",
+        "test/fixtures/hmr-sibling-layer/**",
+        "test/fixtures/inline-styles/**",
+        "test/fixtures/lazy-hydration/**",
+        "test/fixtures/minimal/**",
+        "test/fixtures/minimal-pages/**",
+        "test/fixtures/minimal-types/**",
+        "test/fixtures/nested-suspense/**",
+        "test/fixtures/nitro-legacy/**",
+        "test/fixtures/nitro-module-compat/**",
+        "test/fixtures/nitro-vite-environment/**",
+        "test/fixtures/no-pages-links/**",
+        "test/fixtures/no-scripts/**",
+        "test/fixtures/nuxt-time/**",
+        "test/fixtures/payload-cache-leak/**",
+        "test/fixtures/preview/**",
+        "test/fixtures/route-scroll/**",
+        "test/fixtures/route-types-isomorphic/**",
+        "test/fixtures/route-types-permissive/**",
+        "test/fixtures/runtime-compiler/.gitignore",
+        "test/fixtures/runtime-compiler/app/**",
+        "test/fixtures/runtime-compiler/nuxt.config.ts",
+        "test/fixtures/runtime-compiler/package.json",
+        "test/fixtures/runtime-compiler/server/**",
+        "test/fixtures/runtime-compiler/tsconfig.json",
+        "test/fixtures/server-components/**",
+        "test/fixtures/server-page-css/**",
+        "test/fixtures/server-path-fallback/**",
+        "test/fixtures/server-path-fallback-disabled/**",
+        "test/fixtures/spa/**",
+        "test/fixtures/spa-loader/**",
+        "test/fixtures/spa-only/**",
+        "test/fixtures/ssr-streaming/**",
+        "test/fixtures/standalone-renderer/**",
+        "test/fixtures/suspense/**",
+        "test/fixtures/suspense-layout/**",
+        "test/fixtures/ui-templates/**",
+        "test/fixtures/vapor/**",
+        "test/fixtures/vite-server-cloudflare/**",
+        "test/fixtures/vite-server-dev-error/**",
+        "test/fixtures/vite-server-generate/**",
+        "test/fixtures/vite-server-netlify/**",
+        "test/fixtures/vite-server-spa/**",
+        "test/fixtures/vite-server-ssr/**",
+        "test/fixtures/vite-server-universal-deploy/**",
+        "test/fixtures/worker-assets/app/app.vue",
+        "test/fixtures/worker-assets/app/worker.ts",
+        "test/fixtures/worker-assets/nuxt.config.ts",
+        "test/fixtures/worker-assets/package.json",
+        "test/fixtures/worker-assets/tsconfig.json",
+        "test/hung-template.test.ts",
+        "test/inline-styles.test.ts",
+        "test/matrix.ts",
+        "test/mocks/**",
+        "test/nitro-legacy.test.ts",
+        "test/nitro-module-compat.test.ts",
+        "test/nitro-vite-environment.test.ts",
+        "test/no-jiti/**",
+        "test/no-pages-links.test.ts",
+        "test/nuxt/**",
+        "test/payload-cache-leak.test.ts",
+        "test/prepare.ts",
+        "test/renderer/**",
+        "test/runtime/**",
+        "test/server-components.test.ts",
+        "test/setup-env.ts",
+        "test/setup-prepare.ts",
+        "test/setup-renderer-prepare.ts",
+        "test/setup-runtime.ts",
+        "test/spa-only.test.ts",
+        "test/static-dist.test.ts",
+        "test/typed-router.test.ts",
+        "test/utils.ts",
+        "test/vite-server-cloudflare.test.ts",
+        "test/vite-server-dev-error.test.ts",
+        "test/vite-server-generate.test.ts",
+        "test/vite-server-netlify.test.ts",
+        "test/vite-server-spa.test.ts",
+        "test/vite-server-ssr.test.ts",
+        "test/vite-server-universal-deploy.test.ts",
+        "test/worker-assets.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-present - Nuxt Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present - Nuxt Team, MIT license (LICENSE), https://github.com/nuxt/nuxt."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pcss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nuxtignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nuxtrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/public-asset"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

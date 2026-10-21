@@ -1,0 +1,1070 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apache/pulsar",
+  "revision": "fa282309e22182fa54617fcd84de225dc52dec79",
+  "checksum": "sha256:c87ff3b59365e07def1f60e1c6b14dc8bffb47a04ffb7f361f7d46a442910d3a",
+  "extract": {
+    "exclude": [
+      "distribution/licenses/**",
+      "distribution/server/src/**",
+      "distribution/shell/src/**",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "pip/images/**",
+      "pulsar-client-tools-test/src/test/resources/dummyexamples.jar",
+      "pulsar-websocket/src/test/resources/my-public.key",
+      "src/**",
+      "tests/certificate-authority/ec/jks/broker_client.keystore.jks",
+      "tests/certificate-authority/ec/jks/ca.truststore.jks",
+      "tests/certificate-authority/ec/jks/client.keystore.jks",
+      "tests/certificate-authority/ec/jks/server.keystore.jks",
+      "tests/certificate-authority/jks/broker.keystore.jks",
+      "tests/certificate-authority/jks/broker.truststore.jks",
+      "tests/certificate-authority/jks/broker.truststore.nopassword.jks",
+      "tests/certificate-authority/jks/client.keystore.jks",
+      "tests/certificate-authority/jks/client.truststore.jks",
+      "tests/certificate-authority/jks/client.truststore.nopassword.jks",
+      "tests/certificate-authority/jks/proxy-and-client.truststore.jks",
+      "tests/certificate-authority/jks/proxy-and-client.truststore.nopassword.jks",
+      "tests/certificate-authority/jks/proxy.keystore.jks",
+      "tests/certificate-authority/jks/proxy.truststore.jks",
+      "tests/certificate-authority/jks/proxy.truststore.nopassword.jks",
+      "tests/docker-images/latest-version-image/python-examples/exclamation.zip",
+      "tests/integration/src/test/resources/zk-3.5-test-data/**",
+      "tests/performance/launcher/src/test/resources/**",
+      "tiered-storage/jcloud/src/test/resources/ledger-1",
+      "tiered-storage/jcloud/src/test/resources/ledger-1-index",
+      "tiered-storage/jcloud/src/test/resources/ledger-2",
+      "tiered-storage/jcloud/src/test/resources/ledger-2-index"
+    ]
+  },
+  "history": {
+    "since": "9f849c324969e160f9891203b2a2e4805fae5a1c"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n----------------------------------------------------------------------------------------------------\n\npulsar-common/src/main/java/org/apache/pulsar/common/util/protobuf/ByteBufCoded{Input,Output}Stream.java\n\nCopyright 2014, Google Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nCode generated by the Protocol Buffer compiler is owned by the owner\nof the input file used when generating it.  This code is not\nstandalone and requires a support library to be linked with it.  This\nsupport library is itself covered by the above license.\n\n\nNOTICE:\n\nApache Pulsar\nCopyright 2017-2024 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n",
+      "attribution": "Commit history of https://github.com/apache/pulsar: Copyright 2014, Google Inc.  All rights reserved.; Copyright 2017-2024 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/pulsar."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".asf.yaml",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        ".ratignore",
+        "AGENTS.md",
+        "ARCHITECTURE.md",
+        "CLAUDE.md",
+        "CODING.md",
+        "CONTRIBUTING.md",
+        "CONTRIBUTORS.md",
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "SECURITY.md",
+        "bin/**",
+        "build-logic/**",
+        "build.gradle.kts",
+        "buildtools/**",
+        "codecov.yml",
+        "conf/**",
+        "deployment/**",
+        "distribution/offloaders/**",
+        "distribution/server/build.gradle.kts",
+        "distribution/shell/build.gradle.kts",
+        "doap_Pulsar.rdf",
+        "docker/**",
+        "docker-compose/**",
+        "faq.md",
+        "gradle/libs.versions.toml",
+        "gradle/setup-test-gpg.sh",
+        "gradle/verify-test-groups.gradle.kts",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "grafana/**",
+        "jclouds-shaded/**",
+        "jetty-upgrade/**",
+        "lombok.config",
+        "managed-ledger/**",
+        "microbench/**",
+        "pip/000-INDEX.md",
+        "pip/README.md",
+        "pip/TEMPLATE.md",
+        "pip/pip-1.md",
+        "pip/pip-10.md",
+        "pip/pip-100.md",
+        "pip/pip-101.md",
+        "pip/pip-104.md",
+        "pip/pip-105.md",
+        "pip/pip-106.md",
+        "pip/pip-107.md",
+        "pip/pip-108.md",
+        "pip/pip-109.md",
+        "pip/pip-11.md",
+        "pip/pip-110.md",
+        "pip/pip-111.md",
+        "pip/pip-112.md",
+        "pip/pip-116.md",
+        "pip/pip-117.md",
+        "pip/pip-118.md",
+        "pip/pip-119.md",
+        "pip/pip-12.md",
+        "pip/pip-120.md",
+        "pip/pip-121.md",
+        "pip/pip-122.md",
+        "pip/pip-123.md",
+        "pip/pip-124.md",
+        "pip/pip-129.md",
+        "pip/pip-13.md",
+        "pip/pip-130.md",
+        "pip/pip-131.md",
+        "pip/pip-132.md",
+        "pip/pip-135.md",
+        "pip/pip-136.md",
+        "pip/pip-137.md",
+        "pip/pip-14.md",
+        "pip/pip-143.md",
+        "pip/pip-144.md",
+        "pip/pip-146.md",
+        "pip/pip-148.md",
+        "pip/pip-149.md",
+        "pip/pip-15.md",
+        "pip/pip-152.md",
+        "pip/pip-154.md",
+        "pip/pip-155.md",
+        "pip/pip-156.md",
+        "pip/pip-157.md",
+        "pip/pip-16.md",
+        "pip/pip-160.md",
+        "pip/pip-161.md",
+        "pip/pip-162.md",
+        "pip/pip-165.md",
+        "pip/pip-17.md",
+        "pip/pip-173.md",
+        "pip/pip-174.md",
+        "pip/pip-175.md",
+        "pip/pip-176.md",
+        "pip/pip-177.md",
+        "pip/pip-178.md",
+        "pip/pip-179.md",
+        "pip/pip-18.md",
+        "pip/pip-180.md",
+        "pip/pip-181.md",
+        "pip/pip-182.md",
+        "pip/pip-183.md",
+        "pip/pip-184.md",
+        "pip/pip-186.md",
+        "pip/pip-187.md",
+        "pip/pip-188.md",
+        "pip/pip-189.md",
+        "pip/pip-19.md",
+        "pip/pip-190.md",
+        "pip/pip-191.md",
+        "pip/pip-192.md",
+        "pip/pip-193.md",
+        "pip/pip-194.md",
+        "pip/pip-195.md",
+        "pip/pip-198.md",
+        "pip/pip-2.md",
+        "pip/pip-20.md",
+        "pip/pip-201.md",
+        "pip/pip-204.md",
+        "pip/pip-205.md",
+        "pip/pip-209.md",
+        "pip/pip-21.md",
+        "pip/pip-22.md",
+        "pip/pip-23.md",
+        "pip/pip-24.md",
+        "pip/pip-243.md",
+        "pip/pip-246.md",
+        "pip/pip-249.md",
+        "pip/pip-25.md",
+        "pip/pip-259.md",
+        "pip/pip-26.md",
+        "pip/pip-261.md",
+        "pip/pip-264.md",
+        "pip/pip-265.md",
+        "pip/pip-27.md",
+        "pip/pip-275.md",
+        "pip/pip-276.md",
+        "pip/pip-277.md",
+        "pip/pip-278.md",
+        "pip/pip-279.md",
+        "pip/pip-28.md",
+        "pip/pip-280.md",
+        "pip/pip-281.md",
+        "pip/pip-282.md",
+        "pip/pip-284.md",
+        "pip/pip-286.md",
+        "pip/pip-289.md",
+        "pip/pip-29.md",
+        "pip/pip-290.md",
+        "pip/pip-292.md",
+        "pip/pip-293.md",
+        "pip/pip-296.md",
+        "pip/pip-297.md",
+        "pip/pip-298.md",
+        "pip/pip-299.md",
+        "pip/pip-3.md",
+        "pip/pip-30.md",
+        "pip/pip-300.md",
+        "pip/pip-301.md",
+        "pip/pip-302.md",
+        "pip/pip-303.md",
+        "pip/pip-305.md",
+        "pip/pip-306.md",
+        "pip/pip-307.md",
+        "pip/pip-31.md",
+        "pip/pip-312.md",
+        "pip/pip-313.md",
+        "pip/pip-315.md",
+        "pip/pip-318.md",
+        "pip/pip-32.md",
+        "pip/pip-320.md",
+        "pip/pip-321.md",
+        "pip/pip-322.md",
+        "pip/pip-323.md",
+        "pip/pip-324.md",
+        "pip/pip-325.md",
+        "pip/pip-326.md",
+        "pip/pip-327.md",
+        "pip/pip-329.md",
+        "pip/pip-33.md",
+        "pip/pip-330.md",
+        "pip/pip-335.md",
+        "pip/pip-337.md",
+        "pip/pip-339.md",
+        "pip/pip-34.md",
+        "pip/pip-342.md",
+        "pip/pip-343.md",
+        "pip/pip-344.md",
+        "pip/pip-347.md",
+        "pip/pip-348.md",
+        "pip/pip-349.md",
+        "pip/pip-35.md",
+        "pip/pip-350.md",
+        "pip/pip-351.md",
+        "pip/pip-352.md",
+        "pip/pip-353.md",
+        "pip/pip-354.md",
+        "pip/pip-355.md",
+        "pip/pip-356.md",
+        "pip/pip-357.md",
+        "pip/pip-358.md",
+        "pip/pip-359.md",
+        "pip/pip-36.md",
+        "pip/pip-360.md",
+        "pip/pip-363.md",
+        "pip/pip-364.md",
+        "pip/pip-366.md",
+        "pip/pip-367.md",
+        "pip/pip-368.md",
+        "pip/pip-369.md",
+        "pip/pip-37.md",
+        "pip/pip-370.md",
+        "pip/pip-373.md",
+        "pip/pip-374.md",
+        "pip/pip-375.md",
+        "pip/pip-376.md",
+        "pip/pip-378.md",
+        "pip/pip-379.md",
+        "pip/pip-38.md",
+        "pip/pip-380.md",
+        "pip/pip-381.md",
+        "pip/pip-382.md",
+        "pip/pip-383.md",
+        "pip/pip-384.md",
+        "pip/pip-389.md",
+        "pip/pip-39.md",
+        "pip/pip-391.md",
+        "pip/pip-392.md",
+        "pip/pip-393.md",
+        "pip/pip-395.md",
+        "pip/pip-396.md",
+        "pip/pip-399.md",
+        "pip/pip-4.md",
+        "pip/pip-40.md",
+        "pip/pip-401.md",
+        "pip/pip-402.md",
+        "pip/pip-404.md",
+        "pip/pip-406.md",
+        "pip/pip-407.md",
+        "pip/pip-409.md",
+        "pip/pip-41.md",
+        "pip/pip-412.md",
+        "pip/pip-414.md",
+        "pip/pip-415.md",
+        "pip/pip-416.md",
+        "pip/pip-42.md",
+        "pip/pip-420.md",
+        "pip/pip-421.md",
+        "pip/pip-422.md",
+        "pip/pip-425.md",
+        "pip/pip-427.md",
+        "pip/pip-428.md",
+        "pip/pip-429.md",
+        "pip/pip-43.md",
+        "pip/pip-430.md",
+        "pip/pip-431.md",
+        "pip/pip-432.md",
+        "pip/pip-433.md",
+        "pip/pip-434.md",
+        "pip/pip-435.md",
+        "pip/pip-436.md",
+        "pip/pip-437.md",
+        "pip/pip-439.md",
+        "pip/pip-44.md",
+        "pip/pip-441.md",
+        "pip/pip-442.md",
+        "pip/pip-443.md",
+        "pip/pip-444.md",
+        "pip/pip-445.md",
+        "pip/pip-446.md",
+        "pip/pip-447.md",
+        "pip/pip-45.md",
+        "pip/pip-452.md",
+        "pip/pip-453.md",
+        "pip/pip-454.md",
+        "pip/pip-457.md",
+        "pip/pip-46.md",
+        "pip/pip-460.md",
+        "pip/pip-462.md",
+        "pip/pip-463.md",
+        "pip/pip-464.md",
+        "pip/pip-465.md",
+        "pip/pip-466.md",
+        "pip/pip-467.md",
+        "pip/pip-468.md",
+        "pip/pip-469.md",
+        "pip/pip-47.md",
+        "pip/pip-470.md",
+        "pip/pip-472.md",
+        "pip/pip-473.md",
+        "pip/pip-475.md",
+        "pip/pip-478.md",
+        "pip/pip-48.md",
+        "pip/pip-483.md",
+        "pip/pip-486.md",
+        "pip/pip-487.md",
+        "pip/pip-49.md",
+        "pip/pip-492.md",
+        "pip/pip-494.md",
+        "pip/pip-496.md",
+        "pip/pip-5.md",
+        "pip/pip-50.md",
+        "pip/pip-51.md",
+        "pip/pip-52.md",
+        "pip/pip-53.md",
+        "pip/pip-54.md",
+        "pip/pip-55.md",
+        "pip/pip-56.md",
+        "pip/pip-57.md",
+        "pip/pip-58.md",
+        "pip/pip-59.md",
+        "pip/pip-6.md",
+        "pip/pip-60.md",
+        "pip/pip-61.md",
+        "pip/pip-62.md",
+        "pip/pip-63.md",
+        "pip/pip-64.md",
+        "pip/pip-65.md",
+        "pip/pip-66.md",
+        "pip/pip-67.md",
+        "pip/pip-68.md",
+        "pip/pip-69.md",
+        "pip/pip-7.md",
+        "pip/pip-70.md",
+        "pip/pip-71.md",
+        "pip/pip-72.md",
+        "pip/pip-73.md",
+        "pip/pip-74.md",
+        "pip/pip-75.md",
+        "pip/pip-76.md",
+        "pip/pip-77.md",
+        "pip/pip-78.md",
+        "pip/pip-79.md",
+        "pip/pip-8.md",
+        "pip/pip-80.md",
+        "pip/pip-81.md",
+        "pip/pip-82.md",
+        "pip/pip-83.md",
+        "pip/pip-84.md",
+        "pip/pip-85.md",
+        "pip/pip-86.md",
+        "pip/pip-87.md",
+        "pip/pip-88.md",
+        "pip/pip-89.md",
+        "pip/pip-9.md",
+        "pip/pip-90.md",
+        "pip/pip-91.md",
+        "pip/pip-92.md",
+        "pip/pip-93.md",
+        "pip/pip-94.md",
+        "pip/pip-95.md",
+        "pip/pip-96.md",
+        "pip/pip-97.md",
+        "pip/pip-98.md",
+        "pip/pip-99.md",
+        "pulsar-bom/**",
+        "pulsar-broker/**",
+        "pulsar-broker-auth-athenz/**",
+        "pulsar-broker-auth-oidc/**",
+        "pulsar-broker-auth-sasl/**",
+        "pulsar-broker-common/**",
+        "pulsar-broker-fastutil-minimized/**",
+        "pulsar-build/**",
+        "pulsar-cli-utils/**",
+        "pulsar-client/**",
+        "pulsar-client-admin/**",
+        "pulsar-client-admin-api/**",
+        "pulsar-client-admin-shaded/**",
+        "pulsar-client-all/**",
+        "pulsar-client-api/**",
+        "pulsar-client-api-v5/**",
+        "pulsar-client-auth-athenz/**",
+        "pulsar-client-auth-sasl/**",
+        "pulsar-client-cpp/**",
+        "pulsar-client-fastutil-minimized/**",
+        "pulsar-client-messagecrypto-bc/**",
+        "pulsar-client-shaded/**",
+        "pulsar-client-tools/**",
+        "pulsar-client-tools-api/**",
+        "pulsar-client-tools-customcommand-example/**",
+        "pulsar-client-tools-test/build.gradle.kts",
+        "pulsar-client-tools-test/src/test/java/**",
+        "pulsar-client-tools-test/src/test/resources/findbugsExclude.xml",
+        "pulsar-client-tools-test/src/test/resources/test_function_config.yml",
+        "pulsar-client-tools-test/src/test/resources/test_schema_create.json",
+        "pulsar-client-v5/**",
+        "pulsar-client-v5-all/**",
+        "pulsar-client-v5-shaded/**",
+        "pulsar-common/**",
+        "pulsar-config-validation/**",
+        "pulsar-dependencies/**",
+        "pulsar-docs-tools/**",
+        "pulsar-function-go/**",
+        "pulsar-functions/**",
+        "pulsar-http-client-api/**",
+        "pulsar-io/**",
+        "pulsar-metadata/**",
+        "pulsar-opentelemetry/**",
+        "pulsar-package-management/**",
+        "pulsar-proxy/**",
+        "pulsar-testclient/**",
+        "pulsar-tls-factory-api/**",
+        "pulsar-transaction/**",
+        "pulsar-websocket/build.gradle.kts",
+        "pulsar-websocket/src/main/**",
+        "pulsar-websocket/src/test/java/**",
+        "pulsar-websocket/src/test/resources/websocket.conf",
+        "settings.gradle.kts",
+        "spec/**",
+        "testmocks/**",
+        "tests/README.md",
+        "tests/certificate-authority/.gitignore",
+        "tests/certificate-authority/README.md",
+        "tests/certificate-authority/RemoveJksPassword.java",
+        "tests/certificate-authority/certs/**",
+        "tests/certificate-authority/client-keys/**",
+        "tests/certificate-authority/ec/broker_client.cert.pem",
+        "tests/certificate-authority/ec/broker_client.csr.pem",
+        "tests/certificate-authority/ec/broker_client.key-pk8.pem",
+        "tests/certificate-authority/ec/broker_client.key.pem",
+        "tests/certificate-authority/ec/ca.cert.pem",
+        "tests/certificate-authority/ec/ca.cert.srl",
+        "tests/certificate-authority/ec/ca.key.pem",
+        "tests/certificate-authority/ec/certificate_generation.txt",
+        "tests/certificate-authority/ec/client.cert.pem",
+        "tests/certificate-authority/ec/client.csr.pem",
+        "tests/certificate-authority/ec/client.key-pk8.pem",
+        "tests/certificate-authority/ec/client.key.pem",
+        "tests/certificate-authority/ec/jks/broker_client.cert.pem",
+        "tests/certificate-authority/ec/jks/broker_client.signed.cert.pem",
+        "tests/certificate-authority/ec/jks/ca.cert.pem",
+        "tests/certificate-authority/ec/jks/ca.cert.srl",
+        "tests/certificate-authority/ec/jks/ca.key.pem",
+        "tests/certificate-authority/ec/jks/client.cert.pem",
+        "tests/certificate-authority/ec/jks/client.signed.cert.pem",
+        "tests/certificate-authority/ec/jks/key_store_generation.txt",
+        "tests/certificate-authority/ec/jks/server.cert.pem",
+        "tests/certificate-authority/ec/jks/server.signed.cert.pem",
+        "tests/certificate-authority/ec/server.cert.pem",
+        "tests/certificate-authority/ec/server.conf",
+        "tests/certificate-authority/ec/server.csr.pem",
+        "tests/certificate-authority/ec/server.key-pk8.pem",
+        "tests/certificate-authority/ec/server.key.pem",
+        "tests/certificate-authority/generate_keystore.sh",
+        "tests/certificate-authority/index.txt",
+        "tests/certificate-authority/jks/broker.truststore.pem",
+        "tests/certificate-authority/newcerts/**",
+        "tests/certificate-authority/openssl.cnf",
+        "tests/certificate-authority/private/**",
+        "tests/certificate-authority/serial",
+        "tests/certificate-authority/server-keys/**",
+        "tests/compose/**",
+        "tests/docker-images/java-test-functions/**",
+        "tests/docker-images/java-test-image/**",
+        "tests/docker-images/java-test-plugins/**",
+        "tests/docker-images/latest-version-image/Dockerfile",
+        "tests/docker-images/latest-version-image/build.gradle.kts",
+        "tests/docker-images/latest-version-image/conf/**",
+        "tests/docker-images/latest-version-image/go-examples/**",
+        "tests/docker-images/latest-version-image/python-examples/consumer_schema.py",
+        "tests/docker-images/latest-version-image/python-examples/exception_function.py",
+        "tests/docker-images/latest-version-image/python-examples/exclamation_lib.py",
+        "tests/docker-images/latest-version-image/python-examples/exclamation_with_extra_deps.py",
+        "tests/docker-images/latest-version-image/python-examples/producer_schema.py",
+        "tests/docker-images/latest-version-image/scripts/**",
+        "tests/integration/AGENTS.md",
+        "tests/integration/CLAUDE.md",
+        "tests/integration/build.gradle.kts",
+        "tests/integration/src/test/java/**",
+        "tests/integration/src/test/resources/containers/**",
+        "tests/integration/src/test/resources/kafka-zookeeper.properties",
+        "tests/integration/src/test/resources/org/**",
+        "tests/integration/src/test/resources/pulsar-auth.xml",
+        "tests/integration/src/test/resources/pulsar-backwards-compatibility.xml",
+        "tests/integration/src/test/resources/pulsar-cli.xml",
+        "tests/integration/src/test/resources/pulsar-function.xml",
+        "tests/integration/src/test/resources/pulsar-k8s.xml",
+        "tests/integration/src/test/resources/pulsar-loadbalance.xml",
+        "tests/integration/src/test/resources/pulsar-messaging.xml",
+        "tests/integration/src/test/resources/pulsar-metrics.xml",
+        "tests/integration/src/test/resources/pulsar-plugin.xml",
+        "tests/integration/src/test/resources/pulsar-process.xml",
+        "tests/integration/src/test/resources/pulsar-proxy.xml",
+        "tests/integration/src/test/resources/pulsar-python.xml",
+        "tests/integration/src/test/resources/pulsar-schema.xml",
+        "tests/integration/src/test/resources/pulsar-semantics.xml",
+        "tests/integration/src/test/resources/pulsar-standalone.xml",
+        "tests/integration/src/test/resources/pulsar-thread.xml",
+        "tests/integration/src/test/resources/pulsar-tls.xml",
+        "tests/integration/src/test/resources/pulsar-transaction.xml",
+        "tests/integration/src/test/resources/pulsar-upgrade.xml",
+        "tests/integration/src/test/resources/pulsar-websocket.xml",
+        "tests/integration/src/test/resources/pulsar.xml",
+        "tests/integration/src/test/resources/tiered-filesystem-storage.xml",
+        "tests/integration/src/test/resources/tiered-jcloud-storage.xml",
+        "tests/performance/AGENTS.md",
+        "tests/performance/CLAUDE.md",
+        "tests/performance/README.md",
+        "tests/performance/common/**",
+        "tests/performance/docs/**",
+        "tests/performance/environment/**",
+        "tests/performance/jfr/**",
+        "tests/performance/launcher/build.gradle.kts",
+        "tests/performance/launcher/src/main/**",
+        "tests/performance/launcher/src/test/java/**",
+        "tests/performance/metrics/**",
+        "tests/performance/report-tool/**",
+        "tests/performance/scenarios/**",
+        "tests/performance/serve-reports.py",
+        "tests/performance/tools/**",
+        "tests/pulsar-client-admin-shade-test/**",
+        "tests/pulsar-client-admin-v5-test/**",
+        "tests/pulsar-client-all-shade-test/**",
+        "tests/pulsar-client-java-compatibility/**",
+        "tests/pulsar-client-native-image/**",
+        "tests/pulsar-client-shade-test/**",
+        "tests/pulsar-client-test-bcfips/**",
+        "tests/pulsar-client-v5-all-test/**",
+        "tests/pulsar-client-v5-shade-test/**",
+        "tests/scripts/**",
+        "tiered-storage/file-system/**",
+        "tiered-storage/jcloud/build.gradle.kts",
+        "tiered-storage/jcloud/src/main/**",
+        "tiered-storage/jcloud/src/test/java/**",
+        "tiered-storage/jcloud/src/test/resources/log4j2-test.yml",
+        "wireshark/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n----------------------------------------------------------------------------------------------------\n\npulsar-common/src/main/java/org/apache/pulsar/common/util/protobuf/ByteBufCoded{Input,Output}Stream.java\n\nCopyright 2014, Google Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nCode generated by the Protocol Buffer compiler is owned by the owner\nof the input file used when generating it.  This code is not\nstandalone and requires a support library to be linked with it.  This\nsupport library is itself covered by the above license.\n\n\nNOTICE:\n\nApache Pulsar\nCopyright 2017-2024 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n",
+      "attribution": "Copyright 2014, Google Inc.  All rights reserved.; Copyright 2017-2024 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/pulsar."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ClientBuilder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Provider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PulsarClientProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.RuntimeDelegate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.avsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jfc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.srl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfvars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wolfi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.htpasswd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ratignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bookkeeper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/function-localrunner"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/myid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-admin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-client"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-daemon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-managed-ledger-admin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-perf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pulsar-shell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-workload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-shell-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-shell-file-error"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

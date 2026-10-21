@@ -1,0 +1,1841 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/eggjs/egg",
+  "revision": "95bd9193787f7c318dc6c79bb577510f1d21a85a",
+  "checksum": "sha256:b8347897557061630ec383a421d6ef16c360ae37aa18b3c8bcd7efd66e3c5dc6",
+  "extract": {
+    "exclude": [
+      "packages/cluster/test/fixtures/apps/framework-pkg-egg/node_modules/**",
+      "packages/core/test/fixtures/agent/node_modules/**",
+      "packages/core/test/fixtures/application/node_modules/**",
+      "packages/core/test/fixtures/bundle-plugin-paths/node_modules/**",
+      "packages/core/test/fixtures/egg-esm/node_modules/**",
+      "packages/core/test/fixtures/env-disable/node_modules/**",
+      "packages/core/test/fixtures/extend/node_modules/**",
+      "packages/core/test/fixtures/helper/node_modules/**",
+      "packages/core/test/fixtures/manifest-dynamic-plugin/node_modules/**",
+      "packages/core/test/fixtures/middleware-override/node_modules/**",
+      "packages/core/test/fixtures/plugin/node_modules/**",
+      "packages/core/test/fixtures/plugin-duplicate/node_modules/**",
+      "packages/core/test/fixtures/plugin-optional-dependencies/node_modules/**",
+      "packages/core/test/fixtures/plugin-path-package/node_modules/**",
+      "packages/core/test/fixtures/plugin-pkg-exports/node_modules/**",
+      "packages/core/test/fixtures/plugin-pnpm/node_modules/**",
+      "packages/core/test/fixtures/plugin-pnpm-scope/node_modules/**",
+      "packages/core/test/fixtures/scope/node_modules/**",
+      "packages/core/test/fixtures/scope-env/node_modules/**",
+      "packages/core/test/fixtures/service-override/node_modules/**",
+      "packages/egg/src/config/favicon.png",
+      "packages/egg/test/fixtures/apps/app-ts/node_modules/**",
+      "packages/egg/test/fixtures/apps/loader-plugin/node_modules/**",
+      "packages/koa/docs/logo.png",
+      "packages/koa/docs/middleware.gif",
+      "packages/router/**",
+      "packages/tsconfig/test/fixtures/apps/ts-proj/node_modules/**",
+      "packages/utils/test/fixtures/aliyun-egg-app/**",
+      "packages/utils/test/fixtures/cjs/node_modules/@foo/**",
+      "packages/utils/test/fixtures/cjs/node_modules/inject/**",
+      "packages/utils/test/fixtures/default-egg-app/**",
+      "packages/utils/test/fixtures/demoframework-app/**",
+      "packages/utils/test/fixtures/esm/node_modules/**",
+      "packages/utils/test/fixtures/framework-egg-default/node_modules/**",
+      "packages/utils/test/fixtures/framework-pkg-egg/node_modules/**",
+      "packages/utils/test/fixtures/monorepo-app/node_modules/**",
+      "packages/utils/test/fixtures/test-app/node_modules/**",
+      "packages/utils/test/fixtures/yadan-app/node_modules/**",
+      "plugins/mock/test/fixtures/yadan_app/node_modules/**",
+      "plugins/mock/test/fixtures/yadan_app_fail/node_modules/**",
+      "site/docs/public/assets/communication-seq.png",
+      "site/docs/public/assets/egg-banner.png",
+      "site/docs/public/assets/egg-framework.png",
+      "site/docs/public/assets/egg-logo.png",
+      "site/docs/public/assets/quickstart-coverage.png",
+      "site/docs/public/assets/quickstart-index.png",
+      "site/docs/public/assets/socketio-console.png",
+      "site/docs/public/favicon.png",
+      "site/docs/public/img_egg/**",
+      "site/public/assets/communication-seq.png",
+      "site/public/assets/egg-banner.png",
+      "site/public/assets/egg-framework.png",
+      "site/public/assets/egg-logo.png",
+      "site/public/assets/quickstart-coverage.png",
+      "site/public/assets/quickstart-index.png",
+      "site/public/assets/socketio-console.png",
+      "site/public/favicon.png",
+      "site/public/img_egg/**",
+      "tegg/core/common-util/test/fixtures/apps/app-with-module-pkg-json/node_modules/**",
+      "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json/node_modules/**",
+      "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json-duplicated/node_modules/**",
+      "tegg/core/common-util/test/fixtures/monorepo/node_modules/**",
+      "tegg/core/common-util/test/fixtures/monorepo/packages/a/node_modules/**",
+      "tegg/core/common-util/test/fixtures/monorepo/packages/d/node_modules/**",
+      "tegg/plugin/config/test/fixtures/app-duplicate-name-first-wins/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/apps/duplicate-optional-module/node_modules/**",
+      "tegg/plugin/config/test/fixtures/framework-chain/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/framework-cycle/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/framework-dist-scan/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/framework-module-json/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/framework-same-path/app/node_modules/**",
+      "tegg/plugin/config/test/fixtures/plugin-module-json/app/node_modules/**",
+      "tegg/plugin/tegg/test/fixtures/apps/optional-module/node_modules/**",
+      "tegg/plugin/tegg/test/fixtures/apps/plugin-module/node_modules/**",
+      "tegg/standalone/standalone/test/fixtures/dependency/node_modules/**",
+      "tools/egg-bin/test/fixtures/custom-framework-app/node_modules/**",
+      "tools/egg-bin/test/fixtures/custom-framework-app-my-egg-bin/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-commonjs/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-debug/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-detect-port/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-esm/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-esm-dev/node_modules/**",
+      "tools/egg-bin/test/fixtures/demo-app-kill-self/node_modules/**",
+      "tools/egg-bin/test/fixtures/egg-require/node_modules/**",
+      "tools/egg-bin/test/fixtures/egg-revert/node_modules/**",
+      "tools/egg-bin/test/fixtures/egg-revert-cov/node_modules/**",
+      "tools/egg-bin/test/fixtures/egg-revert-dev/node_modules/**",
+      "tools/egg-bin/test/fixtures/example/node_modules/**",
+      "tools/egg-bin/test/fixtures/example-declarations/node_modules/**",
+      "tools/egg-bin/test/fixtures/example-ts-cluster/node_modules/**",
+      "tools/egg-bin/test/fixtures/example-ts-error-stack/node_modules/**",
+      "tools/egg-bin/test/fixtures/example-ts-simple/node_modules/**",
+      "tools/egg-bin/test/fixtures/test path with space/example-app/node_modules/**",
+      "tools/egg-bin/test/fixtures/test path with space/example-declarations/node_modules/**",
+      "tools/egg-bin/test/fixtures/test path with space/example-egg-require/node_modules/**",
+      "tools/egg-bin/test/fixtures/test path with space/example-import-script/node_modules/**",
+      "tools/egg-bin/test/fixtures/test path with space/example-require-script/node_modules/**",
+      "tools/egg-bin/test/fixtures/test-demo-app/node_modules/**",
+      "tools/egg-bin/test/fixtures/test-files/node_modules/**",
+      "tools/egg-bin/test/fixtures/test-files-glob/test/fixtures/**",
+      "tools/egg-bundler/test/fixtures/externals/**",
+      "tools/scripts/test/fixtures/egg-revert/node_modules/**",
+      "tools/scripts/test/fixtures/egg-scripts-config/node_modules/**",
+      "tools/scripts/test/fixtures/example/node_modules/**",
+      "tools/scripts/test/fixtures/example-stop/node_modules/**",
+      "tools/scripts/test/fixtures/pkg-config/node_modules/**",
+      "tools/scripts/test/fixtures/pkg-config-esm/node_modules/**",
+      "tools/scripts/test/fixtures/pkg-config-sourcemap/node_modules/**",
+      "tools/scripts/test/fixtures/status/node_modules/**",
+      "tools/scripts/test/fixtures/stop-timeout/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "db46f32b288956270e4ee637ac2464a6369b679a"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2017 Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2016-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017-present eggjs and other contributors.\nCopyright (c) 2014 Stefan Thomas\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n(The MIT License)\n\nCopyright (c) 2019 Koa contributors\nCopyright (c) 2023-present EggJS contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2025 - present eggjs and the contributors.\nCopyright (c) 2013 Jonathan Ong me@jongleberry.com\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n(The MIT License)\n\nCopyright (c) 2014 TJ Holowaychuk <tj@vision-media.ca>\nCopyright (c) 2024-present eggjs and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2020-present eggjs and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nMIT License\n\nCopyright (c) 2023-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 David Tse\nCopyright (c) 2025-present eggjs-community and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2018-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/eggjs/egg: Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg; Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/cluster; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/cookies; Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/core; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/egg; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/errors; Copyright (c) 2017-present eggjs and other contributors.; Copyright (c) 2014 Stefan Thomas, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/extend2; Copyright (c) 2019 Koa contributors; Copyright (c) 2023-present EggJS contributors, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/koa; Copyright (c) 2025 - present eggjs and the contributors.; Copyright (c) 2013 Jonathan Ong me@jongleberry.com, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/koa-static-cache; Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/path-matching; Copyright (c) 2014 TJ Holowaychuk <tj@vision-media.ca>; Copyright (c) 2024-present eggjs and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/supertest; Copyright (c) 2020-present eggjs and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/tsconfig; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/utils; Jonas Kello, MIT license (declared in package.json), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/utils/test/fixtures/cjs/node_modules/tsconfig-paths-demo; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/cors; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/development; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/i18n; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/jsonp; Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/logrotator; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/mock; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/multipart; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/onerror; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/redis; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/schedule; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/security; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/session; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/static; Copyright (c) 2023-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/status; Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/tracer; Copyright (c) 2021 David Tse; Copyright (c) 2025-present eggjs-community and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/typebox-validate; Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/view; Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/view-nunjucks; Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/watcher; Copyright (c) 2018-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/create-egg; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/egg-bin; Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/scripts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".e2e-trigger",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".node-version",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
+        ".utoo.toml",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "CONTRIBUTING.zh-CN.md",
+        "LICENSE",
+        "README.md",
+        "README.zh-CN.md",
+        "SECURITY.md",
+        "benchmark/**",
+        "codecov.yml",
+        "dev-services.compose.yml",
+        "ecosystem-ci/**",
+        "examples/**",
+        "package.json",
+        "packages/loader-fs/**",
+        "packages/logger/**",
+        "packages/skills/**",
+        "packages/typings/**",
+        "raw/**",
+        "renovate.json",
+        "scripts/**",
+        "site/.gitignore",
+        "site/.vitepress/**",
+        "site/docs/advanced/**",
+        "site/docs/basics/**",
+        "site/docs/community/**",
+        "site/docs/core/**",
+        "site/docs/faq/**",
+        "site/docs/index.md",
+        "site/docs/intro/**",
+        "site/docs/public/assets/lifecycle_cn.puml",
+        "site/docs/public/assets/lifecycle_en.puml",
+        "site/docs/public/icon.svg",
+        "site/docs/public/logo.svg",
+        "site/docs/public/logo_v1.svg",
+        "site/docs/releases/**",
+        "site/docs/tutorials/**",
+        "site/docs/zh-CN/**",
+        "site/package.json",
+        "site/public/assets/lifecycle_cn.puml",
+        "site/public/assets/lifecycle_en.puml",
+        "site/public/icon.svg",
+        "site/public/logo.svg",
+        "site/public/logo_v1.svg",
+        "site/tsconfig.json",
+        "tegg/AGENTS.md",
+        "tegg/CHANGELOG.md",
+        "tegg/README.md",
+        "tegg/benchmark/**",
+        "tegg/core/agent-runtime/**",
+        "tegg/core/ajv-decorator/**",
+        "tegg/core/aop-decorator/**",
+        "tegg/core/aop-runtime/**",
+        "tegg/core/background-task/**",
+        "tegg/core/common-util/CHANGELOG.md",
+        "tegg/core/common-util/README.md",
+        "tegg/core/common-util/package.json",
+        "tegg/core/common-util/src/**",
+        "tegg/core/common-util/test/MapUtil.test.ts",
+        "tegg/core/common-util/test/ModuleConfig.test.ts",
+        "tegg/core/common-util/test/NameUtil.test.ts",
+        "tegg/core/common-util/test/ObjectUtil.test.ts",
+        "tegg/core/common-util/test/ProtoGraph.test.ts",
+        "tegg/core/common-util/test/StackUtil.test.ts",
+        "tegg/core/common-util/test/TimerUtil.test.ts",
+        "tegg/core/common-util/test/__snapshots__/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-module-json/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-module-pkg-json/config/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-module-pkg-json/package.json",
+        "tegg/core/common-util/test/fixtures/apps/app-with-modules/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json/.sff/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json/app/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json/package.json",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json-duplicated/.sff/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json-duplicated/app/**",
+        "tegg/core/common-util/test/fixtures/apps/app-with-no-module-json-duplicated/package.json",
+        "tegg/core/common-util/test/fixtures/apps/app-with-symlink/**",
+        "tegg/core/common-util/test/fixtures/modules/**",
+        "tegg/core/common-util/test/fixtures/monorepo/foo/**",
+        "tegg/core/common-util/test/fixtures/monorepo/packages/a/package.json",
+        "tegg/core/common-util/test/fixtures/monorepo/packages/b/**",
+        "tegg/core/common-util/test/fixtures/monorepo/packages/d/package.json",
+        "tegg/core/common-util/test/index.test.ts",
+        "tegg/core/common-util/tsconfig.json",
+        "tegg/core/common-util/tsdown.config.ts",
+        "tegg/core/controller-decorator/**",
+        "tegg/core/controller-runtime/**",
+        "tegg/core/core-decorator/**",
+        "tegg/core/dal-decorator/**",
+        "tegg/core/dal-runtime/**",
+        "tegg/core/dynamic-inject/**",
+        "tegg/core/dynamic-inject-runtime/**",
+        "tegg/core/eventbus-decorator/**",
+        "tegg/core/eventbus-runtime/**",
+        "tegg/core/langchain-decorator/**",
+        "tegg/core/lifecycle/**",
+        "tegg/core/loader/**",
+        "tegg/core/mcp-client/**",
+        "tegg/core/metadata/**",
+        "tegg/core/orm-decorator/**",
+        "tegg/core/runtime/**",
+        "tegg/core/schedule-decorator/**",
+        "tegg/core/standalone-decorator/**",
+        "tegg/core/tegg/**",
+        "tegg/core/test-util/**",
+        "tegg/core/transaction-decorator/**",
+        "tegg/core/types/**",
+        "tegg/core/vitest/**",
+        "tegg/plugin/ajv/**",
+        "tegg/plugin/aop/**",
+        "tegg/plugin/common/**",
+        "tegg/plugin/config/CHANGELOG.md",
+        "tegg/plugin/config/README.md",
+        "tegg/plugin/config/package.json",
+        "tegg/plugin/config/src/**",
+        "tegg/plugin/config/test/DuplicateOptionalModule.test.ts",
+        "tegg/plugin/config/test/ManifestModuleReference.test.ts",
+        "tegg/plugin/config/test/ModuleScanner.test.ts",
+        "tegg/plugin/config/test/PluginModuleDiscovery.test.ts",
+        "tegg/plugin/config/test/ReadModule.test.ts",
+        "tegg/plugin/config/test/fixtures/app-duplicate-name-first-wins/app/package.json",
+        "tegg/plugin/config/test/fixtures/app-framework-conflict/**",
+        "tegg/plugin/config/test/fixtures/apps/app-with-modules/**",
+        "tegg/plugin/config/test/fixtures/apps/duplicate-optional-module/config/**",
+        "tegg/plugin/config/test/fixtures/apps/duplicate-optional-module/package.json",
+        "tegg/plugin/config/test/fixtures/framework-chain/app/package.json",
+        "tegg/plugin/config/test/fixtures/framework-cycle/app/package.json",
+        "tegg/plugin/config/test/fixtures/framework-dist-scan/app/dist/**",
+        "tegg/plugin/config/test/fixtures/framework-dist-scan/app/package.json",
+        "tegg/plugin/config/test/fixtures/framework-module-json/app/package.json",
+        "tegg/plugin/config/test/fixtures/framework-same-path/app/config/**",
+        "tegg/plugin/config/test/fixtures/framework-same-path/app/package.json",
+        "tegg/plugin/config/test/fixtures/plugin-module-json/app/config/**",
+        "tegg/plugin/config/test/fixtures/plugin-module-json/app/modules/**",
+        "tegg/plugin/config/test/fixtures/plugin-module-json/app/package.json",
+        "tegg/plugin/config/test/utils.ts",
+        "tegg/plugin/config/tsconfig.json",
+        "tegg/plugin/controller/**",
+        "tegg/plugin/dal/**",
+        "tegg/plugin/dns-cache/**",
+        "tegg/plugin/eventbus/**",
+        "tegg/plugin/langchain/**",
+        "tegg/plugin/mcp-client/**",
+        "tegg/plugin/mcp-proxy/**",
+        "tegg/plugin/orm/**",
+        "tegg/plugin/schedule/**",
+        "tegg/plugin/tegg/CHANGELOG.md",
+        "tegg/plugin/tegg/README.md",
+        "tegg/plugin/tegg/package.json",
+        "tegg/plugin/tegg/src/**",
+        "tegg/plugin/tegg/test/AccessLevelCheck.test.ts",
+        "tegg/plugin/tegg/test/BackgroundTask.test.ts",
+        "tegg/plugin/tegg/test/BundledAppBoot.test.ts",
+        "tegg/plugin/tegg/test/ConstructorModuleConfig.test.ts",
+        "tegg/plugin/tegg/test/DynamicInject.test.ts",
+        "tegg/plugin/tegg/test/EggCompatible.test.ts",
+        "tegg/plugin/tegg/test/Inject.test.ts",
+        "tegg/plugin/tegg/test/ManifestCollection.test.ts",
+        "tegg/plugin/tegg/test/ModuleConfig.test.ts",
+        "tegg/plugin/tegg/test/ModulePlugin.test.ts",
+        "tegg/plugin/tegg/test/MultiApp.test.ts",
+        "tegg/plugin/tegg/test/MultiAppParallel.test.ts",
+        "tegg/plugin/tegg/test/MultiInstanceInjectMultiInstance.test.ts",
+        "tegg/plugin/tegg/test/NoModuleJson.test.ts",
+        "tegg/plugin/tegg/test/OptionalModule.test.ts",
+        "tegg/plugin/tegg/test/OptionalPluginModule.test.ts",
+        "tegg/plugin/tegg/test/SameProtoName.test.ts",
+        "tegg/plugin/tegg/test/Subscription.test.ts",
+        "tegg/plugin/tegg/test/agent-loader-fs.test.ts",
+        "tegg/plugin/tegg/test/app/**",
+        "tegg/plugin/tegg/test/close.test.ts",
+        "tegg/plugin/tegg/test/fixtures/apps/access-level-check/**",
+        "tegg/plugin/tegg/test/fixtures/apps/app-multi-inject-multi/**",
+        "tegg/plugin/tegg/test/fixtures/apps/app-with-no-module-json/**",
+        "tegg/plugin/tegg/test/fixtures/apps/background-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/close-test-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/constructor-module-config/**",
+        "tegg/plugin/tegg/test/fixtures/apps/dynamic-inject-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/egg-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/egg-app-simple/**",
+        "tegg/plugin/tegg/test/fixtures/apps/inject-module-config/**",
+        "tegg/plugin/tegg/test/fixtures/apps/invalid-inject/**",
+        "tegg/plugin/tegg/test/fixtures/apps/module-plugin-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/multi-app-isolation/**",
+        "tegg/plugin/tegg/test/fixtures/apps/multi-app-isolation-b/**",
+        "tegg/plugin/tegg/test/fixtures/apps/optional-inject/**",
+        "tegg/plugin/tegg/test/fixtures/apps/optional-module/app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/optional-module/config/**",
+        "tegg/plugin/tegg/test/fixtures/apps/optional-module/package.json",
+        "tegg/plugin/tegg/test/fixtures/apps/plugin-module/config/**",
+        "tegg/plugin/tegg/test/fixtures/apps/plugin-module/package.json",
+        "tegg/plugin/tegg/test/fixtures/apps/recursive-module-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/same-name-protos/**",
+        "tegg/plugin/tegg/test/fixtures/apps/same-name-singleton-and-context-proto/**",
+        "tegg/plugin/tegg/test/fixtures/apps/schedule-app/**",
+        "tegg/plugin/tegg/test/fixtures/apps/wrong-order-app/**",
+        "tegg/plugin/tegg/test/lib/**",
+        "tegg/plugin/tegg/test/utils.ts",
+        "tegg/plugin/tegg/tsconfig.json",
+        "tegg/standalone/service-worker/**",
+        "tegg/standalone/service-worker-controller/**",
+        "tegg/standalone/service-worker-runtime/**",
+        "tegg/standalone/standalone/CHANGELOG.md",
+        "tegg/standalone/standalone/README.md",
+        "tegg/standalone/standalone/package.json",
+        "tegg/standalone/standalone/src/**",
+        "tegg/standalone/standalone/test/ModulePlugin.test.ts",
+        "tegg/standalone/standalone/test/fixtures/ajv-module/**",
+        "tegg/standalone/standalone/test/fixtures/ajv-module-pass/**",
+        "tegg/standalone/standalone/test/fixtures/aop-module/**",
+        "tegg/standalone/standalone/test/fixtures/custom-context/**",
+        "tegg/standalone/standalone/test/fixtures/dal-manager-inject/**",
+        "tegg/standalone/standalone/test/fixtures/dal-module/**",
+        "tegg/standalone/standalone/test/fixtures/dal-transaction-module/**",
+        "tegg/standalone/standalone/test/fixtures/dependency/foo.ts",
+        "tegg/standalone/standalone/test/fixtures/dependency/package.json",
+        "tegg/standalone/standalone/test/fixtures/dynamic-inject-module/**",
+        "tegg/standalone/standalone/test/fixtures/egg-context-lifecycle-proto/**",
+        "tegg/standalone/standalone/test/fixtures/egg-object-lifecycle-proto/**",
+        "tegg/standalone/standalone/test/fixtures/egg-prototype-lifecycle-proto/**",
+        "tegg/standalone/standalone/test/fixtures/init-failure/**",
+        "tegg/standalone/standalone/test/fixtures/inner-object/**",
+        "tegg/standalone/standalone/test/fixtures/inner-object-proto/**",
+        "tegg/standalone/standalone/test/fixtures/invalid-inject/**",
+        "tegg/standalone/standalone/test/fixtures/invalid-inner-object-inject/**",
+        "tegg/standalone/standalone/test/fixtures/lifecycle/**",
+        "tegg/standalone/standalone/test/fixtures/load-unit-instance-lifecycle-proto/**",
+        "tegg/standalone/standalone/test/fixtures/load-unit-lifecycle-proto/**",
+        "tegg/standalone/standalone/test/fixtures/logger-option/**",
+        "tegg/standalone/standalone/test/fixtures/module-with-config/**",
+        "tegg/standalone/standalone/test/fixtures/module-with-empty-config/**",
+        "tegg/standalone/standalone/test/fixtures/module-with-empty-default-config/**",
+        "tegg/standalone/standalone/test/fixtures/module-with-env-config/**",
+        "tegg/standalone/standalone/test/fixtures/multi-callback-instance-module/**",
+        "tegg/standalone/standalone/test/fixtures/multi-modules/**",
+        "tegg/standalone/standalone/test/fixtures/optional-inject/**",
+        "tegg/standalone/standalone/test/fixtures/runtime-config/**",
+        "tegg/standalone/standalone/test/fixtures/simple/**",
+        "tegg/standalone/standalone/test/index.test.ts",
+        "tegg/standalone/standalone/tsconfig.json",
+        "tegg/standalone/standalone/tsdown.config.ts",
+        "tools/egg-bundler/.gitignore",
+        "tools/egg-bundler/README.md",
+        "tools/egg-bundler/docs/**",
+        "tools/egg-bundler/package.json",
+        "tools/egg-bundler/src/**",
+        "tools/egg-bundler/test/Bundler.test.ts",
+        "tools/egg-bundler/test/EntryGenerator.test.ts",
+        "tools/egg-bundler/test/ExternalsResolver.test.ts",
+        "tools/egg-bundler/test/ManifestLoader.test.ts",
+        "tools/egg-bundler/test/PackRunner.default-build.test.ts",
+        "tools/egg-bundler/test/PackRunner.test.ts",
+        "tools/egg-bundler/test/__snapshots__/**",
+        "tools/egg-bundler/test/cjs-esm-interop.realbuild.test.ts",
+        "tools/egg-bundler/test/classFieldShadowing.realbuild.test.ts",
+        "tools/egg-bundler/test/cluster-entries.realbuild.test.ts",
+        "tools/egg-bundler/test/deterministic.test.ts",
+        "tools/egg-bundler/test/fixtures/apps/**",
+        "tools/egg-bundler/test/generate-manifest.test.ts",
+        "tools/egg-bundler/test/index.test.ts",
+        "tools/egg-bundler/test/integration.test.ts",
+        "tools/egg-bundler/test/leoric-loader.realbuild.test.ts",
+        "tools/egg-bundler/test/leoric-runtime-require-loader.test.ts",
+        "tools/egg-bundler/test/no-filesystem-scan.test.ts",
+        "tools/egg-bundler/test/prelude.test.ts",
+        "tools/egg-bundler/test/single-file.realbuild.test.ts",
+        "tools/egg-bundler/test/snapshot-lazy-bundler.test.ts",
+        "tools/egg-bundler/test/snapshot-lazy-external.test.ts",
+        "tools/egg-bundler/test/snapshot-lazy.realbuild.test.ts",
+        "tools/egg-bundler/tsconfig.json",
+        "tools/egg-bundler/tsdown.config.ts",
+        "tools/egg-bundler/vitest.config.ts",
+        "tsconfig.json",
+        "tsdown.config.ts",
+        "vercel.json",
+        "vitest.config.ts",
+        "wiki/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/cluster/.gitignore",
+        "packages/cluster/CHANGELOG.md",
+        "packages/cluster/LICENSE",
+        "packages/cluster/README.md",
+        "packages/cluster/package.json",
+        "packages/cluster/src/**",
+        "packages/cluster/test/agent_worker.test.ts",
+        "packages/cluster/test/app_worker.test.ts",
+        "packages/cluster/test/fixtures/apps/agent-debug-port/**",
+        "packages/cluster/test/fixtures/apps/agent-die/**",
+        "packages/cluster/test/fixtures/apps/agent-die-on-forkapp/**",
+        "packages/cluster/test/fixtures/apps/agent-die-onboot/**",
+        "packages/cluster/test/fixtures/apps/agent-exit/**",
+        "packages/cluster/test/fixtures/apps/agent-start-error/**",
+        "packages/cluster/test/fixtures/apps/agent-start-framework-error/**",
+        "packages/cluster/test/fixtures/apps/agent-start-framework-ready-error/**",
+        "packages/cluster/test/fixtures/apps/agent-worker-threads/**",
+        "packages/cluster/test/fixtures/apps/agent-worker-threads-error/**",
+        "packages/cluster/test/fixtures/apps/app-die/**",
+        "packages/cluster/test/fixtures/apps/app-error-listeners/**",
+        "packages/cluster/test/fixtures/apps/app-exit/**",
+        "packages/cluster/test/fixtures/apps/app-kill/**",
+        "packages/cluster/test/fixtures/apps/app-listen-hostname/**",
+        "packages/cluster/test/fixtures/apps/app-listen-path/**",
+        "packages/cluster/test/fixtures/apps/app-listen-port/**",
+        "packages/cluster/test/fixtures/apps/app-listen-reusePort/**",
+        "packages/cluster/test/fixtures/apps/app-listen-without-port/**",
+        "packages/cluster/test/fixtures/apps/app-monitor/**",
+        "packages/cluster/test/fixtures/apps/app-server/**",
+        "packages/cluster/test/fixtures/apps/app-start-error/**",
+        "packages/cluster/test/fixtures/apps/app-start-framework-error/**",
+        "packages/cluster/test/fixtures/apps/app-start-framework-ready-error/**",
+        "packages/cluster/test/fixtures/apps/app-start-timeout/**",
+        "packages/cluster/test/fixtures/apps/before-close/**",
+        "packages/cluster/test/fixtures/apps/check-status/**",
+        "packages/cluster/test/fixtures/apps/cluster_mod_app/**",
+        "packages/cluster/test/fixtures/apps/cluster_mod_sticky/**",
+        "packages/cluster/test/fixtures/apps/custom-logger/**",
+        "packages/cluster/test/fixtures/apps/debug-port/**",
+        "packages/cluster/test/fixtures/apps/egg-ready/**",
+        "packages/cluster/test/fixtures/apps/framework/**",
+        "packages/cluster/test/fixtures/apps/framework-egg-default/**",
+        "packages/cluster/test/fixtures/apps/framework-egg-default-noexist/**",
+        "packages/cluster/test/fixtures/apps/framework-pkg-egg/package.json",
+        "packages/cluster/test/fixtures/apps/framework-pkg-egg-noexist/**",
+        "packages/cluster/test/fixtures/apps/frameworkapp/**",
+        "packages/cluster/test/fixtures/apps/frameworkbiz/**",
+        "packages/cluster/test/fixtures/apps/https-server/**",
+        "packages/cluster/test/fixtures/apps/https-server-config/**",
+        "packages/cluster/test/fixtures/apps/master-worker-started/**",
+        "packages/cluster/test/fixtures/apps/messenger/**",
+        "packages/cluster/test/fixtures/apps/mock-production-app/**",
+        "packages/cluster/test/fixtures/apps/options/**",
+        "packages/cluster/test/fixtures/apps/options-require/**",
+        "packages/cluster/test/fixtures/apps/other-port/**",
+        "packages/cluster/test/fixtures/apps/pid/**",
+        "packages/cluster/test/fixtures/apps/reload-worker/**",
+        "packages/cluster/test/fixtures/apps/script-start/**",
+        "packages/cluster/test/fixtures/apps/send-to-multiapp/**",
+        "packages/cluster/test/fixtures/apps/sub-process/**",
+        "packages/cluster/test/fixtures/apps/sub-process-sigkill/**",
+        "packages/cluster/test/fixtures/apps/worker-close-timeout/**",
+        "packages/cluster/test/fixtures/apps/worker-die/**",
+        "packages/cluster/test/fixtures/egg/**",
+        "packages/cluster/test/fixtures/master-thread-shutdown.mjs",
+        "packages/cluster/test/fixtures/server.ca",
+        "packages/cluster/test/fixtures/server.cert",
+        "packages/cluster/test/fixtures/server.key",
+        "packages/cluster/test/fixtures/thread-shutdown-drain.mjs",
+        "packages/cluster/test/fixtures/thread-shutdown.mjs",
+        "packages/cluster/test/fixtures/worker-thread-io.mjs",
+        "packages/cluster/test/https.test.ts",
+        "packages/cluster/test/master/**",
+        "packages/cluster/test/options.test.ts",
+        "packages/cluster/test/utils.ts",
+        "packages/cluster/test/worker-protocol-io.test.ts",
+        "packages/cluster/test/worker-protocol.test.ts",
+        "packages/cluster/test/worker-thread-shutdown.test.ts",
+        "packages/cluster/test/worker-thread-utils.test.ts",
+        "packages/cluster/test/worker_threads.test.ts",
+        "packages/cluster/tsconfig.json",
+        "packages/cluster/tsdown.config.ts",
+        "packages/cluster/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/cluster."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/cookies/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/cookies."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/core/.gitignore",
+        "packages/core/CHANGELOG.md",
+        "packages/core/LICENSE",
+        "packages/core/README.md",
+        "packages/core/benchmark/**",
+        "packages/core/example/**",
+        "packages/core/package.json",
+        "packages/core/src/**",
+        "packages/core/test/__snapshots__/**",
+        "packages/core/test/asyncLocalStorage.test.ts",
+        "packages/core/test/egg-ts.test.ts",
+        "packages/core/test/egg.test.ts",
+        "packages/core/test/fixtures/agent/app/**",
+        "packages/core/test/fixtures/agent/config/**",
+        "packages/core/test/fixtures/agent/package.json",
+        "packages/core/test/fixtures/app-before-close/**",
+        "packages/core/test/fixtures/app-core-middleware/**",
+        "packages/core/test/fixtures/app-getter/**",
+        "packages/core/test/fixtures/app-noname/**",
+        "packages/core/test/fixtures/app-outdir-pkg/**",
+        "packages/core/test/fixtures/app-outdir-precedence/**",
+        "packages/core/test/fixtures/app-outdir-tsconfig/**",
+        "packages/core/test/fixtures/app-ts/**",
+        "packages/core/test/fixtures/appinfo/**",
+        "packages/core/test/fixtures/application/app/**",
+        "packages/core/test/fixtures/application/config/**",
+        "packages/core/test/fixtures/application/package.json",
+        "packages/core/test/fixtures/appname/**",
+        "packages/core/test/fixtures/beforestart/**",
+        "packages/core/test/fixtures/beforestart-error/**",
+        "packages/core/test/fixtures/beforestart-params-error/**",
+        "packages/core/test/fixtures/beforestart-timeout/**",
+        "packages/core/test/fixtures/beforestart-with-timeout-env/**",
+        "packages/core/test/fixtures/boot/**",
+        "packages/core/test/fixtures/boot-before-close/**",
+        "packages/core/test/fixtures/boot-configDidLoad-error/**",
+        "packages/core/test/fixtures/boot-didLoad-error/**",
+        "packages/core/test/fixtures/boot-didReady-error/**",
+        "packages/core/test/fixtures/boot-serverDidLoad-error/**",
+        "packages/core/test/fixtures/boot-timeout/**",
+        "packages/core/test/fixtures/boot-willReady-error/**",
+        "packages/core/test/fixtures/bundle-plugin-paths/package.json",
+        "packages/core/test/fixtures/close/**",
+        "packages/core/test/fixtures/compile-cache-target/**",
+        "packages/core/test/fixtures/config/**",
+        "packages/core/test/fixtures/config-array/**",
+        "packages/core/test/fixtures/config-env/**",
+        "packages/core/test/fixtures/config-env-app-config/**",
+        "packages/core/test/fixtures/configmeta/**",
+        "packages/core/test/fixtures/context-loader/**",
+        "packages/core/test/fixtures/controller-app/**",
+        "packages/core/test/fixtures/controller-next-argument/**",
+        "packages/core/test/fixtures/controller-params/**",
+        "packages/core/test/fixtures/custom-loader/**",
+        "packages/core/test/fixtures/custom_session_invaild/**",
+        "packages/core/test/fixtures/deprecate/**",
+        "packages/core/test/fixtures/dont-load-plugin/**",
+        "packages/core/test/fixtures/egg/**",
+        "packages/core/test/fixtures/egg-esm/app/**",
+        "packages/core/test/fixtures/egg-esm/config/**",
+        "packages/core/test/fixtures/egg-esm/index.ts",
+        "packages/core/test/fixtures/egg-esm/package.json",
+        "packages/core/test/fixtures/egg-esm/plugins/**",
+        "packages/core/test/fixtures/egg-ts/**",
+        "packages/core/test/fixtures/egg-ts-js/**",
+        "packages/core/test/fixtures/egg-ts-js-tsconfig-paths/**",
+        "packages/core/test/fixtures/eggpath/**",
+        "packages/core/test/fixtures/env-disable/config/**",
+        "packages/core/test/fixtures/env-disable/package.json",
+        "packages/core/test/fixtures/extend/app/**",
+        "packages/core/test/fixtures/extend/config/**",
+        "packages/core/test/fixtures/extend/package.json",
+        "packages/core/test/fixtures/extend-controller-service/**",
+        "packages/core/test/fixtures/extend-env/**",
+        "packages/core/test/fixtures/extend-symbol/**",
+        "packages/core/test/fixtures/extend-with-class/**",
+        "packages/core/test/fixtures/extends-app-service/**",
+        "packages/core/test/fixtures/framework-dulp/**",
+        "packages/core/test/fixtures/framework-nosymbol/**",
+        "packages/core/test/fixtures/framework-symbol/**",
+        "packages/core/test/fixtures/framework-wrong-eggpath/**",
+        "packages/core/test/fixtures/helloworld-ts/**",
+        "packages/core/test/fixtures/helper/app/**",
+        "packages/core/test/fixtures/helper/config/**",
+        "packages/core/test/fixtures/helper/package.json",
+        "packages/core/test/fixtures/load-plugin-by-env/**",
+        "packages/core/test/fixtures/load-plugin-config-override/**",
+        "packages/core/test/fixtures/load-plugin-default/**",
+        "packages/core/test/fixtures/load-plugin-unittest/**",
+        "packages/core/test/fixtures/load_context_error/**",
+        "packages/core/test/fixtures/load_context_syntax_error/**",
+        "packages/core/test/fixtures/load_dirs/**",
+        "packages/core/test/fixtures/load_file/**",
+        "packages/core/test/fixtures/load_to_app/**",
+        "packages/core/test/fixtures/loadfile/**",
+        "packages/core/test/fixtures/loadfile-esm/**",
+        "packages/core/test/fixtures/manifest/**",
+        "packages/core/test/fixtures/manifest-dynamic-plugin/config/**",
+        "packages/core/test/fixtures/manifest-dynamic-plugin/package.json",
+        "packages/core/test/fixtures/middleware-aa/**",
+        "packages/core/test/fixtures/middleware-app-disable/**",
+        "packages/core/test/fixtures/middleware-disable/**",
+        "packages/core/test/fixtures/middleware-ignore/**",
+        "packages/core/test/fixtures/middleware-match/**",
+        "packages/core/test/fixtures/middleware-override/app/**",
+        "packages/core/test/fixtures/middleware-override/config/**",
+        "packages/core/test/fixtures/middleware-override/package.json",
+        "packages/core/test/fixtures/middleware-redefined/**",
+        "packages/core/test/fixtures/no-core-middleware/**",
+        "packages/core/test/fixtures/no-dep-plugin/**",
+        "packages/core/test/fixtures/no-helper/**",
+        "packages/core/test/fixtures/no-middleware/**",
+        "packages/core/test/fixtures/no-redefine-plugin/**",
+        "packages/core/test/fixtures/noplugin/**",
+        "packages/core/test/fixtures/nothing/**",
+        "packages/core/test/fixtures/notready/**",
+        "packages/core/test/fixtures/other-directory/**",
+        "packages/core/test/fixtures/plugin/agent.js",
+        "packages/core/test/fixtures/plugin/app/**",
+        "packages/core/test/fixtures/plugin/app.js",
+        "packages/core/test/fixtures/plugin/config/**",
+        "packages/core/test/fixtures/plugin/package.json",
+        "packages/core/test/fixtures/plugin/plugin-middleware/**",
+        "packages/core/test/fixtures/plugin/plugin-proxy/**",
+        "packages/core/test/fixtures/plugin/plugins/**",
+        "packages/core/test/fixtures/plugin-complex-dependencies/**",
+        "packages/core/test/fixtures/plugin-complex-deps/**",
+        "packages/core/test/fixtures/plugin-dep/**",
+        "packages/core/test/fixtures/plugin-dep-disable/**",
+        "packages/core/test/fixtures/plugin-dep-missing/**",
+        "packages/core/test/fixtures/plugin-dep-recursive/**",
+        "packages/core/test/fixtures/plugin-duplicate/release/**",
+        "packages/core/test/fixtures/plugin-egg-plugin/**",
+        "packages/core/test/fixtures/plugin-framework/**",
+        "packages/core/test/fixtures/plugin-from/**",
+        "packages/core/test/fixtures/plugin-implicit-enable-dependencies/**",
+        "packages/core/test/fixtures/plugin-noexist/**",
+        "packages/core/test/fixtures/plugin-optional-dependencies/config/**",
+        "packages/core/test/fixtures/plugin-optional-dependencies/package.json",
+        "packages/core/test/fixtures/plugin-path-package/config/**",
+        "packages/core/test/fixtures/plugin-path-package/package.json",
+        "packages/core/test/fixtures/plugin-path-package/session/**",
+        "packages/core/test/fixtures/plugin-pkg-exports/config/**",
+        "packages/core/test/fixtures/plugin-pkg-exports/package.json",
+        "packages/core/test/fixtures/plugin-pnpm/config/**",
+        "packages/core/test/fixtures/plugin-pnpm/package.json",
+        "packages/core/test/fixtures/plugin-pnpm-scope/config/**",
+        "packages/core/test/fixtures/plugin-pnpm-scope/package.json",
+        "packages/core/test/fixtures/plugin-strict/**",
+        "packages/core/test/fixtures/plugin-ts-src/**",
+        "packages/core/test/fixtures/preload-app-config/**",
+        "packages/core/test/fixtures/proxy-override/**",
+        "packages/core/test/fixtures/ready/**",
+        "packages/core/test/fixtures/realpath/**",
+        "packages/core/test/fixtures/redefine-plugin/**",
+        "packages/core/test/fixtures/router-app/**",
+        "packages/core/test/fixtures/router-in-app/**",
+        "packages/core/test/fixtures/run-with-debug/**",
+        "packages/core/test/fixtures/scope/config/**",
+        "packages/core/test/fixtures/scope/package.json",
+        "packages/core/test/fixtures/scope-env/config/**",
+        "packages/core/test/fixtures/scope-env/package.json",
+        "packages/core/test/fixtures/serverenv/**",
+        "packages/core/test/fixtures/serverenv-file/**",
+        "packages/core/test/fixtures/service-override/app/**",
+        "packages/core/test/fixtures/service-override/config/**",
+        "packages/core/test/fixtures/service-override/package.json",
+        "packages/core/test/fixtures/service-unique/**",
+        "packages/core/test/fixtures/services_loader_verify/**",
+        "packages/core/test/fixtures/session-cache-app/**",
+        "packages/core/test/fixtures/subdir-proxy/**",
+        "packages/core/test/fixtures/subdir-services/**",
+        "packages/core/test/fixtures/syntaxerror/**",
+        "packages/core/test/fixtures/timing/**",
+        "packages/core/test/helper.ts",
+        "packages/core/test/index.test.ts",
+        "packages/core/test/lifecycle.test.ts",
+        "packages/core/test/loader/**",
+        "packages/core/test/singleton.test.ts",
+        "packages/core/test/snapshot.test.ts",
+        "packages/core/test/support-typescript.test.ts",
+        "packages/core/test/utils/**",
+        "packages/core/tsconfig.json",
+        "packages/core/tsdown.config.ts",
+        "packages/core/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/core."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/egg/LICENSE",
+        "packages/egg/README.md",
+        "packages/egg/package.json",
+        "packages/egg/src/agent.ts",
+        "packages/egg/src/ajv.ts",
+        "packages/egg/src/aop.ts",
+        "packages/egg/src/app/**",
+        "packages/egg/src/config/config.default.ts",
+        "packages/egg/src/config/config.local.ts",
+        "packages/egg/src/config/config.unittest.ts",
+        "packages/egg/src/config/plugin.ts",
+        "packages/egg/src/dal.ts",
+        "packages/egg/src/errors.ts",
+        "packages/egg/src/helper.ts",
+        "packages/egg/src/index.ts",
+        "packages/egg/src/lib/**",
+        "packages/egg/src/orm.ts",
+        "packages/egg/src/schedule.ts",
+        "packages/egg/src/transaction.ts",
+        "packages/egg/src/urllib.ts",
+        "packages/egg/test/__snapshots__/**",
+        "packages/egg/test/agent.test.ts",
+        "packages/egg/test/app/**",
+        "packages/egg/test/application.test.ts",
+        "packages/egg/test/asyncSupport.test.ts",
+        "packages/egg/test/bench/**",
+        "packages/egg/test/cluster1/**",
+        "packages/egg/test/cluster2/**",
+        "packages/egg/test/egg.test.ts",
+        "packages/egg/test/fixtures/apps/agent-app/**",
+        "packages/egg/test/fixtures/apps/agent-app-sync/**",
+        "packages/egg/test/fixtures/apps/agent-client-app/**",
+        "packages/egg/test/fixtures/apps/agent-die/**",
+        "packages/egg/test/fixtures/apps/agent-logger-config/**",
+        "packages/egg/test/fixtures/apps/agent-restart/**",
+        "packages/egg/test/fixtures/apps/agent-throw/**",
+        "packages/egg/test/fixtures/apps/aliyun-egg/**",
+        "packages/egg/test/fixtures/apps/aliyun-egg-app/**",
+        "packages/egg/test/fixtures/apps/aliyun-egg-biz/**",
+        "packages/egg/test/fixtures/apps/app-config-cookies/**",
+        "packages/egg/test/fixtures/apps/app-die/**",
+        "packages/egg/test/fixtures/apps/app-die-ignore-code/**",
+        "packages/egg/test/fixtures/apps/app-enableFastContextLogger/**",
+        "packages/egg/test/fixtures/apps/app-enablePerformanceTimer-true/**",
+        "packages/egg/test/fixtures/apps/app-locals-getter/**",
+        "packages/egg/test/fixtures/apps/app-router/**",
+        "packages/egg/test/fixtures/apps/app-runInAnonymousContextScope/**",
+        "packages/egg/test/fixtures/apps/app-runInAnonymousContextScope-withRequest/**",
+        "packages/egg/test/fixtures/apps/app-server/**",
+        "packages/egg/test/fixtures/apps/app-server-customized-client-error/**",
+        "packages/egg/test/fixtures/apps/app-server-timeout/**",
+        "packages/egg/test/fixtures/apps/app-server-with-hostname/**",
+        "packages/egg/test/fixtures/apps/app-start-timeout/**",
+        "packages/egg/test/fixtures/apps/app-throw/**",
+        "packages/egg/test/fixtures/apps/app-ts/app/**",
+        "packages/egg/test/fixtures/apps/app-ts/app.ts",
+        "packages/egg/test/fixtures/apps/app-ts/config/**",
+        "packages/egg/test/fixtures/apps/app-ts/lib/**",
+        "packages/egg/test/fixtures/apps/app-ts/package.json",
+        "packages/egg/test/fixtures/apps/app-ts/tsconfig.json",
+        "packages/egg/test/fixtures/apps/app-ts-esm/**",
+        "packages/egg/test/fixtures/apps/app-ts-type-check/**",
+        "packages/egg/test/fixtures/apps/async-app/**",
+        "packages/egg/test/fixtures/apps/base-context-class/**",
+        "packages/egg/test/fixtures/apps/body_parser_testapp/**",
+        "packages/egg/test/fixtures/apps/body_parser_testapp_disable/**",
+        "packages/egg/test/fixtures/apps/body_parser_testapp_ignore/**",
+        "packages/egg/test/fixtures/apps/body_parser_testapp_match/**",
+        "packages/egg/test/fixtures/apps/boot-app/**",
+        "packages/egg/test/fixtures/apps/boot-app-esm/**",
+        "packages/egg/test/fixtures/apps/close-watcher-logrotator/**",
+        "packages/egg/test/fixtures/apps/cluster-client-error/**",
+        "packages/egg/test/fixtures/apps/cluster_mod_app/**",
+        "packages/egg/test/fixtures/apps/config-env/**",
+        "packages/egg/test/fixtures/apps/confused-configuration/**",
+        "packages/egg/test/fixtures/apps/context-config-app/**",
+        "packages/egg/test/fixtures/apps/context_httpclient/**",
+        "packages/egg/test/fixtures/apps/context_httpclient_timeout/**",
+        "packages/egg/test/fixtures/apps/csrf-disable/**",
+        "packages/egg/test/fixtures/apps/csrf-enable/**",
+        "packages/egg/test/fixtures/apps/csrf-ignore/**",
+        "packages/egg/test/fixtures/apps/ctx-background/**",
+        "packages/egg/test/fixtures/apps/custom-context-getlogger/**",
+        "packages/egg/test/fixtures/apps/custom-env-app/**",
+        "packages/egg/test/fixtures/apps/custom-framework-demo/**",
+        "packages/egg/test/fixtures/apps/custom-loader/**",
+        "packages/egg/test/fixtures/apps/custom-logger/**",
+        "packages/egg/test/fixtures/apps/demo/**",
+        "packages/egg/test/fixtures/apps/development/**",
+        "packages/egg/test/fixtures/apps/dnscache_httpclient/**",
+        "packages/egg/test/fixtures/apps/docapp/**",
+        "packages/egg/test/fixtures/apps/dump-ignore-error/**",
+        "packages/egg/test/fixtures/apps/dumpconfig/**",
+        "packages/egg/test/fixtures/apps/dumpconfig-circular/**",
+        "packages/egg/test/fixtures/apps/dumptiming-slowBootActionMinDuration/**",
+        "packages/egg/test/fixtures/apps/dumptiming-timeout/**",
+        "packages/egg/test/fixtures/apps/empty/**",
+        "packages/egg/test/fixtures/apps/encrypt-cookies/**",
+        "packages/egg/test/fixtures/apps/favicon/**",
+        "packages/egg/test/fixtures/apps/favicon-buffer/**",
+        "packages/egg/test/fixtures/apps/favicon-function/**",
+        "packages/egg/test/fixtures/apps/get-logger/**",
+        "packages/egg/test/fixtures/apps/helper/**",
+        "packages/egg/test/fixtures/apps/httpclient-agent-timeout-3000/**",
+        "packages/egg/test/fixtures/apps/httpclient-interceptor/**",
+        "packages/egg/test/fixtures/apps/httpclient-next-overwrite/**",
+        "packages/egg/test/fixtures/apps/httpclient-next-with-tracer/**",
+        "packages/egg/test/fixtures/apps/httpclient-overwrite/**",
+        "packages/egg/test/fixtures/apps/httpclient-request-timeout-100/**",
+        "packages/egg/test/fixtures/apps/httpclient-retry/**",
+        "packages/egg/test/fixtures/apps/httpclient-tracer/**",
+        "packages/egg/test/fixtures/apps/i18n/**",
+        "packages/egg/test/fixtures/apps/keys-exists/**",
+        "packages/egg/test/fixtures/apps/keys-missing/**",
+        "packages/egg/test/fixtures/apps/koa-session/**",
+        "packages/egg/test/fixtures/apps/loader-plugin/app/**",
+        "packages/egg/test/fixtures/apps/loader-plugin/app.js",
+        "packages/egg/test/fixtures/apps/loader-plugin/config/**",
+        "packages/egg/test/fixtures/apps/loader-plugin/package.json",
+        "packages/egg/test/fixtures/apps/loader-plugin/plugins/**",
+        "packages/egg/test/fixtures/apps/loader-plugin-dep/**",
+        "packages/egg/test/fixtures/apps/loader-plugin-dep-missing/**",
+        "packages/egg/test/fixtures/apps/loader-plugin-dep-recursive/**",
+        "packages/egg/test/fixtures/apps/loader-plugin-noexist/**",
+        "packages/egg/test/fixtures/apps/locals/**",
+        "packages/egg/test/fixtures/apps/logger/**",
+        "packages/egg/test/fixtures/apps/logger-level-debug/**",
+        "packages/egg/test/fixtures/apps/logger-output-json/**",
+        "packages/egg/test/fixtures/apps/logger-reload/**",
+        "packages/egg/test/fixtures/apps/logrotator-app/**",
+        "packages/egg/test/fixtures/apps/master-worker-started/**",
+        "packages/egg/test/fixtures/apps/master-worker-started-worker_threads/**",
+        "packages/egg/test/fixtures/apps/messenger/**",
+        "packages/egg/test/fixtures/apps/messenger-app-agent/**",
+        "packages/egg/test/fixtures/apps/messenger-broadcast/**",
+        "packages/egg/test/fixtures/apps/messenger-random/**",
+        "packages/egg/test/fixtures/apps/meta-logging-app/**",
+        "packages/egg/test/fixtures/apps/metadata-only-app/**",
+        "packages/egg/test/fixtures/apps/middlewares/**",
+        "packages/egg/test/fixtures/apps/middlewares-meta-enablePerformanceTimer/**",
+        "packages/egg/test/fixtures/apps/middlewares-site-file/**",
+        "packages/egg/test/fixtures/apps/mock-dev-app1/**",
+        "packages/egg/test/fixtures/apps/mock-dev-app2/**",
+        "packages/egg/test/fixtures/apps/mock-dev-app3/**",
+        "packages/egg/test/fixtures/apps/mock-dev-app4/**",
+        "packages/egg/test/fixtures/apps/mock-production-app/**",
+        "packages/egg/test/fixtures/apps/mock-production-app-do-not-force/**",
+        "packages/egg/test/fixtures/apps/multipart/**",
+        "packages/egg/test/fixtures/apps/multiple-view-engine/**",
+        "packages/egg/test/fixtures/apps/nobuffer-logger/**",
+        "packages/egg/test/fixtures/apps/notfound/**",
+        "packages/egg/test/fixtures/apps/notfound-custom-404/**",
+        "packages/egg/test/fixtures/apps/notready/**",
+        "packages/egg/test/fixtures/apps/onerror/**",
+        "packages/egg/test/fixtures/apps/override_method/**",
+        "packages/egg/test/fixtures/apps/querystring-extended/**",
+        "packages/egg/test/fixtures/apps/reload-worker/**",
+        "packages/egg/test/fixtures/apps/response/**",
+        "packages/egg/test/fixtures/apps/router-app/**",
+        "packages/egg/test/fixtures/apps/schedule/**",
+        "packages/egg/test/fixtures/apps/secure-app/**",
+        "packages/egg/test/fixtures/apps/service-app/**",
+        "packages/egg/test/fixtures/apps/services_loader_verify/**",
+        "packages/egg/test/fixtures/apps/singleton-demo/**",
+        "packages/egg/test/fixtures/apps/siteFile-custom-cacheControl/**",
+        "packages/egg/test/fixtures/apps/static-server/**",
+        "packages/egg/test/fixtures/apps/subdir-services/**",
+        "packages/egg/test/fixtures/apps/tracer-demo/**",
+        "packages/egg/test/fixtures/apps/view-render/**",
+        "packages/egg/test/fixtures/apps/watcher-development-app/**",
+        "packages/egg/test/fixtures/apps/watcher-type-default/**",
+        "packages/egg/test/fixtures/apps/worker-die/**",
+        "packages/egg/test/fixtures/custom-egg/**",
+        "packages/egg/test/index.test.ts",
+        "packages/egg/test/lib/**",
+        "packages/egg/test/snapshot.test.ts",
+        "packages/egg/test/start.test.ts",
+        "packages/egg/test/typescript.test.ts",
+        "packages/egg/test/urllib.test.ts",
+        "packages/egg/test/utils.ts",
+        "packages/egg/tsconfig.json",
+        "packages/egg/tsdown.config.ts",
+        "packages/egg/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/egg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/errors/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/errors."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/extend2/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017-present eggjs and other contributors.\nCopyright (c) 2014 Stefan Thomas\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present eggjs and other contributors.; Copyright (c) 2014 Stefan Thomas, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/extend2."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/koa/.gitignore",
+        "packages/koa/CHANGELOG.md",
+        "packages/koa/CODE_OF_CONDUCT.md",
+        "packages/koa/LICENSE",
+        "packages/koa/Readme.md",
+        "packages/koa/docs/api/**",
+        "packages/koa/docs/error-handling.md",
+        "packages/koa/docs/faq.md",
+        "packages/koa/docs/guide.md",
+        "packages/koa/docs/koa-vs-express.md",
+        "packages/koa/docs/migration.md",
+        "packages/koa/docs/troubleshooting.md",
+        "packages/koa/example/**",
+        "packages/koa/package.json",
+        "packages/koa/src/**",
+        "packages/koa/test/**",
+        "packages/koa/tsconfig.json",
+        "packages/koa/tsdown.config.ts"
+      ],
+      "text": "(The MIT License)\n\nCopyright (c) 2019 Koa contributors\nCopyright (c) 2023-present EggJS contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 Koa contributors; Copyright (c) 2023-present EggJS contributors, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/koa."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/koa-static-cache/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2025 - present eggjs and the contributors.\nCopyright (c) 2013 Jonathan Ong me@jongleberry.com\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 - present eggjs and the contributors.; Copyright (c) 2013 Jonathan Ong me@jongleberry.com, MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/koa-static-cache."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/path-matching/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/path-matching."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/supertest/**"
+      ],
+      "text": "(The MIT License)\n\nCopyright (c) 2014 TJ Holowaychuk <tj@vision-media.ca>\nCopyright (c) 2024-present eggjs and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 TJ Holowaychuk <tj@vision-media.ca>; Copyright (c) 2024-present eggjs and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/supertest."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/tsconfig/.gitignore",
+        "packages/tsconfig/CHANGELOG.md",
+        "packages/tsconfig/LICENSE",
+        "packages/tsconfig/README.md",
+        "packages/tsconfig/package.json",
+        "packages/tsconfig/test/fixtures/apps/ts-proj/Foo.ts",
+        "packages/tsconfig/test/fixtures/apps/ts-proj/FooDecorator.ts",
+        "packages/tsconfig/test/fixtures/apps/ts-proj/tsconfig.json",
+        "packages/tsconfig/test/index.test.ts",
+        "packages/tsconfig/tsconfig.json",
+        "packages/tsconfig/tsdown.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020-present eggjs and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020-present eggjs and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/tsconfig."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/utils/.gitignore",
+        "packages/utils/CHANGELOG.md",
+        "packages/utils/LICENSE",
+        "packages/utils/README.md",
+        "packages/utils/package.json",
+        "packages/utils/src/**",
+        "packages/utils/test/__snapshots__/**",
+        "packages/utils/test/bundle-import.test.ts",
+        "packages/utils/test/fixtures/bundle-native-fallback/**",
+        "packages/utils/test/fixtures/cjs/es-module-default.js",
+        "packages/utils/test/fixtures/cjs/exports.cjs",
+        "packages/utils/test/fixtures/cjs/exports.js",
+        "packages/utils/test/fixtures/cjs/extend/**",
+        "packages/utils/test/fixtures/cjs/index.js",
+        "packages/utils/test/fixtures/cjs/module-exports-null.js",
+        "packages/utils/test/fixtures/cjs/package.json",
+        "packages/utils/test/fixtures/cjs/run.js",
+        "packages/utils/test/fixtures/cjs-index/**",
+        "packages/utils/test/fixtures/egg-app/**",
+        "packages/utils/test/fixtures/esm/config/**",
+        "packages/utils/test/fixtures/esm/es-module-default.js",
+        "packages/utils/test/fixtures/esm/export-default-null.js",
+        "packages/utils/test/fixtures/esm/exports.js",
+        "packages/utils/test/fixtures/esm/exports.mjs",
+        "packages/utils/test/fixtures/esm/index.js",
+        "packages/utils/test/fixtures/esm/package.json",
+        "packages/utils/test/fixtures/esm-index/**",
+        "packages/utils/test/fixtures/framework-egg-default/app/**",
+        "packages/utils/test/fixtures/framework-egg-default/app.js",
+        "packages/utils/test/fixtures/framework-egg-default/package.json",
+        "packages/utils/test/fixtures/framework-egg-default-noexist/**",
+        "packages/utils/test/fixtures/framework-pkg-egg/package.json",
+        "packages/utils/test/fixtures/framework-pkg-egg-noexist/**",
+        "packages/utils/test/fixtures/module-importer-require-esm/**",
+        "packages/utils/test/fixtures/monorepo-app/packages/**",
+        "packages/utils/test/fixtures/no-package-json/**",
+        "packages/utils/test/fixtures/test-app/package.json",
+        "packages/utils/test/fixtures/test-app/test/**",
+        "packages/utils/test/fixtures/ts-module/**",
+        "packages/utils/test/fixtures/tshy/**",
+        "packages/utils/test/fixtures/tshy-dist/**",
+        "packages/utils/test/fixtures/yadan-app/package.json",
+        "packages/utils/test/framework.test.ts",
+        "packages/utils/test/getFrameworkOrEggPath.test.ts",
+        "packages/utils/test/helper.ts",
+        "packages/utils/test/import.test.ts",
+        "packages/utils/test/index.test.ts",
+        "packages/utils/test/module-importer.test.ts",
+        "packages/utils/test/plugin.test.ts",
+        "packages/utils/test/snapshot-import.test.ts",
+        "packages/utils/tsconfig.json",
+        "packages/utils/tsdown.config.ts",
+        "packages/utils/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/utils."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/utils/test/fixtures/cjs/node_modules/tsconfig-paths-demo/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Jonas Kello, MIT license (declared in package.json), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/packages/utils/test/fixtures/cjs/node_modules/tsconfig-paths-demo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/cors/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/cors."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/development/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/development."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/i18n/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/i18n."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/jsonp/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/jsonp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/logrotator/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/logrotator."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/mock/.gitignore",
+        "plugins/mock/CHANGELOG.md",
+        "plugins/mock/LICENSE",
+        "plugins/mock/README.md",
+        "plugins/mock/README.zh_CN.md",
+        "plugins/mock/package.json",
+        "plugins/mock/src/**",
+        "plugins/mock/test/__snapshots__/**",
+        "plugins/mock/test/agent.test.ts",
+        "plugins/mock/test/app/**",
+        "plugins/mock/test/app.test.ts",
+        "plugins/mock/test/app_event.test.ts",
+        "plugins/mock/test/app_proxy.test.ts",
+        "plugins/mock/test/bootstrap-plugin.test.ts",
+        "plugins/mock/test/bootstrap.test.ts",
+        "plugins/mock/test/cluster-port.test.ts",
+        "plugins/mock/test/cluster-worker_threads.test.ts",
+        "plugins/mock/test/cluster.test.ts",
+        "plugins/mock/test/ctx.test.ts",
+        "plugins/mock/test/demo-cluster.ts",
+        "plugins/mock/test/fixtures/agent/**",
+        "plugins/mock/test/fixtures/agent-boot-error/**",
+        "plugins/mock/test/fixtures/agent-boot-ready-error/**",
+        "plugins/mock/test/fixtures/app/**",
+        "plugins/mock/test/fixtures/app-boot-error/**",
+        "plugins/mock/test/fixtures/app-boot-ready-error/**",
+        "plugins/mock/test/fixtures/app-event/**",
+        "plugins/mock/test/fixtures/app-fail/**",
+        "plugins/mock/test/fixtures/app-proxy/**",
+        "plugins/mock/test/fixtures/app-proxy-ready/**",
+        "plugins/mock/test/fixtures/app-ready-failed/**",
+        "plugins/mock/test/fixtures/apps/**",
+        "plugins/mock/test/fixtures/bar/**",
+        "plugins/mock/test/fixtures/cache/**",
+        "plugins/mock/test/fixtures/chair/**",
+        "plugins/mock/test/fixtures/create-context-failed/**",
+        "plugins/mock/test/fixtures/custom-loader/**",
+        "plugins/mock/test/fixtures/custom_egg/**",
+        "plugins/mock/test/fixtures/demo/**",
+        "plugins/mock/test/fixtures/demo-async/**",
+        "plugins/mock/test/fixtures/demo_mock_service_cluster/**",
+        "plugins/mock/test/fixtures/demo_next/**",
+        "plugins/mock/test/fixtures/demo_next_h2/**",
+        "plugins/mock/test/fixtures/disable-security/**",
+        "plugins/mock/test/fixtures/error-framework/**",
+        "plugins/mock/test/fixtures/failed-app/**",
+        "plugins/mock/test/fixtures/fooPlugin/**",
+        "plugins/mock/test/fixtures/get-app-failed/**",
+        "plugins/mock/test/fixtures/messenger-binding/**",
+        "plugins/mock/test/fixtures/parallel-framework/**",
+        "plugins/mock/test/fixtures/plugin/**",
+        "plugins/mock/test/fixtures/plugin-bootstrap/**",
+        "plugins/mock/test/fixtures/plugin_throw/**",
+        "plugins/mock/test/fixtures/request/**",
+        "plugins/mock/test/fixtures/server/**",
+        "plugins/mock/test/fixtures/setup-app/**",
+        "plugins/mock/test/fixtures/simple/**",
+        "plugins/mock/test/fixtures/snapshot-framework/**",
+        "plugins/mock/test/fixtures/tegg-app/**",
+        "plugins/mock/test/fixtures/tegg-app-esm/**",
+        "plugins/mock/test/fixtures/test-case-create-context-failed/**",
+        "plugins/mock/test/fixtures/test-case-get-app-failed/**",
+        "plugins/mock/test/fixtures/yadan_app/config/**",
+        "plugins/mock/test/fixtures/yadan_app/package.json",
+        "plugins/mock/test/fixtures/yadan_app_fail/config/**",
+        "plugins/mock/test/fixtures/yadan_app_fail/package.json",
+        "plugins/mock/test/format_options.test.ts",
+        "plugins/mock/test/helper.ts",
+        "plugins/mock/test/index.test-skip.ts",
+        "plugins/mock/test/inject_ctx.test.ts",
+        "plugins/mock/test/mm.test.ts",
+        "plugins/mock/test/mock-agent.test.ts",
+        "plugins/mock/test/mock_agent_httpclient.test.ts",
+        "plugins/mock/test/mock_cluster_extend.test.ts",
+        "plugins/mock/test/mock_cluster_restore.test.ts",
+        "plugins/mock/test/mock_cluster_without_security_plugin.test.ts",
+        "plugins/mock/test/mock_context.test.ts",
+        "plugins/mock/test/mock_cookies.test.ts",
+        "plugins/mock/test/mock_csrf.test.ts",
+        "plugins/mock/test/mock_custom_loader.test.ts",
+        "plugins/mock/test/mock_env.test.ts",
+        "plugins/mock/test/mock_headers.test.ts",
+        "plugins/mock/test/mock_httpclient_next.test.ts",
+        "plugins/mock/test/mock_httpclient_next_h2.test.ts",
+        "plugins/mock/test/mock_request.test.ts",
+        "plugins/mock/test/mock_service.test.ts",
+        "plugins/mock/test/mock_service_async.test.ts",
+        "plugins/mock/test/mock_service_cluster.test.ts",
+        "plugins/mock/test/mock_session.test.ts",
+        "plugins/mock/test/parallel.test.ts",
+        "plugins/mock/test/parallel_hook.test.ts",
+        "plugins/mock/test/setup_vitest.test.ts",
+        "plugins/mock/tsconfig.json",
+        "plugins/mock/tsdown.config.ts",
+        "plugins/mock/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/mock."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/multipart/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/multipart."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/onerror/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/onerror."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/redis/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/redis."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/schedule/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/schedule."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/security/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/security."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/session/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/session."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/static/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/static."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/status/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/status."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/tracer/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/tracer."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/typebox-validate/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 David Tse\nCopyright (c) 2025-present eggjs-community and the contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 David Tse; Copyright (c) 2025-present eggjs-community and the contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/typebox-validate."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/view/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/view."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/view-nunjucks/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/view-nunjucks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/watcher/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/plugins/watcher."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/create-egg/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/create-egg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/egg-bin/.vscode/**",
+        "tools/egg-bin/CHANGELOG.md",
+        "tools/egg-bin/LICENSE",
+        "tools/egg-bin/README.md",
+        "tools/egg-bin/bin/**",
+        "tools/egg-bin/package.json",
+        "tools/egg-bin/scripts/**",
+        "tools/egg-bin/src/**",
+        "tools/egg-bin/test/bundleOptions.test.ts",
+        "tools/egg-bin/test/coffee.ts",
+        "tools/egg-bin/test/commands/**",
+        "tools/egg-bin/test/egg-bin.test.ts",
+        "tools/egg-bin/test/fixtures/bin/**",
+        "tools/egg-bin/test/fixtures/custom-framework-app/package.json",
+        "tools/egg-bin/test/fixtures/custom-framework-app-my-egg-bin/package.json",
+        "tools/egg-bin/test/fixtures/demo-app/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-commonjs/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-debug/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-detect-port/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-esm/hook.js",
+        "tools/egg-bin/test/fixtures/demo-app-esm/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-esm-dev/hook.js",
+        "tools/egg-bin/test/fixtures/demo-app-esm-dev/package.json",
+        "tools/egg-bin/test/fixtures/demo-app-kill-self/package.json",
+        "tools/egg-bin/test/fixtures/egg-require/package.json",
+        "tools/egg-bin/test/fixtures/egg-revert/package.json",
+        "tools/egg-bin/test/fixtures/egg-revert/test/**",
+        "tools/egg-bin/test/fixtures/egg-revert-cov/package.json",
+        "tools/egg-bin/test/fixtures/egg-revert-cov/test/**",
+        "tools/egg-bin/test/fixtures/egg-revert-dev/package.json",
+        "tools/egg-bin/test/fixtures/egg-revert-dev/test/**",
+        "tools/egg-bin/test/fixtures/example/app/**",
+        "tools/egg-bin/test/fixtures/example/config/**",
+        "tools/egg-bin/test/fixtures/example/package.json",
+        "tools/egg-bin/test/fixtures/example-declarations/app/**",
+        "tools/egg-bin/test/fixtures/example-declarations/config/**",
+        "tools/egg-bin/test/fixtures/example-declarations/jsconfig.json",
+        "tools/egg-bin/test/fixtures/example-declarations/package.json",
+        "tools/egg-bin/test/fixtures/example-port/**",
+        "tools/egg-bin/test/fixtures/example-ts/**",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/app/**",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/app.ts",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/config/**",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/package.json",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/test/**",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/tsconfig.json",
+        "tools/egg-bin/test/fixtures/example-ts-cluster/typings/**",
+        "tools/egg-bin/test/fixtures/example-ts-cluster-client/**",
+        "tools/egg-bin/test/fixtures/example-ts-cov/**",
+        "tools/egg-bin/test/fixtures/example-ts-custom-compiler/**",
+        "tools/egg-bin/test/fixtures/example-ts-custom-compiler-2/**",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack/app.ts",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack/config/**",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack/package.json",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack/test/**",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack/tsconfig.json",
+        "tools/egg-bin/test/fixtures/example-ts-error-stack-mixed/**",
+        "tools/egg-bin/test/fixtures/example-ts-pkg/**",
+        "tools/egg-bin/test/fixtures/example-ts-simple/config/**",
+        "tools/egg-bin/test/fixtures/example-ts-simple/package.json",
+        "tools/egg-bin/test/fixtures/example-ts-test/**",
+        "tools/egg-bin/test/fixtures/mocha-test/**",
+        "tools/egg-bin/test/fixtures/mocha-test-ts-esm/**",
+        "tools/egg-bin/test/fixtures/mocha-test-ts-esm-cov/**",
+        "tools/egg-bin/test/fixtures/my-egg-bin/**",
+        "tools/egg-bin/test/fixtures/no-exit/**",
+        "tools/egg-bin/test/fixtures/prerequire/**",
+        "tools/egg-bin/test/fixtures/require-script.cjs",
+        "tools/egg-bin/test/fixtures/require-script.mjs",
+        "tools/egg-bin/test/fixtures/setup-js/**",
+        "tools/egg-bin/test/fixtures/setup-ts/**",
+        "tools/egg-bin/test/fixtures/standalone-bundle-ts/**",
+        "tools/egg-bin/test/fixtures/test path with space/example-app/app.ts",
+        "tools/egg-bin/test/fixtures/test path with space/example-app/package.json",
+        "tools/egg-bin/test/fixtures/test path with space/example-declarations/package.json",
+        "tools/egg-bin/test/fixtures/test path with space/example-egg-require/package.json",
+        "tools/egg-bin/test/fixtures/test path with space/example-import-script/package.json",
+        "tools/egg-bin/test/fixtures/test path with space/example-require-script/package.json",
+        "tools/egg-bin/test/fixtures/test path with space/require script.cjs",
+        "tools/egg-bin/test/fixtures/test path with space/require script.mjs",
+        "tools/egg-bin/test/fixtures/test path with space/test-files/**",
+        "tools/egg-bin/test/fixtures/test-demo-app/app/**",
+        "tools/egg-bin/test/fixtures/test-demo-app/config/**",
+        "tools/egg-bin/test/fixtures/test-demo-app/package.json",
+        "tools/egg-bin/test/fixtures/test-demo-app/test/**",
+        "tools/egg-bin/test/fixtures/test-demo-app-esm/**",
+        "tools/egg-bin/test/fixtures/test-files/app/**",
+        "tools/egg-bin/test/fixtures/test-files/config/**",
+        "tools/egg-bin/test/fixtures/test-files/docs/**",
+        "tools/egg-bin/test/fixtures/test-files/example/**",
+        "tools/egg-bin/test/fixtures/test-files/examples/**",
+        "tools/egg-bin/test/fixtures/test-files/ignore/**",
+        "tools/egg-bin/test/fixtures/test-files/lib/**",
+        "tools/egg-bin/test/fixtures/test-files/mocks/**",
+        "tools/egg-bin/test/fixtures/test-files/mocks_data/**",
+        "tools/egg-bin/test/fixtures/test-files/package.json",
+        "tools/egg-bin/test/fixtures/test-files/test/**",
+        "tools/egg-bin/test/fixtures/test-files-cov/**",
+        "tools/egg-bin/test/fixtures/test-files-egg-bin/**",
+        "tools/egg-bin/test/fixtures/test-files-glob/package.json",
+        "tools/egg-bin/test/fixtures/test-files-glob/test/index.test.js",
+        "tools/egg-bin/test/fixtures/test-files-glob/test/lib/**",
+        "tools/egg-bin/test/fixtures/test-files-glob/test/no-load.js",
+        "tools/egg-bin/test/fixtures/test-files-my-egg-bin/**",
+        "tools/egg-bin/test/fixtures/test-unhandled-rejection/**",
+        "tools/egg-bin/test/fixtures/ts/**",
+        "tools/egg-bin/test/helper.ts",
+        "tools/egg-bin/test/my-egg-bin.test.ts",
+        "tools/egg-bin/test/ts.test.ts",
+        "tools/egg-bin/tsconfig.json",
+        "tools/egg-bin/tsdown.config.ts",
+        "tools/egg-bin/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/egg-bin."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/scripts/.gitignore",
+        "tools/scripts/CHANGELOG.md",
+        "tools/scripts/LICENSE",
+        "tools/scripts/README.md",
+        "tools/scripts/bin/**",
+        "tools/scripts/package.json",
+        "tools/scripts/scripts/**",
+        "tools/scripts/src/**",
+        "tools/scripts/test/egg-scripts.test.ts",
+        "tools/scripts/test/fixtures/cluster-config/**",
+        "tools/scripts/test/fixtures/custom-node-dir/**",
+        "tools/scripts/test/fixtures/egg-app/**",
+        "tools/scripts/test/fixtures/egg-revert/config/**",
+        "tools/scripts/test/fixtures/egg-revert/package.json",
+        "tools/scripts/test/fixtures/egg-scripts-config/app.js",
+        "tools/scripts/test/fixtures/egg-scripts-config/config/**",
+        "tools/scripts/test/fixtures/egg-scripts-config/package.json",
+        "tools/scripts/test/fixtures/egg-scripts-node-options/**",
+        "tools/scripts/test/fixtures/example/app/**",
+        "tools/scripts/test/fixtures/example/app.js",
+        "tools/scripts/test/fixtures/example/config/**",
+        "tools/scripts/test/fixtures/example/package.json",
+        "tools/scripts/test/fixtures/example-stop/app/**",
+        "tools/scripts/test/fixtures/example-stop/app.js",
+        "tools/scripts/test/fixtures/example-stop/config/**",
+        "tools/scripts/test/fixtures/example-stop/package.json",
+        "tools/scripts/test/fixtures/ipc-bin/**",
+        "tools/scripts/test/fixtures/mock-egg/**",
+        "tools/scripts/test/fixtures/pkg-config/config/**",
+        "tools/scripts/test/fixtures/pkg-config/inject1.js",
+        "tools/scripts/test/fixtures/pkg-config/inject2.js",
+        "tools/scripts/test/fixtures/pkg-config/package.json",
+        "tools/scripts/test/fixtures/pkg-config-esm/config/**",
+        "tools/scripts/test/fixtures/pkg-config-esm/inject1.js",
+        "tools/scripts/test/fixtures/pkg-config-esm/inject2.js",
+        "tools/scripts/test/fixtures/pkg-config-esm/package.json",
+        "tools/scripts/test/fixtures/pkg-config-sourcemap/config/**",
+        "tools/scripts/test/fixtures/pkg-config-sourcemap/package.json",
+        "tools/scripts/test/fixtures/status/app.js",
+        "tools/scripts/test/fixtures/status/config/**",
+        "tools/scripts/test/fixtures/status/package.json",
+        "tools/scripts/test/fixtures/stop-timeout/app/**",
+        "tools/scripts/test/fixtures/stop-timeout/app.js",
+        "tools/scripts/test/fixtures/stop-timeout/config/**",
+        "tools/scripts/test/fixtures/stop-timeout/package.json",
+        "tools/scripts/test/fixtures/subdir-as-basedir/**",
+        "tools/scripts/test/fixtures/trace-warnings/**",
+        "tools/scripts/test/fixtures/ts/**",
+        "tools/scripts/test/fixtures/ts-pkg/**",
+        "tools/scripts/test/helper.test.ts",
+        "tools/scripts/test/snapshot-process.test.ts",
+        "tools/scripts/test/snapshot-start.test.ts",
+        "tools/scripts/test/snapshot-stop.test.ts",
+        "tools/scripts/test/start-unit.test.ts",
+        "tools/scripts/test/start-without-demon-1.test.ts",
+        "tools/scripts/test/start-without-demon-2.test.ts",
+        "tools/scripts/test/start-without-demon-3.test.ts",
+        "tools/scripts/test/start-without-demon-4.test.ts",
+        "tools/scripts/test/start-without-demon-5.test.ts",
+        "tools/scripts/test/start.test.ts",
+        "tools/scripts/test/stop.test.ts",
+        "tools/scripts/test/ts.test.ts",
+        "tools/scripts/test/utils.ts",
+        "tools/scripts/tsconfig.json",
+        "tools/scripts/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-present Alibaba Group Holding Limited and other contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Alibaba Group Holding Limited and other contributors., MIT license (LICENSE), https://github.com/eggjs/egg/tree/95bd9193787f7c318dc6c79bb577510f1d21a85a/tools/scripts."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ejs",
+      "paths": [
+        "**/*.ejs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mustache",
+      "paths": [
+        "**/*.mustache"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.async"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ca"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "tools/create-egg/src/templates/egg3-simple-js/_.gitignore",
+        "tools/create-egg/src/templates/egg3-simple-ts/_.gitignore",
+        "tools/create-egg/src/templates/egg3-tegg/_.gitignore",
+        "tools/create-egg/src/templates/simple-ts/_.gitignore",
+        "tools/create-egg/src/templates/tegg/_.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.njk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.noext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.puml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.e2e-trigger"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aaa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/null"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tmp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

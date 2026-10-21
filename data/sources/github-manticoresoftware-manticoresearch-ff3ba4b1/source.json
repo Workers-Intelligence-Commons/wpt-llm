@@ -1,0 +1,2271 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/manticoresoftware/manticoresearch",
+  "revision": "0743fdc0cb164fec9150b2bb7931fea777fa1b68",
+  "checksum": "sha256:8a9406ea4cf0e73e10745bae826eea6dd47bffcee0fe37d7559282ad9666373d",
+  "extract": {
+    "exclude": [
+      "api/libsphinxclient/**",
+      "contrib/**",
+      "dist/build_dockers/nsis/nsisunz.dll",
+      "manual/chinese/4.2.0_ps_on_vs_off.png",
+      "manual/chinese/Connecting_to_the_server/cli_browser.png",
+      "manual/chinese/Creating_a_table/Local_tables/Plain_table.md",
+      "manual/chinese/Node_info_and_management/Profiling/graphviz.png",
+      "manual/chinese/Searching/Full_text_matching/graphviz.png",
+      "manual/chinese/Searching/autocomplete.png",
+      "manual/chinese/Searching/autocomplete_github_demo.png",
+      "manual/chinese/Searching/didyoumean.png",
+      "manual/chinese/Searching/faceted.png",
+      "manual/chinese/Searching/fuzzysearch.png",
+      "manual/chinese/copy_example.png",
+      "manual/chinese/images/**",
+      "manual/chinese/manticore_database_flow_2.png",
+      "manual/chinese/mnt.cr.gif",
+      "manual/english/4.2.0_ps_on_vs_off.png",
+      "manual/english/Connecting_to_the_server/cli_browser.png",
+      "manual/english/Node_info_and_management/Profiling/graphviz.png",
+      "manual/english/Searching/Full_text_matching/graphviz.png",
+      "manual/english/Searching/autocomplete.png",
+      "manual/english/Searching/autocomplete_github_demo.png",
+      "manual/english/Searching/didyoumean.png",
+      "manual/english/Searching/faceted.png",
+      "manual/english/Searching/fuzzysearch.png",
+      "manual/english/copy_example.png",
+      "manual/english/images/**",
+      "manual/english/manticore_database_flow_2.png",
+      "manual/english/mnt.cr.gif",
+      "manual/russian/4.2.0_ps_on_vs_off.png",
+      "manual/russian/Connecting_to_the_server/cli_browser.png",
+      "manual/russian/Node_info_and_management/Profiling/graphviz.png",
+      "manual/russian/Searching/Full_text_matching/graphviz.png",
+      "manual/russian/Searching/autocomplete.png",
+      "manual/russian/Searching/autocomplete_github_demo.png",
+      "manual/russian/Searching/didyoumean.png",
+      "manual/russian/Searching/faceted.png",
+      "manual/russian/Searching/fuzzysearch.png",
+      "manual/russian/copy_example.png",
+      "manual/russian/images/**",
+      "manual/russian/manticore_database_flow_2.png",
+      "manual/russian/mnt.cr.gif",
+      "mcl/**",
+      "misc/tzdata/**",
+      "test/clt-tests/migration-es-ms/index.zip",
+      "test/ql/data/**",
+      "test/test_043/model.bin",
+      "test/test_068/data3.xml",
+      "test/test_080/model.bin",
+      "test/test_130/512k.xml",
+      "test/test_130/model.bin",
+      "test/test_138/model.bin",
+      "test/test_233/data/reload.spa",
+      "test/test_233/data/reload.spb",
+      "test/test_233/data/reload.spd",
+      "test/test_233/data/reload.sph",
+      "test/test_233/data/reload.spi",
+      "test/test_233/data/reload.spm",
+      "test/test_233/data/reload.spt",
+      "test/test_233/data/test.spa",
+      "test/test_233/data/test.spb",
+      "test/test_233/data/test.spd",
+      "test/test_233/data/test.sph",
+      "test/test_233/data/test.spi",
+      "test/test_233/data/test.spm",
+      "test/test_233/data/test.spt",
+      "test/test_250/data/plain2.spa",
+      "test/test_250/data/plain2.spd",
+      "test/test_250/data/plain2.sph",
+      "test/test_250/data/plain2.spi",
+      "test/test_250/data/plain2.spm",
+      "test/test_250/data/plain2.spt",
+      "test/test_257/data3.csv",
+      "test/test_406/data/index.0.spa",
+      "test/test_406/data/index.0.spd",
+      "test/test_406/data/index.0.spds",
+      "test/test_406/data/index.0.sphi",
+      "test/test_406/data/index.0.spi",
+      "test/test_406/data/index.0.spm",
+      "test/test_406/data/index.0.spt",
+      "test/test_406/data/index.ram",
+      "test/test_406/data/rel320/idx320.ram",
+      "test/test_406/data/rt67/rt67.0.spa",
+      "test/test_406/data/rt67/rt67.0.spd",
+      "test/test_406/data/rt67/rt67.0.spds",
+      "test/test_406/data/rt67/rt67.0.spe",
+      "test/test_406/data/rt67/rt67.0.sphi",
+      "test/test_406/data/rt67/rt67.0.spi",
+      "test/test_406/data/rt67/rt67.0.spidx",
+      "test/test_406/data/rt67/rt67.0.spm",
+      "test/test_406/data/rt67/rt67.0.spt",
+      "test/test_470/bulk339_1.gz",
+      "test/test_470/replace339_1.gz",
+      "test/test_470/search339_1.gz",
+      "test/test_471/global.idf",
+      "test/test_472/global.idf",
+      "test/test_472/global2.idf",
+      "test/bench/sphinx.html"
+    ]
+  },
+  "history": {
+    "since": "58bda13adb22f3e021b7e05050a7e0ed31a73a91"
+  },
+  "licenses": [
+    {
+      "license": "GPL-3.0-or-later",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nthe GNU General Public License is intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.  We, the Free Software Foundation, use the\nGNU General Public License for most of our software; it applies also to\nany other work released this way by its authors.  You can apply it to\nyour programs, too.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  To protect your rights, we need to prevent others from denying you\nthese rights or asking you to surrender the rights.  Therefore, you have\ncertain responsibilities if you distribute copies of the software, or if\nyou modify it: responsibilities to respect the freedom of others.\n\n  For example, if you distribute copies of such a program, whether\ngratis or for a fee, you must pass on to the recipients the same\nfreedoms that you received.  You must make sure that they, too, receive\nor can get the source code.  And you must show them these terms so they\nknow their rights.\n\n  Developers that use the GNU GPL protect your rights with two steps:\n(1) assert copyright on the software, and (2) offer you this License\ngiving you legal permission to copy, distribute and/or modify it.\n\n  For the developers' and authors' protection, the GPL clearly explains\nthat there is no warranty for this free software.  For both users' and\nauthors' sake, the GPL requires that modified versions be marked as\nchanged, so that their problems will not be attributed erroneously to\nauthors of previous versions.\n\n  Some devices are designed to deny users access to install or run\nmodified versions of the software inside them, although the manufacturer\ncan do so.  This is fundamentally incompatible with the aim of\nprotecting users' freedom to change the software.  The systematic\npattern of such abuse occurs in the area of products for individuals to\nuse, which is precisely where it is most unacceptable.  Therefore, we\nhave designed this version of the GPL to prohibit the practice for those\nproducts.  If such problems arise substantially in other domains, we\nstand ready to extend this provision to those domains in future versions\nof the GPL, as needed to protect the freedom of users.\n\n  Finally, every program is threatened constantly by software patents.\nStates should not allow patents to restrict development and use of\nsoftware on general-purpose computers, but in those that do, we wish to\navoid the special danger that patents applied to a free program could\nmake it effectively proprietary.  To prevent this, the GPL assures that\npatents cannot be used to render the program non-free.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Use with the GNU Affero General Public License.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU Affero General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the special requirements of the GNU Affero General Public License,\nsection 13, concerning interaction through a network will apply to the\ncombination as such.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU General Public License from time to time.  Such new versions will\nbe similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If the program does terminal interaction, make it output a short\nnotice like this when it starts in an interactive mode:\n\n    <program>  Copyright (C) <year>  <name of author>\n    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n    This is free software, and you are welcome to redistribute it\n    under certain conditions; type `show c' for details.\n\nThe hypothetical commands `show w' and `show c' should show the appropriate\nparts of the General Public License.  Of course, your program's commands\nmight be different; for a GUI interface, you would use an \"about box\".\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU GPL, see\n<https://www.gnu.org/licenses/>.\n\n  The GNU General Public License does not permit incorporating your program\ninto proprietary programs.  If your program is a subroutine library, you\nmay consider it more useful to permit linking proprietary applications with\nthe library.  If this is what you want to do, use the GNU Lesser General\nPublic License instead of this License.  But first, please read\n<https://www.gnu.org/licenses/why-not-lgpl.html>.\n\n\nVersion: 6 files allow any later version, such as README.md (\"or later\").",
+      "attribution": "Commit history of https://github.com/manticoresoftware/manticoresearch: the authors of manticoresoftware/manticoresearch (the license file names no copyright line), GPL-3.0-or-later license (LICENSE), https://github.com/manticoresoftware/manticoresearch."
+    },
+    {
+      "license": "GPL-3.0-or-later",
+      "paths": [
+        ".clt/**",
+        ".cursorignore",
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".gitlab-ci.yml",
+        ".gitmodules",
+        ".noindex",
+        "116.conf",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "INSTALL",
+        "LICENSE",
+        "README.md",
+        "TESTING.md",
+        "actions/**",
+        "api/lgpl-3.0.txt",
+        "api/ruby/**",
+        "api/sphinxapi.php",
+        "cmake/**",
+        "component-licenses/**",
+        "config/**",
+        "configure",
+        "deps.txt",
+        "dist/70-manticore.conf",
+        "dist/CPackOptions.cmake.in",
+        "dist/build_dockers/README.md",
+        "dist/build_dockers/cross/**",
+        "dist/build_dockers/nsis/Dockerfile",
+        "dist/build_dockers/nsis/deploy.sh",
+        "dist/build_dockers/nsis/nsis_src_parser.sh",
+        "dist/build_dockers/nsis/nsisscript.nsi",
+        "dist/build_dockers/retired/**",
+        "dist/bundle/**",
+        "dist/check_deps_in_repos.sh",
+        "dist/cleanup_old_test_kit_candidates.sh",
+        "dist/deb/**",
+        "dist/dockerhub_deploy.sh",
+        "dist/download_bundle_deps.sh",
+        "dist/download_bundle_language_packs.sh",
+        "dist/gitlab-release.yml",
+        "dist/nsis-release.yml",
+        "dist/repo_artifacts.sh",
+        "dist/resolve_repo_artifact.sh",
+        "dist/rpm/**",
+        "dist/test_kit_candidate_cleanup.sh",
+        "dist/test_kit_candidate_publish.sh",
+        "dist/test_kit_docker_build.sh",
+        "dist/test_kit_docker_push.sh",
+        "dist/test_kit_light_docker_build.sh",
+        "doc/**",
+        "docker-compose-test.yml",
+        "example.sql",
+        "galera_packaging/**",
+        "installer/**",
+        "libicu/**",
+        "libre2/**",
+        "libstemmer_c/**",
+        "manticore.conf.in",
+        "manual/chinese/Changelog.md",
+        "manual/chinese/Connecting_to_the_server/HTTP.md",
+        "manual/chinese/Connecting_to_the_server/MySQL_protocol.md",
+        "manual/chinese/Connecting_to_the_server.md",
+        "manual/chinese/Creating_a_cluster/**",
+        "manual/chinese/Creating_a_table/Creating_a_distributed_table/**",
+        "manual/chinese/Creating_a_table/Creating_a_sharded_table/**",
+        "manual/chinese/Creating_a_table/Data_types.md",
+        "manual/chinese/Creating_a_table/Local_tables/Percolate_table.md",
+        "manual/chinese/Creating_a_table/Local_tables/Plain_and_real-time_table_settings.md",
+        "manual/chinese/Creating_a_table/Local_tables/Real-time_table.md",
+        "manual/chinese/Creating_a_table/Local_tables/Template_table.md",
+        "manual/chinese/Creating_a_table/Local_tables.md",
+        "manual/chinese/Creating_a_table/NLP_and_tokenization/**",
+        "manual/chinese/Creating_a_table.md",
+        "manual/chinese/Data_creation_and_modification/**",
+        "manual/chinese/Deleting_a_table.md",
+        "manual/chinese/Emptying_a_table.md",
+        "manual/chinese/Extensions/**",
+        "manual/chinese/Functions/**",
+        "manual/chinese/Installation/**",
+        "manual/chinese/Integration/**",
+        "manual/chinese/Introduction.md",
+        "manual/chinese/Listing_tables.md",
+        "manual/chinese/Logging/**",
+        "manual/chinese/Miscellaneous_tools.md",
+        "manual/chinese/Node_info_and_management/KILL.md",
+        "manual/chinese/Node_info_and_management/Node_status.md",
+        "manual/chinese/Node_info_and_management/PURGE.md",
+        "manual/chinese/Node_info_and_management/Profiling/Query_plan.md",
+        "manual/chinese/Node_info_and_management/Profiling/Query_profile.md",
+        "manual/chinese/Node_info_and_management/SHOW_META.md",
+        "manual/chinese/Node_info_and_management/SHOW_QUERIES.md",
+        "manual/chinese/Node_info_and_management/SHOW_THREADS.md",
+        "manual/chinese/Node_info_and_management/SHOW_VARIABLES.md",
+        "manual/chinese/Node_info_and_management/SHOW_VERSION.md",
+        "manual/chinese/Node_info_and_management/SHOW_WARNINGS.md",
+        "manual/chinese/Node_info_and_management/Table_settings_and_status/**",
+        "manual/chinese/Openapi.md",
+        "manual/chinese/Quick_start_guide.md",
+        "manual/chinese/README.md",
+        "manual/chinese/Read_this_first.md",
+        "manual/chinese/References.md",
+        "manual/chinese/Reporting_bugs.md",
+        "manual/chinese/Searching/Autocomplete.md",
+        "manual/chinese/Searching/Collations.md",
+        "manual/chinese/Searching/Conversational_search.md",
+        "manual/chinese/Searching/Cost_based_optimizer.md",
+        "manual/chinese/Searching/Distributed_searching.md",
+        "manual/chinese/Searching/Expressions.md",
+        "manual/chinese/Searching/Faceted_search.md",
+        "manual/chinese/Searching/Filters.md",
+        "manual/chinese/Searching/Full_text_matching/Basic_usage.md",
+        "manual/chinese/Searching/Full_text_matching/Boolean_optimization.md",
+        "manual/chinese/Searching/Full_text_matching/Escaping.md",
+        "manual/chinese/Searching/Full_text_matching/Operators.md",
+        "manual/chinese/Searching/Full_text_matching/Profiling.md",
+        "manual/chinese/Searching/Geo_search.md",
+        "manual/chinese/Searching/Grouping.md",
+        "manual/chinese/Searching/Highlighting.md",
+        "manual/chinese/Searching/Hybrid_search.md",
+        "manual/chinese/Searching/Intro.md",
+        "manual/chinese/Searching/Joining.md",
+        "manual/chinese/Searching/KNN.md",
+        "manual/chinese/Searching/Multi-queries.md",
+        "manual/chinese/Searching/Options.md",
+        "manual/chinese/Searching/Pagination.md",
+        "manual/chinese/Searching/Percolate_query.md",
+        "manual/chinese/Searching/Query_cache.md",
+        "manual/chinese/Searching/Search_results.md",
+        "manual/chinese/Searching/Sorting_and_ranking.md",
+        "manual/chinese/Searching/Spell_correction.md",
+        "manual/chinese/Searching/Sub-selects.md",
+        "manual/chinese/Securing_and_compacting_a_table/**",
+        "manual/chinese/Security/**",
+        "manual/chinese/Server_settings/**",
+        "manual/chinese/Starting_the_server/**",
+        "manual/chinese/Starting_the_server.md",
+        "manual/chinese/Telemetry.md",
+        "manual/chinese/Updating_table_schema_and_settings.md",
+        "manual/chinese/latest_release_version",
+        "manual/chinese/redirects",
+        "manual/english/Changelog.md",
+        "manual/english/Connecting_to_the_server/HTTP.md",
+        "manual/english/Connecting_to_the_server/MySQL_protocol.md",
+        "manual/english/Connecting_to_the_server.md",
+        "manual/english/Creating_a_cluster/**",
+        "manual/english/Creating_a_table/**",
+        "manual/english/Creating_a_table.md",
+        "manual/english/Data_creation_and_modification/**",
+        "manual/english/Deleting_a_table.md",
+        "manual/english/Emptying_a_table.md",
+        "manual/english/Extensions/**",
+        "manual/english/Functions/**",
+        "manual/english/Installation/**",
+        "manual/english/Integration/**",
+        "manual/english/Introduction.md",
+        "manual/english/Listing_tables.md",
+        "manual/english/Logging/**",
+        "manual/english/Miscellaneous_tools.md",
+        "manual/english/Node_info_and_management/KILL.md",
+        "manual/english/Node_info_and_management/Node_status.md",
+        "manual/english/Node_info_and_management/PURGE.md",
+        "manual/english/Node_info_and_management/Profiling/Query_plan.md",
+        "manual/english/Node_info_and_management/Profiling/Query_profile.md",
+        "manual/english/Node_info_and_management/SHOW_META.md",
+        "manual/english/Node_info_and_management/SHOW_QUERIES.md",
+        "manual/english/Node_info_and_management/SHOW_THREADS.md",
+        "manual/english/Node_info_and_management/SHOW_VARIABLES.md",
+        "manual/english/Node_info_and_management/SHOW_VERSION.md",
+        "manual/english/Node_info_and_management/SHOW_WARNINGS.md",
+        "manual/english/Node_info_and_management/Table_settings_and_status/**",
+        "manual/english/Openapi.md",
+        "manual/english/Quick_start_guide.md",
+        "manual/english/README.md",
+        "manual/english/Read_this_first.md",
+        "manual/english/References.md",
+        "manual/english/Reporting_bugs.md",
+        "manual/english/Searching/Autocomplete.md",
+        "manual/english/Searching/Collations.md",
+        "manual/english/Searching/Conversational_search.md",
+        "manual/english/Searching/Cost_based_optimizer.md",
+        "manual/english/Searching/Distributed_searching.md",
+        "manual/english/Searching/Expressions.md",
+        "manual/english/Searching/Faceted_search.md",
+        "manual/english/Searching/Filters.md",
+        "manual/english/Searching/Full_text_matching/Basic_usage.md",
+        "manual/english/Searching/Full_text_matching/Boolean_optimization.md",
+        "manual/english/Searching/Full_text_matching/Escaping.md",
+        "manual/english/Searching/Full_text_matching/Operators.md",
+        "manual/english/Searching/Full_text_matching/Profiling.md",
+        "manual/english/Searching/Geo_search.md",
+        "manual/english/Searching/Grouping.md",
+        "manual/english/Searching/Highlighting.md",
+        "manual/english/Searching/Hybrid_search.md",
+        "manual/english/Searching/Intro.md",
+        "manual/english/Searching/Joining.md",
+        "manual/english/Searching/KNN.md",
+        "manual/english/Searching/Multi-queries.md",
+        "manual/english/Searching/Options.md",
+        "manual/english/Searching/Pagination.md",
+        "manual/english/Searching/Percolate_query.md",
+        "manual/english/Searching/Query_cache.md",
+        "manual/english/Searching/Search_results.md",
+        "manual/english/Searching/Sorting_and_ranking.md",
+        "manual/english/Searching/Spell_correction.md",
+        "manual/english/Searching/Sub-selects.md",
+        "manual/english/Securing_and_compacting_a_table/**",
+        "manual/english/Security/**",
+        "manual/english/Server_settings/**",
+        "manual/english/Starting_the_server/**",
+        "manual/english/Starting_the_server.md",
+        "manual/english/Telemetry.md",
+        "manual/english/Updating_table_schema_and_settings.md",
+        "manual/english/latest_release_version",
+        "manual/english/redirects",
+        "manual/latest_release_version",
+        "manual/russian/Changelog.md",
+        "manual/russian/Connecting_to_the_server/HTTP.md",
+        "manual/russian/Connecting_to_the_server/MySQL_protocol.md",
+        "manual/russian/Connecting_to_the_server.md",
+        "manual/russian/Creating_a_cluster/**",
+        "manual/russian/Creating_a_table/**",
+        "manual/russian/Creating_a_table.md",
+        "manual/russian/Data_creation_and_modification/**",
+        "manual/russian/Deleting_a_table.md",
+        "manual/russian/Emptying_a_table.md",
+        "manual/russian/Extensions/**",
+        "manual/russian/Functions/**",
+        "manual/russian/Installation/**",
+        "manual/russian/Integration/**",
+        "manual/russian/Introduction.md",
+        "manual/russian/Listing_tables.md",
+        "manual/russian/Logging/**",
+        "manual/russian/Miscellaneous_tools.md",
+        "manual/russian/Node_info_and_management/KILL.md",
+        "manual/russian/Node_info_and_management/Node_status.md",
+        "manual/russian/Node_info_and_management/PURGE.md",
+        "manual/russian/Node_info_and_management/Profiling/Query_plan.md",
+        "manual/russian/Node_info_and_management/Profiling/Query_profile.md",
+        "manual/russian/Node_info_and_management/SHOW_META.md",
+        "manual/russian/Node_info_and_management/SHOW_QUERIES.md",
+        "manual/russian/Node_info_and_management/SHOW_THREADS.md",
+        "manual/russian/Node_info_and_management/SHOW_VARIABLES.md",
+        "manual/russian/Node_info_and_management/SHOW_VERSION.md",
+        "manual/russian/Node_info_and_management/SHOW_WARNINGS.md",
+        "manual/russian/Node_info_and_management/Table_settings_and_status/**",
+        "manual/russian/Openapi.md",
+        "manual/russian/Quick_start_guide.md",
+        "manual/russian/README.md",
+        "manual/russian/Read_this_first.md",
+        "manual/russian/References.md",
+        "manual/russian/Reporting_bugs.md",
+        "manual/russian/Searching/Autocomplete.md",
+        "manual/russian/Searching/Collations.md",
+        "manual/russian/Searching/Conversational_search.md",
+        "manual/russian/Searching/Cost_based_optimizer.md",
+        "manual/russian/Searching/Distributed_searching.md",
+        "manual/russian/Searching/Expressions.md",
+        "manual/russian/Searching/Faceted_search.md",
+        "manual/russian/Searching/Filters.md",
+        "manual/russian/Searching/Full_text_matching/Basic_usage.md",
+        "manual/russian/Searching/Full_text_matching/Boolean_optimization.md",
+        "manual/russian/Searching/Full_text_matching/Escaping.md",
+        "manual/russian/Searching/Full_text_matching/Operators.md",
+        "manual/russian/Searching/Full_text_matching/Profiling.md",
+        "manual/russian/Searching/Geo_search.md",
+        "manual/russian/Searching/Grouping.md",
+        "manual/russian/Searching/Highlighting.md",
+        "manual/russian/Searching/Hybrid_search.md",
+        "manual/russian/Searching/Intro.md",
+        "manual/russian/Searching/Joining.md",
+        "manual/russian/Searching/KNN.md",
+        "manual/russian/Searching/Multi-queries.md",
+        "manual/russian/Searching/Options.md",
+        "manual/russian/Searching/Pagination.md",
+        "manual/russian/Searching/Percolate_query.md",
+        "manual/russian/Searching/Query_cache.md",
+        "manual/russian/Searching/Search_results.md",
+        "manual/russian/Searching/Sorting_and_ranking.md",
+        "manual/russian/Searching/Spell_correction.md",
+        "manual/russian/Searching/Sub-selects.md",
+        "manual/russian/Securing_and_compacting_a_table/**",
+        "manual/russian/Security/**",
+        "manual/russian/Server_settings/**",
+        "manual/russian/Starting_the_server/**",
+        "manual/russian/Starting_the_server.md",
+        "manual/russian/Telemetry.md",
+        "manual/russian/Updating_table_schema_and_settings.md",
+        "manual/russian/latest_release_version",
+        "manual/russian/redirects",
+        "memcheck.sh",
+        "memdocker.sh",
+        "misc/.gitignore",
+        "misc/build-local-test-kit.sh",
+        "misc/compare_manuals.sh",
+        "misc/ctest/**",
+        "misc/dockerfiles/**",
+        "misc/http-log-to-test",
+        "misc/junit/**",
+        "misc/manticore.natvis",
+        "misc/manticore_lldb.py",
+        "misc/manual.sh",
+        "misc/morphology/**",
+        "misc/raminfo.py",
+        "misc/resolve.py",
+        "misc/search_json_pretty.php",
+        "misc/stopwords/**",
+        "misc/suggest/**",
+        "misc/winbundle/**",
+        "misc/wordbreak.pl",
+        "misc/workflows.md",
+        "mysqlse/**",
+        "smoke.sh",
+        "smokeci.sh",
+        "sphinxrev.cmake",
+        "sphinxrevcheck.cmake",
+        "src/**",
+        "stack.txt",
+        "test/.gitattributes",
+        "test/CMakeLists.txt",
+        "test/bench/**",
+        "test/bench-results/**",
+        "test/bench.php",
+        "test/clean.cmd",
+        "test/clean.sh",
+        "test/clean_old.sh",
+        "test/clt-tests/.cursor/**",
+        "test/clt-tests/base/**",
+        "test/clt-tests/buddy/**",
+        "test/clt-tests/buddy-plugins/**",
+        "test/clt-tests/bugs/**",
+        "test/clt-tests/core/**",
+        "test/clt-tests/data-manipulation/**",
+        "test/clt-tests/es-like-search/**",
+        "test/clt-tests/expected-errors/**",
+        "test/clt-tests/fulltext-search/**",
+        "test/clt-tests/http-interface/**",
+        "test/clt-tests/indexer/**",
+        "test/clt-tests/indexing-error/**",
+        "test/clt-tests/installation/**",
+        "test/clt-tests/integrations/**",
+        "test/clt-tests/join/**",
+        "test/clt-tests/kibana/**",
+        "test/clt-tests/mcl/**",
+        "test/clt-tests/migration-es-ms/test-migration-es-ms.rec",
+        "test/clt-tests/mysqldump/**",
+        "test/clt-tests/opensearch/**",
+        "test/clt-tests/performance/**",
+        "test/clt-tests/performance-nightly/**",
+        "test/clt-tests/replication/**",
+        "test/clt-tests/scripts/**",
+        "test/clt-tests/sharding/**",
+        "test/clt-tests/tables-interaction/**",
+        "test/clt-tests/test-configuration/**",
+        "test/clt-tests/uuid/**",
+        "test/clt-tests/vector-knn/**",
+        "test/data/**",
+        "test/go_prepared_stmt/**",
+        "test/helpers.inc",
+        "test/helpers_rt.inc",
+        "test/html_120.txt",
+        "test/indextool/**",
+        "test/mre.rec",
+        "test/mysql_prepared_stmt.md",
+        "test/mysql_prepared_stmt.php",
+        "test/node_prepared_stmt/**",
+        "test/ql/README",
+        "test/ql/qltest.cs",
+        "test/ql/qltest.java",
+        "test/ql/qltest.php",
+        "test/ql/qltest.py",
+        "test/ql/qltest.rb",
+        "test/ql/sphinx.conf",
+        "test/ql/t.cmd",
+        "test/ql/t2.cmd",
+        "test/settings.inc",
+        "test/sqlx_prepared_stmt/**",
+        "test/ssl_keys/**",
+        "test/stopwords.txt",
+        "test/stopwords_121.txt",
+        "test/synonyms.txt",
+        "test/test-templates.xml",
+        "test/test_001/**",
+        "test/test_002/**",
+        "test/test_003/**",
+        "test/test_004/**",
+        "test/test_005/**",
+        "test/test_006/**",
+        "test/test_007/**",
+        "test/test_008/**",
+        "test/test_009/**",
+        "test/test_010/**",
+        "test/test_011/**",
+        "test/test_012/**",
+        "test/test_013/**",
+        "test/test_014/**",
+        "test/test_015/**",
+        "test/test_016/**",
+        "test/test_017/**",
+        "test/test_018/**",
+        "test/test_019/**",
+        "test/test_020/**",
+        "test/test_021/**",
+        "test/test_022/**",
+        "test/test_023/**",
+        "test/test_024/**",
+        "test/test_025/**",
+        "test/test_026/**",
+        "test/test_027/**",
+        "test/test_028/**",
+        "test/test_029/**",
+        "test/test_030/**",
+        "test/test_031/**",
+        "test/test_032/**",
+        "test/test_033/**",
+        "test/test_034/**",
+        "test/test_035/**",
+        "test/test_036/**",
+        "test/test_037/**",
+        "test/test_038/**",
+        "test/test_039/**",
+        "test/test_040/**",
+        "test/test_041/**",
+        "test/test_042/**",
+        "test/test_043/test.xml",
+        "test/test_044/**",
+        "test/test_045/**",
+        "test/test_046/**",
+        "test/test_047/**",
+        "test/test_048/**",
+        "test/test_049/**",
+        "test/test_050/**",
+        "test/test_051/**",
+        "test/test_052/**",
+        "test/test_053/**",
+        "test/test_054/**",
+        "test/test_055/**",
+        "test/test_056/**",
+        "test/test_057/**",
+        "test/test_058/**",
+        "test/test_059/**",
+        "test/test_060/**",
+        "test/test_061/**",
+        "test/test_062/**",
+        "test/test_063/**",
+        "test/test_064/**",
+        "test/test_065/**",
+        "test/test_066/**",
+        "test/test_067/**",
+        "test/test_068/data1.csv",
+        "test/test_068/data1.tsv",
+        "test/test_068/data1.xml",
+        "test/test_068/data2.csv",
+        "test/test_068/data2.xml",
+        "test/test_068/data51.xml",
+        "test/test_068/data_embedded.xml",
+        "test/test_068/data_embedded1.xml",
+        "test/test_068/data_embedded2.xml",
+        "test/test_068/data_large.xml",
+        "test/test_068/data_spec.csv",
+        "test/test_068/data_spec.tsv",
+        "test/test_068/model.bin",
+        "test/test_068/test.xml",
+        "test/test_068/test_kl.xml",
+        "test/test_069/**",
+        "test/test_070/**",
+        "test/test_071/**",
+        "test/test_072/**",
+        "test/test_073/**",
+        "test/test_074/**",
+        "test/test_075/**",
+        "test/test_076/**",
+        "test/test_077/**",
+        "test/test_078/**",
+        "test/test_079/**",
+        "test/test_080/test.xml",
+        "test/test_081/**",
+        "test/test_082/**",
+        "test/test_083/**",
+        "test/test_084/**",
+        "test/test_085/**",
+        "test/test_086/**",
+        "test/test_087/**",
+        "test/test_088/**",
+        "test/test_089/**",
+        "test/test_090/**",
+        "test/test_091/**",
+        "test/test_092/**",
+        "test/test_093/**",
+        "test/test_094/**",
+        "test/test_095/**",
+        "test/test_096/**",
+        "test/test_097/**",
+        "test/test_098/**",
+        "test/test_099/**",
+        "test/test_100/**",
+        "test/test_101/**",
+        "test/test_102/**",
+        "test/test_103/**",
+        "test/test_104/**",
+        "test/test_105/**",
+        "test/test_106/**",
+        "test/test_107/**",
+        "test/test_108/**",
+        "test/test_109/**",
+        "test/test_110/**",
+        "test/test_111/**",
+        "test/test_112/**",
+        "test/test_113/**",
+        "test/test_114/**",
+        "test/test_115/**",
+        "test/test_116/**",
+        "test/test_117/**",
+        "test/test_118/**",
+        "test/test_119/**",
+        "test/test_120/**",
+        "test/test_121/**",
+        "test/test_122/**",
+        "test/test_123/**",
+        "test/test_124/**",
+        "test/test_125/**",
+        "test/test_126/**",
+        "test/test_127/**",
+        "test/test_128/**",
+        "test/test_129/**",
+        "test/test_130/empty.txt",
+        "test/test_130/load_file.txt",
+        "test/test_130/test.xml",
+        "test/test_131/**",
+        "test/test_132/**",
+        "test/test_133/**",
+        "test/test_134/**",
+        "test/test_135/**",
+        "test/test_136/**",
+        "test/test_137/**",
+        "test/test_138/test.xml",
+        "test/test_139/**",
+        "test/test_140/**",
+        "test/test_141/**",
+        "test/test_142/**",
+        "test/test_143/**",
+        "test/test_144/**",
+        "test/test_145/**",
+        "test/test_146/**",
+        "test/test_147/**",
+        "test/test_148/**",
+        "test/test_149/**",
+        "test/test_150/**",
+        "test/test_151/**",
+        "test/test_152/**",
+        "test/test_153/**",
+        "test/test_154/**",
+        "test/test_155/**",
+        "test/test_156/**",
+        "test/test_157/**",
+        "test/test_158/**",
+        "test/test_159/**",
+        "test/test_160/**",
+        "test/test_161/**",
+        "test/test_162/**",
+        "test/test_163/**",
+        "test/test_164/**",
+        "test/test_165/**",
+        "test/test_166/**",
+        "test/test_167/**",
+        "test/test_168/**",
+        "test/test_169/**",
+        "test/test_170/**",
+        "test/test_171/**",
+        "test/test_172/**",
+        "test/test_173/**",
+        "test/test_174/**",
+        "test/test_175/**",
+        "test/test_176/**",
+        "test/test_177/**",
+        "test/test_178/**",
+        "test/test_179/**",
+        "test/test_180/**",
+        "test/test_181/**",
+        "test/test_182/**",
+        "test/test_183/**",
+        "test/test_184/**",
+        "test/test_185/**",
+        "test/test_186/**",
+        "test/test_187/**",
+        "test/test_188/**",
+        "test/test_189/**",
+        "test/test_190/**",
+        "test/test_191/**",
+        "test/test_192/**",
+        "test/test_193/**",
+        "test/test_194/**",
+        "test/test_195/**",
+        "test/test_196/**",
+        "test/test_197/**",
+        "test/test_198/**",
+        "test/test_199/**",
+        "test/test_200/**",
+        "test/test_201/**",
+        "test/test_202/**",
+        "test/test_203/**",
+        "test/test_204/**",
+        "test/test_205/**",
+        "test/test_206/**",
+        "test/test_207/**",
+        "test/test_208/**",
+        "test/test_209/**",
+        "test/test_210/**",
+        "test/test_211/**",
+        "test/test_212/**",
+        "test/test_213/**",
+        "test/test_214/**",
+        "test/test_215/**",
+        "test/test_216/**",
+        "test/test_217/**",
+        "test/test_218/**",
+        "test/test_219/**",
+        "test/test_220/**",
+        "test/test_221/**",
+        "test/test_222/**",
+        "test/test_223/**",
+        "test/test_224/**",
+        "test/test_225/**",
+        "test/test_226/**",
+        "test/test_227/**",
+        "test/test_228/**",
+        "test/test_229/**",
+        "test/test_230/**",
+        "test/test_231/**",
+        "test/test_232/**",
+        "test/test_233/data/reload.spe",
+        "test/test_233/data/reload.spp",
+        "test/test_233/data/test.spe",
+        "test/test_233/data/test.spp",
+        "test/test_233/model.bin",
+        "test/test_233/reload_path/**",
+        "test/test_233/test.xml",
+        "test/test_234/**",
+        "test/test_235/**",
+        "test/test_236/**",
+        "test/test_237/**",
+        "test/test_238/**",
+        "test/test_239/**",
+        "test/test_240/**",
+        "test/test_241/**",
+        "test/test_242/**",
+        "test/test_243/**",
+        "test/test_244/**",
+        "test/test_245/**",
+        "test/test_246/**",
+        "test/test_247/**",
+        "test/test_248/**",
+        "test/test_249/**",
+        "test/test_250/data/plain2.spe",
+        "test/test_250/data/plain2.spp",
+        "test/test_250/model.bin",
+        "test/test_250/test.xml",
+        "test/test_251/**",
+        "test/test_252/**",
+        "test/test_253/**",
+        "test/test_254/**",
+        "test/test_255/**",
+        "test/test_256/**",
+        "test/test_257/data1.csv",
+        "test/test_257/data1.tsv",
+        "test/test_257/data1.xml",
+        "test/test_257/data2.csv",
+        "test/test_257/model.bin",
+        "test/test_257/test.xml",
+        "test/test_258/**",
+        "test/test_259/**",
+        "test/test_260/**",
+        "test/test_261/**",
+        "test/test_262/**",
+        "test/test_263/**",
+        "test/test_264/**",
+        "test/test_265/**",
+        "test/test_266/**",
+        "test/test_267/**",
+        "test/test_268/**",
+        "test/test_269/**",
+        "test/test_270/**",
+        "test/test_271/**",
+        "test/test_272/**",
+        "test/test_273/**",
+        "test/test_274/**",
+        "test/test_275/**",
+        "test/test_276/**",
+        "test/test_277/**",
+        "test/test_278/**",
+        "test/test_279/**",
+        "test/test_280/**",
+        "test/test_281/**",
+        "test/test_282/**",
+        "test/test_283/**",
+        "test/test_284/**",
+        "test/test_285/**",
+        "test/test_286/**",
+        "test/test_287/**",
+        "test/test_288/**",
+        "test/test_289/**",
+        "test/test_290/**",
+        "test/test_291/**",
+        "test/test_292/**",
+        "test/test_293/**",
+        "test/test_294/**",
+        "test/test_295/**",
+        "test/test_296/**",
+        "test/test_297/**",
+        "test/test_298/**",
+        "test/test_299/**",
+        "test/test_300/**",
+        "test/test_301/**",
+        "test/test_302/**",
+        "test/test_303/**",
+        "test/test_304/**",
+        "test/test_305/**",
+        "test/test_306/**",
+        "test/test_307/**",
+        "test/test_308/**",
+        "test/test_309/**",
+        "test/test_310/**",
+        "test/test_311/**",
+        "test/test_312/**",
+        "test/test_313/**",
+        "test/test_314/**",
+        "test/test_315/**",
+        "test/test_316/**",
+        "test/test_317/**",
+        "test/test_318/**",
+        "test/test_319/**",
+        "test/test_320/**",
+        "test/test_321/**",
+        "test/test_322/**",
+        "test/test_323/**",
+        "test/test_324/**",
+        "test/test_325/**",
+        "test/test_326/**",
+        "test/test_327/**",
+        "test/test_328/**",
+        "test/test_329/**",
+        "test/test_330/**",
+        "test/test_331/**",
+        "test/test_332/**",
+        "test/test_333/**",
+        "test/test_334/**",
+        "test/test_335/**",
+        "test/test_336/**",
+        "test/test_337/**",
+        "test/test_338/**",
+        "test/test_339/**",
+        "test/test_340/**",
+        "test/test_341/**",
+        "test/test_342/**",
+        "test/test_343/**",
+        "test/test_344/**",
+        "test/test_345/**",
+        "test/test_346/**",
+        "test/test_347/**",
+        "test/test_348/**",
+        "test/test_349/**",
+        "test/test_350/**",
+        "test/test_351/**",
+        "test/test_352/**",
+        "test/test_353/**",
+        "test/test_354/**",
+        "test/test_355/**",
+        "test/test_356/**",
+        "test/test_357/**",
+        "test/test_358/**",
+        "test/test_359/**",
+        "test/test_360/**",
+        "test/test_361/**",
+        "test/test_362/**",
+        "test/test_363/**",
+        "test/test_364/**",
+        "test/test_365/**",
+        "test/test_366/**",
+        "test/test_367/**",
+        "test/test_368/**",
+        "test/test_369/**",
+        "test/test_370/**",
+        "test/test_371/**",
+        "test/test_372/**",
+        "test/test_373/**",
+        "test/test_374/**",
+        "test/test_375/**",
+        "test/test_376/**",
+        "test/test_377/**",
+        "test/test_378/**",
+        "test/test_379/**",
+        "test/test_380/**",
+        "test/test_381/**",
+        "test/test_382/**",
+        "test/test_383/**",
+        "test/test_384/**",
+        "test/test_385/**",
+        "test/test_386/**",
+        "test/test_387/**",
+        "test/test_388/**",
+        "test/test_389/**",
+        "test/test_390/**",
+        "test/test_391/**",
+        "test/test_392/**",
+        "test/test_393/**",
+        "test/test_394/**",
+        "test/test_395/**",
+        "test/test_396/**",
+        "test/test_397/**",
+        "test/test_398/**",
+        "test/test_399/**",
+        "test/test_400/**",
+        "test/test_401/**",
+        "test/test_402/**",
+        "test/test_403/**",
+        "test/test_404/**",
+        "test/test_405/**",
+        "test/test_406/data/index.0.spe",
+        "test/test_406/data/index.0.sph",
+        "test/test_406/data/index.0.spp",
+        "test/test_406/data/index.meta",
+        "test/test_406/data/pq.meta",
+        "test/test_406/data/rel320/idx320.meta",
+        "test/test_406/data/rt67/hitless_words_chunk0_0.txt",
+        "test/test_406/data/rt67/rt67.0.sph",
+        "test/test_406/data/rt67/rt67.0.spp",
+        "test/test_406/data/rt67/rt67.meta",
+        "test/test_406/data/rt67/rt67.settings",
+        "test/test_406/model.bin",
+        "test/test_406/test.xml",
+        "test/test_407/**",
+        "test/test_408/**",
+        "test/test_409/**",
+        "test/test_410/**",
+        "test/test_411/**",
+        "test/test_412/**",
+        "test/test_413/**",
+        "test/test_414/**",
+        "test/test_415/**",
+        "test/test_416/**",
+        "test/test_417/**",
+        "test/test_418/**",
+        "test/test_419/**",
+        "test/test_420/**",
+        "test/test_421/**",
+        "test/test_422/**",
+        "test/test_423/**",
+        "test/test_424/**",
+        "test/test_425/**",
+        "test/test_426/**",
+        "test/test_427/**",
+        "test/test_428/**",
+        "test/test_429/**",
+        "test/test_430/**",
+        "test/test_431/**",
+        "test/test_432/**",
+        "test/test_433/**",
+        "test/test_434/**",
+        "test/test_435/**",
+        "test/test_436/**",
+        "test/test_437/**",
+        "test/test_438/**",
+        "test/test_439/**",
+        "test/test_440/**",
+        "test/test_441/**",
+        "test/test_442/**",
+        "test/test_443/**",
+        "test/test_444/**",
+        "test/test_445/**",
+        "test/test_446/**",
+        "test/test_447/**",
+        "test/test_448/**",
+        "test/test_449/**",
+        "test/test_450/**",
+        "test/test_451/**",
+        "test/test_452/**",
+        "test/test_453/**",
+        "test/test_454/**",
+        "test/test_455/**",
+        "test/test_456/**",
+        "test/test_457/**",
+        "test/test_458/**",
+        "test/test_459/**",
+        "test/test_460/**",
+        "test/test_461/**",
+        "test/test_462/**",
+        "test/test_463/**",
+        "test/test_464/**",
+        "test/test_465/**",
+        "test/test_466/**",
+        "test/test_467/**",
+        "test/test_468/**",
+        "test/test_469/**",
+        "test/test_470/model.bin",
+        "test/test_470/test.xml",
+        "test/test_471/global_idf_src.txt",
+        "test/test_471/model.bin",
+        "test/test_471/test.xml",
+        "test/test_472/global_idf2_src.txt",
+        "test/test_472/global_idf_src.txt",
+        "test/test_472/model.bin",
+        "test/test_472/test.xml",
+        "test/test_473/**",
+        "test/test_474/**",
+        "test/test_475/**",
+        "test/test_476/**",
+        "test/test_477/**",
+        "test/test_478/**",
+        "test/test_479/**",
+        "test/test_480/**",
+        "test/test_481/**",
+        "test/test_482/**",
+        "test/test_483/**",
+        "test/test_484/**",
+        "test/test_485/**",
+        "test/test_486/**",
+        "test/test_487/**",
+        "test/test_488/**",
+        "test/test_489/**",
+        "test/test_490/**",
+        "test/test_491/**",
+        "test/test_492/**",
+        "test/test_493/**",
+        "test/test_494/**",
+        "test/test_495/**",
+        "test/test_496/**",
+        "test/test_497/**",
+        "test/test_498/**",
+        "test/test_499/**",
+        "test/test_500/**",
+        "test/test_501/**",
+        "test/test_502/**",
+        "test/test_503/**",
+        "test/test_504/**",
+        "test/test_505/**",
+        "test/test_506/**",
+        "test/test_507/**",
+        "test/test_508/**",
+        "test/test_509/**",
+        "test/test_510/**",
+        "test/test_511/**",
+        "test/test_512/**",
+        "test/test_513/**",
+        "test/test_514/**",
+        "test/test_515/**",
+        "test/test_516/**",
+        "test/test_517/**",
+        "test/test_518/**",
+        "test/test_519/**",
+        "test/test_520/**",
+        "test/test_521/**",
+        "test/test_522/**",
+        "test/test_523/**",
+        "test/test_524/**",
+        "test/test_525/**",
+        "test/test_526/**",
+        "test/test_527/**",
+        "test/test_528/**",
+        "test/test_529/**",
+        "test/test_530/**",
+        "test/test_531/**",
+        "test/test_532/**",
+        "test/test_533/**",
+        "test/test_534/**",
+        "test/test_535/**",
+        "test/test_536/**",
+        "test/test_537/**",
+        "test/test_538/**",
+        "test/test_539/**",
+        "test/test_540/**",
+        "test/test_columnar.conf",
+        "test/test_icu.conf",
+        "test/test_jieba.conf",
+        "test/test_odbc.conf",
+        "test/test_re.conf",
+        "test/ubertest.php",
+        "test/ubertest.php.in",
+        "test/valgrind.supp",
+        "test/wordforms.txt",
+        "translator.config.yaml",
+        "translator.models.yaml",
+        "translator.role.tpl",
+        "valgrind"
+      ],
+      "text": "                    GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU General Public License is a free, copyleft license for\nsoftware and other kinds of works.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nthe GNU General Public License is intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.  We, the Free Software Foundation, use the\nGNU General Public License for most of our software; it applies also to\nany other work released this way by its authors.  You can apply it to\nyour programs, too.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  To protect your rights, we need to prevent others from denying you\nthese rights or asking you to surrender the rights.  Therefore, you have\ncertain responsibilities if you distribute copies of the software, or if\nyou modify it: responsibilities to respect the freedom of others.\n\n  For example, if you distribute copies of such a program, whether\ngratis or for a fee, you must pass on to the recipients the same\nfreedoms that you received.  You must make sure that they, too, receive\nor can get the source code.  And you must show them these terms so they\nknow their rights.\n\n  Developers that use the GNU GPL protect your rights with two steps:\n(1) assert copyright on the software, and (2) offer you this License\ngiving you legal permission to copy, distribute and/or modify it.\n\n  For the developers' and authors' protection, the GPL clearly explains\nthat there is no warranty for this free software.  For both users' and\nauthors' sake, the GPL requires that modified versions be marked as\nchanged, so that their problems will not be attributed erroneously to\nauthors of previous versions.\n\n  Some devices are designed to deny users access to install or run\nmodified versions of the software inside them, although the manufacturer\ncan do so.  This is fundamentally incompatible with the aim of\nprotecting users' freedom to change the software.  The systematic\npattern of such abuse occurs in the area of products for individuals to\nuse, which is precisely where it is most unacceptable.  Therefore, we\nhave designed this version of the GPL to prohibit the practice for those\nproducts.  If such problems arise substantially in other domains, we\nstand ready to extend this provision to those domains in future versions\nof the GPL, as needed to protect the freedom of users.\n\n  Finally, every program is threatened constantly by software patents.\nStates should not allow patents to restrict development and use of\nsoftware on general-purpose computers, but in those that do, we wish to\navoid the special danger that patents applied to a free program could\nmake it effectively proprietary.  To prevent this, the GPL assures that\npatents cannot be used to render the program non-free.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Use with the GNU Affero General Public License.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU Affero General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the special requirements of the GNU Affero General Public License,\nsection 13, concerning interaction through a network will apply to the\ncombination as such.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU General Public License from time to time.  Such new versions will\nbe similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If the program does terminal interaction, make it output a short\nnotice like this when it starts in an interactive mode:\n\n    <program>  Copyright (C) <year>  <name of author>\n    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n    This is free software, and you are welcome to redistribute it\n    under certain conditions; type `show c' for details.\n\nThe hypothetical commands `show w' and `show c' should show the appropriate\nparts of the General Public License.  Of course, your program's commands\nmight be different; for a GUI interface, you would use an \"about box\".\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU GPL, see\n<https://www.gnu.org/licenses/>.\n\n  The GNU General Public License does not permit incorporating your program\ninto proprietary programs.  If your program is a subroutine library, you\nmay consider it more useful to permit linking proprietary applications with\nthe library.  If this is what you want to do, use the GNU Lesser General\nPublic License instead of this License.  But first, please read\n<https://www.gnu.org/licenses/why-not-lgpl.html>.\n\n\nVersion: 6 files allow any later version, such as README.md (\"or later\").",
+      "attribution": "the authors of manticoresoftware/manticoresearch (the license file names no copyright line), GPL-3.0-or-later license (LICENSE), https://github.com/manticoresoftware/manticoresearch."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.am"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.apt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cmake-license-gplv2floss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.head"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.l"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.meta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nsi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.preun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rdoc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.recb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sph"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "api/lgpl-3.0.txt",
+        "deps.txt",
+        "dist/build_dockers/cross/sysroots/packages_bionic.txt",
+        "dist/build_dockers/cross/sysroots/packages_bookworm.txt",
+        "dist/build_dockers/cross/sysroots/packages_bullseye.txt",
+        "dist/build_dockers/cross/sysroots/packages_buster.txt",
+        "dist/build_dockers/cross/sysroots/packages_focal.txt",
+        "dist/build_dockers/cross/sysroots/packages_jammy.txt",
+        "dist/build_dockers/cross/sysroots/packages_rhel10.txt",
+        "dist/build_dockers/cross/sysroots/packages_rhel8.txt",
+        "dist/build_dockers/cross/sysroots/packages_rhel9.txt",
+        "dist/build_dockers/retired/aarch64/bionic/distr.txt",
+        "dist/build_dockers/retired/aarch64/bullseye/distr.txt",
+        "dist/build_dockers/retired/aarch64/buster/distr.txt",
+        "dist/build_dockers/retired/aarch64/centos7/distr.txt",
+        "dist/build_dockers/retired/aarch64/centos8/distr.txt",
+        "dist/build_dockers/retired/aarch64/focal/distr.txt",
+        "dist/build_dockers/retired/aarch64/stretch/distr.txt",
+        "dist/build_dockers/retired/aarch64/xenial/distr.txt",
+        "dist/build_dockers/retired/bionic/distr.txt",
+        "dist/build_dockers/retired/bullseye/distr.txt",
+        "dist/build_dockers/retired/buster/distr.txt",
+        "dist/build_dockers/retired/centos7/distr.txt",
+        "dist/build_dockers/retired/centos8/distr.txt",
+        "dist/build_dockers/retired/focal/distr.txt",
+        "dist/build_dockers/retired/jammy/distr.txt",
+        "dist/build_dockers/retired/stretch/distr.txt",
+        "dist/build_dockers/retired/xenial/distr.txt",
+        "doc/internals-coding-standard.txt",
+        "doc/internals-format-versions.txt",
+        "galera_packaging/description.txt",
+        "misc/stopwords/languages_list.txt",
+        "src/charsets/chinese.txt",
+        "src/charsets/cjk.txt",
+        "src/charsets/cont.txt",
+        "src/charsets/english.txt",
+        "src/charsets/german.txt",
+        "src/charsets/japanese.txt",
+        "src/charsets/korean.txt",
+        "src/charsets/non_cjk.txt",
+        "src/charsets/non_cont.txt",
+        "src/charsets/russian.txt",
+        "src/charsets/thai.txt",
+        "src/fuzzer/dict.txt",
+        "src/gtests/libsphinxtest.txt",
+        "src/gtests/libsphinxtest2.txt",
+        "src/perfetto/README.txt",
+        "src/replication/wsrep_documentation/wsrep_api_h.txt",
+        "stack.txt",
+        "test/bench-results/stub.txt",
+        "test/bench/ljq1k.txt",
+        "test/clt-tests/scripts/fnames.txt",
+        "test/clt-tests/scripts/names.txt",
+        "test/clt-tests/scripts/surnames.txt",
+        "test/html_120.txt",
+        "test/stopwords.txt",
+        "test/stopwords_121.txt",
+        "test/synonyms.txt",
+        "test/test_015/stops.txt",
+        "test/test_022/wf_multi.txt",
+        "test/test_022/wf_multi2.txt",
+        "test/test_022/wf_multi3.txt",
+        "test/test_022/wf_num.txt",
+        "test/test_025/s25.txt",
+        "test/test_038/stopwords.txt",
+        "test/test_041/wordforms.txt",
+        "test/test_063/stop_blend.txt",
+        "test/test_081/words1.txt",
+        "test/test_081/words2.txt",
+        "test/test_081/words3.txt",
+        "test/test_082/words_delta.txt",
+        "test/test_082/words_main.txt",
+        "test/test_098/wf3.txt",
+        "test/test_098/wordforms.txt",
+        "test/test_115/wf_multi.txt",
+        "test/test_124/field_124_match.txt",
+        "test/test_130/empty.txt",
+        "test/test_130/load_file.txt",
+        "test/test_136/exceptions.txt",
+        "test/test_143/wordforms.txt",
+        "test/test_143/wordforms_multi_dest.txt",
+        "test/test_145/stop0.txt",
+        "test/test_145/stopwords.txt",
+        "test/test_146/stopwords.txt",
+        "test/test_148/doc1.txt",
+        "test/test_148/doc2.txt",
+        "test/test_148/doc3.txt",
+        "test/test_154/stopwords.txt",
+        "test/test_158/wf158.txt",
+        "test/test_160/multiwordorms.txt",
+        "test/test_165/synonyms.txt",
+        "test/test_165/synonyms2.txt",
+        "test/test_165/synonyms3.txt",
+        "test/test_165/synonyms4.txt",
+        "test/test_168/text1.txt",
+        "test/test_168/text2.txt",
+        "test/test_174/readme.txt",
+        "test/test_190/refdata/agent1/allfiles/text1.txt",
+        "test/test_190/refdata/agent1/allfiles/text2.txt",
+        "test/test_190/refdata/agent1/allfiles/text3.txt",
+        "test/test_190/refdata/agent1/allfiles/text4.txt",
+        "test/test_190/refdata/agent1/allfiles/text5.txt",
+        "test/test_190/refdata/agent1/allfiles/text6.txt",
+        "test/test_190/refdata/agent1/scatteredfiles/text3.txt",
+        "test/test_190/refdata/agent1/scatteredfiles/text4.txt",
+        "test/test_190/refdata/agent2/allfiles/text1.txt",
+        "test/test_190/refdata/agent2/allfiles/text2.txt",
+        "test/test_190/refdata/agent2/allfiles/text3.txt",
+        "test/test_190/refdata/agent2/allfiles/text4.txt",
+        "test/test_190/refdata/agent2/allfiles/text5.txt",
+        "test/test_190/refdata/agent2/allfiles/text6.txt",
+        "test/test_190/refdata/agent2/scatteredfiles/text5.txt",
+        "test/test_190/refdata/agent2/scatteredfiles/text6.txt",
+        "test/test_190/refdata/master/allfiles/text1.txt",
+        "test/test_190/refdata/master/allfiles/text2.txt",
+        "test/test_190/refdata/master/allfiles/text3.txt",
+        "test/test_190/refdata/master/allfiles/text4.txt",
+        "test/test_190/refdata/master/allfiles/text5.txt",
+        "test/test_190/refdata/master/allfiles/text6.txt",
+        "test/test_190/refdata/master/scatteredfiles/text1.txt",
+        "test/test_190/refdata/master/scatteredfiles/text2.txt",
+        "test/test_192/wordforms-12.txt",
+        "test/test_192/wordforms-wb.txt",
+        "test/test_192/wordforms.txt",
+        "test/test_193/stopwords.txt",
+        "test/test_193/wordforms.txt",
+        "test/test_194/file1.txt",
+        "test/test_194/file2.txt",
+        "test/test_194/file3.txt",
+        "test/test_196/ex21.txt",
+        "test/test_196/wf1.txt",
+        "test/test_196/wf2.txt",
+        "test/test_196/wf21.txt",
+        "test/test_196/wf_pre.txt",
+        "test/test_196/wordforms.txt",
+        "test/test_196/words1.txt",
+        "test/test_196/words2.txt",
+        "test/test_199/stopwords.txt",
+        "test/test_207/wordforms.txt",
+        "test/test_207/wordforms2.txt",
+        "test/test_207/wordforms3.txt",
+        "test/test_210/stopwords.txt",
+        "test/test_218/wordforms.txt",
+        "test/test_219/wordforms.txt",
+        "test/test_222/wordforms.txt",
+        "test/test_223/wordforms.txt",
+        "test/test_254/wordforms.txt",
+        "test/test_255/wf1.txt",
+        "test/test_309/jieba_user_dict.txt",
+        "test/test_310/jieba_user_dict.txt",
+        "test/test_310/wordforms.txt",
+        "test/test_334/exc.txt",
+        "test/test_360/stops.txt",
+        "test/test_397/stops.txt",
+        "test/test_397/wordforms.txt",
+        "test/test_403/exc1.txt",
+        "test/test_403/exceptions.txt",
+        "test/test_403/stops.txt",
+        "test/test_403/stops1.txt",
+        "test/test_403/wordforms.txt",
+        "test/test_403/wordforms2.txt",
+        "test/test_405/exc.txt",
+        "test/test_405/stop.txt",
+        "test/test_405/wordforms.txt",
+        "test/test_405/wordforms1.txt",
+        "test/test_406/data/rt67/hitless_words_chunk0_0.txt",
+        "test/test_408/word_a.txt",
+        "test/test_408/words1.txt",
+        "test/test_408/words2.txt",
+        "test/test_408/words3.txt",
+        "test/test_409/ex1.txt",
+        "test/test_409/hw1.txt",
+        "test/test_409/hw3.txt",
+        "test/test_409/stop1.txt",
+        "test/test_409/stop2.txt",
+        "test/test_409/wf1.txt",
+        "test/test_409/wf3.txt",
+        "test/test_464/exceptions.txt",
+        "test/test_464/stops.txt",
+        "test/test_464/wordforms.txt",
+        "test/test_471/global_idf_src.txt",
+        "test/test_472/global_idf2_src.txt",
+        "test/test_472/global_idf_src.txt",
+        "test/test_480/dummy.txt",
+        "test/test_480/dummy_empty.txt",
+        "test/test_480/exc1.txt",
+        "test/test_480/hitless1.txt",
+        "test/test_480/stops.txt",
+        "test/test_480/stops_line.txt",
+        "test/test_480/stops_mixed.txt",
+        "test/test_480/wordforms.txt",
+        "test/test_480/wordforms2.txt",
+        "test/wordforms.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cursorignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.noindex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_cmake3243"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/af"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ca"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cjson-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ckb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/contains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/curl-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/da"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/de"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/el"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/en"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/es"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/et"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ga"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/he"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/http-log-to-test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/http_parser-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/it"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ko"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/la"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/latest_release_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libmysqlclient-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lz4-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manticore_new_cluster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redirects"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ru"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/so"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/something"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sphinx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sphinx-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/st"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/th"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/valgrind"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xxhash-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "mcl": "https://github.com/manticoresoftware/columnar"
+  }
+}

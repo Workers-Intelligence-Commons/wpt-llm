@@ -1,0 +1,1976 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/mlflow/mlflow",
+  "revision": "f566a42d64fce8997fe187edb5229221ace09713",
+  "checksum": "sha256:a17ee3cd07abcf667476af6009d3e1be7397ae4d84728ff9ae94c6b43c301b3c",
+  "extract": {
+    "exclude": [
+      ".github/ISSUE_TEMPLATE/images/**",
+      "assets/create-codespace.png",
+      "assets/readme-deployment.png",
+      "assets/readme-experiment.png",
+      "assets/readme-gateway.png",
+      "assets/readme-integrations.png",
+      "assets/readme-llm-eval.png",
+      "assets/readme-logged-model.png",
+      "assets/readme-model-registry.png",
+      "assets/readme-prompt.png",
+      "assets/readme-providers.png",
+      "assets/readme-tracing.png",
+      "docs/api_reference/source/_static/MLflow-logo-final-black.png",
+      "docs/api_reference/source/_static/favicon.ico",
+      "docs/api_reference/source/_static/images/**",
+      "docs/api_reference/theme/mlflow/static/fonts/Inconsolata-Bold.ttf",
+      "docs/api_reference/theme/mlflow/static/fonts/Inconsolata-Regular.ttf",
+      "docs/api_reference/theme/mlflow/static/fonts/db-icon.ttf",
+      "docs/api_reference/theme/mlflow/static/fonts/db-icon.woff",
+      "docs/api_reference/theme/mlflow/static/fonts/fontawesome-webfont.eot",
+      "docs/api_reference/theme/mlflow/static/fonts/fontawesome-webfont.ttf",
+      "docs/api_reference/theme/mlflow/static/fonts/fontawesome-webfont.woff",
+      "docs/docs/genai/eval-monitor/scorers/third-party/**",
+      "docs/static/images/add-expectation-ui.png",
+      "docs/static/images/add_row.png",
+      "docs/static/images/add_row_modal.png",
+      "docs/static/images/assessments/**",
+      "docs/static/images/assistant/**",
+      "docs/static/images/auth_prompt.png",
+      "docs/static/images/auth_signup_form.png",
+      "docs/static/images/budget-policies-create.png",
+      "docs/static/images/budget-policies-list.png",
+      "docs/static/images/deep-learning/**",
+      "docs/static/images/deployment/**",
+      "docs/static/images/duplicate_run.png",
+      "docs/static/images/eval-datasets.mp4",
+      "docs/static/images/eval_view_1.png",
+      "docs/static/images/evaluate_all.png",
+      "docs/static/images/evaluate_all_results.png",
+      "docs/static/images/evaluate_metrics.png",
+      "docs/static/images/evaluate_new_input.png",
+      "docs/static/images/evaluation_dataset_ui.png",
+      "docs/static/images/experiment_page.png",
+      "docs/static/images/favicon.ico",
+      "docs/static/images/genai/**",
+      "docs/static/images/git-versioning.png",
+      "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/child-runs.mp4",
+      "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/no-child-first.mp4",
+      "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/no-child-more.mp4",
+      "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/parent-child-challenge.mp4",
+      "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/plots-in-ui.mp4",
+      "docs/static/images/llms/ag2/**",
+      "docs/static/images/llms/agno/**",
+      "docs/static/images/llms/anthropic/**",
+      "docs/static/images/llms/autogen/**",
+      "docs/static/images/llms/chat-model-guide/**",
+      "docs/static/images/llms/chat-model-intro/**",
+      "docs/static/images/llms/crewai/**",
+      "docs/static/images/llms/demo/**",
+      "docs/static/images/llms/dspy/**",
+      "docs/static/images/llms/gemini/**",
+      "docs/static/images/llms/groq/**",
+      "docs/static/images/llms/haystack/**",
+      "docs/static/images/llms/hermes/**",
+      "docs/static/images/llms/litellm/**",
+      "docs/static/images/llms/litellm-proxy/**",
+      "docs/static/images/llms/llama-index/**",
+      "docs/static/images/llms/mcp-registry/**",
+      "docs/static/images/llms/mistral/**",
+      "docs/static/images/llms/openai/**",
+      "docs/static/images/llms/opencode/**",
+      "docs/static/images/llms/openhands/**",
+      "docs/static/images/llms/openrouter/**",
+      "docs/static/images/llms/playground/**",
+      "docs/static/images/llms/prompt-registry/**",
+      "docs/static/images/llms/pydantic-ai/**",
+      "docs/static/images/llms/qwen/**",
+      "docs/static/images/llms/smolagents/**",
+      "docs/static/images/llms/strands/**",
+      "docs/static/images/llms/tracing/archive-after-badge.png",
+      "docs/static/images/llms/tracing/automatic-evaluation-ui-setup.mp4",
+      "docs/static/images/llms/tracing/basic-openai-trace.png",
+      "docs/static/images/llms/tracing/bedrock-tracing-agent.png",
+      "docs/static/images/llms/tracing/bedrock-tracing-stream.png",
+      "docs/static/images/llms/tracing/chat-sessions-demo.mp4",
+      "docs/static/images/llms/tracing/custom-view-build.png",
+      "docs/static/images/llms/tracing/custom-view-example.png",
+      "docs/static/images/llms/tracing/custom-view-selector.png",
+      "docs/static/images/llms/tracing/deepagent-tracing.png",
+      "docs/static/images/llms/tracing/distributed-tracing-flow.png",
+      "docs/static/images/llms/tracing/distributed-tracing-sample.png",
+      "docs/static/images/llms/tracing/dspy-tracing.mp4",
+      "docs/static/images/llms/tracing/fireworks-ai-tracing.png",
+      "docs/static/images/llms/tracing/genai-evaluation-compare.png",
+      "docs/static/images/llms/tracing/genai-human-feedback.png",
+      "docs/static/images/llms/tracing/genai-monitoring.png",
+      "docs/static/images/llms/tracing/genai-trace-dataset.png",
+      "docs/static/images/llms/tracing/genai-trace-debug.png",
+      "docs/static/images/llms/tracing/genai-trace-evaluation.png",
+      "docs/static/images/llms/tracing/google-adk-tracing.png",
+      "docs/static/images/llms/tracing/goose-tracing.png",
+      "docs/static/images/llms/tracing/instructor-tracing.png",
+      "docs/static/images/llms/tracing/jupyter-trace-ui.png",
+      "docs/static/images/llms/tracing/koog-tracing.png",
+      "docs/static/images/llms/tracing/langchain-name-customize.png",
+      "docs/static/images/llms/tracing/langgraph-agent-trace.png",
+      "docs/static/images/llms/tracing/langgraph-child-span.png",
+      "docs/static/images/llms/tracing/langgraph-session-page.png",
+      "docs/static/images/llms/tracing/langgraph-thread-id.png",
+      "docs/static/images/llms/tracing/livekit-tracing.png",
+      "docs/static/images/llms/tracing/llamaindex-tracing.mp4",
+      "docs/static/images/llms/tracing/logging-feedback.mp4",
+      "docs/static/images/llms/tracing/masking/**",
+      "docs/static/images/llms/tracing/mastra-playground.png",
+      "docs/static/images/llms/tracing/mastra-tracing.png",
+      "docs/static/images/llms/tracing/microsoft-agent-framework-tracing.png",
+      "docs/static/images/llms/tracing/n8n/**",
+      "docs/static/images/llms/tracing/omnigent-trace-detail.png",
+      "docs/static/images/llms/tracing/omnigent-tracing.png",
+      "docs/static/images/llms/tracing/open-webui/**",
+      "docs/static/images/llms/tracing/openai-agent-tracing-function-calling.png",
+      "docs/static/images/llms/tracing/openai-agent-tracing-guardrail.png",
+      "docs/static/images/llms/tracing/openai-agent-tracing.png",
+      "docs/static/images/llms/tracing/openai-function-calling.png",
+      "docs/static/images/llms/tracing/openai-token-usage.png",
+      "docs/static/images/llms/tracing/openai-trace-with-manual-span.png",
+      "docs/static/images/llms/tracing/openai-tracing.mp4",
+      "docs/static/images/llms/tracing/opentelemetry/**",
+      "docs/static/images/llms/tracing/otel-backend-examples.png",
+      "docs/static/images/llms/tracing/overview-token-cost-charts.png",
+      "docs/static/images/llms/tracing/overview_demo.mp4",
+      "docs/static/images/llms/tracing/overview_quality_tab.png",
+      "docs/static/images/llms/tracing/overview_tool_calls_tab.png",
+      "docs/static/images/llms/tracing/overview_usage_tab.png",
+      "docs/static/images/llms/tracing/quickstart/**",
+      "docs/static/images/llms/tracing/schema/**",
+      "docs/static/images/llms/tracing/search-traces-assessments-on-ui.png",
+      "docs/static/images/llms/tracing/search-traces-inputs-on-ui.png",
+      "docs/static/images/llms/tracing/search-traces-on-ui.png",
+      "docs/static/images/llms/tracing/semantic-kernel-tracing.png",
+      "docs/static/images/llms/tracing/span-links-tab.png",
+      "docs/static/images/llms/tracing/spring-ai-tracing.png",
+      "docs/static/images/llms/tracing/token-and-cost-ui.mp4",
+      "docs/static/images/llms/tracing/token-usage-and-cost-charts.mp4",
+      "docs/static/images/llms/tracing/trace-audio-player.png",
+      "docs/static/images/llms/tracing/trace-decorator.png",
+      "docs/static/images/llms/tracing/trace-exception.mp4",
+      "docs/static/images/llms/tracing/trace-experiment-ui.png",
+      "docs/static/images/llms/tracing/trace-image-content.png",
+      "docs/static/images/llms/tracing/trace-set-tag.mp4",
+      "docs/static/images/llms/tracing/trace-ui-delete.png",
+      "docs/static/images/llms/tracing/trace-ui-detail-view.png",
+      "docs/static/images/llms/tracing/trace-ui-export-to-dataset.png",
+      "docs/static/images/llms/tracing/trace-ui-filter.png",
+      "docs/static/images/llms/tracing/trace-ui-search.png",
+      "docs/static/images/llms/tracing/trace-ui-tags.png",
+      "docs/static/images/llms/tracing/tracing-multi-thread.png",
+      "docs/static/images/llms/tracing/tracing-top-poster.png",
+      "docs/static/images/llms/tracing/tracing-top.mp4",
+      "docs/static/images/llms/tracing/txtai-agent-tracing.png",
+      "docs/static/images/llms/tracing/txtai-rag-tracing.png",
+      "docs/static/images/llms/tracing/txtai-textractor-tracing.png",
+      "docs/static/images/llms/tracing/vercel-ai-tracing.mp4",
+      "docs/static/images/llms/tracing/voltagent-tracing.png",
+      "docs/static/images/load_model.png",
+      "docs/static/images/logos/ag2-logo.png",
+      "docs/static/images/logos/agno-logo.png",
+      "docs/static/images/logos/amazon-sagemaker-logo.png",
+      "docs/static/images/logos/anthropic-logo.png",
+      "docs/static/images/logos/arize-phoenix-logo.png",
+      "docs/static/images/logos/autogen-logo.png",
+      "docs/static/images/logos/azure-ml-logo.png",
+      "docs/static/images/logos/bedrock-logo.png",
+      "docs/static/images/logos/byteplus-logo.png",
+      "docs/static/images/logos/catboost-logo.png",
+      "docs/static/images/logos/claude-code-icon.png",
+      "docs/static/images/logos/claude-code-logo.png",
+      "docs/static/images/logos/cohere-logo.png",
+      "docs/static/images/logos/dash0-logo.png",
+      "docs/static/images/logos/databricks-logo.png",
+      "docs/static/images/logos/datadog-logo.png",
+      "docs/static/images/logos/deepeval-logo.png",
+      "docs/static/images/logos/deepseek-logo.png",
+      "docs/static/images/logos/dspy-logo.png",
+      "docs/static/images/logos/fireworks-ai-logo.png",
+      "docs/static/images/logos/google-adk-logo.png",
+      "docs/static/images/logos/goose-logo.png",
+      "docs/static/images/logos/grafana-logo.png",
+      "docs/static/images/logos/grok-logo.png",
+      "docs/static/images/logos/guardrails-ai-logo.jpeg",
+      "docs/static/images/logos/haystack-logo.png",
+      "docs/static/images/logos/helicone-logo.png",
+      "docs/static/images/logos/jaeger-logo.png",
+      "docs/static/images/logos/javascript-typescript-logo.png",
+      "docs/static/images/logos/kimi-logo.png",
+      "docs/static/images/logos/kong-logo.png",
+      "docs/static/images/logos/koog.png",
+      "docs/static/images/logos/kubernetes-logo.png",
+      "docs/static/images/logos/langchain-logo-only.png",
+      "docs/static/images/logos/langchain-logo.png",
+      "docs/static/images/logos/langfuse-logo.png",
+      "docs/static/images/logos/langgraph-logo-only.png",
+      "docs/static/images/logos/langgraph-logo.png",
+      "docs/static/images/logos/lightgbm-logo.png",
+      "docs/static/images/logos/litellm-logo.png",
+      "docs/static/images/logos/livekit-logo.png",
+      "docs/static/images/logos/mastra-logo.png",
+      "docs/static/images/logos/microsoft-agent-framework-logo.png",
+      "docs/static/images/logos/modal-logo.png",
+      "docs/static/images/logos/n8n-logo.png",
+      "docs/static/images/logos/nebius-logo.png",
+      "docs/static/images/logos/new-relic-logo.png",
+      "docs/static/images/logos/novitaai-logo.jpg",
+      "docs/static/images/logos/ollama-logo.png",
+      "docs/static/images/logos/omnigent-logo.png",
+      "docs/static/images/logos/open-webui-logo.png",
+      "docs/static/images/logos/openai-agent-logo.png",
+      "docs/static/images/logos/openai-logo-only.png",
+      "docs/static/images/logos/opencode-logo.png",
+      "docs/static/images/logos/openhands-logo.png",
+      "docs/static/images/logos/openrouter-logo.png",
+      "docs/static/images/logos/opentelemetry-logo-only.png",
+      "docs/static/images/logos/pipecat.png",
+      "docs/static/images/logos/portkey-logo.png",
+      "docs/static/images/logos/prophet-logo.png",
+      "docs/static/images/logos/pydantic-ai-logo-only.png",
+      "docs/static/images/logos/pydanticai-logo.png",
+      "docs/static/images/logos/python-logo.png",
+      "docs/static/images/logos/qwen-logo.jpg",
+      "docs/static/images/logos/ragas-logo.png",
+      "docs/static/images/logos/rhoai-logo.png",
+      "docs/static/images/logos/semantic-kernel-logo.png",
+      "docs/static/images/logos/sentence-transformers-logo.png",
+      "docs/static/images/logos/servicenow-logo.avif",
+      "docs/static/images/logos/smolagents-logo.png",
+      "docs/static/images/logos/splunk-logo.png",
+      "docs/static/images/logos/spring-ai-logo.png",
+      "docs/static/images/logos/strands-logo.png",
+      "docs/static/images/logos/together-ai-logo.png",
+      "docs/static/images/logos/truefoundry-logo.png",
+      "docs/static/images/logos/trulens-logo.png",
+      "docs/static/images/logos/txtai-logo.png",
+      "docs/static/images/logos/typesafe-ai-logo.png",
+      "docs/static/images/logos/voltagent-logo.png",
+      "docs/static/images/logos/watsonx-orchestrate.png",
+      "docs/static/images/logos/x-logo-black.png",
+      "docs/static/images/logos/x-logo-white.png",
+      "docs/static/images/mlflow-3/**",
+      "docs/static/images/models/**",
+      "docs/static/images/new_run.png",
+      "docs/static/images/oss_registry_1_register.png",
+      "docs/static/images/oss_registry_2_dialog.png",
+      "docs/static/images/oss_registry_3_overview.png",
+      "docs/static/images/oss_registry_3b_version.png",
+      "docs/static/images/oss_registry_4_model.png",
+      "docs/static/images/oss_registry_4b_model_alias.png",
+      "docs/static/images/oss_registry_5_version.png",
+      "docs/static/images/oss_registry_6_version.png",
+      "docs/static/images/prompt_eng_run_page.png",
+      "docs/static/images/prompt_eng_table_view.png",
+      "docs/static/images/prompt_modal_1.png",
+      "docs/static/images/prompt_modal_2.png",
+      "docs/static/images/prompt_modal_3.png",
+      "docs/static/images/prompt_modal_4.png",
+      "docs/static/images/quickstart/**",
+      "docs/static/images/save_new_input.png",
+      "docs/static/images/search-runs/**",
+      "docs/static/images/self-hosting/**",
+      "docs/static/images/system-metrics/**",
+      "docs/static/images/tracing_search_traces.png",
+      "docs/static/images/tracking/**",
+      "docs/static/images/traditional-ml-ui.mp4",
+      "docs/static/images/tutorials/introductory/deep-learning/**",
+      "docs/static/images/tutorials/introductory/hyperparameter-tuning/**",
+      "docs/static/images/tutorials/introductory/lighthouse/**",
+      "docs/static/images/tutorials/introductory/quickstart-tracking/**",
+      "docs/static/images/tutorials/llms/**",
+      "docs/static/images/uc_register_model_1_dialog.png",
+      "docs/static/images/uc_register_model_2_button.png",
+      "examples/llama_index/workflow/static/**",
+      "examples/llms/RAG/faiss_index/**",
+      "examples/open_webui/images/**",
+      "libs/skinny/**",
+      "libs/tracing/**",
+      "libs/typescript/integrations/openclaw/dashboard-screenshot.png",
+      "libs/typescript/integrations/openclaw/trace-screenshot.png",
+      "mlflow/R/mlflow/tools/**",
+      "mlflow/server/js/public/favicon.ico",
+      "mlflow/server/js/src/common/static/demo-tracing-screenshot-dark.png",
+      "mlflow/server/js/src/common/static/demo-tracing-screenshot.png",
+      "mlflow/server/js/src/common/static/home-logo.png",
+      "mlflow/server/js/src/common/static/logos/anthropic-dark.png",
+      "mlflow/server/js/src/common/static/logos/autogen.png",
+      "mlflow/server/js/src/common/static/logos/crewai.png",
+      "mlflow/server/js/src/common/static/logos/dspy.png",
+      "mlflow/server/js/src/common/static/logos/gemini.png",
+      "mlflow/server/js/src/common/static/logos/langchain-dark.png",
+      "mlflow/server/js/src/common/static/logos/litellm.png",
+      "mlflow/server/js/src/common/static/logos/llamaindex.png",
+      "mlflow/server/js/src/common/static/logos/ollama.png",
+      "mlflow/server/js/src/common/static/mlflow-spinner.png",
+      "mlflow/server/js/src/common/static/niagara.jpg",
+      "mlflow/server/js/src/common/static/onboarding-promptlab.gif",
+      "mlflow/server/js/src/common/static/preview-icon.png",
+      "mlflow/server/js/src/common/static/spinner.gif",
+      "mlflow/server/js/src/common/static/videos/**",
+      "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/pdf/**",
+      "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/png/**",
+      "mlflow/server/js/src/shared/web-shared/traces-table/TraceCell.tsx",
+      "mlflow/server/js/vendor/js/**",
+      "mlflow-charter.pdf",
+      "tests/datasets/apollo11_launch.wav",
+      "tests/datasets/cat.png",
+      "tests/datasets/cat_image.jpg",
+      "tests/datasets/tiger_cat.jpg",
+      "tests/resources/db/db_version_7ac759974ad8_with_metrics.sql",
+      "tests/resources/example_mlflow_1x_sklearn_model/model.pkl",
+      "tests/resources/images/**",
+      "tests/resources/onnx/sklearn_model.onnx",
+      "tests/resources/onnx/tf_model_multiple_inputs_float32.onnx",
+      "tests/resources/onnx/tf_model_multiple_inputs_float64.onnx",
+      "tests/resources/pyfunc_models/2.7.1/python_model.pkl",
+      "tests/resources/pyfunc_models/2.8.1/python_model.pkl"
+    ]
+  },
+  "history": {
+    "since": "7a69ba64ef269b2a5534e16fe888050a83224ef3"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright 2018 Databricks, Inc.  All rights reserved.\n\n\t\t\t\tApache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/mlflow/mlflow: Copyright 2018 Databricks, Inc.  All rights reserved., Apache-2.0 license (LICENSE.txt), https://github.com/mlflow/mlflow; the authors of mlflow/mlflow (mlflow/assistant/skills) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/mlflow/mlflow/tree/f566a42d64fce8997fe187edb5229221ace09713/mlflow/assistant/skills; the authors of @databricks/design-system, ISC license (declared in package.json), https://github.com/mlflow/mlflow/tree/f566a42d64fce8997fe187edb5229221ace09713/mlflow/server/js/vendor/design-system."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".claude-plugin/**",
+        ".dockerignore",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/ISSUE_TEMPLATE/bug_report_template.yaml",
+        ".github/ISSUE_TEMPLATE/config.yml",
+        ".github/ISSUE_TEMPLATE/doc_fix_template.yaml",
+        ".github/ISSUE_TEMPLATE/feature_request_template.yaml",
+        ".github/ISSUE_TEMPLATE/installation_issue_template.yaml",
+        ".github/ISSUE_TEMPLATE/ui_bug_report_template.yaml",
+        ".github/actions/**",
+        ".github/dependabot.yml",
+        ".github/instructions/**",
+        ".github/policy.rego",
+        ".github/pull_request_template.md",
+        ".github/ui-preview/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".gitmodules",
+        ".pre-commit-config.yaml",
+        ".prettierignore",
+        ".python-version",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CITATION.cff",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.rst",
+        "COMMITTER.md",
+        "CONTRIBUTING.md",
+        "EXTRA_DEPENDENCIES.rst",
+        "ISSUE_POLICY.md",
+        "ISSUE_TRIAGE.rst",
+        "LICENSE.txt",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "assets/icon.svg",
+        "assets/logo-white.svg",
+        "assets/logo.svg",
+        "bin/**",
+        "changelogs/**",
+        "charts/**",
+        "dev/**",
+        "docker/**",
+        "docker-compose/**",
+        "docs/.npmrc",
+        "docs/.prettierignore",
+        "docs/README.md",
+        "docs/api_reference/.gitignore",
+        "docs/api_reference/Makefile",
+        "docs/api_reference/README.md",
+        "docs/api_reference/api_inventory.txt",
+        "docs/api_reference/broken_links.py",
+        "docs/api_reference/build-javadoc.sh",
+        "docs/api_reference/build-rdoc.sh",
+        "docs/api_reference/build-tsdoc.sh",
+        "docs/api_reference/conftest.py",
+        "docs/api_reference/gateway_api_docs.py",
+        "docs/api_reference/image-sources/**",
+        "docs/api_reference/make.bat",
+        "docs/api_reference/mcp_server_registry_api_docs.py",
+        "docs/api_reference/source/R-api.rst",
+        "docs/api_reference/source/_static/clippy.svg",
+        "docs/api_reference/source/_static/icons/**",
+        "docs/api_reference/source/_static/runllm.js",
+        "docs/api_reference/source/auth/**",
+        "docs/api_reference/source/cli.rst",
+        "docs/api_reference/source/conf.py",
+        "docs/api_reference/source/index.rst",
+        "docs/api_reference/source/java_api/**",
+        "docs/api_reference/source/languagesections/**",
+        "docs/api_reference/source/python_api/**",
+        "docs/api_reference/source/rest-api.rst",
+        "docs/api_reference/source/testcode_block.py",
+        "docs/api_reference/source/typescript_api/**",
+        "docs/api_reference/theme/mlflow/__init__.py",
+        "docs/api_reference/theme/mlflow/body_postscripts.html",
+        "docs/api_reference/theme/mlflow/breadcrumbs.html",
+        "docs/api_reference/theme/mlflow/build_info.html",
+        "docs/api_reference/theme/mlflow/footer.html",
+        "docs/api_reference/theme/mlflow/header.html",
+        "docs/api_reference/theme/mlflow/layout.html",
+        "docs/api_reference/theme/mlflow/layout_old.html",
+        "docs/api_reference/theme/mlflow/search.html",
+        "docs/api_reference/theme/mlflow/searchbox.html",
+        "docs/api_reference/theme/mlflow/side_nav.html",
+        "docs/api_reference/theme/mlflow/static/css/**",
+        "docs/api_reference/theme/mlflow/static/fonts/db-icon.svg",
+        "docs/api_reference/theme/mlflow/static/fonts/fontawesome-webfont.svg",
+        "docs/api_reference/theme/mlflow/static/js/**",
+        "docs/api_reference/theme/mlflow/theme.conf",
+        "docs/api_reference/theme/mlflow/versions.html",
+        "docs/api_reference/tsdoc.index.html.template",
+        "docs/api_reference/typedoc-analytics.js",
+        "docs/communitySidebar.ts",
+        "docs/docs/classic-ml/**",
+        "docs/docs/community/**",
+        "docs/docs/genai/assessments/**",
+        "docs/docs/genai/concepts/**",
+        "docs/docs/genai/datasets/**",
+        "docs/docs/genai/demo.mdx",
+        "docs/docs/genai/eval-monitor/ai-insights/**",
+        "docs/docs/genai/eval-monitor/automatic-evaluations/**",
+        "docs/docs/genai/eval-monitor/faq.mdx",
+        "docs/docs/genai/eval-monitor/index.mdx",
+        "docs/docs/genai/eval-monitor/legacy-llm-evaluation.mdx",
+        "docs/docs/genai/eval-monitor/notebooks/**",
+        "docs/docs/genai/eval-monitor/quickstart.mdx",
+        "docs/docs/genai/eval-monitor/regression-testing.mdx",
+        "docs/docs/genai/eval-monitor/running-evaluation/**",
+        "docs/docs/genai/eval-monitor/scorers/custom/**",
+        "docs/docs/genai/eval-monitor/scorers/index.mdx",
+        "docs/docs/genai/eval-monitor/scorers/llm-judge/**",
+        "docs/docs/genai/eval-monitor/scorers/versioning.mdx",
+        "docs/docs/genai/flavors/**",
+        "docs/docs/genai/getting-started/**",
+        "docs/docs/genai/governance/**",
+        "docs/docs/genai/index.mdx",
+        "docs/docs/genai/mcp/**",
+        "docs/docs/genai/mcp-registry/**",
+        "docs/docs/genai/prompt-registry/**",
+        "docs/docs/genai/references/**",
+        "docs/docs/genai/serving/**",
+        "docs/docs/genai/tracing/**",
+        "docs/docs/genai/version-tracking/**",
+        "docs/docs/prompts/**",
+        "docs/docs/quickstart_drilldown/**",
+        "docs/docs/self-hosting/**",
+        "docs/docusaurus.config.ts",
+        "docs/docusaurusConfigUtils.ts",
+        "docs/eslint-plugin-mlflow-docs/**",
+        "docs/eslint.config.js",
+        "docs/package-lock.json",
+        "docs/package.json",
+        "docs/postcss.config.mjs",
+        "docs/prettier.config.js",
+        "docs/scripts/**",
+        "docs/sidebars.ts",
+        "docs/sidebarsClassicML.ts",
+        "docs/sidebarsGenAI.ts",
+        "docs/sidebarsSelfHosting.ts",
+        "docs/src/**",
+        "docs/static/.nojekyll",
+        "docs/static/images/guides/introductory/creating-custom-pyfunc/**",
+        "docs/static/images/guides/introductory/deploy-model-to-kubernetes/**",
+        "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/notebook-dangers.svg",
+        "docs/static/images/guides/introductory/hyperparameter-tuning-with-child-runs/what-to-do-with-hyperparam-runs.svg",
+        "docs/static/images/intro/**",
+        "docs/static/images/llms/tracing/archive-diagram.svg",
+        "docs/static/images/logo-dark.svg",
+        "docs/static/images/logo-light.svg",
+        "docs/static/images/logos/TensorFlow-logo-dark.svg",
+        "docs/static/images/logos/TensorFlow-logo.svg",
+        "docs/static/images/logos/ai21labs-logo.svg",
+        "docs/static/images/logos/aws-logo.svg",
+        "docs/static/images/logos/crewai-logo.svg",
+        "docs/static/images/logos/deepagent-logo.svg",
+        "docs/static/images/logos/dynatrace-logo.svg",
+        "docs/static/images/logos/fastapi-logo.svg",
+        "docs/static/images/logos/google-gemini-logo.svg",
+        "docs/static/images/logos/groq-logo.svg",
+        "docs/static/images/logos/hermes-agent-logo.svg",
+        "docs/static/images/logos/huggingface-logo-dark.svg",
+        "docs/static/images/logos/huggingface-logo.svg",
+        "docs/static/images/logos/instructor-logo.svg",
+        "docs/static/images/logos/keras-logo.svg",
+        "docs/static/images/logos/langchain4j.svg",
+        "docs/static/images/logos/langflow.svg",
+        "docs/static/images/logos/llamaindex-logo.svg",
+        "docs/static/images/logos/middleware-logo.svg",
+        "docs/static/images/logos/mistral-ai-logo.svg",
+        "docs/static/images/logos/mlflow-logo.svg",
+        "docs/static/images/logos/mosaicml-logo.svg",
+        "docs/static/images/logos/openai-logo.svg",
+        "docs/static/images/logos/opentelemetry-logo.svg",
+        "docs/static/images/logos/pytorch-logo-dark.svg",
+        "docs/static/images/logos/pytorch-logo.svg",
+        "docs/static/images/logos/ray-serve-logo.svg",
+        "docs/static/images/logos/scikit-learn-logo.svg",
+        "docs/static/images/logos/signoz-logo.svg",
+        "docs/static/images/logos/spacy-logo.svg",
+        "docs/static/images/logos/spark-logo.svg",
+        "docs/static/images/logos/statsmodels-logo.svg",
+        "docs/static/images/logos/vercel-logo.svg",
+        "docs/static/images/logos/xgboost-logo.svg",
+        "docs/static/images/mlflow-logo-black.svg",
+        "docs/static/images/mlflow-logo-white.svg",
+        "docs/static/images/model_migration_workflow.svg",
+        "docs/static/images/tutorials/introductory/logging-first-model/**",
+        "docs/static/images/undraw_docusaurus_mountain.svg",
+        "docs/static/images/undraw_docusaurus_react.svg",
+        "docs/static/images/undraw_docusaurus_tree.svg",
+        "docs/static/js/**",
+        "docs/tsconfig.json",
+        "examples/README.md",
+        "examples/ag2/**",
+        "examples/agno/**",
+        "examples/anthropic/**",
+        "examples/auth/**",
+        "examples/catboost/**",
+        "examples/crewai/**",
+        "examples/databricks/**",
+        "examples/demos/**",
+        "examples/deployments/**",
+        "examples/diffusers/**",
+        "examples/docker/**",
+        "examples/evaluation/**",
+        "examples/flower_classifier/**",
+        "examples/gateway/**",
+        "examples/gemini/**",
+        "examples/groq/**",
+        "examples/h2o/**",
+        "examples/haystack/**",
+        "examples/hyperparam/**",
+        "examples/johnsnowlabs/**",
+        "examples/jwt_auth/**",
+        "examples/keras/**",
+        "examples/langchain/**",
+        "examples/lightgbm/**",
+        "examples/livekit/**",
+        "examples/llama_index/autolog.py",
+        "examples/llama_index/simple_index.py",
+        "examples/llama_index/workflow/README.md",
+        "examples/llama_index/workflow/Tutorial.ipynb",
+        "examples/llama_index/workflow/data/**",
+        "examples/llama_index/workflow/install.sh",
+        "examples/llama_index/workflow/pyproject.toml",
+        "examples/llama_index/workflow/workflow/**",
+        "examples/llms/RAG/.gitignore",
+        "examples/llms/RAG/_cache.json",
+        "examples/llms/RAG/mlflow_docs_scraped.csv",
+        "examples/llms/RAG/question-generation-retrieval-evaluation.ipynb",
+        "examples/llms/RAG/question_answer_source.csv",
+        "examples/llms/RAG/retriever-evaluation-tutorial.ipynb",
+        "examples/llms/RAG/static_evaluation_dataset.csv",
+        "examples/llms/README.md",
+        "examples/llms/question_answering/**",
+        "examples/llms/summarization/**",
+        "examples/mistral/**",
+        "examples/mlflow-3/**",
+        "examples/mlflow_artifacts/**",
+        "examples/model_config/**",
+        "examples/multistep_workflow/**",
+        "examples/open_webui/README.md",
+        "examples/open_webui/mlflow_filter_pipeline.py",
+        "examples/openai/**",
+        "examples/paddle/**",
+        "examples/pip_requirements/**",
+        "examples/pmdarima/**",
+        "examples/prophet/**",
+        "examples/pydanticai/**",
+        "examples/pyfunc/**",
+        "examples/pyspark_ml_autologging/**",
+        "examples/pyspark_ml_connect/**",
+        "examples/pytorch/**",
+        "examples/quickstart/**",
+        "examples/r_wine/**",
+        "examples/rapids/**",
+        "examples/ray_serve/**",
+        "examples/remote_store/**",
+        "examples/rest_api/**",
+        "examples/restore_model_dependencies/**",
+        "examples/sentence_transformers/**",
+        "examples/shap/**",
+        "examples/sklearn_autolog/**",
+        "examples/sklearn_elasticnet_diabetes/**",
+        "examples/sklearn_elasticnet_wine/**",
+        "examples/sklearn_logistic_regression/**",
+        "examples/sktime/**",
+        "examples/smolagents/**",
+        "examples/spacy/**",
+        "examples/spark_udf/**",
+        "examples/statsmodels/**",
+        "examples/strands/**",
+        "examples/supply_chain_security/**",
+        "examples/synapseml/**",
+        "examples/system_metrics/**",
+        "examples/tensorflow/**",
+        "examples/tracing/**",
+        "examples/transformers/**",
+        "examples/typesafe_judges/**",
+        "examples/uv-dependency-management/**",
+        "examples/virtualenv/**",
+        "examples/xgboost/**",
+        "fs2db/**",
+        "libs/typescript/.eslintrc.json",
+        "libs/typescript/.npmrc",
+        "libs/typescript/.prettierignore",
+        "libs/typescript/.prettierrc",
+        "libs/typescript/README.md",
+        "libs/typescript/core/**",
+        "libs/typescript/integrations/anthropic/**",
+        "libs/typescript/integrations/claude-code/**",
+        "libs/typescript/integrations/codex/**",
+        "libs/typescript/integrations/gemini/**",
+        "libs/typescript/integrations/helpers/**",
+        "libs/typescript/integrations/openai/**",
+        "libs/typescript/integrations/openclaw/README.md",
+        "libs/typescript/integrations/openclaw/jest.config.cjs",
+        "libs/typescript/integrations/openclaw/openclaw.plugin.json",
+        "libs/typescript/integrations/openclaw/package.json",
+        "libs/typescript/integrations/openclaw/src/**",
+        "libs/typescript/integrations/openclaw/tests/**",
+        "libs/typescript/integrations/openclaw/tsconfig.json",
+        "libs/typescript/integrations/opencode/**",
+        "libs/typescript/integrations/qwen-code/**",
+        "libs/typescript/integrations/typesafe/**",
+        "libs/typescript/integrations/vercel/**",
+        "libs/typescript/jest.global-server-setup.ts",
+        "libs/typescript/jest.global-server-teardown.ts",
+        "libs/typescript/package-lock.json",
+        "libs/typescript/package.json",
+        "libs/typescript/scripts/**",
+        "libs/typescript/tests/**",
+        "libs/typescript/tsconfig.base.json",
+        "libs/typescript/tsconfig.json",
+        "mlflow/R/mlflow/.Rbuildignore",
+        "mlflow/R/mlflow/.Rprofile",
+        "mlflow/R/mlflow/.build-doc.R",
+        "mlflow/R/mlflow/.build-package.R",
+        "mlflow/R/mlflow/.create-test-env.R",
+        "mlflow/R/mlflow/.dump-r-dependencies.R",
+        "mlflow/R/mlflow/.gitignore",
+        "mlflow/R/mlflow/.install-deps.R",
+        "mlflow/R/mlflow/.install-mlflow-r.R",
+        "mlflow/R/mlflow/.lintr",
+        "mlflow/R/mlflow/.run-tests.R",
+        "mlflow/R/mlflow/.utils.R",
+        "mlflow/R/mlflow/DESCRIPTION",
+        "mlflow/R/mlflow/Dockerfile.dev",
+        "mlflow/R/mlflow/Dockerfile.r-devel",
+        "mlflow/R/mlflow/NAMESPACE",
+        "mlflow/R/mlflow/R/**",
+        "mlflow/R/mlflow/README.Rmd",
+        "mlflow/R/mlflow/README.md",
+        "mlflow/R/mlflow/build-package.sh",
+        "mlflow/R/mlflow/document.R",
+        "mlflow/R/mlflow/man/**",
+        "mlflow/R/mlflow/man-roxygen/**",
+        "mlflow/R/mlflow/mlflow.Rproj",
+        "mlflow/R/mlflow/tests/**",
+        "mlflow/__init__.py",
+        "mlflow/__main__.py",
+        "mlflow/ag2/**",
+        "mlflow/agent/**",
+        "mlflow/agno/**",
+        "mlflow/ai_commands/**",
+        "mlflow/anthropic/**",
+        "mlflow/artifacts/**",
+        "mlflow/assistant/__init__.py",
+        "mlflow/assistant/cli.py",
+        "mlflow/assistant/config.py",
+        "mlflow/assistant/custom_view.py",
+        "mlflow/assistant/gateway_connection.py",
+        "mlflow/assistant/providers/**",
+        "mlflow/assistant/skill_installer.py",
+        "mlflow/assistant/types.py",
+        "mlflow/autogen/**",
+        "mlflow/azure/**",
+        "mlflow/bedrock/**",
+        "mlflow/catboost/**",
+        "mlflow/claude_code/**",
+        "mlflow/cli/**",
+        "mlflow/client.py",
+        "mlflow/config/**",
+        "mlflow/crewai/**",
+        "mlflow/data/**",
+        "mlflow/db.py",
+        "mlflow/demo/**",
+        "mlflow/deployments/**",
+        "mlflow/diffusers/**",
+        "mlflow/dspy/**",
+        "mlflow/entities/**",
+        "mlflow/environment_variables.py",
+        "mlflow/error_classification.py",
+        "mlflow/evaluation/**",
+        "mlflow/exceptions.py",
+        "mlflow/experiments.py",
+        "mlflow/gateway/**",
+        "mlflow/gemini/**",
+        "mlflow/genai/**",
+        "mlflow/groq/**",
+        "mlflow/h2o/**",
+        "mlflow/haystack/**",
+        "mlflow/java/**",
+        "mlflow/johnsnowlabs/**",
+        "mlflow/keras/**",
+        "mlflow/langchain/**",
+        "mlflow/legacy_databricks_cli/**",
+        "mlflow/lightgbm/**",
+        "mlflow/litellm/**",
+        "mlflow/llama_index/**",
+        "mlflow/mcp/**",
+        "mlflow/metrics/**",
+        "mlflow/mismatch.py",
+        "mlflow/mistral/**",
+        "mlflow/ml-package-versions.yml",
+        "mlflow/ml_package_versions.py",
+        "mlflow/models/**",
+        "mlflow/onnx/**",
+        "mlflow/openai/**",
+        "mlflow/optuna/**",
+        "mlflow/otel/**",
+        "mlflow/paddle/**",
+        "mlflow/pmdarima/**",
+        "mlflow/projects/**",
+        "mlflow/prompt/**",
+        "mlflow/prophet/**",
+        "mlflow/protos/**",
+        "mlflow/py.typed",
+        "mlflow/pydantic_ai/**",
+        "mlflow/pyfunc/**",
+        "mlflow/pyspark/**",
+        "mlflow/pytest/**",
+        "mlflow/pytorch/**",
+        "mlflow/rfunc/**",
+        "mlflow/runs.py",
+        "mlflow/sagemaker/**",
+        "mlflow/semantic_kernel/**",
+        "mlflow/sentence_transformers/**",
+        "mlflow/server/AGENTS.md",
+        "mlflow/server/__init__.py",
+        "mlflow/server/artifact_router.py",
+        "mlflow/server/asgi_utils.py",
+        "mlflow/server/assistant/**",
+        "mlflow/server/auth/**",
+        "mlflow/server/constants.py",
+        "mlflow/server/fastapi_app.py",
+        "mlflow/server/fastapi_security.py",
+        "mlflow/server/gateway_api.py",
+        "mlflow/server/graphql/**",
+        "mlflow/server/handlers.py",
+        "mlflow/server/job_api.py",
+        "mlflow/server/jobs/**",
+        "mlflow/server/js/.env",
+        "mlflow/server/js/.enzymemigrationignore",
+        "mlflow/server/js/.eslintignore",
+        "mlflow/server/js/.eslintrc.js",
+        "mlflow/server/js/.gitignore",
+        "mlflow/server/js/.prettierignore",
+        "mlflow/server/js/.storybook/**",
+        "mlflow/server/js/.yarnrc.yml",
+        "mlflow/server/js/CLAUDE.md",
+        "mlflow/server/js/I18nCompileLoader/**",
+        "mlflow/server/js/PdfjsStripImportMetaLoader/**",
+        "mlflow/server/js/__mocks__/**",
+        "mlflow/server/js/config-eslint/**",
+        "mlflow/server/js/craco.config.js",
+        "mlflow/server/js/eslint-plugin/**",
+        "mlflow/server/js/jest.babel.config.js",
+        "mlflow/server/js/knip-preprocessor.ts",
+        "mlflow/server/js/knip.jsonc",
+        "mlflow/server/js/lint.sh",
+        "mlflow/server/js/mlflow-eslint-plugin/**",
+        "mlflow/server/js/package.json",
+        "mlflow/server/js/prettier.config.js",
+        "mlflow/server/js/public/index.html",
+        "mlflow/server/js/public/manifest.json",
+        "mlflow/server/js/scripts/**",
+        "mlflow/server/js/src/MlflowRouter.test.tsx",
+        "mlflow/server/js/src/MlflowRouter.tsx",
+        "mlflow/server/js/src/account/**",
+        "mlflow/server/js/src/admin/**",
+        "mlflow/server/js/src/app.tsx",
+        "mlflow/server/js/src/assets.d.ts",
+        "mlflow/server/js/src/assistant/**",
+        "mlflow/server/js/src/broken.d.ts",
+        "mlflow/server/js/src/common/color-palette.ts",
+        "mlflow/server/js/src/common/components/**",
+        "mlflow/server/js/src/common/constants.tsx",
+        "mlflow/server/js/src/common/contexts/**",
+        "mlflow/server/js/src/common/forms/**",
+        "mlflow/server/js/src/common/hooks/**",
+        "mlflow/server/js/src/common/mlflow-published-version.ts",
+        "mlflow/server/js/src/common/route-defs.ts",
+        "mlflow/server/js/src/common/sdk/**",
+        "mlflow/server/js/src/common/static/404-overflow.svg",
+        "mlflow/server/js/src/common/static/WorkflowsIcon.svg",
+        "mlflow/server/js/src/common/static/accelerated-tag.svg",
+        "mlflow/server/js/src/common/static/assistant-debug.svg",
+        "mlflow/server/js/src/common/static/assistant-evaluation.svg",
+        "mlflow/server/js/src/common/static/assistant-trends.svg",
+        "mlflow/server/js/src/common/static/chart-bar.svg",
+        "mlflow/server/js/src/common/static/chart-contour.svg",
+        "mlflow/server/js/src/common/static/chart-difference.svg",
+        "mlflow/server/js/src/common/static/chart-image.svg",
+        "mlflow/server/js/src/common/static/chart-line.svg",
+        "mlflow/server/js/src/common/static/chart-parallel.svg",
+        "mlflow/server/js/src/common/static/chart-scatter.svg",
+        "mlflow/server/js/src/common/static/check_circle.svg",
+        "mlflow/server/js/src/common/static/default-error.svg",
+        "mlflow/server/js/src/common/static/empty.svg",
+        "mlflow/server/js/src/common/static/empty_state.svg",
+        "mlflow/server/js/src/common/static/error_circle.svg",
+        "mlflow/server/js/src/common/static/eval-datasets-empty.svg",
+        "mlflow/server/js/src/common/static/eval-runs-empty.svg",
+        "mlflow/server/js/src/common/static/expand-more.svg",
+        "mlflow/server/js/src/common/static/icon-visible-fill.svg",
+        "mlflow/server/js/src/common/static/issue-detection-empty.svg",
+        "mlflow/server/js/src/common/static/labeling-sessions-empty.svg",
+        "mlflow/server/js/src/common/static/laptop.svg",
+        "mlflow/server/js/src/common/static/loading.svg",
+        "mlflow/server/js/src/common/static/logged-model.svg",
+        "mlflow/server/js/src/common/static/logos/anthropic.svg",
+        "mlflow/server/js/src/common/static/logos/azure.svg",
+        "mlflow/server/js/src/common/static/logos/bedrock.svg",
+        "mlflow/server/js/src/common/static/logos/claude-code.svg",
+        "mlflow/server/js/src/common/static/logos/codex-color.svg",
+        "mlflow/server/js/src/common/static/logos/databricks.svg",
+        "mlflow/server/js/src/common/static/logos/langchain.svg",
+        "mlflow/server/js/src/common/static/logos/langgraph-dark.svg",
+        "mlflow/server/js/src/common/static/logos/langgraph.svg",
+        "mlflow/server/js/src/common/static/logos/mlflow-gateway.svg",
+        "mlflow/server/js/src/common/static/logos/openai-dark.svg",
+        "mlflow/server/js/src/common/static/logos/openai.svg",
+        "mlflow/server/js/src/common/static/model-serving-endpoint.svg",
+        "mlflow/server/js/src/common/static/no-experiments.svg",
+        "mlflow/server/js/src/common/static/notebook.svg",
+        "mlflow/server/js/src/common/static/notebookIcon.svg",
+        "mlflow/server/js/src/common/static/open-in-new.svg",
+        "mlflow/server/js/src/common/static/parallel-chart-placeholder.svg",
+        "mlflow/server/js/src/common/static/project.svg",
+        "mlflow/server/js/src/common/static/promo-modal-content.svg",
+        "mlflow/server/js/src/common/static/registered-model-grey-ok.svg",
+        "mlflow/server/js/src/common/static/registered-model-grey.svg",
+        "mlflow/server/js/src/common/static/registered-model.svg",
+        "mlflow/server/js/src/common/static/registryIcon.svg",
+        "mlflow/server/js/src/common/static/revision.svg",
+        "mlflow/server/js/src/common/static/search.svg",
+        "mlflow/server/js/src/common/static/traffic-split.svg",
+        "mlflow/server/js/src/common/static/versions-empty.svg",
+        "mlflow/server/js/src/common/static/warning.svg",
+        "mlflow/server/js/src/common/styles/**",
+        "mlflow/server/js/src/common/types.ts",
+        "mlflow/server/js/src/common/utils/**",
+        "mlflow/server/js/src/emotion.d.ts",
+        "mlflow/server/js/src/experiment-tracking/actions/**",
+        "mlflow/server/js/src/experiment-tracking/actions.test.ts",
+        "mlflow/server/js/src/experiment-tracking/actions.ts",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactPage.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactPage.intg.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactView.css",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactView.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ArtifactViewTree.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunArtifactView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunBox.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunBox.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunContour.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunContour.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunMetricTable.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunMetricTable.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunPage.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunPage.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunPlotContainer.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunScatter.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunScatter.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunUtil.test.ts",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunUtil.ts",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunView.css",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunView.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/CompareRunView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DetailsOverviewCopyableIdBox.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DetailsOverviewMetadataRow.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DetailsOverviewMetadataTable.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DetailsOverviewParamsTable.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DetailsOverviewParamsTable.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DirectRunPage.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/DirectRunPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/EndpointSelector.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/EndpointSelector.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/EntitySearchAutoComplete.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/EntitySearchAutoComplete.utils.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/EntitySearchAutoComplete.utils.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentListTable.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentListTableTagsCell.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentListTableTagsCell.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentListView.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentListView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ExperimentSourceTypeIcon.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/HtmlTableView.css",
+        "mlflow/server/js/src/experiment-tracking/components/HtmlTableView.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/HtmlTableView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/LazyPlot.d.ts",
+        "mlflow/server/js/src/experiment-tracking/components/LazyPlot.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/LineSmoothSlider.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/LineSmoothSlider.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricChartsAccordion.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricPage.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricPage.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricView.css",
+        "mlflow/server/js/src/experiment-tracking/components/MetricView.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsPlotControls.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsPlotControls.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsPlotPanel.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsPlotPanel.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsPlotView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsSummaryTable.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/MetricsSummaryTable.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/NotFoundPage.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/NotFoundPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotControls.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotControls.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotPanel.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotPanel.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotView.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/ParallelCoordinatesPlotView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/PlotlyFactory.d.ts",
+        "mlflow/server/js/src/experiment-tracking/components/PlotlyFactory.js",
+        "mlflow/server/js/src/experiment-tracking/components/PlotlyFactory.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunLinksPopover.enzyme.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunLinksPopover.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunNotFoundView.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunNotFoundView.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunStatusIcon.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/RunView.nav.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/SelectSessionsModal.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/SelectSessionsModal.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/SelectTracesModal.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/SelectTracesModal.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/artifact-view-components/**",
+        "mlflow/server/js/src/experiment-tracking/components/evaluation-artifacts-compare/**",
+        "mlflow/server/js/src/experiment-tracking/components/evaluations/**",
+        "mlflow/server/js/src/experiment-tracking/components/experiment-logged-models/**",
+        "mlflow/server/js/src/experiment-tracking/components/experiment-page/**",
+        "mlflow/server/js/src/experiment-tracking/components/experiment-prompts/**",
+        "mlflow/server/js/src/experiment-tracking/components/label-schemas/**",
+        "mlflow/server/js/src/experiment-tracking/components/modals/**",
+        "mlflow/server/js/src/experiment-tracking/components/onboarding/**",
+        "mlflow/server/js/src/experiment-tracking/components/prompt-engineering/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/IssueCard.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/IssueDetectionLowResultsCallout.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/IssueStatusFilter.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/IssueTracesPanel.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/IssuesTabEmptyState.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunPage.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunPage.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewArtifactTab.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewChartTooltipBody.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeader.intg.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeader.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeaderRegisterFromLoggedModelV3Button.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeaderRegisterModelButton.intg.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeaderRegisterModelButton.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewHeaderRegisterModelButton.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewIssuesTab.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewIssuesTab.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewMetricCharts.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewMetricCharts.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewModeSwitch.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewOverview.intg.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/RunViewOverview.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/csv/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/geojson/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/html/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/json/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/jsonl/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/artifact-fixtures/models/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/assets/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/hooks/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/node-level-metric-charts/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/overview/**",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/useRunDetailsPageDataLegacy.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/useRunDetailsPageDataLegacy.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/run-page/useRunViewActiveTab.tsx",
+        "mlflow/server/js/src/experiment-tracking/components/runs-charts/**",
+        "mlflow/server/js/src/experiment-tracking/components/runs-compare/**",
+        "mlflow/server/js/src/experiment-tracking/components/traces/**",
+        "mlflow/server/js/src/experiment-tracking/constants.ts",
+        "mlflow/server/js/src/experiment-tracking/hooks/**",
+        "mlflow/server/js/src/experiment-tracking/pages/**",
+        "mlflow/server/js/src/experiment-tracking/reducers/**",
+        "mlflow/server/js/src/experiment-tracking/route-defs.ts",
+        "mlflow/server/js/src/experiment-tracking/routes.test.tsx",
+        "mlflow/server/js/src/experiment-tracking/routes.ts",
+        "mlflow/server/js/src/experiment-tracking/sdk/**",
+        "mlflow/server/js/src/experiment-tracking/types.ts",
+        "mlflow/server/js/src/experiment-tracking/utils/**",
+        "mlflow/server/js/src/gateway/**",
+        "mlflow/server/js/src/globals.d.ts",
+        "mlflow/server/js/src/graphql/**",
+        "mlflow/server/js/src/home/**",
+        "mlflow/server/js/src/i18n/**",
+        "mlflow/server/js/src/index.css",
+        "mlflow/server/js/src/index.tsx",
+        "mlflow/server/js/src/lang/**",
+        "mlflow/server/js/src/mcp-registry/**",
+        "mlflow/server/js/src/model-registry/**",
+        "mlflow/server/js/src/module-ext.d.ts",
+        "mlflow/server/js/src/redux-types.ts",
+        "mlflow/server/js/src/reset.css",
+        "mlflow/server/js/src/settings/**",
+        "mlflow/server/js/src/setupProxy.js",
+        "mlflow/server/js/src/setupTests.js",
+        "mlflow/server/js/src/shared/building_blocks/**",
+        "mlflow/server/js/src/shared/web-shared/browse/**",
+        "mlflow/server/js/src/shared/web-shared/copy/**",
+        "mlflow/server/js/src/shared/web-shared/design-system/**",
+        "mlflow/server/js/src/shared/web-shared/errors/**",
+        "mlflow/server/js/src/shared/web-shared/genai-markdown-renderer/**",
+        "mlflow/server/js/src/shared/web-shared/genai-traces-table/**",
+        "mlflow/server/js/src/shared/web-shared/global-settings/**",
+        "mlflow/server/js/src/shared/web-shared/hooks/**",
+        "mlflow/server/js/src/shared/web-shared/html-content/**",
+        "mlflow/server/js/src/shared/web-shared/media-rendering-utils.tsx",
+        "mlflow/server/js/src/shared/web-shared/metrics/**",
+        "mlflow/server/js/src/shared/web-shared/model-trace-explorer/**",
+        "mlflow/server/js/src/shared/web-shared/query-client/**",
+        "mlflow/server/js/src/shared/web-shared/react-table/**",
+        "mlflow/server/js/src/shared/web-shared/routing/**",
+        "mlflow/server/js/src/shared/web-shared/snippet/**",
+        "mlflow/server/js/src/shared/web-shared/test-types.ts",
+        "mlflow/server/js/src/shared/web-shared/test-utils/**",
+        "mlflow/server/js/src/shared/web-shared/traces-table/CLAUDE.md",
+        "mlflow/server/js/src/shared/web-shared/traces-table/ReorderableTraceColumnList.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/ReorderableTraceColumnList.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceCell.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceColumnHeader.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceColumnHeader.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceColumnSelector.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceColumnSelector.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceFilterButton.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TraceFilterButton.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesPaginationBar.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTable.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTable.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTableStates.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTableToolbar.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTableView.test.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesTableView.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/TracesToolbarResponsive.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/columnLabels.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/columns.tsx",
+        "mlflow/server/js/src/shared/web-shared/traces-table/constants.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/data/**",
+        "mlflow/server/js/src/shared/web-shared/traces-table/filterModel.test.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/filterModel.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/formatTraceDuration.test.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/formatTraceDuration.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/getColumnMaxSizes.test.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/getColumnMaxSizes.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/hooks/**",
+        "mlflow/server/js/src/shared/web-shared/traces-table/index.ts",
+        "mlflow/server/js/src/shared/web-shared/traces-table/test-utils/**",
+        "mlflow/server/js/src/shared/web-shared/traces-table/types.ts",
+        "mlflow/server/js/src/shared/web-shared/tsconfig.json",
+        "mlflow/server/js/src/shared/web-shared/unified-tagging/**",
+        "mlflow/server/js/src/shared/web-shared/utils/**",
+        "mlflow/server/js/src/shared/web-shared/zustand/**",
+        "mlflow/server/js/src/skill-registry/**",
+        "mlflow/server/js/src/store.ts",
+        "mlflow/server/js/src/telemetry/**",
+        "mlflow/server/js/src/timezone.test.ts",
+        "mlflow/server/js/src/types/**",
+        "mlflow/server/js/src/workspaces/**",
+        "mlflow/server/js/tsconfig.json",
+        "mlflow/server/js/yarn/**",
+        "mlflow/server/js/yarn.lock",
+        "mlflow/server/mcp_server_api.py",
+        "mlflow/server/mlflow_response.py",
+        "mlflow/server/otel_api.py",
+        "mlflow/server/otlp_metrics.py",
+        "mlflow/server/prometheus_exporter.py",
+        "mlflow/server/sandbox/**",
+        "mlflow/server/security.py",
+        "mlflow/server/security_utils.py",
+        "mlflow/server/server_info_api.py",
+        "mlflow/server/skill_registry/**",
+        "mlflow/server/skill_registry_api.py",
+        "mlflow/server/uvicorn_log_config.yaml",
+        "mlflow/server/validation.py",
+        "mlflow/server/workspace_helpers.py",
+        "mlflow/shap/**",
+        "mlflow/sklearn/**",
+        "mlflow/smolagents/**",
+        "mlflow/spacy/**",
+        "mlflow/spark/**",
+        "mlflow/statsmodels/**",
+        "mlflow/store/**",
+        "mlflow/strands/**",
+        "mlflow/system_metrics/**",
+        "mlflow/telemetry/**",
+        "mlflow/tensorflow/**",
+        "mlflow/tracing/**",
+        "mlflow/tracking/**",
+        "mlflow/transformers/**",
+        "mlflow/types/**",
+        "mlflow/typesafe/**",
+        "mlflow/utils/**",
+        "mlflow/version.py",
+        "mlflow/webhooks/**",
+        "mlflow/xgboost/**",
+        "prettier.config.js",
+        "pyproject.release.toml",
+        "pyproject.toml",
+        "requirements/**",
+        "tests/__init__.py",
+        "tests/ag2/**",
+        "tests/agent/**",
+        "tests/agno/**",
+        "tests/ai_commands/**",
+        "tests/anthropic/**",
+        "tests/artifacts/**",
+        "tests/assistant/**",
+        "tests/autogen/**",
+        "tests/autologging/**",
+        "tests/bedrock/**",
+        "tests/catboost/**",
+        "tests/check_mlflow_lazily_imports_ml_packages.py",
+        "tests/claude_code/**",
+        "tests/cli/**",
+        "tests/conftest.py",
+        "tests/crewai/**",
+        "tests/data/**",
+        "tests/datasets/uci-autos-imports-85.data",
+        "tests/datasets/winequality-red.csv",
+        "tests/datasets/winequality-white.csv",
+        "tests/db/**",
+        "tests/demo/**",
+        "tests/deployments/**",
+        "tests/dev/**",
+        "tests/diffusers/**",
+        "tests/docker/**",
+        "tests/dspy/**",
+        "tests/entities/**",
+        "tests/evaluate/**",
+        "tests/examples/**",
+        "tests/gateway/**",
+        "tests/gemini/**",
+        "tests/genai/**",
+        "tests/generate_ui_test_data.py",
+        "tests/groq/**",
+        "tests/h2o/**",
+        "tests/haystack/**",
+        "tests/helper_functions.py",
+        "tests/helpers/**",
+        "tests/integration/**",
+        "tests/johnsnowlabs/**",
+        "tests/keras/**",
+        "tests/langchain/**",
+        "tests/langgraph/**",
+        "tests/lightgbm/**",
+        "tests/litellm/**",
+        "tests/llama_index/**",
+        "tests/mcp/**",
+        "tests/metrics/**",
+        "tests/mistral/**",
+        "tests/models/**",
+        "tests/onnx/**",
+        "tests/openai/**",
+        "tests/optuna/**",
+        "tests/otel/**",
+        "tests/paddle/**",
+        "tests/pmdarima/**",
+        "tests/projects/**",
+        "tests/prompt/**",
+        "tests/prophet/**",
+        "tests/protos/**",
+        "tests/pydantic_ai/**",
+        "tests/pyfunc/**",
+        "tests/pyspark/**",
+        "tests/pytest/**",
+        "tests/pytorch/**",
+        "tests/resources/__init__.py",
+        "tests/resources/data/**",
+        "tests/resources/db/__init__.py",
+        "tests/resources/db/db_version_7ac759974ad8_with_metrics_expected_values.json",
+        "tests/resources/db/initial_models.py",
+        "tests/resources/db/latest_schema.sql",
+        "tests/resources/dockerfile/**",
+        "tests/resources/example_docker_project/**",
+        "tests/resources/example_mlflow_1x_sklearn_model/MLmodel",
+        "tests/resources/example_mlflow_1x_sklearn_model/conda.yaml",
+        "tests/resources/example_mlflow_1x_sklearn_model/python_env.yaml",
+        "tests/resources/example_mlflow_1x_sklearn_model/requirements.txt",
+        "tests/resources/example_mlflow_2.12_langchain_model/**",
+        "tests/resources/example_project/**",
+        "tests/resources/example_virtualenv_conda_project/**",
+        "tests/resources/example_virtualenv_no_python_env/**",
+        "tests/resources/example_virtualenv_project/**",
+        "tests/resources/mlflow-test-plugin/**",
+        "tests/resources/onnx/generate_onnx_models.py",
+        "tests/resources/pyfunc_models/2.7.1/MLmodel",
+        "tests/resources/pyfunc_models/2.7.1/conda.yaml",
+        "tests/resources/pyfunc_models/2.7.1/python_env.yaml",
+        "tests/resources/pyfunc_models/2.7.1/requirements.txt",
+        "tests/resources/pyfunc_models/2.8.1/MLmodel",
+        "tests/resources/pyfunc_models/2.8.1/conda.yaml",
+        "tests/resources/pyfunc_models/2.8.1/python_env.yaml",
+        "tests/resources/pyfunc_models/2.8.1/requirements.txt",
+        "tests/resources/pyfunc_models/README.md",
+        "tests/rfunc/**",
+        "tests/sagemaker/**",
+        "tests/semantic_kernel/**",
+        "tests/sentence_transformers/**",
+        "tests/server/**",
+        "tests/shap/**",
+        "tests/simple_repository_server.py",
+        "tests/sklearn/**",
+        "tests/smolagents/**",
+        "tests/spacy/**",
+        "tests/spark/**",
+        "tests/statsmodels/**",
+        "tests/store/**",
+        "tests/strands/**",
+        "tests/system_metrics/**",
+        "tests/telemetry/**",
+        "tests/tensorflow/**",
+        "tests/test_cli.py",
+        "tests/test_environment_variables.py",
+        "tests/test_exceptions.py",
+        "tests/test_flavors.py",
+        "tests/test_import.py",
+        "tests/test_mismatch.py",
+        "tests/test_mlflow_version_comp.py",
+        "tests/test_push_images_workflow.py",
+        "tests/test_runs.py",
+        "tests/test_skinny_client_anthropic_import.py",
+        "tests/test_skinny_client_autolog_without_scipy.py",
+        "tests/test_skinny_client_omits_data_science_libs.py",
+        "tests/test_skinny_client_omits_sql_libs.py",
+        "tests/test_version.py",
+        "tests/test_xdist_serial_partition.py",
+        "tests/tracing/**",
+        "tests/tracking/**",
+        "tests/transformers/**",
+        "tests/types/**",
+        "tests/typesafe/**",
+        "tests/uc_oss/**",
+        "tests/utils/**",
+        "tests/webhooks/**",
+        "tests/xgboost/**",
+        "uv.lock"
+      ],
+      "text": "Copyright 2018 Databricks, Inc.  All rights reserved.\n\n\t\t\t\tApache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2018 Databricks, Inc.  All rights reserved., Apache-2.0 license (LICENSE.txt), https://github.com/mlflow/mlflow."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "mlflow/assistant/skills/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of mlflow/mlflow (mlflow/assistant/skills) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/mlflow/mlflow/tree/f566a42d64fce8997fe187edb5229221ace09713/mlflow/assistant/skills."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "mlflow/server/js/vendor/design-system/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of @databricks/design-system, ISC license (declared in package.json), https://github.com/mlflow/mlflow/tree/f566a42d64fce8997fe187edb5229221ace09713/mlflow/server/js/vendor/design-system."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.gql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.R"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Rd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Rmd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Rproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "dev/Dockerfile.protos.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.full"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.geojson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mako"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mermaid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mssql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.protos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.r-devel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rego"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.Rbuildignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.Rprofile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.enzymemigrationignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.lintr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DESCRIPTION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_conda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_custom_scipy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_install_mlflow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_install_mlflow_virtualenv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_java_flavor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_no_model_uri"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_sagemaker_conda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_sagemaker_virtualenv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_sagemaker_virtualenv_no_java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile_with_mlflow_home"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MLProject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MLmodel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MLproject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NAMESPACE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registered_model_meta"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "mlflow/assistant/skills": "https://github.com/mlflow/skills"
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/golang/dep",
+  "revision": "f13583b555deaa6742f141a9c1185af947720d60",
+  "checksum": "sha256:9d69e1040f8e8030673caf89cce08cdaef46d214a745d6f44148a8b3ecd0028d",
+  "extract": {
+    "exclude": [
+      "cmd/dep/testdata/harness_tests/check/hash_mismatch/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/pruneopts_changed/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/check/vendororphans/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/init/govendor/case1/initial/vendor/**",
+      "cmd/dep/testdata/harness_tests/init/gvt/case1/initial/vendor/**",
+      "docs/assets/DigbyFlat.png",
+      "docs/assets/DigbyFlatScene2.png",
+      "docs/assets/DigbyScene2Flat.png",
+      "docs/assets/DigbyScene2Shadows.png",
+      "docs/assets/DigbyShadows.png",
+      "docs/assets/DigbyShadowsScene2.png",
+      "docs/assets/StatusGraph.png",
+      "docs/assets/annotated-func-arrows.png",
+      "docs/assets/base-arrows.png",
+      "docs/assets/four-states.png",
+      "docs/assets/func-toggles.png",
+      "docs/assets/in-sync.png",
+      "docs/assets/lock-back.png",
+      "docs/assets/required-arrows.png",
+      "gps/_testdata/badrepo/corrupt_dot_git_directory.tar",
+      "vendor/github.com/golang/**",
+      "vendor/gopkg.in/**"
+    ]
+  },
+  "history": {
+    "since": "91674cca168fa634c633dd48e241dfd6bfee3dc6"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND MIT AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2014 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nThe Masterminds\nCopyright (C) 2014-2015, Matt Butcher and Matt Farina\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 Armon Dadgar\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2013 Ben Johnson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2017 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nMIT License\n\nCopyright (c) 2017 Jordan Krage\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2012 Ingo Oeser\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2013 - 2017 Thomas Pelletier, Eric Anderton\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2015, Dave Cheney <dave@cheney.net>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 Sam Boyer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/golang/dep: Copyright (c) 2014 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep; Copyright (C) 2014-2015, Matt Butcher and Matt Farina, MIT license (LICENSE.txt), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/Masterminds/semver; Copyright (C) 2014-2015, Matt Butcher and Matt Farina, MIT license (LICENSE.txt), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/Masterminds/vcs; Copyright (c) 2014 Armon Dadgar, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/armon/go-radix; Copyright (c) 2013 Ben Johnson, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/boltdb/bolt; Copyright (c) 2017 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/google/go-cmp; Copyright (c) 2017 Jordan Krage, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/jmank88/nuts; Copyright (c) 2012 Ingo Oeser, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/nightlyone/lockfile; Copyright (c) 2013 - 2017 Thomas Pelletier, Eric Anderton, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/pelletier/go-toml; Copyright (c) 2015, Dave Cheney <dave@cheney.net>, BSD-2-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/pkg/errors; Copyright (c) 2017 Sam Boyer, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/sdboyer/constext; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/net; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/sync; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/sys."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".codeclimate.yml",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".travis.yml",
+        "AUTHORS",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "CONTRIBUTORS",
+        "Gopkg.lock",
+        "Gopkg.toml",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "Makefile",
+        "PATENTS",
+        "README.md",
+        "analyzer.go",
+        "analyzer_notwindows_test.go",
+        "analyzer_test.go",
+        "analyzer_windows_test.go",
+        "appveyor.yml",
+        "cmd/dep/check.go",
+        "cmd/dep/dep_test.go",
+        "cmd/dep/doc.go",
+        "cmd/dep/ensure.go",
+        "cmd/dep/ensure_test.go",
+        "cmd/dep/failures.go",
+        "cmd/dep/feature_flags.go",
+        "cmd/dep/gopath_scanner.go",
+        "cmd/dep/gopath_scanner_test.go",
+        "cmd/dep/graphviz.go",
+        "cmd/dep/graphviz_test.go",
+        "cmd/dep/init.go",
+        "cmd/dep/integration_test.go",
+        "cmd/dep/main.go",
+        "cmd/dep/mkdoc.sh",
+        "cmd/dep/prune.go",
+        "cmd/dep/root_analyzer.go",
+        "cmd/dep/status.go",
+        "cmd/dep/status_test.go",
+        "cmd/dep/testdata/cachedir/**",
+        "cmd/dep/testdata/graphviz/**",
+        "cmd/dep/testdata/harness_tests/README.md",
+        "cmd/dep/testdata/harness_tests/check/excess_inputs/**",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/final/**",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/hash_mismatch/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/final/**",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/hash_version_mismatch/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/missing_and_excess/**",
+        "cmd/dep/testdata/harness_tests/check/missing_inputs/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/final/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_mismatch/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/final/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/noverify/hash_version_mismatch/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/noverify/missing_and_excess/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/unmet_constraint/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/unmet_override/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/final/**",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/noverify/vendororphans/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/final/**",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/pruneopts_changed/testcase.json",
+        "cmd/dep/testdata/harness_tests/check/unmet_constraint/**",
+        "cmd/dep/testdata/harness_tests/check/unmet_override/**",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/final/**",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/initial/main.go",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/stdout.txt",
+        "cmd/dep/testdata/harness_tests/check/vendororphans/testcase.json",
+        "cmd/dep/testdata/harness_tests/ensure/add/**",
+        "cmd/dep/testdata/harness_tests/ensure/default/**",
+        "cmd/dep/testdata/harness_tests/ensure/empty/**",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/README",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/final/**",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/initial/main.go",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/hash_mismatch/testcase.json",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/final/**",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/initial/Gopkg.lock",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/initial/Gopkg.toml",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/initial/main.go",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/stdout.txt",
+        "cmd/dep/testdata/harness_tests/ensure/noverify/vendororphans/testcase.json",
+        "cmd/dep/testdata/harness_tests/ensure/pkg-errors/**",
+        "cmd/dep/testdata/harness_tests/ensure/pkg-ignored/**",
+        "cmd/dep/testdata/harness_tests/ensure/update/**",
+        "cmd/dep/testdata/harness_tests/init/case1/**",
+        "cmd/dep/testdata/harness_tests/init/case2/**",
+        "cmd/dep/testdata/harness_tests/init/case3/**",
+        "cmd/dep/testdata/harness_tests/init/case4/**",
+        "cmd/dep/testdata/harness_tests/init/glide/**",
+        "cmd/dep/testdata/harness_tests/init/glock/**",
+        "cmd/dep/testdata/harness_tests/init/godep/**",
+        "cmd/dep/testdata/harness_tests/init/govend/**",
+        "cmd/dep/testdata/harness_tests/init/govendor/case1/README.md",
+        "cmd/dep/testdata/harness_tests/init/govendor/case1/final/**",
+        "cmd/dep/testdata/harness_tests/init/govendor/case1/initial/main.go",
+        "cmd/dep/testdata/harness_tests/init/govendor/case1/initial/samples/**",
+        "cmd/dep/testdata/harness_tests/init/govendor/case1/testcase.json",
+        "cmd/dep/testdata/harness_tests/init/gvt/case1/final/**",
+        "cmd/dep/testdata/harness_tests/init/gvt/case1/initial/main.go",
+        "cmd/dep/testdata/harness_tests/init/gvt/case1/testcase.json",
+        "cmd/dep/testdata/harness_tests/init/manifest-exists/**",
+        "cmd/dep/testdata/harness_tests/init/relative_path/**",
+        "cmd/dep/testdata/harness_tests/init/skip-hidden/**",
+        "cmd/dep/testdata/harness_tests/init/usage/**",
+        "cmd/dep/testdata/harness_tests/init/vndr/**",
+        "cmd/dep/testdata/harness_tests/status/**",
+        "cmd/dep/testdata/init/**",
+        "cmd/dep/testdata/status/**",
+        "cmd/dep/version.go",
+        "context.go",
+        "context_test.go",
+        "doc.go",
+        "docs/FAQ.md",
+        "docs/Gopkg.lock.md",
+        "docs/Gopkg.toml.md",
+        "docs/assets/DigbyFlat.svg",
+        "docs/assets/DigbyFlatScene2.svg",
+        "docs/assets/DigbyScene2Flat.svg",
+        "docs/assets/DigbyScene2Shadows.svg",
+        "docs/assets/DigbyShadows.svg",
+        "docs/assets/DigbyShadowsScene2.svg",
+        "docs/daily-dep.md",
+        "docs/deduction.md",
+        "docs/ensure-mechanics.md",
+        "docs/env-vars.md",
+        "docs/failure-modes.md",
+        "docs/glossary.md",
+        "docs/installation.md",
+        "docs/introduction.md",
+        "docs/migrating.md",
+        "docs/new-project.md",
+        "docs/the-solver.md",
+        "docs/uninstalling.md",
+        "gps/_testdata/badrepo/README.md",
+        "gps/_testdata/cmd/**",
+        "gps/_testdata/digest/**",
+        "gps/_testdata/src/**",
+        "gps/bridge.go",
+        "gps/cmd.go",
+        "gps/cmd_unix.go",
+        "gps/cmd_windows.go",
+        "gps/constraint.go",
+        "gps/constraint_test.go",
+        "gps/deduce.go",
+        "gps/deduce_test.go",
+        "gps/discovery.go",
+        "gps/doc.go",
+        "gps/error.go",
+        "gps/example.go",
+        "gps/filesystem.go",
+        "gps/filesystem_test.go",
+        "gps/identifier.go",
+        "gps/internal/**",
+        "gps/lock.go",
+        "gps/lock_test.go",
+        "gps/manager_test.go",
+        "gps/manifest.go",
+        "gps/manifest_test.go",
+        "gps/maybe_source.go",
+        "gps/maybe_source_test.go",
+        "gps/metrics.go",
+        "gps/paths/**",
+        "gps/pkgtree/**",
+        "gps/prune.go",
+        "gps/prune_test.go",
+        "gps/rootdata.go",
+        "gps/rootdata_test.go",
+        "gps/satisfy.go",
+        "gps/selection.go",
+        "gps/selection_test.go",
+        "gps/solution.go",
+        "gps/solution_test.go",
+        "gps/solve_basic_test.go",
+        "gps/solve_bimodal_test.go",
+        "gps/solve_failures.go",
+        "gps/solve_test.go",
+        "gps/solver.go",
+        "gps/solver_inputs_test.go",
+        "gps/source.go",
+        "gps/source_cache.go",
+        "gps/source_cache_bolt.go",
+        "gps/source_cache_bolt_encode.go",
+        "gps/source_cache_bolt_encode_test.go",
+        "gps/source_cache_bolt_test.go",
+        "gps/source_cache_multi.go",
+        "gps/source_cache_test.go",
+        "gps/source_errors.go",
+        "gps/source_errors_test.go",
+        "gps/source_manager.go",
+        "gps/source_manager_test.go",
+        "gps/source_test.go",
+        "gps/strings.go",
+        "gps/trace.go",
+        "gps/typed_radix.go",
+        "gps/typed_radix_test.go",
+        "gps/vcs_repo.go",
+        "gps/vcs_repo_test.go",
+        "gps/vcs_source.go",
+        "gps/vcs_source_test.go",
+        "gps/vcs_version.go",
+        "gps/vcs_version_test.go",
+        "gps/verify/**",
+        "gps/version.go",
+        "gps/version_queue.go",
+        "gps/version_queue_test.go",
+        "gps/version_test.go",
+        "hack/**",
+        "install.sh",
+        "internal/**",
+        "lock.go",
+        "lock_test.go",
+        "manifest.go",
+        "manifest_test.go",
+        "project.go",
+        "project_test.go",
+        "test_project_context_test.go",
+        "testdata/**",
+        "txn_writer.go",
+        "txn_writer_test.go",
+        "website/**"
+      ],
+      "text": "Copyright (c) 2014 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2014 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/Masterminds/semver/**"
+      ],
+      "text": "The Masterminds\nCopyright (C) 2014-2015, Matt Butcher and Matt Farina\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (C) 2014-2015, Matt Butcher and Matt Farina, MIT license (LICENSE.txt), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/Masterminds/semver."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/Masterminds/vcs/**"
+      ],
+      "text": "The Masterminds\nCopyright (C) 2014-2015, Matt Butcher and Matt Farina\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (C) 2014-2015, Matt Butcher and Matt Farina, MIT license (LICENSE.txt), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/Masterminds/vcs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/armon/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Armon Dadgar\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 Armon Dadgar, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/armon/go-radix."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/boltdb/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2013 Ben Johnson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2013 Ben Johnson, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/boltdb/bolt."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "vendor/github.com/google/**"
+      ],
+      "text": "Copyright (c) 2017 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2017 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/google/go-cmp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/jmank88/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Jordan Krage\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Jordan Krage, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/jmank88/nuts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/nightlyone/**"
+      ],
+      "text": "Copyright (c) 2012 Ingo Oeser\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2012 Ingo Oeser, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/nightlyone/lockfile."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/pelletier/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2013 - 2017 Thomas Pelletier, Eric Anderton\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013 - 2017 Thomas Pelletier, Eric Anderton, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/pelletier/go-toml."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "vendor/github.com/pkg/**"
+      ],
+      "text": "Copyright (c) 2015, Dave Cheney <dave@cheney.net>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2015, Dave Cheney <dave@cheney.net>, BSD-2-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/pkg/errors."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/github.com/sdboyer/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 Sam Boyer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Sam Boyer, MIT license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/github.com/sdboyer/constext."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "vendor/golang.org/x/net/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/net."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "vendor/golang.org/x/sync/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/sync."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "vendor/golang.org/x/sys/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/golang/dep/tree/f13583b555deaa6742f141a9c1185af947720d60/vendor/golang.org/x/sys."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GLOCKFILE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PATENTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/badinput_fileroot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/redox-os/redox",
+  "revision": "b3f371c1bac6bb4c88ef4eb4b30139d2e007580f",
+  "checksum": "sha256:6ca748c7f29b38eeda6f02340568a9d9df499117d00ef7b8317376cb8ed7093a",
+  "extract": {
+    "exclude": [
+      "recipes/demos/sdl2-gears/assets/**",
+      "recipes/emulators/dosbox/icon.png",
+      "recipes/games/eduke32/icon.png"
+    ]
+  },
+  "history": {
+    "since": "9af0cc2e22934dfbccb0136764f7132715a00d5c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2016 Redox OS Developers\n\nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/redox-os/redox: Copyright (c) 2016 Redox OS Developers, MIT license (LICENSE), https://github.com/redox-os/redox."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cargo/**",
+        ".gitignore",
+        ".gitlab/**",
+        ".gitlab-ci.yml",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "HARDWARE.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "TRADEMARK.md",
+        "bin/**",
+        "build.sh",
+        "config/**",
+        "flake.lock",
+        "flake.nix",
+        "mk/**",
+        "native_bootstrap.sh",
+        "podman/**",
+        "podman_bootstrap.sh",
+        "recipes/archives/**",
+        "recipes/artwork/**",
+        "recipes/core/**",
+        "recipes/cosmic/**",
+        "recipes/data/**",
+        "recipes/demos/cairo-demo/**",
+        "recipes/demos/cmatrix/**",
+        "recipes/demos/cpal/**",
+        "recipes/demos/dynamic-example/**",
+        "recipes/demos/exampled/**",
+        "recipes/demos/gears/**",
+        "recipes/demos/glutin/**",
+        "recipes/demos/iced/**",
+        "recipes/demos/orbclient/**",
+        "recipes/demos/osdemo/**",
+        "recipes/demos/pixelcannon/**",
+        "recipes/demos/sdl2-gears/gears.c",
+        "recipes/demos/sdl2-gears/recipe.toml",
+        "recipes/demos/softbuffer/**",
+        "recipes/demos/winit/**",
+        "recipes/dev/**",
+        "recipes/dri/**",
+        "recipes/emulators/dosbox/01_redox.patch",
+        "recipes/emulators/dosbox/manifest",
+        "recipes/emulators/dosbox/recipe.toml",
+        "recipes/emulators/flycast/**",
+        "recipes/emulators/libretro-super/**",
+        "recipes/emulators/mednafen/**",
+        "recipes/emulators/mgba/**",
+        "recipes/emulators/retroarch/**",
+        "recipes/emulators/rs-nes/**",
+        "recipes/emulators/rust64/**",
+        "recipes/emulators/rustual-boy/**",
+        "recipes/emulators/rvvm/**",
+        "recipes/emulators/scummvm/**",
+        "recipes/fonts/**",
+        "recipes/games/classicube/**",
+        "recipes/games/devilutionx/**",
+        "recipes/games/eduke32/manifest",
+        "recipes/games/eduke32/recipe.toml",
+        "recipes/games/eduke32/redox.patch",
+        "recipes/games/freeciv/**",
+        "recipes/games/freedoom/**",
+        "recipes/games/game-2048/**",
+        "recipes/games/gigalomania/**",
+        "recipes/games/hematite/**",
+        "recipes/games/neverball/**",
+        "recipes/games/neverball-sols/**",
+        "recipes/games/openjazz/**",
+        "recipes/games/openjk/**",
+        "recipes/games/openttd/**",
+        "recipes/games/openttd-opengfx/**",
+        "recipes/games/openttd-openmsx/**",
+        "recipes/games/openttd-opensfx/**",
+        "recipes/games/opentyrian/**",
+        "recipes/games/prboom/**",
+        "recipes/games/quakespasm/**",
+        "recipes/games/redox-games/**",
+        "recipes/games/sm64ex/**",
+        "recipes/games/sopwith/**",
+        "recipes/games/spacecadetpinball/**",
+        "recipes/graphics/**",
+        "recipes/groups/**",
+        "recipes/gui/**",
+        "recipes/icons/**",
+        "recipes/libs/**",
+        "recipes/math/**",
+        "recipes/net/**",
+        "recipes/other/**",
+        "recipes/sound/**",
+        "recipes/terminal/**",
+        "recipes/tests/**",
+        "recipes/text/**",
+        "recipes/tools/**",
+        "recipes/tui/**",
+        "recipes/video/**",
+        "recipes/web/**",
+        "recipes/wip/**",
+        "redox.ipxe",
+        "rust-toolchain.toml",
+        "scripts/**",
+        "src/**"
+      ],
+      "text": "Copyright (c) 2016 Redox OS Developers\n\nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Redox OS Developers, MIT license (LICENSE), https://github.com/redox-os/redox."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "recipes/terminal/bash/etc/bash.bashrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ipxe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.site"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bashrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mozconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.servobuild"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aarch64-unknown-redox-pkg-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/i586-unknown-redox-pkg-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/i686-unknown-redox-pkg-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest-neverball"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest-neverputt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mozconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkgconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redox-base-containerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redox-gdb-containerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redox-toolchain-containerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/riscv64-unknown-redox-pkg-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_64-unknown-redox-llvm-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_64-unknown-redox-pkg-config"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

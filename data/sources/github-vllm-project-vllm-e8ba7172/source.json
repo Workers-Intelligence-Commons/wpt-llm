@@ -1,0 +1,945 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/vllm-project/vllm",
+  "revision": "54d9b1cb487c2a2f12506942820f0ae443807093",
+  "checksum": "sha256:2e6e00b70603395925aaf77de39ca247db1471479d1acd2767558200ce413707",
+  "extract": {
+    "exclude": [
+      "docs/assets/contributing/dockerfile-stages-dependency.png",
+      "docs/assets/contributing/load-pattern-examples.png",
+      "docs/assets/contributing/vllm_bench_serve_dataset_stats.png",
+      "docs/assets/deployment/**",
+      "docs/assets/design/**",
+      "docs/assets/features/disagg_encoder/**",
+      "docs/assets/features/disagg_prefill/**",
+      "docs/assets/logos/**",
+      "docs/assets/training/**",
+      "tests/multimodal/assets/**",
+      "tests/v1/ec_connector/integration/hato.jpg",
+      "tools/profiler/nsys_profile_tools/images/**",
+      "vllm/distributed/kv_transfer/disagg_prefill_workflow.jpg",
+      "vllm/models/glm5next/amd/ops/third_party/**",
+      "vllm/models/glm5next/nvidia/ops/third_party/**",
+      "vllm/models/kimi_k3/amd/ops/third_party/**",
+      "vllm/models/kimi_k3/nvidia/ops/third_party/**",
+      "vllm/third_party/__init__.py",
+      "vllm/third_party/flashmla/**",
+      "vllm/third_party/pynvml.py"
+    ]
+  },
+  "history": {
+    "since": "89988ec8c2a0c3e18e63767d9df5ca8f6b8ff21c"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nMIT License\n\nCopyright (c) 2023-2025, Songlin Yang, Yu Zhang\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/vllm-project/vllm: vLLM Team, Apache-2.0 license (LICENSE), https://github.com/vllm-project/vllm; Copyright (c) 2023-2025, Songlin Yang, Yu Zhang, MIT license (LICENSE), https://github.com/vllm-project/vllm/tree/54d9b1cb487c2a2f12506942820f0ae443807093/vllm/third_party/flash_linear_attention."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".buildkite/**",
+        ".clang-format",
+        ".claude/**",
+        ".dockerignore",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        "AGENTS.md",
+        "CMakeLists.txt",
+        "DCO",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "benchmarks/**",
+        "cmake/**",
+        "csrc/**",
+        "docker/**",
+        "docs/.nav.yml",
+        "docs/README.md",
+        "docs/api/**",
+        "docs/assets/benchmarking/**",
+        "docs/assets/contributing/vllm_bench_serve_timeline.html",
+        "docs/assets/features/speculative_decoding/**",
+        "docs/assets/models/**",
+        "docs/benchmarking/**",
+        "docs/cli/**",
+        "docs/community/**",
+        "docs/configuration/**",
+        "docs/contributing/**",
+        "docs/deployment/**",
+        "docs/design/**",
+        "docs/examples/**",
+        "docs/features/**",
+        "docs/getting_started/**",
+        "docs/governance/**",
+        "docs/mkdocs/**",
+        "docs/models/**",
+        "docs/pre_run_check.sh",
+        "docs/serving/**",
+        "docs/training/**",
+        "docs/usage/**",
+        "examples/**",
+        "mkdocs.yaml",
+        "pyproject.toml",
+        "requirements/**",
+        "rust/**",
+        "rust-toolchain.toml",
+        "setup.py",
+        "tests/__init__.py",
+        "tests/basic_correctness/**",
+        "tests/benchmarks/**",
+        "tests/ci_envs.py",
+        "tests/compile/**",
+        "tests/config/**",
+        "tests/conftest.py",
+        "tests/cuda/**",
+        "tests/detokenizer/**",
+        "tests/device_allocator/**",
+        "tests/distributed/**",
+        "tests/engine/**",
+        "tests/entrypoints/**",
+        "tests/evals/**",
+        "tests/fusion/**",
+        "tests/ir/**",
+        "tests/jit_monitor/**",
+        "tests/kernels/**",
+        "tests/lora/**",
+        "tests/model_executor/**",
+        "tests/models/**",
+        "tests/multimodal/__init__.py",
+        "tests/multimodal/media/**",
+        "tests/multimodal/test_audio.py",
+        "tests/multimodal/test_cache.py",
+        "tests/multimodal/test_embedding_shape_validation.py",
+        "tests/multimodal/test_embedding_shape_validation_unit.py",
+        "tests/multimodal/test_gpu_ipc_memory.py",
+        "tests/multimodal/test_hasher.py",
+        "tests/multimodal/test_image.py",
+        "tests/multimodal/test_inputs.py",
+        "tests/multimodal/test_parse.py",
+        "tests/multimodal/test_processing.py",
+        "tests/multimodal/test_registry.py",
+        "tests/multimodal/test_sparse_tensor_validation_unit.py",
+        "tests/multimodal/test_utils.py",
+        "tests/multimodal/test_vidcom2.py",
+        "tests/multimodal/test_video.py",
+        "tests/multimodal/utils.py",
+        "tests/parser/**",
+        "tests/platforms/**",
+        "tests/plugins/**",
+        "tests/plugins_tests/**",
+        "tests/prompts/**",
+        "tests/quantization/**",
+        "tests/reasoning/**",
+        "tests/renderers/**",
+        "tests/rocm/**",
+        "tests/samplers/**",
+        "tests/spec_decode/**",
+        "tests/standalone_tests/**",
+        "tests/test_attention_backend_registry.py",
+        "tests/test_audio_media_size_precheck.py",
+        "tests/test_cmake_utils.py",
+        "tests/test_config.py",
+        "tests/test_connections.py",
+        "tests/test_embedded_commit.py",
+        "tests/test_envs.py",
+        "tests/test_force_first_config.py",
+        "tests/test_fxgraphcache_pickle_patch.py",
+        "tests/test_logger.py",
+        "tests/test_logprobs.py",
+        "tests/test_outputs.py",
+        "tests/test_pcp_dp.py",
+        "tests/test_pooling_params.py",
+        "tests/test_quantization_revision_pin.py",
+        "tests/test_ray_env.py",
+        "tests/test_ray_env_utils.py",
+        "tests/test_regression.py",
+        "tests/test_request_input_bounds.py",
+        "tests/test_sampling_params.py",
+        "tests/test_scalartype.py",
+        "tests/test_sequence.py",
+        "tests/test_tensorizer_revision_pin.py",
+        "tests/test_triton_utils.py",
+        "tests/test_uvicorn_logging.py",
+        "tests/test_version.py",
+        "tests/test_vllm_port.py",
+        "tests/test_zen_cpu_platform_detection.py",
+        "tests/test_zentorch_version_pin.py",
+        "tests/tokenizers_/**",
+        "tests/tool_parsers/**",
+        "tests/tool_use/**",
+        "tests/tools/**",
+        "tests/tracing/**",
+        "tests/transformers_utils/**",
+        "tests/utils.py",
+        "tests/utils_/**",
+        "tests/v1/__init__.py",
+        "tests/v1/attention/**",
+        "tests/v1/core/**",
+        "tests/v1/cudagraph/**",
+        "tests/v1/determinism/**",
+        "tests/v1/distributed/**",
+        "tests/v1/e2e/**",
+        "tests/v1/ec_connector/__init__.py",
+        "tests/v1/ec_connector/integration/README.md",
+        "tests/v1/ec_connector/integration/run_epd_correctness_test.sh",
+        "tests/v1/ec_connector/integration/run_epd_mooncake_ec_full_pipeline.sh",
+        "tests/v1/ec_connector/integration/test_epd_correctness.py",
+        "tests/v1/ec_connector/integration/test_nixl_failure.py",
+        "tests/v1/ec_connector/unit/**",
+        "tests/v1/engine/**",
+        "tests/v1/executor/**",
+        "tests/v1/fault_tolerance/**",
+        "tests/v1/kv_connector/**",
+        "tests/v1/kv_offload/**",
+        "tests/v1/logits_processors/**",
+        "tests/v1/metrics/**",
+        "tests/v1/sample/**",
+        "tests/v1/shutdown/**",
+        "tests/v1/simple_kv_offload/**",
+        "tests/v1/spec_decode/**",
+        "tests/v1/streaming_input/**",
+        "tests/v1/structured_output/**",
+        "tests/v1/test_kv_cache_spec_registry.py",
+        "tests/v1/test_oracle.py",
+        "tests/v1/test_outputs.py",
+        "tests/v1/test_request.py",
+        "tests/v1/test_serial_utils.py",
+        "tests/v1/test_tensor_ipc_queue.py",
+        "tests/v1/tracing/**",
+        "tests/v1/utils.py",
+        "tests/v1/worker/**",
+        "tests/vllm_test_utils/**",
+        "tests/watermarking/**",
+        "tools/__init__.py",
+        "tools/autotune_helion_kernels.py",
+        "tools/benchmark_helion_kernels.py",
+        "tools/build_deepgemm_C.py",
+        "tools/build_nixl_with_torch215_for_rubin.py",
+        "tools/build_rust.py",
+        "tools/build_rust.sh",
+        "tools/build_triton_from_source.sh",
+        "tools/check_repo.sh",
+        "tools/check_wheel_deepgemm.py",
+        "tools/ci/**",
+        "tools/ep_kernels/**",
+        "tools/flashinfer-build.sh",
+        "tools/generate_cmake_presets.py",
+        "tools/generate_versions_json.py",
+        "tools/gumbel_precision/**",
+        "tools/install_deepgemm.sh",
+        "tools/install_gdrcopy.sh",
+        "tools/install_nixl_from_source_ubuntu.py",
+        "tools/install_snapshot_runtime.sh",
+        "tools/install_torchcodec_rocm.sh",
+        "tools/install_triton_from_source.sh",
+        "tools/pre_commit/**",
+        "tools/profiler/nsys_profile_tools/README.md",
+        "tools/profiler/nsys_profile_tools/gputrc2graph.py",
+        "tools/profiler/nsys_profile_tools/vllm_engine_model.json",
+        "tools/profiler/print_layerwise_table.py",
+        "tools/profiler/visualize_layerwise_profile.py",
+        "tools/recipes/**",
+        "tools/report_build_time_ninja.py",
+        "tools/setup_deepgemm_pythons.sh",
+        "tools/use_existing_torch.py",
+        "tools/vllm-rocm/**",
+        "tools/vllm-tpu/**",
+        "vllm/__init__.py",
+        "vllm/_aiter_ops.py",
+        "vllm/_custom_ops.py",
+        "vllm/_xpu_ops.py",
+        "vllm/assets/**",
+        "vllm/benchmarks/**",
+        "vllm/collect_env.py",
+        "vllm/compilation/**",
+        "vllm/config/**",
+        "vllm/connections.py",
+        "vllm/cute_utils/**",
+        "vllm/device_allocator/**",
+        "vllm/distributed/__init__.py",
+        "vllm/distributed/aux_output_connector/**",
+        "vllm/distributed/communication_op.py",
+        "vllm/distributed/device_communicators/**",
+        "vllm/distributed/ec_transfer/**",
+        "vllm/distributed/elastic_ep/**",
+        "vllm/distributed/eplb/**",
+        "vllm/distributed/kv_events.py",
+        "vllm/distributed/kv_transfer/README.md",
+        "vllm/distributed/kv_transfer/__init__.py",
+        "vllm/distributed/kv_transfer/kv_connector/**",
+        "vllm/distributed/kv_transfer/kv_transfer_state.py",
+        "vllm/distributed/mooncake_store.py",
+        "vllm/distributed/nixl_utils.py",
+        "vllm/distributed/parallel_state.py",
+        "vllm/distributed/stateless_coordinator.py",
+        "vllm/distributed/utils.py",
+        "vllm/distributed/weight_transfer/**",
+        "vllm/engine/**",
+        "vllm/entrypoints/**",
+        "vllm/env_override.py",
+        "vllm/envs.py",
+        "vllm/exceptions.py",
+        "vllm/forward_context.py",
+        "vllm/inputs/**",
+        "vllm/ir/**",
+        "vllm/kernels/**",
+        "vllm/logger.py",
+        "vllm/logging_utils/**",
+        "vllm/logits_process.py",
+        "vllm/logprobs.py",
+        "vllm/lora/**",
+        "vllm/model_executor/**",
+        "vllm/model_inspection.py",
+        "vllm/models/__init__.py",
+        "vllm/models/common/**",
+        "vllm/models/deepseek_v32/**",
+        "vllm/models/deepseek_v4/**",
+        "vllm/models/deepseek_v41/**",
+        "vllm/models/dots3_note/**",
+        "vllm/models/glm5next/__init__.py",
+        "vllm/models/glm5next/amd/__init__.py",
+        "vllm/models/glm5next/amd/ops/__init__.py",
+        "vllm/models/glm5next/amd/ops/kpool_compress.py",
+        "vllm/models/glm5next/amd/sparse_indexer.py",
+        "vllm/models/glm5next/common/**",
+        "vllm/models/glm5next/nvidia/__init__.py",
+        "vllm/models/glm5next/nvidia/ops/__init__.py",
+        "vllm/models/glm5next/nvidia/ops/fused_eh_norm.py",
+        "vllm/models/glm5next/nvidia/ops/kpool_compress.py",
+        "vllm/models/glm5next/nvidia/sparse_indexer.py",
+        "vllm/models/glm5next/sparse_indexer.py",
+        "vllm/models/hy_v4/**",
+        "vllm/models/inkling/**",
+        "vllm/models/kimi_k3/__init__.py",
+        "vllm/models/kimi_k3/amd/__init__.py",
+        "vllm/models/kimi_k3/amd/kda.py",
+        "vllm/models/kimi_k3/amd/kda_metadata.py",
+        "vllm/models/kimi_k3/amd/latent_moe_runner.py",
+        "vllm/models/kimi_k3/amd/linear.py",
+        "vllm/models/kimi_k3/amd/mla.py",
+        "vllm/models/kimi_k3/amd/model.py",
+        "vllm/models/kimi_k3/amd/mtp.py",
+        "vllm/models/kimi_k3/amd/ops/__init__.py",
+        "vllm/models/kimi_k3/amd/ops/attn_res.py",
+        "vllm/models/kimi_k3/amd/ops/kda_checkpoint.py",
+        "vllm/models/kimi_k3/amd/ops/kda_chunk.py",
+        "vllm/models/kimi_k3/amd/ops/kda_decode.py",
+        "vllm/models/kimi_k3/amd/ops/kda_prefill.py",
+        "vllm/models/kimi_k3/common/**",
+        "vllm/models/kimi_k3/nvidia/__init__.py",
+        "vllm/models/kimi_k3/nvidia/dspark_mla.py",
+        "vllm/models/kimi_k3/nvidia/kda.py",
+        "vllm/models/kimi_k3/nvidia/kda_metadata.py",
+        "vllm/models/kimi_k3/nvidia/latent_moe_runner.py",
+        "vllm/models/kimi_k3/nvidia/low_latency_gemm.py",
+        "vllm/models/kimi_k3/nvidia/mla.py",
+        "vllm/models/kimi_k3/nvidia/model.py",
+        "vllm/models/kimi_k3/nvidia/mtp.py",
+        "vllm/models/kimi_k3/nvidia/ops/__init__.py",
+        "vllm/models/kimi_k3/nvidia/ops/attn_res.py",
+        "vllm/models/kimi_k3/nvidia/ops/cute_dsl/**",
+        "vllm/models/kimi_k3/nvidia/ops/fused_mla_key_concat_kv_cache.py",
+        "vllm/models/kimi_k3/nvidia/ops/latent_moe_tail.py",
+        "vllm/models/kimi_k3/nvidia/ops/recoverssm.py",
+        "vllm/models/kimi_k3/nvidia/ops/vision_fa4_warmup.py",
+        "vllm/models/minimax_m3/**",
+        "vllm/models/qwen4_exp/**",
+        "vllm/multimodal/**",
+        "vllm/outputs.py",
+        "vllm/parser/**",
+        "vllm/platforms/**",
+        "vllm/plugins/**",
+        "vllm/pooling_params.py",
+        "vllm/profiler/**",
+        "vllm/py.typed",
+        "vllm/ray/**",
+        "vllm/reasoning/**",
+        "vllm/renderers/**",
+        "vllm/sampling_params.py",
+        "vllm/scalar_type.py",
+        "vllm/sequence.py",
+        "vllm/snapshot/**",
+        "vllm/tasks.py",
+        "vllm/tilelang_utils/**",
+        "vllm/tokenizers/**",
+        "vllm/tool_parsers/**",
+        "vllm/tracing/**",
+        "vllm/transformers_utils/**",
+        "vllm/triton_utils/**",
+        "vllm/usage/**",
+        "vllm/utils/**",
+        "vllm/v1/**",
+        "vllm/version.py",
+        "vllm/vllm_flash_attn/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "vLLM Team, Apache-2.0 license (LICENSE), https://github.com/vllm-project/vllm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vllm/third_party/flash_linear_attention/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2025, Songlin Yang, Yu Zhang\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2025, Songlin Yang, Yu Zhang, MIT license (LICENSE), https://github.com/vllm-project/vllm/tree/54d9b1cb487c2a2f12506942820f0ae443807093/vllm/third_party/flash_linear_attention."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ppc64le"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rock_base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm_base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm_base_gfx1250"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm_gfx1250"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s390x"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slurm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".buildkite/lm-eval-harness/configs/models-large-hopper.txt",
+        ".buildkite/lm-eval-harness/configs/models-large-rocm-tp4.txt",
+        ".buildkite/lm-eval-harness/configs/models-large-rocm.txt",
+        ".buildkite/lm-eval-harness/configs/models-large-xpu-fp8.txt",
+        ".buildkite/lm-eval-harness/configs/models-large.txt",
+        ".buildkite/lm-eval-harness/configs/models-mm-large-h100.txt",
+        ".buildkite/lm-eval-harness/configs/models-mm-small.txt",
+        ".buildkite/lm-eval-harness/configs/models-small-rocm.txt",
+        ".buildkite/lm-eval-harness/configs/models-small.txt",
+        "benchmarks/kernels/requirements.txt",
+        "benchmarks/multi_turn/requirements.txt",
+        "requirements/build/cpu.txt",
+        "requirements/build/cuda.txt",
+        "requirements/build/rock.txt",
+        "requirements/build/rocm.txt",
+        "requirements/build/rust.txt",
+        "requirements/build/tpu.txt",
+        "requirements/common.txt",
+        "requirements/cpu.txt",
+        "requirements/cuda.txt",
+        "requirements/dev.txt",
+        "requirements/docs.txt",
+        "requirements/kv_connectors.txt",
+        "requirements/kv_connectors_cu12.txt",
+        "requirements/kv_connectors_rocm.txt",
+        "requirements/lint.txt",
+        "requirements/rocm.txt",
+        "requirements/rubin-prerelease.txt",
+        "requirements/test/cpu.txt",
+        "requirements/test/cuda.txt",
+        "requirements/test/nightly-torch.txt",
+        "requirements/test/rocm.txt",
+        "requirements/test/xpu.txt",
+        "requirements/tpu.txt",
+        "requirements/xpu.txt",
+        "rust/src/bench/tests/python_serve_flags.txt",
+        "rust/src/chat/src/renderer/deepseek_v32/fixtures/test_output_developer_tools.txt",
+        "rust/src/chat/src/renderer/deepseek_v32/fixtures/test_output_search_w_date.txt",
+        "rust/src/chat/src/renderer/deepseek_v32/fixtures/test_output_search_wo_date.txt",
+        "rust/src/chat/src/renderer/deepseek_v32/fixtures/test_output_vllm_parity.txt",
+        "rust/src/chat/src/renderer/deepseek_v4/fixtures/test_output_1.txt",
+        "rust/src/chat/src/renderer/deepseek_v4/fixtures/test_output_2.txt",
+        "rust/src/chat/src/renderer/deepseek_v4/fixtures/test_output_developer_tools.txt",
+        "rust/src/chat/src/renderer/deepseek_v41/fixtures/test_output_1.txt",
+        "rust/src/chat/src/renderer/deepseek_v41/fixtures/test_output_2.txt",
+        "rust/src/chat/src/renderer/deepseek_v41/fixtures/test_output_developer_tools.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/assistant_history.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/developer_tools.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/drop_analysis.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/leading_system.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/request_tools.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/simple_user.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/system_instructions_env.txt",
+        "rust/src/chat/src/renderer/harmony/fixtures/tool_roundtrip.txt",
+        "rust/src/chat/src/renderer/inkling/fixtures/text_audio_output.txt",
+        "rust/src/chat/src/renderer/inkling/fixtures/text_image_output.txt",
+        "rust/src/chat/src/renderer/inkling/fixtures/tool_declare_output.txt",
+        "rust/src/chat/src/renderer/inkling/fixtures/tool_round_trip_output.txt",
+        "rust/src/chat/src/renderer/kimi_k3/fixtures/controls_thinking_off_output.txt",
+        "rust/src/chat/src/renderer/kimi_k3/fixtures/dynamic_only_tool_declare_output.txt",
+        "rust/src/chat/src/renderer/kimi_k3/fixtures/dynamic_system_tool_declare_output.txt",
+        "rust/src/chat/src/renderer/kimi_k3/fixtures/history_preserve_and_image_output.txt",
+        "rust/src/chat/src/renderer/kimi_k3/fixtures/tools_history_and_required_output.txt",
+        "rust/src/chat/tests/grammar_replay/DeepSeek-V3.2-Exp.txt",
+        "rust/src/chat/tests/grammar_replay/DeepSeek-V4-Flash.txt",
+        "rust/src/chat/tests/grammar_replay/DeepSeek-V4.1-Flash.txt",
+        "rust/src/chat/tests/grammar_replay/GLM-4.5.txt",
+        "rust/src/chat/tests/grammar_replay/GLM-4.7-Flash.txt",
+        "rust/src/chat/tests/grammar_replay/GLM-5.2-FP8.txt",
+        "rust/src/chat/tests/grammar_replay/Hy3.txt",
+        "rust/src/chat/tests/grammar_replay/Kimi-K2.5.txt",
+        "rust/src/chat/tests/grammar_replay/Kimi-K3.txt",
+        "rust/src/chat/tests/grammar_replay/MiMo-V2.6-Flash-RL.txt",
+        "rust/src/chat/tests/grammar_replay/MiniMax-M2.5.txt",
+        "rust/src/chat/tests/grammar_replay/MiniMax-M3.txt",
+        "rust/src/chat/tests/grammar_replay/Qwen3-0.6B.txt",
+        "rust/src/chat/tests/grammar_replay/Qwen3.5-4B.txt",
+        "rust/src/chat/tests/grammar_replay/Seed-OSS-36B-Instruct.txt",
+        "tests/evals/gpt_oss/configs/models-b200.txt",
+        "tests/evals/gpt_oss/configs/models-gfx942.txt",
+        "tests/evals/gpt_oss/configs/models-gfx950.txt",
+        "tests/evals/gpt_oss/configs/models-h100.txt",
+        "tests/evals/gpt_oss/configs/models-spark.txt",
+        "tests/evals/gpt_oss/configs/models-xpu.txt",
+        "tests/evals/gsm8k/configs/humming/config-a100-act-int8-shard-0.txt",
+        "tests/evals/gsm8k/configs/humming/config-a100-act-int8-shard-1.txt",
+        "tests/evals/gsm8k/configs/humming/config-a100-shard-0.txt",
+        "tests/evals/gsm8k/configs/humming/config-a100-shard-1.txt",
+        "tests/evals/gsm8k/configs/humming/config-a100-shard-2.txt",
+        "tests/evals/gsm8k/configs/humming/config-act-fp8.txt",
+        "tests/evals/gsm8k/configs/humming/config-act-int8.txt",
+        "tests/evals/gsm8k/configs/humming/config-deepep.txt",
+        "tests/evals/gsm8k/configs/humming/config-h100-shard-0.txt",
+        "tests/evals/gsm8k/configs/humming/config-h100-shard-1.txt",
+        "tests/evals/gsm8k/configs/humming/config-h100-shard-2.txt",
+        "tests/evals/gsm8k/configs/humming/config-l4.txt",
+        "tests/evals/gsm8k/configs/humming/config.txt",
+        "tests/evals/gsm8k/configs/models-blackwell-ep-mi355.txt",
+        "tests/evals/gsm8k/configs/models-blackwell-ep.txt",
+        "tests/evals/gsm8k/configs/models-blackwell.txt",
+        "tests/evals/gsm8k/configs/models-gfx950-large.txt",
+        "tests/evals/gsm8k/configs/models-gfx950-small.txt",
+        "tests/evals/gsm8k/configs/models-h200-deepseek-r1-dp.txt",
+        "tests/evals/gsm8k/configs/models-h200-deepseek-r1-tp.txt",
+        "tests/evals/gsm8k/configs/models-h200-deepseek-v32-dp.txt",
+        "tests/evals/gsm8k/configs/models-h200-deepseek-v32-tp.txt",
+        "tests/evals/gsm8k/configs/models-h200-nemotron-3-super.txt",
+        "tests/evals/gsm8k/configs/models-hisparse.txt",
+        "tests/evals/gsm8k/configs/models-mi355-deepseek-r1-dp.txt",
+        "tests/evals/gsm8k/configs/models-mi355-deepseek-r1-tp.txt",
+        "tests/evals/gsm8k/configs/models-mi355-deepseek-v32-dp.txt",
+        "tests/evals/gsm8k/configs/models-mi355-deepseek-v32-tp.txt",
+        "tests/evals/gsm8k/configs/models-mi355-nemotron-3-super.txt",
+        "tests/evals/gsm8k/configs/models-mi3xx-fp8-and-mixed.txt",
+        "tests/evals/gsm8k/configs/models-mi3xx.txt",
+        "tests/evals/gsm8k/configs/models-pcp.txt",
+        "tests/evals/gsm8k/configs/models-qwen35-blackwell.txt",
+        "tests/evals/gsm8k/configs/models-qwen35-mi355.txt",
+        "tests/evals/gsm8k/configs/models-small-tp-mi355.txt",
+        "tests/evals/gsm8k/configs/models-small-tp.txt",
+        "tests/evals/gsm8k/configs/models-small.txt",
+        "tests/evals/gsm8k/configs/models-spec-decode-rocm.txt",
+        "tests/evals/gsm8k/configs/models-spec-decode.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-k3v4nc-rocm.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-k3v4nc.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-k8v4-rocm.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-k8v4.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-t3nc-rocm.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-t3nc.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-t4nc-rocm.txt",
+        "tests/evals/gsm8k/configs/models-turboquant-t4nc.txt",
+        "tests/evals/gsm8k/configs/models-watermark-dspark-tp2.txt",
+        "tests/evals/gsm8k/configs/models-watermark.txt",
+        "tests/evals/gsm8k/configs/moe-refactor-dp-ep/config-b200.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-b200-shard-0.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-b200-shard-1.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-b200-shard-2.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-b200-shard-3.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-b200.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-h100-shard-0.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-h100-shard-1.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-h100-shard-2.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-h100-shard-3.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-rocm-shard-0.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-rocm-shard-1.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-rocm-shard-2.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-rocm-shard-3.txt",
+        "tests/evals/gsm8k/configs/moe-refactor/config-test.txt",
+        "tests/evals/mrcr/configs/models-small.txt",
+        "tests/evals/qwen4_exp/configs/models-b200.txt",
+        "tests/evals/qwen4_exp/configs/models-h200.txt",
+        "tests/evals/qwen4_exp/configs/models-rocm.txt",
+        "tests/prompts/example.txt",
+        "tests/prompts/summary.txt",
+        "tests/tokenizers_/fixtures/deepseek_v4/test_output_1.txt",
+        "tests/tokenizers_/fixtures/deepseek_v4/test_output_2.txt",
+        "tests/tokenizers_/fixtures/deepseek_v4/test_output_3.txt",
+        "tests/tokenizers_/fixtures/deepseek_v4/test_output_4.txt",
+        "tests/tokenizers_/fixtures/deepseek_v4/test_output_5.txt",
+        "tests/tokenizers_/fixtures/deepseek_v41/test_output_1.txt",
+        "tests/tokenizers_/fixtures/deepseek_v41/test_output_2.txt",
+        "tools/pre_commit/test_tethering_allowlist.txt",
+        "tools/recipes/requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pipeline_gen_v2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DCO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

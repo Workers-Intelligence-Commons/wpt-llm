@@ -1,0 +1,1871 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dokku/dokku",
+  "revision": "94a82bd6eee3bd1b813e4223c4f5c042d59650d8",
+  "checksum": "sha256:f31e772039f8e713377d84c387ae8bd739bc4d357a98ec66cbe3295b17763dc1",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "docs/assets/docker.png",
+      "docs/assets/dokku-large.png",
+      "docs/assets/dokku.ai",
+      "docs/assets/dokku.png",
+      "docs/assets/extend.png",
+      "docs/assets/favicons/android-chrome-144x144.png",
+      "docs/assets/favicons/android-chrome-192x192.png",
+      "docs/assets/favicons/android-chrome-36x36.png",
+      "docs/assets/favicons/android-chrome-48x48.png",
+      "docs/assets/favicons/android-chrome-72x72.png",
+      "docs/assets/favicons/android-chrome-96x96.png",
+      "docs/assets/favicons/apple-touch-icon-114x114.png",
+      "docs/assets/favicons/apple-touch-icon-120x120.png",
+      "docs/assets/favicons/apple-touch-icon-144x144.png",
+      "docs/assets/favicons/apple-touch-icon-152x152.png",
+      "docs/assets/favicons/apple-touch-icon-180x180.png",
+      "docs/assets/favicons/apple-touch-icon-57x57.png",
+      "docs/assets/favicons/apple-touch-icon-60x60.png",
+      "docs/assets/favicons/apple-touch-icon-72x72.png",
+      "docs/assets/favicons/apple-touch-icon-76x76.png",
+      "docs/assets/favicons/apple-touch-icon-precomposed.png",
+      "docs/assets/favicons/apple-touch-icon.png",
+      "docs/assets/favicons/favicon-16x16.png",
+      "docs/assets/favicons/favicon-32x32.png",
+      "docs/assets/favicons/favicon-96x96.png",
+      "docs/assets/favicons/favicon.ico",
+      "docs/assets/favicons/mstile-144x144.png",
+      "docs/assets/favicons/mstile-150x150.png",
+      "docs/assets/favicons/mstile-310x150.png",
+      "docs/assets/favicons/mstile-310x310.png",
+      "docs/assets/favicons/mstile-70x70.png",
+      "docs/assets/git.png",
+      "docs/assets/gplaypattern.png",
+      "docs/assets/placeholder-avatar.jpg",
+      "docs/assets/slack-logo.png",
+      "docs/assets/social/**",
+      "docs/assets/team/**",
+      "docs/assets/universe/universe animation.keyshape",
+      "tests/unit/domain_ssl.tar",
+      "tests/unit/osx_ssl_tarred.tar",
+      "tests/unit/server_ssl.tar",
+      "tests/unit/server_ssl_sans.tar",
+      "tests/unit/server_ssl_wildcard.tar"
+    ]
+  },
+  "history": {
+    "since": "08575f5603077c6a995d2d1e78d8a03224377a39"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (C) 2014 Jeff Lindsay\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.md:\n\n# NOTICE\n\nFiles in this directory are derived from\n[github.com/databus23/helm-diff](https://github.com/databus23/helm-diff),\nwhich is distributed under the Apache License 2.0. See `LICENSE` for the\nfull text.\n\nSource files merged into this package:\n\n- `diff/diff.go`\n- `diff/report.go`\n- `manifest/parse.go`\n\nModifications:\n\n- Merged the upstream `diff` and `manifest` packages into a single `helmdiff`\n  package; references to `manifest.MappingResult` are now bare `MappingResult`.\n- Removed three-way-merge support (the upstream `manifest/generate.go` and\n  `manifest/util.go` files), which imported Helm v4 and other dependencies not\n  used by Dokku.\n- Removed `manifest.ParseObject`, which depended on `k8s.io/apimachinery/pkg/runtime`.\n- Removed release-ownership tracking (`ManifestsOwnership`, `OwnershipDiff`,\n  `Releases`, `reIndexForRelease`).\n- Removed the simple, JSON, structured, dyff, and template output formatters and\n  the upstream `diff/structured.go` and `diff/constant.go` files. Only the\n  default unified-diff (`\"diff\"`) output format remains.\n- `setupReportFormat` is hard-wired to `setupDiffReport`.\n- `ReportEntry.Structured` and the `*Options.StructuredOutput()` method removed.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 Joe Kutner\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/dokku/dokku: Copyright (C) 2014 Jeff Lindsay, MIT license (LICENSE), https://github.com/dokku/dokku; the authors of dokku/dokku (plugins/scheduler-k3s/internal/helmdiff) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/plugins/scheduler-k3s/internal/helmdiff; Al Johri, ISC license (declared in package.json), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/tests/apps/multi; Copyright (c) 2014 Joe Kutner, MIT license (LICENSE), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/tests/apps/scala."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".circleci/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".golangci-lint.yml",
+        ".prettierignore",
+        ".shellcheckrc",
+        ".well-known/**",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "HISTORY.md",
+        "ISSUE_TEMPLATE.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "Vagrantfile",
+        "arch.mk",
+        "bootstrap.sh",
+        "common.mk",
+        "deb.mk",
+        "debian/**",
+        "docker/**",
+        "docs/README.md",
+        "docs/_build/**",
+        "docs/_overrides/**",
+        "docs/advanced-usage/**",
+        "docs/appendices/**",
+        "docs/assets/dokku-logo.svg",
+        "docs/assets/extra.css",
+        "docs/assets/favicons/browserconfig.xml",
+        "docs/assets/favicons/manifest.json",
+        "docs/assets/style.css",
+        "docs/assets/universe/universe animation.svg",
+        "docs/assets/versions.json",
+        "docs/community/**",
+        "docs/configuration/**",
+        "docs/deployment/**",
+        "docs/development/**",
+        "docs/enterprise/**",
+        "docs/getting-started/**",
+        "docs/home.html",
+        "docs/index.md",
+        "docs/networking/**",
+        "docs/processes/**",
+        "docs/template.html",
+        "docs/viewdocs.json",
+        "docs.mk",
+        "dokku",
+        "go.work",
+        "mkdocs.yml",
+        "package.mk",
+        "plugins/00_dokku-standard/**",
+        "plugins/20_events/**",
+        "plugins/app-json/**",
+        "plugins/apps/**",
+        "plugins/builder/**",
+        "plugins/builder-dockerfile/**",
+        "plugins/builder-herokuish/**",
+        "plugins/builder-lambda/**",
+        "plugins/builder-nixpacks/**",
+        "plugins/builder-null/**",
+        "plugins/builder-pack/**",
+        "plugins/builder-railpack/**",
+        "plugins/buildpacks/**",
+        "plugins/builds/**",
+        "plugins/caddy-vhosts/**",
+        "plugins/certs/**",
+        "plugins/checks/**",
+        "plugins/common/**",
+        "plugins/config/**",
+        "plugins/cron/**",
+        "plugins/docker-options/**",
+        "plugins/domains/**",
+        "plugins/enter/**",
+        "plugins/git/**",
+        "plugins/haproxy-vhosts/**",
+        "plugins/logs/**",
+        "plugins/network/**",
+        "plugins/nginx-vhosts/**",
+        "plugins/openresty-vhosts/**",
+        "plugins/plugin/**",
+        "plugins/ports/**",
+        "plugins/proxy/**",
+        "plugins/ps/**",
+        "plugins/registry/**",
+        "plugins/repo/**",
+        "plugins/resource/**",
+        "plugins/run/**",
+        "plugins/scheduler/**",
+        "plugins/scheduler-docker-local/**",
+        "plugins/scheduler-k3s/.gitignore",
+        "plugins/scheduler-k3s/Makefile",
+        "plugins/scheduler-k3s/certificate_template_test.go",
+        "plugins/scheduler-k3s/chart.go",
+        "plugins/scheduler-k3s/chart_hooks.go",
+        "plugins/scheduler-k3s/chart_hooks_test.go",
+        "plugins/scheduler-k3s/chart_render_test.go",
+        "plugins/scheduler-k3s/config_secret.go",
+        "plugins/scheduler-k3s/config_secret_test.go",
+        "plugins/scheduler-k3s/cron_job_template_test.go",
+        "plugins/scheduler-k3s/functions.go",
+        "plugins/scheduler-k3s/functions_test.go",
+        "plugins/scheduler-k3s/go.mod",
+        "plugins/scheduler-k3s/go.sum",
+        "plugins/scheduler-k3s/helm.go",
+        "plugins/scheduler-k3s/helm_test.go",
+        "plugins/scheduler-k3s/ingress_route_template_test.go",
+        "plugins/scheduler-k3s/ingress_template_test.go",
+        "plugins/scheduler-k3s/k8s.go",
+        "plugins/scheduler-k3s/k8s_test.go",
+        "plugins/scheduler-k3s/metadata.go",
+        "plugins/scheduler-k3s/metadata_test.go",
+        "plugins/scheduler-k3s/node_profiles.go",
+        "plugins/scheduler-k3s/node_profiles_test.go",
+        "plugins/scheduler-k3s/node_sysctls.go",
+        "plugins/scheduler-k3s/node_sysctls_test.go",
+        "plugins/scheduler-k3s/plugin.toml",
+        "plugins/scheduler-k3s/portmap.go",
+        "plugins/scheduler-k3s/preview.go",
+        "plugins/scheduler-k3s/pull_secret.go",
+        "plugins/scheduler-k3s/pull_secret_test.go",
+        "plugins/scheduler-k3s/release_values.go",
+        "plugins/scheduler-k3s/release_values_test.go",
+        "plugins/scheduler-k3s/report.go",
+        "plugins/scheduler-k3s/report_test.go",
+        "plugins/scheduler-k3s/scheduler_k3s.go",
+        "plugins/scheduler-k3s/src/**",
+        "plugins/scheduler-k3s/storage.go",
+        "plugins/scheduler-k3s/storage_exec.go",
+        "plugins/scheduler-k3s/storage_exec_test.go",
+        "plugins/scheduler-k3s/storage_test.go",
+        "plugins/scheduler-k3s/subcommands.go",
+        "plugins/scheduler-k3s/template.go",
+        "plugins/scheduler-k3s/template_test.go",
+        "plugins/scheduler-k3s/templates/**",
+        "plugins/scheduler-k3s/tls.go",
+        "plugins/scheduler-k3s/triggers.go",
+        "plugins/scheduler-k3s/triggers_test.go",
+        "plugins/scheduler-k3s/vector_values_test.go",
+        "plugins/scheduler-null/**",
+        "plugins/shell/**",
+        "plugins/ssh-keys/**",
+        "plugins/storage/**",
+        "plugins/trace/**",
+        "plugins/traefik-vhosts/**",
+        "staticcheck.conf",
+        "tests/apps/checks-root/**",
+        "tests/apps/clojure/**",
+        "tests/apps/config/**",
+        "tests/apps/dockerfile/**",
+        "tests/apps/dockerfile-app-json-formations/**",
+        "tests/apps/dockerfile-entrypoint/**",
+        "tests/apps/dockerfile-noexpose/**",
+        "tests/apps/dockerfile-procfile/**",
+        "tests/apps/dockerfile-procfile-bad/**",
+        "tests/apps/dockerfile-release/**",
+        "tests/apps/gitsubmodules/**",
+        "tests/apps/go/**",
+        "tests/apps/go-fail-postdeploy/**",
+        "tests/apps/go-fail-predeploy/**",
+        "tests/apps/gogrpc/**",
+        "tests/apps/java/**",
+        "tests/apps/lambda-python/**",
+        "tests/apps/nodejs-express/**",
+        "tests/apps/nodejs-express-noappjson/**",
+        "tests/apps/nodejs-express-noprocfile/**",
+        "tests/apps/nodejs-worker/**",
+        "tests/apps/php/**",
+        "tests/apps/python/**",
+        "tests/apps/python-console-only/**",
+        "tests/apps/python-flask/**",
+        "tests/apps/ruby/**",
+        "tests/apps/static/**",
+        "tests/apps/zombies-buildpack/**",
+        "tests/apps/zombies-dockerfile-no-tini/**",
+        "tests/apps/zombies-dockerfile-tini/**",
+        "tests/ci/**",
+        "tests/dhparam.pem",
+        "tests/image/**",
+        "tests/organize-tests",
+        "tests/shellcheck-to-junit",
+        "tests/test_deploy",
+        "tests/unit/app-json-2.bats",
+        "tests/unit/app-json-3.bats",
+        "tests/unit/app-json-4.bats",
+        "tests/unit/app-json-5.bats",
+        "tests/unit/app-json.bats",
+        "tests/unit/apps_1.bats",
+        "tests/unit/apps_2.bats",
+        "tests/unit/archive-security.bats",
+        "tests/unit/build-env.bats",
+        "tests/unit/builder-dockerfile.bats",
+        "tests/unit/builder-herokuish.bats",
+        "tests/unit/builder-lambda.bats",
+        "tests/unit/builder-nixpacks.bats",
+        "tests/unit/builder-pack.bats",
+        "tests/unit/builder-railpack.bats",
+        "tests/unit/builder.bats",
+        "tests/unit/buildpacks.bats",
+        "tests/unit/builds.bats",
+        "tests/unit/caddy-vhosts-docker-args.bats",
+        "tests/unit/caddy-vhosts.bats",
+        "tests/unit/caddy.bats",
+        "tests/unit/certs.bats",
+        "tests/unit/checks.bats",
+        "tests/unit/client.bats",
+        "tests/unit/config-oddities.bats",
+        "tests/unit/config.bats",
+        "tests/unit/core_1.bats",
+        "tests/unit/core_2.bats",
+        "tests/unit/core_3.bats",
+        "tests/unit/cron-1.bats",
+        "tests/unit/cron-2.bats",
+        "tests/unit/cron-3.bats",
+        "tests/unit/deploy-lock.bats",
+        "tests/unit/docker-image-healthcheck.bats",
+        "tests/unit/docker-options-2.bats",
+        "tests/unit/docker-options.bats",
+        "tests/unit/domains.bats",
+        "tests/unit/events.bats",
+        "tests/unit/git_1.bats",
+        "tests/unit/git_2.bats",
+        "tests/unit/git_3.bats",
+        "tests/unit/git_4.bats",
+        "tests/unit/git_5.bats",
+        "tests/unit/git_6.bats",
+        "tests/unit/git_7.bats",
+        "tests/unit/git_8.bats",
+        "tests/unit/haproxy-vhosts.bats",
+        "tests/unit/haproxy.bats",
+        "tests/unit/init.bats",
+        "tests/unit/logs-1.bats",
+        "tests/unit/logs-2.bats",
+        "tests/unit/network.bats",
+        "tests/unit/nginx-vhosts_1.bats",
+        "tests/unit/nginx-vhosts_10.bats",
+        "tests/unit/nginx-vhosts_11.bats",
+        "tests/unit/nginx-vhosts_12.bats",
+        "tests/unit/nginx-vhosts_13.bats",
+        "tests/unit/nginx-vhosts_14.bats",
+        "tests/unit/nginx-vhosts_15.bats",
+        "tests/unit/nginx-vhosts_16.bats",
+        "tests/unit/nginx-vhosts_2.bats",
+        "tests/unit/nginx-vhosts_3.bats",
+        "tests/unit/nginx-vhosts_4.bats",
+        "tests/unit/nginx-vhosts_5.bats",
+        "tests/unit/nginx-vhosts_6.bats",
+        "tests/unit/nginx-vhosts_7.bats",
+        "tests/unit/nginx-vhosts_8.bats",
+        "tests/unit/nginx-vhosts_9.bats",
+        "tests/unit/nginx-vhosts_properties.bats",
+        "tests/unit/openresty-vhosts.bats",
+        "tests/unit/openresty.bats",
+        "tests/unit/plugin.bats",
+        "tests/unit/ports.bats",
+        "tests/unit/proxied-app.bats",
+        "tests/unit/proxy.bats",
+        "tests/unit/ps-dockerfile-1.bats",
+        "tests/unit/ps-dockerfile-2.bats",
+        "tests/unit/ps-general-1.bats",
+        "tests/unit/ps-general-2.bats",
+        "tests/unit/ps-general-3.bats",
+        "tests/unit/ps-herokuish-1.bats",
+        "tests/unit/ps-herokuish-2.bats",
+        "tests/unit/registry.bats",
+        "tests/unit/registry_2.bats",
+        "tests/unit/repo.bats",
+        "tests/unit/report.bats",
+        "tests/unit/resource_1.bats",
+        "tests/unit/resource_2.bats",
+        "tests/unit/resource_3.bats",
+        "tests/unit/run_1.bats",
+        "tests/unit/run_2.bats",
+        "tests/unit/scheduler-docker-local.bats",
+        "tests/unit/scheduler-k3s-1.bats",
+        "tests/unit/scheduler-k3s-2.bats",
+        "tests/unit/scheduler-k3s-3.bats",
+        "tests/unit/scheduler-k3s-4.bats",
+        "tests/unit/scheduler-k3s-5.bats",
+        "tests/unit/scheduler-k3s-annotations.bats",
+        "tests/unit/scheduler-k3s-autoscaling-auth.bats",
+        "tests/unit/scheduler-k3s-certs-2.bats",
+        "tests/unit/scheduler-k3s-certs-deploy-2.bats",
+        "tests/unit/scheduler-k3s-certs-deploy.bats",
+        "tests/unit/scheduler-k3s-certs-redirect.bats",
+        "tests/unit/scheduler-k3s-certs.bats",
+        "tests/unit/scheduler-k3s-charts-1.bats",
+        "tests/unit/scheduler-k3s-charts-2.bats",
+        "tests/unit/scheduler-k3s-cnb.bats",
+        "tests/unit/scheduler-k3s-compression.bats",
+        "tests/unit/scheduler-k3s-dockerfile.bats",
+        "tests/unit/scheduler-k3s-ensure-charts.bats",
+        "tests/unit/scheduler-k3s-help.bats",
+        "tests/unit/scheduler-k3s-herokuish.bats",
+        "tests/unit/scheduler-k3s-labels.bats",
+        "tests/unit/scheduler-k3s-node-sysctls-2.bats",
+        "tests/unit/scheduler-k3s-node-sysctls.bats",
+        "tests/unit/scheduler-k3s-preview.bats",
+        "tests/unit/scheduler-k3s-profiles.bats",
+        "tests/unit/scheduler-k3s-report.bats",
+        "tests/unit/scheduler-k3s-secrets-deploy.bats",
+        "tests/unit/scheduler-k3s-secrets.bats",
+        "tests/unit/scheduler-k3s-wildcard-1.bats",
+        "tests/unit/scheduler-k3s-wildcard-2.bats",
+        "tests/unit/scheduler.bats",
+        "tests/unit/ssh_keys.bats",
+        "tests/unit/storage-1.bats",
+        "tests/unit/storage-2.bats",
+        "tests/unit/storage-3.bats",
+        "tests/unit/storage-4.bats",
+        "tests/unit/test_helper.bash",
+        "tests/unit/trace.bats",
+        "tests/unit/traefik-vhosts.bats",
+        "tests/unit/traefik.bats",
+        "tests/unit/version.bats",
+        "tests.mk",
+        "workspace.code-workspace"
+      ],
+      "text": "Copyright (C) 2014 Jeff Lindsay\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (C) 2014 Jeff Lindsay, MIT license (LICENSE), https://github.com/dokku/dokku."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "plugins/scheduler-k3s/internal/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.md:\n\n# NOTICE\n\nFiles in this directory are derived from\n[github.com/databus23/helm-diff](https://github.com/databus23/helm-diff),\nwhich is distributed under the Apache License 2.0. See `LICENSE` for the\nfull text.\n\nSource files merged into this package:\n\n- `diff/diff.go`\n- `diff/report.go`\n- `manifest/parse.go`\n\nModifications:\n\n- Merged the upstream `diff` and `manifest` packages into a single `helmdiff`\n  package; references to `manifest.MappingResult` are now bare `MappingResult`.\n- Removed three-way-merge support (the upstream `manifest/generate.go` and\n  `manifest/util.go` files), which imported Helm v4 and other dependencies not\n  used by Dokku.\n- Removed `manifest.ParseObject`, which depended on `k8s.io/apimachinery/pkg/runtime`.\n- Removed release-ownership tracking (`ManifestsOwnership`, `OwnershipDiff`,\n  `Releases`, `reIndexForRelease`).\n- Removed the simple, JSON, structured, dyff, and template output formatters and\n  the upstream `diff/structured.go` and `diff/constant.go` files. Only the\n  default unified-diff (`\"diff\"`) output format remains.\n- `setupReportFormat` is hard-wired to `setupDiffReport`.\n- `ReportEntry.Structured` and the `*Options.StructuredOutput()` method removed.\n",
+      "attribution": "the authors of dokku/dokku (plugins/scheduler-k3s/internal/helmdiff) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/plugins/scheduler-k3s/internal/helmdiff."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tests/apps/multi/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Al Johri, ISC license (declared in package.json), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/tests/apps/multi."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/apps/scala/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Joe Kutner\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 Joe Kutner, MIT license (LICENSE), https://github.com/dokku/dokku/tree/94a82bd6eee3bd1b813e4223c4f5c042d59650d8/tests/apps/scala."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Vagrantfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Procfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sbt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sigil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.buildpacks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.godir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.null"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.static"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10_dokku_init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Procfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/access-logs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/add"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/add-global"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/allow-host"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/archive-functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/auth"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/auth-status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builder-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builder-detect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builder-herokuish-allowed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/builder-release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bump-azure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bump-modules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certs-exists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certs-force"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certs-get"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certs-remove"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certs-set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check_deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/checks-get-property"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chmod-storage-dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chown-storage-dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ci-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ci-setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cleanup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clear"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clear-global"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/command-functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commands"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/copy-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core-post-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core-post-extract"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dependencies"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deploy-source-set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deploy-test-app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/destroy-storage-dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/detached"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/detect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-args-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-args-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-args-process-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-builder-prune"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-image-labeler"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dokku"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dokku-docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dokku-retire"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-add"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-disable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-enable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-urls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/domains-vhost-enabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entrypoint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/finish"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/from-archive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/from-image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/funding-manifest-urls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate-deploy-key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-deploy-branch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-from-archive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-from-directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-from-image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-get-property"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-has-code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-revision"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/help-functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/initialize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inputrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install-builder-prune"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install-dependencies"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/installed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/internal-functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambda-builder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lintian-overrides"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/load-image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/logs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/matrix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nixpacks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/null"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/off"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/on"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/organize-tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pack"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-app-clone-setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-app-rename-setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-create"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-delete"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-domains-update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-proxy-ports-update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-release-builder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-disable-vhost"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-enable-vhost"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-restore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre_compile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prerm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/property-functions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxy-build-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxy-clear-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxy-disable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxy-enable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/public-key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/railpack"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/receive-app"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/release-and-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove-global"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/report"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/retire"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-app-status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-deploy-process"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-deploy-process-container"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-enter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-inspect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-is-deployed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-logs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-logs-failed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-post-deploy-process"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-pre-restore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-register-retired"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-retire"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-run-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-run-logs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-run-retire"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-run-stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scheduler-uses-host-cron"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/services"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/set-global"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup-dev-env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/shellcheck-to-junit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/show"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/show-conf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/show-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/skip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sshd_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sync"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/templates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test_deploy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trigger"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uninstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unlock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/urls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/validate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/validate-config"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

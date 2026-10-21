@@ -1,0 +1,314 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/doctrine/orm",
+  "revision": "d1e1ee30f3e6cf5274fe578c778683d4c8fa7f56",
+  "checksum": "sha256:64fc18d4b47507788f1c1039498c255a0f656dab942e899a8afa04575c685212",
+  "extract": {
+    "exclude": [
+      "docs/**",
+      "tests/Tests/ORM/Functional/ParserResults/**"
+    ]
+  },
+  "history": {
+    "since": "70458b2f48eba9a7e184aef95741aad4865b73e5"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) Doctrine Project\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/doctrine/orm: Copyright (c) Doctrine Project, MIT license (LICENSE), https://github.com/doctrine/orm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".doctrine-project.json",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "UPGRADE.md",
+        "ci/**",
+        "composer.json",
+        "doctrine-mapping.xsd",
+        "phpbench.json",
+        "phpcs.xml.dist",
+        "phpstan-baseline.neon",
+        "phpstan-dbal3.neon",
+        "phpstan-params.neon",
+        "phpstan.neon",
+        "phpunit.xml.dist",
+        "src/**",
+        "tests/.gitignore",
+        "tests/Performance/**",
+        "tests/README.markdown",
+        "tests/StaticAnalysis/**",
+        "tests/Tests/DbalExtensions/**",
+        "tests/Tests/DbalTypes/**",
+        "tests/Tests/EventListener/**",
+        "tests/Tests/IterableTester.php",
+        "tests/Tests/Mocks/**",
+        "tests/Tests/Models/**",
+        "tests/Tests/ORM/AbstractQueryTest.php",
+        "tests/Tests/ORM/Cache/**",
+        "tests/Tests/ORM/ConfigurationTest.php",
+        "tests/Tests/ORM/Entity/**",
+        "tests/Tests/ORM/EntityManagerTest.php",
+        "tests/Tests/ORM/EntityNotFoundExceptionTest.php",
+        "tests/Tests/ORM/EntityRepositoryTest.php",
+        "tests/Tests/ORM/Event/**",
+        "tests/Tests/ORM/Functional/AbstractFetchEagerTest.php",
+        "tests/Tests/ORM/Functional/AbstractManyToManyAssociationTestCase.php",
+        "tests/Tests/ORM/Functional/AdvancedAssociationTest.php",
+        "tests/Tests/ORM/Functional/AdvancedDqlQueryTest.php",
+        "tests/Tests/ORM/Functional/BasicFunctionalTest.php",
+        "tests/Tests/ORM/Functional/CascadeRemoveOrderTest.php",
+        "tests/Tests/ORM/Functional/ClassTableInheritanceSecondTest.php",
+        "tests/Tests/ORM/Functional/ClassTableInheritanceTest.php",
+        "tests/Tests/ORM/Functional/ClearEventTest.php",
+        "tests/Tests/ORM/Functional/CompositeKeyRelationsTest.php",
+        "tests/Tests/ORM/Functional/CompositePrimaryKeyTest.php",
+        "tests/Tests/ORM/Functional/CompositePrimaryKeyWithAssociationsTest.php",
+        "tests/Tests/ORM/Functional/CustomForeignKeyNameTest.php",
+        "tests/Tests/ORM/Functional/CustomFunctionsTest.php",
+        "tests/Tests/ORM/Functional/CustomIdObjectTypeTest.php",
+        "tests/Tests/ORM/Functional/DatabaseDriverTest.php",
+        "tests/Tests/ORM/Functional/DatabaseDriverTestCase.php",
+        "tests/Tests/ORM/Functional/DefaultTimeExpressionTest.php",
+        "tests/Tests/ORM/Functional/DefaultTimeExpressionXmlTest.php",
+        "tests/Tests/ORM/Functional/DefaultValuesTest.php",
+        "tests/Tests/ORM/Functional/DetachedEntityTest.php",
+        "tests/Tests/ORM/Functional/EagerFetchCollectionTest.php",
+        "tests/Tests/ORM/Functional/EagerFetchOneToManyWithCompositeKeyTest.php",
+        "tests/Tests/ORM/Functional/EntityListenersTest.php",
+        "tests/Tests/ORM/Functional/EntityRepositoryCriteriaTest.php",
+        "tests/Tests/ORM/Functional/EntityRepositoryTest.php",
+        "tests/Tests/ORM/Functional/EnumTest.php",
+        "tests/Tests/ORM/Functional/ExtraLazyCollectionTest.php",
+        "tests/Tests/ORM/Functional/FlushEventTest.php",
+        "tests/Tests/ORM/Functional/GH11345Test.php",
+        "tests/Tests/ORM/Functional/GH7877Test.php",
+        "tests/Tests/ORM/Functional/GH8011Test.php",
+        "tests/Tests/ORM/Functional/HydrationCacheTest.php",
+        "tests/Tests/ORM/Functional/IdentityMapTest.php",
+        "tests/Tests/ORM/Functional/IndexByAssociationTest.php",
+        "tests/Tests/ORM/Functional/InsertableUpdatableTest.php",
+        "tests/Tests/ORM/Functional/InvalidMappingDefinitionTest.php",
+        "tests/Tests/ORM/Functional/JoinedTableCompositeKeyTest.php",
+        "tests/Tests/ORM/Functional/LifecycleCallbackTest.php",
+        "tests/Tests/ORM/Functional/Locking/**",
+        "tests/Tests/ORM/Functional/ManyToManyBasicAssociationTest.php",
+        "tests/Tests/ORM/Functional/ManyToManyBidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/ManyToManyEventTest.php",
+        "tests/Tests/ORM/Functional/ManyToManySelfReferentialAssociationTest.php",
+        "tests/Tests/ORM/Functional/ManyToManyUnidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/MappedSuperclassTest.php",
+        "tests/Tests/ORM/Functional/NativeQueryTest.php",
+        "tests/Tests/ORM/Functional/NewOperatorTest.php",
+        "tests/Tests/ORM/Functional/OneToManyBidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/OneToManyOrphanRemovalTest.php",
+        "tests/Tests/ORM/Functional/OneToManySelfReferentialAssociationTest.php",
+        "tests/Tests/ORM/Functional/OneToManyUnidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/OneToOneBidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/OneToOneEagerLoadingTest.php",
+        "tests/Tests/ORM/Functional/OneToOneInverseSideLoadAfterDqlQueryTest.php",
+        "tests/Tests/ORM/Functional/OneToOneInverseSideWithAssociativeIdLoadAfterDqlQueryTest.php",
+        "tests/Tests/ORM/Functional/OneToOneOrphanRemovalTest.php",
+        "tests/Tests/ORM/Functional/OneToOneSelfReferentialAssociationTest.php",
+        "tests/Tests/ORM/Functional/OneToOneSingleTableInheritanceTest.php",
+        "tests/Tests/ORM/Functional/OneToOneUnidirectionalAssociationTest.php",
+        "tests/Tests/ORM/Functional/OrderedCollectionTest.php",
+        "tests/Tests/ORM/Functional/OrderedJoinedTableInheritanceCollectionTest.php",
+        "tests/Tests/ORM/Functional/PaginationTest.php",
+        "tests/Tests/ORM/Functional/ParserResultSerializationTest.php",
+        "tests/Tests/ORM/Functional/PartialObjectsTest.php",
+        "tests/Tests/ORM/Functional/PersistentCollectionCriteriaTest.php",
+        "tests/Tests/ORM/Functional/PersistentCollectionTest.php",
+        "tests/Tests/ORM/Functional/PostFlushEventTest.php",
+        "tests/Tests/ORM/Functional/PostLoadEventTest.php",
+        "tests/Tests/ORM/Functional/PrePersistEventTest.php",
+        "tests/Tests/ORM/Functional/PropertyHooksTest.php",
+        "tests/Tests/ORM/Functional/ProxiesLikeEntitiesTest.php",
+        "tests/Tests/ORM/Functional/QueryBuilderParenthesisTest.php",
+        "tests/Tests/ORM/Functional/QueryCacheTest.php",
+        "tests/Tests/ORM/Functional/QueryDqlFunctionTest.php",
+        "tests/Tests/ORM/Functional/QueryIterableTest.php",
+        "tests/Tests/ORM/Functional/QueryParameterTest.php",
+        "tests/Tests/ORM/Functional/QueryTest.php",
+        "tests/Tests/ORM/Functional/ReadOnlyTest.php",
+        "tests/Tests/ORM/Functional/ReadonlyPropertiesTest.php",
+        "tests/Tests/ORM/Functional/ReferenceProxyTest.php",
+        "tests/Tests/ORM/Functional/ResultCacheTest.php",
+        "tests/Tests/ORM/Functional/SQLFilterTest.php",
+        "tests/Tests/ORM/Functional/SchemaTool/**",
+        "tests/Tests/ORM/Functional/SchemaValidatorTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheCompositePrimaryKeyTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheCompositePrimaryKeyWithAssociationsTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheConcurrentTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheCountQueriesTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheCriteriaTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheExtraLazyCollectionTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheFunctionalTestCase.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheJoinTableInheritanceTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheManyToManyTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheManyToOneTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheOneToManyTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheOneToOneTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheQueryCacheTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheRepositoryTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheSingleTableInheritanceTest.php",
+        "tests/Tests/ORM/Functional/SecondLevelCacheTest.php",
+        "tests/Tests/ORM/Functional/SequenceGeneratorTest.php",
+        "tests/Tests/ORM/Functional/SingleTableCompositeKeyTest.php",
+        "tests/Tests/ORM/Functional/SingleTableInheritanceTest.php",
+        "tests/Tests/ORM/Functional/StandardEntityPersisterTest.php",
+        "tests/Tests/ORM/Functional/Ticket/**",
+        "tests/Tests/ORM/Functional/TypeTest.php",
+        "tests/Tests/ORM/Functional/TypeValueSqlTest.php",
+        "tests/Tests/ORM/Functional/UnitOfWorkLifecycleTest.php",
+        "tests/Tests/ORM/Functional/ValueConversionType/**",
+        "tests/Tests/ORM/Functional/ValueObjectsTest.php",
+        "tests/Tests/ORM/Functional/VersionedOneToOneTest.php",
+        "tests/Tests/ORM/Hydration/**",
+        "tests/Tests/ORM/Id/**",
+        "tests/Tests/ORM/Internal/**",
+        "tests/Tests/ORM/LazyCriteriaCollectionTest.php",
+        "tests/Tests/ORM/Mapping/**",
+        "tests/Tests/ORM/ORMInvalidArgumentExceptionTest.php",
+        "tests/Tests/ORM/ORMSetupTest.php",
+        "tests/Tests/ORM/Performance/**",
+        "tests/Tests/ORM/PersistentCollectionTest.php",
+        "tests/Tests/ORM/Persisters/**",
+        "tests/Tests/ORM/Proxy/**",
+        "tests/Tests/ORM/Query/**",
+        "tests/Tests/ORM/QueryBuilderTest.php",
+        "tests/Tests/ORM/Repository/**",
+        "tests/Tests/ORM/Tools/**",
+        "tests/Tests/ORM/UnitOfWorkTest.php",
+        "tests/Tests/ORM/Utility/**",
+        "tests/Tests/OrmFunctionalTestCase.php",
+        "tests/Tests/OrmTestCase.php",
+        "tests/Tests/Proxy/**",
+        "tests/Tests/TestInit.php",
+        "tests/Tests/TestUtil.php",
+        "tests/dbproperties.xml.dev"
+      ],
+      "text": "Copyright (c) Doctrine Project\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Doctrine Project, MIT license (LICENSE), https://github.com/doctrine/orm."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.neon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

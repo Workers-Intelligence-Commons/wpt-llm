@@ -1,0 +1,2088 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apache/druid",
+  "revision": "8d634fdf8d9ac14b763db30636157407261675fc",
+  "checksum": "sha256:4c3129bfac386173d3af5dd783bb58480a979e47c7722a97f870174656b2cbd2",
+  "extract": {
+    "exclude": [
+      ".github/scripts/**",
+      "benchmarks/src/test/resources/ProtoFile",
+      "benchmarks/src/test/resources/prototest.desc",
+      "codestyle/**",
+      "dev/**",
+      "docs/assets/compaction-config.png",
+      "docs/assets/datasources-action-button.png",
+      "docs/assets/druid-architecture.png",
+      "docs/assets/druid-column-types.png",
+      "docs/assets/druid-dataflow-2x.png",
+      "docs/assets/druid-dataflow-3.png",
+      "docs/assets/druid-manage-1.png",
+      "docs/assets/druid-timeline.png",
+      "docs/assets/indexing_service.png",
+      "docs/assets/multi-stage-query/**",
+      "docs/assets/native-queries-01.png",
+      "docs/assets/nested-combined-json.png",
+      "docs/assets/nested-display-data-types.png",
+      "docs/assets/nested-examine-schema.png",
+      "docs/assets/nested-extract-as-type.png",
+      "docs/assets/nested-extract-elements.png",
+      "docs/assets/nested-group-aggregate.png",
+      "docs/assets/nested-msq-ingestion-transform.png",
+      "docs/assets/nested-msq-ingestion.png",
+      "docs/assets/nested-parse-deserialize.png",
+      "docs/assets/nested-retrieve-json.png",
+      "docs/assets/nested-return-json.png",
+      "docs/assets/retention-rules.png",
+      "docs/assets/security-model-1.png",
+      "docs/assets/security-model-2.png",
+      "docs/assets/segmentPropagation.png",
+      "docs/assets/services-overview.png",
+      "docs/assets/set-query-context-insert-query.png",
+      "docs/assets/set-query-context-open-context-dialog.png",
+      "docs/assets/set-query-context-query-view.png",
+      "docs/assets/set-query-context-run-the-query.png",
+      "docs/assets/set-query-context-set-context-parameters.png",
+      "docs/assets/spectator-histogram-size-comparison.png",
+      "docs/assets/supervisor-actions.png",
+      "docs/assets/supervisor-info-dialog.png",
+      "docs/assets/supervisor-view.png",
+      "docs/assets/tutorial-batch-data-loader-00.png",
+      "docs/assets/tutorial-batch-data-loader-01.png",
+      "docs/assets/tutorial-batch-data-loader-015.png",
+      "docs/assets/tutorial-batch-data-loader-02.png",
+      "docs/assets/tutorial-batch-data-loader-03.png",
+      "docs/assets/tutorial-batch-data-loader-04.png",
+      "docs/assets/tutorial-batch-data-loader-05.png",
+      "docs/assets/tutorial-batch-data-loader-06.png",
+      "docs/assets/tutorial-batch-data-loader-07.png",
+      "docs/assets/tutorial-batch-data-loader-08.png",
+      "docs/assets/tutorial-batch-data-loader-09.png",
+      "docs/assets/tutorial-batch-data-loader-10.png",
+      "docs/assets/tutorial-batch-data-loader-11.png",
+      "docs/assets/tutorial-batch-data-loader-12.png",
+      "docs/assets/tutorial-batch-submit-task-01.png",
+      "docs/assets/tutorial-batch-submit-task-02.png",
+      "docs/assets/tutorial-compaction-01.png",
+      "docs/assets/tutorial-compaction-02.png",
+      "docs/assets/tutorial-compaction-03.png",
+      "docs/assets/tutorial-compaction-04.png",
+      "docs/assets/tutorial-compaction-05.png",
+      "docs/assets/tutorial-compaction-06.png",
+      "docs/assets/tutorial-compaction-07.png",
+      "docs/assets/tutorial-compaction-08.png",
+      "docs/assets/tutorial-deletion-01.png",
+      "docs/assets/tutorial-deletion-02.png",
+      "docs/assets/tutorial-deletion-03.png",
+      "docs/assets/tutorial-kafka-data-loader-01.png",
+      "docs/assets/tutorial-kafka-data-loader-02.png",
+      "docs/assets/tutorial-kafka-data-loader-03.png",
+      "docs/assets/tutorial-kafka-data-loader-04.png",
+      "docs/assets/tutorial-kafka-data-loader-05.png",
+      "docs/assets/tutorial-kafka-data-loader-06.png",
+      "docs/assets/tutorial-kafka-data-loader-07.png",
+      "docs/assets/tutorial-kafka-data-loader-08.png",
+      "docs/assets/tutorial-kafka-data-loader-09.png",
+      "docs/assets/tutorial-kafka-data-loader-10.png",
+      "docs/assets/tutorial-kafka-data-loader-11.png",
+      "docs/assets/tutorial-kafka-data-loader-12.png",
+      "docs/assets/tutorial-kafka-submit-supervisor-01.png",
+      "docs/assets/tutorial-query-01.png",
+      "docs/assets/tutorial-query-02.png",
+      "docs/assets/tutorial-query-03.png",
+      "docs/assets/tutorial-query-04.png",
+      "docs/assets/tutorial-query-05.png",
+      "docs/assets/tutorial-query-06.png",
+      "docs/assets/tutorial-query-07.png",
+      "docs/assets/tutorial-query-deepstorage-retention-rule.png",
+      "docs/assets/tutorial-quickstart-01.png",
+      "docs/assets/tutorial-quickstart-02.png",
+      "docs/assets/tutorial-quickstart-03.png",
+      "docs/assets/tutorial-quickstart-04.png",
+      "docs/assets/tutorial-quickstart-05.png",
+      "docs/assets/tutorial-retention-00.png",
+      "docs/assets/tutorial-retention-01.png",
+      "docs/assets/tutorial-retention-02.png",
+      "docs/assets/tutorial-retention-03.png",
+      "docs/assets/tutorial-retention-04.png",
+      "docs/assets/tutorial-retention-05.png",
+      "docs/assets/tutorial-retention-06.png",
+      "docs/assets/tutorial-sql-aggregate-query.png",
+      "docs/assets/tutorial-sql-auto-queries.png",
+      "docs/assets/tutorial-sql-count-distinct-help.png",
+      "docs/assets/tutorial-sql-count-distinct.png",
+      "docs/assets/tutorial-sql-demo-queries.png",
+      "docs/assets/tutorial-sql-query-plan.png",
+      "docs/assets/tutorial-sql-result-column-actions.png",
+      "docs/assets/tutorial-theta-01.png",
+      "docs/assets/tutorial-theta-02.png",
+      "docs/assets/tutorial-theta-03.png",
+      "docs/assets/tutorial-theta-04.png",
+      "docs/assets/tutorial-theta-05.png",
+      "docs/assets/tutorial-theta-06.png",
+      "docs/assets/tutorial-theta-07.png",
+      "docs/assets/tutorial-theta-08.png",
+      "docs/assets/web-console-0.7-tasks.png",
+      "docs/assets/web-console-01-home-view.png",
+      "docs/assets/web-console-02-data-loader-1.png",
+      "docs/assets/web-console-03-data-loader-2.png",
+      "docs/assets/web-console-04-datasources.png",
+      "docs/assets/web-console-05-retention.png",
+      "docs/assets/web-console-06-segments.png",
+      "docs/assets/web-console-07-supervisors.png",
+      "docs/assets/web-console-08-supervisor-status.png",
+      "docs/assets/web-console-09-task-status.png",
+      "docs/assets/web-console-10-servers.png",
+      "docs/assets/web-console-11-query-sql.png",
+      "docs/assets/web-console-12-query-rune.png",
+      "docs/assets/web-console-13-lookups.png",
+      "embedded-tests/src/test/resources/data/avro/**",
+      "embedded-tests/src/test/resources/data/orc/**",
+      "embedded-tests/src/test/resources/data/parquet/**",
+      "embedded-tests/src/test/resources/data/protobuf/proto3_event.desc",
+      "embedded-tests/src/test/resources/data/protobuf/wikipedia.desc",
+      "embedded-tests/src/test/resources/delta/large-row-group-table/.part-00000-42349806-104f-42a0-a6fe-5397f37d29d8-c000.snappy.parquet.crc",
+      "embedded-tests/src/test/resources/delta/large-row-group-table/.part-00001-42b5d278-2c32-4094-af60-5eaca2f7ba03-c000.snappy.parquet.crc",
+      "embedded-tests/src/test/resources/delta/large-row-group-table/_delta_log/.00000000000000000000.json.crc",
+      "embedded-tests/src/test/resources/delta/large-row-group-table/part-00000-42349806-104f-42a0-a6fe-5397f37d29d8-c000.snappy.parquet",
+      "embedded-tests/src/test/resources/delta/large-row-group-table/part-00001-42b5d278-2c32-4094-af60-5eaca2f7ba03-c000.snappy.parquet",
+      "examples/quickstart/protobuf/metrics.desc",
+      "examples/quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00000-ba651ee3-3de4-4d3e-8bff-04182c482c2f-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00001-72cd58ed-7979-4b19-bce2-303feb8f9c66-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00003-0a39e5f0-e30e-4b08-abf3-e4f79a9062f5-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00005-2f71a6be-840a-427d-ad22-7036bb052433-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00007-35186f7d-8e26-4b92-a61f-b9a3e5d8b986-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/.part-00009-cecabfb6-53c7-4526-abc6-69042b415d87-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/_delta_log/.00000000000000000000.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00000-ba651ee3-3de4-4d3e-8bff-04182c482c2f-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00001-72cd58ed-7979-4b19-bce2-303feb8f9c66-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00003-0a39e5f0-e30e-4b08-abf3-e4f79a9062f5-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00005-2f71a6be-840a-427d-ad22-7036bb052433-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00007-35186f7d-8e26-4b92-a61f-b9a3e5d8b986-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/part-00009-cecabfb6-53c7-4526-abc6-69042b415d87-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00000-b17c520a-0c50-4e49-b8e7-46132a57d039-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00000-f0224389-c0df-4dbc-90e5-de1d6a5b5ac6-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00001-e18dc7d0-db98-40f2-9185-45237f51b9bf-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00001-f5c4b19d-a2b2-4189-8927-97fe1720df8d-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00002-b2249397-0232-4a5c-b504-62c7c27702c1-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00003-648766cd-8ebd-475a-afbb-44ae0b9cba30-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00003-fa1d35b8-bb75-4145-ac40-6ccbc04acc79-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00004-d580234a-54cb-43b7-87db-448c67a315df-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00005-963e7ff5-c414-444c-8984-6baecf6987ee-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00005-9ff9b585-5a9e-415f-b28a-a85d960ccb04-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00006-78cd057e-faaa-477d-b5fd-d00a857f7e54-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00007-00eb0d30-e71e-4092-8ea2-0ee576ca7327-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00007-15147217-b81a-45ab-92d4-24d725cc07e1-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00008-9f526a56-2392-4f1c-8c07-3dac19b12e91-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00009-e21486a5-e177-4c02-b256-bc890fadce7e-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/.part-00009-ee9dd918-aaec-4f80-bd63-e369c6335699-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/_delta_log/.00000000000000000000.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/_delta_log/.00000000000000000001.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00000-b17c520a-0c50-4e49-b8e7-46132a57d039-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00000-f0224389-c0df-4dbc-90e5-de1d6a5b5ac6-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00001-e18dc7d0-db98-40f2-9185-45237f51b9bf-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00001-f5c4b19d-a2b2-4189-8927-97fe1720df8d-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00002-b2249397-0232-4a5c-b504-62c7c27702c1-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00003-648766cd-8ebd-475a-afbb-44ae0b9cba30-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00003-fa1d35b8-bb75-4145-ac40-6ccbc04acc79-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00004-d580234a-54cb-43b7-87db-448c67a315df-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00005-963e7ff5-c414-444c-8984-6baecf6987ee-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00005-9ff9b585-5a9e-415f-b28a-a85d960ccb04-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00006-78cd057e-faaa-477d-b5fd-d00a857f7e54-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00007-00eb0d30-e71e-4092-8ea2-0ee576ca7327-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00007-15147217-b81a-45ab-92d4-24d725cc07e1-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00008-9f526a56-2392-4f1c-8c07-3dac19b12e91-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00009-e21486a5-e177-4c02-b256-bc890fadce7e-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/part-00009-ee9dd918-aaec-4f80-bd63-e369c6335699-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/.00000000000000000000.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/.00000000000000000001.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/.00000000000000000002.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/name=Employee1/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/name=Employee2/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/name=Employee3/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/name=Employee4/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/name=Employee5/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/.part-00000-42349806-104f-42a0-a6fe-5397f37d29d8-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/.part-00001-42b5d278-2c32-4094-af60-5eaca2f7ba03-c000.snappy.parquet.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/_delta_log/.00000000000000000000.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/part-00000-42349806-104f-42a0-a6fe-5397f37d29d8-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/part-00001-42b5d278-2c32-4094-af60-5eaca2f7ba03-c000.snappy.parquet",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/.00000000000000000000.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/.00000000000000000001.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/.00000000000000000002.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/.00000000000000000003.json.crc",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/id=0/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/id=1/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/id=2/**",
+      "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/id=4/**",
+      "extensions-contrib/time-min-max/src/test/resources/**",
+      "extensions-core/orc-extensions/example/**",
+      "extensions-core/parquet-extensions/example/**",
+      "extensions-core/parquet-extensions/src/test/resources/**",
+      "extensions-core/protobuf-extensions/src/test/resources/proto_nested_event.desc",
+      "extensions-core/protobuf-extensions/src/test/resources/proto_test_event.desc",
+      "multi-stage-query/src/main/java/org/apache/druid/msq/input/external/**",
+      "multi-stage-query/src/test/java/org/apache/druid/msq/input/external/**",
+      "multi-stage-query/src/test/resources/unparseable-null-byte-string.csv",
+      "multi-stage-query/src/test/resources/unparseable.gz",
+      "processing/src/test/resources/keystore.jks",
+      "processing/src/test/resources/nested_segment_empty_fieldname_bug/**",
+      "processing/src/test/resources/nested_segment_v3/**",
+      "processing/src/test/resources/nested_segment_v4/**",
+      "processing/src/test/resources/v8SegmentPersistDir/00000.smoosh",
+      "processing/src/test/resources/v8SegmentPersistDir/version.bin",
+      "processing/src/test/resources/v9SegmentPersistDir/segmentWithDamagedFile/00000.smoosh",
+      "processing/src/test/resources/v9SegmentPersistDir/segmentWithDamagedFile/version.bin",
+      "processing/src/test/resources/wikipedia/wikiticker-2015-09-12-sampled.json.gz",
+      "publications/demo/druid_demo.pdf",
+      "publications/demo/figures/**",
+      "publications/radstack/figures/**",
+      "publications/radstack/radstack.pdf",
+      "publications/whitepaper/druid.pdf",
+      "publications/whitepaper/figures/**",
+      "publications/whitepaper/modii658-yang.pdf",
+      "publications/whitepaper/modii658-yang.zip",
+      "server/src/main/java/org/apache/druid/segment/loading/external/**",
+      "server/src/test/java/org/apache/druid/segment/loading/external/**",
+      "server/src/test/resources/server-new.jks",
+      "server/src/test/resources/server.jks",
+      "server/src/test/resources/truststore-new.jks",
+      "server/src/test/resources/truststore.jks",
+      "sql/src/main/java/org/apache/druid/sql/calcite/external/**",
+      "sql/src/test/java/org/apache/druid/sql/calcite/external/**",
+      "sql/src/test/quidem/qatests/qaArray/ingest/data/**",
+      "sql/src/test/quidem/qatests/qaJsonCols/ingest/data/**",
+      "sql/src/test/quidem/qatests/qaSql/data/**",
+      "sql/src/test/quidem/qatests/qaSsb/denorm/data/**",
+      "sql/src/test/quidem/qatests/qaSsb/norm/data/**",
+      "sql/src/test/quidem/qatests/qaTpch/data/**",
+      "sql/src/test/quidem/qatests/qaWin/data/**",
+      "sql/src/test/resources/drill/window/datasources/allTypsUniq.parquet",
+      "sql/src/test/resources/drill/window/datasources/fewRowsAllData.parquet",
+      "sql/src/test/resources/drill/window/datasources/forViewCrn.parquet",
+      "sql/src/test/resources/drill/window/datasources/smlTbl.parquet",
+      "sql/src/test/resources/drill/window/datasources/t_alltype.parquet",
+      "sql/src/test/resources/drill/window/datasources/tblWnulls.parquet",
+      "web-console/assets/**",
+      "web-console/favicon.png",
+      "website/static/img/**"
+    ]
+  },
+  "history": {
+    "since": "5486c2abf8fea839d2ae62fc2bc55dd002cadd7b"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n   APACHE DRUID SUBCOMPONENTS:\n\n   Apache Druid includes a number of subcomponents with\n   separate copyright notices and license terms. Your use of the source\n   code for these subcomponents is subject to the terms and\n   conditions of the following licenses.\n\n\nApache License version 2.0\n================================\n\nSOURCE/JAVA-CORE\n    This product contains conjunctive normal form conversion code, a variance aggregator algorithm, and Bloom filter\n     adapted from Apache Hive.\n      * processing/src/main/java/org/apache/druid/segment/filter/cnf/HiveCnfHelper.java\n      * extensions-core/stats/src/main/java/io/druid/query/aggregation/variance/VarianceAggregatorCollector.java\n      * extensions-core/druid-bloom-filter/src/main/java/org/apache/druid/query/filter/BloomKFilter.java\n\n    This product contains variable length long deserialization code adapted from Apache Lucene.\n      * processing/src/main/java/org/apache/druid/segment/data/VSizeLongSerde.java\n\n    This product contains SQL query planning code adapted from Apache Calcite.\n      * sql/src/main/java/org/apache/druid/sql/calcite/\n      * processing/src/main/java/org/apache/druid/segment/filter/cnf/CalciteCnfHelper.java\n\n    This product contains Kerberos authentication code adapted from Apache Hadoop.\n      * extensions-core/druid-kerberos/src/main/java/org/apache/druid/security/kerberos/\n\n    This product contains a modified version of the java-alphanum library,\n     copyright Andrew Duffy (https://github.com/amjjd/java-alphanum).\n      * processing/src/main/java/org/apache/druid/query/ordering/StringComparators.java\n\n    This product contains a modified version of the Metamarkets java-util library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/java-util).\n      * java-util/\n\n    This product contains a modified version of the Metamarkets bytebuffer-collections library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/bytebuffer-collections)\n      * processing/src/main/java/org/apache/druid/collections/\n\n    This product contains a modified version of the Metamarkets extendedset library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/extendedset)\n      * extendedset/\n\n    This product contains a modified version of the CONCISE (COmpressed 'N' Composable Integer SEt) library,\n     copyright Alessandro Colantonio (https://sourceforge.net/projects/concise/), extending the functionality of\n     ConciseSet to use IntBuffers.\n      * extendedset/src/main/java/org/apache/druid/extendedset/intset/\n\n    This product contains modified portions of the Guava library,\n     copyright The Guava Authors (https://github.com/google/guava).\n      Closer class:\n      * processing/src/main/java/org/apache/druid/java/util/common/io/Closer.java\n      Splitter.splitToList() method:\n      * processing/src/main/java/org/apache/druid/java/util/common/parsers/DelimitedParser.java\n      DirectExecutorService class:\n      * processing/src/main/java/org/apache/druid/java/util/common/concurrent/DirectExecutorService.java\n      CartesianList class:\n      * processing/src/main/java/org/apache/druid/math/expr/CartesianList.java\n\n    This product contains modified versions of the Dockerfile, scripts, and related configuration files\n     used for building SequenceIQ's Hadoop Docker image, copyright SequenceIQ, Inc. (https://github.com/sequenceiq/hadoop-docker/)\n      * examples/quickstart/tutorial/hadoop/docker/\n\n    This product contains fixed bins histogram percentile computation code adapted from Netflix Spectator,\n     copyright Netflix, Inc. (https://github.com/Netflix/spectator)\n      * extensions-core/histogram/src/main/java/org/apache/druid/query/aggregation/histogram/FixedBucketsHistogram.java\n\n    This product contains ByteBuffer unmapping code adapted from Apache Kafka\n      * processing/src/main/java/org/apache/druid/java/util/common/ByteBufferUtils.java\n\n    This product contains s3 directory place holder check code adapted from JetS3t (https://bitbucket.org/jmurty/jets3t/wiki/Home).\n      * extensions-core/s3-extensions/src/main/java/org/apache/druid/storage/s3/S3Utils.java\n      * extensions-contrib/aliyun-oss-extensions/src/main/java/org/apache/druid/storage/aliyun/OssObjectSummaryIterator.java\n\n    This product contains lpad and rpad methods adapted from Apache Flink.\n      * processing/src/main/java/org/apache/druid/java/util/common/StringUtils.java\n\n    This product contains SystemInfo methods adapted from oshi\n      * processing/src/main/java/org/apache/druid/java/util/metrics/OshiSysMonitor.java\n\n    This product contains test cases adapted from Test Framework for Apache Drill (https://github.com/apache/drill-test-framework).\n      * sql/src/test/resources/drill/window\n\n    This product contains the class copied from https://github.com/FasterXML/jackson-databind\n      * extensions-core/s3-extensions/src/main/java/com/fasterxml/jackson/databind/PropertyNamingStrategies.java\n\n    This product contains the Maven Wrapper scripts from Apache Maven Wrapper.\n      * mvnw\n      * mvnw.cmd\n\n\n\nMIT License\n================================\n\nSOURCE/WEB-CONSOLE\n    This product bundles jQuery version 1.11.0, copyright jQuery Foundation, Inc.,\n     which is available under an MIT license. For details, see licenses/src/jquery.MIT.\n\n    This product bundles sizzle.js by way of jQuery version 1.11.0, copyright jQuery Foundation and other contributors\n     which is available under an MIT license. For details, see licenses/src/sizzle.MIT.\n\n    This product bundles jQuery UI version 1.9.2, copyright jQuery Foundation and other contributors,\n     which is available under an MIT license. For details, see licenses/src/jquery-ui.MIT.\n\n    This product bundles underscore version 1.2.2, copyright Jeremy Ashkenas, DocumentCloud,\n     which is available under an MIT license. For details, see licenses/src/underscore.MIT.\n\n\nBSD-3-Clause License\n================================\n\nSOURCE/WEB-CONSOLE\n    This product bundles demo_table.css and jquery.dataTables.js from DataTables version 1.8.2, copyright Allan Jardine.,\n     which is available under a BSD-3-Clause License. For details, see licenses/src/datatables.BSD3.\n\nSOURCE/JAVA-CORE\n    This product contains Porter stemmer adapted from a Javascript Porter Stemmer (https://github.com/kristopolous/Porter-Stemmer)\n     which is available under a BSD-3-Clause License. For details, see licenses/src/porter-stemmer.BSD3.\n      * processing/src/test/java/org/apache/druid/query/extraction/JavaScriptExtractionFnTest.java\n\nSOURCE/EXTENSIONS/druid-basic-security\n    This product contains an LDAP string encoding function from OWASP ESAPI, copyright The OWASP Foundation\n     (https://github.com/ESAPI/esapi-java-legacy) which is available under the BSD-3-Clause License. For details, see\n     licenses/src/esapi.BSD3.\n      * extensions-core/druid-basic-security/src/main/java/org/apache/druid/security/basic/authentication/validator/LDAPCredentialsValidator.java\n\n\nPublic Domain\n================================\n\nSOURCE/JAVA-CORE\n    This product uses a smear function adapted from MurmurHash3, written by Austin Appleby who has placed\n     MurmurHash3 in the public domain (https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp).\n      * processing/src/main/java/org/apache/druid/query/groupby/epinephelinae/Groupers.java\n\n\nCreative Commons Attribution-ShareAlike 3.0 Unported License\n================================\n\nSOURCE/JAVA-CORE:\n    This product contains example data collected from the Wikipedia edit stream API (this content is NOT part of the source\n     code and is only used for example and tutorial purposes), copyright Wikipedia editors and contributors for the text\n     content which is available under Creative Commons Attribution-ShareAlike 3.0 Unported License. For details, see\n     licenses/src/CC-BY-SA.txt.\n      * examples/quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz\n\nNOTICE:\n\nApache Druid\nCopyright 2018-2026 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\n\n############ SOURCE/JAVA-CORE ############\n\n================= Apache Calcite 1.10.0 =================\nApache Calcite\nCopyright 2012-2016 The Apache Software Foundation\n\nThis product is based on source code originally developed\nby DynamoBI Corporation, LucidEra Inc., SQLstream Inc. and others\nunder the auspices of the Eigenbase Foundation\nand released as the LucidDB project.\n\n\n\n\n================= Apache Flink 1.8.1 =================\nApache Flink\nCopyright 2014-2019 The Apache Software Foundation\n\n\n\n\n================= Apache Hadoop 2.8.5 =================\nApache Hadoop\nCopyright 2009-2017 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.0.0 =================\nApache Hive\nCopyright 2008-2015 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.0.1 =================\nApache Hive\nCopyright 2008-2016 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.7.0 =================\nApache Hive\nCopyright 2008-2018 The Apache Software Foundation\n\n\n\n\n================= Apache Kafka 2.7.0 =================\nApache Kafka\nCopyright 2020 The Apache Software Foundation.\n\n\n\n\n================= Apache Lucene 6.2.0 =================\nApache Lucene\nCopyright 2014 The Apache Software Foundation\n\n\n\n\n================= Metamarkets bytebuffer-collections 0.2.5 =================\nbytebuffer-collections\nCopyright 2011-2015 Metamarkets Group Inc.\n\n\n\n\n================= Metamarkets java-util 1.3.3 =================\njava-util\nCopyright 2011-2017 Metamarkets Group Inc.\n\n\n\n\n================= Metamarkets extendedset 1.3.10 =================\nextendedset\nCopyright 2012 Metamarkets Group Inc.\n\n================= Apache Commons DBCP2 2.0.1 =================\n\nApache Commons DBCP\nCopyright 2001-2020 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (https://www.apache.org/).\n\n================= Apache Maven Wrapper 3.3.4 =================\n\nApache Maven Wrapper\nCopyright 2013-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\nThe original idea and initial implementation of the maven-wrapper module is derived\nfrom the Gradle Wrapper which was written originally by Hans Dockter and Adam Murdoch.\nCopyright 2007 the original author or authors.\n\n-------------------------------------------------------------------------------\n\nThis library contains a modified version of Alessandro Colantonio's CONCISE\n(COmpressed 'N' Composable Integer SEt) library, extending the functionality of\nConciseSet to use IntBuffers.\n\n\n\n",
+      "attribution": "Commit history of https://github.com/apache/druid: Copyright 2018-2026 The Apache Software Foundation; Copyright 2012-2016 The Apache Software Foundation; Copyright 2014-2019 The Apache Software Foundation; Copyright 2009-2017 The Apache Software Foundation; Copyright 2008-2015 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/druid."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".asf.yaml",
+        ".backportrc.json",
+        ".dockerignore",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/config/**",
+        ".github/dependabot.yml",
+        ".github/labeler.yml",
+        ".github/pull_request_template.md",
+        ".github/workflows/**",
+        ".gitignore",
+        ".idea/**",
+        ".lgtm.yml",
+        ".mvn/**",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "LABELS",
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "README.template",
+        "benchmarks/assembly.xml",
+        "benchmarks/pom.xml",
+        "benchmarks/src/test/java/**",
+        "benchmarks/src/test/resources/META-INF/**",
+        "benchmarks/src/test/resources/log4j2.xml",
+        "cloud/**",
+        "distribution/**",
+        "doap_Druid.rdf",
+        "docs/api-reference/**",
+        "docs/assets/druid-architecture.svg",
+        "docs/assets/files/**",
+        "docs/comparisons/**",
+        "docs/configuration/**",
+        "docs/data-management/**",
+        "docs/design/**",
+        "docs/development/**",
+        "docs/ingestion/**",
+        "docs/misc/**",
+        "docs/multi-stage-query/**",
+        "docs/operations/**",
+        "docs/querying/**",
+        "docs/release-info/**",
+        "docs/tutorials/**",
+        "embedded-tests/pom.xml",
+        "embedded-tests/src/test/java/**",
+        "embedded-tests/src/test/resources/META-INF/**",
+        "embedded-tests/src/test/resources/data/csv/**",
+        "embedded-tests/src/test/resources/data/json/**",
+        "embedded-tests/src/test/resources/data/protobuf/proto3_event.proto",
+        "embedded-tests/src/test/resources/data/tsv/**",
+        "embedded-tests/src/test/resources/delta/large-row-group-table/_delta_log/00000000000000000000.json",
+        "embedded-tests/src/test/resources/indexer/**",
+        "embedded-tests/src/test/resources/ldap-configs/**",
+        "embedded-tests/src/test/resources/log4j2.xml",
+        "embedded-tests/src/test/resources/manifests/**",
+        "embedded-tests/src/test/resources/multi-stage-query/**",
+        "embedded-tests/src/test/resources/opa-configs/**",
+        "embedded-tests/src/test/resources/sql/**",
+        "embedded-tests/src/test/resources/tls/**",
+        "embedded-tests/tls/**",
+        "examples/bin/**",
+        "examples/conf/**",
+        "examples/quickstart/jupyter-notebooks/**",
+        "examples/quickstart/protobuf/metrics.proto",
+        "examples/quickstart/protobuf/metrics_pb2.py",
+        "examples/quickstart/protobuf/pb_publisher.py",
+        "examples/quickstart/releases/**",
+        "examples/quickstart/tutorial/compaction-day-granularity.json",
+        "examples/quickstart/tutorial/compaction-init-index.json",
+        "examples/quickstart/tutorial/compaction-keep-granularity.json",
+        "examples/quickstart/tutorial/deletion-index.json",
+        "examples/quickstart/tutorial/deletion-kill.json",
+        "examples/quickstart/tutorial/hadoop/**",
+        "examples/quickstart/tutorial/retention-index.json",
+        "examples/quickstart/tutorial/rollup-data.json",
+        "examples/quickstart/tutorial/rollup-index.json",
+        "examples/quickstart/tutorial/transform-data.json",
+        "examples/quickstart/tutorial/transform-index.json",
+        "examples/quickstart/tutorial/updates-append-index.json",
+        "examples/quickstart/tutorial/updates-append-index2.json",
+        "examples/quickstart/tutorial/updates-data.json",
+        "examples/quickstart/tutorial/updates-data2.json",
+        "examples/quickstart/tutorial/updates-data3.json",
+        "examples/quickstart/tutorial/updates-data4.json",
+        "examples/quickstart/tutorial/updates-init-index.json",
+        "examples/quickstart/tutorial/updates-overwrite-index.json",
+        "examples/quickstart/tutorial/wikipedia-index.json",
+        "examples/quickstart/tutorial/wikipedia-kafka-supervisor.json",
+        "examples/quickstart/tutorial/wikipedia-top-pages-sql.json",
+        "examples/quickstart/tutorial/wikipedia-top-pages.json",
+        "extensions-contrib/README.md",
+        "extensions-contrib/aliyun-oss-extensions/**",
+        "extensions-contrib/ambari-metrics-emitter/**",
+        "extensions-contrib/cassandra-storage/**",
+        "extensions-contrib/cloudfiles-extensions/**",
+        "extensions-contrib/compressed-bigdecimal/**",
+        "extensions-contrib/consul-extensions/**",
+        "extensions-contrib/ddsketch/**",
+        "extensions-contrib/distinctcount/**",
+        "extensions-contrib/dropwizard-emitter/**",
+        "extensions-contrib/druid-deltalake-extensions/pom.xml",
+        "extensions-contrib/druid-deltalake-extensions/src/main/**",
+        "extensions-contrib/druid-deltalake-extensions/src/test/java/**",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/README.md",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/complex-types-table/_delta_log/00000000000000000000.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/create_delta_table.py",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/_delta_log/00000000000000000000.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table/_delta_log/00000000000000000001.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/00000000000000000000.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/00000000000000000001.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/employee-delta-table-partitioned-name/_delta_log/00000000000000000002.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/large-row-group-table/_delta_log/00000000000000000000.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/requirements.txt",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/00000000000000000000.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/00000000000000000001.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/00000000000000000002.json",
+        "extensions-contrib/druid-deltalake-extensions/src/test/resources/snapshot-table/_delta_log/00000000000000000003.json",
+        "extensions-contrib/druid-exact-count-bitmap/**",
+        "extensions-contrib/druid-iceberg-extensions/**",
+        "extensions-contrib/druid-opa-authorizer/**",
+        "extensions-contrib/druid-ranger-security/**",
+        "extensions-contrib/gce-extensions/**",
+        "extensions-contrib/graphite-emitter/**",
+        "extensions-contrib/grpc-query/**",
+        "extensions-contrib/influx-extensions/**",
+        "extensions-contrib/influxdb-emitter/**",
+        "extensions-contrib/kafka-emitter/**",
+        "extensions-contrib/momentsketch/**",
+        "extensions-contrib/moving-average-query/**",
+        "extensions-contrib/openlineage-emitter/**",
+        "extensions-contrib/opentelemetry-emitter/**",
+        "extensions-contrib/opentsdb-emitter/**",
+        "extensions-contrib/prometheus-emitter/**",
+        "extensions-contrib/rabbit-stream-indexing-service/**",
+        "extensions-contrib/redis-cache/**",
+        "extensions-contrib/spectator-histogram/**",
+        "extensions-contrib/sqlserver-metadata-storage/**",
+        "extensions-contrib/statsd-emitter/**",
+        "extensions-contrib/tdigestsketch/**",
+        "extensions-contrib/thrift-extensions/**",
+        "extensions-contrib/time-min-max/pom.xml",
+        "extensions-contrib/time-min-max/src/main/**",
+        "extensions-contrib/time-min-max/src/test/java/**",
+        "extensions-contrib/virtual-columns/**",
+        "extensions-core/avro-extensions/**",
+        "extensions-core/azure-extensions/**",
+        "extensions-core/datasketches/**",
+        "extensions-core/druid-aws-rds-extensions/**",
+        "extensions-core/druid-basic-security/**",
+        "extensions-core/druid-bloom-filter/**",
+        "extensions-core/druid-catalog/**",
+        "extensions-core/druid-kerberos/**",
+        "extensions-core/druid-pac4j/**",
+        "extensions-core/druid-testcontainers/**",
+        "extensions-core/ec2-extensions/**",
+        "extensions-core/google-extensions/**",
+        "extensions-core/hdfs-storage/**",
+        "extensions-core/histogram/**",
+        "extensions-core/kafka-extraction-namespace/**",
+        "extensions-core/kafka-indexing-service/**",
+        "extensions-core/kinesis-indexing-service/**",
+        "extensions-core/kubernetes-extensions/**",
+        "extensions-core/kubernetes-overlord-extensions/**",
+        "extensions-core/lookups-cached-global/**",
+        "extensions-core/lookups-cached-single/**",
+        "extensions-core/mysql-metadata-storage/**",
+        "extensions-core/orc-extensions/pom.xml",
+        "extensions-core/orc-extensions/src/**",
+        "extensions-core/parquet-extensions/pom.xml",
+        "extensions-core/parquet-extensions/src/main/**",
+        "extensions-core/parquet-extensions/src/test/java/**",
+        "extensions-core/postgresql-metadata-storage/**",
+        "extensions-core/protobuf-extensions/README.md",
+        "extensions-core/protobuf-extensions/pom.xml",
+        "extensions-core/protobuf-extensions/src/main/**",
+        "extensions-core/protobuf-extensions/src/test/java/**",
+        "extensions-core/protobuf-extensions/src/test/resources/Dockerfile",
+        "extensions-core/protobuf-extensions/src/test/resources/proto3_test_event.proto",
+        "extensions-core/protobuf-extensions/src/test/resources/proto_nested_event.proto",
+        "extensions-core/protobuf-extensions/src/test/resources/proto_test_event.proto",
+        "extensions-core/s3-extensions/**",
+        "extensions-core/simple-client-sslcontext/**",
+        "extensions-core/stats/**",
+        "extensions-core/testing-tools/**",
+        "hooks/**",
+        "indexing-service/**",
+        "jdbc-driver/**",
+        "licenses/**",
+        "licenses.yaml",
+        "multi-stage-query/README.md",
+        "multi-stage-query/pom.xml",
+        "multi-stage-query/src/main/java/org/apache/druid/catalog/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/counters/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/dart/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/exec/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/guice/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/indexing/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/AcquireSegmentHandles.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/AdaptedLoadableSegment.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSlice.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSliceReader.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSliceReaderProvider.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSlices.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSpec.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSpecSlicer.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSpecSlicerFactory.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSpecSlicerProvider.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/InputSpecs.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/LoadableSegment.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/LoadableSegmentUtils.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/MapInputSliceReader.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/MapInputSpecSlicer.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/NilInputSlice.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/NilInputSliceReader.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/NilInputSource.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/PhysicalInputSlice.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/RegularLoadableSegment.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/SlicerUtils.java",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/inline/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/lookup/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/stage/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/input/table/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/kernel/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/logical/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/querykit/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/rpc/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/shuffle/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/sql/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/statistics/**",
+        "multi-stage-query/src/main/java/org/apache/druid/msq/util/**",
+        "multi-stage-query/src/main/resources/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/counters/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/dart/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/exec/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/indexing/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/AdaptedLoadableSegmentTest.java",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/InputSpecsTest.java",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/NilInputSliceTest.java",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/RegularLoadableSegmentTest.java",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/inline/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/lookup/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/stage/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/input/table/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/kernel/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/querykit/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/quidem/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/rpc/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/shuffle/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/sql/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/statistics/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/test/**",
+        "multi-stage-query/src/test/java/org/apache/druid/msq/util/**",
+        "multi-stage-query/src/test/java/org/apache/druid/sql/**",
+        "multi-stage-query/src/test/quidem/**",
+        "multi-stage-query/src/test/resources/dataset-with-time-column.json",
+        "multi-stage-query/src/test/resources/multipleFiles/**",
+        "multi-stage-query/src/test/resources/nonstring-mv-string-array.json",
+        "multi-stage-query/src/test/resources/not-json.txt",
+        "multi-stage-query/src/test/resources/org.apache.druid.msq.indexing.MSQSpecCompatTest/**",
+        "multi-stage-query/src/test/resources/wikipedia-sampled-unparsable.json",
+        "multi-stage-query/src/test/resources/wikipedia-sampled.json",
+        "mvnw",
+        "mvnw.cmd",
+        "owasp-dependency-check-suppressions.xml",
+        "pom.xml",
+        "processing/pom.xml",
+        "processing/src/main/**",
+        "processing/src/test/java/**",
+        "processing/src/test/resources/META-INF/**",
+        "processing/src/test/resources/append.json.1",
+        "processing/src/test/resources/append.json.2",
+        "processing/src/test/resources/append.json.3",
+        "processing/src/test/resources/append.json.4",
+        "processing/src/test/resources/append.json.5",
+        "processing/src/test/resources/append.json.6",
+        "processing/src/test/resources/append.json.7",
+        "processing/src/test/resources/blkio.throttle.io_service_bytes",
+        "processing/src/test/resources/blkio.throttle.io_service_bytes-2",
+        "processing/src/test/resources/blkio.throttle.io_serviced",
+        "processing/src/test/resources/blkio.throttle.io_serviced-2",
+        "processing/src/test/resources/boot_id",
+        "processing/src/test/resources/cgroupv2/**",
+        "processing/src/test/resources/cpu.cfs_period_us",
+        "processing/src/test/resources/cpu.cfs_quota_us",
+        "processing/src/test/resources/cpu.shares",
+        "processing/src/test/resources/cpuacct.stat",
+        "processing/src/test/resources/cpuacct.stat-2",
+        "processing/src/test/resources/cpuacct.usage",
+        "processing/src/test/resources/cpuacct.usage_all",
+        "processing/src/test/resources/cpuinfo",
+        "processing/src/test/resources/cpuset.cpus",
+        "processing/src/test/resources/cpuset.effective_cpus.complex",
+        "processing/src/test/resources/cpuset.effective_cpus.simple",
+        "processing/src/test/resources/cpuset.effective_mems",
+        "processing/src/test/resources/cpuset.mems",
+        "processing/src/test/resources/druid.hll.sample.tsv",
+        "processing/src/test/resources/druid.sample.json",
+        "processing/src/test/resources/druid.sample.json.bottom",
+        "processing/src/test/resources/druid.sample.json.top",
+        "processing/src/test/resources/druid.sample.numeric.bottom.json",
+        "processing/src/test/resources/druid.sample.numeric.json",
+        "processing/src/test/resources/druid.sample.numeric.top.json",
+        "processing/src/test/resources/druid.sample.numeric.tsv",
+        "processing/src/test/resources/druid.sample.numeric.tsv.bottom",
+        "processing/src/test/resources/druid.sample.numeric.tsv.top",
+        "processing/src/test/resources/druid.sample.tsv",
+        "processing/src/test/resources/druid.sample.tsv.bottom",
+        "processing/src/test/resources/druid.sample.tsv.top",
+        "processing/src/test/resources/list.json",
+        "processing/src/test/resources/log4j2.xml",
+        "processing/src/test/resources/loggingEmitterAllowedMetrics.json",
+        "processing/src/test/resources/memory.limit_in_bytes",
+        "processing/src/test/resources/memory.numa_stat",
+        "processing/src/test/resources/memory.stat",
+        "processing/src/test/resources/memory.usage_in_bytes",
+        "processing/src/test/resources/nested-all-types-test-data.json",
+        "processing/src/test/resources/nested-array-test-data-2.json",
+        "processing/src/test/resources/nested-array-test-data.json",
+        "processing/src/test/resources/nested-numeric-test-data.json",
+        "processing/src/test/resources/nested-simple-test-data.json",
+        "processing/src/test/resources/nested-simple-test-data.tsv",
+        "processing/src/test/resources/nested-types-test-data.json",
+        "processing/src/test/resources/proc.cgroups",
+        "processing/src/test/resources/proc.mounts",
+        "processing/src/test/resources/proc.pid.cgroup",
+        "processing/src/test/resources/test.runtime.properties",
+        "processing/src/test/resources/v8SegmentPersistDir/meta.smoosh",
+        "processing/src/test/resources/v9SegmentPersistDir/segmentWithDamagedFile/factory.json",
+        "processing/src/test/resources/v9SegmentPersistDir/segmentWithDamagedFile/meta.smoosh",
+        "processing/src/test/resources/white-rabbit.txt",
+        "processing/src/test/resources/wikipedia/countries.json",
+        "processing/src/test/resources/wikipedia/data.json",
+        "processing/src/test/resources/wikipedia/regions.json",
+        "publications/demo/Makefile",
+        "publications/demo/druid_demo.aux",
+        "publications/demo/druid_demo.bbl",
+        "publications/demo/druid_demo.bib",
+        "publications/demo/druid_demo.blg",
+        "publications/demo/druid_demo.out",
+        "publications/demo/druid_demo.tex",
+        "publications/demo/vldb.cls",
+        "publications/radstack/.gitignore",
+        "publications/radstack/Makefile",
+        "publications/radstack/README.md",
+        "publications/radstack/radstack.bib",
+        "publications/radstack/radstack.tex",
+        "publications/radstack/src/**",
+        "publications/radstack/vldb.cls",
+        "publications/whitepaper/.gitignore",
+        "publications/whitepaper/Makefile",
+        "publications/whitepaper/README.md",
+        "publications/whitepaper/acm_proc_article-sp.cls",
+        "publications/whitepaper/druid.bib",
+        "publications/whitepaper/druid.tex",
+        "publications/whitepaper/dummy.ps",
+        "publications/whitepaper/modii658-yang.bib",
+        "publications/whitepaper/modii658-yang.tex",
+        "publications/whitepaper/sig-alternate-2013.cls",
+        "publications/whitepaper/src/**",
+        "quidem-ut/**",
+        "rewrite.yml",
+        "server/pom.xml",
+        "server/src/main/java/org/apache/druid/catalog/**",
+        "server/src/main/java/org/apache/druid/client/**",
+        "server/src/main/java/org/apache/druid/curator/**",
+        "server/src/main/java/org/apache/druid/discovery/**",
+        "server/src/main/java/org/apache/druid/guice/**",
+        "server/src/main/java/org/apache/druid/indexing/**",
+        "server/src/main/java/org/apache/druid/initialization/**",
+        "server/src/main/java/org/apache/druid/messages/**",
+        "server/src/main/java/org/apache/druid/metadata/**",
+        "server/src/main/java/org/apache/druid/offheap/**",
+        "server/src/main/java/org/apache/druid/query/**",
+        "server/src/main/java/org/apache/druid/rpc/**",
+        "server/src/main/java/org/apache/druid/segment/FrameBasedInlineSegmentWrangler.java",
+        "server/src/main/java/org/apache/druid/segment/InlineSegmentWrangler.java",
+        "server/src/main/java/org/apache/druid/segment/LookupSegmentWrangler.java",
+        "server/src/main/java/org/apache/druid/segment/MapSegmentWrangler.java",
+        "server/src/main/java/org/apache/druid/segment/handoff/**",
+        "server/src/main/java/org/apache/druid/segment/indexing/**",
+        "server/src/main/java/org/apache/druid/segment/join/**",
+        "server/src/main/java/org/apache/druid/segment/loading/CacheEntry.java",
+        "server/src/main/java/org/apache/druid/segment/loading/CacheEntryIdentifier.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LeastBytesUsedStorageLocationSelectorStrategy.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalDataSegmentKiller.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalDataSegmentPuller.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalDataSegmentPusher.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalDataSegmentPusherConfig.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalFileTimestampVersionFinder.java",
+        "server/src/main/java/org/apache/druid/segment/loading/LocalLoadSpec.java",
+        "server/src/main/java/org/apache/druid/segment/loading/MostAvailableSizeStorageLocationSelectorStrategy.java",
+        "server/src/main/java/org/apache/druid/segment/loading/OmniDataSegmentArchiver.java",
+        "server/src/main/java/org/apache/druid/segment/loading/OmniDataSegmentKiller.java",
+        "server/src/main/java/org/apache/druid/segment/loading/OmniDataSegmentMover.java",
+        "server/src/main/java/org/apache/druid/segment/loading/PartialSegmentBundleCacheEntry.java",
+        "server/src/main/java/org/apache/druid/segment/loading/PartialSegmentBundleCacheEntryIdentifier.java",
+        "server/src/main/java/org/apache/druid/segment/loading/PartialSegmentMetadataCacheEntry.java",
+        "server/src/main/java/org/apache/druid/segment/loading/PermitLimitedSegmentRangeReader.java",
+        "server/src/main/java/org/apache/druid/segment/loading/RandomStorageLocationSelectorStrategy.java",
+        "server/src/main/java/org/apache/druid/segment/loading/ResizableCacheEntry.java",
+        "server/src/main/java/org/apache/druid/segment/loading/RoundRobinStorageLocationSelectorStrategy.java",
+        "server/src/main/java/org/apache/druid/segment/loading/SegmentCacheEntry.java",
+        "server/src/main/java/org/apache/druid/segment/loading/SegmentCacheEntryIdentifier.java",
+        "server/src/main/java/org/apache/druid/segment/loading/SegmentCacheManager.java",
+        "server/src/main/java/org/apache/druid/segment/loading/SegmentLoaderConfig.java",
+        "server/src/main/java/org/apache/druid/segment/loading/SegmentLocalCacheManager.java",
+        "server/src/main/java/org/apache/druid/segment/loading/StorageLoadingThreadPool.java",
+        "server/src/main/java/org/apache/druid/segment/loading/StorageLocation.java",
+        "server/src/main/java/org/apache/druid/segment/loading/StorageLocationConfig.java",
+        "server/src/main/java/org/apache/druid/segment/loading/StorageLocationSelectorStrategy.java",
+        "server/src/main/java/org/apache/druid/segment/loading/StorageLocationStats.java",
+        "server/src/main/java/org/apache/druid/segment/loading/VirtualPlaceholderSegment.java",
+        "server/src/main/java/org/apache/druid/segment/loading/VirtualStorageLocationStats.java",
+        "server/src/main/java/org/apache/druid/segment/metadata/**",
+        "server/src/main/java/org/apache/druid/segment/realtime/**",
+        "server/src/main/java/org/apache/druid/server/**",
+        "server/src/test/java/org/apache/druid/catalog/**",
+        "server/src/test/java/org/apache/druid/client/**",
+        "server/src/test/java/org/apache/druid/curator/**",
+        "server/src/test/java/org/apache/druid/discovery/**",
+        "server/src/test/java/org/apache/druid/guice/**",
+        "server/src/test/java/org/apache/druid/indexing/**",
+        "server/src/test/java/org/apache/druid/initialization/**",
+        "server/src/test/java/org/apache/druid/messages/**",
+        "server/src/test/java/org/apache/druid/metadata/**",
+        "server/src/test/java/org/apache/druid/query/**",
+        "server/src/test/java/org/apache/druid/rpc/**",
+        "server/src/test/java/org/apache/druid/segment/InlineSegmentWranglerTest.java",
+        "server/src/test/java/org/apache/druid/segment/LookupSegmentWranglerTest.java",
+        "server/src/test/java/org/apache/druid/segment/handoff/**",
+        "server/src/test/java/org/apache/druid/segment/indexing/**",
+        "server/src/test/java/org/apache/druid/segment/join/**",
+        "server/src/test/java/org/apache/druid/segment/loading/LoadSpecTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/LocalDataSegmentKillerTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/LocalDataSegmentPullerTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/LocalDataSegmentPusherTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/LocalFileTimestampVersionFinderTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/NoopSegmentCacheManager.java",
+        "server/src/test/java/org/apache/druid/segment/loading/OmniDataSegmentArchiverTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/OmniDataSegmentKillerTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/OmniDataSegmentMoverTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/PartialSegmentBundleCacheEntryIdentifierTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/PartialSegmentBundleCacheEntryTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/PartialSegmentMetadataCacheEntryTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/PartialSegmentRestoreFromDiskTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/PermitLimitedSegmentRangeReaderTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLoaderConfigTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerAcquireLifecycleTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerBootstrapReserveTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerConcurrencyTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerPartialAcquireTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerPartialDropTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerPartialRuleLoadTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/SegmentLocalCacheManagerTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/StorageLoadingThreadPoolTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/StorageLocationSelectorStrategyTest.java",
+        "server/src/test/java/org/apache/druid/segment/loading/StorageLocationTest.java",
+        "server/src/test/java/org/apache/druid/segment/metadata/**",
+        "server/src/test/java/org/apache/druid/segment/realtime/**",
+        "server/src/test/java/org/apache/druid/server/**",
+        "server/src/test/java/org/apache/druid/sql/**",
+        "server/src/test/java/org/apache/druid/test/**",
+        "server/src/test/resources/random_uuid_100",
+        "server/src/test/resources/status.resource.test.runtime.hpc.properties",
+        "server/src/test/resources/status.resource.test.runtime.properties",
+        "services/**",
+        "sql/pom.xml",
+        "sql/src/main/codegen/**",
+        "sql/src/main/java/org/apache/calcite/**",
+        "sql/src/main/java/org/apache/druid/sql/AbstractStatement.java",
+        "sql/src/main/java/org/apache/druid/sql/DirectStatement.java",
+        "sql/src/main/java/org/apache/druid/sql/HttpStatement.java",
+        "sql/src/main/java/org/apache/druid/sql/PreparedStatement.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlExecutionReporter.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlLifecycleManager.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlPlanningException.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlPlanningTimeout.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlQueryPlus.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlRowTransformer.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlStatementFactory.java",
+        "sql/src/main/java/org/apache/druid/sql/SqlToolbox.java",
+        "sql/src/main/java/org/apache/druid/sql/avatica/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/aggregation/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/expression/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/filtration/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/parser/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/planner/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/rel/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/rule/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/run/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/schema/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/table/**",
+        "sql/src/main/java/org/apache/druid/sql/calcite/view/**",
+        "sql/src/main/java/org/apache/druid/sql/destination/**",
+        "sql/src/main/java/org/apache/druid/sql/guice/**",
+        "sql/src/main/java/org/apache/druid/sql/hook/**",
+        "sql/src/main/java/org/apache/druid/sql/http/**",
+        "sql/src/main/resources/**",
+        "sql/src/test/java/org/apache/druid/query/**",
+        "sql/src/test/java/org/apache/druid/quidem/**",
+        "sql/src/test/java/org/apache/druid/sql/SqlLifecycleManagerTest.java",
+        "sql/src/test/java/org/apache/druid/sql/SqlPlanningTimeoutTest.java",
+        "sql/src/test/java/org/apache/druid/sql/SqlQueryPlusTest.java",
+        "sql/src/test/java/org/apache/druid/sql/SqlRowTransformerTest.java",
+        "sql/src/test/java/org/apache/druid/sql/SqlStatementTest.java",
+        "sql/src/test/java/org/apache/druid/sql/avatica/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/BaseCalciteQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteArraysQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteCatalogDdlTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteCatalogIngestionDmlTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteCatalogInsertTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteCatalogReplaceTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteCorrelatedQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteExplainQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteExportTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteGroupByQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteIngestionDmlTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteInsertDmlTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteJoinQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteLookupFunctionQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteMultiValueStringQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteNestedDataQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteParameterQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteReplaceDmlTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteScanSignatureTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteSelectQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteSimpleQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteStrictInsertTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteSubqueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteSysQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteTableAppendTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteTimeBoundaryQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteUnionQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/CalciteWindowQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledExtension.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteArraysQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteCorrelatedQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteJoinQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteNestedDataQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledPlanningCalciteUnionQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DecoupledTestConfig.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DrillWindowQueryTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/DruidPlannerResourceAnalyzeTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/IngestTableFunctionTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/IngestionTestSqlEngine.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/MultiComponentSupplier.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/NotYetSupported.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/QTestCase.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/QueryTestBuilder.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/QueryTestRunner.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/QueryVerification.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/SqlSchema.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/SqlTestFrameworkConfig.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/SqlTestFrameworkConfigTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/SqlVectorizedExpressionResultConsistencyTest.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/TempDirProducer.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/TestInsertQueryMaker.java",
+        "sql/src/test/java/org/apache/druid/sql/calcite/aggregation/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/expression/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/filtration/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/http/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/parser/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/planner/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/rel/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/rule/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/run/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/schema/**",
+        "sql/src/test/java/org/apache/druid/sql/calcite/util/**",
+        "sql/src/test/java/org/apache/druid/sql/destination/**",
+        "sql/src/test/java/org/apache/druid/sql/guice/**",
+        "sql/src/test/java/org/apache/druid/sql/http/**",
+        "sql/src/test/quidem/druidjoinrule-fullouter-dataset/**",
+        "sql/src/test/quidem/org.apache.druid.quidem.SqlQuidemTest/**",
+        "sql/src/test/quidem/org.apache.druid.sql.calcite.DecoupledPlanningCalciteArraysQueryTest/**",
+        "sql/src/test/quidem/org.apache.druid.sql.calcite.DecoupledPlanningCalciteJoinQueryTest/**",
+        "sql/src/test/quidem/org.apache.druid.sql.calcite.DecoupledPlanningCalciteQueryTest/**",
+        "sql/src/test/quidem/qatests/qaAggFuncs/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/dynamic_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/hashed_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/range_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/schmdisc_and_transform/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/schmdisc_dynamic_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/schmdisc_hashed_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaArray/ingest/schmdisc_range_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaArray/ops_funcs/**",
+        "sql/src/test/quidem/qatests/qaArray/sql/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/funcs_and_sql/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/dynamic_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/flatten_spec/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/hashed_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/infmt_json_file/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/infmt_json_inline/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/infmt_tsv_file/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/infmt_tsv_inline/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/range_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_and_transform_spec/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_dynamic_rollup_true/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_flatten_spec/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_hashed_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_infmt_json_file/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_infmt_json_inline/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_infmt_tsv_file/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_infmt_tsv_inline/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmdisc_range_rollup_false/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmless_json/**",
+        "sql/src/test/quidem/qatests/qaJsonCols/ingest/schmless_tsv/**",
+        "sql/src/test/quidem/qatests/qaSql/ingest.json",
+        "sql/src/test/quidem/qatests/qaSsb/denorm/ingest.ssb_denorm.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.customer.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.date.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.lineorder.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.part.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.ssb_denorm.json",
+        "sql/src/test/quidem/qatests/qaSsb/norm/ingest.supplier.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_customer.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_lineitem.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_nation.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_orders.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_part.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_partsupp.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_region.json",
+        "sql/src/test/quidem/qatests/qaTpch/ingest_supplier.json",
+        "sql/src/test/quidem/qatests/qaUnnest/**",
+        "sql/src/test/quidem/qatests/qaWin/ingest.json",
+        "sql/src/test/quidem/sampledataset/**",
+        "sql/src/test/resources/calcite/**",
+        "sql/src/test/resources/drill/window/datasources/allData.csv",
+        "sql/src/test/resources/drill/window/datasources/allTypsUniq.parquet.json",
+        "sql/src/test/resources/drill/window/datasources/fewRowsAllData.parquet.json",
+        "sql/src/test/resources/drill/window/datasources/forViewCrn.parquet.json",
+        "sql/src/test/resources/drill/window/datasources/smlTbl.parquet.json",
+        "sql/src/test/resources/drill/window/datasources/t_alltype.csv",
+        "sql/src/test/resources/drill/window/datasources/t_alltype.parquet.json",
+        "sql/src/test/resources/drill/window/datasources/tblWnulls.parquet.json",
+        "sql/src/test/resources/drill/window/queries/**",
+        "upload.sh",
+        "web-console/.editorconfig",
+        "web-console/.gitignore",
+        "web-console/.node-version",
+        "web-console/.npmrc",
+        "web-console/.stylelintrc.json",
+        "web-console/AGENTS.md",
+        "web-console/README.md",
+        "web-console/console-config.js",
+        "web-console/e2e-tests/**",
+        "web-console/eslint.config.mjs",
+        "web-console/jest.common.config.js",
+        "web-console/jest.config.js",
+        "web-console/jest.e2e.config.js",
+        "web-console/mise.toml",
+        "web-console/package-lock.json",
+        "web-console/package.json",
+        "web-console/pom.xml",
+        "web-console/script/**",
+        "web-console/src/**",
+        "web-console/tsconfig.json",
+        "web-console/tsconfig.test.json",
+        "web-console/typings/**",
+        "web-console/unified-console.html",
+        "web-console/webpack.config.mjs",
+        "website/.node-version",
+        "website/.spelling",
+        "website/README.md",
+        "website/docusaurus.config.js",
+        "website/mise.toml",
+        "website/package-lock.json",
+        "website/package.json",
+        "website/redirects.js",
+        "website/script/**",
+        "website/sidebars.json",
+        "website/src/**",
+        "website/static/css/**",
+        "website/static/js/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n   APACHE DRUID SUBCOMPONENTS:\n\n   Apache Druid includes a number of subcomponents with\n   separate copyright notices and license terms. Your use of the source\n   code for these subcomponents is subject to the terms and\n   conditions of the following licenses.\n\n\nApache License version 2.0\n================================\n\nSOURCE/JAVA-CORE\n    This product contains conjunctive normal form conversion code, a variance aggregator algorithm, and Bloom filter\n     adapted from Apache Hive.\n      * processing/src/main/java/org/apache/druid/segment/filter/cnf/HiveCnfHelper.java\n      * extensions-core/stats/src/main/java/io/druid/query/aggregation/variance/VarianceAggregatorCollector.java\n      * extensions-core/druid-bloom-filter/src/main/java/org/apache/druid/query/filter/BloomKFilter.java\n\n    This product contains variable length long deserialization code adapted from Apache Lucene.\n      * processing/src/main/java/org/apache/druid/segment/data/VSizeLongSerde.java\n\n    This product contains SQL query planning code adapted from Apache Calcite.\n      * sql/src/main/java/org/apache/druid/sql/calcite/\n      * processing/src/main/java/org/apache/druid/segment/filter/cnf/CalciteCnfHelper.java\n\n    This product contains Kerberos authentication code adapted from Apache Hadoop.\n      * extensions-core/druid-kerberos/src/main/java/org/apache/druid/security/kerberos/\n\n    This product contains a modified version of the java-alphanum library,\n     copyright Andrew Duffy (https://github.com/amjjd/java-alphanum).\n      * processing/src/main/java/org/apache/druid/query/ordering/StringComparators.java\n\n    This product contains a modified version of the Metamarkets java-util library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/java-util).\n      * java-util/\n\n    This product contains a modified version of the Metamarkets bytebuffer-collections library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/bytebuffer-collections)\n      * processing/src/main/java/org/apache/druid/collections/\n\n    This product contains a modified version of the Metamarkets extendedset library,\n     copyright Metamarkets Group Inc. (https://github.com/metamx/extendedset)\n      * extendedset/\n\n    This product contains a modified version of the CONCISE (COmpressed 'N' Composable Integer SEt) library,\n     copyright Alessandro Colantonio (https://sourceforge.net/projects/concise/), extending the functionality of\n     ConciseSet to use IntBuffers.\n      * extendedset/src/main/java/org/apache/druid/extendedset/intset/\n\n    This product contains modified portions of the Guava library,\n     copyright The Guava Authors (https://github.com/google/guava).\n      Closer class:\n      * processing/src/main/java/org/apache/druid/java/util/common/io/Closer.java\n      Splitter.splitToList() method:\n      * processing/src/main/java/org/apache/druid/java/util/common/parsers/DelimitedParser.java\n      DirectExecutorService class:\n      * processing/src/main/java/org/apache/druid/java/util/common/concurrent/DirectExecutorService.java\n      CartesianList class:\n      * processing/src/main/java/org/apache/druid/math/expr/CartesianList.java\n\n    This product contains modified versions of the Dockerfile, scripts, and related configuration files\n     used for building SequenceIQ's Hadoop Docker image, copyright SequenceIQ, Inc. (https://github.com/sequenceiq/hadoop-docker/)\n      * examples/quickstart/tutorial/hadoop/docker/\n\n    This product contains fixed bins histogram percentile computation code adapted from Netflix Spectator,\n     copyright Netflix, Inc. (https://github.com/Netflix/spectator)\n      * extensions-core/histogram/src/main/java/org/apache/druid/query/aggregation/histogram/FixedBucketsHistogram.java\n\n    This product contains ByteBuffer unmapping code adapted from Apache Kafka\n      * processing/src/main/java/org/apache/druid/java/util/common/ByteBufferUtils.java\n\n    This product contains s3 directory place holder check code adapted from JetS3t (https://bitbucket.org/jmurty/jets3t/wiki/Home).\n      * extensions-core/s3-extensions/src/main/java/org/apache/druid/storage/s3/S3Utils.java\n      * extensions-contrib/aliyun-oss-extensions/src/main/java/org/apache/druid/storage/aliyun/OssObjectSummaryIterator.java\n\n    This product contains lpad and rpad methods adapted from Apache Flink.\n      * processing/src/main/java/org/apache/druid/java/util/common/StringUtils.java\n\n    This product contains SystemInfo methods adapted from oshi\n      * processing/src/main/java/org/apache/druid/java/util/metrics/OshiSysMonitor.java\n\n    This product contains test cases adapted from Test Framework for Apache Drill (https://github.com/apache/drill-test-framework).\n      * sql/src/test/resources/drill/window\n\n    This product contains the class copied from https://github.com/FasterXML/jackson-databind\n      * extensions-core/s3-extensions/src/main/java/com/fasterxml/jackson/databind/PropertyNamingStrategies.java\n\n    This product contains the Maven Wrapper scripts from Apache Maven Wrapper.\n      * mvnw\n      * mvnw.cmd\n\n\n\nMIT License\n================================\n\nSOURCE/WEB-CONSOLE\n    This product bundles jQuery version 1.11.0, copyright jQuery Foundation, Inc.,\n     which is available under an MIT license. For details, see licenses/src/jquery.MIT.\n\n    This product bundles sizzle.js by way of jQuery version 1.11.0, copyright jQuery Foundation and other contributors\n     which is available under an MIT license. For details, see licenses/src/sizzle.MIT.\n\n    This product bundles jQuery UI version 1.9.2, copyright jQuery Foundation and other contributors,\n     which is available under an MIT license. For details, see licenses/src/jquery-ui.MIT.\n\n    This product bundles underscore version 1.2.2, copyright Jeremy Ashkenas, DocumentCloud,\n     which is available under an MIT license. For details, see licenses/src/underscore.MIT.\n\n\nBSD-3-Clause License\n================================\n\nSOURCE/WEB-CONSOLE\n    This product bundles demo_table.css and jquery.dataTables.js from DataTables version 1.8.2, copyright Allan Jardine.,\n     which is available under a BSD-3-Clause License. For details, see licenses/src/datatables.BSD3.\n\nSOURCE/JAVA-CORE\n    This product contains Porter stemmer adapted from a Javascript Porter Stemmer (https://github.com/kristopolous/Porter-Stemmer)\n     which is available under a BSD-3-Clause License. For details, see licenses/src/porter-stemmer.BSD3.\n      * processing/src/test/java/org/apache/druid/query/extraction/JavaScriptExtractionFnTest.java\n\nSOURCE/EXTENSIONS/druid-basic-security\n    This product contains an LDAP string encoding function from OWASP ESAPI, copyright The OWASP Foundation\n     (https://github.com/ESAPI/esapi-java-legacy) which is available under the BSD-3-Clause License. For details, see\n     licenses/src/esapi.BSD3.\n      * extensions-core/druid-basic-security/src/main/java/org/apache/druid/security/basic/authentication/validator/LDAPCredentialsValidator.java\n\n\nPublic Domain\n================================\n\nSOURCE/JAVA-CORE\n    This product uses a smear function adapted from MurmurHash3, written by Austin Appleby who has placed\n     MurmurHash3 in the public domain (https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp).\n      * processing/src/main/java/org/apache/druid/query/groupby/epinephelinae/Groupers.java\n\n\nCreative Commons Attribution-ShareAlike 3.0 Unported License\n================================\n\nSOURCE/JAVA-CORE:\n    This product contains example data collected from the Wikipedia edit stream API (this content is NOT part of the source\n     code and is only used for example and tutorial purposes), copyright Wikipedia editors and contributors for the text\n     content which is available under Creative Commons Attribution-ShareAlike 3.0 Unported License. For details, see\n     licenses/src/CC-BY-SA.txt.\n      * examples/quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz\n\nNOTICE:\n\nApache Druid\nCopyright 2018-2026 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\n\n############ SOURCE/JAVA-CORE ############\n\n================= Apache Calcite 1.10.0 =================\nApache Calcite\nCopyright 2012-2016 The Apache Software Foundation\n\nThis product is based on source code originally developed\nby DynamoBI Corporation, LucidEra Inc., SQLstream Inc. and others\nunder the auspices of the Eigenbase Foundation\nand released as the LucidDB project.\n\n\n\n\n================= Apache Flink 1.8.1 =================\nApache Flink\nCopyright 2014-2019 The Apache Software Foundation\n\n\n\n\n================= Apache Hadoop 2.8.5 =================\nApache Hadoop\nCopyright 2009-2017 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.0.0 =================\nApache Hive\nCopyright 2008-2015 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.0.1 =================\nApache Hive\nCopyright 2008-2016 The Apache Software Foundation\n\n\n\n\n================= Apache Hive 2.7.0 =================\nApache Hive\nCopyright 2008-2018 The Apache Software Foundation\n\n\n\n\n================= Apache Kafka 2.7.0 =================\nApache Kafka\nCopyright 2020 The Apache Software Foundation.\n\n\n\n\n================= Apache Lucene 6.2.0 =================\nApache Lucene\nCopyright 2014 The Apache Software Foundation\n\n\n\n\n================= Metamarkets bytebuffer-collections 0.2.5 =================\nbytebuffer-collections\nCopyright 2011-2015 Metamarkets Group Inc.\n\n\n\n\n================= Metamarkets java-util 1.3.3 =================\njava-util\nCopyright 2011-2017 Metamarkets Group Inc.\n\n\n\n\n================= Metamarkets extendedset 1.3.10 =================\nextendedset\nCopyright 2012 Metamarkets Group Inc.\n\n================= Apache Commons DBCP2 2.0.1 =================\n\nApache Commons DBCP\nCopyright 2001-2020 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (https://www.apache.org/).\n\n================= Apache Maven Wrapper 3.3.4 =================\n\nApache Maven Wrapper\nCopyright 2013-2022 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\nThe original idea and initial implementation of the maven-wrapper module is derived\nfrom the Gradle Wrapper which was written originally by Hans Dockter and Adam Murdoch.\nCopyright 2007 the original author or authors.\n\n-------------------------------------------------------------------------------\n\nThis library contains a modified version of Alessandro Colantonio's CONCISE\n(COmpressed 'N' Composable Integer SEt) library, extending the functionality of\nConciseSet to use IntBuffers.\n\n\n\n",
+      "attribution": "Copyright 2018-2026 The Apache Software Foundation; Copyright 2012-2016 The Apache Software Foundation; Copyright 2014-2019 The Apache Software Foundation; Copyright 2009-2017 The Apache Software Foundation; Copyright 2008-2015 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/druid."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.R"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rescript",
+      "paths": [
+        "**/*.res"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0BSD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BSD2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BSD3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CDDL11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CliCommandCreator"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Driver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.DruidModule"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.EDL1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.EPL1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ICU"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ISC"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MIT0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MPL2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.OFL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PropertyChecker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SIL-OFL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.avsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bbl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.blg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cfs_period_us"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cfs_quota_us"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cgroup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cgroups"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.complex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.drill-3582"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.drill-3679"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.drill_4525"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.drill_4811"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dtd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.e_tsv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.effective_mems"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.failing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fmpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.generated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grammar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.io_service_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.io_service_bytes-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.io_serviced"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.io_serviced-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.limit_in_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mariadb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mems"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mounts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mysql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.numa_stat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.q"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rego"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.shares"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.smoosh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sqlTest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sql_"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stat-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.thrift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage_all"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage_in_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.spelling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/APACHE2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LABELS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/boot_id"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/build-sql-docs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/checkstyle-check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cp-to"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cpuinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/druid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dsql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dsql-main-py2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dsql-main-py3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dump-segment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/environment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate-example-metrics"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/greet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/java-util"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/licenses"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvnw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/notify-spellcheck-issues"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-index-task"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-index-task-main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-index-task-main3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-push"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/random_uuid_100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-druid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-zk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-cluster-data-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-cluster-master-no-zk-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-cluster-master-with-zk-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-cluster-query-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-druid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-micro-quickstart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-nano-quickstart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-single-server-large"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-single-server-medium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-single-server-small"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/start-single-server-xlarge"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/supervise"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/verify-default-ports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/verify-java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,2385 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/NationalSecurityAgency/ghidra",
+  "revision": "61f664ff30d9bd7d5501956751d46553728c5f6b",
+  "checksum": "sha256:81ef8efa7cfa297eef15baeeaf213b8090bac02f0180a9d471c1f4a9e8b1e8f3",
+  "extract": {
+    "exclude": [
+      "GPL/DMG/data/lib/**",
+      "GPL/DMG/data/os/**",
+      "GPL/GnuDisassembler/data/big.elf",
+      "GPL/GnuDisassembler/data/little.elf",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/BreakpointTimelinePlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerBreakpointMarkerPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerBreakpointsPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerConsolePlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerCopyActionsPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerEmulationServicePlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerListingPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerMemoryBytesPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerMemviewPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerModelPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerModulesPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerPcodeStepperPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerPlatformPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerRegionsPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerRegistersPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerStackPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerStaticMappingPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerThreadsPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTimePlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTraceViewDiffPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerVariableViewerPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerWatchesPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/TraceCallTreePlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/help/help/topics/VariableValueHoverPlugin/images/**",
+      "Ghidra/Debug/Debugger/src/main/resources/images/**",
+      "Ghidra/Debug/Debugger-agent-dbgeng/src/main/py/**",
+      "Ghidra/Debug/Debugger-agent-drgn/src/main/py/**",
+      "Ghidra/Debug/Debugger-agent-gdb/src/main/help/help/topics/gdb/images/**",
+      "Ghidra/Debug/Debugger-agent-gdb/src/main/py/**",
+      "Ghidra/Debug/Debugger-agent-lldb/src/main/py/**",
+      "Ghidra/Debug/Debugger-agent-x64dbg/src/main/py/**",
+      "Ghidra/Debug/Debugger-rmi-trace/src/main/help/help/topics/TraceRmiConnectionManagerPlugin/images/**",
+      "Ghidra/Debug/Debugger-rmi-trace/src/main/help/help/topics/TraceRmiLauncherServicePlugin/images/**",
+      "Ghidra/Debug/Debugger-rmi-trace/src/main/py/**",
+      "Ghidra/Features/BSim/src/main/help/help/topics/BSimSearchPlugin/images/**",
+      "Ghidra/Features/BSim/src/main/resources/images/**",
+      "Ghidra/Features/Base/data/pcodetest/**",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.15_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.16_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.17_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.18_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.19_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.20_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.21_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.22_anybit_any.gdt",
+      "Ghidra/Features/Base/data/typeinfo/golang/golang_1.23_anybit_any.gdt",
+      "Ghidra/Features/Base/ghidra_scripts/world.png",
+      "Ghidra/Features/Base/src/main/help/help/topics/About/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Annotations/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/AssemblerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/AutoAnalysisPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/BentoServicePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/BlockModel/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/BookmarkPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/CParserPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/CallTreePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Charsets/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ClearPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ClipboardPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/CommentWindowPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/CommentsPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ComputeChecksumsPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ConsolePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DWARFExternalDebugFilesPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DataPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DataTypeEditors/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DataTypeManagerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DataTypePreviewPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DataWindowPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DbViewerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DefinedStringsPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DisassembledViewPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DisassemblerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/DockingWindows/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/EquatePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ExporterPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FallThroughPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FunctionComparison/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FunctionPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FunctionTagPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/FunctionWindowPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/GhidraScriptMgrPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Glossary/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Intro/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/LabelMgrPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/LanguageProviderPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/LocationReferencesPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/MemoryMapPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Navigation/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/OverviewPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/PrintingPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ProgramTreePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/PropertyManagerPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ReferencesPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/RegisterPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/RelocationTablePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Repository/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ScalarSearchPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Search/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/SelectBytesPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ShowInstructionInfoPlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/StackEditor/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/SymbolTablePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/SymbolTreePlugin/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/Tool/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/ValidateProgram/images/**",
+      "Ghidra/Features/Base/src/main/help/help/topics/VersionControl/images/**",
+      "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/external/**",
+      "Ghidra/Features/Base/src/main/resources/defaultTools/**",
+      "Ghidra/Features/Base/src/main/resources/images/**",
+      "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/external/**",
+      "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/external/**",
+      "Ghidra/Features/BytePatterns/src/main/help/help/topics/FunctionBitPatternsExplorerPlugin/images/**",
+      "Ghidra/Features/ByteViewer/src/main/help/help/topics/ByteViewerPlugin/images/**",
+      "Ghidra/Features/ByteViewer/src/main/resources/**",
+      "Ghidra/Features/DataGraph/src/main/help/help/topics/DataGraphPlugin/images/**",
+      "Ghidra/Features/DataGraph/src/main/resources/**",
+      "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/images/**",
+      "Ghidra/Features/Decompiler/src/main/resources/**",
+      "Ghidra/Features/DecompilerDependent/src/main/help/help/topics/DecompilerTextFinderPlugin/images/**",
+      "Ghidra/Features/DecompilerDependent/src/main/resources/**",
+      "Ghidra/Features/FunctionGraph/src/main/help/help/topics/FunctionGraphPlugin/images/**",
+      "Ghidra/Features/FunctionGraph/src/main/resources/**",
+      "Ghidra/Features/FunctionGraphDecompilerExtension/src/main/resources/**",
+      "Ghidra/Features/FunctionID/src/main/help/help/topics/FunctionID/images/**",
+      "Ghidra/Features/GraphFunctionCalls/src/main/help/help/topics/FunctionCallGraphPlugin/images/**",
+      "Ghidra/Features/GraphServices/src/main/help/help/topics/GraphServices/images/**",
+      "Ghidra/Features/PDB/src/main/help/help/topics/Pdb/images/**",
+      "Ghidra/Features/ProgramDiff/src/main/help/help/topics/Diff/images/**",
+      "Ghidra/Features/ProgramDiff/src/main/resources/**",
+      "Ghidra/Features/ProgramGraph/src/main/help/help/topics/ProgramGraphPlugin/images/**",
+      "Ghidra/Features/PyGhidra/src/main/py/**",
+      "Ghidra/Features/Rust/data/typeinfo/**",
+      "Ghidra/Features/VersionTracking/src/main/docs/**",
+      "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/images/**",
+      "Ghidra/Features/VersionTracking/src/main/resources/defaultTools/images/**",
+      "Ghidra/Features/VersionTracking/src/main/resources/images/**",
+      "Ghidra/Framework/Docking/src/main/help/help/topics/KeyboardNavigation/images/**",
+      "Ghidra/Framework/Docking/src/main/help/help/topics/Tables/images/**",
+      "Ghidra/Framework/Docking/src/main/help/help/topics/Theming/images/**",
+      "Ghidra/Framework/Docking/src/main/help/help/topics/Trees/images/**",
+      "Ghidra/Framework/Docking/src/main/resources/**",
+      "Ghidra/Framework/Graph/src/main/docs/VerticesAndEdges.png",
+      "Ghidra/Framework/Graph/src/main/docs/VisualGraphHierarchy.png",
+      "Ghidra/Framework/Graph/src/main/docs/VisualGraphViewer.png",
+      "Ghidra/Framework/Graph/src/main/resources/**",
+      "Ghidra/Framework/Gui/src/main/resources/**",
+      "Ghidra/Framework/Help/src/main/resources/help/shared/close16.gif",
+      "Ghidra/Framework/Help/src/main/resources/help/shared/note.png",
+      "Ghidra/Framework/Help/src/main/resources/help/shared/note.yellow.png",
+      "Ghidra/Framework/Help/src/main/resources/help/shared/tip.png",
+      "Ghidra/Framework/Help/src/main/resources/help/shared/warning.png",
+      "Ghidra/Framework/Project/src/main/resources/**",
+      "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/external/**",
+      "Ghidra/Framework/SoftwareModeling/src/main/resources/**",
+      "Ghidra/RuntimeScripts/support/ghidra.ico",
+      "Ghidra/RuntimeScripts/support/gradle/gradle-wrapper.jar",
+      "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/icons/**",
+      "GhidraDocs/GhidraClass/Advanced/improvingDisassemblyAndDecompilation.pdf",
+      "GhidraDocs/GhidraClass/Advanced/src/GHIDRA_1.png",
+      "GhidraDocs/GhidraClass/Advanced/src/ghidraRight.png",
+      "GhidraDocs/GhidraClass/AdvancedDevelopment/Images/**",
+      "GhidraDocs/GhidraClass/AdvancedDevelopment/contrib/**",
+      "GhidraDocs/GhidraClass/BSim/images/**",
+      "GhidraDocs/GhidraClass/Beginner/Images/**",
+      "GhidraDocs/GhidraClass/Debugger/images/**",
+      "GhidraDocs/GhidraClass/ExerciseFiles/Advanced/**",
+      "GhidraDocs/GhidraClass/ExerciseFiles/VersionTracking/WallaceSrc.exe",
+      "GhidraDocs/GhidraClass/ExerciseFiles/VersionTracking/WallaceVersion2.exe",
+      "GhidraDocs/GhidraClass/ExerciseFiles/WinhelloCPP/WinHelloCPP.exe",
+      "GhidraDocs/GhidraClass/Intermediate/Images/**",
+      "GhidraDocs/images/**",
+      "GhidraDocs/languages/html/Diagram1.png",
+      "GhidraDocs/languages/html/Diagram2.png",
+      "GhidraDocs/languages/html/Diagram3.png",
+      "Ghidra/Features/Base/data/typeinfo/generic/generic_clib.gdt",
+      "Ghidra/Features/Base/data/typeinfo/generic/generic_clib_64.gdt",
+      "Ghidra/Features/Base/data/typeinfo/mac_10.9/mac_osx.gdt",
+      "Ghidra/Features/Base/data/typeinfo/win32/windows_vs12_32.gdt",
+      "Ghidra/Features/Base/data/typeinfo/win32/windows_vs12_64.gdt"
+    ]
+  },
+  "history": {
+    "since": "64ad1bc91a8d6272dd11fc2a3bf43aec6934ff25"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE:\n\nGhidra\n\nThis product includes software developed at National Security Agency\n(https://www.nsa.gov)\n\nPortions of this product were created by the U.S. Government and not subject to\nU.S. copyright protections under 17 U.S.C.\n\nThe remaining portions are copyright their respective authors and have been\ncontributed under the terms of one or more open source licenses, and made\navailable to you under the terms of those licenses. (See LICENSE)\n\n\n\nLicensing Intent\n\nThe intent is that this software and documentation (\"Project\") should be treated\nas if it is licensed under the license associated with the Project (\"License\")\nin the LICENSE file. However, because we are part of the United States (U.S.)\nFederal Government, it is not that simple.\n\nThe portions of this Project written by U.S. Federal Government employees within\nthe scope of their federal employment are ineligible for copyright protection in\nthe U.S.; this is generally understood to mean that these portions of the\nProject are placed in the public domain.\n\nIn countries where copyright protection is available (which does not include the\nU.S.), contributions made by U.S. Federal Government employees are released\nunder the License. Merged contributions from private contributors are released\nunder the License.\n\nThe Ghidra software is released under the Apache License, Version 2.0\n(\"Apache 2.0\").\n\nIn addition, each module may contain numerous 3rd party components (libraries,\nicons, etc.) that each have their own license which is compatible with Apache\n2.0. Each module has a LICENSE.txt file that lists each license used in that\nmodule and the 3rd party files that fall under that license. The license files\nfor each license used by Ghidra can be found in the licenses directory at the\ninstallation root.\n\nAlso, in the GPL directory, there are several stand-alone support programs that\nare released using the GPL 3 license.  Ghidra executes these programs as needed\nand parses the output to get the desired results. There is a licenses directory\nunder the GPL directory that has the GPL license files.\n\nConsistent with the inbound=outbound model, contributions to any module must be\nmade available, by the contributor, under the applicable license(s). Please read\nthe Legal section of the CONTRIBUTING.md guide.\n",
+      "attribution": "Commit history of https://github.com/NationalSecurityAgency/ghidra: the authors of NationalSecurityAgency/ghidra (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/NationalSecurityAgency/ghidra."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CONTRIBUTING.md",
+        "DISCLAIMER.md",
+        "DevGuide.md",
+        "GPL/DMG/Module.manifest",
+        "GPL/DMG/README.md",
+        "GPL/DMG/build.gradle",
+        "GPL/DMG/certification.manifest",
+        "GPL/DMG/data/server_memory.cfg",
+        "GPL/DMG/src/**",
+        "GPL/DemanglerGnu/**",
+        "GPL/GnuDisassembler/.gitignore",
+        "GPL/GnuDisassembler/Module.manifest",
+        "GPL/GnuDisassembler/README.md",
+        "GPL/GnuDisassembler/build.gradle",
+        "GPL/GnuDisassembler/buildGdis.gradle",
+        "GPL/GnuDisassembler/certification.manifest",
+        "GPL/GnuDisassembler/data/arm_test1.s",
+        "GPL/GnuDisassembler/extension.properties",
+        "GPL/GnuDisassembler/settings.gradle",
+        "GPL/GnuDisassembler/src/**",
+        "GPL/Icons/**",
+        "GPL/certification.local.manifest",
+        "GPL/licenses/**",
+        "GPL/nativeBuildProperties.gradle",
+        "GPL/nativePlatforms.gradle",
+        "GPL/settings.gradle",
+        "GPL/utils.gradle",
+        "GPL/vsconfig.gradle",
+        "Ghidra/.gitattributes",
+        "Ghidra/.gitignore",
+        "Ghidra/Configurations/**",
+        "Ghidra/Debug/AnnotationValidator/**",
+        "Ghidra/Debug/Debugger/Module.manifest",
+        "Ghidra/Debug/Debugger/README.md",
+        "Ghidra/Debug/Debugger/build.gradle",
+        "Ghidra/Debug/Debugger/certification.manifest",
+        "Ghidra/Debug/Debugger/data/**",
+        "Ghidra/Debug/Debugger/developer_scripts/**",
+        "Ghidra/Debug/Debugger/ghidra_scripts/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/BreakpointTimelinePlugin/BreakpointTimelinePlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/Debugger/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerBreakpointMarkerPlugin/DebuggerBreakpointMarkerPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerBreakpointsPlugin/DebuggerBreakpointsPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerConsolePlugin/DebuggerConsolePlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerControlPlugin/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerCopyActionsPlugin/DebuggerCopyActionsPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerDisassemblerPlugin/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerEmulationServicePlugin/DebuggerEmulationServicePlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerListingPlugin/DebuggerListingPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerMemoryBytesPlugin/DebuggerMemoryBytesPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerMemviewPlugin/DebuggerMemviewPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerModelPlugin/DebuggerModelPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerModulesPlugin/DebuggerModulesPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerPcodeStepperPlugin/DebuggerPcodeStepperPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerPlatformPlugin/DebuggerPlatformPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerRegionsPlugin/DebuggerRegionsPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerRegistersPlugin/DebuggerRegistersPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerStackPlugin/DebuggerStackPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerStaticMappingPlugin/DebuggerStaticMappingPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerThreadsPlugin/DebuggerThreadsPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTimeOverviewPlugin/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTimePlugin/DebuggerTimePlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTraceManagerServicePlugin/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerTraceViewDiffPlugin/DebuggerTraceViewDiffPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerVariableViewerPlugin/DebuggerVariableViewerPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DebuggerWatchesPlugin/DebuggerWatchesPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/DynamicStaticSynchronizationPlugin/**",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/TraceCallTreePlugin/TraceCallTreePlugin.html",
+        "Ghidra/Debug/Debugger/src/main/help/help/topics/VariableValueHoverPlugin/VariableValueHoverPlugin.html",
+        "Ghidra/Debug/Debugger/src/main/java/**",
+        "Ghidra/Debug/Debugger/src/main/resources/defaultTools/**",
+        "Ghidra/Debug/Debugger/src/main/svg/**",
+        "Ghidra/Debug/Debugger/src/screen/**",
+        "Ghidra/Debug/Debugger/src/test/**",
+        "Ghidra/Debug/Debugger-agent-dbgeng/Module.manifest",
+        "Ghidra/Debug/Debugger-agent-dbgeng/README.md",
+        "Ghidra/Debug/Debugger-agent-dbgeng/build.gradle",
+        "Ghidra/Debug/Debugger-agent-dbgeng/certification.manifest",
+        "Ghidra/Debug/Debugger-agent-dbgeng/data/**",
+        "Ghidra/Debug/Debugger-agent-dbgeng/src/main/help/**",
+        "Ghidra/Debug/Debugger-agent-drgn/Module.manifest",
+        "Ghidra/Debug/Debugger-agent-drgn/README.md",
+        "Ghidra/Debug/Debugger-agent-drgn/build.gradle",
+        "Ghidra/Debug/Debugger-agent-drgn/certification.manifest",
+        "Ghidra/Debug/Debugger-agent-drgn/data/**",
+        "Ghidra/Debug/Debugger-agent-drgn/src/main/help/**",
+        "Ghidra/Debug/Debugger-agent-gdb/Module.manifest",
+        "Ghidra/Debug/Debugger-agent-gdb/README.md",
+        "Ghidra/Debug/Debugger-agent-gdb/build.gradle",
+        "Ghidra/Debug/Debugger-agent-gdb/certification.manifest",
+        "Ghidra/Debug/Debugger-agent-gdb/data/**",
+        "Ghidra/Debug/Debugger-agent-gdb/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Debug/Debugger-agent-gdb/src/main/help/help/topics/gdb/gdb.html",
+        "Ghidra/Debug/Debugger-agent-lldb/Module.manifest",
+        "Ghidra/Debug/Debugger-agent-lldb/README.md",
+        "Ghidra/Debug/Debugger-agent-lldb/build.gradle",
+        "Ghidra/Debug/Debugger-agent-lldb/certification.manifest",
+        "Ghidra/Debug/Debugger-agent-lldb/data/**",
+        "Ghidra/Debug/Debugger-agent-lldb/src/main/help/**",
+        "Ghidra/Debug/Debugger-agent-x64dbg/Module.manifest",
+        "Ghidra/Debug/Debugger-agent-x64dbg/README.md",
+        "Ghidra/Debug/Debugger-agent-x64dbg/build.gradle",
+        "Ghidra/Debug/Debugger-agent-x64dbg/certification.manifest",
+        "Ghidra/Debug/Debugger-agent-x64dbg/data/**",
+        "Ghidra/Debug/Debugger-agent-x64dbg/src/main/help/**",
+        "Ghidra/Debug/Debugger-api/**",
+        "Ghidra/Debug/Debugger-dap/**",
+        "Ghidra/Debug/Debugger-importers/**",
+        "Ghidra/Debug/Debugger-isf/**",
+        "Ghidra/Debug/Debugger-jpda/**",
+        "Ghidra/Debug/Debugger-rmi-trace/DEVNOTES.txt",
+        "Ghidra/Debug/Debugger-rmi-trace/Module.manifest",
+        "Ghidra/Debug/Debugger-rmi-trace/README.md",
+        "Ghidra/Debug/Debugger-rmi-trace/build.gradle",
+        "Ghidra/Debug/Debugger-rmi-trace/certification.manifest",
+        "Ghidra/Debug/Debugger-rmi-trace/data/**",
+        "Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts/**",
+        "Ghidra/Debug/Debugger-rmi-trace/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Debug/Debugger-rmi-trace/src/main/help/help/topics/TraceRmiConnectionManagerPlugin/TraceRmiConnectionManagerPlugin.html",
+        "Ghidra/Debug/Debugger-rmi-trace/src/main/help/help/topics/TraceRmiLauncherServicePlugin/TraceRmiLauncherServicePlugin.html",
+        "Ghidra/Debug/Debugger-rmi-trace/src/main/java/**",
+        "Ghidra/Debug/Debugger-rmi-trace/src/main/proto/**",
+        "Ghidra/Debug/Debugger-rmi-trace/src/screen/**",
+        "Ghidra/Debug/Debugger-rmi-trace/src/test/**",
+        "Ghidra/Debug/Framework-TraceModeling/**",
+        "Ghidra/Debug/ProposedUtils/**",
+        "Ghidra/Debug/TaintAnalysis/**",
+        "Ghidra/Extensions/**",
+        "Ghidra/Features/BSim/Module.manifest",
+        "Ghidra/Features/BSim/README.md",
+        "Ghidra/Features/BSim/build.gradle",
+        "Ghidra/Features/BSim/certification.manifest",
+        "Ghidra/Features/BSim/data/**",
+        "Ghidra/Features/BSim/ghidra_scripts/**",
+        "Ghidra/Features/BSim/other/**",
+        "Ghidra/Features/BSim/src/lshvector/**",
+        "Ghidra/Features/BSim/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/BSim/src/main/help/help/shared/**",
+        "Ghidra/Features/BSim/src/main/help/help/topics/BSim/**",
+        "Ghidra/Features/BSim/src/main/help/help/topics/BSimSearchPlugin/BSimSearch.html",
+        "Ghidra/Features/BSim/src/main/help/help/topics/StructureRecovery/**",
+        "Ghidra/Features/BSim/src/main/java/**",
+        "Ghidra/Features/BSim/src/main/resources/bsim.log4j.xml",
+        "Ghidra/Features/BSim/src/screen/**",
+        "Ghidra/Features/BSim/src/test/**",
+        "Ghidra/Features/BSim/src/test.slow/**",
+        "Ghidra/Features/BSim/support/**",
+        "Ghidra/Features/BSimFeatureVisualizer/**",
+        "Ghidra/Features/Base/.gitignore",
+        "Ghidra/Features/Base/.launch/**",
+        "Ghidra/Features/Base/Module.manifest",
+        "Ghidra/Features/Base/README.md",
+        "Ghidra/Features/Base/build.gradle",
+        "Ghidra/Features/Base/certification.manifest",
+        "Ghidra/Features/Base/data/ElfFunctionsThatDoNotReturn",
+        "Ghidra/Features/Base/data/ExtensionPoint.manifest",
+        "Ghidra/Features/Base/data/GolangFunctionsThatDoNotReturn",
+        "Ghidra/Features/Base/data/MachOFunctionsThatDoNotReturn",
+        "Ghidra/Features/Base/data/PEFunctionsThatDoNotReturn",
+        "Ghidra/Features/Base/data/RustFunctionsThatDoNotReturn",
+        "Ghidra/Features/Base/data/base.file.extensions.icons.theme.properties",
+        "Ghidra/Features/Base/data/base.icons.theme.properties",
+        "Ghidra/Features/Base/data/base.listing.theme.properties",
+        "Ghidra/Features/Base/data/base.programgraph.theme.properties",
+        "Ghidra/Features/Base/data/base.theme.properties",
+        "Ghidra/Features/Base/data/functionTags.xml",
+        "Ghidra/Features/Base/data/ms_pe_rich_products.xml",
+        "Ghidra/Features/Base/data/noReturnFunctionConstraints.xml",
+        "Ghidra/Features/Base/data/parserprofiles/**",
+        "Ghidra/Features/Base/data/stringngrams/**",
+        "Ghidra/Features/Base/data/symbols/**",
+        "Ghidra/Features/Base/data/typeinfo/generic/**",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.15.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.16.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.17.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.18.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.19.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.20.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.21.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.22.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.23.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.24.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.25.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/go1.26.0.json",
+        "Ghidra/Features/Base/data/typeinfo/golang/patchverdiffs/**",
+        "Ghidra/Features/Base/data/typeinfo/mac_10.9/**",
+        "Ghidra/Features/Base/data/typeinfo/win32/**",
+        "Ghidra/Features/Base/data/x64_linux_syscall_numbers",
+        "Ghidra/Features/Base/data/x86_linux_syscall_numbers",
+        "Ghidra/Features/Base/developer_scripts/**",
+        "Ghidra/Features/Base/ghidra_scripts/AddCommentToProgramScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AddReferencesInSwitchTable.java",
+        "Ghidra/Features/Base/ghidra_scripts/AddSingleReferenceInSwitchTable.java",
+        "Ghidra/Features/Base/ghidra_scripts/AddSourceFileScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AddSourceMapEntryScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AppleSingleDoubleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ArmThumbFunctionTableScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AsciiToBinaryScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AskScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AskScript.properties",
+        "Ghidra/Features/Base/ghidra_scripts/AskValuesExampleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AssembleBlockScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AssembleCheckDevScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AssembleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AssemblyThrasherDevScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AssociateExternalPELibrariesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AutoRenameLabelsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/AutoRenameSimpleLabels.java",
+        "Ghidra/Features/Base/ghidra_scripts/BatchRename.java",
+        "Ghidra/Features/Base/ghidra_scripts/BatchSegregate64bit.java",
+        "Ghidra/Features/Base/ghidra_scripts/BinaryToAsciiScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/BuildGhidraJarScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/COFF_ArchiveScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/COFF_Script.java",
+        "Ghidra/Features/Base/ghidra_scripts/CallAnotherScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CallAnotherScriptForAllPrograms.java",
+        "Ghidra/Features/Base/ghidra_scripts/CallotherCensusScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ChangeDataSettingsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ChooseDataTypeScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ClearOrphanFunctions.java",
+        "Ghidra/Features/Base/ghidra_scripts/CompareAnalysisScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CompareGDTs.java",
+        "Ghidra/Features/Base/ghidra_scripts/ComputeCyclomaticComplexity.java",
+        "Ghidra/Features/Base/ghidra_scripts/CondenseAllRepeatingBytes.java",
+        "Ghidra/Features/Base/ghidra_scripts/CondenseFillerBytes.java",
+        "Ghidra/Features/Base/ghidra_scripts/CondenseRepeatingBytes.java",
+        "Ghidra/Features/Base/ghidra_scripts/CondenseRepeatingBytesAtEndOfMemory.java",
+        "Ghidra/Features/Base/ghidra_scripts/ConvertDotDotDotScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ConvertDotToDashInAutoAnalysisLabels.java",
+        "Ghidra/Features/Base/ghidra_scripts/CountAndSaveStrings.java",
+        "Ghidra/Features/Base/ghidra_scripts/CountSymbolsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateDefaultGDTArchivesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateEmptyProgramScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateExampleGDTArchiveScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateExportFileForDLL.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateFunctionAfterTerminals.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateFunctionsFromSelection.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateHelpTemplateScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateOperandReferencesInSelectionScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreatePdbXmlFilesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateRelocationBasedOperandReferences.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateStringScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/CreateUEFIGDTArchivesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DWARFLineInfoCommentScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DWARFLineInfoSourceMapScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DWARFMacroScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DWARFSetExternalDebugFilesLocationPrescript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DebugSleighInstructionParse.java",
+        "Ghidra/Features/Base/ghidra_scripts/DeleteDeadDefaultPlatesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DeleteEmptyPlateCommentsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DeleteExitCommentsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DeleteFunctionDefaultPlatesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DeleteSpacePropertyScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DemangleAllScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DemangleSymbolScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/DoARMDisassemble.java",
+        "Ghidra/Features/Base/ghidra_scripts/DoThumbDisassemble.java",
+        "Ghidra/Features/Base/ghidra_scripts/EditBytesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/EmbeddedFinderScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/EmuX86DeobfuscateExampleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/EmuX86GccDeobfuscateHookExampleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExampleColorScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExampleGraphServiceScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExportFunctionInfoScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExportImagesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExportProgramScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ExtractELFDebugFilesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FFsBeGoneScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindAndReplaceCommentScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindAudioInProgramScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindDataTypeConflictCauseScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindDataTypeScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindFunctionsUsingTOCinPEFScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindImagesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindInstructionsNotInsideFunctionScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindOverlappingCodeUnitsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindRunsOfPointersScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindSharedReturnFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindTextScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindUndefinedFunctionsFollowUpScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindUndefinedFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindUnrecoveredSwitchesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FindX86RelativeCallsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixArrayStructReferencesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixElfExternalOffsetDataRelocationScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixOffcutInstructionScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixOldSTVariableStorageScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/Fix_ARM_Call_JumpsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixupCompositeDataTypesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixupGolangFuncParamStorageScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixupNoReturnFunctionsNoRepairScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FixupNoReturnFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/FormatExampleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/GenerateLotsOfProgramsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/GenerateMaskedBitStringScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/GeneratePrototypeTestFileScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/GetAndSetAnalysisOptionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/GraphClassesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/HelloWorldPopupScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/HelloWorldScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ImportAllProgramsFromADirectoryScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ImportProgramScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/InnerClassScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/InstructionSearchScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/IterateDataScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/IterateFunctionsByAddressScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/IterateFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/IterateInstructionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LabelDataScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LabelDirectFunctionReferencesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LabelIndirectReferencesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LabelIndirectStringReferencesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LanguagesAPIDemoScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LinuxSystemMapImportScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/LocateMemoryAddressesForFileOffset.java",
+        "Ghidra/Features/Base/ghidra_scripts/LocateMemoryAddressesForFileOffset.py",
+        "Ghidra/Features/Base/ghidra_scripts/MachO_Script.java",
+        "Ghidra/Features/Base/ghidra_scripts/MakeFunctionsInlineVoidScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/MakeFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/MakeStackRefs.java",
+        "Ghidra/Features/Base/ghidra_scripts/MarkCallOtherPcode.java",
+        "Ghidra/Features/Base/ghidra_scripts/MarkUnimplementedPcode.java",
+        "Ghidra/Features/Base/ghidra_scripts/MarkupWallaceSrcScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/Mips_Fix_T9_PositionIndependentCode.java",
+        "Ghidra/Features/Base/ghidra_scripts/MultiInstructionMemReference.java",
+        "Ghidra/Features/Base/ghidra_scripts/NameStringPointersPlus.java",
+        "Ghidra/Features/Base/ghidra_scripts/OpenSourceFileAtLineInEclipseScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/OpenSourceFileAtLineInVSCodeScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/Override_ARM_Call_JumpsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PEF_script.java",
+        "Ghidra/Features/Base/ghidra_scripts/PE_script.java",
+        "Ghidra/Features/Base/ghidra_scripts/PasteCopiedListingBytesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PortableExecutableRichPrintScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PrintFunctionCallTreesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PrintStructureScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ProgressExampleScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PropagateConstantReferences.java",
+        "Ghidra/Features/Base/ghidra_scripts/PropagateExternalParametersScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/PropagateX86ConstantReferences.java",
+        "Ghidra/Features/Base/ghidra_scripts/RecursiveStringFinder.py",
+        "Ghidra/Features/Base/ghidra_scripts/RegisterTouchesPerFunction.java",
+        "Ghidra/Features/Base/ghidra_scripts/ReloadSleighLanguage.java",
+        "Ghidra/Features/Base/ghidra_scripts/RemoveDeletedOverlayReferences.java",
+        "Ghidra/Features/Base/ghidra_scripts/RemoveSourceLanguage.java",
+        "Ghidra/Features/Base/ghidra_scripts/RemoveSourceMapEntryScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RemoveSymbolQuotesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RemoveUserCheckoutsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RenameProgramsInProjectScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RenameStructMembers.java",
+        "Ghidra/Features/Base/ghidra_scripts/RenameVariable.java",
+        "Ghidra/Features/Base/ghidra_scripts/RepairDisassemblyScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RepairFuncDefinitionUsageScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ReplaceInComments.java",
+        "Ghidra/Features/Base/ghidra_scripts/ReportDisassemblyErrors.java",
+        "Ghidra/Features/Base/ghidra_scripts/ReportPercentDisassembled.java",
+        "Ghidra/Features/Base/ghidra_scripts/RepositoryFileUpgradeScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ResolveExternalReferences.java",
+        "Ghidra/Features/Base/ghidra_scripts/ResolveX86orX64LinuxSyscallsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/RunYARAFromGhidra.py",
+        "Ghidra/Features/Base/ghidra_scripts/SearchBaseExtended.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchForImageBaseOffsets.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchForImageBaseOffsetsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchGuiMulti.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchGuiSingle.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchMemoryForStringsRegExScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchMnemonicsNoOpsNoConstScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchMnemonicsOpsConstScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SearchMnemonicsOpsNoConstScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SelectAddressesMappedToSourceFileScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SelectFunctionsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SetEquateScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SetHeadlessContinuationOptionScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ShowEquatesInSelectionScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ShowSourceMapEntryStartsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SplitMultiplePefContainersScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SplitUniversalBinariesScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SubsToFuncsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/SynchronizeGDTCategoryPaths.java",
+        "Ghidra/Features/Base/ghidra_scripts/TestPrototypeScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/TranslateStringsScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/TurnOffStackAnalysis.java",
+        "Ghidra/Features/Base/ghidra_scripts/VersionControl_AddAll.java",
+        "Ghidra/Features/Base/ghidra_scripts/VersionControl_ResetAll.java",
+        "Ghidra/Features/Base/ghidra_scripts/VersionControl_UndoAllCheckout.java",
+        "Ghidra/Features/Base/ghidra_scripts/VersionControl_VersionSummary.java",
+        "Ghidra/Features/Base/ghidra_scripts/XorMemoryScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/YaraGhidraGUIScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/ZapBCTRScript.java",
+        "Ghidra/Features/Base/ghidra_scripts/mark_in_out.py",
+        "Ghidra/Features/Base/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/Base/src/main/help/help/topics/About/About_Ghidra.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/About/About_Program_File.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Accessibility/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/Annotations/Annotations.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/AssemblerPlugin/Assembler.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/AutoAnalysisPlugin/AutoAnalysis.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/BentoServicePlugin/BentoServicePlugin.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/BlockModel/Block_Model.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/BookmarkPlugin/Bookmarks.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/BundleManager/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/CParserPlugin/CParser.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CallTreePlugin/Call_Tree_Plugin.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/Charsets/Charsets.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ClearPlugin/Clear.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ClipboardPlugin/Clipboard.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/Browser_Field_Formatter.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/CodeBrowser.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/CodeBrowserOptions.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/ListingBackground.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/CodeBrowserPlugin/SelectionTable.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CommentWindowPlugin/comment_window.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/CommentsPlugin/Comments.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ComputeChecksumsPlugin/Generate_Checksum_Help.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/ConsolePlugin/console.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DWARFExternalDebugFilesPlugin/DWARFExternalDebugFilesPlugin.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataPlugin/Data.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeEditors/DataTypeSelectionDialog.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeEditors/EnumEditor.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeEditors/StructureEditor.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeManagerPlugin/data_type_manager_archives.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeManagerPlugin/data_type_manager_description.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeManagerPlugin/data_type_manager_window.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypeManagerPlugin/data_types_table.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataTypePreviewPlugin/DataTypePreviewPlugin.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/DataWindowPlugin/data_window.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DbViewerPlugin/DbViewer.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DefinedStringsPlugin/DefinedStringsPlugin.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DisassembledViewPlugin/DisassembledViewPlugin.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DisassemblerPlugin/Disassembly.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/DockingWindows/Docking_Windows.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/EclipseIntegration/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/EquatePlugin/Equates.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ExporterPlugin/exporter.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FallThroughPlugin/Override_Fallthrough.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FileSystemBrowserPlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/FlowSelection/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Archive_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Close_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Connecting_Tools.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Creating_a_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Deleting_a_Ghidra_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Edit_Plugin_Path.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Extensions.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Ghidra_Front_end.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Ghidra_Front_end_Menus.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Opening_a_Ghidra_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Project_Info.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Re-opening_a_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Restore_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FrontEndPlugin/Saving_a_Ghidra_Project.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FunctionComparison/FunctionComparison.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FunctionPlugin/Functions.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FunctionPlugin/Variables.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FunctionTagPlugin/function_tag_window.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/FunctionWindowPlugin/function_window.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/GhidraScriptMgrPlugin/GhidraScriptMgrPlugin.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/GhidraScriptMgrPlugin/ScriptDevelopment.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/GhidraServer/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/Glossary/glossary.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Graph/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/HeadlessAnalyzer/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/ImporterPlugin/importer.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Intro/GhidraFunctionality.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Intro/GhidraSupport.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Intro/Intro.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/LabelMgrPlugin/FieldNames.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/LabelMgrPlugin/Labels.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/LanguageProviderPlugin/Languages.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/LibreTranslatePlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/LocationReferencesPlugin/Location_References.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/MemoryMapPlugin/Memory_Map.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Misc/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/Navigation/Navigation.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/OverviewPlugin/Overview.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/PrintingPlugin/Printing.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Program/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Closing_Program_Files.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Navigating_Program_Files.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Opening_Program_Files.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Program_Annotation.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Program_Options_Dialog.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramManagerPlugin/Saving_Program_Files.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramTreePlugin/Program_Organizations.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramTreePlugin/program_tree.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ProgramTreePlugin/view_manager.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Project/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/PropertyManagerPlugin/Property_Viewer.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ReferencesPlugin/CreateOffsetReferencesTable.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ReferencesPlugin/References.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ReferencesPlugin/References_from.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ReferencesPlugin/external_program_names.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/RegisterPlugin/Registers.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/RelocationTablePlugin/relocation_table.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Repository/Merge_Program_Files.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/ResourceActionsPlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/RuntimeInfoPlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/ScalarSearchPlugin/The_Scalar_Table.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Instruction_Mnemonic_Search.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Query_Results_Dialog.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/SearchAndReplace.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_Formats.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_Instruction_Patterns.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_Memory.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_Program_Text.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_for_AddressTables.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_for_DirectReferences.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Search_for_Strings.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Search/Searching.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/SelectBytesPlugin/Select_Bytes_Help.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/Selection/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/SetHighlightPlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/ShowInstructionInfoPlugin/ShowInstructionInfo.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Snapshots/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/SourceFilesTablePlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/StackEditor/StackEditor.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/SymbolTablePlugin/symbol_references.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/SymbolTablePlugin/symbol_table.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/SymbolTablePlugin/symbol_table_transient.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/SymbolTreePlugin/SymbolTree.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/Configure_Tool.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/Ghidra_Tool_Administration.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/ShowLog.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/Tip_Of_The_Day.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/ToolOptions_Dialog.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/Tool/Undo_Redo.htm",
+        "Ghidra/Features/Base/src/main/help/help/topics/TranslateStringsPlugin/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/VSCodeIntegration/**",
+        "Ghidra/Features/Base/src/main/help/help/topics/ValidateProgram/ValidateProgram.html",
+        "Ghidra/Features/Base/src/main/help/help/topics/VersionControl/project_repository.htm",
+        "Ghidra/Features/Base/src/main/java/foundation/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/GhidraException.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/GhidraOptions.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/GhidraRun.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/GhidraThreadGroup.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/JShellRun.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/JarRun.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/CorePluginPackage.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/DeveloperPluginPackage.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/ExamplesPluginPackage.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/actions/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/analyzers/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/cmd/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/context/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/events/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/factory/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/merge/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/nav/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/script/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/services/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/tablechooser/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/AbstractOptionBuilder.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/AddEditDialog.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/AddressFactoryService.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/AddressInput.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/AddressSetEditorPanel.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ByteCopier.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ClipboardType.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/CodeUnitInfo.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/CodeUnitInfoTransferable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ColorAndStyle.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/CommentTypes.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/DataTypeNamingUtil.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/DomainObjectService.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/EditFieldNameDialog.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/EolComments.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/FunctionXrefsTableModel.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/GhidraFileOpenDataFlavorHandlerService.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/HelpTopics.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/HexLong.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ListingHighlightProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/MemoryBlockUtils.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/NamespaceCache.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/NamespaceChooserDialog.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/NamespaceDropDownModel.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/Option.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionException.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionListener.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionUtils.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionValidator.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionsDialog.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/OptionsEditorPanel.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/Permissions.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ProcessorInfo.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ProgramDropProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/RefRepeatComment.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/SearchConstants.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/SelectionTransferData.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/SelectionTransferable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/SymbolInspector.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/ToolTipUtils.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/XReferenceUtil.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/XReferenceUtils.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bean/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/BinaryReader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteArrayConverter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteArrayProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteProviderInputStream.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteProviderPaddedInputStream.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteProviderSeekableByteChannel.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ByteProviderWrapper.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/EmptyByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/FaultTolerantInputStream.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/FileByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/FileBytesProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/GhidraRandomAccessFile.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/InputStreamByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/InvalidDataException.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/LEB128Info.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/MemBufferByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/MemoryByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/MemoryMutableByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/MutableByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ObfuscatedFileByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ObfuscatedInputStream.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/ObfuscatedOutputStream.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/RangeMappedByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/StaticValueByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/StructConverter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/StructConverterUtil.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/SynchronizedByteProvider.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/UnlimitedByteProviderWrapper.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/MemoryLoadable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/RelocationException.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/coff/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DIEAggregate.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DIEContainer.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFAbbreviation.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFAccessibility.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFAddressListHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFChildren.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFCompilationUnit.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFDataInstanceHelper.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFDataTypeConflictHandler.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFDataTypeImporter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFDataTypeManager.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFEncoding.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFEndianity.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFException.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFFunction.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFFunctionImporter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFIdentifierCase.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFImportOptions.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFImportSummary.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFImporter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFIndirectTable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFIndirectTableHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFInline.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFLengthValue.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFLocation.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFLocationList.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFLocationListEntry.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFLocationListHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFMacroEnumCreator.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFName.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFProgram.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRange.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRangeList.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRangeListEntry.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRangeListHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRegisterMappings.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFRegisterMappingsManager.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFSourceInfo.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFSourceLanguage.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFStringOffsetTableHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFTag.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFUnitHeader.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFUnitType.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFUtil.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DWARFVariable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DataTypeGraphComparator.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/DebugInfoEntry.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/ExternalDebugFileSymbolImporter.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/NameDeduper.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/NamespacePath.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/StringTable.java",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/attribs/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/expression/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/funcfixup/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/line/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/macro/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/dwarf/sectionprovider/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/elf/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/golang/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/lx/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/macho/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/macos/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/mz/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/ne/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/omf/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/package.html",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/pdb/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/pe/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/pef/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/som/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/ubi/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/unixaout/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/format/xcoff/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/bin/package.html",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/cparser/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/datatype/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/demangler/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/dialog/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/exporter/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/html/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/importer/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/navigation/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/opinion/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/package.html",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/parser/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/pcode/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/query/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/recognizer/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/task/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/template/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/viewer/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/app/util/xml/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/base/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/features/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/formats/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/framework/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/graph/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/package.html",
+        "Ghidra/Features/Base/src/main/java/ghidra/plugin/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/plugins/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/program/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/test/**",
+        "Ghidra/Features/Base/src/main/java/ghidra/util/**",
+        "Ghidra/Features/Base/src/main/java/help/**",
+        "Ghidra/Features/Base/src/main/javacc/**",
+        "Ghidra/Features/Base/src/main/resources/PROGRAM.DTD",
+        "Ghidra/Features/Base/src/main/resources/ghidra/**",
+        "Ghidra/Features/Base/src/main/resources/help/**",
+        "Ghidra/Features/Base/src/main/resources/pcodetest/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/DatabaseBenchMarks.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/JunitTestScan.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/GhidraLocationGenerator.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/LocationCallback.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/SampleLocationGenerator.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/analyzers/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/cmd/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/merge/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/nav/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/plugin/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/services/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/NamespaceCacheTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/BinaryReaderTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/ByteArrayProviderTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/FileByteProviderTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/MemoryByteProviderTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/RangeMappedByteProviderTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/cli/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/DIECreator.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/DIECreatorTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/DWARFTestBase.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/MockDIEContainer.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/MockDWARFCompilationUnit.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/MockDWARFProgram.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/MockStringTable.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/NamespacePathTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/StringTableTest.java",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/attribs/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/expression/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/dwarf/macro/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/bin/format/golang/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/cparser/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/datatype/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/html/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/navigation/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/opinion/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/template/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/app/util/viewer/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/base/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/features/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/formats/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/framework/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/plugins/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/program/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/test/**",
+        "Ghidra/Features/Base/src/test/java/ghidra/util/**",
+        "Ghidra/Features/Base/src/test/resources/**",
+        "Ghidra/Features/Base/src/test.slow/java/docking/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/app/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/features/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/formats/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/framework/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/ObjectCacheTest.java",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/OverlayAddressSpaceTest.java",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/ProgramDBChangeSetTest.java",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/ProgramUserDataTest.java",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/code/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/data/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/function/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/map/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/mem/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/module/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/properties/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/references/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/symbol/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/database/util/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/model/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/program/util/**",
+        "Ghidra/Features/Base/src/test.slow/java/ghidra/util/**",
+        "Ghidra/Features/Base/src/test.slow/resources/**",
+        "Ghidra/Features/BytePatterns/Module.manifest",
+        "Ghidra/Features/BytePatterns/README.md",
+        "Ghidra/Features/BytePatterns/build.gradle",
+        "Ghidra/Features/BytePatterns/certification.manifest",
+        "Ghidra/Features/BytePatterns/data/**",
+        "Ghidra/Features/BytePatterns/ghidra_scripts/**",
+        "Ghidra/Features/BytePatterns/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/BytePatterns/src/main/help/help/topics/FunctionBitPatternsExplorerPlugin/FunctionBitPatternsExplorerPlugin.htm",
+        "Ghidra/Features/BytePatterns/src/main/java/**",
+        "Ghidra/Features/BytePatterns/src/test/**",
+        "Ghidra/Features/ByteViewer/Module.manifest",
+        "Ghidra/Features/ByteViewer/README.md",
+        "Ghidra/Features/ByteViewer/build.gradle",
+        "Ghidra/Features/ByteViewer/certification.manifest",
+        "Ghidra/Features/ByteViewer/data/**",
+        "Ghidra/Features/ByteViewer/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/ByteViewer/src/main/help/help/topics/ByteViewerPlugin/ByteViewerOptions.htm",
+        "Ghidra/Features/ByteViewer/src/main/help/help/topics/ByteViewerPlugin/The_Byte_Viewer.htm",
+        "Ghidra/Features/ByteViewer/src/main/java/**",
+        "Ghidra/Features/ByteViewer/src/test/**",
+        "Ghidra/Features/ByteViewer/src/test.slow/**",
+        "Ghidra/Features/CodeCompare/**",
+        "Ghidra/Features/DataGraph/Module.manifest",
+        "Ghidra/Features/DataGraph/build.gradle",
+        "Ghidra/Features/DataGraph/certification.manifest",
+        "Ghidra/Features/DataGraph/data/**",
+        "Ghidra/Features/DataGraph/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/DataGraph/src/main/help/help/topics/DataGraphPlugin/Data_Graph.html",
+        "Ghidra/Features/DataGraph/src/main/java/**",
+        "Ghidra/Features/DataGraph/src/test/**",
+        "Ghidra/Features/DebugUtils/**",
+        "Ghidra/Features/Decompiler/Module.manifest",
+        "Ghidra/Features/Decompiler/README.md",
+        "Ghidra/Features/Decompiler/build.gradle",
+        "Ghidra/Features/Decompiler/buildNatives.gradle",
+        "Ghidra/Features/Decompiler/certification.manifest",
+        "Ghidra/Features/Decompiler/data/**",
+        "Ghidra/Features/Decompiler/ghidra_scripts/**",
+        "Ghidra/Features/Decompiler/src/decompile/**",
+        "Ghidra/Features/Decompiler/src/main/doc/**",
+        "Ghidra/Features/Decompiler/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/Decompiler/src/main/help/help/shared/**",
+        "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/DecompilerAnnotations.html",
+        "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/DecompilerConcepts.html",
+        "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/DecompilerIntro.html",
+        "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/DecompilerOptions.html",
+        "Ghidra/Features/Decompiler/src/main/help/help/topics/DecompilePlugin/DecompilerWindow.html",
+        "Ghidra/Features/Decompiler/src/main/java/**",
+        "Ghidra/Features/Decompiler/src/test.slow/**",
+        "Ghidra/Features/DecompilerDependent/Module.manifest",
+        "Ghidra/Features/DecompilerDependent/README.md",
+        "Ghidra/Features/DecompilerDependent/build.gradle",
+        "Ghidra/Features/DecompilerDependent/certification.manifest",
+        "Ghidra/Features/DecompilerDependent/data/**",
+        "Ghidra/Features/DecompilerDependent/ghidra_scripts/**",
+        "Ghidra/Features/DecompilerDependent/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/DecompilerDependent/src/main/help/help/topics/DecompilerTaint/**",
+        "Ghidra/Features/DecompilerDependent/src/main/help/help/topics/DecompilerTextFinderPlugin/Decompiler_Text_Finder.html",
+        "Ghidra/Features/DecompilerDependent/src/main/java/**",
+        "Ghidra/Features/DecompilerDependent/src/test/**",
+        "Ghidra/Features/DecompilerDependent/src/test.slow/**",
+        "Ghidra/Features/FileFormats/**",
+        "Ghidra/Features/FunctionGraph/Module.manifest",
+        "Ghidra/Features/FunctionGraph/README.md",
+        "Ghidra/Features/FunctionGraph/build.gradle",
+        "Ghidra/Features/FunctionGraph/certification.manifest",
+        "Ghidra/Features/FunctionGraph/data/**",
+        "Ghidra/Features/FunctionGraph/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/FunctionGraph/src/main/help/help/topics/FunctionGraphPlugin/Function_Graph.html",
+        "Ghidra/Features/FunctionGraph/src/main/help/help/topics/FunctionGraphPlugin/Function_Graph_Layouts.html",
+        "Ghidra/Features/FunctionGraph/src/main/java/**",
+        "Ghidra/Features/FunctionGraph/src/test/**",
+        "Ghidra/Features/FunctionGraph/src/test.slow/**",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/Module.manifest",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/README.md",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/build.gradle",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/certification.manifest",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/data/**",
+        "Ghidra/Features/FunctionGraphDecompilerExtension/src/main/java/**",
+        "Ghidra/Features/FunctionID/Module.manifest",
+        "Ghidra/Features/FunctionID/README.md",
+        "Ghidra/Features/FunctionID/build.gradle",
+        "Ghidra/Features/FunctionID/certification.manifest",
+        "Ghidra/Features/FunctionID/data/**",
+        "Ghidra/Features/FunctionID/ghidra_scripts/**",
+        "Ghidra/Features/FunctionID/src/main/doc/**",
+        "Ghidra/Features/FunctionID/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/FunctionID/src/main/help/help/shared/**",
+        "Ghidra/Features/FunctionID/src/main/help/help/topics/FunctionID/FunctionID.html",
+        "Ghidra/Features/FunctionID/src/main/help/help/topics/FunctionID/FunctionIDDebug.html",
+        "Ghidra/Features/FunctionID/src/main/help/help/topics/FunctionID/FunctionIDPlugin.html",
+        "Ghidra/Features/FunctionID/src/main/java/**",
+        "Ghidra/Features/FunctionID/src/screen/**",
+        "Ghidra/Features/FunctionID/src/test/**",
+        "Ghidra/Features/GhidraGo/**",
+        "Ghidra/Features/GhidraServer/**",
+        "Ghidra/Features/GnuDemangler/**",
+        "Ghidra/Features/GraphFunctionCalls/Module.manifest",
+        "Ghidra/Features/GraphFunctionCalls/README.md",
+        "Ghidra/Features/GraphFunctionCalls/build.gradle",
+        "Ghidra/Features/GraphFunctionCalls/certification.manifest",
+        "Ghidra/Features/GraphFunctionCalls/data/**",
+        "Ghidra/Features/GraphFunctionCalls/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/GraphFunctionCalls/src/main/help/help/topics/FunctionCallGraphPlugin/Function_Call_Graph.html",
+        "Ghidra/Features/GraphFunctionCalls/src/main/java/**",
+        "Ghidra/Features/GraphFunctionCalls/src/screen/**",
+        "Ghidra/Features/GraphFunctionCalls/src/test/**",
+        "Ghidra/Features/GraphServices/Module.manifest",
+        "Ghidra/Features/GraphServices/README.md",
+        "Ghidra/Features/GraphServices/build.gradle",
+        "Ghidra/Features/GraphServices/certification.manifest",
+        "Ghidra/Features/GraphServices/data/**",
+        "Ghidra/Features/GraphServices/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/GraphServices/src/main/help/help/topics/GraphServices/GraphDisplay.htm",
+        "Ghidra/Features/GraphServices/src/main/help/help/topics/GraphServices/GraphExport.htm",
+        "Ghidra/Features/GraphServices/src/main/java/**",
+        "Ghidra/Features/GraphServices/src/main/resources/**",
+        "Ghidra/Features/GraphServices/src/test/**",
+        "Ghidra/Features/MicrosoftCodeAnalyzer/**",
+        "Ghidra/Features/MicrosoftDemangler/**",
+        "Ghidra/Features/MicrosoftDmang/**",
+        "Ghidra/Features/Objective-C/**",
+        "Ghidra/Features/PDB/Module.manifest",
+        "Ghidra/Features/PDB/README.md",
+        "Ghidra/Features/PDB/build.gradle",
+        "Ghidra/Features/PDB/buildNatives.gradle",
+        "Ghidra/Features/PDB/certification.manifest",
+        "Ghidra/Features/PDB/developer_scripts/**",
+        "Ghidra/Features/PDB/ghidra_scripts/**",
+        "Ghidra/Features/PDB/src/global/**",
+        "Ghidra/Features/PDB/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/PDB/src/main/help/help/topics/Pdb/LoadPDB.html",
+        "Ghidra/Features/PDB/src/main/help/help/topics/Pdb/PDB.htm",
+        "Ghidra/Features/PDB/src/main/java/**",
+        "Ghidra/Features/PDB/src/pdb/**",
+        "Ghidra/Features/PDB/src/test/**",
+        "Ghidra/Features/ProgramDiff/Module.manifest",
+        "Ghidra/Features/ProgramDiff/README.md",
+        "Ghidra/Features/ProgramDiff/build.gradle",
+        "Ghidra/Features/ProgramDiff/certification.manifest",
+        "Ghidra/Features/ProgramDiff/data/**",
+        "Ghidra/Features/ProgramDiff/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/ProgramDiff/src/main/help/help/topics/Diff/Diff.htm",
+        "Ghidra/Features/ProgramDiff/src/main/java/**",
+        "Ghidra/Features/ProgramDiff/src/test.slow/**",
+        "Ghidra/Features/ProgramGraph/Module.manifest",
+        "Ghidra/Features/ProgramGraph/README.md",
+        "Ghidra/Features/ProgramGraph/build.gradle",
+        "Ghidra/Features/ProgramGraph/certification.manifest",
+        "Ghidra/Features/ProgramGraph/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/ProgramGraph/src/main/help/help/topics/ProgramGraphPlugin/ProgramGraph.htm",
+        "Ghidra/Features/ProgramGraph/src/main/java/**",
+        "Ghidra/Features/PyGhidra/.gitignore",
+        "Ghidra/Features/PyGhidra/.launch/**",
+        "Ghidra/Features/PyGhidra/.pydevproject",
+        "Ghidra/Features/PyGhidra/Module.manifest",
+        "Ghidra/Features/PyGhidra/README.md",
+        "Ghidra/Features/PyGhidra/build.gradle",
+        "Ghidra/Features/PyGhidra/certification.manifest",
+        "Ghidra/Features/PyGhidra/data/**",
+        "Ghidra/Features/PyGhidra/ghidra_scripts/**",
+        "Ghidra/Features/PyGhidra/src/main/help/**",
+        "Ghidra/Features/PyGhidra/src/main/java/**",
+        "Ghidra/Features/PyGhidra/src/test.slow/**",
+        "Ghidra/Features/PyGhidra/support/**",
+        "Ghidra/Features/Recognizers/**",
+        "Ghidra/Features/Rust/Module.manifest",
+        "Ghidra/Features/Rust/README.md",
+        "Ghidra/Features/Rust/build.gradle",
+        "Ghidra/Features/Rust/certification.manifest",
+        "Ghidra/Features/Rust/data/extensions/**",
+        "Ghidra/Features/Rust/data/extensions.json",
+        "Ghidra/Features/Rust/data/types.json",
+        "Ghidra/Features/Rust/src/**",
+        "Ghidra/Features/Sarif/**",
+        "Ghidra/Features/SourceCodeLookup/**",
+        "Ghidra/Features/Swift/**",
+        "Ghidra/Features/SystemEmulation/**",
+        "Ghidra/Features/VersionTracking/Module.manifest",
+        "Ghidra/Features/VersionTracking/README.md",
+        "Ghidra/Features/VersionTracking/build.gradle",
+        "Ghidra/Features/VersionTracking/certification.manifest",
+        "Ghidra/Features/VersionTracking/data/**",
+        "Ghidra/Features/VersionTracking/developer_scripts/**",
+        "Ghidra/Features/VersionTracking/ghidra_scripts/**",
+        "Ghidra/Features/VersionTracking/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_AutoVT.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_Correlators.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_Preconditions.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_Tool.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_Wizard.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/VT_Workflow.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/Version_Tracking_Intro.html",
+        "Ghidra/Features/VersionTracking/src/main/help/help/topics/VersionTrackingPlugin/providers/**",
+        "Ghidra/Features/VersionTracking/src/main/java/**",
+        "Ghidra/Features/VersionTracking/src/main/resources/Version Tracking (DESTINATION TOOL).tool",
+        "Ghidra/Features/VersionTracking/src/main/resources/Version Tracking (SOURCE TOOL).tool",
+        "Ghidra/Features/VersionTracking/src/main/resources/defaultTools/VersionTracking.tool",
+        "Ghidra/Features/VersionTracking/src/screen/**",
+        "Ghidra/Features/VersionTracking/src/test/**",
+        "Ghidra/Features/VersionTracking/src/test.slow/**",
+        "Ghidra/Features/VersionTrackingBSim/**",
+        "Ghidra/Features/WildcardAssembler/**",
+        "Ghidra/Framework/DB/**",
+        "Ghidra/Framework/Docking/Module.manifest",
+        "Ghidra/Framework/Docking/README.md",
+        "Ghidra/Framework/Docking/build.gradle",
+        "Ghidra/Framework/Docking/certification.manifest",
+        "Ghidra/Framework/Docking/data/**",
+        "Ghidra/Framework/Docking/src/main/help/help/TOC_Source.xml",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/KeyboardNavigation/KeyboardNavigation.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Misc/**",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Search/**",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Tables/GhidraTableHeaders.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Theming/ThemingDeveloperDocs.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Theming/ThemingInternals.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Theming/ThemingOverview.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Theming/ThemingUserDocs.html",
+        "Ghidra/Framework/Docking/src/main/help/help/topics/Trees/GhidraTreeFilter.html",
+        "Ghidra/Framework/Docking/src/main/java/**",
+        "Ghidra/Framework/Docking/src/main/svg/**",
+        "Ghidra/Framework/Docking/src/test/**",
+        "Ghidra/Framework/Docking/src/test.slow/**",
+        "Ghidra/Framework/Emulation/**",
+        "Ghidra/Framework/FileSystem/**",
+        "Ghidra/Framework/Generic/**",
+        "Ghidra/Framework/Graph/Module.manifest",
+        "Ghidra/Framework/Graph/build.gradle",
+        "Ghidra/Framework/Graph/certification.manifest",
+        "Ghidra/Framework/Graph/data/**",
+        "Ghidra/Framework/Graph/src/main/docs/README.txt",
+        "Ghidra/Framework/Graph/src/main/docs/VerticesAndEdges.xml",
+        "Ghidra/Framework/Graph/src/main/docs/VisualGraphHierarchy.xml",
+        "Ghidra/Framework/Graph/src/main/docs/VisualGraphViewer.xml",
+        "Ghidra/Framework/Graph/src/main/help/**",
+        "Ghidra/Framework/Graph/src/main/java/**",
+        "Ghidra/Framework/Graph/src/test/**",
+        "Ghidra/Framework/Graph/src/test.slow/**",
+        "Ghidra/Framework/Gui/Module.manifest",
+        "Ghidra/Framework/Gui/README.md",
+        "Ghidra/Framework/Gui/build.gradle",
+        "Ghidra/Framework/Gui/certification.manifest",
+        "Ghidra/Framework/Gui/data/**",
+        "Ghidra/Framework/Gui/src/main/java/**",
+        "Ghidra/Framework/Gui/src/test/**",
+        "Ghidra/Framework/Help/Module.manifest",
+        "Ghidra/Framework/Help/README.md",
+        "Ghidra/Framework/Help/build.files/**",
+        "Ghidra/Framework/Help/build.gradle",
+        "Ghidra/Framework/Help/certification.manifest",
+        "Ghidra/Framework/Help/data/**",
+        "Ghidra/Framework/Help/src/main/java/**",
+        "Ghidra/Framework/Help/src/main/resources/help/shared/DarkStyle.css",
+        "Ghidra/Framework/Help/src/main/resources/help/shared/DefaultStyle.css",
+        "Ghidra/Framework/Help/src/test/**",
+        "Ghidra/Framework/Project/Module.manifest",
+        "Ghidra/Framework/Project/README.md",
+        "Ghidra/Framework/Project/build.gradle",
+        "Ghidra/Framework/Project/certification.manifest",
+        "Ghidra/Framework/Project/data/**",
+        "Ghidra/Framework/Project/src/main/java/**",
+        "Ghidra/Framework/Project/src/test/**",
+        "Ghidra/Framework/Project/src/test.slow/**",
+        "Ghidra/Framework/Pty/**",
+        "Ghidra/Framework/SoftwareModeling/.launch/**",
+        "Ghidra/Framework/SoftwareModeling/Module.manifest",
+        "Ghidra/Framework/SoftwareModeling/README.md",
+        "Ghidra/Framework/SoftwareModeling/build.gradle",
+        "Ghidra/Framework/SoftwareModeling/certification.manifest",
+        "Ghidra/Framework/SoftwareModeling/data/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/antlr/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/SoftwareModelingInitializer.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/app/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/pcode/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/pcodeCPort/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/DBStringMapAdapter.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/DbCache.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/DbFactory.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/DbObject.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/IntRangeMap.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/IntRangeMapDB.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ListingDB.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ObsoleteProgramPropertiesService.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/OverlayRegionSupplier.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/OverlaySpaceDBAdapter.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/OverlaySpaceDBAdapterV0.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/OverlaySpaceDBAdapterV1.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramAddressFactory.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramCompilerSpec.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramContentHandler.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramDB.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramDBChangeSet.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramDBModule.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramLinkContentHandler.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramMultiUserMergeManagerFactory.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramOverlayAddressSpace.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/ProgramUserDataDB.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/SpecExtension.java",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/bookmark/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/code/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/data/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/databaseTables.txt",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/dtarchive/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/function/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/map/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/mem/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/module/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/oldfunction/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/package.html",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/properties/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/references/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/register/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/reloc/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/sourcemap/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/symbol/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/database/util/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/disassemble/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/util/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/service/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/sleigh/**",
+        "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/util/**",
+        "Ghidra/Framework/SoftwareModeling/src/test/**",
+        "Ghidra/Framework/SoftwareModeling/src/test.slow/**",
+        "Ghidra/Framework/Utility/**",
+        "Ghidra/Processors/**",
+        "Ghidra/RuntimeScripts/build.gradle",
+        "Ghidra/RuntimeScripts/certification.manifest",
+        "Ghidra/RuntimeScripts/ghidraRun",
+        "Ghidra/RuntimeScripts/ghidraRun.bat",
+        "Ghidra/RuntimeScripts/server/**",
+        "Ghidra/RuntimeScripts/support/GhidraGo/**",
+        "Ghidra/RuntimeScripts/support/README_createPdbXmlFiles.txt",
+        "Ghidra/RuntimeScripts/support/analyzeHeadless",
+        "Ghidra/RuntimeScripts/support/analyzeHeadless.bat",
+        "Ghidra/RuntimeScripts/support/analyzeHeadlessREADME.md",
+        "Ghidra/RuntimeScripts/support/bsim",
+        "Ghidra/RuntimeScripts/support/bsim.bat",
+        "Ghidra/RuntimeScripts/support/bsim_ctl",
+        "Ghidra/RuntimeScripts/support/buildExtension.gradle",
+        "Ghidra/RuntimeScripts/support/buildGhidraJar",
+        "Ghidra/RuntimeScripts/support/buildGhidraJar.bat",
+        "Ghidra/RuntimeScripts/support/buildGhidraJarREADME.txt",
+        "Ghidra/RuntimeScripts/support/convertStorage",
+        "Ghidra/RuntimeScripts/support/convertStorage.bat",
+        "Ghidra/RuntimeScripts/support/createPdbXmlFiles.bat",
+        "Ghidra/RuntimeScripts/support/debug.log4j.xml",
+        "Ghidra/RuntimeScripts/support/ghidraClean",
+        "Ghidra/RuntimeScripts/support/ghidraClean.bat",
+        "Ghidra/RuntimeScripts/support/ghidraDebug",
+        "Ghidra/RuntimeScripts/support/ghidraDebug.bat",
+        "Ghidra/RuntimeScripts/support/gradle/gradle-wrapper.properties",
+        "Ghidra/RuntimeScripts/support/gradle/settings.gradle",
+        "Ghidra/RuntimeScripts/support/jshellRun",
+        "Ghidra/RuntimeScripts/support/jshellRun.bat",
+        "Ghidra/RuntimeScripts/support/launch.bat",
+        "Ghidra/RuntimeScripts/support/launch.properties",
+        "Ghidra/RuntimeScripts/support/launch.sh",
+        "Ghidra/RuntimeScripts/support/pyghidraRun",
+        "Ghidra/RuntimeScripts/support/pyghidraRun.bat",
+        "Ghidra/RuntimeScripts/support/sleigh",
+        "Ghidra/RuntimeScripts/support/sleigh.bat",
+        "Ghidra/RuntimeScripts/support/updateServerAllowList",
+        "Ghidra/RuntimeScripts/support/updateServerAllowList.bat",
+        "Ghidra/Test/**",
+        "Ghidra/application.properties",
+        "Ghidra/certification.local.manifest",
+        "GhidraBuild/BuildFiles/**",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevFeature/**",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/.launch/**",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/GhidraDev.target",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/META-INF/**",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/README.md",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/build.gradle",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/build.properties",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/plugin.xml",
+        "GhidraBuild/EclipsePlugins/GhidraDev/GhidraDevPlugin/src/**",
+        "GhidraBuild/EclipsePlugins/GhidraDev/certification.manifest",
+        "GhidraBuild/EclipsePlugins/GhidraSleighEditor/**",
+        "GhidraBuild/IDAPro/**",
+        "GhidraBuild/LaunchSupport/**",
+        "GhidraBuild/MarkdownSupport/**",
+        "GhidraBuild/Skeleton/**",
+        "GhidraBuild/patch/**",
+        "GhidraDocs/CheatSheet.html",
+        "GhidraDocs/GettingStarted.md",
+        "GhidraDocs/GhidraClass/Advanced/src/Examples/**",
+        "GhidraDocs/GhidraClass/Advanced/src/improvingDisassemblyAndDecompilation.tex",
+        "GhidraDocs/GhidraClass/AdvancedDevelopment/GhidraAdvancedDevelopment.html",
+        "GhidraDocs/GhidraClass/AdvancedDevelopment/GhidraAdvancedDevelopment_withNotes.html",
+        "GhidraDocs/GhidraClass/AdvancedDevelopment/ghidra-format/**",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_BSim_Command_Line.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Basic_Queries.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Creating_Database_From_GUI.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Enabling.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Evaluating_Matches.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Exe_Results.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Filters.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Ghidra_Command_Line.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Intro.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Overview_Queries.md",
+        "GhidraDocs/GhidraClass/BSim/BSimTutorial_Scripting.md",
+        "GhidraDocs/GhidraClass/BSim/README.md",
+        "GhidraDocs/GhidraClass/Beginner/Introduction_to_Ghidra_Student_Guide.html",
+        "GhidraDocs/GhidraClass/Beginner/Introduction_to_Ghidra_Student_Guide_withNotes.html",
+        "GhidraDocs/GhidraClass/Beginner/README.txt",
+        "GhidraDocs/GhidraClass/Debugger/A1-GettingStarted.html",
+        "GhidraDocs/GhidraClass/Debugger/A1-GettingStarted.md",
+        "GhidraDocs/GhidraClass/Debugger/A2-UITour.html",
+        "GhidraDocs/GhidraClass/Debugger/A2-UITour.md",
+        "GhidraDocs/GhidraClass/Debugger/A3-Breakpoints.html",
+        "GhidraDocs/GhidraClass/Debugger/A3-Breakpoints.md",
+        "GhidraDocs/GhidraClass/Debugger/A4-MachineState.html",
+        "GhidraDocs/GhidraClass/Debugger/A4-MachineState.md",
+        "GhidraDocs/GhidraClass/Debugger/A5-Navigation.html",
+        "GhidraDocs/GhidraClass/Debugger/A5-Navigation.md",
+        "GhidraDocs/GhidraClass/Debugger/A6-MemoryMap.html",
+        "GhidraDocs/GhidraClass/Debugger/A6-MemoryMap.md",
+        "GhidraDocs/GhidraClass/Debugger/B1-RemoteTargets.html",
+        "GhidraDocs/GhidraClass/Debugger/B1-RemoteTargets.md",
+        "GhidraDocs/GhidraClass/Debugger/B2-Emulation.html",
+        "GhidraDocs/GhidraClass/Debugger/B2-Emulation.md",
+        "GhidraDocs/GhidraClass/Debugger/B3-Scripting.html",
+        "GhidraDocs/GhidraClass/Debugger/B3-Scripting.md",
+        "GhidraDocs/GhidraClass/Debugger/B4-Modeling.html",
+        "GhidraDocs/GhidraClass/Debugger/B4-Modeling.md",
+        "GhidraDocs/GhidraClass/Debugger/B5-AddingDebuggers.html",
+        "GhidraDocs/GhidraClass/Debugger/B5-AddingDebuggers.md",
+        "GhidraDocs/GhidraClass/Debugger/Makefile",
+        "GhidraDocs/GhidraClass/Debugger/README.html",
+        "GhidraDocs/GhidraClass/Debugger/README.md",
+        "GhidraDocs/GhidraClass/Debugger/gdb_syntax.xml",
+        "GhidraDocs/GhidraClass/Debugger/ghidra_scripts/**",
+        "GhidraDocs/GhidraClass/Debugger/links-to-html.lua",
+        "GhidraDocs/GhidraClass/Debugger/navhead.htm",
+        "GhidraDocs/GhidraClass/Debugger/sleigh_syntax.xml",
+        "GhidraDocs/GhidraClass/Debugger/style.css",
+        "GhidraDocs/GhidraClass/ExerciseFiles/Debugger/**",
+        "GhidraDocs/GhidraClass/ExerciseFiles/Emulation/**",
+        "GhidraDocs/GhidraClass/ExerciseFiles/VersionTracking/Source/**",
+        "GhidraDocs/GhidraClass/ExerciseFiles/WinhelloCPP/source/**",
+        "GhidraDocs/GhidraClass/Intermediate/HeadlessAnalyzer.html",
+        "GhidraDocs/GhidraClass/Intermediate/HeadlessAnalyzer_withNotes.html",
+        "GhidraDocs/GhidraClass/Intermediate/Intermediate_Ghidra_Student_Guide.html",
+        "GhidraDocs/GhidraClass/Intermediate/Intermediate_Ghidra_Student_Guide_withNotes.html",
+        "GhidraDocs/GhidraClass/Intermediate/README.txt",
+        "GhidraDocs/GhidraClass/Intermediate/Scripting.html",
+        "GhidraDocs/GhidraClass/Intermediate/Scripting_withNotes.html",
+        "GhidraDocs/GhidraClass/Intermediate/VersionTracking.html",
+        "GhidraDocs/GhidraClass/Intermediate/VersionTracking_withNotes.html",
+        "GhidraDocs/GhidraCodingStandards.html",
+        "GhidraDocs/GhidraFilesystemStorage.html",
+        "GhidraDocs/build.gradle",
+        "GhidraDocs/certification.manifest",
+        "GhidraDocs/languages/html/DefaultStyle.css",
+        "GhidraDocs/languages/html/additionalpcode.html",
+        "GhidraDocs/languages/html/languages.css",
+        "GhidraDocs/languages/html/pcodedescription.html",
+        "GhidraDocs/languages/html/pcoderef.html",
+        "GhidraDocs/languages/html/pseudo-ops.html",
+        "GhidraDocs/languages/html/reference.html",
+        "GhidraDocs/languages/html/sleigh.html",
+        "GhidraDocs/languages/html/sleigh_constructors.html",
+        "GhidraDocs/languages/html/sleigh_context.html",
+        "GhidraDocs/languages/html/sleigh_definitions.html",
+        "GhidraDocs/languages/html/sleigh_layout.html",
+        "GhidraDocs/languages/html/sleigh_preprocessing.html",
+        "GhidraDocs/languages/html/sleigh_ref.html",
+        "GhidraDocs/languages/html/sleigh_symbols.html",
+        "GhidraDocs/languages/html/sleigh_tokens.html",
+        "GhidraDocs/languages/index.html",
+        "GhidraDocs/languages/manual_index.txt",
+        "GhidraDocs/languages/versioning.html",
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "SECURITY.md",
+        "build.gradle",
+        "certification.local.manifest",
+        "docker/**",
+        "eclipse/**",
+        "gradle/**",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "licenses/**",
+        "settings.gradle"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE:\n\nGhidra\n\nThis product includes software developed at National Security Agency\n(https://www.nsa.gov)\n\nPortions of this product were created by the U.S. Government and not subject to\nU.S. copyright protections under 17 U.S.C.\n\nThe remaining portions are copyright their respective authors and have been\ncontributed under the terms of one or more open source licenses, and made\navailable to you under the terms of those licenses. (See LICENSE)\n\n\n\nLicensing Intent\n\nThe intent is that this software and documentation (\"Project\") should be treated\nas if it is licensed under the license associated with the Project (\"License\")\nin the LICENSE file. However, because we are part of the United States (U.S.)\nFederal Government, it is not that simple.\n\nThe portions of this Project written by U.S. Federal Government employees within\nthe scope of their federal employment are ineligible for copyright protection in\nthe U.S.; this is generally understood to mean that these portions of the\nProject are placed in the public domain.\n\nIn countries where copyright protection is available (which does not include the\nU.S.), contributions made by U.S. Federal Government employees are released\nunder the License. Merged contributions from private contributors are released\nunder the License.\n\nThe Ghidra software is released under the Apache License, Version 2.0\n(\"Apache 2.0\").\n\nIn addition, each module may contain numerous 3rd party components (libraries,\nicons, etc.) that each have their own license which is compatible with Apache\n2.0. Each module has a LICENSE.txt file that lists each license used in that\nmodule and the 3rd party files that fall under that license. The license files\nfor each license used by Ghidra can be found in the licenses directory at the\ninstallation root.\n\nAlso, in the GPL directory, there are several stand-alone support programs that\nare released using the GPL 3 license.  Ghidra executes these programs as needed\nand parses the output to get the desired results. There is a licenses directory\nunder the GPL directory that has the GPL license files.\n\nConsistent with the inbound=outbound model, contributions to any module must be\nmade available, by the contributor, under the applicable license(s). Please read\nthe Legal section of the CONTRIBUTING.md guide.\n",
+      "attribution": "the authors of NationalSecurityAgency/ghidra (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/NationalSecurityAgency/ghidra."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.htm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.DTD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.debuginfod_urls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dwarf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.epf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gdt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hinc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.l"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.launch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldefs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldefs_v01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lshvector"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mwe2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.opinion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ord"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdburl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rxg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sinc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slaspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sng"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.target"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.trans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vcproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xtend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xtext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cproject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pydevproject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/B"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ElfFunctionsThatDoNotReturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GolangFunctionsThatDoNotReturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MachOFunctionsThatDoNotReturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PEFunctionsThatDoNotReturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RustFunctionsThatDoNotReturn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/analyzeHeadless"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bsim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bsim_ctl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/buildGhidraJar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certTool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/convertStorage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eclipse-classpath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eclipse-project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/g"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gdbinit_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghidraClean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghidraDebug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghidraGo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghidraRun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghidraSvr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/h"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jshellRun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lldbinit_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pyghidraRun"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runISFServer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sleigh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/svrAdmin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/svrInstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/svrUninstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/updateServerAllowList"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x64_linux_syscall_numbers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x86_linux_syscall_numbers"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

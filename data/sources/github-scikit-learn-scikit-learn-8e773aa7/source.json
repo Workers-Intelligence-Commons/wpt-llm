@@ -1,0 +1,833 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/scikit-learn/scikit-learn",
+  "revision": "d0e22aee7bbef7b310a2f08227c214ff6df9a526",
+  "checksum": "sha256:80c53744671fb2de098c8617e12b63b22deb074da5e9339b6e90eae5e3ef2e71",
+  "extract": {
+    "exclude": [
+      "build_tools/wheels/**",
+      "doc/images/axa-small.png",
+      "doc/images/axa.png",
+      "doc/images/bcg.png",
+      "doc/images/beta_divergence.png",
+      "doc/images/bnp-paribas-small.png",
+      "doc/images/bnp-paribas.png",
+      "doc/images/bnp-small.png",
+      "doc/images/bnp.png",
+      "doc/images/cds-logo.png",
+      "doc/images/chanel-small.png",
+      "doc/images/chanel.png",
+      "doc/images/columbia-small.png",
+      "doc/images/columbia.png",
+      "doc/images/czi-small.png",
+      "doc/images/czi.png",
+      "doc/images/dataiku-small.png",
+      "doc/images/dataiku.png",
+      "doc/images/digicosme.png",
+      "doc/images/dysco.png",
+      "doc/images/fnrs-logo-small.png",
+      "doc/images/fujitsu.png",
+      "doc/images/generated-doc-ci.png",
+      "doc/images/google-small.png",
+      "doc/images/grid_search_cross_validation.png",
+      "doc/images/grid_search_workflow.png",
+      "doc/images/huggingface_logo-noborder.png",
+      "doc/images/inria-logo.jpg",
+      "doc/images/inria-small.png",
+      "doc/images/intel-small.png",
+      "doc/images/intel.png",
+      "doc/images/iris.pdf",
+      "doc/images/last_digit.png",
+      "doc/images/lda_model_graph.png",
+      "doc/images/logo_APHP.png",
+      "doc/images/logo_APHP_text.png",
+      "doc/images/michelin-small.png",
+      "doc/images/michelin.png",
+      "doc/images/microsoft-small.png",
+      "doc/images/microsoft.png",
+      "doc/images/multi_org_chart.png",
+      "doc/images/multilayerperceptron_network.png",
+      "doc/images/nasa-small.png",
+      "doc/images/nasa.png",
+      "doc/images/no_image.png",
+      "doc/images/nvidia-small.png",
+      "doc/images/nvidia.png",
+      "doc/images/nyu_short_color.png",
+      "doc/images/permuted_non_predictive_feature.png",
+      "doc/images/permuted_predictive_feature.png",
+      "doc/images/plot_digits_classification.png",
+      "doc/images/plot_face_recognition_1.png",
+      "doc/images/plot_face_recognition_2.png",
+      "doc/images/png-logo-inria-la-fondation.png",
+      "doc/images/quansight-labs-small.png",
+      "doc/images/quansight-labs.png",
+      "doc/images/rbm_graph.png",
+      "doc/images/scikit-learn-logo-notext.png",
+      "doc/images/scikit-learn-logo-small.png",
+      "doc/images/sloan_banner.png",
+      "doc/images/sloan_logo-small.png",
+      "doc/images/sydney-primary.jpeg",
+      "doc/images/sydney-stacked-small.png",
+      "doc/images/telecom-small.png",
+      "doc/images/telecom.png",
+      "doc/images/visual-studio-build-tools-selection.png",
+      "doc/images/wellcome-trust-small.png",
+      "doc/images/wellcome-trust.png",
+      "doc/js/scripts/vendor/**",
+      "doc/logos/1280px-scikit-learn-logo.png",
+      "doc/logos/brand_colors/**",
+      "doc/logos/brand_guidelines/**",
+      "doc/logos/favicon.ico",
+      "doc/logos/identity.pdf",
+      "doc/logos/scikit-learn-logo-notext.png",
+      "doc/logos/scikit-learn-logo-thumb.png",
+      "doc/logos/scikit-learn-logo.bmp",
+      "doc/logos/scikit-learn-logo.png",
+      "doc/modules/glm_data/**",
+      "doc/testimonials/images/aweber.png",
+      "doc/testimonials/images/bestofmedia-logo.png",
+      "doc/testimonials/images/betaworks.png",
+      "doc/testimonials/images/birchbox.jpg",
+      "doc/testimonials/images/bnp_paribas_cardif.png",
+      "doc/testimonials/images/booking.png",
+      "doc/testimonials/images/change-logo.png",
+      "doc/testimonials/images/dataiku_logo.png",
+      "doc/testimonials/images/datapublica.png",
+      "doc/testimonials/images/datarobot.png",
+      "doc/testimonials/images/evernote.png",
+      "doc/testimonials/images/howaboutwe.png",
+      "doc/testimonials/images/huggingface.png",
+      "doc/testimonials/images/infonea.jpg",
+      "doc/testimonials/images/inria.png",
+      "doc/testimonials/images/jpmorgan.png",
+      "doc/testimonials/images/lovely.png",
+      "doc/testimonials/images/machinalis.png",
+      "doc/testimonials/images/mars.png",
+      "doc/testimonials/images/okcupid.png",
+      "doc/testimonials/images/ottogroup_logo.png",
+      "doc/testimonials/images/peerindex.png",
+      "doc/testimonials/images/phimeca.png",
+      "doc/testimonials/images/rangespan.png",
+      "doc/testimonials/images/solido_logo.png",
+      "doc/testimonials/images/spotify.png",
+      "doc/testimonials/images/telecomparistech.jpg",
+      "doc/testimonials/images/yhat.png",
+      "doc/testimonials/images/zopa.png",
+      "sklearn/datasets/data/diabetes_data_raw.csv.gz",
+      "sklearn/datasets/data/diabetes_target.csv.gz",
+      "sklearn/datasets/data/digits.csv.gz",
+      "sklearn/datasets/images/china.jpg",
+      "sklearn/datasets/images/flower.jpg",
+      "sklearn/datasets/tests/data/openml/id_1/api-v1-jd-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1/api-v1-jdf-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1/api-v1-jdq-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1/data-v1-dl-1.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/api-v1-jd-1119.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/api-v1-jdf-1119.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/api-v1-jdl-dn-adult-census-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/api-v1-jdl-dn-adult-census-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/api-v1-jdq-1119.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1119/data-v1-dl-54002.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_1590/api-v1-jd-1590.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1590/api-v1-jdf-1590.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1590/api-v1-jdq-1590.json.gz",
+      "sklearn/datasets/tests/data/openml/id_1590/data-v1-dl-1595261.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_2/api-v1-jd-2.json.gz",
+      "sklearn/datasets/tests/data/openml/id_2/api-v1-jdf-2.json.gz",
+      "sklearn/datasets/tests/data/openml/id_2/api-v1-jdl-dn-anneal-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_2/api-v1-jdl-dn-anneal-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_2/api-v1-jdq-2.json.gz",
+      "sklearn/datasets/tests/data/openml/id_2/data-v1-dl-1666876.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jd-292.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jd-40981.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jdf-292.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jdf-40981.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jdl-dn-australian-l-2-dv-1-s-dact.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jdl-dn-australian-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/api-v1-jdl-dn-australian-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_292/data-v1-dl-49822.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_3/api-v1-jd-3.json.gz",
+      "sklearn/datasets/tests/data/openml/id_3/api-v1-jdf-3.json.gz",
+      "sklearn/datasets/tests/data/openml/id_3/api-v1-jdq-3.json.gz",
+      "sklearn/datasets/tests/data/openml/id_3/data-v1-dl-3.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/api-v1-jd-40589.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/api-v1-jdf-40589.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/api-v1-jdl-dn-emotions-l-2-dv-3.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/api-v1-jdl-dn-emotions-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/api-v1-jdq-40589.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40589/data-v1-dl-4644182.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jd-40675.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jdf-40675.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jdl-dn-glass2-l-2-dv-1-s-dact.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jdl-dn-glass2-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jdl-dn-glass2-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/api-v1-jdq-40675.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40675/data-v1-dl-4965250.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_40945/api-v1-jd-40945.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40945/api-v1-jdf-40945.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40945/api-v1-jdq-40945.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40945/data-v1-dl-16826755.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/api-v1-jd-40966.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/api-v1-jdf-40966.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/api-v1-jdl-dn-miceprotein-l-2-dv-4.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/api-v1-jdl-dn-miceprotein-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/api-v1-jdq-40966.json.gz",
+      "sklearn/datasets/tests/data/openml/id_40966/data-v1-dl-17928620.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_42074/api-v1-jd-42074.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42074/api-v1-jdf-42074.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42074/api-v1-jdq-42074.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42074/data-v1-dl-21552912.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_42585/api-v1-jd-42585.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42585/api-v1-jdf-42585.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42585/api-v1-jdq-42585.json.gz",
+      "sklearn/datasets/tests/data/openml/id_42585/data-v1-dl-21854866.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_561/api-v1-jd-561.json.gz",
+      "sklearn/datasets/tests/data/openml/id_561/api-v1-jdf-561.json.gz",
+      "sklearn/datasets/tests/data/openml/id_561/api-v1-jdl-dn-cpu-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_561/api-v1-jdl-dn-cpu-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_561/api-v1-jdq-561.json.gz",
+      "sklearn/datasets/tests/data/openml/id_561/data-v1-dl-52739.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_61/api-v1-jd-61.json.gz",
+      "sklearn/datasets/tests/data/openml/id_61/api-v1-jdf-61.json.gz",
+      "sklearn/datasets/tests/data/openml/id_61/api-v1-jdl-dn-iris-l-2-dv-1.json.gz",
+      "sklearn/datasets/tests/data/openml/id_61/api-v1-jdl-dn-iris-l-2-s-act-.json.gz",
+      "sklearn/datasets/tests/data/openml/id_61/api-v1-jdq-61.json.gz",
+      "sklearn/datasets/tests/data/openml/id_61/data-v1-dl-61.arff.gz",
+      "sklearn/datasets/tests/data/openml/id_62/api-v1-jd-62.json.gz",
+      "sklearn/datasets/tests/data/openml/id_62/api-v1-jdf-62.json.gz",
+      "sklearn/datasets/tests/data/openml/id_62/api-v1-jdq-62.json.gz",
+      "sklearn/datasets/tests/data/openml/id_62/data-v1-dl-52352.arff.gz",
+      "sklearn/externals/README",
+      "sklearn/externals/__init__.py",
+      "sklearn/externals/_arff.py",
+      "sklearn/externals/_array_api_compat_vendor.py",
+      "sklearn/externals/_numpydoc/**",
+      "sklearn/externals/_packaging/**",
+      "sklearn/externals/_scipy/**",
+      "sklearn/externals/conftest.py"
+    ]
+  },
+  "history": {
+    "since": "abc71c93f3bf3eeca297210bd59b47bd6a8dd8df"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2007-2026 The scikit-learn developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nMIT License\n\nCopyright (c) 2022 Consortium for Python Data API Standards\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2024 Consortium for Python Data API Standards\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\nCopyright (c) 2007-2014 The LIBLINEAR Project.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\nnotice, this list of conditions and the following disclaimer in the\ndocumentation and/or other materials provided with the distribution.\n\n3. Neither name of copyright holders nor the names of its contributors\nmay be used to endorse or promote products derived from this software\nwithout specific prior written permission.\n\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\nEXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\nPROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/scikit-learn/scikit-learn: Copyright (c) 2007-2026 The scikit-learn developers., BSD-3-Clause license (COPYING), https://github.com/scikit-learn/scikit-learn; Copyright (c) 2022 Consortium for Python Data API Standards, MIT license (LICENSE), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/externals/array_api_compat; Copyright (c) 2024 Consortium for Python Data API Standards, MIT license (LICENSE), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/externals/array_api_extra; Copyright (c) 2007-2014 The LIBLINEAR Project., BSD-3-Clause license (COPYRIGHT), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/svm/src/liblinear."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".binder/**",
+        ".circleci/**",
+        ".codecov.yml",
+        ".coveragerc",
+        ".devcontainer/**",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".pre-commit-config.yaml",
+        ".spin/**",
+        "AGENTS.md",
+        "CITATION.cff",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "COPYING",
+        "Makefile",
+        "README.rst",
+        "SECURITY.md",
+        "asv_benchmarks/**",
+        "benchmarks/**",
+        "build_tools/Makefile",
+        "build_tools/check-meson-openmp-dependencies.py",
+        "build_tools/circle/**",
+        "build_tools/codespell_ignore_words.txt",
+        "build_tools/generate_authors_table.py",
+        "build_tools/get_comment.py",
+        "build_tools/github/**",
+        "build_tools/linting.sh",
+        "build_tools/shared.sh",
+        "build_tools/update_environments_and_lock_files.py",
+        "cibuildwheel.toml",
+        "doc/Makefile",
+        "doc/README.md",
+        "doc/about.rst",
+        "doc/api/**",
+        "doc/api_reference.py",
+        "doc/binder/**",
+        "doc/callbacks.rst",
+        "doc/common_pitfalls.rst",
+        "doc/communication_team.rst",
+        "doc/communication_team_emeritus.rst",
+        "doc/computing/**",
+        "doc/computing.rst",
+        "doc/conf.py",
+        "doc/conftest.py",
+        "doc/contributor_experience_team.rst",
+        "doc/contributor_experience_team_emeritus.rst",
+        "doc/css/**",
+        "doc/data_interoperability.rst",
+        "doc/data_transforms.rst",
+        "doc/datasets/**",
+        "doc/datasets.rst",
+        "doc/developers/**",
+        "doc/documentation_team.rst",
+        "doc/faq.rst",
+        "doc/getting_started.rst",
+        "doc/glossary.rst",
+        "doc/governance.rst",
+        "doc/images/Tidelift-logo-on-light.svg",
+        "doc/images/iris.svg",
+        "doc/images/ml_map.README.rst",
+        "doc/images/ml_map.svg",
+        "doc/images/probabl.svg",
+        "doc/images/target_encoder_cross_validation.svg",
+        "doc/index.rst.template",
+        "doc/inspection.rst",
+        "doc/install.rst",
+        "doc/install_instructions_conda.rst",
+        "doc/institutional_support.rst",
+        "doc/js/scripts/api-search.js",
+        "doc/js/scripts/dropdown.js",
+        "doc/js/scripts/sg_plotly_resize.js",
+        "doc/js/scripts/theme-observer.js",
+        "doc/js/scripts/version-switcher.js",
+        "doc/jupyter-lite.json",
+        "doc/jupyter_lite_config.json",
+        "doc/logos/README.md",
+        "doc/logos/scikit-learn-logo-without-subtitle.svg",
+        "doc/logos/scikit-learn-logo.svg",
+        "doc/machine_learning_map.rst",
+        "doc/maintainers.rst",
+        "doc/maintainers_emeritus.rst",
+        "doc/make.bat",
+        "doc/metadata_routing.rst",
+        "doc/min_dependency_table.rst.template",
+        "doc/model_persistence.rst",
+        "doc/model_selection.rst",
+        "doc/modules/array_api.rst",
+        "doc/modules/biclustering.rst",
+        "doc/modules/calibration.rst",
+        "doc/modules/classification_threshold.rst",
+        "doc/modules/clustering.rst",
+        "doc/modules/compose.rst",
+        "doc/modules/covariance.rst",
+        "doc/modules/cross_decomposition.rst",
+        "doc/modules/cross_validation.rst",
+        "doc/modules/decomposition.rst",
+        "doc/modules/density.rst",
+        "doc/modules/df_output_transform.rst",
+        "doc/modules/ensemble.rst",
+        "doc/modules/feature_extraction.rst",
+        "doc/modules/feature_selection.rst",
+        "doc/modules/gaussian_process.rst",
+        "doc/modules/grid_search.rst",
+        "doc/modules/impute.rst",
+        "doc/modules/isotonic.rst",
+        "doc/modules/kernel_approximation.rst",
+        "doc/modules/kernel_ridge.rst",
+        "doc/modules/lda_qda.rst",
+        "doc/modules/learning_curve.rst",
+        "doc/modules/linear_model.rst",
+        "doc/modules/manifold.rst",
+        "doc/modules/metrics.rst",
+        "doc/modules/mixture.rst",
+        "doc/modules/model_evaluation.rst",
+        "doc/modules/multiclass.rst",
+        "doc/modules/naive_bayes.rst",
+        "doc/modules/neighbors.rst",
+        "doc/modules/neural_networks_supervised.rst",
+        "doc/modules/neural_networks_unsupervised.rst",
+        "doc/modules/outlier_detection.rst",
+        "doc/modules/partial_dependence.rst",
+        "doc/modules/permutation_importance.rst",
+        "doc/modules/pipeline.rst",
+        "doc/modules/preprocessing.rst",
+        "doc/modules/preprocessing_targets.rst",
+        "doc/modules/random_projection.rst",
+        "doc/modules/semi_supervised.rst",
+        "doc/modules/sgd.rst",
+        "doc/modules/svm.rst",
+        "doc/modules/tree.rst",
+        "doc/modules/unsupervised_reduction.rst",
+        "doc/presentations.rst",
+        "doc/related_projects.rst",
+        "doc/roadmap.rst",
+        "doc/sphinxext/**",
+        "doc/supervised_learning.rst",
+        "doc/support.rst",
+        "doc/templates/**",
+        "doc/testimonials/README.txt",
+        "doc/testimonials/images/Makefile",
+        "doc/testimonials/testimonials.rst",
+        "doc/unsupervised_learning.rst",
+        "doc/user_guide.rst",
+        "doc/visualizations.rst",
+        "doc/whats_new/**",
+        "doc/whats_new.rst",
+        "examples/**",
+        "maint_tools/**",
+        "meson.build",
+        "pyproject.toml",
+        "sklearn/__check_build/**",
+        "sklearn/__init__.py",
+        "sklearn/_build_utils/**",
+        "sklearn/_config.py",
+        "sklearn/_distributor_init.py",
+        "sklearn/_isotonic.pyx",
+        "sklearn/_loss/**",
+        "sklearn/_min_dependencies.py",
+        "sklearn/base.py",
+        "sklearn/calibration.py",
+        "sklearn/callback/**",
+        "sklearn/cluster/**",
+        "sklearn/compose/**",
+        "sklearn/conftest.py",
+        "sklearn/covariance/**",
+        "sklearn/cross_decomposition/**",
+        "sklearn/datasets/__init__.py",
+        "sklearn/datasets/_arff_parser.py",
+        "sklearn/datasets/_base.py",
+        "sklearn/datasets/_california_housing.py",
+        "sklearn/datasets/_covtype.py",
+        "sklearn/datasets/_kddcup99.py",
+        "sklearn/datasets/_lfw.py",
+        "sklearn/datasets/_olivetti_faces.py",
+        "sklearn/datasets/_openml.py",
+        "sklearn/datasets/_rcv1.py",
+        "sklearn/datasets/_samples_generator.py",
+        "sklearn/datasets/_species_distributions.py",
+        "sklearn/datasets/_svmlight_format_fast.pyx",
+        "sklearn/datasets/_svmlight_format_io.py",
+        "sklearn/datasets/_twenty_newsgroups.py",
+        "sklearn/datasets/data/__init__.py",
+        "sklearn/datasets/data/breast_cancer.csv",
+        "sklearn/datasets/data/iris.csv",
+        "sklearn/datasets/data/linnerud_exercise.csv",
+        "sklearn/datasets/data/linnerud_physiological.csv",
+        "sklearn/datasets/data/wine_data.csv",
+        "sklearn/datasets/descr/**",
+        "sklearn/datasets/images/README.txt",
+        "sklearn/datasets/images/__init__.py",
+        "sklearn/datasets/meson.build",
+        "sklearn/datasets/tests/__init__.py",
+        "sklearn/datasets/tests/data/__init__.py",
+        "sklearn/datasets/tests/data/openml/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_1/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_1119/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_1590/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_2/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_292/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_3/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_40589/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_40675/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_40945/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_40966/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_42074/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_42585/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_561/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_61/__init__.py",
+        "sklearn/datasets/tests/data/openml/id_62/__init__.py",
+        "sklearn/datasets/tests/data/svmlight_classification.txt",
+        "sklearn/datasets/tests/data/svmlight_invalid.txt",
+        "sklearn/datasets/tests/data/svmlight_invalid_order.txt",
+        "sklearn/datasets/tests/data/svmlight_multilabel.txt",
+        "sklearn/datasets/tests/test_20news.py",
+        "sklearn/datasets/tests/test_arff_parser.py",
+        "sklearn/datasets/tests/test_base.py",
+        "sklearn/datasets/tests/test_california_housing.py",
+        "sklearn/datasets/tests/test_common.py",
+        "sklearn/datasets/tests/test_covtype.py",
+        "sklearn/datasets/tests/test_kddcup99.py",
+        "sklearn/datasets/tests/test_lfw.py",
+        "sklearn/datasets/tests/test_olivetti_faces.py",
+        "sklearn/datasets/tests/test_openml.py",
+        "sklearn/datasets/tests/test_rcv1.py",
+        "sklearn/datasets/tests/test_samples_generator.py",
+        "sklearn/datasets/tests/test_svmlight_format.py",
+        "sklearn/decomposition/**",
+        "sklearn/discriminant_analysis.py",
+        "sklearn/dummy.py",
+        "sklearn/ensemble/**",
+        "sklearn/exceptions.py",
+        "sklearn/experimental/**",
+        "sklearn/feature_extraction/**",
+        "sklearn/feature_selection/**",
+        "sklearn/frozen/**",
+        "sklearn/gaussian_process/**",
+        "sklearn/impute/**",
+        "sklearn/inspection/**",
+        "sklearn/isotonic.py",
+        "sklearn/kernel_approximation.py",
+        "sklearn/kernel_ridge.py",
+        "sklearn/linear_model/**",
+        "sklearn/manifold/**",
+        "sklearn/meson.build",
+        "sklearn/metrics/**",
+        "sklearn/mixture/**",
+        "sklearn/model_selection/**",
+        "sklearn/multiclass.py",
+        "sklearn/multioutput.py",
+        "sklearn/naive_bayes.py",
+        "sklearn/neighbors/**",
+        "sklearn/neural_network/**",
+        "sklearn/pipeline.py",
+        "sklearn/preprocessing/**",
+        "sklearn/random_projection.py",
+        "sklearn/semi_supervised/**",
+        "sklearn/svm/__init__.py",
+        "sklearn/svm/_base.py",
+        "sklearn/svm/_bounds.py",
+        "sklearn/svm/_classes.py",
+        "sklearn/svm/_liblinear.pxi",
+        "sklearn/svm/_liblinear.pyx",
+        "sklearn/svm/_libsvm.pxi",
+        "sklearn/svm/_libsvm.pyx",
+        "sklearn/svm/_libsvm_sparse.pyx",
+        "sklearn/svm/_newrand.pyx",
+        "sklearn/svm/meson.build",
+        "sklearn/svm/src/libsvm/**",
+        "sklearn/svm/src/newrand/**",
+        "sklearn/svm/tests/**",
+        "sklearn/tests/**",
+        "sklearn/tree/**",
+        "sklearn/utils/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2007-2026 The scikit-learn developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2007-2026 The scikit-learn developers., BSD-3-Clause license (COPYING), https://github.com/scikit-learn/scikit-learn."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "sklearn/externals/array_api_compat/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 Consortium for Python Data API Standards\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 Consortium for Python Data API Standards, MIT license (LICENSE), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/externals/array_api_compat."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "sklearn/externals/array_api_extra/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Consortium for Python Data API Standards\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Consortium for Python Data API Standards, MIT license (LICENSE), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/externals/array_api_extra."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "sklearn/svm/src/liblinear/**"
+      ],
+      "text": "\nCopyright (c) 2007-2014 The LIBLINEAR Project.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\nnotice, this list of conditions and the following disclaimer in the\ndocumentation and/or other materials provided with the distribution.\n\n3. Neither name of copyright holders nor the names of its contributors\nmay be used to endorse or promote products derived from this software\nwithout specific prior written permission.\n\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\nEXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\nPROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2007-2014 The LIBLINEAR Project., BSD-3-Clause license (COPYRIGHT), https://github.com/scikit-learn/scikit-learn/tree/d0e22aee7bbef7b310a2f08227c214ff6df9a526/sklearn/svm/src/liblinear."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pxd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pxi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYRIGHT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LIBSVM_CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postBuild"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

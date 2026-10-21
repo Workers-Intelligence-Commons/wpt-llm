@@ -1,0 +1,486 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pyg-team/pytorch_geometric",
+  "revision": "79d33965a40b7fa83616a9f598a0f8619f25d939",
+  "checksum": "sha256:7223ed53187ae0217f115fd60603ea8504f9e511ccaeb57f3c2f69c0fb4060e3",
+  "extract": {
+    "exclude": [
+      "docs/source/_figures/architecture.pdf",
+      "docs/source/_figures/dist_part.png",
+      "docs/source/_figures/dist_proc.png",
+      "docs/source/_figures/dist_sampling.png",
+      "docs/source/_figures/graphgps_layer.png",
+      "docs/source/_figures/graphgym_design_space.png",
+      "docs/source/_figures/graphgym_evaluation.png",
+      "docs/source/_figures/graphgym_results.png",
+      "docs/source/_figures/intel_kumo.png",
+      "docs/source/_figures/point_cloud1.png",
+      "docs/source/_figures/point_cloud2.png",
+      "docs/source/_figures/point_cloud3.png",
+      "docs/source/_figures/point_cloud4.png",
+      "docs/source/_figures/remote_1.png",
+      "docs/source/_figures/remote_2.png",
+      "docs/source/_figures/remote_3.png",
+      "docs/source/_figures/shallow_node_embeddings.png",
+      "docs/source/_figures/training_affinity.png",
+      "docs/source/_static/thumbnails/**",
+      "docs/source/external/**",
+      "examples/contrib/**",
+      "test/contrib/**",
+      "torch_geometric/contrib/**",
+      "torch_geometric/graphgym/contrib/**",
+      "torch_geometric/graphgym/utils/**"
+    ]
+  },
+  "history": {
+    "since": "1e5c1288769a556b7ac2f3055ef2832b9a61f43d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2023 PyG Team <team@pyg.org>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/pyg-team/pytorch_geometric: Copyright (c) 2023 PyG Team <team@pyg.org>, MIT license (LICENSE), https://github.com/pyg-team/pytorch_geometric."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CHANGELOG.md",
+        "CITATION.cff",
+        "LICENSE",
+        "README.md",
+        "benchmark/**",
+        "codecov.yml",
+        "docker/**",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/requirements.txt",
+        "docs/source/.gitignore",
+        "docs/source/_figures/.gitignore",
+        "docs/source/_figures/architecture.svg",
+        "docs/source/_figures/build.sh",
+        "docs/source/_figures/graph.svg",
+        "docs/source/_figures/graph.tex",
+        "docs/source/_figures/hg_example.svg",
+        "docs/source/_figures/hg_example.tex",
+        "docs/source/_figures/meshcnn_edge_adjacency.svg",
+        "docs/source/_figures/to_hetero.svg",
+        "docs/source/_figures/to_hetero.tex",
+        "docs/source/_figures/to_hetero_with_bases.svg",
+        "docs/source/_figures/to_hetero_with_bases.tex",
+        "docs/source/_static/js/**",
+        "docs/source/_templates/**",
+        "docs/source/advanced/**",
+        "docs/source/cheatsheet/**",
+        "docs/source/conf.py",
+        "docs/source/get_started/**",
+        "docs/source/index.rst",
+        "docs/source/install/**",
+        "docs/source/modules/**",
+        "docs/source/notes/**",
+        "docs/source/tutorial/**",
+        "examples/README.md",
+        "examples/agnn.py",
+        "examples/ar_link_pred.py",
+        "examples/argva_node_clustering.py",
+        "examples/arma.py",
+        "examples/attentive_fp.py",
+        "examples/autoencoder.py",
+        "examples/cluster_gcn_ppi.py",
+        "examples/cluster_gcn_reddit.py",
+        "examples/colors_topk_pool.py",
+        "examples/compile/**",
+        "examples/cora.py",
+        "examples/correct_and_smooth.py",
+        "examples/cpp/**",
+        "examples/datapipe.py",
+        "examples/dgcnn_classification.py",
+        "examples/dgcnn_segmentation.py",
+        "examples/dir_gnn.py",
+        "examples/distributed/**",
+        "examples/dna.py",
+        "examples/egc.py",
+        "examples/equilibrium_median.py",
+        "examples/explain/**",
+        "examples/faust.py",
+        "examples/film.py",
+        "examples/gat.py",
+        "examples/gcn.py",
+        "examples/gcn2_cora.py",
+        "examples/gcn2_ppi.py",
+        "examples/geniepath.py",
+        "examples/glnn.py",
+        "examples/gpse.py",
+        "examples/graph_gps.py",
+        "examples/graph_sage_unsup.py",
+        "examples/graph_sage_unsup_ppi.py",
+        "examples/graph_saint.py",
+        "examples/graph_unet.py",
+        "examples/graphland.py",
+        "examples/hetero/**",
+        "examples/hierarchical_sampling.py",
+        "examples/infomax_inductive.py",
+        "examples/infomax_transductive.py",
+        "examples/jit/**",
+        "examples/kge_fb15k_237.py",
+        "examples/label_prop.py",
+        "examples/lcm_aggr_2nd_min.py",
+        "examples/lightgcn.py",
+        "examples/link_pred.py",
+        "examples/linkx.py",
+        "examples/llm/**",
+        "examples/lpformer.py",
+        "examples/mem_pool.py",
+        "examples/mixhop.py",
+        "examples/mnist_graclus.py",
+        "examples/mnist_nn_conv.py",
+        "examples/mnist_voxel_grid.py",
+        "examples/multi_gpu/**",
+        "examples/mutag_gin.py",
+        "examples/node2vec.py",
+        "examples/ogbn_proteins_deepgcn.py",
+        "examples/ogbn_train.py",
+        "examples/ogc.py",
+        "examples/pmlp.py",
+        "examples/pna.py",
+        "examples/point_transformer_classification.py",
+        "examples/point_transformer_segmentation.py",
+        "examples/pointnet2_classification.py",
+        "examples/pointnet2_segmentation.py",
+        "examples/ppi.py",
+        "examples/proteins_diff_pool.py",
+        "examples/proteins_dmon_pool.py",
+        "examples/proteins_gmt.py",
+        "examples/proteins_mincut_pool.py",
+        "examples/proteins_topk_pool.py",
+        "examples/pytorch_ignite/**",
+        "examples/pytorch_lightning/**",
+        "examples/qm9_nn_conv.py",
+        "examples/qm9_pretrained_dimenet.py",
+        "examples/qm9_pretrained_schnet.py",
+        "examples/quiver/**",
+        "examples/randlanet_classification.py",
+        "examples/randlanet_segmentation.py",
+        "examples/rdl.py",
+        "examples/rect.py",
+        "examples/reddit.py",
+        "examples/relbench_example.py",
+        "examples/renet.py",
+        "examples/rev_gnn.py",
+        "examples/rgat.py",
+        "examples/rgcn.py",
+        "examples/rgcn_link_pred.py",
+        "examples/seal_link_pred.py",
+        "examples/sgc.py",
+        "examples/shadow.py",
+        "examples/sign.py",
+        "examples/signed_gcn.py",
+        "examples/super_gat.py",
+        "examples/tagcn.py",
+        "examples/tensorboard_logging.py",
+        "examples/tgn.py",
+        "examples/triangles_sag_pool.py",
+        "examples/unimp_arxiv.py",
+        "examples/upfd.py",
+        "examples/wl_kernel.py",
+        "graphgym/**",
+        "pyproject.toml",
+        "readthedocs.yml",
+        "test/conftest.py",
+        "test/data/**",
+        "test/datasets/**",
+        "test/distributed/**",
+        "test/explain/**",
+        "test/graphgym/**",
+        "test/io/**",
+        "test/llm/**",
+        "test/loader/**",
+        "test/metrics/**",
+        "test/my_config.yaml",
+        "test/nn/**",
+        "test/profile/**",
+        "test/sampler/**",
+        "test/test_config_mixin.py",
+        "test/test_config_store.py",
+        "test/test_debug.py",
+        "test/test_edge_index.py",
+        "test/test_experimental.py",
+        "test/test_hash_tensor.py",
+        "test/test_home.py",
+        "test/test_index.py",
+        "test/test_inspector.py",
+        "test/test_isinstance.py",
+        "test/test_onnx.py",
+        "test/test_seed.py",
+        "test/test_typing.py",
+        "test/test_warnings.py",
+        "test/testing/**",
+        "test/transforms/**",
+        "test/utils/**",
+        "test/visualization/**",
+        "torch_geometric/__init__.py",
+        "torch_geometric/_compile.py",
+        "torch_geometric/_onnx.py",
+        "torch_geometric/backend.py",
+        "torch_geometric/config_mixin.py",
+        "torch_geometric/config_store.py",
+        "torch_geometric/data/**",
+        "torch_geometric/datasets/**",
+        "torch_geometric/debug.py",
+        "torch_geometric/deprecation.py",
+        "torch_geometric/device.py",
+        "torch_geometric/distributed/**",
+        "torch_geometric/edge_index.py",
+        "torch_geometric/experimental.py",
+        "torch_geometric/explain/**",
+        "torch_geometric/graphgym/__init__.py",
+        "torch_geometric/graphgym/benchmark.py",
+        "torch_geometric/graphgym/checkpoint.py",
+        "torch_geometric/graphgym/cmd_args.py",
+        "torch_geometric/graphgym/config.py",
+        "torch_geometric/graphgym/imports.py",
+        "torch_geometric/graphgym/init.py",
+        "torch_geometric/graphgym/loader.py",
+        "torch_geometric/graphgym/logger.py",
+        "torch_geometric/graphgym/loss.py",
+        "torch_geometric/graphgym/model_builder.py",
+        "torch_geometric/graphgym/models/**",
+        "torch_geometric/graphgym/optim.py",
+        "torch_geometric/graphgym/register.py",
+        "torch_geometric/graphgym/train.py",
+        "torch_geometric/hash_tensor.py",
+        "torch_geometric/home.py",
+        "torch_geometric/index.py",
+        "torch_geometric/inspector.py",
+        "torch_geometric/io/**",
+        "torch_geometric/isinstance.py",
+        "torch_geometric/lazy_loader.py",
+        "torch_geometric/llm/**",
+        "torch_geometric/loader/**",
+        "torch_geometric/logging.py",
+        "torch_geometric/metrics/**",
+        "torch_geometric/nn/**",
+        "torch_geometric/profile/**",
+        "torch_geometric/resolver.py",
+        "torch_geometric/sampler/**",
+        "torch_geometric/seed.py",
+        "torch_geometric/template.py",
+        "torch_geometric/testing/**",
+        "torch_geometric/transforms/**",
+        "torch_geometric/typing.py",
+        "torch_geometric/utils/**",
+        "torch_geometric/visualization/**",
+        "torch_geometric/warnings.py"
+      ],
+      "text": "Copyright (c) 2023 PyG Team <team@pyg.org>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 PyG Team <team@pyg.org>, MIT license (LICENSE), https://github.com/pyg-team/pytorch_geometric."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.off"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sbatch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "docs/requirements.txt",
+        "graphgym/grids/example.txt",
+        "graphgym/grids/pyg/example.txt",
+        "graphgym/sample/dimensions.txt",
+        "graphgym/sample/dimensionsatt.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/singularity"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

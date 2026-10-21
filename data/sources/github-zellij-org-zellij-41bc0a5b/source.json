@@ -1,0 +1,1220 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/zellij-org/zellij",
+  "revision": "519a23715c6b0f65a3ffada64e738ed6ec9380fc",
+  "checksum": "sha256:7bac29403c719fe03a24e15ea3bb3b9b95680800b0335821d3e41723102a857b",
+  "extract": {
+    "exclude": [
+      "assets/demo.gif",
+      "assets/logo.png",
+      "assets/logo128.ico",
+      "assets/logo128.png",
+      "default-plugins/about/**",
+      "default-plugins/bars/**",
+      "default-plugins/configuration/**",
+      "default-plugins/fixture-plugin-for-tests/**",
+      "default-plugins/layout-manager/**",
+      "default-plugins/multiple-select/**",
+      "default-plugins/plugin-manager/**",
+      "default-plugins/share/**",
+      "default-plugins/strider/**",
+      "src/tests/fixtures/bash_cursor_linewrap",
+      "src/tests/fixtures/clear_scroll_region",
+      "src/tests/fixtures/emacs_longbuf_tutorial",
+      "src/tests/fixtures/exa_plus_omf_theme",
+      "src/tests/fixtures/fish_and_bandwhich",
+      "src/tests/fixtures/fish_paste_multiline",
+      "src/tests/fixtures/fish_select_tab_completion_options",
+      "src/tests/fixtures/fish_tab_completion_options",
+      "src/tests/fixtures/git_diff_scrollup",
+      "src/tests/fixtures/git_log",
+      "src/tests/fixtures/htop",
+      "src/tests/fixtures/htop_right_scrolling",
+      "src/tests/fixtures/htop_scrolling",
+      "src/tests/fixtures/nvim_insert",
+      "src/tests/fixtures/tab_characters",
+      "src/tests/fixtures/top_and_quit",
+      "src/tests/fixtures/vim_ctrl_d",
+      "src/tests/fixtures/vim_ctrl_u",
+      "src/tests/fixtures/vim_overwrite",
+      "src/tests/fixtures/vim_scroll_region_down",
+      "wix/**",
+      "zellij-client/assets/favicon.ico",
+      "zellij-client/assets/icon-192.png",
+      "zellij-tile/**",
+      "zellij-tile-utils/**",
+      "zellij-utils/assets/plugins/**",
+      "zellij-utils/src/vendored/mod.rs",
+      "zellij-window/assets/**",
+      "zellij-window/fixtures/goldens/blink.png",
+      "zellij-window/fixtures/goldens/cursor-shapes.png",
+      "zellij-window/fixtures/goldens/glyph-torture.png",
+      "zellij-window/fixtures/goldens/glyph-torture@2x.png",
+      "zellij-window/fixtures/goldens/grapheme-clusters.png",
+      "zellij-window/fixtures/goldens/kitty-graphics.png",
+      "zellij-window/fixtures/goldens/kitty-pane-open.png",
+      "zellij-window/fixtures/goldens/osc-signals.png",
+      "zellij-window/fixtures/goldens/panes-and-tabs.png",
+      "zellij-window/fixtures/goldens/scroll-regions.png",
+      "zellij-window/fixtures/goldens/sixel-graphics.png",
+      "zellij-window/fixtures/goldens/sixel-pane-open.png",
+      "zellij-window/fixtures/goldens/smoke.png",
+      "zellij-window/fixtures/goldens/smooth-scroll@mid-slide.png",
+      "zellij-window/fixtures/goldens/stream/alternate_screen_change_size.png",
+      "zellij-window/fixtures/goldens/stream/bash_cursor_linewrap.png",
+      "zellij-window/fixtures/goldens/stream/bash_delete_wide_characters.png",
+      "zellij-window/fixtures/goldens/stream/chinese_characters_line_middle.png",
+      "zellij-window/fixtures/goldens/stream/clear_scroll_region.png",
+      "zellij-window/fixtures/goldens/stream/csi-b.png",
+      "zellij-window/fixtures/goldens/stream/csi-capital-i.png",
+      "zellij-window/fixtures/goldens/stream/csi-capital-z.png",
+      "zellij-window/fixtures/goldens/stream/delete_wide_character_under_cursor.png",
+      "zellij-window/fixtures/goldens/stream/delete_wide_characters_before_cursor.png",
+      "zellij-window/fixtures/goldens/stream/delete_wide_characters_before_cursor_when_cursor_is_on_wide_character.png",
+      "zellij-window/fixtures/goldens/stream/emacs_longbuf_tutorial.png",
+      "zellij-window/fixtures/goldens/stream/exa_plus_omf_theme.png",
+      "zellij-window/fixtures/goldens/stream/fish_and_bandwhich.png",
+      "zellij-window/fixtures/goldens/stream/fish_paste_multiline.png",
+      "zellij-window/fixtures/goldens/stream/fish_select_tab_completion_options.png",
+      "zellij-window/fixtures/goldens/stream/fish_tab_completion_options.png",
+      "zellij-window/fixtures/goldens/stream/fish_wide_characters_override_clock.png",
+      "zellij-window/fixtures/goldens/stream/fzf_fullscreen.png",
+      "zellij-window/fixtures/goldens/stream/git_diff_scrollup.png",
+      "zellij-window/fixtures/goldens/stream/git_log.png",
+      "zellij-window/fixtures/goldens/stream/grapheme_clusters.png",
+      "zellij-window/fixtures/goldens/stream/grapheme_clusters_2027.png",
+      "zellij-window/fixtures/goldens/stream/grapheme_wrap_edges.png",
+      "zellij-window/fixtures/goldens/stream/grid_copy.png",
+      "zellij-window/fixtures/goldens/stream/grid_copy_wrapped.png",
+      "zellij-window/fixtures/goldens/stream/htop.png",
+      "zellij-window/fixtures/goldens/stream/htop_right_scrolling.png",
+      "zellij-window/fixtures/goldens/stream/htop_scrolling.png",
+      "zellij-window/fixtures/goldens/stream/indic_thai_scripts.png",
+      "zellij-window/fixtures/goldens/stream/move_cursor_below_scroll_region.png",
+      "zellij-window/fixtures/goldens/stream/ncmpcpp-wide-chars.png",
+      "zellij-window/fixtures/goldens/stream/nested-list-ui-component-with-coordinates.png",
+      "zellij-window/fixtures/goldens/stream/nested-list-ui-component.png",
+      "zellij-window/fixtures/goldens/stream/nvim_insert.png",
+      "zellij-window/fixtures/goldens/stream/replace_multiple_wide_characters.png",
+      "zellij-window/fixtures/goldens/stream/replace_non_wide_characters_with_wide_characters.png",
+      "zellij-window/fixtures/goldens/stream/replace_wide_character_under_cursor.png",
+      "zellij-window/fixtures/goldens/stream/ribbon-ui-component-with-coordinates.png",
+      "zellij-window/fixtures/goldens/stream/ribbon-ui-component.png",
+      "zellij-window/fixtures/goldens/stream/ring_bell.png",
+      "zellij-window/fixtures/goldens/stream/scroll_down.png",
+      "zellij-window/fixtures/goldens/stream/scroll_region_full_screen.png",
+      "zellij-window/fixtures/goldens/stream/scrolling.png",
+      "zellij-window/fixtures/goldens/stream/sixel-image-100px.six.png",
+      "zellij-window/fixtures/goldens/stream/sixel-image-500px.six.png",
+      "zellij-window/fixtures/goldens/stream/tab_characters.png",
+      "zellij-window/fixtures/goldens/stream/table-ui-component-with-coordinates.png",
+      "zellij-window/fixtures/goldens/stream/table-ui-component.png",
+      "zellij-window/fixtures/goldens/stream/terminal_emulator_startup_response.png",
+      "zellij-window/fixtures/goldens/stream/terminal_pixel_size_reports.png",
+      "zellij-window/fixtures/goldens/stream/terminal_reports.png",
+      "zellij-window/fixtures/goldens/stream/text-ui-component-with-coordinates.png",
+      "zellij-window/fixtures/goldens/stream/text-ui-component.png",
+      "zellij-window/fixtures/goldens/stream/title-graphemes.png",
+      "zellij-window/fixtures/goldens/stream/title-wide-chars.png",
+      "zellij-window/fixtures/goldens/stream/top_and_quit.png",
+      "zellij-window/fixtures/goldens/stream/vim_ctrl_d.png",
+      "zellij-window/fixtures/goldens/stream/vim_ctrl_u.png",
+      "zellij-window/fixtures/goldens/stream/vim_overwrite.png",
+      "zellij-window/fixtures/goldens/stream/vim_scroll_region_down.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-0.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-1.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-2.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-3.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-4.png",
+      "zellij-window/fixtures/goldens/stream/vttest1-5.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-0.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-1.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-10.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-11.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-12.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-13.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-14.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-2.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-3.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-4.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-5.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-6.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-7.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-8.png",
+      "zellij-window/fixtures/goldens/stream/vttest2-9.png",
+      "zellij-window/fixtures/goldens/stream/vttest3-0.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-0.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-1.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-2.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-3.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-4.png",
+      "zellij-window/fixtures/goldens/stream/vttest8-5.png",
+      "zellij-window/fixtures/goldens/stream/wide-chars-delete-middle-after-multi.png",
+      "zellij-window/fixtures/goldens/stream/wide-chars-delete-middle.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters_full.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters_line_end.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters_line_middle.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters_line_wrap.png",
+      "zellij-window/fixtures/goldens/stream/wide_characters_middle_line_insert.png",
+      "zellij-window/fixtures/goldens/stream/zalgo.png",
+      "zellij-window/fixtures/goldens/styling.png",
+      "zellij-window/fixtures/goldens/styling@padded-extend.png",
+      "zellij-window/fixtures/goldens/styling@padded.png",
+      "zellij-window/fixtures/goldens/wide-chars.png"
+    ]
+  },
+  "history": {
+    "since": "cd4b3d3572bf999522494d5b3e052861fc0bd0d5"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Zellij contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2018 Wez Furlong\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/zellij-org/zellij: Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij; Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/default-plugins/context-menu; Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/default-plugins/prompt; Copyright (c) 2018 Wez Furlong, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/zellij-utils/src/vendored/termwiz."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cargo/**",
+        ".config/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".rustfmt.toml",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "GOVERNANCE.md",
+        "LICENSE.md",
+        "README.md",
+        "assets/logo.svg",
+        "assets/zellij.desktop",
+        "assets/zellij.manifest",
+        "assets/zellij.rc",
+        "default-plugins/session-manager/**",
+        "docker-compose.yml",
+        "docs/**",
+        "example/**",
+        "funding.json",
+        "rust-toolchain.toml",
+        "src/bin/**",
+        "src/build.rs",
+        "src/commands.rs",
+        "src/lib.rs",
+        "src/main.rs",
+        "src/tests/cli.rs",
+        "src/tests/e2e/**",
+        "src/tests/fixtures/alternate_screen_change_size",
+        "src/tests/fixtures/append-echo-script.sh",
+        "src/tests/fixtures/bash_delete_wide_characters",
+        "src/tests/fixtures/chinese_characters_line_middle",
+        "src/tests/fixtures/config-dirs/**",
+        "src/tests/fixtures/configs/**",
+        "src/tests/fixtures/csi-b",
+        "src/tests/fixtures/csi-capital-i",
+        "src/tests/fixtures/csi-capital-z",
+        "src/tests/fixtures/delete_wide_character_under_cursor",
+        "src/tests/fixtures/delete_wide_characters_before_cursor",
+        "src/tests/fixtures/delete_wide_characters_before_cursor_when_cursor_is_on_wide_character",
+        "src/tests/fixtures/e2e/**",
+        "src/tests/fixtures/fish_wide_characters_override_clock",
+        "src/tests/fixtures/fzf_fullscreen",
+        "src/tests/fixtures/grapheme_clusters",
+        "src/tests/fixtures/grapheme_clusters_2027",
+        "src/tests/fixtures/grapheme_wrap_edges",
+        "src/tests/fixtures/grid_copy",
+        "src/tests/fixtures/grid_copy_wrapped",
+        "src/tests/fixtures/indic_thai_scripts",
+        "src/tests/fixtures/layout_for_resurrection.kdl",
+        "src/tests/fixtures/move_cursor_below_scroll_region",
+        "src/tests/fixtures/ncmpcpp-wide-chars",
+        "src/tests/fixtures/nested-list-ui-component",
+        "src/tests/fixtures/nested-list-ui-component-with-coordinates",
+        "src/tests/fixtures/replace_multiple_wide_characters",
+        "src/tests/fixtures/replace_non_wide_characters_with_wide_characters",
+        "src/tests/fixtures/replace_wide_character_under_cursor",
+        "src/tests/fixtures/ribbon-ui-component",
+        "src/tests/fixtures/ribbon-ui-component-with-coordinates",
+        "src/tests/fixtures/ring_bell",
+        "src/tests/fixtures/scroll_down",
+        "src/tests/fixtures/scroll_region_full_screen",
+        "src/tests/fixtures/scrolling",
+        "src/tests/fixtures/sixel-image-100px.six",
+        "src/tests/fixtures/sixel-image-500px.six",
+        "src/tests/fixtures/table-ui-component",
+        "src/tests/fixtures/table-ui-component-with-coordinates",
+        "src/tests/fixtures/terminal_emulator_startup_response",
+        "src/tests/fixtures/terminal_pixel_size_reports",
+        "src/tests/fixtures/terminal_reports",
+        "src/tests/fixtures/text-ui-component",
+        "src/tests/fixtures/text-ui-component-with-coordinates",
+        "src/tests/fixtures/title-graphemes",
+        "src/tests/fixtures/title-wide-chars",
+        "src/tests/fixtures/vttest1-0",
+        "src/tests/fixtures/vttest1-1",
+        "src/tests/fixtures/vttest1-2",
+        "src/tests/fixtures/vttest1-3",
+        "src/tests/fixtures/vttest1-4",
+        "src/tests/fixtures/vttest1-5",
+        "src/tests/fixtures/vttest2-0",
+        "src/tests/fixtures/vttest2-1",
+        "src/tests/fixtures/vttest2-10",
+        "src/tests/fixtures/vttest2-11",
+        "src/tests/fixtures/vttest2-12",
+        "src/tests/fixtures/vttest2-13",
+        "src/tests/fixtures/vttest2-14",
+        "src/tests/fixtures/vttest2-2",
+        "src/tests/fixtures/vttest2-3",
+        "src/tests/fixtures/vttest2-4",
+        "src/tests/fixtures/vttest2-5",
+        "src/tests/fixtures/vttest2-6",
+        "src/tests/fixtures/vttest2-7",
+        "src/tests/fixtures/vttest2-8",
+        "src/tests/fixtures/vttest2-9",
+        "src/tests/fixtures/vttest3-0",
+        "src/tests/fixtures/vttest8-0",
+        "src/tests/fixtures/vttest8-1",
+        "src/tests/fixtures/vttest8-2",
+        "src/tests/fixtures/vttest8-3",
+        "src/tests/fixtures/vttest8-4",
+        "src/tests/fixtures/vttest8-5",
+        "src/tests/fixtures/wide-chars-delete-middle",
+        "src/tests/fixtures/wide-chars-delete-middle-after-multi",
+        "src/tests/fixtures/wide_characters",
+        "src/tests/fixtures/wide_characters_full",
+        "src/tests/fixtures/wide_characters_line_end",
+        "src/tests/fixtures/wide_characters_line_middle",
+        "src/tests/fixtures/wide_characters_line_wrap",
+        "src/tests/fixtures/wide_characters_middle_line_insert",
+        "src/tests/fixtures/zalgo",
+        "src/tests/mod.rs",
+        "xtask/**",
+        "zellij-client/Cargo.toml",
+        "zellij-client/assets/addon-clipboard.js",
+        "zellij-client/assets/addon-fit.js",
+        "zellij-client/assets/addon-web-links.js",
+        "zellij-client/assets/addon-webgl.js",
+        "zellij-client/assets/app.js",
+        "zellij-client/assets/auth.js",
+        "zellij-client/assets/connection.js",
+        "zellij-client/assets/ime-bypass.js",
+        "zellij-client/assets/index.html",
+        "zellij-client/assets/index.js",
+        "zellij-client/assets/input.js",
+        "zellij-client/assets/integrity.json",
+        "zellij-client/assets/key-handler.js",
+        "zellij-client/assets/keyboard.js",
+        "zellij-client/assets/links.js",
+        "zellij-client/assets/manifest.webmanifest",
+        "zellij-client/assets/mobile-pan.js",
+        "zellij-client/assets/mobile-ui.js",
+        "zellij-client/assets/modals.js",
+        "zellij-client/assets/mouse.js",
+        "zellij-client/assets/pinch.js",
+        "zellij-client/assets/soft-keyboard.js",
+        "zellij-client/assets/style.css",
+        "zellij-client/assets/terminal.js",
+        "zellij-client/assets/touch.js",
+        "zellij-client/assets/utils.js",
+        "zellij-client/assets/websockets.js",
+        "zellij-client/assets/xterm.css",
+        "zellij-client/assets/xterm.js",
+        "zellij-client/src/**",
+        "zellij-integration-tests/**",
+        "zellij-server/**",
+        "zellij-utils/Cargo.toml",
+        "zellij-utils/assets/README.md",
+        "zellij-utils/assets/completions/**",
+        "zellij-utils/assets/config/**",
+        "zellij-utils/assets/keybinds/**",
+        "zellij-utils/assets/layouts/**",
+        "zellij-utils/assets/prost/**",
+        "zellij-utils/assets/prost_ipc/**",
+        "zellij-utils/assets/prost_nested_session/**",
+        "zellij-utils/assets/prost_web_server/**",
+        "zellij-utils/assets/shell/**",
+        "zellij-utils/assets/themes/**",
+        "zellij-utils/src/channels.rs",
+        "zellij-utils/src/cli.rs",
+        "zellij-utils/src/client_server_contract/**",
+        "zellij-utils/src/common_path.rs",
+        "zellij-utils/src/consts.rs",
+        "zellij-utils/src/data.rs",
+        "zellij-utils/src/distribution.rs",
+        "zellij-utils/src/downloader.rs",
+        "zellij-utils/src/envs.rs",
+        "zellij-utils/src/errors.rs",
+        "zellij-utils/src/graphemes.rs",
+        "zellij-utils/src/home.rs",
+        "zellij-utils/src/home_unix.rs",
+        "zellij-utils/src/home_windows.rs",
+        "zellij-utils/src/input/**",
+        "zellij-utils/src/ipc/**",
+        "zellij-utils/src/ipc.rs",
+        "zellij-utils/src/kdl/**",
+        "zellij-utils/src/lib.rs",
+        "zellij-utils/src/logging.rs",
+        "zellij-utils/src/nested_session.rs",
+        "zellij-utils/src/nested_session_contract/**",
+        "zellij-utils/src/pane_size.rs",
+        "zellij-utils/src/plugin_api/**",
+        "zellij-utils/src/position.rs",
+        "zellij-utils/src/prompt.rs",
+        "zellij-utils/src/remote_session_tokens.rs",
+        "zellij-utils/src/session_index.rs",
+        "zellij-utils/src/session_serialization.rs",
+        "zellij-utils/src/sessions.rs",
+        "zellij-utils/src/setup.rs",
+        "zellij-utils/src/shared.rs",
+        "zellij-utils/src/snapshots/**",
+        "zellij-utils/src/structured_render.rs",
+        "zellij-utils/src/test-fixtures/**",
+        "zellij-utils/src/unit/**",
+        "zellij-utils/src/web_authentication_tokens.rs",
+        "zellij-utils/src/web_server_commands.rs",
+        "zellij-utils/src/web_server_contract/**",
+        "zellij-utils/tests/**",
+        "zellij-window/Cargo.toml",
+        "zellij-window/fixtures/blink.jsonl",
+        "zellij-window/fixtures/capture.kdl",
+        "zellij-window/fixtures/capture.sh",
+        "zellij-window/fixtures/cursor-shapes.jsonl",
+        "zellij-window/fixtures/glyph-torture.jsonl",
+        "zellij-window/fixtures/goldens/blink.dump",
+        "zellij-window/fixtures/goldens/cursor-shapes.dump",
+        "zellij-window/fixtures/goldens/glyph-torture.dump",
+        "zellij-window/fixtures/goldens/grapheme-clusters.dump",
+        "zellij-window/fixtures/goldens/kitty-graphics.dump",
+        "zellij-window/fixtures/goldens/kitty-pane-open.dump",
+        "zellij-window/fixtures/goldens/osc-signals.dump",
+        "zellij-window/fixtures/goldens/panes-and-tabs.dump",
+        "zellij-window/fixtures/goldens/scroll-regions.dump",
+        "zellij-window/fixtures/goldens/sixel-graphics.dump",
+        "zellij-window/fixtures/goldens/sixel-pane-open.dump",
+        "zellij-window/fixtures/goldens/smoke.dump",
+        "zellij-window/fixtures/goldens/stream/alternate_screen_change_size.dump",
+        "zellij-window/fixtures/goldens/stream/bash_cursor_linewrap.dump",
+        "zellij-window/fixtures/goldens/stream/bash_delete_wide_characters.dump",
+        "zellij-window/fixtures/goldens/stream/chinese_characters_line_middle.dump",
+        "zellij-window/fixtures/goldens/stream/clear_scroll_region.dump",
+        "zellij-window/fixtures/goldens/stream/csi-b.dump",
+        "zellij-window/fixtures/goldens/stream/csi-capital-i.dump",
+        "zellij-window/fixtures/goldens/stream/csi-capital-z.dump",
+        "zellij-window/fixtures/goldens/stream/delete_wide_character_under_cursor.dump",
+        "zellij-window/fixtures/goldens/stream/delete_wide_characters_before_cursor.dump",
+        "zellij-window/fixtures/goldens/stream/delete_wide_characters_before_cursor_when_cursor_is_on_wide_character.dump",
+        "zellij-window/fixtures/goldens/stream/emacs_longbuf_tutorial.dump",
+        "zellij-window/fixtures/goldens/stream/exa_plus_omf_theme.dump",
+        "zellij-window/fixtures/goldens/stream/fish_and_bandwhich.dump",
+        "zellij-window/fixtures/goldens/stream/fish_paste_multiline.dump",
+        "zellij-window/fixtures/goldens/stream/fish_select_tab_completion_options.dump",
+        "zellij-window/fixtures/goldens/stream/fish_tab_completion_options.dump",
+        "zellij-window/fixtures/goldens/stream/fish_wide_characters_override_clock.dump",
+        "zellij-window/fixtures/goldens/stream/fzf_fullscreen.dump",
+        "zellij-window/fixtures/goldens/stream/git_diff_scrollup.dump",
+        "zellij-window/fixtures/goldens/stream/git_log.dump",
+        "zellij-window/fixtures/goldens/stream/grapheme_clusters.dump",
+        "zellij-window/fixtures/goldens/stream/grapheme_clusters_2027.dump",
+        "zellij-window/fixtures/goldens/stream/grapheme_wrap_edges.dump",
+        "zellij-window/fixtures/goldens/stream/grid_copy.dump",
+        "zellij-window/fixtures/goldens/stream/grid_copy_wrapped.dump",
+        "zellij-window/fixtures/goldens/stream/htop.dump",
+        "zellij-window/fixtures/goldens/stream/htop_right_scrolling.dump",
+        "zellij-window/fixtures/goldens/stream/htop_scrolling.dump",
+        "zellij-window/fixtures/goldens/stream/indic_thai_scripts.dump",
+        "zellij-window/fixtures/goldens/stream/move_cursor_below_scroll_region.dump",
+        "zellij-window/fixtures/goldens/stream/ncmpcpp-wide-chars.dump",
+        "zellij-window/fixtures/goldens/stream/nested-list-ui-component-with-coordinates.dump",
+        "zellij-window/fixtures/goldens/stream/nested-list-ui-component.dump",
+        "zellij-window/fixtures/goldens/stream/nvim_insert.dump",
+        "zellij-window/fixtures/goldens/stream/replace_multiple_wide_characters.dump",
+        "zellij-window/fixtures/goldens/stream/replace_non_wide_characters_with_wide_characters.dump",
+        "zellij-window/fixtures/goldens/stream/replace_wide_character_under_cursor.dump",
+        "zellij-window/fixtures/goldens/stream/ribbon-ui-component-with-coordinates.dump",
+        "zellij-window/fixtures/goldens/stream/ribbon-ui-component.dump",
+        "zellij-window/fixtures/goldens/stream/ring_bell.dump",
+        "zellij-window/fixtures/goldens/stream/scroll_down.dump",
+        "zellij-window/fixtures/goldens/stream/scroll_region_full_screen.dump",
+        "zellij-window/fixtures/goldens/stream/scrolling.dump",
+        "zellij-window/fixtures/goldens/stream/sixel-image-100px.six.dump",
+        "zellij-window/fixtures/goldens/stream/sixel-image-500px.six.dump",
+        "zellij-window/fixtures/goldens/stream/tab_characters.dump",
+        "zellij-window/fixtures/goldens/stream/table-ui-component-with-coordinates.dump",
+        "zellij-window/fixtures/goldens/stream/table-ui-component.dump",
+        "zellij-window/fixtures/goldens/stream/terminal_emulator_startup_response.dump",
+        "zellij-window/fixtures/goldens/stream/terminal_pixel_size_reports.dump",
+        "zellij-window/fixtures/goldens/stream/terminal_reports.dump",
+        "zellij-window/fixtures/goldens/stream/text-ui-component-with-coordinates.dump",
+        "zellij-window/fixtures/goldens/stream/text-ui-component.dump",
+        "zellij-window/fixtures/goldens/stream/title-graphemes.dump",
+        "zellij-window/fixtures/goldens/stream/title-wide-chars.dump",
+        "zellij-window/fixtures/goldens/stream/top_and_quit.dump",
+        "zellij-window/fixtures/goldens/stream/vim_ctrl_d.dump",
+        "zellij-window/fixtures/goldens/stream/vim_ctrl_u.dump",
+        "zellij-window/fixtures/goldens/stream/vim_overwrite.dump",
+        "zellij-window/fixtures/goldens/stream/vim_scroll_region_down.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-0.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-1.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-2.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-3.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-4.dump",
+        "zellij-window/fixtures/goldens/stream/vttest1-5.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-0.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-1.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-10.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-11.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-12.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-13.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-14.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-2.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-3.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-4.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-5.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-6.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-7.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-8.dump",
+        "zellij-window/fixtures/goldens/stream/vttest2-9.dump",
+        "zellij-window/fixtures/goldens/stream/vttest3-0.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-0.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-1.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-2.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-3.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-4.dump",
+        "zellij-window/fixtures/goldens/stream/vttest8-5.dump",
+        "zellij-window/fixtures/goldens/stream/wide-chars-delete-middle-after-multi.dump",
+        "zellij-window/fixtures/goldens/stream/wide-chars-delete-middle.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters_full.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters_line_end.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters_line_middle.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters_line_wrap.dump",
+        "zellij-window/fixtures/goldens/stream/wide_characters_middle_line_insert.dump",
+        "zellij-window/fixtures/goldens/stream/zalgo.dump",
+        "zellij-window/fixtures/goldens/styling.dump",
+        "zellij-window/fixtures/goldens/wide-chars.dump",
+        "zellij-window/fixtures/grapheme-clusters.jsonl",
+        "zellij-window/fixtures/kitty-graphics.jsonl",
+        "zellij-window/fixtures/kitty-pane-open.jsonl",
+        "zellij-window/fixtures/osc-signals.jsonl",
+        "zellij-window/fixtures/panes-and-tabs.jsonl",
+        "zellij-window/fixtures/scroll-regions.jsonl",
+        "zellij-window/fixtures/sixel-graphics.jsonl",
+        "zellij-window/fixtures/sixel-pane-open.jsonl",
+        "zellij-window/fixtures/smoke.jsonl",
+        "zellij-window/fixtures/styling.jsonl",
+        "zellij-window/fixtures/wide-chars.jsonl",
+        "zellij-window/src/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Zellij contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "default-plugins/context-menu/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Zellij contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/default-plugins/context-menu."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "default-plugins/prompt/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Zellij contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Zellij contributors, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/default-plugins/prompt."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "zellij-utils/src/vendored/termwiz/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018 Wez Furlong\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Wez Furlong, MIT license (LICENSE.md), https://github.com/zellij-org/zellij/tree/519a23715c6b0f65a3ffada64e738ed6ec9380fc/zellij-utils/src/vendored/termwiz."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.kdl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.six"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alternate_screen_change_size"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bash_delete_wide_characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chinese_characters_line_middle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/csi-b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/csi-capital-i"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/csi-capital-z"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete_wide_character_under_cursor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete_wide_characters_before_cursor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete_wide_characters_before_cursor_when_cursor_is_on_wide_character"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fill_for_pinned_pane"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fish_wide_characters_override_clock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fzf_fullscreen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grapheme_clusters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grapheme_clusters_2027"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grapheme_wrap_edges"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grid_copy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grid_copy_wrapped"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/indic_thai_scripts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/move_cursor_below_scroll_region"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncmpcpp-wide-chars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nested-list-ui-component"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nested-list-ui-component-with-coordinates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace_multiple_wide_characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace_non_wide_characters_with_wide_characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace_wide_character_under_cursor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ribbon-ui-component"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ribbon-ui-component-with-coordinates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ring_bell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_down"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_region_full_screen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scrolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scrolling_inside_a_pane"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/table-ui-component"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/table-ui-component-with-coordinates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terminal_emulator_startup_response"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terminal_pixel_size_reports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terminal_reports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text-ui-component"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text-ui-component-with-coordinates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/title-graphemes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/title-wide-chars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest1-5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-10"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest2-9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest3-0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest8-5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide-chars-delete-middle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide-chars-delete-middle-after-multi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters_full"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters_line_end"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters_line_middle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters_line_wrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wide_characters_middle_line_insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zalgo"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

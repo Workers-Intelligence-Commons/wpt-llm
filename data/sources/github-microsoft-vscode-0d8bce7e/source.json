@@ -1,0 +1,3163 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/microsoft/vscode",
+  "revision": "61877c27251a793ecc4aabfe8ef8d60735316881",
+  "checksum": "sha256:a5d8d1bd901c87bfaa88a4ebeeaba52fe91c1ceb83609a3c6a2178f50465f6b1",
+  "extract": {
+    "exclude": [
+      ".vscode/extensions/vscode-selfhost-test-provider/icon.png",
+      "build/darwin/distribution.provisionprofile",
+      "build/darwin/dmg-background-exploration.tiff",
+      "build/darwin/dmg-background-insider.tiff",
+      "build/darwin/dmg-background-stable.tiff",
+      "build/lib/watch/watcher.exe",
+      "build/win32/inno_updater.exe",
+      "build/win32/vcruntime140.dll",
+      "extensions/configuration-editing/images/**",
+      "extensions/copilot/.vscode/extensions/visualization-runner/docs/**",
+      "extensions/copilot/assets/copilot.png",
+      "extensions/copilot/assets/copilot.woff",
+      "extensions/copilot/docs/media/**",
+      "extensions/copilot/src/extension/mcp/test/vscode-node/fixtures/nuget/**",
+      "extensions/copilot/src/platform/testing/node/setupTestDetector.png",
+      "extensions/copilot/src/util/vs/workbench/contrib/**",
+      "extensions/copilot/test/simulation/fixtures/codeMapper/**",
+      "extensions/css-language-features/icons/**",
+      "extensions/css-language-features/server/test/linksTestFixtures/node_modules/**",
+      "extensions/debug-auto-launch/media/**",
+      "extensions/debug-server-ready/media/**",
+      "extensions/emmet/images/**",
+      "extensions/extension-editing/images/**",
+      "extensions/git/resources/icons/git.png",
+      "extensions/git-base/resources/**",
+      "extensions/github/images/**",
+      "extensions/github-authentication/images/**",
+      "extensions/github-authentication/media/favicon.ico",
+      "extensions/github-authentication/media/icon.png",
+      "extensions/grunt/images/**",
+      "extensions/gulp/images/**",
+      "extensions/html-language-features/icons/**",
+      "extensions/ipynb/media/**",
+      "extensions/jake/images/**",
+      "extensions/json-language-features/icons/**",
+      "extensions/markdown-language-features/icon.png",
+      "extensions/markdown-math/icon.png",
+      "extensions/media-preview/icon.png",
+      "extensions/merge-conflict/media/**",
+      "extensions/microsoft-authentication/media/favicon.ico",
+      "extensions/microsoft-authentication/media/icon.png",
+      "extensions/notebook-renderers/media/**",
+      "extensions/npm/images/npm_icon.png",
+      "extensions/php-language-features/icons/**",
+      "extensions/references-view/media/**",
+      "extensions/search-result/images/**",
+      "extensions/simple-browser/media/icon.png",
+      "extensions/terminal-suggest/media/**",
+      "extensions/theme-modern-icons/fileicons/images/**",
+      "extensions/theme-seti/icons/seti-circular-128x128.png",
+      "extensions/theme-seti/icons/seti.woff",
+      "extensions/tunnel-forwarding/media/**",
+      "extensions/typescript-language-features/media/**",
+      "extensions/vscode-api-tests/media/**",
+      "extensions/vscode-api-tests/testWorkspace/image%.png",
+      "extensions/vscode-api-tests/testWorkspace/image%02.png",
+      "extensions/vscode-api-tests/testWorkspace/image.png",
+      "extensions/vscode-api-tests/testWorkspace/sub/**",
+      "extensions/vscode-colorize-perf-tests/media/**",
+      "extensions/vscode-colorize-tests/media/**",
+      "extensions/vscode-colorize-tests/producticons/ElegantIcons.woff",
+      "extensions/vscode-test-resolver/media/**",
+      "resources/darwin/bat.icns",
+      "resources/darwin/bower.icns",
+      "resources/darwin/c.icns",
+      "resources/darwin/code.icns",
+      "resources/darwin/config.icns",
+      "resources/darwin/cpp.icns",
+      "resources/darwin/csharp.icns",
+      "resources/darwin/css.icns",
+      "resources/darwin/default.icns",
+      "resources/darwin/go.icns",
+      "resources/darwin/html.icns",
+      "resources/darwin/jade.icns",
+      "resources/darwin/java.icns",
+      "resources/darwin/javascript.icns",
+      "resources/darwin/json.icns",
+      "resources/darwin/less.icns",
+      "resources/darwin/markdown.icns",
+      "resources/darwin/php.icns",
+      "resources/darwin/powershell.icns",
+      "resources/darwin/python.icns",
+      "resources/darwin/react.icns",
+      "resources/darwin/ruby.icns",
+      "resources/darwin/sass.icns",
+      "resources/darwin/shell.icns",
+      "resources/darwin/sql.icns",
+      "resources/darwin/typescript.icns",
+      "resources/darwin/vue.icns",
+      "resources/darwin/xml.icns",
+      "resources/darwin/yaml.icns",
+      "resources/linux/code.png",
+      "resources/server/code-192.png",
+      "resources/server/code-512.png",
+      "resources/server/favicon.ico",
+      "resources/win32/bower.ico",
+      "resources/win32/c.ico",
+      "resources/win32/code.ico",
+      "resources/win32/code_150x150.png",
+      "resources/win32/code_70x70.png",
+      "resources/win32/config.ico",
+      "resources/win32/cpp.ico",
+      "resources/win32/csharp.ico",
+      "resources/win32/css.ico",
+      "resources/win32/default.ico",
+      "resources/win32/go.ico",
+      "resources/win32/html.ico",
+      "resources/win32/inno-big-100.bmp",
+      "resources/win32/inno-big-125.bmp",
+      "resources/win32/inno-big-150.bmp",
+      "resources/win32/inno-big-175.bmp",
+      "resources/win32/inno-big-200.bmp",
+      "resources/win32/inno-big-225.bmp",
+      "resources/win32/inno-big-250.bmp",
+      "resources/win32/inno-small-100.bmp",
+      "resources/win32/inno-small-125.bmp",
+      "resources/win32/inno-small-150.bmp",
+      "resources/win32/inno-small-175.bmp",
+      "resources/win32/inno-small-200.bmp",
+      "resources/win32/inno-small-225.bmp",
+      "resources/win32/inno-small-250.bmp",
+      "resources/win32/jade.ico",
+      "resources/win32/java.ico",
+      "resources/win32/javascript.ico",
+      "resources/win32/json.ico",
+      "resources/win32/less.ico",
+      "resources/win32/markdown.ico",
+      "resources/win32/php.ico",
+      "resources/win32/powershell.ico",
+      "resources/win32/python.ico",
+      "resources/win32/react.ico",
+      "resources/win32/ruby.ico",
+      "resources/win32/sass.ico",
+      "resources/win32/sessions.ico",
+      "resources/win32/shell.ico",
+      "resources/win32/sql.ico",
+      "resources/win32/typescript.ico",
+      "resources/win32/vue.ico",
+      "resources/win32/xml.ico",
+      "resources/win32/yaml.ico",
+      "src/vs/base/test/node/zip/fixtures/**",
+      "src/vs/code/electron-utility/sharedProcess/contrib/**",
+      "src/vs/code/test/electron-utility/**",
+      "src/vs/editor/common/core/edits/docs/**",
+      "src/vs/editor/contrib/**",
+      "src/vs/platform/accessibilitySignal/browser/media/**",
+      "src/vs/platform/files/test/node/fixtures/service/binary.txt",
+      "src/vs/platform/files/test/node/fixtures/service/some_utf16le.css",
+      "src/vs/sessions/contrib/**",
+      "src/vs/workbench/browser/parts/editor/media/back-tb.png",
+      "src/vs/workbench/browser/parts/editor/media/forward-tb.png",
+      "src/vs/workbench/contrib/**",
+      "src/vs/workbench/services/search/test/node/fixtures/binary.wuff",
+      "src/vs/workbench/services/search/test/node/fixtures/some_utf16be.css",
+      "src/vs/workbench/services/search/test/node/fixtures/some_utf16le.css",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.cp1252.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.pdf",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.png.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.qwoff.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.shiftjis.1.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.shiftjis.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_gbk.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16be.css",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf16le.css",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/utf16_be_nobom.txt",
+      "src/vs/workbench/services/textfile/test/node/encoding/fixtures/utf16_le_nobom.txt",
+      "src/vs/workbench/test/browser/componentFixtures/chat/media/**"
+    ]
+  },
+  "history": {
+    "since": "8f35cc4768393b25468416829e980d7550619fb1"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2015 - present Microsoft Corporation\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2016 - present Microsoft Corporation\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) Microsoft Corporation. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nApache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Commit history of https://github.com/microsoft/vscode: Copyright (c) 2015 - present Microsoft Corporation, MIT license (LICENSE.txt), https://github.com/microsoft/vscode; Copyright (c) 2016 - present Microsoft Corporation, MIT license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/build/monaco; Copyright (c) Microsoft Corporation. All rights reserved., MIT license (LICENSE.txt), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot; Copyright (c) Microsoft Corporation. All rights reserved., MIT license (LICENSE.txt), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/chat-lib; the authors of microsoft/vscode (extensions/copilot/test/scenarios/test-notebook-tools) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/scenarios/test-notebook-tools; the authors of microsoft/vscode (extensions/copilot/test/scenarios/test-notebooks) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/scenarios/test-notebooks; the authors of microsoft/vscode (extensions/copilot/test/simulation/fixtures/notebook) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/simulation/fixtures/notebook."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".eslint-allowed-bracket-notation-files",
+        ".eslint-allowed-javascript-files",
+        ".eslint-ignore",
+        ".eslint-plugin-local/**",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".lsifrc.json",
+        ".mailmap",
+        ".mcp.json",
+        ".mention-bot",
+        ".npmrc",
+        ".nvmrc",
+        ".vscode/cglicenses.schema.json",
+        ".vscode/extensions/vscode-extras/**",
+        ".vscode/extensions/vscode-pr-pinger/**",
+        ".vscode/extensions/vscode-selfhost-import-aid/**",
+        ".vscode/extensions/vscode-selfhost-test-provider/.vscode/**",
+        ".vscode/extensions/vscode-selfhost-test-provider/package-lock.json",
+        ".vscode/extensions/vscode-selfhost-test-provider/package.json",
+        ".vscode/extensions/vscode-selfhost-test-provider/src/**",
+        ".vscode/extensions/vscode-selfhost-test-provider/tsconfig.json",
+        ".vscode/extensions.json",
+        ".vscode/launch.json",
+        ".vscode/notebooks/**",
+        ".vscode/searches/**",
+        ".vscode/settings.json",
+        ".vscode/shared.code-snippets",
+        ".vscode/tasks.json",
+        ".vscode-test.js",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "README.md",
+        "SECURITY.md",
+        "ThirdPartyNotices.txt",
+        "build/.cachesalt",
+        "build/.gitattributes",
+        "build/.gitignore",
+        "build/.moduleignore",
+        "build/.moduleignore.darwin",
+        "build/.moduleignore.linux",
+        "build/.moduleignore.win32",
+        "build/.npmrc",
+        "build/.webignore",
+        "build/agent-sdk/**",
+        "build/agentHost/**",
+        "build/azure-pipelines/**",
+        "build/builtin/**",
+        "build/checker/**",
+        "build/checksums/**",
+        "build/codex/**",
+        "build/copilot-migrate-pr.ts",
+        "build/darwin/create-dmg.ts",
+        "build/darwin/create-universal-app.ts",
+        "build/darwin/dmg-settings.py.template",
+        "build/darwin/patch-dmg.py",
+        "build/darwin/sign-server.ts",
+        "build/darwin/sign.ts",
+        "build/darwin/verify-macho.ts",
+        "build/dictation-runtime/**",
+        "build/eslint.ts",
+        "build/filters.ts",
+        "build/gulp-eslint.ts",
+        "build/gulpfile.cli.ts",
+        "build/gulpfile.editor.ts",
+        "build/gulpfile.extensions.ts",
+        "build/gulpfile.hygiene.ts",
+        "build/gulpfile.reh.ts",
+        "build/gulpfile.scan.ts",
+        "build/gulpfile.ts",
+        "build/gulpfile.vscode.linux.ts",
+        "build/gulpfile.vscode.ts",
+        "build/gulpfile.vscode.web.ts",
+        "build/gulpfile.vscode.win32.ts",
+        "build/hygiene.ts",
+        "build/lib/apiProposalNames.ts",
+        "build/lib/asar.ts",
+        "build/lib/azureFeed.ts",
+        "build/lib/builtInExtensions.ts",
+        "build/lib/builtInExtensionsCG.ts",
+        "build/lib/checkCyclicDependencies.ts",
+        "build/lib/compilation.ts",
+        "build/lib/copilot.ts",
+        "build/lib/date.ts",
+        "build/lib/dependencies.ts",
+        "build/lib/download.ts",
+        "build/lib/electron.ts",
+        "build/lib/electronVersion.test.ts",
+        "build/lib/electronVersion.ts",
+        "build/lib/esbuild.ts",
+        "build/lib/extensionTarget.ts",
+        "build/lib/extensions.ts",
+        "build/lib/extractExtensionPoints.ts",
+        "build/lib/fetch.ts",
+        "build/lib/formatter.ts",
+        "build/lib/getVersion.ts",
+        "build/lib/git.ts",
+        "build/lib/gulp/**",
+        "build/lib/i18n.resources.json",
+        "build/lib/i18n.ts",
+        "build/lib/inlineMeta.ts",
+        "build/lib/monaco-api.ts",
+        "build/lib/nls-analysis.ts",
+        "build/lib/nls.ts",
+        "build/lib/nlsMessages.ts",
+        "build/lib/nlsMetadata.ts",
+        "build/lib/node.ts",
+        "build/lib/nodeCompileCache.ts",
+        "build/lib/npmPackage.ts",
+        "build/lib/osProxyResolver.ts",
+        "build/lib/pfx.ts",
+        "build/lib/policies/**",
+        "build/lib/preLaunch.ts",
+        "build/lib/propertyInitOrderChecker.ts",
+        "build/lib/reporter.ts",
+        "build/lib/screenshotBlocksCi.ts",
+        "build/lib/screenshotComment.ts",
+        "build/lib/screenshotDiffReport.ts",
+        "build/lib/standalone.ts",
+        "build/lib/stats.ts",
+        "build/lib/stylelint/**",
+        "build/lib/test/**",
+        "build/lib/testAgentHostE2EStartup.test.ts",
+        "build/lib/treeshaking.ts",
+        "build/lib/tsb/**",
+        "build/lib/tsconfigUtils.ts",
+        "build/lib/tsgo.ts",
+        "build/lib/typeScriptLanguageServiceHost.ts",
+        "build/lib/typings/**",
+        "build/lib/util.ts",
+        "build/lib/watch/index.ts",
+        "build/lib/watch/watch-win32.ts",
+        "build/linux/**",
+        "build/loader.min",
+        "build/next/**",
+        "build/npm/**",
+        "build/package-lock.json",
+        "build/package.json",
+        "build/rspack/**",
+        "build/setup-npm-registry.ts",
+        "build/stylelint.ts",
+        "build/tsconfig.json",
+        "build/vite/**",
+        "build/win32/.gitignore",
+        "build/win32/Cargo.lock",
+        "build/win32/Cargo.toml",
+        "build/win32/code.iss",
+        "build/win32/copilot.iss",
+        "build/win32/explorer-dll-fetcher.ts",
+        "build/win32/i18n/**",
+        "cglicenses.json",
+        "cgmanifest.json",
+        "cli/**",
+        "copilot_shim/**",
+        "eslint.config.js",
+        "extensions/.npmrc",
+        "extensions/CONTRIBUTING.md",
+        "extensions/bat/**",
+        "extensions/cgmanifest.json",
+        "extensions/clojure/**",
+        "extensions/coffeescript/**",
+        "extensions/configuration-editing/.npmrc",
+        "extensions/configuration-editing/.vscodeignore",
+        "extensions/configuration-editing/esbuild.browser.mts",
+        "extensions/configuration-editing/esbuild.mts",
+        "extensions/configuration-editing/package-lock.json",
+        "extensions/configuration-editing/package.json",
+        "extensions/configuration-editing/package.nls.json",
+        "extensions/configuration-editing/schemas/**",
+        "extensions/configuration-editing/src/**",
+        "extensions/configuration-editing/tsconfig.browser.json",
+        "extensions/configuration-editing/tsconfig.json",
+        "extensions/cpp/**",
+        "extensions/csharp/**",
+        "extensions/css/**",
+        "extensions/css-language-features/.npmrc",
+        "extensions/css-language-features/.vscode/**",
+        "extensions/css-language-features/.vscodeignore",
+        "extensions/css-language-features/CONTRIBUTING.md",
+        "extensions/css-language-features/README.md",
+        "extensions/css-language-features/client/**",
+        "extensions/css-language-features/esbuild.browser.mts",
+        "extensions/css-language-features/esbuild.mts",
+        "extensions/css-language-features/package-lock.json",
+        "extensions/css-language-features/package.json",
+        "extensions/css-language-features/package.nls.json",
+        "extensions/css-language-features/schemas/**",
+        "extensions/css-language-features/server/.npmrc",
+        "extensions/css-language-features/server/.vscode/**",
+        "extensions/css-language-features/server/package-lock.json",
+        "extensions/css-language-features/server/package.json",
+        "extensions/css-language-features/server/src/**",
+        "extensions/css-language-features/server/test/index.js",
+        "extensions/css-language-features/server/test/linksTestFixtures/.gitignore",
+        "extensions/css-language-features/server/test/pathCompletionFixtures/**",
+        "extensions/css-language-features/server/tsconfig.browser.json",
+        "extensions/css-language-features/server/tsconfig.json",
+        "extensions/dart/**",
+        "extensions/debug-auto-launch/.npmrc",
+        "extensions/debug-auto-launch/.vscode/**",
+        "extensions/debug-auto-launch/.vscodeignore",
+        "extensions/debug-auto-launch/esbuild.mts",
+        "extensions/debug-auto-launch/package-lock.json",
+        "extensions/debug-auto-launch/package.json",
+        "extensions/debug-auto-launch/package.nls.json",
+        "extensions/debug-auto-launch/src/**",
+        "extensions/debug-auto-launch/tsconfig.json",
+        "extensions/debug-server-ready/.npmrc",
+        "extensions/debug-server-ready/.vscode/**",
+        "extensions/debug-server-ready/.vscodeignore",
+        "extensions/debug-server-ready/esbuild.mts",
+        "extensions/debug-server-ready/package-lock.json",
+        "extensions/debug-server-ready/package.json",
+        "extensions/debug-server-ready/package.nls.json",
+        "extensions/debug-server-ready/src/**",
+        "extensions/debug-server-ready/tsconfig.json",
+        "extensions/diff/**",
+        "extensions/docker/**",
+        "extensions/dotenv/**",
+        "extensions/emmet/.npmrc",
+        "extensions/emmet/.vscode/**",
+        "extensions/emmet/.vscodeignore",
+        "extensions/emmet/CONTRIBUTING.md",
+        "extensions/emmet/README.md",
+        "extensions/emmet/cgmanifest.json",
+        "extensions/emmet/esbuild.browser.mts",
+        "extensions/emmet/esbuild.mts",
+        "extensions/emmet/package-lock.json",
+        "extensions/emmet/package.json",
+        "extensions/emmet/package.nls.json",
+        "extensions/emmet/src/**",
+        "extensions/emmet/test-workspace/**",
+        "extensions/emmet/tsconfig.browser.json",
+        "extensions/emmet/tsconfig.json",
+        "extensions/esbuild-common.mts",
+        "extensions/esbuild-extension-common.mts",
+        "extensions/esbuild-webview-common.mts",
+        "extensions/extension-editing/.npmrc",
+        "extensions/extension-editing/.vscodeignore",
+        "extensions/extension-editing/esbuild.browser.mts",
+        "extensions/extension-editing/esbuild.mts",
+        "extensions/extension-editing/package-lock.json",
+        "extensions/extension-editing/package.json",
+        "extensions/extension-editing/package.nls.json",
+        "extensions/extension-editing/src/**",
+        "extensions/extension-editing/tsconfig.browser.json",
+        "extensions/extension-editing/tsconfig.json",
+        "extensions/fsharp/**",
+        "extensions/git/.npmrc",
+        "extensions/git/.vscodeignore",
+        "extensions/git/README.md",
+        "extensions/git/build/**",
+        "extensions/git/esbuild.mts",
+        "extensions/git/package-lock.json",
+        "extensions/git/package.json",
+        "extensions/git/package.nls.json",
+        "extensions/git/resources/emojis.json",
+        "extensions/git/resources/icons/dark/**",
+        "extensions/git/resources/icons/light/**",
+        "extensions/git/src/**",
+        "extensions/git/tsconfig.json",
+        "extensions/git-base/.npmrc",
+        "extensions/git-base/.vscodeignore",
+        "extensions/git-base/README.md",
+        "extensions/git-base/build/**",
+        "extensions/git-base/cgmanifest.json",
+        "extensions/git-base/esbuild.browser.mts",
+        "extensions/git-base/esbuild.mts",
+        "extensions/git-base/languages/**",
+        "extensions/git-base/package-lock.json",
+        "extensions/git-base/package.json",
+        "extensions/git-base/package.nls.json",
+        "extensions/git-base/src/**",
+        "extensions/git-base/syntaxes/**",
+        "extensions/git-base/tsconfig.browser.json",
+        "extensions/git-base/tsconfig.json",
+        "extensions/github/.npmrc",
+        "extensions/github/.vscodeignore",
+        "extensions/github/README.md",
+        "extensions/github/esbuild.mts",
+        "extensions/github/markdown.css",
+        "extensions/github/package-lock.json",
+        "extensions/github/package.json",
+        "extensions/github/package.nls.json",
+        "extensions/github/src/**",
+        "extensions/github/testWorkspace/**",
+        "extensions/github/tsconfig.json",
+        "extensions/github-authentication/.gitignore",
+        "extensions/github-authentication/.npmrc",
+        "extensions/github-authentication/.vscodeignore",
+        "extensions/github-authentication/README.md",
+        "extensions/github-authentication/esbuild.browser.mts",
+        "extensions/github-authentication/esbuild.mts",
+        "extensions/github-authentication/media/auth.css",
+        "extensions/github-authentication/media/code-icon.svg",
+        "extensions/github-authentication/media/index.html",
+        "extensions/github-authentication/package-lock.json",
+        "extensions/github-authentication/package.json",
+        "extensions/github-authentication/package.nls.json",
+        "extensions/github-authentication/src/**",
+        "extensions/github-authentication/tsconfig.browser.json",
+        "extensions/github-authentication/tsconfig.json",
+        "extensions/go/**",
+        "extensions/groovy/**",
+        "extensions/grunt/.npmrc",
+        "extensions/grunt/.vscodeignore",
+        "extensions/grunt/README.md",
+        "extensions/grunt/esbuild.mts",
+        "extensions/grunt/package-lock.json",
+        "extensions/grunt/package.json",
+        "extensions/grunt/package.nls.json",
+        "extensions/grunt/src/**",
+        "extensions/grunt/tsconfig.json",
+        "extensions/gulp/.npmrc",
+        "extensions/gulp/.vscodeignore",
+        "extensions/gulp/README.md",
+        "extensions/gulp/esbuild.mts",
+        "extensions/gulp/package-lock.json",
+        "extensions/gulp/package.json",
+        "extensions/gulp/package.nls.json",
+        "extensions/gulp/src/**",
+        "extensions/gulp/tsconfig.json",
+        "extensions/handlebars/**",
+        "extensions/hlsl/**",
+        "extensions/html/**",
+        "extensions/html-language-features/.npmrc",
+        "extensions/html-language-features/.vscode/**",
+        "extensions/html-language-features/.vscodeignore",
+        "extensions/html-language-features/CONTRIBUTING.md",
+        "extensions/html-language-features/README.md",
+        "extensions/html-language-features/build/**",
+        "extensions/html-language-features/cgmanifest.json",
+        "extensions/html-language-features/client/**",
+        "extensions/html-language-features/esbuild.browser.mts",
+        "extensions/html-language-features/esbuild.mts",
+        "extensions/html-language-features/package-lock.json",
+        "extensions/html-language-features/package.json",
+        "extensions/html-language-features/package.nls.json",
+        "extensions/html-language-features/schemas/**",
+        "extensions/html-language-features/server/**",
+        "extensions/ini/**",
+        "extensions/ipynb/.gitignore",
+        "extensions/ipynb/.npmrc",
+        "extensions/ipynb/.vscode/**",
+        "extensions/ipynb/.vscodeignore",
+        "extensions/ipynb/README.md",
+        "extensions/ipynb/esbuild.browser.mts",
+        "extensions/ipynb/esbuild.mts",
+        "extensions/ipynb/esbuild.notebook.mts",
+        "extensions/ipynb/notebook-src/**",
+        "extensions/ipynb/package-lock.json",
+        "extensions/ipynb/package.json",
+        "extensions/ipynb/package.nls.json",
+        "extensions/ipynb/src/**",
+        "extensions/ipynb/tsconfig.browser.json",
+        "extensions/ipynb/tsconfig.json",
+        "extensions/jake/.npmrc",
+        "extensions/jake/.vscodeignore",
+        "extensions/jake/README.md",
+        "extensions/jake/esbuild.mts",
+        "extensions/jake/package-lock.json",
+        "extensions/jake/package.json",
+        "extensions/jake/package.nls.json",
+        "extensions/jake/src/**",
+        "extensions/jake/tsconfig.json",
+        "extensions/java/**",
+        "extensions/javascript/**",
+        "extensions/json/**",
+        "extensions/json-language-features/.npmrc",
+        "extensions/json-language-features/.vscode/**",
+        "extensions/json-language-features/.vscodeignore",
+        "extensions/json-language-features/CONTRIBUTING.md",
+        "extensions/json-language-features/README.md",
+        "extensions/json-language-features/client/**",
+        "extensions/json-language-features/esbuild.browser.mts",
+        "extensions/json-language-features/esbuild.mts",
+        "extensions/json-language-features/package-lock.json",
+        "extensions/json-language-features/package.json",
+        "extensions/json-language-features/package.nls.json",
+        "extensions/json-language-features/server/**",
+        "extensions/julia/**",
+        "extensions/latex/**",
+        "extensions/less/**",
+        "extensions/log/**",
+        "extensions/lua/**",
+        "extensions/make/**",
+        "extensions/markdown-basics/**",
+        "extensions/markdown-language-features/.gitignore",
+        "extensions/markdown-language-features/.npmrc",
+        "extensions/markdown-language-features/.vscodeignore",
+        "extensions/markdown-language-features/CONTRIBUTING.md",
+        "extensions/markdown-language-features/README.md",
+        "extensions/markdown-language-features/esbuild.browser.mts",
+        "extensions/markdown-language-features/esbuild.markdownEditor.mts",
+        "extensions/markdown-language-features/esbuild.mts",
+        "extensions/markdown-language-features/esbuild.notebook.mts",
+        "extensions/markdown-language-features/esbuild.webview.mts",
+        "extensions/markdown-language-features/markdown-editor-src/**",
+        "extensions/markdown-language-features/media/**",
+        "extensions/markdown-language-features/notebook/**",
+        "extensions/markdown-language-features/package-lock.json",
+        "extensions/markdown-language-features/package.json",
+        "extensions/markdown-language-features/package.nls.json",
+        "extensions/markdown-language-features/preview-src/**",
+        "extensions/markdown-language-features/schemas/**",
+        "extensions/markdown-language-features/scripts/**",
+        "extensions/markdown-language-features/src/**",
+        "extensions/markdown-language-features/test-workspace/**",
+        "extensions/markdown-language-features/tsconfig.browser.json",
+        "extensions/markdown-language-features/tsconfig.json",
+        "extensions/markdown-language-features/tsconfig.markdownEditor.json",
+        "extensions/markdown-language-features/types/**",
+        "extensions/markdown-math/.gitignore",
+        "extensions/markdown-math/.npmrc",
+        "extensions/markdown-math/.vscodeignore",
+        "extensions/markdown-math/README.md",
+        "extensions/markdown-math/cgmanifest.json",
+        "extensions/markdown-math/esbuild.browser.mts",
+        "extensions/markdown-math/esbuild.mts",
+        "extensions/markdown-math/esbuild.notebook.mts",
+        "extensions/markdown-math/notebook/**",
+        "extensions/markdown-math/package-lock.json",
+        "extensions/markdown-math/package.json",
+        "extensions/markdown-math/package.nls.json",
+        "extensions/markdown-math/preview-styles/**",
+        "extensions/markdown-math/src/**",
+        "extensions/markdown-math/syntaxes/**",
+        "extensions/markdown-math/tsconfig.browser.json",
+        "extensions/markdown-math/tsconfig.json",
+        "extensions/media-preview/.npmrc",
+        "extensions/media-preview/.vscodeignore",
+        "extensions/media-preview/README.md",
+        "extensions/media-preview/esbuild.browser.mts",
+        "extensions/media-preview/esbuild.mts",
+        "extensions/media-preview/media/**",
+        "extensions/media-preview/package-lock.json",
+        "extensions/media-preview/package.json",
+        "extensions/media-preview/package.nls.json",
+        "extensions/media-preview/src/**",
+        "extensions/media-preview/tsconfig.browser.json",
+        "extensions/media-preview/tsconfig.json",
+        "extensions/merge-conflict/.npmrc",
+        "extensions/merge-conflict/.vscodeignore",
+        "extensions/merge-conflict/README.md",
+        "extensions/merge-conflict/esbuild.browser.mts",
+        "extensions/merge-conflict/esbuild.mts",
+        "extensions/merge-conflict/package-lock.json",
+        "extensions/merge-conflict/package.json",
+        "extensions/merge-conflict/package.nls.json",
+        "extensions/merge-conflict/src/**",
+        "extensions/merge-conflict/tsconfig.browser.json",
+        "extensions/merge-conflict/tsconfig.json",
+        "extensions/mermaid-markdown-features/**",
+        "extensions/microsoft-authentication/.npmrc",
+        "extensions/microsoft-authentication/.vscodeignore",
+        "extensions/microsoft-authentication/README.md",
+        "extensions/microsoft-authentication/esbuild.mts",
+        "extensions/microsoft-authentication/media/auth.css",
+        "extensions/microsoft-authentication/media/index.html",
+        "extensions/microsoft-authentication/package-lock.json",
+        "extensions/microsoft-authentication/package.json",
+        "extensions/microsoft-authentication/package.nls.json",
+        "extensions/microsoft-authentication/packageMocks/**",
+        "extensions/microsoft-authentication/src/**",
+        "extensions/microsoft-authentication/tsconfig.json",
+        "extensions/notebook-renderers/.gitignore",
+        "extensions/notebook-renderers/.npmrc",
+        "extensions/notebook-renderers/.vscodeignore",
+        "extensions/notebook-renderers/README.md",
+        "extensions/notebook-renderers/esbuild.notebook.mts",
+        "extensions/notebook-renderers/package-lock.json",
+        "extensions/notebook-renderers/package.json",
+        "extensions/notebook-renderers/package.nls.json",
+        "extensions/notebook-renderers/src/**",
+        "extensions/notebook-renderers/tsconfig.json",
+        "extensions/npm/.npmrc",
+        "extensions/npm/.vscode/**",
+        "extensions/npm/.vscodeignore",
+        "extensions/npm/README.md",
+        "extensions/npm/esbuild.browser.mts",
+        "extensions/npm/esbuild.mts",
+        "extensions/npm/images/code.svg",
+        "extensions/npm/package-lock.json",
+        "extensions/npm/package.json",
+        "extensions/npm/package.nls.json",
+        "extensions/npm/src/**",
+        "extensions/npm/tsconfig.browser.json",
+        "extensions/npm/tsconfig.json",
+        "extensions/objective-c/**",
+        "extensions/package-lock.json",
+        "extensions/package.json",
+        "extensions/perl/**",
+        "extensions/php/**",
+        "extensions/php-language-features/.npmrc",
+        "extensions/php-language-features/.vscodeignore",
+        "extensions/php-language-features/README.md",
+        "extensions/php-language-features/esbuild.mts",
+        "extensions/php-language-features/package-lock.json",
+        "extensions/php-language-features/package.json",
+        "extensions/php-language-features/package.nls.json",
+        "extensions/php-language-features/src/**",
+        "extensions/php-language-features/tsconfig.json",
+        "extensions/postinstall.mjs",
+        "extensions/powershell/**",
+        "extensions/prompt-basics/**",
+        "extensions/pug/**",
+        "extensions/python/**",
+        "extensions/r/**",
+        "extensions/razor/**",
+        "extensions/references-view/.npmrc",
+        "extensions/references-view/.vscodeignore",
+        "extensions/references-view/README.md",
+        "extensions/references-view/esbuild.browser.mts",
+        "extensions/references-view/esbuild.mts",
+        "extensions/references-view/package-lock.json",
+        "extensions/references-view/package.json",
+        "extensions/references-view/package.nls.json",
+        "extensions/references-view/src/**",
+        "extensions/references-view/tsconfig.browser.json",
+        "extensions/references-view/tsconfig.json",
+        "extensions/restructuredtext/**",
+        "extensions/ruby/**",
+        "extensions/rust/**",
+        "extensions/scss/**",
+        "extensions/search-result/.vscodeignore",
+        "extensions/search-result/README.md",
+        "extensions/search-result/esbuild.browser.mts",
+        "extensions/search-result/esbuild.mts",
+        "extensions/search-result/package-lock.json",
+        "extensions/search-result/package.json",
+        "extensions/search-result/package.nls.json",
+        "extensions/search-result/src/**",
+        "extensions/search-result/syntaxes/**",
+        "extensions/search-result/tsconfig.browser.json",
+        "extensions/search-result/tsconfig.json",
+        "extensions/shaderlab/**",
+        "extensions/shellscript/**",
+        "extensions/simple-browser/.gitignore",
+        "extensions/simple-browser/.npmrc",
+        "extensions/simple-browser/.vscodeignore",
+        "extensions/simple-browser/README.md",
+        "extensions/simple-browser/esbuild.browser.mts",
+        "extensions/simple-browser/esbuild.mts",
+        "extensions/simple-browser/esbuild.webview.mts",
+        "extensions/simple-browser/media/main.css",
+        "extensions/simple-browser/media/preview-dark.svg",
+        "extensions/simple-browser/media/preview-light.svg",
+        "extensions/simple-browser/package-lock.json",
+        "extensions/simple-browser/package.json",
+        "extensions/simple-browser/package.nls.json",
+        "extensions/simple-browser/preview-src/**",
+        "extensions/simple-browser/src/**",
+        "extensions/simple-browser/tsconfig.browser.json",
+        "extensions/simple-browser/tsconfig.json",
+        "extensions/sql/**",
+        "extensions/swift/**",
+        "extensions/terminal-suggest/.gitignore",
+        "extensions/terminal-suggest/.npmrc",
+        "extensions/terminal-suggest/.vscode/**",
+        "extensions/terminal-suggest/.vscodeignore",
+        "extensions/terminal-suggest/README.md",
+        "extensions/terminal-suggest/ThirdPartyNotices.txt",
+        "extensions/terminal-suggest/cgmanifest.json",
+        "extensions/terminal-suggest/esbuild.mts",
+        "extensions/terminal-suggest/fixtures/**",
+        "extensions/terminal-suggest/package-lock.json",
+        "extensions/terminal-suggest/package.json",
+        "extensions/terminal-suggest/package.nls.json",
+        "extensions/terminal-suggest/scripts/**",
+        "extensions/terminal-suggest/src/**",
+        "extensions/terminal-suggest/testWorkspace/**",
+        "extensions/terminal-suggest/tsconfig.json",
+        "extensions/theme-abyss/**",
+        "extensions/theme-defaults/**",
+        "extensions/theme-kimbie-dark/**",
+        "extensions/theme-modern-icons/README.md",
+        "extensions/theme-modern-icons/fileicons/vscode-modern-icons-icon-theme.json",
+        "extensions/theme-modern-icons/package.json",
+        "extensions/theme-modern-icons/package.nls.json",
+        "extensions/theme-monokai/**",
+        "extensions/theme-monokai-dimmed/**",
+        "extensions/theme-quietlight/**",
+        "extensions/theme-red/**",
+        "extensions/theme-seti/.vscodeignore",
+        "extensions/theme-seti/CONTRIBUTING.md",
+        "extensions/theme-seti/README.md",
+        "extensions/theme-seti/ThirdPartyNotices.txt",
+        "extensions/theme-seti/build/**",
+        "extensions/theme-seti/cgmanifest.json",
+        "extensions/theme-seti/icons/preview.html",
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "extensions/theme-seti/package.json",
+        "extensions/theme-seti/package.nls.json",
+        "extensions/theme-solarized-dark/**",
+        "extensions/theme-solarized-light/**",
+        "extensions/theme-tomorrow-night-blue/**",
+        "extensions/tsconfig.base.json",
+        "extensions/tunnel-forwarding/.npmrc",
+        "extensions/tunnel-forwarding/.vscode/**",
+        "extensions/tunnel-forwarding/.vscodeignore",
+        "extensions/tunnel-forwarding/esbuild.mts",
+        "extensions/tunnel-forwarding/package-lock.json",
+        "extensions/tunnel-forwarding/package.json",
+        "extensions/tunnel-forwarding/package.nls.json",
+        "extensions/tunnel-forwarding/src/**",
+        "extensions/tunnel-forwarding/tsconfig.json",
+        "extensions/types/**",
+        "extensions/typescript-basics/**",
+        "extensions/typescript-language-features/.npmrc",
+        "extensions/typescript-language-features/.vscodeignore",
+        "extensions/typescript-language-features/README.md",
+        "extensions/typescript-language-features/cgmanifest.json",
+        "extensions/typescript-language-features/esbuild.browser.mts",
+        "extensions/typescript-language-features/esbuild.mts",
+        "extensions/typescript-language-features/package-lock.json",
+        "extensions/typescript-language-features/package.json",
+        "extensions/typescript-language-features/package.nls.json",
+        "extensions/typescript-language-features/resources/**",
+        "extensions/typescript-language-features/schemas/**",
+        "extensions/typescript-language-features/src/**",
+        "extensions/typescript-language-features/test-workspace/**",
+        "extensions/typescript-language-features/tsconfig.browser.json",
+        "extensions/typescript-language-features/tsconfig.json",
+        "extensions/typescript-language-features/web/**",
+        "extensions/vb/**",
+        "extensions/vscode-api-tests/.gitignore",
+        "extensions/vscode-api-tests/.npmrc",
+        "extensions/vscode-api-tests/.vscode/**",
+        "extensions/vscode-api-tests/.vscodeignore",
+        "extensions/vscode-api-tests/package-lock.json",
+        "extensions/vscode-api-tests/package.json",
+        "extensions/vscode-api-tests/src/**",
+        "extensions/vscode-api-tests/testWorkspace/.vscode/**",
+        "extensions/vscode-api-tests/testWorkspace/10linefile.ts",
+        "extensions/vscode-api-tests/testWorkspace/30linefile.ts",
+        "extensions/vscode-api-tests/testWorkspace/bower.json",
+        "extensions/vscode-api-tests/testWorkspace/debug.js",
+        "extensions/vscode-api-tests/testWorkspace/far.js",
+        "extensions/vscode-api-tests/testWorkspace/files-exclude/**",
+        "extensions/vscode-api-tests/testWorkspace/index.html",
+        "extensions/vscode-api-tests/testWorkspace/lorem.txt",
+        "extensions/vscode-api-tests/testWorkspace/myFile.ts",
+        "extensions/vscode-api-tests/testWorkspace/search-exclude/**",
+        "extensions/vscode-api-tests/testWorkspace/simple.txt",
+        "extensions/vscode-api-tests/testWorkspace/worker.js",
+        "extensions/vscode-api-tests/testWorkspace2/**",
+        "extensions/vscode-api-tests/testworkspace.code-workspace",
+        "extensions/vscode-api-tests/tsconfig.json",
+        "extensions/vscode-colorize-perf-tests/.gitignore",
+        "extensions/vscode-colorize-perf-tests/.npmrc",
+        "extensions/vscode-colorize-perf-tests/.vscode/**",
+        "extensions/vscode-colorize-perf-tests/package-lock.json",
+        "extensions/vscode-colorize-perf-tests/package.json",
+        "extensions/vscode-colorize-perf-tests/src/**",
+        "extensions/vscode-colorize-perf-tests/test/**",
+        "extensions/vscode-colorize-perf-tests/tsconfig.json",
+        "extensions/vscode-colorize-tests/.gitignore",
+        "extensions/vscode-colorize-tests/.npmrc",
+        "extensions/vscode-colorize-tests/.vscode/**",
+        "extensions/vscode-colorize-tests/package-lock.json",
+        "extensions/vscode-colorize-tests/package.json",
+        "extensions/vscode-colorize-tests/producticons/index.html",
+        "extensions/vscode-colorize-tests/producticons/mit_license.txt",
+        "extensions/vscode-colorize-tests/producticons/test-product-icon-theme.json",
+        "extensions/vscode-colorize-tests/src/**",
+        "extensions/vscode-colorize-tests/test/**",
+        "extensions/vscode-colorize-tests/tsconfig.json",
+        "extensions/vscode-test-resolver/.gitignore",
+        "extensions/vscode-test-resolver/.npmrc",
+        "extensions/vscode-test-resolver/.vscode/**",
+        "extensions/vscode-test-resolver/.vscodeignore",
+        "extensions/vscode-test-resolver/esbuild.browser.mts",
+        "extensions/vscode-test-resolver/esbuild.mts",
+        "extensions/vscode-test-resolver/package-lock.json",
+        "extensions/vscode-test-resolver/package.json",
+        "extensions/vscode-test-resolver/scripts/**",
+        "extensions/vscode-test-resolver/src/**",
+        "extensions/vscode-test-resolver/tsconfig.browser.json",
+        "extensions/vscode-test-resolver/tsconfig.json",
+        "extensions/xml/**",
+        "extensions/yaml/**",
+        "gulpfile.mjs",
+        "package-lock.json",
+        "package.json",
+        "product.json",
+        "remote/**",
+        "resources/completions/**",
+        "resources/darwin/bin/**",
+        "resources/linux/bin/**",
+        "resources/linux/code-url-handler.desktop",
+        "resources/linux/code-workspace.xml",
+        "resources/linux/code.appdata.xml",
+        "resources/linux/code.desktop",
+        "resources/linux/debian/**",
+        "resources/linux/rpm/**",
+        "resources/linux/snap/**",
+        "resources/server/bin/**",
+        "resources/server/bin-dev/**",
+        "resources/server/manifest.json",
+        "resources/win32/VisualElementsManifest.xml",
+        "resources/win32/appx/**",
+        "resources/win32/bin/**",
+        "resources/win32/versioned/**",
+        "scripts/**",
+        "src/bootstrap-cli.ts",
+        "src/bootstrap-esm.ts",
+        "src/bootstrap-fork.ts",
+        "src/bootstrap-import.ts",
+        "src/bootstrap-meta.ts",
+        "src/bootstrap-node.ts",
+        "src/bootstrap-server.ts",
+        "src/cli.ts",
+        "src/main.ts",
+        "src/mainImpl.ts",
+        "src/server-cli.ts",
+        "src/server-main.ts",
+        "src/tsconfig.base.json",
+        "src/tsconfig.defineClassFields.json",
+        "src/tsconfig.json",
+        "src/tsconfig.monaco.json",
+        "src/tsconfig.tsec.json",
+        "src/tsconfig.vscode-dts.json",
+        "src/tsconfig.vscode-proposed-dts.json",
+        "src/tsec.exemptions.json",
+        "src/typings/**",
+        "src/vs/amdX.ts",
+        "src/vs/base/browser/**",
+        "src/vs/base/common/**",
+        "src/vs/base/node/**",
+        "src/vs/base/parts/**",
+        "src/vs/base/test/browser/**",
+        "src/vs/base/test/common/**",
+        "src/vs/base/test/node/__snapshots__/**",
+        "src/vs/base/test/node/crypto.test.ts",
+        "src/vs/base/test/node/id.test.ts",
+        "src/vs/base/test/node/libc.test.ts",
+        "src/vs/base/test/node/nls.test.ts",
+        "src/vs/base/test/node/nodeCompileCache.test.ts",
+        "src/vs/base/test/node/nodeStreams.test.ts",
+        "src/vs/base/test/node/pfs/**",
+        "src/vs/base/test/node/port.test.ts",
+        "src/vs/base/test/node/powershell.test.ts",
+        "src/vs/base/test/node/processes/**",
+        "src/vs/base/test/node/ps.test.ts",
+        "src/vs/base/test/node/snapshot.test.ts",
+        "src/vs/base/test/node/testUtils.ts",
+        "src/vs/base/test/node/unc.test.ts",
+        "src/vs/base/test/node/uri.perf.data.txt",
+        "src/vs/base/test/node/uri.perf.test.ts",
+        "src/vs/base/test/node/uri.test.data.txt",
+        "src/vs/base/test/node/zip/zip.test.ts",
+        "src/vs/code/browser/**",
+        "src/vs/code/electron-browser/**",
+        "src/vs/code/electron-main/**",
+        "src/vs/code/electron-utility/sharedProcess/sharedProcessMain.ts",
+        "src/vs/code/node/**",
+        "src/vs/code/test/electron-browser/**",
+        "src/vs/code/test/node/**",
+        "src/vs/editor/browser/**",
+        "src/vs/editor/common/commands/**",
+        "src/vs/editor/common/config/**",
+        "src/vs/editor/common/coordinatesConverter.ts",
+        "src/vs/editor/common/core/2d/**",
+        "src/vs/editor/common/core/characterClassifier.ts",
+        "src/vs/editor/common/core/cursorColumns.ts",
+        "src/vs/editor/common/core/editOperation.ts",
+        "src/vs/editor/common/core/editorColorRegistry.ts",
+        "src/vs/editor/common/core/edits/arrayEdit.ts",
+        "src/vs/editor/common/core/edits/edit.ts",
+        "src/vs/editor/common/core/edits/lengthEdit.ts",
+        "src/vs/editor/common/core/edits/lineEdit.ts",
+        "src/vs/editor/common/core/edits/stringEdit.ts",
+        "src/vs/editor/common/core/edits/textEdit.ts",
+        "src/vs/editor/common/core/misc/**",
+        "src/vs/editor/common/core/position.ts",
+        "src/vs/editor/common/core/range.ts",
+        "src/vs/editor/common/core/ranges/**",
+        "src/vs/editor/common/core/selection.ts",
+        "src/vs/editor/common/core/stringBuilder.ts",
+        "src/vs/editor/common/core/text/**",
+        "src/vs/editor/common/core/textChange.ts",
+        "src/vs/editor/common/core/wordCharacterClassifier.ts",
+        "src/vs/editor/common/core/wordHelper.ts",
+        "src/vs/editor/common/cursor/**",
+        "src/vs/editor/common/cursorCommon.ts",
+        "src/vs/editor/common/cursorEvents.ts",
+        "src/vs/editor/common/diff/**",
+        "src/vs/editor/common/editorAction.ts",
+        "src/vs/editor/common/editorCommon.ts",
+        "src/vs/editor/common/editorContextKeys.ts",
+        "src/vs/editor/common/editorFeatures.ts",
+        "src/vs/editor/common/editorTheme.ts",
+        "src/vs/editor/common/encodedTokenAttributes.ts",
+        "src/vs/editor/common/inputMode.ts",
+        "src/vs/editor/common/languageFeatureRegistry.ts",
+        "src/vs/editor/common/languageSelector.ts",
+        "src/vs/editor/common/languages/**",
+        "src/vs/editor/common/languages.ts",
+        "src/vs/editor/common/model/**",
+        "src/vs/editor/common/model.ts",
+        "src/vs/editor/common/modelLineProjectionData.ts",
+        "src/vs/editor/common/multiDiffEditor.ts",
+        "src/vs/editor/common/services/**",
+        "src/vs/editor/common/standalone/**",
+        "src/vs/editor/common/standaloneStrings.ts",
+        "src/vs/editor/common/textModelBracketPairs.ts",
+        "src/vs/editor/common/textModelEditSource.ts",
+        "src/vs/editor/common/textModelEvents.ts",
+        "src/vs/editor/common/textModelGuides.ts",
+        "src/vs/editor/common/tokenizationRegistry.ts",
+        "src/vs/editor/common/tokenizationTextModelPart.ts",
+        "src/vs/editor/common/tokens/**",
+        "src/vs/editor/common/viewEventHandler.ts",
+        "src/vs/editor/common/viewEvents.ts",
+        "src/vs/editor/common/viewLayout/**",
+        "src/vs/editor/common/viewModel/**",
+        "src/vs/editor/common/viewModel.ts",
+        "src/vs/editor/common/viewModelEventDispatcher.ts",
+        "src/vs/editor/editor.all.ts",
+        "src/vs/editor/editor.api.ts",
+        "src/vs/editor/editor.main.ts",
+        "src/vs/editor/editor.worker.start.ts",
+        "src/vs/editor/standalone/**",
+        "src/vs/editor/test/**",
+        "src/vs/monaco.d.ts",
+        "src/vs/nls.ts",
+        "src/vs/platform/accessibility/**",
+        "src/vs/platform/accessibilitySignal/browser/accessibilitySignalService.ts",
+        "src/vs/platform/accessibilitySignal/browser/progressAccessibilitySignalScheduler.ts",
+        "src/vs/platform/action/**",
+        "src/vs/platform/actionWidget/**",
+        "src/vs/platform/actions/**",
+        "src/vs/platform/agentHost/**",
+        "src/vs/platform/agentPlugins/**",
+        "src/vs/platform/assignment/**",
+        "src/vs/platform/auxiliaryWindow/**",
+        "src/vs/platform/backup/**",
+        "src/vs/platform/browserView/**",
+        "src/vs/platform/chat/**",
+        "src/vs/platform/checksum/**",
+        "src/vs/platform/clipboard/**",
+        "src/vs/platform/commands/**",
+        "src/vs/platform/configuration/**",
+        "src/vs/platform/contextkey/**",
+        "src/vs/platform/contextview/**",
+        "src/vs/platform/copilotConnectors/**",
+        "src/vs/platform/cssDev/**",
+        "src/vs/platform/customizationMarketplace/**",
+        "src/vs/platform/dataChannel/**",
+        "src/vs/platform/debug/**",
+        "src/vs/platform/defaultAccount/**",
+        "src/vs/platform/diagnostics/**",
+        "src/vs/platform/dialogs/**",
+        "src/vs/platform/dnd/**",
+        "src/vs/platform/domWidget/**",
+        "src/vs/platform/download/**",
+        "src/vs/platform/editor/**",
+        "src/vs/platform/encryption/**",
+        "src/vs/platform/endpoint/**",
+        "src/vs/platform/environment/**",
+        "src/vs/platform/extensionManagement/**",
+        "src/vs/platform/extensionRecommendations/**",
+        "src/vs/platform/extensionResourceLoader/**",
+        "src/vs/platform/extensions/**",
+        "src/vs/platform/externalServices/**",
+        "src/vs/platform/externalTerminal/**",
+        "src/vs/platform/files/browser/**",
+        "src/vs/platform/files/common/**",
+        "src/vs/platform/files/electron-main/**",
+        "src/vs/platform/files/node/**",
+        "src/vs/platform/files/test/browser/**",
+        "src/vs/platform/files/test/common/**",
+        "src/vs/platform/files/test/node/diskFileService.integrationTest.ts",
+        "src/vs/platform/files/test/node/diskFileSystemProvider.test.ts",
+        "src/vs/platform/files/test/node/fixtures/executable/**",
+        "src/vs/platform/files/test/node/fixtures/readNamedPipe.ts",
+        "src/vs/platform/files/test/node/fixtures/resolver/**",
+        "src/vs/platform/files/test/node/fixtures/service/deep/**",
+        "src/vs/platform/files/test/node/fixtures/service/index.html",
+        "src/vs/platform/files/test/node/fixtures/service/lorem.txt",
+        "src/vs/platform/files/test/node/fixtures/service/small.txt",
+        "src/vs/platform/files/test/node/fixtures/service/small_umlaut.txt",
+        "src/vs/platform/files/test/node/fixtures/service/some_utf8_bom.txt",
+        "src/vs/platform/files/test/node/nodejsWatcher.test.ts",
+        "src/vs/platform/files/test/node/parcelWatcher.test.ts",
+        "src/vs/platform/git/**",
+        "src/vs/platform/github/**",
+        "src/vs/platform/globalKeybindings/**",
+        "src/vs/platform/gpu/**",
+        "src/vs/platform/history/**",
+        "src/vs/platform/hover/**",
+        "src/vs/platform/imageResize/**",
+        "src/vs/platform/instantiation/**",
+        "src/vs/platform/ipc/**",
+        "src/vs/platform/jsonschemas/**",
+        "src/vs/platform/keybinding/**",
+        "src/vs/platform/keyboardLayout/**",
+        "src/vs/platform/label/**",
+        "src/vs/platform/languagePacks/**",
+        "src/vs/platform/launch/**",
+        "src/vs/platform/layout/**",
+        "src/vs/platform/lifecycle/**",
+        "src/vs/platform/list/**",
+        "src/vs/platform/localTranscription/**",
+        "src/vs/platform/log/**",
+        "src/vs/platform/markdown/**",
+        "src/vs/platform/markers/**",
+        "src/vs/platform/mcp/**",
+        "src/vs/platform/menubar/**",
+        "src/vs/platform/meteredConnection/**",
+        "src/vs/platform/native/**",
+        "src/vs/platform/networkFilter/**",
+        "src/vs/platform/notification/**",
+        "src/vs/platform/observable/**",
+        "src/vs/platform/onboarding/**",
+        "src/vs/platform/opener/**",
+        "src/vs/platform/otel/**",
+        "src/vs/platform/path/**",
+        "src/vs/platform/policy/**",
+        "src/vs/platform/process/**",
+        "src/vs/platform/product/**",
+        "src/vs/platform/profiling/**",
+        "src/vs/platform/progress/**",
+        "src/vs/platform/protocol/**",
+        "src/vs/platform/quickinput/**",
+        "src/vs/platform/registry/**",
+        "src/vs/platform/remote/**",
+        "src/vs/platform/remoteTunnel/**",
+        "src/vs/platform/request/**",
+        "src/vs/platform/sandbox/**",
+        "src/vs/platform/secrets/**",
+        "src/vs/platform/sharedProcess/**",
+        "src/vs/platform/shell/**",
+        "src/vs/platform/sign/**",
+        "src/vs/platform/state/**",
+        "src/vs/platform/storage/**",
+        "src/vs/platform/telemetry/**",
+        "src/vs/platform/terminal/**",
+        "src/vs/platform/test/**",
+        "src/vs/platform/theme/**",
+        "src/vs/platform/tunnel/**",
+        "src/vs/platform/undoRedo/**",
+        "src/vs/platform/update/**",
+        "src/vs/platform/uriIdentity/**",
+        "src/vs/platform/url/**",
+        "src/vs/platform/userData/**",
+        "src/vs/platform/userDataProfile/**",
+        "src/vs/platform/userDataSync/**",
+        "src/vs/platform/userInteraction/**",
+        "src/vs/platform/utilityProcess/**",
+        "src/vs/platform/webContentExtractor/**",
+        "src/vs/platform/webWorker/**",
+        "src/vs/platform/webview/**",
+        "src/vs/platform/window/**",
+        "src/vs/platform/windows/**",
+        "src/vs/platform/workspace/**",
+        "src/vs/platform/workspaces/**",
+        "src/vs/server/**",
+        "src/vs/sessions/AI_CUSTOMIZATIONS.md",
+        "src/vs/sessions/AUTOMATIONS.md",
+        "src/vs/sessions/DESKTOP.md",
+        "src/vs/sessions/LAYERS.md",
+        "src/vs/sessions/LAYOUT.md",
+        "src/vs/sessions/LAYOUT_CONTROLLER.md",
+        "src/vs/sessions/MOBILE.md",
+        "src/vs/sessions/README.md",
+        "src/vs/sessions/SESSIONS.md",
+        "src/vs/sessions/SESSIONS_LIST.md",
+        "src/vs/sessions/SESSION_COMPARISONS.md",
+        "src/vs/sessions/SYSTEM_WIDE_KEYBINDING.md",
+        "src/vs/sessions/browser/**",
+        "src/vs/sessions/common/**",
+        "src/vs/sessions/copilot-customizations-spec.md",
+        "src/vs/sessions/electron-browser/**",
+        "src/vs/sessions/services/**",
+        "src/vs/sessions/sessions.common.main.ts",
+        "src/vs/sessions/sessions.desktop.main.ts",
+        "src/vs/sessions/sessions.web.main.internal.ts",
+        "src/vs/sessions/sessions.web.main.ts",
+        "src/vs/sessions/skills/**",
+        "src/vs/sessions/test/**",
+        "src/vs/workbench/api/**",
+        "src/vs/workbench/browser/actions/**",
+        "src/vs/workbench/browser/animatedCounterWidget.ts",
+        "src/vs/workbench/browser/changesStatsWidget.ts",
+        "src/vs/workbench/browser/chatChangesPill.ts",
+        "src/vs/workbench/browser/chatDropdownPill.ts",
+        "src/vs/workbench/browser/chatImagePreview.ts",
+        "src/vs/workbench/browser/chatPillHover.ts",
+        "src/vs/workbench/browser/chatPills.ts",
+        "src/vs/workbench/browser/chatResourcePill.ts",
+        "src/vs/workbench/browser/codeeditor.ts",
+        "src/vs/workbench/browser/composite.ts",
+        "src/vs/workbench/browser/contextkeys.ts",
+        "src/vs/workbench/browser/dnd.ts",
+        "src/vs/workbench/browser/editor.ts",
+        "src/vs/workbench/browser/labels.ts",
+        "src/vs/workbench/browser/layout.ts",
+        "src/vs/workbench/browser/media/**",
+        "src/vs/workbench/browser/panecomposite.ts",
+        "src/vs/workbench/browser/part.ts",
+        "src/vs/workbench/browser/parts/activitybar/**",
+        "src/vs/workbench/browser/parts/auxiliarybar/**",
+        "src/vs/workbench/browser/parts/banner/**",
+        "src/vs/workbench/browser/parts/compositeBar.ts",
+        "src/vs/workbench/browser/parts/compositeBarActions.ts",
+        "src/vs/workbench/browser/parts/compositePart.ts",
+        "src/vs/workbench/browser/parts/dialogs/**",
+        "src/vs/workbench/browser/parts/editor/auxiliaryEditorPart.ts",
+        "src/vs/workbench/browser/parts/editor/binaryDiffEditor.ts",
+        "src/vs/workbench/browser/parts/editor/binaryEditor.ts",
+        "src/vs/workbench/browser/parts/editor/breadcrumbs.ts",
+        "src/vs/workbench/browser/parts/editor/breadcrumbsControl.ts",
+        "src/vs/workbench/browser/parts/editor/breadcrumbsModel.ts",
+        "src/vs/workbench/browser/parts/editor/breadcrumbsPicker.ts",
+        "src/vs/workbench/browser/parts/editor/connectedTabClipping.ts",
+        "src/vs/workbench/browser/parts/editor/diffEditor.workbench.contribution.ts",
+        "src/vs/workbench/browser/parts/editor/diffEditorCommands.ts",
+        "src/vs/workbench/browser/parts/editor/diffEditorCommandsService.ts",
+        "src/vs/workbench/browser/parts/editor/editor.contribution.ts",
+        "src/vs/workbench/browser/parts/editor/editor.ts",
+        "src/vs/workbench/browser/parts/editor/editorActions.ts",
+        "src/vs/workbench/browser/parts/editor/editorAddTabControl.ts",
+        "src/vs/workbench/browser/parts/editor/editorAutoSave.ts",
+        "src/vs/workbench/browser/parts/editor/editorCommands.ts",
+        "src/vs/workbench/browser/parts/editor/editorCommandsContext.ts",
+        "src/vs/workbench/browser/parts/editor/editorConfiguration.ts",
+        "src/vs/workbench/browser/parts/editor/editorDropTarget.ts",
+        "src/vs/workbench/browser/parts/editor/editorGroupView.ts",
+        "src/vs/workbench/browser/parts/editor/editorGroupWatermark.ts",
+        "src/vs/workbench/browser/parts/editor/editorHeaderControl.ts",
+        "src/vs/workbench/browser/parts/editor/editorPane.ts",
+        "src/vs/workbench/browser/parts/editor/editorPanes.ts",
+        "src/vs/workbench/browser/parts/editor/editorPart.ts",
+        "src/vs/workbench/browser/parts/editor/editorParts.ts",
+        "src/vs/workbench/browser/parts/editor/editorPlaceholder.ts",
+        "src/vs/workbench/browser/parts/editor/editorQuickAccess.ts",
+        "src/vs/workbench/browser/parts/editor/editorStatus.ts",
+        "src/vs/workbench/browser/parts/editor/editorTabsControl.ts",
+        "src/vs/workbench/browser/parts/editor/editorTitleControl.ts",
+        "src/vs/workbench/browser/parts/editor/editorTypePicker.ts",
+        "src/vs/workbench/browser/parts/editor/editorWithViewState.ts",
+        "src/vs/workbench/browser/parts/editor/editorsObserver.ts",
+        "src/vs/workbench/browser/parts/editor/media/breadcrumbscontrol.css",
+        "src/vs/workbench/browser/parts/editor/media/editordroptarget.css",
+        "src/vs/workbench/browser/parts/editor/media/editorgroupview.css",
+        "src/vs/workbench/browser/parts/editor/media/editorplaceholder.css",
+        "src/vs/workbench/browser/parts/editor/media/editorquickaccess.css",
+        "src/vs/workbench/browser/parts/editor/media/editorstatus.css",
+        "src/vs/workbench/browser/parts/editor/media/editortabscontrol.css",
+        "src/vs/workbench/browser/parts/editor/media/editortitlecontrol.css",
+        "src/vs/workbench/browser/parts/editor/media/letterpress-dark.svg",
+        "src/vs/workbench/browser/parts/editor/media/letterpress-hcDark.svg",
+        "src/vs/workbench/browser/parts/editor/media/letterpress-hcLight.svg",
+        "src/vs/workbench/browser/parts/editor/media/letterpress-light.svg",
+        "src/vs/workbench/browser/parts/editor/media/modalEditorPart.css",
+        "src/vs/workbench/browser/parts/editor/media/multieditortabscontrol.css",
+        "src/vs/workbench/browser/parts/editor/media/sidebysideeditor.css",
+        "src/vs/workbench/browser/parts/editor/media/singleeditortabscontrol.css",
+        "src/vs/workbench/browser/parts/editor/modalEditorPart.ts",
+        "src/vs/workbench/browser/parts/editor/multiEditorTabsControl.ts",
+        "src/vs/workbench/browser/parts/editor/multiRowEditorTabsControl.ts",
+        "src/vs/workbench/browser/parts/editor/noEditorTabsControl.ts",
+        "src/vs/workbench/browser/parts/editor/sideBySideEditor.ts",
+        "src/vs/workbench/browser/parts/editor/singleEditorTabsControl.ts",
+        "src/vs/workbench/browser/parts/editor/textCodeEditor.ts",
+        "src/vs/workbench/browser/parts/editor/textDiffEditor.ts",
+        "src/vs/workbench/browser/parts/editor/textEditor.ts",
+        "src/vs/workbench/browser/parts/editor/textResourceEditor.ts",
+        "src/vs/workbench/browser/parts/globalCompositeBar.ts",
+        "src/vs/workbench/browser/parts/media/**",
+        "src/vs/workbench/browser/parts/notifications/**",
+        "src/vs/workbench/browser/parts/paneCompositeBar.ts",
+        "src/vs/workbench/browser/parts/paneCompositePart.ts",
+        "src/vs/workbench/browser/parts/paneCompositePartService.ts",
+        "src/vs/workbench/browser/parts/panel/**",
+        "src/vs/workbench/browser/parts/sidebar/**",
+        "src/vs/workbench/browser/parts/statusbar/**",
+        "src/vs/workbench/browser/parts/titlebar/**",
+        "src/vs/workbench/browser/parts/views/**",
+        "src/vs/workbench/browser/parts/visibleViewContainersTracker.ts",
+        "src/vs/workbench/browser/quickaccess.ts",
+        "src/vs/workbench/browser/style.ts",
+        "src/vs/workbench/browser/web.api.ts",
+        "src/vs/workbench/browser/web.factory.ts",
+        "src/vs/workbench/browser/web.main.ts",
+        "src/vs/workbench/browser/window.ts",
+        "src/vs/workbench/browser/workbench.contribution.ts",
+        "src/vs/workbench/browser/workbench.ts",
+        "src/vs/workbench/browser/workbench.zenMode.contribution.ts",
+        "src/vs/workbench/common/**",
+        "src/vs/workbench/electron-browser/**",
+        "src/vs/workbench/services/accessibility/**",
+        "src/vs/workbench/services/accounts/**",
+        "src/vs/workbench/services/actions/**",
+        "src/vs/workbench/services/activity/**",
+        "src/vs/workbench/services/agentEditorComments/**",
+        "src/vs/workbench/services/agentHost/**",
+        "src/vs/workbench/services/aiEmbeddingVector/**",
+        "src/vs/workbench/services/aiRelatedInformation/**",
+        "src/vs/workbench/services/aiSettingsSearch/**",
+        "src/vs/workbench/services/assignment/**",
+        "src/vs/workbench/services/authentication/**",
+        "src/vs/workbench/services/auxiliaryWindow/**",
+        "src/vs/workbench/services/banner/**",
+        "src/vs/workbench/services/browserView/**",
+        "src/vs/workbench/services/chat/**",
+        "src/vs/workbench/services/checksum/**",
+        "src/vs/workbench/services/clipboard/**",
+        "src/vs/workbench/services/commands/**",
+        "src/vs/workbench/services/configuration/**",
+        "src/vs/workbench/services/configurationResolver/**",
+        "src/vs/workbench/services/contextmenu/**",
+        "src/vs/workbench/services/dataChannel/**",
+        "src/vs/workbench/services/decorations/**",
+        "src/vs/workbench/services/dialogs/**",
+        "src/vs/workbench/services/driver/**",
+        "src/vs/workbench/services/editor/**",
+        "src/vs/workbench/services/encryption/**",
+        "src/vs/workbench/services/environment/**",
+        "src/vs/workbench/services/extensionManagement/**",
+        "src/vs/workbench/services/extensionRecommendations/**",
+        "src/vs/workbench/services/extensions/**",
+        "src/vs/workbench/services/files/**",
+        "src/vs/workbench/services/filesConfiguration/**",
+        "src/vs/workbench/services/github/**",
+        "src/vs/workbench/services/history/**",
+        "src/vs/workbench/services/host/**",
+        "src/vs/workbench/services/imageResize/**",
+        "src/vs/workbench/services/inlineCompletions/**",
+        "src/vs/workbench/services/integrity/**",
+        "src/vs/workbench/services/keybinding/**",
+        "src/vs/workbench/services/label/**",
+        "src/vs/workbench/services/language/**",
+        "src/vs/workbench/services/languageDetection/**",
+        "src/vs/workbench/services/languageStatus/**",
+        "src/vs/workbench/services/layout/**",
+        "src/vs/workbench/services/lifecycle/**",
+        "src/vs/workbench/services/localTranscription/**",
+        "src/vs/workbench/services/localization/**",
+        "src/vs/workbench/services/log/**",
+        "src/vs/workbench/services/mcp/**",
+        "src/vs/workbench/services/menubar/**",
+        "src/vs/workbench/services/model/**",
+        "src/vs/workbench/services/notebook/**",
+        "src/vs/workbench/services/notification/**",
+        "src/vs/workbench/services/outline/**",
+        "src/vs/workbench/services/output/**",
+        "src/vs/workbench/services/panecomposite/**",
+        "src/vs/workbench/services/path/**",
+        "src/vs/workbench/services/policies/**",
+        "src/vs/workbench/services/power/**",
+        "src/vs/workbench/services/preferences/**",
+        "src/vs/workbench/services/process/**",
+        "src/vs/workbench/services/progress/**",
+        "src/vs/workbench/services/quickinput/**",
+        "src/vs/workbench/services/remote/**",
+        "src/vs/workbench/services/request/**",
+        "src/vs/workbench/services/search/browser/**",
+        "src/vs/workbench/services/search/common/**",
+        "src/vs/workbench/services/search/electron-browser/**",
+        "src/vs/workbench/services/search/node/**",
+        "src/vs/workbench/services/search/test/browser/**",
+        "src/vs/workbench/services/search/test/common/**",
+        "src/vs/workbench/services/search/test/node/fileSearch.integrationTest.ts",
+        "src/vs/workbench/services/search/test/node/fileSearch.test.ts",
+        "src/vs/workbench/services/search/test/node/fixtures/examples/**",
+        "src/vs/workbench/services/search/test/node/fixtures/index.html",
+        "src/vs/workbench/services/search/test/node/fixtures/more/**",
+        "src/vs/workbench/services/search/test/node/fixtures/site.css",
+        "src/vs/workbench/services/search/test/node/fixtures/site.less",
+        "src/vs/workbench/services/search/test/node/fixtures/üm laut汉语/**",
+        "src/vs/workbench/services/search/test/node/fixtures2/**",
+        "src/vs/workbench/services/search/test/node/rawSearchService.integrationTest.ts",
+        "src/vs/workbench/services/search/test/node/ripgrepFileSearch.test.ts",
+        "src/vs/workbench/services/search/test/node/ripgrepSearchUtils.test.ts",
+        "src/vs/workbench/services/search/test/node/ripgrepTextSearchEngineUtils.test.ts",
+        "src/vs/workbench/services/search/test/node/search.integrationTest.ts",
+        "src/vs/workbench/services/search/test/node/symlinkLoopFixture.ts",
+        "src/vs/workbench/services/search/test/node/textSearch.integrationTest.ts",
+        "src/vs/workbench/services/search/test/node/textSearchManager.test.ts",
+        "src/vs/workbench/services/search/worker/**",
+        "src/vs/workbench/services/secrets/**",
+        "src/vs/workbench/services/sharedProcess/**",
+        "src/vs/workbench/services/statusbar/**",
+        "src/vs/workbench/services/storage/**",
+        "src/vs/workbench/services/suggest/**",
+        "src/vs/workbench/services/telemetry/**",
+        "src/vs/workbench/services/terminal/**",
+        "src/vs/workbench/services/textMate/**",
+        "src/vs/workbench/services/textfile/browser/**",
+        "src/vs/workbench/services/textfile/common/**",
+        "src/vs/workbench/services/textfile/electron-browser/**",
+        "src/vs/workbench/services/textfile/test/browser/**",
+        "src/vs/workbench/services/textfile/test/common/**",
+        "src/vs/workbench/services/textfile/test/electron-browser/**",
+        "src/vs/workbench/services/textfile/test/node/encoding/encoding.integrationTest.ts",
+        "src/vs/workbench/services/textfile/test/node/encoding/encoding.test.ts",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/empty.txt",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/issue_102202.txt",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.css.qwoff",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.json.png",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some.xml.png",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_ansi.css",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_file.css",
+        "src/vs/workbench/services/textfile/test/node/encoding/fixtures/some_utf8.css",
+        "src/vs/workbench/services/textmodelResolver/**",
+        "src/vs/workbench/services/textresourceProperties/**",
+        "src/vs/workbench/services/themes/**",
+        "src/vs/workbench/services/timer/**",
+        "src/vs/workbench/services/title/**",
+        "src/vs/workbench/services/treeSitter/**",
+        "src/vs/workbench/services/tunnel/**",
+        "src/vs/workbench/services/untitled/**",
+        "src/vs/workbench/services/update/**",
+        "src/vs/workbench/services/url/**",
+        "src/vs/workbench/services/userActivity/**",
+        "src/vs/workbench/services/userAttention/**",
+        "src/vs/workbench/services/userData/**",
+        "src/vs/workbench/services/userDataProfile/**",
+        "src/vs/workbench/services/userDataSync/**",
+        "src/vs/workbench/services/utilityProcess/**",
+        "src/vs/workbench/services/views/**",
+        "src/vs/workbench/services/workingCopy/**",
+        "src/vs/workbench/services/workspaces/**",
+        "src/vs/workbench/test/browser/actions/**",
+        "src/vs/workbench/test/browser/aiCustomizationManagementSectionRegistry.test.ts",
+        "src/vs/workbench/test/browser/chatPillHover.test.ts",
+        "src/vs/workbench/test/browser/chatPills.test.ts",
+        "src/vs/workbench/test/browser/codeeditor.test.ts",
+        "src/vs/workbench/test/browser/componentFixtures/activityBarMenu.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/agentsVoice/**",
+        "src/vs/workbench/test/browser/componentFixtures/aiStats.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/auxiliaryBarTitle.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/baseUI.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/buttonBar.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAgentFeedbackReviewConfirmation.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAgentLifecycle.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAgentMerge.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAgentMergeFlow.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAgentMergeNotice.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatArtifacts.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatAutoModeResolutionContentPart.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatFixtureUtils.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatGeneratedImages.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatImageHover.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatInput.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatInputNotice.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatMcpAuthenticationContentPart.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatMcpToolCalls.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatPetAccessoryRig.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatPetAchievementsEditor.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatPetFixtureUtils.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatProgressContentPart.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatQuestionCarousel.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatReadOnlyBanner.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatRendering.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatRichLink.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatScrollAnchoring.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatSessionArchiveNudge.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatSubagentContent.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatTerminalCollapsible.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatTerminalFullOutput.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatToolRiskBadge.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatTurnPills.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatUsedContextLabel.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatWidget.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatWorkingLogo.fixture.css",
+        "src/vs/workbench/test/browser/componentFixtures/chat/chatWorkingLogo.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/codexStatusDashboard.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/linkPresentationBuilders.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/localModelNoticeFixtures.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/localModelPickerRows.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/permissionPickerList.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/promptFilePickers.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/renderChatInput.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/tabbedModelPicker.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/chat/voiceGlow.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/comments/**",
+        "src/vs/workbench/test/browser/componentFixtures/editor/**",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureFocus.test.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureFocus.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureResourceLoader.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureSyntaxHighlighting.test.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureSyntaxHighlighting.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureUtils.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureUtilsCss.test.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureUtilsCss.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtures.css",
+        "src/vs/workbench/test/browser/componentFixtures/imageCarousel.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/multiDiffEditorScroll.fixture.css",
+        "src/vs/workbench/test/browser/componentFixtures/multiDiffEditorScroll.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/onboarding/**",
+        "src/vs/workbench/test/browser/componentFixtures/resizeObserver.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/scm/**",
+        "src/vs/workbench/test/browser/componentFixtures/sessions/**",
+        "src/vs/workbench/test/browser/componentFixtures/statusBar.fixture.ts",
+        "src/vs/workbench/test/browser/compositeDragAndDropObserver.test.ts",
+        "src/vs/workbench/test/browser/contextViewService.test.ts",
+        "src/vs/workbench/test/browser/contributions.test.ts",
+        "src/vs/workbench/test/browser/customTreeViewDragAndDrop.test.ts",
+        "src/vs/workbench/test/browser/notificationAccessibleView.test.ts",
+        "src/vs/workbench/test/browser/notificationTelemetry.test.ts",
+        "src/vs/workbench/test/browser/notificationsList.test.ts",
+        "src/vs/workbench/test/browser/notificationsPosition.test.ts",
+        "src/vs/workbench/test/browser/notificationsToasts.test.ts",
+        "src/vs/workbench/test/browser/part.test.ts",
+        "src/vs/workbench/test/browser/parts/**",
+        "src/vs/workbench/test/browser/quickAccess.test.ts",
+        "src/vs/workbench/test/browser/treeview.test.ts",
+        "src/vs/workbench/test/browser/viewlet.test.ts",
+        "src/vs/workbench/test/browser/webview.test.ts",
+        "src/vs/workbench/test/browser/window.test.ts",
+        "src/vs/workbench/test/browser/workbenchTestServices.ts",
+        "src/vs/workbench/test/common/**",
+        "src/vs/workbench/test/electron-browser/**",
+        "src/vs/workbench/workbench.common.main.ts",
+        "src/vs/workbench/workbench.desktop.main.ts",
+        "src/vs/workbench/workbench.web.main.internal.ts",
+        "src/vs/workbench/workbench.web.main.ts",
+        "src/vscode-dts/**",
+        "test/**",
+        "tsfmt.json"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2015 - present Microsoft Corporation\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2015 - present Microsoft Corporation, MIT license (LICENSE.txt), https://github.com/microsoft/vscode."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "build/monaco/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016 - present Microsoft Corporation\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 - present Microsoft Corporation, MIT license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/build/monaco."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "extensions/copilot/.agents/**",
+        "extensions/copilot/.devcontainer/**",
+        "extensions/copilot/.esbuild.mts",
+        "extensions/copilot/.eslintplugin/**",
+        "extensions/copilot/.gitattributes",
+        "extensions/copilot/.github/**",
+        "extensions/copilot/.gitignore",
+        "extensions/copilot/.mocha-multi-reporters.js",
+        "extensions/copilot/.mocharc.js",
+        "extensions/copilot/.npmrc",
+        "extensions/copilot/.nvmrc",
+        "extensions/copilot/.prettierignore",
+        "extensions/copilot/.vscode/conversation.schema.json",
+        "extensions/copilot/.vscode/extensions/test-extension/**",
+        "extensions/copilot/.vscode/extensions/visualization-runner/README.md",
+        "extensions/copilot/.vscode/extensions/visualization-runner/entry.js",
+        "extensions/copilot/.vscode/extensions/visualization-runner/extension.ts",
+        "extensions/copilot/.vscode/extensions/visualization-runner/package.json",
+        "extensions/copilot/.vscode/extensions.json",
+        "extensions/copilot/.vscode/launch.json",
+        "extensions/copilot/.vscode/mcp.json",
+        "extensions/copilot/.vscode/settings.json",
+        "extensions/copilot/.vscode/snippets.code-snippets",
+        "extensions/copilot/.vscode/state.schema.json",
+        "extensions/copilot/.vscode/tasks.json",
+        "extensions/copilot/.vscode-test.mjs",
+        "extensions/copilot/.vscodeignore",
+        "extensions/copilot/CHANGELOG.md",
+        "extensions/copilot/CODE_OF_CONDUCT.md",
+        "extensions/copilot/CONTRIBUTING.md",
+        "extensions/copilot/LICENSE.txt",
+        "extensions/copilot/README.md",
+        "extensions/copilot/SECURITY.md",
+        "extensions/copilot/assets/debug-icon.svg",
+        "extensions/copilot/assets/openrouter-dark.svg",
+        "extensions/copilot/assets/openrouter-light.svg",
+        "extensions/copilot/assets/prompts/**",
+        "extensions/copilot/build/**",
+        "extensions/copilot/cgmanifest.json",
+        "extensions/copilot/docs/NES_EXPECTED_EDIT_CAPTURE.md",
+        "extensions/copilot/docs/monitoring/**",
+        "extensions/copilot/docs/tools.md",
+        "extensions/copilot/package-lock.json",
+        "extensions/copilot/package.json",
+        "extensions/copilot/package.nls.json",
+        "extensions/copilot/script/**",
+        "extensions/copilot/src/extension/agentDebug/**",
+        "extensions/copilot/src/extension/agents/**",
+        "extensions/copilot/src/extension/api/**",
+        "extensions/copilot/src/extension/authentication/**",
+        "extensions/copilot/src/extension/byok/**",
+        "extensions/copilot/src/extension/chat/**",
+        "extensions/copilot/src/extension/chatInputNotification/**",
+        "extensions/copilot/src/extension/chatSessionContext/**",
+        "extensions/copilot/src/extension/chatSessions/**",
+        "extensions/copilot/src/extension/chronicle/**",
+        "extensions/copilot/src/extension/codeBlocks/**",
+        "extensions/copilot/src/extension/commands/**",
+        "extensions/copilot/src/extension/common/**",
+        "extensions/copilot/src/extension/completions/**",
+        "extensions/copilot/src/extension/completions-core/**",
+        "extensions/copilot/src/extension/configuration/**",
+        "extensions/copilot/src/extension/context/**",
+        "extensions/copilot/src/extension/contextKeys/**",
+        "extensions/copilot/src/extension/conversation/**",
+        "extensions/copilot/src/extension/conversationStore/**",
+        "extensions/copilot/src/extension/diagnosticsContext/**",
+        "extensions/copilot/src/extension/extension/**",
+        "extensions/copilot/src/extension/externalAgents/**",
+        "extensions/copilot/src/extension/getting-started/**",
+        "extensions/copilot/src/extension/git/**",
+        "extensions/copilot/src/extension/githubMcp/**",
+        "extensions/copilot/src/extension/githubPullRequest.d.ts",
+        "extensions/copilot/src/extension/ignore/**",
+        "extensions/copilot/src/extension/inlineChat/**",
+        "extensions/copilot/src/extension/inlineChat2/**",
+        "extensions/copilot/src/extension/inlineEdits/**",
+        "extensions/copilot/src/extension/intents/**",
+        "extensions/copilot/src/extension/languageContextProvider/**",
+        "extensions/copilot/src/extension/linkify/**",
+        "extensions/copilot/src/extension/log/**",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/commands.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/fixtures/snapshots/**",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/mcpConfigurationGeneration.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/nuget.integration.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/nuget.mapping.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/nuget.stub.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/setupFlow.spec.ts",
+        "extensions/copilot/src/extension/mcp/test/vscode-node/util.ts",
+        "extensions/copilot/src/extension/mcp/vscode-node/**",
+        "extensions/copilot/src/extension/notebook/**",
+        "extensions/copilot/src/extension/onboardDebug/**",
+        "extensions/copilot/src/extension/otel/**",
+        "extensions/copilot/src/extension/power/**",
+        "extensions/copilot/src/extension/prompt/**",
+        "extensions/copilot/src/extension/promptFileContext/**",
+        "extensions/copilot/src/extension/prompts/**",
+        "extensions/copilot/src/extension/renameSuggestions/**",
+        "extensions/copilot/src/extension/review/**",
+        "extensions/copilot/src/extension/search/**",
+        "extensions/copilot/src/extension/settingsSchema/**",
+        "extensions/copilot/src/extension/survey/**",
+        "extensions/copilot/src/extension/telemetry/**",
+        "extensions/copilot/src/extension/test/**",
+        "extensions/copilot/src/extension/testing/**",
+        "extensions/copilot/src/extension/tools/**",
+        "extensions/copilot/src/extension/trajectory/**",
+        "extensions/copilot/src/extension/typescriptContext/**",
+        "extensions/copilot/src/extension/vscode-api.d.ts",
+        "extensions/copilot/src/extension/workspaceChunkSearch/**",
+        "extensions/copilot/src/extension/workspaceRecorder/**",
+        "extensions/copilot/src/extension/workspaceSemanticSearch/**",
+        "extensions/copilot/src/extension/xtab/**",
+        "extensions/copilot/src/lib/**",
+        "extensions/copilot/src/platform/authentication/**",
+        "extensions/copilot/src/platform/chat/**",
+        "extensions/copilot/src/platform/chronicle/**",
+        "extensions/copilot/src/platform/chunking/**",
+        "extensions/copilot/src/platform/commands/**",
+        "extensions/copilot/src/platform/completions-core/**",
+        "extensions/copilot/src/platform/configuration/**",
+        "extensions/copilot/src/platform/customInstructions/**",
+        "extensions/copilot/src/platform/debug/**",
+        "extensions/copilot/src/platform/devcontainer/**",
+        "extensions/copilot/src/platform/dialog/**",
+        "extensions/copilot/src/platform/diff/**",
+        "extensions/copilot/src/platform/editSurvivalTracking/**",
+        "extensions/copilot/src/platform/editing/**",
+        "extensions/copilot/src/platform/embeddings/**",
+        "extensions/copilot/src/platform/endpoint/**",
+        "extensions/copilot/src/platform/env/**",
+        "extensions/copilot/src/platform/extContext/**",
+        "extensions/copilot/src/platform/extensions/**",
+        "extensions/copilot/src/platform/filesystem/**",
+        "extensions/copilot/src/platform/git/**",
+        "extensions/copilot/src/platform/github/**",
+        "extensions/copilot/src/platform/ignore/**",
+        "extensions/copilot/src/platform/image/**",
+        "extensions/copilot/src/platform/inlineCompletions/**",
+        "extensions/copilot/src/platform/inlineEdits/**",
+        "extensions/copilot/src/platform/interactive/**",
+        "extensions/copilot/src/platform/languageContextProvider/**",
+        "extensions/copilot/src/platform/languageServer/**",
+        "extensions/copilot/src/platform/languages/**",
+        "extensions/copilot/src/platform/log/**",
+        "extensions/copilot/src/platform/mcp/**",
+        "extensions/copilot/src/platform/multiFileEdit/**",
+        "extensions/copilot/src/platform/nesFetch/**",
+        "extensions/copilot/src/platform/networking/**",
+        "extensions/copilot/src/platform/notebook/**",
+        "extensions/copilot/src/platform/notification/**",
+        "extensions/copilot/src/platform/open/**",
+        "extensions/copilot/src/platform/openai/**",
+        "extensions/copilot/src/platform/otel/**",
+        "extensions/copilot/src/platform/parser/**",
+        "extensions/copilot/src/platform/projectTemplatesIndex/**",
+        "extensions/copilot/src/platform/promptFiles/**",
+        "extensions/copilot/src/platform/prompts/**",
+        "extensions/copilot/src/platform/proxyModels/**",
+        "extensions/copilot/src/platform/releaseNotes/**",
+        "extensions/copilot/src/platform/remoteCodeSearch/**",
+        "extensions/copilot/src/platform/remoteRepositories/**",
+        "extensions/copilot/src/platform/remoteSearch/**",
+        "extensions/copilot/src/platform/requestLogger/**",
+        "extensions/copilot/src/platform/review/**",
+        "extensions/copilot/src/platform/scopeSelection/**",
+        "extensions/copilot/src/platform/search/**",
+        "extensions/copilot/src/platform/settingsEditor/**",
+        "extensions/copilot/src/platform/simulationTestContext/**",
+        "extensions/copilot/src/platform/snippy/**",
+        "extensions/copilot/src/platform/survey/**",
+        "extensions/copilot/src/platform/tabs/**",
+        "extensions/copilot/src/platform/tasks/**",
+        "extensions/copilot/src/platform/telemetry/**",
+        "extensions/copilot/src/platform/terminal/**",
+        "extensions/copilot/src/platform/test/**",
+        "extensions/copilot/src/platform/testing/common/**",
+        "extensions/copilot/src/platform/testing/node/setupTestDetector.mmd",
+        "extensions/copilot/src/platform/testing/node/setupTestDetector.tsx",
+        "extensions/copilot/src/platform/testing/node/testDepsResolver.ts",
+        "extensions/copilot/src/platform/testing/test/**",
+        "extensions/copilot/src/platform/testing/vscode/**",
+        "extensions/copilot/src/platform/thinking/**",
+        "extensions/copilot/src/platform/tokenizer/**",
+        "extensions/copilot/src/platform/urlChunkSearch/**",
+        "extensions/copilot/src/platform/workbench/**",
+        "extensions/copilot/src/platform/workspace/**",
+        "extensions/copilot/src/platform/workspaceChunkSearch/**",
+        "extensions/copilot/src/platform/workspaceRecorder/**",
+        "extensions/copilot/src/platform/workspaceState/**",
+        "extensions/copilot/src/shared-fetch-utils/**",
+        "extensions/copilot/src/util/common/**",
+        "extensions/copilot/src/util/node/**",
+        "extensions/copilot/src/util/test/**",
+        "extensions/copilot/src/util/vs/base/**",
+        "extensions/copilot/src/util/vs/base-common.d.ts",
+        "extensions/copilot/src/util/vs/crypto.d.ts",
+        "extensions/copilot/src/util/vs/editor/**",
+        "extensions/copilot/src/util/vs/nls.ts",
+        "extensions/copilot/src/util/vs/platform/**",
+        "extensions/copilot/src/util/vs/vscode-globals-nls.d.ts",
+        "extensions/copilot/src/util/vs/vscode-globals-product.d.ts",
+        "extensions/copilot/src/util/vs/workbench/api/**",
+        "extensions/copilot/src/vscodeTypes.ts",
+        "extensions/copilot/test/base/**",
+        "extensions/copilot/test/cacheSalt.ts",
+        "extensions/copilot/test/codeMapper/**",
+        "extensions/copilot/test/e2e/**",
+        "extensions/copilot/test/inline/**",
+        "extensions/copilot/test/intent/**",
+        "extensions/copilot/test/jsonOutputPrinter.ts",
+        "extensions/copilot/test/outcome/**",
+        "extensions/copilot/test/outputColorer.ts",
+        "extensions/copilot/test/pipeline/**",
+        "extensions/copilot/test/prompts/**",
+        "extensions/copilot/test/requirements.txt",
+        "extensions/copilot/test/scenarios/test-cli/**",
+        "extensions/copilot/test/scenarios/test-current-selection-impls/**",
+        "extensions/copilot/test/scenarios/test-explain/**",
+        "extensions/copilot/test/scenarios/test-generate-markdown/**",
+        "extensions/copilot/test/scenarios/test-new-notebooks/**",
+        "extensions/copilot/test/scenarios/test-new-workspace/**",
+        "extensions/copilot/test/scenarios/test-scenario-1/**",
+        "extensions/copilot/test/scenarios/test-scenario-fix-python/**",
+        "extensions/copilot/test/scenarios/test-scenario-fix-typescript/**",
+        "extensions/copilot/test/scenarios/test-scenario-search/**",
+        "extensions/copilot/test/scenarios/test-semantic-search/**",
+        "extensions/copilot/test/scenarios/test-setupTest/**",
+        "extensions/copilot/test/scenarios/test-setupTestRecommend/**",
+        "extensions/copilot/test/scenarios/test-system/**",
+        "extensions/copilot/test/scenarios/test-terminal/**",
+        "extensions/copilot/test/scenarios/test-tools/**",
+        "extensions/copilot/test/scenarios/test-variables/**",
+        "extensions/copilot/test/simulation/baseline.json",
+        "extensions/copilot/test/simulation/baseline.old.json",
+        "extensions/copilot/test/simulation/cache/**",
+        "extensions/copilot/test/simulation/debugCommandToConfig.stest.ts",
+        "extensions/copilot/test/simulation/debugTools.stest.ts",
+        "extensions/copilot/test/simulation/diagnosticProviders/**",
+        "extensions/copilot/test/simulation/externalScenarios.ts",
+        "extensions/copilot/test/simulation/fixtures/cpp/**",
+        "extensions/copilot/test/simulation/fixtures/doc/**",
+        "extensions/copilot/test/simulation/fixtures/doc-everywhere-issue-3763/**",
+        "extensions/copilot/test/simulation/fixtures/doc-explain-ts-code/**",
+        "extensions/copilot/test/simulation/fixtures/doc-hello-world/**",
+        "extensions/copilot/test/simulation/fixtures/doc-ruby/**",
+        "extensions/copilot/test/simulation/fixtures/doc-ts-class/**",
+        "extensions/copilot/test/simulation/fixtures/doc-ts-class-full/**",
+        "extensions/copilot/test/simulation/fixtures/doc-ts-interface/**",
+        "extensions/copilot/test/simulation/fixtures/doc-ts-large-fn/**",
+        "extensions/copilot/test/simulation/fixtures/edit/**",
+        "extensions/copilot/test/simulation/fixtures/edit-add-enum-variant/**",
+        "extensions/copilot/test/simulation/fixtures/edit-add-explicit-type-issue-3759/**",
+        "extensions/copilot/test/simulation/fixtures/edit-add-toString/**",
+        "extensions/copilot/test/simulation/fixtures/edit-add-toString2/**",
+        "extensions/copilot/test/simulation/fixtures/edit-asyncawait-4151/**",
+        "extensions/copilot/test/simulation/fixtures/edit-convert-ternary-to-if-else/**",
+        "extensions/copilot/test/simulation/fixtures/edit-import-assert/**",
+        "extensions/copilot/test/simulation/fixtures/edit-import-assert2/**",
+        "extensions/copilot/test/simulation/fixtures/edit-issue-1198/**",
+        "extensions/copilot/test/simulation/fixtures/edit-refactor-loop/**",
+        "extensions/copilot/test/simulation/fixtures/edit-single-line-await-issue-3702/**",
+        "extensions/copilot/test/simulation/fixtures/edit-slice-4149/**",
+        "extensions/copilot/test/simulation/fixtures/editing/**",
+        "extensions/copilot/test/simulation/fixtures/editing-html/**",
+        "extensions/copilot/test/simulation/fixtures/explain-project-context/**",
+        "extensions/copilot/test/simulation/fixtures/fix/**",
+        "extensions/copilot/test/simulation/fixtures/fixing/**",
+        "extensions/copilot/test/simulation/fixtures/gen/**",
+        "extensions/copilot/test/simulation/fixtures/gen-json/**",
+        "extensions/copilot/test/simulation/fixtures/gen-method-issue-3602/**",
+        "extensions/copilot/test/simulation/fixtures/gen-nestjs-route-issue-3604/**",
+        "extensions/copilot/test/simulation/fixtures/gen-python-palindrome/**",
+        "extensions/copilot/test/simulation/fixtures/gen-top-level-function/**",
+        "extensions/copilot/test/simulation/fixtures/gen-twice-issue-3597/**",
+        "extensions/copilot/test/simulation/fixtures/generate/**",
+        "extensions/copilot/test/simulation/fixtures/ghpr/**",
+        "extensions/copilot/test/simulation/fixtures/inlineEdits/**",
+        "extensions/copilot/test/simulation/fixtures/multiFile/**",
+        "extensions/copilot/test/simulation/fixtures/multiFileEdit/**",
+        "extensions/copilot/test/simulation/fixtures/review/**",
+        "extensions/copilot/test/simulation/fixtures/tests/**",
+        "extensions/copilot/test/simulation/fixtures/tlaplus/**",
+        "extensions/copilot/test/simulation/fixtures/unknown/**",
+        "extensions/copilot/test/simulation/fixtures/vscode/**",
+        "extensions/copilot/test/simulation/inlineChatSimulator.ts",
+        "extensions/copilot/test/simulation/inlineEdit/**",
+        "extensions/copilot/test/simulation/language/**",
+        "extensions/copilot/test/simulation/nesCoffeTests.ts",
+        "extensions/copilot/test/simulation/nesCoffeTestsTypes.ts",
+        "extensions/copilot/test/simulation/nesExternalTests.ts",
+        "extensions/copilot/test/simulation/nesOptionsToConfigurations.ts",
+        "extensions/copilot/test/simulation/notebookEdits.stest.ts",
+        "extensions/copilot/test/simulation/notebooks.stest.ts",
+        "extensions/copilot/test/simulation/outcomeValidators.ts",
+        "extensions/copilot/test/simulation/panelCodeMapperSimulator.ts",
+        "extensions/copilot/test/simulation/prTitleAndDescription.stest.ts",
+        "extensions/copilot/test/simulation/renameSuggestionsProvider.stest.ts",
+        "extensions/copilot/test/simulation/setupTests.stest.ts",
+        "extensions/copilot/test/simulation/shared/**",
+        "extensions/copilot/test/simulation/simulationTestProvider.ts",
+        "extensions/copilot/test/simulation/slash-test/**",
+        "extensions/copilot/test/simulation/stestUtil.ts",
+        "extensions/copilot/test/simulation/testInformation.ts",
+        "extensions/copilot/test/simulation/testSnapshot.ts",
+        "extensions/copilot/test/simulation/tools/**",
+        "extensions/copilot/test/simulation/types.ts",
+        "extensions/copilot/test/simulation/workbench/**",
+        "extensions/copilot/test/simulationExtension/**",
+        "extensions/copilot/test/simulationLogger.ts",
+        "extensions/copilot/test/simulationMain.ts",
+        "extensions/copilot/test/simulationTests.ts",
+        "extensions/copilot/test/taskRunner.ts",
+        "extensions/copilot/test/testExecutionInExtension.ts",
+        "extensions/copilot/test/testExecutor.ts",
+        "extensions/copilot/test/testVisualizationRunner.ts",
+        "extensions/copilot/test/testVisualizationRunnerSTest.ts",
+        "extensions/copilot/test/testVisualizationRunnerSTestRunner.ts",
+        "extensions/copilot/test/util.ts",
+        "extensions/copilot/tsconfig.base.json",
+        "extensions/copilot/tsconfig.json",
+        "extensions/copilot/tsconfig.worker.json",
+        "extensions/copilot/tsfmt.json",
+        "extensions/copilot/vite.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) Microsoft Corporation. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) Microsoft Corporation. All rights reserved., MIT license (LICENSE.txt), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "extensions/copilot/chat-lib/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Microsoft Corporation. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) Microsoft Corporation. All rights reserved., MIT license (LICENSE.txt), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/chat-lib."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "extensions/copilot/test/scenarios/test-notebook-tools/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of microsoft/vscode (extensions/copilot/test/scenarios/test-notebook-tools) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/scenarios/test-notebook-tools."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "extensions/copilot/test/scenarios/test-notebooks/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of microsoft/vscode (extensions/copilot/test/scenarios/test-notebooks) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/scenarios/test-notebooks."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "extensions/copilot/test/simulation/fixtures/notebook/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of microsoft/vscode (extensions/copilot/test/simulation/fixtures/notebook) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/microsoft/vscode/tree/61877c27251a793ecc4aabfe8ef8d60735316881/extensions/copilot/test/simulation/fixtures/notebook."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "coffeescript",
+      "paths": [
+        "**/*.coffee"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fsharp",
+      "paths": [
+        "**/*.fs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "handlebars",
+      "paths": [
+        "**/*.hbs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hlsl",
+      "paths": [
+        "**/*.hlsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "julia",
+      "paths": [
+        "**/*.jl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.sty"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pug",
+      "paths": [
+        "**/*.pug"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.r"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scheme",
+      "paths": [
+        "**/*.scm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.adml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.admx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-search"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-snippets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cshtml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "extensions/vscode-colorize-tests/test/colorize-fixtures/test.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.github-issues"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.handlebars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.isl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.messages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mmd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mobileconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.off"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.p6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qwoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.recipe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.round1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.round2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.shader"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sqlite"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tempo-summarized"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.text"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tiktoken"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmLanguage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.view-port"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.win32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.winget"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ahp-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cachesalt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslint-allowed-bracket-notation-files"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslint-allowed-javascript-files"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslint-ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gdnsuppress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mention-bot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.moduleignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vscodeignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.webignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-add-2-lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-add-first-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-add-last-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-add-last-line-with-eol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-add-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-move-lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-remove-first-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-remove-last-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-remove-last-line-with-eol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-remove-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-basic-replace-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01-simple-replace-2-lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-basicWithEol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-basicWithEol-add-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-basicWithEol-remove-eol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-basicWithEol-remove-last-line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-filewithtabs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/02-filewithtabs-replace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/03-large"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/03-large-many-changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/03-unusedimport"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/03-unusedimport-addone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/04-spaces"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/04-spaces-replace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/05-beginend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/05-beginend-move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/06-similarline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/06-similarline-comma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/07-indent1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/07-indent1-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/07-indent1-two"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/08-modifyunchanged"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/08-modifyunchanged-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/09-indent2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/09-indent2-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10-test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10-test-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/11-replaceatend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/11-replaceatend-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/12-insertmethod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/12-insertmethod-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/12-insertmethod-two"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/13-coroutine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/13-coroutine-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/14-rob"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/14-rob-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODENOTIFY"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COMMIT_EDITMSG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/electron-launch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-rebase-todo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/non_executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vscode-json-languageserver"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

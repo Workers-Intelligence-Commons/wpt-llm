@@ -1,0 +1,2138 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/gradle/gradle",
+  "revision": "7cb22acddadd13ae6527d6f16d1762c26a9fbf4e",
+  "checksum": "sha256:0e57ce9861d7bc1362c9ea8801523cede1b42266bffa851fe11922daf92eea4e",
+  "extract": {
+    "exclude": [
+      ".idea/icon.png",
+      ".idea/icon_dark.png",
+      ".teamcity/.mvn/wrapper/maven-wrapper.jar",
+      "build-logic/dependency-modules/src/main/kotlin/gradlebuild/**",
+      "build-logic-commons/code-quality-rules/src/main/resources/classycle/**",
+      "contributing/images/**",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "images/gradle-black-primary.png",
+      "images/gradle-dark-green-primary.png",
+      "images/gradle-sea-green-white-primary.png",
+      "images/gradle-white-primary.png",
+      "platforms/core-runtime/wrapper-main/src/executable/**",
+      "platforms/documentation/docs/src/docs/release/release-notes-assets/action-attribution-in-cc-report.png",
+      "platforms/documentation/docs/src/docs/release/release-notes-assets/before-action-attribution-in-cc-report.png",
+      "platforms/documentation/docs/src/docs/release/release-notes-assets/gradle-progress-bar-new.gif",
+      "platforms/documentation/docs/src/docs/release/release-notes-assets/no-color-screenshot.png",
+      "platforms/documentation/docs/src/docs/release/release-notes-assets/problems-locations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/android-studio-build-sync-popup.png",
+      "platforms/documentation/docs/src/docs/userguide/img/android_studio.png",
+      "platforms/documentation/docs/src/docs/userguide/img/ant-task-migration.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/ant-task-migration.png",
+      "platforms/documentation/docs/src/docs/userguide/img/artifact-transform-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/artifact-transform-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/artifact-transform-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/artifact-transform-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/artifact-transform-5.png",
+      "platforms/documentation/docs/src/docs/userguide/img/author-gradle-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/author-gradle-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/author-gradle-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/author-gradle-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/author-tasks-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/build-cache/**",
+      "platforms/documentation/docs/src/docs/userguide/img/build-lifecycle-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/build-scan-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/build-scan-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/build-scan-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/build-scan-infrastructure.png",
+      "platforms/documentation/docs/src/docs/userguide/img/commandLineTutorialTasks.png",
+      "platforms/documentation/docs/src/docs/userguide/img/component-model-gradle-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/component-model-gradle.png",
+      "platforms/documentation/docs/src/docs/userguide/img/component-model.odg",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache/**",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-5.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-6.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-7.png",
+      "platforms/documentation/docs/src/docs/userguide/img/configuration-cache-8.png",
+      "platforms/documentation/docs/src/docs/userguide/img/copy-with-deep-filter-example.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/copy-with-deep-filter-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/copy-with-flat-filter-example.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/copy-with-flat-filter-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-application-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-application-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-application-variant-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-library-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-library-variant-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-shared-library-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-sourcesets-compilation.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-static-library-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-variant-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/declaring-dependencies-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/declaring-dependencies-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dep-man-adv-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dep-man-adv-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dep-man-adv-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dep-man-adv-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dep-man-adv-5.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-configuration-inheritance.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-configurations.graffle/**",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-constraints.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-dependency-insight-report-build-scan.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-file-dependencies.graffle/**",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-file-dependencies.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-java-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-project-dependencies.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-project-dependencies.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-resolution.graffle/**",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-shortcut-repositories.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-management-shortcut-repositories.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-resolution-variant-selection-model.png",
+      "platforms/documentation/docs/src/docs/userguide/img/dependency-resolution-variant-selection.png",
+      "platforms/documentation/docs/src/docs/userguide/img/deprecations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/eclipse.png",
+      "platforms/documentation/docs/src/docs/userguide/img/exploded-war-child-copy-spec-example.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/exploded-war-child-copy-spec-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/file-collection-vs-file-tree.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/file-collection-vs-file-tree.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-10.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-11.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-12.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-13.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-14.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-15.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-5.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-6.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-7.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-8.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-basic-9.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-build-lifecycle.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-completion-4.0.gif",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-core-test-build-scan-dependencies.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-core-test-build-scan-performance.png",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-ide-invocation.gif",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle-terminal-invocation.gif",
+      "platforms/documentation/docs/src/docs/userguide/img/gradle.png",
+      "platforms/documentation/docs/src/docs/userguide/img/groovyPluginTasks.png",
+      "platforms/documentation/docs/src/docs/userguide/img/intellij-build-import-popup.png",
+      "platforms/documentation/docs/src/docs/userguide/img/intellij-idea-android-studio.png",
+      "platforms/documentation/docs/src/docs/userguide/img/intellij-script-dependencies-reload.png",
+      "platforms/documentation/docs/src/docs/userguide/img/intellij_idea.png",
+      "platforms/documentation/docs/src/docs/userguide/img/jacocoHtmlReport.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-library-ignore-deprecated-main.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-library-ignore-deprecated-test.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-main-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-platform-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-sourcesets-compilation.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/java-sourcesets-compilation.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-sourcesets-process-resources.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/java-sourcesets-process-resources.png",
+      "platforms/documentation/docs/src/docs/userguide/img/java-test-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/javaPluginTasks.png",
+      "platforms/documentation/docs/src/docs/userguide/img/multi-project-standards.png",
+      "platforms/documentation/docs/src/docs/userguide/img/multi-project-structure.png",
+      "platforms/documentation/docs/src/docs/userguide/img/nativeDependents.png",
+      "platforms/documentation/docs/src/docs/userguide/img/netbeans.png",
+      "platforms/documentation/docs/src/docs/userguide/img/performance/**",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-intro-advanced-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-intro-advanced-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-intro-advanced-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-markers.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-portal-example.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-portal-page.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-portal-plugin-page.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin-portal-registration-page.png",
+      "platforms/documentation/docs/src/docs/userguide/img/plugin_anatomy.png",
+      "platforms/documentation/docs/src/docs/userguide/img/problems-report-html.png",
+      "platforms/documentation/docs/src/docs/userguide/img/publishing-process.png",
+      "platforms/documentation/docs/src/docs/userguide/img/remote-debug-gradle.gif",
+      "platforms/documentation/docs/src/docs/userguide/img/rich-cli.png",
+      "platforms/documentation/docs/src/docs/userguide/img/scalaPluginTasks.png",
+      "platforms/documentation/docs/src/docs/userguide/img/securing-builds/**",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-1.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-6.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-7.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-8.png",
+      "platforms/documentation/docs/src/docs/userguide/img/structuring-builds-9.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-application-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-application-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-application-variant-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-library-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-library-variant-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-shared-library-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-sourcesets-compilation.png",
+      "platforms/documentation/docs/src/docs/userguide/img/swift-static-library-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/task-dag-examples.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/task-dag-examples.png",
+      "platforms/documentation/docs/src/docs/userguide/img/taskConfigurationAvoidance-navigate-to-performance.png",
+      "platforms/documentation/docs/src/docs/userguide/img/taskConfigurationAvoidance-performance-annotated.png",
+      "platforms/documentation/docs/src/docs/userguide/img/taskInputsOutputs.png",
+      "platforms/documentation/docs/src/docs/userguide/img/testing-pyramid.png",
+      "platforms/documentation/docs/src/docs/userguide/img/troubleshooting-dependency-management-build-scan.png",
+      "platforms/documentation/docs/src/docs/userguide/img/troubleshooting-refresh-eclipse.png",
+      "platforms/documentation/docs/src/docs/userguide/img/troubleshooting-refresh-intellij.png",
+      "platforms/documentation/docs/src/docs/userguide/img/troubleshooting-task-execution-build-scan.png",
+      "platforms/documentation/docs/src/docs/userguide/img/tutorial/**",
+      "platforms/documentation/docs/src/docs/userguide/img/userguide-ides.png",
+      "platforms/documentation/docs/src/docs/userguide/img/userguide-languages.png",
+      "platforms/documentation/docs/src/docs/userguide/img/visual-studio-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/visual_studio_code.png",
+      "platforms/documentation/docs/src/docs/userguide/img/warPluginTasks.png",
+      "platforms/documentation/docs/src/docs/userguide/img/wrapper-workflow.graffle",
+      "platforms/documentation/docs/src/docs/userguide/img/wrapper-workflow.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-2.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-3.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-4.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-5.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-6.png",
+      "platforms/documentation/docs/src/docs/userguide/img/writing-tasks-7.png",
+      "platforms/documentation/docs/src/docs/userguide/img/xcode-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/xctest-configurations.png",
+      "platforms/documentation/docs/src/docs/userguide/img/xctest-task-graph.png",
+      "platforms/documentation/docs/src/docs/userguide/img/xctest-variant-task-graph.png",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/groovy/libs/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/kotlin/libs/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/files/archives/groovy/src/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/files/archives/kotlin/src/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/src/main/assets.zip",
+      "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/src/main/assets.zip",
+      "platforms/documentation/docs/src/snippets/integration-tests/java/application/groovy/src/dist/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/java/application/kotlin/src/dist/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/groovy/libs/cunit/2.1-2/lib/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/groovy/libs/googleTest/1.7.0/lib/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/groovy/gnupg-home/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/kotlin/gnupg-home/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/groovy/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/kotlin/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/groovy/additionalLibs/**",
+      "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/kotlin/additionalLibs/**",
+      "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/groovy/additionalLibs/**",
+      "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/kotlin/additionalLibs/**",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project1/1.0/project1-1.0.jar",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project2/1.0/project2-1.0.jar",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project3/1.0/project3-1.0.jar",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/common/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/groovy/gnupg-home/**",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/kotlin/gnupg-home/**",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/groovy/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/kotlin/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/tasks/common/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/groovy/src/**",
+      "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/kotlin/src/**",
+      "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/src/main/assets.zip",
+      "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/src/main/assets.zip",
+      "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/groovy/src/dist/**",
+      "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/kotlin/src/dist/**",
+      "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/groovy/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/kotlin/secKeyRingFile.gpg",
+      "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/groovy/libs/cunit/2.1-2/lib/**",
+      "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/groovy/libs/googleTest/1.7.0/lib/**",
+      "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/groovy/libs/**",
+      "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/kotlin/libs/**",
+      "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar",
+      "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/incremental/compilerapi/deps/**",
+      "platforms/jvm/javadoc/src/main/java/org/gradle/external/**",
+      "platforms/jvm/javadoc/src/test/groovy/org/gradle/external/**",
+      "platforms/jvm/language-java/src/integTest/resources/org/gradle/api/**",
+      "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/compilerapi/deps/**",
+      "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/deps/**",
+      "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/deps/**",
+      "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/external/**",
+      "platforms/software/dependency-management/src/main/resources/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/verification/report/gradle-logo.png",
+      "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/component/external/**",
+      "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/default/secring.gpg",
+      "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/subkey/secring.gpg",
+      "platforms/software/signing/src/testFixtures/resources/keys/gradle/secring.gpg",
+      "platforms/software/signing/src/testFixtures/resources/keys/rfc9580v6sample/secring.gpg",
+      "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/d.gif",
+      "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/d.png",
+      "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/throbber.gif",
+      "subprojects/core/src/integTest/resources/org/gradle/api/tasks/bundling/**",
+      "subprojects/core/src/test/resources/org/gradle/api/internal/file/**",
+      "testing/internal-integ-testing/src/main/resources/test-key-store/**",
+      "testing/performance/src/templates/native-dependents-resources/googleTest/libs/googleTest/1.7.0/lib/**",
+      "testing/smoke-test/src/smokeTest/groovy/org/gradle/play/integtest/external/**",
+      "testing/smoke-test/src/smokeTest/groovy/org/gradle/play/integtest/fixtures/external/**",
+      "testing/smoke-test/src/smokeTest/resources/org/gradle/play/**",
+      "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/public/images/**"
+    ]
+  },
+  "history": {
+    "since": "17fc6682e2f9d641aa5ff389ea17ec07fe641b24"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n",
+      "attribution": "Commit history of https://github.com/gradle/gradle: the authors of gradle/gradle (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/gradle/gradle."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".coderabbit.yaml",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".idea/codeStyles/**",
+        ".idea/inspectionProfiles/**",
+        ".idea/misc.xml",
+        ".idea/scopes/**",
+        ".mailmap",
+        ".teamcity/.mvn/develocity.xml",
+        ".teamcity/.mvn/extensions.xml",
+        ".teamcity/.mvn/wrapper/MavenWrapperDownloader.java",
+        ".teamcity/.mvn/wrapper/maven-wrapper.properties",
+        ".teamcity/README.md",
+        ".teamcity/hooks/**",
+        ".teamcity/jdks.yaml",
+        ".teamcity/mirror-settings.xml",
+        ".teamcity/mvnw",
+        ".teamcity/mvnw.cmd",
+        ".teamcity/performance-test-durations.json",
+        ".teamcity/performance-tests-ci.json",
+        ".teamcity/pluginData/**",
+        ".teamcity/pom.xml",
+        ".teamcity/scripts/**",
+        ".teamcity/settings.kts",
+        ".teamcity/src/**",
+        ".teamcity/subprojects.json",
+        ".teamcity/test-buckets.json",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "KEYS.md",
+        "LICENSE",
+        "README.md",
+        "architecture/**",
+        "build-logic/binary-compatibility/**",
+        "build-logic/build-update-utils/**",
+        "build-logic/build.gradle.kts",
+        "build-logic/buildquality/**",
+        "build-logic/cleanup/**",
+        "build-logic/dependency-modules/build.gradle.kts",
+        "build-logic/dependency-modules/src/main/kotlin/gradlebuild.dependency-modules.gradle.kts",
+        "build-logic/documentation/**",
+        "build-logic/gradle.properties",
+        "build-logic/idea/**",
+        "build-logic/integration-testing/**",
+        "build-logic/integration-testing-kotlin/**",
+        "build-logic/jvm/**",
+        "build-logic/kotlin-dsl/**",
+        "build-logic/kotlin-dsl-shared-runtime/**",
+        "build-logic/lifecycle/**",
+        "build-logic/packaging/**",
+        "build-logic/performance-testing/**",
+        "build-logic/profiling/**",
+        "build-logic/root-build/**",
+        "build-logic/settings.gradle.kts",
+        "build-logic/uber-plugins/**",
+        "build-logic-commons/basics/**",
+        "build-logic-commons/build-platform/**",
+        "build-logic-commons/build-platform-plugin/**",
+        "build-logic-commons/build.gradle.kts",
+        "build-logic-commons/code-quality-rules/build.gradle.kts",
+        "build-logic-commons/code-quality-rules/src/main/java/**",
+        "build-logic-commons/code-quality-rules/src/main/resources/checkstyle/**",
+        "build-logic-commons/code-quality-rules/src/main/resources/codenarc/**",
+        "build-logic-commons/gradle-plugin/**",
+        "build-logic-commons/module-identity/**",
+        "build-logic-commons/publishing/**",
+        "build-logic-commons/settings.gradle.kts",
+        "build-logic-settings/**",
+        "build.gradle.kts",
+        "contributing/CodeReview.md",
+        "contributing/Debugging.md",
+        "contributing/ErrorMessages.md",
+        "contributing/JavadocStyleGuide.md",
+        "contributing/Nullability.md",
+        "contributing/Testing.md",
+        "gradle/dependency-management/**",
+        "gradle/detekt.yml",
+        "gradle/gradle-daemon-jvm.properties",
+        "gradle/shared-with-buildSrc/**",
+        "gradle/verification-keyring.keys",
+        "gradle/verification-metadata.xml",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "images/README.md",
+        "packaging/**",
+        "platforms/core-configuration/**",
+        "platforms/core-execution/**",
+        "platforms/core-runtime/BYTECODE-INTERCEPTION-README.md",
+        "platforms/core-runtime/README.md",
+        "platforms/core-runtime/base-asm/**",
+        "platforms/core-runtime/base-services/**",
+        "platforms/core-runtime/build-configuration/**",
+        "platforms/core-runtime/build-discovery/**",
+        "platforms/core-runtime/build-discovery-impl/**",
+        "platforms/core-runtime/build-discovery-reporting/**",
+        "platforms/core-runtime/build-operations/**",
+        "platforms/core-runtime/build-operations-trace/**",
+        "platforms/core-runtime/build-option/**",
+        "platforms/core-runtime/build-process-services/**",
+        "platforms/core-runtime/build-profile/**",
+        "platforms/core-runtime/build-state/**",
+        "platforms/core-runtime/classloaders/**",
+        "platforms/core-runtime/classpath/**",
+        "platforms/core-runtime/cli/**",
+        "platforms/core-runtime/client-services/**",
+        "platforms/core-runtime/collections/**",
+        "platforms/core-runtime/concurrent/**",
+        "platforms/core-runtime/daemon-logging/**",
+        "platforms/core-runtime/daemon-main/**",
+        "platforms/core-runtime/daemon-messaging/**",
+        "platforms/core-runtime/daemon-protocol/**",
+        "platforms/core-runtime/daemon-server/**",
+        "platforms/core-runtime/daemon-services/**",
+        "platforms/core-runtime/file-temp/**",
+        "platforms/core-runtime/files/**",
+        "platforms/core-runtime/functional/**",
+        "platforms/core-runtime/gradle-cli/**",
+        "platforms/core-runtime/gradle-cli-main/**",
+        "platforms/core-runtime/groovy-loader/**",
+        "platforms/core-runtime/installation-beacon/**",
+        "platforms/core-runtime/instrumentation-agent/**",
+        "platforms/core-runtime/instrumentation-agent-services/**",
+        "platforms/core-runtime/instrumentation-declarations/**",
+        "platforms/core-runtime/instrumentation-reporting/**",
+        "platforms/core-runtime/internal-instrumentation-api/**",
+        "platforms/core-runtime/internal-instrumentation-processor/**",
+        "platforms/core-runtime/io/**",
+        "platforms/core-runtime/launcher/**",
+        "platforms/core-runtime/logging/**",
+        "platforms/core-runtime/logging-api/**",
+        "platforms/core-runtime/messaging/**",
+        "platforms/core-runtime/native/**",
+        "platforms/core-runtime/process-memory-services/**",
+        "platforms/core-runtime/process-services/**",
+        "platforms/core-runtime/process-services-api/**",
+        "platforms/core-runtime/process-services-base/**",
+        "platforms/core-runtime/reflection-services/**",
+        "platforms/core-runtime/report-rendering/**",
+        "platforms/core-runtime/serialization/**",
+        "platforms/core-runtime/service-lookup/**",
+        "platforms/core-runtime/service-provider/**",
+        "platforms/core-runtime/service-registry-builder/**",
+        "platforms/core-runtime/service-registry-impl/**",
+        "platforms/core-runtime/start-parameter/**",
+        "platforms/core-runtime/stdlib-java-extensions/**",
+        "platforms/core-runtime/time/**",
+        "platforms/core-runtime/tooling-api-provider/**",
+        "platforms/core-runtime/versioned-cache/**",
+        "platforms/core-runtime/wrapper-main/build.gradle.kts",
+        "platforms/core-runtime/wrapper-main/src/crossVersionTest/**",
+        "platforms/core-runtime/wrapper-main/src/integTest/**",
+        "platforms/core-runtime/wrapper-main/src/main/**",
+        "platforms/core-runtime/wrapper-main/src/test/**",
+        "platforms/core-runtime/wrapper-shared/**",
+        "platforms/documentation/docs/README.md",
+        "platforms/documentation/docs/build.gradle.kts",
+        "platforms/documentation/docs/snippets.md",
+        "platforms/documentation/docs/src/docs/css/**",
+        "platforms/documentation/docs/src/docs/design/**",
+        "platforms/documentation/docs/src/docs/dsl/**",
+        "platforms/documentation/docs/src/docs/javaPackageList/**",
+        "platforms/documentation/docs/src/docs/kotlin/**",
+        "platforms/documentation/docs/src/docs/release/content/**",
+        "platforms/documentation/docs/src/docs/release/notes-template.md",
+        "platforms/documentation/docs/src/docs/release/notes.md",
+        "platforms/documentation/docs/src/docs/release/release-notes-assets/.gitkeepdir",
+        "platforms/documentation/docs/src/docs/ruby/**",
+        "platforms/documentation/docs/src/docs/rules/**",
+        "platforms/documentation/docs/src/docs/stylesheets/**",
+        "platforms/documentation/docs/src/docs/userguide/best-practices/**",
+        "platforms/documentation/docs/src/docs/userguide/fundamentals/**",
+        "platforms/documentation/docs/src/docs/userguide/how-to/**",
+        "platforms/documentation/docs/src/docs/userguide/img/commandLineTutorialTasks.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-application-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-application-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-application-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-library-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-library-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-shared-library-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-sourcesets-compilation.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-static-library-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/cpp-unit-test-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/groovyPluginTasks.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/javaPluginTasks.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/nativeDependents.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/octicons-16.svg",
+        "platforms/documentation/docs/src/docs/userguide/img/plugin-markers.puml",
+        "platforms/documentation/docs/src/docs/userguide/img/publishing-process.graffle",
+        "platforms/documentation/docs/src/docs/userguide/img/scalaPluginTasks.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/software_architecture.puml",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-application-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-application-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-application-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-library-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-library-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-shared-library-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-sourcesets-compilation.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/swift-static-library-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/taskInputsOutputs.graffle",
+        "platforms/documentation/docs/src/docs/userguide/img/visual-studio-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/warPluginTasks.graphml",
+        "platforms/documentation/docs/src/docs/userguide/img/xcode-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/xctest-configurations.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/xctest-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/img/xctest-variant-task-graph.dot",
+        "platforms/documentation/docs/src/docs/userguide/integration/**",
+        "platforms/documentation/docs/src/docs/userguide/js/**",
+        "platforms/documentation/docs/src/docs/userguide/on-ci/**",
+        "platforms/documentation/docs/src/docs/userguide/optimizing-builds/**",
+        "platforms/documentation/docs/src/docs/userguide/overview/**",
+        "platforms/documentation/docs/src/docs/userguide/redirects/**",
+        "platforms/documentation/docs/src/docs/userguide/reference/**",
+        "platforms/documentation/docs/src/docs/userguide/releases/**",
+        "platforms/documentation/docs/src/docs/userguide/securing-builds/**",
+        "platforms/documentation/docs/src/docs/userguide/structuring-builds/**",
+        "platforms/documentation/docs/src/docs/userguide/tutorials/**",
+        "platforms/documentation/docs/src/docs/userguide/unused/**",
+        "platforms/documentation/docs/src/docs/userguide/userguide_single.adoc",
+        "platforms/documentation/docs/src/docsTest/**",
+        "platforms/documentation/docs/src/main/**",
+        "platforms/documentation/docs/src/snippets/best-practices/**",
+        "platforms/documentation/docs/src/snippets/dependencyManagement/**",
+        "platforms/documentation/docs/src/snippets/ear/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/basic/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/basic-dependencies/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/buildscript/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/catalogs-toml-simple/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example.goodbye/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/ivy-repo/com.example.hello/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/goodbye/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/groovy/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/kotlin/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/consuming/tests/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/customPlugin/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/customTask/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/declaringDependencies-basic/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/dependenciesIntermediate/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/downgrade-transitives/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/dsl/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/dslWithBuildSrc/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/dynamicDepends/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/example/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/extraProperties/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/generated/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/gradleManagedTypes/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/hello/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/helloEnhanced/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/incrementalTask/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/intro/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/lazyDependsOn/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/localVariables/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/managingTransitiveDependencies-versionsWithConstraints/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiProjectBuild/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/goodbye/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/groovy/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/kotlin/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/multiproject/tests/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginIntro/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginManagement/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/gradle.properties",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/groovy/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/kotlin/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/pluginVersions/tests/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/projectApi/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/publishing/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/quickstart/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/groovy/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/kotlin/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/resolutionRules/tests/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/simple/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/taskTutorial/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/authoring-builds/tutorialTask/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/developing-plugins/**",
+        "platforms/documentation/docs/src/snippets/fundamentals/running-builds/**",
+        "platforms/documentation/docs/src/snippets/how-to/**",
+        "platforms/documentation/docs/src/snippets/integration/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/fileDeps/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/importBuild/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/antMigration/multiProject/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/antlr/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/artifacts/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/base/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/codeQuality/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/customModel/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/dependencyManagement/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archives/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archives/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archives/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archives/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archives/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archivesWithBasePlugin/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/archivesWithJavaPlugin/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/distResources/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/src/docs/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/groovy/src/main/webapp/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/distResources/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/src/docs/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/kotlin/src/main/webapp/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/copy/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/misc/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/files/sampleJavaProject/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/groovy/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/ivy-publish/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/groovy/src/main/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/kotlin/src/main/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/readme.xml",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/application/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/basic/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/customDirs/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/customizedLayout/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/incrementalAnnotationProcessing/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/multiproject/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/java/quickstart/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/maven-publish/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/modelRules/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/assembler/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/c/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cpp/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cpp-exe/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cpp-lib/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/README.md",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/groovy/libs/cunit/2.1-2/include/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/cunit/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/custom-check/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/custom-layout/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/flavors/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/README.md",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/groovy/libs/googleTest/1.7.0/include/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/google-test/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/idl/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/multi-project/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/objective-c/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/objective-cpp/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/pre-compiled-headers/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/prebuilt/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/sourceset-variant/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/target-platforms/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/tool-chains/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/variants/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/visual-studio/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/native-binaries/windows-resources/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/organizingGradleProjects/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/scala/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/conditional/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/groovy/gradle.properties",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/kotlin/gradle.properties",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/gnupg-signatory/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/in-memory/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/in-memory-subkey/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/groovy/gradle.properties",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/kotlin/gradle.properties",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/signing/maven-publish/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/testKit/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/testing/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/toolingApi/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/tutorial/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/readme.xml",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/customized/tests/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/webApplication/quickstart/**",
+        "platforms/documentation/docs/src/snippets/integration-tests/workerApi/**",
+        "platforms/documentation/docs/src/snippets/isolatedProjects/**",
+        "platforms/documentation/docs/src/snippets/java-platform/**",
+        "platforms/documentation/docs/src/snippets/optimizing-builds/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/archivesChangedBaseName/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/basePlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/buildDashboard/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/buildInitPlugin-pomExclusion/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/checkstylePlugin-dependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/codeQuality/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/readme.xml",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customized/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/customizedLayout/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/distribution/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/distribution-ivy-publish/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/distribution-maven-publish/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/distributionPlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/earCustomized/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/earWithWar/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/eclipse/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/idea/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/ideaAdditionalTestSources/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/jacoco-application/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/jacoco-application-filtered/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/jacoco-multi-test-suites/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/jacoco-quickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/java-basic/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/javaGradlePlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/quickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/useAntlrPlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/visualStudio/**",
+        "platforms/documentation/docs/src/snippets/reference/core-plugins/webApplication/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/advanced/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/basics/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/centralizing-dependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/controlling-dependency-resolution/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/declaring-dependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/declaring-repositories/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-attributeSubstitutionRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-capabilitySubstitutionRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-classifierSubstitutionRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project1/1.0/ivy-1.0.xml",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project2/1.0/ivy-1.0.xml",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/common/repo/org.example/project3/1.0/ivy-1.0.xml",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/groovy/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/kotlin/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-conditionalSubstitutionRule/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-defaultDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-lazyDependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-metadataRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-replacementRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-resolutionStrategy/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-selectionRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/customizingResolution-substitutionRule/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyCaching-changingDeps/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyLocking-lockModeSelection/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyLocking-lockingAllConfigurations/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyLocking-lockingClasspathConfiguration/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyLocking-lockingSingleFilePerProject/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/dependencyLocking-unlockingSingleConfiguration/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-disableForConfiguration/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-disableForDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-excludeForConfiguration/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-excludeForDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-forceForConfiguration/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/managingTransitiveDependencies-resolutionStrategy/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/troubleshooting-cache-changing/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/dependency-management/troubleshooting-cache-dynamic/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/introductionDependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/conditional/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/conditional-publishing/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/common/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/common/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/groovy/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/kotlin/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/configurations/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/customize-identity/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/descriptor-customization/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/groovy/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/kotlin/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/gnupg-signatory/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/in-memory/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/in-memory-subkey/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/java-multi-project/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/javaLibrary/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/javaProject/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/groovy/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/kotlin/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/maven-publish/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/modelingFeatures-crossProjectPublications-advanced-published/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/modelingFeatures-outgoingCapabilities/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/publish-artifact/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/publishingMaven-deferredConfig/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/quickstart-ivy-publish/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/quickstart-maven-publish/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/specify-relocation/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/tasks/common/src/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/tasks/groovy/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/tasks/kotlin/**",
+        "platforms/documentation/docs/src/snippets/reference/dependency-management/publishing/tasks/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/dsl-apis/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archiveNaming/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archives/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archivesChangedBaseName/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archivesWithBasePlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/archivesWithJavaPlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/basics/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/collections/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/distResources/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/src/docs/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/groovy/src/main/webapp/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/distResources/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/src/docs/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/kotlin/src/main/webapp/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/copy/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/deployWarWithCopy/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/example/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/file/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/fileCollections/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/fileTrees/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/inputFiles/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/installExecutable/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/lazyFileVariants/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/misc/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/namedDomainObjectContainer/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/playSound/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/property/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/sampleJavaProject/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/services/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/sync/**",
+        "platforms/documentation/docs/src/snippets/reference/gradle-types/workingWithFiles-fileOps/**",
+        "platforms/documentation/docs/src/snippets/reference/other-topics/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/groovy/src/main/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/kotlin/src/main/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/readme.xml",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/application/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/apt/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/archivesWithJavaPlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/basic/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/compilationAvoidance/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/compileTaskClasspath/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/compilerPlugin/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/crossCompilation/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/customConfs-creation/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/customDirs/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/customizedLayout/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/defineRepository/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/dependencyBasics/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/externalDependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/filtering/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/fixtures/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/force/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/groovyDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/groovyQuickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/ideaTargetVersion/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/incrementalAnnotationProcessing/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/incrementalCompilation/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/javaLibraryDistribution/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/javaLibraryQuickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/javaPlatformQuickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/javaQuickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junit-categories/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junit-xml-results/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junitplatform-engine/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junitplatform-jupiter/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junitplatform-mix/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/junitplatform-tagging/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/jvm-multi-project-with-code-coverage-standalone/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/jvm-multi-project-with-test-aggregation-standalone/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/jvm-multi-project-with-toolchains/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/manifest/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/groovy/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/kotlin/gradle.properties",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/maven-publish/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/module/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/module-disabled/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/multiproject/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/non-class-based-testing/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/patch-module/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/preview/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/recommender/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/scala3/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/scalaCustomizedLayout/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/scalaDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/scalaQuickstart/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/sourceSets/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/sourceSets-badConfNames/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-add-target/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-configure-default-suite/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-configure-source-dir/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-configure-suite-dependencies/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-configure-suite-dependencies-project/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-configure-suite-dependencies-test-fixtures/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-multi-configure-each/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-multi-configure-each-extracted/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-multi-configure-each-matching/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/test-suite-plugin/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/testReport/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/testng-groupbyinstances/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/testng-groups/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/testng-preserveorder/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-basic/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-config-task/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-filters/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-foojay/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-management/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchain-task/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/toolchains-crossCompile/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/zinc/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/jvm/zincDependency/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/assembler/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/c/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cpp/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cpp-basic/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cpp-lib/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cppApplication/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cppLibrary/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cppUnitTest/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/README.md",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/groovy/libs/cunit/2.1-2/include/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/cunit/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/custom-check/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/custom-layout/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/flavors/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/README.md",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/groovy/libs/googleTest/1.7.0/include/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/google-test/tests/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/multi-project/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/objective-c/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/objective-cpp/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/pre-compiled-headers/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/swift-basic/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/swiftApplication/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/swiftLibrary/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/swiftXCTest/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/target-platforms/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/testFiltering/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/testReport/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/tool-chains/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/variants/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/windows-resources/**",
+        "platforms/documentation/docs/src/snippets/reference/platforms/native/xcode/**",
+        "platforms/documentation/docs/src/snippets/reference/plugin-development/**",
+        "platforms/documentation/docs/src/snippets/reference/runtime-configuration/**",
+        "platforms/documentation/docs/src/snippets/reference/task-development/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/ant/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/basic/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/groovy/build.gradle",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/groovy/settings.gradle",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/groovy/src/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/kotlin/build.gradle.kts",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/kotlin/settings.gradle.kts",
+        "platforms/documentation/docs/src/snippets/releases/migrating/fileDeps/kotlin/src/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/importBom/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/importBuild/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/multiModule/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/multiProject/**",
+        "platforms/documentation/docs/src/snippets/releases/migrating/profiles/**",
+        "platforms/documentation/docs/src/snippets/releases/upgrading/**",
+        "platforms/documentation/docs/src/snippets/securing-builds/**",
+        "platforms/documentation/docs/src/snippets/structuring-builds/**",
+        "platforms/documentation/docs/src/snippets/tutorials/**",
+        "platforms/documentation/docs/src/snippets/unused/build-environment/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/buildscript/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example.goodbye/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/ivy-repo/com.example.hello/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/goodbye/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/groovy/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/kotlin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/consuming/tests/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/dsl/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/dslWithBuildSrc/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/greeting/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/greetingPlugin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/init-groovy/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/init-kotlin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/mappingExtensions/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/goodbye/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/groovy/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/kotlin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/multiproject/tests/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/plugin-binary/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/plugin-tutorial/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginManagement/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginProject/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/gradle.properties",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/hello/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/groovy/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/kotlin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/pluginVersions/tests/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/precompiledScriptPlugins-externalPlugins/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/precompiledScriptPlugins-inBuildSrc/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/precompiledScriptPlugins-settings/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/publishing/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/readme.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/reportingProblems/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/ivy-1.0.0.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/ivy-repo/com.example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.jar.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/1.0.0/sample-plugins-1.0.0.pom.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.md5",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/common/maven-repo/com/example/sample-plugins/maven-metadata.xml.sha1",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/groovy/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/kotlin/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/resolutionRules/tests/**",
+        "platforms/documentation/docs/src/snippets/unused/plugins/simple/**",
+        "platforms/documentation/docs/src/snippets/unused/tasks/**",
+        "platforms/documentation/docs/src/snippets/unused/tutorial/**",
+        "platforms/documentation/docs/src/snippets/unused/worker-api/**",
+        "platforms/documentation/docs/src/test/**",
+        "platforms/documentation/docs-asciidoctor-extensions/**",
+        "platforms/documentation/docs-asciidoctor-extensions-base/**",
+        "platforms/documentation/samples/**",
+        "platforms/enterprise/**",
+        "platforms/extensibility/**",
+        "platforms/ide/**",
+        "platforms/jvm/antlr/**",
+        "platforms/jvm/code-quality/**",
+        "platforms/jvm/code-quality-workers/**",
+        "platforms/jvm/distributions-jvm/**",
+        "platforms/jvm/ear/**",
+        "platforms/jvm/groovy-compiler-worker/**",
+        "platforms/jvm/groovydoc-worker/**",
+        "platforms/jvm/jacoco/**",
+        "platforms/jvm/jacoco-workers/**",
+        "platforms/jvm/java-compiler-plugin/**",
+        "platforms/jvm/java-compiler-worker/build.gradle.kts",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/AnnotationProcessingCompileTask.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/ApiCompilerResult.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/CommandLineJavaCompileSpec.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/CompilationClassBackupService.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/CompilationFailedException.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/CompilationSourceDirs.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/ContextAwareJavaCompiler.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/DefaultForkingJavaCompileSpec.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/DefaultJavaCompileSpec.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/DiagnosticToProblemListener.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/ForkingJavaCompileSpec.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/IncrementalCompilationAwareJavaCompiler.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JavaCompileSpec.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JavaCompilerArgumentsBuilder.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JavaCompilerParameters.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JavaHomeBasedJavaCompilerFactory.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JavacDiagnosticNames.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JdkJavaCompiler.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/JdkTools.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/MinimalJavaCompileOptions.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/MinimalJavaCompilerDaemonForkOptions.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/ResourceCleaningCompilationTask.java",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/filter/**",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/incremental/compilerapi/constants/**",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/incremental/processing/**",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/processing/**",
+        "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/reflect/**",
+        "platforms/jvm/java-compiler-worker/src/test/**",
+        "platforms/jvm/java-platform/**",
+        "platforms/jvm/javadoc/build.gradle.kts",
+        "platforms/jvm/javadoc/src/integTest/**",
+        "platforms/jvm/javadoc/src/main/java/org/gradle/api/**",
+        "platforms/jvm/javadoc/src/main/java/org/gradle/language/**",
+        "platforms/jvm/javadoc/src/main/resources/**",
+        "platforms/jvm/javadoc/src/test/groovy/org/gradle/api/**",
+        "platforms/jvm/jvm-compiler-worker/**",
+        "platforms/jvm/jvm-services/**",
+        "platforms/jvm/language-groovy/**",
+        "platforms/jvm/language-java/build.gradle.kts",
+        "platforms/jvm/language-java/src/crossVersionTest/**",
+        "platforms/jvm/language-java/src/integTest/groovy/**",
+        "platforms/jvm/language-java/src/integTest/resources/org/gradle/integtests/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/CompileServices.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/AbstractJavaCompileSpecFactory.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/AnnotationProcessorDiscoveringCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CleaningJavaCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CommandLineJavaCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CommandLineJavaCompilerArgumentsGenerator.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CompileJavaBuildOperationReportingCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CompileJavaBuildOperationType.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/CompilerForkUtils.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/DaemonJavaCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/DefaultJavaCompileSpecFactory.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/DefaultJavaCompilerFactory.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/JavaCompileExecutableUtils.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/ModuleApplicationNameWritingCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/NormalizingJavaCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/IncrementalCompilerFactory.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/IncrementalResultStoringCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/RecompilationNotNecessary.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/SelectiveCompiler.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/analyzer/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/asm/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/cache/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/classpath/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/compilerapi/CompilerApiData.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/compilerapi/constants/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/processing/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/recomp/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/incremental/transaction/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/processing/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/compile/tooling/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/internal/tasks/package-info.java",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/plugins/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/api/tasks/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/jvm/**",
+        "platforms/jvm/language-java/src/main/java/org/gradle/language/**",
+        "platforms/jvm/language-java/src/main/resources/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/AnnotationProcessorDiscoveringCompilerTest.groovy",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/CommandLineJavaCompilerArgumentsGeneratorTest.groovy",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/DefaultJavaCompileSpecFactoryTest.groovy",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/DefaultJavaCompilerFactoryTest.groovy",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/NormalizingJavaCompilerTest.groovy",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/analyzer/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/compilerapi/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/recomp/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/test/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/incremental/transaction/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/internal/tasks/compile/processing/**",
+        "platforms/jvm/language-java/src/test/groovy/org/gradle/api/tasks/**",
+        "platforms/jvm/language-java/src/testFixtures/**",
+        "platforms/jvm/language-jvm/**",
+        "platforms/jvm/platform-jvm/**",
+        "platforms/jvm/plugins-application/**",
+        "platforms/jvm/plugins-groovy/**",
+        "platforms/jvm/plugins-java/**",
+        "platforms/jvm/plugins-java-base/**",
+        "platforms/jvm/plugins-java-library/**",
+        "platforms/jvm/plugins-jvm-test-fixtures/**",
+        "platforms/jvm/plugins-jvm-test-suite/**",
+        "platforms/jvm/plugins-test-report-aggregation/**",
+        "platforms/jvm/scala/**",
+        "platforms/jvm/scala-compiler-worker/**",
+        "platforms/jvm/scaladoc-worker/**",
+        "platforms/jvm/testing-jvm/**",
+        "platforms/jvm/testing-jvm-infrastructure/**",
+        "platforms/jvm/toolchains-jvm/**",
+        "platforms/jvm/toolchains-jvm-shared/**",
+        "platforms/jvm/war/**",
+        "platforms/native/**",
+        "platforms/software/ant/**",
+        "platforms/software/ant-api/**",
+        "platforms/software/ant-impl/**",
+        "platforms/software/ant-worker/**",
+        "platforms/software/base-compiler-worker/**",
+        "platforms/software/build-init/**",
+        "platforms/software/build-init-specs/**",
+        "platforms/software/build-init-specs-api/**",
+        "platforms/software/credentials/**",
+        "platforms/software/credentials-api/**",
+        "platforms/software/credentials-impl/**",
+        "platforms/software/dependency-management/README.md",
+        "platforms/software/dependency-management/build.gradle.kts",
+        "platforms/software/dependency-management/src/crossVersionTest/**",
+        "platforms/software/dependency-management/src/integTest/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/api/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/composite/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/AmbiguousVariantSelectionException.java",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/local/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/model/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/package-info.java",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/component/resolution/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/locking/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/management/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/resolve/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/resource/**",
+        "platforms/software/dependency-management/src/main/java/org/gradle/internal/rules/**",
+        "platforms/software/dependency-management/src/main/resources/META-INF/**",
+        "platforms/software/dependency-management/src/main/resources/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/verification/report/uikit-icons.min.js",
+        "platforms/software/dependency-management/src/main/resources/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/verification/report/uikit.min.css",
+        "platforms/software/dependency-management/src/main/resources/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/verification/report/uikit.min.js",
+        "platforms/software/dependency-management/src/main/resources/org/gradle/schema/**",
+        "platforms/software/dependency-management/src/scripts/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/api/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/caching/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/integtests/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/component/local/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/component/model/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/locking/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/resolve/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/resource/**",
+        "platforms/software/dependency-management/src/test/groovy/org/gradle/internal/rules/**",
+        "platforms/software/dependency-management/src/test/resources/**",
+        "platforms/software/dependency-management/src/testFixtures/**",
+        "platforms/software/dependency-management-resources/**",
+        "platforms/software/distributions-publishing/**",
+        "platforms/software/isolated-ant-builder/**",
+        "platforms/software/ivy/**",
+        "platforms/software/maven/**",
+        "platforms/software/platform-base/**",
+        "platforms/software/plugins-distribution/**",
+        "platforms/software/plugins-version-catalog/**",
+        "platforms/software/publish/**",
+        "platforms/software/reporting/**",
+        "platforms/software/resources/**",
+        "platforms/software/resources-gcs/**",
+        "platforms/software/resources-http/**",
+        "platforms/software/resources-s3/**",
+        "platforms/software/resources-sftp/**",
+        "platforms/software/security/**",
+        "platforms/software/signing/build.gradle.kts",
+        "platforms/software/signing/src/integTest/groovy/**",
+        "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/default/keyId.txt",
+        "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/default/password.txt",
+        "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/subkey/keyId.txt",
+        "platforms/software/signing/src/integTest/resources/org/gradle/plugins/signing/keys/subkey/password.txt",
+        "platforms/software/signing/src/main/**",
+        "platforms/software/signing/src/test/**",
+        "platforms/software/signing/src/testFixtures/groovy/**",
+        "platforms/software/signing/src/testFixtures/resources/keys/gradle/keyId.txt",
+        "platforms/software/signing/src/testFixtures/resources/keys/gradle/password.txt",
+        "platforms/software/signing/src/testFixtures/resources/keys/invalid-key-ring/**",
+        "platforms/software/signing/src/testFixtures/resources/keys/rfc9580v6sample/keyId.txt",
+        "platforms/software/signing/src/testFixtures/resources/keys/rfc9580v6sample/password.txt",
+        "platforms/software/software-diagnostics/build.gradle.kts",
+        "platforms/software/software-diagnostics/src/integTest/**",
+        "platforms/software/software-diagnostics/src/main/java/**",
+        "platforms/software/software-diagnostics/src/main/resources/META-INF/**",
+        "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/jquery.jstree.js",
+        "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/script.js",
+        "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/style.css",
+        "platforms/software/software-diagnostics/src/main/resources/org/gradle/api/tasks/diagnostics/htmldependencyreport/tree.css",
+        "platforms/software/software-diagnostics/src/test/**",
+        "platforms/software/test-suites-base/**",
+        "platforms/software/testing-base/**",
+        "platforms/software/testing-base-infrastructure/**",
+        "platforms/software/version-control/**",
+        "released-versions.json",
+        "settings.gradle.kts",
+        "subprojects/composite-builds/**",
+        "subprojects/core/build.gradle.kts",
+        "subprojects/core/src/crossVersionTest/**",
+        "subprojects/core/src/integTest/groovy/**",
+        "subprojects/core/src/integTest/resources/org/gradle/api/resource/**",
+        "subprojects/core/src/integTest/resources/org/gradle/api/tasks/copyTestResources/**",
+        "subprojects/core/src/main/**",
+        "subprojects/core/src/test/groovy/**",
+        "subprojects/core/src/test/java/**",
+        "subprojects/core/src/test/resources/META-INF/**",
+        "subprojects/core/src/test/resources/org/gradle/api/internal/catalog/**",
+        "subprojects/core/src/test/resources/org/gradle/api/tasks/**",
+        "subprojects/core/src/testFixtures/**",
+        "subprojects/core-api/**",
+        "testing/architecture-test/**",
+        "testing/distributions-basics/**",
+        "testing/distributions-core/**",
+        "testing/distributions-integ-tests/**",
+        "testing/integ-test/**",
+        "testing/internal-distribution-testing/**",
+        "testing/internal-integ-testing/build.gradle.kts",
+        "testing/internal-integ-testing/src/integTest/**",
+        "testing/internal-integ-testing/src/main/groovy/**",
+        "testing/internal-integ-testing/src/main/java/**",
+        "testing/internal-integ-testing/src/main/resources/META-INF/**",
+        "testing/internal-integ-testing/src/main/resources/sshd-config/**",
+        "testing/internal-integ-testing/src/test/**",
+        "testing/internal-performance-testing/**",
+        "testing/internal-testing/**",
+        "testing/performance/README.md",
+        "testing/performance/build.gradle.kts",
+        "testing/performance/docs/**",
+        "testing/performance/src/performanceTest/**",
+        "testing/performance/src/templates/archivePerformanceProject/**",
+        "testing/performance/src/templates/config-inject/**",
+        "testing/performance/src/templates/cpp-project/**",
+        "testing/performance/src/templates/cpp-source/**",
+        "testing/performance/src/templates/empty/**",
+        "testing/performance/src/templates/generateDiverseDeprecationWarnings/**",
+        "testing/performance/src/templates/generateLotsOfDeprecationWarnings/**",
+        "testing/performance/src/templates/gradle-properties/**",
+        "testing/performance/src/templates/java-source/**",
+        "testing/performance/src/templates/kts-empty/**",
+        "testing/performance/src/templates/kts-many-accessors/**",
+        "testing/performance/src/templates/kts-project-with-source/**",
+        "testing/performance/src/templates/kts-settings/**",
+        "testing/performance/src/templates/minimal/**",
+        "testing/performance/src/templates/native-component/**",
+        "testing/performance/src/templates/native-dependents/**",
+        "testing/performance/src/templates/native-dependents-resources/googleTest/build.gradle",
+        "testing/performance/src/templates/native-dependents-resources/googleTest/libs/googleTest/1.7.0/include/**",
+        "testing/performance/src/templates/native-monolithic/**",
+        "testing/performance/src/templates/native-pch-component/**",
+        "testing/performance/src/templates/native-pch-source/**",
+        "testing/performance/src/templates/native-source/**",
+        "testing/performance/src/templates/project-with-source/**",
+        "testing/performance/src/templates/root-project/**",
+        "testing/performance/src/templates/task-creation/**",
+        "testing/performance/src/templates/with-junit/**",
+        "testing/performance/src/templates/with-testng/**",
+        "testing/performance/src/templates/with-verbose-junit/**",
+        "testing/performance/src/templates/with-verbose-testng/**",
+        "testing/performance/src/templates/workerApiProject/**",
+        "testing/precondition-tester/**",
+        "testing/public-api-tests/**",
+        "testing/smoke-ide-test/**",
+        "testing/smoke-test/build.gradle.kts",
+        "testing/smoke-test/src/smokeTest/groovy/org/gradle/play/integtest/fixtures/PlayCoverage.groovy",
+        "testing/smoke-test/src/smokeTest/groovy/org/gradle/play/integtest/fixtures/Repositories.groovy",
+        "testing/smoke-test/src/smokeTest/groovy/org/gradle/smoketests/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/android-kotlin-example/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/android-kotlin-example-kotlin-dsl/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/gretty-example/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/kotlin-example/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/kotlin-multiplatform-js-jvm-example/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/app/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/conf/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/public/javascripts/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/public/stylesheets/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/settings.gradle",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/play-example/test/**",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/schedule-all-tasks.gradle",
+        "testing/smoke-test/src/smokeTest/resources/org/gradle/smoketests/validate-external-gradle-plugin.gradle.kts",
+        "testing/soak/**",
+        "version.txt"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n",
+      "attribution": "the authors of gradle/gradle (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/gradle/gradle."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BuildSrcProjectConfigurationAction"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ConnectionVersion4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ExtensionModule"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ExtensionRegistry"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GradleApiSpecProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GradleModuleServices"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.IGlobalExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ProjectConfigureAction"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SLF4JServiceProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TestEngine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dtd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.eps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.feature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.graffle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.graphml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.keys"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lockfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.md5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.module"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.processors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.puml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeepdir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvnw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/routes"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,781 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/goreleaser/goreleaser",
+  "revision": "1015c53f53a9b6a012f0180635dc5a59a376400b",
+  "checksum": "sha256:463b280c4bfc5d754bb21b46ce5cddbf1cbebf702bae29106b12b5d525ab375d",
+  "extract": {
+    "exclude": [
+      "internal/pipe/nfpm/testdata/privkey.gpg",
+      "internal/pipe/nix/testdata/file.bin",
+      "internal/pipe/sign/testdata/gnupg/private-keys-v1.d/**",
+      "internal/pipe/sign/testdata/gnupg/pubring.gpg",
+      "internal/pipe/sign/testdata/gnupg/pubring.kbx",
+      "internal/pipe/sign/testdata/gnupg/secring.gpg",
+      "internal/pipe/sign/testdata/gnupg/trustdb.gpg",
+      "www/static/android-chrome-192x192.png",
+      "www/static/android-chrome-512x512.png",
+      "www/static/apple-touch-icon.png",
+      "www/static/card.png",
+      "www/static/favicon-16x16.png",
+      "www/static/favicon-32x32.png",
+      "www/static/favicon.ico",
+      "www/static/goreleaser.icns",
+      "www/static/goreleaser_hero.png",
+      "www/static/goreleaser_hero_480.png",
+      "www/static/hero.png"
+    ]
+  },
+  "history": {
+    "since": "eea2878693bc17f6bfc1b754a14b4fc0f3917136"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-2026 Carlos Alexandro Becker\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/goreleaser/goreleaser: Copyright (c) 2016-2026 Carlos Alexandro Becker, MIT license (LICENSE.md), https://github.com/goreleaser/goreleaser."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".copilot/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitleaksignore",
+        ".golangci.yaml",
+        ".goreleaser.yaml",
+        ".grype.yaml",
+        ".mailmap",
+        ".svu.yml",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "EULA.md",
+        "INCIDENT_RESPONSE.md",
+        "LICENSE.md",
+        "README.md",
+        "SECURITY.md",
+        "THREAT_MODEL.md",
+        "Taskfile.yml",
+        "USERS.md",
+        "art.txt",
+        "cmd/**",
+        "go.mod",
+        "go.sum",
+        "internal/archivefiles/**",
+        "internal/artifact/**",
+        "internal/builders/**",
+        "internal/cargo/**",
+        "internal/changelog/**",
+        "internal/client/**",
+        "internal/commitauthor/**",
+        "internal/deprecate/**",
+        "internal/elf/**",
+        "internal/exec/**",
+        "internal/experimental/**",
+        "internal/extrafiles/**",
+        "internal/gerrors/**",
+        "internal/gio/**",
+        "internal/git/**",
+        "internal/golden/**",
+        "internal/http/**",
+        "internal/ids/**",
+        "internal/logext/**",
+        "internal/middleware/**",
+        "internal/nodedist/**",
+        "internal/packagejson/**",
+        "internal/pipe/announce/**",
+        "internal/pipe/archive/**",
+        "internal/pipe/artifactory/**",
+        "internal/pipe/aur/**",
+        "internal/pipe/aursources/**",
+        "internal/pipe/before/**",
+        "internal/pipe/blob/**",
+        "internal/pipe/bluesky/**",
+        "internal/pipe/brew/**",
+        "internal/pipe/build/**",
+        "internal/pipe/cask/**",
+        "internal/pipe/changelog/**",
+        "internal/pipe/checksums/**",
+        "internal/pipe/chocolatey/**",
+        "internal/pipe/custompublishers/**",
+        "internal/pipe/defaults/**",
+        "internal/pipe/discord/**",
+        "internal/pipe/discourse/**",
+        "internal/pipe/dist/**",
+        "internal/pipe/docker/**",
+        "internal/pipe/dockerdigest/**",
+        "internal/pipe/effectiveconfig/**",
+        "internal/pipe/env/**",
+        "internal/pipe/flatpak/**",
+        "internal/pipe/git/**",
+        "internal/pipe/gomod/**",
+        "internal/pipe/iru/**",
+        "internal/pipe/ko/**",
+        "internal/pipe/krew/**",
+        "internal/pipe/linkedin/**",
+        "internal/pipe/makeself/**",
+        "internal/pipe/mastodon/**",
+        "internal/pipe/mattermost/**",
+        "internal/pipe/mcp/**",
+        "internal/pipe/metadata/**",
+        "internal/pipe/milestone/**",
+        "internal/pipe/nfpm/nfpm.go",
+        "internal/pipe/nfpm/nfpm_test.go",
+        "internal/pipe/nfpm/testdata/changelog.yaml",
+        "internal/pipe/nfpm/testdata/folder/**",
+        "internal/pipe/nfpm/testdata/post_install.sh",
+        "internal/pipe/nfpm/testdata/post_remove.sh",
+        "internal/pipe/nfpm/testdata/pre_install.sh",
+        "internal/pipe/nfpm/testdata/pre_remove.sh",
+        "internal/pipe/nfpm/testdata/rsa.priv",
+        "internal/pipe/nfpm/testdata/testfile-386.txt",
+        "internal/pipe/nfpm/testdata/testfile-amd64v1.txt",
+        "internal/pipe/nfpm/testdata/testfile-amd64v2.txt",
+        "internal/pipe/nfpm/testdata/testfile-amd64v3.txt",
+        "internal/pipe/nfpm/testdata/testfile-amd64v4.txt",
+        "internal/pipe/nfpm/testdata/testfile-arm6.txt",
+        "internal/pipe/nfpm/testdata/testfile-arm64.txt",
+        "internal/pipe/nfpm/testdata/testfile-arm7.txt",
+        "internal/pipe/nfpm/testdata/testfile-mipshardfloat.txt",
+        "internal/pipe/nfpm/testdata/testfile-mipssoftfloat.txt",
+        "internal/pipe/nfpm/testdata/testfile-ppc64.txt",
+        "internal/pipe/nfpm/testdata/testfile.txt",
+        "internal/pipe/nix/licenses.go",
+        "internal/pipe/nix/nix.go",
+        "internal/pipe/nix/nix_test.go",
+        "internal/pipe/nix/template.go",
+        "internal/pipe/nix/testdata/TestBinInstallFormats/**",
+        "internal/pipe/nix/testdata/TestDynamicallyLinked.golden",
+        "internal/pipe/nix/testdata/TestFormat/**",
+        "internal/pipe/nix/testdata/TestRunPipe/**",
+        "internal/pipe/nix/tmpl.nix",
+        "internal/pipe/notary/**",
+        "internal/pipe/opencollective/**",
+        "internal/pipe/partial/**",
+        "internal/pipe/pipe.go",
+        "internal/pipe/pipe_test.go",
+        "internal/pipe/prebuild/**",
+        "internal/pipe/project/**",
+        "internal/pipe/publish/**",
+        "internal/pipe/reddit/**",
+        "internal/pipe/release/**",
+        "internal/pipe/reportsizes/**",
+        "internal/pipe/sbom/**",
+        "internal/pipe/scoop/**",
+        "internal/pipe/semver/**",
+        "internal/pipe/sign/sign.go",
+        "internal/pipe/sign/sign_binary.go",
+        "internal/pipe/sign/sign_binary_test.go",
+        "internal/pipe/sign/sign_docker.go",
+        "internal/pipe/sign/sign_docker_test.go",
+        "internal/pipe/sign/sign_test.go",
+        "internal/pipe/sign/testdata/.gitignore",
+        "internal/pipe/sign/testdata/README.md",
+        "internal/pipe/sign/testdata/cosign/**",
+        "internal/pipe/sign/testdata/gnupg/.gitignore",
+        "internal/pipe/sign/testdata/gnupg/.gpg-v21-migrated",
+        "internal/pipe/sign/testdata/gnupg/openpgp-revocs.d/**",
+        "internal/pipe/sign/testdata/gnupg/password",
+        "internal/pipe/sign/testdata/gpg-and-certificate.sh",
+        "internal/pipe/slack/**",
+        "internal/pipe/smtp/**",
+        "internal/pipe/snapcraft/**",
+        "internal/pipe/snapshot/**",
+        "internal/pipe/sourcearchive/**",
+        "internal/pipe/srpm/**",
+        "internal/pipe/teams/**",
+        "internal/pipe/telegram/**",
+        "internal/pipe/twitter/**",
+        "internal/pipe/universalbinary/**",
+        "internal/pipe/upload/**",
+        "internal/pipe/upx/**",
+        "internal/pipe/webhook/**",
+        "internal/pipe/winget/**",
+        "internal/pipeline/**",
+        "internal/pyproject/**",
+        "internal/redact/**",
+        "internal/retryx/**",
+        "internal/semerrgroup/**",
+        "internal/shell/**",
+        "internal/skips/**",
+        "internal/static/**",
+        "internal/summary/**",
+        "internal/testctx/**",
+        "internal/testlib/**",
+        "internal/tmpl/**",
+        "internal/yaml/**",
+        "main.go",
+        "main_test.go",
+        "pkg/**",
+        "scripts/**",
+        "testdata/**",
+        "www/.gitignore",
+        "www/content/**",
+        "www/data/**",
+        "www/go.mod",
+        "www/go.sum",
+        "www/htmltest.yml",
+        "www/hugo.yaml",
+        "www/i18n/**",
+        "www/layouts/**",
+        "www/static/.well-known/**",
+        "www/static/_redirects",
+        "www/static/favicon.svg",
+        "www/static/goreleaser.svg",
+        "www/static/goreleaser_hero.svg",
+        "www/static/latest",
+        "www/static/latest-pro",
+        "www/static/logo.svg",
+        "www/static/releases-pro.json",
+        "www/static/releases.json",
+        "www/static/run",
+        "www/static/schema-pro.json",
+        "www/static/schema.json",
+        "www/static/site.webmanifest"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-2026 Carlos Alexandro Becker\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-2026 Carlos Alexandro Becker, MIT license (LICENSE.md), https://github.com/goreleaser/goreleaser."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.clean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dummy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.false"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gold"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.golden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.multiple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nfpm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.priv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.true"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wrongbin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitleaksignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gpg-v21-migrated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/040de92d22e4f552"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9f2a0bc58229b2e8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_redirects"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alias-case-insensitive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alias-chain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arg-after-from"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arg-dollar-form"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arg-simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arg-with-default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/comment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fakesyft"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fakeupx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/follows-alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/latest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/latest-pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/line-continuation"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lowercase-from"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multi-stage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multiple-flags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mybin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-from"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/password"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pinned-digest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/quoted-arg-default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scratch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unknown-image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with-digest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with-platform-flag"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

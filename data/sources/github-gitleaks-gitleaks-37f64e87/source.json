@@ -1,0 +1,395 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/gitleaks/gitleaks",
+  "revision": "b58d3f102cf3a2c84cb7f923d05c25c9b1aed84b",
+  "checksum": "sha256:c8fde9f2f0c3aa9593b4c1ef3ef31f47b823e63e6ead471937b47be9991d4a77",
+  "extract": {
+    "exclude": [
+      "testdata/archives/files/main.go.gz",
+      "testdata/archives/files/main.go.xz",
+      "testdata/archives/files/main.go.zst",
+      "testdata/archives/files.7z",
+      "testdata/archives/files.tar",
+      "testdata/archives/files.tar.xz",
+      "testdata/archives/files.tar.zst",
+      "testdata/archives/files.zip",
+      "testdata/archives/nested.tar.gz",
+      "testdata/repos/archives/dotGit/index",
+      "testdata/repos/archives/dotGit/objects/info/commit-graph",
+      "testdata/repos/archives/dotGit/objects/pack/**",
+      "testdata/repos/archives/main.go.zst",
+      "testdata/repos/small/dotGit/index",
+      "testdata/repos/small/dotGit/objects/**",
+      "testdata/repos/staged/dotGit/index",
+      "testdata/repos/staged/dotGit/objects/**"
+    ]
+  },
+  "history": {
+    "since": "274e8212a6aa833c4723d151af35e9377ba70e8b"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 Zachary Rice\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/gitleaks/gitleaks: Copyright (c) 2019 Zachary Rice, MIT license (LICENSE), https://github.com/gitleaks/gitleaks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".gitleaks.toml",
+        ".gitleaksignore",
+        ".golangci.yaml",
+        ".goreleaser.yml",
+        ".pre-commit-hooks.yaml",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "USERS.md",
+        "cmd/**",
+        "config/**",
+        "detect/**",
+        "go.mod",
+        "go.sum",
+        "logging/**",
+        "main.go",
+        "regexp/**",
+        "report/**",
+        "report_templates/**",
+        "scripts/**",
+        "sources/**",
+        "testdata/archives/files/.env.prod",
+        "testdata/archives/files/.gitleaksignore",
+        "testdata/archives/files/api.go",
+        "testdata/archives/files/main.go",
+        "testdata/baseline/**",
+        "testdata/config/**",
+        "testdata/expected/**",
+        "testdata/gitleaksignore/**",
+        "testdata/report/**",
+        "testdata/repos/archives/.gitleaksignore",
+        "testdata/repos/archives/README.md",
+        "testdata/repos/archives/dotGit/HEAD",
+        "testdata/repos/archives/dotGit/ORIG_HEAD",
+        "testdata/repos/archives/dotGit/config",
+        "testdata/repos/archives/dotGit/description",
+        "testdata/repos/archives/dotGit/info/**",
+        "testdata/repos/archives/dotGit/objects/info/packs",
+        "testdata/repos/archives/dotGit/packed-refs",
+        "testdata/repos/archives/dotGit/refs/**",
+        "testdata/repos/nogit/**",
+        "testdata/repos/small/.gitleaksignore",
+        "testdata/repos/small/README.md",
+        "testdata/repos/small/api/**",
+        "testdata/repos/small/dotGit/COMMIT_EDITMSG",
+        "testdata/repos/small/dotGit/FETCH_HEAD",
+        "testdata/repos/small/dotGit/HEAD",
+        "testdata/repos/small/dotGit/ORIG_HEAD",
+        "testdata/repos/small/dotGit/config",
+        "testdata/repos/small/dotGit/description",
+        "testdata/repos/small/dotGit/info/**",
+        "testdata/repos/small/dotGit/logs/**",
+        "testdata/repos/small/dotGit/packed-refs",
+        "testdata/repos/small/dotGit/refs/**",
+        "testdata/repos/small/main.go",
+        "testdata/repos/staged/.gitleaksignore",
+        "testdata/repos/staged/README.md",
+        "testdata/repos/staged/api/**",
+        "testdata/repos/staged/dotGit/COMMIT_EDITMSG",
+        "testdata/repos/staged/dotGit/FETCH_HEAD",
+        "testdata/repos/staged/dotGit/HEAD",
+        "testdata/repos/staged/dotGit/ORIG_HEAD",
+        "testdata/repos/staged/dotGit/config",
+        "testdata/repos/staged/dotGit/description",
+        "testdata/repos/staged/dotGit/info/**",
+        "testdata/repos/staged/dotGit/logs/**",
+        "testdata/repos/staged/dotGit/packed-refs",
+        "testdata/repos/staged/dotGit/refs/**",
+        "testdata/repos/staged/main.go",
+        "testdata/repos/symlinks/**",
+        "version/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 Zachary Rice\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 Zachary Rice, MIT license (LICENSE), https://github.com/gitleaks/gitleaks."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sarif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitleaksignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.windowspaths"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COMMIT_EDITMSG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FETCH_HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ORIG_HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/api-pkg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id_ed25519"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packed-refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove-secrets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

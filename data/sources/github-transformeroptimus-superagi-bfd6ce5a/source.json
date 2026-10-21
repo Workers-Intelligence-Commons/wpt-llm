@@ -1,0 +1,447 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/TransformerOptimus/SuperAGI",
+  "revision": "c3c1982e7bd6a11cfed53c5a193ea502f924b1b6",
+  "checksum": "sha256:0170c3146adeb37e65fc606851204c437cd3e28f91fb7117f6a0999cad0728d5",
+  "extract": {
+    "exclude": [
+      "gui/app/favicon.ico",
+      "gui/public/images/apollo_logo.png",
+      "gui/public/images/calendar.png",
+      "gui/public/images/calendarIcon.png",
+      "gui/public/images/duckduckgo_icon.png",
+      "gui/public/images/eventSchedule.png",
+      "gui/public/images/gmail.png",
+      "gui/public/images/google_analytics_logo.png",
+      "gui/public/images/instagram.png",
+      "gui/public/images/knowledeg_logo.png",
+      "gui/public/images/loading.gif",
+      "gui/public/images/marketplace_logo.png",
+      "gui/public/images/notion_logo.png",
+      "gui/public/images/plus.png",
+      "gui/public/images/profile_pic.png",
+      "gui/public/images/superagi_logo.png",
+      "gui/public/images/superagi_logo_beta.png",
+      "gui/public/images/watermark.png",
+      "static/**"
+    ]
+  },
+  "history": {
+    "since": "a65a557db33a2572be77dbb0bd961128f08d1788"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 TransformerOptimus\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/TransformerOptimus/SuperAGI: Copyright (c) 2023 TransformerOptimus, MIT license (LICENSE), https://github.com/TransformerOptimus/SuperAGI."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".do/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile-gpu",
+        "DockerfileCelery",
+        "DockerfileRedis",
+        "LICENSE",
+        "README.MD",
+        "alembic.ini",
+        "cli2.py",
+        "config_template.yaml",
+        "docker-compose-dev.yaml",
+        "docker-compose-gpu.yml",
+        "docker-compose.image.example.yaml",
+        "docker-compose.yaml",
+        "entrypoint.sh",
+        "entrypoint_celery.sh",
+        "gui/.dockerignore",
+        "gui/.eslintrc.json",
+        "gui/Dockerfile",
+        "gui/DockerfileProd",
+        "gui/README.md",
+        "gui/app/globals.css",
+        "gui/app/layout.js",
+        "gui/jsconfig.json",
+        "gui/next.config.js",
+        "gui/package-lock.json",
+        "gui/package.json",
+        "gui/pages/**",
+        "gui/public/images/action_console.svg",
+        "gui/public/images/active_icon.svg",
+        "gui/public/images/add.svg",
+        "gui/public/images/agent_cluster.svg",
+        "gui/public/images/agent_cluster_light.svg",
+        "gui/public/images/agents_icon_dropdown.svg",
+        "gui/public/images/agents_light-1.svg",
+        "gui/public/images/agents_light.svg",
+        "gui/public/images/all_match.svg",
+        "gui/public/images/apm.svg",
+        "gui/public/images/arrow_back.svg",
+        "gui/public/images/arrow_down.svg",
+        "gui/public/images/arrow_downward.svg",
+        "gui/public/images/arrow_downward_dropdown.svg",
+        "gui/public/images/arrow_forward.svg",
+        "gui/public/images/arrow_forward_ios.svg",
+        "gui/public/images/arrow_forward_secondary.svg",
+        "gui/public/images/arrow_outward.svg",
+        "gui/public/images/backtotop.svg",
+        "gui/public/images/bolt.svg",
+        "gui/public/images/books.svg",
+        "gui/public/images/calls_made.svg",
+        "gui/public/images/cancel_presentation.svg",
+        "gui/public/images/chat_paste_go.svg",
+        "gui/public/images/check.svg",
+        "gui/public/images/clear_input.svg",
+        "gui/public/images/close.svg",
+        "gui/public/images/close_fullscreen.svg",
+        "gui/public/images/close_history.svg",
+        "gui/public/images/close_light.svg",
+        "gui/public/images/copy_icon.svg",
+        "gui/public/images/custom_tool.svg",
+        "gui/public/images/data_info_alert.svg",
+        "gui/public/images/database.svg",
+        "gui/public/images/default_file.svg",
+        "gui/public/images/default_tool.svg",
+        "gui/public/images/deployed_code.svg",
+        "gui/public/images/discord.svg",
+        "gui/public/images/docs_icon.svg",
+        "gui/public/images/download.svg",
+        "gui/public/images/download_icon.svg",
+        "gui/public/images/dropdown_down.svg",
+        "gui/public/images/dropdown_up.svg",
+        "gui/public/images/embedding.svg",
+        "gui/public/images/embedding_light.svg",
+        "gui/public/images/event_available.svg",
+        "gui/public/images/event_repeat.svg",
+        "gui/public/images/expand_more.svg",
+        "gui/public/images/fact_check.svg",
+        "gui/public/images/filemanager_icon.svg",
+        "gui/public/images/flag.svg",
+        "gui/public/images/github.svg",
+        "gui/public/images/github_icon.svg",
+        "gui/public/images/github_white.svg",
+        "gui/public/images/gmail_icon.svg",
+        "gui/public/images/google_calender_icon.svg",
+        "gui/public/images/google_palm_logo.svg",
+        "gui/public/images/google_search_icon.svg",
+        "gui/public/images/google_serp_icon.svg",
+        "gui/public/images/history.svg",
+        "gui/public/images/home_storage.svg",
+        "gui/public/images/huggingface_logo.svg",
+        "gui/public/images/icon_error.svg",
+        "gui/public/images/icon_info.svg",
+        "gui/public/images/img_file.svg",
+        "gui/public/images/info.svg",
+        "gui/public/images/instructions.svg",
+        "gui/public/images/is_verified.svg",
+        "gui/public/images/jira_icon.svg",
+        "gui/public/images/key.svg",
+        "gui/public/images/key_white.svg",
+        "gui/public/images/knowledge.svg",
+        "gui/public/images/marketplace.svg",
+        "gui/public/images/marketplace_download.svg",
+        "gui/public/images/marketplace_empty.svg",
+        "gui/public/images/model_light.svg",
+        "gui/public/images/models.svg",
+        "gui/public/images/models_icon_dropdown.svg",
+        "gui/public/images/mongoDB.svg",
+        "gui/public/images/no_permissions.svg",
+        "gui/public/images/open_in_new.svg",
+        "gui/public/images/openai_logo.svg",
+        "gui/public/images/overview.svg",
+        "gui/public/images/pdf_file.svg",
+        "gui/public/images/pinecone.svg",
+        "gui/public/images/plus_symbol.svg",
+        "gui/public/images/project.svg",
+        "gui/public/images/qdrant.svg",
+        "gui/public/images/replicate_logo.svg",
+        "gui/public/images/run_icon.svg",
+        "gui/public/images/runs_made.svg",
+        "gui/public/images/schedule.svg",
+        "gui/public/images/searx_icon.svg",
+        "gui/public/images/send.svg",
+        "gui/public/images/settings.svg",
+        "gui/public/images/sign-in-logo.svg",
+        "gui/public/images/slack_icon.svg",
+        "gui/public/images/stack.svg",
+        "gui/public/images/three_dots.svg",
+        "gui/public/images/three_dots_vertical.svg",
+        "gui/public/images/tick.svg",
+        "gui/public/images/tokens_consumed.svg",
+        "gui/public/images/tools.svg",
+        "gui/public/images/tools_dark.svg",
+        "gui/public/images/tools_light.svg",
+        "gui/public/images/twitter_icon.svg",
+        "gui/public/images/txt_file.svg",
+        "gui/public/images/undo.svg",
+        "gui/public/images/update.svg",
+        "gui/public/images/upload_icon.svg",
+        "gui/public/images/upload_icon_dark.svg",
+        "gui/public/images/weaviate.svg",
+        "gui/public/images/webhook_icon.svg",
+        "gui/public/images/webscraper_icon.svg",
+        "gui/public/images/widgets.svg",
+        "gui/public/images/xls_file.svg",
+        "gui/public/images/zip_file.svg",
+        "gui/utils/**",
+        "install_tool_dependencies.sh",
+        "local-llm",
+        "local-llm-gpu",
+        "main.py",
+        "migrations/**",
+        "nginx/**",
+        "package.json",
+        "requirements.txt",
+        "run.bat",
+        "run.sh",
+        "run_gui.py",
+        "run_gui.sh",
+        "superagi/**",
+        "test.py",
+        "test_main.http",
+        "tests/**",
+        "tgwui/**",
+        "tools.json",
+        "ui.py",
+        "wait-for-it.sh",
+        "workspace/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 TransformerOptimus\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 TransformerOptimus, MIT license (LICENSE), https://github.com/TransformerOptimus/SuperAGI."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gbnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.http"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mako"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.temp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-gpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DockerfileCelery"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DockerfileProd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DockerfileRedis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DockerfileTGWUI"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/local-llm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/local-llm-gpu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

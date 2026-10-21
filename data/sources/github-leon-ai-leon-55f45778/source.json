@@ -1,0 +1,423 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/leon-ai/leon",
+  "revision": "21baf11714f618a9367f25882e59e856d3308037",
+  "checksum": "sha256:cf61ef2428f02e248ea6b3c53aab8e730661d231246e82416b216b3763075e49",
+  "extract": {
+    "exclude": [
+      "app/src/img/favicon.png",
+      "app/src/sounds/**",
+      "aurora/preview/public/baking-powder.jpeg",
+      "aurora/preview/public/butter.jpeg",
+      "aurora/preview/public/egg.webp",
+      "aurora/preview/public/flour.jpeg",
+      "aurora/preview/public/milk.jpeg",
+      "aurora/preview/public/mockingbird.jpg",
+      "aurora/preview/public/pancakes.jpeg",
+      "aurora/preview/public/salt.jpg",
+      "aurora/preview/public/sugar.jpg",
+      "core/data/models/audio/wake_word/Hey_Leon.onnx",
+      "core/data/models/audio/wake_word/embedding.onnx",
+      "core/data/models/audio/wake_word/melspectrogram.onnx",
+      "scripts/ci/fixtures/**",
+      "tcp_server/src/lib/tts/text/cmudict_cache.pickle",
+      "test/fixtures/documents/**",
+      "web-app/public/img/favicon.png"
+    ]
+  },
+  "history": {
+    "since": "ed093bf6541f1f2f45430bcd8d8b1b63b6fda138"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019-present, Louis Grenard <louis@getleon.ai>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/leon-ai/leon: Copyright (c) 2019-present, Louis Grenard <louis@getleon.ai>, MIT license (LICENSE.md), https://github.com/leon-ai/leon."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".changelogrc",
+        ".editorconfig",
+        ".env.sample",
+        ".github/**",
+        ".gitignore",
+        ".gitpod.yml",
+        ".husky/**",
+        ".lintstagedrc",
+        ".nvmrc",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "LICENSE.md",
+        "README.md",
+        "app/src/css/**",
+        "app/src/custom-aurora-components/**",
+        "app/src/img/logo.svg",
+        "app/src/img/mic.svg",
+        "app/src/index.html",
+        "app/src/js/**",
+        "app/tsconfig.json",
+        "app/vite.config.js",
+        "aurora/global.d.ts",
+        "aurora/preview/App.tsx",
+        "aurora/preview/index.html",
+        "aurora/preview/main.tsx",
+        "aurora/preview/public/apple-music.svg",
+        "aurora/preview/public/deezer.svg",
+        "aurora/preview/public/spotify.svg",
+        "aurora/preview/public/youtube-music.svg",
+        "aurora/preview/style.css",
+        "aurora/preview/vite.config.js",
+        "aurora/src/**",
+        "aurora/style.css",
+        "aurora/tsconfig.build.json",
+        "aurora/tsconfig.json",
+        "bin/**",
+        "bridges/**",
+        "config.sample.yml",
+        "core/config/**",
+        "core/context/**",
+        "core/data/en/**",
+        "core/data/fr/**",
+        "core/data/models/.gitkeep",
+        "core/data/models/audio/asr/**",
+        "core/data/models/audio/tts/**",
+        "core/data/models/audio/wake_word/.gitkeep",
+        "core/data/models/llm/**",
+        "core/langs.json",
+        "eslint.config.mjs",
+        "jsconfig.json",
+        "logs/**",
+        "nodemon.json",
+        "nodemon.nolint.json",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "scripts/app/**",
+        "scripts/assets/**",
+        "scripts/build-aurora.js",
+        "scripts/build-server.js",
+        "scripts/check-os.js",
+        "scripts/check.js",
+        "scripts/ci/check-fellows-discovery.js",
+        "scripts/ci/fresh-install-inferences.ts",
+        "scripts/ci/test-fresh-install.js",
+        "scripts/clean-test-dbs.js",
+        "scripts/commit-msg.js",
+        "scripts/generate/**",
+        "scripts/kill.js",
+        "scripts/lint.js",
+        "scripts/out/**",
+        "scripts/prompt-templates/**",
+        "scripts/release/**",
+        "scripts/run-agent-vitest.ts",
+        "scripts/run-built-in-command.js",
+        "scripts/run-clean-test-dbs.js",
+        "scripts/run-python-bridge.js",
+        "scripts/run-tcp-server.js",
+        "scripts/run-with-managed-node.js",
+        "scripts/setup/**",
+        "scripts/sync-skill-deps.js",
+        "scripts/tmp/**",
+        "scripts/train/**",
+        "server/**",
+        "skills/**",
+        "tcp_server/settings.json",
+        "tcp_server/src/lib/asr/**",
+        "tcp_server/src/lib/audio_input.py",
+        "tcp_server/src/lib/constants.py",
+        "tcp_server/src/lib/tcp_server.py",
+        "tcp_server/src/lib/tmp/**",
+        "tcp_server/src/lib/tts/__init__.py",
+        "tcp_server/src/lib/tts/api.py",
+        "tcp_server/src/lib/tts/attentions.py",
+        "tcp_server/src/lib/tts/commons.py",
+        "tcp_server/src/lib/tts/models.py",
+        "tcp_server/src/lib/tts/modules.py",
+        "tcp_server/src/lib/tts/monotonic_align/**",
+        "tcp_server/src/lib/tts/split_utils.py",
+        "tcp_server/src/lib/tts/text/__init__.py",
+        "tcp_server/src/lib/tts/text/cleaner.py",
+        "tcp_server/src/lib/tts/text/cleaner_multiling.py",
+        "tcp_server/src/lib/tts/text/cmudict.rep",
+        "tcp_server/src/lib/tts/text/english.py",
+        "tcp_server/src/lib/tts/text/english_bert.py",
+        "tcp_server/src/lib/tts/text/english_utils/**",
+        "tcp_server/src/lib/tts/text/fr_phonemizer/**",
+        "tcp_server/src/lib/tts/text/french.py",
+        "tcp_server/src/lib/tts/text/french_bert.py",
+        "tcp_server/src/lib/tts/text/opencpop-strict.txt",
+        "tcp_server/src/lib/tts/text/symbols.py",
+        "tcp_server/src/lib/tts/transforms.py",
+        "tcp_server/src/lib/tts/utils.py",
+        "tcp_server/src/lib/utils.py",
+        "tcp_server/src/lib/wake_word/**",
+        "tcp_server/src/main.py",
+        "tcp_server/src/pyproject.toml",
+        "tcp_server/src/version.py",
+        "test/agent/**",
+        "test/controlled/**",
+        "test/core/**",
+        "test/fixtures/duckdb/**",
+        "test/onboarding/**",
+        "test/tsconfig.json",
+        "tools/**",
+        "tsconfig.json",
+        "vitest.config.ts",
+        "web-app/index.html",
+        "web-app/public/img/logo-color-text.svg",
+        "web-app/public/img/logo-color.svg",
+        "web-app/public/img/logo-for-dark-bg-text.svg",
+        "web-app/public/img/logo-for-dark-bg.svg",
+        "web-app/public/img/logo-for-light-bg-text.svg",
+        "web-app/public/img/logo-for-light-bg.svg",
+        "web-app/public/img/moods/**",
+        "web-app/src/**",
+        "web-app/tsconfig.json",
+        "web-app/vite.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019-present, Louis Grenard <louis@getleon.ai>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019-present, Louis Grenard <louis@getleon.ai>, MIT license (LICENSE.md), https://github.com/leon-ai/leon."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sass",
+      "paths": [
+        "**/*.sass"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.changelogrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.lintstagedrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

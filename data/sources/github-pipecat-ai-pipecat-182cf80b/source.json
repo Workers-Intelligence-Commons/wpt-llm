@@ -1,0 +1,516 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pipecat-ai/pipecat",
+  "revision": "f7c191f743807dc9380d8201f387d6767f544a07",
+  "checksum": "sha256:b5c9177fafa2faaff01ee7f0427b94deb02338064f242f74ac7e9d901ab455f0",
+  "extract": {
+    "exclude": [
+      ".github/workflows/**",
+      "evals/release/assets/**",
+      "examples/assets/cat.jpg",
+      "examples/assets/ding1.wav",
+      "examples/assets/ding2.wav",
+      "examples/assets/moondream.png",
+      "examples/assets/office-ambience-24000-mono.mp3",
+      "examples/assets/sc-default.png",
+      "examples/assets/sc-listen-1.png",
+      "examples/assets/sc-listen-2.png",
+      "examples/assets/sc-talk.png",
+      "examples/assets/sc-think-1.png",
+      "examples/assets/sc-think-2.png",
+      "examples/assets/sc-think-3.png",
+      "examples/assets/sc-think-4.png",
+      "examples/assets/speaking.png",
+      "examples/assets/waiting.png",
+      "examples/flows/python/assets/hold_music/hold_music.wav",
+      "examples/vision/assets/**",
+      "pipecat.png",
+      "scripts/provider-watch/assets/**",
+      "src/pipecat/audio/dtmf/dtmf-0.wav",
+      "src/pipecat/audio/dtmf/dtmf-1.wav",
+      "src/pipecat/audio/dtmf/dtmf-2.wav",
+      "src/pipecat/audio/dtmf/dtmf-3.wav",
+      "src/pipecat/audio/dtmf/dtmf-4.wav",
+      "src/pipecat/audio/dtmf/dtmf-5.wav",
+      "src/pipecat/audio/dtmf/dtmf-6.wav",
+      "src/pipecat/audio/dtmf/dtmf-7.wav",
+      "src/pipecat/audio/dtmf/dtmf-8.wav",
+      "src/pipecat/audio/dtmf/dtmf-9.wav",
+      "src/pipecat/audio/dtmf/dtmf-pound.wav",
+      "src/pipecat/audio/dtmf/dtmf-star.wav",
+      "src/pipecat/audio/turn/smart_turn/data/smart-turn-v3.2-cpu.onnx",
+      "src/pipecat/audio/vad/data/silero_vad.onnx",
+      "src/pipecat/cli/templates/client/_pipecat_ui/src/components/ui/**",
+      "src/pipecat/services/aws/nova_sonic/ready.wav"
+    ]
+  },
+  "history": {
+    "since": "d27122e35e7815757fa5fa8d57e22ef076bb1ca7"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2024–2026, Daily\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/pipecat-ai/pipecat: Copyright (c) 2024–2026, Daily, BSD-2-Clause license (LICENSE), https://github.com/pipecat-ai/pipecat."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".claude-plugin/**",
+        ".codex/**",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "COMMUNITY_INTEGRATIONS.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "changelog/**",
+        "codecov.yml",
+        "docs/**",
+        "env.example",
+        "evals/judges.py",
+        "evals/llm-with-backend/**",
+        "evals/release/README.md",
+        "evals/release/manifest.yaml",
+        "evals/release/run.sh",
+        "evals/release/scenarios/**",
+        "evals/turn-completion/**",
+        "examples/README.md",
+        "examples/assets/pronunciations.json",
+        "examples/assets/rag-content.txt",
+        "examples/audio/**",
+        "examples/context-summarization/**",
+        "examples/features/**",
+        "examples/flows/README.md",
+        "examples/flows/python/assets/hold_music/README.md",
+        "examples/flows/python/assets/hold_music/hold_music.py",
+        "examples/flows/python/food_ordering.py",
+        "examples/flows/python/food_ordering_advanced_functionschema.py",
+        "examples/flows/python/hello_world.py",
+        "examples/flows/python/llm_switching.py",
+        "examples/flows/python/multi_worker_handoff.py",
+        "examples/flows/python/utils.py",
+        "examples/flows/python/warm_transfer.py",
+        "examples/flows/yaml/**",
+        "examples/function-calling/**",
+        "examples/getting-started/**",
+        "examples/image-generation/**",
+        "examples/mcp/**",
+        "examples/multi-worker/**",
+        "examples/observability/**",
+        "examples/persistent-context/**",
+        "examples/rag/**",
+        "examples/realtime/**",
+        "examples/thinking/**",
+        "examples/transcription/**",
+        "examples/transports/**",
+        "examples/turn-management/**",
+        "examples/update-settings/**",
+        "examples/video-avatar/**",
+        "examples/video-processing/**",
+        "examples/vision/vision-anthropic.py",
+        "examples/vision/vision-aws.py",
+        "examples/vision/vision-gemini-flash.py",
+        "examples/vision/vision-moondream.py",
+        "examples/vision/vision-openai-responses-http.py",
+        "examples/vision/vision-openai-responses.py",
+        "examples/vision/vision-openai.py",
+        "examples/voice/**",
+        "pyproject.toml",
+        "pyrightconfig.json",
+        "scripts/check_licenses.py",
+        "scripts/cli/**",
+        "scripts/daily/**",
+        "scripts/deprecations/**",
+        "scripts/dtmf/**",
+        "scripts/fix-ruff-and-typecheck.sh",
+        "scripts/flows/**",
+        "scripts/krisp/**",
+        "scripts/mem-watch.sh",
+        "scripts/provider-watch/digest.py",
+        "scripts/provider-watch/inventory.py",
+        "scripts/provider-watch/plan.py",
+        "scripts/provider-watch/probe.py",
+        "scripts/provider-watch/publish.py",
+        "scripts/release-changelog.py",
+        "src/pipecat/__init__.py",
+        "src/pipecat/adapters/**",
+        "src/pipecat/audio/__init__.py",
+        "src/pipecat/audio/dtmf/__init__.py",
+        "src/pipecat/audio/dtmf/types.py",
+        "src/pipecat/audio/dtmf/utils.py",
+        "src/pipecat/audio/filters/**",
+        "src/pipecat/audio/krisp_instance.py",
+        "src/pipecat/audio/mixers/**",
+        "src/pipecat/audio/resamplers/**",
+        "src/pipecat/audio/turn/__init__.py",
+        "src/pipecat/audio/turn/base_turn_analyzer.py",
+        "src/pipecat/audio/turn/krisp_viva_turn.py",
+        "src/pipecat/audio/turn/smart_turn/__init__.py",
+        "src/pipecat/audio/turn/smart_turn/_whisper_features.py",
+        "src/pipecat/audio/turn/smart_turn/base_smart_turn.py",
+        "src/pipecat/audio/turn/smart_turn/data/__init__.py",
+        "src/pipecat/audio/turn/smart_turn/http_smart_turn.py",
+        "src/pipecat/audio/turn/smart_turn/local_coreml_smart_turn.py",
+        "src/pipecat/audio/turn/smart_turn/local_smart_turn_v2.py",
+        "src/pipecat/audio/turn/smart_turn/local_smart_turn_v3.py",
+        "src/pipecat/audio/utils.py",
+        "src/pipecat/audio/vad/__init__.py",
+        "src/pipecat/audio/vad/aic_quail_vad.py",
+        "src/pipecat/audio/vad/data/__init__.py",
+        "src/pipecat/audio/vad/krisp_viva_vad.py",
+        "src/pipecat/audio/vad/silero.py",
+        "src/pipecat/audio/vad/vad_analyzer.py",
+        "src/pipecat/audio/vad/vad_controller.py",
+        "src/pipecat/audio/volume.py",
+        "src/pipecat/bus/**",
+        "src/pipecat/classifiers/**",
+        "src/pipecat/cli/__init__.py",
+        "src/pipecat/cli/agent_templates/**",
+        "src/pipecat/cli/commands/**",
+        "src/pipecat/cli/config_validator.py",
+        "src/pipecat/cli/generators/**",
+        "src/pipecat/cli/hub_status.py",
+        "src/pipecat/cli/main.py",
+        "src/pipecat/cli/prompts/**",
+        "src/pipecat/cli/registry/**",
+        "src/pipecat/cli/scaffold.py",
+        "src/pipecat/cli/templates/README.md.jinja2",
+        "src/pipecat/cli/templates/_readme_blocks/**",
+        "src/pipecat/cli/templates/client/_pipecat_ui/dependencies.json",
+        "src/pipecat/cli/templates/client/_pipecat_ui/src/components/pipecat/**",
+        "src/pipecat/cli/templates/client/_pipecat_ui/src/hooks/**",
+        "src/pipecat/cli/templates/client/_pipecat_ui/src/lib/**",
+        "src/pipecat/cli/templates/client/react-nextjs/**",
+        "src/pipecat/cli/templates/client/react-vite/**",
+        "src/pipecat/cli/templates/client/vanilla-js-vite/**",
+        "src/pipecat/cli/templates/gitignore.jinja2",
+        "src/pipecat/cli/templates/server/**",
+        "src/pipecat/clocks/**",
+        "src/pipecat/evals/**",
+        "src/pipecat/extensions/**",
+        "src/pipecat/flows/**",
+        "src/pipecat/frames/**",
+        "src/pipecat/metrics/**",
+        "src/pipecat/observers/**",
+        "src/pipecat/pipeline/**",
+        "src/pipecat/processors/**",
+        "src/pipecat/py.typed",
+        "src/pipecat/registry/**",
+        "src/pipecat/runner/**",
+        "src/pipecat/serializers/**",
+        "src/pipecat/services/__init__.py",
+        "src/pipecat/services/ai_service.py",
+        "src/pipecat/services/anthropic/**",
+        "src/pipecat/services/assemblyai/**",
+        "src/pipecat/services/asyncai/**",
+        "src/pipecat/services/aws/__init__.py",
+        "src/pipecat/services/aws/agent_core.py",
+        "src/pipecat/services/aws/llm.py",
+        "src/pipecat/services/aws/nova_sonic/__init__.py",
+        "src/pipecat/services/aws/nova_sonic/llm.py",
+        "src/pipecat/services/aws/nova_sonic/session_continuation.py",
+        "src/pipecat/services/aws/sagemaker/**",
+        "src/pipecat/services/aws/stt.py",
+        "src/pipecat/services/aws/tts.py",
+        "src/pipecat/services/aws/utils.py",
+        "src/pipecat/services/azure/**",
+        "src/pipecat/services/baseten/**",
+        "src/pipecat/services/bland/**",
+        "src/pipecat/services/camb/**",
+        "src/pipecat/services/cartesia/**",
+        "src/pipecat/services/cerebras/**",
+        "src/pipecat/services/crusoe/**",
+        "src/pipecat/services/deepgram/**",
+        "src/pipecat/services/deepseek/**",
+        "src/pipecat/services/elevenlabs/**",
+        "src/pipecat/services/fal/**",
+        "src/pipecat/services/fireworks/**",
+        "src/pipecat/services/fish/**",
+        "src/pipecat/services/funasr/**",
+        "src/pipecat/services/gladia/**",
+        "src/pipecat/services/google/**",
+        "src/pipecat/services/gradium/**",
+        "src/pipecat/services/grok/**",
+        "src/pipecat/services/groq/**",
+        "src/pipecat/services/heygen/**",
+        "src/pipecat/services/hume/**",
+        "src/pipecat/services/image_service.py",
+        "src/pipecat/services/inception/**",
+        "src/pipecat/services/inworld/**",
+        "src/pipecat/services/keenable/**",
+        "src/pipecat/services/kokoro/**",
+        "src/pipecat/services/llm_service.py",
+        "src/pipecat/services/mcp_service.py",
+        "src/pipecat/services/mem0/**",
+        "src/pipecat/services/meta/**",
+        "src/pipecat/services/minimax/**",
+        "src/pipecat/services/mistral/**",
+        "src/pipecat/services/moondream/**",
+        "src/pipecat/services/moonshine/**",
+        "src/pipecat/services/nebius/**",
+        "src/pipecat/services/neuphonic/**",
+        "src/pipecat/services/novita/**",
+        "src/pipecat/services/nvidia/**",
+        "src/pipecat/services/ollama/**",
+        "src/pipecat/services/openai/**",
+        "src/pipecat/services/openclaw/**",
+        "src/pipecat/services/openrouter/**",
+        "src/pipecat/services/perplexity/**",
+        "src/pipecat/services/piper/**",
+        "src/pipecat/services/pocket_tts/**",
+        "src/pipecat/services/qwen/**",
+        "src/pipecat/services/resembleai/**",
+        "src/pipecat/services/rime/**",
+        "src/pipecat/services/sambanova/**",
+        "src/pipecat/services/sarvam/**",
+        "src/pipecat/services/settings.py",
+        "src/pipecat/services/simli/**",
+        "src/pipecat/services/smallest/**",
+        "src/pipecat/services/soniox/**",
+        "src/pipecat/services/speechify/**",
+        "src/pipecat/services/speechmatics/**",
+        "src/pipecat/services/stt_latency.py",
+        "src/pipecat/services/stt_service.py",
+        "src/pipecat/services/tavus/**",
+        "src/pipecat/services/together/**",
+        "src/pipecat/services/tts_service.py",
+        "src/pipecat/services/ultravox/**",
+        "src/pipecat/services/vision_service.py",
+        "src/pipecat/services/websocket_service.py",
+        "src/pipecat/services/whisper/**",
+        "src/pipecat/services/xai/**",
+        "src/pipecat/services/xtts/**",
+        "src/pipecat/tests/**",
+        "src/pipecat/transcriptions/**",
+        "src/pipecat/transports/**",
+        "src/pipecat/turns/**",
+        "src/pipecat/utils/**",
+        "src/pipecat/workers/**",
+        "tests/**",
+        "uv.lock"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2024–2026, Daily\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2024–2026, Daily, BSD-2-Clause license (LICENSE), https://github.com/pipecat-ai/pipecat."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

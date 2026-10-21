@@ -1,0 +1,475 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/rubocop/rubocop",
+  "revision": "b0c7560a95b3d64d29fefcaa6d5de9058c491fd1",
+  "checksum": "sha256:1b1369179ce163308460a8cdc00ee93f6771886bacfa9d96ad9679cdcd837091",
+  "extract": {
+    "exclude": [
+      "assets/logo.png",
+      "docs/modules/ROOT/pages/about/**",
+      "lib/rubocop/cop/style/**",
+      "logo/**",
+      "spec/rubocop/cop/style/**"
+    ]
+  },
+  "history": {
+    "since": "afbead34db54506c12a21dbd4ce04fada0f8b9a4"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2012-26 Bozhidar Batsov\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/rubocop/rubocop: Copyright (c) 2012-26 Bozhidar Batsov, MIT license (LICENSE.txt), https://github.com/rubocop/rubocop."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".codespellrc",
+        ".dir-locals.el",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-hooks.yaml",
+        ".rspec",
+        ".rubocop.yml",
+        ".rubocop_todo.yml",
+        ".simplecov",
+        ".yamllint.yml",
+        ".yardopts",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Gemfile",
+        "LICENSE.txt",
+        "README.md",
+        "Rakefile",
+        "assets/output.css.erb",
+        "assets/output.html.erb",
+        "bin/**",
+        "changelog/**",
+        "config/**",
+        "docs/antora.yml",
+        "docs/modules/ROOT/nav.adoc",
+        "docs/modules/ROOT/pages/automated_code_review.adoc",
+        "docs/modules/ROOT/pages/compatibility.adoc",
+        "docs/modules/ROOT/pages/configuration/**",
+        "docs/modules/ROOT/pages/configuration.adoc",
+        "docs/modules/ROOT/pages/contributing.adoc",
+        "docs/modules/ROOT/pages/cops.adoc",
+        "docs/modules/ROOT/pages/cops_bundler.adoc",
+        "docs/modules/ROOT/pages/cops_gemspec.adoc",
+        "docs/modules/ROOT/pages/cops_layout.adoc",
+        "docs/modules/ROOT/pages/cops_lint.adoc",
+        "docs/modules/ROOT/pages/cops_metrics.adoc",
+        "docs/modules/ROOT/pages/cops_migration.adoc",
+        "docs/modules/ROOT/pages/cops_naming.adoc",
+        "docs/modules/ROOT/pages/cops_security.adoc",
+        "docs/modules/ROOT/pages/cops_style.adoc",
+        "docs/modules/ROOT/pages/development.adoc",
+        "docs/modules/ROOT/pages/formatters.adoc",
+        "docs/modules/ROOT/pages/index.adoc",
+        "docs/modules/ROOT/pages/installation.adoc",
+        "docs/modules/ROOT/pages/integration_with_other_tools.adoc",
+        "docs/modules/ROOT/pages/plugin_configuration.adoc",
+        "docs/modules/ROOT/pages/plugin_migration_guide.adoc",
+        "docs/modules/ROOT/pages/plugins.adoc",
+        "docs/modules/ROOT/pages/support.adoc",
+        "docs/modules/ROOT/pages/usage/**",
+        "docs/modules/ROOT/pages/v1_upgrade_notes.adoc",
+        "docs/modules/ROOT/pages/versioning.adoc",
+        "docs/modules/ROOT/partials/**",
+        "exe/**",
+        "lib/rubocop/arguments_env.rb",
+        "lib/rubocop/arguments_file.rb",
+        "lib/rubocop/ast_aliases.rb",
+        "lib/rubocop/cache_config.rb",
+        "lib/rubocop/cached_data.rb",
+        "lib/rubocop/changed_files.rb",
+        "lib/rubocop/cli/**",
+        "lib/rubocop/cli.rb",
+        "lib/rubocop/comment_config/**",
+        "lib/rubocop/comment_config.rb",
+        "lib/rubocop/config.rb",
+        "lib/rubocop/config_finder.rb",
+        "lib/rubocop/config_loader.rb",
+        "lib/rubocop/config_loader_resolver.rb",
+        "lib/rubocop/config_obsoletion/**",
+        "lib/rubocop/config_obsoletion.rb",
+        "lib/rubocop/config_regeneration.rb",
+        "lib/rubocop/config_store.rb",
+        "lib/rubocop/config_validator.rb",
+        "lib/rubocop/cop/autocorrect_logic.rb",
+        "lib/rubocop/cop/badge.rb",
+        "lib/rubocop/cop/base.rb",
+        "lib/rubocop/cop/bundler/**",
+        "lib/rubocop/cop/bundler.rb",
+        "lib/rubocop/cop/commissioner.rb",
+        "lib/rubocop/cop/cop.rb",
+        "lib/rubocop/cop/cop_documentation.rb",
+        "lib/rubocop/cop/cop_explanation.rb",
+        "lib/rubocop/cop/corrector.rb",
+        "lib/rubocop/cop/correctors/**",
+        "lib/rubocop/cop/correctors.rb",
+        "lib/rubocop/cop/documentation.rb",
+        "lib/rubocop/cop/exclude_limit.rb",
+        "lib/rubocop/cop/force.rb",
+        "lib/rubocop/cop/gemspec/**",
+        "lib/rubocop/cop/gemspec.rb",
+        "lib/rubocop/cop/generator/**",
+        "lib/rubocop/cop/generator.rb",
+        "lib/rubocop/cop/ignored_node.rb",
+        "lib/rubocop/cop/internal_affairs/**",
+        "lib/rubocop/cop/internal_affairs.rb",
+        "lib/rubocop/cop/layout/**",
+        "lib/rubocop/cop/layout.rb",
+        "lib/rubocop/cop/lazy_loader.rb",
+        "lib/rubocop/cop/legacy/**",
+        "lib/rubocop/cop/lint/**",
+        "lib/rubocop/cop/lint.rb",
+        "lib/rubocop/cop/message_annotator.rb",
+        "lib/rubocop/cop/metrics/**",
+        "lib/rubocop/cop/metrics.rb",
+        "lib/rubocop/cop/migration/**",
+        "lib/rubocop/cop/migration.rb",
+        "lib/rubocop/cop/mixin/**",
+        "lib/rubocop/cop/mixin.rb",
+        "lib/rubocop/cop/naming/**",
+        "lib/rubocop/cop/naming.rb",
+        "lib/rubocop/cop/offense.rb",
+        "lib/rubocop/cop/registry.rb",
+        "lib/rubocop/cop/security/**",
+        "lib/rubocop/cop/security.rb",
+        "lib/rubocop/cop/severity.rb",
+        "lib/rubocop/cop/style.rb",
+        "lib/rubocop/cop/team.rb",
+        "lib/rubocop/cop/util.rb",
+        "lib/rubocop/cop/utils/**",
+        "lib/rubocop/cop/variable_force/**",
+        "lib/rubocop/cop/variable_force.rb",
+        "lib/rubocop/cops_documentation_generator.rb",
+        "lib/rubocop/core_ext/**",
+        "lib/rubocop/directive_comment.rb",
+        "lib/rubocop/error.rb",
+        "lib/rubocop/ext/**",
+        "lib/rubocop/feature_loader.rb",
+        "lib/rubocop/file_finder.rb",
+        "lib/rubocop/file_patterns.rb",
+        "lib/rubocop/formatter/**",
+        "lib/rubocop/formatter.rb",
+        "lib/rubocop/lockfile.rb",
+        "lib/rubocop/lsp/**",
+        "lib/rubocop/lsp.rb",
+        "lib/rubocop/magic_comment.rb",
+        "lib/rubocop/mcp/**",
+        "lib/rubocop/name_similarity.rb",
+        "lib/rubocop/offense_limit.rb",
+        "lib/rubocop/options.rb",
+        "lib/rubocop/path_util.rb",
+        "lib/rubocop/pending_cops_reporter.rb",
+        "lib/rubocop/platform.rb",
+        "lib/rubocop/plugin/**",
+        "lib/rubocop/plugin.rb",
+        "lib/rubocop/project_index_loader.rb",
+        "lib/rubocop/rake_task.rb",
+        "lib/rubocop/remote_config.rb",
+        "lib/rubocop/result_cache.rb",
+        "lib/rubocop/rspec/**",
+        "lib/rubocop/runner.rb",
+        "lib/rubocop/server/**",
+        "lib/rubocop/server.rb",
+        "lib/rubocop/string_interpreter.rb",
+        "lib/rubocop/target_finder.rb",
+        "lib/rubocop/target_ruby.rb",
+        "lib/rubocop/todo_audit.rb",
+        "lib/rubocop/unified_diff.rb",
+        "lib/rubocop/util.rb",
+        "lib/rubocop/version.rb",
+        "lib/rubocop/warning.rb",
+        "lib/rubocop/yaml_duplication_checker.rb",
+        "lib/rubocop.rb",
+        "lib/ruby_lsp/**",
+        "relnotes/**",
+        "rubocop.gemspec",
+        "spec/core_ext/**",
+        "spec/fixtures/**",
+        "spec/isolated_environment_spec.rb",
+        "spec/project_spec.rb",
+        "spec/rubocop/cache_config_spec.rb",
+        "spec/rubocop/cached_data_spec.rb",
+        "spec/rubocop/changed_files_spec.rb",
+        "spec/rubocop/cli/**",
+        "spec/rubocop/cli_spec.rb",
+        "spec/rubocop/comment_config_spec.rb",
+        "spec/rubocop/config_loader_spec.rb",
+        "spec/rubocop/config_obsoletion/**",
+        "spec/rubocop/config_obsoletion_spec.rb",
+        "spec/rubocop/config_regeneration_spec.rb",
+        "spec/rubocop/config_spec.rb",
+        "spec/rubocop/config_store_spec.rb",
+        "spec/rubocop/cop/alignment_corrector_spec.rb",
+        "spec/rubocop/cop/annotation_comment_spec.rb",
+        "spec/rubocop/cop/badge_spec.rb",
+        "spec/rubocop/cop/bundler/**",
+        "spec/rubocop/cop/commissioner_spec.rb",
+        "spec/rubocop/cop/cop_documentation_spec.rb",
+        "spec/rubocop/cop/cop_spec.rb",
+        "spec/rubocop/cop/corrector_spec.rb",
+        "spec/rubocop/cop/force_spec.rb",
+        "spec/rubocop/cop/gemspec/**",
+        "spec/rubocop/cop/generator/**",
+        "spec/rubocop/cop/generator_spec.rb",
+        "spec/rubocop/cop/internal_affairs/**",
+        "spec/rubocop/cop/layout/**",
+        "spec/rubocop/cop/lazy_loader_spec.rb",
+        "spec/rubocop/cop/lint/**",
+        "spec/rubocop/cop/message_annotator_spec.rb",
+        "spec/rubocop/cop/metrics/**",
+        "spec/rubocop/cop/migration/**",
+        "spec/rubocop/cop/mixin/**",
+        "spec/rubocop/cop/naming/**",
+        "spec/rubocop/cop/offense_spec.rb",
+        "spec/rubocop/cop/range_help_spec.rb",
+        "spec/rubocop/cop/registry_spec.rb",
+        "spec/rubocop/cop/security/**",
+        "spec/rubocop/cop/severity_spec.rb",
+        "spec/rubocop/cop/team_spec.rb",
+        "spec/rubocop/cop/util_spec.rb",
+        "spec/rubocop/cop/utils/**",
+        "spec/rubocop/cop/variable_force/**",
+        "spec/rubocop/cop/variable_force_spec.rb",
+        "spec/rubocop/cop/visibility_help_spec.rb",
+        "spec/rubocop/cops_documentation_generator_spec.rb",
+        "spec/rubocop/directive_comment_spec.rb",
+        "spec/rubocop/exclude_limit_spec.rb",
+        "spec/rubocop/ext/**",
+        "spec/rubocop/feature_loader_spec.rb",
+        "spec/rubocop/file_finder_spec.rb",
+        "spec/rubocop/file_patterns_spec.rb",
+        "spec/rubocop/formatter/**",
+        "spec/rubocop/intentionally_empty_file.rb",
+        "spec/rubocop/lazy_loading_spec.rb",
+        "spec/rubocop/lockfile_spec.rb",
+        "spec/rubocop/lsp/**",
+        "spec/rubocop/lsp_spec.rb",
+        "spec/rubocop/magic_comment_spec.rb",
+        "spec/rubocop/mcp/**",
+        "spec/rubocop/offense_limit_spec.rb",
+        "spec/rubocop/options_spec.rb",
+        "spec/rubocop/path_util_spec.rb",
+        "spec/rubocop/pending_cops_reporter_spec.rb",
+        "spec/rubocop/plugin/**",
+        "spec/rubocop/plugin_spec.rb",
+        "spec/rubocop/project_index_loader_spec.rb",
+        "spec/rubocop/rake_task_spec.rb",
+        "spec/rubocop/remote_config_spec.rb",
+        "spec/rubocop/result_cache_spec.rb",
+        "spec/rubocop/rspec/**",
+        "spec/rubocop/runner_formatter_invocation_spec.rb",
+        "spec/rubocop/runner_spec.rb",
+        "spec/rubocop/server/**",
+        "spec/rubocop/server_spec.rb",
+        "spec/rubocop/string_interpreter_spec.rb",
+        "spec/rubocop/target_finder_spec.rb",
+        "spec/rubocop/target_ruby_spec.rb",
+        "spec/rubocop/unified_diff_spec.rb",
+        "spec/rubocop/util_spec.rb",
+        "spec/rubocop/version_spec.rb",
+        "spec/rubocop/yaml_duplication_checker_spec.rb",
+        "spec/ruby_lsp/**",
+        "spec/spec_helper.rb",
+        "spec/support/**",
+        "spec/tasks/**",
+        "tasks/**"
+      ],
+      "text": "Copyright (c) 2012-26 Bozhidar Batsov\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2012-26 Bozhidar Batsov, MIT license (LICENSE.txt), https://github.com/rubocop/rubocop."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elisp",
+      "paths": [
+        "**/*.el"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.rspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.simplecov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yardopts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/console"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rubocop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

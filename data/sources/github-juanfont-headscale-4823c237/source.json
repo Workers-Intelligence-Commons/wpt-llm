@@ -1,0 +1,430 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/juanfont/headscale",
+  "revision": "fc97593bcea76c92fb3ad41a5b95076684ddc85a",
+  "checksum": "sha256:097fac0b2c7001e1c671fc8069318fecea6bdf575de6a08bd92cfc130a6b038a",
+  "extract": {
+    "exclude": [
+      "docs/assets/favicon.png",
+      "docs/assets/logo/headscale3-dots.pdf",
+      "docs/assets/logo/headscale3-dots.png",
+      "docs/assets/logo/headscale3_header_stacked_left.pdf",
+      "docs/assets/logo/headscale3_header_stacked_left.png",
+      "hscontrol/assets/favicon.png",
+      "hscontrol/db/testdata/postgres/**"
+    ]
+  },
+  "history": {
+    "since": "8077923b681a051707d3026d127850cdb69b41cd"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2020, Juan Font\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/juanfont/headscale: Copyright (c) 2020, Juan Font, BSD-3-Clause license (LICENSE), https://github.com/juanfont/headscale."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".dockerignore",
+        ".editorconfig",
+        ".envrc",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yaml",
+        ".goreleaser.yml",
+        ".mcp.json",
+        ".mdformat.toml",
+        ".pre-commit-config.yaml",
+        ".prettierignore",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile.derper",
+        "Dockerfile.integration",
+        "Dockerfile.integration-ci",
+        "Dockerfile.tailscale-HEAD",
+        "Dockerfile.tailscale-rs",
+        "Dockerfile.wasmclient",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "cmd/**",
+        "config-example.yaml",
+        "derp-example.yaml",
+        "docs/about/**",
+        "docs/assets/logo/headscale3-dots.svg",
+        "docs/assets/logo/headscale3_header_stacked_left.svg",
+        "docs/index.md",
+        "docs/ref/**",
+        "docs/requirements.txt",
+        "docs/setup/**",
+        "docs/usage/**",
+        "flake.lock",
+        "flake.nix",
+        "flakehashes.json",
+        "gen/**",
+        "go.mod",
+        "go.sum",
+        "hscontrol/api/**",
+        "hscontrol/apiv1_apikeys_test.go",
+        "hscontrol/apiv1_auth_test.go",
+        "hscontrol/apiv1_authmw_test.go",
+        "hscontrol/apiv1_client_test.go",
+        "hscontrol/apiv1_harness_test.go",
+        "hscontrol/apiv1_health_test.go",
+        "hscontrol/apiv1_nodes_test.go",
+        "hscontrol/apiv1_policy_test.go",
+        "hscontrol/apiv1_preauthkeys_test.go",
+        "hscontrol/apiv1_socket_test.go",
+        "hscontrol/apiv1_users_test.go",
+        "hscontrol/apiv2_acl_test.go",
+        "hscontrol/apiv2_devices_test.go",
+        "hscontrol/apiv2_keys_test.go",
+        "hscontrol/apiv2_oauth_matrix_test.go",
+        "hscontrol/apiv2_oauth_test.go",
+        "hscontrol/apiv2_settings_test.go",
+        "hscontrol/apiv2_users_test.go",
+        "hscontrol/app.go",
+        "hscontrol/app_test.go",
+        "hscontrol/assets/assets.go",
+        "hscontrol/assets/headscale.svg",
+        "hscontrol/assets/style.css",
+        "hscontrol/auth.go",
+        "hscontrol/auth_tags_test.go",
+        "hscontrol/auth_test.go",
+        "hscontrol/capver/**",
+        "hscontrol/db/api_key.go",
+        "hscontrol/db/api_key_byid_test.go",
+        "hscontrol/db/api_key_test.go",
+        "hscontrol/db/credential.go",
+        "hscontrol/db/db.go",
+        "hscontrol/db/db_test.go",
+        "hscontrol/db/ephemeral_garbage_collector_test.go",
+        "hscontrol/db/ip.go",
+        "hscontrol/db/ip_backfill_race_test.go",
+        "hscontrol/db/ip_random_exhaustion_test.go",
+        "hscontrol/db/ip_test.go",
+        "hscontrol/db/main_test.go",
+        "hscontrol/db/migrate_credentials.go",
+        "hscontrol/db/node.go",
+        "hscontrol/db/node_test.go",
+        "hscontrol/db/oauth.go",
+        "hscontrol/db/oauth_test.go",
+        "hscontrol/db/policy.go",
+        "hscontrol/db/preauth_keys.go",
+        "hscontrol/db/preauth_keys_test.go",
+        "hscontrol/db/randomnext_test.go",
+        "hscontrol/db/schema.sql",
+        "hscontrol/db/secret.go",
+        "hscontrol/db/sqliteconfig/**",
+        "hscontrol/db/suite_test.go",
+        "hscontrol/db/testdata/sqlite/**",
+        "hscontrol/db/testdata/sqlite_too_old/**",
+        "hscontrol/db/text_serialiser.go",
+        "hscontrol/db/user_update_test.go",
+        "hscontrol/db/users.go",
+        "hscontrol/db/users_test.go",
+        "hscontrol/db/versioncheck.go",
+        "hscontrol/db/versioncheck_test.go",
+        "hscontrol/debug.go",
+        "hscontrol/derp/**",
+        "hscontrol/dns/**",
+        "hscontrol/handlers.go",
+        "hscontrol/handlers_test.go",
+        "hscontrol/mapper/**",
+        "hscontrol/metrics.go",
+        "hscontrol/noise.go",
+        "hscontrol/noise_test.go",
+        "hscontrol/oidc.go",
+        "hscontrol/oidc_confirm_test.go",
+        "hscontrol/oidc_cookiename_test.go",
+        "hscontrol/oidc_template_test.go",
+        "hscontrol/oidc_test.go",
+        "hscontrol/platform_config.go",
+        "hscontrol/platform_config_test.go",
+        "hscontrol/policy/**",
+        "hscontrol/poll.go",
+        "hscontrol/poll_test.go",
+        "hscontrol/realip.go",
+        "hscontrol/realip_test.go",
+        "hscontrol/scope/**",
+        "hscontrol/servertest/**",
+        "hscontrol/state/**",
+        "hscontrol/tailsql.go",
+        "hscontrol/templates/**",
+        "hscontrol/templates_consistency_test.go",
+        "hscontrol/testdata/**",
+        "hscontrol/types/**",
+        "hscontrol/util/**",
+        "integration/**",
+        "mkdocs.yml",
+        "nix/**",
+        "packaging/**",
+        "tools/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2020, Juan Font\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2020, Juan Font, BSD-3-Clause license (LICENSE), https://github.com/juanfont/headscale."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.derper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hujson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.integration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.integration-ci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tailscale-HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tailscale-rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.td"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wasmclient"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pr-unvouched-message"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prerm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

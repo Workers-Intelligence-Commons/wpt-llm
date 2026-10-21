@@ -1,0 +1,1176 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/redcanaryco/atomic-red-team",
+  "revision": "388942adbd9641f4dfdcf079d7efe9a75ec0ac43",
+  "checksum": "sha256:408a03da9f4da25ff9aa7314e06e4fb40d3a8a3d460c380f1cbd8dd04ebf2ccd",
+  "extract": {
+    "exclude": [
+      "atomics/T1005/src/art",
+      "atomics/T1005/src/gta.db",
+      "atomics/T1027/bin/**",
+      "atomics/T1027/src/**",
+      "atomics/T1027.002/bin/**",
+      "atomics/T1027.004/bin/**",
+      "atomics/T1027.007/bin/**",
+      "atomics/T1036/bin/**",
+      "atomics/T1036.003/bin/**",
+      "atomics/T1047/bin/**",
+      "atomics/T1053.005/src/T1053_005_WMI.xml",
+      "atomics/T1055/bin/**",
+      "atomics/T1055.001/src/Win32/**",
+      "atomics/T1055.001/src/x64/**",
+      "atomics/T1055.002/bin/**",
+      "atomics/T1055.003/bin/**",
+      "atomics/T1055.004/bin/**",
+      "atomics/T1055.004/src/Win32/**",
+      "atomics/T1055.004/src/x64/T1055.dll",
+      "atomics/T1055.011/bin/**",
+      "atomics/T1055.011/src/ntlib/x64/**",
+      "atomics/T1055.011/src/ntlib/x86/**",
+      "atomics/T1055.012/bin/**",
+      "atomics/T1055.015/bin/**",
+      "atomics/T1056.004/bin/**",
+      "atomics/T1056.004/src/Win32/**",
+      "atomics/T1056.004/src/x64/**",
+      "atomics/T1059.001/bin/**",
+      "atomics/T1071/bin/**",
+      "atomics/T1087.002/bin/**",
+      "atomics/T1105/bin/GUP.exe",
+      "atomics/T1105/bin/libcurl.dll",
+      "atomics/T1105/src/T1105.zip",
+      "atomics/T1105/src/redcanary.cab",
+      "atomics/T1106/bin/**",
+      "atomics/T1129/src/atomicvibes.vib",
+      "atomics/T1134.001/bin/**",
+      "atomics/T1134.004/bin/**",
+      "atomics/T1137.002/bin/**",
+      "atomics/T1137.006/bin/**",
+      "atomics/T1204.002/bin/**",
+      "atomics/T1204.003/src/**",
+      "atomics/T1218/bin/**",
+      "atomics/T1218/src/T1218Test.docx",
+      "atomics/T1218/src/Win32/**",
+      "atomics/T1218/src/x64/**",
+      "atomics/T1218.001/src/T1218.001.chm",
+      "atomics/T1218.002/bin/**",
+      "atomics/T1218.007/bin/**",
+      "atomics/T1218.008/bin/o.dll",
+      "atomics/T1218.008/src/Win32/**",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/UnmanagedExports.1.2.7.nupkg",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/lib/**",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/Mono.Cecil.dll",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.MSBuild.dll",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.MSBuild.pdb",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.dll",
+      "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.pdb",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/DllExport.1.5.2.nupkg",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/lib/**",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/Microsoft.Build.Framework.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/Microsoft.Build.Utilities.v4.0.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/Microsoft.Management.Infrastructure.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/Mono.Cecil.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/NSBin.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/NSBin.pdb",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/RGiesecke.DllExport.MSBuild.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/RGiesecke.DllExport.MSBuild.pdb",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/RGiesecke.DllExport.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/RGiesecke.DllExport.pdb",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/System.Management.Automation.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/coreclr.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/ilasm.exe",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/ildasm.exe",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/ildasmrc.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/mscordaccore.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/mscordbi.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/net.r_eg.DllExport.Configurator.dll",
+      "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/net.r_eg.DllExport.Configurator.pdb",
+      "atomics/T1218.010/bin/**",
+      "atomics/T1218.011/bin/**",
+      "atomics/T1221/src/Calculator.docx",
+      "atomics/T1221/src/opencalc.dotm",
+      "atomics/T1543.003/bin/**",
+      "atomics/T1546/bin/**",
+      "atomics/T1546.007/bin/**",
+      "atomics/T1546.009/bin/**",
+      "atomics/T1546.010/bin/**",
+      "atomics/T1546.011/bin/**",
+      "atomics/T1546.015/bin/**",
+      "atomics/T1547.001/src/regtemplate.ini",
+      "atomics/T1547.002/bin/**",
+      "atomics/T1547.003/bin/**",
+      "atomics/T1547.007/src/reopen_loginwindow_calc.plist",
+      "atomics/T1547.010/bin/**",
+      "atomics/T1547.012/bin/**",
+      "atomics/T1548.002/bin/**",
+      "atomics/T1553.003/bin/**",
+      "atomics/T1553.005/bin/**",
+      "atomics/T1555.003/bin/WebBrowserPassView.exe",
+      "atomics/T1555.003/src/Login Data",
+      "atomics/T1555.003/src/key4.db",
+      "atomics/T1556.002/bin/**",
+      "atomics/T1559.002/bin/**",
+      "atomics/T1564/bin/**",
+      "atomics/T1564.006/bin/**",
+      "atomics/T1566.001/bin/**",
+      "atomics/T1574.001/bin/**",
+      "atomics/T1574.009/bin/**",
+      "atomics/T1574.012/bin/**",
+      "atomics/T1574.012/src/x64/**",
+      "atomics/T1614.001/bin/**",
+      "atomics/T1620/bin/**",
+      "atomics/T1685.001/bin/**",
+      "atomics/T1686/bin/**",
+      "static/**"
+    ]
+  },
+  "history": {
+    "since": "ac8dd2cfecb6e183eb2e0f74e5f76465fcef579c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\nThe MIT License\n\nCopyright (c) 2018 Red Canary, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2009-2015  Robert Giesecke\nCopyright (c) 2016-2017  Denis Kuzmin <entry.reg@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\nThe MIT License (MIT)\n\nCopyright (c) .NET Foundation and Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/redcanaryco/atomic-red-team: Copyright (c) 2018 Red Canary, Inc., MIT license (LICENSE.txt), https://github.com/redcanaryco/atomic-red-team; Copyright (c) 2009-2015  Robert Giesecke; Copyright (c) 2016-2017  Denis Kuzmin <entry.reg@gmail.com>, MIT license (License.txt), https://github.com/redcanaryco/atomic-red-team/tree/388942adbd9641f4dfdcf079d7efe9a75ec0ac43/atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2; Copyright (c) .NET Foundation and Contributors, MIT license (LICENSE.TXT), https://github.com/redcanaryco/atomic-red-team/tree/388942adbd9641f4dfdcf079d7efe9a75ec0ac43/atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".github/**",
+        ".gitignore",
+        "CODE_OF_CONDUCT.md",
+        "Gemfile",
+        "LICENSE.txt",
+        "README.md",
+        "atomic-red-team.gemspec",
+        "atomic_red_team/**",
+        "atomics/Indexes/**",
+        "atomics/T1001.002/**",
+        "atomics/T1003/**",
+        "atomics/T1003.001/**",
+        "atomics/T1003.002/**",
+        "atomics/T1003.003/**",
+        "atomics/T1003.004/**",
+        "atomics/T1003.005/**",
+        "atomics/T1003.006/**",
+        "atomics/T1003.007/**",
+        "atomics/T1003.008/**",
+        "atomics/T1005/T1005.md",
+        "atomics/T1005/T1005.yaml",
+        "atomics/T1005/src/sqlite_dump.sh",
+        "atomics/T1006/**",
+        "atomics/T1007/**",
+        "atomics/T1010/**",
+        "atomics/T1012/**",
+        "atomics/T1014/**",
+        "atomics/T1016/**",
+        "atomics/T1016.001/**",
+        "atomics/T1016.002/**",
+        "atomics/T1018/**",
+        "atomics/T1020/**",
+        "atomics/T1021.001/**",
+        "atomics/T1021.002/**",
+        "atomics/T1021.003/**",
+        "atomics/T1021.004/**",
+        "atomics/T1021.005/**",
+        "atomics/T1021.006/**",
+        "atomics/T1025/**",
+        "atomics/T1027/T1027.md",
+        "atomics/T1027/T1027.yaml",
+        "atomics/T1027.001/**",
+        "atomics/T1027.002/T1027.002.md",
+        "atomics/T1027.002/T1027.002.yaml",
+        "atomics/T1027.002/src/**",
+        "atomics/T1027.004/T1027.004.md",
+        "atomics/T1027.004/T1027.004.yaml",
+        "atomics/T1027.004/src/**",
+        "atomics/T1027.006/**",
+        "atomics/T1027.007/T1027.007.md",
+        "atomics/T1027.007/T1027.007.yaml",
+        "atomics/T1027.007/src/**",
+        "atomics/T1027.013/**",
+        "atomics/T1027.018/**",
+        "atomics/T1030/**",
+        "atomics/T1033/**",
+        "atomics/T1036/T1036.md",
+        "atomics/T1036/T1036.yaml",
+        "atomics/T1036.002/**",
+        "atomics/T1036.003/T1036.003.md",
+        "atomics/T1036.003/T1036.003.yaml",
+        "atomics/T1036.003/src/**",
+        "atomics/T1036.004/**",
+        "atomics/T1036.005/**",
+        "atomics/T1036.006/**",
+        "atomics/T1036.007/**",
+        "atomics/T1036.008/**",
+        "atomics/T1037.001/**",
+        "atomics/T1037.002/**",
+        "atomics/T1037.004/**",
+        "atomics/T1037.005/**",
+        "atomics/T1039/**",
+        "atomics/T1040/**",
+        "atomics/T1041/**",
+        "atomics/T1046/**",
+        "atomics/T1047/T1047.md",
+        "atomics/T1047/T1047.yaml",
+        "atomics/T1048/**",
+        "atomics/T1048.002/**",
+        "atomics/T1048.003/**",
+        "atomics/T1049/**",
+        "atomics/T1053.002/**",
+        "atomics/T1053.003/**",
+        "atomics/T1053.005/T1053.005.md",
+        "atomics/T1053.005/T1053.005.yaml",
+        "atomics/T1053.005/src/T1053.005-macrocode.txt",
+        "atomics/T1053.005/src/T1053_05_SCTASK_HIDDEN_ATTRIB.xml",
+        "atomics/T1053.006/**",
+        "atomics/T1053.007/**",
+        "atomics/T1055/T1055.md",
+        "atomics/T1055/T1055.yaml",
+        "atomics/T1055/src/**",
+        "atomics/T1055.001/T1055.001.md",
+        "atomics/T1055.001/T1055.001.yaml",
+        "atomics/T1055.001/src/T1055.001.cpp",
+        "atomics/T1055.002/T1055.002.md",
+        "atomics/T1055.002/T1055.002.yaml",
+        "atomics/T1055.002/src/**",
+        "atomics/T1055.003/T1055.003.md",
+        "atomics/T1055.003/T1055.003.yaml",
+        "atomics/T1055.003/src/**",
+        "atomics/T1055.004/T1055.004.md",
+        "atomics/T1055.004/T1055.004.yaml",
+        "atomics/T1055.004/src/Linux/**",
+        "atomics/T1055.004/src/T1055.cpp",
+        "atomics/T1055.004/src/T1055.cs",
+        "atomics/T1055.004/src/x64/EarlyBird.go",
+        "atomics/T1055.004/src/x64/NtQueueApcThreadEx.go",
+        "atomics/T1055.009/**",
+        "atomics/T1055.011/T1055.011.md",
+        "atomics/T1055.011/T1055.011.yaml",
+        "atomics/T1055.011/src/build_x64.bat",
+        "atomics/T1055.011/src/build_x86.bat",
+        "atomics/T1055.011/src/ewm.c",
+        "atomics/T1055.011/src/ewm.h",
+        "atomics/T1055.011/src/extrabytes_x64.txt",
+        "atomics/T1055.011/src/extrabytes_x86.txt",
+        "atomics/T1055.011/src/ntlib/ntddk.h",
+        "atomics/T1055.011/src/ntlib/nttpp.h",
+        "atomics/T1055.011/src/ntlib/util.h",
+        "atomics/T1055.011/src/payload.c",
+        "atomics/T1055.011/src/vsdevcmd_x64.bat",
+        "atomics/T1055.011/src/vsdevcmd_x86.bat",
+        "atomics/T1055.011/src/xbin.cpp",
+        "atomics/T1055.012/T1055.012.md",
+        "atomics/T1055.012/T1055.012.yaml",
+        "atomics/T1055.012/src/**",
+        "atomics/T1055.015/T1055.015.md",
+        "atomics/T1055.015/T1055.015.yaml",
+        "atomics/T1055.015/src/**",
+        "atomics/T1056.001/**",
+        "atomics/T1056.002/**",
+        "atomics/T1056.004/T1056.004.md",
+        "atomics/T1056.004/T1056.004.yaml",
+        "atomics/T1056.004/src/T1056.004/**",
+        "atomics/T1056.004/src/T1056.004.sln",
+        "atomics/T1057/**",
+        "atomics/T1059/**",
+        "atomics/T1059.001/T1059.001.md",
+        "atomics/T1059.001/T1059.001.yaml",
+        "atomics/T1059.001/src/**",
+        "atomics/T1059.002/**",
+        "atomics/T1059.003/**",
+        "atomics/T1059.004/**",
+        "atomics/T1059.005/**",
+        "atomics/T1059.006/**",
+        "atomics/T1059.007/**",
+        "atomics/T1059.010/**",
+        "atomics/T1068/**",
+        "atomics/T1069.001/**",
+        "atomics/T1069.002/**",
+        "atomics/T1070/**",
+        "atomics/T1070.003/**",
+        "atomics/T1070.004/**",
+        "atomics/T1070.005/**",
+        "atomics/T1070.006/**",
+        "atomics/T1070.008/**",
+        "atomics/T1071/T1071.md",
+        "atomics/T1071/T1071.yaml",
+        "atomics/T1071/src/**",
+        "atomics/T1071.001/**",
+        "atomics/T1071.004/**",
+        "atomics/T1072/**",
+        "atomics/T1074.001/**",
+        "atomics/T1078.001/**",
+        "atomics/T1078.003/**",
+        "atomics/T1078.004/**",
+        "atomics/T1082/**",
+        "atomics/T1083/**",
+        "atomics/T1087.001/**",
+        "atomics/T1087.002/T1087.002.md",
+        "atomics/T1087.002/T1087.002.yaml",
+        "atomics/T1087.002/src/**",
+        "atomics/T1090.001/**",
+        "atomics/T1090.003/**",
+        "atomics/T1091/**",
+        "atomics/T1095/**",
+        "atomics/T1098/**",
+        "atomics/T1098.001/**",
+        "atomics/T1098.002/**",
+        "atomics/T1098.003/**",
+        "atomics/T1098.004/**",
+        "atomics/T1102.002/**",
+        "atomics/T1105/T1105.md",
+        "atomics/T1105/T1105.yaml",
+        "atomics/T1105/bin/gup.xml",
+        "atomics/T1105/src/T1105-download-file.vbs",
+        "atomics/T1105/src/T1105.bat",
+        "atomics/T1105/src/atomic.sh",
+        "atomics/T1106/T1106.md",
+        "atomics/T1106/T1106.yaml",
+        "atomics/T1106/src/**",
+        "atomics/T1110.001/**",
+        "atomics/T1110.002/**",
+        "atomics/T1110.003/**",
+        "atomics/T1110.004/**",
+        "atomics/T1112/**",
+        "atomics/T1113/**",
+        "atomics/T1114.001/**",
+        "atomics/T1114.002/**",
+        "atomics/T1114.003/**",
+        "atomics/T1115/**",
+        "atomics/T1119/**",
+        "atomics/T1120/**",
+        "atomics/T1123/**",
+        "atomics/T1124/**",
+        "atomics/T1125/**",
+        "atomics/T1127/**",
+        "atomics/T1127.001/**",
+        "atomics/T1129/T1129.md",
+        "atomics/T1129/T1129.yaml",
+        "atomics/T1129/src/esxi_vibinstall.txt",
+        "atomics/T1129/src/esxi_vibremove.txt",
+        "atomics/T1132.001/**",
+        "atomics/T1133/**",
+        "atomics/T1134.001/T1134.001.md",
+        "atomics/T1134.001/T1134.001.yaml",
+        "atomics/T1134.002/**",
+        "atomics/T1134.004/T1134.004.md",
+        "atomics/T1134.004/T1134.004.yaml",
+        "atomics/T1134.004/src/**",
+        "atomics/T1134.005/**",
+        "atomics/T1135/**",
+        "atomics/T1136.001/**",
+        "atomics/T1136.002/**",
+        "atomics/T1136.003/**",
+        "atomics/T1137/**",
+        "atomics/T1137.001/**",
+        "atomics/T1137.002/T1137.002.md",
+        "atomics/T1137.002/T1137.002.yaml",
+        "atomics/T1137.002/src/**",
+        "atomics/T1137.004/**",
+        "atomics/T1137.005/**",
+        "atomics/T1137.006/T1137.006.md",
+        "atomics/T1137.006/T1137.006.yaml",
+        "atomics/T1137.006/src/**",
+        "atomics/T1140/**",
+        "atomics/T1176/**",
+        "atomics/T1187/**",
+        "atomics/T1195/**",
+        "atomics/T1195.002/**",
+        "atomics/T1197/**",
+        "atomics/T1201/**",
+        "atomics/T1202/**",
+        "atomics/T1204.002/T1204.002.md",
+        "atomics/T1204.002/T1204.002.yaml",
+        "atomics/T1204.002/src/**",
+        "atomics/T1204.003/T1204.003.md",
+        "atomics/T1204.003/T1204.003.yaml",
+        "atomics/T1204.004/**",
+        "atomics/T1207/**",
+        "atomics/T1216/**",
+        "atomics/T1216.001/**",
+        "atomics/T1216.002/**",
+        "atomics/T1217/**",
+        "atomics/T1218/T1218.md",
+        "atomics/T1218/T1218.yaml",
+        "atomics/T1218/src/Infdefaultinstall.inf",
+        "atomics/T1218/src/T1218-2.cpp",
+        "atomics/T1218/src/T1218.cpp",
+        "atomics/T1218/src/T1218.txt",
+        "atomics/T1218/src/T1218.xml",
+        "atomics/T1218/src/T1218.xoml",
+        "atomics/T1218/src/ieuinit.inf",
+        "atomics/T1218/src/test.sct",
+        "atomics/T1218.001/T1218.001.md",
+        "atomics/T1218.001/T1218.001.yaml",
+        "atomics/T1218.001/src/T1218.001.hhp",
+        "atomics/T1218.001/src/T1218.001.html",
+        "atomics/T1218.002/T1218.002.md",
+        "atomics/T1218.002/T1218.002.yaml",
+        "atomics/T1218.002/src/**",
+        "atomics/T1218.003/**",
+        "atomics/T1218.004/**",
+        "atomics/T1218.005/**",
+        "atomics/T1218.007/T1218.007.md",
+        "atomics/T1218.007/T1218.007.yaml",
+        "atomics/T1218.007/src/**",
+        "atomics/T1218.008/T1218.008.md",
+        "atomics/T1218.008/T1218.008.yaml",
+        "atomics/T1218.008/bin/T1218.008.rsp",
+        "atomics/T1218.008/src/T1218-2.cpp",
+        "atomics/T1218.008/src/odbcconf net.20/Class1.cs",
+        "atomics/T1218.008/src/odbcconf net.20/Properties/**",
+        "atomics/T1218.008/src/odbcconf net.20/odbcconf.csproj",
+        "atomics/T1218.008/src/odbcconf net.20/odbcconf.sln",
+        "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/DllExportCmdLets.psm1",
+        "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets",
+        "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/init.ps1",
+        "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/install.ps1",
+        "atomics/T1218.008/src/odbcconf net.20/packages/UnmanagedExports.1.2.7/tools/uninstall.ps1",
+        "atomics/T1218.008/src/odbcconf net.20/packages.config",
+        "atomics/T1218.008/src/odbcconf net.40/Class1.cs",
+        "atomics/T1218.008/src/odbcconf net.40/Properties/**",
+        "atomics/T1218.008/src/odbcconf net.40/odbcconf.csproj",
+        "atomics/T1218.008/src/odbcconf net.40/odbcconf.sln",
+        "atomics/T1218.008/src/odbcconf net.40/packages.config",
+        "atomics/T1218.009/**",
+        "atomics/T1218.010/T1218.010.md",
+        "atomics/T1218.010/T1218.010.yaml",
+        "atomics/T1218.010/src/**",
+        "atomics/T1218.011/T1218.011.md",
+        "atomics/T1218.011/T1218.011.yaml",
+        "atomics/T1218.011/src/**",
+        "atomics/T1219/**",
+        "atomics/T1220/**",
+        "atomics/T1221/T1221.md",
+        "atomics/T1221/T1221.yaml",
+        "atomics/T1221/src/readme.txt",
+        "atomics/T1222/**",
+        "atomics/T1222.001/**",
+        "atomics/T1222.002/**",
+        "atomics/T1482/**",
+        "atomics/T1484.001/**",
+        "atomics/T1484.002/**",
+        "atomics/T1485/**",
+        "atomics/T1486/**",
+        "atomics/T1489/**",
+        "atomics/T1490/**",
+        "atomics/T1491.001/**",
+        "atomics/T1496/**",
+        "atomics/T1497.001/**",
+        "atomics/T1497.003/**",
+        "atomics/T1505.002/**",
+        "atomics/T1505.003/**",
+        "atomics/T1505.004/**",
+        "atomics/T1505.005/**",
+        "atomics/T1518/**",
+        "atomics/T1518.001/**",
+        "atomics/T1526/**",
+        "atomics/T1528/**",
+        "atomics/T1529/**",
+        "atomics/T1530/**",
+        "atomics/T1531/**",
+        "atomics/T1539/**",
+        "atomics/T1542.001/**",
+        "atomics/T1543.001/**",
+        "atomics/T1543.002/**",
+        "atomics/T1543.003/T1543.003.md",
+        "atomics/T1543.003/T1543.003.yaml",
+        "atomics/T1543.003/src/**",
+        "atomics/T1543.004/**",
+        "atomics/T1546/T1546.md",
+        "atomics/T1546/T1546.yaml",
+        "atomics/T1546/src/**",
+        "atomics/T1546.001/**",
+        "atomics/T1546.002/**",
+        "atomics/T1546.003/**",
+        "atomics/T1546.004/**",
+        "atomics/T1546.005/**",
+        "atomics/T1546.007/T1546.007.md",
+        "atomics/T1546.007/T1546.007.yaml",
+        "atomics/T1546.007/src/**",
+        "atomics/T1546.008/**",
+        "atomics/T1546.009/T1546.009.md",
+        "atomics/T1546.009/T1546.009.yaml",
+        "atomics/T1546.009/src/**",
+        "atomics/T1546.010/T1546.010.md",
+        "atomics/T1546.010/T1546.010.yaml",
+        "atomics/T1546.010/src/**",
+        "atomics/T1546.011/T1546.011.md",
+        "atomics/T1546.011/T1546.011.yaml",
+        "atomics/T1546.011/src/**",
+        "atomics/T1546.012/**",
+        "atomics/T1546.013/**",
+        "atomics/T1546.014/**",
+        "atomics/T1546.015/T1546.015.md",
+        "atomics/T1546.015/T1546.015.yaml",
+        "atomics/T1546.015/src/**",
+        "atomics/T1546.018/**",
+        "atomics/T1547/**",
+        "atomics/T1547.001/T1547.001.md",
+        "atomics/T1547.001/T1547.001.yaml",
+        "atomics/T1547.001/src/Discovery.bat",
+        "atomics/T1547.001/src/batstartup.bat",
+        "atomics/T1547.001/src/jsestartup.jse",
+        "atomics/T1547.001/src/vbsstartup.vbs",
+        "atomics/T1547.002/T1547.002.md",
+        "atomics/T1547.002/T1547.002.yaml",
+        "atomics/T1547.002/src/**",
+        "atomics/T1547.003/T1547.003.md",
+        "atomics/T1547.003/T1547.003.yaml",
+        "atomics/T1547.003/src/**",
+        "atomics/T1547.004/**",
+        "atomics/T1547.005/**",
+        "atomics/T1547.006/**",
+        "atomics/T1547.007/T1547.007.md",
+        "atomics/T1547.007/T1547.007.yaml",
+        "atomics/T1547.007/src/append_reopen_loginwindow.m",
+        "atomics/T1547.008/**",
+        "atomics/T1547.009/**",
+        "atomics/T1547.010/T1547.010.md",
+        "atomics/T1547.010/T1547.010.yaml",
+        "atomics/T1547.010/src/**",
+        "atomics/T1547.012/T1547.012.md",
+        "atomics/T1547.012/T1547.012.yaml",
+        "atomics/T1547.012/src/**",
+        "atomics/T1547.014/**",
+        "atomics/T1547.015/**",
+        "atomics/T1548.001/**",
+        "atomics/T1548.002/T1548.002.md",
+        "atomics/T1548.002/T1548.002.yaml",
+        "atomics/T1548.002/src/**",
+        "atomics/T1548.003/**",
+        "atomics/T1550.002/**",
+        "atomics/T1550.003/**",
+        "atomics/T1552/**",
+        "atomics/T1552.001/**",
+        "atomics/T1552.002/**",
+        "atomics/T1552.003/**",
+        "atomics/T1552.004/**",
+        "atomics/T1552.005/**",
+        "atomics/T1552.006/**",
+        "atomics/T1552.007/**",
+        "atomics/T1553.001/**",
+        "atomics/T1553.003/T1553.003.md",
+        "atomics/T1553.003/T1553.003.yaml",
+        "atomics/T1553.003/src/**",
+        "atomics/T1553.004/**",
+        "atomics/T1553.005/T1553.005.md",
+        "atomics/T1553.005/T1553.005.yaml",
+        "atomics/T1553.006/**",
+        "atomics/T1555/**",
+        "atomics/T1555.001/**",
+        "atomics/T1555.003/T1555.003.md",
+        "atomics/T1555.003/T1555.003.yaml",
+        "atomics/T1555.003/bin/WebBrowserPassView.cfg",
+        "atomics/T1555.003/src/logins.json",
+        "atomics/T1555.004/**",
+        "atomics/T1555.006/**",
+        "atomics/T1556.001/**",
+        "atomics/T1556.002/T1556.002.md",
+        "atomics/T1556.002/T1556.002.yaml",
+        "atomics/T1556.002/src/**",
+        "atomics/T1556.003/**",
+        "atomics/T1557.001/**",
+        "atomics/T1558.001/**",
+        "atomics/T1558.002/**",
+        "atomics/T1558.003/**",
+        "atomics/T1558.004/**",
+        "atomics/T1559/**",
+        "atomics/T1559.002/T1559.002.md",
+        "atomics/T1559.002/T1559.002.yaml",
+        "atomics/T1559.002/src/**",
+        "atomics/T1560/**",
+        "atomics/T1560.001/**",
+        "atomics/T1560.002/**",
+        "atomics/T1563.002/**",
+        "atomics/T1564/T1564.md",
+        "atomics/T1564/T1564.yaml",
+        "atomics/T1564/src/**",
+        "atomics/T1564.001/**",
+        "atomics/T1564.002/**",
+        "atomics/T1564.003/**",
+        "atomics/T1564.004/**",
+        "atomics/T1564.006/T1564.006.md",
+        "atomics/T1564.006/T1564.006.yaml",
+        "atomics/T1564.008/**",
+        "atomics/T1564.012/**",
+        "atomics/T1566.001/T1566.001.md",
+        "atomics/T1566.001/T1566.001.yaml",
+        "atomics/T1566.002/**",
+        "atomics/T1567.002/**",
+        "atomics/T1567.003/**",
+        "atomics/T1567.004/**",
+        "atomics/T1568.002/**",
+        "atomics/T1569.001/**",
+        "atomics/T1569.002/**",
+        "atomics/T1569.003/**",
+        "atomics/T1570/**",
+        "atomics/T1571/**",
+        "atomics/T1572/**",
+        "atomics/T1573/**",
+        "atomics/T1574.001/T1574.001.md",
+        "atomics/T1574.001/T1574.001.yaml",
+        "atomics/T1574.001/src/**",
+        "atomics/T1574.006/**",
+        "atomics/T1574.008/**",
+        "atomics/T1574.009/T1574.009.md",
+        "atomics/T1574.009/T1574.009.yaml",
+        "atomics/T1574.011/**",
+        "atomics/T1574.012/T1574.012.md",
+        "atomics/T1574.012/T1574.012.yaml",
+        "atomics/T1574.012/src/atomicNotepad/**",
+        "atomics/T1574.012/src/atomicNotepad.sln",
+        "atomics/T1578.001/**",
+        "atomics/T1578.002/**",
+        "atomics/T1580/**",
+        "atomics/T1592.001/**",
+        "atomics/T1595.003/**",
+        "atomics/T1606.002/**",
+        "atomics/T1609/**",
+        "atomics/T1610/**",
+        "atomics/T1611/**",
+        "atomics/T1612/**",
+        "atomics/T1613/**",
+        "atomics/T1614/**",
+        "atomics/T1614.001/T1614.001.md",
+        "atomics/T1614.001/T1614.001.yaml",
+        "atomics/T1614.001/src/**",
+        "atomics/T1615/**",
+        "atomics/T1619/**",
+        "atomics/T1620/T1620.md",
+        "atomics/T1620/T1620.yaml",
+        "atomics/T1620/src/**",
+        "atomics/T1622/**",
+        "atomics/T1647/**",
+        "atomics/T1648/**",
+        "atomics/T1649/**",
+        "atomics/T1651/**",
+        "atomics/T1652/**",
+        "atomics/T1654/**",
+        "atomics/T1659/**",
+        "atomics/T1680/**",
+        "atomics/T1685/**",
+        "atomics/T1685.001/T1685.001.md",
+        "atomics/T1685.001/T1685.001.yaml",
+        "atomics/T1685.002/**",
+        "atomics/T1685.004/**",
+        "atomics/T1685.005/**",
+        "atomics/T1685.006/**",
+        "atomics/T1686/T1686.md",
+        "atomics/T1686/T1686.yaml",
+        "atomics/T1686/src/**",
+        "atomics/T1686.003/**",
+        "atomics/T1688/**",
+        "atomics/T1689/**",
+        "atomics/T1690/**",
+        "atomics/used_guids.txt",
+        "bin/**",
+        "poetry.lock",
+        "pyproject.toml"
+      ],
+      "text": "\nThe MIT License\n\nCopyright (c) 2018 Red Canary, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Red Canary, Inc., MIT license (LICENSE.txt), https://github.com/redcanaryco/atomic-red-team."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/3rd-party.txt",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/License.txt",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/Readme.md",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/changelog.txt",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/DllExportCmdLets.psm1",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/gnt.bat",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/init.ps1",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/install.ps1",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/msbuild.bat",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/net.r_eg.DllExport.targets",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/nsbin.bat",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/powershell.bat",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/uninstall.ps1"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2009-2015  Robert Giesecke\nCopyright (c) 2016-2017  Denis Kuzmin <entry.reg@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.",
+      "attribution": "Copyright (c) 2009-2015  Robert Giesecke; Copyright (c) 2016-2017  Denis Kuzmin <entry.reg@gmail.com>, MIT license (License.txt), https://github.com/redcanaryco/atomic-red-team/tree/388942adbd9641f4dfdcf079d7efe9a75ec0ac43/atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/LICENSE.TXT",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/PATENTS.TXT",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/README.md",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/_Version.txt",
+        "atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr/changelog.txt"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) .NET Foundation and Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) .NET Foundation and Contributors, MIT license (LICENSE.TXT), https://github.com/redcanaryco/atomic-red-team/tree/388942adbd9641f4dfdcf079d7efe9a75ec0ac43/atomics/T1218.008/src/odbcconf net.40/packages/DllExport.1.5.2/tools/coreclr."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.psm1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SED"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TXT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ahk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aspx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.au3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hhp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.osa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.reg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sct"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfvars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.user"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xoml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/artifact"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.targets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

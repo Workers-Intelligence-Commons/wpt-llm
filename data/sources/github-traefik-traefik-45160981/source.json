@@ -1,0 +1,641 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/traefik/traefik",
+  "revision": "62b1f935f7612dbb730504e8210d8cffe2f4aef7",
+  "checksum": "sha256:0225935ecf950b3ecec8b394b6aa5b8dcd8c282a7429cc2f48f028dcfd57587b",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "docs/content/assets/img/architecture-overview.png",
+      "docs/content/assets/img/entrypoints.png",
+      "docs/content/assets/img/getting-started/**",
+      "docs/content/assets/img/maintainers-guidelines.png",
+      "docs/content/assets/img/providers/**",
+      "docs/content/assets/img/providers.png",
+      "docs/content/assets/img/quickstart-diagram.png",
+      "docs/content/assets/img/routers.png",
+      "docs/content/assets/img/secure/**",
+      "docs/content/assets/img/services.png",
+      "docs/content/assets/img/setup/**",
+      "docs/content/assets/img/static-dynamic-configuration.png",
+      "docs/content/assets/img/traefik-architecture.png",
+      "docs/content/assets/img/traefik-concepts-1.png",
+      "docs/content/assets/img/traefik-concepts-2.png",
+      "docs/content/assets/img/traefik.logo-dark.png",
+      "docs/content/assets/img/traefik.logo.png",
+      "docs/content/assets/img/traefikproxy-icon-color.png",
+      "docs/content/assets/img/webui-dashboard.png",
+      "integration/fixtures/test.pdf",
+      "pkg/plugins/fixtures/withoutsocket/plugin.wasm",
+      "webui/public/favicon-16x16.png",
+      "webui/public/favicon-32x32.png",
+      "webui/public/favicon.ico",
+      "webui/public/icons/apple-icon-120x120.png",
+      "webui/public/icons/apple-icon-152x152.png",
+      "webui/public/icons/apple-icon-167x167.png",
+      "webui/public/icons/apple-icon-180x180.png",
+      "webui/public/icons/favicon-16x16.png",
+      "webui/public/icons/favicon-32x32.png",
+      "webui/public/icons/favicon-96x96.png",
+      "webui/public/icons/favicon.ico",
+      "webui/public/icons/icon-128x128.png",
+      "webui/public/icons/icon-192x192.png",
+      "webui/public/icons/icon-256x256.png",
+      "webui/public/icons/icon-384x384.png",
+      "webui/public/icons/icon-512x512.png",
+      "webui/public/icons/ms-icon-144x144.png",
+      "webui/public/img/**"
+    ]
+  },
+  "history": {
+    "since": "0dde11aa860416821b6541a7927cc55868dab5af"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-2020 Containous SAS; 2020-2025 Traefik Labs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright (c) 2006, Ivan Sagalaev\nAll rights reserved.\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of highlight.js nor the names of its contributors \n      may be used to endorse or promote products derived from this software \n      without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY\nEXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/traefik/traefik: Copyright (c) 2016-2020 Containous SAS; 2020-2025 Traefik Labs, MIT license (LICENSE.md), https://github.com/traefik/traefik; Copyright (c) 2006, Ivan Sagalaev, BSD-3-Clause license (LICENSE), https://github.com/traefik/traefik/tree/62b1f935f7612dbb730504e8210d8cffe2f4aef7/docs/content/assets/js/hljs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".go-version",
+        ".golangci.yml",
+        ".goreleaser.yml.tmpl",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE.md",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "cmd/**",
+        "docs/.dockerignore",
+        "docs/.markdownlint.json",
+        "docs/Makefile",
+        "docs/check.Dockerfile",
+        "docs/content/assets/css/**",
+        "docs/content/assets/img/traefikproxy-vertical-logo-color.svg",
+        "docs/content/assets/img/user-guides/**",
+        "docs/content/assets/js/banner.js",
+        "docs/content/assets/js/extra.js",
+        "docs/content/contributing/**",
+        "docs/content/deprecation/**",
+        "docs/content/expose/**",
+        "docs/content/extend/**",
+        "docs/content/features/**",
+        "docs/content/getting-started/**",
+        "docs/content/govern/**",
+        "docs/content/https/**",
+        "docs/content/includes/**",
+        "docs/content/index.md",
+        "docs/content/migrate/**",
+        "docs/content/observe/**",
+        "docs/content/operations/**",
+        "docs/content/reference/**",
+        "docs/content/routing/**",
+        "docs/content/secure/**",
+        "docs/content/security/**",
+        "docs/content/setup/**",
+        "docs/content/user-guides/**",
+        "docs/docs.Dockerfile",
+        "docs/mkdocs.yml",
+        "docs/readme.md",
+        "docs/requirements.txt",
+        "docs/scripts/**",
+        "flake.lock",
+        "flake.nix",
+        "generate.go",
+        "go.mod",
+        "go.sum",
+        "integration/access_log_test.go",
+        "integration/acme_test.go",
+        "integration/conf_throttling_test.go",
+        "integration/consul_catalog_test.go",
+        "integration/consul_test.go",
+        "integration/docker_compose_test.go",
+        "integration/docker_test.go",
+        "integration/dual_logging_test.go",
+        "integration/error_pages_test.go",
+        "integration/etcd_test.go",
+        "integration/fake_dns_server.go",
+        "integration/file_test.go",
+        "integration/fixtures/access_log/**",
+        "integration/fixtures/access_log_json_config.toml",
+        "integration/fixtures/acme/**",
+        "integration/fixtures/consul/**",
+        "integration/fixtures/consul_catalog/**",
+        "integration/fixtures/custom_ping_termination_status_code.toml",
+        "integration/fixtures/docker/**",
+        "integration/fixtures/dual_logging/**",
+        "integration/fixtures/error_pages/**",
+        "integration/fixtures/etcd/**",
+        "integration/fixtures/failover.toml",
+        "integration/fixtures/failover_statuscode.toml",
+        "integration/fixtures/file/**",
+        "integration/fixtures/gateway-api-conformance/**",
+        "integration/fixtures/grpc/**",
+        "integration/fixtures/headers/**",
+        "integration/fixtures/healthcheck/**",
+        "integration/fixtures/highest_random_weight.toml",
+        "integration/fixtures/http/**",
+        "integration/fixtures/https/**",
+        "integration/fixtures/invalid_configuration.toml",
+        "integration/fixtures/k8s/**",
+        "integration/fixtures/k8s-gateway/**",
+        "integration/fixtures/k8s_crd.toml",
+        "integration/fixtures/k8s_crd_label_selector.toml",
+        "integration/fixtures/k8s_default.toml",
+        "integration/fixtures/k8s_gateway.toml",
+        "integration/fixtures/k8s_ingress_label_selector.toml",
+        "integration/fixtures/k8s_ingressclass.toml",
+        "integration/fixtures/k8s_ingressclass_disabled.toml",
+        "integration/fixtures/knative/**",
+        "integration/fixtures/leasttime_server.toml",
+        "integration/fixtures/mirror.toml",
+        "integration/fixtures/multiple_provider.toml",
+        "integration/fixtures/multiprovider.toml",
+        "integration/fixtures/ocsp/**",
+        "integration/fixtures/providers-precedence.toml",
+        "integration/fixtures/proxy-protocol/**",
+        "integration/fixtures/ratelimit/**",
+        "integration/fixtures/redis/**",
+        "integration/fixtures/reqacceptgrace.toml",
+        "integration/fixtures/rest/**",
+        "integration/fixtures/retry/**",
+        "integration/fixtures/router_errors.toml",
+        "integration/fixtures/routing/**",
+        "integration/fixtures/service_errors.toml",
+        "integration/fixtures/service_middleware.toml",
+        "integration/fixtures/simple_acme_bypass_redirect.toml",
+        "integration/fixtures/simple_alias_headers.toml",
+        "integration/fixtures/simple_allowlist.toml",
+        "integration/fixtures/simple_auth.toml",
+        "integration/fixtures/simple_contenttype.toml",
+        "integration/fixtures/simple_ddos.toml",
+        "integration/fixtures/simple_debug_log.toml",
+        "integration/fixtures/simple_default.toml",
+        "integration/fixtures/simple_deny.toml",
+        "integration/fixtures/simple_encode_semicolons.toml",
+        "integration/fixtures/simple_encoded_chars.toml",
+        "integration/fixtures/simple_fastproxy.toml",
+        "integration/fixtures/simple_hostresolver.toml",
+        "integration/fixtures/simple_max_header_size.toml",
+        "integration/fixtures/simple_metrics_with_buffer_middleware.toml",
+        "integration/fixtures/simple_muxer.toml",
+        "integration/fixtures/simple_sanitize_path.toml",
+        "integration/fixtures/simple_secure_api.toml",
+        "integration/fixtures/simple_stats.toml",
+        "integration/fixtures/simple_underscore_headers.toml",
+        "integration/fixtures/simple_web.toml",
+        "integration/fixtures/simple_whitelist.toml",
+        "integration/fixtures/tcp/**",
+        "integration/fixtures/tcp_healthcheck/**",
+        "integration/fixtures/throttling/**",
+        "integration/fixtures/timeout/**",
+        "integration/fixtures/tlsclientheaders/**",
+        "integration/fixtures/tracing/**",
+        "integration/fixtures/traefik_log_config.toml",
+        "integration/fixtures/udp/**",
+        "integration/fixtures/websocket/**",
+        "integration/fixtures/with_default_rule_syntax.toml",
+        "integration/fixtures/without_default_rule_syntax.toml",
+        "integration/fixtures/wrr.toml",
+        "integration/fixtures/wrr_server.toml",
+        "integration/fixtures/wrr_sticky.toml",
+        "integration/fixtures/x_forwarded_for.toml",
+        "integration/fixtures/x_forwarded_for_enabled.toml",
+        "integration/fixtures/x_forwarded_for_fastproxy.toml",
+        "integration/fixtures/x_forwarded_for_fastproxy_enabled.toml",
+        "integration/fixtures/zookeeper/**",
+        "integration/gateway-api-conformance-reports/**",
+        "integration/gateway_api_conformance_merged_test.go",
+        "integration/gateway_api_conformance_test.go",
+        "integration/grpc_test.go",
+        "integration/headers_test.go",
+        "integration/healthcheck_test.go",
+        "integration/helloworld/**",
+        "integration/hostresolver_test.go",
+        "integration/http_test.go",
+        "integration/https_test.go",
+        "integration/integration_test.go",
+        "integration/k8s_gateway_test.go",
+        "integration/k8s_test.go",
+        "integration/keepalive_test.go",
+        "integration/knative_conformance_test.go",
+        "integration/log_rotation_test.go",
+        "integration/proxy_protocol_test.go",
+        "integration/ratelimit_test.go",
+        "integration/redis_sentinel_test.go",
+        "integration/redis_test.go",
+        "integration/resources/**",
+        "integration/rest_test.go",
+        "integration/retry_test.go",
+        "integration/routing_test.go",
+        "integration/simple_test.go",
+        "integration/tcp_healthcheck_test.go",
+        "integration/tcp_test.go",
+        "integration/testdata/**",
+        "integration/timeout_test.go",
+        "integration/tls_client_headers_test.go",
+        "integration/tracing_test.go",
+        "integration/try/**",
+        "integration/udp_test.go",
+        "integration/websocket_test.go",
+        "integration/zk_test.go",
+        "internal/**",
+        "pkg/api/**",
+        "pkg/cli/**",
+        "pkg/collector/**",
+        "pkg/config/**",
+        "pkg/healthcheck/**",
+        "pkg/ip/**",
+        "pkg/job/**",
+        "pkg/middlewares/**",
+        "pkg/muxer/**",
+        "pkg/observability/**",
+        "pkg/ping/**",
+        "pkg/plugins/builder.go",
+        "pkg/plugins/downloader.go",
+        "pkg/plugins/downloader_test.go",
+        "pkg/plugins/fixtures/src/**",
+        "pkg/plugins/fixtures/withoutsocket/demo.go",
+        "pkg/plugins/fixtures/withoutsocket/go.mod",
+        "pkg/plugins/fixtures/withoutsocket/go.sum",
+        "pkg/plugins/manager.go",
+        "pkg/plugins/manager_test.go",
+        "pkg/plugins/middlewarewasm.go",
+        "pkg/plugins/middlewarewasm_test.go",
+        "pkg/plugins/middlewareyaegi.go",
+        "pkg/plugins/middlewareyaegi_test.go",
+        "pkg/plugins/plugins.go",
+        "pkg/plugins/plugins_test.go",
+        "pkg/plugins/providers.go",
+        "pkg/plugins/types.go",
+        "pkg/plugins/wasip.go",
+        "pkg/plugins/wasip_mock.go",
+        "pkg/provider/**",
+        "pkg/proxy/**",
+        "pkg/redactor/**",
+        "pkg/rules/**",
+        "pkg/safe/**",
+        "pkg/server/**",
+        "pkg/tcp/**",
+        "pkg/testhelpers/**",
+        "pkg/tls/**",
+        "pkg/types/**",
+        "pkg/udp/**",
+        "pkg/version/**",
+        "script/**",
+        "traefik.sample.toml",
+        "traefik.sample.yml",
+        "webui/.editorconfig",
+        "webui/.env.sample",
+        "webui/.gitignore",
+        "webui/.husky/**",
+        "webui/.nvmrc",
+        "webui/.prettierrc.json",
+        "webui/.yarnrc.yml",
+        "webui/buildx.Dockerfile",
+        "webui/embed.go",
+        "webui/eslint.config.mjs",
+        "webui/index.dev.html",
+        "webui/index.html",
+        "webui/package.json",
+        "webui/public/browserconfig.xml",
+        "webui/public/icons/safari-pinned-tab.svg",
+        "webui/public/manifest.json",
+        "webui/public/mockServiceWorker.js",
+        "webui/public/robots.txt",
+        "webui/readme.md",
+        "webui/src/**",
+        "webui/static/**",
+        "webui/test/**",
+        "webui/tsconfig.json",
+        "webui/tsconfig.node.json",
+        "webui/vite.config.ts",
+        "webui/yarn.lock"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016-2020 Containous SAS; 2020-2025 Traefik Labs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-2020 Containous SAS; 2020-2025 Traefik Labs, MIT license (LICENSE.md), https://github.com/traefik/traefik."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "docs/content/assets/js/hljs/**"
+      ],
+      "text": "Copyright (c) 2006, Ivan Sagalaev\nAll rights reserved.\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of highlight.js nor the names of its contributors \n      may be used to endorse or promote products derived from this software \n      without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY\nEXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2006, Ivan Sagalaev, BSD-3-Clause license (LICENSE), https://github.com/traefik/traefik/tree/62b1f935f7612dbb730504e8210d8cffe2f4aef7/docs/content/assets/js/hljs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.srl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.go-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

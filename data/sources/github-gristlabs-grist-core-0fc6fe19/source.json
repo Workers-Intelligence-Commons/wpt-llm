@@ -1,0 +1,843 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/gristlabs/grist-core",
+  "revision": "58fd2f29e446d3f9a70264970acc6914b9f30910",
+  "checksum": "sha256:73294b39a6dc0f1a093d919b9400f88e3f0d19c196101a81ed82f2c6d83b3b63",
+  "extract": {
+    "exclude": [
+      "documentation/images/doc-worker.png",
+      "documentation/images/infrastructure.png",
+      "documentation/images/ws-users-management-popup.png",
+      "sandbox/grist/imports/fixtures/nyc_schools_progress_report_ec_2013.xlsx",
+      "sandbox/grist/imports/fixtures/strange_dates.xlsx",
+      "sandbox/grist/imports/fixtures/test_boolean.xlsx",
+      "sandbox/grist/imports/fixtures/test_empty_rows.xlsx",
+      "sandbox/grist/imports/fixtures/test_excel.xlsx",
+      "sandbox/grist/imports/fixtures/test_excel_numeric_gs.xlsx",
+      "sandbox/grist/imports/fixtures/test_excel_types.xlsx",
+      "sandbox/grist/imports/fixtures/test_falsy_cells.xlsx",
+      "sandbox/grist/imports/fixtures/test_headers_with_none_cell.xlsx",
+      "sandbox/grist/imports/fixtures/test_invalid_dimensions.xlsx",
+      "sandbox/grist/imports/fixtures/test_single_merged_cell.xlsx",
+      "sandbox/grist/tzdata.data",
+      "static/icons/favicon.png",
+      "static/icons/grist.icns",
+      "static/icons/grist.ico",
+      "static/icons/grist.png",
+      "static/icons/gristdoc.icns",
+      "static/icons/gristdoc.ico",
+      "static/icons/logo-fieldlink.png",
+      "static/img/automation-triggers.png",
+      "static/img/get-started.png",
+      "static/img/gplaypattern.png",
+      "static/img/grist.png",
+      "static/img/logo-grist.png",
+      "static/img/prismpattern.png",
+      "static/img/security-alert-dark-theme.png",
+      "static/img/security-alert.png",
+      "static/img/tutorial-screenshot.png",
+      "static/img/youtube-screenshot.png",
+      "test/fixtures/docs/ACL-Test.grist",
+      "test/fixtures/docs/ActiveDoc-sqlite.grist",
+      "test/fixtures/docs/AllColumns.grist",
+      "test/fixtures/docs/ApiDataRecordsTest.grist",
+      "test/fixtures/docs/AttachmentsJsonMigration.grist",
+      "test/fixtures/docs/BadRules.grist",
+      "test/fixtures/docs/BlobMigrationV1.grist",
+      "test/fixtures/docs/BlobMigrationV16.grist",
+      "test/fixtures/docs/BlobMigrationV17.grist",
+      "test/fixtures/docs/BlobMigrationV2.grist",
+      "test/fixtures/docs/BlobMigrationV3.grist",
+      "test/fixtures/docs/BlobMigrationV4.grist",
+      "test/fixtures/docs/BlobMigrationV5.grist",
+      "test/fixtures/docs/BlobMigrationV6.grist",
+      "test/fixtures/docs/BlobMigrationV7.grist",
+      "test/fixtures/docs/BlobMigrationV8.grist",
+      "test/fixtures/docs/BlobMigrationV9.grist",
+      "test/fixtures/docs/CCTransactions.grist",
+      "test/fixtures/docs/CC_Statement.grist",
+      "test/fixtures/docs/CC_Summaries-v2.grist",
+      "test/fixtures/docs/CC_Summaries-v6.grist",
+      "test/fixtures/docs/CC_Summaries.grist",
+      "test/fixtures/docs/Calendar.grist",
+      "test/fixtures/docs/CalendarLegacy.grist",
+      "test/fixtures/docs/CalendarLegacyCustom.grist",
+      "test/fixtures/docs/CardView.grist",
+      "test/fixtures/docs/ChartData.grist",
+      "test/fixtures/docs/Class Enrollment.grist",
+      "test/fixtures/docs/Comments_44.grist",
+      "test/fixtures/docs/CopyOptions.grist",
+      "test/fixtures/docs/CopyPaste.grist",
+      "test/fixtures/docs/CopyPaste2.grist",
+      "test/fixtures/docs/Countries-Print.grist",
+      "test/fixtures/docs/Currencies.grist",
+      "test/fixtures/docs/CursorWithRefLists1.grist",
+      "test/fixtures/docs/CustomWidget.grist",
+      "test/fixtures/docs/DefaultValuesV5.grist",
+      "test/fixtures/docs/DefaultValuesV6.grist",
+      "test/fixtures/docs/DefaultValuesV7.grist",
+      "test/fixtures/docs/DefaultValuesV8.grist",
+      "test/fixtures/docs/DefaultValuesV9.grist",
+      "test/fixtures/docs/DeleteColumnsUndo.grist",
+      "test/fixtures/docs/DownmigrateTest.grist",
+      "test/fixtures/docs/DropdownCondition.grist",
+      "test/fixtures/docs/Excel.grist",
+      "test/fixtures/docs/ExemptFromFilterBug.grist",
+      "test/fixtures/docs/Exports.grist",
+      "test/fixtures/docs/ExternalAttachmentsInvalidStoreId.grist",
+      "test/fixtures/docs/Favorite_Films.grist",
+      "test/fixtures/docs/Favorite_Films_Raw.grist",
+      "test/fixtures/docs/Favorite_Films_With_Linked_Ref.grist",
+      "test/fixtures/docs/FetchSelectedOptions.grist",
+      "test/fixtures/docs/FieldSettings.grist",
+      "test/fixtures/docs/FilmsWithImages.grist",
+      "test/fixtures/docs/FilterByComplexCellValues.grist",
+      "test/fixtures/docs/FilterLinkChain.grist",
+      "test/fixtures/docs/FilterTest.grist",
+      "test/fixtures/docs/GridWithAllFields.grist",
+      "test/fixtures/docs/GristNewUserInfo.grist",
+      "test/fixtures/docs/Hello.grist",
+      "test/fixtures/docs/Hooks-v37.grist",
+      "test/fixtures/docs/ImportReferences.grist",
+      "test/fixtures/docs/InvalidValues.grist",
+      "test/fixtures/docs/Investment Research (smaller).grist",
+      "test/fixtures/docs/LastPosition.grist",
+      "test/fixtures/docs/LinkChain.grist",
+      "test/fixtures/docs/LongList.grist",
+      "test/fixtures/docs/ManyRefs.grist",
+      "test/fixtures/docs/Memos-v34.grist",
+      "test/fixtures/docs/NumericFormatting.grist",
+      "test/fixtures/docs/Pages-v19.grist",
+      "test/fixtures/docs/Pages.grist",
+      "test/fixtures/docs/PasteParsing.grist",
+      "test/fixtures/docs/RawSummaryTables.grist",
+      "test/fixtures/docs/RemoveTransformColumns.grist",
+      "test/fixtures/docs/SchoolsSample.grist",
+      "test/fixtures/docs/SelectByRefList.grist",
+      "test/fixtures/docs/SelectBySummary.grist",
+      "test/fixtures/docs/SelectBySummaryRef.grist",
+      "test/fixtures/docs/SelectionSummary.grist",
+      "test/fixtures/docs/ShiftSelection.grist",
+      "test/fixtures/docs/SortDates.grist",
+      "test/fixtures/docs/SortFilterIconTest.grist",
+      "test/fixtures/docs/SummarizeByRef.grist",
+      "test/fixtures/docs/SummaryRulesBug.grist",
+      "test/fixtures/docs/SummaryTableFormula.grist",
+      "test/fixtures/docs/TabBar.grist",
+      "test/fixtures/docs/Teams.grist",
+      "test/fixtures/docs/TypeEncoding.grist",
+      "test/fixtures/docs/Widgets.grist",
+      "test/fixtures/docs/World-v10.grist",
+      "test/fixtures/docs/World-v11.grist",
+      "test/fixtures/docs/World-v12.grist",
+      "test/fixtures/docs/World-v13.grist",
+      "test/fixtures/docs/World-v14.grist",
+      "test/fixtures/docs/World-v15.grist",
+      "test/fixtures/docs/World-v18.grist",
+      "test/fixtures/docs/World-v20.grist",
+      "test/fixtures/docs/World-v24.grist",
+      "test/fixtures/docs/World-v25.grist",
+      "test/fixtures/docs/World-v33.grist",
+      "test/fixtures/docs/World-v39.grist",
+      "test/fixtures/docs/World-v8.grist",
+      "test/fixtures/docs/World.grist",
+      "test/fixtures/docs/WorldSQLDB.grist",
+      "test/fixtures/docs/WorldUndo.grist",
+      "test/fixtures/docs/doctour.grist",
+      "test/fixtures/docs/selectBy.grist",
+      "test/fixtures/docs/video/ACME Orders.grist",
+      "test/fixtures/docs/video/Afterschool Program.grist",
+      "test/fixtures/docs/video/Employees HomePage.grist",
+      "test/fixtures/docs/video/Employees.grist",
+      "test/fixtures/docs/video/Leases.grist",
+      "test/fixtures/docs/video/Lightweight CRM.grist",
+      "test/fixtures/export-xlsx/**",
+      "test/fixtures/uploads/BooleanData.xlsx",
+      "test/fixtures/uploads/DateTimeData.xlsx",
+      "test/fixtures/uploads/World-v0.xlsx",
+      "test/fixtures/uploads/World-v1.xlsx",
+      "test/fixtures/uploads/empty_excel.xlsx",
+      "test/fixtures/uploads/flower.png",
+      "test/fixtures/uploads/gplaypattern.png",
+      "test/fixtures/uploads/grist.png",
+      "test/fixtures/uploads/homicide_rates.xlsx",
+      "test/fixtures/uploads/sample.pdf",
+      "test/fixtures/uploads/unicode_headers.xlsx",
+      "test/fixtures/uploads/video/**",
+      "test/fixtures/docs/Covid-19.grist",
+      "test/fixtures/docs/Grist Basics.grist",
+      "test/fixtures/docs/Investment Research.grist",
+      "test/fixtures/docs/Landlord.grist",
+      "test/fixtures/docs/Ref-AC-Test.grist",
+      "test/fixtures/docs/Ref-List-AC-Test.grist",
+      "test/fixtures/docs/TypeConversions.grist",
+      "test/fixtures/docs/World-v0.grist",
+      "test/fixtures/docs/World-v1.grist",
+      "test/fixtures/docs/World-v3.grist",
+      "test/fixtures/docs/video/Candidates.grist"
+    ]
+  },
+  "history": {
+    "since": "3c9ff4a703730f0123de632c3baa56f256691d8c"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2014-2022 Grist Labs Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.txt:\n\nGrist Software\nCopyright 2014-2022 Grist Labs Inc.\n\nThis product includes software developed at\nGrist Labs Inc. (https://www.getgrist.com/).\n\n\nMIT License\n\nCopyright (c) 2021 Yummygum (https://github.com/Yummygum/flagpack-core)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/gristlabs/grist-core: Copyright 2014-2022 Grist Labs Inc., Apache-2.0 license (LICENSE.txt), https://github.com/gristlabs/grist-core; Copyright (c) 2021 Yummygum (https://github.com/Yummygum/flagpack-core), MIT license (LICENSE), https://github.com/gristlabs/grist-core/tree/58fd2f29e446d3f9a70264970acc6914b9f30910/static/icons/locales; the authors of dependency_test, ISC license (declared in package.json), https://github.com/gristlabs/grist-core/tree/58fd2f29e446d3f9a70264970acc6914b9f30910/test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/node_modules/dependency_test."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".dockerignore",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".nvmrc",
+        ".storybook/**",
+        ".yarnrc",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE.txt",
+        "NOTICE.txt",
+        "README.md",
+        "SECURITY.md",
+        "app/**",
+        "assets/**",
+        "bin",
+        "bower_components/**",
+        "buildtools/**",
+        "docker-compose-examples/**",
+        "documentation/database.md",
+        "documentation/develop.md",
+        "documentation/disposal.md",
+        "documentation/grainjs.md",
+        "documentation/grist-data-format.md",
+        "documentation/images/BDD-doc-inheritance-after-change.svg",
+        "documentation/images/BDD-doc-inheritance-default.svg",
+        "documentation/images/BDD.drawio",
+        "documentation/images/homedb-schema.svg",
+        "documentation/migrations.md",
+        "documentation/overview.md",
+        "documentation/translations.md",
+        "documentation/urls.md",
+        "eslint-rules/**",
+        "eslint.config.js",
+        "eslint.config.shared.js",
+        "package.json",
+        "plugins/**",
+        "publiccode.yml",
+        "sandbox/MANIFEST.in",
+        "sandbox/bundle_as_wheel.sh",
+        "sandbox/docker/**",
+        "sandbox/docker_entrypoint.sh",
+        "sandbox/gen_js_schema.py",
+        "sandbox/grist/acl.py",
+        "sandbox/grist/action_obj.py",
+        "sandbox/grist/action_summary.py",
+        "sandbox/grist/actions.py",
+        "sandbox/grist/attribute_recorder.py",
+        "sandbox/grist/autocomplete_context.py",
+        "sandbox/grist/bench/**",
+        "sandbox/grist/codebuilder.py",
+        "sandbox/grist/column.py",
+        "sandbox/grist/csv_patch.py",
+        "sandbox/grist/depend.py",
+        "sandbox/grist/docactions.py",
+        "sandbox/grist/docmodel.py",
+        "sandbox/grist/dropdown_condition.py",
+        "sandbox/grist/engine.py",
+        "sandbox/grist/fake_std_streams.py",
+        "sandbox/grist/formula_prompt.py",
+        "sandbox/grist/friendly_errors.py",
+        "sandbox/grist/functions/**",
+        "sandbox/grist/gencode.py",
+        "sandbox/grist/grist.py",
+        "sandbox/grist/identifiers.py",
+        "sandbox/grist/import_actions.py",
+        "sandbox/grist/imports/__init__.py",
+        "sandbox/grist/imports/fixtures/test_encoding_utf8.csv",
+        "sandbox/grist/imports/fixtures/test_excel_types.csv",
+        "sandbox/grist/imports/fixtures/test_import_csv.csv",
+        "sandbox/grist/imports/fixtures/test_isdigit.csv",
+        "sandbox/grist/imports/fixtures/test_long_cell.csv",
+        "sandbox/grist/imports/import_csv.py",
+        "sandbox/grist/imports/import_csv_test.py",
+        "sandbox/grist/imports/import_json.py",
+        "sandbox/grist/imports/import_json_test.py",
+        "sandbox/grist/imports/import_utils.py",
+        "sandbox/grist/imports/import_xls.py",
+        "sandbox/grist/imports/import_xls_test.py",
+        "sandbox/grist/imports/register.py",
+        "sandbox/grist/imports/test_imports.py",
+        "sandbox/grist/lookup.py",
+        "sandbox/grist/lookupset.py",
+        "sandbox/grist/main.py",
+        "sandbox/grist/match_counter.py",
+        "sandbox/grist/migrations.py",
+        "sandbox/grist/moment.py",
+        "sandbox/grist/objtypes.py",
+        "sandbox/grist/parse_data.py",
+        "sandbox/grist/predicate_formula.py",
+        "sandbox/grist/records.py",
+        "sandbox/grist/relabeling.py",
+        "sandbox/grist/relation.py",
+        "sandbox/grist/reverse_references.py",
+        "sandbox/grist/runtests.py",
+        "sandbox/grist/sandbox.py",
+        "sandbox/grist/schema.py",
+        "sandbox/grist/sort_key.py",
+        "sandbox/grist/sort_specs.py",
+        "sandbox/grist/summary.py",
+        "sandbox/grist/summary_helper.py",
+        "sandbox/grist/table.py",
+        "sandbox/grist/table_data_set.py",
+        "sandbox/grist/test_acl_formula.py",
+        "sandbox/grist/test_acl_renames.py",
+        "sandbox/grist/test_actions.py",
+        "sandbox/grist/test_codebuilder.py",
+        "sandbox/grist/test_column_actions.py",
+        "sandbox/grist/test_completion.py",
+        "sandbox/grist/test_date_types.py",
+        "sandbox/grist/test_default_formulas.py",
+        "sandbox/grist/test_depend.py",
+        "sandbox/grist/test_derived.py",
+        "sandbox/grist/test_display_cols.py",
+        "sandbox/grist/test_docmodel.py",
+        "sandbox/grist/test_dropdown_condition.py",
+        "sandbox/grist/test_dropdown_condition_renames.py",
+        "sandbox/grist/test_engine.py",
+        "sandbox/grist/test_find_col.py",
+        "sandbox/grist/test_formula_error.py",
+        "sandbox/grist/test_formula_prompt.py",
+        "sandbox/grist/test_formula_undo.py",
+        "sandbox/grist/test_functions.py",
+        "sandbox/grist/test_gencode.py",
+        "sandbox/grist/test_import_actions.py",
+        "sandbox/grist/test_lookup_find.py",
+        "sandbox/grist/test_lookup_perf.py",
+        "sandbox/grist/test_lookup_relations.py",
+        "sandbox/grist/test_lookup_sort.py",
+        "sandbox/grist/test_lookup_sort2.py",
+        "sandbox/grist/test_lookups.py",
+        "sandbox/grist/test_lookups_refs.py",
+        "sandbox/grist/test_lookups_refs2.py",
+        "sandbox/grist/test_lookupset.py",
+        "sandbox/grist/test_match_counter.py",
+        "sandbox/grist/test_migrations.py",
+        "sandbox/grist/test_moment.py",
+        "sandbox/grist/test_objtypes.py",
+        "sandbox/grist/test_predicate_formula.py",
+        "sandbox/grist/test_prevnext.py",
+        "sandbox/grist/test_record_func.py",
+        "sandbox/grist/test_recordlist.py",
+        "sandbox/grist/test_reflist_rel.py",
+        "sandbox/grist/test_relabeling.py",
+        "sandbox/grist/test_reload_oracle.py",
+        "sandbox/grist/test_rename_relations.py",
+        "sandbox/grist/test_renames.py",
+        "sandbox/grist/test_renames2.py",
+        "sandbox/grist/test_replace_table_data.py",
+        "sandbox/grist/test_replay.py",
+        "sandbox/grist/test_requests.py",
+        "sandbox/grist/test_rules.py",
+        "sandbox/grist/test_rules_grid.py",
+        "sandbox/grist/test_side_effects.py",
+        "sandbox/grist/test_sort_key.py",
+        "sandbox/grist/test_sort_spec.py",
+        "sandbox/grist/test_summary.py",
+        "sandbox/grist/test_summary2.py",
+        "sandbox/grist/test_summary_choicelist.py",
+        "sandbox/grist/test_summary_groups.py",
+        "sandbox/grist/test_summary_perf.py",
+        "sandbox/grist/test_summary_undo.py",
+        "sandbox/grist/test_table_actions.py",
+        "sandbox/grist/test_table_data_set.py",
+        "sandbox/grist/test_temp_rowids.py",
+        "sandbox/grist/test_textbuilder.py",
+        "sandbox/grist/test_treeview.py",
+        "sandbox/grist/test_trigger_expression.py",
+        "sandbox/grist/test_trigger_formulas.py",
+        "sandbox/grist/test_twoway_refs.py",
+        "sandbox/grist/test_twowaymap.py",
+        "sandbox/grist/test_types.py",
+        "sandbox/grist/test_undo.py",
+        "sandbox/grist/test_undo_rename.py",
+        "sandbox/grist/test_urllib_patch.py",
+        "sandbox/grist/test_user.py",
+        "sandbox/grist/test_useractions.py",
+        "sandbox/grist/testsamples.py",
+        "sandbox/grist/testscript.json",
+        "sandbox/grist/testutil.py",
+        "sandbox/grist/textbuilder.py",
+        "sandbox/grist/timing.py",
+        "sandbox/grist/treeview.py",
+        "sandbox/grist/trigger_expression.py",
+        "sandbox/grist/twowaymap.py",
+        "sandbox/grist/urllib_patch.py",
+        "sandbox/grist/user.py",
+        "sandbox/grist/useractions.py",
+        "sandbox/grist/usercode.py",
+        "sandbox/grist/usertypes.py",
+        "sandbox/grist/xmlrunner.py",
+        "sandbox/gvisor/**",
+        "sandbox/install_tz.js",
+        "sandbox/pyodide/**",
+        "sandbox/requirements.in",
+        "sandbox/requirements.txt",
+        "sandbox/run.sh",
+        "sandbox/setup.py",
+        "sandbox/supervisor.mjs",
+        "sandbox/watch.sh",
+        "static/apiconsole.html",
+        "static/app.html",
+        "static/custom-widget.html",
+        "static/custom.css",
+        "static/error.html",
+        "static/form.html",
+        "static/hljs.default.css",
+        "static/icons/grist.svg",
+        "static/icons/gristdoc.svg",
+        "static/icons/icon.icns",
+        "static/icons/icons.css",
+        "static/img/audit-logs-other.svg",
+        "static/img/audit-logs-splunk.svg",
+        "static/img/create-document.svg",
+        "static/img/empty-widget.svg",
+        "static/img/form-error.svg",
+        "static/img/form-success.svg",
+        "static/img/help-center.svg",
+        "static/img/webinars.svg",
+        "static/index.html",
+        "static/message.html",
+        "static/mocha.css",
+        "static/mocha.js",
+        "static/sinon.js",
+        "static/swagger-ui-bundle.js",
+        "static/swagger-ui-dark.css",
+        "static/swagger-ui.css",
+        "static/test.html",
+        "static/testWebdriverJQuery.html",
+        "static/toastui-calendar.min.css",
+        "static/ui-icons/**",
+        "storybook/**",
+        "stubs/**",
+        "test/assistant/**",
+        "test/axios-own-agent.js",
+        "test/chai-as-promised.js",
+        "test/client/**",
+        "test/client-harness/**",
+        "test/common/**",
+        "test/declarations.d.ts",
+        "test/deployment/**",
+        "test/eslint-rules/**",
+        "test/fixtures/docs/Covid-19.grist",
+        "test/fixtures/docs/Grist Basics.grist",
+        "test/fixtures/docs/Investment Research.grist",
+        "test/fixtures/docs/Landlord.grist",
+        "test/fixtures/docs/Ref-AC-Test.grist",
+        "test/fixtures/docs/Ref-List-AC-Test.grist",
+        "test/fixtures/docs/TypeConversions.grist",
+        "test/fixtures/docs/World-v0.grist",
+        "test/fixtures/docs/World-v1.grist",
+        "test/fixtures/docs/World-v3.grist",
+        "test/fixtures/docs/video/Candidates.grist",
+        "test/fixtures/export-csv/**",
+        "test/fixtures/export-dsv/**",
+        "test/fixtures/export-tsv/**",
+        "test/fixtures/nbrowser/**",
+        "test/fixtures/plugins/.jshintrc",
+        "test/fixtures/plugins/browserInstalledPlugins/**",
+        "test/fixtures/plugins/builtInPlugins/**",
+        "test/fixtures/plugins/installedPlugins/plugins/node-GristDocAPI/**",
+        "test/fixtures/plugins/installedPlugins/plugins/node-fail/**",
+        "test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/manifest.yml",
+        "test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/main.js",
+        "test/fixtures/plugins/installedPlugins/plugins/node-wrong-message/**",
+        "test/fixtures/plugins/installedPlugins/plugins/valid-import-source/**",
+        "test/fixtures/projects/**",
+        "test/fixtures/saml/**",
+        "test/fixtures/sites/**",
+        "test/fixtures/uploads/CCTransactions.csv",
+        "test/fixtures/uploads/ChartData-Sort_Test.csv",
+        "test/fixtures/uploads/ChartData.csv",
+        "test/fixtures/uploads/Cities.csv",
+        "test/fixtures/uploads/CodeEditor.test.csv",
+        "test/fixtures/uploads/ColumnFilterData_A.csv",
+        "test/fixtures/uploads/ColumnFilterData_B.csv",
+        "test/fixtures/uploads/EmptyDate.csv",
+        "test/fixtures/uploads/FileUploadData.csv",
+        "test/fixtures/uploads/ImportReferences-Tasks.csv",
+        "test/fixtures/uploads/SchoolData.csv",
+        "test/fixtures/uploads/StudentData.csv",
+        "test/fixtures/uploads/UploadedData1.csv",
+        "test/fixtures/uploads/UploadedData1Extended.csv",
+        "test/fixtures/uploads/UploadedData2.csv",
+        "test/fixtures/uploads/UploadedData2Extended.csv",
+        "test/fixtures/uploads/UploadedData3.csv",
+        "test/fixtures/uploads/UploadedDataEmpty.csv",
+        "test/fixtures/uploads/cities.jgrist",
+        "test/fixtures/uploads/cities_broken.jgrist",
+        "test/fixtures/uploads/dirtyNames.json",
+        "test/fixtures/uploads/empty_data.jgrist",
+        "test/fixtures/uploads/file1.mov",
+        "test/fixtures/uploads/file2.mp3",
+        "test/fixtures/uploads/file3.zip",
+        "test/fixtures/uploads/formatted_numbers.csv",
+        "test/fixtures/uploads/htmlfile.html",
+        "test/fixtures/uploads/image_with_script.svg",
+        "test/fixtures/uploads/mixed_dates.csv",
+        "test/fixtures/uploads/name_references.csv",
+        "test/fixtures/uploads/names.json",
+        "test/fixtures/uploads/simple_array.json",
+        "test/fixtures/uploads/spotifyGetSeveralAlbums.json",
+        "test/fixtures/uploads/unicode_headers.csv",
+        "test/gen-server/**",
+        "test/init-mocha-webdriver.js",
+        "test/nbrowser/**",
+        "test/nbrowser_with_stubs/**",
+        "test/projects/**",
+        "test/report-why-tests-hang.js",
+        "test/server/**",
+        "test/setupPaths.js",
+        "test/split-tests.js",
+        "test/testUtils.ts",
+        "test/test_env.sh",
+        "test/test_env_server.sh",
+        "test/test_under_docker.sh",
+        "test/timings/**",
+        "test/tsconfig.json",
+        "test/upgradeDocument",
+        "test/upgradeDocumentImpl.ts",
+        "test/utils.js",
+        "test/xunit-file.js",
+        "tsconfig-ext.json",
+        "tsconfig-prod.json",
+        "tsconfig.eslint.json",
+        "tsconfig.json",
+        "yarn.lock"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2014-2022 Grist Labs Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.txt:\n\nGrist Software\nCopyright 2014-2022 Grist Labs Inc.\n\nThis product includes software developed at\nGrist Labs Inc. (https://www.getgrist.com/).\n",
+      "attribution": "Copyright 2014-2022 Grist Labs Inc., Apache-2.0 license (LICENSE.txt), https://github.com/gristlabs/grist-core."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "static/icons/locales/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Yummygum (https://github.com/Yummygum/flagpack-core)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Yummygum (https://github.com/Yummygum/flagpack-core), MIT license (LICENSE), https://github.com/gristlabs/grist-core/tree/58fd2f29e446d3f9a70264970acc6914b9f30910/static/icons/locales."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/node_modules/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of dependency_test, ISC license (declared in package.json), https://github.com/gristlabs/grist-core/tree/58fd2f29e446d3f9a70264970acc6914b9f30910/test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/node_modules/dependency_test."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.drawio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dsv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jgrist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mp3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.grist-ee-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.jshintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yarnrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saml-login"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saml-logout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/upgradeDocument"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,986 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/microsoft/BitNet",
+  "revision": "0b341e582afbf9e1011f24744b554c96a3477eb5",
+  "checksum": "sha256:874e64fe06b041ad1012f03b6f2aafd93c3637e6f4922cd172eea7c8ccf53124",
+  "extract": {
+    "exclude": [
+      "3rdparty/llama.cpp/cmake/**",
+      "3rdparty/llama.cpp/docs/android/**",
+      "3rdparty/llama.cpp/docs/development/llama-star/**",
+      "3rdparty/llama.cpp/examples/gguf-hash/deps/**",
+      "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-hdpi/**",
+      "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-mdpi/**",
+      "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-xhdpi/**",
+      "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-xxhdpi/**",
+      "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-xxxhdpi/**",
+      "3rdparty/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+      "3rdparty/llama.cpp/media/llama0-banner.png",
+      "3rdparty/llama.cpp/media/llama0-logo.png",
+      "3rdparty/llama.cpp/media/llama1-banner.png",
+      "3rdparty/llama.cpp/media/llama1-icon-transparent.png",
+      "3rdparty/llama.cpp/media/llama1-icon.png",
+      "3rdparty/llama.cpp/media/llama1-logo.png",
+      "3rdparty/llama.cpp/media/matmul.png",
+      "3rdparty/llama.cpp/models/ggml-vocab-aquila.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-baichuan.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-bert-bge.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-command-r.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-deepseek-coder.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-deepseek-llm.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-falcon.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-gemma-4.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-gpt-2.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-gpt-neox.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-llama-bpe.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-llama-spm.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-mpt.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-nomic-bert-moe.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-phi-3.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-qwen2.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-qwen35.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-refact.gguf",
+      "3rdparty/llama.cpp/models/ggml-vocab-starcoder.gguf",
+      "3rdparty/llama.cpp/tools/mtmd/test-1.jpeg",
+      "3rdparty/llama.cpp/tools/mtmd/test-2.mp3",
+      "3rdparty/llama.cpp/tools/mtmd/test-3.mp4",
+      "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/assets/1.jpg",
+      "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/assets/beautiful-flowers-lotus.webp",
+      "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/assets/example.pdf",
+      "3rdparty/llama.cpp/vendor/miniaudio/**",
+      "3rdparty/llama.cpp/vendor/nlohmann/**",
+      "3rdparty/llama.cpp/vendor/sheredom/**",
+      "3rdparty/llama.cpp/vendor/stb/**",
+      "assets/**",
+      "docs/fig1_quant_per_task.png",
+      "media/**",
+      "src/assets/**"
+    ]
+  },
+  "history": {
+    "since": "6cfd8831fd748cfeb91ba65df0ff542678f77ff0"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n\n\nMIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Commit history of https://github.com/microsoft/BitNet: Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/BitNet; Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp; Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/gguf-py; Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE-jsonhpp), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/licenses; Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/vendor/cpp-httplib."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitignore",
+        ".gitmodules",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docs/bitnet-embeddings-i2s-guide.md",
+        "docs/codegen.md",
+        "gpu/**",
+        "include/**",
+        "preset_kernels/**",
+        "requirements.txt",
+        "run_inference.py",
+        "run_inference_server.py",
+        "setup_env.py",
+        "src/CMakeLists.txt",
+        "src/README.md",
+        "src/ggml-bitnet-lut.cpp",
+        "src/ggml-bitnet-mad.cpp",
+        "utils/**"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n",
+      "attribution": "Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/BitNet."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "3rdparty/llama.cpp/.clang-format",
+        "3rdparty/llama.cpp/.clang-tidy",
+        "3rdparty/llama.cpp/.devops/**",
+        "3rdparty/llama.cpp/.dockerignore",
+        "3rdparty/llama.cpp/.ecrc",
+        "3rdparty/llama.cpp/.editorconfig",
+        "3rdparty/llama.cpp/.flake8",
+        "3rdparty/llama.cpp/.gemini/**",
+        "3rdparty/llama.cpp/.github/**",
+        "3rdparty/llama.cpp/.gitignore",
+        "3rdparty/llama.cpp/.gitmodules",
+        "3rdparty/llama.cpp/.pi/**",
+        "3rdparty/llama.cpp/.pre-commit-config.yaml",
+        "3rdparty/llama.cpp/AGENTS.md",
+        "3rdparty/llama.cpp/AUTHORS",
+        "3rdparty/llama.cpp/CLAUDE.md",
+        "3rdparty/llama.cpp/CMakeLists.txt",
+        "3rdparty/llama.cpp/CMakePresets.json",
+        "3rdparty/llama.cpp/CODEOWNERS",
+        "3rdparty/llama.cpp/CONTRIBUTING.md",
+        "3rdparty/llama.cpp/LICENSE",
+        "3rdparty/llama.cpp/Makefile",
+        "3rdparty/llama.cpp/Package.swift",
+        "3rdparty/llama.cpp/README.md",
+        "3rdparty/llama.cpp/SECURITY.md",
+        "3rdparty/llama.cpp/app/**",
+        "3rdparty/llama.cpp/benches/**",
+        "3rdparty/llama.cpp/build-xcframework.sh",
+        "3rdparty/llama.cpp/ci/**",
+        "3rdparty/llama.cpp/common/**",
+        "3rdparty/llama.cpp/conversion/**",
+        "3rdparty/llama.cpp/convert.py",
+        "3rdparty/llama.cpp/convert_hf_to_gguf.py",
+        "3rdparty/llama.cpp/convert_hf_to_gguf_update.py",
+        "3rdparty/llama.cpp/convert_llama_ggml_to_gguf.py",
+        "3rdparty/llama.cpp/convert_lora_to_gguf.py",
+        "3rdparty/llama.cpp/docs/android.md",
+        "3rdparty/llama.cpp/docs/autoparser.md",
+        "3rdparty/llama.cpp/docs/backend/**",
+        "3rdparty/llama.cpp/docs/build-riscv64-spacemit.md",
+        "3rdparty/llama.cpp/docs/build-s390x.md",
+        "3rdparty/llama.cpp/docs/build.md",
+        "3rdparty/llama.cpp/docs/development/HOWTO-add-model.md",
+        "3rdparty/llama.cpp/docs/development/debugging-tests.md",
+        "3rdparty/llama.cpp/docs/development/parsing.md",
+        "3rdparty/llama.cpp/docs/development/token_generation_performance_tips.md",
+        "3rdparty/llama.cpp/docs/docker.md",
+        "3rdparty/llama.cpp/docs/function-calling.md",
+        "3rdparty/llama.cpp/docs/install.md",
+        "3rdparty/llama.cpp/docs/llguidance.md",
+        "3rdparty/llama.cpp/docs/multi-gpu.md",
+        "3rdparty/llama.cpp/docs/multimodal/**",
+        "3rdparty/llama.cpp/docs/multimodal.md",
+        "3rdparty/llama.cpp/docs/ops/**",
+        "3rdparty/llama.cpp/docs/ops.md",
+        "3rdparty/llama.cpp/docs/preset.md",
+        "3rdparty/llama.cpp/docs/speculative.md",
+        "3rdparty/llama.cpp/examples/CMakeLists.txt",
+        "3rdparty/llama.cpp/examples/batched/**",
+        "3rdparty/llama.cpp/examples/batched.swift/**",
+        "3rdparty/llama.cpp/examples/convert-llama2c-to-ggml/**",
+        "3rdparty/llama.cpp/examples/convert_legacy_llama.py",
+        "3rdparty/llama.cpp/examples/debug/**",
+        "3rdparty/llama.cpp/examples/deprecation-warning/**",
+        "3rdparty/llama.cpp/examples/diffusion/**",
+        "3rdparty/llama.cpp/examples/embedding/**",
+        "3rdparty/llama.cpp/examples/eval-callback/**",
+        "3rdparty/llama.cpp/examples/gen-docs/**",
+        "3rdparty/llama.cpp/examples/gguf/**",
+        "3rdparty/llama.cpp/examples/gguf-hash/CMakeLists.txt",
+        "3rdparty/llama.cpp/examples/gguf-hash/README.md",
+        "3rdparty/llama.cpp/examples/gguf-hash/gguf-hash.cpp",
+        "3rdparty/llama.cpp/examples/idle/**",
+        "3rdparty/llama.cpp/examples/json_schema_pydantic_example.py",
+        "3rdparty/llama.cpp/examples/json_schema_to_grammar.py",
+        "3rdparty/llama.cpp/examples/llama-eval/**",
+        "3rdparty/llama.cpp/examples/llama.android/.gitignore",
+        "3rdparty/llama.cpp/examples/llama.android/app/.gitignore",
+        "3rdparty/llama.cpp/examples/llama.android/app/build.gradle.kts",
+        "3rdparty/llama.cpp/examples/llama.android/app/proguard-rules.pro",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/AndroidManifest.xml",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/java/**",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/drawable/**",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/layout/**",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/mipmap-anydpi/**",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/values/**",
+        "3rdparty/llama.cpp/examples/llama.android/app/src/main/res/xml/**",
+        "3rdparty/llama.cpp/examples/llama.android/build.gradle.kts",
+        "3rdparty/llama.cpp/examples/llama.android/gradle/libs.versions.toml",
+        "3rdparty/llama.cpp/examples/llama.android/gradle/wrapper/gradle-wrapper.properties",
+        "3rdparty/llama.cpp/examples/llama.android/gradle.properties",
+        "3rdparty/llama.cpp/examples/llama.android/gradlew",
+        "3rdparty/llama.cpp/examples/llama.android/lib/**",
+        "3rdparty/llama.cpp/examples/llama.android/settings.gradle.kts",
+        "3rdparty/llama.cpp/examples/llama.swiftui/**",
+        "3rdparty/llama.cpp/examples/llama.vim",
+        "3rdparty/llama.cpp/examples/lookahead/**",
+        "3rdparty/llama.cpp/examples/lookup/**",
+        "3rdparty/llama.cpp/examples/model-conversion/**",
+        "3rdparty/llama.cpp/examples/parallel/**",
+        "3rdparty/llama.cpp/examples/passkey/**",
+        "3rdparty/llama.cpp/examples/pydantic_models_to_grammar.py",
+        "3rdparty/llama.cpp/examples/pydantic_models_to_grammar_examples.py",
+        "3rdparty/llama.cpp/examples/reason-act.sh",
+        "3rdparty/llama.cpp/examples/regex_to_grammar.py",
+        "3rdparty/llama.cpp/examples/retrieval/**",
+        "3rdparty/llama.cpp/examples/server-llama2-13B.sh",
+        "3rdparty/llama.cpp/examples/server_embd.py",
+        "3rdparty/llama.cpp/examples/simple/**",
+        "3rdparty/llama.cpp/examples/simple-chat/**",
+        "3rdparty/llama.cpp/examples/simple-cmake-pkg/**",
+        "3rdparty/llama.cpp/examples/speculative/**",
+        "3rdparty/llama.cpp/examples/speculative-simple/**",
+        "3rdparty/llama.cpp/examples/sycl/**",
+        "3rdparty/llama.cpp/examples/training/**",
+        "3rdparty/llama.cpp/examples/ts-type-to-grammar.sh",
+        "3rdparty/llama.cpp/flake.nix",
+        "3rdparty/llama.cpp/ggml/**",
+        "3rdparty/llama.cpp/gguf-py-bak/**",
+        "3rdparty/llama.cpp/grammars/**",
+        "3rdparty/llama.cpp/include/**",
+        "3rdparty/llama.cpp/media/llama1-icon-transparent.svg",
+        "3rdparty/llama.cpp/media/llama1-icon.svg",
+        "3rdparty/llama.cpp/media/llama1-logo.svg",
+        "3rdparty/llama.cpp/media/matmul.svg",
+        "3rdparty/llama.cpp/models/.editorconfig",
+        "3rdparty/llama.cpp/models/ggml-vocab-bert-bge.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-bert-bge.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-command-r.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-command-r.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-deepseek-coder.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-deepseek-coder.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-deepseek-llm.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-deepseek-llm.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-falcon.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-falcon.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-gemma-4.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-gemma-4.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-gpt-2.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-gpt-2.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-llama-bpe.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-llama-bpe.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-llama-spm.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-llama-spm.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-mpt.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-mpt.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-phi-3.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-phi-3.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-qwen2.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-qwen2.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-qwen35.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-qwen35.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-refact.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-refact.gguf.out",
+        "3rdparty/llama.cpp/models/ggml-vocab-starcoder.gguf.inp",
+        "3rdparty/llama.cpp/models/ggml-vocab-starcoder.gguf.out",
+        "3rdparty/llama.cpp/models/templates/**",
+        "3rdparty/llama.cpp/mypy.ini",
+        "3rdparty/llama.cpp/pocs/**",
+        "3rdparty/llama.cpp/pyproject.toml",
+        "3rdparty/llama.cpp/pyrightconfig.json",
+        "3rdparty/llama.cpp/requirements/**",
+        "3rdparty/llama.cpp/requirements.txt",
+        "3rdparty/llama.cpp/scripts/**",
+        "3rdparty/llama.cpp/spm-headers/**",
+        "3rdparty/llama.cpp/spm-sources/**",
+        "3rdparty/llama.cpp/src/**",
+        "3rdparty/llama.cpp/test_op/**",
+        "3rdparty/llama.cpp/tests/**",
+        "3rdparty/llama.cpp/tools/CMakeLists.txt",
+        "3rdparty/llama.cpp/tools/batched-bench/**",
+        "3rdparty/llama.cpp/tools/cli/**",
+        "3rdparty/llama.cpp/tools/completion/**",
+        "3rdparty/llama.cpp/tools/cvector-generator/**",
+        "3rdparty/llama.cpp/tools/export-lora/**",
+        "3rdparty/llama.cpp/tools/fit-params/**",
+        "3rdparty/llama.cpp/tools/gguf-split/**",
+        "3rdparty/llama.cpp/tools/imatrix/**",
+        "3rdparty/llama.cpp/tools/llama-bench/**",
+        "3rdparty/llama.cpp/tools/mtmd/CMakeLists.txt",
+        "3rdparty/llama.cpp/tools/mtmd/README-dev.md",
+        "3rdparty/llama.cpp/tools/mtmd/README.md",
+        "3rdparty/llama.cpp/tools/mtmd/clip-graph.h",
+        "3rdparty/llama.cpp/tools/mtmd/clip-impl.h",
+        "3rdparty/llama.cpp/tools/mtmd/clip-model.h",
+        "3rdparty/llama.cpp/tools/mtmd/clip.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/clip.h",
+        "3rdparty/llama.cpp/tools/mtmd/debug/**",
+        "3rdparty/llama.cpp/tools/mtmd/deprecation-warning.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/legacy-models/**",
+        "3rdparty/llama.cpp/tools/mtmd/models/**",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-audio.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-audio.h",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-cli.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-helper.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-helper.h",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-image.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd-image.h",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd.cpp",
+        "3rdparty/llama.cpp/tools/mtmd/mtmd.h",
+        "3rdparty/llama.cpp/tools/mtmd/requirements.txt",
+        "3rdparty/llama.cpp/tools/mtmd/tests/**",
+        "3rdparty/llama.cpp/tools/mtmd/tests.sh",
+        "3rdparty/llama.cpp/tools/parser/**",
+        "3rdparty/llama.cpp/tools/perplexity/**",
+        "3rdparty/llama.cpp/tools/quantize/**",
+        "3rdparty/llama.cpp/tools/results/**",
+        "3rdparty/llama.cpp/tools/rpc/**",
+        "3rdparty/llama.cpp/tools/server/**",
+        "3rdparty/llama.cpp/tools/tokenize/**",
+        "3rdparty/llama.cpp/tools/tts/**",
+        "3rdparty/llama.cpp/tools/ui/.env.example",
+        "3rdparty/llama.cpp/tools/ui/.gitignore",
+        "3rdparty/llama.cpp/tools/ui/.npmrc",
+        "3rdparty/llama.cpp/tools/ui/.prettierignore",
+        "3rdparty/llama.cpp/tools/ui/.prettierrc",
+        "3rdparty/llama.cpp/tools/ui/.storybook/**",
+        "3rdparty/llama.cpp/tools/ui/CMakeLists.txt",
+        "3rdparty/llama.cpp/tools/ui/README.md",
+        "3rdparty/llama.cpp/tools/ui/components.json",
+        "3rdparty/llama.cpp/tools/ui/docs/**",
+        "3rdparty/llama.cpp/tools/ui/embed.cpp",
+        "3rdparty/llama.cpp/tools/ui/eslint.config.js",
+        "3rdparty/llama.cpp/tools/ui/package-lock.json",
+        "3rdparty/llama.cpp/tools/ui/package.json",
+        "3rdparty/llama.cpp/tools/ui/playwright.config.ts",
+        "3rdparty/llama.cpp/tools/ui/pwa-assets-dark.config.ts",
+        "3rdparty/llama.cpp/tools/ui/pwa-assets.config.ts",
+        "3rdparty/llama.cpp/tools/ui/scripts/**",
+        "3rdparty/llama.cpp/tools/ui/sources.cmake",
+        "3rdparty/llama.cpp/tools/ui/src/**",
+        "3rdparty/llama.cpp/tools/ui/static/**",
+        "3rdparty/llama.cpp/tools/ui/svelte.config.js",
+        "3rdparty/llama.cpp/tools/ui/tests/client/**",
+        "3rdparty/llama.cpp/tools/ui/tests/e2e/**",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/ChatMessage.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/ChatScreenForm.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/Introduction.mdx",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/MarkdownContent.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/ModelsSelector.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/PwaRefreshAlert.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/SidebarNavigation.stories.svelte",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/a11y/**",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/ai-tutorial.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/api-docs.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/assets/hf-logo.svg",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/blog-post.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/data-analysis.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/empty.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/math-formulas.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/readme.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/stories/fixtures/storybook-mocks.ts",
+        "3rdparty/llama.cpp/tools/ui/tests/unit/**",
+        "3rdparty/llama.cpp/tools/ui/tsconfig.json",
+        "3rdparty/llama.cpp/tools/ui/vite.config.ts",
+        "3rdparty/llama.cpp/tools/ui/vitest-setup-client.ts",
+        "3rdparty/llama.cpp/tools/ui/vitest.shims.d.ts",
+        "3rdparty/llama.cpp/ty.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "3rdparty/llama.cpp/gguf-py/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/gguf-py."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "3rdparty/llama.cpp/licenses/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE-jsonhpp), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/licenses."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "3rdparty/llama.cpp/vendor/cpp-httplib/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/microsoft/BitNet/tree/0b341e582afbf9e1011f24744b554c96a3477eb5/3rdparty/llama.cpp/vendor/cpp-httplib."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.farf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gbnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.last"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.model"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.schema"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "3rdparty/llama.cpp/examples/model-conversion/requirements.txt",
+        "3rdparty/llama.cpp/requirements.txt",
+        "3rdparty/llama.cpp/requirements/requirements-all.txt",
+        "3rdparty/llama.cpp/requirements/requirements-compare-llama-bench.txt",
+        "3rdparty/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt",
+        "3rdparty/llama.cpp/requirements/requirements-convert_hf_to_gguf_update.txt",
+        "3rdparty/llama.cpp/requirements/requirements-convert_legacy_llama.txt",
+        "3rdparty/llama.cpp/requirements/requirements-convert_llama_ggml_to_gguf.txt",
+        "3rdparty/llama.cpp/requirements/requirements-convert_lora_to_gguf.txt",
+        "3rdparty/llama.cpp/requirements/requirements-gguf_editor_gui.txt",
+        "3rdparty/llama.cpp/requirements/requirements-pydantic.txt",
+        "3rdparty/llama.cpp/requirements/requirements-server-bench.txt",
+        "3rdparty/llama.cpp/requirements/requirements-test-tokenizer-random.txt",
+        "3rdparty/llama.cpp/requirements/requirements-tool_bench.txt",
+        "3rdparty/llama.cpp/scripts/jinja/requirements.txt",
+        "3rdparty/llama.cpp/scripts/snapdragon/qdc/requirements.txt",
+        "3rdparty/llama.cpp/tools/cvector-generator/completions.txt",
+        "3rdparty/llama.cpp/tools/cvector-generator/negative.txt",
+        "3rdparty/llama.cpp/tools/cvector-generator/positive.txt",
+        "3rdparty/llama.cpp/tools/mtmd/requirements.txt",
+        "3rdparty/llama.cpp/tools/mtmd/tests/test-1-ground-truth.txt",
+        "3rdparty/llama.cpp/tools/mtmd/tests/tests-requirements.txt",
+        "3rdparty/llama.cpp/tools/server/bench/requirements.txt",
+        "3rdparty/llama.cpp/tools/server/bench/speed-bench/requirements.txt",
+        "3rdparty/llama.cpp/tools/server/tests/requirements.txt",
+        "gpu/requirements.txt",
+        "requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ecrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-jsonhpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "3rdparty/llama.cpp": "https://github.com/isHuangXin/llama.cpp"
+  }
+}

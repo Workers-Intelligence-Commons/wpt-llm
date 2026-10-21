@@ -1,0 +1,661 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/vega/vega",
+  "revision": "fdd9ab9d4faf48553c8dfdbcaf7284f485504aaf",
+  "checksum": "sha256:683094c0a3c716dd1b27b942e15de07eaea09ec46eab669e440194f65760f3c9",
+  "extract": {
+    "exclude": [
+      "docs/assets/banner.png",
+      "docs/assets/idl-logo.png",
+      "docs/assets/vega-large.png",
+      "docs/assets/vega-logo.png",
+      "docs/data/7zip.png",
+      "docs/data/ffox.png",
+      "docs/data/flights-200k.arrow",
+      "docs/data/gimp.png",
+      "docs/examples/img/**",
+      "packages/vega-cli/test/resources/vg2pdf-test-scaled.pdf",
+      "packages/vega-cli/test/resources/vg2pdf-test.pdf",
+      "packages/vega-cli/test/resources/vg2png-test-scaled.png",
+      "packages/vega-cli/test/resources/vg2png-test.png",
+      "packages/vega-scenegraph/test/resources/image0.png",
+      "packages/vega-scenegraph/test/resources/image1.png",
+      "packages/vega-scenegraph/test/resources/image2.png",
+      "packages/vega-scenegraph/test/resources/png/**"
+    ]
+  },
+  "history": {
+    "since": "17b0dd7486b425dec9b7a9e1c8ab0d7d9b998214"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2015-2023, University of Washington Interactive Data Lab\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors\n  may be used to endorse or promote products derived from this software\n  without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/vega/vega: Copyright (c) 2015-2023, University of Washington Interactive Data Lab, BSD-3-Clause license (LICENSE), https://github.com/vega/vega."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".vscode/**",
+        "AUTHORS",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "babel.config.js",
+        "docs/Gemfile",
+        "docs/_config.yml",
+        "docs/_data/**",
+        "docs/_includes/**",
+        "docs/_layouts/**",
+        "docs/about/**",
+        "docs/assets/main.css",
+        "docs/assets/syntax.css",
+        "docs/data/airports.csv",
+        "docs/data/annual-precip.json",
+        "docs/data/anscombe.json",
+        "docs/data/barley.json",
+        "docs/data/birdstrikes.csv",
+        "docs/data/budget.json",
+        "docs/data/budgets.json",
+        "docs/data/burtin.json",
+        "docs/data/cars.json",
+        "docs/data/co2-concentration.csv",
+        "docs/data/countries.json",
+        "docs/data/crimea.json",
+        "docs/data/disasters.csv",
+        "docs/data/driving.json",
+        "docs/data/earthquakes.json",
+        "docs/data/flare-dependencies.json",
+        "docs/data/flare.json",
+        "docs/data/flights-10k.json",
+        "docs/data/flights-200k.json",
+        "docs/data/flights-20k.json",
+        "docs/data/flights-2k.json",
+        "docs/data/flights-5k.json",
+        "docs/data/flights-airport.csv",
+        "docs/data/football.json",
+        "docs/data/gapminder-health-income.csv",
+        "docs/data/gapminder.json",
+        "docs/data/github.csv",
+        "docs/data/global-temp.csv",
+        "docs/data/income.json",
+        "docs/data/iowa-electricity.csv",
+        "docs/data/jobs.json",
+        "docs/data/la-riots.csv",
+        "docs/data/londonBoroughs.json",
+        "docs/data/londonCentroids.json",
+        "docs/data/londonTubeLines.json",
+        "docs/data/lookup_groups.csv",
+        "docs/data/lookup_people.csv",
+        "docs/data/miserables.json",
+        "docs/data/monarchs.json",
+        "docs/data/movies.json",
+        "docs/data/normal-2d.json",
+        "docs/data/obesity.json",
+        "docs/data/ohlc.json",
+        "docs/data/penguins.json",
+        "docs/data/platformer-terrain.json",
+        "docs/data/platformer-terrain.txt",
+        "docs/data/points.json",
+        "docs/data/political-contributions.json",
+        "docs/data/population.json",
+        "docs/data/population_engineers_hurricanes.csv",
+        "docs/data/seattle-weather-hourly-normals.csv",
+        "docs/data/seattle-weather.csv",
+        "docs/data/sp500-2000.csv",
+        "docs/data/sp500.csv",
+        "docs/data/species.csv",
+        "docs/data/stocks.csv",
+        "docs/data/udistrict.json",
+        "docs/data/unemployment-across-industries.json",
+        "docs/data/unemployment.tsv",
+        "docs/data/uniform-2d.json",
+        "docs/data/us-10m.json",
+        "docs/data/us-employment.csv",
+        "docs/data/us-state-capitals.json",
+        "docs/data/volcano.json",
+        "docs/data/weather.csv",
+        "docs/data/weekly-weather.json",
+        "docs/data/wheat.json",
+        "docs/data/windvectors.csv",
+        "docs/data/world-110m.json",
+        "docs/data/zipcodes.csv",
+        "docs/docs/**",
+        "docs/examples/airport-connections.md",
+        "docs/examples/airport-connections.vg.json",
+        "docs/examples/annual-precipitation.md",
+        "docs/examples/annual-precipitation.vg.json",
+        "docs/examples/annual-temperature.md",
+        "docs/examples/annual-temperature.vg.json",
+        "docs/examples/arc-diagram.md",
+        "docs/examples/arc-diagram.vg.json",
+        "docs/examples/area-chart.md",
+        "docs/examples/area-chart.vg.json",
+        "docs/examples/bar-chart.md",
+        "docs/examples/bar-chart.vg.json",
+        "docs/examples/bar-line-toggle.md",
+        "docs/examples/bar-line-toggle.vg.json",
+        "docs/examples/barley-trellis-plot.md",
+        "docs/examples/barley-trellis-plot.vg.json",
+        "docs/examples/beeswarm-plot.md",
+        "docs/examples/beeswarm-plot.vg.json",
+        "docs/examples/binned-scatter-plot.md",
+        "docs/examples/binned-scatter-plot.vg.json",
+        "docs/examples/box-plot.md",
+        "docs/examples/box-plot.vg.json",
+        "docs/examples/brushing-scatter-plots.md",
+        "docs/examples/brushing-scatter-plots.vg.json",
+        "docs/examples/budget-forecasts.md",
+        "docs/examples/budget-forecasts.vg.json",
+        "docs/examples/calendar-view.md",
+        "docs/examples/calendar-view.vg.json",
+        "docs/examples/circle-packing.md",
+        "docs/examples/circle-packing.vg.json",
+        "docs/examples/clock.md",
+        "docs/examples/clock.vg.json",
+        "docs/examples/connected-scatter-plot.md",
+        "docs/examples/connected-scatter-plot.vg.json",
+        "docs/examples/contour-plot.md",
+        "docs/examples/contour-plot.vg.json",
+        "docs/examples/county-unemployment.md",
+        "docs/examples/county-unemployment.vg.json",
+        "docs/examples/crossfilter-flights.md",
+        "docs/examples/crossfilter-flights.vg.json",
+        "docs/examples/density-heatmaps.md",
+        "docs/examples/density-heatmaps.vg.json",
+        "docs/examples/distortion-comparison.md",
+        "docs/examples/distortion-comparison.vg.json",
+        "docs/examples/donut-chart-labelled.md",
+        "docs/examples/donut-chart-labelled.vg.json",
+        "docs/examples/donut-chart.md",
+        "docs/examples/donut-chart.vg.json",
+        "docs/examples/dorling-cartogram.md",
+        "docs/examples/dorling-cartogram.vg.json",
+        "docs/examples/dot-plot.md",
+        "docs/examples/dot-plot.vg.json",
+        "docs/examples/earthquakes-globe.md",
+        "docs/examples/earthquakes-globe.vg.json",
+        "docs/examples/earthquakes.md",
+        "docs/examples/earthquakes.vg.json",
+        "docs/examples/edge-bundling.md",
+        "docs/examples/edge-bundling.vg.json",
+        "docs/examples/error-bars.md",
+        "docs/examples/error-bars.vg.json",
+        "docs/examples/falkensee-population.md",
+        "docs/examples/falkensee-population.vg.json",
+        "docs/examples/flight-passengers.md",
+        "docs/examples/flight-passengers.vg.json",
+        "docs/examples/force-directed-layout.md",
+        "docs/examples/force-directed-layout.vg.json",
+        "docs/examples/global-development.md",
+        "docs/examples/global-development.vg.json",
+        "docs/examples/grouped-bar-chart.md",
+        "docs/examples/grouped-bar-chart.vg.json",
+        "docs/examples/heatmap.md",
+        "docs/examples/heatmap.vg.json",
+        "docs/examples/histogram-null-values.md",
+        "docs/examples/histogram-null-values.vg.json",
+        "docs/examples/histogram.md",
+        "docs/examples/histogram.vg.json",
+        "docs/examples/horizon-graph.md",
+        "docs/examples/horizon-graph.vg.json",
+        "docs/examples/hypothetical-outcome-plots.md",
+        "docs/examples/hypothetical-outcome-plots.vg.json",
+        "docs/examples/index.md",
+        "docs/examples/interactive-legend.md",
+        "docs/examples/interactive-legend.vg.json",
+        "docs/examples/job-voyager.md",
+        "docs/examples/job-voyager.vg.json",
+        "docs/examples/labeled-scatter-plot.md",
+        "docs/examples/labeled-scatter-plot.vg.json",
+        "docs/examples/line-chart.md",
+        "docs/examples/line-chart.vg.json",
+        "docs/examples/loess-regression.md",
+        "docs/examples/loess-regression.vg.json",
+        "docs/examples/map-with-tooltip.md",
+        "docs/examples/map-with-tooltip.vg.json",
+        "docs/examples/nested-bar-chart.md",
+        "docs/examples/nested-bar-chart.vg.json",
+        "docs/examples/overview-plus-detail.md",
+        "docs/examples/overview-plus-detail.vg.json",
+        "docs/examples/packed-bubble-chart.md",
+        "docs/examples/packed-bubble-chart.vg.json",
+        "docs/examples/pacman.md",
+        "docs/examples/pacman.vg.json",
+        "docs/examples/parallel-coordinates-interactive.md",
+        "docs/examples/parallel-coordinates-interactive.vg.json",
+        "docs/examples/parallel-coordinates.md",
+        "docs/examples/parallel-coordinates.vg.json",
+        "docs/examples/pi-monte-carlo.md",
+        "docs/examples/pi-monte-carlo.vg.json",
+        "docs/examples/pie-chart.md",
+        "docs/examples/pie-chart.vg.json",
+        "docs/examples/platformer.md",
+        "docs/examples/platformer.vg.json",
+        "docs/examples/population-pyramid.md",
+        "docs/examples/population-pyramid.vg.json",
+        "docs/examples/probability-density.md",
+        "docs/examples/probability-density.vg.json",
+        "docs/examples/projections.md",
+        "docs/examples/projections.vg.json",
+        "docs/examples/quantile-dot-plot.md",
+        "docs/examples/quantile-dot-plot.vg.json",
+        "docs/examples/quantile-quantile-plot.md",
+        "docs/examples/quantile-quantile-plot.vg.json",
+        "docs/examples/radar-chart.md",
+        "docs/examples/radar-chart.vg.json",
+        "docs/examples/radial-plot.md",
+        "docs/examples/radial-plot.vg.json",
+        "docs/examples/radial-tree-layout.md",
+        "docs/examples/radial-tree-layout.vg.json",
+        "docs/examples/regression.md",
+        "docs/examples/regression.vg.json",
+        "docs/examples/reorderable-matrix.md",
+        "docs/examples/reorderable-matrix.vg.json",
+        "docs/examples/scatter-plot-null-values.md",
+        "docs/examples/scatter-plot-null-values.vg.json",
+        "docs/examples/scatter-plot.md",
+        "docs/examples/scatter-plot.vg.json",
+        "docs/examples/serpentine-timeline.md",
+        "docs/examples/serpentine-timeline.vg.json",
+        "docs/examples/stacked-area-chart.md",
+        "docs/examples/stacked-area-chart.vg.json",
+        "docs/examples/stacked-bar-chart.md",
+        "docs/examples/stacked-bar-chart.vg.json",
+        "docs/examples/stock-index-chart.md",
+        "docs/examples/stock-index-chart.vg.json",
+        "docs/examples/sunburst.md",
+        "docs/examples/sunburst.vg.json",
+        "docs/examples/table-scrollbar.md",
+        "docs/examples/table-scrollbar.vg.json",
+        "docs/examples/time-units.md",
+        "docs/examples/time-units.vg.json",
+        "docs/examples/timelines.md",
+        "docs/examples/timelines.vg.json",
+        "docs/examples/top-k-plot-with-others.md",
+        "docs/examples/top-k-plot-with-others.vg.json",
+        "docs/examples/top-k-plot.md",
+        "docs/examples/top-k-plot.vg.json",
+        "docs/examples/tree-layout.md",
+        "docs/examples/tree-layout.vg.json",
+        "docs/examples/treemap.md",
+        "docs/examples/treemap.vg.json",
+        "docs/examples/u-district-cuisine.md",
+        "docs/examples/u-district-cuisine.vg.json",
+        "docs/examples/violin-plot.md",
+        "docs/examples/violin-plot.vg.json",
+        "docs/examples/volcano-contours.md",
+        "docs/examples/volcano-contours.vg.json",
+        "docs/examples/warming-stripes.md",
+        "docs/examples/warming-stripes.vg.json",
+        "docs/examples/watch.md",
+        "docs/examples/watch.vg.json",
+        "docs/examples/weekly-temperature.md",
+        "docs/examples/weekly-temperature.vg.json",
+        "docs/examples/wheat-and-wages.md",
+        "docs/examples/wheat-and-wages.vg.json",
+        "docs/examples/wheat-plot.md",
+        "docs/examples/wheat-plot.vg.json",
+        "docs/examples/wind-vectors.md",
+        "docs/examples/wind-vectors.vg.json",
+        "docs/examples/word-cloud.md",
+        "docs/examples/word-cloud.vg.json",
+        "docs/examples/world-map.md",
+        "docs/examples/world-map.vg.json",
+        "docs/examples/zoomable-binned-plot.md",
+        "docs/examples/zoomable-binned-plot.vg.json",
+        "docs/examples/zoomable-circle-packing.md",
+        "docs/examples/zoomable-circle-packing.vg.json",
+        "docs/examples/zoomable-scatter-plot.md",
+        "docs/examples/zoomable-scatter-plot.vg.json",
+        "docs/examples/zoomable-world-map.md",
+        "docs/examples/zoomable-world-map.vg.json",
+        "docs/index.md",
+        "docs/tutorials/**",
+        "docs/usage/**",
+        "docs/vega-core.js",
+        "docs/vega-core.min.js",
+        "docs/vega-projections.min.js",
+        "docs/vega-schema.json",
+        "docs/vega.js",
+        "docs/vega.min.js",
+        "eslint.config.js",
+        "lerna.json",
+        "package-lock.json",
+        "package.json",
+        "packages/README.md",
+        "packages/vega/**",
+        "packages/vega-canvas/**",
+        "packages/vega-cli/.npmignore",
+        "packages/vega-cli/README.md",
+        "packages/vega-cli/bin/**",
+        "packages/vega-cli/index.js",
+        "packages/vega-cli/package.json",
+        "packages/vega-cli/src/**",
+        "packages/vega-cli/test/resources/bar.vg.json",
+        "packages/vega-cli/test/resources/config-invalid.json",
+        "packages/vega-cli/test/resources/config.json",
+        "packages/vega-cli/test/resources/vg2svg-test-config.svg",
+        "packages/vega-cli/test/resources/vg2svg-test-header.svg",
+        "packages/vega-cli/test/resources/vg2svg-test-scaled.svg",
+        "packages/vega-cli/test/resources/vg2svg-test.svg",
+        "packages/vega-cli/test/util.js",
+        "packages/vega-cli/test/vg2pdf-test-no-ci.js",
+        "packages/vega-cli/test/vg2png-test.js",
+        "packages/vega-cli/test/vg2svg-test.js",
+        "packages/vega-crossfilter/**",
+        "packages/vega-dataflow/**",
+        "packages/vega-encode/**",
+        "packages/vega-event-selector/**",
+        "packages/vega-expression/**",
+        "packages/vega-force/**",
+        "packages/vega-format/**",
+        "packages/vega-functions/**",
+        "packages/vega-geo/**",
+        "packages/vega-hierarchy/**",
+        "packages/vega-interpreter/**",
+        "packages/vega-label/**",
+        "packages/vega-loader/**",
+        "packages/vega-parser/**",
+        "packages/vega-projection/**",
+        "packages/vega-projection-extended/**",
+        "packages/vega-regression/**",
+        "packages/vega-runtime/**",
+        "packages/vega-scale/**",
+        "packages/vega-scenegraph/.npmignore",
+        "packages/vega-scenegraph/README.md",
+        "packages/vega-scenegraph/index.js",
+        "packages/vega-scenegraph/package.json",
+        "packages/vega-scenegraph/rollup.config.js",
+        "packages/vega-scenegraph/schema.js",
+        "packages/vega-scenegraph/src/**",
+        "packages/vega-scenegraph/test/__init__.js",
+        "packages/vega-scenegraph/test/bound-context-test.js",
+        "packages/vega-scenegraph/test/bound-stroke-test.js",
+        "packages/vega-scenegraph/test/bounds-test.js",
+        "packages/vega-scenegraph/test/canvas-external-context-test.js",
+        "packages/vega-scenegraph/test/canvas-handler-test.js",
+        "packages/vega-scenegraph/test/canvas-renderer-test.js",
+        "packages/vega-scenegraph/test/font-test.js",
+        "packages/vega-scenegraph/test/handler-test.js",
+        "packages/vega-scenegraph/test/intersect-test.js",
+        "packages/vega-scenegraph/test/markup-test.js",
+        "packages/vega-scenegraph/test/path-test.js",
+        "packages/vega-scenegraph/test/point-test.js",
+        "packages/vega-scenegraph/test/renderer-test.js",
+        "packages/vega-scenegraph/test/resources/generate-tests.js",
+        "packages/vega-scenegraph/test/resources/marks.json",
+        "packages/vega-scenegraph/test/resources/scenegraph-barley.json",
+        "packages/vega-scenegraph/test/resources/scenegraph-defs.json",
+        "packages/vega-scenegraph/test/resources/scenegraph-description.json",
+        "packages/vega-scenegraph/test/resources/scenegraph-href.json",
+        "packages/vega-scenegraph/test/resources/scenegraph-rect.json",
+        "packages/vega-scenegraph/test/resources/svg/**",
+        "packages/vega-scenegraph/test/schema-test.js",
+        "packages/vega-scenegraph/test/svg-handler-test.js",
+        "packages/vega-scenegraph/test/svg-renderer-test.js",
+        "packages/vega-scenegraph/test/svg-string-renderer-test.js",
+        "packages/vega-scenegraph/test/symbol-bound-test.js",
+        "packages/vega-schema/**",
+        "packages/vega-selections/**",
+        "packages/vega-statistics/**",
+        "packages/vega-time/**",
+        "packages/vega-transforms/**",
+        "packages/vega-typings/**",
+        "packages/vega-util/**",
+        "packages/vega-view/**",
+        "packages/vega-view-transforms/**",
+        "packages/vega-voronoi/**",
+        "packages/vega-wordcloud/**",
+        "rollup.config.js",
+        "scripts/**",
+        "tsconfig.json"
+      ],
+      "text": "Copyright (c) 2015-2023, University of Washington Interactive Data Lab\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors\n  may be used to endorse or promote products derived from this software\n  without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2015-2023, University of Washington Interactive Data Lab, BSD-3-Clause license (LICENSE), https://github.com/vega/vega."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/array"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/embed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/or"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preview"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/projections"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/required"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/showcase"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vg2pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vg2png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vg2svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

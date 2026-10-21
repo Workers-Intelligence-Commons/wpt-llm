@@ -1,0 +1,668 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/portainer/portainer",
+  "revision": "d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b",
+  "checksum": "sha256:9477e7226156eba1680f6d3404cb92909e1732001d69677f463b879d66153f12",
+  "extract": {
+    "exclude": [
+      "api/archive/testdata/**",
+      "api/git/testdata/**",
+      "app/assets/fonts/**",
+      "app/assets/ico/android-chrome-192x192.png",
+      "app/assets/ico/android-chrome-256x256.png",
+      "app/assets/ico/apple-touch-icon.png",
+      "app/assets/ico/favicon-16x16.png",
+      "app/assets/ico/favicon-32x32.png",
+      "app/assets/ico/favicon.ico",
+      "app/assets/ico/mstile-150x150.png",
+      "app/assets/ico/vendor/**",
+      "app/assets/images/extensions_overview_diagram.png",
+      "app/assets/images/ingress-explanatory-diagram.png",
+      "app/assets/images/kubernetes_endpoint.png",
+      "app/assets/images/portainer-github-banner.png",
+      "app/assets/images/support_1.png",
+      "app/assets/images/support_2.png",
+      "app/portainer/license-management/**",
+      "app/react/portainer/environments/utils/azure.png",
+      "app/react/portainer/environments/utils/docker.png",
+      "app/react/portainer/environments/utils/kubernetes.png",
+      "app/react/portainer/licenses/**"
+    ]
+  },
+  "history": {
+    "since": "6c520907ad8f9d4e4c6f2783451490046472ee3f"
+  },
+  "licenses": [
+    {
+      "license": "Zlib AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2018 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\nCopyright (c) 2022 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\n\nCopyright (c) 2018-2020 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\n\nCopyright 2021 Portainer.io\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/portainer/portainer: Copyright (c) 2018 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer; Copyright (c) 2022 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/featureflags; Copyright (c) 2018-2020 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libcrypto; Copyright 2021 Portainer.io, MIT license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libhelm; Copyright (c) 2018-2020 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libhttp; Copyright 2021 Portainer.io, MIT license (LICENSE.md), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libstack."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        ".air.toml",
+        ".dockerignore",
+        ".env.defaults",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".golangci-forward.yaml",
+        ".golangci.yaml",
+        ".husky/**",
+        ".prettierignore",
+        ".prettierrc",
+        ".storybook/**",
+        "ATTRIBUTIONS.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "__mocks__/**",
+        "analysis/**",
+        "api/.swaggo",
+        "api/adminmonitor/**",
+        "api/agent/**",
+        "api/api.md",
+        "api/apikey/**",
+        "api/archive/tar.go",
+        "api/archive/targz.go",
+        "api/archive/targz_test.go",
+        "api/archive/zip.go",
+        "api/archive/zip_test.go",
+        "api/aws/**",
+        "api/backup/**",
+        "api/chisel/**",
+        "api/cli/**",
+        "api/cmd/**",
+        "api/concurrent/**",
+        "api/connection.go",
+        "api/crypto/**",
+        "api/database/**",
+        "api/dataservices/**",
+        "api/datastore/**",
+        "api/docker/**",
+        "api/docs/**",
+        "api/edge/**",
+        "api/exec/**",
+        "api/filesystem/**",
+        "api/git/azure.go",
+        "api/git/azure_integration_test.go",
+        "api/git/azure_test.go",
+        "api/git/backup.go",
+        "api/git/credentials.go",
+        "api/git/git.go",
+        "api/git/git_integration_test.go",
+        "api/git/git_test.go",
+        "api/git/service.go",
+        "api/git/service_test.go",
+        "api/git/ssrf_transport.go",
+        "api/git/types/**",
+        "api/git/update/**",
+        "api/gitops/**",
+        "api/http/**",
+        "api/internal/**",
+        "api/jwt/**",
+        "api/kubernetes/**",
+        "api/kubernetes.go",
+        "api/ldap/**",
+        "api/logoutcontext/**",
+        "api/logs/**",
+        "api/motd/**",
+        "api/oauth/**",
+        "api/pending_action.go",
+        "api/pendingactions/**",
+        "api/platform/**",
+        "api/portainer.go",
+        "api/roar/**",
+        "api/scheduler/**",
+        "api/set/**",
+        "api/slicesx/**",
+        "api/stacks/**",
+        "api/swagger_config.json",
+        "api/tag/**",
+        "api/uac/**",
+        "api/url/**",
+        "api/ws/**",
+        "app/__mocks__/**",
+        "app/agent/**",
+        "app/app.js",
+        "app/assets/css/**",
+        "app/assets/ico/beta.svg",
+        "app/assets/ico/browserconfig.xml",
+        "app/assets/ico/dataflow-1.svg",
+        "app/assets/ico/docker-edge-environment.svg",
+        "app/assets/ico/filter-lines.svg",
+        "app/assets/ico/flask.svg",
+        "app/assets/ico/git.svg",
+        "app/assets/ico/heartbeat-down.svg",
+        "app/assets/ico/heartbeat-up.svg",
+        "app/assets/ico/helm.svg",
+        "app/assets/ico/icon_up-to-date.svg",
+        "app/assets/ico/icon_updates-available.svg",
+        "app/assets/ico/icon_updates-unknown.svg",
+        "app/assets/ico/kube.svg",
+        "app/assets/ico/kubernetes-edge-environment.svg",
+        "app/assets/ico/laptop-code.svg",
+        "app/assets/ico/ldap.svg",
+        "app/assets/ico/linux.svg",
+        "app/assets/ico/lock-2.svg",
+        "app/assets/ico/lock.svg",
+        "app/assets/ico/logomark.svg",
+        "app/assets/ico/manifest.json",
+        "app/assets/ico/memory.svg",
+        "app/assets/ico/oauth.svg",
+        "app/assets/ico/object-group.svg",
+        "app/assets/ico/placeholder.svg",
+        "app/assets/ico/plug.svg",
+        "app/assets/ico/podman-edge-environment.svg",
+        "app/assets/ico/restore-window.svg",
+        "app/assets/ico/route.svg",
+        "app/assets/ico/safari-pinned-tab.svg",
+        "app/assets/ico/sort.svg",
+        "app/assets/ico/subscription.svg",
+        "app/assets/ico/user-lock.svg",
+        "app/assets/ico/wizard/**",
+        "app/assets/images/icon-error.svg",
+        "app/assets/images/icon-success.svg",
+        "app/assets/images/icon-warning.svg",
+        "app/assets/images/logo_alt.svg",
+        "app/assets/images/logo_alt_black.svg",
+        "app/assets/images/purple-gradient.svg",
+        "app/azure/**",
+        "app/config.js",
+        "app/constants.ts",
+        "app/docker/**",
+        "app/edge/**",
+        "app/global.d.ts",
+        "app/i18n.ts",
+        "app/index.html",
+        "app/index.js",
+        "app/kubernetes/**",
+        "app/ng-constants.ts",
+        "app/portainer/__module.js",
+        "app/portainer/authorization-guard.test.ts",
+        "app/portainer/authorization-guard.ts",
+        "app/portainer/components/**",
+        "app/portainer/environments/**",
+        "app/portainer/error.ts",
+        "app/portainer/filters/**",
+        "app/portainer/helpers/**",
+        "app/portainer/models/**",
+        "app/portainer/oauth/**",
+        "app/portainer/rbac/**",
+        "app/portainer/react/**",
+        "app/portainer/registry-management/**",
+        "app/portainer/rest/**",
+        "app/portainer/services/**",
+        "app/portainer/settings/**",
+        "app/portainer/tags/**",
+        "app/portainer/user-activity/**",
+        "app/portainer/users/**",
+        "app/portainer/views/**",
+        "app/react/auth/**",
+        "app/react/azure/**",
+        "app/react/common/**",
+        "app/react/components/**",
+        "app/react/constants.ts",
+        "app/react/docker/**",
+        "app/react/edge/**",
+        "app/react/hooks/**",
+        "app/react/kubernetes/**",
+        "app/react/portainer/HomeView/**",
+        "app/react/portainer/access-control/**",
+        "app/react/portainer/account/**",
+        "app/react/portainer/common/**",
+        "app/react/portainer/custom-templates/**",
+        "app/react/portainer/environments/EdgeAutoCreateScriptView/**",
+        "app/react/portainer/environments/ItemView/**",
+        "app/react/portainer/environments/ListView/**",
+        "app/react/portainer/environments/TagsView/**",
+        "app/react/portainer/environments/common/**",
+        "app/react/portainer/environments/environment-groups/**",
+        "app/react/portainer/environments/environment.service/**",
+        "app/react/portainer/environments/queries/**",
+        "app/react/portainer/environments/types.ts",
+        "app/react/portainer/environments/update-schedules/**",
+        "app/react/portainer/environments/utils/azure.svg",
+        "app/react/portainer/environments/utils/docker.svg",
+        "app/react/portainer/environments/utils/get-group-icon.tsx",
+        "app/react/portainer/environments/utils/get-health-icon.tsx",
+        "app/react/portainer/environments/utils/get-platform-icon.tsx",
+        "app/react/portainer/environments/utils/getDockerEnvironmentType.ts",
+        "app/react/portainer/environments/utils/index.ts",
+        "app/react/portainer/environments/utils/kubernetes.svg",
+        "app/react/portainer/environments/wizard/**",
+        "app/react/portainer/feature-flags/**",
+        "app/react/portainer/generated-api/**",
+        "app/react/portainer/gitops/**",
+        "app/react/portainer/helpers/**",
+        "app/react/portainer/init/**",
+        "app/react/portainer/logs/**",
+        "app/react/portainer/notifications/**",
+        "app/react/portainer/registries/**",
+        "app/react/portainer/services/**",
+        "app/react/portainer/settings/**",
+        "app/react/portainer/system/**",
+        "app/react/portainer/templates/**",
+        "app/react/portainer/users/**",
+        "app/react/portainer/webhooks/**",
+        "app/react/sidebar/**",
+        "app/react/test-utils/**",
+        "app/react/utils/**",
+        "app/react-table-config.d.ts",
+        "app/react-tools/**",
+        "app/setup-tests/**",
+        "app/timeout.ejs",
+        "app/types/**",
+        "app/types.ts",
+        "app/vendors.js",
+        "babel.config.js",
+        "build/**",
+        "dev/**",
+        "distribution/**",
+        "eslint.config.mjs",
+        "go.mod",
+        "go.sum",
+        "jsconfig.json",
+        "lint-staged.config.js",
+        "mustache-templates/**",
+        "openapi-ts.config.ts",
+        "package.json",
+        "pkg/authorization/**",
+        "pkg/build/**",
+        "pkg/edge/**",
+        "pkg/endpoints/**",
+        "pkg/fips/**",
+        "pkg/libkompose/**",
+        "pkg/libkubectl/**",
+        "pkg/liboras/**",
+        "pkg/libpolicy/**",
+        "pkg/libprometheus/**",
+        "pkg/librand/**",
+        "pkg/metrics/**",
+        "pkg/networking/**",
+        "pkg/registryhttp/**",
+        "pkg/retry/**",
+        "pkg/schedule/**",
+        "pkg/snapshot/**",
+        "pkg/testhelpers/**",
+        "pkg/validate/**",
+        "pnpm-lock.yaml",
+        "postcss.config.js",
+        "tailwind.config.js",
+        "translations/**",
+        "tsconfig.generated.json",
+        "tsconfig.json",
+        "vitest.config.mts",
+        "webpack/**",
+        "webpack.config.js"
+      ],
+      "text": "Copyright (c) 2018 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.",
+      "attribution": "Copyright (c) 2018 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "pkg/featureflags/**"
+      ],
+      "text": "Copyright (c) 2022 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2022 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/featureflags."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "pkg/libcrypto/**"
+      ],
+      "text": "Copyright (c) 2018-2020 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2018-2020 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libcrypto."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pkg/libhelm/**"
+      ],
+      "text": "Copyright 2021 Portainer.io\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2021 Portainer.io, MIT license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libhelm."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "pkg/libhttp/**"
+      ],
+      "text": "Copyright (c) 2018-2020 Portainer.io\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2018-2020 Portainer.io, Zlib license (LICENSE), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libhttp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pkg/libstack/**"
+      ],
+      "text": "Copyright 2021 Portainer.io\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2021 Portainer.io, MIT license (LICENSE.md), https://github.com/portainer/portainer/tree/d661cbc0bbe2fb67dcc320ac8600b127c7f8cb9b/pkg/libstack."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ejs",
+      "paths": [
+        "**/*.ejs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mustache",
+      "paths": [
+        "**/*.mustache"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.defaults"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.old"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dotfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.swaggo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/extra_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inner"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/outer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

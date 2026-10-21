@@ -1,0 +1,471 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/wolfpld/tracy",
+  "revision": "778d6d712cefa1b531816c0dca61d93471213fab",
+  "checksum": "sha256:c5cec911ab13f41b2f1abd14829fae9fd52f333896c39dc847db9552d401a80a",
+  "extract": {
+    "exclude": [
+      "doc/**",
+      "examples/ToyPathTracer/**",
+      "examples/dyna/**",
+      "extra/zigzag01.png",
+      "extra/zigzag02.png",
+      "extra/zigzag04.png",
+      "extra/zigzag08.png",
+      "extra/zigzag16.png",
+      "extra/zigzag32.png",
+      "icon/icon.ico",
+      "icon/icon.pdf",
+      "icon/icon.png",
+      "manual/icons/lmb.pdf",
+      "manual/icons/mmb.pdf",
+      "manual/icons/rmb.pdf",
+      "manual/icons/scroll.pdf",
+      "manual/images/**",
+      "profiler/src/font/FiraCode-Retina.ttf",
+      "profiler/src/font/Font Awesome 7 Free-Solid-900.otf",
+      "profiler/src/font/NotoEmoji-Regular.ttf",
+      "profiler/src/font/Roboto-Bold.ttf",
+      "profiler/src/font/Roboto-BoldItalic.ttf",
+      "profiler/src/font/Roboto-Italic.ttf",
+      "profiler/src/font/Roboto-Regular.ttf",
+      "tests/tracy/image.jpg",
+      "profiler/src/font/SourceHanSans-Normal.ttc"
+    ]
+  },
+  "history": {
+    "since": "e9e848ecbd07e84aec84ef7414c7f14e56c53b8e"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Tracy Profiler (https://github.com/wolfpld/tracy) is licensed under the\n3-clause BSD license.\n\nCopyright (c) 2017-2026, Bartosz Taudul <wolf@nereid.pl>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the <organization> nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n# Copyright (C) 2012-2016 Free Software Foundation, Inc.\n\n# Redistribution and use in source and binary forms, with or without\n# modification, are permitted provided that the following conditions are\n# met:\n\n#     (1) Redistributions of source code must retain the above copyright\n#     notice, this list of conditions and the following disclaimer. \n\n#     (2) Redistributions in binary form must reproduce the above copyright\n#     notice, this list of conditions and the following disclaimer in\n#     the documentation and/or other materials provided with the\n#     distribution.  \n    \n#     (3) The name of the author may not be used to\n#     endorse or promote products derived from this software without\n#     specific prior written permission.\n\n# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR\n# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,\n# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,\n# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING\n# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n# POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/wolfpld/tracy: Copyright (c) 2017-2026, Bartosz Taudul <wolf@nereid.pl>, BSD-3-Clause license (LICENSE), https://github.com/wolfpld/tracy; the authors of wolfpld/tracy (public/libbacktrace) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/wolfpld/tracy/tree/778d6d712cefa1b531816c0dca61d93471213fab/public/libbacktrace."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".clang-tidy",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".omp/**",
+        ".vscode/**",
+        "CMakeLists.txt",
+        "Config.cmake.in",
+        "LICENSE",
+        "NEWS",
+        "README.md",
+        "capture/**",
+        "cmake/**",
+        "csvexport/**",
+        "dtl/**",
+        "examples/CustomPlatform/**",
+        "examples/OpenCLVectorAdd/**",
+        "examples/cuda/**",
+        "examples/fibers.cpp",
+        "examples/opengl/**",
+        "examples/webgpu/**",
+        "extra/color-hot.cpp",
+        "extra/color.cpp",
+        "extra/desktop/**",
+        "extra/dxt1divtable.c",
+        "extra/dxt1table.c",
+        "extra/identify.cpp",
+        "extra/mcp/**",
+        "extra/natvis.py",
+        "extra/rdotbl.c",
+        "extra/tracy-version.py",
+        "extra/uarch/**",
+        "extra/version.cpp",
+        "extra/x11_colors.c",
+        "extra/zigzag.svg",
+        "getopt/**",
+        "icon/application-tracy.copying",
+        "icon/application-tracy.svg",
+        "icon/icon.svg",
+        "import/**",
+        "manual/filter.lua",
+        "manual/icons/lmb.svg",
+        "manual/icons/mmb.svg",
+        "manual/icons/mouse.svg",
+        "manual/icons/rmb.svg",
+        "manual/icons/scroll.svg",
+        "manual/latex2md.py",
+        "manual/techdoc.tex",
+        "manual/tracy.bib",
+        "manual/tracy.tex",
+        "merge/**",
+        "meson.build",
+        "meson.options",
+        "monitor/**",
+        "profiler/CMakeLists.txt",
+        "profiler/CMakePresets.json",
+        "profiler/appimage/**",
+        "profiler/helpers/**",
+        "profiler/macos/**",
+        "profiler/src/Backend.hpp",
+        "profiler/src/BackendEmscripten.cpp",
+        "profiler/src/BackendGlfw.cpp",
+        "profiler/src/BackendWayland.cpp",
+        "profiler/src/ConnectionHistory.cpp",
+        "profiler/src/ConnectionHistory.hpp",
+        "profiler/src/EmscriptenShim.hpp",
+        "profiler/src/Filters.cpp",
+        "profiler/src/Filters.hpp",
+        "profiler/src/Fonts.cpp",
+        "profiler/src/Fonts.hpp",
+        "profiler/src/HttpRequest.cpp",
+        "profiler/src/HttpRequest.hpp",
+        "profiler/src/ImGuiContext.cpp",
+        "profiler/src/ImGuiContext.hpp",
+        "profiler/src/IsElevated.cpp",
+        "profiler/src/IsElevated.hpp",
+        "profiler/src/ResolvService.cpp",
+        "profiler/src/ResolvService.hpp",
+        "profiler/src/RunQueue.cpp",
+        "profiler/src/RunQueue.hpp",
+        "profiler/src/WindowPosition.cpp",
+        "profiler/src/WindowPosition.hpp",
+        "profiler/src/achievements/**",
+        "profiler/src/font/SourceHanSans-Normal.ttc",
+        "profiler/src/icon.hpp",
+        "profiler/src/ini.c",
+        "profiler/src/ini.h",
+        "profiler/src/llm/**",
+        "profiler/src/main.cpp",
+        "profiler/src/profiler/**",
+        "profiler/src/stb_image.h",
+        "profiler/src/stb_image_resize.h",
+        "profiler/src/winmain.cpp",
+        "profiler/src/winmainArchDiscovery.cpp",
+        "profiler/src/zigzag01.hpp",
+        "profiler/src/zigzag02.hpp",
+        "profiler/src/zigzag04.hpp",
+        "profiler/src/zigzag08.hpp",
+        "profiler/src/zigzag16.hpp",
+        "profiler/src/zigzag32.hpp",
+        "profiler/wasm/**",
+        "profiler/win32/**",
+        "public/TracyClient.F90",
+        "public/TracyClient.cpp",
+        "public/client/**",
+        "public/common/**",
+        "public/tracy/**",
+        "python/**",
+        "server/**",
+        "tests/cuda/**",
+        "tests/lockdeadlocks/**",
+        "tests/rocprof/**",
+        "tests/tracy/CMakeLists.txt",
+        "tests/tracy/stb_image.h",
+        "tests/tracy/test.cpp",
+        "update/**",
+        "util/**"
+      ],
+      "text": "Tracy Profiler (https://github.com/wolfpld/tracy) is licensed under the\n3-clause BSD license.\n\nCopyright (c) 2017-2026, Bartosz Taudul <wolf@nereid.pl>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the <organization> nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2017-2026, Bartosz Taudul <wolf@nereid.pl>, BSD-3-Clause license (LICENSE), https://github.com/wolfpld/tracy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "public/libbacktrace/**"
+      ],
+      "text": "# Copyright (C) 2012-2016 Free Software Foundation, Inc.\n\n# Redistribution and use in source and binary forms, with or without\n# modification, are permitted provided that the following conditions are\n# met:\n\n#     (1) Redistributions of source code must retain the above copyright\n#     notice, this list of conditions and the following disclaimer. \n\n#     (2) Redistributions in binary form must reproduce the above copyright\n#     notice, this list of conditions and the following disclaimer in\n#     the documentation and/or other materials provided with the\n#     distribution.  \n    \n#     (3) The name of the author may not be used to\n#     endorse or promote products derived from this software without\n#     specific prior written permission.\n\n# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR\n# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,\n# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,\n# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING\n# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n# POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "the authors of wolfpld/tracy (public/libbacktrace) (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/wolfpld/tracy/tree/778d6d712cefa1b531816c0dca61d93471213fab/public/libbacktrace."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fortran",
+      "paths": [
+        "**/*.F90"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.copying"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hmm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ttc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "extra/mcp/requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NEWS"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

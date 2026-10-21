@@ -1,0 +1,942 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/iovisor/bcc",
+  "revision": "c398a9a7a41cba623b520cda27457b92d7fcad2b",
+  "checksum": "sha256:88f7017eb282fa21ac5b4037570dad321b376fd0267ca1897a31c648eeae3d53",
+  "extract": {
+    "exclude": [
+      "debian/**",
+      "examples/networking/tcp_mon_block/screenshots/**",
+      "examples/networking/tunnel_monitor/chord.png",
+      "examples/networking/tunnel_monitor/vxlan.jpg",
+      "examples/networking/vlan_filter/scenario.jpg",
+      "images/bcc_tracing_tools_2016.png",
+      "images/bcc_tracing_tools_2017.png",
+      "images/bcc_tracing_tools_2019.png",
+      "images/logo1.png",
+      "images/logo2.png",
+      "libbpf-tools/blazesym/capi/**",
+      "libbpf-tools/blazesym/cli/**",
+      "libbpf-tools/blazesym/data/kallsyms.xz",
+      "libbpf-tools/blazesym/data/modules.dep.bin",
+      "libbpf-tools/bpftool/**",
+      "src/cc/libbpf/**",
+      "src/cc/vendor/**",
+      "src/lua/bcc/vendor/**"
+    ]
+  },
+  "history": {
+    "since": "7d942da7acab60fd039f35a6d2689df6658012e9"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nBSD 3-Clause License\n\nCopyright (c) 2024\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/iovisor/bcc: the authors of iovisor/bcc (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/iovisor/bcc; Copyright (c) 2024, BSD-3-Clause license (LICENSE), https://github.com/iovisor/bcc/tree/c398a9a7a41cba623b520cda27457b92d7fcad2b/libbpf-tools/blazesym."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".clang-format",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".travis.yml",
+        "CMakeLists.txt",
+        "CODEOWNERS",
+        "CONTRIBUTING-SCRIPTS.md",
+        "FAQ.txt",
+        "INSTALL.md",
+        "LICENSE.txt",
+        "LINKS.md",
+        "QUICKSTART.md",
+        "README.md",
+        "SPECS/**",
+        "cmake/**",
+        "docker/**",
+        "docs/**",
+        "examples/CMakeLists.txt",
+        "examples/cgroupid/**",
+        "examples/cpp/**",
+        "examples/hello_world.py",
+        "examples/local_storage/**",
+        "examples/lua/**",
+        "examples/networking/CMakeLists.txt",
+        "examples/networking/distributed_bridge/**",
+        "examples/networking/dns_matching/**",
+        "examples/networking/http_filter/**",
+        "examples/networking/neighbor_sharing/**",
+        "examples/networking/net_monitor.py",
+        "examples/networking/simple_tc.py",
+        "examples/networking/simulation.py",
+        "examples/networking/sockmap.py",
+        "examples/networking/tc_perf_event.py",
+        "examples/networking/tcp_mon_block/README.md",
+        "examples/networking/tcp_mon_block/src/**",
+        "examples/networking/tunnel_monitor/CMakeLists.txt",
+        "examples/networking/tunnel_monitor/README.md",
+        "examples/networking/tunnel_monitor/main.py",
+        "examples/networking/tunnel_monitor/monitor.c",
+        "examples/networking/tunnel_monitor/monitor.py",
+        "examples/networking/tunnel_monitor/setup.sh",
+        "examples/networking/tunnel_monitor/simulation.py",
+        "examples/networking/tunnel_monitor/traffic.sh",
+        "examples/networking/vlan_filter/README.md",
+        "examples/networking/vlan_filter/data-plane-tracing.c",
+        "examples/networking/vlan_filter/data-plane-tracing.py",
+        "examples/networking/vlan_filter/test_setup.sh",
+        "examples/networking/vlan_filter/test_traffic.sh",
+        "examples/networking/vlan_learning/**",
+        "examples/networking/xdp/**",
+        "examples/perf/**",
+        "examples/ringbuf/**",
+        "examples/tracing/**",
+        "examples/usdt_sample/**",
+        "images/logo1.svg",
+        "images/logo2.svg",
+        "introspection/**",
+        "libbpf-tools/.gitignore",
+        "libbpf-tools/Makefile",
+        "libbpf-tools/Makefile.btfgen",
+        "libbpf-tools/README.md",
+        "libbpf-tools/arm64/**",
+        "libbpf-tools/bashreadline.bpf.c",
+        "libbpf-tools/bashreadline.c",
+        "libbpf-tools/bashreadline.h",
+        "libbpf-tools/bindsnoop.bpf.c",
+        "libbpf-tools/bindsnoop.c",
+        "libbpf-tools/bindsnoop.h",
+        "libbpf-tools/biolatency.bpf.c",
+        "libbpf-tools/biolatency.c",
+        "libbpf-tools/biolatency.h",
+        "libbpf-tools/biopattern.bpf.c",
+        "libbpf-tools/biopattern.c",
+        "libbpf-tools/biopattern.h",
+        "libbpf-tools/biosnoop.bpf.c",
+        "libbpf-tools/biosnoop.c",
+        "libbpf-tools/biosnoop.h",
+        "libbpf-tools/biostacks.bpf.c",
+        "libbpf-tools/biostacks.c",
+        "libbpf-tools/biostacks.h",
+        "libbpf-tools/biotop.bpf.c",
+        "libbpf-tools/biotop.c",
+        "libbpf-tools/biotop.h",
+        "libbpf-tools/bitesize.bpf.c",
+        "libbpf-tools/bitesize.c",
+        "libbpf-tools/bitesize.h",
+        "libbpf-tools/bits.bpf.h",
+        "libbpf-tools/blk_types.h",
+        "libbpf-tools/btf_helpers.c",
+        "libbpf-tools/btf_helpers.h",
+        "libbpf-tools/cachestat.bpf.c",
+        "libbpf-tools/cachestat.c",
+        "libbpf-tools/capable.bpf.c",
+        "libbpf-tools/capable.c",
+        "libbpf-tools/capable.h",
+        "libbpf-tools/compat.bpf.h",
+        "libbpf-tools/compat.c",
+        "libbpf-tools/compat.h",
+        "libbpf-tools/core_fixes.bpf.h",
+        "libbpf-tools/cpudist.bpf.c",
+        "libbpf-tools/cpudist.c",
+        "libbpf-tools/cpudist.h",
+        "libbpf-tools/cpufreq.bpf.c",
+        "libbpf-tools/cpufreq.c",
+        "libbpf-tools/cpufreq.h",
+        "libbpf-tools/drsnoop.bpf.c",
+        "libbpf-tools/drsnoop.c",
+        "libbpf-tools/drsnoop.h",
+        "libbpf-tools/drsnoop_example.txt",
+        "libbpf-tools/errno_helpers.c",
+        "libbpf-tools/errno_helpers.h",
+        "libbpf-tools/execsnoop.bpf.c",
+        "libbpf-tools/execsnoop.c",
+        "libbpf-tools/execsnoop.h",
+        "libbpf-tools/exitsnoop.bpf.c",
+        "libbpf-tools/exitsnoop.c",
+        "libbpf-tools/exitsnoop.h",
+        "libbpf-tools/filelife.bpf.c",
+        "libbpf-tools/filelife.c",
+        "libbpf-tools/filelife.h",
+        "libbpf-tools/filetop.bpf.c",
+        "libbpf-tools/filetop.c",
+        "libbpf-tools/filetop.h",
+        "libbpf-tools/fsdist.bpf.c",
+        "libbpf-tools/fsdist.c",
+        "libbpf-tools/fsdist.h",
+        "libbpf-tools/fsslower.bpf.c",
+        "libbpf-tools/fsslower.c",
+        "libbpf-tools/fsslower.h",
+        "libbpf-tools/funclatency.bpf.c",
+        "libbpf-tools/funclatency.c",
+        "libbpf-tools/funclatency.h",
+        "libbpf-tools/futexctn.bpf.c",
+        "libbpf-tools/futexctn.c",
+        "libbpf-tools/futexctn.h",
+        "libbpf-tools/gethostlatency.bpf.c",
+        "libbpf-tools/gethostlatency.c",
+        "libbpf-tools/gethostlatency.h",
+        "libbpf-tools/hardirqs.bpf.c",
+        "libbpf-tools/hardirqs.c",
+        "libbpf-tools/hardirqs.h",
+        "libbpf-tools/ioctl_names.h",
+        "libbpf-tools/javagc.bpf.c",
+        "libbpf-tools/javagc.c",
+        "libbpf-tools/javagc.h",
+        "libbpf-tools/kernel.config",
+        "libbpf-tools/klockstat.bpf.c",
+        "libbpf-tools/klockstat.c",
+        "libbpf-tools/klockstat.h",
+        "libbpf-tools/ksnoop.bpf.c",
+        "libbpf-tools/ksnoop.c",
+        "libbpf-tools/ksnoop.h",
+        "libbpf-tools/llcstat.bpf.c",
+        "libbpf-tools/llcstat.c",
+        "libbpf-tools/llcstat.h",
+        "libbpf-tools/loongarch/**",
+        "libbpf-tools/map_helpers.c",
+        "libbpf-tools/map_helpers.h",
+        "libbpf-tools/maps.bpf.h",
+        "libbpf-tools/mdflush.bpf.c",
+        "libbpf-tools/mdflush.c",
+        "libbpf-tools/mdflush.h",
+        "libbpf-tools/memleak.bpf.c",
+        "libbpf-tools/memleak.c",
+        "libbpf-tools/memleak.h",
+        "libbpf-tools/mountsnoop.bpf.c",
+        "libbpf-tools/mountsnoop.c",
+        "libbpf-tools/mountsnoop.h",
+        "libbpf-tools/numamove.bpf.c",
+        "libbpf-tools/numamove.c",
+        "libbpf-tools/offcputime.bpf.c",
+        "libbpf-tools/offcputime.c",
+        "libbpf-tools/offcputime.h",
+        "libbpf-tools/oomkill.bpf.c",
+        "libbpf-tools/oomkill.c",
+        "libbpf-tools/oomkill.h",
+        "libbpf-tools/opensnoop.bpf.c",
+        "libbpf-tools/opensnoop.c",
+        "libbpf-tools/opensnoop.h",
+        "libbpf-tools/path_helpers.bpf.h",
+        "libbpf-tools/path_helpers.c",
+        "libbpf-tools/path_helpers.h",
+        "libbpf-tools/powerpc/**",
+        "libbpf-tools/profile.bpf.c",
+        "libbpf-tools/profile.c",
+        "libbpf-tools/profile.h",
+        "libbpf-tools/readahead.bpf.c",
+        "libbpf-tools/readahead.c",
+        "libbpf-tools/readahead.h",
+        "libbpf-tools/riscv/**",
+        "libbpf-tools/runqlat.bpf.c",
+        "libbpf-tools/runqlat.c",
+        "libbpf-tools/runqlat.h",
+        "libbpf-tools/runqlen.bpf.c",
+        "libbpf-tools/runqlen.c",
+        "libbpf-tools/runqlen.h",
+        "libbpf-tools/runqslower.bpf.c",
+        "libbpf-tools/runqslower.c",
+        "libbpf-tools/runqslower.h",
+        "libbpf-tools/runqslower_example.txt",
+        "libbpf-tools/s390/**",
+        "libbpf-tools/sigsnoop.bpf.c",
+        "libbpf-tools/sigsnoop.c",
+        "libbpf-tools/sigsnoop.h",
+        "libbpf-tools/sigsnoop_example.txt",
+        "libbpf-tools/slabratetop.bpf.c",
+        "libbpf-tools/slabratetop.c",
+        "libbpf-tools/slabratetop.h",
+        "libbpf-tools/softirqs.bpf.c",
+        "libbpf-tools/softirqs.c",
+        "libbpf-tools/softirqs.h",
+        "libbpf-tools/softirqslower.bpf.c",
+        "libbpf-tools/softirqslower.c",
+        "libbpf-tools/softirqslower.h",
+        "libbpf-tools/solisten.bpf.c",
+        "libbpf-tools/solisten.c",
+        "libbpf-tools/solisten.h",
+        "libbpf-tools/stat.h",
+        "libbpf-tools/statsnoop.bpf.c",
+        "libbpf-tools/statsnoop.c",
+        "libbpf-tools/statsnoop.h",
+        "libbpf-tools/syncsnoop.bpf.c",
+        "libbpf-tools/syncsnoop.c",
+        "libbpf-tools/syncsnoop.h",
+        "libbpf-tools/syscall_helpers.c",
+        "libbpf-tools/syscall_helpers.h",
+        "libbpf-tools/syscount.bpf.c",
+        "libbpf-tools/syscount.c",
+        "libbpf-tools/syscount.h",
+        "libbpf-tools/tcpconnect.bpf.c",
+        "libbpf-tools/tcpconnect.c",
+        "libbpf-tools/tcpconnect.h",
+        "libbpf-tools/tcpconnlat.bpf.c",
+        "libbpf-tools/tcpconnlat.c",
+        "libbpf-tools/tcpconnlat.h",
+        "libbpf-tools/tcplife.bpf.c",
+        "libbpf-tools/tcplife.c",
+        "libbpf-tools/tcplife.h",
+        "libbpf-tools/tcppktlat.bpf.c",
+        "libbpf-tools/tcppktlat.c",
+        "libbpf-tools/tcppktlat.h",
+        "libbpf-tools/tcppktlat_example.txt",
+        "libbpf-tools/tcprtt.bpf.c",
+        "libbpf-tools/tcprtt.c",
+        "libbpf-tools/tcprtt.h",
+        "libbpf-tools/tcpstates.bpf.c",
+        "libbpf-tools/tcpstates.c",
+        "libbpf-tools/tcpstates.h",
+        "libbpf-tools/tcpsynbl.bpf.c",
+        "libbpf-tools/tcpsynbl.c",
+        "libbpf-tools/tcpsynbl.h",
+        "libbpf-tools/tcptop.bpf.c",
+        "libbpf-tools/tcptop.c",
+        "libbpf-tools/tcptop.h",
+        "libbpf-tools/tcptop_example.txt",
+        "libbpf-tools/tcptracer.bpf.c",
+        "libbpf-tools/tcptracer.c",
+        "libbpf-tools/tcptracer.h",
+        "libbpf-tools/trace_helpers.c",
+        "libbpf-tools/trace_helpers.h",
+        "libbpf-tools/uprobe_helpers.c",
+        "libbpf-tools/uprobe_helpers.h",
+        "libbpf-tools/vfsstat.bpf.c",
+        "libbpf-tools/vfsstat.c",
+        "libbpf-tools/vfsstat.h",
+        "libbpf-tools/wakeuptime.bpf.c",
+        "libbpf-tools/wakeuptime.c",
+        "libbpf-tools/wakeuptime.h",
+        "libbpf-tools/x86/**",
+        "man/**",
+        "scripts/**",
+        "snap/**",
+        "src/CMakeLists.txt",
+        "src/cc/CMakeLists.txt",
+        "src/cc/README",
+        "src/cc/api/**",
+        "src/cc/bcc_btf.cc",
+        "src/cc/bcc_btf.h",
+        "src/cc/bcc_common.cc",
+        "src/cc/bcc_common.h",
+        "src/cc/bcc_debug.cc",
+        "src/cc/bcc_debug.h",
+        "src/cc/bcc_elf.c",
+        "src/cc/bcc_elf.h",
+        "src/cc/bcc_exception.h",
+        "src/cc/bcc_libbpf_inc.h",
+        "src/cc/bcc_perf_map.c",
+        "src/cc/bcc_perf_map.h",
+        "src/cc/bcc_proc.c",
+        "src/cc/bcc_proc.h",
+        "src/cc/bcc_syms.cc",
+        "src/cc/bcc_syms.h",
+        "src/cc/bcc_usdt.h",
+        "src/cc/bcc_version.h.in",
+        "src/cc/bcc_zip.c",
+        "src/cc/bcc_zip.h",
+        "src/cc/bpf_module.cc",
+        "src/cc/bpf_module.h",
+        "src/cc/bpf_module_rw_engine.cc",
+        "src/cc/bpf_module_rw_engine_disabled.cc",
+        "src/cc/bpffs_table.cc",
+        "src/cc/clang/**",
+        "src/cc/common.cc",
+        "src/cc/common.h",
+        "src/cc/compat/**",
+        "src/cc/export/**",
+        "src/cc/exported_files.cc",
+        "src/cc/exported_files.h",
+        "src/cc/file_desc.h",
+        "src/cc/frontends/**",
+        "src/cc/json_map_decl_visitor.cc",
+        "src/cc/libbcc.pc.in",
+        "src/cc/libbpf.c",
+        "src/cc/libbpf.h",
+        "src/cc/link_all.cc",
+        "src/cc/perf_reader.c",
+        "src/cc/perf_reader.h",
+        "src/cc/setns.h",
+        "src/cc/shared_table.cc",
+        "src/cc/syms.h",
+        "src/cc/table_desc.h",
+        "src/cc/table_storage.cc",
+        "src/cc/table_storage.h",
+        "src/cc/table_storage_impl.h",
+        "src/cc/usdt/**",
+        "src/cc/usdt.h",
+        "src/lua/.busted",
+        "src/lua/.luacheckrc",
+        "src/lua/CMakeLists.txt",
+        "src/lua/README.md",
+        "src/lua/bcc/bpf.lua",
+        "src/lua/bcc/init.lua",
+        "src/lua/bcc/libbcc.lua",
+        "src/lua/bcc/run.lua",
+        "src/lua/bcc/sym.lua",
+        "src/lua/bcc/table.lua",
+        "src/lua/bcc/tracerpipe.lua",
+        "src/lua/bcc/usdt.lua",
+        "src/lua/bcc-probe",
+        "src/lua/bpf/**",
+        "src/lua/bpf-scm-1.rockspec",
+        "src/lua/squishy",
+        "src/lua/src/**",
+        "src/python/**",
+        "tests/**",
+        "tools/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of iovisor/bcc (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/iovisor/bcc."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "libbpf-tools/blazesym/.cargo/**",
+        "libbpf-tools/blazesym/.clippy.toml",
+        "libbpf-tools/blazesym/.gitattributes",
+        "libbpf-tools/blazesym/.github/**",
+        "libbpf-tools/blazesym/.gitignore",
+        "libbpf-tools/blazesym/.rustfmt.toml",
+        "libbpf-tools/blazesym/CHANGELOG.md",
+        "libbpf-tools/blazesym/Cargo.lock",
+        "libbpf-tools/blazesym/Cargo.toml",
+        "libbpf-tools/blazesym/LICENSE",
+        "libbpf-tools/blazesym/README-devel.md",
+        "libbpf-tools/blazesym/README.md",
+        "libbpf-tools/blazesym/benches/**",
+        "libbpf-tools/blazesym/build.rs",
+        "libbpf-tools/blazesym/data/config",
+        "libbpf-tools/blazesym/data/gnu_debugdata.sh",
+        "libbpf-tools/blazesym/data/proc-maps-large",
+        "libbpf-tools/blazesym/data/test-block-augmented.ld",
+        "libbpf-tools/blazesym/data/test-block.c",
+        "libbpf-tools/blazesym/data/test-chroot-dbg-link.c",
+        "libbpf-tools/blazesym/data/test-empty.c",
+        "libbpf-tools/blazesym/data/test-exe.c",
+        "libbpf-tools/blazesym/data/test-mnt-ns.c",
+        "libbpf-tools/blazesym/data/test-so.c",
+        "libbpf-tools/blazesym/data/test-so.h",
+        "libbpf-tools/blazesym/data/test-so.map",
+        "libbpf-tools/blazesym/data/test-stable-addrs-cu2.c",
+        "libbpf-tools/blazesym/data/test-stable-addrs.c",
+        "libbpf-tools/blazesym/data/test-stable-addrs.ld",
+        "libbpf-tools/blazesym/data/test-wait.c",
+        "libbpf-tools/blazesym/data/test.rs",
+        "libbpf-tools/blazesym/data/util.h",
+        "libbpf-tools/blazesym/dev/**",
+        "libbpf-tools/blazesym/examples/**",
+        "libbpf-tools/blazesym/go/**",
+        "libbpf-tools/blazesym/src/**",
+        "libbpf-tools/blazesym/tests/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2024\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2024, BSD-3-Clause license (LICENSE), https://github.com/iovisor/bcc/tree/c398a9a7a41cba623b520cda27457b92d7fcad2b/libbpf-tools/blazesym."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.btfgen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.debian"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fedora"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rockspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "FAQ.txt",
+        "LICENSE.txt",
+        "examples/networking/neighbor_sharing/README.txt",
+        "examples/networking/vlan_learning/README.txt",
+        "examples/tracing/biolatpcts_example.txt",
+        "examples/tracing/bitehist_example.txt",
+        "examples/tracing/dddos_example.txt",
+        "examples/tracing/disksnoop_example.txt",
+        "examples/tracing/kvm_hypercall.txt",
+        "examples/tracing/mysqld_query_example.txt",
+        "examples/tracing/nodejs_http_server_example.txt",
+        "examples/tracing/setuid_monitor_example.txt",
+        "examples/tracing/stacksnoop_example.txt",
+        "examples/tracing/tcpv4connect_example.txt",
+        "examples/tracing/undump_example.txt",
+        "examples/tracing/urandomread_example.txt",
+        "examples/tracing/vfsreadlat_example.txt",
+        "introspection/bps_example.txt",
+        "libbpf-tools/drsnoop_example.txt",
+        "libbpf-tools/runqslower_example.txt",
+        "libbpf-tools/sigsnoop_example.txt",
+        "libbpf-tools/tcppktlat_example.txt",
+        "libbpf-tools/tcptop_example.txt",
+        "tests/cc/dummy_proc_map.txt",
+        "tools/argdist_example.txt",
+        "tools/bashreadline_example.txt",
+        "tools/bindsnoop_example.txt",
+        "tools/biolatency_example.txt",
+        "tools/biolatpcts_example.txt",
+        "tools/biopattern_example.txt",
+        "tools/biosnoop_example.txt",
+        "tools/biotop_example.txt",
+        "tools/bitesize_example.txt",
+        "tools/bpflist_example.txt",
+        "tools/btrfsdist_example.txt",
+        "tools/btrfsslower_example.txt",
+        "tools/cachestat_example.txt",
+        "tools/cachetop_example.txt",
+        "tools/capable_example.txt",
+        "tools/compactsnoop_example.txt",
+        "tools/cpudist_example.txt",
+        "tools/cpuunclaimed_example.txt",
+        "tools/criticalstat_example.txt",
+        "tools/dbslower_example.txt",
+        "tools/dbstat_example.txt",
+        "tools/dcsnoop_example.txt",
+        "tools/dcstat_example.txt",
+        "tools/deadlock_example.txt",
+        "tools/dirtop_example.txt",
+        "tools/drsnoop_example.txt",
+        "tools/execsnoop_example.txt",
+        "tools/exitsnoop_example.txt",
+        "tools/ext4dist_example.txt",
+        "tools/ext4slower_example.txt",
+        "tools/f2fsslower_example.txt",
+        "tools/filegone_example.txt",
+        "tools/filelife_example.txt",
+        "tools/fileslower_example.txt",
+        "tools/filetop_example.txt",
+        "tools/funccount_example.txt",
+        "tools/funcinterval_example.txt",
+        "tools/funclatency_example.txt",
+        "tools/funcslower_example.txt",
+        "tools/gethostlatency_example.txt",
+        "tools/hardirqs_example.txt",
+        "tools/inject_example.txt",
+        "tools/killsnoop_example.txt",
+        "tools/klockstat_example.txt",
+        "tools/kvmexit_example.txt",
+        "tools/lib/ucalls_example.txt",
+        "tools/lib/uflow_example.txt",
+        "tools/lib/ugc_example.txt",
+        "tools/lib/uobjnew_example.txt",
+        "tools/lib/ustat_example.txt",
+        "tools/lib/uthreads_example.txt",
+        "tools/llcstat_example.txt",
+        "tools/mdflush_example.txt",
+        "tools/memleak_example.txt",
+        "tools/mountsnoop_example.txt",
+        "tools/mptcpify_example.txt",
+        "tools/mysqld_qslower_example.txt",
+        "tools/netqtop_example.txt",
+        "tools/nfsdist_example.txt",
+        "tools/nfsslower_example.txt",
+        "tools/numasched_example.txt",
+        "tools/offcputime_example.txt",
+        "tools/offwaketime_example.txt",
+        "tools/old/profile_example.txt",
+        "tools/oomkill_example.txt",
+        "tools/opensnoop_example.txt",
+        "tools/pidpersec_example.txt",
+        "tools/ppchcalls_example.txt",
+        "tools/profile_example.txt",
+        "tools/rdmaucma_example.txt",
+        "tools/readahead_example.txt",
+        "tools/reset-trace_example.txt",
+        "tools/runqlat_example.txt",
+        "tools/runqlen_example.txt",
+        "tools/runqslower_example.txt",
+        "tools/shmsnoop_example.txt",
+        "tools/slabratetop_example.txt",
+        "tools/sofdsnoop_example.txt",
+        "tools/softirqs_example.txt",
+        "tools/softirqslower_example.txt",
+        "tools/solisten_example.txt",
+        "tools/sslsniff_example.txt",
+        "tools/stackcount_example.txt",
+        "tools/statsnoop_example.txt",
+        "tools/swapin_example.txt",
+        "tools/syncsnoop_example.txt",
+        "tools/syscount_example.txt",
+        "tools/tcpaccept_example.txt",
+        "tools/tcpcong_example.txt",
+        "tools/tcpconnect_example.txt",
+        "tools/tcpconnlat_example.txt",
+        "tools/tcpdrop_example.txt",
+        "tools/tcplife_example.txt",
+        "tools/tcpretrans_example.txt",
+        "tools/tcprtt_example.txt",
+        "tools/tcpstates_example.txt",
+        "tools/tcpsubnet_example.txt",
+        "tools/tcpsynbl_example.txt",
+        "tools/tcptop_example.txt",
+        "tools/tcptracer_example.txt",
+        "tools/threadsnoop_example.txt",
+        "tools/tplist_example.txt",
+        "tools/trace_example.txt",
+        "tools/ttysnoop_example.txt",
+        "tools/vfscount_example.txt",
+        "tools/vfsstat_example.txt",
+        "tools/virtiostat_example.txt",
+        "tools/wakeuptime_example.txt",
+        "tools/wqlat_example.txt",
+        "tools/xfsdist_example.txt",
+        "tools/xfsslower_example.txt",
+        "tools/zfsdist_example.txt",
+        "tools/zfsslower_example.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ubuntu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.busted"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.luacheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bcc-probe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bcc-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proc-maps-large"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squishy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "libbpf-tools/blazesym": "https://github.com/libbpf/blazesym",
+    "libbpf-tools/bpftool": "https://github.com/libbpf/bpftool",
+    "src/cc/libbpf": "https://github.com/libbpf/libbpf"
+  }
+}

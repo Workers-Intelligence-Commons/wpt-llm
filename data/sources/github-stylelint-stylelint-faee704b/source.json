@@ -1,0 +1,755 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/stylelint/stylelint",
+  "revision": "bc06c7cdb1413de3d8dc939b33af138ab7e59df1",
+  "checksum": "sha256:e5d4735b4bd7047940aff44fdb30d0174107295eee76a2bd2f6fc5b9bd5c1d56",
+  "extract": {
+    "exclude": [
+      "example.png",
+      "identity/stylelint-icon-and-text-white-square.png",
+      "identity/stylelint-icon-and-text-white.png",
+      "identity/stylelint-icon-white-512.png",
+      "identity/stylelint-text-black-256.png",
+      "identity/stylelint-text-white-256.png",
+      "lib/__tests__/fixtures/.hidden/**",
+      "lib/__tests__/fixtures/node_modules/**",
+      "lib/utils/__tests__/fixtures/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "daf4fa823b985e90ed97099742140ce0c58c3ccc"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015 - present Maxime Thirouin, David Clark & Richard Hallows\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/stylelint/stylelint: Copyright (c) 2015 - present Maxime Thirouin, David Clark & Richard Hallows, MIT license (LICENSE), https://github.com/stylelint/stylelint."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".changeset/**",
+        ".codespellrc",
+        ".editorconfig",
+        ".gitattributes",
+        ".githooks/**",
+        ".github/**",
+        ".gitignore",
+        ".npmrc",
+        ".prettierignore",
+        ".remarkignore",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SUPPORT.md",
+        "bin/**",
+        "codecov.yml",
+        "docs/**",
+        "eslint.config.mjs",
+        "identity/credits.md",
+        "identity/stylelint-icon-and-text-white-square.svg",
+        "identity/stylelint-icon-black.svg",
+        "identity/stylelint-icon-white.svg",
+        "identity/stylelint-text-black.svg",
+        "identity/stylelint-text-white.svg",
+        "jest.setup.mjs",
+        "jest.setupAfterEnv.mjs",
+        "lib/__tests__/.stylelintignore",
+        "lib/__tests__/__mocks__/**",
+        "lib/__tests__/__snapshots__/**",
+        "lib/__tests__/applyOverrides.test.mjs",
+        "lib/__tests__/cli-suppressions.test.mjs",
+        "lib/__tests__/cli.test.mjs",
+        "lib/__tests__/defaultSeverity.test.mjs",
+        "lib/__tests__/descriptionlessDisables.test.mjs",
+        "lib/__tests__/disableRanges-integration.test.mjs",
+        "lib/__tests__/disableRanges.test.mjs",
+        "lib/__tests__/extends.test.mjs",
+        "lib/__tests__/fixtures/at-rule-empty-line-before.html",
+        "lib/__tests__/fixtures/broken-syntax/**",
+        "lib/__tests__/fixtures/cache/**",
+        "lib/__tests__/fixtures/comment-empty-line-before.html",
+        "lib/__tests__/fixtures/config-allow-empty-input.json",
+        "lib/__tests__/fixtures/config-at-rule-empty-line-before.json",
+        "lib/__tests__/fixtures/config-block-empty-ok.json",
+        "lib/__tests__/fixtures/config-block-no-empty-and-color-hex-length-short.json",
+        "lib/__tests__/fixtures/config-block-no-empty-report-disables.json",
+        "lib/__tests__/fixtures/config-block-no-empty.json",
+        "lib/__tests__/fixtures/config-block-no-empty.mjs",
+        "lib/__tests__/fixtures/config-color-named-custom-message.yaml",
+        "lib/__tests__/fixtures/config-color-no-invalid-hex.json",
+        "lib/__tests__/fixtures/config-extending-and-ignoring.json",
+        "lib/__tests__/fixtures/config-extending-another-extend.json",
+        "lib/__tests__/fixtures/config-extending-one.json",
+        "lib/__tests__/fixtures/config-extending-three-with-override.json",
+        "lib/__tests__/fixtures/config-extending-two.json",
+        "lib/__tests__/fixtures/config-extending-with-object.mjs",
+        "lib/__tests__/fixtures/config-extending-with-plugin.json",
+        "lib/__tests__/fixtures/config-language-options.json",
+        "lib/__tests__/fixtures/config-length-zero-no-unit-true.json",
+        "lib/__tests__/fixtures/config-no-empty-source.json",
+        "lib/__tests__/fixtures/config-no-pixels.json",
+        "lib/__tests__/fixtures/config-overrides/**",
+        "lib/__tests__/fixtures/config-per-file/**",
+        "lib/__tests__/fixtures/config-plugin-extending-with-plugin.json",
+        "lib/__tests__/fixtures/config-reference-files/**",
+        "lib/__tests__/fixtures/config-relative-plugin-nested.json",
+        "lib/__tests__/fixtures/config-relative-plugin.json",
+        "lib/__tests__/fixtures/config-require-unknown.cjs",
+        "lib/__tests__/fixtures/config-with-undefined-rule.json",
+        "lib/__tests__/fixtures/config-without-rules.json",
+        "lib/__tests__/fixtures/custom-formatter.cjs",
+        "lib/__tests__/fixtures/custom-formatter.mjs",
+        "lib/__tests__/fixtures/custom-parser.cjs",
+        "lib/__tests__/fixtures/custom-parser.mjs",
+        "lib/__tests__/fixtures/custom-syntax.cjs",
+        "lib/__tests__/fixtures/custom-syntax.mjs",
+        "lib/__tests__/fixtures/default-severity-warning.json",
+        "lib/__tests__/fixtures/disableOptions/**",
+        "lib/__tests__/fixtures/empty-block-with-disables.css",
+        "lib/__tests__/fixtures/empty-block-with-relevant-disable.css",
+        "lib/__tests__/fixtures/empty-block.css",
+        "lib/__tests__/fixtures/fix.css",
+        "lib/__tests__/fixtures/getConfigForFile/**",
+        "lib/__tests__/fixtures/globby-options/**",
+        "lib/__tests__/fixtures/globs/**",
+        "lib/__tests__/fixtures/ignore-2.txt",
+        "lib/__tests__/fixtures/ignore.txt",
+        "lib/__tests__/fixtures/invalid-hex.css",
+        "lib/__tests__/fixtures/invalid-hex.html",
+        "lib/__tests__/fixtures/invalid-hex.scss",
+        "lib/__tests__/fixtures/no-empty-source.html",
+        "lib/__tests__/fixtures/plugin-array.mjs",
+        "lib/__tests__/fixtures/plugin-async.mjs",
+        "lib/__tests__/fixtures/plugin-conditionally-check-color-named.mjs",
+        "lib/__tests__/fixtures/plugin-fixer-buggy.mjs",
+        "lib/__tests__/fixtures/plugin-fixer.mjs",
+        "lib/__tests__/fixtures/plugin-fixes.mjs",
+        "lib/__tests__/fixtures/plugin-primary-array.mjs",
+        "lib/__tests__/fixtures/plugin-selector-no-foo.mjs",
+        "lib/__tests__/fixtures/plugin-selector-no-qux.mjs",
+        "lib/__tests__/fixtures/plugin-slashless-warn-about-foo.mjs",
+        "lib/__tests__/fixtures/plugin-warn-about-bar.mjs",
+        "lib/__tests__/fixtures/plugin-warn-about-foo.cjs",
+        "lib/__tests__/fixtures/plugin-warn-about-foo.mjs",
+        "lib/__tests__/fixtures/postcss-naive-css-in-js.cjs",
+        "lib/__tests__/fixtures/postprocess-empty.mjs",
+        "lib/__tests__/fixtures/postprocess-remap-location.mjs",
+        "lib/__tests__/fixtures/postprocess-unknown-function.mjs",
+        "lib/__tests__/fixtures/postprocess-update-text.mjs",
+        "lib/__tests__/fixtures/quiet-deprecation-warnings/**",
+        "lib/__tests__/fixtures/rule-empty-line-before.html",
+        "lib/__tests__/fixtures/standaloneNoParsing/**",
+        "lib/__tests__/fixtures/suppressions/**",
+        "lib/__tests__/fixtures/syntax_error.css",
+        "lib/__tests__/fixtures/syntax_error.less",
+        "lib/__tests__/fixtures/syntax_error.pcss",
+        "lib/__tests__/fixtures/syntax_error.postcss",
+        "lib/__tests__/fixtures/syntax_error.scss",
+        "lib/__tests__/formatters.test.mjs",
+        "lib/__tests__/getConfigForFile.test.mjs",
+        "lib/__tests__/getPostcssResult.test.mjs",
+        "lib/__tests__/ignore.test.mjs",
+        "lib/__tests__/ignoreDisables.test.mjs",
+        "lib/__tests__/integration.test.mjs",
+        "lib/__tests__/invalidScopeDisables.test.mjs",
+        "lib/__tests__/isPathIgnored.test.mjs",
+        "lib/__tests__/languageOptions.test.mjs",
+        "lib/__tests__/message.test.mjs",
+        "lib/__tests__/needlessDisables.test.mjs",
+        "lib/__tests__/normalizeRuleSettings-integration.test.mjs",
+        "lib/__tests__/normalizeRuleSettings.test.mjs",
+        "lib/__tests__/overrides.test.mjs",
+        "lib/__tests__/plugins.test.mjs",
+        "lib/__tests__/postcssPlugin.test.mjs",
+        "lib/__tests__/printConfig.test.mjs",
+        "lib/__tests__/processors.test.mjs",
+        "lib/__tests__/referenceFiles.test.mjs",
+        "lib/__tests__/reportDisables.test.mjs",
+        "lib/__tests__/reportUnknownRuleNames.test.mjs",
+        "lib/__tests__/require.test.cjs",
+        "lib/__tests__/resolveConfig.test.mjs",
+        "lib/__tests__/standalone-abort-signal.test.mjs",
+        "lib/__tests__/standalone-cache.test.mjs",
+        "lib/__tests__/standalone-compute-edit-info.test.mjs",
+        "lib/__tests__/standalone-custom-url.test.mjs",
+        "lib/__tests__/standalone-deprecations.test.mjs",
+        "lib/__tests__/standalone-fix.test.mjs",
+        "lib/__tests__/standalone-formatter.test.mjs",
+        "lib/__tests__/standalone-glob-parent-test/**",
+        "lib/__tests__/standalone-globs.test.mjs",
+        "lib/__tests__/standalone-maxWarnings.test.mjs",
+        "lib/__tests__/standalone-parseErrors.test.mjs",
+        "lib/__tests__/standalone-quiet-deprecation-warnings.test.mjs",
+        "lib/__tests__/standalone-quiet.test.mjs",
+        "lib/__tests__/standalone-syntax.test.mjs",
+        "lib/__tests__/standalone.test.mjs",
+        "lib/__tests__/stylelintignore-test/**",
+        "lib/__tests__/timing.test.mjs",
+        "lib/__tests__/unscopedDisables.test.mjs",
+        "lib/__tests__/validateLanguageOptions.test.mjs",
+        "lib/__tests__/writeOutputFile.test.mjs",
+        "lib/assignDisabledRanges.mjs",
+        "lib/augmentConfig.mjs",
+        "lib/cli.mjs",
+        "lib/constants.mjs",
+        "lib/createPartialStylelintResult.mjs",
+        "lib/createPlugin.mjs",
+        "lib/createStylelint.mjs",
+        "lib/descriptionlessDisables.mjs",
+        "lib/formatters/**",
+        "lib/getConfigForFile.mjs",
+        "lib/getPostcssResult.mjs",
+        "lib/index.mjs",
+        "lib/invalidScopeDisables.mjs",
+        "lib/isPathIgnored.mjs",
+        "lib/lintPostcssResult.mjs",
+        "lib/lintSource.mjs",
+        "lib/needlessDisables.mjs",
+        "lib/normalizeAllRuleSettings.mjs",
+        "lib/normalizeRuleSettings.mjs",
+        "lib/postcssPlugin.mjs",
+        "lib/prepareReturnValue.mjs",
+        "lib/printConfig.mjs",
+        "lib/reference/**",
+        "lib/reportDisables.mjs",
+        "lib/reportUnknownRuleNames.mjs",
+        "lib/resolveConfig.mjs",
+        "lib/rules/**",
+        "lib/standalone.mjs",
+        "lib/testUtils/**",
+        "lib/timing.mjs",
+        "lib/unscopedDisables.mjs",
+        "lib/utils/FileCache.mjs",
+        "lib/utils/MemoryCache.mjs",
+        "lib/utils/__tests__/MemoryCache.test.mjs",
+        "lib/utils/__tests__/addEmptyLineBefore.test.mjs",
+        "lib/utils/__tests__/addSemicolonForEditInfo.test.mjs",
+        "lib/utils/__tests__/appendRuleName.test.mjs",
+        "lib/utils/__tests__/arrayEqual.test.mjs",
+        "lib/utils/__tests__/beforeBlockString.test.mjs",
+        "lib/utils/__tests__/blockString.test.mjs",
+        "lib/utils/__tests__/blurInterpolation.test.mjs",
+        "lib/utils/__tests__/cachedImport.test.mjs",
+        "lib/utils/__tests__/checkAgainstRule.test.mjs",
+        "lib/utils/__tests__/checkInvalidCLIOptions.test.mjs",
+        "lib/utils/__tests__/configurationComment.test.mjs",
+        "lib/utils/__tests__/containsNestingSelector.test.mjs",
+        "lib/utils/__tests__/containsString.test.mjs",
+        "lib/utils/__tests__/dynamicImport.test.mjs",
+        "lib/utils/__tests__/eachNodeUpToRoot.test.mjs",
+        "lib/utils/__tests__/emitWarning.test.mjs",
+        "lib/utils/__tests__/filterFilePaths.test.mjs",
+        "lib/utils/__tests__/findAnimationName.test.mjs",
+        "lib/utils/__tests__/findAtRuleContext.test.mjs",
+        "lib/utils/__tests__/findFontFamily.test.mjs",
+        "lib/utils/__tests__/findNodeUpToRoot.test.mjs",
+        "lib/utils/__tests__/fixtures/custom-rule-async.mjs",
+        "lib/utils/__tests__/fixtures/index.js",
+        "lib/utils/__tests__/fixtures/module-a.mjs",
+        "lib/utils/__tests__/fixtures/module-b.mjs",
+        "lib/utils/__tests__/fixtures/one.css",
+        "lib/utils/__tests__/fixtures/two.css",
+        "lib/utils/__tests__/functionArgumentsSearch.test.mjs",
+        "lib/utils/__tests__/getCompoundSelectors.test.mjs",
+        "lib/utils/__tests__/getDimension.test.mjs",
+        "lib/utils/__tests__/getFormatterOptionsText.test.mjs",
+        "lib/utils/__tests__/getImportantPosition.test.mjs",
+        "lib/utils/__tests__/getLoader.test.mjs",
+        "lib/utils/__tests__/getModulePath.test.mjs",
+        "lib/utils/__tests__/getNextNonSharedLineCommentNode.test.mjs",
+        "lib/utils/__tests__/getPreviousNonSharedLineCommentNode.test.mjs",
+        "lib/utils/__tests__/getSchemeFromUrl.test.mjs",
+        "lib/utils/__tests__/getSelectorSourceIndex.test.mjs",
+        "lib/utils/__tests__/getStrippedSelectorSource.test.mjs",
+        "lib/utils/__tests__/hasBlock.test.mjs",
+        "lib/utils/__tests__/hasEmptyLine.test.mjs",
+        "lib/utils/__tests__/hasInterpolation.test.mjs",
+        "lib/utils/__tests__/hash.test.mjs",
+        "lib/utils/__tests__/isAfterComment.test.mjs",
+        "lib/utils/__tests__/isAfterSingleLineComment.test.mjs",
+        "lib/utils/__tests__/isAutoprefixable.test.mjs",
+        "lib/utils/__tests__/isBlocklessAtRuleAfterBlocklessAtRule.test.mjs",
+        "lib/utils/__tests__/isBlocklessAtRuleAfterSameNameBlocklessAtRule.test.mjs",
+        "lib/utils/__tests__/isComma.test.mjs",
+        "lib/utils/__tests__/isContextFunctionalPseudoClass.test.mjs",
+        "lib/utils/__tests__/isCounterIncrementCustomIdentValue.test.mjs",
+        "lib/utils/__tests__/isCounterResetCustomIdentValue.test.mjs",
+        "lib/utils/__tests__/isCustomElement.test.mjs",
+        "lib/utils/__tests__/isCustomFunction.test.mjs",
+        "lib/utils/__tests__/isCustomMediaQuery.test.mjs",
+        "lib/utils/__tests__/isCustomProperty.test.mjs",
+        "lib/utils/__tests__/isCustomSelector.test.mjs",
+        "lib/utils/__tests__/isDescriptorDeclaration.test.mjs",
+        "lib/utils/__tests__/isFamilyNameKeyword.test.mjs",
+        "lib/utils/__tests__/isFirstNested.test.mjs",
+        "lib/utils/__tests__/isFirstNodeOfRoot.test.mjs",
+        "lib/utils/__tests__/isHexColor.test.mjs",
+        "lib/utils/__tests__/isInDocument.test.mjs",
+        "lib/utils/__tests__/isKeyframeRule.test.mjs",
+        "lib/utils/__tests__/isKeyframeSelector.test.mjs",
+        "lib/utils/__tests__/isMathFunction.test.mjs",
+        "lib/utils/__tests__/isNonNegativeInteger.test.mjs",
+        "lib/utils/__tests__/isNumbery.test.mjs",
+        "lib/utils/__tests__/isOnlyWhitespace.test.mjs",
+        "lib/utils/__tests__/isScssVariable.test.mjs",
+        "lib/utils/__tests__/isSharedLineComment.test.mjs",
+        "lib/utils/__tests__/isSingleLineString.test.mjs",
+        "lib/utils/__tests__/isSlash.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxAtRule.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxColorFunction.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxCombinator.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxComment.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxDeclaration.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxFunction.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxHexColor.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxKeyframesName.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxProperty.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxRule.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxSelector.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxTypeSelector.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxUrl.test.mjs",
+        "lib/utils/__tests__/isStandardSyntaxValue.test.mjs",
+        "lib/utils/__tests__/isUrlFunction.test.mjs",
+        "lib/utils/__tests__/isValidFontSize.test.mjs",
+        "lib/utils/__tests__/isValidHex.test.mjs",
+        "lib/utils/__tests__/isValidIdentifier.test.mjs",
+        "lib/utils/__tests__/isVariable.test.mjs",
+        "lib/utils/__tests__/matchesStringOrRegExp.test.mjs",
+        "lib/utils/__tests__/mergeSyntaxDefinitions.test.mjs",
+        "lib/utils/__tests__/narrowFixRange.test.mjs",
+        "lib/utils/__tests__/nodeContextLookup.test.mjs",
+        "lib/utils/__tests__/nodeFieldIndices.test.mjs",
+        "lib/utils/__tests__/normalizeCombinator.test.mjs",
+        "lib/utils/__tests__/normalizeFilePath.test.mjs",
+        "lib/utils/__tests__/normalizeSelector.test.mjs",
+        "lib/utils/__tests__/optionsMatches.test.mjs",
+        "lib/utils/__tests__/optionsMatchesEntry.test.mjs",
+        "lib/utils/__tests__/parseSelector.test.mjs",
+        "lib/utils/__tests__/pluralize.test.mjs",
+        "lib/utils/__tests__/rangesOverlap.test.mjs",
+        "lib/utils/__tests__/regexes.test.mjs",
+        "lib/utils/__tests__/removeEmptyLinesBefore.test.mjs",
+        "lib/utils/__tests__/report.test.mjs",
+        "lib/utils/__tests__/resolveNestedSelectorsForRule.test.mjs",
+        "lib/utils/__tests__/resolveSilent.test.mjs",
+        "lib/utils/__tests__/ruleMessages.test.mjs",
+        "lib/utils/__tests__/toPath.test.mjs",
+        "lib/utils/__tests__/typeGuards.test.mjs",
+        "lib/utils/__tests__/validateObjectWithArrayProps.test.mjs",
+        "lib/utils/__tests__/validateObjectWithProps.test.mjs",
+        "lib/utils/__tests__/validateOptions.test.mjs",
+        "lib/utils/__tests__/validateTypes.test.mjs",
+        "lib/utils/__tests__/vendor.test.mjs",
+        "lib/utils/addEmptyLineBefore.mjs",
+        "lib/utils/addSemicolonForEditInfo.mjs",
+        "lib/utils/appendRuleName.mjs",
+        "lib/utils/arrayEqual.mjs",
+        "lib/utils/beforeBlockString.mjs",
+        "lib/utils/blockString.mjs",
+        "lib/utils/blurInterpolation.mjs",
+        "lib/utils/cachedImport.mjs",
+        "lib/utils/checkAgainstRule.mjs",
+        "lib/utils/checkInvalidCLIOptions.mjs",
+        "lib/utils/configurationComment.mjs",
+        "lib/utils/containsNestingSelector.mjs",
+        "lib/utils/containsString.mjs",
+        "lib/utils/createMapWithSet.mjs",
+        "lib/utils/directionFlowToSides.mjs",
+        "lib/utils/dynamicImport.mjs",
+        "lib/utils/eachDeclarationBlock.mjs",
+        "lib/utils/eachNodeUpToRoot.mjs",
+        "lib/utils/emitWarning.mjs",
+        "lib/utils/errors.mjs",
+        "lib/utils/filterFilePaths.mjs",
+        "lib/utils/findAnimationName.mjs",
+        "lib/utils/findAtRuleContext.mjs",
+        "lib/utils/findFontFamily.mjs",
+        "lib/utils/findMediaFeatureNames.mjs",
+        "lib/utils/findNodeUpToRoot.mjs",
+        "lib/utils/fixEmptyLinesBefore.mjs",
+        "lib/utils/functionArgumentsSearch.mjs",
+        "lib/utils/getAtRuleParams.mjs",
+        "lib/utils/getCompoundSelectors.mjs",
+        "lib/utils/getCustomSyntax.mjs",
+        "lib/utils/getDeclarationValue.mjs",
+        "lib/utils/getDimension.mjs",
+        "lib/utils/getFileIgnorer.mjs",
+        "lib/utils/getFormatter.mjs",
+        "lib/utils/getFormatterOptionsText.mjs",
+        "lib/utils/getImportantPosition.mjs",
+        "lib/utils/getLexer.mjs",
+        "lib/utils/getLoader.mjs",
+        "lib/utils/getModulePath.mjs",
+        "lib/utils/getNextNonSharedLineCommentNode.mjs",
+        "lib/utils/getPreviousNonSharedLineCommentNode.mjs",
+        "lib/utils/getReferenceRoots.mjs",
+        "lib/utils/getRelativePath.mjs",
+        "lib/utils/getRuleSelector.mjs",
+        "lib/utils/getSchemeFromUrl.mjs",
+        "lib/utils/getSelectorSourceIndex.mjs",
+        "lib/utils/getStrippedSelectorSource.mjs",
+        "lib/utils/getStylelintRule.mjs",
+        "lib/utils/hasBlock.mjs",
+        "lib/utils/hasEmptyLine.mjs",
+        "lib/utils/hasInterpolation.mjs",
+        "lib/utils/hasLessInterpolation.mjs",
+        "lib/utils/hasPsvInterpolation.mjs",
+        "lib/utils/hasScssInterpolation.mjs",
+        "lib/utils/hasTplInterpolation.mjs",
+        "lib/utils/hash.mjs",
+        "lib/utils/isAfterBlock.mjs",
+        "lib/utils/isAfterComment.mjs",
+        "lib/utils/isAfterSingleLineComment.mjs",
+        "lib/utils/isAfterStandardPropertyDeclaration.mjs",
+        "lib/utils/isAutoprefixable.mjs",
+        "lib/utils/isBlocklessAtRuleAfterBlocklessAtRule.mjs",
+        "lib/utils/isBlocklessAtRuleAfterSameNameBlocklessAtRule.mjs",
+        "lib/utils/isComma.mjs",
+        "lib/utils/isContextFunctionalPseudoClass.mjs",
+        "lib/utils/isCounterIncrementCustomIdentValue.mjs",
+        "lib/utils/isCounterResetCustomIdentValue.mjs",
+        "lib/utils/isCustomElement.mjs",
+        "lib/utils/isCustomFunction.mjs",
+        "lib/utils/isCustomMediaQuery.mjs",
+        "lib/utils/isCustomProperty.mjs",
+        "lib/utils/isCustomSelector.mjs",
+        "lib/utils/isDescriptorDeclaration.mjs",
+        "lib/utils/isFamilyNameKeyword.mjs",
+        "lib/utils/isFirstNested.mjs",
+        "lib/utils/isFirstNodeOfRoot.mjs",
+        "lib/utils/isHexColor.mjs",
+        "lib/utils/isInDocument.mjs",
+        "lib/utils/isKeyframeRule.mjs",
+        "lib/utils/isKeyframeSelector.mjs",
+        "lib/utils/isMathFunction.mjs",
+        "lib/utils/isNonNegativeInteger.mjs",
+        "lib/utils/isNumbery.mjs",
+        "lib/utils/isOnlyWhitespace.mjs",
+        "lib/utils/isPathNotFoundError.mjs",
+        "lib/utils/isScssVariable.mjs",
+        "lib/utils/isSelectorContainingPseudoClass.mjs",
+        "lib/utils/isSharedLineComment.mjs",
+        "lib/utils/isSingleLineString.mjs",
+        "lib/utils/isSlash.mjs",
+        "lib/utils/isStandardSyntaxAtRule.mjs",
+        "lib/utils/isStandardSyntaxColorFunction.mjs",
+        "lib/utils/isStandardSyntaxCombinator.mjs",
+        "lib/utils/isStandardSyntaxComment.mjs",
+        "lib/utils/isStandardSyntaxDeclaration.mjs",
+        "lib/utils/isStandardSyntaxFunction.mjs",
+        "lib/utils/isStandardSyntaxHexColor.mjs",
+        "lib/utils/isStandardSyntaxKeyframesName.mjs",
+        "lib/utils/isStandardSyntaxProperty.mjs",
+        "lib/utils/isStandardSyntaxRule.mjs",
+        "lib/utils/isStandardSyntaxSelector.mjs",
+        "lib/utils/isStandardSyntaxTypeSelector.mjs",
+        "lib/utils/isStandardSyntaxUrl.mjs",
+        "lib/utils/isStandardSyntaxValue.mjs",
+        "lib/utils/isUnicodeRangeDescriptor.mjs",
+        "lib/utils/isUnicodeSupported.mjs",
+        "lib/utils/isUrlFunction.mjs",
+        "lib/utils/isValidFontSize.mjs",
+        "lib/utils/isValidHex.mjs",
+        "lib/utils/isValidIdentifier.mjs",
+        "lib/utils/isVarFunction.mjs",
+        "lib/utils/isVariable.mjs",
+        "lib/utils/isWhitespace.mjs",
+        "lib/utils/matchesStringOrRegExp.mjs",
+        "lib/utils/mergeSyntaxDefinitions.mjs",
+        "lib/utils/narrowFixRange.mjs",
+        "lib/utils/nodeContextLookup.mjs",
+        "lib/utils/nodeFieldIndices.mjs",
+        "lib/utils/normalizeCombinator.mjs",
+        "lib/utils/normalizeFilePath.mjs",
+        "lib/utils/normalizeFixMode.mjs",
+        "lib/utils/normalizePseudoName.mjs",
+        "lib/utils/normalizeSelector.mjs",
+        "lib/utils/omitPrivateProperties.mjs",
+        "lib/utils/optionsMatches.mjs",
+        "lib/utils/optionsMatchesEntry.mjs",
+        "lib/utils/parseCustomMediaQuery.mjs",
+        "lib/utils/parseMediaQuery.mjs",
+        "lib/utils/parseSelector.mjs",
+        "lib/utils/pathExists.mjs",
+        "lib/utils/pluralize.mjs",
+        "lib/utils/putIfAbsent.mjs",
+        "lib/utils/rangesOverlap.mjs",
+        "lib/utils/rawNodeString.mjs",
+        "lib/utils/regexes.mjs",
+        "lib/utils/removeEmptyLinesBefore.mjs",
+        "lib/utils/report.mjs",
+        "lib/utils/reportCommentProblem.mjs",
+        "lib/utils/resolveFilePath.mjs",
+        "lib/utils/resolveNestedSelectorsForRule.mjs",
+        "lib/utils/resolveOptionValue.mjs",
+        "lib/utils/resolveSilent.mjs",
+        "lib/utils/ruleMessages.mjs",
+        "lib/utils/setAtRuleParams.mjs",
+        "lib/utils/setDeclarationValue.mjs",
+        "lib/utils/suppressionsService.mjs",
+        "lib/utils/toPath.mjs",
+        "lib/utils/typeGuards.mjs",
+        "lib/utils/uniteSets.mjs",
+        "lib/utils/validateObjectWithArrayProps.mjs",
+        "lib/utils/validateObjectWithProps.mjs",
+        "lib/utils/validateOptions.mjs",
+        "lib/utils/validateTypes.mjs",
+        "lib/utils/vendor.mjs",
+        "lib/validateDisableSettings.mjs",
+        "lib/validateLanguageOptions.mjs",
+        "lib/writeOutputFile.mjs",
+        "package-lock.json",
+        "package.json",
+        "patches/**",
+        "scripts/**",
+        "system-tests/**",
+        "tsconfig.json",
+        "types/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015 - present Maxime Thirouin, David Clark & Richard Hallows\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015 - present Maxime Thirouin, David Clark & Richard Hallows, MIT license (LICENSE), https://github.com/stylelint/stylelint."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pcss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.postcss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.postcssPluginignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.remarkignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.stylelintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.stylelintignore-empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.stylelintignore2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.stylelintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

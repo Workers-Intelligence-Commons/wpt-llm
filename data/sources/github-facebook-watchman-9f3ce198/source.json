@@ -1,0 +1,1430 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/facebook/watchman",
+  "revision": "39466b324f276b505b4b9530354b41420732cc8e",
+  "checksum": "sha256:e3c8e21b83746d2229ba250d4286da4588a8236f7dc0e03d663b219c39a80e3f",
+  "extract": {
+    "exclude": [
+      "build/deps/**",
+      "watchman/java/**",
+      "watchman/python/**",
+      "watchman/thirdparty/deelevate_binding/**",
+      "watchman/thirdparty/getopt/**",
+      "watchman/thirdparty/jansson/**",
+      "watchman/thirdparty/wildmatch/**",
+      "website/static/img/favicon.png",
+      "website/static/img/logo.png",
+      "website/static/img/watchman-social-card.png"
+    ]
+  },
+  "history": {
+    "since": "bca70f0bfaa2da0de4603ddecf042763f794ee79"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) Facebook, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2014-present Meta Platforms, Inc. All Rights Reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice,\n   this list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n * Neither the name Facebook nor the names of its contributors may be used to\n   endorse or promote products derived from this software without specific\n   prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2012, Armon Dadgar\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the organization nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL ARMON DADGAR BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Commit history of https://github.com/facebook/watchman: Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman; Copyright (c) Facebook, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/build/fbcode_builder; Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/node; Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/node/bser; Copyright (c) 2014-present Meta Platforms, Inc. All Rights Reserved., BSD-3-Clause license (LICENSE.txt), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/ruby/ruby-watchman; Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/rust/serde_bser; Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/rust/watchman_client; Copyright (c) 2012, Armon Dadgar, BSD-3-Clause license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/thirdparty/libart."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.markdown",
+        "autogen.cmd",
+        "autogen.sh",
+        "clippy.toml",
+        "eden/**",
+        "install-system-packages.sh",
+        "run-tests.sh",
+        "rustfmt.toml",
+        "watchman/.clang-format",
+        "watchman/.clang-tidy",
+        "watchman/.codex/**",
+        "watchman/.llms/**",
+        "watchman/.projectid",
+        "watchman/BUCK",
+        "watchman/ChildProcess.cpp",
+        "watchman/ChildProcess.h",
+        "watchman/Client.cpp",
+        "watchman/Client.h",
+        "watchman/ClientContext.h",
+        "watchman/Clock.cpp",
+        "watchman/Clock.h",
+        "watchman/CloseRandomFds.cpp",
+        "watchman/CloseRandomFds.h",
+        "watchman/Command.cpp",
+        "watchman/Command.h",
+        "watchman/CommandRegistry.cpp",
+        "watchman/CommandRegistry.h",
+        "watchman/Connect.cpp",
+        "watchman/Connect.h",
+        "watchman/Constants.h",
+        "watchman/ContentHash.cpp",
+        "watchman/ContentHash.h",
+        "watchman/Cookie.h",
+        "watchman/CookieSync.cpp",
+        "watchman/CookieSync.h",
+        "watchman/Errors.cpp",
+        "watchman/Errors.h",
+        "watchman/FlagMap.cpp",
+        "watchman/FlagMap.h",
+        "watchman/GroupLookup.cpp",
+        "watchman/GroupLookup.h",
+        "watchman/Hash.h",
+        "watchman/IgnoreSet.cpp",
+        "watchman/IgnoreSet.h",
+        "watchman/InMemoryView.cpp",
+        "watchman/InMemoryView.h",
+        "watchman/LRUCache.h",
+        "watchman/LogConfig.cpp",
+        "watchman/LogConfig.h",
+        "watchman/Logging.cpp",
+        "watchman/Logging.h",
+        "watchman/MapUtil.h",
+        "watchman/Options.cpp",
+        "watchman/Options.h",
+        "watchman/PDU.cpp",
+        "watchman/PDU.h",
+        "watchman/PathUtils.cpp",
+        "watchman/PathUtils.h",
+        "watchman/PendingCollection.cpp",
+        "watchman/PendingCollection.h",
+        "watchman/PerfSample.cpp",
+        "watchman/PerfSample.h",
+        "watchman/Poison.cpp",
+        "watchman/Poison.h",
+        "watchman/ProcessLock.cpp",
+        "watchman/ProcessLock.h",
+        "watchman/ProcessUtil.cpp",
+        "watchman/ProcessUtil.h",
+        "watchman/PubSub.cpp",
+        "watchman/PubSub.h",
+        "watchman/QueryableView.cpp",
+        "watchman/QueryableView.h",
+        "watchman/Result.h",
+        "watchman/RingBuffer.h",
+        "watchman/SanityCheck.cpp",
+        "watchman/SanityCheck.h",
+        "watchman/Serde.h",
+        "watchman/Shutdown.cpp",
+        "watchman/Shutdown.h",
+        "watchman/SignalHandler.cpp",
+        "watchman/SignalHandler.h",
+        "watchman/SymlinkTargets.cpp",
+        "watchman/SymlinkTargets.h",
+        "watchman/ThreadPool.cpp",
+        "watchman/ThreadPool.h",
+        "watchman/TriggerCommand.cpp",
+        "watchman/TriggerCommand.h",
+        "watchman/UserDir.cpp",
+        "watchman/UserDir.h",
+        "watchman/WatchmanConfig.cpp",
+        "watchman/WatchmanConfig.h",
+        "watchman/XattrUtils.cpp",
+        "watchman/XattrUtils.h",
+        "watchman/benchmarks/**",
+        "watchman/bser.cpp",
+        "watchman/bser.h",
+        "watchman/build/**",
+        "watchman/cli/**",
+        "watchman/cmds/**",
+        "watchman/cppclient/**",
+        "watchman/docs/**",
+        "watchman/facebook/**",
+        "watchman/fs/**",
+        "watchman/fuzz/**",
+        "watchman/integration/**",
+        "watchman/listener-user.cpp",
+        "watchman/listener.cpp",
+        "watchman/listener.h",
+        "watchman/main.cpp",
+        "watchman/portability/**",
+        "watchman/query/**",
+        "watchman/root/**",
+        "watchman/runtests.py",
+        "watchman/rust/.gitignore",
+        "watchman/saved_state/**",
+        "watchman/scm/**",
+        "watchman/sockname.cpp",
+        "watchman/sockname.h",
+        "watchman/state.cpp",
+        "watchman/state.h",
+        "watchman/stream.cpp",
+        "watchman/stream_stdout.cpp",
+        "watchman/stream_unix.cpp",
+        "watchman/stream_win.cpp",
+        "watchman/string.cpp",
+        "watchman/telemetry/**",
+        "watchman/test/**",
+        "watchman/watcher/**",
+        "watchman/watchman_cmd.h",
+        "watchman/watchman_dir.h",
+        "watchman/watchman_file.h",
+        "watchman/watchman_preprocessor.h",
+        "watchman/watchman_stream.h",
+        "watchman/watchman_string.h",
+        "watchman/watchman_system.h",
+        "watchman/watchman_time.h",
+        "watchman/winbuild/**",
+        "website/.eslintrc.js",
+        "website/.gitignore",
+        "website/.npmrc",
+        "website/.prettierignore",
+        "website/.prettierrc",
+        "website/.stylelintrc.js",
+        "website/README.md",
+        "website/babel.config.js",
+        "website/docs/**",
+        "website/docusaurus.config.js",
+        "website/package.json",
+        "website/sidebars.js",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/img/meta_opensource_logo.svg",
+        "website/static/img/meta_opensource_logo_negative.svg",
+        "website/yarn.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "build/fbcode_builder/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Facebook, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Facebook, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/build/fbcode_builder."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "watchman/node/.flowconfig",
+        "watchman/node/LICENSE",
+        "watchman/node/README.md",
+        "watchman/node/example.js",
+        "watchman/node/index.js",
+        "watchman/node/package.json",
+        "watchman/node/yarn.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/node."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "watchman/node/bser/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/node/bser."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "watchman/ruby/**"
+      ],
+      "text": "Copyright (c) 2014-present Meta Platforms, Inc. All Rights Reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n * Redistributions of source code must retain the above copyright notice,\n   this list of conditions and the following disclaimer.\n\n * Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n * Neither the name Facebook nor the names of its contributors may be used to\n   endorse or promote products derived from this software without specific\n   prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2014-present Meta Platforms, Inc. All Rights Reserved., BSD-3-Clause license (LICENSE.txt), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/ruby/ruby-watchman."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "watchman/rust/serde_bser/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/rust/serde_bser."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "watchman/rust/watchman_client/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and its affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and its affiliates., MIT license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/rust/watchman_client."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "watchman/thirdparty/libart/**"
+      ],
+      "text": "Copyright (c) 2012, Armon Dadgar\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n    * Neither the name of the organization nor the\n      names of its contributors may be used to endorse or promote products\n      derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL ARMON DADGAR BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Copyright (c) 2012, Armon Dadgar, BSD-3-Clause license (LICENSE), https://github.com/facebook/watchman/tree/39466b324f276b505b4b9530354b41420732cc8e/watchman/thirdparty/libart."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Vagrantfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.external-linter-test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.thrift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "watchman/ruby/ruby-watchman/LICENSE.txt",
+        "watchman/thirdparty/libart/tests/uuid.txt",
+        "watchman/thirdparty/libart/tests/words.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.projectid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.rspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUCK"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CLI11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autoconf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/automake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/benchmark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bgp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blake3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/boost"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/boost-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bpftool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bz2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/c-ares"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cabal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cachelib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang19"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cpptoml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/depend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/edencommon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exprtk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fast_float"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fb303"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fboss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fbthrift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fbthrift-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fizz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fizz-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fmt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fmt-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/folly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/folly-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcc12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcc14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gflags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ghc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-lfs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/glean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/glog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/googletest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gperf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hexdump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/highs-optimizer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hsthrift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iproute2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/katran"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libaio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libaio-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libbpf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libcurl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libdwarf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libdwarf-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libelf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libevent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libevent-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libffi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libgit2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libgpiod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libiberty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libiberty-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libibverbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libmnl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libnl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/liboqs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libsai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libsodium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libtool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libunwind"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libusb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libyaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/llvm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/llvm19"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lmdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lz4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lz4-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/magic_enum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mcrouter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mononoke"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mononoke_integration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/moxygen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvfst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mvfst-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncurses"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nghttp2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ninja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nlohmann-json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/numa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openssl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/osxfuse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packsim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/patchelf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pcre2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/perl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pexpect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxygen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-3_14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-click"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-filelock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-psutil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-ptyprocess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-pyyaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-setuptools"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-setuptools-69"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-six"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/python-toml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ragel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/range-v3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rdma-core"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/re2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rebalancer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rebalancer-explorer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ripgrep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rocksdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rust-shed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sapling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/snappy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/socket-lb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sparsemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sqlite3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swig3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/systemd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tabulate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wangle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wangle-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/watchman"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xxhash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yaml-cpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zlib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zlib-python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zstd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zstd-python"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1590 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/desktop/desktop",
+  "revision": "bebc062caafcf818993b9f53397b976d33484231",
+  "checksum": "sha256:a0f89b3db5afc42c5a836bdaecdb3c5d5bb401662838653b61deb67a37b871c5",
+  "extract": {
+    "exclude": [
+      "app/static/common/cherry-pick-intro.png",
+      "app/static/common/choosealicense.com/_includes/**",
+      "app/static/common/choosealicense.com/_layouts/**",
+      "app/static/common/choosealicense.com/_licenses/**",
+      "app/static/common/choosealicense.com/assets/img/**",
+      "app/static/common/choosealicense.com/favicon.ico",
+      "app/static/common/choosealicense.com/license-list-XML/DOCS/**",
+      "app/static/common/choosealicense.com/license-list-XML/goneall.gpg",
+      "app/static/common/choosealicense.com/license-list-XML/src/**",
+      "app/static/common/choosealicense.com/license-list-XML/test/**",
+      "app/static/common/choosealicense.com/spec/**",
+      "app/static/common/logo-64x64@2x.png",
+      "app/static/common/windows-logo-64x64@2x.png",
+      "app/static/linux/**",
+      "app/static/logos/dev/icon-logo-legacy.icns",
+      "app/static/logos/dev/icon-logo.ico",
+      "app/static/logos/prod/icon-logo-legacy.icns",
+      "app/static/logos/prod/icon-logo.ico",
+      "app/static/logos/win32-installer-splash.gif",
+      "app/test/fixtures/branch-prune-tests/_git/index",
+      "app/test/fixtures/branch-prune-tests/_git/objects/**",
+      "app/test/fixtures/checkout-test-cases/_git/index",
+      "app/test/fixtures/checkout-test-cases/_git/objects/**",
+      "app/test/fixtures/copies-history-detection/_git/index",
+      "app/test/fixtures/copies-history-detection/_git/objects/**",
+      "app/test/fixtures/copy-detection-status/_git/index",
+      "app/test/fixtures/copy-detection-status/_git/objects/**",
+      "app/test/fixtures/detached-head/_git/index",
+      "app/test/fixtures/detached-head/_git/objects/**",
+      "app/test/fixtures/detect-conflict-in-binary-file/_git/index",
+      "app/test/fixtures/detect-conflict-in-binary-file/_git/objects/**",
+      "app/test/fixtures/detect-conflict-in-binary-file/my-cool-image.png",
+      "app/test/fixtures/diff-rendering-docx/_git/index",
+      "app/test/fixtures/diff-rendering-docx/_git/objects/**",
+      "app/test/fixtures/diff-rendering-docx/word-doc.docx",
+      "app/test/fixtures/just-doing-some-signing/**",
+      "app/test/fixtures/merge-base-test/_git/index",
+      "app/test/fixtures/merge-base-test/_git/objects/**",
+      "app/test/fixtures/rename-history-detection/_git/index",
+      "app/test/fixtures/rename-history-detection/_git/objects/**",
+      "app/test/fixtures/repo-with-changes/_git/index",
+      "app/test/fixtures/repo-with-changes/_git/objects/**",
+      "app/test/fixtures/repo-with-image-changes/_git/index",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/0d/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/39/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/3a/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/5e/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/70/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/83/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/92/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/97/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/ac/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/e7/**",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/ea/**",
+      "app/test/fixtures/repo-with-image-changes/modified-image.jpg",
+      "app/test/fixtures/repo-with-image-changes/new-image.jpg",
+      "app/test/fixtures/repo-with-image-changes/new-image.png",
+      "app/test/fixtures/repo-with-many-refs/_git/index",
+      "app/test/fixtures/repo-with-many-refs/_git/objects/**",
+      "app/test/fixtures/repo-with-multiple-remotes/_git/index",
+      "app/test/fixtures/repo-with-multiple-remotes/_git/objects/**",
+      "app/test/fixtures/repo-with-non-updated-branches/_git/index",
+      "app/test/fixtures/repo-with-non-updated-branches/_git/objects/**",
+      "app/test/fixtures/repository-with-105-commits/_git/index",
+      "app/test/fixtures/repository-with-105-commits/_git/objects/**",
+      "app/test/fixtures/repository-with-HEAD-file/_git/index",
+      "app/test/fixtures/repository-with-HEAD-file/_git/objects/**",
+      "app/test/fixtures/submodule-basic-setup/_git/index",
+      "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/index",
+      "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/objects/**",
+      "app/test/fixtures/submodule-basic-setup/_git/objects/**",
+      "app/test/fixtures/test-repo/_git/index",
+      "app/test/fixtures/test-repo/_git/objects/**",
+      "app/test/fixtures/test-repo-with-tags/_git/index",
+      "app/test/fixtures/test-repo-with-tags/_git/objects/**",
+      "app/test/fixtures/test-submodule-checkouts/_git/index",
+      "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/index",
+      "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/objects/**",
+      "app/test/fixtures/test-submodule-checkouts/_git/modules/private/index",
+      "app/test/fixtures/test-submodule-checkouts/_git/modules/private/objects/**",
+      "app/test/fixtures/test-submodule-checkouts/_git/objects/**",
+      "app/test/fixtures/test-submodule-checkouts/inner/**",
+      "docs/assets/**",
+      "gemoji/images/**",
+      "script/licenses/**",
+      "vendor/yarn-1.21.1.js",
+      "app/static/logos/dev/Assets.car",
+      "app/static/logos/prod/Assets.car",
+      "app/test/fixtures/repo-with-image-changes/_git/objects/76/59287f7bd8e2d690d733dbad64faaa75cf227e"
+    ]
+  },
+  "history": {
+    "since": "15f9460c80455e871d1ed1615429e8d0239c4717"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND CC0-1.0 AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2013-2023 GitHub, Inc. and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 Kushagra Gour\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\ncomposer.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) Nicolas Gallagher and Jonathan Neal\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"CC0-1.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nCreative Commons Legal Code\n\nCC0 1.0 Universal\n\n    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\n    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\n    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\n    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\n    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\n    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\n    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\n    HEREUNDER.\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator\nand subsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for\nthe purpose of contributing to a commons of creative, cultural and\nscientific works (\"Commons\") that the public can reliably and without fear\nof later claims of infringement build upon, modify, incorporate in other\nworks, reuse and redistribute as freely as possible in any form whatsoever\nand for any purposes, including without limitation commercial purposes.\nThese owners may contribute to the Commons to promote the ideal of a free\nculture and the further production of creative, cultural and scientific\nworks, or to gain reputation or greater distribution for their Work in\npart through the use and efforts of others.\n\nFor these and/or other purposes and motivations, and without any\nexpectation of additional consideration or compensation, the person\nassociating CC0 with a Work (the \"Affirmer\"), to the extent that he or she\nis an owner of Copyright and Related Rights in the Work, voluntarily\nelects to apply CC0 to the Work and publicly distribute the Work under its\nterms, with knowledge of his or her Copyright and Related Rights in the\nWork and the meaning and intended legal effect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not\nlimited to, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display,\n     communicate, and translate a Work;\n ii. moral rights retained by the original author(s) and/or performer(s);\niii. publicity and privacy rights pertaining to a person's image or\n     likeness depicted in a Work;\n iv. rights protecting against unfair competition in regards to a Work,\n     subject to the limitations in paragraph 4(a), below;\n  v. rights protecting the extraction, dissemination, use and reuse of data\n     in a Work;\n vi. database rights (such as those arising under Directive 96/9/EC of the\n     European Parliament and of the Council of 11 March 1996 on the legal\n     protection of databases, and under any national implementation\n     thereof, including any amended or successor version of such\n     directive); and\nvii. other similar, equivalent or corresponding rights throughout the\n     world based on applicable law or treaty, and any national\n     implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention\nof, applicable law, Affirmer hereby overtly, fully, permanently,\nirrevocably and unconditionally waives, abandons, and surrenders all of\nAffirmer's Copyright and Related Rights and associated claims and causes\nof action, whether now known or unknown (including existing as well as\nfuture claims and causes of action), in the Work (i) in all territories\nworldwide, (ii) for the maximum duration provided by applicable law or\ntreaty (including future time extensions), (iii) in any current or future\nmedium and for any number of copies, and (iv) for any purpose whatsoever,\nincluding without limitation commercial, advertising or promotional\npurposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each\nmember of the public at large and to the detriment of Affirmer's heirs and\nsuccessors, fully intending that such Waiver shall not be subject to\nrevocation, rescission, cancellation, termination, or any other legal or\nequitable action to disrupt the quiet enjoyment of the Work by the public\nas contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason\nbe judged legally invalid or ineffective under applicable law, then the\nWaiver shall be preserved to the maximum extent permitted taking into\naccount Affirmer's express Statement of Purpose. In addition, to the\nextent the Waiver is so judged Affirmer hereby grants to each affected\nperson a royalty-free, non transferable, non sublicensable, non exclusive,\nirrevocable and unconditional license to exercise Affirmer's Copyright and\nRelated Rights in the Work (i) in all territories worldwide, (ii) for the\nmaximum duration provided by applicable law or treaty (including future\ntime extensions), (iii) in any current or future medium and for any number\nof copies, and (iv) for any purpose whatsoever, including without\nlimitation commercial, advertising or promotional purposes (the\n\"License\"). The License shall be deemed effective as of the date CC0 was\napplied by Affirmer to the Work. Should any part of the License for any\nreason be judged legally invalid or ineffective under applicable law, such\npartial invalidity or ineffectiveness shall not invalidate the remainder\nof the License, and in such case Affirmer hereby affirms that he or she\nwill not (i) exercise any of his or her remaining Copyright and Related\nRights in the Work or (ii) assert any associated claims and causes of\naction with respect to the Work, in either case contrary to Affirmer's\nexpress Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n a. No trademark or patent rights held by Affirmer are waived, abandoned,\n    surrendered, licensed or otherwise affected by this document.\n b. Affirmer offers the Work as-is and makes no representations or\n    warranties of any kind concerning the Work, express, implied,\n    statutory or otherwise, including without limitation warranties of\n    title, merchantability, fitness for a particular purpose, non\n    infringement, or the absence of latent or other defects, accuracy, or\n    the present or absence of errors, whether or not discoverable, all to\n    the greatest extent permissible under applicable law.\n c. Affirmer disclaims responsibility for clearing rights of other persons\n    that may apply to the Work or any use thereof, including without\n    limitation any person's Copyright and Related Rights in the Work.\n    Further, Affirmer disclaims responsibility for obtaining any necessary\n    consents, permissions or other rights required for any use of the\n    Work.\n d. Affirmer understands and acknowledges that Creative Commons is not a\n    party to this document and has no duty or obligation with respect to\n    this CC0 or use of the Work.\n\n\nCC0 1.0 Universal\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator and\nsubsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for the\npurpose of contributing to a commons of creative, cultural and scientific\nworks (\"Commons\") that the public can reliably and without fear of later\nclaims of infringement build upon, modify, incorporate in other works, reuse\nand redistribute as freely as possible in any form whatsoever and for any\npurposes, including without limitation commercial purposes. These owners may\ncontribute to the Commons to promote the ideal of a free culture and the\nfurther production of creative, cultural and scientific works, or to gain\nreputation or greater distribution for their Work in part through the use and\nefforts of others.\n\nFor these and/or other purposes and motivations, and without any expectation\nof additional consideration or compensation, the person associating CC0 with a\nWork (the \"Affirmer\"), to the extent that he or she is an owner of Copyright\nand Related Rights in the Work, voluntarily elects to apply CC0 to the Work\nand publicly distribute the Work under its terms, with knowledge of his or her\nCopyright and Related Rights in the Work and the meaning and intended legal\neffect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not limited\nto, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display, communicate,\n  and translate a Work;\n\n  ii. moral rights retained by the original author(s) and/or performer(s);\n\n  iii. publicity and privacy rights pertaining to a person's image or likeness\n  depicted in a Work;\n\n  iv. rights protecting against unfair competition in regards to a Work,\n  subject to the limitations in paragraph 4(a), below;\n\n  v. rights protecting the extraction, dissemination, use and reuse of data in\n  a Work;\n\n  vi. database rights (such as those arising under Directive 96/9/EC of the\n  European Parliament and of the Council of 11 March 1996 on the legal\n  protection of databases, and under any national implementation thereof,\n  including any amended or successor version of such directive); and\n\n  vii. other similar, equivalent or corresponding rights throughout the world\n  based on applicable law or treaty, and any national implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention of,\napplicable law, Affirmer hereby overtly, fully, permanently, irrevocably and\nunconditionally waives, abandons, and surrenders all of Affirmer's Copyright\nand Related Rights and associated claims and causes of action, whether now\nknown or unknown (including existing as well as future claims and causes of\naction), in the Work (i) in all territories worldwide, (ii) for the maximum\nduration provided by applicable law or treaty (including future time\nextensions), (iii) in any current or future medium and for any number of\ncopies, and (iv) for any purpose whatsoever, including without limitation\ncommercial, advertising or promotional purposes (the \"Waiver\"). Affirmer makes\nthe Waiver for the benefit of each member of the public at large and to the\ndetriment of Affirmer's heirs and successors, fully intending that such Waiver\nshall not be subject to revocation, rescission, cancellation, termination, or\nany other legal or equitable action to disrupt the quiet enjoyment of the Work\nby the public as contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason be\njudged legally invalid or ineffective under applicable law, then the Waiver\nshall be preserved to the maximum extent permitted taking into account\nAffirmer's express Statement of Purpose. In addition, to the extent the Waiver\nis so judged Affirmer hereby grants to each affected person a royalty-free,\nnon transferable, non sublicensable, non exclusive, irrevocable and\nunconditional license to exercise Affirmer's Copyright and Related Rights in\nthe Work (i) in all territories worldwide, (ii) for the maximum duration\nprovided by applicable law or treaty (including future time extensions), (iii)\nin any current or future medium and for any number of copies, and (iv) for any\npurpose whatsoever, including without limitation commercial, advertising or\npromotional purposes (the \"License\"). The License shall be deemed effective as\nof the date CC0 was applied by Affirmer to the Work. Should any part of the\nLicense for any reason be judged legally invalid or ineffective under\napplicable law, such partial invalidity or ineffectiveness shall not\ninvalidate the remainder of the License, and in such case Affirmer hereby\naffirms that he or she will not (i) exercise any of his or her remaining\nCopyright and Related Rights in the Work or (ii) assert any associated claims\nand causes of action with respect to the Work, in either case contrary to\nAffirmer's express Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n  a. No trademark or patent rights held by Affirmer are waived, abandoned,\n  surrendered, licensed or otherwise affected by this document.\n\n  b. Affirmer offers the Work as-is and makes no representations or warranties\n  of any kind concerning the Work, express, implied, statutory or otherwise,\n  including without limitation warranties of title, merchantability, fitness\n  for a particular purpose, non infringement, or the absence of latent or\n  other defects, accuracy, or the present or absence of errors, whether or not\n  discoverable, all to the greatest extent permissible under applicable law.\n\n  c. Affirmer disclaims responsibility for clearing rights of other persons\n  that may apply to the Work or any use thereof, including without limitation\n  any person's Copyright and Related Rights in the Work. Further, Affirmer\n  disclaims responsibility for obtaining any necessary consents, permissions\n  or other rights required for any use of the Work.\n\n  d. Affirmer understands and acknowledges that Creative Commons is not a\n  party to this document and has no duty or obligation with respect to this\n  CC0 or use of the Work.\n\nFor more information, please see\n<http://creativecommons.org/publicdomain/zero/1.0/>\n\n\nMIT License\n\nCopyright (c) 2017 Brendan Forster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2016 Brendan Forster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\noctocat, squirrel, shipit\nCopyright (c) 2013 GitHub Inc. All rights reserved.\n\nbowtie, neckbeard, fu\nCopyright (c) 2013 37signals, LLC. All rights reserved.\n\nfeelsgood, finnadie, goberserk, godmode, hurtrealbad, rage 1-4, suspect\nCopyright (c) 2013 id Software. All rights reserved.\n\ntrollface\nCopyright (c) 2013 whynne@deviantart. All rights reserved.\n\nAll other images\nCopyright (c) 2013 Apple Inc. All rights reserved.\n\nSource code:\n\nCopyright (c) 2013 GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2017 GitHub Desktop\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/desktop/desktop: Copyright (c) GitHub, Inc., MIT license (LICENSE), https://github.com/desktop/desktop; Copyright (c) 2013-2023 GitHub, Inc. and contributors, MIT license (LICENSE.md), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com; the authors of clipboard, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/clipboard; Copyright (c) 2021 Kushagra Gour, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/hint.css; John Resig, MIT license (declared in composer.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/jquery; Copyright (c) Nicolas Gallagher and Jonathan Neal, MIT license (LICENSE.md), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/normalize-css; Linux Foundation and its Contributors, CC0-1.0 license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/license-list-XML; Copyright and Related Rights in the Work and the meaning and intended legal; Copyright and Related Rights in the Work or (ii) assert any associated claims, CC0-1.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/gitignore; Copyright (c) 2017 Brendan Forster, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/checkout-test-cases; Copyright (c) 2016 Brendan Forster, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/repo-with-multiple-remotes; the authors of desktop/desktop (app/test/fixtures/submodule-basic-setup/foo/submodule) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/submodule-basic-setup/foo/submodule; the authors of desktop/desktop (app/test/fixtures/test-submodule-checkouts) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/test-submodule-checkouts; Copyright (c) 2013 GitHub Inc. All rights reserved.; Copyright (c) 2013 37signals, LLC. All rights reserved.; Copyright (c) 2013 id Software. All rights reserved.; Copyright (c) 2013 whynne@deviantart. All rights reserved.; Copyright (c) 2013 Apple Inc. All rights reserved., MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/gemoji; Copyright (c) 2017 GitHub Desktop, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/desktop-notifications; Copyright (c) GitHub, Inc., MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/desktop-trampoline; the authors of printenvz, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/printenvz; the authors of windows-argv-parser, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/windows-argv-parser."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".eslintignore",
+        ".eslintrc.yml",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".markdownlint-rules.js",
+        ".markdownlint.js",
+        ".node-version",
+        ".nvmrc",
+        ".prettierignore",
+        ".prettierrc.yml",
+        ".python-version",
+        ".test.env",
+        ".tool-versions",
+        ".vscode/**",
+        ".yarnrc",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "app/.npmrc",
+        "app/.yarnrc",
+        "app/app-info.ts",
+        "app/git-info.ts",
+        "app/package-info.ts",
+        "app/package.json",
+        "app/src/**",
+        "app/static/common/admin-mentoring.svg",
+        "app/static/common/code.svg",
+        "app/static/common/empty-no-branches.svg",
+        "app/static/common/empty-no-commit.svg",
+        "app/static/common/empty-no-file-selected.svg",
+        "app/static/common/empty-no-pull-requests.svg",
+        "app/static/common/empty-no-repo.svg",
+        "app/static/common/explore.svg",
+        "app/static/common/ghd_dark.svg",
+        "app/static/common/ghd_light.svg",
+        "app/static/common/github-for-business.svg",
+        "app/static/common/github-for-teams.svg",
+        "app/static/common/markdown.css",
+        "app/static/common/multiple-files-selected.svg",
+        "app/static/common/organized-by-project-status.svg",
+        "app/static/common/paper-stack.svg",
+        "app/static/common/pretext-draft.md",
+        "app/static/common/release-note-header-left.svg",
+        "app/static/common/release-note-header-right.svg",
+        "app/static/common/required-status-check.svg",
+        "app/static/common/ufo-alert.svg",
+        "app/static/common/welcome-illustration-left-bottom.svg",
+        "app/static/common/welcome-illustration-left-top.svg",
+        "app/static/common/welcome-illustration-right.svg",
+        "app/static/darwin/**",
+        "app/static/index.html",
+        "app/static/logos/dev/Assets.car",
+        "app/static/logos/dev/icon-logo.icon/**",
+        "app/static/logos/prod/Assets.car",
+        "app/static/logos/prod/icon-logo.icon/**",
+        "app/static/win32/**",
+        "app/styles/**",
+        "app/test/.eslintrc.yml",
+        "app/test/e2e/**",
+        "app/test/fake-stats-post.ts",
+        "app/test/fixtures/branch-prune-tests/README.md",
+        "app/test/fixtures/branch-prune-tests/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/branch-prune-tests/_git/FETCH_HEAD",
+        "app/test/fixtures/branch-prune-tests/_git/HEAD",
+        "app/test/fixtures/branch-prune-tests/_git/ORIG_HEAD",
+        "app/test/fixtures/branch-prune-tests/_git/config",
+        "app/test/fixtures/branch-prune-tests/_git/description",
+        "app/test/fixtures/branch-prune-tests/_git/info/**",
+        "app/test/fixtures/branch-prune-tests/_git/logs/**",
+        "app/test/fixtures/branch-prune-tests/_git/packed-refs",
+        "app/test/fixtures/branch-prune-tests/_git/refs/**",
+        "app/test/fixtures/clone-with-progress-output",
+        "app/test/fixtures/copies-history-detection/README.md",
+        "app/test/fixtures/copies-history-detection/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/copies-history-detection/_git/HEAD",
+        "app/test/fixtures/copies-history-detection/_git/config",
+        "app/test/fixtures/copies-history-detection/_git/description",
+        "app/test/fixtures/copies-history-detection/_git/info/**",
+        "app/test/fixtures/copies-history-detection/_git/logs/**",
+        "app/test/fixtures/copies-history-detection/_git/refs/**",
+        "app/test/fixtures/copies-history-detection/duplicate-with-edits.md",
+        "app/test/fixtures/copies-history-detection/duplicate.md",
+        "app/test/fixtures/copies-history-detection/initial.md",
+        "app/test/fixtures/copy-detection-status/CONTRIBUTING.md",
+        "app/test/fixtures/copy-detection-status/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/copy-detection-status/_git/HEAD",
+        "app/test/fixtures/copy-detection-status/_git/config",
+        "app/test/fixtures/copy-detection-status/_git/description",
+        "app/test/fixtures/copy-detection-status/_git/info/**",
+        "app/test/fixtures/copy-detection-status/_git/logs/**",
+        "app/test/fixtures/copy-detection-status/_git/refs/**",
+        "app/test/fixtures/copy-detection-status/docs/**",
+        "app/test/fixtures/detached-head/README.md",
+        "app/test/fixtures/detached-head/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/detached-head/_git/HEAD",
+        "app/test/fixtures/detached-head/_git/config",
+        "app/test/fixtures/detached-head/_git/description",
+        "app/test/fixtures/detached-head/_git/info/**",
+        "app/test/fixtures/detached-head/_git/logs/**",
+        "app/test/fixtures/detached-head/_git/refs/**",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/HEAD",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/ORIG_HEAD",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/config",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/description",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/info/**",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/logs/**",
+        "app/test/fixtures/detect-conflict-in-binary-file/_git/refs/**",
+        "app/test/fixtures/diff-rendering-docx/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/diff-rendering-docx/_git/HEAD",
+        "app/test/fixtures/diff-rendering-docx/_git/config",
+        "app/test/fixtures/diff-rendering-docx/_git/description",
+        "app/test/fixtures/diff-rendering-docx/_git/info/**",
+        "app/test/fixtures/diff-rendering-docx/_git/logs/**",
+        "app/test/fixtures/diff-rendering-docx/_git/refs/**",
+        "app/test/fixtures/merge-base-test/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/merge-base-test/_git/HEAD",
+        "app/test/fixtures/merge-base-test/_git/config",
+        "app/test/fixtures/merge-base-test/_git/description",
+        "app/test/fixtures/merge-base-test/_git/info/**",
+        "app/test/fixtures/merge-base-test/_git/logs/**",
+        "app/test/fixtures/merge-base-test/_git/refs/**",
+        "app/test/fixtures/rename-history-detection/NEWER.md",
+        "app/test/fixtures/rename-history-detection/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/rename-history-detection/_git/HEAD",
+        "app/test/fixtures/rename-history-detection/_git/config",
+        "app/test/fixtures/rename-history-detection/_git/description",
+        "app/test/fixtures/rename-history-detection/_git/info/**",
+        "app/test/fixtures/rename-history-detection/_git/logs/**",
+        "app/test/fixtures/rename-history-detection/_git/refs/**",
+        "app/test/fixtures/repo-with-changes/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repo-with-changes/_git/HEAD",
+        "app/test/fixtures/repo-with-changes/_git/config",
+        "app/test/fixtures/repo-with-changes/_git/description",
+        "app/test/fixtures/repo-with-changes/_git/info/**",
+        "app/test/fixtures/repo-with-changes/_git/logs/**",
+        "app/test/fixtures/repo-with-changes/_git/refs/**",
+        "app/test/fixtures/repo-with-changes/modified-file.md",
+        "app/test/fixtures/repo-with-changes/new-file.md",
+        "app/test/fixtures/repo-with-changes/staged-file.md",
+        "app/test/fixtures/repo-with-image-changes/README.md",
+        "app/test/fixtures/repo-with-image-changes/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repo-with-image-changes/_git/HEAD",
+        "app/test/fixtures/repo-with-image-changes/_git/config",
+        "app/test/fixtures/repo-with-image-changes/_git/description",
+        "app/test/fixtures/repo-with-image-changes/_git/info/**",
+        "app/test/fixtures/repo-with-image-changes/_git/logs/**",
+        "app/test/fixtures/repo-with-image-changes/_git/objects/76/**",
+        "app/test/fixtures/repo-with-image-changes/_git/refs/**",
+        "app/test/fixtures/repo-with-many-refs/README.md",
+        "app/test/fixtures/repo-with-many-refs/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repo-with-many-refs/_git/HEAD",
+        "app/test/fixtures/repo-with-many-refs/_git/config",
+        "app/test/fixtures/repo-with-many-refs/_git/description",
+        "app/test/fixtures/repo-with-many-refs/_git/info/**",
+        "app/test/fixtures/repo-with-many-refs/_git/logs/**",
+        "app/test/fixtures/repo-with-many-refs/_git/refs/**",
+        "app/test/fixtures/repo-with-many-refs/long-description.md",
+        "app/test/fixtures/repo-with-non-updated-branches/README.md",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/FETCH_HEAD",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/HEAD",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/ORIG_HEAD",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/config",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/description",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/info/**",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/logs/**",
+        "app/test/fixtures/repo-with-non-updated-branches/_git/refs/**",
+        "app/test/fixtures/repo-with-non-updated-branches/my-file.txt",
+        "app/test/fixtures/repository-with-105-commits/README.md",
+        "app/test/fixtures/repository-with-105-commits/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repository-with-105-commits/_git/HEAD",
+        "app/test/fixtures/repository-with-105-commits/_git/config",
+        "app/test/fixtures/repository-with-105-commits/_git/description",
+        "app/test/fixtures/repository-with-105-commits/_git/info/**",
+        "app/test/fixtures/repository-with-105-commits/_git/logs/**",
+        "app/test/fixtures/repository-with-105-commits/_git/refs/**",
+        "app/test/fixtures/repository-with-105-commits/script.sh",
+        "app/test/fixtures/repository-with-HEAD-file/HEAD",
+        "app/test/fixtures/repository-with-HEAD-file/README.md",
+        "app/test/fixtures/repository-with-HEAD-file/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/repository-with-HEAD-file/_git/HEAD",
+        "app/test/fixtures/repository-with-HEAD-file/_git/config",
+        "app/test/fixtures/repository-with-HEAD-file/_git/description",
+        "app/test/fixtures/repository-with-HEAD-file/_git/info/**",
+        "app/test/fixtures/repository-with-HEAD-file/_git/logs/**",
+        "app/test/fixtures/repository-with-HEAD-file/_git/refs/**",
+        "app/test/fixtures/submodule-basic-setup/.gitignore",
+        "app/test/fixtures/submodule-basic-setup/.gitmodules",
+        "app/test/fixtures/submodule-basic-setup/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/submodule-basic-setup/_git/HEAD",
+        "app/test/fixtures/submodule-basic-setup/_git/config",
+        "app/test/fixtures/submodule-basic-setup/_git/description",
+        "app/test/fixtures/submodule-basic-setup/_git/info/**",
+        "app/test/fixtures/submodule-basic-setup/_git/logs/**",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/COMMIT_EDITMSG",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/HEAD",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/config",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/description",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/info/**",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/logs/**",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/packed-refs",
+        "app/test/fixtures/submodule-basic-setup/_git/modules/foo/submodule/refs/**",
+        "app/test/fixtures/submodule-basic-setup/_git/refs/**",
+        "app/test/fixtures/test-repo/README.md",
+        "app/test/fixtures/test-repo/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/test-repo/_git/HEAD",
+        "app/test/fixtures/test-repo/_git/ORIG_HEAD",
+        "app/test/fixtures/test-repo/_git/config",
+        "app/test/fixtures/test-repo/_git/info/**",
+        "app/test/fixtures/test-repo/_git/logs/**",
+        "app/test/fixtures/test-repo/_git/refs/**",
+        "app/test/fixtures/test-repo-with-tags/README.md",
+        "app/test/fixtures/test-repo-with-tags/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/test-repo-with-tags/_git/HEAD",
+        "app/test/fixtures/test-repo-with-tags/_git/ORIG_HEAD",
+        "app/test/fixtures/test-repo-with-tags/_git/config",
+        "app/test/fixtures/test-repo-with-tags/_git/info/**",
+        "app/test/fixtures/test-repo-with-tags/_git/logs/**",
+        "app/test/fixtures/test-repo-with-tags/_git/refs/**",
+        "app/test/globals.mts",
+        "app/test/helpers/**",
+        "app/test/unit/**",
+        "app/test/unit-test-env.ts",
+        "app/webpack.common.ts",
+        "app/webpack.development.ts",
+        "app/webpack.production.ts",
+        "app/yarn.lock",
+        "changelog.json",
+        "docs/README.md",
+        "docs/contributing/**",
+        "docs/installation.md",
+        "docs/integrations/**",
+        "docs/known-issues.md",
+        "docs/learn-more/**",
+        "docs/process/**",
+        "docs/technical/**",
+        "eslint-rules/**",
+        "package.json",
+        "script/.eslintrc.yml",
+        "script/.prettierignore",
+        "script/build-icon-assets.sh",
+        "script/build-platforms.ts",
+        "script/build.ts",
+        "script/changelog/**",
+        "script/copilot-test.ts",
+        "script/copilot.ts",
+        "script/dist-info.ts",
+        "script/draft-release/**",
+        "script/entitlements-dev.plist",
+        "script/entitlements.plist",
+        "script/generate-example-usage-data.mjs",
+        "script/generate-octicons.ts",
+        "script/globals.d.ts",
+        "script/info.plist",
+        "script/install-arm64-deps.sh",
+        "script/native-module-build-test.ts",
+        "script/package.ts",
+        "script/post-install.ts",
+        "script/pr-api.ts",
+        "script/run.ts",
+        "script/setup-macos-keychain",
+        "script/sh.ts",
+        "script/start.ts",
+        "script/test-setup.ts",
+        "script/test.mjs",
+        "script/tsconfig.json",
+        "script/validate-changelog.ts",
+        "script/validate-electron-version.ts",
+        "script/validate-macos-version.ts",
+        "script/validate-sass/**",
+        "script/webpack-koffi-test.ts",
+        "script/webpack-koffi.ts",
+        "tsconfig.json",
+        "yarn.lock"
+      ],
+      "text": "Copyright (c) GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) GitHub, Inc., MIT license (LICENSE), https://github.com/desktop/desktop."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/static/common/choosealicense.com/.bowerrc",
+        "app/static/common/choosealicense.com/.gitattributes",
+        "app/static/common/choosealicense.com/.github/**",
+        "app/static/common/choosealicense.com/.gitignore",
+        "app/static/common/choosealicense.com/.gitmodules",
+        "app/static/common/choosealicense.com/.rubocop.yml",
+        "app/static/common/choosealicense.com/404.md",
+        "app/static/common/choosealicense.com/CNAME",
+        "app/static/common/choosealicense.com/CODE_OF_CONDUCT.md",
+        "app/static/common/choosealicense.com/CONTRIBUTING.md",
+        "app/static/common/choosealicense.com/Gemfile",
+        "app/static/common/choosealicense.com/LICENSE.md",
+        "app/static/common/choosealicense.com/README.md",
+        "app/static/common/choosealicense.com/Rakefile",
+        "app/static/common/choosealicense.com/_config.yml",
+        "app/static/common/choosealicense.com/_data/**",
+        "app/static/common/choosealicense.com/about.md",
+        "app/static/common/choosealicense.com/appendix.md",
+        "app/static/common/choosealicense.com/assets/css/**",
+        "app/static/common/choosealicense.com/assets/js/**",
+        "app/static/common/choosealicense.com/bower.json",
+        "app/static/common/choosealicense.com/community.md",
+        "app/static/common/choosealicense.com/index.html",
+        "app/static/common/choosealicense.com/licenses.html",
+        "app/static/common/choosealicense.com/no-permission.md",
+        "app/static/common/choosealicense.com/non-software.md",
+        "app/static/common/choosealicense.com/robots.txt",
+        "app/static/common/choosealicense.com/script/**",
+        "app/static/common/choosealicense.com/terms-of-service.md"
+      ],
+      "text": "Copyright (c) 2013-2023 GitHub, Inc. and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2013-2023 GitHub, Inc. and contributors, MIT license (LICENSE.md), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/static/common/choosealicense.com/assets/vendor/clipboard/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of clipboard, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/clipboard."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/static/common/choosealicense.com/assets/vendor/hint.css/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Kushagra Gour\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Kushagra Gour, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/hint.css."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/static/common/choosealicense.com/assets/vendor/jquery/**"
+      ],
+      "text": "composer.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "John Resig, MIT license (declared in composer.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/jquery."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/static/common/choosealicense.com/assets/vendor/normalize-css/**"
+      ],
+      "text": "Copyright (c) Nicolas Gallagher and Jonathan Neal\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Nicolas Gallagher and Jonathan Neal, MIT license (LICENSE.md), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/assets/vendor/normalize-css."
+    },
+    {
+      "license": "CC0-1.0",
+      "paths": [
+        "app/static/common/choosealicense.com/license-list-XML/.editorconfig",
+        "app/static/common/choosealicense.com/license-list-XML/.gitattributes",
+        "app/static/common/choosealicense.com/license-list-XML/.github/**",
+        "app/static/common/choosealicense.com/license-list-XML/.gitignore",
+        "app/static/common/choosealicense.com/license-list-XML/.travis.yml",
+        "app/static/common/choosealicense.com/license-list-XML/CONTRIBUTING.md",
+        "app/static/common/choosealicense.com/license-list-XML/Makefile",
+        "app/static/common/choosealicense.com/license-list-XML/README.md",
+        "app/static/common/choosealicense.com/license-list-XML/RELEASE-NOTES.md",
+        "app/static/common/choosealicense.com/license-list-XML/equivalentwords.txt",
+        "app/static/common/choosealicense.com/license-list-XML/expected-warnings",
+        "app/static/common/choosealicense.com/license-list-XML/package.json",
+        "app/static/common/choosealicense.com/license-list-XML/rename-license",
+        "app/static/common/choosealicense.com/license-list-XML/schema/**",
+        "app/static/common/choosealicense.com/license-list-XML/test-one-license",
+        "app/static/common/choosealicense.com/license-list-XML/validate-schema.js"
+      ],
+      "text": "package.json declares the license \"CC0-1.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nCreative Commons Legal Code\n\nCC0 1.0 Universal\n\n    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\n    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\n    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\n    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\n    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\n    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\n    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\n    HEREUNDER.\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator\nand subsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for\nthe purpose of contributing to a commons of creative, cultural and\nscientific works (\"Commons\") that the public can reliably and without fear\nof later claims of infringement build upon, modify, incorporate in other\nworks, reuse and redistribute as freely as possible in any form whatsoever\nand for any purposes, including without limitation commercial purposes.\nThese owners may contribute to the Commons to promote the ideal of a free\nculture and the further production of creative, cultural and scientific\nworks, or to gain reputation or greater distribution for their Work in\npart through the use and efforts of others.\n\nFor these and/or other purposes and motivations, and without any\nexpectation of additional consideration or compensation, the person\nassociating CC0 with a Work (the \"Affirmer\"), to the extent that he or she\nis an owner of Copyright and Related Rights in the Work, voluntarily\nelects to apply CC0 to the Work and publicly distribute the Work under its\nterms, with knowledge of his or her Copyright and Related Rights in the\nWork and the meaning and intended legal effect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not\nlimited to, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display,\n     communicate, and translate a Work;\n ii. moral rights retained by the original author(s) and/or performer(s);\niii. publicity and privacy rights pertaining to a person's image or\n     likeness depicted in a Work;\n iv. rights protecting against unfair competition in regards to a Work,\n     subject to the limitations in paragraph 4(a), below;\n  v. rights protecting the extraction, dissemination, use and reuse of data\n     in a Work;\n vi. database rights (such as those arising under Directive 96/9/EC of the\n     European Parliament and of the Council of 11 March 1996 on the legal\n     protection of databases, and under any national implementation\n     thereof, including any amended or successor version of such\n     directive); and\nvii. other similar, equivalent or corresponding rights throughout the\n     world based on applicable law or treaty, and any national\n     implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention\nof, applicable law, Affirmer hereby overtly, fully, permanently,\nirrevocably and unconditionally waives, abandons, and surrenders all of\nAffirmer's Copyright and Related Rights and associated claims and causes\nof action, whether now known or unknown (including existing as well as\nfuture claims and causes of action), in the Work (i) in all territories\nworldwide, (ii) for the maximum duration provided by applicable law or\ntreaty (including future time extensions), (iii) in any current or future\nmedium and for any number of copies, and (iv) for any purpose whatsoever,\nincluding without limitation commercial, advertising or promotional\npurposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each\nmember of the public at large and to the detriment of Affirmer's heirs and\nsuccessors, fully intending that such Waiver shall not be subject to\nrevocation, rescission, cancellation, termination, or any other legal or\nequitable action to disrupt the quiet enjoyment of the Work by the public\nas contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason\nbe judged legally invalid or ineffective under applicable law, then the\nWaiver shall be preserved to the maximum extent permitted taking into\naccount Affirmer's express Statement of Purpose. In addition, to the\nextent the Waiver is so judged Affirmer hereby grants to each affected\nperson a royalty-free, non transferable, non sublicensable, non exclusive,\nirrevocable and unconditional license to exercise Affirmer's Copyright and\nRelated Rights in the Work (i) in all territories worldwide, (ii) for the\nmaximum duration provided by applicable law or treaty (including future\ntime extensions), (iii) in any current or future medium and for any number\nof copies, and (iv) for any purpose whatsoever, including without\nlimitation commercial, advertising or promotional purposes (the\n\"License\"). The License shall be deemed effective as of the date CC0 was\napplied by Affirmer to the Work. Should any part of the License for any\nreason be judged legally invalid or ineffective under applicable law, such\npartial invalidity or ineffectiveness shall not invalidate the remainder\nof the License, and in such case Affirmer hereby affirms that he or she\nwill not (i) exercise any of his or her remaining Copyright and Related\nRights in the Work or (ii) assert any associated claims and causes of\naction with respect to the Work, in either case contrary to Affirmer's\nexpress Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n a. No trademark or patent rights held by Affirmer are waived, abandoned,\n    surrendered, licensed or otherwise affected by this document.\n b. Affirmer offers the Work as-is and makes no representations or\n    warranties of any kind concerning the Work, express, implied,\n    statutory or otherwise, including without limitation warranties of\n    title, merchantability, fitness for a particular purpose, non\n    infringement, or the absence of latent or other defects, accuracy, or\n    the present or absence of errors, whether or not discoverable, all to\n    the greatest extent permissible under applicable law.\n c. Affirmer disclaims responsibility for clearing rights of other persons\n    that may apply to the Work or any use thereof, including without\n    limitation any person's Copyright and Related Rights in the Work.\n    Further, Affirmer disclaims responsibility for obtaining any necessary\n    consents, permissions or other rights required for any use of the\n    Work.\n d. Affirmer understands and acknowledges that Creative Commons is not a\n    party to this document and has no duty or obligation with respect to\n    this CC0 or use of the Work.\n",
+      "attribution": "Linux Foundation and its Contributors, CC0-1.0 license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/choosealicense.com/license-list-XML."
+    },
+    {
+      "license": "CC0-1.0",
+      "paths": [
+        "app/static/common/gitignore/**"
+      ],
+      "text": "CC0 1.0 Universal\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator and\nsubsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for the\npurpose of contributing to a commons of creative, cultural and scientific\nworks (\"Commons\") that the public can reliably and without fear of later\nclaims of infringement build upon, modify, incorporate in other works, reuse\nand redistribute as freely as possible in any form whatsoever and for any\npurposes, including without limitation commercial purposes. These owners may\ncontribute to the Commons to promote the ideal of a free culture and the\nfurther production of creative, cultural and scientific works, or to gain\nreputation or greater distribution for their Work in part through the use and\nefforts of others.\n\nFor these and/or other purposes and motivations, and without any expectation\nof additional consideration or compensation, the person associating CC0 with a\nWork (the \"Affirmer\"), to the extent that he or she is an owner of Copyright\nand Related Rights in the Work, voluntarily elects to apply CC0 to the Work\nand publicly distribute the Work under its terms, with knowledge of his or her\nCopyright and Related Rights in the Work and the meaning and intended legal\neffect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not limited\nto, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display, communicate,\n  and translate a Work;\n\n  ii. moral rights retained by the original author(s) and/or performer(s);\n\n  iii. publicity and privacy rights pertaining to a person's image or likeness\n  depicted in a Work;\n\n  iv. rights protecting against unfair competition in regards to a Work,\n  subject to the limitations in paragraph 4(a), below;\n\n  v. rights protecting the extraction, dissemination, use and reuse of data in\n  a Work;\n\n  vi. database rights (such as those arising under Directive 96/9/EC of the\n  European Parliament and of the Council of 11 March 1996 on the legal\n  protection of databases, and under any national implementation thereof,\n  including any amended or successor version of such directive); and\n\n  vii. other similar, equivalent or corresponding rights throughout the world\n  based on applicable law or treaty, and any national implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention of,\napplicable law, Affirmer hereby overtly, fully, permanently, irrevocably and\nunconditionally waives, abandons, and surrenders all of Affirmer's Copyright\nand Related Rights and associated claims and causes of action, whether now\nknown or unknown (including existing as well as future claims and causes of\naction), in the Work (i) in all territories worldwide, (ii) for the maximum\nduration provided by applicable law or treaty (including future time\nextensions), (iii) in any current or future medium and for any number of\ncopies, and (iv) for any purpose whatsoever, including without limitation\ncommercial, advertising or promotional purposes (the \"Waiver\"). Affirmer makes\nthe Waiver for the benefit of each member of the public at large and to the\ndetriment of Affirmer's heirs and successors, fully intending that such Waiver\nshall not be subject to revocation, rescission, cancellation, termination, or\nany other legal or equitable action to disrupt the quiet enjoyment of the Work\nby the public as contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason be\njudged legally invalid or ineffective under applicable law, then the Waiver\nshall be preserved to the maximum extent permitted taking into account\nAffirmer's express Statement of Purpose. In addition, to the extent the Waiver\nis so judged Affirmer hereby grants to each affected person a royalty-free,\nnon transferable, non sublicensable, non exclusive, irrevocable and\nunconditional license to exercise Affirmer's Copyright and Related Rights in\nthe Work (i) in all territories worldwide, (ii) for the maximum duration\nprovided by applicable law or treaty (including future time extensions), (iii)\nin any current or future medium and for any number of copies, and (iv) for any\npurpose whatsoever, including without limitation commercial, advertising or\npromotional purposes (the \"License\"). The License shall be deemed effective as\nof the date CC0 was applied by Affirmer to the Work. Should any part of the\nLicense for any reason be judged legally invalid or ineffective under\napplicable law, such partial invalidity or ineffectiveness shall not\ninvalidate the remainder of the License, and in such case Affirmer hereby\naffirms that he or she will not (i) exercise any of his or her remaining\nCopyright and Related Rights in the Work or (ii) assert any associated claims\nand causes of action with respect to the Work, in either case contrary to\nAffirmer's express Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n  a. No trademark or patent rights held by Affirmer are waived, abandoned,\n  surrendered, licensed or otherwise affected by this document.\n\n  b. Affirmer offers the Work as-is and makes no representations or warranties\n  of any kind concerning the Work, express, implied, statutory or otherwise,\n  including without limitation warranties of title, merchantability, fitness\n  for a particular purpose, non infringement, or the absence of latent or\n  other defects, accuracy, or the present or absence of errors, whether or not\n  discoverable, all to the greatest extent permissible under applicable law.\n\n  c. Affirmer disclaims responsibility for clearing rights of other persons\n  that may apply to the Work or any use thereof, including without limitation\n  any person's Copyright and Related Rights in the Work. Further, Affirmer\n  disclaims responsibility for obtaining any necessary consents, permissions\n  or other rights required for any use of the Work.\n\n  d. Affirmer understands and acknowledges that Creative Commons is not a\n  party to this document and has no duty or obligation with respect to this\n  CC0 or use of the Work.\n\nFor more information, please see\n<http://creativecommons.org/publicdomain/zero/1.0/>\n",
+      "attribution": "Copyright and Related Rights in the Work and the meaning and intended legal; Copyright and Related Rights in the Work or (ii) assert any associated claims, CC0-1.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/static/common/gitignore."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/test/fixtures/checkout-test-cases/.gitignore",
+        "app/test/fixtures/checkout-test-cases/LICENSE",
+        "app/test/fixtures/checkout-test-cases/README.md",
+        "app/test/fixtures/checkout-test-cases/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/checkout-test-cases/_git/FETCH_HEAD",
+        "app/test/fixtures/checkout-test-cases/_git/HEAD",
+        "app/test/fixtures/checkout-test-cases/_git/config",
+        "app/test/fixtures/checkout-test-cases/_git/description",
+        "app/test/fixtures/checkout-test-cases/_git/info/**",
+        "app/test/fixtures/checkout-test-cases/_git/packed-refs",
+        "app/test/fixtures/checkout-test-cases/_git/refs/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Brendan Forster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Brendan Forster, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/checkout-test-cases."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "app/test/fixtures/repo-with-multiple-remotes/.gitignore",
+        "app/test/fixtures/repo-with-multiple-remotes/LICENSE",
+        "app/test/fixtures/repo-with-multiple-remotes/README.md",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/FETCH_HEAD",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/HEAD",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/config",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/description",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/info/**",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/logs/**",
+        "app/test/fixtures/repo-with-multiple-remotes/_git/refs/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016 Brendan Forster\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Brendan Forster, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/repo-with-multiple-remotes."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "app/test/fixtures/submodule-basic-setup/foo/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of desktop/desktop (app/test/fixtures/submodule-basic-setup/foo/submodule) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/submodule-basic-setup/foo/submodule."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "app/test/fixtures/test-submodule-checkouts/.gitignore",
+        "app/test/fixtures/test-submodule-checkouts/.gitmodules",
+        "app/test/fixtures/test-submodule-checkouts/LICENSE",
+        "app/test/fixtures/test-submodule-checkouts/README.md",
+        "app/test/fixtures/test-submodule-checkouts/_git/COMMIT_EDITMSG",
+        "app/test/fixtures/test-submodule-checkouts/_git/FETCH_HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/config",
+        "app/test/fixtures/test-submodule-checkouts/_git/description",
+        "app/test/fixtures/test-submodule-checkouts/_git/info/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/logs/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/FETCH_HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/ORIG_HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/config",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/description",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/info/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/logs/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/packed-refs",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/inner/refs/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/HEAD",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/config",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/description",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/info/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/logs/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/packed-refs",
+        "app/test/fixtures/test-submodule-checkouts/_git/modules/private/refs/**",
+        "app/test/fixtures/test-submodule-checkouts/_git/packed-refs",
+        "app/test/fixtures/test-submodule-checkouts/_git/refs/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of desktop/desktop (app/test/fixtures/test-submodule-checkouts) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/app/test/fixtures/test-submodule-checkouts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gemoji/.gitignore",
+        "gemoji/.travis.yml",
+        "gemoji/CONTRIBUTING.md",
+        "gemoji/Gemfile",
+        "gemoji/Gemfile.lock",
+        "gemoji/LICENSE",
+        "gemoji/README.md",
+        "gemoji/Rakefile",
+        "gemoji/db/**",
+        "gemoji/gemoji.gemspec",
+        "gemoji/lib/**",
+        "gemoji/script/**",
+        "gemoji/test/**"
+      ],
+      "text": "octocat, squirrel, shipit\nCopyright (c) 2013 GitHub Inc. All rights reserved.\n\nbowtie, neckbeard, fu\nCopyright (c) 2013 37signals, LLC. All rights reserved.\n\nfeelsgood, finnadie, goberserk, godmode, hurtrealbad, rage 1-4, suspect\nCopyright (c) 2013 id Software. All rights reserved.\n\ntrollface\nCopyright (c) 2013 whynne@deviantart. All rights reserved.\n\nAll other images\nCopyright (c) 2013 Apple Inc. All rights reserved.\n\nSource code:\n\nCopyright (c) 2013 GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2013 GitHub Inc. All rights reserved.; Copyright (c) 2013 37signals, LLC. All rights reserved.; Copyright (c) 2013 id Software. All rights reserved.; Copyright (c) 2013 whynne@deviantart. All rights reserved.; Copyright (c) 2013 Apple Inc. All rights reserved., MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/gemoji."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/desktop-notifications/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 GitHub Desktop\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 GitHub Desktop, MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/desktop-notifications."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/desktop-trampoline/**"
+      ],
+      "text": "Copyright (c) GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) GitHub, Inc., MIT license (LICENSE), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/desktop-trampoline."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/printenvz/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of printenvz, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/printenvz."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/windows-argv-parser/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of windows-argv-parser, MIT license (declared in package.json), https://github.com/desktop/desktop/tree/bebc062caafcf818993b9f53397b976d33484231/vendor/windows-argv-parser."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "coffeescript",
+      "paths": [
+        "**/*.coffee"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.applescript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.car"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "app/static/common/gitignore/AL.gitignore",
+        "app/static/common/gitignore/Actionscript.gitignore",
+        "app/static/common/gitignore/Ada.gitignore",
+        "app/static/common/gitignore/Agda.gitignore",
+        "app/static/common/gitignore/Android.gitignore",
+        "app/static/common/gitignore/AppEngine.gitignore",
+        "app/static/common/gitignore/AppceleratorTitanium.gitignore",
+        "app/static/common/gitignore/ArchLinuxPackages.gitignore",
+        "app/static/common/gitignore/Autotools.gitignore",
+        "app/static/common/gitignore/Ballerina.gitignore",
+        "app/static/common/gitignore/C++.gitignore",
+        "app/static/common/gitignore/C.gitignore",
+        "app/static/common/gitignore/CFWheels.gitignore",
+        "app/static/common/gitignore/CMake.gitignore",
+        "app/static/common/gitignore/CUDA.gitignore",
+        "app/static/common/gitignore/CakePHP.gitignore",
+        "app/static/common/gitignore/ChefCookbook.gitignore",
+        "app/static/common/gitignore/CodeIgniter.gitignore",
+        "app/static/common/gitignore/CommonLisp.gitignore",
+        "app/static/common/gitignore/Composer.gitignore",
+        "app/static/common/gitignore/Concrete5.gitignore",
+        "app/static/common/gitignore/Coq.gitignore",
+        "app/static/common/gitignore/CraftCMS.gitignore",
+        "app/static/common/gitignore/D.gitignore",
+        "app/static/common/gitignore/DM.gitignore",
+        "app/static/common/gitignore/Dart.gitignore",
+        "app/static/common/gitignore/Delphi.gitignore",
+        "app/static/common/gitignore/Dotnet.gitignore",
+        "app/static/common/gitignore/Drupal.gitignore",
+        "app/static/common/gitignore/EPiServer.gitignore",
+        "app/static/common/gitignore/Eagle.gitignore",
+        "app/static/common/gitignore/Elisp.gitignore",
+        "app/static/common/gitignore/Elixir.gitignore",
+        "app/static/common/gitignore/Elm.gitignore",
+        "app/static/common/gitignore/Erlang.gitignore",
+        "app/static/common/gitignore/ExpressionEngine.gitignore",
+        "app/static/common/gitignore/ExtJs.gitignore",
+        "app/static/common/gitignore/Fancy.gitignore",
+        "app/static/common/gitignore/Finale.gitignore",
+        "app/static/common/gitignore/Firebase.gitignore",
+        "app/static/common/gitignore/FlaxEngine.gitignore",
+        "app/static/common/gitignore/Flutter.gitignore",
+        "app/static/common/gitignore/ForceDotCom.gitignore",
+        "app/static/common/gitignore/FuelPHP.gitignore",
+        "app/static/common/gitignore/GWT.gitignore",
+        "app/static/common/gitignore/Gcov.gitignore",
+        "app/static/common/gitignore/GitBook.gitignore",
+        "app/static/common/gitignore/GitHubPages.gitignore",
+        "app/static/common/gitignore/Global/AL.gitignore",
+        "app/static/common/gitignore/Global/Anjuta.gitignore",
+        "app/static/common/gitignore/Global/Ansible.gitignore",
+        "app/static/common/gitignore/Global/Archives.gitignore",
+        "app/static/common/gitignore/Global/Backup.gitignore",
+        "app/static/common/gitignore/Global/Bazaar.gitignore",
+        "app/static/common/gitignore/Global/BricxCC.gitignore",
+        "app/static/common/gitignore/Global/CVS.gitignore",
+        "app/static/common/gitignore/Global/Calabash.gitignore",
+        "app/static/common/gitignore/Global/Cloud9.gitignore",
+        "app/static/common/gitignore/Global/CodeKit.gitignore",
+        "app/static/common/gitignore/Global/DartEditor.gitignore",
+        "app/static/common/gitignore/Global/Diff.gitignore",
+        "app/static/common/gitignore/Global/Dreamweaver.gitignore",
+        "app/static/common/gitignore/Global/Dropbox.gitignore",
+        "app/static/common/gitignore/Global/Eclipse.gitignore",
+        "app/static/common/gitignore/Global/EiffelStudio.gitignore",
+        "app/static/common/gitignore/Global/Emacs.gitignore",
+        "app/static/common/gitignore/Global/Ensime.gitignore",
+        "app/static/common/gitignore/Global/Espresso.gitignore",
+        "app/static/common/gitignore/Global/FlexBuilder.gitignore",
+        "app/static/common/gitignore/Global/GPG.gitignore",
+        "app/static/common/gitignore/Global/Images.gitignore",
+        "app/static/common/gitignore/Global/JDeveloper.gitignore",
+        "app/static/common/gitignore/Global/JEnv.gitignore",
+        "app/static/common/gitignore/Global/JetBrains.gitignore",
+        "app/static/common/gitignore/Global/KDevelop4.gitignore",
+        "app/static/common/gitignore/Global/Kate.gitignore",
+        "app/static/common/gitignore/Global/Lazarus.gitignore",
+        "app/static/common/gitignore/Global/LibreOffice.gitignore",
+        "app/static/common/gitignore/Global/Linux.gitignore",
+        "app/static/common/gitignore/Global/LyX.gitignore",
+        "app/static/common/gitignore/Global/MATLAB.gitignore",
+        "app/static/common/gitignore/Global/Mercurial.gitignore",
+        "app/static/common/gitignore/Global/Metals.gitignore",
+        "app/static/common/gitignore/Global/MicrosoftOffice.gitignore",
+        "app/static/common/gitignore/Global/ModelSim.gitignore",
+        "app/static/common/gitignore/Global/Momentics.gitignore",
+        "app/static/common/gitignore/Global/MonoDevelop.gitignore",
+        "app/static/common/gitignore/Global/NetBeans.gitignore",
+        "app/static/common/gitignore/Global/Ninja.gitignore",
+        "app/static/common/gitignore/Global/NotepadPP.gitignore",
+        "app/static/common/gitignore/Global/Otto.gitignore",
+        "app/static/common/gitignore/Global/PSoCCreator.gitignore",
+        "app/static/common/gitignore/Global/Patch.gitignore",
+        "app/static/common/gitignore/Global/PuTTY.gitignore",
+        "app/static/common/gitignore/Global/Redcar.gitignore",
+        "app/static/common/gitignore/Global/Redis.gitignore",
+        "app/static/common/gitignore/Global/SBT.gitignore",
+        "app/static/common/gitignore/Global/SVN.gitignore",
+        "app/static/common/gitignore/Global/SlickEdit.gitignore",
+        "app/static/common/gitignore/Global/Stata.gitignore",
+        "app/static/common/gitignore/Global/SublimeText.gitignore",
+        "app/static/common/gitignore/Global/Syncthing.gitignore",
+        "app/static/common/gitignore/Global/SynopsysVCS.gitignore",
+        "app/static/common/gitignore/Global/Tags.gitignore",
+        "app/static/common/gitignore/Global/TextMate.gitignore",
+        "app/static/common/gitignore/Global/TortoiseGit.gitignore",
+        "app/static/common/gitignore/Global/Vagrant.gitignore",
+        "app/static/common/gitignore/Global/Vim.gitignore",
+        "app/static/common/gitignore/Global/VirtualEnv.gitignore",
+        "app/static/common/gitignore/Global/Virtuoso.gitignore",
+        "app/static/common/gitignore/Global/VisualStudioCode.gitignore",
+        "app/static/common/gitignore/Global/WebMethods.gitignore",
+        "app/static/common/gitignore/Global/Windows.gitignore",
+        "app/static/common/gitignore/Global/Xcode.gitignore",
+        "app/static/common/gitignore/Global/XilinxISE.gitignore",
+        "app/static/common/gitignore/Global/macOS.gitignore",
+        "app/static/common/gitignore/Go.gitignore",
+        "app/static/common/gitignore/Godot.gitignore",
+        "app/static/common/gitignore/Gradle.gitignore",
+        "app/static/common/gitignore/Grails.gitignore",
+        "app/static/common/gitignore/Haskell.gitignore",
+        "app/static/common/gitignore/IAR.gitignore",
+        "app/static/common/gitignore/IGORPro.gitignore",
+        "app/static/common/gitignore/Idris.gitignore",
+        "app/static/common/gitignore/JBoss.gitignore",
+        "app/static/common/gitignore/JENKINS_HOME.gitignore",
+        "app/static/common/gitignore/Java.gitignore",
+        "app/static/common/gitignore/Jekyll.gitignore",
+        "app/static/common/gitignore/Joomla.gitignore",
+        "app/static/common/gitignore/Julia.gitignore",
+        "app/static/common/gitignore/KiCad.gitignore",
+        "app/static/common/gitignore/Kohana.gitignore",
+        "app/static/common/gitignore/Kotlin.gitignore",
+        "app/static/common/gitignore/LabVIEW.gitignore",
+        "app/static/common/gitignore/Laravel.gitignore",
+        "app/static/common/gitignore/Leiningen.gitignore",
+        "app/static/common/gitignore/LemonStand.gitignore",
+        "app/static/common/gitignore/Lilypond.gitignore",
+        "app/static/common/gitignore/Lithium.gitignore",
+        "app/static/common/gitignore/Lua.gitignore",
+        "app/static/common/gitignore/Luau.gitignore",
+        "app/static/common/gitignore/Magento.gitignore",
+        "app/static/common/gitignore/Maven.gitignore",
+        "app/static/common/gitignore/Mercury.gitignore",
+        "app/static/common/gitignore/MetaProgrammingSystem.gitignore",
+        "app/static/common/gitignore/Modelica.gitignore",
+        "app/static/common/gitignore/Nanoc.gitignore",
+        "app/static/common/gitignore/Nim.gitignore",
+        "app/static/common/gitignore/Node.gitignore",
+        "app/static/common/gitignore/OCaml.gitignore",
+        "app/static/common/gitignore/Objective-C.gitignore",
+        "app/static/common/gitignore/Opa.gitignore",
+        "app/static/common/gitignore/OpenCart.gitignore",
+        "app/static/common/gitignore/OracleForms.gitignore",
+        "app/static/common/gitignore/Packer.gitignore",
+        "app/static/common/gitignore/Perl.gitignore",
+        "app/static/common/gitignore/Phalcon.gitignore",
+        "app/static/common/gitignore/PlayFramework.gitignore",
+        "app/static/common/gitignore/Plone.gitignore",
+        "app/static/common/gitignore/Prestashop.gitignore",
+        "app/static/common/gitignore/Processing.gitignore",
+        "app/static/common/gitignore/PureScript.gitignore",
+        "app/static/common/gitignore/Python.gitignore",
+        "app/static/common/gitignore/Qooxdoo.gitignore",
+        "app/static/common/gitignore/Qt.gitignore",
+        "app/static/common/gitignore/R.gitignore",
+        "app/static/common/gitignore/ROS.gitignore",
+        "app/static/common/gitignore/Racket.gitignore",
+        "app/static/common/gitignore/Rails.gitignore",
+        "app/static/common/gitignore/Raku.gitignore",
+        "app/static/common/gitignore/ReScript.gitignore",
+        "app/static/common/gitignore/RhodesRhomobile.gitignore",
+        "app/static/common/gitignore/Ruby.gitignore",
+        "app/static/common/gitignore/Rust.gitignore",
+        "app/static/common/gitignore/SCons.gitignore",
+        "app/static/common/gitignore/Sass.gitignore",
+        "app/static/common/gitignore/Scala.gitignore",
+        "app/static/common/gitignore/Scheme.gitignore",
+        "app/static/common/gitignore/Scrivener.gitignore",
+        "app/static/common/gitignore/Sdcc.gitignore",
+        "app/static/common/gitignore/SeamGen.gitignore",
+        "app/static/common/gitignore/SketchUp.gitignore",
+        "app/static/common/gitignore/Smalltalk.gitignore",
+        "app/static/common/gitignore/Solidity-Remix.gitignore",
+        "app/static/common/gitignore/Stella.gitignore",
+        "app/static/common/gitignore/SugarCRM.gitignore",
+        "app/static/common/gitignore/Swift.gitignore",
+        "app/static/common/gitignore/Symfony.gitignore",
+        "app/static/common/gitignore/SymphonyCMS.gitignore",
+        "app/static/common/gitignore/TeX.gitignore",
+        "app/static/common/gitignore/Terraform.gitignore",
+        "app/static/common/gitignore/TestComplete.gitignore",
+        "app/static/common/gitignore/Textpattern.gitignore",
+        "app/static/common/gitignore/TurboGears2.gitignore",
+        "app/static/common/gitignore/TwinCAT3.gitignore",
+        "app/static/common/gitignore/Typo3.gitignore",
+        "app/static/common/gitignore/Unity.gitignore",
+        "app/static/common/gitignore/UnrealEngine.gitignore",
+        "app/static/common/gitignore/VVVV.gitignore",
+        "app/static/common/gitignore/VisualStudio.gitignore",
+        "app/static/common/gitignore/Waf.gitignore",
+        "app/static/common/gitignore/WordPress.gitignore",
+        "app/static/common/gitignore/Xojo.gitignore",
+        "app/static/common/gitignore/Yeoman.gitignore",
+        "app/static/common/gitignore/Yii.gitignore",
+        "app/static/common/gitignore/ZendFramework.gitignore",
+        "app/static/common/gitignore/Zephir.gitignore",
+        "app/static/common/gitignore/Zig.gitignore",
+        "app/static/common/gitignore/community/AWS/CDK.gitignore",
+        "app/static/common/gitignore/community/AWS/SAM.gitignore",
+        "app/static/common/gitignore/community/Alteryx.gitignore",
+        "app/static/common/gitignore/community/AltiumDesigner.gitignore",
+        "app/static/common/gitignore/community/AutoIt.gitignore",
+        "app/static/common/gitignore/community/AutomationStudio.gitignore",
+        "app/static/common/gitignore/community/B4X.gitignore",
+        "app/static/common/gitignore/community/Bazel.gitignore",
+        "app/static/common/gitignore/community/Beef.gitignore",
+        "app/static/common/gitignore/community/DotNet/InforCMS.gitignore",
+        "app/static/common/gitignore/community/DotNet/Kentico.gitignore",
+        "app/static/common/gitignore/community/DotNet/Umbraco.gitignore",
+        "app/static/common/gitignore/community/DotNet/core.gitignore",
+        "app/static/common/gitignore/community/Dotter.gitignore",
+        "app/static/common/gitignore/community/Elixir/Phoenix.gitignore",
+        "app/static/common/gitignore/community/Exercism.gitignore",
+        "app/static/common/gitignore/community/GNOME/GNOMEShellExtension.gitignore",
+        "app/static/common/gitignore/community/Golang/Go.AllowList.gitignore",
+        "app/static/common/gitignore/community/Golang/Hugo.gitignore",
+        "app/static/common/gitignore/community/Gretl.gitignore",
+        "app/static/common/gitignore/community/Hexo.gitignore",
+        "app/static/common/gitignore/community/Java/JBoss4.gitignore",
+        "app/static/common/gitignore/community/Java/JBoss6.gitignore",
+        "app/static/common/gitignore/community/JavaScript/Cordova.gitignore",
+        "app/static/common/gitignore/community/JavaScript/Meteor.gitignore",
+        "app/static/common/gitignore/community/JavaScript/NWjs.gitignore",
+        "app/static/common/gitignore/community/JavaScript/Vue.gitignore",
+        "app/static/common/gitignore/community/LensStudio.gitignore",
+        "app/static/common/gitignore/community/Linux/Snap.gitignore",
+        "app/static/common/gitignore/community/Logtalk.gitignore",
+        "app/static/common/gitignore/community/Move.gitignore",
+        "app/static/common/gitignore/community/NasaSpecsIntact.gitignore",
+        "app/static/common/gitignore/community/Nix.gitignore",
+        "app/static/common/gitignore/community/Obsidian/NotesAndCoreConfiguration.gitignore",
+        "app/static/common/gitignore/community/Obsidian/NotesAndExtendedConfiguration.gitignore",
+        "app/static/common/gitignore/community/Obsidian/NotesOnly.gitignore",
+        "app/static/common/gitignore/community/OpenSSL.gitignore",
+        "app/static/common/gitignore/community/OpenTofu.gitignore",
+        "app/static/common/gitignore/community/PHP/Bitrix.gitignore",
+        "app/static/common/gitignore/community/PHP/CodeSniffer.gitignore",
+        "app/static/common/gitignore/community/PHP/Drupal7.gitignore",
+        "app/static/common/gitignore/community/PHP/Jigsaw.gitignore",
+        "app/static/common/gitignore/community/PHP/Magento1.gitignore",
+        "app/static/common/gitignore/community/PHP/Magento2.gitignore",
+        "app/static/common/gitignore/community/PHP/Pimcore.gitignore",
+        "app/static/common/gitignore/community/PHP/ThinkPHP.gitignore",
+        "app/static/common/gitignore/community/Puppet.gitignore",
+        "app/static/common/gitignore/community/Python/JupyterNotebooks.gitignore",
+        "app/static/common/gitignore/community/Python/Nikola.gitignore",
+        "app/static/common/gitignore/community/ROS2.gitignore",
+        "app/static/common/gitignore/community/Racket.gitignore",
+        "app/static/common/gitignore/community/Red.gitignore",
+        "app/static/common/gitignore/community/SPFx.gitignore",
+        "app/static/common/gitignore/community/Splunk.gitignore",
+        "app/static/common/gitignore/community/Strapi.gitignore",
+        "app/static/common/gitignore/community/Terragrunt.gitignore",
+        "app/static/common/gitignore/community/Toit.gitignore",
+        "app/static/common/gitignore/community/UiPath.gitignore",
+        "app/static/common/gitignore/community/V.gitignore",
+        "app/static/common/gitignore/community/Xilinx.gitignore",
+        "app/static/common/gitignore/community/embedded/AtmelStudio.gitignore",
+        "app/static/common/gitignore/community/embedded/IAR_EWARM.gitignore",
+        "app/static/common/gitignore/community/embedded/esp-idf.gitignore",
+        "app/static/common/gitignore/community/embedded/uVision.gitignore",
+        "app/static/common/gitignore/ecu.test.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gyp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bowerrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.tool-versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yarnrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/59287f7bd8e2d690d733dbad64faaa75cf227e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COMMIT_EDITMSG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FETCH_HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ORIG_HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/add-private-repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/another-branch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bootstrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch-ahead"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch-ahead-and-behind"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch-behind"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch-up-to-date"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch-with-tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check-approval"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cibuild"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clone-with-progress-output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-with-long-description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-with-no-body"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/console"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deleted-branch-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/devel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/develop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/development"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-warnings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/first"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/first-tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate-docs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gh-pages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/important"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/less-important"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make-a-change"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/not-deleted-branch-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/not-merged-branch-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packed-refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/regenerate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rename-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/second"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup-macos-keychain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tentative"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-one-license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trunk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "app/static/common/choosealicense.com": "https://github.com/github/choosealicense.com",
+    "app/static/common/choosealicense.com/license-list-XML": "https://github.com/spdx/license-list-XML",
+    "app/static/common/gitignore": "https://github.com/github/gitignore",
+    "gemoji": "https://github.com/github/gemoji"
+  }
+}

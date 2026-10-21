@@ -1,0 +1,1169 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/odin-lang/Odin",
+  "revision": "74ed00460c115173343f618f1d6fecc42b0e5cf3",
+  "checksum": "sha256:d12fa87b26fa2f1c9a9e268553c0304edd23e5d3061559c3c717cf969df2170b",
+  "extract": {
+    "exclude": [
+      "LLVM-C.dll",
+      "base/runtime/**",
+      "bin/lld-link.exe",
+      "bin/llvm/**",
+      "bin/nasm/**",
+      "bin/radlink.exe",
+      "bin/wasm-ld.exe",
+      "core/encoding/entity/**",
+      "core/mem/tlsf/**",
+      "core/rexcode/isa/arm32/tables/**",
+      "core/rexcode/isa/arm64/tables/**",
+      "core/rexcode/isa/mips/tables/**",
+      "core/rexcode/isa/mos6502/tables/**",
+      "core/rexcode/isa/mos65816/tables/**",
+      "core/rexcode/isa/ppc/tables/**",
+      "core/rexcode/isa/ppc_vle/tables/**",
+      "core/rexcode/isa/riscv/tables/**",
+      "core/rexcode/isa/rsp/tables/**",
+      "core/rexcode/isa/x86/tables/**",
+      "misc/emblem.ico",
+      "misc/logo-slim.png",
+      "misc/sourcefile.ico",
+      "src/libtommath/**",
+      "src/utf8proc/**",
+      "tests/core/assets/HXA/**",
+      "tests/core/assets/I18N/mixed_context.mo",
+      "tests/core/assets/I18N/nl_NL.mo",
+      "tests/core/assets/I18N/plur.mo",
+      "tests/core/assets/Shoco/LICENSE.shoco",
+      "tests/core/assets/Shoco/README.md.shoco",
+      "tests/core/crypto/x509/testdata/**",
+      "tests/vendor/**",
+      "vendor/.gitkeep",
+      "vendor/ENet/lib/**",
+      "vendor/OpenEXRCore/OpenEXRCore-3_3.lib",
+      "vendor/OpenGL/**",
+      "vendor/README.md",
+      "vendor/box2d/lib/box2d_darwin_amd64_avx2.a",
+      "vendor/box2d/lib/box2d_darwin_amd64_sse2.a",
+      "vendor/box2d/lib/box2d_darwin_arm64.a",
+      "vendor/box2d/lib/box2d_wasm.o",
+      "vendor/box2d/lib/box2d_wasm_simd.o",
+      "vendor/box3d/**",
+      "vendor/cgltf/lib/**",
+      "vendor/commonmark/**",
+      "vendor/compress/**",
+      "vendor/curl/lib/**",
+      "vendor/darwin/**",
+      "vendor/directx/**",
+      "vendor/egl/**",
+      "vendor/fontstash/**",
+      "vendor/ggpo/GGPO.lib",
+      "vendor/glfw/lib/**",
+      "vendor/kb_text_shape/doc.odin",
+      "vendor/kb_text_shape/kb_text_shape_procs.odin",
+      "vendor/kb_text_shape/kb_text_shape_types.odin",
+      "vendor/kb_text_shape/lib/**",
+      "vendor/libc/**",
+      "vendor/libc-shim/**",
+      "vendor/lua/5.1/linux/**",
+      "vendor/lua/5.1/windows/**",
+      "vendor/lua/5.2/linux/**",
+      "vendor/lua/5.2/windows/**",
+      "vendor/lua/5.3/linux/**",
+      "vendor/lua/5.3/windows/**",
+      "vendor/lua/5.4/linux/**",
+      "vendor/lua/5.4/windows/**",
+      "vendor/miniaudio/**",
+      "vendor/nanovg/**",
+      "vendor/portmidi/portmidi_s.lib",
+      "vendor/raylib/macos/libraygui-arm64.a",
+      "vendor/raylib/macos/libraygui.a",
+      "vendor/raylib/wasm/libraygui.a",
+      "vendor/sdl2/SDL2.dll",
+      "vendor/sdl2/SDL2.lib",
+      "vendor/sdl2/image/**",
+      "vendor/sdl2/mixer/**",
+      "vendor/sdl2/net/SDL2_net.dll",
+      "vendor/sdl2/net/SDL2_net.lib",
+      "vendor/sdl2/ttf/**",
+      "vendor/sdl3/image/**",
+      "vendor/sdl3/mixer/**",
+      "vendor/sdl3/ttf/**",
+      "vendor/stb/**",
+      "vendor/vulkan/core.odin",
+      "vendor/vulkan/enums.odin",
+      "vendor/vulkan/procedures.odin",
+      "vendor/vulkan/structs.odin",
+      "vendor/wasm/**",
+      "vendor/wgpu/**",
+      "vendor/windows/**",
+      "vendor/x11/**",
+      "vendor/zlib/libz.lib"
+    ]
+  },
+  "history": {
+    "since": "842cfee0f3eacbef5fa5f0dbd392a500ebad93ae"
+  },
+  "licenses": [
+    {
+      "license": "Zlib AND BSD-3-Clause AND Unicode-3.0 AND MIT AND curl AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2016-2025 Ginger Bill. All rights reserved.\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\nCopyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved.\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\nCopyright (c) 2016-2021 Ginger Bill. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nUNICODE LICENSE V3\n\nCOPYRIGHT AND PERMISSION NOTICE\n\nCopyright © 1991-2026 Unicode, Inc.\n\nNOTICE TO USER: Carefully read the following legal agreement. BY\nDOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING DATA FILES, AND/OR\nSOFTWARE, YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE\nTERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT\nDOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of data files and any associated documentation (the \"Data Files\") or\nsoftware and any associated documentation (the \"Software\") to deal in the\nData Files or Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, and/or sell\ncopies of the Data Files or Software, and to permit persons to whom the\nData Files or Software are furnished to do so, provided that either (a)\nthis copyright and permission notice appear with all copies of the Data\nFiles or Software, or (b) this copyright and permission notice appear in\nassociated Documentation.\n\nTHE DATA FILES AND SOFTWARE ARE PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY\nKIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF\nTHIRD PARTY RIGHTS.\n\nIN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE\nBE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES,\nOR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,\nWHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,\nARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA\nFILES OR SOFTWARE.\n\nExcept as contained in this notice, the name of a copyright holder shall\nnot be used in advertising or otherwise to promote the sale, use or other\ndealings in these Data Files or Software without prior written\nauthorization of the copyright holder.\n\n\nCopyright (c) 2002-2020 Lee Salzman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) Contributors to the OpenEXR Project. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nMIT License\n\nCopyright (c) 2022 Erin Catto\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nCopyright (c) 2018-2021 Johannes Kuhlmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCOPYRIGHT AND PERMISSION NOTICE\n\nCopyright (c) 1996 - 2025, Daniel Stenberg, daniel@haxx.se, and many contributors, see the THANKS file.\n\nAll rights reserved.\n\nPermission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nExcept as contained in this notice, the name of a copyright holder shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization of the copyright holder.\n\nThe MIT License\n\nCopyright (c) 2009-2019 GroundStorm Studios, LLC. (http://ggpo.net)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\nCopyright (c) 2002-2006 Marcus Geelnard\n\nCopyright (c) 2006-2019 Camilla Löwy\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n\n\nzlib License\n\n(C) Copyright 2024-2025 Jimmy Lefevre\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n  claim that you wrote the original software. If you use this software\n  in a product, an acknowledgment in the product documentation would be\n  appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n  misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\nCopyright © 1994–2023 Lua.org, PUC-Rio.\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nOriginal work: Copyright (c) 2020 rxi\nModified work: Copyright (c) 2020 oskarnp\nModified work: Copyright (c) 2021 gingerBill\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nPortMidi Portable Real-Time MIDI Library\nPortMidi API Header File\nLatest version available at: http://sourceforge.net/projects/portmedia\n\nCopyright (c) 1999-2000 Ross Bencina and Phil Burk\nCopyright (c) 2001-2006 Roger B. Dannenberg\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files\n(the \"Software\"), to deal in the Software without restriction,\nincluding without limitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of the Software,\nand to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR\nANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF\nCONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2013-2026 Ramon Santamaria (@raysan5)\n\nThis software is provided \"as-is\", without any express or implied warranty. In no event \nwill the authors be held liable for any damages arising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose, including commercial \napplications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n  1. The origin of this software must not be misrepresented; you must not claim that you \n  wrote the original software. If you use this software in a product, an acknowledgment \n  in the product documentation would be appreciated but is not required.\n\n  2. Altered source versions must be plainly marked as such, and must not be misrepresented\n  as being the original software.\n\n  3. This notice may not be removed or altered from any source distribution.\n\n\nCopyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>\r\n  \r\nThis software is provided 'as-is', without any express or implied\r\nwarranty.  In no event will the authors be held liable for any damages\r\narising from the use of this software.\r\n\r\nPermission is granted to anyone to use this software for any purpose,\r\nincluding commercial applications, and to alter it and redistribute it\r\nfreely, subject to the following restrictions:\r\n  \r\n1. The origin of this software must not be misrepresented; you must not\r\n   claim that you wrote the original software. If you use this software\r\n   in a product, an acknowledgment in the product documentation would be\r\n   appreciated but is not required. \r\n2. Altered source versions must be plainly marked as such, and must not be\r\n   misrepresented as being the original software.\r\n3. This notice may not be removed or altered from any source distribution.\r\n\n\n/*\r\n  SDL_net:  An example cross-platform network library for use with SDL\r\n  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>\r\n\r\n  This software is provided 'as-is', without any express or implied\r\n  warranty.  In no event will the authors be held liable for any damages\r\n  arising from the use of this software.\r\n\r\n  Permission is granted to anyone to use this software for any purpose,\r\n  including commercial applications, and to alter it and redistribute it\r\n  freely, subject to the following restrictions:\r\n\r\n  1. The origin of this software must not be misrepresented; you must not\r\n     claim that you wrote the original software. If you use this software\r\n     in a product, an acknowledgment in the product documentation would be\r\n     appreciated but is not required.\r\n  2. Altered source versions must be plainly marked as such, and must not be\r\n     misrepresented as being the original software.\r\n  3. This notice may not be removed or altered from any source distribution.\r\n*/\n\nCopyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>\n  \nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n  \n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required. \n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\n\n\n\r\n                                 Apache License\r\n                           Version 2.0, January 2004\r\n                        http://www.apache.org/licenses/\r\n\r\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\r\n\r\n   1. Definitions.\r\n\r\n      \"License\" shall mean the terms and conditions for use, reproduction,\r\n      and distribution as defined by Sections 1 through 9 of this document.\r\n\r\n      \"Licensor\" shall mean the copyright owner or entity authorized by\r\n      the copyright owner that is granting the License.\r\n\r\n      \"Legal Entity\" shall mean the union of the acting entity and all\r\n      other entities that control, are controlled by, or are under common\r\n      control with that entity. For the purposes of this definition,\r\n      \"control\" means (i) the power, direct or indirect, to cause the\r\n      direction or management of such entity, whether by contract or\r\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\r\n      outstanding shares, or (iii) beneficial ownership of such entity.\r\n\r\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\r\n      exercising permissions granted by this License.\r\n\r\n      \"Source\" form shall mean the preferred form for making modifications,\r\n      including but not limited to software source code, documentation\r\n      source, and configuration files.\r\n\r\n      \"Object\" form shall mean any form resulting from mechanical\r\n      transformation or translation of a Source form, including but\r\n      not limited to compiled object code, generated documentation,\r\n      and conversions to other media types.\r\n\r\n      \"Work\" shall mean the work of authorship, whether in Source or\r\n      Object form, made available under the License, as indicated by a\r\n      copyright notice that is included in or attached to the work\r\n      (an example is provided in the Appendix below).\r\n\r\n      \"Derivative Works\" shall mean any work, whether in Source or Object\r\n      form, that is based on (or derived from) the Work and for which the\r\n      editorial revisions, annotations, elaborations, or other modifications\r\n      represent, as a whole, an original work of authorship. For the purposes\r\n      of this License, Derivative Works shall not include works that remain\r\n      separable from, or merely link (or bind by name) to the interfaces of,\r\n      the Work and Derivative Works thereof.\r\n\r\n      \"Contribution\" shall mean any work of authorship, including\r\n      the original version of the Work and any modifications or additions\r\n      to that Work or Derivative Works thereof, that is intentionally\r\n      submitted to Licensor for inclusion in the Work by the copyright owner\r\n      or by an individual or Legal Entity authorized to submit on behalf of\r\n      the copyright owner. For the purposes of this definition, \"submitted\"\r\n      means any form of electronic, verbal, or written communication sent\r\n      to the Licensor or its representatives, including but not limited to\r\n      communication on electronic mailing lists, source code control systems,\r\n      and issue tracking systems that are managed by, or on behalf of, the\r\n      Licensor for the purpose of discussing and improving the Work, but\r\n      excluding communication that is conspicuously marked or otherwise\r\n      designated in writing by the copyright owner as \"Not a Contribution.\"\r\n\r\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\r\n      on behalf of whom a Contribution has been received by Licensor and\r\n      subsequently incorporated within the Work.\r\n\r\n   2. Grant of Copyright License. Subject to the terms and conditions of\r\n      this License, each Contributor hereby grants to You a perpetual,\r\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\r\n      copyright license to reproduce, prepare Derivative Works of,\r\n      publicly display, publicly perform, sublicense, and distribute the\r\n      Work and such Derivative Works in Source or Object form.\r\n\r\n   3. Grant of Patent License. Subject to the terms and conditions of\r\n      this License, each Contributor hereby grants to You a perpetual,\r\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\r\n      (except as stated in this section) patent license to make, have made,\r\n      use, offer to sell, sell, import, and otherwise transfer the Work,\r\n      where such license applies only to those patent claims licensable\r\n      by such Contributor that are necessarily infringed by their\r\n      Contribution(s) alone or by combination of their Contribution(s)\r\n      with the Work to which such Contribution(s) was submitted. If You\r\n      institute patent litigation against any entity (including a\r\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\r\n      or a Contribution incorporated within the Work constitutes direct\r\n      or contributory patent infringement, then any patent licenses\r\n      granted to You under this License for that Work shall terminate\r\n      as of the date such litigation is filed.\r\n\r\n   4. Redistribution. You may reproduce and distribute copies of the\r\n      Work or Derivative Works thereof in any medium, with or without\r\n      modifications, and in Source or Object form, provided that You\r\n      meet the following conditions:\r\n\r\n      (a) You must give any other recipients of the Work or\r\n          Derivative Works a copy of this License; and\r\n\r\n      (b) You must cause any modified files to carry prominent notices\r\n          stating that You changed the files; and\r\n\r\n      (c) You must retain, in the Source form of any Derivative Works\r\n          that You distribute, all copyright, patent, trademark, and\r\n          attribution notices from the Source form of the Work,\r\n          excluding those notices that do not pertain to any part of\r\n          the Derivative Works; and\r\n\r\n      (d) If the Work includes a \"NOTICE\" text file as part of its\r\n          distribution, then any Derivative Works that You distribute must\r\n          include a readable copy of the attribution notices contained\r\n          within such NOTICE file, excluding those notices that do not\r\n          pertain to any part of the Derivative Works, in at least one\r\n          of the following places: within a NOTICE text file distributed\r\n          as part of the Derivative Works; within the Source form or\r\n          documentation, if provided along with the Derivative Works; or,\r\n          within a display generated by the Derivative Works, if and\r\n          wherever such third-party notices normally appear. The contents\r\n          of the NOTICE file are for informational purposes only and\r\n          do not modify the License. You may add Your own attribution\r\n          notices within Derivative Works that You distribute, alongside\r\n          or as an addendum to the NOTICE text from the Work, provided\r\n          that such additional attribution notices cannot be construed\r\n          as modifying the License.\r\n\r\n      You may add Your own copyright statement to Your modifications and\r\n      may provide additional or different license terms and conditions\r\n      for use, reproduction, or distribution of Your modifications, or\r\n      for any such Derivative Works as a whole, provided Your use,\r\n      reproduction, and distribution of the Work otherwise complies with\r\n      the conditions stated in this License.\r\n\r\n   5. Submission of Contributions. Unless You explicitly state otherwise,\r\n      any Contribution intentionally submitted for inclusion in the Work\r\n      by You to the Licensor shall be under the terms and conditions of\r\n      this License, without any additional terms or conditions.\r\n      Notwithstanding the above, nothing herein shall supersede or modify\r\n      the terms of any separate license agreement you may have executed\r\n      with Licensor regarding such Contributions.\r\n\r\n   6. Trademarks. This License does not grant permission to use the trade\r\n      names, trademarks, service marks, or product names of the Licensor,\r\n      except as required for reasonable and customary use in describing the\r\n      origin of the Work and reproducing the content of the NOTICE file.\r\n\r\n   7. Disclaimer of Warranty. Unless required by applicable law or\r\n      agreed to in writing, Licensor provides the Work (and each\r\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\r\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\r\n      implied, including, without limitation, any warranties or conditions\r\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\r\n      PARTICULAR PURPOSE. You are solely responsible for determining the\r\n      appropriateness of using or redistributing the Work and assume any\r\n      risks associated with Your exercise of permissions under this License.\r\n\r\n   8. Limitation of Liability. In no event and under no legal theory,\r\n      whether in tort (including negligence), contract, or otherwise,\r\n      unless required by applicable law (such as deliberate and grossly\r\n      negligent acts) or agreed to in writing, shall any Contributor be\r\n      liable to You for damages, including any direct, indirect, special,\r\n      incidental, or consequential damages of any character arising as a\r\n      result of this License or out of the use or inability to use the\r\n      Work (including but not limited to damages for loss of goodwill,\r\n      work stoppage, computer failure or malfunction, or any and all\r\n      other commercial damages or losses), even if such Contributor\r\n      has been advised of the possibility of such damages.\r\n\r\n   9. Accepting Warranty or Additional Liability. While redistributing\r\n      the Work or Derivative Works thereof, You may choose to offer,\r\n      and charge a fee for, acceptance of support, warranty, indemnity,\r\n      or other liability obligations and/or rights consistent with this\r\n      License. However, in accepting such obligations, You may act only\r\n      on Your own behalf and on Your sole responsibility, not on behalf\r\n      of any other Contributor, and only if You agree to indemnify,\r\n      defend, and hold each Contributor harmless for any liability\r\n      incurred by, or claims asserted against, such Contributor by reason\r\n      of your accepting any such warranty or additional liability.\r\n\r\n   END OF TERMS AND CONDITIONS\r\n\r\n   APPENDIX: How to apply the Apache License to your work.\r\n\r\n      To apply the Apache License to your work, attach the following\r\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\r\n      replaced with your own identifying information. (Don't include\r\n      the brackets!)  The text should be enclosed in the appropriate\r\n      comment syntax for the file format. We also recommend that a\r\n      file or class name and description of purpose be included on the\r\n      same \"printed page\" as the copyright notice for easier\r\n      identification within third-party archives.\r\n\r\n   Copyright [yyyy] [name of copyright owner]\r\n\r\n   Licensed under the Apache License, Version 2.0 (the \"License\");\r\n   you may not use this file except in compliance with the License.\r\n   You may obtain a copy of the License at\r\n\r\n       http://www.apache.org/licenses/LICENSE-2.0\r\n\r\n   Unless required by applicable law or agreed to in writing, software\r\n   distributed under the License is distributed on an \"AS IS\" BASIS,\r\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n   See the License for the specific language governing permissions and\r\n   limitations under the License.\n\nCopyright notice:\r\n\r\n (C) 1995-2026 Jean-loup Gailly and Mark Adler\r\n\r\n  This software is provided 'as-is', without any express or implied\r\n  warranty.  In no event will the authors be held liable for any damages\r\n  arising from the use of this software.\r\n\r\n  Permission is granted to anyone to use this software for any purpose,\r\n  including commercial applications, and to alter it and redistribute it\r\n  freely, subject to the following restrictions:\r\n\r\n  1. The origin of this software must not be misrepresented; you must not\r\n     claim that you wrote the original software. If you use this software\r\n     in a product, an acknowledgment in the product documentation would be\r\n     appreciated but is not required.\r\n  2. Altered source versions must be plainly marked as such, and must not be\r\n     misrepresented as being the original software.\r\n  3. This notice may not be removed or altered from any source distribution.\r\n\r\n  Jean-loup Gailly        Mark Adler\r\n  jloup@gzip.org          madler@alumni.caltech.edu\r\n",
+      "attribution": "Commit history of https://github.com/odin-lang/Odin: Copyright (c) 2016-2025 Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin; Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/core/encoding/uuid; Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/core/flags; Copyright (c) 2016-2021 Ginger Bill. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/tests/core/assets/Shoco; COPYRIGHT AND PERMISSION NOTICE; Copyright © 1991-2026 Unicode, Inc., Unicode-3.0 license (license.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/tests/core/assets/UCD; Copyright (c) 2002-2020 Lee Salzman, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/ENet; Copyright (c) Contributors to the OpenEXR Project. All rights reserved., BSD-3-Clause license (LICENSE.md), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/OpenEXRCore; Copyright (c) 2022 Erin Catto, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/box2d; Copyright (c) 2018-2021 Johannes Kuhlmann, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/cgltf; COPYRIGHT AND PERMISSION NOTICE; Copyright (c) 1996 - 2025, Daniel Stenberg, daniel@haxx.se, and many contributors, see the THANKS file., curl license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/curl; Copyright (c) 2009-2019 GroundStorm Studios, LLC. (http://ggpo.net), MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/ggpo; Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2019 Camilla Löwy, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/glfw; the authors of odin-lang/Odin (vendor/kb_text_shape/src) (the license file names no copyright line), Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/kb_text_shape/src; Copyright © 1994–2023 Lua.org, PUC-Rio., MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/lua; the authors of odin-lang/Odin (vendor/microui) (the license file names no copyright line), MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/microui; Copyright (c) 1999-2000 Ross Bencina and Phil Burk; Copyright (c) 2001-2006 Roger B. Dannenberg, MIT license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/portmidi; Copyright (c) 2013-2026 Ramon Santamaria (@raysan5), Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/raylib; Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl2; Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>, Zlib license (COPYING.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl2/net; Copyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl3; the authors of odin-lang/Odin (vendor/vulkan/_gen) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/vulkan/_gen; Copyright notice:; (C) 1995-2026 Jean-loup Gailly and Mark Adler, Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/zlib."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "LICENSE",
+        "Makefile",
+        "PROPOSAL-PROCESS.md",
+        "README.md",
+        "base/builtin/**",
+        "base/intrinsics/**",
+        "base/sanitizer/**",
+        "bin/RAD-LICENSE",
+        "bin/README.md",
+        "build.bat",
+        "build_odin.sh",
+        "build_vendor.bat",
+        "check_all.bat",
+        "check_all.sh",
+        "ci/**",
+        "codecov.yml",
+        "core/bufio/**",
+        "core/bytes/**",
+        "core/c/**",
+        "core/compress/**",
+        "core/container/**",
+        "core/crypto/**",
+        "core/debug/**",
+        "core/dynlib/**",
+        "core/encoding/asn1/**",
+        "core/encoding/base32/**",
+        "core/encoding/base64/**",
+        "core/encoding/cbor/**",
+        "core/encoding/csv/**",
+        "core/encoding/endian/**",
+        "core/encoding/hex/**",
+        "core/encoding/hxa/**",
+        "core/encoding/ini/**",
+        "core/encoding/json/**",
+        "core/encoding/pem/**",
+        "core/encoding/varint/**",
+        "core/encoding/xml/**",
+        "core/fmt/**",
+        "core/hash/**",
+        "core/image/**",
+        "core/io/**",
+        "core/log/**",
+        "core/math/**",
+        "core/mem/alloc.odin",
+        "core/mem/allocators.odin",
+        "core/mem/doc.odin",
+        "core/mem/mem.odin",
+        "core/mem/mem_posix.odin",
+        "core/mem/mem_windows.odin",
+        "core/mem/mutex_allocator.odin",
+        "core/mem/raw.odin",
+        "core/mem/rollback_stack_allocator.odin",
+        "core/mem/tracking_allocator.odin",
+        "core/mem/virtual/**",
+        "core/nbio/**",
+        "core/net/**",
+        "core/odin/**",
+        "core/os/**",
+        "core/path/**",
+        "core/prof/**",
+        "core/reflect/**",
+        "core/relative/**",
+        "core/rexcode/build.lua",
+        "core/rexcode/doc.odin",
+        "core/rexcode/docs/**",
+        "core/rexcode/ir/**",
+        "core/rexcode/isa/arm32/decoder.odin",
+        "core/rexcode/isa/arm32/encoder.odin",
+        "core/rexcode/isa/arm32/encoding_types.odin",
+        "core/rexcode/isa/arm32/immediates.odin",
+        "core/rexcode/isa/arm32/instructions.odin",
+        "core/rexcode/isa/arm32/mnemonic_builders.odin",
+        "core/rexcode/isa/arm32/mnemonics.odin",
+        "core/rexcode/isa/arm32/operands.odin",
+        "core/rexcode/isa/arm32/printer.odin",
+        "core/rexcode/isa/arm32/registers.odin",
+        "core/rexcode/isa/arm32/reloc.odin",
+        "core/rexcode/isa/arm32/tablegen/**",
+        "core/rexcode/isa/arm32/tables.odin",
+        "core/rexcode/isa/arm32/tests/**",
+        "core/rexcode/isa/arm32/tools/**",
+        "core/rexcode/isa/arm64/bitmask.odin",
+        "core/rexcode/isa/arm64/clobber_types.odin",
+        "core/rexcode/isa/arm64/decoder.odin",
+        "core/rexcode/isa/arm64/encoder.odin",
+        "core/rexcode/isa/arm64/encoding_types.odin",
+        "core/rexcode/isa/arm64/instructions.odin",
+        "core/rexcode/isa/arm64/mnemonic_builders.odin",
+        "core/rexcode/isa/arm64/mnemonics.odin",
+        "core/rexcode/isa/arm64/operands.odin",
+        "core/rexcode/isa/arm64/printer.odin",
+        "core/rexcode/isa/arm64/registers.odin",
+        "core/rexcode/isa/arm64/reloc.odin",
+        "core/rexcode/isa/arm64/tablegen/**",
+        "core/rexcode/isa/arm64/tables.odin",
+        "core/rexcode/isa/arm64/tests/**",
+        "core/rexcode/isa/arm64/tools/**",
+        "core/rexcode/isa/label_infer.odin",
+        "core/rexcode/isa/labels.odin",
+        "core/rexcode/isa/mips/decoder.odin",
+        "core/rexcode/isa/mips/encoder.odin",
+        "core/rexcode/isa/mips/encoding_types.odin",
+        "core/rexcode/isa/mips/instructions.odin",
+        "core/rexcode/isa/mips/mnemonic_builders.odin",
+        "core/rexcode/isa/mips/mnemonics.odin",
+        "core/rexcode/isa/mips/operands.odin",
+        "core/rexcode/isa/mips/printer.odin",
+        "core/rexcode/isa/mips/registers.odin",
+        "core/rexcode/isa/mips/reloc.odin",
+        "core/rexcode/isa/mips/tablegen/**",
+        "core/rexcode/isa/mips/tables.odin",
+        "core/rexcode/isa/mips/tests/**",
+        "core/rexcode/isa/mips/tools/**",
+        "core/rexcode/isa/mos6502/decoder.odin",
+        "core/rexcode/isa/mos6502/encoder.odin",
+        "core/rexcode/isa/mos6502/encoding_types.odin",
+        "core/rexcode/isa/mos6502/instructions.odin",
+        "core/rexcode/isa/mos6502/mnemonic_builders.odin",
+        "core/rexcode/isa/mos6502/mnemonics.odin",
+        "core/rexcode/isa/mos6502/operands.odin",
+        "core/rexcode/isa/mos6502/printer.odin",
+        "core/rexcode/isa/mos6502/registers.odin",
+        "core/rexcode/isa/mos6502/reloc.odin",
+        "core/rexcode/isa/mos6502/tablegen/**",
+        "core/rexcode/isa/mos6502/tables.odin",
+        "core/rexcode/isa/mos6502/tests/**",
+        "core/rexcode/isa/mos6502/tools/**",
+        "core/rexcode/isa/mos65816/decoder.odin",
+        "core/rexcode/isa/mos65816/encoder.odin",
+        "core/rexcode/isa/mos65816/encoding_types.odin",
+        "core/rexcode/isa/mos65816/instructions.odin",
+        "core/rexcode/isa/mos65816/mnemonic_builders.odin",
+        "core/rexcode/isa/mos65816/mnemonics.odin",
+        "core/rexcode/isa/mos65816/operands.odin",
+        "core/rexcode/isa/mos65816/printer.odin",
+        "core/rexcode/isa/mos65816/registers.odin",
+        "core/rexcode/isa/mos65816/reloc.odin",
+        "core/rexcode/isa/mos65816/tablegen/**",
+        "core/rexcode/isa/mos65816/tables.odin",
+        "core/rexcode/isa/mos65816/tests/**",
+        "core/rexcode/isa/mos65816/tools/**",
+        "core/rexcode/isa/ppc/decoder.odin",
+        "core/rexcode/isa/ppc/encoder.odin",
+        "core/rexcode/isa/ppc/encoding_types.odin",
+        "core/rexcode/isa/ppc/instructions.odin",
+        "core/rexcode/isa/ppc/mnemonic_builders.odin",
+        "core/rexcode/isa/ppc/mnemonics.odin",
+        "core/rexcode/isa/ppc/operands.odin",
+        "core/rexcode/isa/ppc/printer.odin",
+        "core/rexcode/isa/ppc/registers.odin",
+        "core/rexcode/isa/ppc/reloc.odin",
+        "core/rexcode/isa/ppc/tablegen/**",
+        "core/rexcode/isa/ppc/tables.odin",
+        "core/rexcode/isa/ppc/tests/**",
+        "core/rexcode/isa/ppc/tools/**",
+        "core/rexcode/isa/ppc_vle/decoder.odin",
+        "core/rexcode/isa/ppc_vle/encoder.odin",
+        "core/rexcode/isa/ppc_vle/encoding_types.odin",
+        "core/rexcode/isa/ppc_vle/instructions.odin",
+        "core/rexcode/isa/ppc_vle/mnemonic_builders.odin",
+        "core/rexcode/isa/ppc_vle/mnemonics.odin",
+        "core/rexcode/isa/ppc_vle/operands.odin",
+        "core/rexcode/isa/ppc_vle/printer.odin",
+        "core/rexcode/isa/ppc_vle/registers.odin",
+        "core/rexcode/isa/ppc_vle/reloc.odin",
+        "core/rexcode/isa/ppc_vle/tablegen/**",
+        "core/rexcode/isa/ppc_vle/tables.odin",
+        "core/rexcode/isa/ppc_vle/tests/**",
+        "core/rexcode/isa/ppc_vle/tools/**",
+        "core/rexcode/isa/print.odin",
+        "core/rexcode/isa/riscv/clobber_types.odin",
+        "core/rexcode/isa/riscv/decoder.odin",
+        "core/rexcode/isa/riscv/encoder.odin",
+        "core/rexcode/isa/riscv/encoding_types.odin",
+        "core/rexcode/isa/riscv/instructions.odin",
+        "core/rexcode/isa/riscv/mnemonic_builders.odin",
+        "core/rexcode/isa/riscv/mnemonics.odin",
+        "core/rexcode/isa/riscv/operands.odin",
+        "core/rexcode/isa/riscv/printer.odin",
+        "core/rexcode/isa/riscv/pseudo_aliases.odin",
+        "core/rexcode/isa/riscv/registers.odin",
+        "core/rexcode/isa/riscv/reloc.odin",
+        "core/rexcode/isa/riscv/tablegen/**",
+        "core/rexcode/isa/riscv/tables.odin",
+        "core/rexcode/isa/riscv/tests/**",
+        "core/rexcode/isa/riscv/tools/**",
+        "core/rexcode/isa/rsp/decoder.odin",
+        "core/rexcode/isa/rsp/encoder.odin",
+        "core/rexcode/isa/rsp/encoding_types.odin",
+        "core/rexcode/isa/rsp/instructions.odin",
+        "core/rexcode/isa/rsp/mnemonic_builders.odin",
+        "core/rexcode/isa/rsp/mnemonics.odin",
+        "core/rexcode/isa/rsp/operands.odin",
+        "core/rexcode/isa/rsp/printer.odin",
+        "core/rexcode/isa/rsp/registers.odin",
+        "core/rexcode/isa/rsp/reloc.odin",
+        "core/rexcode/isa/rsp/tablegen/**",
+        "core/rexcode/isa/rsp/tables.odin",
+        "core/rexcode/isa/rsp/tests/**",
+        "core/rexcode/isa/rsp/tools/**",
+        "core/rexcode/isa/status.odin",
+        "core/rexcode/isa/x86/aliases.odin",
+        "core/rexcode/isa/x86/clobber_types.odin",
+        "core/rexcode/isa/x86/decoder.odin",
+        "core/rexcode/isa/x86/encoder.odin",
+        "core/rexcode/isa/x86/encoder_match.odin",
+        "core/rexcode/isa/x86/encoder_recipe.odin",
+        "core/rexcode/isa/x86/encoding_types.odin",
+        "core/rexcode/isa/x86/instructions.odin",
+        "core/rexcode/isa/x86/labels.odin",
+        "core/rexcode/isa/x86/mnemonic_builders.odin",
+        "core/rexcode/isa/x86/mnemonics.odin",
+        "core/rexcode/isa/x86/operands.odin",
+        "core/rexcode/isa/x86/printer.odin",
+        "core/rexcode/isa/x86/registers.odin",
+        "core/rexcode/isa/x86/reloc.odin",
+        "core/rexcode/isa/x86/tablegen/**",
+        "core/rexcode/isa/x86/tables.odin",
+        "core/rexcode/isa/x86/tests/**",
+        "core/rexcode/isa/x86/tools/**",
+        "core/simd/**",
+        "core/slice/**",
+        "core/sort/**",
+        "core/strconv/**",
+        "core/strings/**",
+        "core/sync/**",
+        "core/sys/**",
+        "core/terminal/**",
+        "core/testing/**",
+        "core/text/**",
+        "core/thread/**",
+        "core/time/**",
+        "core/unicode/**",
+        "examples/**",
+        "misc/compile_time_execution_problems.md",
+        "misc/debug.bat",
+        "misc/featuregen/**",
+        "misc/get-date.c",
+        "misc/lib_maker.bat",
+        "misc/lib_maker_clang.bat",
+        "misc/libs.txt",
+        "misc/odin.manifest",
+        "misc/odin.rc",
+        "misc/remove_libraries_for_other_platforms.sh",
+        "misc/shell.bat",
+        "misc/todo.md",
+        "odin.ebnf",
+        "run_tests.bat",
+        "run_tests.sh",
+        "shared/**",
+        "shell.nix",
+        "src/array.cpp",
+        "src/asm_tables.cpp",
+        "src/asm_tables_amd64.cpp",
+        "src/asm_tables_arm64.cpp",
+        "src/asm_tables_riscv.cpp",
+        "src/big_int.cpp",
+        "src/big_rat.cpp",
+        "src/bug_report.cpp",
+        "src/build_cpuid.cpp",
+        "src/build_settings.cpp",
+        "src/build_settings_microarch.cpp",
+        "src/bundle_command.cpp",
+        "src/cached.cpp",
+        "src/check_asm.cpp",
+        "src/check_asm_cfg.cpp",
+        "src/check_atomics.cpp",
+        "src/check_builtin.cpp",
+        "src/check_decl.cpp",
+        "src/check_escape.cpp",
+        "src/check_expr.cpp",
+        "src/check_stmt.cpp",
+        "src/check_type.cpp",
+        "src/checker.cpp",
+        "src/checker.hpp",
+        "src/checker_builtin_procs.hpp",
+        "src/checker_global.cpp",
+        "src/common.cpp",
+        "src/common_memory.cpp",
+        "src/docs.cpp",
+        "src/docs_format.cpp",
+        "src/docs_writer.cpp",
+        "src/entity.cpp",
+        "src/error.cpp",
+        "src/exact_value.cpp",
+        "src/gb/**",
+        "src/json.cpp",
+        "src/libtommath.cpp",
+        "src/linker.cpp",
+        "src/llvm-c/**",
+        "src/llvm_abi.cpp",
+        "src/llvm_backend.cpp",
+        "src/llvm_backend.hpp",
+        "src/llvm_backend_asm.cpp",
+        "src/llvm_backend_const.cpp",
+        "src/llvm_backend_debug.cpp",
+        "src/llvm_backend_expr.cpp",
+        "src/llvm_backend_general.cpp",
+        "src/llvm_backend_opt.cpp",
+        "src/llvm_backend_passes.cpp",
+        "src/llvm_backend_proc.cpp",
+        "src/llvm_backend_stmt.cpp",
+        "src/llvm_backend_type.cpp",
+        "src/llvm_backend_utility.cpp",
+        "src/main.cpp",
+        "src/microsoft_craziness.h",
+        "src/name_canonicalization.cpp",
+        "src/name_canonicalization.hpp",
+        "src/odin_compiler.natvis",
+        "src/parser.cpp",
+        "src/parser.hpp",
+        "src/parser_pos.cpp",
+        "src/path.cpp",
+        "src/priority_queue.cpp",
+        "src/ptr_map.cpp",
+        "src/ptr_set.cpp",
+        "src/queue.cpp",
+        "src/range_cache.cpp",
+        "src/semantics_writer.cpp",
+        "src/sort.cpp",
+        "src/string.cpp",
+        "src/string16_map.cpp",
+        "src/string_interner.cpp",
+        "src/string_map.cpp",
+        "src/string_set.cpp",
+        "src/thread_pool.cpp",
+        "src/threading.cpp",
+        "src/timings.cpp",
+        "src/tokenizer.cpp",
+        "src/types.cpp",
+        "src/ucg/**",
+        "src/unicode.cpp",
+        "tests/.gitignore",
+        "tests/abi/**",
+        "tests/benchmark/**",
+        "tests/core/.gitignore",
+        "tests/core/assets/I18N/duplicate-key.ts",
+        "tests/core/assets/I18N/messages.pot",
+        "tests/core/assets/I18N/mixed_context.po",
+        "tests/core/assets/I18N/nl_NL-qt-ts.ts",
+        "tests/core/assets/I18N/nl_NL-xliff-1.2.xliff",
+        "tests/core/assets/I18N/nl_NL-xliff-2.0.xliff",
+        "tests/core/assets/I18N/nl_NL.po",
+        "tests/core/assets/I18N/plur.po",
+        "tests/core/assets/Noise/**",
+        "tests/core/assets/Wycheproof/**",
+        "tests/core/assets/X509-Limbo/**",
+        "tests/core/assets/XML/**",
+        "tests/core/bytes/**",
+        "tests/core/c/**",
+        "tests/core/compress/**",
+        "tests/core/container/**",
+        "tests/core/crypto/bigint/**",
+        "tests/core/crypto/common/**",
+        "tests/core/crypto/noise/**",
+        "tests/core/crypto/test_core_crypto.odin",
+        "tests/core/crypto/test_core_crypto_aead.odin",
+        "tests/core/crypto/test_core_crypto_aes.odin",
+        "tests/core/crypto/test_core_crypto_ecdh.odin",
+        "tests/core/crypto/test_core_crypto_edwards.odin",
+        "tests/core/crypto/test_core_crypto_exdsa.odin",
+        "tests/core/crypto/test_core_crypto_hash.odin",
+        "tests/core/crypto/test_core_crypto_kdf.odin",
+        "tests/core/crypto/test_core_crypto_mac.odin",
+        "tests/core/crypto/test_core_crypto_noise.odin",
+        "tests/core/crypto/test_core_crypto_pqc.odin",
+        "tests/core/crypto/test_core_crypto_rsa.odin",
+        "tests/core/crypto/test_core_crypto_sha3_variants.odin",
+        "tests/core/crypto/test_core_crypto_weierstrass.odin",
+        "tests/core/crypto/wycheproof/**",
+        "tests/core/crypto/x509/fuzz_x509.odin",
+        "tests/core/crypto/x509/oom_x509.odin",
+        "tests/core/crypto/x509/test_core_x509.odin",
+        "tests/core/crypto/x509_limbo/**",
+        "tests/core/download_assets.py",
+        "tests/core/encoding/**",
+        "tests/core/flags/**",
+        "tests/core/fmt/**",
+        "tests/core/hash/**",
+        "tests/core/image/**",
+        "tests/core/io/**",
+        "tests/core/math/**",
+        "tests/core/mem/**",
+        "tests/core/nbio/**",
+        "tests/core/net/**",
+        "tests/core/normal.odin",
+        "tests/core/odin/**",
+        "tests/core/os/**",
+        "tests/core/path/**",
+        "tests/core/reflect/**",
+        "tests/core/runtime/**",
+        "tests/core/slice/**",
+        "tests/core/speed.odin",
+        "tests/core/strconv/**",
+        "tests/core/strings/**",
+        "tests/core/sync/**",
+        "tests/core/sys/**",
+        "tests/core/testing/**",
+        "tests/core/text/**",
+        "tests/core/thread/**",
+        "tests/core/time/**",
+        "tests/core/unicode/**",
+        "tests/documentation/**",
+        "tests/internal/**",
+        "tests/issues/**",
+        "tests/parapoly/**",
+        "tests/parapoly_concurrency/**"
+      ],
+      "text": "Copyright (c) 2016-2025 Ginger Bill. All rights reserved.\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.",
+      "attribution": "Copyright (c) 2016-2025 Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "core/encoding/uuid/**"
+      ],
+      "text": "Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved.\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.",
+      "attribution": "Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/core/encoding/uuid."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "core/flags/**"
+      ],
+      "text": "Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved.\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.",
+      "attribution": "Copyright (c) 2024-2025 Feoramund, Ginger Bill. All rights reserved., Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/core/flags."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/core/assets/Shoco/LICENSE",
+        "tests/core/assets/Shoco/README.md"
+      ],
+      "text": "Copyright (c) 2016-2021 Ginger Bill. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2016-2021 Ginger Bill. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/tests/core/assets/Shoco."
+    },
+    {
+      "license": "Unicode-3.0",
+      "paths": [
+        "tests/core/assets/UCD/**"
+      ],
+      "text": "UNICODE LICENSE V3\n\nCOPYRIGHT AND PERMISSION NOTICE\n\nCopyright © 1991-2026 Unicode, Inc.\n\nNOTICE TO USER: Carefully read the following legal agreement. BY\nDOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING DATA FILES, AND/OR\nSOFTWARE, YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE\nTERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT\nDOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of data files and any associated documentation (the \"Data Files\") or\nsoftware and any associated documentation (the \"Software\") to deal in the\nData Files or Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, and/or sell\ncopies of the Data Files or Software, and to permit persons to whom the\nData Files or Software are furnished to do so, provided that either (a)\nthis copyright and permission notice appear with all copies of the Data\nFiles or Software, or (b) this copyright and permission notice appear in\nassociated Documentation.\n\nTHE DATA FILES AND SOFTWARE ARE PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY\nKIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF\nTHIRD PARTY RIGHTS.\n\nIN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE\nBE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES,\nOR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,\nWHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,\nARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA\nFILES OR SOFTWARE.\n\nExcept as contained in this notice, the name of a copyright holder shall\nnot be used in advertising or otherwise to promote the sale, use or other\ndealings in these Data Files or Software without prior written\nauthorization of the copyright holder.\n",
+      "attribution": "COPYRIGHT AND PERMISSION NOTICE; Copyright © 1991-2026 Unicode, Inc., Unicode-3.0 license (license.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/tests/core/assets/UCD."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/ENet/LICENSE",
+        "vendor/ENet/callbacks.odin",
+        "vendor/ENet/enet.odin",
+        "vendor/ENet/list.odin",
+        "vendor/ENet/protocol.odin",
+        "vendor/ENet/time.odin",
+        "vendor/ENet/unix.odin",
+        "vendor/ENet/win32.odin"
+      ],
+      "text": "Copyright (c) 2002-2020 Lee Salzman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2002-2020 Lee Salzman, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/ENet."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "vendor/OpenEXRCore/LICENSE.md",
+        "vendor/OpenEXRCore/exr_attr.odin",
+        "vendor/OpenEXRCore/exr_base.odin",
+        "vendor/OpenEXRCore/exr_chunkio.odin",
+        "vendor/OpenEXRCore/exr_coding.odin",
+        "vendor/OpenEXRCore/exr_compression.odin",
+        "vendor/OpenEXRCore/exr_context.odin",
+        "vendor/OpenEXRCore/exr_debug.odin",
+        "vendor/OpenEXRCore/exr_decode.odin",
+        "vendor/OpenEXRCore/exr_encode.odin",
+        "vendor/OpenEXRCore/exr_errors.odin",
+        "vendor/OpenEXRCore/exr_part.odin"
+      ],
+      "text": "Copyright (c) Contributors to the OpenEXR Project. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Copyright (c) Contributors to the OpenEXR Project. All rights reserved., BSD-3-Clause license (LICENSE.md), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/OpenEXRCore."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/box2d/LICENSE",
+        "vendor/box2d/README.md",
+        "vendor/box2d/box2d.odin",
+        "vendor/box2d/box2d_wasm.odin",
+        "vendor/box2d/build_box2d.sh",
+        "vendor/box2d/collision.odin",
+        "vendor/box2d/id.odin",
+        "vendor/box2d/lib/box2d_windows_amd64_avx2.lib",
+        "vendor/box2d/lib/box2d_windows_amd64_sse2.lib",
+        "vendor/box2d/math_functions.odin",
+        "vendor/box2d/types.odin",
+        "vendor/box2d/wasm.Makefile"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 Erin Catto\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2022 Erin Catto, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/box2d."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/cgltf/LICENSE",
+        "vendor/cgltf/README.md",
+        "vendor/cgltf/cgltf.odin",
+        "vendor/cgltf/cgltf_wasm.odin",
+        "vendor/cgltf/src/**"
+      ],
+      "text": "Copyright (c) 2018-2021 Johannes Kuhlmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018-2021 Johannes Kuhlmann, MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/cgltf."
+    },
+    {
+      "license": "curl",
+      "paths": [
+        "vendor/curl/LICENSE",
+        "vendor/curl/c/**",
+        "vendor/curl/curl.odin",
+        "vendor/curl/curl_easy.odin",
+        "vendor/curl/curl_header.odin",
+        "vendor/curl/curl_multi.odin",
+        "vendor/curl/curl_options.odin",
+        "vendor/curl/curl_posix.odin",
+        "vendor/curl/curl_urlapi.odin",
+        "vendor/curl/curl_websockets.odin",
+        "vendor/curl/curl_windows.odin"
+      ],
+      "text": "COPYRIGHT AND PERMISSION NOTICE\n\nCopyright (c) 1996 - 2025, Daniel Stenberg, daniel@haxx.se, and many contributors, see the THANKS file.\n\nAll rights reserved.\n\nPermission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nExcept as contained in this notice, the name of a copyright holder shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization of the copyright holder.",
+      "attribution": "COPYRIGHT AND PERMISSION NOTICE; Copyright (c) 1996 - 2025, Daniel Stenberg, daniel@haxx.se, and many contributors, see the THANKS file., curl license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/curl."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/ggpo/LICENSE",
+        "vendor/ggpo/ggpo.odin"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2009-2019 GroundStorm Studios, LLC. (http://ggpo.net)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.",
+      "attribution": "Copyright (c) 2009-2019 GroundStorm Studios, LLC. (http://ggpo.net), MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/ggpo."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/glfw/LICENSE.txt",
+        "vendor/glfw/bindings/**",
+        "vendor/glfw/constants.odin",
+        "vendor/glfw/native_darwin.odin",
+        "vendor/glfw/native_linux.odin",
+        "vendor/glfw/native_windows.odin",
+        "vendor/glfw/types.odin",
+        "vendor/glfw/wrapper.odin"
+      ],
+      "text": "Copyright (c) 2002-2006 Marcus Geelnard\n\nCopyright (c) 2006-2019 Camilla Löwy\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n",
+      "attribution": "Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2019 Camilla Löwy, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/glfw."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/kb_text_shape/src/**"
+      ],
+      "text": "zlib License\n\n(C) Copyright 2024-2025 Jimmy Lefevre\n\nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n  claim that you wrote the original software. If you use this software\n  in a product, an acknowledgment in the product documentation would be\n  appreciated but is not required.\n2. Altered source versions must be plainly marked as such, and must not be\n  misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.",
+      "attribution": "the authors of odin-lang/Odin (vendor/kb_text_shape/src) (the license file names no copyright line), Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/kb_text_shape/src."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/lua/5.1/include/**",
+        "vendor/lua/5.1/lua.odin",
+        "vendor/lua/5.2/include/**",
+        "vendor/lua/5.2/lua.odin",
+        "vendor/lua/5.3/include/**",
+        "vendor/lua/5.3/lua.odin",
+        "vendor/lua/5.4/include/**",
+        "vendor/lua/5.4/lua.odin",
+        "vendor/lua/LICENSE",
+        "vendor/lua/README.md"
+      ],
+      "text": "Copyright © 1994–2023 Lua.org, PUC-Rio.\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Copyright © 1994–2023 Lua.org, PUC-Rio., MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/lua."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/microui/**"
+      ],
+      "text": "Original work: Copyright (c) 2020 rxi\nModified work: Copyright (c) 2020 oskarnp\nModified work: Copyright (c) 2021 gingerBill\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "the authors of odin-lang/Odin (vendor/microui) (the license file names no copyright line), MIT license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/microui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/portmidi/LICENSE.txt",
+        "vendor/portmidi/doc.odin",
+        "vendor/portmidi/portmidi.odin",
+        "vendor/portmidi/util.odin"
+      ],
+      "text": "PortMidi Portable Real-Time MIDI Library\nPortMidi API Header File\nLatest version available at: http://sourceforge.net/projects/portmedia\n\nCopyright (c) 1999-2000 Ross Bencina and Phil Burk\nCopyright (c) 2001-2006 Roger B. Dannenberg\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files\n(the \"Software\"), to deal in the Software without restriction,\nincluding without limitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of the Software,\nand to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR\nANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF\nCONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 1999-2000 Ross Bencina and Phil Burk; Copyright (c) 2001-2006 Roger B. Dannenberg, MIT license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/portmidi."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/raylib/LICENSE",
+        "vendor/raylib/README.md",
+        "vendor/raylib/easings.odin",
+        "vendor/raylib/linux/**",
+        "vendor/raylib/linux-arm64/**",
+        "vendor/raylib/macos/libraygui-arm64.dylib",
+        "vendor/raylib/macos/libraygui.dylib",
+        "vendor/raylib/macos/libraylib.600.dylib",
+        "vendor/raylib/macos/libraylib.a",
+        "vendor/raylib/raygui.odin",
+        "vendor/raylib/raylib.odin",
+        "vendor/raylib/raymath.odin",
+        "vendor/raylib/rlgl/**",
+        "vendor/raylib/wasm/libraylib.web.a",
+        "vendor/raylib/windows/**"
+      ],
+      "text": "Copyright (c) 2013-2026 Ramon Santamaria (@raysan5)\n\nThis software is provided \"as-is\", without any express or implied warranty. In no event \nwill the authors be held liable for any damages arising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose, including commercial \napplications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n  1. The origin of this software must not be misrepresented; you must not claim that you \n  wrote the original software. If you use this software in a product, an acknowledgment \n  in the product documentation would be appreciated but is not required.\n\n  2. Altered source versions must be plainly marked as such, and must not be misrepresented\n  as being the original software.\n\n  3. This notice may not be removed or altered from any source distribution.\n",
+      "attribution": "Copyright (c) 2013-2026 Ramon Santamaria (@raysan5), Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/raylib."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/sdl2/LICENSE.txt",
+        "vendor/sdl2/gamecontrollerdb.txt",
+        "vendor/sdl2/sdl2.odin",
+        "vendor/sdl2/sdl_audio.odin",
+        "vendor/sdl2/sdl_blendmode.odin",
+        "vendor/sdl2/sdl_cpuinfo.odin",
+        "vendor/sdl2/sdl_events.odin",
+        "vendor/sdl2/sdl_gamecontroller.odin",
+        "vendor/sdl2/sdl_gesture_haptic.odin",
+        "vendor/sdl2/sdl_hints.odin",
+        "vendor/sdl2/sdl_joystick.odin",
+        "vendor/sdl2/sdl_keyboard.odin",
+        "vendor/sdl2/sdl_keycode.odin",
+        "vendor/sdl2/sdl_log.odin",
+        "vendor/sdl2/sdl_messagebox.odin",
+        "vendor/sdl2/sdl_metal.odin",
+        "vendor/sdl2/sdl_mouse.odin",
+        "vendor/sdl2/sdl_mutex.odin",
+        "vendor/sdl2/sdl_pixels.odin",
+        "vendor/sdl2/sdl_rect.odin",
+        "vendor/sdl2/sdl_render.odin",
+        "vendor/sdl2/sdl_rwops.odin",
+        "vendor/sdl2/sdl_scancode.odin",
+        "vendor/sdl2/sdl_stdinc.odin",
+        "vendor/sdl2/sdl_surface.odin",
+        "vendor/sdl2/sdl_system.odin",
+        "vendor/sdl2/sdl_syswm.odin",
+        "vendor/sdl2/sdl_thread.odin",
+        "vendor/sdl2/sdl_timer.odin",
+        "vendor/sdl2/sdl_touch.odin",
+        "vendor/sdl2/sdl_video.odin",
+        "vendor/sdl2/sdl_vulkan.odin"
+      ],
+      "text": "Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>\r\n  \r\nThis software is provided 'as-is', without any express or implied\r\nwarranty.  In no event will the authors be held liable for any damages\r\narising from the use of this software.\r\n\r\nPermission is granted to anyone to use this software for any purpose,\r\nincluding commercial applications, and to alter it and redistribute it\r\nfreely, subject to the following restrictions:\r\n  \r\n1. The origin of this software must not be misrepresented; you must not\r\n   claim that you wrote the original software. If you use this software\r\n   in a product, an acknowledgment in the product documentation would be\r\n   appreciated but is not required. \r\n2. Altered source versions must be plainly marked as such, and must not be\r\n   misrepresented as being the original software.\r\n3. This notice may not be removed or altered from any source distribution.\r\n",
+      "attribution": "Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl2."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/sdl2/net/COPYING.txt",
+        "vendor/sdl2/net/sdl_net.odin"
+      ],
+      "text": "/*\r\n  SDL_net:  An example cross-platform network library for use with SDL\r\n  Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>\r\n\r\n  This software is provided 'as-is', without any express or implied\r\n  warranty.  In no event will the authors be held liable for any damages\r\n  arising from the use of this software.\r\n\r\n  Permission is granted to anyone to use this software for any purpose,\r\n  including commercial applications, and to alter it and redistribute it\r\n  freely, subject to the following restrictions:\r\n\r\n  1. The origin of this software must not be misrepresented; you must not\r\n     claim that you wrote the original software. If you use this software\r\n     in a product, an acknowledgment in the product documentation would be\r\n     appreciated but is not required.\r\n  2. Altered source versions must be plainly marked as such, and must not be\r\n     misrepresented as being the original software.\r\n  3. This notice may not be removed or altered from any source distribution.\r\n*/",
+      "attribution": "Copyright (C) 1997-2021 Sam Lantinga <slouken@libsdl.org>, Zlib license (COPYING.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl2/net."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/sdl3/LICENSE.txt",
+        "vendor/sdl3/SDL3.dll",
+        "vendor/sdl3/SDL3.lib",
+        "vendor/sdl3/gamecontrollerdb.txt",
+        "vendor/sdl3/include/**",
+        "vendor/sdl3/sdl3__foreign.odin",
+        "vendor/sdl3/sdl3_assert.odin",
+        "vendor/sdl3/sdl3_asyncio.odin",
+        "vendor/sdl3/sdl3_atomic.odin",
+        "vendor/sdl3/sdl3_audio.odin",
+        "vendor/sdl3/sdl3_bits.odin",
+        "vendor/sdl3/sdl3_blendmode.odin",
+        "vendor/sdl3/sdl3_camera.odin",
+        "vendor/sdl3/sdl3_clipboard.odin",
+        "vendor/sdl3/sdl3_cpuinfo.odin",
+        "vendor/sdl3/sdl3_dialog.odin",
+        "vendor/sdl3/sdl3_endian.odin",
+        "vendor/sdl3/sdl3_error.odin",
+        "vendor/sdl3/sdl3_events.odin",
+        "vendor/sdl3/sdl3_filesystem.odin",
+        "vendor/sdl3/sdl3_gamepad.odin",
+        "vendor/sdl3/sdl3_gpu.odin",
+        "vendor/sdl3/sdl3_guid.odin",
+        "vendor/sdl3/sdl3_haptic.odin",
+        "vendor/sdl3/sdl3_hidapi.odin",
+        "vendor/sdl3/sdl3_hints.odin",
+        "vendor/sdl3/sdl3_init.odin",
+        "vendor/sdl3/sdl3_iostream.odin",
+        "vendor/sdl3/sdl3_joystick.odin",
+        "vendor/sdl3/sdl3_keyboard.odin",
+        "vendor/sdl3/sdl3_keycode.odin",
+        "vendor/sdl3/sdl3_loadso.odin",
+        "vendor/sdl3/sdl3_locale.odin",
+        "vendor/sdl3/sdl3_log.odin",
+        "vendor/sdl3/sdl3_main.odin",
+        "vendor/sdl3/sdl3_messagebox.odin",
+        "vendor/sdl3/sdl3_metal.odin",
+        "vendor/sdl3/sdl3_misc.odin",
+        "vendor/sdl3/sdl3_mouse.odin",
+        "vendor/sdl3/sdl3_mutex.odin",
+        "vendor/sdl3/sdl3_pen.odin",
+        "vendor/sdl3/sdl3_pixels.odin",
+        "vendor/sdl3/sdl3_platform.odin",
+        "vendor/sdl3/sdl3_power.odin",
+        "vendor/sdl3/sdl3_process.odin",
+        "vendor/sdl3/sdl3_properties.odin",
+        "vendor/sdl3/sdl3_rect.odin",
+        "vendor/sdl3/sdl3_render.odin",
+        "vendor/sdl3/sdl3_scancode.odin",
+        "vendor/sdl3/sdl3_sensor.odin",
+        "vendor/sdl3/sdl3_stdinc.odin",
+        "vendor/sdl3/sdl3_storage.odin",
+        "vendor/sdl3/sdl3_surface.odin",
+        "vendor/sdl3/sdl3_system.odin",
+        "vendor/sdl3/sdl3_thread.odin",
+        "vendor/sdl3/sdl3_time.odin",
+        "vendor/sdl3/sdl3_timer.odin",
+        "vendor/sdl3/sdl3_touch.odin",
+        "vendor/sdl3/sdl3_tray.odin",
+        "vendor/sdl3/sdl3_version.odin",
+        "vendor/sdl3/sdl3_video.odin",
+        "vendor/sdl3/sdl3_vulkan.odin"
+      ],
+      "text": "Copyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>\n  \nThis software is provided 'as-is', without any express or implied\nwarranty.  In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n  \n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would be\n   appreciated but is not required. \n2. Altered source versions must be plainly marked as such, and must not be\n   misrepresented as being the original software.\n3. This notice may not be removed or altered from any source distribution.\n\n",
+      "attribution": "Copyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>, Zlib license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/sdl3."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "vendor/vulkan/_gen/**"
+      ],
+      "text": "\r\n                                 Apache License\r\n                           Version 2.0, January 2004\r\n                        http://www.apache.org/licenses/\r\n\r\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\r\n\r\n   1. Definitions.\r\n\r\n      \"License\" shall mean the terms and conditions for use, reproduction,\r\n      and distribution as defined by Sections 1 through 9 of this document.\r\n\r\n      \"Licensor\" shall mean the copyright owner or entity authorized by\r\n      the copyright owner that is granting the License.\r\n\r\n      \"Legal Entity\" shall mean the union of the acting entity and all\r\n      other entities that control, are controlled by, or are under common\r\n      control with that entity. For the purposes of this definition,\r\n      \"control\" means (i) the power, direct or indirect, to cause the\r\n      direction or management of such entity, whether by contract or\r\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\r\n      outstanding shares, or (iii) beneficial ownership of such entity.\r\n\r\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\r\n      exercising permissions granted by this License.\r\n\r\n      \"Source\" form shall mean the preferred form for making modifications,\r\n      including but not limited to software source code, documentation\r\n      source, and configuration files.\r\n\r\n      \"Object\" form shall mean any form resulting from mechanical\r\n      transformation or translation of a Source form, including but\r\n      not limited to compiled object code, generated documentation,\r\n      and conversions to other media types.\r\n\r\n      \"Work\" shall mean the work of authorship, whether in Source or\r\n      Object form, made available under the License, as indicated by a\r\n      copyright notice that is included in or attached to the work\r\n      (an example is provided in the Appendix below).\r\n\r\n      \"Derivative Works\" shall mean any work, whether in Source or Object\r\n      form, that is based on (or derived from) the Work and for which the\r\n      editorial revisions, annotations, elaborations, or other modifications\r\n      represent, as a whole, an original work of authorship. For the purposes\r\n      of this License, Derivative Works shall not include works that remain\r\n      separable from, or merely link (or bind by name) to the interfaces of,\r\n      the Work and Derivative Works thereof.\r\n\r\n      \"Contribution\" shall mean any work of authorship, including\r\n      the original version of the Work and any modifications or additions\r\n      to that Work or Derivative Works thereof, that is intentionally\r\n      submitted to Licensor for inclusion in the Work by the copyright owner\r\n      or by an individual or Legal Entity authorized to submit on behalf of\r\n      the copyright owner. For the purposes of this definition, \"submitted\"\r\n      means any form of electronic, verbal, or written communication sent\r\n      to the Licensor or its representatives, including but not limited to\r\n      communication on electronic mailing lists, source code control systems,\r\n      and issue tracking systems that are managed by, or on behalf of, the\r\n      Licensor for the purpose of discussing and improving the Work, but\r\n      excluding communication that is conspicuously marked or otherwise\r\n      designated in writing by the copyright owner as \"Not a Contribution.\"\r\n\r\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\r\n      on behalf of whom a Contribution has been received by Licensor and\r\n      subsequently incorporated within the Work.\r\n\r\n   2. Grant of Copyright License. Subject to the terms and conditions of\r\n      this License, each Contributor hereby grants to You a perpetual,\r\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\r\n      copyright license to reproduce, prepare Derivative Works of,\r\n      publicly display, publicly perform, sublicense, and distribute the\r\n      Work and such Derivative Works in Source or Object form.\r\n\r\n   3. Grant of Patent License. Subject to the terms and conditions of\r\n      this License, each Contributor hereby grants to You a perpetual,\r\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\r\n      (except as stated in this section) patent license to make, have made,\r\n      use, offer to sell, sell, import, and otherwise transfer the Work,\r\n      where such license applies only to those patent claims licensable\r\n      by such Contributor that are necessarily infringed by their\r\n      Contribution(s) alone or by combination of their Contribution(s)\r\n      with the Work to which such Contribution(s) was submitted. If You\r\n      institute patent litigation against any entity (including a\r\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\r\n      or a Contribution incorporated within the Work constitutes direct\r\n      or contributory patent infringement, then any patent licenses\r\n      granted to You under this License for that Work shall terminate\r\n      as of the date such litigation is filed.\r\n\r\n   4. Redistribution. You may reproduce and distribute copies of the\r\n      Work or Derivative Works thereof in any medium, with or without\r\n      modifications, and in Source or Object form, provided that You\r\n      meet the following conditions:\r\n\r\n      (a) You must give any other recipients of the Work or\r\n          Derivative Works a copy of this License; and\r\n\r\n      (b) You must cause any modified files to carry prominent notices\r\n          stating that You changed the files; and\r\n\r\n      (c) You must retain, in the Source form of any Derivative Works\r\n          that You distribute, all copyright, patent, trademark, and\r\n          attribution notices from the Source form of the Work,\r\n          excluding those notices that do not pertain to any part of\r\n          the Derivative Works; and\r\n\r\n      (d) If the Work includes a \"NOTICE\" text file as part of its\r\n          distribution, then any Derivative Works that You distribute must\r\n          include a readable copy of the attribution notices contained\r\n          within such NOTICE file, excluding those notices that do not\r\n          pertain to any part of the Derivative Works, in at least one\r\n          of the following places: within a NOTICE text file distributed\r\n          as part of the Derivative Works; within the Source form or\r\n          documentation, if provided along with the Derivative Works; or,\r\n          within a display generated by the Derivative Works, if and\r\n          wherever such third-party notices normally appear. The contents\r\n          of the NOTICE file are for informational purposes only and\r\n          do not modify the License. You may add Your own attribution\r\n          notices within Derivative Works that You distribute, alongside\r\n          or as an addendum to the NOTICE text from the Work, provided\r\n          that such additional attribution notices cannot be construed\r\n          as modifying the License.\r\n\r\n      You may add Your own copyright statement to Your modifications and\r\n      may provide additional or different license terms and conditions\r\n      for use, reproduction, or distribution of Your modifications, or\r\n      for any such Derivative Works as a whole, provided Your use,\r\n      reproduction, and distribution of the Work otherwise complies with\r\n      the conditions stated in this License.\r\n\r\n   5. Submission of Contributions. Unless You explicitly state otherwise,\r\n      any Contribution intentionally submitted for inclusion in the Work\r\n      by You to the Licensor shall be under the terms and conditions of\r\n      this License, without any additional terms or conditions.\r\n      Notwithstanding the above, nothing herein shall supersede or modify\r\n      the terms of any separate license agreement you may have executed\r\n      with Licensor regarding such Contributions.\r\n\r\n   6. Trademarks. This License does not grant permission to use the trade\r\n      names, trademarks, service marks, or product names of the Licensor,\r\n      except as required for reasonable and customary use in describing the\r\n      origin of the Work and reproducing the content of the NOTICE file.\r\n\r\n   7. Disclaimer of Warranty. Unless required by applicable law or\r\n      agreed to in writing, Licensor provides the Work (and each\r\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\r\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\r\n      implied, including, without limitation, any warranties or conditions\r\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\r\n      PARTICULAR PURPOSE. You are solely responsible for determining the\r\n      appropriateness of using or redistributing the Work and assume any\r\n      risks associated with Your exercise of permissions under this License.\r\n\r\n   8. Limitation of Liability. In no event and under no legal theory,\r\n      whether in tort (including negligence), contract, or otherwise,\r\n      unless required by applicable law (such as deliberate and grossly\r\n      negligent acts) or agreed to in writing, shall any Contributor be\r\n      liable to You for damages, including any direct, indirect, special,\r\n      incidental, or consequential damages of any character arising as a\r\n      result of this License or out of the use or inability to use the\r\n      Work (including but not limited to damages for loss of goodwill,\r\n      work stoppage, computer failure or malfunction, or any and all\r\n      other commercial damages or losses), even if such Contributor\r\n      has been advised of the possibility of such damages.\r\n\r\n   9. Accepting Warranty or Additional Liability. While redistributing\r\n      the Work or Derivative Works thereof, You may choose to offer,\r\n      and charge a fee for, acceptance of support, warranty, indemnity,\r\n      or other liability obligations and/or rights consistent with this\r\n      License. However, in accepting such obligations, You may act only\r\n      on Your own behalf and on Your sole responsibility, not on behalf\r\n      of any other Contributor, and only if You agree to indemnify,\r\n      defend, and hold each Contributor harmless for any liability\r\n      incurred by, or claims asserted against, such Contributor by reason\r\n      of your accepting any such warranty or additional liability.\r\n\r\n   END OF TERMS AND CONDITIONS\r\n\r\n   APPENDIX: How to apply the Apache License to your work.\r\n\r\n      To apply the Apache License to your work, attach the following\r\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\r\n      replaced with your own identifying information. (Don't include\r\n      the brackets!)  The text should be enclosed in the appropriate\r\n      comment syntax for the file format. We also recommend that a\r\n      file or class name and description of purpose be included on the\r\n      same \"printed page\" as the copyright notice for easier\r\n      identification within third-party archives.\r\n\r\n   Copyright [yyyy] [name of copyright owner]\r\n\r\n   Licensed under the Apache License, Version 2.0 (the \"License\");\r\n   you may not use this file except in compliance with the License.\r\n   You may obtain a copy of the License at\r\n\r\n       http://www.apache.org/licenses/LICENSE-2.0\r\n\r\n   Unless required by applicable law or agreed to in writing, software\r\n   distributed under the License is distributed on an \"AS IS\" BASIS,\r\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n   See the License for the specific language governing permissions and\r\n   limitations under the License.",
+      "attribution": "the authors of odin-lang/Odin (vendor/vulkan/_gen) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/vulkan/_gen."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "vendor/zlib/LICENSE",
+        "vendor/zlib/zlib.odin"
+      ],
+      "text": "Copyright notice:\r\n\r\n (C) 1995-2026 Jean-loup Gailly and Mark Adler\r\n\r\n  This software is provided 'as-is', without any express or implied\r\n  warranty.  In no event will the authors be held liable for any damages\r\n  arising from the use of this software.\r\n\r\n  Permission is granted to anyone to use this software for any purpose,\r\n  including commercial applications, and to alter it and redistribute it\r\n  freely, subject to the following restrictions:\r\n\r\n  1. The origin of this software must not be misrepresented; you must not\r\n     claim that you wrote the original software. If you use this software\r\n     in a product, an acknowledgment in the product documentation would be\r\n     appreciated but is not required.\r\n  2. Altered source versions must be plainly marked as such, and must not be\r\n     misrepresented as being the original software.\r\n  3. This notice may not be removed or altered from any source distribution.\r\n\r\n  Jean-loup Gailly        Mark Adler\r\n  jloup@gzip.org          madler@alumni.caltech.edu\r\n",
+      "attribution": "Copyright notice:; (C) 1995-2026 Jean-loup Gailly and Mark Adler, Zlib license (LICENSE), https://github.com/odin-lang/Odin/tree/74ed00460c115173343f618f1d6fecc42b0e5cf3/vendor/zlib."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.600"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Makefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dylib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ebnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.odin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.so"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xliff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RAD-LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

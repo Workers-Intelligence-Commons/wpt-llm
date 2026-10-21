@@ -1,0 +1,548 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/caronc/apprise",
+  "revision": "d61316d4cd18b333d60d6fa046512ec93117e415",
+  "checksum": "sha256:48b2ff54d5f91dac61fbf496a9dc61984447d282d6c0c7a0103a30fccaa1d877",
+  "extract": {
+    "exclude": [
+      "Apprise-overview.png",
+      "apprise/assets/themes/**",
+      "tests/var/apprise-archive.zip",
+      "tests/var/apprise-test.gif",
+      "tests/var/apprise-test.jpeg",
+      "tests/var/apprise-test.mp4",
+      "tests/var/apprise-test.png"
+    ]
+  },
+  "history": {
+    "since": "429470d45e149fb7ff2290c27c8c87ee1f954c5c"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2026, Chris Caron <lead2gold@gmail.com>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/caronc/apprise: Copyright (c) 2026, Chris Caron <lead2gold@gmail.com>, BSD-2-Clause license (LICENSE), https://github.com/caronc/apprise."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".codecov.yml",
+        ".env",
+        ".github/**",
+        ".gitignore",
+        ".gitleaks.toml",
+        ".vscode/**",
+        "ACKNOWLEDGEMENTS.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "all-plugin-requirements.txt",
+        "apprise/__init__.py",
+        "apprise/apprise.py",
+        "apprise/apprise_attachment.py",
+        "apprise/apprise_config.py",
+        "apprise/asset.py",
+        "apprise/assets/NotifyXML-1.0.xsd",
+        "apprise/assets/NotifyXML-1.1.xsd",
+        "apprise/attachment/**",
+        "apprise/cli.py",
+        "apprise/common.py",
+        "apprise/compat/**",
+        "apprise/config/**",
+        "apprise/conversion/**",
+        "apprise/decorators/**",
+        "apprise/dispatch.py",
+        "apprise/emojis.py",
+        "apprise/exception.py",
+        "apprise/i18n/**",
+        "apprise/locale.py",
+        "apprise/logger.py",
+        "apprise/manager.py",
+        "apprise/manager_attachment.py",
+        "apprise/manager_config.py",
+        "apprise/manager_plugins.py",
+        "apprise/persistent_store.py",
+        "apprise/plugins/**",
+        "apprise/py.typed",
+        "apprise/result.py",
+        "apprise/tag.py",
+        "apprise/template.py",
+        "apprise/url.py",
+        "apprise/utils/**",
+        "babel.cfg",
+        "bin/**",
+        "dev-requirements.txt",
+        "docker-compose.yml",
+        "packaging/**",
+        "pyproject.toml",
+        "requirements.txt",
+        "setup.py",
+        "tests/conftest.py",
+        "tests/docker/**",
+        "tests/helpers/**",
+        "tests/test_api.py",
+        "tests/test_apprise_asset.py",
+        "tests/test_apprise_attachments.py",
+        "tests/test_apprise_cli.py",
+        "tests/test_apprise_config.py",
+        "tests/test_apprise_emojis.py",
+        "tests/test_apprise_helpers.py",
+        "tests/test_apprise_jsonencoder.py",
+        "tests/test_apprise_pickle.py",
+        "tests/test_apprise_template.py",
+        "tests/test_apprise_template_placement.py",
+        "tests/test_apprise_translations.py",
+        "tests/test_apprise_utils.py",
+        "tests/test_asyncio.py",
+        "tests/test_attach_base.py",
+        "tests/test_attach_file.py",
+        "tests/test_attach_http.py",
+        "tests/test_attach_memory.py",
+        "tests/test_compat_markdown33.py",
+        "tests/test_compat_py39.py",
+        "tests/test_config_base.py",
+        "tests/test_config_file.py",
+        "tests/test_config_http.py",
+        "tests/test_config_memory.py",
+        "tests/test_conversion.py",
+        "tests/test_decorator_notify.py",
+        "tests/test_delivery_tracking.py",
+        "tests/test_delivery_tracking_fleet.py",
+        "tests/test_delivery_tracking_keys.py",
+        "tests/test_delivery_tracking_paths.py",
+        "tests/test_delivery_tracking_retry.py",
+        "tests/test_delivery_tracking_structure.py",
+        "tests/test_escapes.py",
+        "tests/test_exception.py",
+        "tests/test_i18n_status.py",
+        "tests/test_logger.py",
+        "tests/test_notification_manager.py",
+        "tests/test_notify_base.py",
+        "tests/test_persistent_store.py",
+        "tests/test_plugin_africas_talking.py",
+        "tests/test_plugin_apprise_api.py",
+        "tests/test_plugin_aprs.py",
+        "tests/test_plugin_bark.py",
+        "tests/test_plugin_base_formatting.py",
+        "tests/test_plugin_blink1.py",
+        "tests/test_plugin_bluesky.py",
+        "tests/test_plugin_brevo.py",
+        "tests/test_plugin_bulksms.py",
+        "tests/test_plugin_bulkvs.py",
+        "tests/test_plugin_burstsms.py",
+        "tests/test_plugin_chanify.py",
+        "tests/test_plugin_chime.py",
+        "tests/test_plugin_clickatell.py",
+        "tests/test_plugin_clicksend.py",
+        "tests/test_plugin_custom_form.py",
+        "tests/test_plugin_custom_json.py",
+        "tests/test_plugin_custom_xml.py",
+        "tests/test_plugin_d7networks.py",
+        "tests/test_plugin_dapnet.py",
+        "tests/test_plugin_dbus.py",
+        "tests/test_plugin_deltachat.py",
+        "tests/test_plugin_dingtalk.py",
+        "tests/test_plugin_discord.py",
+        "tests/test_plugin_dot.py",
+        "tests/test_plugin_eight00com.py",
+        "tests/test_plugin_email.py",
+        "tests/test_plugin_email_smtp.py",
+        "tests/test_plugin_emby.py",
+        "tests/test_plugin_enigma2.py",
+        "tests/test_plugin_evolution.py",
+        "tests/test_plugin_exotel.py",
+        "tests/test_plugin_fcm.py",
+        "tests/test_plugin_feishu.py",
+        "tests/test_plugin_flock.py",
+        "tests/test_plugin_flowtriq.py",
+        "tests/test_plugin_fluxer.py",
+        "tests/test_plugin_fortysixelks.py",
+        "tests/test_plugin_freemobile.py",
+        "tests/test_plugin_glib.py",
+        "tests/test_plugin_gnome.py",
+        "tests/test_plugin_goalert.py",
+        "tests/test_plugin_google_chat.py",
+        "tests/test_plugin_gotify.py",
+        "tests/test_plugin_groupme.py",
+        "tests/test_plugin_growl.py",
+        "tests/test_plugin_guilded.py",
+        "tests/test_plugin_homeassistant.py",
+        "tests/test_plugin_httpsms.py",
+        "tests/test_plugin_humhub.py",
+        "tests/test_plugin_ifttt.py",
+        "tests/test_plugin_irc.py",
+        "tests/test_plugin_irc_state.py",
+        "tests/test_plugin_jellyfin.py",
+        "tests/test_plugin_jira.py",
+        "tests/test_plugin_join.py",
+        "tests/test_plugin_kavenegar.py",
+        "tests/test_plugin_kook.py",
+        "tests/test_plugin_kumulos.py",
+        "tests/test_plugin_lametric.py",
+        "tests/test_plugin_lark.py",
+        "tests/test_plugin_lauther.py",
+        "tests/test_plugin_line.py",
+        "tests/test_plugin_macosx.py",
+        "tests/test_plugin_mailersend.py",
+        "tests/test_plugin_mailgun.py",
+        "tests/test_plugin_mastodon.py",
+        "tests/test_plugin_matrix.py",
+        "tests/test_plugin_matrix_sizing.py",
+        "tests/test_plugin_mattermost.py",
+        "tests/test_plugin_messagebird.py",
+        "tests/test_plugin_misskey.py",
+        "tests/test_plugin_mobilemessage.py",
+        "tests/test_plugin_mqtt.py",
+        "tests/test_plugin_msg91.py",
+        "tests/test_plugin_nextcloud.py",
+        "tests/test_plugin_nextcloudtalk.py",
+        "tests/test_plugin_notica.py",
+        "tests/test_plugin_notifiarr.py",
+        "tests/test_plugin_notifico.py",
+        "tests/test_plugin_notifyre.py",
+        "tests/test_plugin_ntfy.py",
+        "tests/test_plugin_octopush.py",
+        "tests/test_plugin_office365.py",
+        "tests/test_plugin_onebot.py",
+        "tests/test_plugin_onesignal.py",
+        "tests/test_plugin_opsgenie.py",
+        "tests/test_plugin_pagerduty.py",
+        "tests/test_plugin_pagertree.py",
+        "tests/test_plugin_parse_platform.py",
+        "tests/test_plugin_pinglet.py",
+        "tests/test_plugin_pingram.py",
+        "tests/test_plugin_plivo.py",
+        "tests/test_plugin_postmark.py",
+        "tests/test_plugin_prowl.py",
+        "tests/test_plugin_pushbullet.py",
+        "tests/test_plugin_pushdeer.py",
+        "tests/test_plugin_pushed.py",
+        "tests/test_plugin_pushjet.py",
+        "tests/test_plugin_pushme.py",
+        "tests/test_plugin_pushover.py",
+        "tests/test_plugin_pushplus.py",
+        "tests/test_plugin_pushsafer.py",
+        "tests/test_plugin_pushward.py",
+        "tests/test_plugin_pushy.py",
+        "tests/test_plugin_qq.py",
+        "tests/test_plugin_reddit.py",
+        "tests/test_plugin_resend.py",
+        "tests/test_plugin_revolt.py",
+        "tests/test_plugin_ringcentral.py",
+        "tests/test_plugin_rocket_chat.py",
+        "tests/test_plugin_rsyslog.py",
+        "tests/test_plugin_ryver.py",
+        "tests/test_plugin_sendgrid.py",
+        "tests/test_plugin_sendpulse.py",
+        "tests/test_plugin_serverchan.py",
+        "tests/test_plugin_serwersms.py",
+        "tests/test_plugin_ses.py",
+        "tests/test_plugin_seven.py",
+        "tests/test_plugin_sfr.py",
+        "tests/test_plugin_signal.py",
+        "tests/test_plugin_signalgrid.py",
+        "tests/test_plugin_signl4.py",
+        "tests/test_plugin_simplepush.py",
+        "tests/test_plugin_sinch.py",
+        "tests/test_plugin_slack.py",
+        "tests/test_plugin_smpp.py",
+        "tests/test_plugin_sms_manager.py",
+        "tests/test_plugin_smsc.py",
+        "tests/test_plugin_smseagle.py",
+        "tests/test_plugin_smtp2go.py",
+        "tests/test_plugin_sns.py",
+        "tests/test_plugin_sogs.py",
+        "tests/test_plugin_sparkpost.py",
+        "tests/test_plugin_spike.py",
+        "tests/test_plugin_splunk.py",
+        "tests/test_plugin_spugpush.py",
+        "tests/test_plugin_stackfield.py",
+        "tests/test_plugin_streamlabs.py",
+        "tests/test_plugin_synology.py",
+        "tests/test_plugin_syslog.py",
+        "tests/test_plugin_techululs_push.py",
+        "tests/test_plugin_telegram.py",
+        "tests/test_plugin_telnyx.py",
+        "tests/test_plugin_threema.py",
+        "tests/test_plugin_title_maxlen.py",
+        "tests/test_plugin_trigv.py",
+        "tests/test_plugin_twilio.py",
+        "tests/test_plugin_twist.py",
+        "tests/test_plugin_twitter.py",
+        "tests/test_plugin_vapid.py",
+        "tests/test_plugin_viber.py",
+        "tests/test_plugin_voipms.py",
+        "tests/test_plugin_vonage.py",
+        "tests/test_plugin_webex_teams.py",
+        "tests/test_plugin_wechat.py",
+        "tests/test_plugin_wecombot.py",
+        "tests/test_plugin_whatsapp.py",
+        "tests/test_plugin_windows.py",
+        "tests/test_plugin_workflows.py",
+        "tests/test_plugin_wpush.py",
+        "tests/test_plugin_wxpusher.py",
+        "tests/test_plugin_xbmc_kodi.py",
+        "tests/test_plugin_xmpp.py",
+        "tests/test_plugin_youlmk.py",
+        "tests/test_plugin_zoom.py",
+        "tests/test_plugin_zulip.py",
+        "tests/test_result.py",
+        "tests/test_retry_wait.py",
+        "tests/test_secure_logging.py",
+        "tests/test_template.py",
+        "tests/test_url_response_lookup.py",
+        "tests/test_utils_format.py",
+        "tests/test_utils_http.py",
+        "tests/test_utils_pem.py",
+        "tests/test_utils_pgp.py",
+        "tests/test_utils_sanitize.py",
+        "tests/test_utils_socket.py",
+        "tests/test_utils_wkd.py",
+        "tests/test_utils_xml.py",
+        "tests/test_utils_yaml.py",
+        "tests/var/01_test_example.html",
+        "tests/var/fcm/**",
+        "tests/var/mime.types",
+        "tests/var/pgp/**",
+        "tox.ini",
+        "win-requirements.txt"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2026, Chris Caron <lead2gold@gmail.com>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2026, Chris Caron <lead2gold@gmail.com>, BSD-2-Clause license (LICENSE), https://github.com/caronc/apprise."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.el10"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.el9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.f44"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.py310"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.py311"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.py312"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.py39"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rawhide"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/apprise"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

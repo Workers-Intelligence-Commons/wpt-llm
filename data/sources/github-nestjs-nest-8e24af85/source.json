@@ -1,0 +1,453 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nestjs/nest",
+  "revision": "1c2f689518412cbc6a6bc09662dd5cfed779f2bf",
+  "checksum": "sha256:9b649ac011e4bd18bc8325c74178a0d9af40ac9f7849bdc0d79275d7166befbe",
+  "extract": {
+    "exclude": [
+      "packages/common/interfaces/external/**",
+      "packages/microservices/external/**",
+      "packages/platform-fastify/interfaces/external/**",
+      "sample/29-file-upload/resources/**",
+      "sample/39-file-storage/try-it/kibble.png",
+      "sample/39-file-storage/try-it/scratching-post.jpg"
+    ]
+  },
+  "history": {
+    "since": "d3abc2dddd63d4b5c0c3d0de880e11980c9f09a9"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "(The MIT License)\n\nCopyright (c) 2017-present Kamil Mysliwiec <https://kamilmysliwiec.com>\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nestjs/nest: Copyright (c) 2017-present Kamil Mysliwiec <https://kamilmysliwiec.com>, MIT license (LICENSE), https://github.com/nestjs/nest; the authors of @nestjs/benchmarks, ISC license (declared in package.json), https://github.com/nestjs/nest/tree/1c2f689518412cbc6a6bc09662dd5cfed779f2bf/tools/benchmarks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".circleci/**",
+        ".commitlintrc.json",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".npmignore",
+        ".oxlintrc.json",
+        ".prettierignore",
+        ".prettierrc",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Readme.md",
+        "SECURITY.md",
+        "gulpfile.mjs",
+        "integration/**",
+        "lerna.json",
+        "package-lock.json",
+        "package.json",
+        "packages/common/PACKAGE.md",
+        "packages/common/Readme.md",
+        "packages/common/constants.ts",
+        "packages/common/decorators/**",
+        "packages/common/enums/**",
+        "packages/common/exceptions/**",
+        "packages/common/file-stream/**",
+        "packages/common/index.ts",
+        "packages/common/interfaces/abstract.interface.ts",
+        "packages/common/interfaces/controllers/**",
+        "packages/common/interfaces/exceptions/**",
+        "packages/common/interfaces/features/**",
+        "packages/common/interfaces/global-prefix-options.interface.ts",
+        "packages/common/interfaces/hooks/**",
+        "packages/common/interfaces/http/**",
+        "packages/common/interfaces/index.ts",
+        "packages/common/interfaces/injectable.interface.ts",
+        "packages/common/interfaces/microservices/**",
+        "packages/common/interfaces/middleware/**",
+        "packages/common/interfaces/modules/**",
+        "packages/common/interfaces/nest-application-context-options.interface.ts",
+        "packages/common/interfaces/nest-application-context.interface.ts",
+        "packages/common/interfaces/nest-application-options.interface.ts",
+        "packages/common/interfaces/nest-application.interface.ts",
+        "packages/common/interfaces/nest-microservice.interface.ts",
+        "packages/common/interfaces/router-options.interface.ts",
+        "packages/common/interfaces/scope-options.interface.ts",
+        "packages/common/interfaces/shutdown-hooks-options.interface.ts",
+        "packages/common/interfaces/type.interface.ts",
+        "packages/common/interfaces/version-options.interface.ts",
+        "packages/common/interfaces/websockets/**",
+        "packages/common/internal.ts",
+        "packages/common/module-utils/**",
+        "packages/common/package.json",
+        "packages/common/pipes/**",
+        "packages/common/serializer/**",
+        "packages/common/services/**",
+        "packages/common/test/**",
+        "packages/common/tsconfig.build.json",
+        "packages/common/tsconfig.json",
+        "packages/common/utils/**",
+        "packages/core/**",
+        "packages/microservices/Readme.md",
+        "packages/microservices/client/**",
+        "packages/microservices/constants.ts",
+        "packages/microservices/container.ts",
+        "packages/microservices/context/**",
+        "packages/microservices/ctx-host/**",
+        "packages/microservices/decorators/**",
+        "packages/microservices/deserializers/**",
+        "packages/microservices/enums/**",
+        "packages/microservices/errors/**",
+        "packages/microservices/events/**",
+        "packages/microservices/exceptions/**",
+        "packages/microservices/factories/**",
+        "packages/microservices/helpers/**",
+        "packages/microservices/index.ts",
+        "packages/microservices/interfaces/**",
+        "packages/microservices/listener-metadata-explorer.ts",
+        "packages/microservices/listeners-controller.ts",
+        "packages/microservices/microservices-module.ts",
+        "packages/microservices/module/**",
+        "packages/microservices/nest-microservice.ts",
+        "packages/microservices/package.json",
+        "packages/microservices/record-builders/**",
+        "packages/microservices/serializers/**",
+        "packages/microservices/server/**",
+        "packages/microservices/test/**",
+        "packages/microservices/tokens.ts",
+        "packages/microservices/tsconfig.build.json",
+        "packages/microservices/tsconfig.json",
+        "packages/microservices/utils/**",
+        "packages/platform-express/**",
+        "packages/platform-fastify/Readme.md",
+        "packages/platform-fastify/adapters/**",
+        "packages/platform-fastify/constants.ts",
+        "packages/platform-fastify/decorators/**",
+        "packages/platform-fastify/index.ts",
+        "packages/platform-fastify/interfaces/index.ts",
+        "packages/platform-fastify/interfaces/nest-fastify-application.interface.ts",
+        "packages/platform-fastify/interfaces/nest-fastify-body-parser-options.interface.ts",
+        "packages/platform-fastify/multipart/**",
+        "packages/platform-fastify/package.json",
+        "packages/platform-fastify/test/**",
+        "packages/platform-fastify/tsconfig.build.json",
+        "packages/platform-fastify/tsconfig.json",
+        "packages/platform-socket.io/**",
+        "packages/platform-ws/**",
+        "packages/testing/**",
+        "packages/tsconfig.build.json",
+        "packages/tsconfig.json",
+        "packages/websockets/**",
+        "readme_jp.md",
+        "readme_kr.md",
+        "readme_zh.md",
+        "renovate.json",
+        "sample/01-cats-app/**",
+        "sample/02-gateways/**",
+        "sample/03-microservices/**",
+        "sample/04-grpc/**",
+        "sample/05-sql-typeorm/**",
+        "sample/06-mongoose/**",
+        "sample/07-sequelize/**",
+        "sample/08-webpack/**",
+        "sample/09-babel-example/**",
+        "sample/10-fastify/**",
+        "sample/11-swagger/**",
+        "sample/12-graphql-schema-first/**",
+        "sample/13-mongo-typeorm/**",
+        "sample/14-mongoose-base/**",
+        "sample/15-mvc/**",
+        "sample/16-gateways-ws/**",
+        "sample/17-mvc-fastify/**",
+        "sample/18-context/**",
+        "sample/19-auth-jwt/**",
+        "sample/20-cache/**",
+        "sample/21-serializer/**",
+        "sample/22-graphql-prisma/**",
+        "sample/23-graphql-code-first/**",
+        "sample/24-serve-static/**",
+        "sample/25-dynamic-modules/**",
+        "sample/26-queues/**",
+        "sample/27-scheduling/**",
+        "sample/28-sse/**",
+        "sample/29-file-upload/.gitignore",
+        "sample/29-file-upload/README.md",
+        "sample/29-file-upload/e2e/**",
+        "sample/29-file-upload/jest.json",
+        "sample/29-file-upload/package.json",
+        "sample/29-file-upload/src/**",
+        "sample/29-file-upload/tsconfig.build.json",
+        "sample/29-file-upload/tsconfig.json",
+        "sample/29-file-upload/vitest.config.e2e.mts",
+        "sample/29-file-upload/vitest.config.mts",
+        "sample/30-event-emitter/**",
+        "sample/31-graphql-federation-code-first/**",
+        "sample/32-graphql-federation-schema-first/**",
+        "sample/33-graphql-mercurius/**",
+        "sample/34-hmr-esm/**",
+        "sample/35-zod-validation/**",
+        "sample/36-valibot-serializer/**",
+        "sample/37-outbox/**",
+        "sample/38-webhooks/**",
+        "sample/39-file-storage/.gitignore",
+        "sample/39-file-storage/README.md",
+        "sample/39-file-storage/nest-cli.json",
+        "sample/39-file-storage/package.json",
+        "sample/39-file-storage/src/**",
+        "sample/39-file-storage/test/**",
+        "sample/39-file-storage/try-it/notes.txt",
+        "sample/39-file-storage/tsconfig.build.json",
+        "sample/39-file-storage/tsconfig.json",
+        "sample/39-file-storage/vitest.config.e2e.mts",
+        "scripts/**",
+        "tools/gulp/**",
+        "tsconfig.json",
+        "tsconfig.spec.json",
+        "vitest.config.coverage.mts",
+        "vitest.config.integration.mts",
+        "vitest.config.mts"
+      ],
+      "text": "(The MIT License)\n\nCopyright (c) 2017-present Kamil Mysliwiec <https://kamilmysliwiec.com>\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-present Kamil Mysliwiec <https://kamilmysliwiec.com>, MIT license (LICENSE), https://github.com/nestjs/nest."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tools/benchmarks/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of @nestjs/benchmarks, ISC license (declared in package.json), https://github.com/nestjs/nest/tree/1c2f689518412cbc6a6bc09662dd5cfed779f2bf/tools/benchmarks."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.gql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "handlebars",
+      "paths": [
+        "**/*.hbs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prisma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

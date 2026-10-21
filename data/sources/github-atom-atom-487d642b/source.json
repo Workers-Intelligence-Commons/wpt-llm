@@ -1,0 +1,973 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/atom/atom",
+  "revision": "1c3bd35ce238dc0491def9e1780d04748d8e18af",
+  "checksum": "sha256:ae851e49be7945974f1356434627c466c3129bb26ce8b1e1d81051370ab47045",
+  "extract": {
+    "exclude": [
+      "packages/git-diff/spec/fixtures/working-dir/git.git/index",
+      "packages/git-diff/spec/fixtures/working-dir/git.git/objects/**",
+      "resources/app-icons/**",
+      "resources/mac/file.icns",
+      "resources/win/file.ico",
+      "resources/win/folder.ico",
+      "resources/win/loading.gif",
+      "resources/win/visualElements/**",
+      "script/**",
+      "spec/fixtures/dir/file-detected-as-binary",
+      "spec/fixtures/git/ignore.git/index",
+      "spec/fixtures/git/ignore.git/objects/**",
+      "spec/fixtures/git/master.git/index",
+      "spec/fixtures/git/master.git/objects/**",
+      "spec/fixtures/git/master.git/worktrees/worktree-dir/index",
+      "spec/fixtures/git/repo-with-submodules/git.git/index",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/index",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/objects/**",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/index",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/05/**",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/1a/**",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/5b/**",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/pack/pack-e568a55e02b6b7b75582924204669e4f3ed5276f.idx",
+      "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/pack/pack-e568a55e02b6b7b75582924204669e4f3ed5276f.pack",
+      "spec/fixtures/git/repo-with-submodules/git.git/objects/**",
+      "spec/fixtures/git/repo-with-submodules/jstips/resources/jstips-header-blog.gif",
+      "spec/fixtures/git/working-dir/git.git/index",
+      "spec/fixtures/git/working-dir/git.git/objects/**",
+      "spec/fixtures/packages/package-with-ignored-incompatible-native-module/node_modules/**",
+      "spec/fixtures/packages/package-with-incompatible-native-module-loaded-conditionally/node_modules/**",
+      "spec/fixtures/packages/package-with-incompatible-native-module/node_modules/**",
+      "static/icons/atomicons.woff",
+      "static/icons/octicons-2.1.2.woff",
+      "static/icons/octicons.woff",
+      "static/images/**",
+      "vendor/**"
+    ]
+  },
+  "history": {
+    "since": "832cc40a7f935788a595d2d2a656cea5d9c56b63"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2011-2022 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2015 Machisté N. Quintana\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2016 GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2011-2018 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2016 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2015 oneuijs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Commit history of https://github.com/atom/atom: Copyright (c) 2011-2022 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom; Copyright (c) 2015 Machisté N. Quintana, MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/about; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-dark-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-dark-ui; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-light-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-light-ui; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/autoflow; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/base16-tomorrow-dark-theme; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/base16-tomorrow-light-theme; Copyright (c) 2016 GitHub, Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/dalek; Copyright (c) 2011-2018 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/deprecation-cop; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/dev-live-reload; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/exception-reporting; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/git-diff; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/go-to-line; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/incompatible-packages; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/line-ending-selector; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/link; Copyright (c) 2016 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-dark-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-dark-ui; Copyright (c) 2016 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-light-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-light-ui; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/solarized-dark-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/solarized-light-syntax; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/update-package-dependencies; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/welcome; Copyright (c) 2015 oneuijs, MIT license (LICENSE), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/spec/fixtures/git/repo-with-submodules/You-Dont-Need-jQuery."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".coffeelintignore",
+        ".eslintignore",
+        ".eslintrc.json",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".prettierrc",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE.md",
+        "PULL_REQUEST_TEMPLATE.md",
+        "README.md",
+        "SUPPORT.md",
+        "apm/**",
+        "atom.sh",
+        "benchmarks/**",
+        "coffeelint.json",
+        "docs/**",
+        "dot-atom/**",
+        "exports/**",
+        "keymaps/**",
+        "menus/**",
+        "package-lock.json",
+        "package.json",
+        "packages/README.md",
+        "packages/grammar-selector/**",
+        "packages/language-rust-bundled/**",
+        "resources/linux/**",
+        "resources/mac/atom-Info.plist",
+        "resources/mac/entitlements.plist",
+        "resources/mac/helper-Info.plist",
+        "resources/win/apm.cmd",
+        "resources/win/apm.sh",
+        "resources/win/atom.cmd",
+        "resources/win/atom.js",
+        "resources/win/atom.sh",
+        "resources/win/atom.visualElementsManifest.xml",
+        "spec/application-delegate-spec.js",
+        "spec/async-spec-helpers.js",
+        "spec/atom-environment-spec.js",
+        "spec/atom-paths-spec.js",
+        "spec/atom-protocol-handler-spec.js",
+        "spec/atom-reporter.coffee",
+        "spec/auto-update-manager-spec.js",
+        "spec/babel-spec.js",
+        "spec/buffered-node-process-spec.js",
+        "spec/buffered-process-spec.js",
+        "spec/clipboard-spec.js",
+        "spec/command-installer-spec.js",
+        "spec/command-registry-spec.js",
+        "spec/compile-cache-spec.coffee",
+        "spec/config-file-spec.js",
+        "spec/config-spec.js",
+        "spec/context-menu-manager-spec.js",
+        "spec/decoration-manager-spec.js",
+        "spec/default-directory-provider-spec.js",
+        "spec/default-directory-searcher-spec.js",
+        "spec/deserializer-manager-spec.js",
+        "spec/dock-spec.js",
+        "spec/file-system-blob-store-spec.js",
+        "spec/fixtures/babel/**",
+        "spec/fixtures/coffee.coffee",
+        "spec/fixtures/cson.cson",
+        "spec/fixtures/css.css",
+        "spec/fixtures/dir/a",
+        "spec/fixtures/dir/a-dir/**",
+        "spec/fixtures/dir/b",
+        "spec/fixtures/dir/c",
+        "spec/fixtures/dir/file-with-newline-literal",
+        "spec/fixtures/dir/file-with-unicode",
+        "spec/fixtures/dir/file1",
+        "spec/fixtures/git/ignore.git/HEAD",
+        "spec/fixtures/git/ignore.git/config",
+        "spec/fixtures/git/ignore.git/info/**",
+        "spec/fixtures/git/ignore.git/refs/**",
+        "spec/fixtures/git/master.git/HEAD",
+        "spec/fixtures/git/master.git/config",
+        "spec/fixtures/git/master.git/refs/**",
+        "spec/fixtures/git/master.git/worktrees/worktree-dir/HEAD",
+        "spec/fixtures/git/master.git/worktrees/worktree-dir/commondir",
+        "spec/fixtures/git/repo-with-submodules/.gitmodules",
+        "spec/fixtures/git/repo-with-submodules/README",
+        "spec/fixtures/git/repo-with-submodules/git.git/COMMIT_EDITMSG",
+        "spec/fixtures/git/repo-with-submodules/git.git/HEAD",
+        "spec/fixtures/git/repo-with-submodules/git.git/config",
+        "spec/fixtures/git/repo-with-submodules/git.git/description",
+        "spec/fixtures/git/repo-with-submodules/git.git/hooks/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/info/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/logs/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/COMMIT_EDITMSG",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/HEAD",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/ORIG_HEAD",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/config",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/description",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/gitdir",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/hooks/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/info/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/logs/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/packed-refs",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/You-Dont-Need-jQuery/refs/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/COMMIT_EDITMSG",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/HEAD",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/ORIG_HEAD",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/config",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/description",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/gitdir",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/hooks/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/info/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/logs/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/objects/pack/pack-e568a55e02b6b7b75582924204669e4f3ed5276f.pack",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/packed-refs",
+        "spec/fixtures/git/repo-with-submodules/git.git/modules/jstips/refs/**",
+        "spec/fixtures/git/repo-with-submodules/git.git/refs/**",
+        "spec/fixtures/git/repo-with-submodules/jstips/CONTRIBUTING.md",
+        "spec/fixtures/git/repo-with-submodules/jstips/README.md",
+        "spec/fixtures/git/repo-with-submodules/jstips/git.git",
+        "spec/fixtures/git/repo-with-submodules/jstips/resources/log.js",
+        "spec/fixtures/git/working-dir/.gitignore",
+        "spec/fixtures/git/working-dir/a.txt",
+        "spec/fixtures/git/working-dir/git.git/HEAD",
+        "spec/fixtures/git/working-dir/git.git/config",
+        "spec/fixtures/git/working-dir/git.git/refs/**",
+        "spec/fixtures/indentation/**",
+        "spec/fixtures/lorem.txt",
+        "spec/fixtures/module-cache/**",
+        "spec/fixtures/native-cache/**",
+        "spec/fixtures/packages/folder/**",
+        "spec/fixtures/packages/package-that-throws-an-exception/**",
+        "spec/fixtures/packages/package-that-throws-on-activate/**",
+        "spec/fixtures/packages/package-that-throws-on-deactivate/**",
+        "spec/fixtures/packages/package-with-activation-commands/**",
+        "spec/fixtures/packages/package-with-activation-commands-and-deserializers/**",
+        "spec/fixtures/packages/package-with-activation-hooks/**",
+        "spec/fixtures/packages/package-with-broken-keymap/**",
+        "spec/fixtures/packages/package-with-broken-package-json/**",
+        "spec/fixtures/packages/package-with-cached-incompatible-native-module/**",
+        "spec/fixtures/packages/package-with-config-defaults/**",
+        "spec/fixtures/packages/package-with-config-schema/**",
+        "spec/fixtures/packages/package-with-consumed-services/**",
+        "spec/fixtures/packages/package-with-deactivate/**",
+        "spec/fixtures/packages/package-with-deprecated-pane-item-method/**",
+        "spec/fixtures/packages/package-with-deserializers/**",
+        "spec/fixtures/packages/package-with-different-directory-name/**",
+        "spec/fixtures/packages/package-with-directory-provider/**",
+        "spec/fixtures/packages/package-with-empty-activation-commands/**",
+        "spec/fixtures/packages/package-with-empty-activation-hooks/**",
+        "spec/fixtures/packages/package-with-empty-keymap/**",
+        "spec/fixtures/packages/package-with-empty-menu/**",
+        "spec/fixtures/packages/package-with-empty-workspace-openers/**",
+        "spec/fixtures/packages/package-with-eval-time-api-calls/**",
+        "spec/fixtures/packages/package-with-grammars/**",
+        "spec/fixtures/packages/package-with-ignored-incompatible-native-module/main.js",
+        "spec/fixtures/packages/package-with-ignored-incompatible-native-module/package.json",
+        "spec/fixtures/packages/package-with-incompatible-native-module/main.js",
+        "spec/fixtures/packages/package-with-incompatible-native-module/package.json",
+        "spec/fixtures/packages/package-with-incompatible-native-module-loaded-conditionally/main.js",
+        "spec/fixtures/packages/package-with-incompatible-native-module-loaded-conditionally/package.json",
+        "spec/fixtures/packages/package-with-index/**",
+        "spec/fixtures/packages/package-with-injection-selector/**",
+        "spec/fixtures/packages/package-with-invalid-activation-commands/**",
+        "spec/fixtures/packages/package-with-invalid-context-menu/**",
+        "spec/fixtures/packages/package-with-invalid-grammar/**",
+        "spec/fixtures/packages/package-with-invalid-settings/**",
+        "spec/fixtures/packages/package-with-invalid-styles/**",
+        "spec/fixtures/packages/package-with-invalid-url-package-json/**",
+        "spec/fixtures/packages/package-with-json-config-schema/**",
+        "spec/fixtures/packages/package-with-keymaps/**",
+        "spec/fixtures/packages/package-with-keymaps-manifest/**",
+        "spec/fixtures/packages/package-with-main/**",
+        "spec/fixtures/packages/package-with-menus/**",
+        "spec/fixtures/packages/package-with-menus-manifest/**",
+        "spec/fixtures/packages/package-with-missing-consumed-services/**",
+        "spec/fixtures/packages/package-with-missing-provided-services/**",
+        "spec/fixtures/packages/package-with-no-activate/**",
+        "spec/fixtures/packages/package-with-prefixed-and-suffixed-repo-url/**",
+        "spec/fixtures/packages/package-with-provided-services/**",
+        "spec/fixtures/packages/package-with-rb-filetype/**",
+        "spec/fixtures/packages/package-with-serialization/**",
+        "spec/fixtures/packages/package-with-serialize-error/**",
+        "spec/fixtures/packages/package-with-settings/**",
+        "spec/fixtures/packages/package-with-short-url-package-json/**",
+        "spec/fixtures/packages/package-with-style-sheets-manifest/**",
+        "spec/fixtures/packages/package-with-styles/**",
+        "spec/fixtures/packages/package-with-stylesheets-manifest/**",
+        "spec/fixtures/packages/package-with-tree-sitter-grammar/**",
+        "spec/fixtures/packages/package-with-uri-handler/**",
+        "spec/fixtures/packages/package-with-url-main/**",
+        "spec/fixtures/packages/package-with-view-providers/**",
+        "spec/fixtures/packages/package-with-workspace-openers/**",
+        "spec/fixtures/packages/package-without-module/**",
+        "spec/fixtures/packages/sublime-tabs/**",
+        "spec/fixtures/packages/theme-with-incomplete-ui-variables/**",
+        "spec/fixtures/packages/theme-with-index-css/**",
+        "spec/fixtures/packages/theme-with-index-less/**",
+        "spec/fixtures/packages/theme-with-invalid-styles/**",
+        "spec/fixtures/packages/theme-with-package-file/**",
+        "spec/fixtures/packages/theme-with-syntax-variables/**",
+        "spec/fixtures/packages/theme-with-ui-variables/**",
+        "spec/fixtures/packages/theme-without-package-file/**",
+        "spec/fixtures/packages/wordcount/**",
+        "spec/fixtures/sample-with-comments.js",
+        "spec/fixtures/sample-with-many-folds.js",
+        "spec/fixtures/sample-with-tabs-and-leading-comment.coffee",
+        "spec/fixtures/sample-with-tabs.coffee",
+        "spec/fixtures/sample.js",
+        "spec/fixtures/sample.less",
+        "spec/fixtures/sample.txt",
+        "spec/fixtures/script-with-deprecations.js",
+        "spec/fixtures/script.js",
+        "spec/fixtures/shebang",
+        "spec/fixtures/task-handler-with-deprecations.coffee",
+        "spec/fixtures/task-spec-handler.coffee",
+        "spec/fixtures/testdir/**",
+        "spec/fixtures/two-hundred.txt",
+        "spec/fixtures/typescript/**",
+        "spec/git-repository-provider-spec.js",
+        "spec/git-repository-spec.js",
+        "spec/grammar-registry-spec.js",
+        "spec/gutter-container-spec.js",
+        "spec/gutter-spec.js",
+        "spec/helpers/**",
+        "spec/history-manager-spec.js",
+        "spec/integration/**",
+        "spec/jasmine-junit-reporter.js",
+        "spec/jasmine-list-reporter.js",
+        "spec/jasmine-test-runner.coffee",
+        "spec/keymap-extensions-spec.js",
+        "spec/main-process/**",
+        "spec/menu-manager-spec.js",
+        "spec/menu-sort-helpers-spec.js",
+        "spec/module-cache-spec.js",
+        "spec/native-compile-cache-spec.coffee",
+        "spec/native-watcher-registry-spec.js",
+        "spec/notification-manager-spec.js",
+        "spec/notification-spec.js",
+        "spec/package-manager-spec.js",
+        "spec/package-spec.js",
+        "spec/package-transpilation-registry-spec.js",
+        "spec/pane-axis-element-spec.js",
+        "spec/pane-container-element-spec.js",
+        "spec/pane-container-spec.js",
+        "spec/pane-element-spec.js",
+        "spec/pane-spec.js",
+        "spec/panel-container-element-spec.js",
+        "spec/panel-container-spec.js",
+        "spec/panel-spec.js",
+        "spec/path-watcher-spec.js",
+        "spec/project-spec.js",
+        "spec/reopen-project-menu-manager-spec.js",
+        "spec/selection-spec.js",
+        "spec/spec-helper-platform.js",
+        "spec/spec-helper.coffee",
+        "spec/squirrel-update-spec.js",
+        "spec/state-store-spec.js",
+        "spec/style-manager-spec.js",
+        "spec/styles-element-spec.js",
+        "spec/syntax-scope-map-spec.js",
+        "spec/task-spec.js",
+        "spec/text-editor-component-spec.js",
+        "spec/text-editor-element-spec.js",
+        "spec/text-editor-registry-spec.js",
+        "spec/text-editor-spec.js",
+        "spec/text-mate-language-mode-spec.js",
+        "spec/text-utils-spec.js",
+        "spec/theme-manager-spec.js",
+        "spec/title-bar-spec.js",
+        "spec/tooltip-manager-spec.js",
+        "spec/tree-indenter-spec.js",
+        "spec/tree-sitter-language-mode-spec.js",
+        "spec/typescript-spec.js",
+        "spec/update-process-env-spec.js",
+        "spec/uri-handler-registry-spec.js",
+        "spec/view-registry-spec.js",
+        "spec/window-event-handler-spec.js",
+        "spec/workspace-center-spec.js",
+        "spec/workspace-element-spec.js",
+        "spec/workspace-spec.js",
+        "src/**",
+        "static/atom-ui/**",
+        "static/atom.less",
+        "static/babelrc.json",
+        "static/core-ui/**",
+        "static/icons/octicons.less",
+        "static/index.html",
+        "static/index.js",
+        "static/jasmine.less",
+        "static/linux.less",
+        "static/normalize.less",
+        "static/scaffolding.less",
+        "static/variables/**",
+        "stylelint.config.js"
+      ],
+      "text": "Copyright (c) 2011-2022 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2011-2022 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/about/**"
+      ],
+      "text": "Copyright (c) 2015 Machisté N. Quintana\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015 Machisté N. Quintana, MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/about."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/atom-dark-syntax/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-dark-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/atom-dark-ui/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-dark-ui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/atom-light-syntax/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-light-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/atom-light-ui/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/atom-light-ui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/autoflow/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/autoflow."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/base16-tomorrow-dark-theme/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/base16-tomorrow-dark-theme."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/base16-tomorrow-light-theme/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/base16-tomorrow-light-theme."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/dalek/**"
+      ],
+      "text": "Copyright (c) 2016 GitHub, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 GitHub, Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/dalek."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/deprecation-cop/**"
+      ],
+      "text": "Copyright (c) 2011-2018 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2011-2018 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/deprecation-cop."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/dev-live-reload/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/dev-live-reload."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/exception-reporting/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/exception-reporting."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/git-diff/LICENSE.md",
+        "packages/git-diff/README.md",
+        "packages/git-diff/keymaps/**",
+        "packages/git-diff/lib/**",
+        "packages/git-diff/menus/**",
+        "packages/git-diff/package.json",
+        "packages/git-diff/spec/diff-list-view-spec.js",
+        "packages/git-diff/spec/fixtures/working-dir/git.git/HEAD",
+        "packages/git-diff/spec/fixtures/working-dir/git.git/config",
+        "packages/git-diff/spec/fixtures/working-dir/git.git/refs/**",
+        "packages/git-diff/spec/fixtures/working-dir/sample.js",
+        "packages/git-diff/spec/fixtures/working-dir/sample.txt",
+        "packages/git-diff/spec/git-diff-spec.js",
+        "packages/git-diff/spec/git-diff-subfolder-spec.js",
+        "packages/git-diff/spec/init-spec.js",
+        "packages/git-diff/styles/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/git-diff."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/go-to-line/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/go-to-line."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/incompatible-packages/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/incompatible-packages."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/line-ending-selector/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/line-ending-selector."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/link/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/link."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/one-dark-syntax/**"
+      ],
+      "text": "Copyright (c) 2016 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-dark-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/one-dark-ui/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-dark-ui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/one-light-syntax/**"
+      ],
+      "text": "Copyright (c) 2016 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-light-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/one-light-ui/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/one-light-ui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/solarized-dark-syntax/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/solarized-dark-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/solarized-light-syntax/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/solarized-light-syntax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/update-package-dependencies/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/update-package-dependencies."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/welcome/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/packages/welcome."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "spec/fixtures/git/repo-with-submodules/You-Dont-Need-jQuery/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015 oneuijs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2015 oneuijs, MIT license (LICENSE), https://github.com/atom/atom/tree/1c3bd35ce238dc0491def9e1780d04748d8e18af/spec/fixtures/git/repo-with-submodules/You-Dont-Need-jQuery."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "coffeescript",
+      "paths": [
+        "**/*.coffee"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ejs",
+      "paths": [
+        "**/*.ejs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cjson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nemo_action"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pack"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.policy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coffeelintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COMMIT_EDITMSG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ORIG_HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commondir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-with-newline-literal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-with-unicode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitdir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oh-git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packed-refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/readme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/shebang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

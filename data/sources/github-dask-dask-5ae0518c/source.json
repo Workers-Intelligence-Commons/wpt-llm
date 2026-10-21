@@ -1,0 +1,401 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dask/dask",
+  "revision": "6ce3740fa79bfa051ecc74c3641f8c6a46dfdc30",
+  "checksum": "sha256:beef88f26d3b964e51eea665572026fad4c6a40488594062a7a80bee9f0fe9f3",
+  "extract": {
+    "exclude": [
+      "docs/source/_static/dask-simple.png",
+      "docs/source/daskcheatsheet.pdf",
+      "docs/source/images/10_minutes_array_graph.png",
+      "docs/source/images/10_minutes_bag_graph.png",
+      "docs/source/images/10_minutes_dataframe_graph.png",
+      "docs/source/images/HHMI_Janelia_Color.png",
+      "docs/source/images/async-embarrassing.gif",
+      "docs/source/images/changelog/**",
+      "docs/source/images/concurrent-futures-threaded.webp",
+      "docs/source/images/dashboard_jupyterlab.png",
+      "docs/source/images/dashboard_link.png",
+      "docs/source/images/dashboard_memory.png",
+      "docs/source/images/dashboard_memory_new.gif",
+      "docs/source/images/dashboard_progress.png",
+      "docs/source/images/dashboard_status.png",
+      "docs/source/images/dashboard_task_processing.png",
+      "docs/source/images/dashboard_task_stream_unhealthy.png",
+      "docs/source/images/dashboard_taskstream_healthy.png",
+      "docs/source/images/dataframe-optimize-explain.png",
+      "docs/source/images/futures-graph.png",
+      "docs/source/images/gputester-msg.png",
+      "docs/source/images/growth_of_languages.png",
+      "docs/source/images/growth_of_libraries.png",
+      "docs/source/images/map_blocks_drop_axis.png",
+      "docs/source/images/merge_chunks.png",
+      "docs/source/images/merge_chunks_false.png",
+      "docs/source/images/order-failure.png",
+      "docs/source/images/order-success.png",
+      "docs/source/images/reshape.png",
+      "docs/source/images/reshape_problem.png",
+      "docs/source/images/reshape_rechunked.png",
+      "docs/source/images/scaling-edges.png",
+      "docs/source/images/scaling-nodes.png",
+      "docs/source/images/simple-dask.png",
+      "docs/source/images/transpose-hlg-hovertooltip.png",
+      "docs/source/images/transpose-hlg-html-repr.png"
+    ]
+  },
+  "history": {
+    "since": "23bce271c30eb8c3737394fd0afd9da68ef84334"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2014, Anaconda, Inc. and contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/dask/dask: Copyright (c) 2014, Anaconda, Inc. and contributors, BSD-3-Clause license (LICENSE.txt), https://github.com/dask/dask."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".agents/**",
+        ".claude",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pixi/**",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "MANIFEST.in",
+        "README.rst",
+        "codecov.yml",
+        "conftest.py",
+        "continuous_integration/**",
+        "dask/**",
+        "docs/Makefile",
+        "docs/README.rst",
+        "docs/make.bat",
+        "docs/release-procedure.md",
+        "docs/requirements-docs.txt",
+        "docs/source/10-minutes-to-dask.rst",
+        "docs/source/_static/config_converter.js",
+        "docs/source/_static/custom.js",
+        "docs/source/_static/main-page.css",
+        "docs/source/_static/profile.html",
+        "docs/source/_static/stacked_profile.html",
+        "docs/source/_static/style.css",
+        "docs/source/_static/theme_overrides.css",
+        "docs/source/_static/transpose_cyto.html",
+        "docs/source/_static/yaml.min.js",
+        "docs/source/_templates/**",
+        "docs/source/adaptive.rst",
+        "docs/source/api.rst",
+        "docs/source/array-api.rst",
+        "docs/source/array-assignment.rst",
+        "docs/source/array-best-practices.rst",
+        "docs/source/array-chunks.rst",
+        "docs/source/array-creation.rst",
+        "docs/source/array-design.rst",
+        "docs/source/array-gufunc.rst",
+        "docs/source/array-numpy-compatibility.rst",
+        "docs/source/array-overlap.rst",
+        "docs/source/array-random.rst",
+        "docs/source/array-slicing.rst",
+        "docs/source/array-sparse.rst",
+        "docs/source/array-stack.rst",
+        "docs/source/array-stats.rst",
+        "docs/source/array.rst",
+        "docs/source/bag-api.rst",
+        "docs/source/bag-creation.rst",
+        "docs/source/bag.rst",
+        "docs/source/best-practices.rst",
+        "docs/source/caching.rst",
+        "docs/source/changelog.rst",
+        "docs/source/cheatsheet.rst",
+        "docs/source/cli.rst",
+        "docs/source/conf.py",
+        "docs/source/configuration.rst",
+        "docs/source/custom-collections.rst",
+        "docs/source/custom-graphs.rst",
+        "docs/source/customize-initialization.rst",
+        "docs/source/dashboard-progress-script.py",
+        "docs/source/dashboard.rst",
+        "docs/source/dataframe-api.rst",
+        "docs/source/dataframe-best-practices.rst",
+        "docs/source/dataframe-categoricals.rst",
+        "docs/source/dataframe-create.rst",
+        "docs/source/dataframe-design.rst",
+        "docs/source/dataframe-extend.rst",
+        "docs/source/dataframe-extra.rst",
+        "docs/source/dataframe-groupby.rst",
+        "docs/source/dataframe-hive.rst",
+        "docs/source/dataframe-indexing.rst",
+        "docs/source/dataframe-joins.rst",
+        "docs/source/dataframe-optimizer.rst",
+        "docs/source/dataframe-parquet.rst",
+        "docs/source/dataframe-sql.rst",
+        "docs/source/dataframe.rst",
+        "docs/source/debugging-performance.rst",
+        "docs/source/delayed-api.rst",
+        "docs/source/delayed-best-practices.rst",
+        "docs/source/delayed-collections.rst",
+        "docs/source/delayed.rst",
+        "docs/source/deploying-cli.rst",
+        "docs/source/deploying-cloud.rst",
+        "docs/source/deploying-docker.rst",
+        "docs/source/deploying-extra.rst",
+        "docs/source/deploying-hpc.rst",
+        "docs/source/deploying-kubernetes.rst",
+        "docs/source/deploying-python-advanced.rst",
+        "docs/source/deploying-python.rst",
+        "docs/source/deploying-ssh.rst",
+        "docs/source/deploying.rst",
+        "docs/source/deployment-considerations.rst",
+        "docs/source/develop.rst",
+        "docs/source/diagnostics-distributed.rst",
+        "docs/source/diagnostics-local.rst",
+        "docs/source/ecosystem.rst",
+        "docs/source/expr-system-internals.rst",
+        "docs/source/faq.rst",
+        "docs/source/futures.rst",
+        "docs/source/gpu.rst",
+        "docs/source/graph_manipulation.rst",
+        "docs/source/graphs.rst",
+        "docs/source/graphviz.rst",
+        "docs/source/high-level-graphs.rst",
+        "docs/source/how-to/**",
+        "docs/source/images/array.svg",
+        "docs/source/images/cloud-provider-logos.svg",
+        "docs/source/images/crosstalk.svg",
+        "docs/source/images/dask-adaptive.svg",
+        "docs/source/images/dask-array.svg",
+        "docs/source/images/dask-cluster-manager.svg",
+        "docs/source/images/dask-dataframe.svg",
+        "docs/source/images/dask-overview-distributed-callout.svg",
+        "docs/source/images/dask-overview-schedulers.svg",
+        "docs/source/images/dask-overview.svg",
+        "docs/source/images/dask_horizontal.svg",
+        "docs/source/images/dask_horizontal_black.svg",
+        "docs/source/images/dask_horizontal_on_blue.svg",
+        "docs/source/images/dask_horizontal_on_pink.svg",
+        "docs/source/images/dask_horizontal_white.svg",
+        "docs/source/images/dask_icon.svg",
+        "docs/source/images/dask_icon_black.svg",
+        "docs/source/images/dask_icon_on_pink.svg",
+        "docs/source/images/dask_icon_white.svg",
+        "docs/source/images/delayed-inc-double-add.svg",
+        "docs/source/images/distributed-overview.svg",
+        "docs/source/images/frame-shuffle.svg",
+        "docs/source/images/frame-sort.svg",
+        "docs/source/images/frame.svg",
+        "docs/source/images/inc-add.svg",
+        "docs/source/images/map-reduce-task-scheduling.svg",
+        "docs/source/images/optimize_dask1.svg",
+        "docs/source/images/optimize_dask2.svg",
+        "docs/source/images/optimize_dask3.svg",
+        "docs/source/images/optimize_dask4.svg",
+        "docs/source/images/optimize_dask5.svg",
+        "docs/source/images/optimizer/**",
+        "docs/source/images/overlap.svg",
+        "docs/source/images/overlapping-blocks.svg",
+        "docs/source/images/overlapping-neighbors.svg",
+        "docs/source/images/pipeline.svg",
+        "docs/source/images/transpose.svg",
+        "docs/source/images/transpose_opt.svg",
+        "docs/source/images/trivial.svg",
+        "docs/source/images/unoverlapping-neighbors.svg",
+        "docs/source/index.rst",
+        "docs/source/install.rst",
+        "docs/source/internals.rst",
+        "docs/source/logos.rst",
+        "docs/source/maintainers.rst",
+        "docs/source/ml.rst",
+        "docs/source/optimize.rst",
+        "docs/source/order.rst",
+        "docs/source/phases-of-computation.rst",
+        "docs/source/presentations.rst",
+        "docs/source/prometheus.rst",
+        "docs/source/scheduler-overview.rst",
+        "docs/source/scheduling-policy.rst",
+        "docs/source/scheduling.rst",
+        "docs/source/scripts/**",
+        "docs/source/shared.rst",
+        "docs/source/software-environments.rst",
+        "docs/source/spark.rst",
+        "docs/source/spec.rst",
+        "docs/source/support.rst",
+        "docs/source/understanding-performance.rst",
+        "docs/source/user-interfaces.rst",
+        "docs/source/why.rst",
+        "pixi.lock",
+        "pixi.toml",
+        "pyproject.toml"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2014, Anaconda, Inc. and contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2014, Anaconda, Inc. and contributors, BSD-3-Clause license (LICENSE.txt), https://github.com/dask/dask."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

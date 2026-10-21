@@ -1,0 +1,539 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tree-sitter/tree-sitter",
+  "revision": "8ca548849fc8dbefd699edcec26546bb14112820",
+  "checksum": "sha256:387af4b62e2757bca33ef8dde1c5139b40a53b85f680149e9c0af6e7282bb43c",
+  "extract": {
+    "exclude": [
+      "crates/cli/src/templates/**",
+      "docs/src/assets/images/**",
+      "docs/theme/**",
+      "lib/src/unicode/**",
+      "lib/src/wasm-stdlib/libc/**"
+    ]
+  },
+  "history": {
+    "since": "8918d1a5b14f9a54ef23dcb4b29d8bf2bccd6384"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/tree-sitter/tree-sitter: Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/cli; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/config; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/generate; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/highlight; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/language; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/loader; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/tags; Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/lib."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cargo/**",
+        ".editorconfig",
+        ".envrc",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".taplo.toml",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "FUNDING.json",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "build.zig",
+        "build.zig.zon",
+        "clippy.toml",
+        "crates/xtask/**",
+        "docs/.gitignore",
+        "docs/book.toml",
+        "docs/package.nix",
+        "docs/src/3-syntax-highlighting.md",
+        "docs/src/4-code-navigation.md",
+        "docs/src/5-implementation.md",
+        "docs/src/6-contributing.md",
+        "docs/src/7-playground.md",
+        "docs/src/SUMMARY.md",
+        "docs/src/assets/css/**",
+        "docs/src/assets/js/**",
+        "docs/src/assets/schemas/**",
+        "docs/src/cli/**",
+        "docs/src/creating-parsers/**",
+        "docs/src/index.md",
+        "docs/src/using-parsers/**",
+        "flake.lock",
+        "flake.nix",
+        "test/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/cli/Cargo.toml",
+        "crates/cli/LICENSE",
+        "crates/cli/README.md",
+        "crates/cli/benches/**",
+        "crates/cli/build.rs",
+        "crates/cli/eslint/**",
+        "crates/cli/npm/**",
+        "crates/cli/package.nix",
+        "crates/cli/src/fuzz/**",
+        "crates/cli/src/fuzz.rs",
+        "crates/cli/src/highlight.rs",
+        "crates/cli/src/init.rs",
+        "crates/cli/src/input.rs",
+        "crates/cli/src/logger.rs",
+        "crates/cli/src/main.rs",
+        "crates/cli/src/paint.rs",
+        "crates/cli/src/parse.rs",
+        "crates/cli/src/playground.html",
+        "crates/cli/src/playground.rs",
+        "crates/cli/src/query.rs",
+        "crates/cli/src/query_testing.rs",
+        "crates/cli/src/tags.rs",
+        "crates/cli/src/test.rs",
+        "crates/cli/src/test_highlight.rs",
+        "crates/cli/src/test_tags.rs",
+        "crates/cli/src/tests/**",
+        "crates/cli/src/tests.rs",
+        "crates/cli/src/tree_sitter_cli.rs",
+        "crates/cli/src/util.rs",
+        "crates/cli/src/version.rs",
+        "crates/cli/src/wasm.rs"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/cli."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/config/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/config."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/generate/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/generate."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/highlight/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/highlight."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/language/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/language."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/loader/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/loader."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tags/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/crates/tags."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "lib/.ccls",
+        "lib/Cargo.toml",
+        "lib/LICENSE",
+        "lib/README.md",
+        "lib/binding_rust/**",
+        "lib/binding_web/**",
+        "lib/include/**",
+        "lib/lldb_pretty_printers/**",
+        "lib/package.nix",
+        "lib/src/alloc.c",
+        "lib/src/alloc.h",
+        "lib/src/array.h",
+        "lib/src/atomic.h",
+        "lib/src/error_costs.h",
+        "lib/src/get_changed_ranges.c",
+        "lib/src/get_changed_ranges.h",
+        "lib/src/host.h",
+        "lib/src/language.c",
+        "lib/src/language.h",
+        "lib/src/length.h",
+        "lib/src/lexer.c",
+        "lib/src/lexer.h",
+        "lib/src/lib.c",
+        "lib/src/node.c",
+        "lib/src/parser.c",
+        "lib/src/parser.h",
+        "lib/src/point.c",
+        "lib/src/point.h",
+        "lib/src/portable/**",
+        "lib/src/query.c",
+        "lib/src/reduce_action.h",
+        "lib/src/reusable_node.h",
+        "lib/src/stack.c",
+        "lib/src/stack.h",
+        "lib/src/subtree.c",
+        "lib/src/subtree.h",
+        "lib/src/tree.c",
+        "lib/src/tree.h",
+        "lib/src/tree_cursor.c",
+        "lib/src/tree_cursor.h",
+        "lib/src/ts_assert.h",
+        "lib/src/unicode.h",
+        "lib/src/wasm-stdlib/README.md",
+        "lib/src/wasm-stdlib/external_scanner_allocator.c",
+        "lib/src/wasm-stdlib/external_scanner_stdlib.h",
+        "lib/src/wasm-stdlib/imports.txt",
+        "lib/src/wasm-stdlib/libc.c",
+        "lib/src/wasm-stdlib/stdio.c",
+        "lib/src/wasm_store.c",
+        "lib/src/wasm_store.h",
+        "lib/tree-sitter.pc.in"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Max Brunsfeld\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Max Brunsfeld, MIT license (LICENSE), https://github.com/tree-sitter/tree-sitter/tree/8ca548849fc8dbefd699edcec26546bb14112820/lib."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "lib/binding_web/lib/exports.txt",
+        "lib/src/wasm-stdlib/imports.txt",
+        "test/fixtures/error_corpus/c_errors.txt",
+        "test/fixtures/error_corpus/javascript_errors.txt",
+        "test/fixtures/error_corpus/json_errors.txt",
+        "test/fixtures/error_corpus/python_errors.txt",
+        "test/fixtures/error_corpus/ruby_errors.txt",
+        "test/fixtures/template_corpus/ruby_templates.txt",
+        "test/fixtures/test_grammars/aliased_inlined_rules/corpus.txt",
+        "test/fixtures/test_grammars/aliased_rules/corpus.txt",
+        "test/fixtures/test_grammars/aliased_token_rules/corpus.txt",
+        "test/fixtures/test_grammars/aliased_unit_reductions/corpus.txt",
+        "test/fixtures/test_grammars/aliases_in_root/corpus.txt",
+        "test/fixtures/test_grammars/anonymous_error/corpus.txt",
+        "test/fixtures/test_grammars/anonymous_tokens_with_escaped_chars/corpus.txt",
+        "test/fixtures/test_grammars/associativity_left/corpus.txt",
+        "test/fixtures/test_grammars/associativity_left_with_lower_precedence_shift/corpus.txt",
+        "test/fixtures/test_grammars/associativity_missing/expected_error.txt",
+        "test/fixtures/test_grammars/associativity_right/corpus.txt",
+        "test/fixtures/test_grammars/associativity_right_with_lower_precedence_shift/corpus.txt",
+        "test/fixtures/test_grammars/basic_cst/corpus.txt",
+        "test/fixtures/test_grammars/conflict_in_repeat_rule/expected_error.txt",
+        "test/fixtures/test_grammars/conflict_in_repeat_rule_after_external_token/expected_error.txt",
+        "test/fixtures/test_grammars/conflicting_precedence/expected_error.txt",
+        "test/fixtures/test_grammars/depends_on_column/corpus.txt",
+        "test/fixtures/test_grammars/depends_on_column_failed_scan/corpus.txt",
+        "test/fixtures/test_grammars/depends_on_column_repetition/corpus.txt",
+        "test/fixtures/test_grammars/duplicate_reduction_precedence/corpus.txt",
+        "test/fixtures/test_grammars/dynamic_precedence/corpus.txt",
+        "test/fixtures/test_grammars/eof_basic/corpus.txt",
+        "test/fixtures/test_grammars/eof_dropped_branch/corpus.txt",
+        "test/fixtures/test_grammars/eof_duplicate_reduction/corpus.txt",
+        "test/fixtures/test_grammars/eof_misplaced/expected_error.txt",
+        "test/fixtures/test_grammars/eof_repeat_terminated/corpus.txt",
+        "test/fixtures/test_grammars/eof_repeat_via_nullable_rule/expected_error.txt",
+        "test/fixtures/test_grammars/eof_repeat_via_rule/corpus.txt",
+        "test/fixtures/test_grammars/epsilon_external_extra_tokens/corpus.txt",
+        "test/fixtures/test_grammars/epsilon_external_tokens/corpus.txt",
+        "test/fixtures/test_grammars/epsilon_rules/expected_error.txt",
+        "test/fixtures/test_grammars/error_recovery_loop/corpus.txt",
+        "test/fixtures/test_grammars/external_and_internal_anonymous_tokens/corpus.txt",
+        "test/fixtures/test_grammars/external_and_internal_tokens/corpus.txt",
+        "test/fixtures/test_grammars/external_extra_tokens/corpus.txt",
+        "test/fixtures/test_grammars/external_lookahead_eof_boundary/corpus.txt",
+        "test/fixtures/test_grammars/external_tokens/corpus.txt",
+        "test/fixtures/test_grammars/external_unicode_column_alignment/corpus.txt",
+        "test/fixtures/test_grammars/external_word_token/corpus.txt",
+        "test/fixtures/test_grammars/extra_non_terminals/corpus.txt",
+        "test/fixtures/test_grammars/extra_non_terminals_with_shared_rules/corpus.txt",
+        "test/fixtures/test_grammars/get_col_eof/corpus.txt",
+        "test/fixtures/test_grammars/get_col_should_hang_not_crash/corpus.txt",
+        "test/fixtures/test_grammars/immediate_tokens/corpus.txt",
+        "test/fixtures/test_grammars/indirect_recursion_in_transitions/expected_error.txt",
+        "test/fixtures/test_grammars/inline_rules/corpus.txt",
+        "test/fixtures/test_grammars/inlined_aliased_rules/corpus.txt",
+        "test/fixtures/test_grammars/inverted_external_token/corpus.txt",
+        "test/fixtures/test_grammars/invisible_start_rule/expected_error.txt",
+        "test/fixtures/test_grammars/last_child_anchor_past_hidden_repeat/corpus.txt",
+        "test/fixtures/test_grammars/lexical_conflicts_due_to_state_merging/corpus.txt",
+        "test/fixtures/test_grammars/named_precedences/corpus.txt",
+        "test/fixtures/test_grammars/named_precedences/readme.txt",
+        "test/fixtures/test_grammars/named_rule_aliased_as_anonymous/corpus.txt",
+        "test/fixtures/test_grammars/nested_inlined_rules/corpus.txt",
+        "test/fixtures/test_grammars/next_sibling_from_zwt/corpus.txt",
+        "test/fixtures/test_grammars/partially_resolved_conflict/expected_error.txt",
+        "test/fixtures/test_grammars/partially_resolved_conflict/readme.txt",
+        "test/fixtures/test_grammars/precedence_on_single_child_missing/expected_error.txt",
+        "test/fixtures/test_grammars/precedence_on_single_child_negative/corpus.txt",
+        "test/fixtures/test_grammars/precedence_on_single_child_positive/corpus.txt",
+        "test/fixtures/test_grammars/precedence_on_subsequence/corpus.txt",
+        "test/fixtures/test_grammars/precedence_on_token/corpus.txt",
+        "test/fixtures/test_grammars/readme_grammar/corpus.txt",
+        "test/fixtures/test_grammars/reserved_words/corpus.txt",
+        "test/fixtures/test_grammars/start_rule_is_blank/corpus.txt",
+        "test/fixtures/test_grammars/start_rule_is_token/corpus.txt",
+        "test/fixtures/test_grammars/terminal_supertype/expected_error.txt",
+        "test/fixtures/test_grammars/unicode_classes/corpus.txt",
+        "test/fixtures/test_grammars/unused_rules/corpus.txt",
+        "test/fixtures/test_grammars/uses_current_column/corpus.txt",
+        "test/fixtures/test_grammars/utf16_surrogate_oob/corpus.txt",
+        "test/fixtures/test_grammars/wasm_realloc_clobber_region/corpus.txt",
+        "test/fixtures/test_grammars/wasm_realloc_overflow_heap/corpus.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ccls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/binaryen-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/emscripten-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wasi-sdk-version"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

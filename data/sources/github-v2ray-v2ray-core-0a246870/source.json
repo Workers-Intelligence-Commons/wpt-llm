@@ -1,0 +1,249 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/v2ray/v2ray-core",
+  "revision": "d80440f3d57b45c829dbf513306f7adf9a0f3f76",
+  "checksum": "sha256:23e30936976974011cd88e3fcdd439c971e2fe931c041d29f6b8940dfed1b685",
+  "extract": {
+    "exclude": [
+      ".dev/protoc/windows/**",
+      "main/confloader/external/**",
+      "release/config/geoip.dat",
+      "release/config/geosite.dat",
+      ".dev/protoc/linux/protoc",
+      ".dev/protoc/macos/protoc"
+    ]
+  },
+  "history": {
+    "since": "4c03bf0d45ba68dc2768bd75b1eb2e2efd23b58d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-2020 V2Fly Community\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Commit history of https://github.com/v2ray/v2ray-core: Copyright (c) 2015-2020 V2Fly Community, MIT license (LICENSE), https://github.com/v2ray/v2ray-core."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dev/protoc/linux/**",
+        ".dev/protoc/macos/**",
+        ".github/**",
+        ".gitignore",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "WORKSPACE",
+        "annotations.go",
+        "app/**",
+        "azure-pipelines.yml",
+        "common/**",
+        "config.go",
+        "config.pb.go",
+        "config.proto",
+        "context.go",
+        "context_test.go",
+        "core.go",
+        "errors.generated.go",
+        "features/**",
+        "functions.go",
+        "functions_test.go",
+        "go.mod",
+        "go.sum",
+        "infra/**",
+        "main/BUILD",
+        "main/confloader/confloader.go",
+        "main/confloader/errors.generated.go",
+        "main/distro/**",
+        "main/errors.generated.go",
+        "main/json/**",
+        "main/jsonem/**",
+        "main/main.go",
+        "main/main_test.go",
+        "main/targets.bzl",
+        "mocks.go",
+        "proto.go",
+        "proxy/**",
+        "release/BUILD",
+        "release/bleedingrelease.sh",
+        "release/config/config.json",
+        "release/config/systemd/**",
+        "release/config/vpoint_socks_vmess.json",
+        "release/config/vpoint_vmess_freedom.json",
+        "release/install-release.sh",
+        "release/mapping.bzl",
+        "release/mutilate/**",
+        "release/requestsign.sh",
+        "release/requestsign_github.sh",
+        "release/tagrelease.sh",
+        "release/user-package.sh",
+        "testing/**",
+        "transport/**",
+        "v2ray.go",
+        "v2ray_test.go"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-2020 V2Fly Community\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2015-2020 V2Fly Community, MIT license (LICENSE), https://github.com/v2ray/v2ray-core."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverall2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/protoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

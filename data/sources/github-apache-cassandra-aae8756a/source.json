@@ -1,0 +1,2899 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apache/cassandra",
+  "revision": "275a3a5143959427d65ff4344de279ab55b31112",
+  "checksum": "sha256:a8620a10e97dab67dda823a1a69ebd5f5b3f5fe762dec2243455fea8af7bcb66",
+  "extract": {
+    "exclude": [
+      ".circleci/**",
+      "debian/**",
+      "doc/modules/cassandra/assets/**",
+      "doc/modules/cassandra/examples/RESULTS/select_all_from_popular_count.result",
+      "doc/modules/cassandra/pages/developing/data-modeling/images/**",
+      "examples/ssl-factory/test/conf/cassandra_ssl_test.keystore",
+      "examples/ssl-factory/test/conf/cassandra_ssl_test.truststore",
+      "examples/ssl-factory/test/conf/cassandra_ssl_test.truststore-without-password",
+      "lib/**",
+      "modules/**",
+      "test/conf/cassandra.keystore",
+      "test/conf/cassandra_ssl_test.keystore",
+      "test/conf/cassandra_ssl_test.truststore",
+      "test/conf/cassandra_ssl_test_endpoint_verify.keystore",
+      "test/conf/cassandra_ssl_test_nopassword.keystore",
+      "test/conf/cassandra_ssl_test_outbound.keystore",
+      "test/conf/cassandra_ssl_test_spiffe.keystore",
+      "test/conf/keystore.jks",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-CompressionInfo.db",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Data.db",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Filter.db",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Index.db",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Statistics.db",
+      "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Summary.db",
+      "test/data/bloom-filter/la/foo/la-1-big-CompressionInfo.db",
+      "test/data/bloom-filter/la/foo/la-1-big-Data.db",
+      "test/data/bloom-filter/la/foo/la-1-big-Filter.db",
+      "test/data/bloom-filter/la/foo/la-1-big-Index.db",
+      "test/data/bloom-filter/la/foo/la-1-big-Statistics.db",
+      "test/data/bloom-filter/la/foo/la-1-big-Summary.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Data.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Filter.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Index.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Statistics.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Summary.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-CompressionInfo.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Data.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Filter.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Index.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Statistics.db",
+      "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Summary.db",
+      "test/data/legacy-commitlog/3.4-encrypted/CommitLog-6-1480001790339.log",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Rows.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Rows.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Rows.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-CompressionInfo.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Data.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Filter.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Partitions.db",
+      "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-CompressionInfo.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Data.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Filter.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Index.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Statistics.db",
+      "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Data.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Filter.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Index.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Statistics.db",
+      "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-CompressionInfo.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Data.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Filter.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Index.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Statistics.db",
+      "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-CompressionInfo.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Data.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Filter.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Index.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Statistics.db",
+      "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-CompressionInfo.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Data.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Filter.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Index.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Statistics.db",
+      "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Summary.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Data.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Filter.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Index.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Statistics.db",
+      "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Summary.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-CompressionInfo.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Data.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Filter.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Index.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Statistics.db",
+      "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Summary.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-CompressionInfo.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Data.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Filter.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Index.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Statistics.db",
+      "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Summary.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-CompressionInfo.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Data.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Filter.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Index.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Statistics.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Summary.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-CompressionInfo.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Data.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Filter.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Index.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Statistics.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Summary.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-CompressionInfo.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Data.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Filter.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Index.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Statistics.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Summary.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-CompressionInfo.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Data.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Filter.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Index.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Statistics.db",
+      "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Summary.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-CompressionInfo.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-Data.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-Filter.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-Index.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-Statistics.db",
+      "test/data/negative-local-expiration-test/table1/mc-1-big-Summary.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-CompressionInfo.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-Data.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-Filter.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-Index.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-Statistics.db",
+      "test/data/negative-local-expiration-test/table2/mc-1-big-Summary.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-CompressionInfo.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-Data.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-Filter.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-Index.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-Statistics.db",
+      "test/data/negative-local-expiration-test/table3/mc-1-big-Summary.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-CompressionInfo.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-Data.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-Filter.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-Index.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-Statistics.db",
+      "test/data/negative-local-expiration-test/table4/mc-1-big-Summary.db",
+      "test/data/serialization/**",
+      "test/data/siftsmall/siftsmall_groundtruth.ivecs",
+      "test/data/siftsmall/siftsmall_query.fvecs",
+      "test/data/types-compatibility/**",
+      "test/resources/cluster_metadata/**",
+      "test/data/legacy-commitlog/3.0.13-encrypted/CommitLog-6-1699284515156.log",
+      "test/data/legacy-commitlog/3.0.13-encrypted/CommitLog-6-1699284515157.log",
+      "test/data/legacy-commitlog/3.0.29-encrypted/CommitLog-6-1699279786262.log",
+      "test/data/legacy-commitlog/3.4-encrypted/CommitLog-6-1480001790338.log",
+      "test/data/legacy-commitlog/4.0.11-encrypted/CommitLog-7-1699285478684.log",
+      "test/data/legacy-hints/3.0.29/23b9a46b-e21a-4a8d-b171-3f1886fa537d-1700232964563-1.hints",
+      "test/data/legacy-hints/4.1.3/8d0a4af4-4c94-4cb5-915f-08c0f1c7ab85-1700233917885-2.hints",
+      "test/data/siftsmall/siftsmall_base.fvecs",
+      "test/data/siftsmall/siftsmall_learn.fvecs"
+    ]
+  },
+  "history": {
+    "since": "06248ea220a752a2a07fe85191b03f306487eb18"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n   APACHE CASSANDRA SUBCOMPONENTS:\n\n   Apache Cassandra includes a number of subcomponents with\n   separate copyright notices and license terms. Your use of the source\n   code for these subcomponents is subject to the terms and\n   conditions of the following licenses.\n\n   This product bundles a file (Dump.java) from Chronicle-Bytes,\n   copyright higherfrequencytrading.com, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (AbstractGuavaIterator.java) from Guava,\n   copyright The Guava Authors, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (LongTimSort.java) from Android libcore,\n   copyright The Android Open Source Project, which is available under an\n   Apache License version 2.\n\n   This product bundles several files (PatriciaTrie.java) from PATRICIA Trie\n   copyright Roger Kapsi and Sam Berlin, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (VIntCoding.java) from Protocol Buffers\n   copyright Google Inc., which is available under a BSD license.\n\n   Thus product bundles material adapted from Cassandra, The Definitive Guide.\n   Published by O'Reilly Media, Inc. Copyright Jeff Carpenter and Eben Hewitt \n   and used with their permission.\n\n   This product bundles The Project Gutenberg EBook of Adventures of\n   Huckleberry Finn, Complete by Mark Twain (Samuel Clemens), which is in\n   the public domain.\n   \n   This product bundles code (internalOffer) that is written by Doug Lea and\n   Martin Buchholz available under a Creative Commons zero license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the Datastax Java Driver\n   copyright DataStax, Inc., which is available under an Apache License version 2.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from python-smhasher\n   copyright Austin Appleby and Patrick Hensley, which is available under a MIT license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the OrderedDict\n   copyright Raymond Hettinger, which is available under a MIT license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the MagnetoDB\n   copyright Mirantis Inc., which is available under an Apache License version 2.\n\n\nNOTICE.txt:\n\nApache Cassandra\nCopyright 2009- The Apache Software Foundation\n\nThis product includes software developed by The Apache Software\nFoundation (http://www.apache.org/).\n\nAndroid Code\nCopyright 2005-2008 The Android Open Source Project\nThis product includes software developed as part of\nThe Android Open Source Project (http://source.android.com).\n",
+      "attribution": "Commit history of https://github.com/apache/cassandra: Copyright 2009- The Apache Software Foundation; Copyright 2005-2008 The Android Open Source Project, Apache-2.0 license (LICENSE.txt), https://github.com/apache/cassandra."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".asf.yaml",
+        ".build/**",
+        ".claude/**",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".idea/**",
+        ".jenkins/**",
+        ".snyk",
+        "AGENTS.md",
+        "CASSANDRA-14092.txt",
+        "CHANGES.txt",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE.txt",
+        "NEWS.txt",
+        "NOTICE.txt",
+        "README.asc",
+        "SECURITY.md",
+        "TESTING.md",
+        "bin/**",
+        "build-shaded-dtest-jar.sh",
+        "build.properties.default",
+        "build.xml",
+        "ci/**",
+        "conf/**",
+        "doc/Makefile",
+        "doc/README.md",
+        "doc/SASI.md",
+        "doc/cql3/**",
+        "doc/modules/ROOT/**",
+        "doc/modules/cassandra/examples/BASH/**",
+        "doc/modules/cassandra/examples/BNF/**",
+        "doc/modules/cassandra/examples/CQL/**",
+        "doc/modules/cassandra/examples/CQLSH/**",
+        "doc/modules/cassandra/examples/JAVA/**",
+        "doc/modules/cassandra/examples/RESULTS/2i/**",
+        "doc/modules/cassandra/examples/RESULTS/add_repo_keys.result",
+        "doc/modules/cassandra/examples/RESULTS/add_yum_repo.result",
+        "doc/modules/cassandra/examples/RESULTS/autoexpand_exclude_dc.result",
+        "doc/modules/cassandra/examples/RESULTS/autoexpand_ks.result",
+        "doc/modules/cassandra/examples/RESULTS/autoexpand_ks_override.result",
+        "doc/modules/cassandra/examples/RESULTS/comments-desc_table.result",
+        "doc/modules/cassandra/examples/RESULTS/cqlsh_list_snapshots.result",
+        "doc/modules/cassandra/examples/RESULTS/cqlsh_localhost.result",
+        "doc/modules/cassandra/examples/RESULTS/curl_verify_sha.result",
+        "doc/modules/cassandra/examples/RESULTS/cyclist_team-queries.results",
+        "doc/modules/cassandra/examples/RESULTS/docker-run-cqlsh-quickstart.result",
+        "doc/modules/cassandra/examples/RESULTS/find_backups.result",
+        "doc/modules/cassandra/examples/RESULTS/find_backups_table.result",
+        "doc/modules/cassandra/examples/RESULTS/find_two_snapshots.result",
+        "doc/modules/cassandra/examples/RESULTS/flush_and_check.result",
+        "doc/modules/cassandra/examples/RESULTS/flush_and_check2.result",
+        "doc/modules/cassandra/examples/RESULTS/insert_data2_backup.result",
+        "doc/modules/cassandra/examples/RESULTS/insert_table_cc_addl.result",
+        "doc/modules/cassandra/examples/RESULTS/java_verify.result",
+        "doc/modules/cassandra/examples/RESULTS/no_bups.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_list_snapshot_empty.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_list_snapshots.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_list_snapshots_ephemeral.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_snapshot_help.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_snapshot_list_ttl_snapshots.result",
+        "doc/modules/cassandra/examples/RESULTS/nodetool_snapshot_take_ttl.result",
+        "doc/modules/cassandra/examples/RESULTS/sai/**",
+        "doc/modules/cassandra/examples/RESULTS/select_after_batch_food_from_cyclist_expenses.result",
+        "doc/modules/cassandra/examples/RESULTS/select_after_batch_paid_from_cyclist_expenses.result",
+        "doc/modules/cassandra/examples/RESULTS/select_after_update_from_cyclist_expenses.result",
+        "doc/modules/cassandra/examples/RESULTS/select_data2_backup.result",
+        "doc/modules/cassandra/examples/RESULTS/select_data_backup.result",
+        "doc/modules/cassandra/examples/RESULTS/select_initial_from_country_flag.result",
+        "doc/modules/cassandra/examples/RESULTS/select_initial_from_cyclist_expenses.result",
+        "doc/modules/cassandra/examples/RESULTS/select_range.result",
+        "doc/modules/cassandra/examples/RESULTS/select_static_data.result",
+        "doc/modules/cassandra/examples/RESULTS/select_table_clustercolumn.result",
+        "doc/modules/cassandra/examples/RESULTS/select_table_compound_pk.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_all.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_backup2.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_backup2_find.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_files.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_mult_ks.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_mult_tables.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_mult_tables_again.result",
+        "doc/modules/cassandra/examples/RESULTS/snapshot_one_table2.result",
+        "doc/modules/cassandra/examples/RESULTS/tail_syslog.result",
+        "doc/modules/cassandra/examples/RESULTS/true.result",
+        "doc/modules/cassandra/examples/RESULTS/verify_gpg.result",
+        "doc/modules/cassandra/examples/TEXT/**",
+        "doc/modules/cassandra/examples/YAML/**",
+        "doc/modules/cassandra/nav.adoc",
+        "doc/modules/cassandra/pages/architecture/**",
+        "doc/modules/cassandra/pages/developing/cql/**",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_conceptual.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_logical.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_physical.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_queries.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_rdbms.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_refining.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_schema.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/data-modeling_tools.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/index.adoc",
+        "doc/modules/cassandra/pages/developing/data-modeling/intro.adoc",
+        "doc/modules/cassandra/pages/developing/index.adoc",
+        "doc/modules/cassandra/pages/getting-started/**",
+        "doc/modules/cassandra/pages/installing/**",
+        "doc/modules/cassandra/pages/integrating/**",
+        "doc/modules/cassandra/pages/managing/**",
+        "doc/modules/cassandra/pages/new/**",
+        "doc/modules/cassandra/pages/overview/**",
+        "doc/modules/cassandra/pages/reference/**",
+        "doc/modules/cassandra/pages/tooling/**",
+        "doc/modules/cassandra/pages/troubleshooting/**",
+        "doc/modules/cassandra/pages/vector-search/**",
+        "doc/modules/cassandra/partials/**",
+        "doc/native_protocol_v3.spec",
+        "doc/native_protocol_v4.spec",
+        "doc/native_protocol_v5.spec",
+        "doc/scripts/**",
+        "doc/site-local.yml",
+        "examples/constraints/**",
+        "examples/ssl-factory/README.adoc",
+        "examples/ssl-factory/build.xml",
+        "examples/ssl-factory/src/**",
+        "examples/ssl-factory/test/conf/cassandra_encrypted_private_key.pem",
+        "examples/ssl-factory/test/conf/cassandra_encrypted_private_key_multiplecerts.pem",
+        "examples/ssl-factory/test/conf/cassandra_trusted_certificates.pem",
+        "examples/ssl-factory/test/conf/cassandra_unencrypted_private_key.pem",
+        "examples/ssl-factory/test/unit/**",
+        "examples/startup-checks/**",
+        "examples/triggers/**",
+        "formalise/**",
+        "ide/**",
+        "pylib/**",
+        "redhat/**",
+        "relocate-dependencies.pom",
+        "src/**",
+        "test/anttasks/**",
+        "test/bin/**",
+        "test/burn/**",
+        "test/conf/cassandra-converters-special-cases-old-names.yaml",
+        "test/conf/cassandra-converters-special-cases.yaml",
+        "test/conf/cassandra-jmx-disabled-sslconfig.yaml",
+        "test/conf/cassandra-jmx-pem-sslconfig.yaml",
+        "test/conf/cassandra-jmx-sslconfig-with-passwordfile.yaml",
+        "test/conf/cassandra-jmx-sslconfig.yaml",
+        "test/conf/cassandra-mtls-backward-compatibility.yaml",
+        "test/conf/cassandra-mtls.yaml",
+        "test/conf/cassandra-murmur.yaml",
+        "test/conf/cassandra-old.yaml",
+        "test/conf/cassandra-passwordauth.yaml",
+        "test/conf/cassandra-pem-jks-sslcontextfactory.yaml",
+        "test/conf/cassandra-pem-sslcontextfactory-invalidconfiguration.yaml",
+        "test/conf/cassandra-pem-sslcontextfactory-mismatching-passwords.yaml",
+        "test/conf/cassandra-pem-sslcontextfactory-unencryptedkeys.yaml",
+        "test/conf/cassandra-pem-sslcontextfactory-with-passwordfile.yaml",
+        "test/conf/cassandra-pem-sslcontextfactory.yaml",
+        "test/conf/cassandra-rackdc.properties",
+        "test/conf/cassandra-rackdc.properties.mod",
+        "test/conf/cassandra-seeds.yaml",
+        "test/conf/cassandra-sslcontextfactory-invalidconfiguration.yaml",
+        "test/conf/cassandra-sslcontextfactory.yaml",
+        "test/conf/cassandra-topology.properties",
+        "test/conf/cassandra.yaml",
+        "test/conf/cassandra_encryption.yaml",
+        "test/conf/cassandra_ssl_test.keystore.pem",
+        "test/conf/cassandra_ssl_test.truststore.pem",
+        "test/conf/cassandra_ssl_test.unencrypted_keystore.pem",
+        "test/conf/cassandra_ssl_test_keystore_passwordfile.txt",
+        "test/conf/cassandra_ssl_test_outbound_keystore_password.txt",
+        "test/conf/cassandra_ssl_test_truststore_passwordfile.txt",
+        "test/conf/cdc.yaml",
+        "test/conf/commitlog_archiving.properties",
+        "test/conf/commitlog_compression_LZ4.yaml",
+        "test/conf/commitlog_compression_Zstd.yaml",
+        "test/conf/datacenters.properties",
+        "test/conf/latest_diff.yaml",
+        "test/conf/logback-burntest.xml",
+        "test/conf/logback-dtest-info-rolling.xml",
+        "test/conf/logback-dtest-quiet.xml",
+        "test/conf/logback-dtest.xml",
+        "test/conf/logback-dtest_with_slow_query_appender.xml",
+        "test/conf/logback-dtest_with_slow_query_appender_invalid.xml",
+        "test/conf/logback-dtest_with_vtable_appender.xml",
+        "test/conf/logback-dtest_with_vtable_appender_invalid.xml",
+        "test/conf/logback-error.xml",
+        "test/conf/logback-info.xml",
+        "test/conf/logback-jmh.xml",
+        "test/conf/logback-simulator.xml",
+        "test/conf/logback-test.xml",
+        "test/conf/sstableloader_with_encryption.yaml",
+        "test/conf/storage_compatibility_mode_none.yaml",
+        "test/conf/system_keyspaces_directory.yaml",
+        "test/conf/triggers/**",
+        "test/conf/unit-test-conf/**",
+        "test/data/CASSANDRA-15313/**",
+        "test/data/bloom-filter/ka/foo/foo-atable-ka-1-Digest.sha1",
+        "test/data/bloom-filter/ka/foo/foo-atable-ka-1-TOC.txt",
+        "test/data/bloom-filter/ka/foo.cql",
+        "test/data/bloom-filter/la/foo/la-1-big-Digest.adler32",
+        "test/data/bloom-filter/la/foo/la-1-big-TOC.txt",
+        "test/data/config/**",
+        "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-Digest.sha1",
+        "test/data/invalid-legacy-sstables/Keyspace1/Standard1/Keyspace1-Standard1-ic-0-TOC.txt",
+        "test/data/invalid-legacy-sstables/Keyspace1/Standard1/legacyleveled.json",
+        "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-Digest.crc32",
+        "test/data/invalid-legacy-sstables/Keyspace1/cf_with_duplicates_3_0/mb-3-big-TOC.txt",
+        "test/data/jmxdump/**",
+        "test/data/legacy-commitlog/3.0.13-encrypted/**",
+        "test/data/legacy-commitlog/3.0.29-encrypted/**",
+        "test/data/legacy-commitlog/3.4-encrypted/CommitLog-6-1480001790338.log",
+        "test/data/legacy-commitlog/3.4-encrypted/hash.txt",
+        "test/data/legacy-commitlog/4.0.11-encrypted/**",
+        "test/data/legacy-hints/**",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_be_index_summary/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_clust_counter/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-Rows.db",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-Rows.db",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_simple_counter/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Digest.crc32",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-Rows.db",
+        "test/data/legacy-sstables/da/legacy_tables/legacy_da_tuple/da-500-bti-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_be_index_summary/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_compact/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_clust_counter_compact/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_compact/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_simple_counter_compact/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-Digest.crc32",
+        "test/data/legacy-sstables/ma/legacy_tables/legacy_ma_tuple/ma-306-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_be_index_summary/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_compact/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_clust_counter_compact/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_compact/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_simple_counter_compact/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-Digest.crc32",
+        "test/data/legacy-sstables/mb/legacy_tables/legacy_mb_tuple/mb-307-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_be_index_summary/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_compact/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_clust_counter_compact/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_inaccurate_min_max/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_compact/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_simple_counter_compact/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-Digest.crc32",
+        "test/data/legacy-sstables/mc/legacy_tables/legacy_mc_tuple/mc-3113-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_be_index_summary/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_compact/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_clust_counter_compact/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_compact/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_simple_counter_compact/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-Digest.crc32",
+        "test/data/legacy-sstables/md/legacy_tables/legacy_md_tuple/md-31110-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_be_index_summary/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_compact/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_clust_counter_compact/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_compact/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-3025-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_simple_counter_compact/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-Digest.crc32",
+        "test/data/legacy-sstables/me/legacy_tables/legacy_me_tuple_compact/me-31111-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_be_index_summary/na-40-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_compact/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_clust_counter_compact/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_compact/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_simple_counter_compact/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-Digest.crc32",
+        "test/data/legacy-sstables/na/legacy_tables/legacy_na_tuple/na-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_be_index_summary/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_clust_counter/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-3gll_1kke_3qdyo2i4kzfpt3cqcy-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_simple_counter/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-3gll_1kke_4abk02i4kzfpt3cqcy-big-TOC.txt",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-Digest.crc32",
+        "test/data/legacy-sstables/nb/legacy_tables/legacy_nb_tuple/nb-400-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust/oa-500-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_be_index_summary/oa-500-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_clust_counter/oa-500-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple/oa-500-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_simple_counter/oa-500-big-TOC.txt",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-Digest.crc32",
+        "test/data/legacy-sstables/oa/legacy_tables/legacy_oa_tuple/oa-500-big-TOC.txt",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-Digest.crc32",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_partition_deletion/nc-1-big-TOC.txt",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-Digest.crc32",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_compaction/nb-1-big-TOC.txt",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-Digest.crc32",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_range_tombstone_reader/nb-1-big-TOC.txt",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-Digest.crc32",
+        "test/data/negative-ldts-invalid-deletions-test/invalid_tombstones/nc-1-big-TOC.txt",
+        "test/data/negative-local-expiration-test/table1/mc-1-big-Digest.crc32",
+        "test/data/negative-local-expiration-test/table1/mc-1-big-TOC.txt",
+        "test/data/negative-local-expiration-test/table2/mc-1-big-Digest.crc32",
+        "test/data/negative-local-expiration-test/table2/mc-1-big-TOC.txt",
+        "test/data/negative-local-expiration-test/table3/mc-1-big-Digest.crc32",
+        "test/data/negative-local-expiration-test/table3/mc-1-big-TOC.txt",
+        "test/data/negative-local-expiration-test/table4/mc-1-big-Digest.crc32",
+        "test/data/negative-local-expiration-test/table4/mc-1-big-TOC.txt",
+        "test/data/siftsmall/siftsmall_base.fvecs",
+        "test/data/siftsmall/siftsmall_learn.fvecs",
+        "test/distributed/**",
+        "test/harry/**",
+        "test/long/**",
+        "test/memory/**",
+        "test/microbench/**",
+        "test/resources/CQLTable.json",
+        "test/resources/CounterCF.json",
+        "test/resources/SimpleCF.json",
+        "test/resources/SimpleCFWithDeletionInfo.json",
+        "test/resources/UnsortedCF.json",
+        "test/resources/auth/**",
+        "test/resources/blogpost.yaml",
+        "test/resources/byteman/**",
+        "test/resources/data/**",
+        "test/resources/functions/**",
+        "test/resources/glove.3K.50d.txt",
+        "test/resources/nodetool/**",
+        "test/resources/passwordDictionary.txt",
+        "test/resources/tokenization/**",
+        "test/resources/whirr-default.properties",
+        "test/simulator/**",
+        "test/unit/**",
+        "tools/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n   APACHE CASSANDRA SUBCOMPONENTS:\n\n   Apache Cassandra includes a number of subcomponents with\n   separate copyright notices and license terms. Your use of the source\n   code for these subcomponents is subject to the terms and\n   conditions of the following licenses.\n\n   This product bundles a file (Dump.java) from Chronicle-Bytes,\n   copyright higherfrequencytrading.com, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (AbstractGuavaIterator.java) from Guava,\n   copyright The Guava Authors, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (LongTimSort.java) from Android libcore,\n   copyright The Android Open Source Project, which is available under an\n   Apache License version 2.\n\n   This product bundles several files (PatriciaTrie.java) from PATRICIA Trie\n   copyright Roger Kapsi and Sam Berlin, which is available under an\n   Apache License version 2.\n\n   This product bundles a file (VIntCoding.java) from Protocol Buffers\n   copyright Google Inc., which is available under a BSD license.\n\n   Thus product bundles material adapted from Cassandra, The Definitive Guide.\n   Published by O'Reilly Media, Inc. Copyright Jeff Carpenter and Eben Hewitt \n   and used with their permission.\n\n   This product bundles The Project Gutenberg EBook of Adventures of\n   Huckleberry Finn, Complete by Mark Twain (Samuel Clemens), which is in\n   the public domain.\n   \n   This product bundles code (internalOffer) that is written by Doug Lea and\n   Martin Buchholz available under a Creative Commons zero license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the Datastax Java Driver\n   copyright DataStax, Inc., which is available under an Apache License version 2.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from python-smhasher\n   copyright Austin Appleby and Patrick Hensley, which is available under a MIT license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the OrderedDict\n   copyright Raymond Hettinger, which is available under a MIT license.\n\n   This product bundles code (cassandra-driver-internal-only-*.zip) from the MagnetoDB\n   copyright Mirantis Inc., which is available under an Apache License version 2.\n\n\nNOTICE.txt:\n\nApache Cassandra\nCopyright 2009- The Apache Software Foundation\n\nThis product includes software developed by The Apache Software\nFoundation (http://www.apache.org/).\n\nAndroid Code\nCopyright 2005-2008 The Android Open Source Project\nThis product includes software developed as part of\nThe Android Open Source Project (http://source.android.com).\n",
+      "attribution": "Copyright 2009- The Apache Software Foundation; Copyright 2005-2008 The Android Open Source Project, Apache-2.0 license (LICENSE.txt), https://github.com/apache/cassandra."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/Jenkinsfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ConstraintProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SSTableFormat$Factory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.StartupCheck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.adler32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.btm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cqlsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crc32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fvecs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.importorder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jflex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jflex-macro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.result"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.results"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.textile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.snyk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abortbootstrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abortdecommission"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abortmove"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abortremovenode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/accord"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/accord$describe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/accord$mark_rejoining"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/accord$mark_stale"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/altertopology"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/assassinate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/auditlogviewer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autorepairstatus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bootstrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bootstrap$resume"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cassandra"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cassandra-stress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cidrfilteringstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cleanup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clearsnapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clientstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$abortinitialization"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$describe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$dump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$dumpdirectory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$dumplog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$initialize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$reconfigure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$resumedropaccordtable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$snapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cms$unregister"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cmsofflinetool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compaction-stress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compactionhistory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compactionstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/complex_auth_provider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/complex_auth_provider_creds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/complex_auth_provider_with_pass"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary$cleanup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary$export"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary$import"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary$list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compressiondictionary$train"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consensus_admin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consensus_admin$begin-migration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consensus_admin$finish-migration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consensus_admin$list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cqlsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/datapaths"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/debug-cql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/decommission"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/describecluster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/describering"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disableauditlog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disableautocompaction"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablebackup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablebinary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablefullquerylog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablegossip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablehandoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disablehintsfordc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/disableoldprotocolversions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/drain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dropcidrgroup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enableauditlog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enableautocompaction"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablebackup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablebinary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablefullquerylog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablegossip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablehandoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enablehintsfordc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/enableoldprotocolversions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/failuredetector"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flush"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/forcecompact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fqltool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/full_plain_text_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/garbagecollect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate-snyk-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generatetokens"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getauditlog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getauthcacheconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getautorepairconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getbatchlogreplaythrottle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcidrgroupsofip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcolumnindexsize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcompactionthreshold"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getcompactionthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getconcurrency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getconcurrentcompactors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getconcurrentviewbuilders"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getdefaultrf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getendpoints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getfullquerylog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getguardrailsconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getinterdcstreamthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getlogginglevels"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getmaxhintwindow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getreplicas"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getseeds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getsnapshotthrottle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getsstables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/getstreamthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gettimeout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gettraceprobability"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gossipinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hash_password"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/help"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/history"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/illegal_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/import"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatecidrpermissionscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatecountercache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatecredentialscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatejmxpermissionscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatekeycache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatenetworkpermissionscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidatepermissionscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidaterolescache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalidaterowcache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jmh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jmxtool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/join"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/listcidrgroups"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/listpendinghints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/listsnapshots"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/netstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no_classname_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nodetool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/offlineclustermetadatadump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/partial_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pausehandoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plain_text_full_creds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plain_text_partial_creds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plain_text_partial_example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$execute"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$fetch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$purge"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$start"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile$stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profileload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxyhistograms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rangekeysample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rebuild"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rebuild_index"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/recompress_sstables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/refresh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/refreshsizeestimates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloadcidrgroupscache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloadlocalschema"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloadseeds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloadssl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reloadtriggers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/relocatesstables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/removenode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/removenode$status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin$cancel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin$cleanup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin$list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin$summarize-pending"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/repair_admin$summarize-repaired"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replaybatchlog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resetfullquerylog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resetlocalschema"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resumehandoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ring"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-ci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scrub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setauthcacheconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setautorepairconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setbatchlogreplaythrottle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setcachecapacity"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setcachekeystosave"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setcolumnindexsize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setcompactionthreshold"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setcompactionthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setconcurrency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setconcurrentcompactors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setconcurrentviewbuilders"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setdefaultrf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setguardrailsconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sethintedhandoffthrottlekb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setinterdcstreamthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setlogginglevel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setmaxhintwindow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setsnapshotthrottle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setstreamthroughput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/settimeout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/settraceprobability"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sjk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/snapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstabledump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableexpiredblockers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablelevelreset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableloader"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablemetadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableofflinerelevel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablepartitions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablerepairedset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablescrub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstablesplit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableupgrade"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableutil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sstableverify"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/status"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statusautocompaction"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statusbackup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statusbinary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statusgossip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statushandoff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stop-server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stopdaemon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tablehistograms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tablestats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/toppartitions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tpstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truncatehints"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/updatecidrgroup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/upgradesstables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/verify"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/viewbuildstatus"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1442 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/unionlabs/union",
+  "revision": "031785bb6dc6b957c624e62bc64c184409c97d7b",
+  "checksum": "sha256:aaff7a2e51d7c9d5e675697f8db5cad489d6c0cc6eb6b8c6067410df2df169a7",
+  "extract": {
+    "exclude": [
+      "app2/static/favicon.ico",
+      "app2/static/images/icons/leap.ico",
+      "cosmwasm/lightclient/base/**",
+      "cosmwasm/lightclient/bob/**",
+      "cosmwasm/lightclient/parlia/**",
+      "cosmwasm/lightclient/starknet/**",
+      "cosmwasm/lst/**",
+      "docs/public/favicon.ico",
+      "galoisd/nonadjacent.webp",
+      "lib/base-client/**",
+      "lib/base-light-client-types/**",
+      "lib/base-verifier/**",
+      "lib/bob-client/**",
+      "lib/bob-light-client-types/**",
+      "lib/bob-types/**",
+      "lib/bob-verifier/**",
+      "lib/cometbls-groth16-verifier/verifying_key.bin",
+      "lib/parlia-light-client-types/**",
+      "lib/parlia-types/**",
+      "site/public/content/assets/3SUWMEiUAltRmt2bUUAeic/**",
+      "site/public/content/assets/42D7t10fqB5pxPpAuvg0Lf/**",
+      "site/public/content/assets/6L6dFXuTeJ9QDAFVT2dYPp/**",
+      "site/public/content/assets/7tGVDcDqsnPuPfCYQlx9j/**",
+      "site/public/favicon.ico",
+      "site/src/assets/images/partners/horizons-law.svg",
+      "typescript-sdk/bun.lockb"
+    ]
+  },
+  "history": {
+    "since": "7cc2f867095cfcbb12c99b3fa461936d76a1dae1"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0 AND Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2024 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2024 Union.fi Labs, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nVersion: No file states a choice between the two licenses, so both apply.\n\nCargo.toml declares the license \"Apache-2.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2022 Sigma Prime Pty Ltd\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2025 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2024 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/unionlabs/union: Copyright (c) 2024 Union.fi Labs, Inc.; Copyright 2024 Union.fi Labs, Inc., MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/unionlabs/union; Ethan Frey <ethanfrey@users.noreply.github.com>, Apache-2.0 license (declared in Cargo.toml), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/cosmwasm/cw20-base; Copyright 2022 Sigma Prime Pty Ltd, Apache-2.0 license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/lib/ssz; Copyright 2022 Sigma Prime Pty Ltd, Apache-2.0 license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/lib/ssz-derive; the authors of sentinel2, MIT license (declared in package.json), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/sentinel2; Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk; Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-cosmos; Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-evm; Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-sui; Copyright (c) 2024 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/typescript-sdk."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".changeset/**",
+        ".envrc",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".helix/**",
+        ".ignore",
+        ".vscode/**",
+        ".zed/**",
+        "11-cometbls/**",
+        "ARCHITECTURE.md",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "README.md",
+        "Scarb.lock",
+        "Scarb.toml",
+        "VERSIONING.md",
+        "app2/.gitignore",
+        "app2/CONVENTIONS.md",
+        "app2/README.md",
+        "app2/app2.nix",
+        "app2/eslint.config.js",
+        "app2/examples/**",
+        "app2/knip.ts",
+        "app2/package.json",
+        "app2/src/**",
+        "app2/static/airdrop/**",
+        "app2/static/app-og-image.png",
+        "app2/static/app-static-video-old.png",
+        "app2/static/app-static-video.png",
+        "app2/static/app-static-video_old_old.png",
+        "app2/static/apple-touch-icon.png",
+        "app2/static/badges/**",
+        "app2/static/btc-og-image.png",
+        "app2/static/btc-static-video.png",
+        "app2/static/escher-logo.svg",
+        "app2/static/favicon-96x96.png",
+        "app2/static/favicon.svg",
+        "app2/static/fonts/**",
+        "app2/static/images/icons/arbitrum.svg",
+        "app2/static/images/icons/ethereum.svg",
+        "app2/static/images/icons/faucet.svg",
+        "app2/static/images/icons/ibc.svg",
+        "app2/static/images/icons/injected.svg",
+        "app2/static/images/icons/keplr.svg",
+        "app2/static/images/icons/leap.svg",
+        "app2/static/images/icons/osmo.svg",
+        "app2/static/images/icons/osmosis.svg",
+        "app2/static/images/icons/petra.svg",
+        "app2/static/images/icons/polygon.svg",
+        "app2/static/images/icons/scroll.svg",
+        "app2/static/images/icons/sepolia.svg",
+        "app2/static/images/icons/slush.svg",
+        "app2/static/images/icons/stargaze.svg",
+        "app2/static/images/icons/union.svg",
+        "app2/static/images/icons/uno.svg",
+        "app2/static/images/icons/wallet-connect.svg",
+        "app2/static/images/skull.png",
+        "app2/static/images/union-logo-glyph.svg",
+        "app2/static/images/union-logo.svg",
+        "app2/static/logos/**",
+        "app2/static/manifest.json",
+        "app2/static/web-app-manifest-192x192.png",
+        "app2/static/web-app-manifest-512x512.png",
+        "app2/static/yaps/**",
+        "app2/svelte.config.js",
+        "app2/tsconfig.examples.json",
+        "app2/tsconfig.json",
+        "app2/vite.config.ts",
+        "app2/vitest-setup-client.ts",
+        "aptos/**",
+        "biome.json",
+        "cairo/**",
+        "ceremony/**",
+        "clippy.toml",
+        "cosmwasm/README.md",
+        "cosmwasm/access-managed/**",
+        "cosmwasm/access-manager/**",
+        "cosmwasm/app/**",
+        "cosmwasm/core/**",
+        "cosmwasm/cosmwasm.nix",
+        "cosmwasm/cw-account/**",
+        "cosmwasm/cw-escrow-vault/**",
+        "cosmwasm/cw-unionversal-token/**",
+        "cosmwasm/cw20-token-minter/**",
+        "cosmwasm/cw20-wrapped-tokenfactory/**",
+        "cosmwasm/deployer/**",
+        "cosmwasm/gatekeeper/**",
+        "cosmwasm/lightclient/arbitrum/**",
+        "cosmwasm/lightclient/attested/**",
+        "cosmwasm/lightclient/berachain/**",
+        "cosmwasm/lightclient/cometbls/**",
+        "cosmwasm/lightclient/ethereum/**",
+        "cosmwasm/lightclient/ethermint/**",
+        "cosmwasm/lightclient/gno/**",
+        "cosmwasm/lightclient/movement/**",
+        "cosmwasm/lightclient/proof-lens/**",
+        "cosmwasm/lightclient/state-lens-ics23-ics23/**",
+        "cosmwasm/lightclient/state-lens-ics23-mpt/**",
+        "cosmwasm/lightclient/state-lens-ics23-smt/**",
+        "cosmwasm/lightclient/sui/**",
+        "cosmwasm/lightclient/tendermint/**",
+        "cosmwasm/lightclient/trusted-mpt/**",
+        "cosmwasm/lst-ocw/**",
+        "cosmwasm/lst-staker/**",
+        "cosmwasm/migrations/**",
+        "cosmwasm/multicall/**",
+        "cosmwasm/on-zkgm-call-proxy/**",
+        "cosmwasm/osmosis-tokenfactory-token-minter/**",
+        "cosmwasm/osmosis-tokenfactory-token-owner/**",
+        "cosmwasm/pausable/**",
+        "cosmwasm/proxy-account-factory/**",
+        "cosmwasm/token-factory-api/**",
+        "cosmwasm/ucs03-zkgm-token-minter-api/**",
+        "cosmwasm/upgradable/**",
+        "deployments/**",
+        "devnet-compose/**",
+        "docs/.env.example",
+        "docs/.gitattributes",
+        "docs/.gitignore",
+        "docs/README.md",
+        "docs/astro.config.ts",
+        "docs/components.json",
+        "docs/docs.nix",
+        "docs/ec.config.mjs",
+        "docs/fleek.config.json",
+        "docs/integrations/**",
+        "docs/markdown.config.ts",
+        "docs/openapi.nix",
+        "docs/package.json",
+        "docs/postcss.config.cjs",
+        "docs/public/_headers",
+        "docs/public/android-chrome-192x192.png",
+        "docs/public/android-chrome-512x512.png",
+        "docs/public/apple-touch-icon.png",
+        "docs/public/faq/**",
+        "docs/public/favicon-16x16.png",
+        "docs/public/favicon-32x32.png",
+        "docs/public/favicon.svg",
+        "docs/public/fonts/**",
+        "docs/public/genesis.json",
+        "docs/public/icon-192.png",
+        "docs/public/icon-512.png",
+        "docs/public/logo-circle.png",
+        "docs/public/logo.png",
+        "docs/public/logo.svg",
+        "docs/public/og.png",
+        "docs/public/scripts/**",
+        "docs/public/union-logo.zip",
+        "docs/public/voyager-example-config.jsonc",
+        "docs/public/webmanifest.json",
+        "docs/reset.d.ts",
+        "docs/src/**",
+        "docs/svelte.config.js",
+        "docs/tailwind.config.ts",
+        "docs/tsconfig.json",
+        "docs/typedoc-example-pages.mjs",
+        "dprint.json",
+        "drip/**",
+        "e2e/**",
+        "effect-svelte/**",
+        "evm/**",
+        "flake.lock",
+        "flake.nix",
+        "foundry.toml",
+        "galoisd/.gitignore",
+        "galoisd/README.md",
+        "galoisd/cmd/**",
+        "galoisd/galoisd.nix",
+        "galoisd/go.mod",
+        "galoisd/go.sum",
+        "galoisd/grpc/**",
+        "galoisd/pkg/**",
+        "galoisd/proto/**",
+        "garnix.yaml",
+        "generated/**",
+        "lib/access-manager-types/**",
+        "lib/aptos-types/**",
+        "lib/aptos-verifier/**",
+        "lib/aptos.nix",
+        "lib/arbitrum-client/**",
+        "lib/arbitrum-light-client-types/**",
+        "lib/arbitrum-types/**",
+        "lib/arbitrum-verifier/**",
+        "lib/attested-light-client-types/**",
+        "lib/beacon-api/**",
+        "lib/beacon-api-types/**",
+        "lib/berachain-light-client-types/**",
+        "lib/chain-kitchen/**",
+        "lib/cometbft-rpc/**",
+        "lib/cometbft-types/**",
+        "lib/cometbls-groth16-verifier/Cargo.toml",
+        "lib/cometbls-groth16-verifier/build.rs",
+        "lib/cometbls-groth16-verifier/src/**",
+        "lib/cometbls-light-client-types/**",
+        "lib/concurrent-keyring/**",
+        "lib/consensus-primitives/**",
+        "lib/cosmos-client/**",
+        "lib/cosmos-sdk-event/**",
+        "lib/cosmos-signer/**",
+        "lib/cosmwasm-event/**",
+        "lib/create3/**",
+        "lib/cw20-ctx/**",
+        "lib/deployments/**",
+        "lib/depolama/**",
+        "lib/embed-commit/**",
+        "lib/ethereum-light-client-types/**",
+        "lib/ethereum-sync-protocol/**",
+        "lib/ethereum-sync-protocol-types/**",
+        "lib/ethermint-light-client-types/**",
+        "lib/evm-storage-verifier/**",
+        "lib/fork-schedules/**",
+        "lib/frissitheto/**",
+        "lib/galois-rpc/**",
+        "lib/gnark-key-parser/**",
+        "lib/gnark-mimc/**",
+        "lib/gno-client/**",
+        "lib/gno-light-client-types/**",
+        "lib/gno-rpc/**",
+        "lib/gno-types/**",
+        "lib/gno-verifier/**",
+        "lib/ibc-classic-spec/**",
+        "lib/ibc-solidity/**",
+        "lib/ibc-union-spec/**",
+        "lib/ics23/**",
+        "lib/macros/**",
+        "lib/move-bindgen-derive/**",
+        "lib/movement-light-client-types/**",
+        "lib/parlia-verifier/**",
+        "lib/pg-queue/**",
+        "lib/proof-lens-light-client-types/**",
+        "lib/reconnecting-jsonrpc-ws-client/**",
+        "lib/serde-utils/**",
+        "lib/solidity-slot/**",
+        "lib/starknet-light-client-types/**",
+        "lib/starknet-storage-verifier/**",
+        "lib/starknet-types/**",
+        "lib/starknet-verifier/**",
+        "lib/state-lens-ics23-ics23-light-client-types/**",
+        "lib/state-lens-ics23-mpt-light-client-types/**",
+        "lib/state-lens-ics23-smt-light-client-types/**",
+        "lib/state-lens-light-client-types/**",
+        "lib/subset-of/**",
+        "lib/subset-of-derive/**",
+        "lib/sui-light-client-types/**",
+        "lib/sui-utils/**",
+        "lib/sui-verifier/**",
+        "lib/tendermint-light-client-types/**",
+        "lib/tendermint-verifier/**",
+        "lib/trusted-mpt-light-client-types/**",
+        "lib/ucs03-solvable/**",
+        "lib/ucs03-zkgm-packet/**",
+        "lib/ucs03-zkgmable/**",
+        "lib/ucs04/**",
+        "lib/unionlabs/**",
+        "lib/unionlabs-encoding/**",
+        "lib/unionlabs-primitives/**",
+        "lib/voyager-client/**",
+        "lib/voyager-core/**",
+        "lib/voyager-message/**",
+        "lib/voyager-plugin/**",
+        "lib/voyager-plugin-protocol/**",
+        "lib/voyager-primitives/**",
+        "lib/voyager-rpc/**",
+        "lib/voyager-sdk/**",
+        "lib/voyager-types/**",
+        "lib/voyager-vm/**",
+        "lib/wasm-client-type/**",
+        "mpc/**",
+        "networks/**",
+        "package.json",
+        "patches/**",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "rustfmt.toml",
+        "scripts/**",
+        "site/.env.example",
+        "site/.gitattributes",
+        "site/.gitignore",
+        "site/README.md",
+        "site/astro.config.ts",
+        "site/content/**",
+        "site/markdown.config.ts",
+        "site/package.json",
+        "site/postcss.config.cjs",
+        "site/public/_redirects",
+        "site/public/android-chrome-192x192.png",
+        "site/public/android-chrome-512x512.png",
+        "site/public/apple-touch-icon.png",
+        "site/public/content/assets/01IDgId02WmfPBEHH87ipT/**",
+        "site/public/content/assets/0NTSMx2gItUzZsahQQLr6/**",
+        "site/public/content/assets/10N9HhhoxYbj4gRBGg8b1Z/**",
+        "site/public/content/assets/10iHOZCwJeupSwLY5ZPHCM/**",
+        "site/public/content/assets/117peDSrGMxXeFLHDylASp/**",
+        "site/public/content/assets/11NBZKIoEuIpd6EVa9LbFC/**",
+        "site/public/content/assets/11xbMBNexixiLShmLpxZk8/**",
+        "site/public/content/assets/13PfbRwEPTUrOeKv3y3B1o/**",
+        "site/public/content/assets/13bBeTqqIS6PB8SrmSg2eX/**",
+        "site/public/content/assets/13jvQj1rJUkEdO8GVADfze/**",
+        "site/public/content/assets/14y33HAY8cbcBlT2Z675rb/**",
+        "site/public/content/assets/15m9Rf0ROQFI4BuHlBHfS1/**",
+        "site/public/content/assets/16layexFt217P13sYUDgUn/**",
+        "site/public/content/assets/186cVePBdDNpjZwzgXqM0E/**",
+        "site/public/content/assets/18o5soYRXPWyB1At50eaGE/**",
+        "site/public/content/assets/19AIOTDl2NHp0zxmkayC3x/**",
+        "site/public/content/assets/19TsQAaPosHNyEWeQbA3q9/**",
+        "site/public/content/assets/1AQlm7egju6lEolXtbGeTJ/**",
+        "site/public/content/assets/1Ej94ce4eUBpIznfFlqEE0/**",
+        "site/public/content/assets/1FAB1f3KdXXIlKXIfh642L/**",
+        "site/public/content/assets/1G0Tz9NqfQl6Fh1tTDc6ts/**",
+        "site/public/content/assets/1JiifILhEwzgTr3JUZjAFD/**",
+        "site/public/content/assets/1JrT9YjeQA3A52r7JARfTL/**",
+        "site/public/content/assets/1LHqq7GAIr44e8uSTJJhem/**",
+        "site/public/content/assets/1MWoA9hlGXqQuy7lMq5BMF/**",
+        "site/public/content/assets/1N9r1l8cRO0SaLfiZxersp/**",
+        "site/public/content/assets/1Oi6pwkzPoAY7b7tcIUCwH/**",
+        "site/public/content/assets/1QITaGCkWHOFBefwR0R7Ss/**",
+        "site/public/content/assets/1RG50ktrrmUt4lX96Uk8y1/**",
+        "site/public/content/assets/1SPSJId4OelcjI3Kwu61a1/**",
+        "site/public/content/assets/1dzf6zOwILsREss5KmWQD6/**",
+        "site/public/content/assets/1e9erfcF7VJVw8cPGK2tLz/**",
+        "site/public/content/assets/1fapo9yEj1kP6IrB5pUJXl/**",
+        "site/public/content/assets/1h6QgImjv8WVypZbwSOg2G/**",
+        "site/public/content/assets/1hHBuIdmr6Yi1Cn7l92Jds/**",
+        "site/public/content/assets/1hqSetjn3azVKgs4u2b0wx/**",
+        "site/public/content/assets/1iMnG1oinZukUn5AZZx3cL/**",
+        "site/public/content/assets/1iSWJjnHlY37GaAPnSjuuN/**",
+        "site/public/content/assets/1iSf8Fv0Zol0s44BZvCIgY/**",
+        "site/public/content/assets/1jYYNaxJq1bRBk38YWyEiU/**",
+        "site/public/content/assets/1kq91Xhlj2Zy2QXgMcWrdD/**",
+        "site/public/content/assets/1mrAsWmzxsdaW90YwvxWK0/**",
+        "site/public/content/assets/1o8NqpMrz2CBXZ39omkCV8/**",
+        "site/public/content/assets/1obzrUZDxCzc4ALPSMoNZ1/**",
+        "site/public/content/assets/1tfvJl79jwacr8kFKscKUi/**",
+        "site/public/content/assets/1vIlHZeF1fWqEV03ux75pG/**",
+        "site/public/content/assets/1veCws4YPYBHNAB78dAbSG/**",
+        "site/public/content/assets/20q3u4hrjvrssJ5Hqbd1HA/**",
+        "site/public/content/assets/21TjGlaMM0YbLecVA7qvaE/**",
+        "site/public/content/assets/23P7aa24tT10GnL3bWLIwr/**",
+        "site/public/content/assets/23jAFxu1TxtMYplkQYM2aY/**",
+        "site/public/content/assets/24t8GnEKMMEypzctmFk0G9/**",
+        "site/public/content/assets/26LI4j7cot4QxeCpGHUSXT/**",
+        "site/public/content/assets/26w1U7qBWWlzxyFKTmPeUg/**",
+        "site/public/content/assets/28q7YOGyBSo8OxhsubMLUj/**",
+        "site/public/content/assets/296EEHJzo5wiMHeUS2rFW2/**",
+        "site/public/content/assets/2AH9qqwL3b40Iv86ar1mLb/**",
+        "site/public/content/assets/2BB2p44CXXPXZTYml8fzz3/**",
+        "site/public/content/assets/2C9T40aHSeZQi2Nks8SNcQ/**",
+        "site/public/content/assets/2CeyEuhJ05cqKq9aJhsAS3/**",
+        "site/public/content/assets/2Cuwyi8CNJpNfIec3Rwimv/**",
+        "site/public/content/assets/2EHNGCitRfa8JYQs0iN3gB/**",
+        "site/public/content/assets/2EqJ4iCxGtFACc20MsboIu/**",
+        "site/public/content/assets/2FA1DI2uGtbwwiFHp2k4v9/**",
+        "site/public/content/assets/2FFIiN5sfOYhB8A1aUNnvs/**",
+        "site/public/content/assets/2GMcnau4uUSOWjR4DvXVBh/**",
+        "site/public/content/assets/2GlABF7cBovoSj91vHy98v/**",
+        "site/public/content/assets/2GrxiQTjFdReIhQnmmzH9D/**",
+        "site/public/content/assets/2IKxTxsdDVcPPckjOHiZTo/**",
+        "site/public/content/assets/2IaFPKbmApyExPCqP9DysM/**",
+        "site/public/content/assets/2K7HQypj6kLyfMsAcuBzU5/**",
+        "site/public/content/assets/2KiDRjfCIi2puyQwj4VZXI/**",
+        "site/public/content/assets/2KoJjiWuUq6vkKdvGtmfSt/**",
+        "site/public/content/assets/2LWMGe5Ztl4urZeGK81SOf/**",
+        "site/public/content/assets/2LX5e6vlkomTAgrNthsWtC/**",
+        "site/public/content/assets/2MPUrTmMkyikA1fNILEQlf/**",
+        "site/public/content/assets/2NZbR3aMpFeD4azzecbpmS/**",
+        "site/public/content/assets/2NyGS8mllWlEHAhtftXA8U/**",
+        "site/public/content/assets/2PffprEuuoVU8MSqffxs78/**",
+        "site/public/content/assets/2PiRQVYasDqIjMNEEiYZ0D/**",
+        "site/public/content/assets/2Q5T6m7lTfiVWwFzTu7rZV/**",
+        "site/public/content/assets/2SfgNGovaMD0pWEJ0lJAeR/**",
+        "site/public/content/assets/2T8OE7VQyLPwHbrLU24dfp/**",
+        "site/public/content/assets/2WYUQRg34PH9Af9NhrkInS/**",
+        "site/public/content/assets/2XmISQGa34yt01QJQQucmt/**",
+        "site/public/content/assets/2c9hviSQnlAO1iI0f2sDnO/**",
+        "site/public/content/assets/2eqmAiNedaFjlsdi2Whu5r/**",
+        "site/public/content/assets/2geNmz6Z65K78J7Ixx8B1v/**",
+        "site/public/content/assets/2hLtA9sEqoFw1FkHpD0MrM/**",
+        "site/public/content/assets/2hVTCZNks1nFOBpgUsQ5JQ/**",
+        "site/public/content/assets/2ifcyxWRxtm4S1gdIu7M9G/**",
+        "site/public/content/assets/2jhzuY2Kkuyg2UzhNRpQtW/**",
+        "site/public/content/assets/2mQKoYGeStRBpC2cNbW8Ma/**",
+        "site/public/content/assets/2oHx1VZXsdnttl7IOJ2TjS/**",
+        "site/public/content/assets/2oYg8KFUwZ2mRLhRwmrqxa/**",
+        "site/public/content/assets/2pzAjJqy23UanN825psbTG/**",
+        "site/public/content/assets/2rrhhOb8bYK4JOQ3y6P5gx/**",
+        "site/public/content/assets/2sVSCc8H4EsPCIJm1VErVp/**",
+        "site/public/content/assets/2uHlR08Q1Mvyb4YQnp5I41/**",
+        "site/public/content/assets/2vOIvCKzxhdz5cYjFLoWRZ/**",
+        "site/public/content/assets/2xSyVlLqm2VJaxFeDIVdM9/**",
+        "site/public/content/assets/2xoet4NGb4fJfhggDOMGTa/**",
+        "site/public/content/assets/2yUSnqXuyR3x3fRwDc1ElM/**",
+        "site/public/content/assets/2zYXxSdCMIaUMfRjlyjDYV/**",
+        "site/public/content/assets/2zrg8KV8XuZ3NnBBWK7L6Z/**",
+        "site/public/content/assets/30KqKsAU9SYI09GdAR2qMa/**",
+        "site/public/content/assets/31SSuMN8zbDGZopaHIKlAb/**",
+        "site/public/content/assets/31mdN3RRVmXrVwVFiXjWLp/**",
+        "site/public/content/assets/33CPLtRtOuYevYcFdpeHPn/**",
+        "site/public/content/assets/33sgczoaC6Ar0pPX3uo4ZA/**",
+        "site/public/content/assets/38DFCktZ5dCkRvJNHzq61/**",
+        "site/public/content/assets/38ZPagEsyUMdlnDpMsR4jA/**",
+        "site/public/content/assets/38elYMT0ms2VKw0QrdxzyF/**",
+        "site/public/content/assets/39XIamLMYkzeg2brTmHdVR/**",
+        "site/public/content/assets/39j6Tg1qbhuuVooYubUPYA/**",
+        "site/public/content/assets/3BsDUMYVFDTDWGfuBikkcS/**",
+        "site/public/content/assets/3CBL95O7VwPqzquKBlcTn0/**",
+        "site/public/content/assets/3DTwRQkUq4nQAWuM1ZDRdU/**",
+        "site/public/content/assets/3Hi2aSaQI51K3C6ik9KG2e/**",
+        "site/public/content/assets/3HkaXZIlT9bW1IdvzzTdYv/**",
+        "site/public/content/assets/3IDXiKzP92jLMWvJlUp5mm/**",
+        "site/public/content/assets/3IIK7tUID1DG2lRgxKl7wX/**",
+        "site/public/content/assets/3IsmEjuBnz1aDzUsrjln5h/**",
+        "site/public/content/assets/3K64ATDv6ORy93Qk73Q3o9/**",
+        "site/public/content/assets/3LQxN3XvTW56LWeOUu5oTT/**",
+        "site/public/content/assets/3McpI6fygHM9TxW0LAvbXe/**",
+        "site/public/content/assets/3O48QMcmGzq7mrBhK97vIJ/**",
+        "site/public/content/assets/3OCvVV1ctsMs9u1kiQ6tsX/**",
+        "site/public/content/assets/3OKHn7pFb1a5TSs3O7aAh8/**",
+        "site/public/content/assets/3PPwVhHaNU9m1JSHVaBJ5n/**",
+        "site/public/content/assets/3SdInWYFCj0KxzEYQCCT8Z/**",
+        "site/public/content/assets/3TfliinAaL9ITmDhnMKsSx/**",
+        "site/public/content/assets/3UXXJSUcafbwQqTMjEydhH/**",
+        "site/public/content/assets/3UXYlzQkxjp09g3YHJRSET/**",
+        "site/public/content/assets/3Wp4Bd1kaRnTkJswX6eVpr/**",
+        "site/public/content/assets/3Z31pkMqcUj8SrRIS45Tm5/**",
+        "site/public/content/assets/3a5mevTvTJBpxvR4oorYKk/**",
+        "site/public/content/assets/3bG0yBkVAFgmpTABDE6KHX/**",
+        "site/public/content/assets/3bjcdBESNc6F4KcnaAdNBY/**",
+        "site/public/content/assets/3cJn19iwRzy3gBhbY1WdeD/**",
+        "site/public/content/assets/3e3udfqzKNrCOnxUmcFdTd/**",
+        "site/public/content/assets/3ioEyMlHLeBNmQfBn7GzPO/**",
+        "site/public/content/assets/3iyNn8S3TJrwKdltpxO5WY/**",
+        "site/public/content/assets/3kGiyRwgXkAUkHCqr0XHo4/**",
+        "site/public/content/assets/3kSV3khjktaboUZ3KM0bck/**",
+        "site/public/content/assets/3m38WWRsT7vP6jVLKG93HF/**",
+        "site/public/content/assets/3n44oAJRXBkaXtFEkbSo0K/**",
+        "site/public/content/assets/3oCKiTpnDlbCRnFstKFQL5/**",
+        "site/public/content/assets/3ojY4YNrbQ8N0dzhywrqSc/**",
+        "site/public/content/assets/3p0i7KkgDSIiy2M1iXry2R/**",
+        "site/public/content/assets/3qo06v4er2jmkMsqDy1ey/**",
+        "site/public/content/assets/3uXT3JvmPO8ygZWWnk1gbo/**",
+        "site/public/content/assets/3wSFuHJ44uV2dTL76R5lWs/**",
+        "site/public/content/assets/3y1VMbVOP93Jd0N0ljDfn7/**",
+        "site/public/content/assets/3yYOUyLfeQkGzpfQbfpXcz/**",
+        "site/public/content/assets/3ygvgy28JpIETtpBmrzQHd/**",
+        "site/public/content/assets/3ziOFLc9WwXn3OGWCk1RhD/**",
+        "site/public/content/assets/419GqJiFwS1OTQYXKo5Aq/**",
+        "site/public/content/assets/41SWpUsugUzSayqHaWN2St/**",
+        "site/public/content/assets/42DUWR5CpDkHUeRA68yJyv/**",
+        "site/public/content/assets/46ZcVZb9kFTt3zACeP5Ikb/**",
+        "site/public/content/assets/46wsVcnlkdzLx1rF6rcIAF/**",
+        "site/public/content/assets/47N9LME2jGsz2OJvWnkDKE/**",
+        "site/public/content/assets/47fWfNdKQpHviyWTw4gjJp/**",
+        "site/public/content/assets/4ASyUbZ6ih3GNnNykzJh3f/**",
+        "site/public/content/assets/4BMn4tEw02F5zKIl8PxaCC/**",
+        "site/public/content/assets/4G1vNh708HyyFsFGYe9TtT/**",
+        "site/public/content/assets/4GzgkygixpKNpBESieG18N/**",
+        "site/public/content/assets/4H21lQngrgH7h1dbKF3sho/**",
+        "site/public/content/assets/4ILTtpbEsKmEjkqxCa9M5i/**",
+        "site/public/content/assets/4IzOc10a6StV5omaJtm03p/**",
+        "site/public/content/assets/4O1ikLLBpiTpLYXEBKltiL/**",
+        "site/public/content/assets/4OCWmnM2LwstCYGksdY8jY/**",
+        "site/public/content/assets/4Oyz5qaElhgY1JgytLBiDY/**",
+        "site/public/content/assets/4PxdaEVUxT2JlPgyb8qrQ3/**",
+        "site/public/content/assets/4QG3kwy7SnenCPzjbG2uUS/**",
+        "site/public/content/assets/4R55GEACEY9duy8KU1IA6q/**",
+        "site/public/content/assets/4R9SMhQyKLx1Dr1zez2Vf/**",
+        "site/public/content/assets/4Tkb6BWkc0V7zyP0xcGJdO/**",
+        "site/public/content/assets/4TuplEuMLPjjXLtdGVCxEn/**",
+        "site/public/content/assets/4U53JuRkVY0YYcgSVz4iEU/**",
+        "site/public/content/assets/4U8DJk0Poix5By4G6tprek/**",
+        "site/public/content/assets/4Vcnccbet2K9wVH4X3zsqD/**",
+        "site/public/content/assets/4WdhiTmhBiI54Iz6Xs0jqs/**",
+        "site/public/content/assets/4WpqM10XSOjtw5BtboDTRv/**",
+        "site/public/content/assets/4X8mT5bQokC1aec9ABuym0/**",
+        "site/public/content/assets/4XQjyJjln4cUv5AJP2whRj/**",
+        "site/public/content/assets/4ZPOIsWWrjJWIE4Twtrb3k/**",
+        "site/public/content/assets/4a8idsnS2zmbrNna6tjfi5/**",
+        "site/public/content/assets/4aoUpiRF7NFwut1SXe415/**",
+        "site/public/content/assets/4cIA8fuSJISzvI1GJoCHsp/**",
+        "site/public/content/assets/4cqFy7l0l9Vvc1q0vblK6v/**",
+        "site/public/content/assets/4eLTSxE53qq5WyxRGK43ut/**",
+        "site/public/content/assets/4ezm6McE4iVC4YSZ3lMtQj/**",
+        "site/public/content/assets/4fwsgYW61rdNglbHmSGtRn/**",
+        "site/public/content/assets/4gRpEpefZoXpjZXVGfOq0M/**",
+        "site/public/content/assets/4iFSwlvYPYK1OxSh8UYxR1/**",
+        "site/public/content/assets/4iLfJCdQzZ4k1yjQQeG7TB/**",
+        "site/public/content/assets/4jQ1N0etlSPWcTeGlrM0jp/**",
+        "site/public/content/assets/4jmwH7QyOB7YZJrr5pBB9K/**",
+        "site/public/content/assets/4jxCx82g94FbKTm8gkL47m/**",
+        "site/public/content/assets/4lXS8WKH82SYZhUzZdrI27/**",
+        "site/public/content/assets/4m3gZSxR7Frjv22Z4fV6U6/**",
+        "site/public/content/assets/4sAycEdIF9Gyfp53HbQrl4/**",
+        "site/public/content/assets/4tCs01enK6g7ih2tnhwGW/**",
+        "site/public/content/assets/4vsAQRMphFzgvJw0vRSCS2/**",
+        "site/public/content/assets/4yHArXI19xheQz1yVrgpBX/**",
+        "site/public/content/assets/4yVOcMN0DSXNLo0CAOd0xi/**",
+        "site/public/content/assets/4zuDeEx3unAtn2U7pPml3x/**",
+        "site/public/content/assets/50mONedyG34N7v4k6e87zu/**",
+        "site/public/content/assets/50oMxeaX8ZYZ1dnkKPK6KU/**",
+        "site/public/content/assets/519Kok7HnzpyDjSlu6tpcA/**",
+        "site/public/content/assets/536cydlhxm9gffgR5T39R5/**",
+        "site/public/content/assets/53saiL3vjseht2KTDnyNPn/**",
+        "site/public/content/assets/54XoGCqKKkWHLl2uAm9Suh/**",
+        "site/public/content/assets/58E1PDSDtz8bJjZxHowZ8R/**",
+        "site/public/content/assets/5AhYNbXlO98rwRbBlWeYNV/**",
+        "site/public/content/assets/5ByV1zmzl9dKhIb0U0LyBf/**",
+        "site/public/content/assets/5CcHQx5whmDoFHBMrRXtns/**",
+        "site/public/content/assets/5CwJcv144X8iNIhN7i7Qm0/**",
+        "site/public/content/assets/5DuMvW9GUm8jUGmgAwzXhc/**",
+        "site/public/content/assets/5E2U20BpOHAi6UAbXZAs5O/**",
+        "site/public/content/assets/5EgmRpervgxGxBNZwX7OIM/**",
+        "site/public/content/assets/5FMq3DBJBVVuQqGS7k2Kys/**",
+        "site/public/content/assets/5HmdXvM4lHsBHkf3kWAJkb/**",
+        "site/public/content/assets/5I5tw0oElgTj9AhTOs362f/**",
+        "site/public/content/assets/5Ilok1HTRqmfPCjCSODe8o/**",
+        "site/public/content/assets/5KjWmBkt53I1pSAv0lgMNN/**",
+        "site/public/content/assets/5Lg8Y47RO4pLY1BjRXGVGx/**",
+        "site/public/content/assets/5MtXbcCTVxnZrpKbXXILrb/**",
+        "site/public/content/assets/5NolNqhmgNgwjnVI8bhGAa/**",
+        "site/public/content/assets/5OAISds4mchG4octXCsp8t/**",
+        "site/public/content/assets/5Ok3wtqNb1CzZFSgzdzj8t/**",
+        "site/public/content/assets/5Q8aJ3JmkYYVJJi8wpIfmj/**",
+        "site/public/content/assets/5QZZmlglRQLjvTcZIyk1Mq/**",
+        "site/public/content/assets/5R0kj4uUHtW9KVH7Efy3AR/**",
+        "site/public/content/assets/5T8TzfIGqdVzPORsqbStC6/**",
+        "site/public/content/assets/5WINbnUABgid97QvmnwieF/**",
+        "site/public/content/assets/5YRXF38BQqWbRHsphdCb4x/**",
+        "site/public/content/assets/5YhyiDloL7u2Bbw9UvhWLV/**",
+        "site/public/content/assets/5Yr0wsQMt1deGbd6OjFEg5/**",
+        "site/public/content/assets/5bpWRctjY7iQ0dGwV6UUR0/**",
+        "site/public/content/assets/5cThOkKZE1p1D1IOfKybLf/**",
+        "site/public/content/assets/5dfrPqFe0eJNwfksj8hrBm/**",
+        "site/public/content/assets/5fBbPCl5U7W7M5JIkdqQ3r/**",
+        "site/public/content/assets/5fGtlr6aooWWQACkw2oZtF/**",
+        "site/public/content/assets/5i6rWkJsOb6EL8AdyCQz6c/**",
+        "site/public/content/assets/5jAr85y9MnmccnX8DYEUyi/**",
+        "site/public/content/assets/5kM4pAMOaJ4zFpfVV7cPx3/**",
+        "site/public/content/assets/5laseRG8LAy3XYA98Rd7S4/**",
+        "site/public/content/assets/5n9XqH31vfk6IZdDMDlhRv/**",
+        "site/public/content/assets/5paAcwE5AmTdcNu9CwE12E/**",
+        "site/public/content/assets/5q5svAzIaPLR6lYtGtdUMs/**",
+        "site/public/content/assets/5qRzirPrRZU4TJgsAsrmd7/**",
+        "site/public/content/assets/5srBRiZ1qEBvO3LWbtWyfK/**",
+        "site/public/content/assets/5sscAZ0b46DSmrzbWDXdL6/**",
+        "site/public/content/assets/5tAolvwioBDgnYKnrWueSZ/**",
+        "site/public/content/assets/5yV3RNA8QpiXCuXf583l1/**",
+        "site/public/content/assets/5yclIucHespR4IVmPHY6Ul/**",
+        "site/public/content/assets/5zA23DU37hwEWhIrQ9L0um/**",
+        "site/public/content/assets/5zEoxNBrfkTNYGc9wwI1C3/**",
+        "site/public/content/assets/5zki8zTYSWrpoB0K3TGuH4/**",
+        "site/public/content/assets/5zpDxexIINSsgN2aeoTGA5/**",
+        "site/public/content/assets/606Sjf1yo88POsvhD3wqwR/**",
+        "site/public/content/assets/64uxrZNB0V1kXTDJ1pQdA5/**",
+        "site/public/content/assets/65F5azPX0gZUDhJUsPiI37/**",
+        "site/public/content/assets/68fTHGd8vCOtNcuDEOSrC5/**",
+        "site/public/content/assets/69HM5RbcxziGgP0FL4pXIf/**",
+        "site/public/content/assets/6C7rDzAI4ntTPC9HwY21xu/**",
+        "site/public/content/assets/6CMujYlxTT0oIzfu3ST4qn/**",
+        "site/public/content/assets/6DJ6gNNIg9IBgP0prmRVM4/**",
+        "site/public/content/assets/6EnXHAvoajz6bJKH1VBt5t/**",
+        "site/public/content/assets/6FNGC3s1NMaGOk3OlsF61l/**",
+        "site/public/content/assets/6GaNbbAWVyHDL1eTIUHc40/**",
+        "site/public/content/assets/6JSNnTJ9DWZSkTxJdJkqMb/**",
+        "site/public/content/assets/6LSeTHb41Jp7i7a3BZzYfG/**",
+        "site/public/content/assets/6MVoCP8uIcqPlT21L9pbVz/**",
+        "site/public/content/assets/6Mku6zfjIUUgAG3FCWNV8t/**",
+        "site/public/content/assets/6OOTKuA3HdRzQOuzzxGNL0/**",
+        "site/public/content/assets/6PFQbYaeJNCNpSg6YoVzZ7/**",
+        "site/public/content/assets/6PMQsBAKvt6mFWJnFaY1pU/**",
+        "site/public/content/assets/6YjcLwNtyWgABHwsMV8lre/**",
+        "site/public/content/assets/6a2i2GWdBIX1NLxLs6i9I9/**",
+        "site/public/content/assets/6a2ooQfSCWtbY3wGfFgJNK/**",
+        "site/public/content/assets/6akO21Suf2gj6M0eY21UyV/**",
+        "site/public/content/assets/6bPZPuma9g7VrDCt8JA2XS/**",
+        "site/public/content/assets/6btg4YPMNIVeOEFyTbzzOA/**",
+        "site/public/content/assets/6gSyzUrE9lY7NhETdmKw6p/**",
+        "site/public/content/assets/6gklP7XzQVIHoZmuT9NPi5/**",
+        "site/public/content/assets/6hr2zWWvKz3acUId0wb3qT/**",
+        "site/public/content/assets/6kB2tMNAf6LmflyP3wfIOZ/**",
+        "site/public/content/assets/6lkw44BcfUA13WpI2ykr4V/**",
+        "site/public/content/assets/6nhiIs26CQU49ms3uZwEeW/**",
+        "site/public/content/assets/6niAosGuDAvgFe8WMXVGMT/**",
+        "site/public/content/assets/6rwR5KwvYkzVn033dB7iFs/**",
+        "site/public/content/assets/6soK3DxkXxMHWN6ib4D71U/**",
+        "site/public/content/assets/6vdoI3cGezq17ps9G6FQsT/**",
+        "site/public/content/assets/6y49VxvtSek1Fz8gHNT7vc/**",
+        "site/public/content/assets/6y4KFIyAKy0589nQ2Ec4DF/**",
+        "site/public/content/assets/6zhrIEZ3AArSLuf5QZ6o0f/**",
+        "site/public/content/assets/6zo6EuGS8UpjNmmmZ5FtlF/**",
+        "site/public/content/assets/6zoSPcED0UgFv57mjtBLPG/**",
+        "site/public/content/assets/71FnHUJilV8lo8ZFk2JtXW/**",
+        "site/public/content/assets/71PySnc3h67RdobKNWsNfo/**",
+        "site/public/content/assets/75ci7sYfSB8dSDy2EskMqI/**",
+        "site/public/content/assets/79DNqTqPt5KOAPNV51EE0o/**",
+        "site/public/content/assets/7BXuMCbmFHIBaa7c3qicy5/**",
+        "site/public/content/assets/7Cj2orNl2DuFwCsVPj2osQ/**",
+        "site/public/content/assets/7Del7QJFYd0XjUTvHPiLWG/**",
+        "site/public/content/assets/7Dod94X3IZuBSF9H5Y0yaV/**",
+        "site/public/content/assets/7E7GeDnA7nQkm4ahDnHW5J/**",
+        "site/public/content/assets/7GXhi3Pe8zQcHPn37cJPNM/**",
+        "site/public/content/assets/7Gj2UeaaKgFlc5uTaovw5e/**",
+        "site/public/content/assets/7L3UT1OTvjN78sDxSLOtXP/**",
+        "site/public/content/assets/7L75Q0EvKq7DlRYMctqzBN/**",
+        "site/public/content/assets/7LfyIaH46onbfGq6EjnIRr/**",
+        "site/public/content/assets/7O3PhFZVSu6k9RbxCj9nL/**",
+        "site/public/content/assets/7VJRQgR1lsAO6AknxkOpo/**",
+        "site/public/content/assets/7a5JzS0XvEAKFGYW3bBFrJ/**",
+        "site/public/content/assets/7aHcfnFSbJeTkHBpKlsPwY/**",
+        "site/public/content/assets/7aoBRNhVKVsQriDiee0b30/**",
+        "site/public/content/assets/7bnWhIiJk10T2a1BxaynHR/**",
+        "site/public/content/assets/7e5N3ESdazrRUBrL1Ig0Pl/**",
+        "site/public/content/assets/7ebVJrzhW6le5WBMFKjtsJ/**",
+        "site/public/content/assets/7fwRV4Kro8b1tGXDFj4m1J/**",
+        "site/public/content/assets/7holYcUVKlgGuYBLZMvwEh/**",
+        "site/public/content/assets/7kJsIkMNry8OchHWQzWn3g/**",
+        "site/public/content/assets/7kPTq0o7Q2TiecZdurU3J0/**",
+        "site/public/content/assets/7ktcdvlY1docNow5NQI5tl/**",
+        "site/public/content/assets/7mdEBElfoYxzzt4NCmRBLy/**",
+        "site/public/content/assets/7omBQPAzNME6hVZxtmuKaj/**",
+        "site/public/content/assets/7reTcnPA8ZENTBsBxFahFn/**",
+        "site/public/content/assets/7sSQv68KAYyePJq4N53Ubb/**",
+        "site/public/content/assets/7treGgGVJwSil3yQuM7dlQ/**",
+        "site/public/content/assets/7wJtlxh6yHlJORQYCITYuq/**",
+        "site/public/content/assets/7wffIqbyPjEbQ5taCNvSFS/**",
+        "site/public/content/assets/7wrmLQJ8GrKrNnJhOcbi5O/**",
+        "site/public/content/assets/8STPso9YXrx8331dbM9dK/**",
+        "site/public/content/assets/8TaL5WzVWkWKBIKjexXbi/**",
+        "site/public/content/assets/9WmATj6jxwR34GYiz5wJJ/**",
+        "site/public/content/assets/A2eL21o6KpsdD2SCtWYwx/**",
+        "site/public/content/assets/BPVmzNSHaR6Jpvp4Mdto5/**",
+        "site/public/content/assets/CjNPQhDP5uMuR15eL9mdW/**",
+        "site/public/content/assets/D6BoRk66vTUwyEjv0h2gV/**",
+        "site/public/content/assets/J4k9t1OkRIBA46tUZzTdg/**",
+        "site/public/content/assets/Oo1foOb8z3ysvo6w0K3Ye/**",
+        "site/public/content/assets/Ot1huuF4INvY5mHzgBHK2/**",
+        "site/public/content/assets/PaIsUgRnGvul52pv3u6VK/**",
+        "site/public/content/assets/Q3lEimM8M2oQEMD4vALKw/**",
+        "site/public/content/assets/QeQeMLZZrjQneK38nMU3g/**",
+        "site/public/content/assets/Qr4KaQXiKYW6WysmbAz5O/**",
+        "site/public/content/assets/RGXs3EzS0KsOJCDvnUsFA/**",
+        "site/public/content/assets/SIQPddZbPgUwwlp9HoqFT/**",
+        "site/public/content/assets/SN8z5lJRg2ZAAEjlQIV6H/**",
+        "site/public/content/assets/YnJ52f0sWeU6dHIYhhJmt/**",
+        "site/public/content/assets/ZFSfOj93Vos05CKfZlPYw/**",
+        "site/public/content/assets/ZNS79iH3Do8jqcaXHDX7U/**",
+        "site/public/content/assets/ZpSgfckjvBjyWlWh0Kc6J/**",
+        "site/public/content/assets/edPGcZrLMW0KYufsmCowu/**",
+        "site/public/content/assets/gVlPCxB8luPMKN2WSW8I1/**",
+        "site/public/content/assets/hMdHRdFcQDM0fKiid1rwY/**",
+        "site/public/content/assets/ioJkFRmapfWUK3ahXNBcN/**",
+        "site/public/content/assets/kA1eZlyQiFRdyAGTPGl5p/**",
+        "site/public/content/assets/kYFHhexPi41jSPpQhBFYz/**",
+        "site/public/content/assets/kZ0ov2vmgOBMm3EKD8Wjs/**",
+        "site/public/content/assets/o6ciU5532RcGAikbUfX3F/**",
+        "site/public/content/assets/qcLMPdHS6APfgc1mC5phx/**",
+        "site/public/content/assets/rOTBraOlYlcytan6vl0WM/**",
+        "site/public/content/assets/u44e6mOovduQ9ZlDXrin9/**",
+        "site/public/content/assets/yNxchMR9v24I5YcFa9NBU/**",
+        "site/public/content/assets/yjU4Qt796ae6NasFEu3SG/**",
+        "site/public/favicon-16x16.png",
+        "site/public/favicon-32x32.png",
+        "site/public/favicon.svg",
+        "site/public/fonts/**",
+        "site/public/genesis.json",
+        "site/public/icon-192.png",
+        "site/public/icon-512.png",
+        "site/public/logo-black.svg",
+        "site/public/logo-circle.png",
+        "site/public/logo-full.svg",
+        "site/public/logo-white.svg",
+        "site/public/logo.png",
+        "site/public/logo.svg",
+        "site/public/manifest.webmanifest",
+        "site/public/mica.pdf",
+        "site/public/og.png",
+        "site/public/pattern-refresh.svg",
+        "site/public/pdf-example-1.png",
+        "site/public/pdf-example-2.png",
+        "site/public/pdf-example-3.png",
+        "site/public/scripts/**",
+        "site/public/site.webmanifest",
+        "site/public/u.png",
+        "site/public/u.svg",
+        "site/public/union-logo.zip",
+        "site/reset.d.ts",
+        "site/scripts/**",
+        "site/site.nix",
+        "site/src/assets/images/backgrounds/**",
+        "site/src/assets/images/big-whale.png",
+        "site/src/assets/images/calendar.svg",
+        "site/src/assets/images/consensus-verification/**",
+        "site/src/assets/images/ethereum.svg",
+        "site/src/assets/images/fins/**",
+        "site/src/assets/images/headshots/**",
+        "site/src/assets/images/investors/**",
+        "site/src/assets/images/link.svg",
+        "site/src/assets/images/mainnet-overview.drawio.svg",
+        "site/src/assets/images/marquee/**",
+        "site/src/assets/images/overview.drawio.svg",
+        "site/src/assets/images/partners/groomlake.png",
+        "site/src/assets/images/partners/horizons.svg",
+        "site/src/assets/images/partners/spearbit.svg",
+        "site/src/assets/images/placeholder.jpeg",
+        "site/src/assets/images/research/**",
+        "site/src/assets/images/spline-holders/**",
+        "site/src/assets/images/testnet-overview.drawio.svg",
+        "site/src/assets/images/whale.png",
+        "site/src/assets/partners/**",
+        "site/src/assets/theme/**",
+        "site/src/assets/union-logo/**",
+        "site/src/components/**",
+        "site/src/content/**",
+        "site/src/content-data/**",
+        "site/src/env.d.ts",
+        "site/src/layouts/**",
+        "site/src/lib/**",
+        "site/src/pages/**",
+        "site/src/spline/**",
+        "site/src/styles/**",
+        "site/svelte.config.js",
+        "site/tailwind.config.ts",
+        "site/tsconfig.json",
+        "sui/**",
+        "taplo.toml",
+        "tools/**",
+        "treefmt.nix",
+        "tsconfig.base.json",
+        "tsconfig.build.json",
+        "tstyche.config.json",
+        "typos.toml",
+        "uniond/**",
+        "unionvisor/**",
+        "vercel.json",
+        "versions/**",
+        "vitest.setup.ts",
+        "vitest.shared.ts",
+        "vitest.workspace.ts",
+        "voyager/**",
+        "zkgm-dev/**"
+      ],
+      "text": "LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2024 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2024 Union.fi Labs, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "Copyright (c) 2024 Union.fi Labs, Inc.; Copyright 2024 Union.fi Labs, Inc., MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/unionlabs/union."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "cosmwasm/cw20-base/**"
+      ],
+      "text": "Cargo.toml declares the license \"Apache-2.0\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nApache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, \"control\" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:\n\n     (a) You must give any other recipients of the Work or Derivative Works a copy of this License; and\n\n     (b) You must cause any modified files to carry prominent notices stating that You changed the files; and\n\n     (c) You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and\n\n     (d) If the Work includes a \"NOTICE\" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.\n\n     You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following boilerplate notice, with the fields enclosed by brackets \"[]\" replaced with your own identifying information. (Don't include the brackets!)  The text should be enclosed in the appropriate comment syntax for the file format. We also recommend that a file or class name and description of purpose be included on the same \"printed page\" as the copyright notice for easier identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Ethan Frey <ethanfrey@users.noreply.github.com>, Apache-2.0 license (declared in Cargo.toml), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/cosmwasm/cw20-base."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "lib/ssz/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2022 Sigma Prime Pty Ltd\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2022 Sigma Prime Pty Ltd, Apache-2.0 license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/lib/ssz."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "lib/ssz-derive/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2022 Sigma Prime Pty Ltd\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2022 Sigma Prime Pty Ltd, Apache-2.0 license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/lib/ssz-derive."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "sentinel2/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of sentinel2, MIT license (declared in package.json), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/sentinel2."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ts-sdk/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ts-sdk-cosmos/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-cosmos."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ts-sdk-evm/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-evm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ts-sdk-sui/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/ts-sdk-sui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "typescript-sdk/.env.example",
+        "typescript-sdk/.gitignore",
+        "typescript-sdk/LICENSE",
+        "typescript-sdk/README.md",
+        "typescript-sdk/bun.lock",
+        "typescript-sdk/bunfig.toml",
+        "typescript-sdk/environment.d.ts",
+        "typescript-sdk/jsr.json",
+        "typescript-sdk/knip.json",
+        "typescript-sdk/package.json",
+        "typescript-sdk/playground/**",
+        "typescript-sdk/reset.d.ts",
+        "typescript-sdk/scripts/**",
+        "typescript-sdk/src/**",
+        "typescript-sdk/test/**",
+        "typescript-sdk/tsconfig.json",
+        "typescript-sdk/tsconfig.strictest.json",
+        "typescript-sdk/tsup.config.ts",
+        "typescript-sdk/typescript-sdk.nix",
+        "typescript-sdk/vitest.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Union.fi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Union.fi Labs, Inc., MIT license (LICENSE), https://github.com/unionlabs/union/tree/031785bb6dc6b957c624e62bc64c184409c97d7b/typescript-sdk."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "solidity",
+      "paths": [
+        "**/*.sol"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cairo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jpeg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "Scarb.lock",
+        "cairo/cometbls_light_client/Scarb.lock",
+        "cairo/ibc/Scarb.lock",
+        "cairo/loopback_light_client/Scarb.lock",
+        "cairo/mock_client/Scarb.lock",
+        "cairo/zkgm/Scarb.lock",
+        "flake.lock",
+        "sui/escrow_vault/Move.lock",
+        "sui/ibc/Move.lock",
+        "sui/muno/Move.lock",
+        "sui/owned_vault/Move.lock",
+        "sui/ping_pong/Move.lock",
+        "sui/u/Move.lock",
+        "sui/ucs03_zkgm/Move.lock",
+        "tools/rust/rust-std-Cargo.lock",
+        "typescript-sdk/bun.lock",
+        "uniond/proto/buf.lock",
+        "voyager/plugins/transaction/sui/token_denom/Move.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.splinecode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ttf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unoo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.woff2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.tool-versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/005c380a7af47341"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/00c6facf29213d38"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/01257c5ece168c79"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/015ccd09899229bd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/03b237ea9c32ddf2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0a12ac50b9315562"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3a77333f630d984f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/6bd9babbebf7eb78"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/77494f50a286d2d4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/95f996d617877a54"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-APACHE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_redirects"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ccd48983c567d8fb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/d985d6dd438397f2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f0861eedbc473802"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f650f1b08228860d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swapperd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uniond"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

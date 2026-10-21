@@ -1,0 +1,1488 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/TheCherno/Hazel",
+  "revision": "1feb70572fa87fa1c4ba784a2cfeada5b4a500db",
+  "checksum": "sha256:81283673f68ef1add61a9919399e2f95dba642481fd19a1c94f25eb175d05221",
+  "extract": {
+    "exclude": [
+      "Hazel/vendor/Box2D/docs/images/body_origin.gif",
+      "Hazel/vendor/Box2D/docs/images/convex_concave.gif",
+      "Hazel/vendor/Box2D/docs/images/debug_draw.png",
+      "Hazel/vendor/Box2D/docs/images/distance_joint.gif",
+      "Hazel/vendor/Box2D/docs/images/gear_joint.gif",
+      "Hazel/vendor/Box2D/docs/images/prismatic_joint.gif",
+      "Hazel/vendor/Box2D/docs/images/pulley_joint.gif",
+      "Hazel/vendor/Box2D/docs/images/revolute_joint.gif",
+      "Hazel/vendor/Box2D/docs/images/testbed.png",
+      "Hazel/vendor/Box2D/testbed/data/**",
+      "Hazel/vendor/GLFW/deps/**",
+      "Hazel/vendor/GLFW/examples/glfw.icns",
+      "Hazel/vendor/GLFW/examples/glfw.ico",
+      "Hazel/vendor/Glad/**",
+      "Hazel/vendor/ImGuizmo/bin/**",
+      "Hazel/vendor/filewatch/**",
+      "Hazel/vendor/glm/**",
+      "Hazel/vendor/imgui/examples/example_apple_metal/iOS/Default-568h@2x.png",
+      "Hazel/vendor/imgui/examples/libs/glfw/lib-vc2010-32/**",
+      "Hazel/vendor/imgui/examples/libs/glfw/lib-vc2010-64/**",
+      "Hazel/vendor/imgui/misc/fonts/Cousine-Regular.ttf",
+      "Hazel/vendor/imgui/misc/fonts/DroidSans.ttf",
+      "Hazel/vendor/imgui/misc/fonts/Karla-Regular.ttf",
+      "Hazel/vendor/imgui/misc/fonts/ProggyClean.ttf",
+      "Hazel/vendor/imgui/misc/fonts/ProggyTiny.ttf",
+      "Hazel/vendor/imgui/misc/fonts/Roboto-Medium.ttf",
+      "Hazel/vendor/mono/**",
+      "Hazel/vendor/msdf-atlas-gen/icon.ico",
+      "Hazel/vendor/msdf-atlas-gen/msdf-atlas-gen.aps",
+      "Hazel/vendor/msdf-atlas-gen/msdf-atlas-gen.rc",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/Msdfgen.aps",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/Msdfgen.rc",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/.clang-format",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/.gitignore",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/.gitlab-ci.yml",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/.gitmodules",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/.mailmap",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/CMakeLists.txt",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/LICENSE.TXT",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/Makefile",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/README",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/README.git",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/autogen.sh",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/builds/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/configure",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/devel/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/docs/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/include/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/meson.build",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/meson_options.txt",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/modules.cfg",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/objs/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/src/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/examples/example.png",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/libpng.wrap",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/zlib.wrap",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/tests/**",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/vms_make.com",
+      "Hazel/vendor/msdf-atlas-gen/msdfgen/resource.h",
+      "Hazel/vendor/msdf-atlas-gen/resource.h",
+      "Hazel/vendor/stb_image/**",
+      "Hazel/vendor/yaml-cpp/include/yaml-cpp/contrib/**",
+      "Hazel/vendor/yaml-cpp/src/contrib/**",
+      "Hazelnut/Resources/**",
+      "Hazelnut/SandboxProject/Assets/Textures/**",
+      "Hazelnut/assets/fonts/opensans/OpenSans-Bold.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-BoldItalic.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-ExtraBold.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-ExtraBoldItalic.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-Italic.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-Light.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-LightItalic.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-Regular.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-SemiBold.ttf",
+      "Hazelnut/assets/fonts/opensans/OpenSans-SemiBoldItalic.ttf",
+      "Hazelnut/mono/lib/mono/4.5/Accessibility.dll",
+      "Hazelnut/mono/lib/mono/4.5/Commons.Xml.Relaxng.dll",
+      "Hazelnut/mono/lib/mono/4.5/CustomMarshalers.dll",
+      "Hazelnut/mono/lib/mono/4.5/Facades/**",
+      "Hazelnut/mono/lib/mono/4.5/I18N.CJK.dll",
+      "Hazelnut/mono/lib/mono/4.5/I18N.MidEast.dll",
+      "Hazelnut/mono/lib/mono/4.5/I18N.Other.dll",
+      "Hazelnut/mono/lib/mono/4.5/I18N.Rare.dll",
+      "Hazelnut/mono/lib/mono/4.5/I18N.West.dll",
+      "Hazelnut/mono/lib/mono/4.5/I18N.dll",
+      "Hazelnut/mono/lib/mono/4.5/IBM.Data.DB2.dll",
+      "Hazelnut/mono/lib/mono/4.5/ICSharpCode.SharpZipLib.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.Engine.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.Framework.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.Tasks.v4.0.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.Utilities.v4.0.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CSharp.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CodeAnalysis.CSharp.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CodeAnalysis.Scripting.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CodeAnalysis.VisualBasic.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.CodeAnalysis.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.VisualBasic.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.VisualC.dll",
+      "Hazelnut/mono/lib/mono/4.5/Microsoft.Web.Infrastructure.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Btls.Interface.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.CSharp.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Cairo.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Cecil.VB.Mdb.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Cecil.VB.Pdb.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Cecil.VB.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.CodeContracts.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.CompilerServices.SymbolWriter.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Data.Sqlite.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Data.Tds.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Debugger.Soft.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Http.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Management.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Messaging.RabbitMQ.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Messaging.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Parallel.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Posix.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Profiler.Log.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Security.Win32.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Security.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Simd.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.Tasklets.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.WebBrowser.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.WebServer2.dll",
+      "Hazelnut/mono/lib/mono/4.5/Mono.XBuild.Tasks.dll",
+      "Hazelnut/mono/lib/mono/4.5/Novell.Directory.Ldap.dll",
+      "Hazelnut/mono/lib/mono/4.5/PEAPI.dll",
+      "Hazelnut/mono/lib/mono/4.5/RabbitMQ.Client.Apigen.exe",
+      "Hazelnut/mono/lib/mono/4.5/RabbitMQ.Client.Apigen.pdb",
+      "Hazelnut/mono/lib/mono/4.5/RabbitMQ.Client.dll",
+      "Hazelnut/mono/lib/mono/4.5/SMDiagnostics.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Collections.Immutable.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ComponentModel.Composition.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ComponentModel.DataAnnotations.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Configuration.Install.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Configuration.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Core.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.DataSetExtensions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.Entity.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.Linq.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.OracleClient.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.Services.Client.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.Services.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Data.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Deployment.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Design.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.DirectoryServices.Protocols.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.DirectoryServices.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Drawing.Design.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Drawing.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Dynamic.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.EnterpriseServices.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.IO.Compression.FileSystem.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.IO.Compression.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.IdentityModel.Selectors.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.IdentityModel.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Json.Microsoft.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Json.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Management.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Memory.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Messaging.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Net.Http.Formatting.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Net.Http.WebRequest.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Net.Http.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Net.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Numerics.Vectors.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Numerics.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Core.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Debugger.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Experimental.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Interfaces.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Linq.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Observable.Aliases.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.PlatformServices.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Providers.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Runtime.Remoting.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Windows.Forms.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reactive.Windows.Threading.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reflection.Context.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Reflection.Metadata.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.Caching.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.CompilerServices.Unsafe.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.DurableInstancing.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.Remoting.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.Serialization.Formatters.Soap.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Runtime.Serialization.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Security.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.Activation.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.Discovery.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.Internals.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.Routing.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.Web.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceModel.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.ServiceProcess.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Threading.Tasks.Dataflow.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Threading.Tasks.Extensions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Transactions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Abstractions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.ApplicationServices.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.DynamicData.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Extensions.Design.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Extensions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Http.SelfHost.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Http.WebHost.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Http.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Mobile.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Mvc.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Razor.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.RegularExpressions.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Routing.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.Services.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.WebPages.Deployment.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.WebPages.Razor.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.WebPages.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Web.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Windows.Forms.DataVisualization.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Windows.Forms.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Windows.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Workflow.Activities.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Workflow.ComponentModel.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Workflow.Runtime.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Xaml.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Xml.Linq.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Xml.Serialization.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.Xml.dll",
+      "Hazelnut/mono/lib/mono/4.5/System.dll",
+      "Hazelnut/mono/lib/mono/4.5/VBCSCompiler.exe",
+      "Hazelnut/mono/lib/mono/4.5/WebMatrix.Data.dll",
+      "Hazelnut/mono/lib/mono/4.5/WindowsBase.dll",
+      "Hazelnut/mono/lib/mono/4.5/al.exe",
+      "Hazelnut/mono/lib/mono/4.5/al.pdb",
+      "Hazelnut/mono/lib/mono/4.5/aprofutil.exe",
+      "Hazelnut/mono/lib/mono/4.5/aprofutil.pdb",
+      "Hazelnut/mono/lib/mono/4.5/browsercaps-updater.exe",
+      "Hazelnut/mono/lib/mono/4.5/browsercaps-updater.pdb",
+      "Hazelnut/mono/lib/mono/4.5/caspol.exe",
+      "Hazelnut/mono/lib/mono/4.5/caspol.pdb",
+      "Hazelnut/mono/lib/mono/4.5/cccheck.exe",
+      "Hazelnut/mono/lib/mono/4.5/cccheck.pdb",
+      "Hazelnut/mono/lib/mono/4.5/ccrewrite.exe",
+      "Hazelnut/mono/lib/mono/4.5/ccrewrite.pdb",
+      "Hazelnut/mono/lib/mono/4.5/cert-sync.exe",
+      "Hazelnut/mono/lib/mono/4.5/cert-sync.pdb",
+      "Hazelnut/mono/lib/mono/4.5/cert2spc.exe",
+      "Hazelnut/mono/lib/mono/4.5/cert2spc.pdb",
+      "Hazelnut/mono/lib/mono/4.5/certmgr.exe",
+      "Hazelnut/mono/lib/mono/4.5/certmgr.pdb",
+      "Hazelnut/mono/lib/mono/4.5/chktrust.exe",
+      "Hazelnut/mono/lib/mono/4.5/chktrust.pdb",
+      "Hazelnut/mono/lib/mono/4.5/crlupdate.exe",
+      "Hazelnut/mono/lib/mono/4.5/crlupdate.pdb",
+      "Hazelnut/mono/lib/mono/4.5/csc.exe",
+      "Hazelnut/mono/lib/mono/4.5/cscompmgd.dll",
+      "Hazelnut/mono/lib/mono/4.5/csharp.exe",
+      "Hazelnut/mono/lib/mono/4.5/csharp.pdb",
+      "Hazelnut/mono/lib/mono/4.5/csi.exe",
+      "Hazelnut/mono/lib/mono/4.5/culevel.exe",
+      "Hazelnut/mono/lib/mono/4.5/culevel.pdb",
+      "Hazelnut/mono/lib/mono/4.5/disco.exe",
+      "Hazelnut/mono/lib/mono/4.5/disco.pdb",
+      "Hazelnut/mono/lib/mono/4.5/dtd2rng.exe",
+      "Hazelnut/mono/lib/mono/4.5/dtd2rng.pdb",
+      "Hazelnut/mono/lib/mono/4.5/dtd2xsd.exe",
+      "Hazelnut/mono/lib/mono/4.5/dtd2xsd.pdb",
+      "Hazelnut/mono/lib/mono/4.5/fastcgi-mono-server4.exe",
+      "Hazelnut/mono/lib/mono/4.5/gacutil.exe",
+      "Hazelnut/mono/lib/mono/4.5/gacutil.pdb",
+      "Hazelnut/mono/lib/mono/4.5/genxs.exe",
+      "Hazelnut/mono/lib/mono/4.5/genxs.pdb",
+      "Hazelnut/mono/lib/mono/4.5/httpcfg.exe",
+      "Hazelnut/mono/lib/mono/4.5/httpcfg.pdb",
+      "Hazelnut/mono/lib/mono/4.5/ictool.exe",
+      "Hazelnut/mono/lib/mono/4.5/ictool.pdb",
+      "Hazelnut/mono/lib/mono/4.5/ikdasm.exe",
+      "Hazelnut/mono/lib/mono/4.5/ikdasm.pdb",
+      "Hazelnut/mono/lib/mono/4.5/ilasm.exe",
+      "Hazelnut/mono/lib/mono/4.5/ilasm.pdb",
+      "Hazelnut/mono/lib/mono/4.5/illinkanalyzer.exe",
+      "Hazelnut/mono/lib/mono/4.5/illinkanalyzer.pdb",
+      "Hazelnut/mono/lib/mono/4.5/installutil.exe",
+      "Hazelnut/mono/lib/mono/4.5/installutil.pdb",
+      "Hazelnut/mono/lib/mono/4.5/installvst.exe",
+      "Hazelnut/mono/lib/mono/4.5/installvst.pdb",
+      "Hazelnut/mono/lib/mono/4.5/lc.exe",
+      "Hazelnut/mono/lib/mono/4.5/lc.pdb",
+      "Hazelnut/mono/lib/mono/4.5/macpack.exe",
+      "Hazelnut/mono/lib/mono/4.5/macpack.pdb",
+      "Hazelnut/mono/lib/mono/4.5/makecert.exe",
+      "Hazelnut/mono/lib/mono/4.5/makecert.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mconfig.exe",
+      "Hazelnut/mono/lib/mono/4.5/mconfig.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mcs.exe",
+      "Hazelnut/mono/lib/mono/4.5/mcs.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mdbrebase.exe",
+      "Hazelnut/mono/lib/mono/4.5/mdbrebase.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mdoc.exe",
+      "Hazelnut/mono/lib/mono/4.5/mdoc.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mkbundle.exe",
+      "Hazelnut/mono/lib/mono/4.5/mkbundle.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mod-mono-server4.exe",
+      "Hazelnut/mono/lib/mono/4.5/mod.exe",
+      "Hazelnut/mono/lib/mono/4.5/mod.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-diff.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-diff.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-html.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-html.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-info.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-api-info.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-cil-strip.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-cil-strip.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-fpm.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-service.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-service.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-shlib-cop.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-shlib-cop.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-symbolicate.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-symbolicate.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mono-xmltool.exe",
+      "Hazelnut/mono/lib/mono/4.5/mono-xmltool.pdb",
+      "Hazelnut/mono/lib/mono/4.5/monolinker.exe",
+      "Hazelnut/mono/lib/mono/4.5/monolinker.pdb",
+      "Hazelnut/mono/lib/mono/4.5/monop.exe",
+      "Hazelnut/mono/lib/mono/4.5/monop.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mozroots.exe",
+      "Hazelnut/mono/lib/mono/4.5/mozroots.pdb",
+      "Hazelnut/mono/lib/mono/4.5/mscorlib.dll",
+      "Hazelnut/mono/lib/mono/4.5/pdb2mdb.exe",
+      "Hazelnut/mono/lib/mono/4.5/pdb2mdb.pdb",
+      "Hazelnut/mono/lib/mono/4.5/permview.exe",
+      "Hazelnut/mono/lib/mono/4.5/permview.pdb",
+      "Hazelnut/mono/lib/mono/4.5/resgen.exe",
+      "Hazelnut/mono/lib/mono/4.5/resgen.pdb",
+      "Hazelnut/mono/lib/mono/4.5/secutil.exe",
+      "Hazelnut/mono/lib/mono/4.5/secutil.pdb",
+      "Hazelnut/mono/lib/mono/4.5/setreg.exe",
+      "Hazelnut/mono/lib/mono/4.5/setreg.pdb",
+      "Hazelnut/mono/lib/mono/4.5/sgen.exe",
+      "Hazelnut/mono/lib/mono/4.5/sgen.pdb",
+      "Hazelnut/mono/lib/mono/4.5/signcode.exe",
+      "Hazelnut/mono/lib/mono/4.5/signcode.pdb",
+      "Hazelnut/mono/lib/mono/4.5/sn.exe",
+      "Hazelnut/mono/lib/mono/4.5/sn.pdb",
+      "Hazelnut/mono/lib/mono/4.5/soapsuds.exe",
+      "Hazelnut/mono/lib/mono/4.5/soapsuds.pdb",
+      "Hazelnut/mono/lib/mono/4.5/sqlmetal.exe",
+      "Hazelnut/mono/lib/mono/4.5/sqlmetal.pdb",
+      "Hazelnut/mono/lib/mono/4.5/sqlsharp.exe",
+      "Hazelnut/mono/lib/mono/4.5/sqlsharp.pdb",
+      "Hazelnut/mono/lib/mono/4.5/svcutil.exe",
+      "Hazelnut/mono/lib/mono/4.5/svcutil.pdb",
+      "Hazelnut/mono/lib/mono/4.5/vbc.exe",
+      "Hazelnut/mono/lib/mono/4.5/vbnc.exe",
+      "Hazelnut/mono/lib/mono/4.5/vbnc.exe.mdb",
+      "Hazelnut/mono/lib/mono/4.5/wsdl.exe",
+      "Hazelnut/mono/lib/mono/4.5/wsdl.pdb",
+      "Hazelnut/mono/lib/mono/4.5/xbuild.exe",
+      "Hazelnut/mono/lib/mono/4.5/xbuild.pdb",
+      "Hazelnut/mono/lib/mono/4.5/xsd.exe",
+      "Hazelnut/mono/lib/mono/4.5/xsd.pdb",
+      "Hazelnut/mono/lib/mono/4.5/xsp4.exe",
+      "Resources/**",
+      "Sandbox/assets/fonts/opensans/OpenSans-Bold.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-BoldItalic.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-ExtraBold.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-ExtraBoldItalic.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-Italic.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-Light.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-LightItalic.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-Regular.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-SemiBold.ttf",
+      "Sandbox/assets/fonts/opensans/OpenSans-SemiBoldItalic.ttf",
+      "Sandbox/assets/textures/**",
+      "vendor/**",
+      "Hazelnut/mono/lib/mono/4.5/mscorlib.pdb"
+    ]
+  },
+  "history": {
+    "since": "9d8c0119104d11af240786e1b7476275287b8eec"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT AND Zlib AND BSL-1.0 AND BSD-2-Clause AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nMIT License\n\nCopyright (c) 2019 Erin Catto\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nCopyright (c) 2002-2006 Marcus Geelnard\nCopyright (c) 2006-2016 Camilla Löwy <elmindreda@glfw.org>\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2016 Cedric Guillemet\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017-2020 Michele Caini\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopy of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopy or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014-2020 Omar Cornut\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2002-2006 Marcus Geelnard\nCopyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n\n\n\nMIT License\n\nCopyright (c) 2020 Viktor Chlumsky\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2016 Viktor Chlumsky\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nBoost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\r\n\r\nCopyright (c) 2016 Gabi Melman.                                       \r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in\r\nall copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\r\nTHE SOFTWARE.\r\n\r\n\n\nCopyright (c) 2012 - 2016, Victor Zverovich\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2008-2015 Jesse Beder.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright 2008, Google Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [2007] Neal Norwitz\n   Portions Copyright [2007] Google Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/TheCherno/Hazel: the authors of TheCherno/Hazel (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/TheCherno/Hazel; Copyright (c) 2019 Erin Catto, MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/Box2D; Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2016 Camilla Löwy <elmindreda@glfw.org>, Zlib license (LICENSE.md), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/GLFW; Copyright (c) 2016 Cedric Guillemet, MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/ImGuizmo; Copyright (c) 2017-2020 Michele Caini, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/entt; Copyright (c) 2014-2020 Omar Cornut, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/imgui; Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>, Zlib license (COPYING.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/imgui/examples/libs/glfw; Copyright (c) 2020 Viktor Chlumsky, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen; Copyright (c) 2016 Viktor Chlumsky, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen/msdfgen; the authors of TheCherno/Hazel (Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg) (the license file names no copyright line), BSL-1.0 license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg; Copyright (c) 2016 Gabi Melman., MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/spdlog; Copyright (c) 2012 - 2016, Victor Zverovich, BSD-2-Clause license (LICENSE.rst), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/spdlog/include/spdlog/fmt/bundled; Copyright (c) 2008-2015 Jesse Beder., MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp; Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0; Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock; Copyright [2007] Neal Norwitz, Apache-2.0 license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/generator; Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googletest; the authors of TheCherno/Hazel (Hazelnut/assets/fonts/opensans) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazelnut/assets/fonts/opensans; the authors of TheCherno/Hazel (Sandbox/assets/fonts/opensans) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Sandbox/assets/fonts/opensans."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        "Dependencies.lua",
+        "Hazel/premake5.lua",
+        "Hazel/src/**",
+        "Hazel-ScriptCore/**",
+        "Hazelnut/SandboxProject/Assets/Scenes/**",
+        "Hazelnut/SandboxProject/Assets/Scripts/**",
+        "Hazelnut/SandboxProject/Sandbox.hproj",
+        "Hazelnut/assets/shaders/**",
+        "Hazelnut/imgui.ini",
+        "Hazelnut/mono/lib/mono/4.5/MSBuild/**",
+        "Hazelnut/mono/lib/mono/4.5/Microsoft.Build.xsd",
+        "Hazelnut/mono/lib/mono/4.5/Microsoft.CSharp.targets",
+        "Hazelnut/mono/lib/mono/4.5/Microsoft.Common.targets",
+        "Hazelnut/mono/lib/mono/4.5/Microsoft.Common.tasks",
+        "Hazelnut/mono/lib/mono/4.5/Microsoft.VisualBasic.targets",
+        "Hazelnut/mono/lib/mono/4.5/VBCSCompiler.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/csc.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/csc.rsp",
+        "Hazelnut/mono/lib/mono/4.5/csi.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/csi.rsp",
+        "Hazelnut/mono/lib/mono/4.5/mono-shlib-cop.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/mscorlib.pdb",
+        "Hazelnut/mono/lib/mono/4.5/sqlmetal.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/vbc.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/vbc.rsp",
+        "Hazelnut/mono/lib/mono/4.5/vbnc.rsp",
+        "Hazelnut/mono/lib/mono/4.5/xbuild.exe.config",
+        "Hazelnut/mono/lib/mono/4.5/xbuild.rsp",
+        "Hazelnut/premake5.lua",
+        "Hazelnut/src/**",
+        "LICENSE",
+        "README.md",
+        "Sandbox/assets/shaders/**",
+        "Sandbox/imgui.ini",
+        "Sandbox/premake5.lua",
+        "Sandbox/src/**",
+        "premake5.lua",
+        "scripts/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of TheCherno/Hazel (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/TheCherno/Hazel."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/Box2D/.github/**",
+        "Hazel/vendor/Box2D/.gitignore",
+        "Hazel/vendor/Box2D/.travis.yml",
+        "Hazel/vendor/Box2D/CHANGELOG.md",
+        "Hazel/vendor/Box2D/CMakeLists.txt",
+        "Hazel/vendor/Box2D/LICENSE",
+        "Hazel/vendor/Box2D/README.md",
+        "Hazel/vendor/Box2D/build.bat",
+        "Hazel/vendor/Box2D/build.sh",
+        "Hazel/vendor/Box2D/build_docs.sh",
+        "Hazel/vendor/Box2D/deploy_docs.sh",
+        "Hazel/vendor/Box2D/docs/CMakeLists.txt",
+        "Hazel/vendor/Box2D/docs/Doxyfile.in",
+        "Hazel/vendor/Box2D/docs/FAQ.md",
+        "Hazel/vendor/Box2D/docs/collision.md",
+        "Hazel/vendor/Box2D/docs/common.md",
+        "Hazel/vendor/Box2D/docs/copycss.sh",
+        "Hazel/vendor/Box2D/docs/dynamics.md",
+        "Hazel/vendor/Box2D/docs/extra.css",
+        "Hazel/vendor/Box2D/docs/hello.md",
+        "Hazel/vendor/Box2D/docs/images/captured_toi.svg",
+        "Hazel/vendor/Box2D/docs/images/chain_loop_inwards.svg",
+        "Hazel/vendor/Box2D/docs/images/chain_loop_outwards.svg",
+        "Hazel/vendor/Box2D/docs/images/chain_shape.svg",
+        "Hazel/vendor/Box2D/docs/images/distance.svg",
+        "Hazel/vendor/Box2D/docs/images/ghost_collision.svg",
+        "Hazel/vendor/Box2D/docs/images/ghost_vertices.svg",
+        "Hazel/vendor/Box2D/docs/images/logo.svg",
+        "Hazel/vendor/Box2D/docs/images/manifolds.svg",
+        "Hazel/vendor/Box2D/docs/images/missed_toi.svg",
+        "Hazel/vendor/Box2D/docs/images/modules.svg",
+        "Hazel/vendor/Box2D/docs/images/overlap_test.svg",
+        "Hazel/vendor/Box2D/docs/images/raycast.svg",
+        "Hazel/vendor/Box2D/docs/images/self_intersect.svg",
+        "Hazel/vendor/Box2D/docs/images/skin_collision.svg",
+        "Hazel/vendor/Box2D/docs/images/skinned_polygon.svg",
+        "Hazel/vendor/Box2D/docs/images/tunneling1.svg",
+        "Hazel/vendor/Box2D/docs/images/tunneling2.svg",
+        "Hazel/vendor/Box2D/docs/images/wheel_joint.svg",
+        "Hazel/vendor/Box2D/docs/images/winding.svg",
+        "Hazel/vendor/Box2D/docs/loose_ends.md",
+        "Hazel/vendor/Box2D/docs/overview.md",
+        "Hazel/vendor/Box2D/docs/references.md",
+        "Hazel/vendor/Box2D/docs/testbed.md",
+        "Hazel/vendor/Box2D/include/**",
+        "Hazel/vendor/Box2D/premake5.lua",
+        "Hazel/vendor/Box2D/src/**",
+        "Hazel/vendor/Box2D/testbed/CMakeLists.txt",
+        "Hazel/vendor/Box2D/testbed/MacOSXBundleInfo.plist.in",
+        "Hazel/vendor/Box2D/testbed/draw.cpp",
+        "Hazel/vendor/Box2D/testbed/draw.h",
+        "Hazel/vendor/Box2D/testbed/imgui_impl_glfw.cpp",
+        "Hazel/vendor/Box2D/testbed/imgui_impl_glfw.h",
+        "Hazel/vendor/Box2D/testbed/imgui_impl_opengl3.cpp",
+        "Hazel/vendor/Box2D/testbed/imgui_impl_opengl3.h",
+        "Hazel/vendor/Box2D/testbed/main.cpp",
+        "Hazel/vendor/Box2D/testbed/settings.cpp",
+        "Hazel/vendor/Box2D/testbed/settings.h",
+        "Hazel/vendor/Box2D/testbed/test.cpp",
+        "Hazel/vendor/Box2D/testbed/test.h",
+        "Hazel/vendor/Box2D/testbed/tests/**",
+        "Hazel/vendor/Box2D/unit-test/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 Erin Catto\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2019 Erin Catto, MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/Box2D."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "Hazel/vendor/GLFW/.appveyor.yml",
+        "Hazel/vendor/GLFW/.gitattributes",
+        "Hazel/vendor/GLFW/.gitignore",
+        "Hazel/vendor/GLFW/.travis.yml",
+        "Hazel/vendor/GLFW/CMake/**",
+        "Hazel/vendor/GLFW/CMakeLists.txt",
+        "Hazel/vendor/GLFW/LICENSE.md",
+        "Hazel/vendor/GLFW/README.md",
+        "Hazel/vendor/GLFW/cmake_uninstall.cmake.in",
+        "Hazel/vendor/GLFW/docs/**",
+        "Hazel/vendor/GLFW/examples/CMakeLists.txt",
+        "Hazel/vendor/GLFW/examples/boing.c",
+        "Hazel/vendor/GLFW/examples/gears.c",
+        "Hazel/vendor/GLFW/examples/glfw.rc",
+        "Hazel/vendor/GLFW/examples/heightmap.c",
+        "Hazel/vendor/GLFW/examples/offscreen.c",
+        "Hazel/vendor/GLFW/examples/particles.c",
+        "Hazel/vendor/GLFW/examples/sharing.c",
+        "Hazel/vendor/GLFW/examples/splitview.c",
+        "Hazel/vendor/GLFW/examples/triangle-opengl.c",
+        "Hazel/vendor/GLFW/examples/wave.c",
+        "Hazel/vendor/GLFW/include/**",
+        "Hazel/vendor/GLFW/premake5.lua",
+        "Hazel/vendor/GLFW/src/**",
+        "Hazel/vendor/GLFW/tests/**"
+      ],
+      "text": "Copyright (c) 2002-2006 Marcus Geelnard\nCopyright (c) 2006-2016 Camilla Löwy <elmindreda@glfw.org>\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n\n",
+      "attribution": "Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2016 Camilla Löwy <elmindreda@glfw.org>, Zlib license (LICENSE.md), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/GLFW."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/ImGuizmo/.editorconfig",
+        "Hazel/vendor/ImGuizmo/ImCurveEdit.cpp",
+        "Hazel/vendor/ImGuizmo/ImCurveEdit.h",
+        "Hazel/vendor/ImGuizmo/ImGradient.cpp",
+        "Hazel/vendor/ImGuizmo/ImGradient.h",
+        "Hazel/vendor/ImGuizmo/ImGuizmo.cpp",
+        "Hazel/vendor/ImGuizmo/ImGuizmo.h",
+        "Hazel/vendor/ImGuizmo/ImSequencer.cpp",
+        "Hazel/vendor/ImGuizmo/ImSequencer.h",
+        "Hazel/vendor/ImGuizmo/LICENSE",
+        "Hazel/vendor/ImGuizmo/README.md",
+        "Hazel/vendor/ImGuizmo/example/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016 Cedric Guillemet\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Cedric Guillemet, MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/ImGuizmo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/entt/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017-2020 Michele Caini\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopy of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopy or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-2020 Michele Caini, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/entt."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/imgui/.editorconfig",
+        "Hazel/vendor/imgui/.gitattributes",
+        "Hazel/vendor/imgui/.github/**",
+        "Hazel/vendor/imgui/.gitignore",
+        "Hazel/vendor/imgui/LICENSE.txt",
+        "Hazel/vendor/imgui/docs/**",
+        "Hazel/vendor/imgui/examples/README.txt",
+        "Hazel/vendor/imgui/examples/example_allegro5/**",
+        "Hazel/vendor/imgui/examples/example_apple_metal/README.md",
+        "Hazel/vendor/imgui/examples/example_apple_metal/Shared/**",
+        "Hazel/vendor/imgui/examples/example_apple_metal/example_apple_metal.xcodeproj/**",
+        "Hazel/vendor/imgui/examples/example_apple_metal/iOS/Base.lproj/**",
+        "Hazel/vendor/imgui/examples/example_apple_metal/iOS/Info-iOS.plist",
+        "Hazel/vendor/imgui/examples/example_apple_metal/iOS/Launch Screen.storyboard",
+        "Hazel/vendor/imgui/examples/example_apple_metal/macOS/**",
+        "Hazel/vendor/imgui/examples/example_apple_opengl2/**",
+        "Hazel/vendor/imgui/examples/example_emscripten/**",
+        "Hazel/vendor/imgui/examples/example_glfw_metal/**",
+        "Hazel/vendor/imgui/examples/example_glfw_opengl2/**",
+        "Hazel/vendor/imgui/examples/example_glfw_opengl3/**",
+        "Hazel/vendor/imgui/examples/example_glfw_vulkan/**",
+        "Hazel/vendor/imgui/examples/example_glut_opengl2/**",
+        "Hazel/vendor/imgui/examples/example_marmalade/**",
+        "Hazel/vendor/imgui/examples/example_null/**",
+        "Hazel/vendor/imgui/examples/example_sdl_directx11/**",
+        "Hazel/vendor/imgui/examples/example_sdl_metal/**",
+        "Hazel/vendor/imgui/examples/example_sdl_opengl2/**",
+        "Hazel/vendor/imgui/examples/example_sdl_opengl3/**",
+        "Hazel/vendor/imgui/examples/example_sdl_vulkan/**",
+        "Hazel/vendor/imgui/examples/example_win32_directx10/**",
+        "Hazel/vendor/imgui/examples/example_win32_directx11/**",
+        "Hazel/vendor/imgui/examples/example_win32_directx12/**",
+        "Hazel/vendor/imgui/examples/example_win32_directx9/**",
+        "Hazel/vendor/imgui/examples/imgui_examples.sln",
+        "Hazel/vendor/imgui/examples/imgui_impl_allegro5.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_allegro5.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx10.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx10.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx11.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx11.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx12.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx12.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx9.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_dx9.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_glfw.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_glfw.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_glut.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_glut.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_marmalade.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_marmalade.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_metal.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_metal.mm",
+        "Hazel/vendor/imgui/examples/imgui_impl_opengl2.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_opengl2.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_opengl3.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_opengl3.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_osx.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_osx.mm",
+        "Hazel/vendor/imgui/examples/imgui_impl_sdl.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_sdl.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_vulkan.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_vulkan.h",
+        "Hazel/vendor/imgui/examples/imgui_impl_win32.cpp",
+        "Hazel/vendor/imgui/examples/imgui_impl_win32.h",
+        "Hazel/vendor/imgui/examples/libs/gl3w/**",
+        "Hazel/vendor/imgui/examples/libs/usynergy/**",
+        "Hazel/vendor/imgui/imconfig.h",
+        "Hazel/vendor/imgui/imgui.cpp",
+        "Hazel/vendor/imgui/imgui.h",
+        "Hazel/vendor/imgui/imgui_demo.cpp",
+        "Hazel/vendor/imgui/imgui_draw.cpp",
+        "Hazel/vendor/imgui/imgui_internal.h",
+        "Hazel/vendor/imgui/imgui_widgets.cpp",
+        "Hazel/vendor/imgui/imstb_rectpack.h",
+        "Hazel/vendor/imgui/imstb_textedit.h",
+        "Hazel/vendor/imgui/imstb_truetype.h",
+        "Hazel/vendor/imgui/misc/README.txt",
+        "Hazel/vendor/imgui/misc/cpp/**",
+        "Hazel/vendor/imgui/misc/fonts/binary_to_compressed_c.cpp",
+        "Hazel/vendor/imgui/misc/freetype/**",
+        "Hazel/vendor/imgui/misc/natvis/**",
+        "Hazel/vendor/imgui/misc/single_file/**",
+        "Hazel/vendor/imgui/premake5.lua"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014-2020 Omar Cornut\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2014-2020 Omar Cornut, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/imgui."
+    },
+    {
+      "license": "Zlib",
+      "paths": [
+        "Hazel/vendor/imgui/examples/libs/glfw/COPYING.txt",
+        "Hazel/vendor/imgui/examples/libs/glfw/include/**"
+      ],
+      "text": "Copyright (c) 2002-2006 Marcus Geelnard\nCopyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>\n\nThis software is provided 'as-is', without any express or implied\nwarranty. In no event will the authors be held liable for any damages\narising from the use of this software.\n\nPermission is granted to anyone to use this software for any purpose,\nincluding commercial applications, and to alter it and redistribute it\nfreely, subject to the following restrictions:\n\n1. The origin of this software must not be misrepresented; you must not\n   claim that you wrote the original software. If you use this software\n   in a product, an acknowledgment in the product documentation would\n   be appreciated but is not required.\n\n2. Altered source versions must be plainly marked as such, and must not\n   be misrepresented as being the original software.\n\n3. This notice may not be removed or altered from any source\n   distribution.\n\n",
+      "attribution": "Copyright (c) 2002-2006 Marcus Geelnard; Copyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>, Zlib license (COPYING.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/imgui/examples/libs/glfw."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/msdf-atlas-gen/.gitignore",
+        "Hazel/vendor/msdf-atlas-gen/.gitmodules",
+        "Hazel/vendor/msdf-atlas-gen/CHANGELOG.md",
+        "Hazel/vendor/msdf-atlas-gen/CMakeLists.txt",
+        "Hazel/vendor/msdf-atlas-gen/LICENSE.txt",
+        "Hazel/vendor/msdf-atlas-gen/Makefile",
+        "Hazel/vendor/msdf-atlas-gen/README.md",
+        "Hazel/vendor/msdf-atlas-gen/msdf-atlas-gen/**",
+        "Hazel/vendor/msdf-atlas-gen/premake5.lua",
+        "Hazel/vendor/msdf-atlas-gen/scripts/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Viktor Chlumsky\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Viktor Chlumsky, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/.gitattributes",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/.gitignore",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/.gitmodules",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/CHANGELOG.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/LICENSE.txt",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/README.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/core/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/ext/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/include/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/lib/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/main.cpp",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/msdfgen-ext.h",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/msdfgen.h",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/premake5.lua",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/scripts/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016 Viktor Chlumsky\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Viktor Chlumsky, MIT license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen/msdfgen."
+    },
+    {
+      "license": "BSL-1.0",
+      "paths": [
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/.clang_complete",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/.gitignore",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/.travis.yml",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/LICENSE",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/README.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/appveyor.yml",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/api.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/changelog.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/dlg_android.c",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/examples/chain.c",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/examples/example.c",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/examples/example.cpp",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/notes.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/tests/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/docs/todo.md",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/include/**",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/meson.build",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/meson_options.txt",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/src/**"
+      ],
+      "text": "Boost Software License - Version 1.0 - August 17th, 2003\n\nPermission is hereby granted, free of charge, to any person or organization\nobtaining a copy of the software and accompanying documentation covered by\nthis license (the \"Software\") to use, reproduce, display, distribute,\nexecute, and transmit the Software, and to prepare derivative works of the\nSoftware, and to permit third-parties to whom the Software is furnished to\ndo so, all subject to the following:\n\nThe copyright notices in the Software and this entire statement, including\nthe above license grant, this restriction and the following disclaimer,\nmust be included in all copies of the Software, in whole or in part, and\nall derivative works of the Software, unless such copies or derivative\nworks are solely in the form of machine-executable object code generated by\na source language processor.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT\nSHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE\nFOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of TheCherno/Hazel (Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg) (the license file names no copyright line), BSL-1.0 license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/spdlog/.clang-format",
+        "Hazel/vendor/spdlog/.clang-tidy",
+        "Hazel/vendor/spdlog/.gitignore",
+        "Hazel/vendor/spdlog/.travis.yml",
+        "Hazel/vendor/spdlog/CMakeLists.txt",
+        "Hazel/vendor/spdlog/INSTALL",
+        "Hazel/vendor/spdlog/LICENSE",
+        "Hazel/vendor/spdlog/README.md",
+        "Hazel/vendor/spdlog/appveyor.yml",
+        "Hazel/vendor/spdlog/bench/**",
+        "Hazel/vendor/spdlog/clang_tidy.sh",
+        "Hazel/vendor/spdlog/cmake/**",
+        "Hazel/vendor/spdlog/example/**",
+        "Hazel/vendor/spdlog/format.sh",
+        "Hazel/vendor/spdlog/include/spdlog/async.h",
+        "Hazel/vendor/spdlog/include/spdlog/async_logger.h",
+        "Hazel/vendor/spdlog/include/spdlog/common.h",
+        "Hazel/vendor/spdlog/include/spdlog/details/**",
+        "Hazel/vendor/spdlog/include/spdlog/fmt/bin_to_hex.h",
+        "Hazel/vendor/spdlog/include/spdlog/fmt/fmt.h",
+        "Hazel/vendor/spdlog/include/spdlog/fmt/ostr.h",
+        "Hazel/vendor/spdlog/include/spdlog/formatter.h",
+        "Hazel/vendor/spdlog/include/spdlog/logger.h",
+        "Hazel/vendor/spdlog/include/spdlog/sinks/**",
+        "Hazel/vendor/spdlog/include/spdlog/spdlog.h",
+        "Hazel/vendor/spdlog/include/spdlog/tweakme.h",
+        "Hazel/vendor/spdlog/include/spdlog/version.h",
+        "Hazel/vendor/spdlog/tests/**"
+      ],
+      "text": "The MIT License (MIT)\r\n\r\nCopyright (c) 2016 Gabi Melman.                                       \r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy\r\nof this software and associated documentation files (the \"Software\"), to deal\r\nin the Software without restriction, including without limitation the rights\r\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in\r\nall copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\r\nTHE SOFTWARE.\r\n\r\n",
+      "attribution": "Copyright (c) 2016 Gabi Melman., MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/spdlog."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "Hazel/vendor/spdlog/include/spdlog/fmt/bundled/**"
+      ],
+      "text": "Copyright (c) 2012 - 2016, Victor Zverovich\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012 - 2016, Victor Zverovich, BSD-2-Clause license (LICENSE.rst), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/spdlog/include/spdlog/fmt/bundled."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Hazel/vendor/yaml-cpp/.clang-format",
+        "Hazel/vendor/yaml-cpp/.codedocs",
+        "Hazel/vendor/yaml-cpp/.gitignore",
+        "Hazel/vendor/yaml-cpp/.travis.yml",
+        "Hazel/vendor/yaml-cpp/BUILD.bazel",
+        "Hazel/vendor/yaml-cpp/CMakeLists.txt",
+        "Hazel/vendor/yaml-cpp/CONTRIBUTING.md",
+        "Hazel/vendor/yaml-cpp/LICENSE",
+        "Hazel/vendor/yaml-cpp/README.md",
+        "Hazel/vendor/yaml-cpp/WORKSPACE",
+        "Hazel/vendor/yaml-cpp/appveyor.yml",
+        "Hazel/vendor/yaml-cpp/docs/**",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/anchor.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/binary.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/depthguard.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/dll.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/emitfromevents.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/emitter.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/emitterdef.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/emittermanip.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/emitterstyle.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/eventhandler.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/exceptions.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/mark.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/node/**",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/noexcept.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/null.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/ostream_wrapper.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/parser.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/stlemitter.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/traits.h",
+        "Hazel/vendor/yaml-cpp/include/yaml-cpp/yaml.h",
+        "Hazel/vendor/yaml-cpp/install.txt",
+        "Hazel/vendor/yaml-cpp/premake5.lua",
+        "Hazel/vendor/yaml-cpp/src/binary.cpp",
+        "Hazel/vendor/yaml-cpp/src/collectionstack.h",
+        "Hazel/vendor/yaml-cpp/src/convert.cpp",
+        "Hazel/vendor/yaml-cpp/src/depthguard.cpp",
+        "Hazel/vendor/yaml-cpp/src/directives.cpp",
+        "Hazel/vendor/yaml-cpp/src/directives.h",
+        "Hazel/vendor/yaml-cpp/src/emit.cpp",
+        "Hazel/vendor/yaml-cpp/src/emitfromevents.cpp",
+        "Hazel/vendor/yaml-cpp/src/emitter.cpp",
+        "Hazel/vendor/yaml-cpp/src/emitterstate.cpp",
+        "Hazel/vendor/yaml-cpp/src/emitterstate.h",
+        "Hazel/vendor/yaml-cpp/src/emitterutils.cpp",
+        "Hazel/vendor/yaml-cpp/src/emitterutils.h",
+        "Hazel/vendor/yaml-cpp/src/exceptions.cpp",
+        "Hazel/vendor/yaml-cpp/src/exp.cpp",
+        "Hazel/vendor/yaml-cpp/src/exp.h",
+        "Hazel/vendor/yaml-cpp/src/indentation.h",
+        "Hazel/vendor/yaml-cpp/src/memory.cpp",
+        "Hazel/vendor/yaml-cpp/src/node.cpp",
+        "Hazel/vendor/yaml-cpp/src/node_data.cpp",
+        "Hazel/vendor/yaml-cpp/src/nodebuilder.cpp",
+        "Hazel/vendor/yaml-cpp/src/nodebuilder.h",
+        "Hazel/vendor/yaml-cpp/src/nodeevents.cpp",
+        "Hazel/vendor/yaml-cpp/src/nodeevents.h",
+        "Hazel/vendor/yaml-cpp/src/null.cpp",
+        "Hazel/vendor/yaml-cpp/src/ostream_wrapper.cpp",
+        "Hazel/vendor/yaml-cpp/src/parse.cpp",
+        "Hazel/vendor/yaml-cpp/src/parser.cpp",
+        "Hazel/vendor/yaml-cpp/src/ptr_vector.h",
+        "Hazel/vendor/yaml-cpp/src/regex_yaml.cpp",
+        "Hazel/vendor/yaml-cpp/src/regex_yaml.h",
+        "Hazel/vendor/yaml-cpp/src/regeximpl.h",
+        "Hazel/vendor/yaml-cpp/src/scanner.cpp",
+        "Hazel/vendor/yaml-cpp/src/scanner.h",
+        "Hazel/vendor/yaml-cpp/src/scanscalar.cpp",
+        "Hazel/vendor/yaml-cpp/src/scanscalar.h",
+        "Hazel/vendor/yaml-cpp/src/scantag.cpp",
+        "Hazel/vendor/yaml-cpp/src/scantag.h",
+        "Hazel/vendor/yaml-cpp/src/scantoken.cpp",
+        "Hazel/vendor/yaml-cpp/src/setting.h",
+        "Hazel/vendor/yaml-cpp/src/simplekey.cpp",
+        "Hazel/vendor/yaml-cpp/src/singledocparser.cpp",
+        "Hazel/vendor/yaml-cpp/src/singledocparser.h",
+        "Hazel/vendor/yaml-cpp/src/stream.cpp",
+        "Hazel/vendor/yaml-cpp/src/stream.h",
+        "Hazel/vendor/yaml-cpp/src/streamcharsource.h",
+        "Hazel/vendor/yaml-cpp/src/stringsource.h",
+        "Hazel/vendor/yaml-cpp/src/tag.cpp",
+        "Hazel/vendor/yaml-cpp/src/tag.h",
+        "Hazel/vendor/yaml-cpp/src/token.h",
+        "Hazel/vendor/yaml-cpp/test/BUILD.bazel",
+        "Hazel/vendor/yaml-cpp/test/CMakeLists.txt",
+        "Hazel/vendor/yaml-cpp/test/create-emitter-tests.py",
+        "Hazel/vendor/yaml-cpp/test/handler_test.h",
+        "Hazel/vendor/yaml-cpp/test/integration/**",
+        "Hazel/vendor/yaml-cpp/test/main.cpp",
+        "Hazel/vendor/yaml-cpp/test/mock_event_handler.h",
+        "Hazel/vendor/yaml-cpp/test/node/**",
+        "Hazel/vendor/yaml-cpp/test/ostream_wrapper_test.cpp",
+        "Hazel/vendor/yaml-cpp/test/parser_test.cpp",
+        "Hazel/vendor/yaml-cpp/test/regex_test.cpp",
+        "Hazel/vendor/yaml-cpp/test/specexamples.h",
+        "Hazel/vendor/yaml-cpp/util/**",
+        "Hazel/vendor/yaml-cpp/yaml-cpp-config.cmake.in",
+        "Hazel/vendor/yaml-cpp/yaml-cpp.pc.in"
+      ],
+      "text": "Copyright (c) 2008-2015 Jesse Beder.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2008-2015 Jesse Beder., MIT license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/.clang-format",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/.gitignore",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/.travis.yml",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/BUILD.bazel",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/CMakeLists.txt",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/CONTRIBUTING.md",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/LICENSE",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/README.md",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/WORKSPACE",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/appveyor.yml",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/ci/**",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/library.json",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/platformio.ini"
+      ],
+      "text": "Copyright 2008, Google Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/CMakeLists.txt",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/CONTRIBUTORS",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/LICENSE",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/README.md",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/cmake/**",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/docs/**",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/include/**",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/fuse_gmock_files.py",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/gmock-config.in",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/gmock_doctor.py",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/upload.py",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/upload_gmock.py",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/src/**",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/test/**"
+      ],
+      "text": "Copyright 2008, Google Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/generator/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [2007] Neal Norwitz\n   Portions Copyright [2007] Google Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright [2007] Neal Norwitz, Apache-2.0 license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/scripts/generator."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googletest/**"
+      ],
+      "text": "Copyright 2008, Google Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2008, Google Inc., BSD-3-Clause license (LICENSE), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googletest."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "Hazelnut/assets/fonts/opensans/LICENSE.txt"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of TheCherno/Hazel (Hazelnut/assets/fonts/opensans) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Hazelnut/assets/fonts/opensans."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "Sandbox/assets/fonts/opensans/LICENSE.txt"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of TheCherno/Hazel (Sandbox/assets/fonts/opensans) (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/TheCherno/Hazel/tree/1feb70572fa87fa1c4ba784a2cfeada5b4a500db/Sandbox/assets/fonts/opensans."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cppclean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.icf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mingw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mkb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.natvis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tasks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "Hazel/vendor/entt/LICENSE.txt",
+        "Hazel/vendor/imgui/LICENSE.txt",
+        "Hazel/vendor/imgui/docs/CHANGELOG.txt",
+        "Hazel/vendor/imgui/docs/TODO.txt",
+        "Hazel/vendor/imgui/examples/README.txt",
+        "Hazel/vendor/imgui/examples/libs/glfw/COPYING.txt",
+        "Hazel/vendor/imgui/examples/libs/usynergy/README.txt",
+        "Hazel/vendor/imgui/misc/README.txt",
+        "Hazel/vendor/imgui/misc/cpp/README.txt",
+        "Hazel/vendor/imgui/misc/natvis/README.txt",
+        "Hazel/vendor/msdf-atlas-gen/LICENSE.txt",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/LICENSE.txt",
+        "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg/meson_options.txt",
+        "Hazel/vendor/yaml-cpp/install.txt",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googlemock/test/gmock_output_test_golden.txt",
+        "Hazel/vendor/yaml-cpp/test/gtest-1.10.0/googletest/test/googletest-output-test-golden-lin.txt",
+        "Hazelnut/assets/fonts/opensans/LICENSE.txt",
+        "Sandbox/assets/fonts/opensans/LICENSE.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.user"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang_complete"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codedocs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Makefile-all-warn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mem"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.targets"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "Hazel/vendor/Box2D": "https://github.com/thecherno/box2d",
+    "Hazel/vendor/GLFW": "https://github.com/TheCherno/glfw",
+    "Hazel/vendor/ImGuizmo": "https://github.com/thecherno/imguizmo",
+    "Hazel/vendor/glm": "https://github.com/g-truc/glm",
+    "Hazel/vendor/imgui": "https://github.com/TheCherno/imgui",
+    "Hazel/vendor/msdf-atlas-gen": "https://github.com/TheCherno/msdf-atlas-gen",
+    "Hazel/vendor/msdf-atlas-gen/msdfgen": "https://github.com/TheCherno/msdfgen",
+    "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype": "https://github.com/freetype/freetype",
+    "Hazel/vendor/msdf-atlas-gen/msdfgen/freetype/subprojects/dlg": "https://github.com/nyorain/dlg",
+    "Hazel/vendor/spdlog": "https://github.com/gabime/spdlog",
+    "Hazel/vendor/yaml-cpp": "https://github.com/thecherno/yaml-cpp"
+  }
+}

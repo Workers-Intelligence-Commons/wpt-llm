@@ -1,0 +1,707 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tmux/tmux",
+  "revision": "65f1a975e2b9ce66cfb62483df6534052fc3c1e2",
+  "checksum": "sha256:d5ad6f7649966af051dacf27e37702e4f7d16ae40bac7e9ed53c406bfc18f7a7",
+  "extract": {
+    "exclude": [
+      "logo/favicon.ico",
+      "logo/icons/**",
+      "logo/tmux-logo-huge.png",
+      "logo/tmux-logo-large.png",
+      "logo/tmux-logo-medium.png",
+      "logo/tmux-logo-small.png",
+      "presentations/**",
+      "regress/UTF-8-test.txt"
+    ]
+  },
+  "history": {
+    "since": "d03f9454b90991733a4efb490109c7d5e34550aa"
+  },
+  "licenses": [
+    {
+      "license": "ISC AND 0BSD",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) Various Authors\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF MIND, USE, DATA OR PROFITS, WHETHER\nIN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING\nOUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nCopyright (c) 2015, Jason Long <jason@jasonlong.me>\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/tmux/tmux: Copyright (c) Various Authors, ISC license (COPYING), https://github.com/tmux/tmux; Copyright (c) 2015, Jason Long <jason@jasonlong.me>, 0BSD license (LICENSE), https://github.com/tmux/tmux/tree/65f1a975e2b9ce66cfb62483df6534052fc3c1e2/logo."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".travis.yml",
+        "CHANGES",
+        "COPYING",
+        "Makefile.am",
+        "README",
+        "SECURITY.md",
+        "SYNCING.md",
+        "alerts.c",
+        "arguments.c",
+        "attributes.c",
+        "autogen.sh",
+        "cfg.c",
+        "client.c",
+        "cmd-attach-session.c",
+        "cmd-bind-key.c",
+        "cmd-break-pane.c",
+        "cmd-capture-pane.c",
+        "cmd-choose-tree.c",
+        "cmd-command-prompt.c",
+        "cmd-confirm-before.c",
+        "cmd-copy-mode.c",
+        "cmd-detach-client.c",
+        "cmd-display-menu.c",
+        "cmd-display-message.c",
+        "cmd-find-window.c",
+        "cmd-find.c",
+        "cmd-if-shell.c",
+        "cmd-join-pane.c",
+        "cmd-kill-pane.c",
+        "cmd-kill-server.c",
+        "cmd-kill-session.c",
+        "cmd-kill-window.c",
+        "cmd-list-buffers.c",
+        "cmd-list-clients.c",
+        "cmd-list-commands.c",
+        "cmd-list-keys.c",
+        "cmd-list-panes.c",
+        "cmd-list-sessions.c",
+        "cmd-list-windows.c",
+        "cmd-load-buffer.c",
+        "cmd-lock-server.c",
+        "cmd-move-window.c",
+        "cmd-new-session.c",
+        "cmd-new-window.c",
+        "cmd-parse.y",
+        "cmd-paste-buffer.c",
+        "cmd-pipe-pane.c",
+        "cmd-queue.c",
+        "cmd-refresh-client.c",
+        "cmd-rename-session.c",
+        "cmd-rename-window.c",
+        "cmd-resize-pane.c",
+        "cmd-resize-window.c",
+        "cmd-respawn-pane.c",
+        "cmd-respawn-window.c",
+        "cmd-rotate-window.c",
+        "cmd-run-shell.c",
+        "cmd-save-buffer.c",
+        "cmd-select-layout.c",
+        "cmd-select-pane.c",
+        "cmd-select-window.c",
+        "cmd-send-keys.c",
+        "cmd-server-access.c",
+        "cmd-set-buffer.c",
+        "cmd-set-environment.c",
+        "cmd-set-option.c",
+        "cmd-show-environment.c",
+        "cmd-show-messages.c",
+        "cmd-show-options.c",
+        "cmd-show-prompt-history.c",
+        "cmd-source-file.c",
+        "cmd-split-window.c",
+        "cmd-swap-pane.c",
+        "cmd-swap-window.c",
+        "cmd-switch-client.c",
+        "cmd-unbind-key.c",
+        "cmd-wait-for.c",
+        "cmd.c",
+        "colour.c",
+        "compat/**",
+        "compat.h",
+        "configure.ac",
+        "control-notify.c",
+        "control.c",
+        "environ.c",
+        "events-payload.c",
+        "events.c",
+        "example_tmux.conf",
+        "file.c",
+        "format-draw.c",
+        "format.c",
+        "fuzz/**",
+        "fuzzy.c",
+        "grid-reader.c",
+        "grid-view.c",
+        "grid.c",
+        "hooks.c",
+        "hyperlinks.c",
+        "image-fallback.c",
+        "image-grid.c",
+        "image-sixel.c",
+        "image.c",
+        "input-keys.c",
+        "input.c",
+        "job.c",
+        "json.c",
+        "key-bindings.c",
+        "key-string.c",
+        "layout-custom.c",
+        "layout-set.c",
+        "layout.c",
+        "log.c",
+        "mdoc2man.awk",
+        "menu.c",
+        "mode-tree.c",
+        "monitor.c",
+        "names.c",
+        "options-table.c",
+        "options.c",
+        "osdep-aix.c",
+        "osdep-cygwin.c",
+        "osdep-darwin.c",
+        "osdep-dragonfly.c",
+        "osdep-freebsd.c",
+        "osdep-haiku.c",
+        "osdep-hpux.c",
+        "osdep-linux.c",
+        "osdep-netbsd.c",
+        "osdep-openbsd.c",
+        "osdep-sunos.c",
+        "osdep-unknown.c",
+        "paste.c",
+        "proc.c",
+        "prompt-history.c",
+        "prompt.c",
+        "regress/Makefile",
+        "regress/alerts.sh",
+        "regress/alt-screen-saved-cursor.sh",
+        "regress/alternate-screen-resize.sh",
+        "regress/am-terminal.sh",
+        "regress/attach-session-redraw.sh",
+        "regress/border-arrows.sh",
+        "regress/buffers.sh",
+        "regress/capture-pane-hyperlink.sh",
+        "regress/capture-pane-sgr0.sh",
+        "regress/capture-pane-time.sh",
+        "regress/cfg-client-free.sh",
+        "regress/cfg-client-lost-before-wait.sh",
+        "regress/cfg-client-lost.sh",
+        "regress/cfg-load-once.sh",
+        "regress/check-names.sh",
+        "regress/choose-buffer.sh",
+        "regress/choose-client.sh",
+        "regress/choose-tree.sh",
+        "regress/clear-on-attach.sh",
+        "regress/client-exit-resize.sh",
+        "regress/client-key-order-focus.sh",
+        "regress/client-readonly.sh",
+        "regress/clock-mode.sh",
+        "regress/cmd-parse-assignment.sh",
+        "regress/cmd-parse-condition.sh",
+        "regress/cmd-template-replace.sh",
+        "regress/codepoint-widths.sh",
+        "regress/combine-test.result",
+        "regress/combine-test.sh",
+        "regress/command-alias.sh",
+        "regress/command-order.sh",
+        "regress/conf/**",
+        "regress/conf-syntax.sh",
+        "regress/confirm-before-lock.sh",
+        "regress/control-client-exit-stalled.sh",
+        "regress/control-client-exit.sh",
+        "regress/control-client-new-layouts.sh",
+        "regress/control-client-popup.sh",
+        "regress/control-client-run-shell-exit.sh",
+        "regress/control-client-sanity.sh",
+        "regress/control-client-size.sh",
+        "regress/control-client-start-fail.sh",
+        "regress/control-client-wait-exit.sh",
+        "regress/control-notify-events.sh",
+        "regress/control-notify-guard.sh",
+        "regress/control-subscriptions.sh",
+        "regress/copy-mode-commands.sh",
+        "regress/copy-mode-no-client-scroll.sh",
+        "regress/copy-mode-redraw.sh",
+        "regress/copy-mode-scroll-exit.sh",
+        "regress/copy-mode-search-count.sh",
+        "regress/copy-mode-selection-mode.sh",
+        "regress/copy-mode-selection-scroll.sh",
+        "regress/copy-mode-source-blank.sh",
+        "regress/copy-mode-test-emacs.sh",
+        "regress/copy-mode-test-vi.sh",
+        "regress/copy-mode-test.txt",
+        "regress/copy-mode-unicode-whitespace.sh",
+        "regress/copy-mode-word-redraw.sh",
+        "regress/cursor-test.txt",
+        "regress/cursor-test1.result",
+        "regress/cursor-test1.sh",
+        "regress/cursor-test2.result",
+        "regress/cursor-test2.sh",
+        "regress/cursor-test3.result",
+        "regress/cursor-test3.sh",
+        "regress/cursor-test4.result",
+        "regress/cursor-test4.sh",
+        "regress/customize-mode.sh",
+        "regress/decrqm-sync.sh",
+        "regress/display-message-client.sh",
+        "regress/display-panes.sh",
+        "regress/environ-update.sh",
+        "regress/environ.sh",
+        "regress/find-window.sh",
+        "regress/floating-pane-border-clients.sh",
+        "regress/floating-pane-covers-tiled-pane.sh",
+        "regress/floating-pane-drag-composite.sh",
+        "regress/floating-pane-drag-ghost.sh",
+        "regress/floating-pane-drag-sb-strip.sh",
+        "regress/floating-pane-drag-sync.sh",
+        "regress/floating-pane-drag-wide-character.sh",
+        "regress/floating-pane-drag-wide-right.sh",
+        "regress/floating-pane-geometry.sh",
+        "regress/floating-pane-new-zoom.sh",
+        "regress/floating-pane-offscreen-alt.sh",
+        "regress/floating-pane-prompt-wide-character.sh",
+        "regress/floating-pane-scroll-behind-margins.sh",
+        "regress/floating-pane-status-cross-client.sh",
+        "regress/floating-pane-status-format.sh",
+        "regress/floating-pane-top-border-drag.sh",
+        "regress/floating-pane-zoom.sh",
+        "regress/format-animation.sh",
+        "regress/format-fuzzy.sh",
+        "regress/format-modifiers.sh",
+        "regress/format-mouse.sh",
+        "regress/format-no-current-window.sh",
+        "regress/format-render-contexts.sh",
+        "regress/format-strings.sh",
+        "regress/format-time-range.sh",
+        "regress/format-variables.sh",
+        "regress/has-session-return.sh",
+        "regress/hooks-after.sh",
+        "regress/hooks-lifecycle.sh",
+        "regress/hooks-notify.sh",
+        "regress/hooks.sh",
+        "regress/if-shell-TERM.sh",
+        "regress/if-shell-error.sh",
+        "regress/if-shell-nested.sh",
+        "regress/image-border-status-sixel.sh",
+        "regress/image-border-status-wipe.sh",
+        "regress/image-common.inc",
+        "regress/image-fallback.sh",
+        "regress/image-feature-redraw.sh",
+        "regress/image-floating-content-wipe.sh",
+        "regress/image-grid-operations.sh",
+        "regress/image-grid.sh",
+        "regress/image-lifecycle.sh",
+        "regress/image-movepane-drag-noflash.sh",
+        "regress/image-noflash-common.inc",
+        "regress/image-obscured-structural-op.sh",
+        "regress/image-resize-many-placements.sh",
+        "regress/image-resize-width-recovery.sh",
+        "regress/image-scroll-no-erase.sh",
+        "regress/image-scroll-no-text-redraw.sh",
+        "regress/image-scroll-off-recovery.sh",
+        "regress/image-scroll-uses-region.sh",
+        "regress/image-selection-noflash.sh",
+        "regress/image-sixel-cache.sh",
+        "regress/image-sixel-output.sh",
+        "regress/image-sixel-overlap.sh",
+        "regress/image-sixel-palette.sh",
+        "regress/image-sixel-parse.sh",
+        "regress/image-sixel-region-scroll.sh",
+        "regress/image-sixel-transparency.sh",
+        "regress/image-splitwindow-resize-noflash.sh",
+        "regress/image-status-pane-click-noflash.sh",
+        "regress/image_scroll.py",
+        "regress/image_terminal.py",
+        "regress/image_test.py",
+        "regress/input-common.inc",
+        "regress/input-cursor.sh",
+        "regress/input-edit.sh",
+        "regress/input-keys.sh",
+        "regress/input-malformed.sh",
+        "regress/input-modes.sh",
+        "regress/input-nowrap-collect.sh",
+        "regress/input-osc.sh",
+        "regress/input-osc133.sh",
+        "regress/input-raw-controls.sh",
+        "regress/input-raw-cursor.sh",
+        "regress/input-raw-edit.sh",
+        "regress/input-raw-history.sh",
+        "regress/input-raw-reflow.sh",
+        "regress/input-raw-scroll.sh",
+        "regress/input-raw-sgr.sh",
+        "regress/input-raw-unicode.sh",
+        "regress/input-raw-wrap.sh",
+        "regress/input-reflow-stress.sh",
+        "regress/input-reflow-wide.sh",
+        "regress/input-replies.sh",
+        "regress/input-requests.sh",
+        "regress/input-scroll.sh",
+        "regress/input-sgr.sh",
+        "regress/input-unicode.sh",
+        "regress/join-pane-modal.sh",
+        "regress/json.sh",
+        "regress/kill-session-process-exit.sh",
+        "regress/kill-session-zoomed.sh",
+        "regress/layout-custom.sh",
+        "regress/layout-nesting-limit.sh",
+        "regress/layout-set.sh",
+        "regress/lifecycle-deferred.sh",
+        "regress/list-commands.sh",
+        "regress/list-keys-sort-name.sh",
+        "regress/menu-live-output.sh",
+        "regress/menu-mouse.sh",
+        "regress/menu-pane-killed.sh",
+        "regress/modal-pane.sh",
+        "regress/mode-kill.sh",
+        "regress/mode-mutation.sh",
+        "regress/mode-tree-menu-position.sh",
+        "regress/mode-tree-scroll.sh",
+        "regress/monkey-2.sixel.txt",
+        "regress/ncv.sh",
+        "regress/new-pane-mouse-status.sh",
+        "regress/new-pane-mouse.sh",
+        "regress/new-session-base-index.sh",
+        "regress/new-session-command.sh",
+        "regress/new-session-environment.sh",
+        "regress/new-session-no-client.sh",
+        "regress/new-session-size.sh",
+        "regress/new-window-command.sh",
+        "regress/options-array.sh",
+        "regress/options-scope.sh",
+        "regress/options-values.sh",
+        "regress/osc-11colours.sh",
+        "regress/pane-ops.sh",
+        "regress/pipe-pane.sh",
+        "regress/prompt-keys.sh",
+        "regress/prompt-mechanics.sh",
+        "regress/prompt-words-history.sh",
+        "regress/redraw-damage-accumulate.sh",
+        "regress/redraw-damage-blocked-client.sh",
+        "regress/redraw-damage-only.sh",
+        "regress/redraw-damage-viewports.sh",
+        "regress/redraw-multiclient.sh",
+        "regress/redraw-screen-write.sh",
+        "regress/renumber-window-limit.sh",
+        "regress/respawn-pane-control-lag.sh",
+        "regress/respawn-pane-empty.sh",
+        "regress/run-shell-cwd.sh",
+        "regress/run-shell-output.sh",
+        "regress/screen-redraw-bidi.sh",
+        "regress/screen-redraw-cache.sh",
+        "regress/screen-redraw-fill-character.sh",
+        "regress/screen-redraw-floating.sh",
+        "regress/screen-redraw-indicators.sh",
+        "regress/screen-redraw-menus.sh",
+        "regress/screen-redraw-outside.sh",
+        "regress/screen-redraw-results/**",
+        "regress/screen-redraw-scrollbars-auto-hide.sh",
+        "regress/screen-redraw-scrollbars.sh",
+        "regress/screen-redraw-status.sh",
+        "regress/screen-redraw-tiled.sh",
+        "regress/screen-redraw-window-style.sh",
+        "regress/server-access.sh",
+        "regress/server-socket-error.sh",
+        "regress/session-group-name.sh",
+        "regress/session-group-resize.sh",
+        "regress/session-ops.sh",
+        "regress/set-hook-B.sh",
+        "regress/set-hook-E.sh",
+        "regress/set-hook-R.sh",
+        "regress/show-options-output.sh",
+        "regress/socket-path.sh",
+        "regress/split-window-wait-kill.sh",
+        "regress/style-trim.sh",
+        "regress/swap-pane-zoom-error.sh",
+        "regress/switch-client-redraw.sh",
+        "regress/switch-mode.sh",
+        "regress/sync-output-atomic.sh",
+        "regress/sync-output-copy-cursor.sh",
+        "regress/sync-output-cursor.sh",
+        "regress/sync-output-scroll-clients.sh",
+        "regress/sync-output-scroll.sh",
+        "regress/sync-output-wrapped.sh",
+        "regress/tab-cell-background.sh",
+        "regress/targets-current.sh",
+        "regress/targets-panes.sh",
+        "regress/targets.sh",
+        "regress/terminal-feature-utf8.sh",
+        "regress/theme-report.sh",
+        "regress/tty-clamp-area-status-top.sh",
+        "regress/tty-draw-line.sh",
+        "regress/tty-keys-backtab.sh",
+        "regress/tty-keys-extended-escape.sh",
+        "regress/tty-keys-focus-escape.sh",
+        "regress/tty-keys-mouse-escape.sh",
+        "regress/tty-keys-paste.sh",
+        "regress/tty-keys-replies.sh",
+        "regress/tty-keys-reply-escape.sh",
+        "regress/tty-keys.sh",
+        "regress/tty-margins-sb.sh",
+        "regress/utf8-test.result",
+        "regress/utf8-test.sh",
+        "regress/wait-for-E.sh",
+        "regress/wait-for-client-lost.sh",
+        "regress/window-copy-sb-drag-focus-style.sh",
+        "regress/window-index-limit.sh",
+        "regress/window-ops.sh",
+        "regsub.c",
+        "resize.c",
+        "screen-redraw.c",
+        "screen-write.c",
+        "screen.c",
+        "server-acl.c",
+        "server-client.c",
+        "server-fn.c",
+        "server.c",
+        "session.c",
+        "sort.c",
+        "spawn.c",
+        "status.c",
+        "style.c",
+        "tmux-image.h",
+        "tmux-protocol.h",
+        "tmux.1",
+        "tmux.c",
+        "tmux.h",
+        "tools/**",
+        "tty-acs.c",
+        "tty-draw.c",
+        "tty-features.c",
+        "tty-keys.c",
+        "tty-term.c",
+        "tty.c",
+        "utf8-combined.c",
+        "utf8.c",
+        "window-border.c",
+        "window-buffer.c",
+        "window-client.c",
+        "window-clock.c",
+        "window-copy.c",
+        "window-customize.c",
+        "window-panes.c",
+        "window-switch.c",
+        "window-tree.c",
+        "window-visible.c",
+        "window.c",
+        "xmalloc.c",
+        "xmalloc.h"
+      ],
+      "text": "Copyright (c) Various Authors\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF MIND, USE, DATA OR PROFITS, WHETHER\nIN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING\nOUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) Various Authors, ISC license (COPYING), https://github.com/tmux/tmux."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "logo/LICENSE",
+        "logo/tmux-logo-1-color.eps",
+        "logo/tmux-logo-1-color.svg",
+        "logo/tmux-logo.eps",
+        "logo/tmux-logo.svg",
+        "logo/tmux-logomark.eps",
+        "logo/tmux-logomark.svg"
+      ],
+      "text": "Copyright (c) 2015, Jason Long <jason@jasonlong.me>\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015, Jason Long <jason@jasonlong.me>, 0BSD license (LICENSE), https://github.com/tmux/tmux/tree/65f1a975e2b9ce66cfb62483df6534052fc3c1e2/logo."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "awk",
+      "paths": [
+        "**/*.awk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.am"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.eps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.result"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sixel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

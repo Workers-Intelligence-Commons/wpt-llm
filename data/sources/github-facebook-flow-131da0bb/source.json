@@ -1,0 +1,2439 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/facebook/flow",
+  "revision": "49e5096e9abeebb70d1b3b78ab688ae3502c60fb",
+  "checksum": "sha256:3c5d9e3052289921fb3ad200c1db8ceae262f9b0c28470e5b4760b65c3920309",
+  "extract": {
+    "exclude": [
+      "newtests/lsp/completion/node_modules_auto_imports/nested/inner/**",
+      "newtests/lsp/completion/node_modules_auto_imports/node_modules/**",
+      "newtests/lsp/completion/node_modules_auto_imports/third_party/**",
+      "newtests/lsp/diagnostics/node_modules/**",
+      "packages/flow-bin/vendor/**",
+      "packages/flow-for-vscode/flow-logo.png",
+      "packages/flow-for-vscode/readme/**",
+      "tests/at_types_incremental/node_modules/**",
+      "tests/at_types_incremental_add/node_modules/**",
+      "tests/config_declarations_react/node_modules/react-d3/**",
+      "tests/config_declarations_react/node_modules/react-native/**",
+      "tests/config_module_name_rewrite_node/node_modules/**",
+      "tests/config_module_system_node_allow_root_relative/node_modules/**",
+      "tests/config_module_system_node_resolve_dirname/node_modules/**",
+      "tests/config_module_system_node_resolve_dirname_misuse/node_modules/**",
+      "tests/config_module_system_node_root_relative_dirnames/node_modules/**",
+      "tests/declaration_files_haste/external/**",
+      "tests/declaration_files_haste/node_modules/**",
+      "tests/declaration_files_haste_all/node_modules/**",
+      "tests/declaration_files_incremental_haste/external/**",
+      "tests/declaration_files_incremental_haste/node_modules/**",
+      "tests/declaration_files_incremental_haste_name_reducers/node_modules/**",
+      "tests/declaration_files_incremental_node/node_modules/**",
+      "tests/declaration_files_node/node_modules/**",
+      "tests/declare_global_scoping/node_modules/**",
+      "tests/declare_module_exports/node_modules/**",
+      "tests/deps/**",
+      "tests/direct_dependent_files_cache/node_modules/**",
+      "tests/direct_dependent_files_cache/src/node_modules/**",
+      "tests/direct_dependent_node_modules/node_modules/**",
+      "tests/docblock_flow/**",
+      "tests/haste_name_reducers_defaults/node_modules/**",
+      "tests/haste_node_precedence/node_modules/**",
+      "tests/haste_package/subdir/node_modules/**",
+      "tests/haste_use_name_reducers/dir2/node_modules/**",
+      "tests/haste_use_name_reducers/node_modules/**",
+      "tests/ignore_package/node_modules/**",
+      "tests/import_type/node_modules/**",
+      "tests/incremental_haste_phantom/node_modules/**",
+      "tests/incremental_package_json_types/node_modules/**",
+      "tests/incremental_path/dir/node_modules/**",
+      "tests/incremental_path/node_modules/**",
+      "tests/lazy_mode_fs_dependency/node_modules/**",
+      "tests/libdef_ignored_module/node_modules/**",
+      "tests/lint_node_modules/node_modules/**",
+      "tests/malformed_code/text.js",
+      "tests/module_not_found_errors/node_modules/**",
+      "tests/node_haste/external/**",
+      "tests/node_haste/node_modules/**",
+      "tests/node_main_fields/node_modules/**",
+      "tests/node_modules_containers_init/node_modules/**",
+      "tests/node_modules_errors/node_modules/**",
+      "tests/node_modules_with_bad_package_format/node_modules/**",
+      "tests/node_modules_with_symlinks/root/node_modules/**",
+      "tests/node_modules_without_json/node_modules/**",
+      "tests/node_package_main_non_flow/node_modules/**",
+      "tests/node_tests/basic_node_modules/node_modules/**",
+      "tests/node_tests/basic_node_modules_with_path/node_modules/**",
+      "tests/node_tests/package_file_node_modules/foo/node_modules/**",
+      "tests/node_tests/package_file_node_modules/node_modules/**",
+      "tests/node_tests/path_node_modules/node_modules/**",
+      "tests/node_tests/path_node_modules_with_short_main/node_modules/**",
+      "tests/node_tests/path_node_modules_without_main/node_modules/**",
+      "tests/node_tests/path_package/node_modules/**",
+      "tests/shadow_delete/dir/node_modules/**",
+      "tests/shadow_delete/node_modules/**",
+      "tests/types_first_dep_graph_change/node_modules/**",
+      "tests/types_first_dep_graph_change/test/node_modules/**",
+      "tests/typescript_library_definition_support/node_modules/**",
+      "tests/unchecked_node_module_vs_lib/node_modules/**",
+      "tests/workspaces_test/foo/node_modules/**",
+      "tests/workspaces_test/node_modules/**",
+      "website/static/img/favicon.ico",
+      "website/static/img/favicon.png",
+      "website/static/img/og-home.png",
+      "website/static/img/og-share.png",
+      "website/static/img/oss_logo.png"
+    ]
+  },
+  "history": {
+    "since": "bbbac30475e80e0190936b97c91c757ca6c11cd6"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-2-Clause AND ISC AND CC-BY-4.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nFor flow-bin software\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) jQuery Foundation, Inc. and Contributors, All Rights Reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nAttribution 4.0 International\n\n=======================================================================\n\nCreative Commons Corporation (\"Creative Commons\") is not a law firm and\ndoes not provide legal services or legal advice. Distribution of\nCreative Commons public licenses does not create a lawyer-client or\nother relationship. Creative Commons makes its licenses and related\ninformation available on an \"as-is\" basis. Creative Commons gives no\nwarranties regarding its licenses, any material licensed under their\nterms and conditions, or any related information. Creative Commons\ndisclaims all liability for damages resulting from their use to the\nfullest extent possible.\n\nUsing Creative Commons Public Licenses\n\nCreative Commons public licenses provide a standard set of terms and\nconditions that creators and other rights holders may use to share\noriginal works of authorship and other material subject to copyright\nand certain other rights specified in the public license below. The\nfollowing considerations are for informational purposes only, are not\nexhaustive, and do not form part of our licenses.\n\n     Considerations for licensors: Our public licenses are\n     intended for use by those authorized to give the public\n     permission to use material in ways otherwise restricted by\n     copyright and certain other rights. Our licenses are\n     irrevocable. Licensors should read and understand the terms\n     and conditions of the license they choose before applying it.\n     Licensors should also secure all rights necessary before\n     applying our licenses so that the public can reuse the\n     material as expected. Licensors should clearly mark any\n     material not subject to the license. This includes other CC-\n     licensed material, or material used under an exception or\n     limitation to copyright. More considerations for licensors:\n  wiki.creativecommons.org/Considerations_for_licensors\n\n     Considerations for the public: By using one of our public\n     licenses, a licensor grants the public permission to use the\n     licensed material under specified terms and conditions. If\n     the licensor's permission is not necessary for any reason--for\n     example, because of any applicable exception or limitation to\n     copyright--then that use is not regulated by the license. Our\n     licenses grant only permissions under copyright and certain\n     other rights that a licensor has authority to grant. Use of\n     the licensed material may still be restricted for other\n     reasons, including because others have copyright or other\n     rights in the material. A licensor may make special requests,\n     such as asking that all changes be marked or described.\n     Although not required by our licenses, you are encouraged to\n     respect those requests where reasonable. More_considerations\n     for the public:\n  wiki.creativecommons.org/Considerations_for_licensees\n\n=======================================================================\n\nCreative Commons Attribution 4.0 International Public License\n\nBy exercising the Licensed Rights (defined below), You accept and agree\nto be bound by the terms and conditions of this Creative Commons\nAttribution 4.0 International Public License (\"Public License\"). To the\nextent this Public License may be interpreted as a contract, You are\ngranted the Licensed Rights in consideration of Your acceptance of\nthese terms and conditions, and the Licensor grants You such rights in\nconsideration of benefits the Licensor receives from making the\nLicensed Material available under these terms and conditions.\n\nSection 1 -- Definitions.\n\n  a. Adapted Material means material subject to Copyright and Similar\n     Rights that is derived from or based upon the Licensed Material\n     and in which the Licensed Material is translated, altered,\n     arranged, transformed, or otherwise modified in a manner requiring\n     permission under the Copyright and Similar Rights held by the\n     Licensor. For purposes of this Public License, where the Licensed\n     Material is a musical work, performance, or sound recording,\n     Adapted Material is always produced where the Licensed Material is\n     synched in timed relation with a moving image.\n\nb. Adapter's License means the license You apply to Your Copyright\n   and Similar Rights in Your contributions to Adapted Material in\n   accordance with the terms and conditions of this Public License.\n\nc. Copyright and Similar Rights means copyright and/or similar rights\n   closely related to copyright including, without limitation,\n   performance, broadcast, sound recording, and Sui Generis Database\n   Rights, without regard to how the rights are labeled or\n   categorized. For purposes of this Public License, the rights\n   specified in Section 2(b)(1)-(2) are not Copyright and Similar\n   Rights.\n\nd. Effective Technological Measures means those measures that, in the\n   absence of proper authority, may not be circumvented under laws\n   fulfilling obligations under Article 11 of the WIPO Copyright\n   Treaty adopted on December 20, 1996, and/or similar international\n   agreements.\n\ne. Exceptions and Limitations means fair use, fair dealing, and/or\n   any other exception or limitation to Copyright and Similar Rights\n   that applies to Your use of the Licensed Material.\n\nf. Licensed Material means the artistic or literary work, database,\n   or other material to which the Licensor applied this Public\n   License.\n\ng. Licensed Rights means the rights granted to You subject to the\n   terms and conditions of this Public License, which are limited to\n   all Copyright and Similar Rights that apply to Your use of the\n   Licensed Material and that the Licensor has authority to license.\n\nh. Licensor means the individual(s) or entity(ies) granting rights\n   under this Public License.\n\ni. Share means to provide material to the public by any means or\n   process that requires permission under the Licensed Rights, such\n   as reproduction, public display, public performance, distribution,\n   dissemination, communication, or importation, and to make material\n   available to the public including in ways that members of the\n   public may access the material from a place and at a time\n   individually chosen by them.\n\nj. Sui Generis Database Rights means rights other than copyright\n   resulting from Directive 96/9/EC of the European Parliament and of\n   the Council of 11 March 1996 on the legal protection of databases,\n   as amended and/or succeeded, as well as other essentially\n   equivalent rights anywhere in the world.\n\nk. You means the individual or entity exercising the Licensed Rights\n   under this Public License. Your has a corresponding meaning.\n\nSection 2 -- Scope.\n\na. License grant.\n\n     1. Subject to the terms and conditions of this Public License,\n        the Licensor hereby grants You a worldwide, royalty-free,\n        non-sublicensable, non-exclusive, irrevocable license to\n        exercise the Licensed Rights in the Licensed Material to:\n\n          a. reproduce and Share the Licensed Material, in whole or\n             in part; and\n\n          b. produce, reproduce, and Share Adapted Material.\n\n     2. Exceptions and Limitations. For the avoidance of doubt, where\n        Exceptions and Limitations apply to Your use, this Public\n        License does not apply, and You do not need to comply with\n        its terms and conditions.\n\n     3. Term. The term of this Public License is specified in Section\n        6(a).\n\n     4. Media and formats; technical modifications allowed. The\n        Licensor authorizes You to exercise the Licensed Rights in\n        all media and formats whether now known or hereafter created,\n        and to make technical modifications necessary to do so. The\n        Licensor waives and/or agrees not to assert any right or\n        authority to forbid You from making technical modifications\n        necessary to exercise the Licensed Rights, including\n        technical modifications necessary to circumvent Effective\n        Technological Measures. For purposes of this Public License,\n        simply making modifications authorized by this Section 2(a)\n        (4) never produces Adapted Material.\n\n     5. Downstream recipients.\n\n          a. Offer from the Licensor -- Licensed Material. Every\n             recipient of the Licensed Material automatically\n             receives an offer from the Licensor to exercise the\n             Licensed Rights under the terms and conditions of this\n             Public License.\n\n          b. No downstream restrictions. You may not offer or impose\n             any additional or different terms or conditions on, or\n             apply any Effective Technological Measures to, the\n             Licensed Material if doing so restricts exercise of the\n             Licensed Rights by any recipient of the Licensed\n             Material.\n\n     6. No endorsement. Nothing in this Public License constitutes or\n        may be construed as permission to assert or imply that You\n        are, or that Your use of the Licensed Material is, connected\n        with, or sponsored, endorsed, or granted official status by,\n        the Licensor or others designated to receive attribution as\n        provided in Section 3(a)(1)(A)(i).\n\nb. Other rights.\n\n     1. Moral rights, such as the right of integrity, are not\n        licensed under this Public License, nor are publicity,\n        privacy, and/or other similar personality rights; however, to\n        the extent possible, the Licensor waives and/or agrees not to\n        assert any such rights held by the Licensor to the limited\n        extent necessary to allow You to exercise the Licensed\n        Rights, but not otherwise.\n\n     2. Patent and trademark rights are not licensed under this\n        Public License.\n\n     3. To the extent possible, the Licensor waives any right to\n        collect royalties from You for the exercise of the Licensed\n        Rights, whether directly or through a collecting society\n        under any voluntary or waivable statutory or compulsory\n        licensing scheme. In all other cases the Licensor expressly\n        reserves any right to collect such royalties.\n\nSection 3 -- License Conditions.\n\nYour exercise of the Licensed Rights is expressly made subject to the\nfollowing conditions.\n\na. Attribution.\n\n     1. If You Share the Licensed Material (including in modified\n        form), You must:\n\n          a. retain the following if it is supplied by the Licensor\n             with the Licensed Material:\n\n               i. identification of the creator(s) of the Licensed\n                  Material and any others designated to receive\n                  attribution, in any reasonable manner requested by\n                  the Licensor (including by pseudonym if\n                  designated);\n\n              ii. a copyright notice;\n\n             iii. a notice that refers to this Public License;\n\n              iv. a notice that refers to the disclaimer of\n                  warranties;\n\n               v. a URI or hyperlink to the Licensed Material to the\n                  extent reasonably practicable;\n\n          b. indicate if You modified the Licensed Material and\n             retain an indication of any previous modifications; and\n\n          c. indicate the Licensed Material is licensed under this\n             Public License, and include the text of, or the URI or\n             hyperlink to, this Public License.\n\n     2. You may satisfy the conditions in Section 3(a)(1) in any\n        reasonable manner based on the medium, means, and context in\n        which You Share the Licensed Material. For example, it may be\n        reasonable to satisfy the conditions by providing a URI or\n        hyperlink to a resource that includes the required\n        information.\n\n     3. If requested by the Licensor, You must remove any of the\n        information required by Section 3(a)(1)(A) to the extent\n        reasonably practicable.\n\n     4. If You Share Adapted Material You produce, the Adapter's\n        License You apply must not prevent recipients of the Adapted\n        Material from complying with this Public License.\n\nSection 4 -- Sui Generis Database Rights.\n\nWhere the Licensed Rights include Sui Generis Database Rights that\napply to Your use of the Licensed Material:\n\na. for the avoidance of doubt, Section 2(a)(1) grants You the right\n   to extract, reuse, reproduce, and Share all or a substantial\n   portion of the contents of the database;\n\nb. if You include all or a substantial portion of the database\n   contents in a database in which You have Sui Generis Database\n   Rights, then the database in which You have Sui Generis Database\n   Rights (but not its individual contents) is Adapted Material; and\n\nc. You must comply with the conditions in Section 3(a) if You Share\n   all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not\nreplace Your obligations under this Public License where the Licensed\nRights include other Copyright and Similar Rights.\n\nSection 5 -- Disclaimer of Warranties and Limitation of Liability.\n\na. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE\n   EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS\n   AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF\n   ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,\n   IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,\n   WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR\n   PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,\n   ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT\n   KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT\n   ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\n\nb. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE\n   TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,\n   NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,\n   INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,\n   COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR\n   USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN\n   ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR\n   DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR\n   IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\n\nc. The disclaimer of warranties and limitation of liability provided\n   above shall be interpreted in a manner that, to the extent\n   possible, most closely approximates an absolute disclaimer and\n   waiver of all liability.\n\nSection 6 -- Term and Termination.\n\na. This Public License applies for the term of the Copyright and\n   Similar Rights licensed here. However, if You fail to comply with\n   this Public License, then Your rights under this Public License\n   terminate automatically.\n\nb. Where Your right to use the Licensed Material has terminated under\n   Section 6(a), it reinstates:\n\n     1. automatically as of the date the violation is cured, provided\n        it is cured within 30 days of Your discovery of the\n        violation; or\n\n     2. upon express reinstatement by the Licensor.\n\n   For the avoidance of doubt, this Section 6(b) does not affect any\n   right the Licensor may have to seek remedies for Your violations\n   of this Public License.\n\nc. For the avoidance of doubt, the Licensor may also offer the\n   Licensed Material under separate terms or conditions or stop\n   distributing the Licensed Material at any time; however, doing so\n   will not terminate this Public License.\n\nd. Sections 1, 5, 6, 7, and 8 survive termination of this Public\n   License.\n\nSection 7 -- Other Terms and Conditions.\n\na. The Licensor shall not be bound by any additional or different\n   terms or conditions communicated by You unless expressly agreed.\n\nb. Any arrangements, understandings, or agreements regarding the\n   Licensed Material not stated herein are separate from and\n   independent of the terms and conditions of this Public License.\n\nSection 8 -- Interpretation.\n\na. For the avoidance of doubt, this Public License does not, and\n   shall not be interpreted to, reduce, limit, restrict, or impose\n   conditions on any use of the Licensed Material that could lawfully\n   be made without permission under this Public License.\n\nb. To the extent possible, if any provision of this Public License is\n   deemed unenforceable, it shall be automatically reformed to the\n   minimum extent necessary to make it enforceable. If the provision\n   cannot be reformed, it shall be severed from this Public License\n   without affecting the enforceability of the remaining terms and\n   conditions.\n\nc. No term or condition of this Public License will be waived and no\n   failure to comply consented to unless expressly agreed to by the\n   Licensor.\n\nd. Nothing in this Public License constitutes or may be interpreted\n   as a limitation upon, or waiver of, any privileges and immunities\n   that apply to the Licensor or You, including from the legal\n   processes of any jurisdiction or authority.\n\n=======================================================================\n\nCreative Commons is not a party to its public licenses.\nNotwithstanding, Creative Commons may elect to apply one of its public\nlicenses to material it publishes and in those instances will be\nconsidered the \"Licensor.\" Except for the limited purpose of indicating\nthat material is shared under a Creative Commons public license or as\notherwise permitted by the Creative Commons policies published at\ncreativecommons.org/policies, Creative Commons does not authorize the\nuse of the trademark \"Creative Commons\" or any other trademark or logo\nof Creative Commons without its prior written consent including,\nwithout limitation, in connection with any unauthorized modifications\nto any of its public licenses or any other arrangements,\nunderstandings, or agreements concerning use of licensed material. For\nthe avoidance of doubt, this paragraph does not form part of the public\nlicenses.\n\nCreative Commons may be contacted at creativecommons.org.\n",
+      "attribution": "Commit history of https://github.com/facebook/flow: Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/babel-plugin-syntax-flow-parser; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/babel-plugin-transform-flow-enums; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/eslint-plugin-fb-flow; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-api-translator; Copyright (c) 2015-present, Facebook, Inc., MIT license (license), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-bin; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-enums-runtime; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-eslint; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-remove-types; Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-transform; Copyright (c) jQuery Foundation, Inc. and Contributors, All Rights Reserved., BSD-2-Clause license (LICENSE.BSD), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/src/parser/test/esprima; the authors of react, ISC license (declared in package.json), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/tests/config_declarations_react/node_modules/react; the authors of facebook/flow (website) (the license file names no copyright line), CC-BY-4.0 license (LICENSE-DOCUMENTATION), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/website."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".circleci/**",
+        ".claude/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Changelog.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "evals/**",
+        "lib/**",
+        "newtests/.flowconfig",
+        "newtests/README.md",
+        "newtests/Tester.js",
+        "newtests/autofix-exports/**",
+        "newtests/autostop/**",
+        "newtests/lsp/auto_close_jsx/**",
+        "newtests/lsp/code-action/**",
+        "newtests/lsp/completion/_flowconfig",
+        "newtests/lsp/completion/autoimports/**",
+        "newtests/lsp/completion/bracket.js",
+        "newtests/lsp/completion/completion-metrics.js",
+        "newtests/lsp/completion/completion.js",
+        "newtests/lsp/completion/completion_metrics_collision.js",
+        "newtests/lsp/completion/component_syntax_auto_imports/**",
+        "newtests/lsp/completion/haste_package_auto_imports/**",
+        "newtests/lsp/completion/jsx-attr-with-value.js",
+        "newtests/lsp/completion/jsx.js",
+        "newtests/lsp/completion/kind.js",
+        "newtests/lsp/completion/node_modules_auto_imports/__snapshots__/**",
+        "newtests/lsp/completion/node_modules_auto_imports/_flowconfig",
+        "newtests/lsp/completion/node_modules_auto_imports/nested/bar/**",
+        "newtests/lsp/completion/node_modules_auto_imports/nested/workspace/**",
+        "newtests/lsp/completion/node_modules_auto_imports/test.js",
+        "newtests/lsp/completion/params.js",
+        "newtests/lsp/completion/test.js",
+        "newtests/lsp/completion/type-exports.js",
+        "newtests/lsp/completion/unqualified-type-annotation.js",
+        "newtests/lsp/connection/**",
+        "newtests/lsp/detailed_diagnostics/**",
+        "newtests/lsp/diagnostics/_flowconfig",
+        "newtests/lsp/diagnostics/_flowconfig_all_set_to_true",
+        "newtests/lsp/diagnostics/_flowconfig_haste_node_modules",
+        "newtests/lsp/diagnostics/_flowconfig_lazy",
+        "newtests/lsp/diagnostics/_flowconfig_with_dir_ignores",
+        "newtests/lsp/diagnostics/_flowconfig_with_ignores",
+        "newtests/lsp/diagnostics/dependency.js",
+        "newtests/lsp/diagnostics/empty.js",
+        "newtests/lsp/diagnostics/export_number.js",
+        "newtests/lsp/diagnostics/export_string.js",
+        "newtests/lsp/diagnostics/importsFakeSymbol.js",
+        "newtests/lsp/diagnostics/nodeModulesConsumer.js",
+        "newtests/lsp/diagnostics/test.js",
+        "newtests/lsp/diagnostics/witherrors1.js",
+        "newtests/lsp/diagnostics/witherrors2.js",
+        "newtests/lsp/documentHighlight/**",
+        "newtests/lsp/documentSymbol/**",
+        "newtests/lsp/document_paste/**",
+        "newtests/lsp/edits/**",
+        "newtests/lsp/execute_command/**",
+        "newtests/lsp/findReferences/**",
+        "newtests/lsp/globalReferencesAndRename/**",
+        "newtests/lsp/linkedEditingRange/**",
+        "newtests/lsp/queries/**",
+        "newtests/lsp/rename/**",
+        "newtests/lsp/renameFileImports/**",
+        "newtests/lsp/restartOnReinit/**",
+        "newtests/lsp/savedStateReinit/**",
+        "newtests/lsp/selectionRange/**",
+        "newtests/lsp/signatureHelp/**",
+        "newtests/lsp/staleTransaction/**",
+        "newtests/lsp/version/**",
+        "newtests/lsp/wait_for_recheck/**",
+        "newtests/lsp/workspaceSymbol/**",
+        "newtests/package.json",
+        "newtests/package_json_changes/**",
+        "newtests/recheck_parse_error/**",
+        "newtests/tool_test_example/**",
+        "package.json",
+        "packages/.flowconfig",
+        "packages/.gitignore",
+        "packages/.prettierignore",
+        "packages/.prettierrc.json",
+        "packages/babel.config.js",
+        "packages/eslint.config.js",
+        "packages/flow-dev-tools/**",
+        "packages/flow-estree/**",
+        "packages/flow-for-vscode/.gitattributes",
+        "packages/flow-for-vscode/.gitignore",
+        "packages/flow-for-vscode/.vscodeignore",
+        "packages/flow-for-vscode/CHANGELOG.md",
+        "packages/flow-for-vscode/CODE_OF_CONDUCT.md",
+        "packages/flow-for-vscode/CONTRIBUTING.md",
+        "packages/flow-for-vscode/PAST_FLOW_BIN_SHASUMS.txt",
+        "packages/flow-for-vscode/README.md",
+        "packages/flow-for-vscode/babel.config.js",
+        "packages/flow-for-vscode/bundle.js",
+        "packages/flow-for-vscode/jest.config.js",
+        "packages/flow-for-vscode/package.json",
+        "packages/flow-for-vscode/playground/**",
+        "packages/flow-for-vscode/signing.pem",
+        "packages/flow-for-vscode/src/**",
+        "packages/flow-for-vscode/tsconfig.json",
+        "packages/flow-for-vscode/yarn.lock",
+        "packages/flow-parser/**",
+        "packages/flow-typed/**",
+        "packages/flow-upgrade/**",
+        "packages/jest.config.js",
+        "packages/package.json",
+        "packages/patches/**",
+        "packages/scripts/**",
+        "packages/try-flow-website-js/**",
+        "packages/yarn.lock",
+        "prelude/**",
+        "resources/**",
+        "runtests.sh",
+        "rust_port/**",
+        "scripts/**",
+        "src/__tests__/**",
+        "src/flow_dot_js_wasm.js",
+        "src/flow_dot_js_wasm_packager.js",
+        "src/parser/.gitignore",
+        "src/parser/.rgignore",
+        "src/parser/__tests__/**",
+        "src/parser/test/flow/**",
+        "src/parser/test/test262_baseline.txt",
+        "src/parser/test/test262_baseline_rust_port.txt",
+        "tests/.gitignore",
+        "tests/README.md",
+        "tests/abnormal/**",
+        "tests/abstract_classes/**",
+        "tests/abstract_classes_off/**",
+        "tests/abstract_locations_cycle/**",
+        "tests/abstract_locations_ide_services/**",
+        "tests/abstract_locations_minimal_merge/**",
+        "tests/abstract_locations_object_deopt/**",
+        "tests/abstract_locations_saved_state/**",
+        "tests/abstract_locations_skip_recheck/**",
+        "tests/all_arith/**",
+        "tests/almost_disjoint_union_opt/**",
+        "tests/ambient_declarations/**",
+        "tests/ambiguous_object_syntax_exact_by_default/**",
+        "tests/ambiguous_object_syntax_no_exact_by_default/**",
+        "tests/annot/**",
+        "tests/annot2/**",
+        "tests/annot_inference_error_dst/**",
+        "tests/annot_inference_specialize_proto/**",
+        "tests/annotate_exports_anonymous_class/**",
+        "tests/annotate_exports_array_literal/**",
+        "tests/annotate_exports_boolean_literals/**",
+        "tests/annotate_exports_class_extends/**",
+        "tests/annotate_exports_dotFlow/**",
+        "tests/annotate_exports_duplicate_import_error/**",
+        "tests/annotate_exports_export_class_utility/**",
+        "tests/annotate_exports_fbt/**",
+        "tests/annotate_exports_function/**",
+        "tests/annotate_exports_graphql_fragments/**",
+        "tests/annotate_exports_hard_coded_fixes/**",
+        "tests/annotate_exports_import_class_direct/**",
+        "tests/annotate_exports_import_class_indirect/**",
+        "tests/annotate_exports_import_cycle/**",
+        "tests/annotate_exports_import_declare_class_type/**",
+        "tests/annotate_exports_import_default_exported_class/**",
+        "tests/annotate_exports_import_es6/**",
+        "tests/annotate_exports_import_instance_type_cast/**",
+        "tests/annotate_exports_import_interface/**",
+        "tests/annotate_exports_import_multiple_kinds/**",
+        "tests/annotate_exports_import_no_bounds/**",
+        "tests/annotate_exports_import_no_duplicates/**",
+        "tests/annotate_exports_import_opaque_type/**",
+        "tests/annotate_exports_import_paths/**",
+        "tests/annotate_exports_import_type_default/**",
+        "tests/annotate_exports_import_typeof/**",
+        "tests/annotate_exports_large_type/**",
+        "tests/annotate_exports_library_import/**",
+        "tests/annotate_exports_no_import_on_error/**",
+        "tests/annotate_exports_numeric_literals/**",
+        "tests/annotate_exports_object/**",
+        "tests/annotate_exports_object_dynamic_props/**",
+        "tests/annotate_exports_object_key/**",
+        "tests/annotate_exports_object_spread/**",
+        "tests/annotate_exports_omit_targ_defaults/**",
+        "tests/annotate_exports_react/**",
+        "tests/annotate_exports_reuse_imports/**",
+        "tests/annotate_exports_simplify_hardcoded_fixes/**",
+        "tests/annotate_exports_special_types/**",
+        "tests/annotate_exports_string_literals/**",
+        "tests/annotate_exports_unclear_type/**",
+        "tests/annotate_exports_unclear_type_cycle/**",
+        "tests/annotate_exports_validator/**",
+        "tests/annotate_literal_declaration/**",
+        "tests/annotate_optional_properties/**",
+        "tests/any/**",
+        "tests/any_named_import/**",
+        "tests/any_propagation/**",
+        "tests/apply_code_action_command/**",
+        "tests/arith/**",
+        "tests/array_filter/**",
+        "tests/array_literal_tuple_spread/**",
+        "tests/array_named_access/**",
+        "tests/array_spread/**",
+        "tests/arraylib/**",
+        "tests/arrays/**",
+        "tests/arrows/**",
+        "tests/as_const/**",
+        "tests/assert_operator_disabled_but_parsed/**",
+        "tests/assert_operator_enabled/**",
+        "tests/assert_operator_specialized/**",
+        "tests/assert_operator_unparsed/**",
+        "tests/assertion_call_analysis_saved_state/**",
+        "tests/assertion_functions/**",
+        "tests/assertion_functions_callable_object/**",
+        "tests/assertion_functions_import_cjs_default/**",
+        "tests/assertion_functions_jest/**",
+        "tests/assertion_functions_lib/**",
+        "tests/assertion_functions_require_default/**",
+        "tests/assertion_functions_return_inference/**",
+        "tests/assertion_functions_spread/**",
+        "tests/ast_error_description/**",
+        "tests/ast_filename/**",
+        "tests/ast_tokens/**",
+        "tests/async/**",
+        "tests/async_component_syntax/**",
+        "tests/async_component_syntax_disabled/**",
+        "tests/async_component_syntax_includes/**",
+        "tests/async_iteration/**",
+        "tests/at_types_incremental/.flowconfig",
+        "tests/at_types_incremental/.testconfig",
+        "tests/at_types_incremental/at_types_incremental.exp",
+        "tests/at_types_incremental/test.js",
+        "tests/at_types_incremental/test.sh",
+        "tests/at_types_incremental/tmp/**",
+        "tests/at_types_incremental_add/.flowconfig",
+        "tests/at_types_incremental_add/.testconfig",
+        "tests/at_types_incremental_add/at_types_incremental_add.exp",
+        "tests/at_types_incremental_add/test.js",
+        "tests/at_types_incremental_add/test.sh",
+        "tests/at_types_incremental_add/tmp/**",
+        "tests/autocomplete_autoimport_default_export_disagree_with_module_name/**",
+        "tests/autocomplete_autoimport_from_flowtyped/**",
+        "tests/autocomplete_autoimport_from_root_relative/**",
+        "tests/autocomplete_bracket_syntax/**",
+        "tests/autocomplete_from_a_to_g/**",
+        "tests/autocomplete_from_h_to_l/**",
+        "tests/autocomplete_from_m_to_q/**",
+        "tests/autocomplete_from_r_to_z/**",
+        "tests/autocomplete_haste_multiplatform_autoimport/**",
+        "tests/autocomplete_jsdoc/**",
+        "tests/autocomplete_match/**",
+        "tests/autocomplete_props/**",
+        "tests/autocomplete_react/**",
+        "tests/autocomplete_record/**",
+        "tests/autocomplete_upper_bounds/**",
+        "tests/autofix_array_literal/**",
+        "tests/autofix_boolean_literals/**",
+        "tests/autofix_class/**",
+        "tests/autofix_dotFlow/**",
+        "tests/autofix_fbt/**",
+        "tests/autofix_function/**",
+        "tests/autofix_hard_coded_fixes/**",
+        "tests/autofix_simplify_hardcoded_fixes/**",
+        "tests/autofix_string_literals/**",
+        "tests/autofix_union_style/**",
+        "tests/autofix_validator/**",
+        "tests/automatic_require_default/**",
+        "tests/auxiliary/**",
+        "tests/babel_loose_array_spread/**",
+        "tests/badly_positioned_flow_use_op/**",
+        "tests/badly_positioned_func_proto/**",
+        "tests/badly_positioned_func_sig/**",
+        "tests/badly_positioned_make_exactt/**",
+        "tests/badly_positioned_mapped_types/**",
+        "tests/badly_positioned_objassign/**",
+        "tests/badly_positioned_polyt/**",
+        "tests/badly_positioned_react/**",
+        "tests/badly_positioned_unknown_use/**",
+        "tests/bigint/**",
+        "tests/binding/**",
+        "tests/block_level_fun/**",
+        "tests/bounded_poly/**",
+        "tests/break/**",
+        "tests/builtin_uses/**",
+        "tests/builtins/**",
+        "tests/builtins_shadowing/**",
+        "tests/call_caching1/**",
+        "tests/call_caching2/**",
+        "tests/call_properties/**",
+        "tests/callable/**",
+        "tests/cancelable_rechecks/**",
+        "tests/capture_avoid/**",
+        "tests/casting_syntax_as/**",
+        "tests/check_contents/**",
+        "tests/check_contents_wedge/**",
+        "tests/cjs_esm_interop/**",
+        "tests/class_computed_props/**",
+        "tests/class_computed_props_munge/**",
+        "tests/class_fields/**",
+        "tests/class_method_default_parameters/**",
+        "tests/class_munging/**",
+        "tests/class_object_subtyping/**",
+        "tests/class_statics/**",
+        "tests/class_subtyping/**",
+        "tests/class_type/**",
+        "tests/class_variance/**",
+        "tests/classes/**",
+        "tests/cli_renderer/**",
+        "tests/cli_renderer_color/**",
+        "tests/cli_renderer_color_and_unicode/**",
+        "tests/cli_renderer_not_all/**",
+        "tests/cli_renderer_not_all_2/**",
+        "tests/cli_renderer_unicode/**",
+        "tests/cli_renderer_width_120/**",
+        "tests/cli_renderer_width_40/**",
+        "tests/closure/**",
+        "tests/codeless_suppression/**",
+        "tests/codemod_remove_react_import/**",
+        "tests/commonjs/**",
+        "tests/component_syntax/**",
+        "tests/component_syntax_unsupported/**",
+        "tests/component_type/**",
+        "tests/computed_getters_setters/**",
+        "tests/computed_method_keys/**",
+        "tests/computed_props/**",
+        "tests/computed_race/**",
+        "tests/conditional/**",
+        "tests/conditional_type/**",
+        "tests/config_all/**",
+        "tests/config_all_false/**",
+        "tests/config_check_version/**",
+        "tests/config_comment/**",
+        "tests/config_declarations/**",
+        "tests/config_declarations_react/.flowconfig",
+        "tests/config_declarations_react/A.js",
+        "tests/config_declarations_react/B.js",
+        "tests/config_declarations_react/config_declarations_react.exp",
+        "tests/config_file_extensions/**",
+        "tests/config_haste_disallow_dynamic_import_misuse/**",
+        "tests/config_ignore/**",
+        "tests/config_invalid_lint/**",
+        "tests/config_invalid_option/**",
+        "tests/config_module_file_exts_precedence/**",
+        "tests/config_module_name_mapper_PROJECT_ROOT_1.0/**",
+        "tests/config_module_name_mapper_dot_prefix/**",
+        "tests/config_module_name_mapper_filetype/**",
+        "tests/config_module_name_mapper_invalid/**",
+        "tests/config_module_name_rewrite_haste/**",
+        "tests/config_module_name_rewrite_node/.flowconfig",
+        "tests/config_module_name_rewrite_node/A.js",
+        "tests/config_module_name_rewrite_node/Exists.js",
+        "tests/config_module_name_rewrite_node/config_module_name_rewrite_node.exp",
+        "tests/config_module_system_node_allow_root_relative/.flowconfig",
+        "tests/config_module_system_node_allow_root_relative/ambiguous.js",
+        "tests/config_module_system_node_allow_root_relative/config_module_system_node_allow_root_relative.exp",
+        "tests/config_module_system_node_allow_root_relative/subdir/**",
+        "tests/config_module_system_node_allow_root_relative/test.js",
+        "tests/config_module_system_node_allow_root_relative/user_code.js",
+        "tests/config_module_system_node_resolve_dirname/.flowconfig",
+        "tests/config_module_system_node_resolve_dirname/config_module_system_node_resolve_dirname.exp",
+        "tests/config_module_system_node_resolve_dirname/custom_resolve_dir/**",
+        "tests/config_module_system_node_resolve_dirname/subdir/**",
+        "tests/config_module_system_node_resolve_dirname/toplevel.js",
+        "tests/config_module_system_node_resolve_dirname_misuse/.flowconfig",
+        "tests/config_module_system_node_resolve_dirname_misuse/.testconfig",
+        "tests/config_module_system_node_resolve_dirname_misuse/config_module_system_node_resolve_dirname_misuse.exp",
+        "tests/config_module_system_node_resolve_dirname_misuse/test.sh",
+        "tests/config_module_system_node_root_relative_dirnames/.flowconfig",
+        "tests/config_module_system_node_root_relative_dirnames/ambiguous.js",
+        "tests/config_module_system_node_root_relative_dirnames/config_module_system_node_root_relative_dirnames.exp",
+        "tests/config_module_system_node_root_relative_dirnames/first/**",
+        "tests/config_module_system_node_root_relative_dirnames/fourth/**",
+        "tests/config_module_system_node_root_relative_dirnames/only-here-can-we-use-root-relative-fourth/**",
+        "tests/config_module_system_node_root_relative_dirnames/second/**",
+        "tests/config_module_system_node_root_relative_dirnames/subdir/**",
+        "tests/config_module_system_node_root_relative_dirnames/test.js",
+        "tests/config_module_system_node_root_relative_dirnames/third/**",
+        "tests/config_module_system_node_root_relative_dirnames/user_code.js",
+        "tests/config_munging_underscores/**",
+        "tests/config_munging_underscores2/**",
+        "tests/config_untyped/**",
+        "tests/config_version/**",
+        "tests/connect_race/**",
+        "tests/const_imports/**",
+        "tests/const_params/**",
+        "tests/const_type_param/**",
+        "tests/constant_condition/**",
+        "tests/constrain_writes/**",
+        "tests/constructor/**",
+        "tests/constructor_type/**",
+        "tests/contents/**",
+        "tests/contextual_typing/**",
+        "tests/core_tests/**",
+        "tests/coverage/**",
+        "tests/custom_errors/**",
+        "tests/cycle/**",
+        "tests/cycle_command_types_first/**",
+        "tests/cyclic_elab_overflow/**",
+        "tests/date/**",
+        "tests/date_compare_type_alias/**",
+        "tests/declaration_files_haste/.flowconfig",
+        "tests/declaration_files_haste/CycleNodeA.js.flow",
+        "tests/declaration_files_haste/CycleNodeB.js.flow",
+        "tests/declaration_files_haste/GenericRecord.js",
+        "tests/declaration_files_haste/GenericRecord.js.flow",
+        "tests/declaration_files_haste/GenericRecordSpec.js",
+        "tests/declaration_files_haste/GenericRecordWithDefaults.js",
+        "tests/declaration_files_haste/GenericRecordWithDefaults.js.flow",
+        "tests/declaration_files_haste/GenericRecordWithDefaultsSpec.js",
+        "tests/declaration_files_haste/ImplicitProvidesModule.js",
+        "tests/declaration_files_haste/ImplicitProvidesModule.js.flow",
+        "tests/declaration_files_haste/ImportedHasteRecord.js.flow",
+        "tests/declaration_files_haste/ProvidedFormTypes.js",
+        "tests/declaration_files_haste/ProvidedParams.js",
+        "tests/declaration_files_haste/ProvidedParams.js.flow",
+        "tests/declaration_files_haste/ProvidedParamsSpec.js",
+        "tests/declaration_files_haste/ProvidedValidation.js",
+        "tests/declaration_files_haste/declaration_files_haste.exp",
+        "tests/declaration_files_haste/foo/**",
+        "tests/declaration_files_haste/generic_record_operations.js",
+        "tests/declaration_files_haste/globals.js",
+        "tests/declaration_files_haste/haste_default_module_object.js",
+        "tests/declaration_files_haste/immutable.js",
+        "tests/declaration_files_haste/immutable.js.flow",
+        "tests/declaration_files_haste/non_polymorphic_super.js",
+        "tests/declaration_files_haste/pragmas/**",
+        "tests/declaration_files_haste/provided_record_default_import.js",
+        "tests/declaration_files_haste/record_import_cycle.js",
+        "tests/declaration_files_haste/test.js",
+        "tests/declaration_files_haste/ws/**",
+        "tests/declaration_files_haste_all/.flowconfig",
+        "tests/declaration_files_haste_all/CycleRecordA.js.flow",
+        "tests/declaration_files_haste_all/CycleRecordB.js.flow",
+        "tests/declaration_files_haste_all/RecordFormTypes.js",
+        "tests/declaration_files_haste_all/RecordModel.js",
+        "tests/declaration_files_haste_all/RecordModel.js.flow",
+        "tests/declaration_files_haste_all/RecordValidation.js",
+        "tests/declaration_files_haste_all/RecordWithDefaults.js",
+        "tests/declaration_files_haste_all/RecordWithDefaults.js.flow",
+        "tests/declaration_files_haste_all/bar.js",
+        "tests/declaration_files_haste_all/bar.js.flow",
+        "tests/declaration_files_haste_all/declaration_files_haste_all.exp",
+        "tests/declaration_files_haste_all/immutable_import_cycle.js",
+        "tests/declaration_files_haste_all/record_default_import.js",
+        "tests/declaration_files_haste_all/record_operations.js",
+        "tests/declaration_files_haste_all/test.js",
+        "tests/declaration_files_incremental_haste/.flowconfig",
+        "tests/declaration_files_incremental_haste/.testconfig",
+        "tests/declaration_files_incremental_haste/A.js",
+        "tests/declaration_files_incremental_haste/A.js.flow.ignored",
+        "tests/declaration_files_incremental_haste/ImplicitProvidesModule.js",
+        "tests/declaration_files_incremental_haste/ImplicitProvidesModule.js.flow.ignored",
+        "tests/declaration_files_incremental_haste/declaration_files_incremental_haste.exp",
+        "tests/declaration_files_incremental_haste/foo/**",
+        "tests/declaration_files_incremental_haste/md5.js",
+        "tests/declaration_files_incremental_haste/test.js",
+        "tests/declaration_files_incremental_haste/test.sh",
+        "tests/declaration_files_incremental_haste/ws/**",
+        "tests/declaration_files_incremental_haste_name_reducers/.flowconfig",
+        "tests/declaration_files_incremental_haste_name_reducers/.testconfig",
+        "tests/declaration_files_incremental_haste_name_reducers/A.js",
+        "tests/declaration_files_incremental_haste_name_reducers/A.js.flow.ignored",
+        "tests/declaration_files_incremental_haste_name_reducers/declaration_files_incremental_haste_name_reducers.exp",
+        "tests/declaration_files_incremental_haste_name_reducers/index.js",
+        "tests/declaration_files_incremental_haste_name_reducers/test.sh",
+        "tests/declaration_files_incremental_node/.flowconfig",
+        "tests/declaration_files_incremental_node/.testconfig",
+        "tests/declaration_files_incremental_node/A.js",
+        "tests/declaration_files_incremental_node/A.js.flow.ignored",
+        "tests/declaration_files_incremental_node/declaration_files_incremental_node.exp",
+        "tests/declaration_files_incremental_node/test.sh",
+        "tests/declaration_files_incremental_node/test_absolute.js",
+        "tests/declaration_files_incremental_node/test_relative.js",
+        "tests/declaration_files_node/.flowconfig",
+        "tests/declaration_files_node/A.js",
+        "tests/declaration_files_node/A.js.flow",
+        "tests/declaration_files_node/CJS.js",
+        "tests/declaration_files_node/CJS.js.flow",
+        "tests/declaration_files_node/confusing_dir.js/**",
+        "tests/declaration_files_node/confusing_dir_dot_flow.js.flow/**",
+        "tests/declaration_files_node/declaration_files_node.exp",
+        "tests/declaration_files_node/not_flow.js",
+        "tests/declaration_files_node/not_flow.js.flow",
+        "tests/declaration_files_node/test_absolute.js",
+        "tests/declaration_files_node/test_relative.js",
+        "tests/declaration_files_parse_error/**",
+        "tests/declare_class/**",
+        "tests/declare_class_extends_constructor/**",
+        "tests/declare_class_interface_merging/**",
+        "tests/declare_class_method_no_return/**",
+        "tests/declare_export/**",
+        "tests/declare_fun/**",
+        "tests/declare_function_namespace_libdef/**",
+        "tests/declare_global_scoping/.flowconfig",
+        "tests/declare_global_scoping/declare_global_scoping.exp",
+        "tests/declare_global_scoping/test.js",
+        "tests/declare_let_const/**",
+        "tests/declare_module_exports/.flowconfig",
+        "tests/declare_module_exports/declare_module_exports.exp",
+        "tests/declare_module_exports/flow-typed/**",
+        "tests/declare_module_exports/main.js",
+        "tests/declare_namespace/**",
+        "tests/declare_opaque_type/**",
+        "tests/declare_type/**",
+        "tests/declare_var/**",
+        "tests/decorators/**",
+        "tests/def_site_variance/**",
+        "tests/delete/**",
+        "tests/demo/**",
+        "tests/dep_graph_types_first/**",
+        "tests/destructuring/**",
+        "tests/dev_tools_commands/**",
+        "tests/dictionary/**",
+        "tests/dir_coverage/**",
+        "tests/direct_dependent_deleted/**",
+        "tests/direct_dependent_files_cache/.testconfig",
+        "tests/direct_dependent_files_cache/direct_dependent_files_cache.exp",
+        "tests/direct_dependent_files_cache/src/.flowconfig",
+        "tests/direct_dependent_files_cache/src/dependent.js",
+        "tests/direct_dependent_files_cache/src/unrelated.js",
+        "tests/direct_dependent_files_cache/test.sh",
+        "tests/direct_dependent_node_modules/.flowconfig",
+        "tests/direct_dependent_node_modules/.testconfig",
+        "tests/direct_dependent_node_modules/direct_dependent_node_modules.exp",
+        "tests/direct_dependent_node_modules/main.js",
+        "tests/direct_dependent_node_modules/test.sh",
+        "tests/direct_dependent_unparsed/**",
+        "tests/disjoint_union_perf/**",
+        "tests/docblock/**",
+        "tests/dump_types/**",
+        "tests/dump_types_for_tool/**",
+        "tests/dump_types_for_tool_dedup/**",
+        "tests/dump_types_for_tool_provider/**",
+        "tests/dump_types_unannotated/**",
+        "tests/duplicate_libs/**",
+        "tests/duplicate_methods/**",
+        "tests/duplicate_name/**",
+        "tests/dynamic_import/**",
+        "tests/encaps/**",
+        "tests/enforce_union_optimized/**",
+        "tests/ensure_parsed_dependency_saved_state/**",
+        "tests/ensure_parsed_no_saved_state/**",
+        "tests/ensure_parsed_rename/**",
+        "tests/ensure_parsed_saved_state/**",
+        "tests/ensure_parsed_saved_state_deleted_dependent/**",
+        "tests/ensure_parsed_saved_state_deleted_file/**",
+        "tests/enum_perf/**",
+        "tests/enumerror/**",
+        "tests/enums/**",
+        "tests/enums_off/**",
+        "tests/equality/**",
+        "tests/equals/**",
+        "tests/error_codes/**",
+        "tests/error_ctor/**",
+        "tests/error_messages/**",
+        "tests/error_offset_styles/**",
+        "tests/error_printing/**",
+        "tests/error_unsuppressable/**",
+        "tests/es6modules/**",
+        "tests/es_declare_module/**",
+        "tests/eval_fast_path/**",
+        "tests/eval_union_perf/**",
+        "tests/exact/**",
+        "tests/exact_by_default/**",
+        "tests/exact_empty/**",
+        "tests/exact_empty_objects/**",
+        "tests/existential_type/**",
+        "tests/explicit_inexact/**",
+        "tests/export_default/**",
+        "tests/export_star_as/**",
+        "tests/export_star_default_forwarded_when_disabled/**",
+        "tests/export_star_excludes_default/**",
+        "tests/export_type/**",
+        "tests/export_type_specifier/**",
+        "tests/export_type_star_as/**",
+        "tests/extends/**",
+        "tests/extensions/**",
+        "tests/facebook_fbs_none/**",
+        "tests/facebook_fbs_some/**",
+        "tests/facebook_fbt_none/**",
+        "tests/facebook_fbt_some/**",
+        "tests/facebook_module_interop/**",
+        "tests/fast_symlink_resolution_uncrawled_aliases/**",
+        "tests/find_module/**",
+        "tests/find_module_haste_namespaces/**",
+        "tests/fix/**",
+        "tests/flow_ast.template_strings/**",
+        "tests/flow_ast_visitor_in_flow/**",
+        "tests/flow_js_env_hint_eval_speculation/**",
+        "tests/flowconfig_all_false/**",
+        "tests/flowconfig_all_true/**",
+        "tests/flowconfig_empty_sections/**",
+        "tests/flowconfig_ignore/**",
+        "tests/flowconfig_name/**",
+        "tests/flowconfig_rollouts/**",
+        "tests/flowlib_with_lib_dom_d_ts/**",
+        "tests/fn_type_tparam_scope/**",
+        "tests/focus_check/**",
+        "tests/focus_unparsed_file/**",
+        "tests/for/**",
+        "tests/force_recheck_focus/**",
+        "tests/forof/**",
+        "tests/friendly_errors/**",
+        "tests/fs.sh",
+        "tests/function/**",
+        "tests/function_and_object_type_is_no_longer_any/**",
+        "tests/function_as_type/**",
+        "tests/function_loc/**",
+        "tests/function_nominal_prototypes/**",
+        "tests/function_statics/**",
+        "tests/function_to_indexed/**",
+        "tests/funrec/**",
+        "tests/generators/**",
+        "tests/generic_escape/**",
+        "tests/generic_zeroed/**",
+        "tests/generics/**",
+        "tests/get_def/**",
+        "tests/get_def2/**",
+        "tests/get_def_enums/**",
+        "tests/get_def_match/**",
+        "tests/get_def_type_param/**",
+        "tests/get_def_types_first/**",
+        "tests/getters_and_setters/**",
+        "tests/getters_and_setters_invalid/**",
+        "tests/getters_and_setters_types_first/**",
+        "tests/glean_with_saved_state/**",
+        "tests/global_this/**",
+        "tests/global_this_already_defined/**",
+        "tests/graphql/**",
+        "tests/guess_root/**",
+        "tests/haste_cycle/**",
+        "tests/haste_disallow_dynamic_import/**",
+        "tests/haste_dupe/**",
+        "tests/haste_dupe_packages/**",
+        "tests/haste_module_ref_standard_cjs_esm_interop/**",
+        "tests/haste_name_reducers_defaults/.flowconfig",
+        "tests/haste_name_reducers_defaults/Module1.js",
+        "tests/haste_name_reducers_defaults/foo/**",
+        "tests/haste_name_reducers_defaults/haste_name_reducers_defaults.exp",
+        "tests/haste_name_reducers_defaults/index.js",
+        "tests/haste_namespaces/**",
+        "tests/haste_namespaces_incremental/**",
+        "tests/haste_namespaces_strict_boundary/**",
+        "tests/haste_node_precedence/.flowconfig",
+        "tests/haste_node_precedence/foo.js",
+        "tests/haste_node_precedence/haste_node_precedence.exp",
+        "tests/haste_node_precedence/test.js",
+        "tests/haste_package/.flowconfig",
+        "tests/haste_package/haste_package.exp",
+        "tests/haste_package/subdir/haste_pkg/**",
+        "tests/haste_package/subdir/non_haste_pkg/**",
+        "tests/haste_package/test.js",
+        "tests/haste_package_subpath_vs_module_incremental/**",
+        "tests/haste_package_vs_module_incremental/**",
+        "tests/haste_use_name_reducers/.flowconfig",
+        "tests/haste_use_name_reducers/dir1/**",
+        "tests/haste_use_name_reducers/dir2/Module2.js",
+        "tests/haste_use_name_reducers/dir3/**",
+        "tests/haste_use_name_reducers/haste_use_name_reducers.exp",
+        "tests/haste_use_name_reducers/index.js",
+        "tests/hook_syntax/**",
+        "tests/hook_syntax_compatibility/**",
+        "tests/hook_syntax_compatibility_excludes/**",
+        "tests/hook_syntax_compatibility_includes/**",
+        "tests/ide_commands_on_ignored_files/**",
+        "tests/ide_unmerged_deps/**",
+        "tests/ide_unmerged_deps_dependents/**",
+        "tests/ignore_package/.flowconfig",
+        "tests/ignore_package/foo.js",
+        "tests/ignore_package/ignore_package.exp",
+        "tests/immutable_methods/**",
+        "tests/implements/**",
+        "tests/implicit_instantiation/**",
+        "tests/import_errors/**",
+        "tests/import_export_equals/**",
+        "tests/import_type/.flowconfig",
+        "tests/import_type/ExportCJSDefault_Class.js",
+        "tests/import_type/ExportCJSNamed_Class.js",
+        "tests/import_type/ExportClassAndType.js",
+        "tests/import_type/ExportDefaultNonType.js",
+        "tests/import_type/ExportDefault_Class.js",
+        "tests/import_type/ExportExactObject.js",
+        "tests/import_type/ExportNamed_Alias.js",
+        "tests/import_type/ExportNamed_Class.js",
+        "tests/import_type/ExportObject.js",
+        "tests/import_type/ExportsANumber.js",
+        "tests/import_type/ImportedRecord.js.flow",
+        "tests/import_type/default_module_object.js",
+        "tests/import_type/import_type.exp",
+        "tests/import_type/import_type.js",
+        "tests/import_type/issue-359.js",
+        "tests/import_type_annot/**",
+        "tests/import_type_star/**",
+        "tests/import_typeof/**",
+        "tests/importable_global_libdef/**",
+        "tests/importable_global_libdef_new_lib_file/**",
+        "tests/in/**",
+        "tests/include/**",
+        "tests/include_suppressed/**",
+        "tests/include_warnings_client/**",
+        "tests/include_warnings_server/**",
+        "tests/include_without_implictly_include_root/**",
+        "tests/incremental_basic/**",
+        "tests/incremental_cycle/**",
+        "tests/incremental_cycle_break/**",
+        "tests/incremental_cycle_unparsed/**",
+        "tests/incremental_delete/**",
+        "tests/incremental_delete_add_dependent/**",
+        "tests/incremental_delete_lazy/**",
+        "tests/incremental_duplicate_delete/**",
+        "tests/incremental_eval_diff/**",
+        "tests/incremental_eval_property_type/**",
+        "tests/incremental_eval_spread/**",
+        "tests/incremental_haste_all_providers/**",
+        "tests/incremental_haste_duplicate/**",
+        "tests/incremental_haste_excludes/**",
+        "tests/incremental_haste_phantom/.flowconfig",
+        "tests/incremental_haste_phantom/.testconfig",
+        "tests/incremental_haste_phantom/incremental_haste_phantom.exp",
+        "tests/incremental_haste_phantom/test.js",
+        "tests/incremental_haste_phantom/test.sh",
+        "tests/incremental_haste_phantom/tmp/**",
+        "tests/incremental_identical_dep/**",
+        "tests/incremental_lint_ide/**",
+        "tests/incremental_no_implicitly_include_root/**",
+        "tests/incremental_non_flow_move/**",
+        "tests/incremental_package_json_new/**",
+        "tests/incremental_package_json_types/.flowconfig",
+        "tests/incremental_package_json_types/.testconfig",
+        "tests/incremental_package_json_types/incremental_package_json_types.exp",
+        "tests/incremental_package_json_types/test.js",
+        "tests/incremental_package_json_types/test.sh",
+        "tests/incremental_package_json_types/tmp/**",
+        "tests/incremental_path/.flowconfig",
+        "tests/incremental_path/.testconfig",
+        "tests/incremental_path/dir/a.js",
+        "tests/incremental_path/incremental_path.exp",
+        "tests/incremental_path/test.sh",
+        "tests/incremental_rename_file/**",
+        "tests/indeterminate_module_type/**",
+        "tests/indexed_access/**",
+        "tests/indexed_objects/**",
+        "tests/indexer/**",
+        "tests/inexact_to_indexed/**",
+        "tests/init/**",
+        "tests/init_command/**",
+        "tests/init_covariant_props_in_ctor/**",
+        "tests/inlay_hint_command/**",
+        "tests/instanceof/**",
+        "tests/integration/**",
+        "tests/interface/**",
+        "tests/interface_computed_keys/**",
+        "tests/interface_merging_libdefs/**",
+        "tests/interface_merging_libdefs_errors/**",
+        "tests/internal_property_name/**",
+        "tests/internal_slot/**",
+        "tests/internal_type_lint/**",
+        "tests/interpreter_directive/**",
+        "tests/intersection/**",
+        "tests/intersection_subtype_regression/**",
+        "tests/intersection_with_imported_union/**",
+        "tests/invalid_this_arg/**",
+        "tests/invariant/**",
+        "tests/invariant_reachability/**",
+        "tests/issues_11/**",
+        "tests/iter/**",
+        "tests/iterable/**",
+        "tests/iterator_helpers/**",
+        "tests/jest_integration/**",
+        "tests/jest_integration_incremental/**",
+        "tests/js_flow_illegal_shadow/**",
+        "tests/json/**",
+        "tests/json2_output/**",
+        "tests/json_exit/**",
+        "tests/jsx_child_ordering/**",
+        "tests/jsx_intrinsic_missing_instance/**",
+        "tests/jsx_intrinsics.builtin/**",
+        "tests/jsx_intrinsics.custom/**",
+        "tests/jsx_member_expression/**",
+        "tests/jsx_namespaced_name/**",
+        "tests/jsx_pragma/**",
+        "tests/jsx_runtime_pragma/**",
+        "tests/jsx_type_args/**",
+        "tests/key_mirror/**",
+        "tests/keys/**",
+        "tests/keyvalue/**",
+        "tests/last_duplicate_property_wins/**",
+        "tests/lazy_mode_checked_count/**",
+        "tests/lazy_mode_flowconfig/**",
+        "tests/lazy_mode_fs_dependency/.flowconfig",
+        "tests/lazy_mode_fs_dependency/.testconfig",
+        "tests/lazy_mode_fs_dependency/foo.js",
+        "tests/lazy_mode_fs_dependency/lazy_mode_fs_dependency.exp",
+        "tests/lazy_mode_fs_dependency/test.sh",
+        "tests/lazy_mode_fs_dependency/tmp1/**",
+        "tests/lazy_mode_fs_dependency/tmp2/**",
+        "tests/lazy_mode_fs_ide_request/**",
+        "tests/lazy_mode_ide_dependency/**",
+        "tests/lib/**",
+        "tests/lib_ignore_json/**",
+        "tests/lib_interface_extends/**",
+        "tests/lib_interfaces/**",
+        "tests/lib_method_this/**",
+        "tests/libconfig/**",
+        "tests/libdef_conflicting_ignore/**",
+        "tests/libdef_ignored_module/.flowconfig",
+        "tests/libdef_ignored_module/lib/**",
+        "tests/libdef_ignored_module/libdef_ignored_module.exp",
+        "tests/libdef_ignored_module/test.js",
+        "tests/libdef_illegal_import_export/**",
+        "tests/libdef_name_collision_declared_module/**",
+        "tests/libdef_outside_of_root/**",
+        "tests/libdef_override_error_incremental/**",
+        "tests/libdef_parse_error_lazy_mode/**",
+        "tests/libdef_react_types_override/**",
+        "tests/liberr/**",
+        "tests/liberr_parse/**",
+        "tests/libflow_typed/**",
+        "tests/librec/**",
+        "tests/libs_are_implicitly_included/**",
+        "tests/lint_all_warn/**",
+        "tests/lint_cli_add_all/**",
+        "tests/lint_cli_add_single/**",
+        "tests/lint_cli_no_override_all/**",
+        "tests/lint_cli_no_override_none/**",
+        "tests/lint_cli_remove_all/**",
+        "tests/lint_cli_remove_single/**",
+        "tests/lint_comments/**",
+        "tests/lint_comments_incremental/**",
+        "tests/lint_config_late_all/**",
+        "tests/lint_config_shadowed/**",
+        "tests/lint_flag_late_all/**",
+        "tests/lint_flag_redundant/**",
+        "tests/lint_flag_shadowed/**",
+        "tests/lint_node_modules/.flowconfig",
+        "tests/lint_node_modules/foo_modules/**",
+        "tests/lint_node_modules/lint_node_modules.exp",
+        "tests/lint_redundant_comments/**",
+        "tests/lint_severity_cli/**",
+        "tests/lint_severity_json/**",
+        "tests/lint_severity_vim/**",
+        "tests/lint_suppressions_all/**",
+        "tests/lint_suppressions_single/**",
+        "tests/lint_suppressions_with_errors/**",
+        "tests/lint_with_include_suppressed/**",
+        "tests/literal/**",
+        "tests/literal_subtype_checking/**",
+        "tests/local_inference_annotations/**",
+        "tests/locals/**",
+        "tests/logical/**",
+        "tests/loners/**",
+        "tests/long_directory_names/**",
+        "tests/ls/**",
+        "tests/lti_friendly_errors/**",
+        "tests/lti_implicit_instantiation/**",
+        "tests/malformed_code/.flowconfig",
+        "tests/malformed_code/.testconfig",
+        "tests/malformed_code/malformed_code.exp",
+        "tests/malformed_code/test.sh",
+        "tests/mapped_type_utilities/**",
+        "tests/mapped_types/**",
+        "tests/match/**",
+        "tests/match_exhaustive/**",
+        "tests/match_failure/**",
+        "tests/match_perf/**",
+        "tests/match_unsupported/**",
+        "tests/merge_env/**",
+        "tests/meta_property/**",
+        "tests/method_call/**",
+        "tests/method_extraction/**",
+        "tests/method_loc/**",
+        "tests/method_properties/**",
+        "tests/method_type_param_variance_error/**",
+        "tests/method_unbinding/**",
+        "tests/missing_module_generators/**",
+        "tests/mixed_flavors/**",
+        "tests/modified_lib/**",
+        "tests/module_not_found_errors/.flowconfig",
+        "tests/module_not_found_errors/.testconfig",
+        "tests/module_not_found_errors/module_not_found_errors.exp",
+        "tests/module_not_found_errors/src/**",
+        "tests/module_not_found_errors/test.sh",
+        "tests/module_redirect/**",
+        "tests/module_ref/**",
+        "tests/module_system_at_flowtyped_under_haste/**",
+        "tests/module_system_at_flowtyped_under_node/**",
+        "tests/module_system_declaration_dirnames/**",
+        "tests/module_use_strict/**",
+        "tests/modules/**",
+        "tests/more_annot/**",
+        "tests/more_classes/**",
+        "tests/more_generics/**",
+        "tests/more_path/**",
+        "tests/more_react/**",
+        "tests/multiflow/**",
+        "tests/multiflow_with_flowlib/**",
+        "tests/multiplatform/**",
+        "tests/multiplatform_haste/**",
+        "tests/multiplatform_haste_incremental/**",
+        "tests/multiplatform_haste_platform_specific_import_incremental/**",
+        "tests/multiplatform_incremental/**",
+        "tests/multiplatform_off/**",
+        "tests/multiplatform_off_with_platform_extensions/**",
+        "tests/multiplatform_subtyping/**",
+        "tests/multiplatform_supports_platform/**",
+        "tests/multiplatform_web_and_native/**",
+        "tests/multiplatform_web_and_native_non_strict_boundary/**",
+        "tests/munge_underscores_assert_ground_cycle/**",
+        "tests/name_prop/**",
+        "tests/name_redeclaration/**",
+        "tests/name_resolver_switch_exhaustiveness/**",
+        "tests/namespace/**",
+        "tests/natural_inference_object/**",
+        "tests/natural_inference_primitive/**",
+        "tests/natural_inference_primitive_exports/**",
+        "tests/natural_inference_primitive_fbt/**",
+        "tests/new_env/**",
+        "tests/new_env_jsx_pragma/**",
+        "tests/new_generics/**",
+        "tests/new_merge/**",
+        "tests/new_merge_diff/**",
+        "tests/new_merge_fixes/**",
+        "tests/new_merge_unsupported/**",
+        "tests/new_on_interface/**",
+        "tests/new_react/**",
+        "tests/new_refi/**",
+        "tests/new_reordering/**",
+        "tests/new_spread/**",
+        "tests/new_this_typing/**",
+        "tests/no_implicit_override/**",
+        "tests/no_source_error/**",
+        "tests/no_unchecked_indexed_access/**",
+        "tests/node_haste/.flowconfig",
+        "tests/node_haste/.testconfig",
+        "tests/node_haste/client.js",
+        "tests/node_haste/foo/**",
+        "tests/node_haste/md5.js",
+        "tests/node_haste/node_haste.exp",
+        "tests/node_haste/test.sh",
+        "tests/node_haste/ws/**",
+        "tests/node_main_fields/.flowconfig",
+        "tests/node_main_fields/node_main_fields.exp",
+        "tests/node_main_fields/test.js",
+        "tests/node_modules_containers_init/.flowconfig",
+        "tests/node_modules_containers_init/.testconfig",
+        "tests/node_modules_containers_init/node_modules_containers_init.exp",
+        "tests/node_modules_containers_init/test.js",
+        "tests/node_modules_containers_init/test.sh",
+        "tests/node_modules_errors/.flowconfig",
+        "tests/node_modules_errors/main.js",
+        "tests/node_modules_errors/node_modules_errors.exp",
+        "tests/node_modules_with_bad_package_format/.flowconfig",
+        "tests/node_modules_with_bad_package_format/node_modules_with_bad_package_format.exp",
+        "tests/node_modules_with_bad_package_format/test.js",
+        "tests/node_modules_with_symlinks/.testconfig",
+        "tests/node_modules_with_symlinks/nested_inner_target/**",
+        "tests/node_modules_with_symlinks/nested_outer_target/**",
+        "tests/node_modules_with_symlinks/node_modules_with_symlinks.exp",
+        "tests/node_modules_with_symlinks/root/.flowconfig",
+        "tests/node_modules_with_symlinks/root/dir/**",
+        "tests/node_modules_with_symlinks/root/extensionless_link",
+        "tests/node_modules_with_symlinks/root/file_link.js",
+        "tests/node_modules_with_symlinks/root/foo.js",
+        "tests/node_modules_with_symlinks/root/ignored_alias",
+        "tests/node_modules_with_symlinks/root/outer_link",
+        "tests/node_modules_with_symlinks/root/symlink_lib/**",
+        "tests/node_modules_with_symlinks/root/test.sh",
+        "tests/node_modules_with_symlinks/root/util.js",
+        "tests/node_modules_with_symlinks/symlink_lib_outside_root/**",
+        "tests/node_modules_with_symlinks/unwatched/**",
+        "tests/node_modules_without_json/.flowconfig",
+        "tests/node_modules_without_json/node_modules_without_json.exp",
+        "tests/node_modules_without_json/test.js",
+        "tests/node_package_exports/**",
+        "tests/node_package_main_non_flow/.flowconfig",
+        "tests/node_package_main_non_flow/flow/**",
+        "tests/node_package_main_non_flow/main.js",
+        "tests/node_package_main_non_flow/node_package_main_non_flow.exp",
+        "tests/node_tests/.flowconfig",
+        "tests/node_tests/basic/**",
+        "tests/node_tests/basic_file/**",
+        "tests/node_tests/basic_node_modules/foo.js",
+        "tests/node_tests/basic_node_modules_with_path/foo.js",
+        "tests/node_tests/basic_package/**",
+        "tests/node_tests/invalid_package_file/**",
+        "tests/node_tests/jsx/**",
+        "tests/node_tests/jsx_file/**",
+        "tests/node_tests/node_tests.exp",
+        "tests/node_tests/package_file/**",
+        "tests/node_tests/package_file_node_modules/foo/foo.js",
+        "tests/node_tests/path_node_modules/foo.js",
+        "tests/node_tests/path_node_modules_with_short_main/foo.js",
+        "tests/node_tests/path_node_modules_without_main/foo.js",
+        "tests/node_tests/path_package/foo.js",
+        "tests/nonstrict_import/**",
+        "tests/nullable/**",
+        "tests/nullish_coalescing/**",
+        "tests/number_constants/**",
+        "tests/number_lib/**",
+        "tests/numeric_keys/**",
+        "tests/object/**",
+        "tests/object_annot/**",
+        "tests/object_api/**",
+        "tests/object_assign/**",
+        "tests/object_freeze/**",
+        "tests/object_freeze2/**",
+        "tests/object_is/**",
+        "tests/object_kit/**",
+        "tests/object_method/**",
+        "tests/object_prelude/**",
+        "tests/object_type_computed_keys/**",
+        "tests/object_widening/**",
+        "tests/objects/**",
+        "tests/objkit_primitives/**",
+        "tests/op_assignment/**",
+        "tests/opaque_computed_keys/**",
+        "tests/opaque_generics/**",
+        "tests/opaque_libdefs/**",
+        "tests/opaque_operations/**",
+        "tests/opaque_refinements/**",
+        "tests/opaque_subtype/**",
+        "tests/opaque_type_cycle/**",
+        "tests/opaque_type_error/**",
+        "tests/opaque_type_printing/**",
+        "tests/opaque_type_success/**",
+        "tests/opaque_types_and_component_syntax_destructors/**",
+        "tests/optional/**",
+        "tests/optional_chaining/**",
+        "tests/optional_props/**",
+        "tests/optional_union/**",
+        "tests/ordinal_suffix/**",
+        "tests/overload/**",
+        "tests/override/**",
+        "tests/parallelizable_command_cancel_recheck/**",
+        "tests/parse/**",
+        "tests/parse_error_haste/**",
+        "tests/parse_error_node/**",
+        "tests/partial/**",
+        "tests/plsummit/**",
+        "tests/polarity/**",
+        "tests/poly/**",
+        "tests/poly_class_export/**",
+        "tests/poly_fast_path/**",
+        "tests/poly_instantiation_cache_fix/**",
+        "tests/poly_method_conditional/**",
+        "tests/poly_overload/**",
+        "tests/poorly_formed_exports/**",
+        "tests/poorly_formed_exports_config_false/**",
+        "tests/predicates_ignored/**",
+        "tests/prepack_rec/**",
+        "tests/primary_loc/**",
+        "tests/private/**",
+        "tests/private_class_fields/**",
+        "tests/private_class_methods/**",
+        "tests/promises/**",
+        "tests/prop_typos/**",
+        "tests/property_writeonly_variance/**",
+        "tests/props_missing_truncation/**",
+        "tests/proto/**",
+        "tests/provider_havoc/**",
+        "tests/provider_havoc_closure/**",
+        "tests/pure_component/**",
+        "tests/qualified/**",
+        "tests/query/**",
+        "tests/quick_start/**",
+        "tests/quick_start_add_dependency/**",
+        "tests/quick_start_add_dependency_on_cycle/**",
+        "tests/quick_start_check_contents/**",
+        "tests/quick_start_delete_dependency/**",
+        "tests/quick_start_unchecked_dependency/**",
+        "tests/react/**",
+        "tests/react_16_3/**",
+        "tests/react_16_6/**",
+        "tests/react_16_9/**",
+        "tests/react_abstract_component/**",
+        "tests/react_children/**",
+        "tests/react_clone_element/**",
+        "tests/react_component_props/**",
+        "tests/react_component_props_intrinsics/**",
+        "tests/react_experimental/**",
+        "tests/react_functional/**",
+        "tests/react_hocs/**",
+        "tests/react_imports/**",
+        "tests/react_instance/**",
+        "tests/react_jsx/**",
+        "tests/react_jsx_custom_typing/**",
+        "tests/react_jsx_fragments/**",
+        "tests/react_jsx_strict_mode/**",
+        "tests/react_modules/**",
+        "tests/react_no_jsx_intrinsics/**",
+        "tests/react_ref_as_prop/**",
+        "tests/react_refinements/**",
+        "tests/react_rules/**",
+        "tests/react_runtime_automatic/**",
+        "tests/read_only_array_polarity/**",
+        "tests/read_only_map/**",
+        "tests/read_only_object/**",
+        "tests/read_only_set/**",
+        "tests/read_only_weak_map/**",
+        "tests/read_only_weak_set/**",
+        "tests/rec/**",
+        "tests/recheck/**",
+        "tests/recheck_array/**",
+        "tests/recheck_cancel_cast/**",
+        "tests/recheck_cancel_optional_chain/**",
+        "tests/recheck_cancel_unary_arith/**",
+        "tests/recheck_changed_mergebase/**",
+        "tests/recheck_class_id/**",
+        "tests/recheck_commit_deadlock/**",
+        "tests/recheck_empty_string_import/**",
+        "tests/recheck_haste/**",
+        "tests/recheck_opaque_id/**",
+        "tests/recheck_poly_id/**",
+        "tests/recheck_props_id/**",
+        "tests/recheck_remove_flow_pragma/**",
+        "tests/recheck_spread/**",
+        "tests/recheck_strict/**",
+        "tests/recheck_while_full_check_reinit/**",
+        "tests/records/**",
+        "tests/records_option_includes/**",
+        "tests/records_unsupported/**",
+        "tests/recursive_defs/**",
+        "tests/refi/**",
+        "tests/refinements/**",
+        "tests/refinements_match/**",
+        "tests/reflection/**",
+        "tests/regexp/**",
+        "tests/relative_resource_files/**",
+        "tests/relay/**",
+        "tests/relay_integration/**",
+        "tests/relay_integration_esmodules/**",
+        "tests/relay_integration_module_prefix/**",
+        "tests/relay_integration_module_prefix_includes/**",
+        "tests/render_types/**",
+        "tests/require/**",
+        "tests/required/**",
+        "tests/resolved_env/**",
+        "tests/resource_files/**",
+        "tests/resource_files_with_module_name_wrapper/**",
+        "tests/return/**",
+        "tests/return_new/**",
+        "tests/rust_port_async_scope/**",
+        "tests/rust_port_flowset_clear/**",
+        "tests/rust_port_missing_env_entry/**",
+        "tests/rust_port_suppressed_spread_speculation/**",
+        "tests/satisfies/**",
+        "tests/saved_state_builtin_ts_libdef_discovery/**",
+        "tests/saved_state_different_root/**",
+        "tests/saved_state_init_recheck/**",
+        "tests/saved_state_init_recheck_ensure_parsed/**",
+        "tests/saved_state_init_with_lib_changes/**",
+        "tests/saved_state_lazy_init_unknown_libdef/**",
+        "tests/saved_state_no_fallback/**",
+        "tests/saved_state_out_of_root/**",
+        "tests/saved_state_package_json/**",
+        "tests/saved_state_parallel_decompress/**",
+        "tests/saved_state_reinit_direct_serialization/**",
+        "tests/saved_state_reinit_flowconfig_change/**",
+        "tests/saved_state_reinit_git/**",
+        "tests/saved_state_reinit_libdef_change_mergebase/**",
+        "tests/saved_state_reinit_node_modules_containers/**",
+        "tests/saved_state_reinit_upstream_change_git/**",
+        "tests/saved_state_reinit_with_lib_changes/**",
+        "tests/saved_state_reinit_with_libdef_override_errors/**",
+        "tests/saved_state_rejected_stale_file/**",
+        "tests/saved_state_scm_git/**",
+        "tests/saved_state_update_parse_error/**",
+        "tests/saved_state_update_whitespace/**",
+        "tests/saved_state_userland_react_lib/**",
+        "tests/saved_state_warnings/**",
+        "tests/seal/**",
+        "tests/sealed_objects/**",
+        "tests/sealed_tvars/**",
+        "tests/shadow_delete/.flowconfig",
+        "tests/shadow_delete/.testconfig",
+        "tests/shadow_delete/dir/A.js",
+        "tests/shadow_delete/shadow_delete.exp",
+        "tests/shadow_delete/test.sh",
+        "tests/shadowed_exports/**",
+        "tests/shape/**",
+        "tests/shorthand/**",
+        "tests/signature_verification_failure/**",
+        "tests/signature_verification_lazy/**",
+        "tests/simple_arrays/**",
+        "tests/singleton/**",
+        "tests/sketchy_null_check/**",
+        "tests/sketchy_null_default/**",
+        "tests/sketchy_null_strict/**",
+        "tests/sketchy_variants/**",
+        "tests/socket/**",
+        "tests/speculation_argument_overlap/**",
+        "tests/speculation_error_codes/**",
+        "tests/speculation_errors/**",
+        "tests/speculation_errors_all_branches/**",
+        "tests/speculative_cast_in_return_hint/**",
+        "tests/spread/**",
+        "tests/spread_indexers/**",
+        "tests/spread_performance/**",
+        "tests/stacked_subtyping_errors/**",
+        "tests/static_overload/**",
+        "tests/strict/**",
+        "tests/strict_es6_import_export/**",
+        "tests/strict_es6_import_export_config_false/**",
+        "tests/strict_local_mode/**",
+        "tests/strict_mode/**",
+        "tests/strict_requires/**",
+        "tests/string_case_utils/**",
+        "tests/string_literal_keys/**",
+        "tests/string_type_utils/**",
+        "tests/structural_subtyping/**",
+        "tests/subst_cache_collision/**",
+        "tests/super/**",
+        "tests/super_object/**",
+        "tests/suppress/**",
+        "tests/suppress_bad/**",
+        "tests/suppress_default/**",
+        "tests/suppress_focus_check/**",
+        "tests/suppress_incremental/**",
+        "tests/suppress_unused_lazy/**",
+        "tests/suppress_unused_lazy_2/**",
+        "tests/suppress_unused_lazy_3/**",
+        "tests/switch/**",
+        "tests/switch_case_typing/**",
+        "tests/switch_fallthrough/**",
+        "tests/sx_prop/**",
+        "tests/sx_prop_disabled/**",
+        "tests/symbol/**",
+        "tests/symbol_call/**",
+        "tests/symbol_keys/**",
+        "tests/symbol_keys_display/**",
+        "tests/symlink/**",
+        "tests/symlink-tmp-dir/**",
+        "tests/tagged_unions/**",
+        "tests/temp_dir/**",
+        "tests/template/**",
+        "tests/template_literal_types/**",
+        "tests/this/**",
+        "tests/this_annot_no_warnings/**",
+        "tests/this_ctor/**",
+        "tests/this_in_object/**",
+        "tests/this_inference/**",
+        "tests/this_type/**",
+        "tests/this_type_interface_dict_recursion/**",
+        "tests/this_type_ts/**",
+        "tests/this_typing/**",
+        "tests/throw/**",
+        "tests/timeout/**",
+        "tests/traits/**",
+        "tests/truncate_branches/**",
+        "tests/try/**",
+        "tests/ts_builtin_lib_tests/**",
+        "tests/ts_constructor_object_instanceof/**",
+        "tests/ts_declare_global_default/**",
+        "tests/ts_declare_global_errors/**",
+        "tests/ts_declare_global_isolated/**",
+        "tests/ts_declare_global_reinit/**",
+        "tests/ts_enum_type_at_pos/**",
+        "tests/ts_enums/**",
+        "tests/ts_ext/**",
+        "tests/ts_interface_indexer_named_access/**",
+        "tests/ts_lib_latent_ide/**",
+        "tests/ts_lib_latent_reinit/**",
+        "tests/ts_lib_latent_saved_state/**",
+        "tests/ts_method_extraction/**",
+        "tests/ts_method_unbinding/**",
+        "tests/ts_mixed_builtin_strictness/**",
+        "tests/ts_object_proto_recursion/**",
+        "tests/ts_object_type/**",
+        "tests/ts_objects/**",
+        "tests/ts_primitive_as_obj/**",
+        "tests/ts_structural_interface_speculation/**",
+        "tests/ts_suppression/**",
+        "tests/ts_syntax/**",
+        "tests/ts_syntax_allowed/**",
+        "tests/ts_this_param/**",
+        "tests/ts_this_type_utility/**",
+        "tests/ts_type_arg_defaults/**",
+        "tests/ts_type_import_export/**",
+        "tests/ts_variance/**",
+        "tests/tslib_syntax/**",
+        "tests/tslib_syntax_off/**",
+        "tests/tuples/**",
+        "tests/tvars/**",
+        "tests/type_alias_param_variance/**",
+        "tests/type_args_strict/**",
+        "tests/type_at_pos_JSResourceReference/**",
+        "tests/type_at_pos_any/**",
+        "tests/type_at_pos_array_heads/**",
+        "tests/type_at_pos_class/**",
+        "tests/type_at_pos_comp_concr_loc_to_aloc/**",
+        "tests/type_at_pos_const_literals/**",
+        "tests/type_at_pos_enums/**",
+        "tests/type_at_pos_evaluate/**",
+        "tests/type_at_pos_exports/**",
+        "tests/type_at_pos_expression/**",
+        "tests/type_at_pos_function/**",
+        "tests/type_at_pos_imported_as/**",
+        "tests/type_at_pos_imports/**",
+        "tests/type_at_pos_indexed_access/**",
+        "tests/type_at_pos_instanceof_union_disjoint/**",
+        "tests/type_at_pos_interface/**",
+        "tests/type_at_pos_jsdoc/**",
+        "tests/type_at_pos_json_pretty/**",
+        "tests/type_at_pos_jsx/**",
+        "tests/type_at_pos_match_pattern/**",
+        "tests/type_at_pos_name_already_bound/**",
+        "tests/type_at_pos_namespace/**",
+        "tests/type_at_pos_no_implicitly_include_root/**",
+        "tests/type_at_pos_object_freeze/**",
+        "tests/type_at_pos_pattern/**",
+        "tests/type_at_pos_provider/**",
+        "tests/type_at_pos_react/**",
+        "tests/type_at_pos_reactscript/**",
+        "tests/type_at_pos_refinement/**",
+        "tests/type_at_pos_specialize_callee/**",
+        "tests/type_at_pos_statement/**",
+        "tests/type_at_pos_template_literal/**",
+        "tests/type_at_pos_type_destructors/**",
+        "tests/type_at_pos_type_guards/**",
+        "tests/type_at_pos_types/**",
+        "tests/type_destructors/**",
+        "tests/type_destructors_lti_ready/**",
+        "tests/type_guards/**",
+        "tests/type_of_name/**",
+        "tests/type_only_vars/**",
+        "tests/type_param_bounds/**",
+        "tests/type_param_defaults/**",
+        "tests/type_param_forward_references/**",
+        "tests/type_param_scope/**",
+        "tests/type_param_variance/**",
+        "tests/type_param_variance2/**",
+        "tests/type_printer/**",
+        "tests/type_sig_merge/**",
+        "tests/type_spread/**",
+        "tests/type_token_unification/**",
+        "tests/type_visitor/**",
+        "tests/typeapp_call/**",
+        "tests/typeapp_import/**",
+        "tests/typeapp_jsx_hint/**",
+        "tests/typeapp_opt/**",
+        "tests/typeapp_perf/**",
+        "tests/typeapp_termination/**",
+        "tests/typecast/**",
+        "tests/typecheck_contents_error_suppression/**",
+        "tests/typecheck_contents_lint_severities/**",
+        "tests/typed_array_backing_buffer/**",
+        "tests/typeof/**",
+        "tests/typeof_function_callable/**",
+        "tests/types_first/**",
+        "tests/types_first_dep_graph_change/.flowconfig",
+        "tests/types_first_dep_graph_change/.testconfig",
+        "tests/types_first_dep_graph_change/test/test.js",
+        "tests/types_first_dep_graph_change/test.sh",
+        "tests/types_first_dep_graph_change/types_first_dep_graph_change.exp",
+        "tests/types_first_dependents/**",
+        "tests/types_first_destructuring/**",
+        "tests/types_first_exports/**",
+        "tests/types_first_function_statics/**",
+        "tests/types_first_function_statics2/**",
+        "tests/types_first_function_statics3/**",
+        "tests/types_first_function_statics4/**",
+        "tests/types_first_haste_dep_graph_change/**",
+        "tests/types_first_keyMirror/**",
+        "tests/types_first_lazy/**",
+        "tests/types_first_lazy_suppressed/**",
+        "tests/types_first_let_bound_reassignment/**",
+        "tests/types_first_munge_underscores/**",
+        "tests/types_first_object_spread/**",
+        "tests/types_first_object_spread2/**",
+        "tests/types_first_opaque_types_cycle/**",
+        "tests/types_first_parse_error/**",
+        "tests/types_first_perf/**",
+        "tests/types_first_reasons/**",
+        "tests/types_first_recheck_opts_regression/**",
+        "tests/types_first_refresh_errors/**",
+        "tests/types_first_signature_construction/**",
+        "tests/types_first_unary/**",
+        "tests/typescript_library_definition_support/.flowconfig",
+        "tests/typescript_library_definition_support/at_types.js",
+        "tests/typescript_library_definition_support/global-looking-use.js",
+        "tests/typescript_library_definition_support/global-looking.d.ts",
+        "tests/typescript_library_definition_support/test.js",
+        "tests/typescript_library_definition_support/typescript_library_definition_support.exp",
+        "tests/typescript_namespaces/**",
+        "tests/unary/**",
+        "tests/unchecked_haste_module_vs_lib/**",
+        "tests/unchecked_node_module_vs_lib/.flowconfig",
+        "tests/unchecked_node_module_vs_lib/dep1.js",
+        "tests/unchecked_node_module_vs_lib/dep2.js",
+        "tests/unchecked_node_module_vs_lib/lib.js",
+        "tests/unchecked_node_module_vs_lib/test.js",
+        "tests/unchecked_node_module_vs_lib/unchecked_node_module_vs_lib.exp",
+        "tests/unclear_type/**",
+        "tests/undefined/**",
+        "tests/unicode/**",
+        "tests/uninitialized_instance_property/**",
+        "tests/union/**",
+        "tests/union_circular_imports/**",
+        "tests/union_enum_representative/**",
+        "tests/union_fast_path/**",
+        "tests/union_intersection/**",
+        "tests/union_maybe_perf/**",
+        "tests/union_new/**",
+        "tests/unknown_props_in_conditionals/**",
+        "tests/unreachable/**",
+        "tests/unsafe_getters_setters/**",
+        "tests/unsupported_spread_args/**",
+        "tests/untyped_import/**",
+        "tests/untyped_type_import/**",
+        "tests/unused_function_args/**",
+        "tests/unused_promise/**",
+        "tests/use_unknown_in_catch_variables/**",
+        "tests/valid_variables/**",
+        "tests/value/**",
+        "tests/value_as_type/**",
+        "tests/values/**",
+        "tests/variance/**",
+        "tests/variance_merging_ts/**",
+        "tests/version/**",
+        "tests/vim_emacs_errors/**",
+        "tests/wait_for_recheck_false/**",
+        "tests/wait_for_recheck_false_timeout/**",
+        "tests/wait_for_recheck_true/**",
+        "tests/wait_for_recheck_true_timeout/**",
+        "tests/warning_exit_code/**",
+        "tests/website_docs_flow_check/**",
+        "tests/website_flow_check/**",
+        "tests/while/**",
+        "tests/with/**",
+        "tests/workspaces_test/.flowconfig",
+        "tests/workspaces_test/bar/**",
+        "tests/workspaces_test/foo/index.js",
+        "tests/workspaces_test/foo/package.json",
+        "tests/workspaces_test/package.json",
+        "tests/workspaces_test/workspaces_test.exp",
+        "tests/x/**",
+        "tests/yield/**",
+        "tool",
+        "tslib/**",
+        "yarn.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/babel-plugin-syntax-flow-parser/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/babel-plugin-syntax-flow-parser."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/babel-plugin-transform-flow-enums/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/babel-plugin-transform-flow-enums."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/eslint-plugin-fb-flow/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/eslint-plugin-fb-flow."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-api-translator/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-api-translator."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-bin/.gitignore",
+        "packages/flow-bin/Makefile",
+        "packages/flow-bin/cli.js",
+        "packages/flow-bin/index.js",
+        "packages/flow-bin/index.js.flow",
+        "packages/flow-bin/license",
+        "packages/flow-bin/package.json",
+        "packages/flow-bin/readme.md",
+        "packages/flow-bin/signing.pem",
+        "packages/flow-bin/test.js"
+      ],
+      "text": "MIT License\n\nFor flow-bin software\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2015-present, Facebook, Inc., MIT license (license), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-bin."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-enums-runtime/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-enums-runtime."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-eslint/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-eslint."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-remove-types/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-remove-types."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/flow-transform/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates., MIT license (LICENSE), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/packages/flow-transform."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "src/parser/test/esprima/**"
+      ],
+      "text": "Copyright (c) jQuery Foundation, Inc. and Contributors, All Rights Reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) jQuery Foundation, Inc. and Contributors, All Rights Reserved., BSD-2-Clause license (LICENSE.BSD), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/src/parser/test/esprima."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tests/config_declarations_react/node_modules/react/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of react, ISC license (declared in package.json), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/tests/config_declarations_react/node_modules/react."
+    },
+    {
+      "license": "CC-BY-4.0",
+      "paths": [
+        "website/.flowconfig",
+        "website/.flowconfig.snippets",
+        "website/.gitignore",
+        "website/Gemfile",
+        "website/Gemfile.lock",
+        "website/LICENSE-DOCUMENTATION",
+        "website/README.md",
+        "website/babel.config.js",
+        "website/blog/**",
+        "website/components/**",
+        "website/docs/**",
+        "website/docusaurus.config.js",
+        "website/flow-typed/**",
+        "website/flow-typed.config.json",
+        "website/libs/**",
+        "website/package.json",
+        "website/sidebars.js",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/CNAME",
+        "website/static/flow/**",
+        "website/static/img/flow-rust-port.svg",
+        "website/static/img/icon-github.svg",
+        "website/static/img/icon-x.svg",
+        "website/static/img/logo.svg",
+        "website/static/img/logomark.svg",
+        "website/tests/**",
+        "website/yarn.lock"
+      ],
+      "text": "Attribution 4.0 International\n\n=======================================================================\n\nCreative Commons Corporation (\"Creative Commons\") is not a law firm and\ndoes not provide legal services or legal advice. Distribution of\nCreative Commons public licenses does not create a lawyer-client or\nother relationship. Creative Commons makes its licenses and related\ninformation available on an \"as-is\" basis. Creative Commons gives no\nwarranties regarding its licenses, any material licensed under their\nterms and conditions, or any related information. Creative Commons\ndisclaims all liability for damages resulting from their use to the\nfullest extent possible.\n\nUsing Creative Commons Public Licenses\n\nCreative Commons public licenses provide a standard set of terms and\nconditions that creators and other rights holders may use to share\noriginal works of authorship and other material subject to copyright\nand certain other rights specified in the public license below. The\nfollowing considerations are for informational purposes only, are not\nexhaustive, and do not form part of our licenses.\n\n     Considerations for licensors: Our public licenses are\n     intended for use by those authorized to give the public\n     permission to use material in ways otherwise restricted by\n     copyright and certain other rights. Our licenses are\n     irrevocable. Licensors should read and understand the terms\n     and conditions of the license they choose before applying it.\n     Licensors should also secure all rights necessary before\n     applying our licenses so that the public can reuse the\n     material as expected. Licensors should clearly mark any\n     material not subject to the license. This includes other CC-\n     licensed material, or material used under an exception or\n     limitation to copyright. More considerations for licensors:\n  wiki.creativecommons.org/Considerations_for_licensors\n\n     Considerations for the public: By using one of our public\n     licenses, a licensor grants the public permission to use the\n     licensed material under specified terms and conditions. If\n     the licensor's permission is not necessary for any reason--for\n     example, because of any applicable exception or limitation to\n     copyright--then that use is not regulated by the license. Our\n     licenses grant only permissions under copyright and certain\n     other rights that a licensor has authority to grant. Use of\n     the licensed material may still be restricted for other\n     reasons, including because others have copyright or other\n     rights in the material. A licensor may make special requests,\n     such as asking that all changes be marked or described.\n     Although not required by our licenses, you are encouraged to\n     respect those requests where reasonable. More_considerations\n     for the public:\n  wiki.creativecommons.org/Considerations_for_licensees\n\n=======================================================================\n\nCreative Commons Attribution 4.0 International Public License\n\nBy exercising the Licensed Rights (defined below), You accept and agree\nto be bound by the terms and conditions of this Creative Commons\nAttribution 4.0 International Public License (\"Public License\"). To the\nextent this Public License may be interpreted as a contract, You are\ngranted the Licensed Rights in consideration of Your acceptance of\nthese terms and conditions, and the Licensor grants You such rights in\nconsideration of benefits the Licensor receives from making the\nLicensed Material available under these terms and conditions.\n\nSection 1 -- Definitions.\n\n  a. Adapted Material means material subject to Copyright and Similar\n     Rights that is derived from or based upon the Licensed Material\n     and in which the Licensed Material is translated, altered,\n     arranged, transformed, or otherwise modified in a manner requiring\n     permission under the Copyright and Similar Rights held by the\n     Licensor. For purposes of this Public License, where the Licensed\n     Material is a musical work, performance, or sound recording,\n     Adapted Material is always produced where the Licensed Material is\n     synched in timed relation with a moving image.\n\nb. Adapter's License means the license You apply to Your Copyright\n   and Similar Rights in Your contributions to Adapted Material in\n   accordance with the terms and conditions of this Public License.\n\nc. Copyright and Similar Rights means copyright and/or similar rights\n   closely related to copyright including, without limitation,\n   performance, broadcast, sound recording, and Sui Generis Database\n   Rights, without regard to how the rights are labeled or\n   categorized. For purposes of this Public License, the rights\n   specified in Section 2(b)(1)-(2) are not Copyright and Similar\n   Rights.\n\nd. Effective Technological Measures means those measures that, in the\n   absence of proper authority, may not be circumvented under laws\n   fulfilling obligations under Article 11 of the WIPO Copyright\n   Treaty adopted on December 20, 1996, and/or similar international\n   agreements.\n\ne. Exceptions and Limitations means fair use, fair dealing, and/or\n   any other exception or limitation to Copyright and Similar Rights\n   that applies to Your use of the Licensed Material.\n\nf. Licensed Material means the artistic or literary work, database,\n   or other material to which the Licensor applied this Public\n   License.\n\ng. Licensed Rights means the rights granted to You subject to the\n   terms and conditions of this Public License, which are limited to\n   all Copyright and Similar Rights that apply to Your use of the\n   Licensed Material and that the Licensor has authority to license.\n\nh. Licensor means the individual(s) or entity(ies) granting rights\n   under this Public License.\n\ni. Share means to provide material to the public by any means or\n   process that requires permission under the Licensed Rights, such\n   as reproduction, public display, public performance, distribution,\n   dissemination, communication, or importation, and to make material\n   available to the public including in ways that members of the\n   public may access the material from a place and at a time\n   individually chosen by them.\n\nj. Sui Generis Database Rights means rights other than copyright\n   resulting from Directive 96/9/EC of the European Parliament and of\n   the Council of 11 March 1996 on the legal protection of databases,\n   as amended and/or succeeded, as well as other essentially\n   equivalent rights anywhere in the world.\n\nk. You means the individual or entity exercising the Licensed Rights\n   under this Public License. Your has a corresponding meaning.\n\nSection 2 -- Scope.\n\na. License grant.\n\n     1. Subject to the terms and conditions of this Public License,\n        the Licensor hereby grants You a worldwide, royalty-free,\n        non-sublicensable, non-exclusive, irrevocable license to\n        exercise the Licensed Rights in the Licensed Material to:\n\n          a. reproduce and Share the Licensed Material, in whole or\n             in part; and\n\n          b. produce, reproduce, and Share Adapted Material.\n\n     2. Exceptions and Limitations. For the avoidance of doubt, where\n        Exceptions and Limitations apply to Your use, this Public\n        License does not apply, and You do not need to comply with\n        its terms and conditions.\n\n     3. Term. The term of this Public License is specified in Section\n        6(a).\n\n     4. Media and formats; technical modifications allowed. The\n        Licensor authorizes You to exercise the Licensed Rights in\n        all media and formats whether now known or hereafter created,\n        and to make technical modifications necessary to do so. The\n        Licensor waives and/or agrees not to assert any right or\n        authority to forbid You from making technical modifications\n        necessary to exercise the Licensed Rights, including\n        technical modifications necessary to circumvent Effective\n        Technological Measures. For purposes of this Public License,\n        simply making modifications authorized by this Section 2(a)\n        (4) never produces Adapted Material.\n\n     5. Downstream recipients.\n\n          a. Offer from the Licensor -- Licensed Material. Every\n             recipient of the Licensed Material automatically\n             receives an offer from the Licensor to exercise the\n             Licensed Rights under the terms and conditions of this\n             Public License.\n\n          b. No downstream restrictions. You may not offer or impose\n             any additional or different terms or conditions on, or\n             apply any Effective Technological Measures to, the\n             Licensed Material if doing so restricts exercise of the\n             Licensed Rights by any recipient of the Licensed\n             Material.\n\n     6. No endorsement. Nothing in this Public License constitutes or\n        may be construed as permission to assert or imply that You\n        are, or that Your use of the Licensed Material is, connected\n        with, or sponsored, endorsed, or granted official status by,\n        the Licensor or others designated to receive attribution as\n        provided in Section 3(a)(1)(A)(i).\n\nb. Other rights.\n\n     1. Moral rights, such as the right of integrity, are not\n        licensed under this Public License, nor are publicity,\n        privacy, and/or other similar personality rights; however, to\n        the extent possible, the Licensor waives and/or agrees not to\n        assert any such rights held by the Licensor to the limited\n        extent necessary to allow You to exercise the Licensed\n        Rights, but not otherwise.\n\n     2. Patent and trademark rights are not licensed under this\n        Public License.\n\n     3. To the extent possible, the Licensor waives any right to\n        collect royalties from You for the exercise of the Licensed\n        Rights, whether directly or through a collecting society\n        under any voluntary or waivable statutory or compulsory\n        licensing scheme. In all other cases the Licensor expressly\n        reserves any right to collect such royalties.\n\nSection 3 -- License Conditions.\n\nYour exercise of the Licensed Rights is expressly made subject to the\nfollowing conditions.\n\na. Attribution.\n\n     1. If You Share the Licensed Material (including in modified\n        form), You must:\n\n          a. retain the following if it is supplied by the Licensor\n             with the Licensed Material:\n\n               i. identification of the creator(s) of the Licensed\n                  Material and any others designated to receive\n                  attribution, in any reasonable manner requested by\n                  the Licensor (including by pseudonym if\n                  designated);\n\n              ii. a copyright notice;\n\n             iii. a notice that refers to this Public License;\n\n              iv. a notice that refers to the disclaimer of\n                  warranties;\n\n               v. a URI or hyperlink to the Licensed Material to the\n                  extent reasonably practicable;\n\n          b. indicate if You modified the Licensed Material and\n             retain an indication of any previous modifications; and\n\n          c. indicate the Licensed Material is licensed under this\n             Public License, and include the text of, or the URI or\n             hyperlink to, this Public License.\n\n     2. You may satisfy the conditions in Section 3(a)(1) in any\n        reasonable manner based on the medium, means, and context in\n        which You Share the Licensed Material. For example, it may be\n        reasonable to satisfy the conditions by providing a URI or\n        hyperlink to a resource that includes the required\n        information.\n\n     3. If requested by the Licensor, You must remove any of the\n        information required by Section 3(a)(1)(A) to the extent\n        reasonably practicable.\n\n     4. If You Share Adapted Material You produce, the Adapter's\n        License You apply must not prevent recipients of the Adapted\n        Material from complying with this Public License.\n\nSection 4 -- Sui Generis Database Rights.\n\nWhere the Licensed Rights include Sui Generis Database Rights that\napply to Your use of the Licensed Material:\n\na. for the avoidance of doubt, Section 2(a)(1) grants You the right\n   to extract, reuse, reproduce, and Share all or a substantial\n   portion of the contents of the database;\n\nb. if You include all or a substantial portion of the database\n   contents in a database in which You have Sui Generis Database\n   Rights, then the database in which You have Sui Generis Database\n   Rights (but not its individual contents) is Adapted Material; and\n\nc. You must comply with the conditions in Section 3(a) if You Share\n   all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not\nreplace Your obligations under this Public License where the Licensed\nRights include other Copyright and Similar Rights.\n\nSection 5 -- Disclaimer of Warranties and Limitation of Liability.\n\na. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE\n   EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS\n   AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF\n   ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,\n   IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,\n   WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR\n   PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,\n   ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT\n   KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT\n   ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\n\nb. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE\n   TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,\n   NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,\n   INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,\n   COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR\n   USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN\n   ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR\n   DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR\n   IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\n\nc. The disclaimer of warranties and limitation of liability provided\n   above shall be interpreted in a manner that, to the extent\n   possible, most closely approximates an absolute disclaimer and\n   waiver of all liability.\n\nSection 6 -- Term and Termination.\n\na. This Public License applies for the term of the Copyright and\n   Similar Rights licensed here. However, if You fail to comply with\n   this Public License, then Your rights under this Public License\n   terminate automatically.\n\nb. Where Your right to use the Licensed Material has terminated under\n   Section 6(a), it reinstates:\n\n     1. automatically as of the date the violation is cured, provided\n        it is cured within 30 days of Your discovery of the\n        violation; or\n\n     2. upon express reinstatement by the Licensor.\n\n   For the avoidance of doubt, this Section 6(b) does not affect any\n   right the Licensor may have to seek remedies for Your violations\n   of this Public License.\n\nc. For the avoidance of doubt, the Licensor may also offer the\n   Licensed Material under separate terms or conditions or stop\n   distributing the Licensed Material at any time; however, doing so\n   will not terminate this Public License.\n\nd. Sections 1, 5, 6, 7, and 8 survive termination of this Public\n   License.\n\nSection 7 -- Other Terms and Conditions.\n\na. The Licensor shall not be bound by any additional or different\n   terms or conditions communicated by You unless expressly agreed.\n\nb. Any arrangements, understandings, or agreements regarding the\n   Licensed Material not stated herein are separate from and\n   independent of the terms and conditions of this Public License.\n\nSection 8 -- Interpretation.\n\na. For the avoidance of doubt, this Public License does not, and\n   shall not be interpreted to, reduce, limit, restrict, or impose\n   conditions on any use of the Licensed Material that could lawfully\n   be made without permission under this Public License.\n\nb. To the extent possible, if any provision of this Public License is\n   deemed unenforceable, it shall be automatically reformed to the\n   minimum extent necessary to make it enforceable. If the provision\n   cannot be reformed, it shall be severed from this Public License\n   without affecting the enforceability of the remaining terms and\n   conditions.\n\nc. No term or condition of this Public License will be waived and no\n   failure to comply consented to unless expressly agreed to by the\n   Licensor.\n\nd. Nothing in this Public License constitutes or may be interpreted\n   as a limitation upon, or waiver of, any privileges and immunities\n   that apply to the Licensor or You, including from the legal\n   processes of any jurisdiction or authority.\n\n=======================================================================\n\nCreative Commons is not a party to its public licenses.\nNotwithstanding, Creative Commons may elect to apply one of its public\nlicenses to material it publishes and in those instances will be\nconsidered the \"Licensor.\" Except for the limited purpose of indicating\nthat material is shared under a Creative Commons public license or as\notherwise permitted by the Creative Commons policies published at\ncreativecommons.org/policies, Creative Commons does not authorize the\nuse of the trademark \"Creative Commons\" or any other trademark or logo\nof Creative Commons without its prior written consent including,\nwithout limitation, in connection with any unauthorized modifications\nto any of its public licenses or any other arrangements,\nunderstandings, or agreements concerning use of licensed material. For\nthe avoidance of doubt, this paragraph does not form part of the public\nlicenses.\n\nCreative Commons may be contacted at creativecommons.org.\n",
+      "attribution": "the authors of facebook/flow (website) (the license file names no copyright line), CC-BY-4.0 license (LICENSE-DOCUMENTATION), https://github.com/facebook/flow/tree/49e5096e9abeebb70d1b3b78ab688ae3502c60fb/website."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0_pct_ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0_pct_no_unchecked_indexed_access"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.100_pct_no_unchecked_indexed_access"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.BSD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aaa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.after"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bad_group_name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bad_rollout_name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bbb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.duplicate_group_names"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.duplicate_rollout_names"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.es6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fixed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fixture"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.flow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gabe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ignored"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.js_"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "packages/babel-plugin-transform-flow-enums/yarn.lock",
+        "packages/eslint-plugin-fb-flow/yarn.lock",
+        "packages/flow-enums-runtime/yarn.lock",
+        "packages/flow-for-vscode/yarn.lock",
+        "packages/flow-parser/yarn.lock",
+        "packages/flow-upgrade/yarn.lock",
+        "packages/scripts/bootstrap/yarn.lock",
+        "packages/yarn.lock",
+        "website/Gemfile.lock",
+        "website/yarn.lock",
+        "yarn.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.modified"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.munge_underscores_true"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pct_sum_too_high"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pct_sum_too_low"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.shot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.skip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snippets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stdin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unknown_group"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unknown_rollout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.with_new_dependency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.with_parse_error"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zzz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nolint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ocamlformat-ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.rgignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.spelling-allowlist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.testconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vscodeignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/APACHE_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ESLINT_LICENCE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-DOCUMENTATION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PRETTIER_LICENCE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TYPESCRIPT_ESLINT_SCOPE_MANAGER_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_all_set_to_true"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_autoimports_false"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_component_syntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_haste_node_modules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_lazy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_match"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_ranked"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_require_min_chars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_ts_syntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_ts_utility_syntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_with_dir_ignores"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flowconfig_with_ignores"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bash-completion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure-flow"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/error_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flow-node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flow-remove-types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/haste_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/include_warnings_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/node_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/node_flowconfig_with_main_field"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/other_flowconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saved_state_file_changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tool"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/warn_flowconfig"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

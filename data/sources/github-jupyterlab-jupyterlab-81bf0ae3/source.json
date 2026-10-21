@@ -1,0 +1,980 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/jupyterlab/jupyterlab",
+  "revision": "5d3ae70270ffd602eac1be77ca24ed7a88ad518a",
+  "checksum": "sha256:7bc683b0e6425353e9d21962ba12223fd93b55b1a3c55dd2339c8241dec44502",
+  "extract": {
+    "exclude": [
+      ".github/workflows/**",
+      "docs/source/_static/logo-icon.png",
+      "docs/source/_templates/**",
+      "docs/source/developer/debugger_launch_configuration.png",
+      "docs/source/developer/debugger_protocol_diagram.png",
+      "docs/source/developer/debugger_vscode_start.png",
+      "docs/source/developer/prep_language_packs.png",
+      "docs/source/extension/images/extension_migration_dependencies_debugger.png",
+      "docs/source/extension/images/extension_migration_dependencies_shortcuts.png",
+      "docs/source/extension/images/extension_migration_session.png",
+      "docs/source/extension/images/extension_tutorial_complete.png",
+      "docs/source/extension/images/extension_tutorial_empty.png",
+      "docs/source/extension/images/extension_tutorial_single.png",
+      "docs/source/extension/images/filebrowser_example.png",
+      "docs/source/extension/images/filebrowser_source.png",
+      "docs/source/getting_started/changelog_assets/**",
+      "docs/source/getting_started/changelog_celltags.png",
+      "docs/source/getting_started/changelog_fileinfo.png",
+      "docs/source/getting_started/changelog_restartrunallbutton.png",
+      "docs/source/getting_started/changelog_searchoutput-fs8.png",
+      "docs/source/getting_started/changelog_searchoutput.png",
+      "docs/source/getting_started/find.png",
+      "docs/source/getting_started/statusbar.png",
+      "docs/source/images/**",
+      "docs/source/user/images/**",
+      "examples/app/example.spec.ts-snapshots/**",
+      "examples/app/jupyter.png",
+      "examples/cell/example.spec.ts-snapshots/**",
+      "examples/console/example.spec.ts-snapshots/**",
+      "examples/console/jupyter.png",
+      "examples/federated/example.spec.ts-snapshots/**",
+      "examples/federated/jupyter.png",
+      "examples/filebrowser/example.spec.ts-snapshots/**",
+      "examples/notebook/example.spec.ts-snapshots/**",
+      "examples/notebook/jupyter.png",
+      "examples/terminal/example.spec.ts-snapshots/**",
+      "galata/test/benchmark/notebook.spec.ts-snapshots/**",
+      "galata/test/documentation/completer.test.ts-snapshots/**",
+      "galata/test/documentation/custom_css.test.ts-snapshots/**",
+      "galata/test/documentation/customization.test.ts-snapshots/**",
+      "galata/test/documentation/data/jupyter.png",
+      "galata/test/documentation/debugger.test.ts-snapshots/**",
+      "galata/test/documentation/export_notebook.test.ts-snapshots/**",
+      "galata/test/documentation/extension_manager.test.ts-snapshots/**",
+      "galata/test/documentation/general.test.ts-snapshots/**",
+      "galata/test/documentation/internationalization.test.ts-snapshots/**",
+      "galata/test/documentation/overview.test.ts-snapshots/**",
+      "galata/test/documentation/plugin_manager.test.ts-snapshots/**",
+      "galata/test/documentation/workspaces.test.ts-snapshots/**",
+      "galata/test/galata/notebook.spec.ts-snapshots/**",
+      "galata/test/galata/notebooks/jupyter.png",
+      "galata/test/galata/upload/sub_folder/upload_image.png",
+      "galata/test/galata/upload/upload_image.png",
+      "galata/test/jupyterlab/breadcrumbs-snapshot.test.ts-snapshots/**",
+      "galata/test/jupyterlab/cells.test.ts-snapshots/**",
+      "galata/test/jupyterlab/codemirror.test.ts-snapshots/**",
+      "galata/test/jupyterlab/collapsible-headings.test.ts-snapshots/**",
+      "galata/test/jupyterlab/completer.test.ts-snapshots/**",
+      "galata/test/jupyterlab/contextmenu.test.ts-snapshots/**",
+      "galata/test/jupyterlab/csvviewer.test.ts-snapshots/**",
+      "galata/test/jupyterlab/debugger.test.ts-snapshots/**",
+      "galata/test/jupyterlab/file-search.test.ts-snapshots/**",
+      "galata/test/jupyterlab/general.test.ts-snapshots/**",
+      "galata/test/jupyterlab/history.test.ts-snapshots/**",
+      "galata/test/jupyterlab/inline-completer.test.ts-snapshots/**",
+      "galata/test/jupyterlab/launcher.test.ts-snapshots/**",
+      "galata/test/jupyterlab/menus.test.ts-snapshots/**",
+      "galata/test/jupyterlab/metadataform.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-create.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-edit.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-footer.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-markdown.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-mermaid-diagrams.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-mobile.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-replace.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-run-mermaid.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-run-vega.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-run.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-search.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-statusbar.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebook-toolbar.test.ts-snapshots/**",
+      "galata/test/jupyterlab/notebooks/WidgetArch.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-accent-action-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-center-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-default-action-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-default-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-error-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-in-progress-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-info-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-link-action-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-success-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-warn-action-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-warning-jupyterlab-linux.png",
+      "galata/test/jupyterlab/notification.test.ts-snapshots/notification-with-actions-jupyterlab-linux.png",
+      "galata/test/jupyterlab/output-scrolling.test.ts-snapshots/**",
+      "galata/test/jupyterlab/outputarea-stdin.test.ts-snapshots/**",
+      "galata/test/jupyterlab/print.test.ts-snapshots/**",
+      "galata/test/jupyterlab/readonly.test.ts-snapshots/**",
+      "galata/test/jupyterlab/settings.test.ts-snapshots/**",
+      "galata/test/jupyterlab/sidebars.test.ts-snapshots/**",
+      "galata/test/jupyterlab/terminal.test.ts-snapshots/**",
+      "galata/test/jupyterlab/texteditor.test.ts-snapshots/**",
+      "galata/test/jupyterlab/toc-running.test.ts-snapshots/**",
+      "galata/test/jupyterlab/toc-scrolling.test.ts-snapshots/**",
+      "galata/test/jupyterlab/toc.test.ts-snapshots/**",
+      "galata/test/jupyterlab/workspace.test.ts-snapshots/**",
+      "packages/extensionmanager-extension/examples/listings/jupyter.png",
+      "packages/notebook/fonts/icomoon.eot",
+      "packages/notebook/fonts/icomoon.ttf",
+      "packages/notebook/fonts/icomoon.woff",
+      "packages/services/architecture.png",
+      "packages/ui-components/style/icons/licenses/**"
+    ]
+  },
+  "history": {
+    "since": "e9f67ae612639037f6e19ef43d71ce497e0efa6b"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2015-2026 Project Jupyter Contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/jupyterlab/jupyterlab: Copyright (c) 2015-2026 Project Jupyter Contributors, BSD-3-Clause license (LICENSE), https://github.com/jupyterlab/jupyterlab."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".bumpversion.cfg",
+        ".cleanignore",
+        ".codespellignore",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/codeql/**",
+        ".github/dependabot.yml",
+        ".github/jupyterlab-probot.yml",
+        ".github/labeler.yml",
+        ".github/openssf-scorecard.yml",
+        ".github/pull_request_template.md",
+        ".gitignore",
+        ".licenserc.yaml",
+        ".meeseeksdev.yml",
+        ".pre-commit-config.yaml",
+        ".prettierignore",
+        ".prettierrc",
+        ".readthedocs.yml",
+        ".stylelintignore",
+        ".stylelintrc.yaml",
+        ".vscode/**",
+        ".yarnrc.yml",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "CORPORATE.md",
+        "LICENSE",
+        "README.md",
+        "RELEASE.md",
+        "binder/**",
+        "buildapi.py",
+        "buildutils/**",
+        "clean.py",
+        "conftest.py",
+        "design/**",
+        "dev_mode/**",
+        "docker/**",
+        "docs/Makefile",
+        "docs/make.bat",
+        "docs/source/_ext/**",
+        "docs/source/_static/css/**",
+        "docs/source/_static/js/**",
+        "docs/source/_static/jupyter_logo.svg",
+        "docs/source/_static/logo-rectangle-dark.svg",
+        "docs/source/_static/logo-rectangle.svg",
+        "docs/source/_static/switcher.json",
+        "docs/source/conf.py",
+        "docs/source/developer/accessibility.md",
+        "docs/source/developer/api.md",
+        "docs/source/developer/contributing.md",
+        "docs/source/developer/css.md",
+        "docs/source/developer/internationalization.md",
+        "docs/source/developer/patterns.md",
+        "docs/source/developer/performance.md",
+        "docs/source/developer/repo.md",
+        "docs/source/developer/security.md",
+        "docs/source/extension/components.md",
+        "docs/source/extension/documents.md",
+        "docs/source/extension/extension_dev.md",
+        "docs/source/extension/extension_migration.md",
+        "docs/source/extension/extension_multiple_ui.md",
+        "docs/source/extension/extension_points.md",
+        "docs/source/extension/extension_tutorial.md",
+        "docs/source/extension/identity.md",
+        "docs/source/extension/images/active-markdown-cell-dom.svg",
+        "docs/source/extension/images/code-cell-dom.svg",
+        "docs/source/extension/images/rendered-markdown-cell-dom.svg",
+        "docs/source/extension/internationalization.md",
+        "docs/source/extension/notebook.md",
+        "docs/source/extension/ui_components.md",
+        "docs/source/extension/ui_helpers.md",
+        "docs/source/extension/virtualdom.create.tsx",
+        "docs/source/extension/virtualdom.md",
+        "docs/source/extension/virtualdom.reactwidget.tsx",
+        "docs/source/extension/virtualdom.usesignal.tsx",
+        "docs/source/getting_started/accessibility.md",
+        "docs/source/getting_started/faq.md",
+        "docs/source/getting_started/installation.md",
+        "docs/source/getting_started/issue.md",
+        "docs/source/getting_started/lifecycle.md",
+        "docs/source/getting_started/overview.md",
+        "docs/source/getting_started/starting.md",
+        "docs/source/index.md",
+        "docs/source/privacy_policies.md",
+        "docs/source/spelling_wordlist.txt",
+        "docs/source/user/announcements.md",
+        "docs/source/user/binder.md",
+        "docs/source/user/code_console.md",
+        "docs/source/user/commands.md",
+        "docs/source/user/completer.md",
+        "docs/source/user/custom_css.md",
+        "docs/source/user/debugger.md",
+        "docs/source/user/directories.md",
+        "docs/source/user/documents_kernels.md",
+        "docs/source/user/export.md",
+        "docs/source/user/extensions.md",
+        "docs/source/user/file_editor.md",
+        "docs/source/user/file_formats.md",
+        "docs/source/user/files.md",
+        "docs/source/user/index.md",
+        "docs/source/user/interface.md",
+        "docs/source/user/interface_customization.md",
+        "docs/source/user/jupyterhub.md",
+        "docs/source/user/language.md",
+        "docs/source/user/lsp.md",
+        "docs/source/user/notebook.md",
+        "docs/source/user/rtc.md",
+        "docs/source/user/running.md",
+        "docs/source/user/terminal.md",
+        "docs/source/user/toc.md",
+        "docs/source/user/urls.md",
+        "docs/source/user/workspaces.md",
+        "docs/typedoc-custom.css",
+        "docs/typedoc-customizations.js",
+        "eslint.config.mjs",
+        "eslint.config.typecheck.mjs",
+        "examples/app/README.md",
+        "examples/app/example.ipynb",
+        "examples/app/index.js",
+        "examples/app/main.py",
+        "examples/app/package.json",
+        "examples/app/rspack.config.js",
+        "examples/app/templates/**",
+        "examples/cell/README.md",
+        "examples/cell/index.css",
+        "examples/cell/main.py",
+        "examples/cell/package.json",
+        "examples/cell/rspack.config.js",
+        "examples/cell/src/**",
+        "examples/cell/templates/**",
+        "examples/console/README.md",
+        "examples/console/data/**",
+        "examples/console/index.css",
+        "examples/console/main.py",
+        "examples/console/package.json",
+        "examples/console/rspack.config.js",
+        "examples/console/src/**",
+        "examples/console/templates/**",
+        "examples/console/test.ipynb",
+        "examples/example.spec.ts",
+        "examples/example_check.py",
+        "examples/federated/.gitignore",
+        "examples/federated/README.md",
+        "examples/federated/core_package/**",
+        "examples/federated/example.cert",
+        "examples/federated/example.md",
+        "examples/federated/main.py",
+        "examples/federated/md_package/**",
+        "examples/federated/middle_package/**",
+        "examples/federated/package.json",
+        "examples/federated/templates/**",
+        "examples/filebrowser/README.md",
+        "examples/filebrowser/index.css",
+        "examples/filebrowser/main.py",
+        "examples/filebrowser/package.json",
+        "examples/filebrowser/rspack.config.js",
+        "examples/filebrowser/sample.md",
+        "examples/filebrowser/src/**",
+        "examples/filebrowser/templates/**",
+        "examples/localization/**",
+        "examples/notebook/README.md",
+        "examples/notebook/data/**",
+        "examples/notebook/index.css",
+        "examples/notebook/main.py",
+        "examples/notebook/package.json",
+        "examples/notebook/rspack.config.js",
+        "examples/notebook/src/**",
+        "examples/notebook/templates/**",
+        "examples/notebook/test.ipynb",
+        "examples/notebooks/**",
+        "examples/terminal/README.md",
+        "examples/terminal/index.css",
+        "examples/terminal/main.py",
+        "examples/terminal/package.json",
+        "examples/terminal/rspack.config.js",
+        "examples/terminal/src/**",
+        "examples/terminal/templates/**",
+        "examples/test_examples.py",
+        "examples/vega/**",
+        "galata/README.md",
+        "galata/eslint.config.mjs",
+        "galata/extension/**",
+        "galata/jupyter_server_csp_test_config.py",
+        "galata/jupyter_server_test_config.py",
+        "galata/media/**",
+        "galata/package.json",
+        "galata/playwright-benchmark.config.js",
+        "galata/playwright-video.config.js",
+        "galata/playwright.config.js",
+        "galata/src/**",
+        "galata/test/benchmark/notebook-output-render.spec.ts",
+        "galata/test/benchmark/notebook-resize.spec.ts",
+        "galata/test/benchmark/notebook.spec.ts",
+        "galata/test/csp/**",
+        "galata/test/documentation/add.py",
+        "galata/test/documentation/commands.test.ts",
+        "galata/test/documentation/commands.test.ts-snapshots/**",
+        "galata/test/documentation/completer.test.ts",
+        "galata/test/documentation/custom_css.test.ts",
+        "galata/test/documentation/customization.test.ts",
+        "galata/test/documentation/data/analysis-space.jupyterlab-workspace",
+        "galata/test/documentation/data/custom-jupyter.css",
+        "galata/test/documentation/data/custom-markdown.css",
+        "galata/test/documentation/data/extensions-search-all.json",
+        "galata/test/documentation/data/extensions-search-drawio.json",
+        "galata/test/documentation/data/extensions.json",
+        "galata/test/documentation/data/markdownCells.ipynb",
+        "galata/test/documentation/data/tree_fixture.txt",
+        "galata/test/documentation/debugger.test.ts",
+        "galata/test/documentation/export_notebook.test.ts",
+        "galata/test/documentation/extension_manager.test.ts",
+        "galata/test/documentation/general.test.ts",
+        "galata/test/documentation/internationalization.test.ts",
+        "galata/test/documentation/media_files.test.ts",
+        "galata/test/documentation/overview.test.ts",
+        "galata/test/documentation/plugin_manager.test.ts",
+        "galata/test/documentation/plugins.test.ts",
+        "galata/test/documentation/plugins.test.ts-snapshots/**",
+        "galata/test/documentation/utils.ts",
+        "galata/test/documentation/workspaces.test.ts",
+        "galata/test/galata/benchmarkReporter.spec.ts",
+        "galata/test/galata/benchmarkReporter.spec.ts-snapshots/**",
+        "galata/test/galata/contents.spec.ts",
+        "galata/test/galata/filebrowser.spec.ts",
+        "galata/test/galata/fixture.spec.ts",
+        "galata/test/galata/jupyterlabpage.spec.ts",
+        "galata/test/galata/notebook.spec.ts",
+        "galata/test/galata/notebooks/example.ipynb",
+        "galata/test/galata/notebooks/simple_test.ipynb",
+        "galata/test/galata/notebooks/windowed_notebook.ipynb",
+        "galata/test/galata/test.spec.ts",
+        "galata/test/galata/upload/sub_folder/upload_notebook_sub.ipynb",
+        "galata/test/galata/upload/upload_notebook.ipynb",
+        "galata/test/jupyterlab/announcements.test.ts",
+        "galata/test/jupyterlab/breadcrumbs-snapshot.test.ts",
+        "galata/test/jupyterlab/cells-motion.spec.ts",
+        "galata/test/jupyterlab/cells.test.ts",
+        "galata/test/jupyterlab/codemirror.test.ts",
+        "galata/test/jupyterlab/collapsible-headings.test.ts",
+        "galata/test/jupyterlab/completer.test.ts",
+        "galata/test/jupyterlab/console.test.ts",
+        "galata/test/jupyterlab/contextmenu.test.ts",
+        "galata/test/jupyterlab/csvviewer.test.ts",
+        "galata/test/jupyterlab/debugger-console.test.ts",
+        "galata/test/jupyterlab/debugger.test.ts",
+        "galata/test/jupyterlab/dockpanel-resize.test.ts",
+        "galata/test/jupyterlab/docmanager.test.ts",
+        "galata/test/jupyterlab/file-edit.test.ts",
+        "galata/test/jupyterlab/file-search.test.ts",
+        "galata/test/jupyterlab/filebrowser.test.ts",
+        "galata/test/jupyterlab/general.test.ts",
+        "galata/test/jupyterlab/help.test.ts",
+        "galata/test/jupyterlab/history.test.ts",
+        "galata/test/jupyterlab/html-viewer.test.ts",
+        "galata/test/jupyterlab/inline-completer.test.ts",
+        "galata/test/jupyterlab/inspector-tooltip.test.ts",
+        "galata/test/jupyterlab/kernel.test.ts",
+        "galata/test/jupyterlab/launcher.test.ts",
+        "galata/test/jupyterlab/markdown-preview-search.test.ts",
+        "galata/test/jupyterlab/menus.test.ts",
+        "galata/test/jupyterlab/metadataform.test.ts",
+        "galata/test/jupyterlab/notebook-active-cell-tool.test.ts",
+        "galata/test/jupyterlab/notebook-create.test.ts",
+        "galata/test/jupyterlab/notebook-deferred-loading.test.ts",
+        "galata/test/jupyterlab/notebook-edit.test.ts",
+        "galata/test/jupyterlab/notebook-footer.test.ts",
+        "galata/test/jupyterlab/notebook-markdown.test.ts",
+        "galata/test/jupyterlab/notebook-max-outputs.test.ts",
+        "galata/test/jupyterlab/notebook-mermaid-diagrams.test.ts",
+        "galata/test/jupyterlab/notebook-mobile.test.ts",
+        "galata/test/jupyterlab/notebook-navigate.test.ts",
+        "galata/test/jupyterlab/notebook-no-kernel.test.ts",
+        "galata/test/jupyterlab/notebook-redo.test.ts",
+        "galata/test/jupyterlab/notebook-replace.test.ts",
+        "galata/test/jupyterlab/notebook-run-mermaid.test.ts",
+        "galata/test/jupyterlab/notebook-run-vega.test.ts",
+        "galata/test/jupyterlab/notebook-run.test.ts",
+        "galata/test/jupyterlab/notebook-scroll-no-windowing.test.ts",
+        "galata/test/jupyterlab/notebook-scroll.test.ts",
+        "galata/test/jupyterlab/notebook-search-highlight.test.ts",
+        "galata/test/jupyterlab/notebook-search.test.ts",
+        "galata/test/jupyterlab/notebook-statusbar.test.ts",
+        "galata/test/jupyterlab/notebook-toolbar.test.ts",
+        "galata/test/jupyterlab/notebook-trust.test.ts",
+        "galata/test/jupyterlab/notebooks/200_empty_cells.ipynb",
+        "galata/test/jupyterlab/notebooks/20_empty_cells.ipynb",
+        "galata/test/jupyterlab/notebooks/code_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/code_script.py",
+        "galata/test/jupyterlab/notebooks/collapsible_headings_keyboard_navigation.ipynb",
+        "galata/test/jupyterlab/notebooks/completer_panel.py",
+        "galata/test/jupyterlab/notebooks/css_js_injection.ipynb",
+        "galata/test/jupyterlab/notebooks/debugger_console.ipynb",
+        "galata/test/jupyterlab/notebooks/image_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/inline_completer.ipynb",
+        "galata/test/jupyterlab/notebooks/long_output_and_headings.ipynb",
+        "galata/test/jupyterlab/notebooks/long_outputs.ipynb",
+        "galata/test/jupyterlab/notebooks/markdown_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/mermaid_diagrams.ipynb",
+        "galata/test/jupyterlab/notebooks/mermaid_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/nested_code.ipynb",
+        "galata/test/jupyterlab/notebooks/output_scrolling.ipynb",
+        "galata/test/jupyterlab/notebooks/scroll.ipynb",
+        "galata/test/jupyterlab/notebooks/search.ipynb",
+        "galata/test/jupyterlab/notebooks/search_highlight_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/simple.md",
+        "galata/test/jupyterlab/notebooks/simple_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/single_long_output.ipynb",
+        "galata/test/jupyterlab/notebooks/test.html",
+        "galata/test/jupyterlab/notebooks/toc_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/toc_running.ipynb",
+        "galata/test/jupyterlab/notebooks/toc_scrolling_notebook.ipynb",
+        "galata/test/jupyterlab/notebooks/vega_notebook.ipynb",
+        "galata/test/jupyterlab/notification.test.ts",
+        "galata/test/jupyterlab/notification.test.ts-snapshots/text-content-notification-jupyterlab-linux.txt",
+        "galata/test/jupyterlab/output-scrolling.test.ts",
+        "galata/test/jupyterlab/outputarea-stdin.test.ts",
+        "galata/test/jupyterlab/print.test.ts",
+        "galata/test/jupyterlab/readonly.test.ts",
+        "galata/test/jupyterlab/save.test.ts",
+        "galata/test/jupyterlab/settings.test.ts",
+        "galata/test/jupyterlab/shortcuts.test.ts",
+        "galata/test/jupyterlab/sidebars.test.ts",
+        "galata/test/jupyterlab/styles.test.ts",
+        "galata/test/jupyterlab/terminal.test.ts",
+        "galata/test/jupyterlab/texteditor.test.ts",
+        "galata/test/jupyterlab/toc-running.test.ts",
+        "galata/test/jupyterlab/toc-scrolling.test.ts",
+        "galata/test/jupyterlab/toc.test.ts",
+        "galata/test/jupyterlab/toolbars.test.ts",
+        "galata/test/jupyterlab/utils.ts",
+        "galata/test/jupyterlab/windowed-notebook.test.ts",
+        "galata/test/jupyterlab/workspace.test.ts",
+        "galata/test/memory-leak/**",
+        "galata/tsconfig.json",
+        "galata/update_snapshots.py",
+        "jupyter-config/**",
+        "jupyterlab/**",
+        "jupyterlab.desktop",
+        "jupyterlab.svg",
+        "lerna.json",
+        "package.json",
+        "packages/application/**",
+        "packages/application-extension/**",
+        "packages/apputils/**",
+        "packages/apputils-extension/**",
+        "packages/attachments/**",
+        "packages/audio-extension/**",
+        "packages/cell-toolbar/**",
+        "packages/cell-toolbar-extension/**",
+        "packages/cells/**",
+        "packages/celltags-extension/**",
+        "packages/codeeditor/**",
+        "packages/codemirror/**",
+        "packages/codemirror-extension/**",
+        "packages/completer/**",
+        "packages/completer-extension/**",
+        "packages/console/**",
+        "packages/console-extension/**",
+        "packages/core-meta/**",
+        "packages/coreutils/**",
+        "packages/csvviewer/**",
+        "packages/csvviewer-extension/**",
+        "packages/debugger/**",
+        "packages/debugger-extension/**",
+        "packages/docmanager/**",
+        "packages/docmanager-extension/**",
+        "packages/docregistry/**",
+        "packages/documentsearch/**",
+        "packages/documentsearch-extension/**",
+        "packages/extensionmanager/**",
+        "packages/extensionmanager-extension/examples/listings/Makefile",
+        "packages/extensionmanager-extension/examples/listings/README.md",
+        "packages/extensionmanager-extension/examples/listings/index.js",
+        "packages/extensionmanager-extension/examples/listings/list/**",
+        "packages/extensionmanager-extension/examples/listings/main.py",
+        "packages/extensionmanager-extension/examples/listings/package.json",
+        "packages/extensionmanager-extension/examples/listings/rspack.config.js",
+        "packages/extensionmanager-extension/examples/listings/settings/**",
+        "packages/extensionmanager-extension/examples/listings/templates/**",
+        "packages/extensionmanager-extension/package.json",
+        "packages/extensionmanager-extension/schema/**",
+        "packages/extensionmanager-extension/src/**",
+        "packages/extensionmanager-extension/style/**",
+        "packages/extensionmanager-extension/tsconfig.json",
+        "packages/extensionmanager-extension/typedoc.json",
+        "packages/filebrowser/**",
+        "packages/filebrowser-extension/**",
+        "packages/fileeditor/**",
+        "packages/fileeditor-extension/**",
+        "packages/help-extension/**",
+        "packages/htmlviewer/**",
+        "packages/htmlviewer-extension/**",
+        "packages/hub-extension/**",
+        "packages/imageviewer/**",
+        "packages/imageviewer-extension/**",
+        "packages/inspector/**",
+        "packages/inspector-extension/**",
+        "packages/javascript-extension/**",
+        "packages/json-extension/**",
+        "packages/launcher/**",
+        "packages/launcher-extension/**",
+        "packages/logconsole/**",
+        "packages/logconsole-extension/**",
+        "packages/lsp/**",
+        "packages/lsp-extension/**",
+        "packages/mainmenu/**",
+        "packages/mainmenu-extension/**",
+        "packages/markdownviewer/**",
+        "packages/markdownviewer-extension/**",
+        "packages/markedparser-extension/**",
+        "packages/mathjax-extension/**",
+        "packages/mermaid/**",
+        "packages/mermaid-extension/**",
+        "packages/metadataform/**",
+        "packages/metadataform-extension/**",
+        "packages/metapackage/**",
+        "packages/nbconvert-css/**",
+        "packages/nbformat/**",
+        "packages/notebook/.vscode/**",
+        "packages/notebook/README.md",
+        "packages/notebook/babel.config.js",
+        "packages/notebook/fonts/icomoon.svg",
+        "packages/notebook/jest.config.js",
+        "packages/notebook/package.json",
+        "packages/notebook/src/**",
+        "packages/notebook/style/**",
+        "packages/notebook/test/**",
+        "packages/notebook/tsconfig.json",
+        "packages/notebook/tsconfig.test.json",
+        "packages/notebook/typedoc.json",
+        "packages/notebook-extension/**",
+        "packages/observables/**",
+        "packages/outputarea/**",
+        "packages/pdf-extension/**",
+        "packages/pluginmanager/**",
+        "packages/pluginmanager-extension/**",
+        "packages/property-inspector/**",
+        "packages/rendermime/**",
+        "packages/rendermime-extension/**",
+        "packages/rendermime-interfaces/**",
+        "packages/running/**",
+        "packages/running-extension/**",
+        "packages/services/.gitignore",
+        "packages/services/.vscode/**",
+        "packages/services/README.md",
+        "packages/services/architecture.xml",
+        "packages/services/babel.config.js",
+        "packages/services/examples/**",
+        "packages/services/jest.config.js",
+        "packages/services/package.json",
+        "packages/services/rspack.config.js",
+        "packages/services/src/**",
+        "packages/services/test/**",
+        "packages/services/tsconfig.json",
+        "packages/services/tsconfig.test.json",
+        "packages/services/typedoc.json",
+        "packages/services/typings/**",
+        "packages/services-extension/**",
+        "packages/settingeditor/**",
+        "packages/settingeditor-extension/**",
+        "packages/settingregistry/**",
+        "packages/shortcuts-extension/**",
+        "packages/statedb/**",
+        "packages/statusbar/**",
+        "packages/statusbar-extension/**",
+        "packages/terminal/**",
+        "packages/terminal-extension/**",
+        "packages/testing/**",
+        "packages/theme-dark-extension/**",
+        "packages/theme-dark-high-contrast-extension/**",
+        "packages/theme-light-extension/**",
+        "packages/toc/**",
+        "packages/toc-extension/**",
+        "packages/tooltip/**",
+        "packages/tooltip-extension/**",
+        "packages/translation/**",
+        "packages/translation-extension/**",
+        "packages/ui-components/.vscode/**",
+        "packages/ui-components/CONTRIBUTING.md",
+        "packages/ui-components/README.md",
+        "packages/ui-components/babel.config.js",
+        "packages/ui-components/docs/**",
+        "packages/ui-components/examples/**",
+        "packages/ui-components/jest.config.js",
+        "packages/ui-components/package.json",
+        "packages/ui-components/src/**",
+        "packages/ui-components/style/base.css",
+        "packages/ui-components/style/collapse.css",
+        "packages/ui-components/style/debug/**",
+        "packages/ui-components/style/deprecated/**",
+        "packages/ui-components/style/deprecated.css",
+        "packages/ui-components/style/deprecatedExtra.css",
+        "packages/ui-components/style/hoverbox.css",
+        "packages/ui-components/style/icons/arrow/**",
+        "packages/ui-components/style/icons/debugger/**",
+        "packages/ui-components/style/icons/error.svg",
+        "packages/ui-components/style/icons/filetype/**",
+        "packages/ui-components/style/icons/history.svg",
+        "packages/ui-components/style/icons/info.svg",
+        "packages/ui-components/style/icons/jupyter/**",
+        "packages/ui-components/style/icons/lock.svg",
+        "packages/ui-components/style/icons/lsp/**",
+        "packages/ui-components/style/icons/output/**",
+        "packages/ui-components/style/icons/search/**",
+        "packages/ui-components/style/icons/sidebar/**",
+        "packages/ui-components/style/icons/statusbar/**",
+        "packages/ui-components/style/icons/toolbar/**",
+        "packages/ui-components/style/icons.css",
+        "packages/ui-components/style/iconsalt.css",
+        "packages/ui-components/style/iconshover.css",
+        "packages/ui-components/style/iframe.css",
+        "packages/ui-components/style/index.css",
+        "packages/ui-components/style/index.js",
+        "packages/ui-components/style/rjsfTemplates.css",
+        "packages/ui-components/style/sidepanel.css",
+        "packages/ui-components/style/spinner.css",
+        "packages/ui-components/style/styling.css",
+        "packages/ui-components/style/switch.css",
+        "packages/ui-components/style/tabbar.css",
+        "packages/ui-components/style/table.css",
+        "packages/ui-components/style/toolbar.css",
+        "packages/ui-components/style/toolkit.css",
+        "packages/ui-components/style/unused/**",
+        "packages/ui-components/style/windowedlist.css",
+        "packages/ui-components/svgo.config.js",
+        "packages/ui-components/test/**",
+        "packages/ui-components/tsconfig.json",
+        "packages/ui-components/tsconfig.test.json",
+        "packages/ui-components/typedoc.json",
+        "packages/ui-components-extension/**",
+        "packages/vega5-extension/**",
+        "packages/video-extension/**",
+        "packages/workspaces/**",
+        "packages/workspaces-extension/**",
+        "postcss.config.js",
+        "pyproject.toml",
+        "scripts/**",
+        "testutils/**",
+        "tsconfig.eslint.json",
+        "tsconfigbase.json",
+        "tsconfigbase.test.json",
+        "typedoc.base.json",
+        "typedoc.js",
+        "yarn.lock"
+      ],
+      "text": "Copyright (c) 2015-2026 Project Jupyter Contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2015-2026 Project Jupyter Contributors, BSD-3-Clause license (LICENSE), https://github.com/jupyterlab/jupyterlab."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grammar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jupyterlab-settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jupyterlab-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cleanignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.stylelintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postBuild"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

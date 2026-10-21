@@ -1,0 +1,1406 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/argoproj/argo-cd",
+  "revision": "bb011dcc107382d74dd132059170a1d1ee1ccc11",
+  "checksum": "sha256:4c0ff4e421a3f2f07aaef13c222c6f35f9160c82249e13ef0f6923525e8bc736",
+  "extract": {
+    "exclude": [
+      "docs/assets/app-ui-information.png",
+      "docs/assets/application-of-applications.png",
+      "docs/assets/application-pod-view-node-labels.png",
+      "docs/assets/application-view-extension.png",
+      "docs/assets/applicationset/**",
+      "docs/assets/argo.png",
+      "docs/assets/argocd-arch-authn-authz.jpg",
+      "docs/assets/argocd-components.png",
+      "docs/assets/argocd-core-components.png",
+      "docs/assets/argocd-ui.gif",
+      "docs/assets/argocd_architecture.png",
+      "docs/assets/azure-api-permissions.png",
+      "docs/assets/azure-app-registration-authentication.png",
+      "docs/assets/azure-app-registration-overview.png",
+      "docs/assets/azure-app-registration-secret.png",
+      "docs/assets/azure-devops-webhook-config.png",
+      "docs/assets/azure-enterprise-claims.png",
+      "docs/assets/azure-enterprise-saml-urls.png",
+      "docs/assets/azure-enterprise-users.png",
+      "docs/assets/azure-sso-cli-log-in-success.png",
+      "docs/assets/azure-sso-web-application.png",
+      "docs/assets/azure-sso-web-log-in-via-azure.png",
+      "docs/assets/azure-sso-web-user-info.png",
+      "docs/assets/azure-token-configuration.png",
+      "docs/assets/banner.png",
+      "docs/assets/cert-management-add-ssh.png",
+      "docs/assets/cert-management-add-tls.png",
+      "docs/assets/cert-management-overview.png",
+      "docs/assets/cert-management-remove.png",
+      "docs/assets/compare-option-ignore-needs-pruning.png",
+      "docs/assets/confirm-delete.png",
+      "docs/assets/confirm-prune.png",
+      "docs/assets/connect-repo.png",
+      "docs/assets/create-app.png",
+      "docs/assets/dashboard.jpg",
+      "docs/assets/destination.png",
+      "docs/assets/download-codegen-patch-file.png",
+      "docs/assets/external-link-1.png",
+      "docs/assets/external-link.png",
+      "docs/assets/extra_info-1.png",
+      "docs/assets/extra_info-2.png",
+      "docs/assets/extra_info.png",
+      "docs/assets/favicon.png",
+      "docs/assets/filter-apps.png",
+      "docs/assets/ghcr-package-event.png",
+      "docs/assets/google-admin-idp-metadata.png",
+      "docs/assets/google-admin-oidc-uris.png",
+      "docs/assets/google-admin-saml-add-app-menu.png",
+      "docs/assets/google-admin-saml-app-details.png",
+      "docs/assets/google-admin-saml-apps-menu.png",
+      "docs/assets/google-admin-saml-attribute-mapping-details.png",
+      "docs/assets/google-admin-service-provider-details.png",
+      "docs/assets/google-groups-membership.png",
+      "docs/assets/guestbook-app.png",
+      "docs/assets/guestbook-tree.png",
+      "docs/assets/identity-center-1.png",
+      "docs/assets/identity-center-2.png",
+      "docs/assets/identity-center-3.png",
+      "docs/assets/identity-center-4.png",
+      "docs/assets/identity-center-5.png",
+      "docs/assets/identity-center-6.png",
+      "docs/assets/keycloak-add-client-pkce_2.png",
+      "docs/assets/keycloak-add-client.png",
+      "docs/assets/keycloak-add-client_2.png",
+      "docs/assets/keycloak-add-scope.png",
+      "docs/assets/keycloak-authentication-successful.png",
+      "docs/assets/keycloak-client-scope.png",
+      "docs/assets/keycloak-client-secret.png",
+      "docs/assets/keycloak-configure-client-pkce.png",
+      "docs/assets/keycloak-configure-client-pkce_2.png",
+      "docs/assets/keycloak-configure-client.png",
+      "docs/assets/keycloak-groups-mapper.png",
+      "docs/assets/keycloak-login.png",
+      "docs/assets/keycloak-user-group.png",
+      "docs/assets/logo.png",
+      "docs/assets/new-app-of-apps.png",
+      "docs/assets/new-app.png",
+      "docs/assets/oauth2-config.png",
+      "docs/assets/okta-app.png",
+      "docs/assets/okta-auth-policy-edit.png",
+      "docs/assets/okta-auth-policy.png",
+      "docs/assets/okta-auth-rule.png",
+      "docs/assets/okta-create-oidc-app.png",
+      "docs/assets/okta-groups-claim.png",
+      "docs/assets/okta-groups-scope.png",
+      "docs/assets/openunison-portal.png",
+      "docs/assets/orphaned-resources.png",
+      "docs/assets/register-app.png",
+      "docs/assets/release-action.png",
+      "docs/assets/repo-add-azure-service-principal.png",
+      "docs/assets/repo-add-azure-workload-identity.png",
+      "docs/assets/repo-add-github-app.png",
+      "docs/assets/repo-add-google-cloud-source.png",
+      "docs/assets/repo-add-https.png",
+      "docs/assets/repo-add-overview.png",
+      "docs/assets/repo-add-ssh.png",
+      "docs/assets/repo-type-helm.png",
+      "docs/assets/saml-1.png",
+      "docs/assets/saml-2.png",
+      "docs/assets/saml-3.png",
+      "docs/assets/saml-4.png",
+      "docs/assets/saml-split.png",
+      "docs/assets/scale_resources_1.png",
+      "docs/assets/scale_resources_2.png",
+      "docs/assets/scale_resources_3.png",
+      "docs/assets/select_env.png",
+      "docs/assets/select_repo.png",
+      "docs/assets/selective-sync.png",
+      "docs/assets/status-badge-healthy-synced.png",
+      "docs/assets/sync-apps.png",
+      "docs/assets/sync-option-no-prune-sync-status.png",
+      "docs/assets/sync-option-no-prune.png",
+      "docs/assets/synchronization-button.png",
+      "docs/assets/terminal.png",
+      "docs/assets/terminate-button.png",
+      "docs/assets/webhook-config.png",
+      "docs/assets/zitadel-actions.png",
+      "docs/assets/zitadel-application-1.png",
+      "docs/assets/zitadel-application-2.png",
+      "docs/assets/zitadel-application-3.png",
+      "docs/assets/zitadel-application-4.png",
+      "docs/assets/zitadel-application-secrets.png",
+      "docs/assets/zitadel-application-settings.png",
+      "docs/assets/zitadel-argocd-login.png",
+      "docs/assets/zitadel-argocd-user-info.png",
+      "docs/assets/zitadel-project-authorizations.png",
+      "docs/assets/zitadel-project-roles.png",
+      "docs/assets/zitadel-project-settings.png",
+      "docs/assets/zitadel-project.png",
+      "docs/developer-guide/ci-pipeline-failed.png",
+      "docs/proposals/backend-support-appset.png",
+      "docs/proposals/images/**",
+      "docs/proposals/rollout-extension.png",
+      "docs/user-guide/how_phases_work.png",
+      "docs/user-guide/how_waves_work.png",
+      "gitops-engine/pkg/diff/testdata/openapiv2.bin",
+      "reposerver/repository/testdata/jsonnet/vendor/**",
+      "reposerver/repository/testdata/jsonnet-1/vendor/**",
+      "reposerver/repository/testdata/utf-16/**",
+      "test/e2e/testdata/helm-repo/helm-1.0.0.tgz",
+      "test/e2e/testdata/helm-repo/helm2-1.0.0.tgz",
+      "test/fixture/gpg/signingkey.asc",
+      "ui/src/assets/fonts/google-fonts/Heebo-Bold.eot",
+      "ui/src/assets/fonts/google-fonts/Heebo-Bold.ttf",
+      "ui/src/assets/fonts/google-fonts/Heebo-Bold.woff",
+      "ui/src/assets/fonts/google-fonts/Heebo-Bold.woff2",
+      "ui/src/assets/fonts/google-fonts/Heebo-Light.eot",
+      "ui/src/assets/fonts/google-fonts/Heebo-Light.ttf",
+      "ui/src/assets/fonts/google-fonts/Heebo-Light.woff",
+      "ui/src/assets/fonts/google-fonts/Heebo-Light.woff2",
+      "ui/src/assets/fonts/google-fonts/Heebo-Medium.eot",
+      "ui/src/assets/fonts/google-fonts/Heebo-Medium.ttf",
+      "ui/src/assets/fonts/google-fonts/Heebo-Medium.woff",
+      "ui/src/assets/fonts/google-fonts/Heebo-Medium.woff2",
+      "ui/src/assets/fonts/google-fonts/Heebo-Regular.eot",
+      "ui/src/assets/fonts/google-fonts/Heebo-Regular.ttf",
+      "ui/src/assets/fonts/google-fonts/Heebo-Regular.woff",
+      "ui/src/assets/fonts/google-fonts/Heebo-Regular.woff2",
+      "ui/src/assets/images/argo.png",
+      "ui/src/assets/images/stars.gif",
+      "util/cmp/testdata/example.tar.gz",
+      "util/helm/testdata/external/**"
+    ]
+  },
+  "history": {
+    "since": "817b13ccbed93f41a851d2dd71040e2e2bc975a0"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2018 The Argo Authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 - 2022 Knut Sveidqvist\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/argoproj/argo-cd: Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd; Copyright (c) 2014 - 2022 Knut Sveidqvist, MIT license (LICENSE.mermaid), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/docs/assets/lib; Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/gitops-engine; Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/ui."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".codecov.yml",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yaml",
+        ".goreleaser.yaml",
+        ".mockery.yaml",
+        ".readthedocs.yaml",
+        ".snyk",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.dev",
+        "Dockerfile.tilt",
+        "Dockerfile.ui.tilt",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "Makefile",
+        "Procfile",
+        "README.md",
+        "SECURITY-INSIGHTS.yml",
+        "SECURITY.md",
+        "SECURITY_CONTACTS",
+        "Tiltfile",
+        "USERS.md",
+        "VERSION",
+        "applicationset/**",
+        "assets/**",
+        "cmd/**",
+        "cmpserver/**",
+        "commitserver/**",
+        "common/**",
+        "controller/**",
+        "docs/CONTRIBUTING.md",
+        "docs/SUPPORT.md",
+        "docs/assets/mermaid-init.js",
+        "docs/assets/nav.css",
+        "docs/assets/nav.js",
+        "docs/assets/openunison-argocd-url.yaml",
+        "docs/assets/versions.css",
+        "docs/assets/versions.js",
+        "docs/bug_triage.md",
+        "docs/cli_installation.md",
+        "docs/core_concepts.md",
+        "docs/developer-guide/api-docs.md",
+        "docs/developer-guide/architecture/**",
+        "docs/developer-guide/backporting-fixes.md",
+        "docs/developer-guide/ci.md",
+        "docs/developer-guide/code-contributions.md",
+        "docs/developer-guide/contributing.md",
+        "docs/developer-guide/custom-resource-icons.md",
+        "docs/developer-guide/debugging-locally.md",
+        "docs/developer-guide/debugging-remote-environment.md",
+        "docs/developer-guide/dependencies.md",
+        "docs/developer-guide/development-cycle.md",
+        "docs/developer-guide/development-environment.md",
+        "docs/developer-guide/docs-site.md",
+        "docs/developer-guide/extensions/**",
+        "docs/developer-guide/faq.md",
+        "docs/developer-guide/index.md",
+        "docs/developer-guide/mac-users.md",
+        "docs/developer-guide/maintaining-internal-argo-cd-forks.md",
+        "docs/developer-guide/release-process-and-cadence.md",
+        "docs/developer-guide/releasing.md",
+        "docs/developer-guide/running-locally.md",
+        "docs/developer-guide/static-code-analysis.md",
+        "docs/developer-guide/submit-your-pr.md",
+        "docs/developer-guide/test-e2e.md",
+        "docs/developer-guide/tilt.md",
+        "docs/developer-guide/toolchain-guide.md",
+        "docs/developer-guide/ui-extensions.md",
+        "docs/developer-guide/use-gitpod.md",
+        "docs/faq.md",
+        "docs/getting_started.md",
+        "docs/index.md",
+        "docs/operator-manual/**",
+        "docs/proposals/001-proposal-template.md",
+        "docs/proposals/002-ui-extensions.md",
+        "docs/proposals/003-applications-outside-argocd-namespace.md",
+        "docs/proposals/004-scalability-benchmarking.md",
+        "docs/proposals/2022-07-13-appset-progressive-rollout-strategy.md",
+        "docs/proposals/application-name-identifier.md",
+        "docs/proposals/applicationset-plugin-generator.md",
+        "docs/proposals/argocd-cli-pluin.md",
+        "docs/proposals/attach-debug-containers.md",
+        "docs/proposals/backend-support-appset.md",
+        "docs/proposals/config-management-plugin-v2.md",
+        "docs/proposals/decouple-application-sync-user-using-impersonation.md",
+        "docs/proposals/deep-links.md",
+        "docs/proposals/deletion-strategy-progressive-sync.md",
+        "docs/proposals/feature-bounties/**",
+        "docs/proposals/feature-bounties.md",
+        "docs/proposals/headless-argocd.md",
+        "docs/proposals/manifest-hydrator/**",
+        "docs/proposals/manifest-hydrator.md",
+        "docs/proposals/multiple-sources-for-applications-ui.md",
+        "docs/proposals/multiple-sources-for-applications.md",
+        "docs/proposals/native-oci-support.md",
+        "docs/proposals/notifications-API.md",
+        "docs/proposals/parameterized-config-management-plugins.md",
+        "docs/proposals/project-repos-and-clusters.md",
+        "docs/proposals/project-scoped-repository-enhancements.md",
+        "docs/proposals/proxy-extensions.md",
+        "docs/proposals/rebalancing-clusters-across-shards-dynamically.md",
+        "docs/proposals/resource-deletion-with-approval.md",
+        "docs/proposals/respect-rbac-for-resource-exclusions.md",
+        "docs/proposals/server-side-apply.md",
+        "docs/proposals/server-side-pagination.md",
+        "docs/proposals/source-verification-policies.md",
+        "docs/proposals/sync-timeout.md",
+        "docs/proposals/ui-applications-virtual-scrolling.md",
+        "docs/requirements.txt",
+        "docs/roadmap.md",
+        "docs/security_considerations.md",
+        "docs/snyk/**",
+        "docs/try_argo_cd_locally.md",
+        "docs/understand_the_basics.md",
+        "docs/user-guide/annotations-and-labels.md",
+        "docs/user-guide/app_deletion.md",
+        "docs/user-guide/application-notice.md",
+        "docs/user-guide/application-set-ui.md",
+        "docs/user-guide/application-set.md",
+        "docs/user-guide/application-specification.md",
+        "docs/user-guide/application_sources.md",
+        "docs/user-guide/auto_sync.md",
+        "docs/user-guide/best_practices.md",
+        "docs/user-guide/build-environment.md",
+        "docs/user-guide/ci_automation.md",
+        "docs/user-guide/commands/**",
+        "docs/user-guide/compare-options.md",
+        "docs/user-guide/config-management-plugins.md",
+        "docs/user-guide/diff-strategies.md",
+        "docs/user-guide/diffing.md",
+        "docs/user-guide/directory.md",
+        "docs/user-guide/environment-variables.md",
+        "docs/user-guide/external-url.md",
+        "docs/user-guide/extra_info.md",
+        "docs/user-guide/gpg-verification.md",
+        "docs/user-guide/helm.md",
+        "docs/user-guide/import.md",
+        "docs/user-guide/index.md",
+        "docs/user-guide/jsonnet.md",
+        "docs/user-guide/kustomize.md",
+        "docs/user-guide/multiple_sources.md",
+        "docs/user-guide/oci.md",
+        "docs/user-guide/orphaned-resources.md",
+        "docs/user-guide/parameters.md",
+        "docs/user-guide/plugins.md",
+        "docs/user-guide/private-repositories.md",
+        "docs/user-guide/projects.md",
+        "docs/user-guide/resource_hooks.md",
+        "docs/user-guide/resource_tracking.md",
+        "docs/user-guide/resources-view.md",
+        "docs/user-guide/scale_application_resources.md",
+        "docs/user-guide/selective_sync.md",
+        "docs/user-guide/skip_reconcile.md",
+        "docs/user-guide/source-hydrator.md",
+        "docs/user-guide/source-integrity-git-gpg.md",
+        "docs/user-guide/source-integrity.md",
+        "docs/user-guide/status-badge.md",
+        "docs/user-guide/subscriptions.md",
+        "docs/user-guide/sync-kubectl.md",
+        "docs/user-guide/sync-options.md",
+        "docs/user-guide/sync-waves.md",
+        "docs/user-guide/sync_windows.md",
+        "docs/user-guide/tool_detection.md",
+        "docs/user-guide/tracking_strategies.md",
+        "entrypoint.sh",
+        "examples/**",
+        "go.mod",
+        "go.sum",
+        "hack/**",
+        "manifests/**",
+        "mkdocs.yml",
+        "notification_controller/**",
+        "notifications_catalog/**",
+        "overrides/**",
+        "pkg/**",
+        "prepare.sh",
+        "renovate-presets/**",
+        "renovate.json",
+        "reposerver/apiclient/**",
+        "reposerver/cache/**",
+        "reposerver/gpgwatcher.go",
+        "reposerver/metrics/**",
+        "reposerver/repository/chart.go",
+        "reposerver/repository/chart_test.go",
+        "reposerver/repository/helm_repo_cred_matrix_test.go",
+        "reposerver/repository/jsonnet_import_test.go",
+        "reposerver/repository/lock.go",
+        "reposerver/repository/lock_test.go",
+        "reposerver/repository/repository.go",
+        "reposerver/repository/repository.proto",
+        "reposerver/repository/repository_cmp_test.go",
+        "reposerver/repository/repository_test.go",
+        "reposerver/repository/testdata/Kustomization/**",
+        "reposerver/repository/testdata/app-include-exclude/**",
+        "reposerver/repository/testdata/app-parameters/**",
+        "reposerver/repository/testdata/broken-schema-verification/**",
+        "reposerver/repository/testdata/circular-link/**",
+        "reposerver/repository/testdata/concatenated/**",
+        "reposerver/repository/testdata/empty-list/**",
+        "reposerver/repository/testdata/git-files-dirs/**",
+        "reposerver/repository/testdata/helm-with-dependencies/**",
+        "reposerver/repository/testdata/helm-with-dependencies-alias/**",
+        "reposerver/repository/testdata/helm-with-local-dependency/**",
+        "reposerver/repository/testdata/in-bounds-link/**",
+        "reposerver/repository/testdata/in-bounds-values-file-link/**",
+        "reposerver/repository/testdata/invalid-helm/**",
+        "reposerver/repository/testdata/invalid-json/**",
+        "reposerver/repository/testdata/invalid-kustomize/**",
+        "reposerver/repository/testdata/invalid-manifests/**",
+        "reposerver/repository/testdata/invalid-manifests-skipped/**",
+        "reposerver/repository/testdata/invalid-metadata/**",
+        "reposerver/repository/testdata/irrelevant-yaml/**",
+        "reposerver/repository/testdata/json-list/**",
+        "reposerver/repository/testdata/jsonnet/guestbook-ui.jsonnet",
+        "reposerver/repository/testdata/jsonnet/params.libsonnet",
+        "reposerver/repository/testdata/jsonnet-1/guestbook-ui.jsonnet",
+        "reposerver/repository/testdata/jsonnet-1/params.libsonnet",
+        "reposerver/repository/testdata/jsonnet-and-json/**",
+        "reposerver/repository/testdata/jsonnet-import-abs-outside/**",
+        "reposerver/repository/testdata/jsonnet-import-device-outside/**",
+        "reposerver/repository/testdata/jsonnet-import-traversal-outside/**",
+        "reposerver/repository/testdata/kustomization_yaml/**",
+        "reposerver/repository/testdata/kustomization_yml/**",
+        "reposerver/repository/testdata/link-to-nowhere/**",
+        "reposerver/repository/testdata/my-chart/**",
+        "reposerver/repository/testdata/my-chart-2/**",
+        "reposerver/repository/testdata/nil-metadata-accessors/**",
+        "reposerver/repository/testdata/non-manifest-file/**",
+        "reposerver/repository/testdata/null-list/**",
+        "reposerver/repository/testdata/oci-dependencies/**",
+        "reposerver/repository/testdata/out-of-bounds-link/**",
+        "reposerver/repository/testdata/out-of-bounds-values-file-link/**",
+        "reposerver/repository/testdata/out-of-bounds.json",
+        "reposerver/repository/testdata/out-of-bounds.yaml",
+        "reposerver/repository/testdata/partially-valid-yaml/**",
+        "reposerver/repository/testdata/recurse/**",
+        "reposerver/repository/testdata/several-files/**",
+        "reposerver/repository/testdata/simple-chart/**",
+        "reposerver/repository/testdata/valid-json/**",
+        "reposerver/repository/testdata/values-files/**",
+        "reposerver/repository/testdata/weird-list/**",
+        "reposerver/repository/testdata/yaml-with-empty-document/**",
+        "reposerver/repository/testdata2/**",
+        "reposerver/repository/types.go",
+        "reposerver/repository/utils.go",
+        "reposerver/repository/utils_test.go",
+        "reposerver/server.go",
+        "reposerver/server_test.go",
+        "resource_customizations/**",
+        "server/**",
+        "sonar-project.properties",
+        "test/certificates/**",
+        "test/cmp/**",
+        "test/container/**",
+        "test/e2e/accounts_test.go",
+        "test/e2e/admin_test.go",
+        "test/e2e/aggregated_apiservice_test.go",
+        "test/e2e/api_versions_test.go",
+        "test/e2e/app_autosync_ns_test.go",
+        "test/e2e/app_autosync_test.go",
+        "test/e2e/app_deletion_test.go",
+        "test/e2e/app_k8s_events_test.go",
+        "test/e2e/app_management_ns_test.go",
+        "test/e2e/app_management_source_integrity_test.go",
+        "test/e2e/app_management_test.go",
+        "test/e2e/app_multiple_sources_source_integrity_test.go",
+        "test/e2e/app_multiple_sources_test.go",
+        "test/e2e/app_namespaces_test.go",
+        "test/e2e/app_skipreconcile_test.go",
+        "test/e2e/applicationset_git_generator_test.go",
+        "test/e2e/applicationset_oci_generator_test.go",
+        "test/e2e/applicationset_progressive_sync_test.go",
+        "test/e2e/applicationset_test.go",
+        "test/e2e/cli_test.go",
+        "test/e2e/cluster_generator_test.go",
+        "test/e2e/cluster_objects_test.go",
+        "test/e2e/cluster_test.go",
+        "test/e2e/clusterdecisiongenerator_e2e_test.go",
+        "test/e2e/cross_namespace_ownership_test.go",
+        "test/e2e/custom_tool_test.go",
+        "test/e2e/declarative_test.go",
+        "test/e2e/deployment_test.go",
+        "test/e2e/diff_test.go",
+        "test/e2e/extension_proxy_rbac_test.go",
+        "test/e2e/fixture/**",
+        "test/e2e/git_submodule_test.go",
+        "test/e2e/git_test.go",
+        "test/e2e/graceful_restart_test.go",
+        "test/e2e/helm_test.go",
+        "test/e2e/hook_test.go",
+        "test/e2e/hydrator_test.go",
+        "test/e2e/jsonnet_test.go",
+        "test/e2e/kustomize_test.go",
+        "test/e2e/logout_test.go",
+        "test/e2e/managed_by_url_test.go",
+        "test/e2e/matrix_e2e_test.go",
+        "test/e2e/merge_e2e_test.go",
+        "test/e2e/metrics_test.go",
+        "test/e2e/multiarch-container/**",
+        "test/e2e/notification_test.go",
+        "test/e2e/oci_test.go",
+        "test/e2e/project_management_test.go",
+        "test/e2e/pruning_required_test.go",
+        "test/e2e/repo_creds_test.go",
+        "test/e2e/repo_management_test.go",
+        "test/e2e/rollback_rbac_test.go",
+        "test/e2e/scoped_repository_test.go",
+        "test/e2e/selective_sync_test.go",
+        "test/e2e/serverside_diff_test.go",
+        "test/e2e/shard-weights.txt",
+        "test/e2e/sharding_test.go",
+        "test/e2e/ssh_repo_test.go",
+        "test/e2e/sync_options_test.go",
+        "test/e2e/sync_waves_test.go",
+        "test/e2e/sync_with_impersonate_test.go",
+        "test/e2e/testdata/.hidden-helm/**",
+        "test/e2e/testdata/aggregated-apiserver/**",
+        "test/e2e/testdata/aggregated-apiserver-server/**",
+        "test/e2e/testdata/always-outofsync/**",
+        "test/e2e/testdata/bad-servicecatalog/**",
+        "test/e2e/testdata/cluster-role/**",
+        "test/e2e/testdata/cluster-role-hook/**",
+        "test/e2e/testdata/cmp-fileName/**",
+        "test/e2e/testdata/cmp-find-command/**",
+        "test/e2e/testdata/cmp-find-glob/**",
+        "test/e2e/testdata/cmp-gitcreds/**",
+        "test/e2e/testdata/cmp-gitcredstemplate/**",
+        "test/e2e/testdata/cmp-gitsshcreds/**",
+        "test/e2e/testdata/cmp-gitsshcreds-disable-provide/**",
+        "test/e2e/testdata/cmp-kustomize/**",
+        "test/e2e/testdata/cmp-preserve-file-mode/**",
+        "test/e2e/testdata/config-map/**",
+        "test/e2e/testdata/crashing-guestbook/**",
+        "test/e2e/testdata/crd-creation/**",
+        "test/e2e/testdata/crd-subresource/**",
+        "test/e2e/testdata/crd-validation/**",
+        "test/e2e/testdata/crd-version-differences/**",
+        "test/e2e/testdata/cross-namespace-ownership/**",
+        "test/e2e/testdata/data.go",
+        "test/e2e/testdata/declarative-apps/**",
+        "test/e2e/testdata/deployment/**",
+        "test/e2e/testdata/deprecated-extensions/**",
+        "test/e2e/testdata/duplicated-resources/**",
+        "test/e2e/testdata/empty-dir/**",
+        "test/e2e/testdata/failure-during-sync/**",
+        "test/e2e/testdata/git-submodule/**",
+        "test/e2e/testdata/global-with-no-namespace/**",
+        "test/e2e/testdata/guestbook/**",
+        "test/e2e/testdata/guestbook-logs/**",
+        "test/e2e/testdata/guestbook-with-namespace/**",
+        "test/e2e/testdata/guestbook-with-namespace-manifest/**",
+        "test/e2e/testdata/guestbook-with-plain-namespace-manifest/**",
+        "test/e2e/testdata/guestbook_local/**",
+        "test/e2e/testdata/helm/**",
+        "test/e2e/testdata/helm-api-versions/**",
+        "test/e2e/testdata/helm-crd/**",
+        "test/e2e/testdata/helm-glob-values/**",
+        "test/e2e/testdata/helm-guestbook/**",
+        "test/e2e/testdata/helm-kube-version/**",
+        "test/e2e/testdata/helm-namespace/**",
+        "test/e2e/testdata/helm-oci-authed-with-dependencies/**",
+        "test/e2e/testdata/helm-oci-with-dependencies/**",
+        "test/e2e/testdata/helm-repo/index.yaml",
+        "test/e2e/testdata/helm-repo/local/**",
+        "test/e2e/testdata/helm-repo/local2/**",
+        "test/e2e/testdata/helm-repo/remote/**",
+        "test/e2e/testdata/helm-values/**",
+        "test/e2e/testdata/helm-with-dependencies/**",
+        "test/e2e/testdata/helm-with-multiple-dependencies/**",
+        "test/e2e/testdata/helm-with-multiple-dependencies-permission-denied/**",
+        "test/e2e/testdata/helm3-crd/**",
+        "test/e2e/testdata/hook/**",
+        "test/e2e/testdata/hook-and-deployment/**",
+        "test/e2e/testdata/hook-custom-health/**",
+        "test/e2e/testdata/hook-resource-deleted-externally/**",
+        "test/e2e/testdata/https-kustomize-base/**",
+        "test/e2e/testdata/hydrator-directory/**",
+        "test/e2e/testdata/hydrator-helm/**",
+        "test/e2e/testdata/hydrator-kustomize/**",
+        "test/e2e/testdata/hydrator-plugin/**",
+        "test/e2e/testdata/invalid-kustomize/**",
+        "test/e2e/testdata/jsonnet-ext-var/**",
+        "test/e2e/testdata/jsonnet-nested-dir-with-imports/**",
+        "test/e2e/testdata/jsonnet-tla/**",
+        "test/e2e/testdata/jsonnet-tla-cm/**",
+        "test/e2e/testdata/ksonnet/**",
+        "test/e2e/testdata/kustomize/**",
+        "test/e2e/testdata/kustomize-api-versions/**",
+        "test/e2e/testdata/kustomize-cm-gen/**",
+        "test/e2e/testdata/kustomize-kube-version/**",
+        "test/e2e/testdata/kustomize-with-version-override/**",
+        "test/e2e/testdata/managed-by-url-test/**",
+        "test/e2e/testdata/multi-namespace/**",
+        "test/e2e/testdata/multi-namespace-hook/**",
+        "test/e2e/testdata/multi-sync/**",
+        "test/e2e/testdata/multiple-source-values/**",
+        "test/e2e/testdata/networking/**",
+        "test/e2e/testdata/one-deployment/**",
+        "test/e2e/testdata/openshift/**",
+        "test/e2e/testdata/post-delete-hook/**",
+        "test/e2e/testdata/pre-delete-hook/**",
+        "test/e2e/testdata/pre-delete-hook-restricted/**",
+        "test/e2e/testdata/progressive-sync/**",
+        "test/e2e/testdata/resource-actions/**",
+        "test/e2e/testdata/secrets/**",
+        "test/e2e/testdata/self-managed-app/**",
+        "test/e2e/testdata/service/**",
+        "test/e2e/testdata/shards-sync-assigned-apps/**",
+        "test/e2e/testdata/slow-manifest/**",
+        "test/e2e/testdata/ssa-revision-history/**",
+        "test/e2e/testdata/ssh-kustomize-base/**",
+        "test/e2e/testdata/sync-options-validate-false/**",
+        "test/e2e/testdata/sync-waves/**",
+        "test/e2e/testdata/syncwaves-prune-order/**",
+        "test/e2e/testdata/tracking-instance-label/**",
+        "test/e2e/testdata/two-nice-pods/**",
+        "test/e2e/testdata2/**",
+        "test/e2e/testdata3/**",
+        "test/e2e/user_info_test.go",
+        "test/fixture/certs/**",
+        "test/fixture/gpg/D56C4FCA57A46444",
+        "test/fixture/log/**",
+        "test/fixture/path/**",
+        "test/fixture/revision_metadata/**",
+        "test/fixture/test/**",
+        "test/fixture/testrepos/**",
+        "test/manifests/**",
+        "test/manifests_test.go",
+        "test/remote/**",
+        "test/testdata/**",
+        "test/testdata.go",
+        "test/testutil.go",
+        "tools/**",
+        "util/app/**",
+        "util/argo/**",
+        "util/askpass/**",
+        "util/assets/**",
+        "util/buffered_context/**",
+        "util/cache/**",
+        "util/cert/**",
+        "util/cli/**",
+        "util/clusterauth/**",
+        "util/cmp/stream.go",
+        "util/cmp/stream_test.go",
+        "util/cmp/testdata/app/**",
+        "util/collections/**",
+        "util/config/**",
+        "util/crypto/**",
+        "util/db/**",
+        "util/dex/**",
+        "util/env/**",
+        "util/errors/**",
+        "util/exec/**",
+        "util/git/**",
+        "util/github_app/**",
+        "util/glob/**",
+        "util/gpgsign/**",
+        "util/grpc/**",
+        "util/guard/**",
+        "util/hash/**",
+        "util/healthz/**",
+        "util/helm/client.go",
+        "util/helm/client_test.go",
+        "util/helm/cmd.go",
+        "util/helm/cmd_test.go",
+        "util/helm/creds.go",
+        "util/helm/creds_test.go",
+        "util/helm/helm.go",
+        "util/helm/helm_test.go",
+        "util/helm/index.go",
+        "util/helm/index_test.go",
+        "util/helm/mocks/**",
+        "util/helm/testdata/api-versions/**",
+        "util/helm/testdata/crds/**",
+        "util/helm/testdata/dependency/**",
+        "util/helm/testdata/minio/**",
+        "util/helm/testdata/redis/**",
+        "util/helm/testdata/tests/**",
+        "util/http/**",
+        "util/hydrator/**",
+        "util/io/**",
+        "util/jwt/**",
+        "util/kube/**",
+        "util/kustomize/**",
+        "util/localconfig/**",
+        "util/log/**",
+        "util/lua/**",
+        "util/manifeststream/**",
+        "util/metrics/**",
+        "util/notification/**",
+        "util/oci/**",
+        "util/oidc/**",
+        "util/password/**",
+        "util/profile/**",
+        "util/proxy/**",
+        "util/rand/**",
+        "util/rbac/**",
+        "util/regex/**",
+        "util/resource/**",
+        "util/security/**",
+        "util/session/**",
+        "util/settings/**",
+        "util/sourceintegrity/**",
+        "util/stats/**",
+        "util/swagger/**",
+        "util/templates/**",
+        "util/test/**",
+        "util/text/**",
+        "util/tgzstream/**",
+        "util/tls/**",
+        "util/trace/**",
+        "util/util.go",
+        "util/util_test.go",
+        "util/versions/**",
+        "util/webhook/**",
+        "util/workloadidentity/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2018 The Argo Authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/assets/lib/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 - 2022 Knut Sveidqvist\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 - 2022 Knut Sveidqvist, MIT license (LICENSE.mermaid), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/docs/assets/lib."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "gitops-engine/.mockery.yaml",
+        "gitops-engine/LICENSE",
+        "gitops-engine/Makefile",
+        "gitops-engine/README.md",
+        "gitops-engine/agent/**",
+        "gitops-engine/go.mod",
+        "gitops-engine/go.sum",
+        "gitops-engine/hack/**",
+        "gitops-engine/internal/**",
+        "gitops-engine/pkg/cache/**",
+        "gitops-engine/pkg/diff/diff.go",
+        "gitops-engine/pkg/diff/diff_options.go",
+        "gitops-engine/pkg/diff/diff_test.go",
+        "gitops-engine/pkg/diff/internal/**",
+        "gitops-engine/pkg/diff/mocks/**",
+        "gitops-engine/pkg/diff/testdata/aggr-clusterrole-config.json",
+        "gitops-engine/pkg/diff/testdata/aggr-clusterrole-live.json",
+        "gitops-engine/pkg/diff/testdata/data.go",
+        "gitops-engine/pkg/diff/testdata/deployment-config.json",
+        "gitops-engine/pkg/diff/testdata/deployment-live.json",
+        "gitops-engine/pkg/diff/testdata/elasticsearch-config.json",
+        "gitops-engine/pkg/diff/testdata/elasticsearch-live.json",
+        "gitops-engine/pkg/diff/testdata/endpoints-config.json",
+        "gitops-engine/pkg/diff/testdata/endpoints-live.json",
+        "gitops-engine/pkg/diff/testdata/grafana-clusterrole-config.json",
+        "gitops-engine/pkg/diff/testdata/grafana-clusterrole-live.json",
+        "gitops-engine/pkg/diff/testdata/mutatingwebhookconfig-config.json",
+        "gitops-engine/pkg/diff/testdata/mutatingwebhookconfig-live.json",
+        "gitops-engine/pkg/diff/testdata/sealedsecret-config.json",
+        "gitops-engine/pkg/diff/testdata/sealedsecret-live.json",
+        "gitops-engine/pkg/diff/testdata/smd-deploy-config.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-deploy-live.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-deploy2-config.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-deploy2-live.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-deploy2-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/smd-service-config-2-ports.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-service-config-ports.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-service-config.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-service-live-with-type.yaml",
+        "gitops-engine/pkg/diff/testdata/smd-service-live.yaml",
+        "gitops-engine/pkg/diff/testdata/spinnaker-sa-config.json",
+        "gitops-engine/pkg/diff/testdata/spinnaker-sa-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-configmap-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-configmap-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-configmap-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-composite-key-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-composite-key-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-composite-key-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-nested-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-nested-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-nested-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-with-manual-apply-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-with-manual-apply-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-deploy-with-manual-apply-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-service-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-service-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-service-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/ssd-svc-label-live.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-svc-no-label-config.yaml",
+        "gitops-engine/pkg/diff/testdata/ssd-svc-no-label-predicted-live.json",
+        "gitops-engine/pkg/diff/testdata/wordpress-config.json",
+        "gitops-engine/pkg/diff/testdata/wordpress-live.json",
+        "gitops-engine/pkg/engine/**",
+        "gitops-engine/pkg/health/**",
+        "gitops-engine/pkg/sync/**",
+        "gitops-engine/pkg/utils/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2018 The Argo Authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/gitops-engine."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "ui/.babelrc",
+        "ui/.dockerignore",
+        "ui/.gitignore",
+        "ui/.jshintrc",
+        "ui/.nvmrc",
+        "ui/.prettierrc",
+        "ui/LICENSE",
+        "ui/README.md",
+        "ui/__mocks__/**",
+        "ui/babel.config.js",
+        "ui/dist/**",
+        "ui/embed.go",
+        "ui/eslint.config.mjs",
+        "ui/jest.config.js",
+        "ui/jest.setup.js",
+        "ui/osv-scanner.toml",
+        "ui/package.json",
+        "ui/pnpm-lock.yaml",
+        "ui/pnpm-workspace.yaml",
+        "ui/scripts/**",
+        "ui/src/app/**",
+        "ui/src/assets/fonts/google-fonts/Heebo-Bold.svg",
+        "ui/src/assets/fonts/google-fonts/Heebo-Light.svg",
+        "ui/src/assets/fonts/google-fonts/Heebo-Medium.svg",
+        "ui/src/assets/fonts/google-fonts/Heebo-Regular.svg",
+        "ui/src/assets/fonts.css",
+        "ui/src/assets/images/argo_o.svg",
+        "ui/src/assets/images/argologo.svg",
+        "ui/src/assets/images/infrastructure_components/**",
+        "ui/src/assets/images/resources/**",
+        "ui/tsconfig.json"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2017-2018 The Argo Authors\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2017-2018 The Argo Authors, Apache-2.0 license (LICENSE), https://github.com/argoproj/argo-cd/tree/bb011dcc107382d74dd132059170a1d1ee1ccc11/ui."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev-tools"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.libsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mermaid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.special"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tgz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tilt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.htpasswd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.jshintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.oci-htpasswd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.snyk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/D56C4FCA57A46444"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Kustomization"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Procfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SECURITY_CONTACTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Tiltfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-demo_plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-error"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-no-permission"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-status-code-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-test-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/argocd_my-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id_rsa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/my-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/not-json-or-yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_host_ecdsa_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_host_ed25519_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_host_rsa_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_known_hosts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.YAML"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,902 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/PaddlePaddle/PaddleSpeech",
+  "revision": "6b25a400008d393f9c3af837b3c692b17f29ee1a",
+  "checksum": "sha256:0b1d41df305226f5d8e1aa1e4100cf994702d1a230cc7983aa99aae881b1bed1",
+  "extract": {
+    "exclude": [
+      ".pre-commit-hooks/**",
+      "audio/cmake/external/**",
+      "audio/paddleaudio/third_party/**",
+      "audio/tests/features/testdata/fbank_feat.ark",
+      "audio/tests/features/testdata/pitch_feat.ark",
+      "audio/tests/features/testdata/test.wav",
+      "demos/TTSAndroid/app/src/main/res/drawable/logo.jpg",
+      "demos/TTSAndroid/app/src/main/res/drawable/paddlespeech_logo.png",
+      "demos/TTSAndroid/gradle/wrapper/gradle-wrapper.jar",
+      "demos/TTSCppFrontend/third-party/**",
+      "demos/audio_searching/img/**",
+      "demos/speech_web/web_client/public/**",
+      "demos/speech_web/web_client/src/assets/image/在线体验-背景@2x.png",
+      "demos/speech_web/web_client/src/assets/image/场景齐全@3x.png",
+      "demos/speech_web/web_client/src/assets/image/教程丰富@3x.png",
+      "demos/speech_web/web_client/src/assets/image/模型全面@3x.png",
+      "demos/speech_web/web_client/src/assets/image/步骤-箭头切图@2x.png",
+      "demos/speech_web/web_client/src/assets/image/用户头像@2x.png",
+      "demos/speech_web/web_client/src/assets/image/飞桨头像@2x.png",
+      "demos/speech_web/web_client/src/assets/logo.png",
+      "demos/streaming_asr_server/web/favicon.ico",
+      "demos/streaming_asr_server/web/paddle_web_demo.png",
+      "demos/streaming_tts_serving_fastdeploy/tree.png",
+      "docs/images/**",
+      "docs/paddlespeech.pdf",
+      "docs/topic/ctc/img/**",
+      "docs/topic/gan_vocoder/imgs/**",
+      "runtime/examples/android/VadJni/app/src/main/res/mipmap-hdpi/**",
+      "runtime/examples/android/VadJni/app/src/main/res/mipmap-mdpi/**",
+      "runtime/examples/android/VadJni/app/src/main/res/mipmap-xhdpi/**",
+      "runtime/examples/android/VadJni/app/src/main/res/mipmap-xxhdpi/**",
+      "runtime/examples/android/VadJni/app/src/main/res/mipmap-xxxhdpi/**",
+      "runtime/examples/android/VadJni/gradle/wrapper/gradle-wrapper.jar",
+      "runtime/examples/audio_classification/android_demo/app/src/main/cpp/jniLibs/**",
+      "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-hdpi/**",
+      "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-mdpi/**",
+      "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-xhdpi/**",
+      "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-xxhdpi/**",
+      "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-xxxhdpi/**",
+      "runtime/examples/audio_classification/android_demo/gradle/wrapper/gradle-wrapper.jar",
+      "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/executionHistory/**",
+      "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/fileChanges/**",
+      "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/fileContent/**",
+      "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/fileHashes/**",
+      "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/javaCompile/**",
+      "runtime/examples/vad/vad-android-demo/.gradle/buildOutputCleanup/buildOutputCleanup.lock",
+      "runtime/examples/vad/vad-android-demo/.gradle/buildOutputCleanup/outputFiles.bin",
+      "runtime/examples/vad/vad-android-demo/.gradle/checksums/**",
+      "runtime/examples/vad/vad-android-demo/demo.gif",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-hdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-mdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-xhdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-xxhdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-xxxhdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-hdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-mdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-xhdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-xxhdpi/**",
+      "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-xxxhdpi/**",
+      "runtime/examples/vad/vad-android-demo/gradle/wrapper/gradle-wrapper.jar",
+      "third_party/README.md",
+      "third_party/__init__.py",
+      "third_party/ctc_decoders/**",
+      "third_party/install.sh",
+      "third_party/install_win_ctc.bat",
+      "third_party/python_kaldi_features/english.wav"
+    ]
+  },
+  "history": {
+    "since": "ecbed5565d8bde20845e96489ef6a511f065a447"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND CC0-1.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nCreative Commons Legal Code\n\nCC0 1.0 Universal\n\n    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\n    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\n    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\n    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\n    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\n    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\n    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\n    HEREUNDER.\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator\nand subsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for\nthe purpose of contributing to a commons of creative, cultural and\nscientific works (\"Commons\") that the public can reliably and without fear\nof later claims of infringement build upon, modify, incorporate in other\nworks, reuse and redistribute as freely as possible in any form whatsoever\nand for any purposes, including without limitation commercial purposes.\nThese owners may contribute to the Commons to promote the ideal of a free\nculture and the further production of creative, cultural and scientific\nworks, or to gain reputation or greater distribution for their Work in\npart through the use and efforts of others.\n\nFor these and/or other purposes and motivations, and without any\nexpectation of additional consideration or compensation, the person\nassociating CC0 with a Work (the \"Affirmer\"), to the extent that he or she\nis an owner of Copyright and Related Rights in the Work, voluntarily\nelects to apply CC0 to the Work and publicly distribute the Work under its\nterms, with knowledge of his or her Copyright and Related Rights in the\nWork and the meaning and intended legal effect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not\nlimited to, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display,\n     communicate, and translate a Work;\n ii. moral rights retained by the original author(s) and/or performer(s);\niii. publicity and privacy rights pertaining to a person's image or\n     likeness depicted in a Work;\n iv. rights protecting against unfair competition in regards to a Work,\n     subject to the limitations in paragraph 4(a), below;\n  v. rights protecting the extraction, dissemination, use and reuse of data\n     in a Work;\n vi. database rights (such as those arising under Directive 96/9/EC of the\n     European Parliament and of the Council of 11 March 1996 on the legal\n     protection of databases, and under any national implementation\n     thereof, including any amended or successor version of such\n     directive); and\nvii. other similar, equivalent or corresponding rights throughout the\n     world based on applicable law or treaty, and any national\n     implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention\nof, applicable law, Affirmer hereby overtly, fully, permanently,\nirrevocably and unconditionally waives, abandons, and surrenders all of\nAffirmer's Copyright and Related Rights and associated claims and causes\nof action, whether now known or unknown (including existing as well as\nfuture claims and causes of action), in the Work (i) in all territories\nworldwide, (ii) for the maximum duration provided by applicable law or\ntreaty (including future time extensions), (iii) in any current or future\nmedium and for any number of copies, and (iv) for any purpose whatsoever,\nincluding without limitation commercial, advertising or promotional\npurposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each\nmember of the public at large and to the detriment of Affirmer's heirs and\nsuccessors, fully intending that such Waiver shall not be subject to\nrevocation, rescission, cancellation, termination, or any other legal or\nequitable action to disrupt the quiet enjoyment of the Work by the public\nas contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason\nbe judged legally invalid or ineffective under applicable law, then the\nWaiver shall be preserved to the maximum extent permitted taking into\naccount Affirmer's express Statement of Purpose. In addition, to the\nextent the Waiver is so judged Affirmer hereby grants to each affected\nperson a royalty-free, non transferable, non sublicensable, non exclusive,\nirrevocable and unconditional license to exercise Affirmer's Copyright and\nRelated Rights in the Work (i) in all territories worldwide, (ii) for the\nmaximum duration provided by applicable law or treaty (including future\ntime extensions), (iii) in any current or future medium and for any number\nof copies, and (iv) for any purpose whatsoever, including without\nlimitation commercial, advertising or promotional purposes (the\n\"License\"). The License shall be deemed effective as of the date CC0 was\napplied by Affirmer to the Work. Should any part of the License for any\nreason be judged legally invalid or ineffective under applicable law, such\npartial invalidity or ineffectiveness shall not invalidate the remainder\nof the License, and in such case Affirmer hereby affirms that he or she\nwill not (i) exercise any of his or her remaining Copyright and Related\nRights in the Work or (ii) assert any associated claims and causes of\naction with respect to the Work, in either case contrary to Affirmer's\nexpress Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n a. No trademark or patent rights held by Affirmer are waived, abandoned,\n    surrendered, licensed or otherwise affected by this document.\n b. Affirmer offers the Work as-is and makes no representations or\n    warranties of any kind concerning the Work, express, implied,\n    statutory or otherwise, including without limitation warranties of\n    title, merchantability, fitness for a particular purpose, non\n    infringement, or the absence of latent or other defects, accuracy, or\n    the present or absence of errors, whether or not discoverable, all to\n    the greatest extent permissible under applicable law.\n c. Affirmer disclaims responsibility for clearing rights of other persons\n    that may apply to the Work or any use thereof, including without\n    limitation any person's Copyright and Related Rights in the Work.\n    Further, Affirmer disclaims responsibility for obtaining any necessary\n    consents, permissions or other rights required for any use of the\n    Work.\n d. Affirmer understands and acknowledges that Creative Commons is not a\n    party to this document and has no duty or obligation with respect to\n    this CC0 or use of the Work.\n\n\nCopyright 2019 Georgiy Konovalov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and \nassociated documentation files (the \"Software\"), to deal in the Software without restriction, \nincluding without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, \nand/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, \nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial \nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT \nNOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND \nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, \nDAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, \nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nThe MIT License (MIT)\n\nCopyright (c) 2013 James Lyons\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/PaddlePaddle/PaddleSpeech: the authors of PaddlePaddle/PaddleSpeech (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/PaddlePaddle/PaddleSpeech; the authors of PaddlePaddle/PaddleSpeech (audio/paddleaudio/src/optional) (the license file names no copyright line), CC0-1.0 license (COPYING), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/audio/paddleaudio/src/optional; Copyright 2019 Georgiy Konovalov, MIT license (LICENSE.md), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/runtime/examples/vad/vad-android-demo; Copyright (c) 2013 James Lyons, MIT license (LICENSE), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/third_party/python_kaldi_features."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".clang-format",
+        ".flake8",
+        ".gitconfig",
+        ".github/**",
+        ".gitignore",
+        ".mergify.yml",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yml",
+        ".style.yapf",
+        ".travis.yml",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "README_cn.md",
+        "audio/CMakeLists.txt",
+        "audio/README.md",
+        "audio/cmake/FindGFortranLibs.cmake",
+        "audio/cmake/pybind.cmake",
+        "audio/cmake/summary.cmake",
+        "audio/paddleaudio/CMakeLists.txt",
+        "audio/paddleaudio/__init__.py",
+        "audio/paddleaudio/_extension.py",
+        "audio/paddleaudio/_internal/**",
+        "audio/paddleaudio/backends/**",
+        "audio/paddleaudio/compliance/**",
+        "audio/paddleaudio/datasets/**",
+        "audio/paddleaudio/features/**",
+        "audio/paddleaudio/functional/**",
+        "audio/paddleaudio/kaldi/**",
+        "audio/paddleaudio/metric/**",
+        "audio/paddleaudio/sox_effects/**",
+        "audio/paddleaudio/src/CMakeLists.txt",
+        "audio/paddleaudio/src/pybind/**",
+        "audio/paddleaudio/src/utils.cpp",
+        "audio/paddleaudio/utils/**",
+        "audio/setup.py",
+        "audio/tests/backends/**",
+        "audio/tests/benchmark/**",
+        "audio/tests/common_utils/**",
+        "audio/tests/features/__init__.py",
+        "audio/tests/features/base.py",
+        "audio/tests/features/test_istft.py",
+        "audio/tests/features/test_kaldi.py",
+        "audio/tests/features/test_kaldi_feat.py",
+        "audio/tests/features/test_librosa.py",
+        "audio/tests/features/test_log_melspectrogram.py",
+        "audio/tests/features/test_spectrogram.py",
+        "audio/tests/features/test_stft.py",
+        "audio/tests/features/testdata/fbank_feat_txt.ark",
+        "audio/tests/features/testdata/pitch_feat_txt.ark",
+        "audio/tools/**",
+        "dataset/**",
+        "demos/README.md",
+        "demos/README_cn.md",
+        "demos/TTSAndroid/.gitignore",
+        "demos/TTSAndroid/README.md",
+        "demos/TTSAndroid/app/.gitignore",
+        "demos/TTSAndroid/app/build.gradle",
+        "demos/TTSAndroid/app/proguard-rules.pro",
+        "demos/TTSAndroid/app/src/androidTest/**",
+        "demos/TTSAndroid/app/src/main/AndroidManifest.xml",
+        "demos/TTSAndroid/app/src/main/java/**",
+        "demos/TTSAndroid/app/src/main/res/drawable/button_drawable.xml",
+        "demos/TTSAndroid/app/src/main/res/layout/**",
+        "demos/TTSAndroid/app/src/main/res/menu/**",
+        "demos/TTSAndroid/app/src/main/res/values/**",
+        "demos/TTSAndroid/app/src/main/res/xml/**",
+        "demos/TTSAndroid/app/src/test/**",
+        "demos/TTSAndroid/build.gradle",
+        "demos/TTSAndroid/gradle/wrapper/gradle-wrapper.properties",
+        "demos/TTSAndroid/gradle.properties",
+        "demos/TTSAndroid/gradlew",
+        "demos/TTSAndroid/gradlew.bat",
+        "demos/TTSAndroid/settings.gradle",
+        "demos/TTSArmLinux/**",
+        "demos/TTSCppFrontend/.gitignore",
+        "demos/TTSCppFrontend/CMakeLists.txt",
+        "demos/TTSCppFrontend/README.md",
+        "demos/TTSCppFrontend/build-depends.sh",
+        "demos/TTSCppFrontend/build.sh",
+        "demos/TTSCppFrontend/clean.sh",
+        "demos/TTSCppFrontend/download.sh",
+        "demos/TTSCppFrontend/front_demo/**",
+        "demos/TTSCppFrontend/run_front_demo.sh",
+        "demos/TTSCppFrontend/src/**",
+        "demos/asr_deployment/**",
+        "demos/audio_content_search/**",
+        "demos/audio_searching/README.md",
+        "demos/audio_searching/README_cn.md",
+        "demos/audio_searching/docker-compose.yaml",
+        "demos/audio_searching/requirements.txt",
+        "demos/audio_searching/src/**",
+        "demos/audio_tagging/**",
+        "demos/automatic_video_subtitiles/**",
+        "demos/custom_streaming_asr/**",
+        "demos/keyword_spotting/**",
+        "demos/metaverse/**",
+        "demos/punctuation_restoration/**",
+        "demos/speaker_verification/**",
+        "demos/speech_recognition/**",
+        "demos/speech_server/**",
+        "demos/speech_ssl/**",
+        "demos/speech_translation/**",
+        "demos/speech_web/.gitignore",
+        "demos/speech_web/API.md",
+        "demos/speech_web/README.md",
+        "demos/speech_web/speech_server/**",
+        "demos/speech_web/web_client/.gitignore",
+        "demos/speech_web/web_client/index.html",
+        "demos/speech_web/web_client/package-lock.json",
+        "demos/speech_web/web_client/package.json",
+        "demos/speech_web/web_client/src/App.vue",
+        "demos/speech_web/web_client/src/api/**",
+        "demos/speech_web/web_client/src/assets/image/ic_大-上传文件.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_大-声音波浪.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_大-语音.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_小-录制语音.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_小-结束.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_开始聊天.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_开始聊天_hover.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_播放（按钮）.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_暂停（按钮）.svg",
+        "demos/speech_web/web_client/src/assets/image/ic_更换示例.svg",
+        "demos/speech_web/web_client/src/assets/image/icon_小-声音波浪.svg",
+        "demos/speech_web/web_client/src/assets/image/icon_录制声音小语音1.svg",
+        "demos/speech_web/web_client/src/components/**",
+        "demos/speech_web/web_client/src/main.js",
+        "demos/speech_web/web_client/vite.config.js",
+        "demos/speech_web/web_client/yarn.lock",
+        "demos/story_talker/**",
+        "demos/streaming_asr_server/.gitignore",
+        "demos/streaming_asr_server/README.md",
+        "demos/streaming_asr_server/README_cn.md",
+        "demos/streaming_asr_server/conf/**",
+        "demos/streaming_asr_server/local/**",
+        "demos/streaming_asr_server/run.sh",
+        "demos/streaming_asr_server/server.sh",
+        "demos/streaming_asr_server/test.sh",
+        "demos/streaming_asr_server/web/index.html",
+        "demos/streaming_asr_server/web/readme.md",
+        "demos/streaming_tts_server/**",
+        "demos/streaming_tts_serving_fastdeploy/README.md",
+        "demos/streaming_tts_serving_fastdeploy/README_cn.md",
+        "demos/streaming_tts_serving_fastdeploy/streaming_tts_serving/**",
+        "demos/style_fs2/**",
+        "demos/text_to_speech/**",
+        "demos/whisper/**",
+        "docker/**",
+        "docs/Makefile",
+        "docs/requirements.txt",
+        "docs/source/**",
+        "docs/topic/ctc/ctc_loss.ipynb",
+        "docs/topic/ctc/ctc_loss_compare.ipynb",
+        "docs/topic/ctc/ctc_loss_speed_compare.ipynb",
+        "docs/topic/frontend/**",
+        "docs/topic/gan_vocoder/gan_vocoder.ipynb",
+        "docs/topic/package_release/**",
+        "docs/tutorial/**",
+        "examples/**",
+        "paddlespeech/**",
+        "runtime/.clang-format",
+        "runtime/.gitignore",
+        "runtime/CMakeLists.txt",
+        "runtime/README.md",
+        "runtime/build.sh",
+        "runtime/build_android.sh",
+        "runtime/build_ios.sh",
+        "runtime/cmake/**",
+        "runtime/docker/**",
+        "runtime/engine/**",
+        "runtime/examples/.gitignore",
+        "runtime/examples/README.md",
+        "runtime/examples/android/VadJni/.gitignore",
+        "runtime/examples/android/VadJni/.idea/**",
+        "runtime/examples/android/VadJni/app/.gitignore",
+        "runtime/examples/android/VadJni/app/build.gradle",
+        "runtime/examples/android/VadJni/app/libs/**",
+        "runtime/examples/android/VadJni/app/proguard-rules.pro",
+        "runtime/examples/android/VadJni/app/src/androidTest/**",
+        "runtime/examples/android/VadJni/app/src/main/AndroidManifest.xml",
+        "runtime/examples/android/VadJni/app/src/main/assets/**",
+        "runtime/examples/android/VadJni/app/src/main/cpp/**",
+        "runtime/examples/android/VadJni/app/src/main/java/**",
+        "runtime/examples/android/VadJni/app/src/main/res/drawable/**",
+        "runtime/examples/android/VadJni/app/src/main/res/drawable-v24/**",
+        "runtime/examples/android/VadJni/app/src/main/res/layout/**",
+        "runtime/examples/android/VadJni/app/src/main/res/mipmap-anydpi-v26/**",
+        "runtime/examples/android/VadJni/app/src/main/res/mipmap-anydpi-v33/**",
+        "runtime/examples/android/VadJni/app/src/main/res/values/**",
+        "runtime/examples/android/VadJni/app/src/main/res/values-night/**",
+        "runtime/examples/android/VadJni/app/src/main/res/xml/**",
+        "runtime/examples/android/VadJni/build.gradle",
+        "runtime/examples/android/VadJni/gradle/wrapper/gradle-wrapper.properties",
+        "runtime/examples/android/VadJni/gradle.properties",
+        "runtime/examples/android/VadJni/gradlew",
+        "runtime/examples/android/VadJni/gradlew.bat",
+        "runtime/examples/android/VadJni/settings.gradle",
+        "runtime/examples/audio_classification/README.md",
+        "runtime/examples/audio_classification/android_demo/.gitignore",
+        "runtime/examples/audio_classification/android_demo/.idea/**",
+        "runtime/examples/audio_classification/android_demo/app/.gitignore",
+        "runtime/examples/audio_classification/android_demo/app/build.gradle",
+        "runtime/examples/audio_classification/android_demo/app/proguard-rules.pro",
+        "runtime/examples/audio_classification/android_demo/app/src/androidTest/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/AndroidManifest.xml",
+        "runtime/examples/audio_classification/android_demo/app/src/main/cpp/CMakeLists.txt",
+        "runtime/examples/audio_classification/android_demo/app/src/main/cpp/includes/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/cpp/native-lib.cpp",
+        "runtime/examples/audio_classification/android_demo/app/src/main/java/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/drawable/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/drawable-v24/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/layout/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/mipmap-anydpi-v26/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/values/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/values-night/**",
+        "runtime/examples/audio_classification/android_demo/app/src/main/res/xml/**",
+        "runtime/examples/audio_classification/android_demo/build.gradle",
+        "runtime/examples/audio_classification/android_demo/gradle/wrapper/gradle-wrapper.properties",
+        "runtime/examples/audio_classification/android_demo/gradle.properties",
+        "runtime/examples/audio_classification/android_demo/gradlew",
+        "runtime/examples/audio_classification/android_demo/gradlew.bat",
+        "runtime/examples/audio_classification/android_demo/settings.gradle",
+        "runtime/examples/audio_classification/conf",
+        "runtime/examples/audio_classification/label_list",
+        "runtime/examples/audio_classification/scp",
+        "runtime/examples/codelab/**",
+        "runtime/examples/custom_asr/**",
+        "runtime/examples/text_lm/**",
+        "runtime/examples/u2pp_ol/**",
+        "runtime/examples/vad/.gitignore",
+        "runtime/examples/vad/README.md",
+        "runtime/examples/vad/conf/**",
+        "runtime/examples/vad/local/**",
+        "runtime/examples/vad/path.sh",
+        "runtime/examples/vad/run.sh",
+        "runtime/examples/vad/utils",
+        "runtime/patch/**",
+        "runtime/tools/**",
+        "setup.cfg",
+        "setup.py",
+        "tests/**",
+        "tools/**",
+        "utils/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of PaddlePaddle/PaddleSpeech (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/PaddlePaddle/PaddleSpeech."
+    },
+    {
+      "license": "CC0-1.0",
+      "paths": [
+        "audio/paddleaudio/src/optional/**"
+      ],
+      "text": "Creative Commons Legal Code\n\nCC0 1.0 Universal\n\n    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\n    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\n    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\n    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\n    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\n    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\n    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\n    HEREUNDER.\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator\nand subsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for\nthe purpose of contributing to a commons of creative, cultural and\nscientific works (\"Commons\") that the public can reliably and without fear\nof later claims of infringement build upon, modify, incorporate in other\nworks, reuse and redistribute as freely as possible in any form whatsoever\nand for any purposes, including without limitation commercial purposes.\nThese owners may contribute to the Commons to promote the ideal of a free\nculture and the further production of creative, cultural and scientific\nworks, or to gain reputation or greater distribution for their Work in\npart through the use and efforts of others.\n\nFor these and/or other purposes and motivations, and without any\nexpectation of additional consideration or compensation, the person\nassociating CC0 with a Work (the \"Affirmer\"), to the extent that he or she\nis an owner of Copyright and Related Rights in the Work, voluntarily\nelects to apply CC0 to the Work and publicly distribute the Work under its\nterms, with knowledge of his or her Copyright and Related Rights in the\nWork and the meaning and intended legal effect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not\nlimited to, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display,\n     communicate, and translate a Work;\n ii. moral rights retained by the original author(s) and/or performer(s);\niii. publicity and privacy rights pertaining to a person's image or\n     likeness depicted in a Work;\n iv. rights protecting against unfair competition in regards to a Work,\n     subject to the limitations in paragraph 4(a), below;\n  v. rights protecting the extraction, dissemination, use and reuse of data\n     in a Work;\n vi. database rights (such as those arising under Directive 96/9/EC of the\n     European Parliament and of the Council of 11 March 1996 on the legal\n     protection of databases, and under any national implementation\n     thereof, including any amended or successor version of such\n     directive); and\nvii. other similar, equivalent or corresponding rights throughout the\n     world based on applicable law or treaty, and any national\n     implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention\nof, applicable law, Affirmer hereby overtly, fully, permanently,\nirrevocably and unconditionally waives, abandons, and surrenders all of\nAffirmer's Copyright and Related Rights and associated claims and causes\nof action, whether now known or unknown (including existing as well as\nfuture claims and causes of action), in the Work (i) in all territories\nworldwide, (ii) for the maximum duration provided by applicable law or\ntreaty (including future time extensions), (iii) in any current or future\nmedium and for any number of copies, and (iv) for any purpose whatsoever,\nincluding without limitation commercial, advertising or promotional\npurposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each\nmember of the public at large and to the detriment of Affirmer's heirs and\nsuccessors, fully intending that such Waiver shall not be subject to\nrevocation, rescission, cancellation, termination, or any other legal or\nequitable action to disrupt the quiet enjoyment of the Work by the public\nas contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason\nbe judged legally invalid or ineffective under applicable law, then the\nWaiver shall be preserved to the maximum extent permitted taking into\naccount Affirmer's express Statement of Purpose. In addition, to the\nextent the Waiver is so judged Affirmer hereby grants to each affected\nperson a royalty-free, non transferable, non sublicensable, non exclusive,\nirrevocable and unconditional license to exercise Affirmer's Copyright and\nRelated Rights in the Work (i) in all territories worldwide, (ii) for the\nmaximum duration provided by applicable law or treaty (including future\ntime extensions), (iii) in any current or future medium and for any number\nof copies, and (iv) for any purpose whatsoever, including without\nlimitation commercial, advertising or promotional purposes (the\n\"License\"). The License shall be deemed effective as of the date CC0 was\napplied by Affirmer to the Work. Should any part of the License for any\nreason be judged legally invalid or ineffective under applicable law, such\npartial invalidity or ineffectiveness shall not invalidate the remainder\nof the License, and in such case Affirmer hereby affirms that he or she\nwill not (i) exercise any of his or her remaining Copyright and Related\nRights in the Work or (ii) assert any associated claims and causes of\naction with respect to the Work, in either case contrary to Affirmer's\nexpress Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n a. No trademark or patent rights held by Affirmer are waived, abandoned,\n    surrendered, licensed or otherwise affected by this document.\n b. Affirmer offers the Work as-is and makes no representations or\n    warranties of any kind concerning the Work, express, implied,\n    statutory or otherwise, including without limitation warranties of\n    title, merchantability, fitness for a particular purpose, non\n    infringement, or the absence of latent or other defects, accuracy, or\n    the present or absence of errors, whether or not discoverable, all to\n    the greatest extent permissible under applicable law.\n c. Affirmer disclaims responsibility for clearing rights of other persons\n    that may apply to the Work or any use thereof, including without\n    limitation any person's Copyright and Related Rights in the Work.\n    Further, Affirmer disclaims responsibility for obtaining any necessary\n    consents, permissions or other rights required for any use of the\n    Work.\n d. Affirmer understands and acknowledges that Creative Commons is not a\n    party to this document and has no duty or obligation with respect to\n    this CC0 or use of the Work.\n",
+      "attribution": "the authors of PaddlePaddle/PaddleSpeech (audio/paddleaudio/src/optional) (the license file names no copyright line), CC0-1.0 license (COPYING), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/audio/paddleaudio/src/optional."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "runtime/examples/vad/vad-android-demo/.gradle/6.1.1/gc.properties",
+        "runtime/examples/vad/vad-android-demo/.gradle/buildOutputCleanup/cache.properties",
+        "runtime/examples/vad/vad-android-demo/.gradle/vcs-1/**",
+        "runtime/examples/vad/vad-android-demo/.idea/**",
+        "runtime/examples/vad/vad-android-demo/LICENSE.md",
+        "runtime/examples/vad/vad-android-demo/README",
+        "runtime/examples/vad/vad-android-demo/README.md",
+        "runtime/examples/vad/vad-android-demo/build.gradle",
+        "runtime/examples/vad/vad-android-demo/example/.gitignore",
+        "runtime/examples/vad/vad-android-demo/example/build.gradle",
+        "runtime/examples/vad/vad-android-demo/example/local.properties",
+        "runtime/examples/vad/vad-android-demo/example/proguard-rules.pro",
+        "runtime/examples/vad/vad-android-demo/example/src/androidTest/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/AndroidManifest.xml",
+        "runtime/examples/vad/vad-android-demo/example/src/main/java/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/res/drawable-v24/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/res/layout/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/res/mipmap-anydpi-v26/**",
+        "runtime/examples/vad/vad-android-demo/example/src/main/res/values/**",
+        "runtime/examples/vad/vad-android-demo/gradle/wrapper/gradle-wrapper.properties",
+        "runtime/examples/vad/vad-android-demo/gradle.properties",
+        "runtime/examples/vad/vad-android-demo/gradlew",
+        "runtime/examples/vad/vad-android-demo/gradlew.bat",
+        "runtime/examples/vad/vad-android-demo/local.properties",
+        "runtime/examples/vad/vad-android-demo/settings.gradle",
+        "runtime/examples/vad/vad-android-demo/vad/**"
+      ],
+      "text": "Copyright 2019 Georgiy Konovalov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and \nassociated documentation files (the \"Software\"), to deal in the Software without restriction, \nincluding without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, \nand/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, \nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial \nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT \nNOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND \nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, \nDAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, \nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Copyright 2019 Georgiy Konovalov, MIT license (LICENSE.md), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/runtime/examples/vad/vad-android-demo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "third_party/python_kaldi_features/.gitignore",
+        "third_party/python_kaldi_features/LICENSE",
+        "third_party/python_kaldi_features/MANIFEST",
+        "third_party/python_kaldi_features/README.rst",
+        "third_party/python_kaldi_features/docs/**",
+        "third_party/python_kaldi_features/example.py",
+        "third_party/python_kaldi_features/python_speech_features/**",
+        "third_party/python_kaldi_features/requirements.txt",
+        "third_party/python_kaldi_features/setup.py",
+        "third_party/python_kaldi_features/test/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2013 James Lyons\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2013 James Lyons, MIT license (LICENSE), https://github.com/PaddlePaddle/PaddleSpeech/tree/6b25a400008d393f9c3af837b3c692b17f29ee1a/third_party/python_kaldi_features."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lexicon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbtxt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.perl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rst_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "demos/audio_content_search/conf/words.txt",
+        "demos/audio_content_search/requirements.txt",
+        "demos/audio_searching/requirements.txt",
+        "demos/metaverse/sentences.txt",
+        "demos/speech_web/speech_server/requirements.txt",
+        "demos/style_fs2/sentences.txt",
+        "docs/requirements.txt",
+        "docs/source/tts/test_sentence.txt",
+        "examples/opencpop/svs1/local/pinyin_to_phone.txt",
+        "examples/other/ngram_lm/s0/data/custom_confusion.txt",
+        "examples/other/ngram_lm/s0/data/text_correct.txt",
+        "examples/other/ngram_lm/s0/requirements.txt",
+        "examples/other/tn/data/textnorm_test_cases.txt",
+        "examples/other/tts_finetune/tts3/conf/fastspeech2_layers.txt",
+        "paddlespeech/t2s/assets/csmsc_test.txt",
+        "paddlespeech/t2s/assets/sentences.txt",
+        "paddlespeech/t2s/assets/sentences_canton.txt",
+        "paddlespeech/t2s/assets/sentences_en.txt",
+        "paddlespeech/t2s/assets/sentences_mix.txt",
+        "paddlespeech/t2s/assets/sentences_sing.txt",
+        "paddlespeech/t2s/assets/sentences_ssml.txt",
+        "tests/chains/ds2/ds2_params_lite_train_infer.txt",
+        "tests/chains/ds2/ds2_params_whole_train_infer.txt",
+        "tests/chains/ds2/speedyspeech_params_lite.txt",
+        "tests/chains/speedyspeech/speedyspeech_params_lite_multi_gpu.txt",
+        "tests/chains/speedyspeech/speedyspeech_params_lite_single_gpu.txt",
+        "tests/chains/speedyspeech/speedyspeech_params_whole_multi_gpu.txt",
+        "tests/chains/speedyspeech/speedyspeech_params_whole_single_gpu.txt",
+        "tests/test_tipc/configs/conformer/train_infer_python.txt",
+        "tests/test_tipc/configs/mdtc/train_infer_python.txt",
+        "tests/test_tipc/configs/pwgan/train_infer_python.txt",
+        "third_party/python_kaldi_features/requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yapf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MANIFEST"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/conf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/label_list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rhy_token"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spm_decode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spm_encode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spm_train"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/text"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/whisper_LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

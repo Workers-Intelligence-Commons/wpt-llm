@@ -1,0 +1,317 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/grpc-ecosystem/grpc-gateway",
+  "revision": "089332338e0346eeca632c3a6eb8134fdb8185d5",
+  "checksum": "sha256:6bd0d56932b1080d579a7d1bf1832a73a020a408950e113593bcf4c63ad825b4",
+  "extract": {
+    "exclude": [
+      "docs/assets/images/gotemplates/**",
+      "docs/favicon.ico",
+      "examples/internal/browser/**",
+      "protoc-gen-openapiv3/internal/genopenapi/testdata/**"
+    ]
+  },
+  "history": {
+    "since": "bfe6d92b0a6e46e32d3a0bafd4bd5d56d7eb10de"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2015, Gengo, Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n\n    * Redistributions in binary form must reproduce the above copyright notice,\n      this list of conditions and the following disclaimer in the documentation\n      and/or other materials provided with the distribution.\n\n    * Neither the name of Gengo, Inc. nor the names of its\n      contributors may be used to endorse or promote products derived from this\n      software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright 2010, 2019 The Go Authors.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Commit history of https://github.com/grpc-ecosystem/grpc-gateway: Copyright (c) 2015, Gengo, Inc., BSD-3-Clause license (LICENSE), https://github.com/grpc-ecosystem/grpc-gateway; Copyright 2010, 2019 The Go Authors.  All rights reserved., BSD-3-Clause license (LICENSE.md), https://github.com/grpc-ecosystem/grpc-gateway/tree/089332338e0346eeca632c3a6eb8134fdb8185d5/internal/casing."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".bazelci/**",
+        ".bazelrc",
+        ".bazelversion",
+        ".devcontainer/**",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".goreleaser.yml",
+        "ADOPTERS.md",
+        "BUILD.bazel",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MODULE.bazel",
+        "MODULE.bazel.lock",
+        "Makefile",
+        "README.md",
+        "WORKSPACE",
+        "bin/**",
+        "buf.gen.yaml",
+        "buf.lock",
+        "buf.yaml",
+        "docs/.gitignore",
+        "docs/Gemfile",
+        "docs/Gemfile.lock",
+        "docs/_config.yml",
+        "docs/_layouts/**",
+        "docs/assets/images/architecture_introduction_diagram.svg",
+        "docs/docs/**",
+        "docs/index.md",
+        "docs/run.sh",
+        "examples/internal/README.md",
+        "examples/internal/clients/**",
+        "examples/internal/cmd/**",
+        "examples/internal/gateway/**",
+        "examples/internal/helloworld/**",
+        "examples/internal/integration/**",
+        "examples/internal/proto/**",
+        "examples/internal/server/**",
+        "go.mod",
+        "go.sum",
+        "internal/codegenerator/**",
+        "internal/descriptor/**",
+        "internal/generator/**",
+        "internal/httprule/**",
+        "non_module_deps.bzl",
+        "openapiv3-merge/**",
+        "protoc-gen-grpc-gateway/**",
+        "protoc-gen-openapiv2/**",
+        "protoc-gen-openapiv3/BUILD.bazel",
+        "protoc-gen-openapiv3/buf.gen.yaml",
+        "protoc-gen-openapiv3/internal/genopenapi/BUILD.bazel",
+        "protoc-gen-openapiv3/internal/genopenapi/annotations.go",
+        "protoc-gen-openapiv3/internal/genopenapi/annotations_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/comments.go",
+        "protoc-gen-openapiv3/internal/genopenapi/comments_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/doc.go",
+        "protoc-gen-openapiv3/internal/genopenapi/generator.go",
+        "protoc-gen-openapiv3/internal/genopenapi/generator_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/naming.go",
+        "protoc-gen-openapiv3/internal/genopenapi/operation.go",
+        "protoc-gen-openapiv3/internal/genopenapi/operation_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/path.go",
+        "protoc-gen-openapiv3/internal/genopenapi/path_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/schema.go",
+        "protoc-gen-openapiv3/internal/genopenapi/schema_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/types.go",
+        "protoc-gen-openapiv3/internal/genopenapi/visibility.go",
+        "protoc-gen-openapiv3/internal/genopenapi/visibility_test.go",
+        "protoc-gen-openapiv3/internal/genopenapi/wkt.go",
+        "protoc-gen-openapiv3/main.go",
+        "protoc-gen-openapiv3/main_test.go",
+        "protoc-gen-openapiv3/options/**",
+        "renovate.json",
+        "repositories.bzl",
+        "runtime/**",
+        "utilities/**"
+      ],
+      "text": "Copyright (c) 2015, Gengo, Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n\n    * Redistributions in binary form must reproduce the above copyright notice,\n      this list of conditions and the following disclaimer in the documentation\n      and/or other materials provided with the distribution.\n\n    * Neither the name of Gengo, Inc. nor the names of its\n      contributors may be used to endorse or promote products derived from this\n      software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2015, Gengo, Inc., BSD-3-Clause license (LICENSE), https://github.com/grpc-ecosystem/grpc-gateway."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "internal/casing/**"
+      ],
+      "text": "Copyright 2010, 2019 The Go Authors.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n    * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n    * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Copyright 2010, 2019 The Go Authors.  All rights reserved., BSD-3-Clause license (LICENSE.md), https://github.com/grpc-ecosystem/grpc-gateway/tree/089332338e0346eeca632c3a6eb8134fdb8185d5/internal/casing."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prototext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

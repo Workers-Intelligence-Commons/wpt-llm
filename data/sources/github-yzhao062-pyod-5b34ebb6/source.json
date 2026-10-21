@@ -1,0 +1,474 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/yzhao062/pyod",
+  "revision": "f0d0967d162ed46150cfa39ca61ffd1e7f78404b",
+  "checksum": "sha256:c2f90b67d72865a6604e656a892ae43d6c1a632fd730c4988167e1d1a41571cc",
+  "extract": {
+    "exclude": [
+      "docs/figs/**",
+      "examples/ALL.png",
+      "examples/KNN.png",
+      "examples/data/arrhythmia.mat",
+      "examples/data/cardio.mat",
+      "examples/data/ionosphere.mat",
+      "examples/data/letter.mat",
+      "examples/data/pima.mat",
+      "notebooks/data/arrhythmia.mat",
+      "notebooks/data/cardio.mat",
+      "notebooks/data/glass.mat",
+      "notebooks/data/ionosphere.mat",
+      "notebooks/data/letter.mat",
+      "notebooks/data/lympho.mat",
+      "notebooks/data/mnist.mat",
+      "notebooks/data/musk.mat",
+      "notebooks/data/optdigits.mat",
+      "notebooks/data/pendigits.mat",
+      "notebooks/data/pima.mat",
+      "notebooks/data/satellite.mat",
+      "notebooks/data/satimage-2.mat",
+      "notebooks/data/shuttle.mat",
+      "notebooks/data/vertebral.mat",
+      "notebooks/data/vowels.mat",
+      "notebooks/data/wbc.mat",
+      "pyod/test/data/cardio.mat",
+      "pyod/test/data/pima.mat",
+      "pyod/test/data/ts_demo.mat",
+      "pyod/test/fixtures/iforest_sklearn_1_2_x.joblib",
+      "pyod/test/fixtures/iforest_sklearn_1_2_x_expected_scores.npy"
+    ]
+  },
+  "history": {
+    "since": "85a20c97fe1cc6ffa030d1a57408891983f1a97b"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2018, Yue Zhao\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/yzhao062/pyod: Copyright (c) 2018, Yue Zhao, BSD-2-Clause license (LICENSE), https://github.com/yzhao062/pyod."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".readthedocs.yaml",
+        "CHANGES.txt",
+        "CITATION.cff",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "PULL_REQUEST_TEMPLATE.md",
+        "README.rst",
+        "SECURITY.md",
+        "brand/**",
+        "docs/Makefile",
+        "docs/_static/**",
+        "docs/about.rst",
+        "docs/api_cc.rst",
+        "docs/benchmark.rst",
+        "docs/build.bat",
+        "docs/build.sh",
+        "docs/conf.py",
+        "docs/examples/**",
+        "docs/faq.rst",
+        "docs/fast_train.rst",
+        "docs/impact.rst",
+        "docs/index.rst",
+        "docs/install.rst",
+        "docs/issues.rst",
+        "docs/make.bat",
+        "docs/model_persistence.rst",
+        "docs/pubs.rst",
+        "docs/pyod.ad_engine.rst",
+        "docs/pyod.models.audio.rst",
+        "docs/pyod.models.embedding.rst",
+        "docs/pyod.models.graph.rst",
+        "docs/pyod.models.tabular.rst",
+        "docs/pyod.models.timeseries.rst",
+        "docs/pyod.test.rst",
+        "docs/pyod.utils.rst",
+        "docs/rebuild.bat",
+        "docs/relevant_knowledge.rst",
+        "docs/requirements.txt",
+        "docs/skill_maintenance.rst",
+        "docs/superpowers/**",
+        "docs/tables/**",
+        "docs/thresholding.rst",
+        "docs/v3.3-backlog.md",
+        "docs/zreferences.bib",
+        "examples/README.md",
+        "examples/abod_example.py",
+        "examples/ad_engine_example.py",
+        "examples/ae1svm_example.py",
+        "examples/agentic_demo.html",
+        "examples/agentic_example.py",
+        "examples/agentic_hindsight_real_data.py",
+        "examples/alad_example.py",
+        "examples/auto_encoder_example.py",
+        "examples/auto_model_selection_example/**",
+        "examples/cblof_example.py",
+        "examples/cd_example.py",
+        "examples/cof_example.py",
+        "examples/comb_example.py",
+        "examples/compare_all_models.py",
+        "examples/copod_example.py",
+        "examples/copod_interpretability.py",
+        "examples/copod_parallel_example.py",
+        "examples/data/arrhythmia.csv",
+        "examples/data/cardio.csv",
+        "examples/data/ionosphere.csv",
+        "examples/data/letter.csv",
+        "examples/data/mat_file_conversion.py",
+        "examples/data/pima.csv",
+        "examples/deepsvdd_example.py",
+        "examples/devnet_example.py",
+        "examples/dif_example.py",
+        "examples/ecod_example.py",
+        "examples/embedding_od_example.py",
+        "examples/feature_bagging_example.py",
+        "examples/generate_data_categorical_example.py",
+        "examples/generate_data_cluster_example.py",
+        "examples/gmm_example.py",
+        "examples/hbos_example.py",
+        "examples/hdbscan_example.py",
+        "examples/iforest_example.py",
+        "examples/inne_example.py",
+        "examples/investigate_example.py",
+        "examples/kde_example.py",
+        "examples/knn_example.py",
+        "examples/knn_mahalanobis_example.py",
+        "examples/kpca_example.py",
+        "examples/lmdd_example.py",
+        "examples/loci_example.py",
+        "examples/loda_example.py",
+        "examples/lof_example.py",
+        "examples/lscp_example.py",
+        "examples/lunar_example.py",
+        "examples/mad_example.py",
+        "examples/mcd_example.py",
+        "examples/mo_gaal_example.py",
+        "examples/ocsvm_example.py",
+        "examples/pca_example.py",
+        "examples/perf_check.py",
+        "examples/pyg_anomalous_example.py",
+        "examples/pyg_anomalydae_example.py",
+        "examples/pyg_cola_example.py",
+        "examples/pyg_conad_example.py",
+        "examples/pyg_dominant_example.py",
+        "examples/pyg_guide_example.py",
+        "examples/pyg_radar_example.py",
+        "examples/pyg_scan_example.py",
+        "examples/qmcd_example.py",
+        "examples/rgraph_example.ipynb",
+        "examples/rgraph_example.py",
+        "examples/rod_example.py",
+        "examples/sampling_example.py",
+        "examples/save_load_model_example.py",
+        "examples/so_gaal_example.py",
+        "examples/so_gaal_example_new.py",
+        "examples/sod_example.py",
+        "examples/sos_example.py",
+        "examples/suod_example.py",
+        "examples/threshold_example.py",
+        "examples/ts_kshape_example.py",
+        "examples/ts_matrix_profile_example.py",
+        "examples/ts_od_example.py",
+        "examples/ts_sand_example.py",
+        "examples/ts_spectral_residual_example.py",
+        "examples/vae_example.py",
+        "examples/xgbod_example.py",
+        "notebooks/Benchmark.ipynb",
+        "notebooks/Compare All Models.ipynb",
+        "notebooks/Model Combination.ipynb",
+        "notebooks/benchmark.py",
+        "notebooks/data/README.md",
+        "notebooks/prc.csv",
+        "notebooks/roc.csv",
+        "notebooks/time.csv",
+        "pyod/__init__.py",
+        "pyod/cli.py",
+        "pyod/mcp_server.py",
+        "pyod/models/**",
+        "pyod/skills/**",
+        "pyod/test/__init__.py",
+        "pyod/test/conftest.py",
+        "pyod/test/data/cardio.csv",
+        "pyod/test/data/pima.csv",
+        "pyod/test/fixtures/README.md",
+        "pyod/test/fixtures/iforest_sklearn_1_2_x_meta.json",
+        "pyod/test/fixtures/regen_iforest_sklearn_1_2.py",
+        "pyod/test/test_abod.py",
+        "pyod/test/test_ad_engine.py",
+        "pyod/test/test_ad_engine_compare.py",
+        "pyod/test/test_ad_engine_v3.py",
+        "pyod/test/test_ae1svm.py",
+        "pyod/test/test_alad.py",
+        "pyod/test/test_anogan.py",
+        "pyod/test/test_audio.py",
+        "pyod/test/test_auto_encoder.py",
+        "pyod/test/test_auto_model_selector.py",
+        "pyod/test/test_base.py",
+        "pyod/test/test_base_dl.py",
+        "pyod/test/test_cblof.py",
+        "pyod/test/test_cd.py",
+        "pyod/test/test_cli.py",
+        "pyod/test/test_cof.py",
+        "pyod/test/test_combination.py",
+        "pyod/test/test_contamination_diagnostics.py",
+        "pyod/test/test_copod.py",
+        "pyod/test/test_copod_parallel.py",
+        "pyod/test/test_data.py",
+        "pyod/test/test_deepsvdd.py",
+        "pyod/test/test_devnet.py",
+        "pyod/test/test_dif.py",
+        "pyod/test/test_ecod.py",
+        "pyod/test/test_ecod_parallel.py",
+        "pyod/test/test_embedding.py",
+        "pyod/test/test_encoders.py",
+        "pyod/test/test_feature_bagging.py",
+        "pyod/test/test_gmm.py",
+        "pyod/test/test_hbos.py",
+        "pyod/test/test_hbos_auto_bins_fix.py",
+        "pyod/test/test_hbos_small_samples.py",
+        "pyod/test/test_hdbscan.py",
+        "pyod/test/test_iforest.py",
+        "pyod/test/test_inne.py",
+        "pyod/test/test_kb_router_surface1.py",
+        "pyod/test/test_kde.py",
+        "pyod/test/test_knn.py",
+        "pyod/test/test_knowledge.py",
+        "pyod/test/test_kpca.py",
+        "pyod/test/test_lmdd.py",
+        "pyod/test/test_loci.py",
+        "pyod/test/test_loda.py",
+        "pyod/test/test_lof.py",
+        "pyod/test/test_lscp.py",
+        "pyod/test/test_lunar.py",
+        "pyod/test/test_mad.py",
+        "pyod/test/test_mcd.py",
+        "pyod/test/test_mcp_server_import.py",
+        "pyod/test/test_mo_gaal.py",
+        "pyod/test/test_ocsvm.py",
+        "pyod/test/test_pca.py",
+        "pyod/test/test_persistence.py",
+        "pyod/test/test_pyg_anomalous.py",
+        "pyod/test/test_pyg_anomalydae.py",
+        "pyod/test/test_pyg_cola.py",
+        "pyod/test/test_pyg_conad.py",
+        "pyod/test/test_pyg_dominant.py",
+        "pyod/test/test_pyg_guide.py",
+        "pyod/test/test_pyg_radar.py",
+        "pyod/test/test_pyg_scan.py",
+        "pyod/test/test_qmcd.py",
+        "pyod/test/test_readme_rst.py",
+        "pyod/test/test_recover.py",
+        "pyod/test/test_regen_skill.py",
+        "pyod/test/test_rgraph.py",
+        "pyod/test/test_rod.py",
+        "pyod/test/test_sampling.py",
+        "pyod/test/test_save_load_clone.py",
+        "pyod/test/test_skill_api_refs.py",
+        "pyod/test/test_skill_kb_consistency.py",
+        "pyod/test/test_so_gaal.py",
+        "pyod/test/test_so_gaal_new.py",
+        "pyod/test/test_sod.py",
+        "pyod/test/test_sos.py",
+        "pyod/test/test_stat_models.py",
+        "pyod/test/test_suod.py",
+        "pyod/test/test_thresholds.py",
+        "pyod/test/test_torch_utility.py",
+        "pyod/test/test_ts_anomaly_transformer.py",
+        "pyod/test/test_ts_kshape.py",
+        "pyod/test/test_ts_lstm.py",
+        "pyod/test/test_ts_matrix_profile.py",
+        "pyod/test/test_ts_od.py",
+        "pyod/test/test_ts_sand.py",
+        "pyod/test/test_ts_spectral_residual.py",
+        "pyod/test/test_utility.py",
+        "pyod/test/test_vae.py",
+        "pyod/test/test_validate.py",
+        "pyod/test/test_xgbod.py",
+        "pyod/utils/**",
+        "pyod/version.py",
+        "pypi_build_commands.txt",
+        "pyproject.toml",
+        "requirements.txt",
+        "scripts/**",
+        "setup.py",
+        "todo/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2018, Yue Zhao\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2018, Yue Zhao, BSD-2-Clause license (LICENSE), https://github.com/yzhao062/pyod."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,989 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/earthly/earthly",
+  "revision": "6e641c15d3b4d7dd396363b61d2381faa2658f3d",
+  "checksum": "sha256:4e12d686d668815a2e782d1433a91f4b1b1ec32969b14df73d9e2cade3c1bd25",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "docs/alt-installation/img/**",
+      "docs/basics/img/**",
+      "docs/ci-integration/guides/img/**",
+      "docs/cloud/satellites/byoc/aws/img/**",
+      "docs/cloud/satellites/byoc/vpn/img/**",
+      "docs/cloud/satellites/gha/**",
+      "docs/guides/img/**",
+      "docs/img/**",
+      "examples/react/public/favicon.ico",
+      "examples/ruby-on-rails/vendor/**",
+      "img/**",
+      "release/msi/icon.ico",
+      "util/containerutil/testdata/**"
+    ]
+  },
+  "history": {
+    "since": "5a6b598faaaa647b15fbee961dbe9d4741dcd082"
+  },
+  "licenses": [
+    {
+      "license": "MPL-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Mozilla Public License Version 2.0\n==================================\n\n1. Definitions\n--------------\n\n1.1. \"Contributor\"\n    means each individual or legal entity that creates, contributes to\n    the creation of, or owns Covered Software.\n\n1.2. \"Contributor Version\"\n    means the combination of the Contributions of others (if any) used\n    by a Contributor and that particular Contributor's Contribution.\n\n1.3. \"Contribution\"\n    means Covered Software of a particular Contributor.\n\n1.4. \"Covered Software\"\n    means Source Code Form to which the initial Contributor has attached\n    the notice in Exhibit A, the Executable Form of such Source Code\n    Form, and Modifications of such Source Code Form, in each case\n    including portions thereof.\n\n1.5. \"Incompatible With Secondary Licenses\"\n    means\n\n    (a) that the initial Contributor has attached the notice described\n        in Exhibit B to the Covered Software; or\n\n    (b) that the Covered Software was made available under the terms of\n        version 1.1 or earlier of the License, but not also under the\n        terms of a Secondary License.\n\n1.6. \"Executable Form\"\n    means any form of the work other than Source Code Form.\n\n1.7. \"Larger Work\"\n    means a work that combines Covered Software with other material, in\n    a separate file or files, that is not Covered Software.\n\n1.8. \"License\"\n    means this document.\n\n1.9. \"Licensable\"\n    means having the right to grant, to the maximum extent possible,\n    whether at the time of the initial grant or subsequently, any and\n    all of the rights conveyed by this License.\n\n1.10. \"Modifications\"\n    means any of the following:\n\n    (a) any file in Source Code Form that results from an addition to,\n        deletion from, or modification of the contents of Covered\n        Software; or\n\n    (b) any new file in Source Code Form that contains any Covered\n        Software.\n\n1.11. \"Patent Claims\" of a Contributor\n    means any patent claim(s), including without limitation, method,\n    process, and apparatus claims, in any patent Licensable by such\n    Contributor that would be infringed, but for the grant of the\n    License, by the making, using, selling, offering for sale, having\n    made, import, or transfer of either its Contributions or its\n    Contributor Version.\n\n1.12. \"Secondary License\"\n    means either the GNU General Public License, Version 2.0, the GNU\n    Lesser General Public License, Version 2.1, the GNU Affero General\n    Public License, Version 3.0, or any later versions of those\n    licenses.\n\n1.13. \"Source Code Form\"\n    means the form of the work preferred for making modifications.\n\n1.14. \"You\" (or \"Your\")\n    means an individual or a legal entity exercising rights under this\n    License. For legal entities, \"You\" includes any entity that\n    controls, is controlled by, or is under common control with You. For\n    purposes of this definition, \"control\" means (a) the power, direct\n    or indirect, to cause the direction or management of such entity,\n    whether by contract or otherwise, or (b) ownership of more than\n    fifty percent (50%) of the outstanding shares or beneficial\n    ownership of such entity.\n\n2. License Grants and Conditions\n--------------------------------\n\n2.1. Grants\n\nEach Contributor hereby grants You a world-wide, royalty-free,\nnon-exclusive license:\n\n(a) under intellectual property rights (other than patent or trademark)\n    Licensable by such Contributor to use, reproduce, make available,\n    modify, display, perform, distribute, and otherwise exploit its\n    Contributions, either on an unmodified basis, with Modifications, or\n    as part of a Larger Work; and\n\n(b) under Patent Claims of such Contributor to make, use, sell, offer\n    for sale, have made, import, and otherwise transfer either its\n    Contributions or its Contributor Version.\n\n2.2. Effective Date\n\nThe licenses granted in Section 2.1 with respect to any Contribution\nbecome effective for each Contribution on the date the Contributor first\ndistributes such Contribution.\n\n2.3. Limitations on Grant Scope\n\nThe licenses granted in this Section 2 are the only rights granted under\nthis License. No additional rights or licenses will be implied from the\ndistribution or licensing of Covered Software under this License.\nNotwithstanding Section 2.1(b) above, no patent license is granted by a\nContributor:\n\n(a) for any code that a Contributor has removed from Covered Software;\n    or\n\n(b) for infringements caused by: (i) Your and any other third party's\n    modifications of Covered Software, or (ii) the combination of its\n    Contributions with other software (except as part of its Contributor\n    Version); or\n\n(c) under Patent Claims infringed by Covered Software in the absence of\n    its Contributions.\n\nThis License does not grant any rights in the trademarks, service marks,\nor logos of any Contributor (except as may be necessary to comply with\nthe notice requirements in Section 3.4).\n\n2.4. Subsequent Licenses\n\nNo Contributor makes additional grants as a result of Your choice to\ndistribute the Covered Software under a subsequent version of this\nLicense (see Section 10.2) or under the terms of a Secondary License (if\npermitted under the terms of Section 3.3).\n\n2.5. Representation\n\nEach Contributor represents that the Contributor believes its\nContributions are its original creation(s) or it has sufficient rights\nto grant the rights to its Contributions conveyed by this License.\n\n2.6. Fair Use\n\nThis License is not intended to limit any rights You have under\napplicable copyright doctrines of fair use, fair dealing, or other\nequivalents.\n\n2.7. Conditions\n\nSections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted\nin Section 2.1.\n\n3. Responsibilities\n-------------------\n\n3.1. Distribution of Source Form\n\nAll distribution of Covered Software in Source Code Form, including any\nModifications that You create or to which You contribute, must be under\nthe terms of this License. You must inform recipients that the Source\nCode Form of the Covered Software is governed by the terms of this\nLicense, and how they can obtain a copy of this License. You may not\nattempt to alter or restrict the recipients' rights in the Source Code\nForm.\n\n3.2. Distribution of Executable Form\n\nIf You distribute Covered Software in Executable Form then:\n\n(a) such Covered Software must also be made available in Source Code\n    Form, as described in Section 3.1, and You must inform recipients of\n    the Executable Form how they can obtain a copy of such Source Code\n    Form by reasonable means in a timely manner, at a charge no more\n    than the cost of distribution to the recipient; and\n\n(b) You may distribute such Executable Form under the terms of this\n    License, or sublicense it under different terms, provided that the\n    license for the Executable Form does not attempt to limit or alter\n    the recipients' rights in the Source Code Form under this License.\n\n3.3. Distribution of a Larger Work\n\nYou may create and distribute a Larger Work under terms of Your choice,\nprovided that You also comply with the requirements of this License for\nthe Covered Software. If the Larger Work is a combination of Covered\nSoftware with a work governed by one or more Secondary Licenses, and the\nCovered Software is not Incompatible With Secondary Licenses, this\nLicense permits You to additionally distribute such Covered Software\nunder the terms of such Secondary License(s), so that the recipient of\nthe Larger Work may, at their option, further distribute the Covered\nSoftware under the terms of either this License or such Secondary\nLicense(s).\n\n3.4. Notices\n\nYou may not remove or alter the substance of any license notices\n(including copyright notices, patent notices, disclaimers of warranty,\nor limitations of liability) contained within the Source Code Form of\nthe Covered Software, except that You may alter any license notices to\nthe extent required to remedy known factual inaccuracies.\n\n3.5. Application of Additional Terms\n\nYou may choose to offer, and to charge a fee for, warranty, support,\nindemnity or liability obligations to one or more recipients of Covered\nSoftware. However, You may do so only on Your own behalf, and not on\nbehalf of any Contributor. You must make it absolutely clear that any\nsuch warranty, support, indemnity, or liability obligation is offered by\nYou alone, and You hereby agree to indemnify every Contributor for any\nliability incurred by such Contributor as a result of warranty, support,\nindemnity or liability terms You offer. You may include additional\ndisclaimers of warranty and limitations of liability specific to any\njurisdiction.\n\n4. Inability to Comply Due to Statute or Regulation\n---------------------------------------------------\n\nIf it is impossible for You to comply with any of the terms of this\nLicense with respect to some or all of the Covered Software due to\nstatute, judicial order, or regulation then You must: (a) comply with\nthe terms of this License to the maximum extent possible; and (b)\ndescribe the limitations and the code they affect. Such description must\nbe placed in a text file included with all distributions of the Covered\nSoftware under this License. Except to the extent prohibited by statute\nor regulation, such description must be sufficiently detailed for a\nrecipient of ordinary skill to be able to understand it.\n\n5. Termination\n--------------\n\n5.1. The rights granted under this License will terminate automatically\nif You fail to comply with any of its terms. However, if You become\ncompliant, then the rights granted under this License from a particular\nContributor are reinstated (a) provisionally, unless and until such\nContributor explicitly and finally terminates Your grants, and (b) on an\nongoing basis, if such Contributor fails to notify You of the\nnon-compliance by some reasonable means prior to 60 days after You have\ncome back into compliance. Moreover, Your grants from a particular\nContributor are reinstated on an ongoing basis if such Contributor\nnotifies You of the non-compliance by some reasonable means, this is the\nfirst time You have received notice of non-compliance with this License\nfrom such Contributor, and You become compliant prior to 30 days after\nYour receipt of the notice.\n\n5.2. If You initiate litigation against any entity by asserting a patent\ninfringement claim (excluding declaratory judgment actions,\ncounter-claims, and cross-claims) alleging that a Contributor Version\ndirectly or indirectly infringes any patent, then the rights granted to\nYou by any and all Contributors for the Covered Software under Section\n2.1 of this License shall terminate.\n\n5.3. In the event of termination under Sections 5.1 or 5.2 above, all\nend user license agreements (excluding distributors and resellers) which\nhave been validly granted by You or Your distributors under this License\nprior to termination shall survive termination.\n\n************************************************************************\n*                                                                      *\n*  6. Disclaimer of Warranty                                           *\n*  -------------------------                                           *\n*                                                                      *\n*  Covered Software is provided under this License on an \"as is\"       *\n*  basis, without warranty of any kind, either expressed, implied, or  *\n*  statutory, including, without limitation, warranties that the       *\n*  Covered Software is free of defects, merchantable, fit for a        *\n*  particular purpose or non-infringing. The entire risk as to the     *\n*  quality and performance of the Covered Software is with You.        *\n*  Should any Covered Software prove defective in any respect, You     *\n*  (not any Contributor) assume the cost of any necessary servicing,   *\n*  repair, or correction. This disclaimer of warranty constitutes an   *\n*  essential part of this License. No use of any Covered Software is   *\n*  authorized under this License except under this disclaimer.         *\n*                                                                      *\n************************************************************************\n\n************************************************************************\n*                                                                      *\n*  7. Limitation of Liability                                          *\n*  --------------------------                                          *\n*                                                                      *\n*  Under no circumstances and under no legal theory, whether tort      *\n*  (including negligence), contract, or otherwise, shall any           *\n*  Contributor, or anyone who distributes Covered Software as          *\n*  permitted above, be liable to You for any direct, indirect,         *\n*  special, incidental, or consequential damages of any character      *\n*  including, without limitation, damages for lost profits, loss of    *\n*  goodwill, work stoppage, computer failure or malfunction, or any    *\n*  and all other commercial damages or losses, even if such party      *\n*  shall have been informed of the possibility of such damages. This   *\n*  limitation of liability shall not apply to liability for death or   *\n*  personal injury resulting from such party's negligence to the       *\n*  extent applicable law prohibits such limitation. Some               *\n*  jurisdictions do not allow the exclusion or limitation of           *\n*  incidental or consequential damages, so this exclusion and          *\n*  limitation may not apply to You.                                    *\n*                                                                      *\n************************************************************************\n\n8. Litigation\n-------------\n\nAny litigation relating to this License may be brought only in the\ncourts of a jurisdiction where the defendant maintains its principal\nplace of business and such litigation shall be governed by laws of that\njurisdiction, without reference to its conflict-of-law provisions.\nNothing in this Section shall prevent a party's ability to bring\ncross-claims or counter-claims.\n\n9. Miscellaneous\n----------------\n\nThis License represents the complete agreement concerning the subject\nmatter hereof. If any provision of this License is held to be\nunenforceable, such provision shall be reformed only to the extent\nnecessary to make it enforceable. Any law or regulation which provides\nthat the language of a contract shall be construed against the drafter\nshall not be used to construe this License against a Contributor.\n\n10. Versions of the License\n---------------------------\n\n10.1. New Versions\n\nMozilla Foundation is the license steward. Except as provided in Section\n10.3, no one other than the license steward has the right to modify or\npublish new versions of this License. Each version will be given a\ndistinguishing version number.\n\n10.2. Effect of New Versions\n\nYou may distribute the Covered Software under the terms of the version\nof the License under which You originally received the Covered Software,\nor under the terms of any subsequent version published by the license\nsteward.\n\n10.3. Modified Versions\n\nIf you create software not governed by this License, and you want to\ncreate a new license for such software, you may create and use a\nmodified version of this License if you rename the license and remove\nany references to the name of the license steward (except to note that\nsuch modified license differs from this License).\n\n10.4. Distributing Source Code Form that is Incompatible With Secondary\nLicenses\n\nIf You choose to distribute Source Code Form that is Incompatible With\nSecondary Licenses under the terms of this version of the License, the\nnotice described in Exhibit B of this License must be attached.\n\nExhibit A - Source Code Form License Notice\n-------------------------------------------\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\nIf it is not possible or desirable to put the notice in a particular\nfile, then You may include the notice in a location (such as a LICENSE\nfile in a relevant directory) where a recipient would be likely to look\nfor such a notice.\n\nYou may add additional accurate notices of copyright ownership.\n\nExhibit B - \"Incompatible With Secondary Licenses\" Notice\n---------------------------------------------------------\n\n  This Source Code Form is \"Incompatible With Secondary Licenses\", as\n  defined by the Mozilla Public License, v. 2.0.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/earthly/earthly: the authors of earthly/earthly (the license file names no copyright line), MPL-2.0 license (LICENSE), https://github.com/earthly/earthly; the authors of npm, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/cache-command/npm; the authors of api, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/tutorial/js/part6/api; the authors of example-typescript-node, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/typescript-node."
+    },
+    {
+      "license": "MPL-2.0",
+      "paths": [
+        ".buildkite/**",
+        ".circleci/**",
+        ".devcontainer/**",
+        ".earthly_version_flag_overrides",
+        ".earthlyignore",
+        ".gitbook.yaml",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yaml",
+        ".vale/**",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "Earthfile",
+        "LICENSE",
+        "README.md",
+        "ast/**",
+        "autocomplete/**",
+        "buildcontext/**",
+        "builder/**",
+        "buildkitd/**",
+        "cleanup/**",
+        "cmd/**",
+        "code-of-conduct.md",
+        "config/**",
+        "conslogging/**",
+        "debugger/**",
+        "docker2earthly/**",
+        "dockertar/**",
+        "docs/README.md",
+        "docs/SUMMARY.md",
+        "docs/alt-installation/alt-installation.md",
+        "docs/basics/basics.md",
+        "docs/basics/final-words.md",
+        "docs/basics/part-1-a-simple-earthfile.md",
+        "docs/basics/part-2-outputs.md",
+        "docs/basics/part-3-adding-dependencies-with-caching.md",
+        "docs/basics/part-4-args.md",
+        "docs/basics/part-5-importing.md",
+        "docs/basics/part-6-using-docker-with-earthly.md",
+        "docs/basics/part-7-using-remote-runners.md",
+        "docs/basics/part-8a-using-earthly-in-your-current-ci.md",
+        "docs/caching/**",
+        "docs/ci-integration/build-an-earthly-ci-image.md",
+        "docs/ci-integration/guides/bitbucket-pipelines-integration.md",
+        "docs/ci-integration/guides/circle-integration.md",
+        "docs/ci-integration/guides/codebuild-integration.md",
+        "docs/ci-integration/guides/gh-actions-integration.md",
+        "docs/ci-integration/guides/gitlab-integration.md",
+        "docs/ci-integration/guides/google-cloud-build.md",
+        "docs/ci-integration/guides/guide-template.md",
+        "docs/ci-integration/guides/jenkins.md",
+        "docs/ci-integration/guides/kubernetes.md",
+        "docs/ci-integration/guides/woodpecker-integration.md",
+        "docs/ci-integration/overview.md",
+        "docs/ci-integration/pull-through-cache.md",
+        "docs/ci-integration/remote-buildkit.md",
+        "docs/ci-integration/use-earthly-ci-image.md",
+        "docs/cloud/cloud-secrets.md",
+        "docs/cloud/managing-permissions.md",
+        "docs/cloud/oidc.md",
+        "docs/cloud/overview.md",
+        "docs/cloud/satellites/best-practices.md",
+        "docs/cloud/satellites/byoc/aws/cloudformation.md",
+        "docs/cloud/satellites/byoc/aws/manual.md",
+        "docs/cloud/satellites/byoc/aws/requirements.md",
+        "docs/cloud/satellites/byoc/aws/terraform.md",
+        "docs/cloud/satellites/byoc/byoc.md",
+        "docs/cloud/satellites/byoc/vpn/tailscale.md",
+        "docs/cloud/satellites/gha-runners.md",
+        "docs/cloud/satellites/managing.md",
+        "docs/cloud/satellites/self-hosted.md",
+        "docs/cloud/satellites/using.md",
+        "docs/cloud/satellites.md",
+        "docs/data-collection/**",
+        "docs/definitions/**",
+        "docs/docker-images/**",
+        "docs/earthfile/**",
+        "docs/earthly-command/**",
+        "docs/earthly-config/**",
+        "docs/earthly-lib/**",
+        "docs/examples/**",
+        "docs/guides/auth.md",
+        "docs/guides/best-practices.md",
+        "docs/guides/build-args.md",
+        "docs/guides/cloud-providers/**",
+        "docs/guides/debugging.md",
+        "docs/guides/docker-in-earthly.md",
+        "docs/guides/functions.md",
+        "docs/guides/importing.md",
+        "docs/guides/integration.md",
+        "docs/guides/multi-platform.md",
+        "docs/guides/podman.md",
+        "docs/guides/registries/**",
+        "docs/guides/secrets.md",
+        "docs/guides/target-ref.md",
+        "docs/install/**",
+        "docs/lang-guides/**",
+        "docs/public-key-auth/**",
+        "docs/remote-runners.md",
+        "docs-internals/**",
+        "domain/**",
+        "earthfile2llb/**",
+        "earthly",
+        "earthly-entrypoint.sh",
+        "earthly-next",
+        "examples/README.md",
+        "examples/aws-sso/**",
+        "examples/bazel/**",
+        "examples/c/**",
+        "examples/cache-command/README.md",
+        "examples/cache-command/mvn/**",
+        "examples/clojure/**",
+        "examples/cloud-secrets/**",
+        "examples/cobol/**",
+        "examples/cpp/**",
+        "examples/cutoff-optimization/**",
+        "examples/dotnet/**",
+        "examples/elixir/**",
+        "examples/go/**",
+        "examples/go-monorepo/**",
+        "examples/grpc/**",
+        "examples/import/**",
+        "examples/integration-test/**",
+        "examples/java/**",
+        "examples/js/**",
+        "examples/mkdocs/**",
+        "examples/monorepo/**",
+        "examples/multiplatform/**",
+        "examples/multiplatform-cross-compile/**",
+        "examples/multirepo/**",
+        "examples/next-js-netlify/**",
+        "examples/python/**",
+        "examples/react/Earthfile",
+        "examples/react/package.json",
+        "examples/react/public/index.html",
+        "examples/react/public/manifest.json",
+        "examples/react/public/styles.css",
+        "examples/react/src/**",
+        "examples/react/yarn.lock",
+        "examples/readme/**",
+        "examples/ruby/**",
+        "examples/ruby-on-rails/.gitignore",
+        "examples/ruby-on-rails/Earthfile",
+        "examples/ruby-on-rails/Gemfile",
+        "examples/ruby-on-rails/Gemfile.lock",
+        "examples/ruby-on-rails/Rakefile",
+        "examples/ruby-on-rails/app/**",
+        "examples/ruby-on-rails/bin/**",
+        "examples/ruby-on-rails/config/**",
+        "examples/ruby-on-rails/config.ru",
+        "examples/ruby-on-rails/db/**",
+        "examples/ruby-on-rails/lib/**",
+        "examples/ruby-on-rails/log/**",
+        "examples/ruby-on-rails/package.json",
+        "examples/ruby-on-rails/public/**",
+        "examples/ruby-on-rails/test/**",
+        "examples/ruby-on-rails/tmp/**",
+        "examples/rust/**",
+        "examples/scala/**",
+        "examples/secrets/**",
+        "examples/terraform/**",
+        "examples/tutorial/Earthfile",
+        "examples/tutorial/README.md",
+        "examples/tutorial/go/**",
+        "examples/tutorial/java/**",
+        "examples/tutorial/js/Earthfile",
+        "examples/tutorial/js/README.md",
+        "examples/tutorial/js/part1/**",
+        "examples/tutorial/js/part2/**",
+        "examples/tutorial/js/part3/**",
+        "examples/tutorial/js/part4/**",
+        "examples/tutorial/js/part5/**",
+        "examples/tutorial/js/part6/Earthfile",
+        "examples/tutorial/js/part6/README.md",
+        "examples/tutorial/js/part6/app/**",
+        "examples/tutorial/python/**",
+        "examples/zig/**",
+        "features/**",
+        "go.mod",
+        "go.sum",
+        "inputgraph/**",
+        "internal/**",
+        "logbus/**",
+        "not-a-unit-test.sh",
+        "regproxy/**",
+        "release/Earthfile",
+        "release/README.md",
+        "release/apt-repo/**",
+        "release/changelogparser.py",
+        "release/choco-repo/**",
+        "release/common-repo/**",
+        "release/ensure_gha_passing.py",
+        "release/envcredhelper.sh",
+        "release/msi/.gitignore",
+        "release/msi/Earthfile",
+        "release/msi/earthly.wxs",
+        "release/release.sh",
+        "release/yum-repo/**",
+        "scripts/**",
+        "setup-registry.sh",
+        "slog/**",
+        "states/**",
+        "tests/**",
+        "util/buildkitskipper/**",
+        "util/buildkitutil/**",
+        "util/circbuf/**",
+        "util/cliutil/**",
+        "util/containerutil/alias_test.go",
+        "util/containerutil/docker.go",
+        "util/containerutil/frontend.go",
+        "util/containerutil/frontend_test.go",
+        "util/containerutil/podman.go",
+        "util/containerutil/settings_test.go",
+        "util/containerutil/shell_shared.go",
+        "util/containerutil/shell_shared_test.go",
+        "util/containerutil/stub.go",
+        "util/containerutil/types.go",
+        "util/deltautil/**",
+        "util/dockerutil/**",
+        "util/envutil/**",
+        "util/errutil/**",
+        "util/execstatssummary/**",
+        "util/fileutil/**",
+        "util/flagutil/**",
+        "util/fsutilprogress/**",
+        "util/gatewaycrafter/**",
+        "util/gitutil/**",
+        "util/gwclientlogger/**",
+        "util/hint/**",
+        "util/inodeutil/**",
+        "util/llbutil/**",
+        "util/oidcutil/**",
+        "util/params/**",
+        "util/parseutil/**",
+        "util/platutil/**",
+        "util/progressbar/**",
+        "util/proj/**",
+        "util/reflectutil/**",
+        "util/saveartifactlocally/**",
+        "util/semverutil/**",
+        "util/shell/**",
+        "util/statsstreamparser/**",
+        "util/stringutil/**",
+        "util/syncutil/**",
+        "util/termutil/**",
+        "util/vertexmeta/**",
+        "util/waitutil/**",
+        "util/xcontext/**",
+        "variables/**"
+      ],
+      "text": "Mozilla Public License Version 2.0\n==================================\n\n1. Definitions\n--------------\n\n1.1. \"Contributor\"\n    means each individual or legal entity that creates, contributes to\n    the creation of, or owns Covered Software.\n\n1.2. \"Contributor Version\"\n    means the combination of the Contributions of others (if any) used\n    by a Contributor and that particular Contributor's Contribution.\n\n1.3. \"Contribution\"\n    means Covered Software of a particular Contributor.\n\n1.4. \"Covered Software\"\n    means Source Code Form to which the initial Contributor has attached\n    the notice in Exhibit A, the Executable Form of such Source Code\n    Form, and Modifications of such Source Code Form, in each case\n    including portions thereof.\n\n1.5. \"Incompatible With Secondary Licenses\"\n    means\n\n    (a) that the initial Contributor has attached the notice described\n        in Exhibit B to the Covered Software; or\n\n    (b) that the Covered Software was made available under the terms of\n        version 1.1 or earlier of the License, but not also under the\n        terms of a Secondary License.\n\n1.6. \"Executable Form\"\n    means any form of the work other than Source Code Form.\n\n1.7. \"Larger Work\"\n    means a work that combines Covered Software with other material, in\n    a separate file or files, that is not Covered Software.\n\n1.8. \"License\"\n    means this document.\n\n1.9. \"Licensable\"\n    means having the right to grant, to the maximum extent possible,\n    whether at the time of the initial grant or subsequently, any and\n    all of the rights conveyed by this License.\n\n1.10. \"Modifications\"\n    means any of the following:\n\n    (a) any file in Source Code Form that results from an addition to,\n        deletion from, or modification of the contents of Covered\n        Software; or\n\n    (b) any new file in Source Code Form that contains any Covered\n        Software.\n\n1.11. \"Patent Claims\" of a Contributor\n    means any patent claim(s), including without limitation, method,\n    process, and apparatus claims, in any patent Licensable by such\n    Contributor that would be infringed, but for the grant of the\n    License, by the making, using, selling, offering for sale, having\n    made, import, or transfer of either its Contributions or its\n    Contributor Version.\n\n1.12. \"Secondary License\"\n    means either the GNU General Public License, Version 2.0, the GNU\n    Lesser General Public License, Version 2.1, the GNU Affero General\n    Public License, Version 3.0, or any later versions of those\n    licenses.\n\n1.13. \"Source Code Form\"\n    means the form of the work preferred for making modifications.\n\n1.14. \"You\" (or \"Your\")\n    means an individual or a legal entity exercising rights under this\n    License. For legal entities, \"You\" includes any entity that\n    controls, is controlled by, or is under common control with You. For\n    purposes of this definition, \"control\" means (a) the power, direct\n    or indirect, to cause the direction or management of such entity,\n    whether by contract or otherwise, or (b) ownership of more than\n    fifty percent (50%) of the outstanding shares or beneficial\n    ownership of such entity.\n\n2. License Grants and Conditions\n--------------------------------\n\n2.1. Grants\n\nEach Contributor hereby grants You a world-wide, royalty-free,\nnon-exclusive license:\n\n(a) under intellectual property rights (other than patent or trademark)\n    Licensable by such Contributor to use, reproduce, make available,\n    modify, display, perform, distribute, and otherwise exploit its\n    Contributions, either on an unmodified basis, with Modifications, or\n    as part of a Larger Work; and\n\n(b) under Patent Claims of such Contributor to make, use, sell, offer\n    for sale, have made, import, and otherwise transfer either its\n    Contributions or its Contributor Version.\n\n2.2. Effective Date\n\nThe licenses granted in Section 2.1 with respect to any Contribution\nbecome effective for each Contribution on the date the Contributor first\ndistributes such Contribution.\n\n2.3. Limitations on Grant Scope\n\nThe licenses granted in this Section 2 are the only rights granted under\nthis License. No additional rights or licenses will be implied from the\ndistribution or licensing of Covered Software under this License.\nNotwithstanding Section 2.1(b) above, no patent license is granted by a\nContributor:\n\n(a) for any code that a Contributor has removed from Covered Software;\n    or\n\n(b) for infringements caused by: (i) Your and any other third party's\n    modifications of Covered Software, or (ii) the combination of its\n    Contributions with other software (except as part of its Contributor\n    Version); or\n\n(c) under Patent Claims infringed by Covered Software in the absence of\n    its Contributions.\n\nThis License does not grant any rights in the trademarks, service marks,\nor logos of any Contributor (except as may be necessary to comply with\nthe notice requirements in Section 3.4).\n\n2.4. Subsequent Licenses\n\nNo Contributor makes additional grants as a result of Your choice to\ndistribute the Covered Software under a subsequent version of this\nLicense (see Section 10.2) or under the terms of a Secondary License (if\npermitted under the terms of Section 3.3).\n\n2.5. Representation\n\nEach Contributor represents that the Contributor believes its\nContributions are its original creation(s) or it has sufficient rights\nto grant the rights to its Contributions conveyed by this License.\n\n2.6. Fair Use\n\nThis License is not intended to limit any rights You have under\napplicable copyright doctrines of fair use, fair dealing, or other\nequivalents.\n\n2.7. Conditions\n\nSections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted\nin Section 2.1.\n\n3. Responsibilities\n-------------------\n\n3.1. Distribution of Source Form\n\nAll distribution of Covered Software in Source Code Form, including any\nModifications that You create or to which You contribute, must be under\nthe terms of this License. You must inform recipients that the Source\nCode Form of the Covered Software is governed by the terms of this\nLicense, and how they can obtain a copy of this License. You may not\nattempt to alter or restrict the recipients' rights in the Source Code\nForm.\n\n3.2. Distribution of Executable Form\n\nIf You distribute Covered Software in Executable Form then:\n\n(a) such Covered Software must also be made available in Source Code\n    Form, as described in Section 3.1, and You must inform recipients of\n    the Executable Form how they can obtain a copy of such Source Code\n    Form by reasonable means in a timely manner, at a charge no more\n    than the cost of distribution to the recipient; and\n\n(b) You may distribute such Executable Form under the terms of this\n    License, or sublicense it under different terms, provided that the\n    license for the Executable Form does not attempt to limit or alter\n    the recipients' rights in the Source Code Form under this License.\n\n3.3. Distribution of a Larger Work\n\nYou may create and distribute a Larger Work under terms of Your choice,\nprovided that You also comply with the requirements of this License for\nthe Covered Software. If the Larger Work is a combination of Covered\nSoftware with a work governed by one or more Secondary Licenses, and the\nCovered Software is not Incompatible With Secondary Licenses, this\nLicense permits You to additionally distribute such Covered Software\nunder the terms of such Secondary License(s), so that the recipient of\nthe Larger Work may, at their option, further distribute the Covered\nSoftware under the terms of either this License or such Secondary\nLicense(s).\n\n3.4. Notices\n\nYou may not remove or alter the substance of any license notices\n(including copyright notices, patent notices, disclaimers of warranty,\nor limitations of liability) contained within the Source Code Form of\nthe Covered Software, except that You may alter any license notices to\nthe extent required to remedy known factual inaccuracies.\n\n3.5. Application of Additional Terms\n\nYou may choose to offer, and to charge a fee for, warranty, support,\nindemnity or liability obligations to one or more recipients of Covered\nSoftware. However, You may do so only on Your own behalf, and not on\nbehalf of any Contributor. You must make it absolutely clear that any\nsuch warranty, support, indemnity, or liability obligation is offered by\nYou alone, and You hereby agree to indemnify every Contributor for any\nliability incurred by such Contributor as a result of warranty, support,\nindemnity or liability terms You offer. You may include additional\ndisclaimers of warranty and limitations of liability specific to any\njurisdiction.\n\n4. Inability to Comply Due to Statute or Regulation\n---------------------------------------------------\n\nIf it is impossible for You to comply with any of the terms of this\nLicense with respect to some or all of the Covered Software due to\nstatute, judicial order, or regulation then You must: (a) comply with\nthe terms of this License to the maximum extent possible; and (b)\ndescribe the limitations and the code they affect. Such description must\nbe placed in a text file included with all distributions of the Covered\nSoftware under this License. Except to the extent prohibited by statute\nor regulation, such description must be sufficiently detailed for a\nrecipient of ordinary skill to be able to understand it.\n\n5. Termination\n--------------\n\n5.1. The rights granted under this License will terminate automatically\nif You fail to comply with any of its terms. However, if You become\ncompliant, then the rights granted under this License from a particular\nContributor are reinstated (a) provisionally, unless and until such\nContributor explicitly and finally terminates Your grants, and (b) on an\nongoing basis, if such Contributor fails to notify You of the\nnon-compliance by some reasonable means prior to 60 days after You have\ncome back into compliance. Moreover, Your grants from a particular\nContributor are reinstated on an ongoing basis if such Contributor\nnotifies You of the non-compliance by some reasonable means, this is the\nfirst time You have received notice of non-compliance with this License\nfrom such Contributor, and You become compliant prior to 30 days after\nYour receipt of the notice.\n\n5.2. If You initiate litigation against any entity by asserting a patent\ninfringement claim (excluding declaratory judgment actions,\ncounter-claims, and cross-claims) alleging that a Contributor Version\ndirectly or indirectly infringes any patent, then the rights granted to\nYou by any and all Contributors for the Covered Software under Section\n2.1 of this License shall terminate.\n\n5.3. In the event of termination under Sections 5.1 or 5.2 above, all\nend user license agreements (excluding distributors and resellers) which\nhave been validly granted by You or Your distributors under this License\nprior to termination shall survive termination.\n\n************************************************************************\n*                                                                      *\n*  6. Disclaimer of Warranty                                           *\n*  -------------------------                                           *\n*                                                                      *\n*  Covered Software is provided under this License on an \"as is\"       *\n*  basis, without warranty of any kind, either expressed, implied, or  *\n*  statutory, including, without limitation, warranties that the       *\n*  Covered Software is free of defects, merchantable, fit for a        *\n*  particular purpose or non-infringing. The entire risk as to the     *\n*  quality and performance of the Covered Software is with You.        *\n*  Should any Covered Software prove defective in any respect, You     *\n*  (not any Contributor) assume the cost of any necessary servicing,   *\n*  repair, or correction. This disclaimer of warranty constitutes an   *\n*  essential part of this License. No use of any Covered Software is   *\n*  authorized under this License except under this disclaimer.         *\n*                                                                      *\n************************************************************************\n\n************************************************************************\n*                                                                      *\n*  7. Limitation of Liability                                          *\n*  --------------------------                                          *\n*                                                                      *\n*  Under no circumstances and under no legal theory, whether tort      *\n*  (including negligence), contract, or otherwise, shall any           *\n*  Contributor, or anyone who distributes Covered Software as          *\n*  permitted above, be liable to You for any direct, indirect,         *\n*  special, incidental, or consequential damages of any character      *\n*  including, without limitation, damages for lost profits, loss of    *\n*  goodwill, work stoppage, computer failure or malfunction, or any    *\n*  and all other commercial damages or losses, even if such party      *\n*  shall have been informed of the possibility of such damages. This   *\n*  limitation of liability shall not apply to liability for death or   *\n*  personal injury resulting from such party's negligence to the       *\n*  extent applicable law prohibits such limitation. Some               *\n*  jurisdictions do not allow the exclusion or limitation of           *\n*  incidental or consequential damages, so this exclusion and          *\n*  limitation may not apply to You.                                    *\n*                                                                      *\n************************************************************************\n\n8. Litigation\n-------------\n\nAny litigation relating to this License may be brought only in the\ncourts of a jurisdiction where the defendant maintains its principal\nplace of business and such litigation shall be governed by laws of that\njurisdiction, without reference to its conflict-of-law provisions.\nNothing in this Section shall prevent a party's ability to bring\ncross-claims or counter-claims.\n\n9. Miscellaneous\n----------------\n\nThis License represents the complete agreement concerning the subject\nmatter hereof. If any provision of this License is held to be\nunenforceable, such provision shall be reformed only to the extent\nnecessary to make it enforceable. Any law or regulation which provides\nthat the language of a contract shall be construed against the drafter\nshall not be used to construe this License against a Contributor.\n\n10. Versions of the License\n---------------------------\n\n10.1. New Versions\n\nMozilla Foundation is the license steward. Except as provided in Section\n10.3, no one other than the license steward has the right to modify or\npublish new versions of this License. Each version will be given a\ndistinguishing version number.\n\n10.2. Effect of New Versions\n\nYou may distribute the Covered Software under the terms of the version\nof the License under which You originally received the Covered Software,\nor under the terms of any subsequent version published by the license\nsteward.\n\n10.3. Modified Versions\n\nIf you create software not governed by this License, and you want to\ncreate a new license for such software, you may create and use a\nmodified version of this License if you rename the license and remove\nany references to the name of the license steward (except to note that\nsuch modified license differs from this License).\n\n10.4. Distributing Source Code Form that is Incompatible With Secondary\nLicenses\n\nIf You choose to distribute Source Code Form that is Incompatible With\nSecondary Licenses under the terms of this version of the License, the\nnotice described in Exhibit B of this License must be attached.\n\nExhibit A - Source Code Form License Notice\n-------------------------------------------\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\nIf it is not possible or desirable to put the notice in a particular\nfile, then You may include the notice in a location (such as a LICENSE\nfile in a relevant directory) where a recipient would be likely to look\nfor such a notice.\n\nYou may add additional accurate notices of copyright ownership.\n\nExhibit B - \"Incompatible With Secondary Licenses\" Notice\n---------------------------------------------------------\n\n  This Source Code Form is \"Incompatible With Secondary Licenses\", as\n  defined by the Mozilla Public License, v. 2.0.\n",
+      "attribution": "the authors of earthly/earthly (the license file names no copyright line), MPL-2.0 license (LICENSE), https://github.com/earthly/earthly."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/cache-command/npm/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of npm, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/cache-command/npm."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/tutorial/js/part6/api/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of api, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/tutorial/js/part6/api."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/typescript-node/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of example-typescript-node, ISC license (declared in package.json), https://github.com/earthly/earthly/tree/6e641c15d3b4d7dd396363b61d2381faa2658f3d/examples/typescript-node."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.ex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.exs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cob"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.control"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.earth"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ico"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/elixir/mix.lock",
+        "examples/mkdocs/Pipfile.lock",
+        "examples/react/yarn.lock",
+        "examples/ruby-on-rails/Gemfile.lock",
+        "examples/ruby/Gemfile.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ru"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sbt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".vale/styles/HouseStyle/tech-terms/fileformats.txt",
+        ".vale/styles/HouseStyle/tech-terms/general.txt",
+        ".vale/styles/HouseStyle/tech-terms/java.txt",
+        ".vale/styles/HouseStyle/tech-terms/linux.txt",
+        ".vale/styles/HouseStyle/tech-terms/mobile.txt",
+        ".vale/styles/HouseStyle/tech-terms/monitoring.txt",
+        ".vale/styles/HouseStyle/tech-terms/names.txt",
+        ".vale/styles/HouseStyle/tech-terms/nonsense.txt",
+        ".vale/styles/HouseStyle/tech-terms/nontech.txt",
+        ".vale/styles/HouseStyle/tech-terms/people.txt",
+        ".vale/styles/HouseStyle/tech-terms/phrases.txt",
+        ".vale/styles/HouseStyle/tech-terms/python.txt",
+        ".vale/styles/HouseStyle/tech-terms/security.txt",
+        "examples/import/some/local/path/file.txt",
+        "examples/python/requirements.txt",
+        "examples/ruby-on-rails/public/robots.txt",
+        "examples/tutorial/python/part3/requirements.txt",
+        "examples/tutorial/python/part4/requirements.txt",
+        "examples/tutorial/python/part5/services/service-one/requirements.txt",
+        "examples/tutorial/python/part6/requirements.txt",
+        "release/choco-repo/VERIFICATION.txt",
+        "tests/autoskip/glob/hello.txt",
+        "tests/autoskip/glob/subdir/hello.txt",
+        "tests/autoskip/glob/world.txt",
+        "tests/docker/a.txt",
+        "tests/dockerfile/a.txt",
+        "tests/dockerfile2/subdir/a.txt",
+        "tests/expected-quotes.txt",
+        "util/fileutil/testdata/globdirs/file.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.earthly_version_flag_overrides"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.earthlyignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Earthfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/acbgrep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/acbtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bundle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/earthly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/earthly-next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/envVarTest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/extractJarVersion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-interactive-login"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runc-ps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spring"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sshd_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sso_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-secret-provider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wordsTest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yarn"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

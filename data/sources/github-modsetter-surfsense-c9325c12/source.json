@@ -1,0 +1,875 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/MODSetter/SurfSense",
+  "revision": "622c1ded8d46b57fd9754e37773af62ba3b1928b",
+  "checksum": "sha256:a1909c3970dd7e27e6c5b3a7e5c27d99a9bae791af5dcfb716d233e366aeae67",
+  "extract": {
+    "exclude": [
+      "docker/sandbox/remotion/fonts/Inter.ttf",
+      "docker/sandbox/remotion/fonts/JetBrainsMono.ttf",
+      "docker/sandbox/remotion/fonts/Lora.ttf",
+      "docker/sandbox/remotion/public/silence.wav",
+      "plans/community-local/seo/data/b2b/clickstream-top-terms.json.gz",
+      "plans/community-local/seo/data/b2b/competitors-b2b-heads.json.gz",
+      "plans/community-local/seo/data/b2b/overview-editing-office.json.gz",
+      "plans/community-local/seo/data/b2b/overview-finance-legal-consulting.json.gz",
+      "plans/community-local/seo/data/b2b/overview-jobs-a.json.gz",
+      "plans/community-local/seo/data/b2b/overview-jobs-b.json.gz",
+      "plans/community-local/seo/data/b2b/overview-operations-hr-health.json.gz",
+      "plans/community-local/seo/data/b2b/overview-sales-marketing.json.gz",
+      "plans/community-local/seo/data/b2b/overview-templates.json.gz",
+      "plans/community-local/seo/data/b2b/overview-vendor-jobs.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-bluej.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-conveyor.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-datarails.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-evenup.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-fieldguide.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-gamma.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-genspark.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-govdash.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-inventive.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-magicschool.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-manus.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-rogo.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-skywork.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-spellbook.json.gz",
+      "plans/community-local/seo/data/b2b/ranked-vanta.json.gz",
+      "plans/community-local/seo/data/b2b/suggestions-ai-agent-for.json.gz",
+      "plans/community-local/seo/data/b2b/suggestions-ai-for.json.gz",
+      "plans/community-local/seo/data/keyword-ideas-artifacts.json.gz",
+      "plans/community-local/seo/data/keyword-ideas-broad.json.gz",
+      "plans/community-local/seo/data/keyword-ideas-deliverable.json.gz",
+      "plans/community-local/seo/data/keyword-overview-artifacts.json.gz",
+      "plans/community-local/seo/data/keyword-overview-curated.json.gz",
+      "plans/community-local/seo/data/keyword-suggestions-notebooklm.json.gz",
+      "plans/community-local/seo/data/ranked-anythingllm.json.gz",
+      "plans/community-local/seo/data/ranked-open-notebook.json.gz",
+      "plans/community-local/seo/data/ranked-surfsense.json.gz",
+      "plugins/remote/proprietary/**",
+      "surfsense_backend/app/proprietary/**",
+      "surfsense_backend/tests/fixtures/sample.pdf",
+      "surfsense_local/backend/modules/license/**",
+      "surfsense_local/backend/scripts/local_manifest/**",
+      "surfsense_local/backend/tests/**",
+      "surfsense_local/electron/build/icons/**",
+      "surfsense_local/frontend/src/features/license/**",
+      "surfsense_local/frontend/src/features/onboarding/onboarding-dither-background.webp",
+      "surfsense_web/app/(home)/license/**",
+      "surfsense_web/app/apple-icon.png",
+      "surfsense_web/app/favicon.ico",
+      "surfsense_web/app/icon.png",
+      "surfsense_web/content/docs/legacy/connectors/external/**",
+      "surfsense_web/public/announcements/**",
+      "surfsense_web/public/changelog/**",
+      "surfsense_web/public/demo.mp4",
+      "surfsense_web/public/docs/**",
+      "surfsense_web/public/homepage/banner.png",
+      "surfsense_web/public/homepage/cta-dither-background.png",
+      "surfsense_web/public/homepage/cta-dither-background.webp",
+      "surfsense_web/public/homepage/desktop.png",
+      "surfsense_web/public/homepage/hero_realtime/**",
+      "surfsense_web/public/homepage/hero_tutorial/**",
+      "surfsense_web/public/homepage/icon.png",
+      "surfsense_web/public/homepage/main_demo.webp",
+      "surfsense_web/public/images/**",
+      "surfsense_web/public/license/**",
+      "surfsense_web/public/logo.png",
+      "surfsense_web/public/og-image-twitter.png",
+      "surfsense_web/public/og-image.png",
+      "surfsense_web/public/sunset/**",
+      "surfsense_web/tests/documents/file-upload/fixtures/canary.pdf"
+    ]
+  },
+  "history": {
+    "since": "6d8e1fe994d8d8ebf307be67451e316459c7c294"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) SurfSense\n\nPortions of this software are licensed as follows:\n\n* All content that resides under the \"surfsense_backend/app/proprietary/\"\n  directory of this repository is licensed under the Business Source License\n  1.1 as defined in \"surfsense_backend/app/proprietary/LICENSE\".\n* All content that resides under the \"plugins/remote/proprietary/\" directory\n  of this repository is licensed under the Business Source License 1.1 as\n  defined in \"plugins/remote/proprietary/LICENSE\".\n* All third-party components incorporated into the SurfSense software are\n  licensed under the original license provided by the owner of the applicable\n  component.\n* Content outside of the above-mentioned directories is available under the\n  Apache License, Version 2.0, as defined below.\n\n-----------------------------------------------------------------------------\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nMIT License\n\nCopyright (c) 2025 Rohan Verma\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/MODSetter/SurfSense: Copyright (c) SurfSense, Apache-2.0 license (LICENSE), https://github.com/MODSetter/SurfSense; Copyright (c) 2025 Rohan Verma, MIT license (LICENSE), https://github.com/MODSetter/SurfSense/tree/622c1ded8d46b57fd9754e37773af62ba3b1928b/surfsense_web."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".coderabbit.yaml",
+        ".cursor/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".secrets.baseline",
+        ".vscode/**",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.ar.md",
+        "README.de.md",
+        "README.es.md",
+        "README.fr.md",
+        "README.hi.md",
+        "README.ja.md",
+        "README.ko.md",
+        "README.md",
+        "README.pt-BR.md",
+        "README.ru.md",
+        "README.zh-CN.md",
+        "SECURITY.md",
+        "SurfSense.code-workspace",
+        "VERSION",
+        "docker/.env.example",
+        "docker/docker-compose.deps-only.yml",
+        "docker/docker-compose.dev.yml",
+        "docker/docker-compose.e2e.yml",
+        "docker/docker-compose.gpu.yml",
+        "docker/docker-compose.yml",
+        "docker/keygen/**",
+        "docker/opensandbox/**",
+        "docker/postgresql.conf",
+        "docker/proxy/**",
+        "docker/sandbox/.dockerignore",
+        "docker/sandbox/Dockerfile",
+        "docker/sandbox/remotion/fonts/OFL.txt",
+        "docker/sandbox/remotion/fonts/README.md",
+        "docker/sandbox/remotion/package-lock.json",
+        "docker/sandbox/remotion/package.json",
+        "docker/sandbox/remotion/public/icon-128.svg",
+        "docker/sandbox/remotion/render-mindmap.mjs",
+        "docker/sandbox/remotion/render-utils.mjs",
+        "docker/sandbox/remotion/render.mjs",
+        "docker/sandbox/remotion/src/**",
+        "docker/sandbox/remotion/stagger.ts",
+        "docker/sandbox/remotion/tsconfig.json",
+        "docker/sandbox/skills/**",
+        "docker/scripts/**",
+        "docker/searxng/**",
+        "docs/**",
+        "plans/README.md",
+        "plans/community-local/00d-pivot-plan.md",
+        "plans/community-local/file-agent-strategy.md",
+        "plans/community-local/portal/**",
+        "plans/community-local/purge-runbook.md",
+        "plans/community-local/seo/01-keyword-research.md",
+        "plans/community-local/seo/02-page-briefs.md",
+        "plans/community-local/seo/03-international.md",
+        "plans/community-local/seo/04-competitors.md",
+        "plans/community-local/seo/05-serp-landscape.md",
+        "plans/community-local/seo/06-repo-readme.md",
+        "plans/community-local/seo/07-what-users-do.md",
+        "plans/community-local/seo/08-b2b-artifact-jobs.md",
+        "plans/community-local/seo/data/README.md",
+        "plans/community-local/seo/data/artifacts-intl-de-de.json",
+        "plans/community-local/seo/data/artifacts-intl-gb-en.json",
+        "plans/community-local/seo/data/artifacts-intl-in-en.json",
+        "plans/community-local/seo/data/artifacts-intl-jp-ja.json",
+        "plans/community-local/seo/data/artifacts-serp-competitors.json",
+        "plans/community-local/seo/data/b2b/clickstream-privacy-heads.json",
+        "plans/community-local/seo/data/b2b/clickstream-vendor-jobs.json",
+        "plans/community-local/seo/data/b2b/rollup.py",
+        "plans/community-local/seo/data/b2b/use-cases.json",
+        "plans/community-local/seo/data/domain-authority.json",
+        "plans/community-local/seo/data/gap-anythingllm.json",
+        "plans/community-local/seo/data/gap-open-notebook.json",
+        "plans/community-local/seo/data/historical-artifact-terms.json",
+        "plans/community-local/seo/data/historical-head-terms.json",
+        "plans/community-local/seo/data/intl/**",
+        "plans/community-local/seo/data/intl-pro-es-es.json",
+        "plans/community-local/seo/data/keyword-ideas-questions.json",
+        "plans/community-local/seo/data/keyword-overview-brand-questions.json",
+        "plans/community-local/seo/data/keyword-overview-deliverable.json",
+        "plans/community-local/seo/data/keyword-overview-gap-terms.json",
+        "plans/community-local/seo/data/keyword-overview-notebooklm-family.json",
+        "plans/community-local/seo/data/keyword-overview-variants.json",
+        "plans/community-local/seo/data/keyword-overview-verticals.json",
+        "plans/community-local/seo/data/keyword-overview-workintercept.json",
+        "plans/community-local/seo/data/master-keywords.csv",
+        "plans/community-local/seo/data/parse.py",
+        "plans/community-local/seo/data/ranked-jan.json",
+        "plans/community-local/seo/data/ranked-khoj.json",
+        "plans/community-local/seo/data/ranked-openwebui.json",
+        "plans/community-local/seo/data/serp-notebooklm-mcp.json",
+        "plans/community-local/seo/data/serp-offline-ai.json",
+        "plans/community-local/seo/data/serp-private-ai.json",
+        "plans/community-local/seo/data/serp-self-hosted-ai.json",
+        "plans/community-local/seo/data/serp-study-guide-maker.json",
+        "plans/community-local/seo/drafts/**",
+        "plans/community-local/sunset-runbook.md",
+        "plugins/README.md",
+        "plugins/bundles/**",
+        "plugins/registry/**",
+        "plugins/remote/.gitignore",
+        "plugins/remote/host/**",
+        "plugins/remote/mcp_server/**",
+        "plugins/remote/ruff.toml",
+        "scripts/**",
+        "skills-lock.json",
+        "surfsense_backend/.dockerignore",
+        "surfsense_backend/.env.example",
+        "surfsense_backend/.gitignore",
+        "surfsense_backend/.python-version",
+        "surfsense_backend/AGENTS.md",
+        "surfsense_backend/CLAUDE.md",
+        "surfsense_backend/Dockerfile",
+        "surfsense_backend/README.md",
+        "surfsense_backend/alembic/**",
+        "surfsense_backend/alembic.ini",
+        "surfsense_backend/app/__init__.py",
+        "surfsense_backend/app/account_deletion/**",
+        "surfsense_backend/app/agents/**",
+        "surfsense_backend/app/app.py",
+        "surfsense_backend/app/artifacts/**",
+        "surfsense_backend/app/auth/**",
+        "surfsense_backend/app/automations/**",
+        "surfsense_backend/app/capabilities/**",
+        "surfsense_backend/app/celery_app.py",
+        "surfsense_backend/app/config/**",
+        "surfsense_backend/app/connectors/**",
+        "surfsense_backend/app/db.py",
+        "surfsense_backend/app/deliverables/**",
+        "surfsense_backend/app/etl_pipeline/**",
+        "surfsense_backend/app/event_bus/**",
+        "surfsense_backend/app/exceptions.py",
+        "surfsense_backend/app/file_storage/**",
+        "surfsense_backend/app/gateway/**",
+        "surfsense_backend/app/indexing_pipeline/**",
+        "surfsense_backend/app/knowledge_store/**",
+        "surfsense_backend/app/license/**",
+        "surfsense_backend/app/mailer/**",
+        "surfsense_backend/app/notifications/**",
+        "surfsense_backend/app/observability/**",
+        "surfsense_backend/app/payments/**",
+        "surfsense_backend/app/podcasts/**",
+        "surfsense_backend/app/prompts/**",
+        "surfsense_backend/app/rate_limiter.py",
+        "surfsense_backend/app/retriever/**",
+        "surfsense_backend/app/routes/**",
+        "surfsense_backend/app/sandbox/**",
+        "surfsense_backend/app/schemas/**",
+        "surfsense_backend/app/services/**",
+        "surfsense_backend/app/session_events.py",
+        "surfsense_backend/app/signup_credit/**",
+        "surfsense_backend/app/sunset.py",
+        "surfsense_backend/app/tasks/**",
+        "surfsense_backend/app/users.py",
+        "surfsense_backend/app/utils/**",
+        "surfsense_backend/app/zero_publication.py",
+        "surfsense_backend/celery_worker.py",
+        "surfsense_backend/main.py",
+        "surfsense_backend/pyproject.toml",
+        "surfsense_backend/scripts/**",
+        "surfsense_backend/tests/README.md",
+        "surfsense_backend/tests/__init__.py",
+        "surfsense_backend/tests/conftest.py",
+        "surfsense_backend/tests/e2e/**",
+        "surfsense_backend/tests/fixtures/empty.pdf",
+        "surfsense_backend/tests/fixtures/sample.md",
+        "surfsense_backend/tests/fixtures/sample.txt",
+        "surfsense_backend/tests/fixtures/tiktok/**",
+        "surfsense_backend/tests/integration/**",
+        "surfsense_backend/tests/unit/**",
+        "surfsense_backend/tests/utils/**",
+        "surfsense_backend/uv.lock",
+        "surfsense_local/AGENTS.md",
+        "surfsense_local/CLAUDE.md",
+        "surfsense_local/README.md",
+        "surfsense_local/RELEASE.md",
+        "surfsense_local/VERSION",
+        "surfsense_local/backend/.gitignore",
+        "surfsense_local/backend/.python-version",
+        "surfsense_local/backend/.vscode/**",
+        "surfsense_local/backend/alembic/**",
+        "surfsense_local/backend/alembic.ini",
+        "surfsense_local/backend/api/**",
+        "surfsense_local/backend/bundling/**",
+        "surfsense_local/backend/main.py",
+        "surfsense_local/backend/modules/__init__.py",
+        "surfsense_local/backend/modules/agent/**",
+        "surfsense_local/backend/modules/artifacts/**",
+        "surfsense_local/backend/modules/chat/**",
+        "surfsense_local/backend/modules/chunks/**",
+        "surfsense_local/backend/modules/documents/**",
+        "surfsense_local/backend/modules/egress/**",
+        "surfsense_local/backend/modules/embedding/**",
+        "surfsense_local/backend/modules/events/**",
+        "surfsense_local/backend/modules/folders/**",
+        "surfsense_local/backend/modules/health/**",
+        "surfsense_local/backend/modules/llm/**",
+        "surfsense_local/backend/modules/migration/**",
+        "surfsense_local/backend/modules/office_support/**",
+        "surfsense_local/backend/modules/pdf_tools/**",
+        "surfsense_local/backend/modules/plugins/**",
+        "surfsense_local/backend/modules/resource_usage/**",
+        "surfsense_local/backend/modules/runtime_packs/**",
+        "surfsense_local/backend/modules/source_roots/**",
+        "surfsense_local/backend/modules/source_scope/**",
+        "surfsense_local/backend/modules/workspaces/**",
+        "surfsense_local/backend/pyproject.toml",
+        "surfsense_local/backend/scripts/audit_gate.py",
+        "surfsense_local/backend/scripts/build_binaries.py",
+        "surfsense_local/backend/scripts/capability_list/**",
+        "surfsense_local/backend/scripts/catalog_rows.py",
+        "surfsense_local/backend/scripts/chat_eval/**",
+        "surfsense_local/backend/scripts/fetch_bundled_voice.py",
+        "surfsense_local/backend/scripts/fetch_docling_models.py",
+        "surfsense_local/backend/scripts/fetch_embedding_model.py",
+        "surfsense_local/backend/scripts/fetch_limit_small.py",
+        "surfsense_local/backend/scripts/measure_figure_ingest.py",
+        "surfsense_local/backend/scripts/refresh_local_manifest.py",
+        "surfsense_local/backend/scripts/refresh_remote_manifest.py",
+        "surfsense_local/backend/scripts/remote_manifest/**",
+        "surfsense_local/backend/scripts/retrieval_eval/**",
+        "surfsense_local/backend/scripts/run_chat_eval.py",
+        "surfsense_local/backend/scripts/run_retrieval_eval.py",
+        "surfsense_local/backend/scripts/write_capability_list.py",
+        "surfsense_local/backend/shared/**",
+        "surfsense_local/backend/uv.lock",
+        "surfsense_local/backend/worker/**",
+        "surfsense_local/backend/worker.py",
+        "surfsense_local/electron/.gitignore",
+        "surfsense_local/electron/build/entitlements.mac.plist",
+        "surfsense_local/electron/electron-builder.yml",
+        "surfsense_local/electron/electron.vite.config.ts",
+        "surfsense_local/electron/package.json",
+        "surfsense_local/electron/pnpm-lock.yaml",
+        "surfsense_local/electron/pnpm-workspace.yaml",
+        "surfsense_local/electron/scripts/**",
+        "surfsense_local/electron/src/**",
+        "surfsense_local/electron/tsconfig.json",
+        "surfsense_local/frontend/.gitignore",
+        "surfsense_local/frontend/.prettierignore",
+        "surfsense_local/frontend/.prettierrc",
+        "surfsense_local/frontend/components.json",
+        "surfsense_local/frontend/docx-snapshot.html",
+        "surfsense_local/frontend/eslint.config.js",
+        "surfsense_local/frontend/index.html",
+        "surfsense_local/frontend/package.json",
+        "surfsense_local/frontend/pnpm-lock.yaml",
+        "surfsense_local/frontend/pnpm-workspace.yaml",
+        "surfsense_local/frontend/public/**",
+        "surfsense_local/frontend/src/App.tsx",
+        "surfsense_local/frontend/src/app/**",
+        "surfsense_local/frontend/src/components/**",
+        "surfsense_local/frontend/src/features/about/**",
+        "surfsense_local/frontend/src/features/agent/**",
+        "surfsense_local/frontend/src/features/chat/**",
+        "surfsense_local/frontend/src/features/dashboard/**",
+        "surfsense_local/frontend/src/features/docx-snapshot/**",
+        "surfsense_local/frontend/src/features/egress/**",
+        "surfsense_local/frontend/src/features/embedding/**",
+        "surfsense_local/frontend/src/features/external-links/**",
+        "surfsense_local/frontend/src/features/feedback/**",
+        "surfsense_local/frontend/src/features/file-viewers/**",
+        "surfsense_local/frontend/src/features/migration/**",
+        "surfsense_local/frontend/src/features/models/**",
+        "surfsense_local/frontend/src/features/office-support/**",
+        "surfsense_local/frontend/src/features/onboarding/api.ts",
+        "surfsense_local/frontend/src/features/onboarding/model-step/**",
+        "surfsense_local/frontend/src/features/onboarding/offline-state.tsx",
+        "surfsense_local/frontend/src/features/onboarding/onboarding-dither-shader.ts",
+        "surfsense_local/frontend/src/features/onboarding/onboarding-dither.tsx",
+        "surfsense_local/frontend/src/features/onboarding/onboarding-page.test.tsx",
+        "surfsense_local/frontend/src/features/onboarding/onboarding-page.tsx",
+        "surfsense_local/frontend/src/features/onboarding/use-finish-onboarding.ts",
+        "surfsense_local/frontend/src/features/plugins/**",
+        "surfsense_local/frontend/src/features/resources/**",
+        "surfsense_local/frontend/src/features/settings/**",
+        "surfsense_local/frontend/src/features/source-preview/**",
+        "surfsense_local/frontend/src/features/sources/**",
+        "surfsense_local/frontend/src/features/studio/**",
+        "surfsense_local/frontend/src/features/updates/**",
+        "surfsense_local/frontend/src/features/workspaces/**",
+        "surfsense_local/frontend/src/hooks/**",
+        "surfsense_local/frontend/src/i18n/**",
+        "surfsense_local/frontend/src/index.css",
+        "surfsense_local/frontend/src/lib/**",
+        "surfsense_local/frontend/src/main.tsx",
+        "surfsense_local/frontend/src/surfsense-logo.svg",
+        "surfsense_local/frontend/src/test-render-count.ts",
+        "surfsense_local/frontend/src/test-setup.ts",
+        "surfsense_local/frontend/src/test-utils.tsx",
+        "surfsense_local/frontend/src/vite-env.d.ts",
+        "surfsense_local/frontend/translations/**",
+        "surfsense_local/frontend/tsconfig.app.json",
+        "surfsense_local/frontend/tsconfig.json",
+        "surfsense_local/frontend/tsconfig.node.json",
+        "surfsense_local/frontend/vite.config.ts",
+        "surfsense_local/packaging/**",
+        "surfsense_local/scripts/**",
+        "surfsense_mcp/**"
+      ],
+      "text": "Copyright (c) SurfSense\n\nPortions of this software are licensed as follows:\n\n* All content that resides under the \"surfsense_backend/app/proprietary/\"\n  directory of this repository is licensed under the Business Source License\n  1.1 as defined in \"surfsense_backend/app/proprietary/LICENSE\".\n* All content that resides under the \"plugins/remote/proprietary/\" directory\n  of this repository is licensed under the Business Source License 1.1 as\n  defined in \"plugins/remote/proprietary/LICENSE\".\n* All third-party components incorporated into the SurfSense software are\n  licensed under the original license provided by the owner of the applicable\n  component.\n* Content outside of the above-mentioned directories is available under the\n  Apache License, Version 2.0, as defined below.\n\n-----------------------------------------------------------------------------\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright (c) SurfSense, Apache-2.0 license (LICENSE), https://github.com/MODSetter/SurfSense."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "surfsense_web/.cursorrules",
+        "surfsense_web/.dockerignore",
+        "surfsense_web/.env.example",
+        "surfsense_web/.gitignore",
+        "surfsense_web/AGENTS.md",
+        "surfsense_web/CLAUDE.md",
+        "surfsense_web/Dockerfile",
+        "surfsense_web/LICENSE",
+        "surfsense_web/README.md",
+        "surfsense_web/app/(home)/[[]slug[]]/**",
+        "surfsense_web/app/(home)/announcements/**",
+        "surfsense_web/app/(home)/blog/**",
+        "surfsense_web/app/(home)/changelog/**",
+        "surfsense_web/app/(home)/contact/**",
+        "surfsense_web/app/(home)/downloads/**",
+        "surfsense_web/app/(home)/external-mcp-connectors/**",
+        "surfsense_web/app/(home)/free/**",
+        "surfsense_web/app/(home)/home.css",
+        "surfsense_web/app/(home)/layout.tsx",
+        "surfsense_web/app/(home)/login/**",
+        "surfsense_web/app/(home)/mcp-server/**",
+        "surfsense_web/app/(home)/page.tsx",
+        "surfsense_web/app/(home)/plugins/**",
+        "surfsense_web/app/(home)/pricing/**",
+        "surfsense_web/app/(home)/privacy/**",
+        "surfsense_web/app/(home)/private-ai-for-business/**",
+        "surfsense_web/app/(home)/register/**",
+        "surfsense_web/app/(home)/sunset/**",
+        "surfsense_web/app/(home)/terms/**",
+        "surfsense_web/app/api/**",
+        "surfsense_web/app/auth/**",
+        "surfsense_web/app/dashboard/**",
+        "surfsense_web/app/desktop/**",
+        "surfsense_web/app/docs/**",
+        "surfsense_web/app/error.tsx",
+        "surfsense_web/app/global-error.tsx",
+        "surfsense_web/app/globals.css",
+        "surfsense_web/app/invite/**",
+        "surfsense_web/app/layout.config.tsx",
+        "surfsense_web/app/layout.tsx",
+        "surfsense_web/app/not-found.tsx",
+        "surfsense_web/app/public/**",
+        "surfsense_web/app/robots.ts",
+        "surfsense_web/app/sitemap.ts",
+        "surfsense_web/app/verify-token/**",
+        "surfsense_web/atoms/**",
+        "surfsense_web/biome.json",
+        "surfsense_web/blog/**",
+        "surfsense_web/changelog/**",
+        "surfsense_web/components/**",
+        "surfsense_web/components.json",
+        "surfsense_web/content/docs/legacy/code-of-conduct.mdx",
+        "surfsense_web/content/docs/legacy/connectors/deprecated/**",
+        "surfsense_web/content/docs/legacy/connectors/index.mdx",
+        "surfsense_web/content/docs/legacy/connectors/meta.json",
+        "surfsense_web/content/docs/legacy/connectors/native/**",
+        "surfsense_web/content/docs/legacy/docker-installation/**",
+        "surfsense_web/content/docs/legacy/how-to/**",
+        "surfsense_web/content/docs/legacy/index.mdx",
+        "surfsense_web/content/docs/legacy/installation.mdx",
+        "surfsense_web/content/docs/legacy/local-models/**",
+        "surfsense_web/content/docs/legacy/manual-installation.mdx",
+        "surfsense_web/content/docs/legacy/messaging-channels/**",
+        "surfsense_web/content/docs/legacy/meta.json",
+        "surfsense_web/content/docs/legacy/observability.mdx",
+        "surfsense_web/content/docs/legacy/testing.mdx",
+        "surfsense_web/content/docs/meta.json",
+        "surfsense_web/content/docs/v2/**",
+        "surfsense_web/contexts/**",
+        "surfsense_web/contracts/**",
+        "surfsense_web/eslint.config.mjs",
+        "surfsense_web/features/**",
+        "surfsense_web/hooks/**",
+        "surfsense_web/i18n/**",
+        "surfsense_web/instrumentation-client.ts",
+        "surfsense_web/instrumentation.ts",
+        "surfsense_web/lib/**",
+        "surfsense_web/mdx-components.tsx",
+        "surfsense_web/messages/**",
+        "surfsense_web/next.config.ts",
+        "surfsense_web/package.json",
+        "surfsense_web/playwright.config.ts",
+        "surfsense_web/pnpm-lock.yaml",
+        "surfsense_web/pnpm-workspace.yaml",
+        "surfsense_web/postcss.config.mjs",
+        "surfsense_web/proxy.ts",
+        "surfsense_web/public/ads.txt",
+        "surfsense_web/public/connectors/**",
+        "surfsense_web/public/homepage/artifacts.svg",
+        "surfsense_web/public/homepage/local-model-toggle.svg",
+        "surfsense_web/public/homepage/no-cloud-in-the-loop.svg",
+        "surfsense_web/public/icon-128.svg",
+        "surfsense_web/public/infographic-styles/**",
+        "surfsense_web/public/logo-wordmark.svg",
+        "surfsense_web/public/logos/**",
+        "surfsense_web/scripts/**",
+        "surfsense_web/source.config.ts",
+        "surfsense_web/svgr.d.ts",
+        "surfsense_web/tailwind.config.js",
+        "surfsense_web/tests/README.md",
+        "surfsense_web/tests/auth.setup.ts",
+        "surfsense_web/tests/connectors/**",
+        "surfsense_web/tests/documents/file-upload/fixtures/canary.md",
+        "surfsense_web/tests/documents/file-upload/journey.spec.ts",
+        "surfsense_web/tests/fixtures/**",
+        "surfsense_web/tests/helpers/**",
+        "surfsense_web/tests/smoke/**",
+        "surfsense_web/tests/unit/**",
+        "surfsense_web/tsconfig.json",
+        "surfsense_web/types/**",
+        "surfsense_web/zero/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Rohan Verma\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Rohan Verma, MIT license (LICENSE), https://github.com/MODSetter/SurfSense/tree/622c1ded8d46b57fd9754e37773af62ba3b1928b/surfsense_web."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.baseline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpp-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "plugins/remote/host/Dockerfile.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mako"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Caddyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1439 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nix-community/home-manager",
+  "revision": "54ad640b81c5e9a32db1a29e7561fda628601117",
+  "checksum": "sha256:e7e63a885deed3579511e4dd6cb05096b600040f6653cd479923b71473b52259",
+  "extract": {
+    "exclude": [
+      "tests/modules/programs/yazi/flavor/**"
+    ]
+  },
+  "history": {
+    "since": "e4c63eb66aaa10e447f010b3d0f28e3a278ad30d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-2026 Home Manager contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nix-community/home-manager: Copyright (c) 2017-2026 Home Manager contributors, MIT license (LICENSE), https://github.com/nix-community/home-manager."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".builds/**",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".gitlab-ci.yml",
+        ".mailmap",
+        "CONTRIBUTING.md",
+        "Justfile",
+        "LICENSE",
+        "MAINTAINING.md",
+        "Makefile",
+        "README.md",
+        "all-maintainers.nix",
+        "ci/**",
+        "default.nix",
+        "docs/**",
+        "flake-module.nix",
+        "flake.lock",
+        "flake.nix",
+        "home-manager/**",
+        "lib/**",
+        "modules/**",
+        "nix-darwin/**",
+        "nixbot.toml",
+        "nixos/**",
+        "overlay.nix",
+        "release.json",
+        "statix.toml",
+        "templates/**",
+        "tests/asserts.nix",
+        "tests/big-test.nix",
+        "tests/darwinScrublist.nix",
+        "tests/default.nix",
+        "tests/integration/**",
+        "tests/lib/**",
+        "tests/modules/accounts/**",
+        "tests/modules/config/**",
+        "tests/modules/dbus/**",
+        "tests/modules/files/**",
+        "tests/modules/home-environment/**",
+        "tests/modules/i18n/**",
+        "tests/modules/launchd/**",
+        "tests/modules/misc/**",
+        "tests/modules/programs/abaddon/**",
+        "tests/modules/programs/abook/**",
+        "tests/modules/programs/acd-cli/**",
+        "tests/modules/programs/aerc/**",
+        "tests/modules/programs/aerospace/**",
+        "tests/modules/programs/ahoviewer/**",
+        "tests/modules/programs/aiac/**",
+        "tests/modules/programs/aichat/**",
+        "tests/modules/programs/aider-chat/**",
+        "tests/modules/programs/airlift/**",
+        "tests/modules/programs/alacritty/**",
+        "tests/modules/programs/algia/**",
+        "tests/modules/programs/aliae/**",
+        "tests/modules/programs/alistral/**",
+        "tests/modules/programs/alot/**",
+        "tests/modules/programs/am2rlauncher/**",
+        "tests/modules/programs/amber/**",
+        "tests/modules/programs/amfora/**",
+        "tests/modules/programs/amoco/**",
+        "tests/modules/programs/amp/**",
+        "tests/modules/programs/andcli/**",
+        "tests/modules/programs/anime-downloader/**",
+        "tests/modules/programs/anki/**",
+        "tests/modules/programs/antidote/**",
+        "tests/modules/programs/antigravity/**",
+        "tests/modules/programs/antigravity-cli/**",
+        "tests/modules/programs/antigravity-cli-legacy/**",
+        "tests/modules/programs/anup/**",
+        "tests/modules/programs/anvil-editor/**",
+        "tests/modules/programs/anyrun/**",
+        "tests/modules/programs/aperture/**",
+        "tests/modules/programs/aphorme/**",
+        "tests/modules/programs/aria2/**",
+        "tests/modules/programs/aria2p/**",
+        "tests/modules/programs/asciinema/**",
+        "tests/modules/programs/ashell/**",
+        "tests/modules/programs/astroid/**",
+        "tests/modules/programs/atool/**",
+        "tests/modules/programs/attic-client/**",
+        "tests/modules/programs/atuin/**",
+        "tests/modules/programs/autojump/**",
+        "tests/modules/programs/autorandr/**",
+        "tests/modules/programs/awscli/**",
+        "tests/modules/programs/b4/**",
+        "tests/modules/programs/bacon/**",
+        "tests/modules/programs/bash/**",
+        "tests/modules/programs/bat/**",
+        "tests/modules/programs/beets/**",
+        "tests/modules/programs/bemenu/**",
+        "tests/modules/programs/bluetuith/**",
+        "tests/modules/programs/borgmatic/**",
+        "tests/modules/programs/bottom/**",
+        "tests/modules/programs/boxxy/**",
+        "tests/modules/programs/broot/**",
+        "tests/modules/programs/browserpass/**",
+        "tests/modules/programs/btop/**",
+        "tests/modules/programs/calibre/**",
+        "tests/modules/programs/carapace/**",
+        "tests/modules/programs/cargo/**",
+        "tests/modules/programs/cava/**",
+        "tests/modules/programs/cavalier/**",
+        "tests/modules/programs/chromium/**",
+        "tests/modules/programs/claude-code/**",
+        "tests/modules/programs/clock-rs/**",
+        "tests/modules/programs/cmus/**",
+        "tests/modules/programs/codex/**",
+        "tests/modules/programs/comodoro/**",
+        "tests/modules/programs/concord/**",
+        "tests/modules/programs/crush/**",
+        "tests/modules/programs/cudatext/**",
+        "tests/modules/programs/cursor/**",
+        "tests/modules/programs/darcs/**",
+        "tests/modules/programs/dbeaver/**",
+        "tests/modules/programs/delta/**",
+        "tests/modules/programs/devenv/**",
+        "tests/modules/programs/diff-highlight/**",
+        "tests/modules/programs/diff-so-fancy/**",
+        "tests/modules/programs/difftastic/**",
+        "tests/modules/programs/dircolors/**",
+        "tests/modules/programs/direnv/**",
+        "tests/modules/programs/discocss/**",
+        "tests/modules/programs/discord/**",
+        "tests/modules/programs/distrobox/**",
+        "tests/modules/programs/docker-cli/**",
+        "tests/modules/programs/dprint/**",
+        "tests/modules/programs/earthly/**",
+        "tests/modules/programs/ec/**",
+        "tests/modules/programs/eilmeldung/**",
+        "tests/modules/programs/element-desktop/**",
+        "tests/modules/programs/emacs/**",
+        "tests/modules/programs/equibop/**",
+        "tests/modules/programs/eww/**",
+        "tests/modules/programs/eza/**",
+        "tests/modules/programs/fabric-ai/**",
+        "tests/modules/programs/fastfetch/**",
+        "tests/modules/programs/feedr/**",
+        "tests/modules/programs/feh/**",
+        "tests/modules/programs/firefox/**",
+        "tests/modules/programs/firefoxpwa/**",
+        "tests/modules/programs/fish/**",
+        "tests/modules/programs/flake-edit/**",
+        "tests/modules/programs/flashspace/**",
+        "tests/modules/programs/fnox/**",
+        "tests/modules/programs/foliate/**",
+        "tests/modules/programs/foot/**",
+        "tests/modules/programs/formiko/**",
+        "tests/modules/programs/freetube/**",
+        "tests/modules/programs/fresh-editor/**",
+        "tests/modules/programs/fuzzel/**",
+        "tests/modules/programs/fzf/**",
+        "tests/modules/programs/gallery-dl/**",
+        "tests/modules/programs/gcc/**",
+        "tests/modules/programs/getmail/**",
+        "tests/modules/programs/gh/**",
+        "tests/modules/programs/gh-dash/**",
+        "tests/modules/programs/ghostty/**",
+        "tests/modules/programs/git/**",
+        "tests/modules/programs/git-cliff/**",
+        "tests/modules/programs/git-credential-keepassxc/**",
+        "tests/modules/programs/git-credential-oauth/**",
+        "tests/modules/programs/git-worktree-switcher/**",
+        "tests/modules/programs/github-copilot-cli/**",
+        "tests/modules/programs/gnome-shell/**",
+        "tests/modules/programs/gnome-terminal/**",
+        "tests/modules/programs/go/**",
+        "tests/modules/programs/goto/**",
+        "tests/modules/programs/gpg/**",
+        "tests/modules/programs/gradle/**",
+        "tests/modules/programs/gram/**",
+        "tests/modules/programs/granted/**",
+        "tests/modules/programs/grep/**",
+        "tests/modules/programs/grype/**",
+        "tests/modules/programs/gurk-rs/**",
+        "tests/modules/programs/halloy/**",
+        "tests/modules/programs/helix/**",
+        "tests/modules/programs/herdr/**",
+        "tests/modules/programs/himalaya/**",
+        "tests/modules/programs/htop/**",
+        "tests/modules/programs/hwatch/**",
+        "tests/modules/programs/hyfetch/**",
+        "tests/modules/programs/hyprland-qt-support/**",
+        "tests/modules/programs/hyprlock/**",
+        "tests/modules/programs/hyprpanel/**",
+        "tests/modules/programs/hyprshot/**",
+        "tests/modules/programs/hyprtoolkit/**",
+        "tests/modules/programs/i3bar-river/**",
+        "tests/modules/programs/i3blocks/**",
+        "tests/modules/programs/i3status/**",
+        "tests/modules/programs/i3status-rust/**",
+        "tests/modules/programs/impala/**",
+        "tests/modules/programs/imv/**",
+        "tests/modules/programs/infat/**",
+        "tests/modules/programs/inori/**",
+        "tests/modules/programs/intelli-shell/**",
+        "tests/modules/programs/irssi/**",
+        "tests/modules/programs/jjui/**",
+        "tests/modules/programs/joplin-desktop/**",
+        "tests/modules/programs/jqp/**",
+        "tests/modules/programs/jrnl/**",
+        "tests/modules/programs/jujutsu/**",
+        "tests/modules/programs/k9s/**",
+        "tests/modules/programs/kakoune/**",
+        "tests/modules/programs/keepassxc/**",
+        "tests/modules/programs/khal/**",
+        "tests/modules/programs/khard/**",
+        "tests/modules/programs/kickoff/**",
+        "tests/modules/programs/kiro/**",
+        "tests/modules/programs/kiro-cli/**",
+        "tests/modules/programs/kitty/**",
+        "tests/modules/programs/kodi/**",
+        "tests/modules/programs/kraftkit/**",
+        "tests/modules/programs/kubecolor/**",
+        "tests/modules/programs/kubeswitch/**",
+        "tests/modules/programs/lapce/**",
+        "tests/modules/programs/lazydocker/**",
+        "tests/modules/programs/lazygit/**",
+        "tests/modules/programs/lazysql/**",
+        "tests/modules/programs/lazyworktree/**",
+        "tests/modules/programs/ledger/**",
+        "tests/modules/programs/less/**",
+        "tests/modules/programs/lesspipe/**",
+        "tests/modules/programs/lf/**",
+        "tests/modules/programs/libreoffice/**",
+        "tests/modules/programs/lieer/**",
+        "tests/modules/programs/looking-glass-client/**",
+        "tests/modules/programs/lsd/**",
+        "tests/modules/programs/lutris/**",
+        "tests/modules/programs/macchina/**",
+        "tests/modules/programs/macos-terminal/**",
+        "tests/modules/programs/man/**",
+        "tests/modules/programs/mangohud/**",
+        "tests/modules/programs/mblaze/**",
+        "tests/modules/programs/mbsync/**",
+        "tests/modules/programs/mc/**",
+        "tests/modules/programs/mcp/**",
+        "tests/modules/programs/meli/**",
+        "tests/modules/programs/mergiraf/**",
+        "tests/modules/programs/micro/**",
+        "tests/modules/programs/mise/**",
+        "tests/modules/programs/mistral-vibe/**",
+        "tests/modules/programs/mods/**",
+        "tests/modules/programs/moor/**",
+        "tests/modules/programs/mpv/**",
+        "tests/modules/programs/mpvpaper/**",
+        "tests/modules/programs/mu/**",
+        "tests/modules/programs/mujmap/**",
+        "tests/modules/programs/mullvad-vpn/**",
+        "tests/modules/programs/mypy/**",
+        "tests/modules/programs/ncmpcpp/**",
+        "tests/modules/programs/ncmpcpp-linux/**",
+        "tests/modules/programs/ne/**",
+        "tests/modules/programs/neomutt/**",
+        "tests/modules/programs/neovide/**",
+        "tests/modules/programs/neovim/**",
+        "tests/modules/programs/newsboat/**",
+        "tests/modules/programs/nh/**",
+        "tests/modules/programs/nheko/**",
+        "tests/modules/programs/ninjabrain-bot/**",
+        "tests/modules/programs/nix-index/**",
+        "tests/modules/programs/nix-init/**",
+        "tests/modules/programs/nix-search-tv/**",
+        "tests/modules/programs/nix-your-shell/**",
+        "tests/modules/programs/nnn/**",
+        "tests/modules/programs/noctalia/**",
+        "tests/modules/programs/nom/**",
+        "tests/modules/programs/notmuch/**",
+        "tests/modules/programs/npm/**",
+        "tests/modules/programs/numbat/**",
+        "tests/modules/programs/nushell/**",
+        "tests/modules/programs/nvchecker/**",
+        "tests/modules/programs/nyxt/**",
+        "tests/modules/programs/oh-my-posh/**",
+        "tests/modules/programs/omniwm/**",
+        "tests/modules/programs/onagre/**",
+        "tests/modules/programs/onedrive/**",
+        "tests/modules/programs/onlyoffice/**",
+        "tests/modules/programs/opencode/**",
+        "tests/modules/programs/openstackclient/**",
+        "tests/modules/programs/opkssh/**",
+        "tests/modules/programs/pandoc/**",
+        "tests/modules/programs/papis/**",
+        "tests/modules/programs/parallel/**",
+        "tests/modules/programs/password-store/**",
+        "tests/modules/programs/patdiff/**",
+        "tests/modules/programs/pay-respects/**",
+        "tests/modules/programs/pet/**",
+        "tests/modules/programs/pgcli/**",
+        "tests/modules/programs/pi-coding-agent/**",
+        "tests/modules/programs/pianobar/**",
+        "tests/modules/programs/pimsync/**",
+        "tests/modules/programs/pistol/**",
+        "tests/modules/programs/pls/**",
+        "tests/modules/programs/pnpm/**",
+        "tests/modules/programs/poetry/**",
+        "tests/modules/programs/pomo/**",
+        "tests/modules/programs/positron/**",
+        "tests/modules/programs/posting/**",
+        "tests/modules/programs/powerline-go/**",
+        "tests/modules/programs/pqiv/**",
+        "tests/modules/programs/prismlauncher/**",
+        "tests/modules/programs/ptyxis/**",
+        "tests/modules/programs/pubs/**",
+        "tests/modules/programs/pyenv/**",
+        "tests/modules/programs/pyradio/**",
+        "tests/modules/programs/qalculate/**",
+        "tests/modules/programs/qcal/**",
+        "tests/modules/programs/qutebrowser/**",
+        "tests/modules/programs/radicle/**",
+        "tests/modules/programs/radio-active/**",
+        "tests/modules/programs/radio-cli/**",
+        "tests/modules/programs/ranger/**",
+        "tests/modules/programs/rbw/**",
+        "tests/modules/programs/rclone/**",
+        "tests/modules/programs/readest/**",
+        "tests/modules/programs/readline/**",
+        "tests/modules/programs/rectangle/**",
+        "tests/modules/programs/retext/**",
+        "tests/modules/programs/retroarch/**",
+        "tests/modules/programs/riff/**",
+        "tests/modules/programs/rio/**",
+        "tests/modules/programs/ripasso/**",
+        "tests/modules/programs/ripgrep/**",
+        "tests/modules/programs/ripgrep-all/**",
+        "tests/modules/programs/rizin/**",
+        "tests/modules/programs/rmpc/**",
+        "tests/modules/programs/rofi/**",
+        "tests/modules/programs/ruff/**",
+        "tests/modules/programs/sagemath/**",
+        "tests/modules/programs/sapling/**",
+        "tests/modules/programs/satty/**",
+        "tests/modules/programs/sbt/**",
+        "tests/modules/programs/scmpuff/**",
+        "tests/modules/programs/screen/**",
+        "tests/modules/programs/secretspec/**",
+        "tests/modules/programs/senpai/**",
+        "tests/modules/programs/sesh/**",
+        "tests/modules/programs/sftpman/**",
+        "tests/modules/programs/sheldon/**",
+        "tests/modules/programs/sherlock/**",
+        "tests/modules/programs/sioyek/**",
+        "tests/modules/programs/sketchybar/**",
+        "tests/modules/programs/sm64ex/**",
+        "tests/modules/programs/smug/**",
+        "tests/modules/programs/spotify-player/**",
+        "tests/modules/programs/ssh/**",
+        "tests/modules/programs/starship/**",
+        "tests/modules/programs/streamlink/**",
+        "tests/modules/programs/stylua/**",
+        "tests/modules/programs/superfile/**",
+        "tests/modules/programs/swappy/**",
+        "tests/modules/programs/sway-easyfocus/**",
+        "tests/modules/programs/swayimg/**",
+        "tests/modules/programs/swaylock/**",
+        "tests/modules/programs/swayr/**",
+        "tests/modules/programs/t3code/**",
+        "tests/modules/programs/taskwarrior/**",
+        "tests/modules/programs/tealdeer/**",
+        "tests/modules/programs/television/**",
+        "tests/modules/programs/terminator/**",
+        "tests/modules/programs/tex-fmt/**",
+        "tests/modules/programs/texlive/**",
+        "tests/modules/programs/thunderbird/**",
+        "tests/modules/programs/tirith/**",
+        "tests/modules/programs/tmate/**",
+        "tests/modules/programs/tmux/**",
+        "tests/modules/programs/todoman/**",
+        "tests/modules/programs/tofi/**",
+        "tests/modules/programs/topgrade/**",
+        "tests/modules/programs/translate-shell/**",
+        "tests/modules/programs/tray-tui/**",
+        "tests/modules/programs/trippy/**",
+        "tests/modules/programs/ttyper/**",
+        "tests/modules/programs/twitch-tui/**",
+        "tests/modules/programs/ty/**",
+        "tests/modules/programs/uv/**",
+        "tests/modules/programs/vdirsyncer/**",
+        "tests/modules/programs/vesktop/**",
+        "tests/modules/programs/vicinae/**",
+        "tests/modules/programs/vifm/**",
+        "tests/modules/programs/vim-vint/**",
+        "tests/modules/programs/vinegar/**",
+        "tests/modules/programs/visidata/**",
+        "tests/modules/programs/vivid/**",
+        "tests/modules/programs/vscode/**",
+        "tests/modules/programs/vscodium/**",
+        "tests/modules/programs/w3m/**",
+        "tests/modules/programs/wallust/**",
+        "tests/modules/programs/watson/**",
+        "tests/modules/programs/waveterm/**",
+        "tests/modules/programs/waybar/**",
+        "tests/modules/programs/wayprompt/**",
+        "tests/modules/programs/wezterm/**",
+        "tests/modules/programs/windsurf/**",
+        "tests/modules/programs/wiremix/**",
+        "tests/modules/programs/wleave/**",
+        "tests/modules/programs/wlogout/**",
+        "tests/modules/programs/wlr-which-key/**",
+        "tests/modules/programs/wofi/**",
+        "tests/modules/programs/workstyle/**",
+        "tests/modules/programs/worktrunk/**",
+        "tests/modules/programs/xmobar/**",
+        "tests/modules/programs/yambar/**",
+        "tests/modules/programs/yarn/**",
+        "tests/modules/programs/yazi/bash-integration-enabled.nix",
+        "tests/modules/programs/yazi/configurations-expected.lua",
+        "tests/modules/programs/yazi/configurations-with-init-lua-expected.lua",
+        "tests/modules/programs/yazi/configurations-with-init-lua.nix",
+        "tests/modules/programs/yazi/configurations-with-path-init-lua.nix",
+        "tests/modules/programs/yazi/configurations.nix",
+        "tests/modules/programs/yazi/default.nix",
+        "tests/modules/programs/yazi/empty/**",
+        "tests/modules/programs/yazi/fish-integration-enabled.nix",
+        "tests/modules/programs/yazi/fish-integration-expected.fish",
+        "tests/modules/programs/yazi/init-lua-string.nix",
+        "tests/modules/programs/yazi/init.lua",
+        "tests/modules/programs/yazi/keymap-expected.toml",
+        "tests/modules/programs/yazi/nushell-integration-enabled.nix",
+        "tests/modules/programs/yazi/plugin/**",
+        "tests/modules/programs/yazi/settings-expected.toml",
+        "tests/modules/programs/yazi/settings.nix",
+        "tests/modules/programs/yazi/theme-expected.toml",
+        "tests/modules/programs/yazi/zsh-integration-enabled.nix",
+        "tests/modules/programs/yofi/**",
+        "tests/modules/programs/yopass/**",
+        "tests/modules/programs/yt-dlp/**",
+        "tests/modules/programs/zapzap/**",
+        "tests/modules/programs/zed-editor/**",
+        "tests/modules/programs/zellij/**",
+        "tests/modules/programs/zk/**",
+        "tests/modules/programs/zplug/**",
+        "tests/modules/programs/zsh/**",
+        "tests/modules/services/**",
+        "tests/modules/services-modular/**",
+        "tests/modules/systemd/**",
+        "tests/modules/targets-darwin/**",
+        "tests/modules/targets-linux/**",
+        "tests/modules/xresources/**",
+        "tests/package.nix",
+        "tests/stubs.nix",
+        "tests/tests.py",
+        "treefmt.toml",
+        "xgettext"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017-2026 Home Manager contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017-2026 Home Manager contributors, MIT license (LICENSE), https://github.com/nix-community/home-manager."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/Justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lisp",
+      "paths": [
+        "**/*.lisp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.com-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.com-signature-command-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.com-signature-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.com-starttls-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.db"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.json-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.kdl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.keymap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.keynavrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.latex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nbt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rasi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ron"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.scfg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.socket"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.target"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.theme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.timer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yuck"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zprofile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zshenv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zshrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.hidden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autostart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bashrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic-configuration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic_config_expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blacklist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bspwmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/discover_type_expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/editorconfig-simple-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_config_expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env-old-options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env-suboptions-unset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/environment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-macos-launch-services-cmdline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-settings-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-settings-expected-bindings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-settings-expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-settings-expected-settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example-theme-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-changelog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-keymap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-mcp-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-plugin-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-siteconf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-urimethodmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feh-bindings-expected-buttons"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feh-bindings-expected-keys"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feh-themes-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/full-configuration-ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-allowed-signers-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/herbstluftwm-alias-disabled-autostart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/herbstluftwm-no-tags-autostart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/herbstluftwm-simple-config-autostart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/home-manager"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ignore-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jankyborders-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/khal-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mpv-example-settings-expected-bindings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mpv-example-settings-expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mpv-example-settings-expected-osc-opts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multiple_accounts_expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multiple_with_abooks_expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncmpcpp-example-settings-expected-bindings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncmpcpp-example-settings-expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncmpcpp-issue-3560-expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ncmpcpp-use-mpd-config-expected-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nix-gc-script-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/non-nixos-gpu-setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/output-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pauselist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pubs-example-settings-expected-pubsrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qalculate-with-settings-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/screenrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/skhd-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/source with spaces!"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stoplist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sxhkdrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-hook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/todoman-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xgettext"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/yt-dlp-config-expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zshrc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

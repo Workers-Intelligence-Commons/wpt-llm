@@ -1,0 +1,529 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/microsoft/garnet",
+  "revision": "a4f07ccebcae4b957a0de18c82d9fd0e0f9ab497",
+  "checksum": "sha256:1177a72b7b16e3786d8c1d4b308b37cd06c70e1963f3b3b6ffe6af22f21724fc",
+  "extract": {
+    "exclude": [
+      "Garnet.snk",
+      "libs/native/bftree-garnet/runtimes/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/linux-arm64/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/linux-musl-arm64/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/linux-musl-x64/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/linux-x64/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-arm64/native/native_device.dll",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-x64/native/native_device.dll",
+      "test/testcerts/testcert.pfx",
+      "website/static/img/azure/**",
+      "website/static/img/benchmark/**",
+      "website/static/img/favicon.ico",
+      "website/static/img/garnet-bg2-2800x720.jpg",
+      "website/static/img/garnet-bg2-2800x720.png",
+      "website/static/img/garnet-logo-diamond.png",
+      "website/static/img/garnet-logo-inset.png",
+      "website/static/img/garnet-logo.png",
+      "website/static/img/logo_128.png",
+      "website/static/img/vector-sets/**",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-arm64/native/native_device.pdb",
+      "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-x64/native/native_device.pdb"
+    ]
+  },
+  "history": {
+    "since": "1e5c7ad3d80a57a58e233e76267e5a21f9d2113f"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n",
+      "attribution": "Commit history of https://github.com/microsoft/garnet: Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/garnet."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".azure/**",
+        ".cargo/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CODE_OF_CONDUCT.md",
+        "Directory.Build.props",
+        "Directory.Packages.props",
+        "Dockerfile",
+        "Dockerfile.alpine",
+        "Dockerfile.azurelinux",
+        "Dockerfile.chiseled",
+        "Dockerfile.nanoserver",
+        "Dockerfile.ubuntu",
+        "Garnet.slnx",
+        "LICENSE",
+        "NOTICE.md",
+        "README.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "Version.props",
+        "benchmark/**",
+        "charts/**",
+        "docker-compose.yml",
+        "es-metadata.yml",
+        "global.json",
+        "hosting/**",
+        "libs/GlobalUsings.cs",
+        "libs/client/**",
+        "libs/cluster/**",
+        "libs/common/**",
+        "libs/host/**",
+        "libs/native/bftree-garnet/.gitignore",
+        "libs/native/bftree-garnet/BfTreeInterop.csproj",
+        "libs/native/bftree-garnet/BfTreeService.cs",
+        "libs/native/bftree-garnet/Cargo.lock",
+        "libs/native/bftree-garnet/Cargo.toml",
+        "libs/native/bftree-garnet/NativeBfTreeMethods.cs",
+        "libs/native/bftree-garnet/Properties/**",
+        "libs/native/bftree-garnet/examples/**",
+        "libs/native/bftree-garnet/rust-toolchain.toml",
+        "libs/native/bftree-garnet/src/**",
+        "libs/resources/**",
+        "libs/server/**",
+        "libs/storage/Tsavorite/.gitignore",
+        "libs/storage/Tsavorite/README.md",
+        "libs/storage/Tsavorite/cc/**",
+        "libs/storage/Tsavorite/cs/README.md",
+        "libs/storage/Tsavorite/cs/Tsavorite.slnx",
+        "libs/storage/Tsavorite/cs/benchmark/**",
+        "libs/storage/Tsavorite/cs/src/core/Allocator/**",
+        "libs/storage/Tsavorite/cs/src/core/Async/**",
+        "libs/storage/Tsavorite/cs/src/core/ClientSession/**",
+        "libs/storage/Tsavorite/cs/src/core/Compaction/**",
+        "libs/storage/Tsavorite/cs/src/core/Device/AsyncPool.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/DeviceOptions.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/DeviceType.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/Devices.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/IDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/LinuxFileExtensions.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/LocalMemoryDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/LocalStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/ManagedLocalStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/NativeStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/NullDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/RandomAccessLocalStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/ShardedStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/SpscRing.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/StorageDeviceBase.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/TieredStorageDevice.cs",
+        "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-arm64/native/native_device.pdb",
+        "libs/storage/Tsavorite/cs/src/core/Device/runtimes/win-x64/native/native_device.pdb",
+        "libs/storage/Tsavorite/cs/src/core/Epochs/**",
+        "libs/storage/Tsavorite/cs/src/core/Index/**",
+        "libs/storage/Tsavorite/cs/src/core/Native/**",
+        "libs/storage/Tsavorite/cs/src/core/Tsavorite.core.csproj",
+        "libs/storage/Tsavorite/cs/src/core/TsavoriteLog/**",
+        "libs/storage/Tsavorite/cs/src/core/Utilities/**",
+        "libs/storage/Tsavorite/cs/src/core/VarLen/**",
+        "libs/storage/Tsavorite/cs/src/devices/**",
+        "libs/storage/Tsavorite/cs/test/**",
+        "main/**",
+        "metrics/**",
+        "modules/**",
+        "playground/**",
+        "samples/**",
+        "test/BDNPerfTests/**",
+        "test/Garnet.fuzz/**",
+        "test/PerfRegressionTesting/**",
+        "test/cluster/**",
+        "test/docker-tests/**",
+        "test/standalone/**",
+        "test/testcerts/README.md",
+        "test/testcerts/garnet-ca.crt",
+        "test/testcerts/garnet-ca.key",
+        "test/testcerts/garnet-cert.crt",
+        "test/testcerts/garnet-cert.key",
+        "test/testcerts/testcert.key.pem",
+        "test/testcerts/testcert.pem",
+        "website/.gitignore",
+        "website/.npmrc",
+        "website/.yarnrc",
+        "website/README.md",
+        "website/babel.config.js",
+        "website/blog/**",
+        "website/docs/**",
+        "website/docusaurus.config.js",
+        "website/package.json",
+        "website/sidebars.js",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/img/undraw_performance_overview_re_mqrq.svg",
+        "website/static/img/undraw_scrum_board_re_wk7v.svg",
+        "website/static/img/undraw_secure_login_pdn4.svg",
+        "website/yarn.lock"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n",
+      "attribution": "Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/garnet."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.alpine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.azurelinux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bicep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.chiseled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gotmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "website/yarn.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nanoserver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pubxml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.runsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slnx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ubuntu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yarnrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

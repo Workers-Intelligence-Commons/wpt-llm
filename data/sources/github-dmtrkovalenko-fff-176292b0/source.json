@@ -1,0 +1,638 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dmtrKovalenko/fff",
+  "revision": "a3770690bcde58e49bad91e2077e290b409c172c",
+  "checksum": "sha256:bcdc1b17bacdf3552970f58e9f1d3bae88def897e246d0ca9737314983059c94",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "chart.png",
+      "crates/fff-core/tests/fixtures/binaries/codex_view",
+      "crates/fff-core/tests/fixtures/binaries/codex_view.codex"
+    ]
+  },
+  "history": {
+    "since": "198ab9430aabf48b9d22344db9d07a0c96b2cb5d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Dmitriy Kovalenko\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/dmtrKovalenko/fff: Copyright (c) 2025 Dmitriy Kovalenko, MIT license (LICENSE), https://github.com/dmtrKovalenko/fff."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cargo/**",
+        ".github/**",
+        ".gitignore",
+        ".luacheckrc",
+        ".luarc.ci.json",
+        ".luarc.json",
+        ".mcp.json",
+        ".nixignore",
+        ".stylua.toml",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "Formula/**",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "_typos.toml",
+        "crates/fff-c/**",
+        "crates/fff-core/Cargo.toml",
+        "crates/fff-core/README.md",
+        "crates/fff-core/benches/**",
+        "crates/fff-core/build.rs",
+        "crates/fff-core/src/**",
+        "crates/fff-core/tests/bigram_overlay_coherence_test.rs",
+        "crates/fff-core/tests/bigram_overlay_integration.rs",
+        "crates/fff-core/tests/dir_index_consistency_test.rs",
+        "crates/fff-core/tests/dotdir_glob_constraint_test.rs",
+        "crates/fff-core/tests/drop_during_post_scan.rs",
+        "crates/fff-core/tests/explicit_cache_budget.rs",
+        "crates/fff-core/tests/fixtures/binaries/codex_view",
+        "crates/fff-core/tests/fs_delete_handler_test.rs",
+        "crates/fff-core/tests/fuzz_file_operations.rs",
+        "crates/fff-core/tests/fuzz_git_watcher_stress.proptest-regressions",
+        "crates/fff-core/tests/fuzz_git_watcher_stress.rs",
+        "crates/fff-core/tests/fuzz_real_repos.proptest-regressions",
+        "crates/fff-core/tests/fuzz_real_repos.rs",
+        "crates/fff-core/tests/git_recency_integration.rs",
+        "crates/fff-core/tests/grep_integration.rs",
+        "crates/fff-core/tests/grep_overflow_path_constraint_segfault.rs",
+        "crates/fff-core/tests/grep_time_budget_zero_match.rs",
+        "crates/fff-core/tests/invalid_utf8_paths.rs",
+        "crates/fff-core/tests/lmdb_env_pool.rs",
+        "crates/fff-core/tests/lmdb_readers_full_repro.rs",
+        "crates/fff-core/tests/lmdb_stale_lock_deadlock.rs",
+        "crates/fff-core/tests/new_directory_watcher_test.rs",
+        "crates/fff-core/tests/overflow_frecency_segfault.rs",
+        "crates/fff-core/tests/path_separator_constraint_test.rs",
+        "crates/fff-core/tests/real_binary_fixtures.rs",
+        "crates/fff-core/tests/rename_frecency_test.rs",
+        "crates/fff-core/tests/rescan_regression.rs",
+        "crates/fff-core/tests/watch_subscription_test.rs",
+        "crates/fff-core/tests/watcher_stop_under_lock.rs",
+        "crates/fff-core/tests/watcher_thread_lifecycle_test.rs",
+        "crates/fff-grep/**",
+        "crates/fff-mcp/**",
+        "crates/fff-nvim/**",
+        "crates/fff-python/**",
+        "crates/fff-query-parser/**",
+        "doc/**",
+        "empty_config.lua",
+        "flake.lock",
+        "flake.nix",
+        "install-mcp.ps1",
+        "install-mcp.sh",
+        "lua/**",
+        "package.json",
+        "packages/**",
+        "plugin/**",
+        "rust-toolchain.toml",
+        "scripts/**",
+        "tests/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Dmitriy Kovalenko\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Dmitriy Kovalenko, MIT license (LICENSE), https://github.com/dmtrKovalenko/fff."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock",
+        "packages/bun.lock",
+        "packages/fff-python/uv.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---combo---boost_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---combo---boost_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---debug_narrow---file_info_panel_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---debug_narrow---file_info_panel_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---debug_wide---file_info_panel_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---debug_wide---file_info_panel_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---cursor_second_item_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---cursor_second_item_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---no_results_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---no_results_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---query_main_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---default---query_main_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---filename_center---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---filename_center---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---filename_right---cursor_second_item_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---filename_right---cursor_second_item_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---cursor_second_item"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---cursor_second_item_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---cursor_second_item_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---no_results_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---no_results_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---query_main_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---narrow---query_main_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---scrollbar---next_page_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---scrollbar---next_page_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---show_path_first---query_main_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---show_path_first---query_main_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---title_center_no_count---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---title_center_no_count---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---cursor_second_item_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---cursor_second_item_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---no_results_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---no_results_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---query_main_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---wide---query_main_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---cursor_second_item"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---cursor_second_item_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---cursor_second_item_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---empty_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---empty_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---no_results_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---no_results_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---query_main_bottom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lua---xwide---query_main_top"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.proptest-regressions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.luacheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nixignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/codex_view"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1792 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/saltstack/salt",
+  "revision": "f37cdcd1c93f778a84f83b3cc9933cac92d0456b",
+  "checksum": "sha256:550948dffb2898d02cb5f92975ed7c6703f5abd1294b52b3392f697470e31cc1",
+  "extract": {
+    "exclude": [
+      ".github/scripts/SaltProject_altlogo_teal.png",
+      "doc/_static/cloud-settings-inheritance.png",
+      "doc/_static/external-job-cache.png",
+      "doc/_static/favicon.ico",
+      "doc/_static/master-job-cache.png",
+      "doc/_static/napalm_logo.png",
+      "doc/_static/proxy_minions.png",
+      "doc/_static/rest_status_screen.png",
+      "doc/_static/salt-architecture.png",
+      "doc/_static/salt-logo.pdf",
+      "doc/_static/salt-logo.png",
+      "doc/_static/salt-oss-logo.png",
+      "doc/_static/snapshot_manager.png",
+      "doc/_static/spm-overview.png",
+      "doc/_static/spm-package-contents.png",
+      "doc/_static/spm-package-extraction.png",
+      "doc/_themes/saltstack/static/images/**",
+      "doc/_themes/saltstack/static/img/**",
+      "doc/_themes/saltstack/static/js/vendor/**",
+      "doc/_themes/saltstack2/static/css/close.png",
+      "doc/_themes/saltstack2/static/css/loading.gif",
+      "doc/_themes/saltstack2/static/css/next.png",
+      "doc/_themes/saltstack2/static/css/prev.png",
+      "doc/_themes/saltstack2/static/fonts/glyphicons-halflings-regular.eot",
+      "doc/_themes/saltstack2/static/fonts/glyphicons-halflings-regular.ttf",
+      "doc/_themes/saltstack2/static/fonts/glyphicons-halflings-regular.woff",
+      "doc/_themes/saltstack2/static/fonts/lato/**",
+      "doc/_themes/saltstack2/static/images/DOCBANNER.png",
+      "doc/_themes/saltstack2/static/images/banner-saltconf.png",
+      "doc/_themes/saltstack2/static/images/banner-support.png",
+      "doc/_themes/saltstack2/static/images/email.png",
+      "doc/_themes/saltstack2/static/images/enterprise_ad.jpg",
+      "doc/_themes/saltstack2/static/images/footer-support.png",
+      "doc/_themes/saltstack2/static/images/github.png",
+      "doc/_themes/saltstack2/static/images/linkedin.png",
+      "doc/_themes/saltstack2/static/images/meetup.png",
+      "doc/_themes/saltstack2/static/images/messenger-generic.png",
+      "doc/_themes/saltstack2/static/images/reddit.png",
+      "doc/_themes/saltstack2/static/images/stackoverflow.png",
+      "doc/_themes/saltstack2/static/images/twitter.png",
+      "doc/_themes/saltstack2/static/images/youtube-variation.png",
+      "doc/favicon.ico",
+      "pkg/debian/**",
+      "pkg/macos/pkg-resources/**",
+      "pkg/windows/msi/pkg_resources/**",
+      "pkg/windows/msi/tests/_mock_files/buildenv/Scripts/python.exe",
+      "pkg/windows/msi/tests/_mock_files/buildenv/Scripts/python3.dll",
+      "pkg/windows/msi/tests/_mock_files/buildenv/Scripts/python310.dll",
+      "pkg/windows/nsis/installer/**",
+      "tests/integration/files/file/base/certs/**",
+      "tests/integration/files/file/base/custom.tar.gz",
+      "tests/integration/files/file/base/custom.tar.gz.SHA256.sig",
+      "tests/integration/files/file/base/custom.tar.gz.sig",
+      "tests/integration/files/file/base/grail/scene33.SHA256.sig",
+      "tests/integration/files/file/base/grail/scene33.sig",
+      "tests/integration/files/file/base/random_bytes",
+      "tests/integration/files/file/prod/issue45893/custom.tar.gz",
+      "tests/integration/files/hello-2.10-1.el7.x86_64.rpm",
+      "tests/pytests/functional/files/salt-archive-keyring.gpg",
+      "tests/pytests/unit/modules/sol10_pkg/bashs/SUNWbashS/archive/**",
+      "tests/pytests/unit/modules/sol10_pkg/bashs/SUNWbashS/install/**"
+    ]
+  },
+  "history": {
+    "since": "a1d07e9cc5d84895468bf360390754c4d68308d9"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright (c) 2011-2022 VMware, Inc. All rights reserved.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n===========================================================================\n\nBelow is a summary of the licensing used by external modules that are\nbundled with SaltStack.\n\nFormat: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/\nUpstream-Name: salt\nUpstream-Contact: salt-users@googlegroups.com\nSource: https://github.com/saltstack/salt\n\nFiles: *\nCopyright: 2014 SaltStack Team\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n\nFiles: debian/*\nCopyright: 2013 Joe Healy <joehealy@gmail.com>\n           2012 Michael Prokop <mika@debian.org>\n           2012 Christian Hofstaedtler <christian@hofstaedtler.name>\n           2012 Ulrich Dangel <mru@spamt.net>\n           2012 Corey Quinn <corey@sequestered.net>\n           2011 Aaron Toponce <aaron.toponce@gmail.com>\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n\nFiles: salt/auth/pam.py\nCopyright: 2007 Chris AtLee <chris@atlee.ca>\nLicense: MIT License\n  Permission is hereby granted, free of charge, to any person obtaining a copy\n  of this software and associated documentation files (the \"Software\"), to deal\n  in the Software without restriction, including without limitation the rights\n  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n  copies of the Software, and to permit persons to whom the Software is\n  furnished to do so, subject to the following conditions:\n  .\n  The above copyright notice and this permission notice shall be included in\n  all copies or substantial portions of the Software.\n  .\n  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n  THE SOFTWARE.\n\nFiles: doc/_ext/youtube.py\nCopyright: 2009 Chris Pickel <sfiera@gmail.com>\nLicense: BSD-2-clause\n Redistribution and use in source and binary forms, with or without\n modification, are permitted provided that the following conditions are\n met:\n .\n * Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n .\n * Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n .\n THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nFiles: salt/ext/six.py\nCopyright: 2010-2014 Benjamin Peterson\nLicense: MIT License\n  Permission is hereby granted, free of charge, to any person obtaining a copy\n  of this software and associated documentation files (the \"Software\"), to deal\n  in the Software without restriction, including without limitation the rights\n  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n  copies of the Software, and to permit persons to whom the Software is\n  furnished to do so, subject to the following conditions:\n  .\n  The above copyright notice and this permission notice shall be included in\n  all copies or substantial portions of the Software.\n  .\n  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n  THE SOFTWARE.\n\nFiles: doc/_ext/images\nCopyright: 2013 SaltStack Team\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n .\n Files in this directory were created in-house.\n\nFiles: tests/support/cptestcase.py\nCopyright: (c) 2014 Adam Hajari\nThe MIT License (MIT)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nNOTICE:\n\nCopyright 2012-2022 VMware, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Commit history of https://github.com/saltstack/salt: Copyright (c) 2011-2022 VMware, Inc. All rights reserved.; Copyright: 2014 SaltStack Team; Copyright: 2013 Joe Healy <joehealy@gmail.com>; Copyright: 2007 Chris AtLee <chris@atlee.ca>; Copyright: 2009 Chris Pickel <sfiera@gmail.com>, Apache-2.0 license (LICENSE), https://github.com/saltstack/salt."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".backportrc.json",
+        ".bandit",
+        ".codeclimate.yml",
+        ".codecov.yml",
+        ".coveragerc",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/CODEOWNERS",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/ISSUE_TEMPLATE.md",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/actionlint.yaml",
+        ".github/actions/**",
+        ".github/config.yml",
+        ".github/copilot-instructions.md",
+        ".github/dependabot.yml",
+        ".github/scripts/generate_nightly_dashboard.py",
+        ".github/scripts/hash-files.py",
+        ".github/scripts/verify-draft-signing-manifest.sh",
+        ".github/stale.yml",
+        ".github/workflows/**",
+        ".gitignore",
+        ".mention-bot",
+        ".pre-commit-config.yaml",
+        ".pylintrc",
+        "AUTHORS",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.rst",
+        "DEPENDENCIES.md",
+        "FIXED_TESTS.md",
+        "GAP5.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "MULTI_RING_DESIGN.md",
+        "NOTICE",
+        "POLICY.rst",
+        "README.rst",
+        "SECURITY.md",
+        "SUPPORT.rst",
+        "agents/**",
+        "changelog/**",
+        "cicd/**",
+        "conf/**",
+        "doc/Makefile",
+        "doc/_ext/**",
+        "doc/_incl/**",
+        "doc/_static/proxy_minions.drawio.xml",
+        "doc/_static/proxy_minions.svg",
+        "doc/_static/salt-logo-full.svg",
+        "doc/_static/salt-logo.svg",
+        "doc/_static/versions.json",
+        "doc/_templates/**",
+        "doc/_themes/saltstack/layout.html",
+        "doc/_themes/saltstack/static/css/**",
+        "doc/_themes/saltstack/static/js/main.js",
+        "doc/_themes/saltstack/theme.conf",
+        "doc/_themes/saltstack2/layout.html",
+        "doc/_themes/saltstack2/static/css/core.min.css",
+        "doc/_themes/saltstack2/static/css/webhelp.min_v1.4.5.css",
+        "doc/_themes/saltstack2/static/fonts/glyphicons-halflings-regular.svg",
+        "doc/_themes/saltstack2/static/images/SaltStack_white.svg",
+        "doc/_themes/saltstack2/static/images/pdf_icon.svg",
+        "doc/_themes/saltstack2/static/images/saltstack.svg",
+        "doc/_themes/saltstack2/static/images/saltstack_logo.svg",
+        "doc/_themes/saltstack2/static/js/**",
+        "doc/_themes/saltstack2/theme.conf",
+        "doc/apidoc-saltmods.sh",
+        "doc/cheatsheet/**",
+        "doc/conf.py",
+        "doc/contents.rst",
+        "doc/faq.rst",
+        "doc/gen_gource",
+        "doc/glossary.rst",
+        "doc/ref/**",
+        "doc/security/**",
+        "doc/spelling_wordlist.txt",
+        "doc/topics/**",
+        "noxfile.py",
+        "pkg/README",
+        "pkg/common/**",
+        "pkg/macos/.gitignore",
+        "pkg/macos/README.md",
+        "pkg/macos/build.sh",
+        "pkg/macos/build_python.sh",
+        "pkg/macos/clean.sh",
+        "pkg/macos/distribution.xml.dist",
+        "pkg/macos/entitlements.plist",
+        "pkg/macos/install_salt.sh",
+        "pkg/macos/notarize.sh",
+        "pkg/macos/package.sh",
+        "pkg/macos/pkg-scripts/**",
+        "pkg/macos/prep_salt.sh",
+        "pkg/macos/scripts/**",
+        "pkg/macos/sign_binaries.sh",
+        "pkg/old/**",
+        "pkg/rpm/**",
+        "pkg/windows/build.cmd",
+        "pkg/windows/build.ps1",
+        "pkg/windows/build_python.cmd",
+        "pkg/windows/build_python.ps1",
+        "pkg/windows/clean.cmd",
+        "pkg/windows/clean.ps1",
+        "pkg/windows/install_nsis.cmd",
+        "pkg/windows/install_nsis.ps1",
+        "pkg/windows/install_salt.cmd",
+        "pkg/windows/install_salt.ps1",
+        "pkg/windows/install_vs_buildtools.cmd",
+        "pkg/windows/install_vs_buildtools.ps1",
+        "pkg/windows/install_wix.cmd",
+        "pkg/windows/install_wix.ps1",
+        "pkg/windows/msi/CustomAction01/**",
+        "pkg/windows/msi/Product-README.md",
+        "pkg/windows/msi/Product-discover-files-README.md",
+        "pkg/windows/msi/Product-discover-files-config.xsl",
+        "pkg/windows/msi/Product-discover-files.xsl",
+        "pkg/windows/msi/Product.wxs",
+        "pkg/windows/msi/README-how-to-build.md",
+        "pkg/windows/msi/README.md",
+        "pkg/windows/msi/build_pkg.cmd",
+        "pkg/windows/msi/build_pkg.ps1",
+        "pkg/windows/msi/clean.cmd",
+        "pkg/windows/msi/clean.ps1",
+        "pkg/windows/msi/tests/README.md",
+        "pkg/windows/msi/tests/_mock_files/buildenv/Scripts/binlevel.exe",
+        "pkg/windows/msi/tests/_mock_files/buildenv/Scripts/underbin/**",
+        "pkg/windows/msi/tests/_mock_files/buildenv/configs/**",
+        "pkg/windows/msi/tests/_mock_files/buildenv/salt-minion.exe",
+        "pkg/windows/msi/tests/_mock_files/buildenv/ssm.exe",
+        "pkg/windows/msi/tests/_mock_files/buildenv/toplevel.bat",
+        "pkg/windows/msi/tests/_mock_files/buildenv/var/**",
+        "pkg/windows/msi/tests/clean.cmd",
+        "pkg/windows/msi/tests/clean.ps1",
+        "pkg/windows/msi/tests/config_tests/**",
+        "pkg/windows/msi/tests/setup.cmd",
+        "pkg/windows/msi/tests/setup.ps1",
+        "pkg/windows/msi/tests/test.cmd",
+        "pkg/windows/multi-minion.cmd",
+        "pkg/windows/multi-minion.ps1",
+        "pkg/windows/nsis/build_pkg.cmd",
+        "pkg/windows/nsis/build_pkg.ps1",
+        "pkg/windows/nsis/clean.cmd",
+        "pkg/windows/nsis/clean.ps1",
+        "pkg/windows/nsis/test.cmd",
+        "pkg/windows/nsis/tests/**",
+        "pkg/windows/prep_salt.cmd",
+        "pkg/windows/prep_salt.ps1",
+        "pkg/windows/readme.md",
+        "pyproject.toml",
+        "pytest.ini",
+        "requirements/**",
+        "rfcs/**",
+        "salt/**",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "templates/**",
+        "tests/__init__.py",
+        "tests/buildpackage.py",
+        "tests/committer_parser.py",
+        "tests/conftest.py",
+        "tests/eventlisten.py",
+        "tests/eventlisten.sh",
+        "tests/filename_map.yml",
+        "tests/integration/__init__.py",
+        "tests/integration/cli/**",
+        "tests/integration/client/**",
+        "tests/integration/cloud/**",
+        "tests/integration/conftest.py",
+        "tests/integration/doc/**",
+        "tests/integration/executors/**",
+        "tests/integration/externalapi/**",
+        "tests/integration/files/autosign_file",
+        "tests/integration/files/autosign_grains/**",
+        "tests/integration/files/conf/**",
+        "tests/integration/files/ext.yaml",
+        "tests/integration/files/extension_modules/**",
+        "tests/integration/files/file/base/Dockerfile",
+        "tests/integration/files/file/base/_executors/**",
+        "tests/integration/files/file/base/_grains/**",
+        "tests/integration/files/file/base/_modules/**",
+        "tests/integration/files/file/base/_runners/**",
+        "tests/integration/files/file/base/_states/**",
+        "tests/integration/files/file/base/_wheel/**",
+        "tests/integration/files/file/base/buildout/**",
+        "tests/integration/files/file/base/cheese",
+        "tests/integration/files/file/base/custom.tar.gz.SHA256",
+        "tests/integration/files/file/base/custom.tar.gz.SHA256.asc",
+        "tests/integration/files/file/base/custom.tar.gz.SHA256.clearsign.asc",
+        "tests/integration/files/file/base/custom.tar.gz.asc",
+        "tests/integration/files/file/base/custom_module.sls",
+        "tests/integration/files/file/base/disable_apt_timers.sls",
+        "tests/integration/files/file/base/docker_non_root/**",
+        "tests/integration/files/file/base/exit_code.cmd",
+        "tests/integration/files/file/base/exit_code.sh",
+        "tests/integration/files/file/base/fail.sls",
+        "tests/integration/files/file/base/failparse.sls",
+        "tests/integration/files/file/base/file.big",
+        "tests/integration/files/file/base/fuzz/**",
+        "tests/integration/files/file/base/git_pillar/**",
+        "tests/integration/files/file/base/grail/36/**",
+        "tests/integration/files/file/base/grail/empty",
+        "tests/integration/files/file/base/grail/scene33",
+        "tests/integration/files/file/base/grail/scene33.SHA256",
+        "tests/integration/files/file/base/grail/scene33.SHA256.asc",
+        "tests/integration/files/file/base/grail/scene33.SHA256.clearsign.asc",
+        "tests/integration/files/file/base/grail/scene33.asc",
+        "tests/integration/files/file/base/grail/scene33.clearsign.asc",
+        "tests/integration/files/file/base/hello.patch",
+        "tests/integration/files/file/base/hello_dolly.patch",
+        "tests/integration/files/file/base/issue-10010-macro.sls",
+        "tests/integration/files/file/base/issue-10010.sls",
+        "tests/integration/files/file/base/issue-31427.sls",
+        "tests/integration/files/file/base/issue-35384.sls",
+        "tests/integration/files/file/base/issue-41858/**",
+        "tests/integration/files/file/base/issue-42116-cli-pillar-override.sls",
+        "tests/integration/files/file/base/issue-47182/**",
+        "tests/integration/files/file/base/issue-49008.sls",
+        "tests/integration/files/file/base/issue-49027.sls",
+        "tests/integration/files/file/base/issue-54765-map.jinja",
+        "tests/integration/files/file/base/issue-54765.sls",
+        "tests/integration/files/file/base/issue-56195/**",
+        "tests/integration/files/file/base/issue-7649-handle-iorder.sls",
+        "tests/integration/files/file/base/issue-9983-handleerror.sls",
+        "tests/integration/files/file/base/jinja_dot_notation.sls",
+        "tests/integration/files/file/base/jinja_salt_contains_function.sls",
+        "tests/integration/files/file/base/master_tops_test.sls",
+        "tests/integration/files/file/base/mkimage-busybox-static",
+        "tests/integration/files/file/base/modules/**",
+        "tests/integration/files/file/base/mysql/**",
+        "tests/integration/files/file/base/mysql_utf8.sls",
+        "tests/integration/files/file/base/network/**",
+        "tests/integration/files/file/base/pydsl/**",
+        "tests/integration/files/file/base/running.sls",
+        "tests/integration/files/file/base/saltcalllocal.sls",
+        "tests/integration/files/file/base/script.py",
+        "tests/integration/files/file/base/ssh_state_tests.sls",
+        "tests/integration/files/file/base/supervisor.conf",
+        "tests/integration/files/file/base/templates/**",
+        "tests/integration/files/file/base/test.sls",
+        "tests/integration/files/file/base/test_cert_not_after.sls",
+        "tests/integration/files/file/base/test_cert_not_before.sls",
+        "tests/integration/files/file/base/test_cert_not_before_not_after.sls",
+        "tests/integration/files/file/base/test_deep/**",
+        "tests/integration/files/file/base/testfile",
+        "tests/integration/files/file/base/validate-saltcheck/**",
+        "tests/integration/files/file/base/win/**",
+        "tests/integration/files/file/base/x509/**",
+        "tests/integration/files/file/base/x509_compound_match/**",
+        "tests/integration/files/file/base/x509_test.crt",
+        "tests/integration/files/file/base/питон.txt",
+        "tests/integration/files/file/prod/cheese",
+        "tests/integration/files/file/prod/holy/**",
+        "tests/integration/files/file/prod/issue-8196.sls",
+        "tests/integration/files/file/prod/issue45893/init.sls",
+        "tests/integration/files/file/prod/nonbase_env",
+        "tests/integration/files/file/prod/top.sls",
+        "tests/integration/files/file/prod/validate-saltcheck/**",
+        "tests/integration/files/hosts",
+        "tests/integration/files/mysql_returner_archiver_data.sql",
+        "tests/integration/files/over/**",
+        "tests/integration/files/reactor-sync-minion.sls",
+        "tests/integration/files/returners/**",
+        "tests/integration/files/saltclass/**",
+        "tests/integration/files/ssh/**",
+        "tests/integration/files/vault.hcl",
+        "tests/integration/files/windows-firewall-winexe.ps1",
+        "tests/integration/files/windows-firewall.ps1",
+        "tests/integration/fileserver/**",
+        "tests/integration/grains/**",
+        "tests/integration/loader/**",
+        "tests/integration/master/**",
+        "tests/integration/minion/**",
+        "tests/integration/modules/**",
+        "tests/integration/netapi/**",
+        "tests/integration/output/**",
+        "tests/integration/pillar/**",
+        "tests/integration/renderers/**",
+        "tests/integration/returners/**",
+        "tests/integration/runners/**",
+        "tests/integration/sdb/**",
+        "tests/integration/shell/**",
+        "tests/integration/spm/**",
+        "tests/integration/ssh/**",
+        "tests/integration/states/**",
+        "tests/integration/utils/**",
+        "tests/minionswarm.py",
+        "tests/modparser.py",
+        "tests/monitoring/**",
+        "tests/packdump.py",
+        "tests/pytests/README.md",
+        "tests/pytests/__init__.py",
+        "tests/pytests/conftest.py",
+        "tests/pytests/functional/__init__.py",
+        "tests/pytests/functional/cache/**",
+        "tests/pytests/functional/channel/**",
+        "tests/pytests/functional/cli/**",
+        "tests/pytests/functional/cluster/**",
+        "tests/pytests/functional/conftest.py",
+        "tests/pytests/functional/files/SALTSTACK-GPG-KEY.pub",
+        "tests/pytests/functional/fileserver/**",
+        "tests/pytests/functional/formulas/**",
+        "tests/pytests/functional/grains/**",
+        "tests/pytests/functional/loader/**",
+        "tests/pytests/functional/log_handlers/**",
+        "tests/pytests/functional/master/**",
+        "tests/pytests/functional/masterminion/**",
+        "tests/pytests/functional/metaproxy/**",
+        "tests/pytests/functional/minion/**",
+        "tests/pytests/functional/modules/**",
+        "tests/pytests/functional/netapi/**",
+        "tests/pytests/functional/pillar/**",
+        "tests/pytests/functional/returners/**",
+        "tests/pytests/functional/runners/**",
+        "tests/pytests/functional/sdb/**",
+        "tests/pytests/functional/state/**",
+        "tests/pytests/functional/states/**",
+        "tests/pytests/functional/test_config.py",
+        "tests/pytests/functional/test_crypt.py",
+        "tests/pytests/functional/test_fileclient_reuse.py",
+        "tests/pytests/functional/test_payload.py",
+        "tests/pytests/functional/test_pip_install.py",
+        "tests/pytests/functional/test_version.py",
+        "tests/pytests/functional/transport/**",
+        "tests/pytests/functional/utils/**",
+        "tests/pytests/integration/**",
+        "tests/pytests/mmapcache-smoke-tests.txt",
+        "tests/pytests/perf/**",
+        "tests/pytests/pkg/**",
+        "tests/pytests/run-mmapcache-smoke-tests.sh",
+        "tests/pytests/run-smoke-tests.sh",
+        "tests/pytests/scenarios/**",
+        "tests/pytests/smoke-tests.txt",
+        "tests/pytests/stress/**",
+        "tests/pytests/unit/__init__.py",
+        "tests/pytests/unit/_logging/**",
+        "tests/pytests/unit/auth/**",
+        "tests/pytests/unit/beacons/**",
+        "tests/pytests/unit/cache/**",
+        "tests/pytests/unit/changelog/**",
+        "tests/pytests/unit/channel/**",
+        "tests/pytests/unit/cli/**",
+        "tests/pytests/unit/client/**",
+        "tests/pytests/unit/cloud/**",
+        "tests/pytests/unit/cluster/**",
+        "tests/pytests/unit/config/**",
+        "tests/pytests/unit/conftest.py",
+        "tests/pytests/unit/crypt/**",
+        "tests/pytests/unit/daemons/**",
+        "tests/pytests/unit/doc/**",
+        "tests/pytests/unit/engines/**",
+        "tests/pytests/unit/executors/**",
+        "tests/pytests/unit/fileclient/**",
+        "tests/pytests/unit/fileserver/**",
+        "tests/pytests/unit/grains/**",
+        "tests/pytests/unit/loader/**",
+        "tests/pytests/unit/log_handlers/**",
+        "tests/pytests/unit/matchers/**",
+        "tests/pytests/unit/metaproxy/**",
+        "tests/pytests/unit/modules/__init__.py",
+        "tests/pytests/unit/modules/dockermod/**",
+        "tests/pytests/unit/modules/file/**",
+        "tests/pytests/unit/modules/napalm/**",
+        "tests/pytests/unit/modules/sol10_pkg/bashs/SUNWbashS/pkginfo",
+        "tests/pytests/unit/modules/sol10_pkg/bashs/SUNWbashS/pkgmap",
+        "tests/pytests/unit/modules/state/**",
+        "tests/pytests/unit/modules/test_aix_status.py",
+        "tests/pytests/unit/modules/test_aixpkg.py",
+        "tests/pytests/unit/modules/test_aliases.py",
+        "tests/pytests/unit/modules/test_alternatives.py",
+        "tests/pytests/unit/modules/test_ansiblegate.py",
+        "tests/pytests/unit/modules/test_apache.py",
+        "tests/pytests/unit/modules/test_aptpkg.py",
+        "tests/pytests/unit/modules/test_archive.py",
+        "tests/pytests/unit/modules/test_artifactory.py",
+        "tests/pytests/unit/modules/test_at.py",
+        "tests/pytests/unit/modules/test_baredoc.py",
+        "tests/pytests/unit/modules/test_beacons.py",
+        "tests/pytests/unit/modules/test_bridge.py",
+        "tests/pytests/unit/modules/test_cassandra_cql.py",
+        "tests/pytests/unit/modules/test_chocolatey.py",
+        "tests/pytests/unit/modules/test_chroot.py",
+        "tests/pytests/unit/modules/test_cmdmod.py",
+        "tests/pytests/unit/modules/test_config.py",
+        "tests/pytests/unit/modules/test_cp.py",
+        "tests/pytests/unit/modules/test_cryptdev.py",
+        "tests/pytests/unit/modules/test_data.py",
+        "tests/pytests/unit/modules/test_debconfmod.py",
+        "tests/pytests/unit/modules/test_debian_ip.py",
+        "tests/pytests/unit/modules/test_debian_service.py",
+        "tests/pytests/unit/modules/test_debuild_pkgbuild.py",
+        "tests/pytests/unit/modules/test_defaults.py",
+        "tests/pytests/unit/modules/test_devinfo.py",
+        "tests/pytests/unit/modules/test_devmap.py",
+        "tests/pytests/unit/modules/test_dig.py",
+        "tests/pytests/unit/modules/test_disk.py",
+        "tests/pytests/unit/modules/test_dnfmodule.py",
+        "tests/pytests/unit/modules/test_dnsutil.py",
+        "tests/pytests/unit/modules/test_dpkg_lowpkg.py",
+        "tests/pytests/unit/modules/test_environ.py",
+        "tests/pytests/unit/modules/test_etcd_mod.py",
+        "tests/pytests/unit/modules/test_ethtool.py",
+        "tests/pytests/unit/modules/test_event.py",
+        "tests/pytests/unit/modules/test_extfs.py",
+        "tests/pytests/unit/modules/test_firewalld.py",
+        "tests/pytests/unit/modules/test_git.py",
+        "tests/pytests/unit/modules/test_gpg.py",
+        "tests/pytests/unit/modules/test_grains.py",
+        "tests/pytests/unit/modules/test_groupadd.py",
+        "tests/pytests/unit/modules/test_hashutil.py",
+        "tests/pytests/unit/modules/test_http.py",
+        "tests/pytests/unit/modules/test_http_documented.py",
+        "tests/pytests/unit/modules/test_incron.py",
+        "tests/pytests/unit/modules/test_ini_manage.py",
+        "tests/pytests/unit/modules/test_iosconfig.py",
+        "tests/pytests/unit/modules/test_ipset.py",
+        "tests/pytests/unit/modules/test_iptables.py",
+        "tests/pytests/unit/modules/test_junos.py",
+        "tests/pytests/unit/modules/test_junos_yaml_security.py",
+        "tests/pytests/unit/modules/test_key.py",
+        "tests/pytests/unit/modules/test_keyboard.py",
+        "tests/pytests/unit/modules/test_kmod.py",
+        "tests/pytests/unit/modules/test_linux_lvm.py",
+        "tests/pytests/unit/modules/test_linux_service.py",
+        "tests/pytests/unit/modules/test_linux_shadow.py",
+        "tests/pytests/unit/modules/test_linux_sysctl.py",
+        "tests/pytests/unit/modules/test_localemod_debian13.py",
+        "tests/pytests/unit/modules/test_locate.py",
+        "tests/pytests/unit/modules/test_logrotate.py",
+        "tests/pytests/unit/modules/test_mac_assistive.py",
+        "tests/pytests/unit/modules/test_mac_brew_pkg.py",
+        "tests/pytests/unit/modules/test_mac_desktop.py",
+        "tests/pytests/unit/modules/test_mac_group.py",
+        "tests/pytests/unit/modules/test_mac_keychain.py",
+        "tests/pytests/unit/modules/test_mac_pkgutil.py",
+        "tests/pytests/unit/modules/test_mac_power.py",
+        "tests/pytests/unit/modules/test_mac_service.py",
+        "tests/pytests/unit/modules/test_mac_shadow.py",
+        "tests/pytests/unit/modules/test_mac_softwareupdate.py",
+        "tests/pytests/unit/modules/test_mac_sysctl.py",
+        "tests/pytests/unit/modules/test_mac_user.py",
+        "tests/pytests/unit/modules/test_mac_xattr.py",
+        "tests/pytests/unit/modules/test_macdefaults.py",
+        "tests/pytests/unit/modules/test_macpackage.py",
+        "tests/pytests/unit/modules/test_match.py",
+        "tests/pytests/unit/modules/test_mdadm_raid.py",
+        "tests/pytests/unit/modules/test_mine.py",
+        "tests/pytests/unit/modules/test_minion.py",
+        "tests/pytests/unit/modules/test_mod_random.py",
+        "tests/pytests/unit/modules/test_mount.py",
+        "tests/pytests/unit/modules/test_mysql.py",
+        "tests/pytests/unit/modules/test_nacl.py",
+        "tests/pytests/unit/modules/test_napalm_network.py",
+        "tests/pytests/unit/modules/test_netplan_ip.py",
+        "tests/pytests/unit/modules/test_network.py",
+        "tests/pytests/unit/modules/test_nfs3.py",
+        "tests/pytests/unit/modules/test_nftables.py",
+        "tests/pytests/unit/modules/test_nixpkg.py",
+        "tests/pytests/unit/modules/test_npm.py",
+        "tests/pytests/unit/modules/test_oracle.py",
+        "tests/pytests/unit/modules/test_osquery.py",
+        "tests/pytests/unit/modules/test_pacmanpkg.py",
+        "tests/pytests/unit/modules/test_pam.py",
+        "tests/pytests/unit/modules/test_pillar.py",
+        "tests/pytests/unit/modules/test_pip.py",
+        "tests/pytests/unit/modules/test_pkg_resource.py",
+        "tests/pytests/unit/modules/test_pkgin.py",
+        "tests/pytests/unit/modules/test_pkgng.py",
+        "tests/pytests/unit/modules/test_pkgutil.py",
+        "tests/pytests/unit/modules/test_postgres.py",
+        "tests/pytests/unit/modules/test_proxy.py",
+        "tests/pytests/unit/modules/test_ps.py",
+        "tests/pytests/unit/modules/test_publish.py",
+        "tests/pytests/unit/modules/test_puppet.py",
+        "tests/pytests/unit/modules/test_pw_group.py",
+        "tests/pytests/unit/modules/test_pw_user.py",
+        "tests/pytests/unit/modules/test_pyenv.py",
+        "tests/pytests/unit/modules/test_python.py",
+        "tests/pytests/unit/modules/test_rabbitmq.py",
+        "tests/pytests/unit/modules/test_rdp.py",
+        "tests/pytests/unit/modules/test_reg.py",
+        "tests/pytests/unit/modules/test_restartcheck.py",
+        "tests/pytests/unit/modules/test_ret.py",
+        "tests/pytests/unit/modules/test_rh_service.py",
+        "tests/pytests/unit/modules/test_rpm_lowpkg.py",
+        "tests/pytests/unit/modules/test_rpmbuild_pkgbuild.py",
+        "tests/pytests/unit/modules/test_rsync.py",
+        "tests/pytests/unit/modules/test_salt_version.py",
+        "tests/pytests/unit/modules/test_saltcheck.py",
+        "tests/pytests/unit/modules/test_saltcloudmod.py",
+        "tests/pytests/unit/modules/test_saltutil.py",
+        "tests/pytests/unit/modules/test_schedule.py",
+        "tests/pytests/unit/modules/test_scsi.py",
+        "tests/pytests/unit/modules/test_sdb.py",
+        "tests/pytests/unit/modules/test_seed.py",
+        "tests/pytests/unit/modules/test_selinux.py",
+        "tests/pytests/unit/modules/test_slack.py",
+        "tests/pytests/unit/modules/test_slsutil.py",
+        "tests/pytests/unit/modules/test_smf_service.py",
+        "tests/pytests/unit/modules/test_solaris_shadow.py",
+        "tests/pytests/unit/modules/test_solarisipspkg.py",
+        "tests/pytests/unit/modules/test_solarispkg.py",
+        "tests/pytests/unit/modules/test_ssh_pki.py",
+        "tests/pytests/unit/modules/test_sshresource_state.py",
+        "tests/pytests/unit/modules/test_state.py",
+        "tests/pytests/unit/modules/test_status.py",
+        "tests/pytests/unit/modules/test_syslog_ng.py",
+        "tests/pytests/unit/modules/test_system.py",
+        "tests/pytests/unit/modules/test_systemd_service.py",
+        "tests/pytests/unit/modules/test_textfsm_mod.py",
+        "tests/pytests/unit/modules/test_timezone.py",
+        "tests/pytests/unit/modules/test_tls.py",
+        "tests/pytests/unit/modules/test_tls_create_csr_path.py",
+        "tests/pytests/unit/modules/test_tls_unmask.py",
+        "tests/pytests/unit/modules/test_udev.py",
+        "tests/pytests/unit/modules/test_useradd.py",
+        "tests/pytests/unit/modules/test_vagrant.py",
+        "tests/pytests/unit/modules/test_virtualenv_mod.py",
+        "tests/pytests/unit/modules/test_webutil.py",
+        "tests/pytests/unit/modules/test_win_appx.py",
+        "tests/pytests/unit/modules/test_win_autoruns.py",
+        "tests/pytests/unit/modules/test_win_certutil.py",
+        "tests/pytests/unit/modules/test_win_disk.py",
+        "tests/pytests/unit/modules/test_win_dism.py",
+        "tests/pytests/unit/modules/test_win_dns_client.py",
+        "tests/pytests/unit/modules/test_win_dsc_resource.py",
+        "tests/pytests/unit/modules/test_win_event.py",
+        "tests/pytests/unit/modules/test_win_file.py",
+        "tests/pytests/unit/modules/test_win_iis.py",
+        "tests/pytests/unit/modules/test_win_ip.py",
+        "tests/pytests/unit/modules/test_win_lgpo.py",
+        "tests/pytests/unit/modules/test_win_lgpo_reg.py",
+        "tests/pytests/unit/modules/test_win_licence.py",
+        "tests/pytests/unit/modules/test_win_network.py",
+        "tests/pytests/unit/modules/test_win_ntp.py",
+        "tests/pytests/unit/modules/test_win_path.py",
+        "tests/pytests/unit/modules/test_win_pkg.py",
+        "tests/pytests/unit/modules/test_win_pki.py",
+        "tests/pytests/unit/modules/test_win_powercfg.py",
+        "tests/pytests/unit/modules/test_win_psget.py",
+        "tests/pytests/unit/modules/test_win_servermanager.py",
+        "tests/pytests/unit/modules/test_win_service.py",
+        "tests/pytests/unit/modules/test_win_shadow.py",
+        "tests/pytests/unit/modules/test_win_snmp.py",
+        "tests/pytests/unit/modules/test_win_status.py",
+        "tests/pytests/unit/modules/test_win_system.py",
+        "tests/pytests/unit/modules/test_win_task.py",
+        "tests/pytests/unit/modules/test_win_task_duration.py",
+        "tests/pytests/unit/modules/test_win_task_edit.py",
+        "tests/pytests/unit/modules/test_win_timezone.py",
+        "tests/pytests/unit/modules/test_win_useradd.py",
+        "tests/pytests/unit/modules/test_win_wua.py",
+        "tests/pytests/unit/modules/test_win_wusa.py",
+        "tests/pytests/unit/modules/test_x509.py",
+        "tests/pytests/unit/modules/test_x509_v2.py",
+        "tests/pytests/unit/modules/test_xfs.py",
+        "tests/pytests/unit/modules/test_xml.py",
+        "tests/pytests/unit/modules/test_yaml.py",
+        "tests/pytests/unit/modules/test_yumpkg.py",
+        "tests/pytests/unit/modules/virt/**",
+        "tests/pytests/unit/modules/win_lgpo/**",
+        "tests/pytests/unit/netapi/**",
+        "tests/pytests/unit/output/**",
+        "tests/pytests/unit/pillar/**",
+        "tests/pytests/unit/pkg/**",
+        "tests/pytests/unit/platform/**",
+        "tests/pytests/unit/proxy/**",
+        "tests/pytests/unit/renderers/**",
+        "tests/pytests/unit/resources/**",
+        "tests/pytests/unit/returners/**",
+        "tests/pytests/unit/roster/**",
+        "tests/pytests/unit/runners/**",
+        "tests/pytests/unit/sdb/**",
+        "tests/pytests/unit/serializers/**",
+        "tests/pytests/unit/spm/**",
+        "tests/pytests/unit/state/**",
+        "tests/pytests/unit/states/**",
+        "tests/pytests/unit/support/**",
+        "tests/pytests/unit/syndic/**",
+        "tests/pytests/unit/test__init__.py",
+        "tests/pytests/unit/test_acl.py",
+        "tests/pytests/unit/test_auth.py",
+        "tests/pytests/unit/test_auth_creds_event.py",
+        "tests/pytests/unit/test_beacons.py",
+        "tests/pytests/unit/test_client.py",
+        "tests/pytests/unit/test_config.py",
+        "tests/pytests/unit/test_crypt.py",
+        "tests/pytests/unit/test_defaults.py",
+        "tests/pytests/unit/test_event_monitor_ring_gating.py",
+        "tests/pytests/unit/test_fileclient.py",
+        "tests/pytests/unit/test_fileserver.py",
+        "tests/pytests/unit/test_fork_safety.py",
+        "tests/pytests/unit/test_issue_65317_non_root_publisher_acl.py",
+        "tests/pytests/unit/test_log.py",
+        "tests/pytests/unit/test_master.py",
+        "tests/pytests/unit/test_master_async_error_paths.py",
+        "tests/pytests/unit/test_master_async_optin.py",
+        "tests/pytests/unit/test_master_maintenance_batch.py",
+        "tests/pytests/unit/test_master_requests_metrics.py",
+        "tests/pytests/unit/test_minion.py",
+        "tests/pytests/unit/test_minion_resources.py",
+        "tests/pytests/unit/test_payload.py",
+        "tests/pytests/unit/test_pillar.py",
+        "tests/pytests/unit/test_pkg_scripts.py",
+        "tests/pytests/unit/test_pkg_systemd_units.py",
+        "tests/pytests/unit/test_pool_name_edge_cases.py",
+        "tests/pytests/unit/test_pool_name_validation.py",
+        "tests/pytests/unit/test_process_role.py",
+        "tests/pytests/unit/test_proxy_minion.py",
+        "tests/pytests/unit/test_pytest_pass_fail.py",
+        "tests/pytests/unit/test_request_router.py",
+        "tests/pytests/unit/test_salt_build_backend.py",
+        "tests/pytests/unit/test_salt_onedir_extras.py",
+        "tests/pytests/unit/test_salt_pip_user.py",
+        "tests/pytests/unit/test_scripts.py",
+        "tests/pytests/unit/test_shared_state_races.py",
+        "tests/pytests/unit/test_syspaths.py",
+        "tests/pytests/unit/test_template.py",
+        "tests/pytests/unit/test_tls_aware_crypt.py",
+        "tests/pytests/unit/test_version.py",
+        "tests/pytests/unit/thorium/**",
+        "tests/pytests/unit/tokens/**",
+        "tests/pytests/unit/tops/**",
+        "tests/pytests/unit/transport/**",
+        "tests/pytests/unit/utils/**",
+        "tests/pytests/unit/wheel/**",
+        "tests/resources_smoke.txt",
+        "tests/runtests.py",
+        "tests/salt-tcpdump.py",
+        "tests/saltsh.py",
+        "tests/smoke-tests-before-commit.txt",
+        "tests/support/**",
+        "tests/unit/**",
+        "tests/wheeltest.py",
+        "tests/zypp_plugin.py",
+        "tools/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright (c) 2011-2022 VMware, Inc. All rights reserved.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n===========================================================================\n\nBelow is a summary of the licensing used by external modules that are\nbundled with SaltStack.\n\nFormat: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/\nUpstream-Name: salt\nUpstream-Contact: salt-users@googlegroups.com\nSource: https://github.com/saltstack/salt\n\nFiles: *\nCopyright: 2014 SaltStack Team\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n\nFiles: debian/*\nCopyright: 2013 Joe Healy <joehealy@gmail.com>\n           2012 Michael Prokop <mika@debian.org>\n           2012 Christian Hofstaedtler <christian@hofstaedtler.name>\n           2012 Ulrich Dangel <mru@spamt.net>\n           2012 Corey Quinn <corey@sequestered.net>\n           2011 Aaron Toponce <aaron.toponce@gmail.com>\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n\nFiles: salt/auth/pam.py\nCopyright: 2007 Chris AtLee <chris@atlee.ca>\nLicense: MIT License\n  Permission is hereby granted, free of charge, to any person obtaining a copy\n  of this software and associated documentation files (the \"Software\"), to deal\n  in the Software without restriction, including without limitation the rights\n  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n  copies of the Software, and to permit persons to whom the Software is\n  furnished to do so, subject to the following conditions:\n  .\n  The above copyright notice and this permission notice shall be included in\n  all copies or substantial portions of the Software.\n  .\n  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n  THE SOFTWARE.\n\nFiles: doc/_ext/youtube.py\nCopyright: 2009 Chris Pickel <sfiera@gmail.com>\nLicense: BSD-2-clause\n Redistribution and use in source and binary forms, with or without\n modification, are permitted provided that the following conditions are\n met:\n .\n * Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n .\n * Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n .\n THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nFiles: salt/ext/six.py\nCopyright: 2010-2014 Benjamin Peterson\nLicense: MIT License\n  Permission is hereby granted, free of charge, to any person obtaining a copy\n  of this software and associated documentation files (the \"Software\"), to deal\n  in the Software without restriction, including without limitation the rights\n  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n  copies of the Software, and to permit persons to whom the Software is\n  furnished to do so, subject to the following conditions:\n  .\n  The above copyright notice and this permission notice shall be included in\n  all copies or substantial portions of the Software.\n  .\n  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n  THE SOFTWARE.\n\nFiles: doc/_ext/images\nCopyright: 2013 SaltStack Team\nLicense: Apache-2.0\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n .\n     http://www.apache.org/licenses/LICENSE-2.0\n .\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.\n .\n On Debian systems, the full text of the Apache License, Version 2.0 can be\n found in the file\n `/usr/share/common-licenses/Apache-2.0'.\n .\n Files in this directory were created in-house.\n\nFiles: tests/support/cptestcase.py\nCopyright: (c) 2014 Adam Hajari\nThe MIT License (MIT)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nNOTICE:\n\nCopyright 2012-2022 VMware, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Copyright (c) 2011-2022 VMware, Inc. All rights reserved.; Copyright: 2014 SaltStack Team; Copyright: 2013 Joe Healy <joehealy@gmail.com>; Copyright: 2007 Chris AtLee <chris@atlee.ca>; Copyright: 2009 Chris Pickel <sfiera@gmail.com>, Apache-2.0 license (LICENSE), https://github.com/saltstack/salt."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.j2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SHA256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.SuSEfirewall2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.big"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crtkey"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.environment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fedora"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.logrotate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.profiles"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.providers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pth"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc-d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rhel7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rsa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s7-zone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.salt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sleep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.suse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.t5220"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.t5220-zone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfstate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ufw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.upstart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bandit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mention-bot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/99dpkgnotify"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PKGBUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PKGBUILD-git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PKGBUILD-local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Portfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authorized_badkeys"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authorized_keys"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/autosign_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cheese"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cloud"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dpkgnotify"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gen_gource"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git_ssh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hosts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id_rsa_nopass"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id_rsa_withpass"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/known_hosts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/minion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mkimage-busybox-static"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nonbase_env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkginfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkgmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preinstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proxy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rescape"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/roster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-api"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-api_PKGBUILD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-api_PKGBUILD-git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-call"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-cloud"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-cp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-daemon-watcher"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-extend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-minion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-proxy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-ssh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt-syndic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt_tarball"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scene"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scene33"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scene34"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh-id-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_host_rsa_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sshd_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sub_minion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/syndic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/syndic_master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/syndic_roster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zyppnotify"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

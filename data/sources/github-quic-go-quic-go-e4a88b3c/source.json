@@ -1,0 +1,288 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/quic-go/quic-go",
+  "revision": "54cf12e7c24dd65fae1559ddc8c87cab97fab0e2",
+  "checksum": "sha256:8783a6bf6bb5c4ccba5e087fdedda23410e2a8586849ad9e9c8d0f9840754bbf",
+  "extract": {
+    "exclude": [
+      "assets/**"
+    ]
+  },
+  "history": {
+    "since": "ce57f008e44fdbe0098922e3552919ecc756c597"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016 the quic-go authors & Google, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/quic-go/quic-go: Copyright (c) 2016 the quic-go authors & Google, Inc., MIT license (LICENSE), https://github.com/quic-go/quic-go."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clusterfuzzlite/**",
+        ".githooks/**",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        "AI-POLICY.md",
+        "FIPS140.md",
+        "FUZZING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "buffer_pool.go",
+        "buffer_pool_test.go",
+        "client.go",
+        "client_test.go",
+        "closed_conn.go",
+        "closed_conn_test.go",
+        "codecov.yml",
+        "config.go",
+        "config_test.go",
+        "conn_id_generator.go",
+        "conn_id_generator_test.go",
+        "conn_id_manager.go",
+        "conn_id_manager_test.go",
+        "conn_wrapped_test.go",
+        "connection.go",
+        "connection_logging.go",
+        "connection_logging_test.go",
+        "connection_test.go",
+        "crypto_stream.go",
+        "crypto_stream_manager.go",
+        "crypto_stream_manager_test.go",
+        "crypto_stream_test.go",
+        "datagram_queue.go",
+        "datagram_queue_test.go",
+        "errors.go",
+        "errors_test.go",
+        "example/**",
+        "flow_controller_base.go",
+        "flow_controller_connection.go",
+        "flow_controller_connection_test.go",
+        "flow_controller_stream.go",
+        "flow_controller_stream_test.go",
+        "flow_controller_test_helpers_test.go",
+        "frame_sorter.go",
+        "frame_sorter_test.go",
+        "framer.go",
+        "framer_test.go",
+        "go.mod",
+        "go.sum",
+        "http3/**",
+        "integrationtests/**",
+        "interface.go",
+        "internal/**",
+        "interop/**",
+        "metrics/**",
+        "mock_ack_frame_source_test.go",
+        "mock_conn_runner_test.go",
+        "mock_frame_source_test.go",
+        "mock_packer_test.go",
+        "mock_packet_handler_test.go",
+        "mock_packetconn_test.go",
+        "mock_raw_conn_test.go",
+        "mock_sealing_manager_test.go",
+        "mock_send_conn_test.go",
+        "mock_sender_test.go",
+        "mock_stream_control_frame_getter_test.go",
+        "mock_stream_frame_getter_test.go",
+        "mock_stream_sender_test.go",
+        "mock_unpacker_test.go",
+        "mockgen.go",
+        "mtu_discoverer.go",
+        "mtu_discoverer_test.go",
+        "oss-fuzz.sh",
+        "packet_packer.go",
+        "packet_packer_test.go",
+        "packet_unpacker.go",
+        "packet_unpacker_test.go",
+        "path_manager.go",
+        "path_manager_outgoing.go",
+        "path_manager_outgoing_test.go",
+        "path_manager_test.go",
+        "qlog/**",
+        "qlogwriter/**",
+        "quic_linux_test.go",
+        "quic_test.go",
+        "quicvarint/**",
+        "receive_stream.go",
+        "receive_stream_test.go",
+        "retransmission_queue.go",
+        "retransmission_queue_test.go",
+        "send_conn.go",
+        "send_conn_test.go",
+        "send_queue.go",
+        "send_queue_test.go",
+        "send_stream.go",
+        "send_stream_test.go",
+        "server.go",
+        "server_test.go",
+        "sni.go",
+        "sni_test.go",
+        "stateless_reset.go",
+        "stateless_reset_test.go",
+        "stream.go",
+        "stream_test.go",
+        "streams_map.go",
+        "streams_map_incoming.go",
+        "streams_map_incoming_test.go",
+        "streams_map_outgoing.go",
+        "streams_map_outgoing_test.go",
+        "streams_map_test.go",
+        "sys_conn.go",
+        "sys_conn_buffers.go",
+        "sys_conn_buffers_inspect.go",
+        "sys_conn_buffers_inspect_stub.go",
+        "sys_conn_buffers_nonopenbsd.go",
+        "sys_conn_buffers_openbsd.go",
+        "sys_conn_buffers_write.go",
+        "sys_conn_df.go",
+        "sys_conn_df_darwin.go",
+        "sys_conn_df_darwin_test.go",
+        "sys_conn_df_linux.go",
+        "sys_conn_df_windows.go",
+        "sys_conn_helper_darwin.go",
+        "sys_conn_helper_freebsd.go",
+        "sys_conn_helper_linux.go",
+        "sys_conn_helper_linux_test.go",
+        "sys_conn_helper_nonlinux.go",
+        "sys_conn_helper_nonlinux_test.go",
+        "sys_conn_no_oob.go",
+        "sys_conn_oob.go",
+        "sys_conn_oob_test.go",
+        "sys_conn_test.go",
+        "sys_conn_windows.go",
+        "sys_conn_windows_test.go",
+        "testutils/**",
+        "token_store.go",
+        "token_store_test.go",
+        "transport.go",
+        "transport_test.go"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016 the quic-go authors & Google, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 the quic-go authors & Google, Inc., MIT license (LICENSE), https://github.com/quic-go/quic-go."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

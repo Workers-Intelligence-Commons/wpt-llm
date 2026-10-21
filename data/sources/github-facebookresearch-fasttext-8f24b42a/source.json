@@ -1,0 +1,615 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/facebookresearch/fastText",
+  "revision": "1142dc4c4ecbc19cc16eee5cdd28472e689267e6",
+  "checksum": "sha256:af811fae95940a861e88b20063026a4522c957d370dfb82ad6f3813f26338058",
+  "extract": {
+    "exclude": [
+      "website/static/docs/en/html/bc_s.png",
+      "website/static/docs/en/html/bdwn.png",
+      "website/static/docs/en/html/closed.png",
+      "website/static/docs/en/html/doc.png",
+      "website/static/docs/en/html/doxygen.png",
+      "website/static/docs/en/html/favicon.png",
+      "website/static/docs/en/html/folderclosed.png",
+      "website/static/docs/en/html/folderopen.png",
+      "website/static/docs/en/html/nav_f.png",
+      "website/static/docs/en/html/nav_g.png",
+      "website/static/docs/en/html/nav_h.png",
+      "website/static/docs/en/html/open.png",
+      "website/static/docs/en/html/search/close.png",
+      "website/static/docs/en/html/search/mag_sel.png",
+      "website/static/docs/en/html/search/search_l.png",
+      "website/static/docs/en/html/search/search_m.png",
+      "website/static/docs/en/html/search/search_r.png",
+      "website/static/docs/en/html/splitbar.png",
+      "website/static/docs/en/html/sync_off.png",
+      "website/static/docs/en/html/sync_on.png",
+      "website/static/docs/en/html/tab_a.png",
+      "website/static/docs/en/html/tab_b.png",
+      "website/static/docs/en/html/tab_h.png",
+      "website/static/docs/en/html/tab_s.png",
+      "website/static/img/**"
+    ]
+  },
+  "history": {
+    "since": "7842495a4d64c7a3bb4339d45d6e64321d002ed8"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/facebookresearch/fastText: Copyright (c) 2016-present, Facebook, Inc., MIT license (LICENSE), https://github.com/facebookresearch/fastText."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitignore",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "PACKAGE",
+        "README.md",
+        "alignment/**",
+        "classification-example.sh",
+        "classification-results.sh",
+        "crawl/**",
+        "docs/**",
+        "download_model.py",
+        "eval.py",
+        "fasttext.pc.in",
+        "get-wikimedia.sh",
+        "pyproject.toml",
+        "python/**",
+        "quantization-example.sh",
+        "reduce_model.py",
+        "runtests.py",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "src/**",
+        "tests/**",
+        "webassembly/**",
+        "website/README.md",
+        "website/blog/**",
+        "website/core/**",
+        "website/package.json",
+        "website/pages/**",
+        "website/sidebars.json",
+        "website/siteConfig.js",
+        "website/static/docs/en/html/.classfasttext_1_1QMatrix-members.html.i4eKqy",
+        "website/static/docs/en/html/annotated.html",
+        "website/static/docs/en/html/annotated_dup.js",
+        "website/static/docs/en/html/args_8cc.html",
+        "website/static/docs/en/html/args_8h.html",
+        "website/static/docs/en/html/args_8h.js",
+        "website/static/docs/en/html/args_8h_source.html",
+        "website/static/docs/en/html/classes.html",
+        "website/static/docs/en/html/classfasttext_1_1Args-members.html",
+        "website/static/docs/en/html/classfasttext_1_1Args.html",
+        "website/static/docs/en/html/classfasttext_1_1Args.js",
+        "website/static/docs/en/html/classfasttext_1_1Dictionary-members.html",
+        "website/static/docs/en/html/classfasttext_1_1Dictionary.html",
+        "website/static/docs/en/html/classfasttext_1_1Dictionary.js",
+        "website/static/docs/en/html/classfasttext_1_1FastText-members.html",
+        "website/static/docs/en/html/classfasttext_1_1FastText.html",
+        "website/static/docs/en/html/classfasttext_1_1FastText.js",
+        "website/static/docs/en/html/classfasttext_1_1Matrix-members.html",
+        "website/static/docs/en/html/classfasttext_1_1Matrix.html",
+        "website/static/docs/en/html/classfasttext_1_1Matrix.js",
+        "website/static/docs/en/html/classfasttext_1_1Model-members.html",
+        "website/static/docs/en/html/classfasttext_1_1Model.html",
+        "website/static/docs/en/html/classfasttext_1_1Model.js",
+        "website/static/docs/en/html/classfasttext_1_1ProductQuantizer-members.html",
+        "website/static/docs/en/html/classfasttext_1_1ProductQuantizer.html",
+        "website/static/docs/en/html/classfasttext_1_1ProductQuantizer.js",
+        "website/static/docs/en/html/classfasttext_1_1QMatrix-members.html",
+        "website/static/docs/en/html/classfasttext_1_1QMatrix.html",
+        "website/static/docs/en/html/classfasttext_1_1QMatrix.js",
+        "website/static/docs/en/html/classfasttext_1_1Vector-members.html",
+        "website/static/docs/en/html/classfasttext_1_1Vector.html",
+        "website/static/docs/en/html/classfasttext_1_1Vector.js",
+        "website/static/docs/en/html/dictionary_8cc.html",
+        "website/static/docs/en/html/dictionary_8h.html",
+        "website/static/docs/en/html/dictionary_8h.js",
+        "website/static/docs/en/html/dictionary_8h_source.html",
+        "website/static/docs/en/html/dir_68267d1309a1af8e8297ef4c3efbcdba.html",
+        "website/static/docs/en/html/dir_68267d1309a1af8e8297ef4c3efbcdba.js",
+        "website/static/docs/en/html/doxygen.css",
+        "website/static/docs/en/html/dynsections.js",
+        "website/static/docs/en/html/fasttext_8cc.html",
+        "website/static/docs/en/html/fasttext_8h.html",
+        "website/static/docs/en/html/fasttext_8h.js",
+        "website/static/docs/en/html/fasttext_8h_source.html",
+        "website/static/docs/en/html/files.html",
+        "website/static/docs/en/html/files.js",
+        "website/static/docs/en/html/functions.html",
+        "website/static/docs/en/html/functions_0x7e.html",
+        "website/static/docs/en/html/functions_b.html",
+        "website/static/docs/en/html/functions_c.html",
+        "website/static/docs/en/html/functions_d.html",
+        "website/static/docs/en/html/functions_dup.js",
+        "website/static/docs/en/html/functions_e.html",
+        "website/static/docs/en/html/functions_f.html",
+        "website/static/docs/en/html/functions_func.html",
+        "website/static/docs/en/html/functions_g.html",
+        "website/static/docs/en/html/functions_h.html",
+        "website/static/docs/en/html/functions_i.html",
+        "website/static/docs/en/html/functions_k.html",
+        "website/static/docs/en/html/functions_l.html",
+        "website/static/docs/en/html/functions_m.html",
+        "website/static/docs/en/html/functions_n.html",
+        "website/static/docs/en/html/functions_o.html",
+        "website/static/docs/en/html/functions_p.html",
+        "website/static/docs/en/html/functions_q.html",
+        "website/static/docs/en/html/functions_r.html",
+        "website/static/docs/en/html/functions_s.html",
+        "website/static/docs/en/html/functions_t.html",
+        "website/static/docs/en/html/functions_u.html",
+        "website/static/docs/en/html/functions_v.html",
+        "website/static/docs/en/html/functions_vars.html",
+        "website/static/docs/en/html/functions_w.html",
+        "website/static/docs/en/html/functions_z.html",
+        "website/static/docs/en/html/globals.html",
+        "website/static/docs/en/html/globals_defs.html",
+        "website/static/docs/en/html/globals_func.html",
+        "website/static/docs/en/html/index.html",
+        "website/static/docs/en/html/jquery.js",
+        "website/static/docs/en/html/main_8cc.html",
+        "website/static/docs/en/html/main_8cc.js",
+        "website/static/docs/en/html/matrix_8cc.html",
+        "website/static/docs/en/html/matrix_8h.html",
+        "website/static/docs/en/html/matrix_8h_source.html",
+        "website/static/docs/en/html/menu.js",
+        "website/static/docs/en/html/menudata.js",
+        "website/static/docs/en/html/model_8cc.html",
+        "website/static/docs/en/html/model_8h.html",
+        "website/static/docs/en/html/model_8h.js",
+        "website/static/docs/en/html/model_8h_source.html",
+        "website/static/docs/en/html/namespacefasttext.html",
+        "website/static/docs/en/html/namespacefasttext.js",
+        "website/static/docs/en/html/namespacefasttext_1_1utils.html",
+        "website/static/docs/en/html/namespacemembers.html",
+        "website/static/docs/en/html/namespacemembers_enum.html",
+        "website/static/docs/en/html/namespacemembers_func.html",
+        "website/static/docs/en/html/namespacemembers_type.html",
+        "website/static/docs/en/html/namespaces.html",
+        "website/static/docs/en/html/namespaces.js",
+        "website/static/docs/en/html/navtree.css",
+        "website/static/docs/en/html/navtree.js",
+        "website/static/docs/en/html/navtreedata.js",
+        "website/static/docs/en/html/navtreeindex0.js",
+        "website/static/docs/en/html/navtreeindex1.js",
+        "website/static/docs/en/html/productquantizer_8cc.html",
+        "website/static/docs/en/html/productquantizer_8cc.js",
+        "website/static/docs/en/html/productquantizer_8h.html",
+        "website/static/docs/en/html/productquantizer_8h_source.html",
+        "website/static/docs/en/html/qmatrix_8cc.html",
+        "website/static/docs/en/html/qmatrix_8h.html",
+        "website/static/docs/en/html/qmatrix_8h_source.html",
+        "website/static/docs/en/html/real_8h.html",
+        "website/static/docs/en/html/real_8h.js",
+        "website/static/docs/en/html/real_8h_source.html",
+        "website/static/docs/en/html/resize.js",
+        "website/static/docs/en/html/search/.files_7.html.StRRNc",
+        "website/static/docs/en/html/search/.variables_a.html.1MGQ27",
+        "website/static/docs/en/html/search/all_0.html",
+        "website/static/docs/en/html/search/all_0.js",
+        "website/static/docs/en/html/search/all_1.html",
+        "website/static/docs/en/html/search/all_1.js",
+        "website/static/docs/en/html/search/all_10.html",
+        "website/static/docs/en/html/search/all_10.js",
+        "website/static/docs/en/html/search/all_11.html",
+        "website/static/docs/en/html/search/all_11.js",
+        "website/static/docs/en/html/search/all_12.html",
+        "website/static/docs/en/html/search/all_12.js",
+        "website/static/docs/en/html/search/all_13.html",
+        "website/static/docs/en/html/search/all_13.js",
+        "website/static/docs/en/html/search/all_14.html",
+        "website/static/docs/en/html/search/all_14.js",
+        "website/static/docs/en/html/search/all_15.html",
+        "website/static/docs/en/html/search/all_15.js",
+        "website/static/docs/en/html/search/all_16.html",
+        "website/static/docs/en/html/search/all_16.js",
+        "website/static/docs/en/html/search/all_17.html",
+        "website/static/docs/en/html/search/all_17.js",
+        "website/static/docs/en/html/search/all_2.html",
+        "website/static/docs/en/html/search/all_2.js",
+        "website/static/docs/en/html/search/all_3.html",
+        "website/static/docs/en/html/search/all_3.js",
+        "website/static/docs/en/html/search/all_4.html",
+        "website/static/docs/en/html/search/all_4.js",
+        "website/static/docs/en/html/search/all_5.html",
+        "website/static/docs/en/html/search/all_5.js",
+        "website/static/docs/en/html/search/all_6.html",
+        "website/static/docs/en/html/search/all_6.js",
+        "website/static/docs/en/html/search/all_7.html",
+        "website/static/docs/en/html/search/all_7.js",
+        "website/static/docs/en/html/search/all_8.html",
+        "website/static/docs/en/html/search/all_8.js",
+        "website/static/docs/en/html/search/all_9.html",
+        "website/static/docs/en/html/search/all_9.js",
+        "website/static/docs/en/html/search/all_a.html",
+        "website/static/docs/en/html/search/all_a.js",
+        "website/static/docs/en/html/search/all_b.html",
+        "website/static/docs/en/html/search/all_b.js",
+        "website/static/docs/en/html/search/all_c.html",
+        "website/static/docs/en/html/search/all_c.js",
+        "website/static/docs/en/html/search/all_d.html",
+        "website/static/docs/en/html/search/all_d.js",
+        "website/static/docs/en/html/search/all_e.html",
+        "website/static/docs/en/html/search/all_e.js",
+        "website/static/docs/en/html/search/all_f.html",
+        "website/static/docs/en/html/search/all_f.js",
+        "website/static/docs/en/html/search/classes_0.html",
+        "website/static/docs/en/html/search/classes_0.js",
+        "website/static/docs/en/html/search/classes_1.html",
+        "website/static/docs/en/html/search/classes_1.js",
+        "website/static/docs/en/html/search/classes_2.html",
+        "website/static/docs/en/html/search/classes_2.js",
+        "website/static/docs/en/html/search/classes_3.html",
+        "website/static/docs/en/html/search/classes_3.js",
+        "website/static/docs/en/html/search/classes_4.html",
+        "website/static/docs/en/html/search/classes_4.js",
+        "website/static/docs/en/html/search/classes_5.html",
+        "website/static/docs/en/html/search/classes_5.js",
+        "website/static/docs/en/html/search/classes_6.html",
+        "website/static/docs/en/html/search/classes_6.js",
+        "website/static/docs/en/html/search/classes_7.html",
+        "website/static/docs/en/html/search/classes_7.js",
+        "website/static/docs/en/html/search/classes_8.html",
+        "website/static/docs/en/html/search/classes_8.js",
+        "website/static/docs/en/html/search/defines_0.html",
+        "website/static/docs/en/html/search/defines_0.js",
+        "website/static/docs/en/html/search/defines_1.html",
+        "website/static/docs/en/html/search/defines_1.js",
+        "website/static/docs/en/html/search/defines_2.html",
+        "website/static/docs/en/html/search/defines_2.js",
+        "website/static/docs/en/html/search/defines_3.html",
+        "website/static/docs/en/html/search/defines_3.js",
+        "website/static/docs/en/html/search/enums_0.html",
+        "website/static/docs/en/html/search/enums_0.js",
+        "website/static/docs/en/html/search/enums_1.html",
+        "website/static/docs/en/html/search/enums_1.js",
+        "website/static/docs/en/html/search/enums_2.html",
+        "website/static/docs/en/html/search/enums_2.js",
+        "website/static/docs/en/html/search/enumvalues_0.html",
+        "website/static/docs/en/html/search/enumvalues_0.js",
+        "website/static/docs/en/html/search/enumvalues_1.html",
+        "website/static/docs/en/html/search/enumvalues_1.js",
+        "website/static/docs/en/html/search/enumvalues_2.html",
+        "website/static/docs/en/html/search/enumvalues_2.js",
+        "website/static/docs/en/html/search/enumvalues_3.html",
+        "website/static/docs/en/html/search/enumvalues_3.js",
+        "website/static/docs/en/html/search/enumvalues_4.html",
+        "website/static/docs/en/html/search/enumvalues_4.js",
+        "website/static/docs/en/html/search/enumvalues_5.html",
+        "website/static/docs/en/html/search/enumvalues_5.js",
+        "website/static/docs/en/html/search/files_0.html",
+        "website/static/docs/en/html/search/files_0.js",
+        "website/static/docs/en/html/search/files_1.html",
+        "website/static/docs/en/html/search/files_1.js",
+        "website/static/docs/en/html/search/files_2.html",
+        "website/static/docs/en/html/search/files_2.js",
+        "website/static/docs/en/html/search/files_3.html",
+        "website/static/docs/en/html/search/files_3.js",
+        "website/static/docs/en/html/search/files_4.html",
+        "website/static/docs/en/html/search/files_4.js",
+        "website/static/docs/en/html/search/files_5.html",
+        "website/static/docs/en/html/search/files_5.js",
+        "website/static/docs/en/html/search/files_6.html",
+        "website/static/docs/en/html/search/files_6.js",
+        "website/static/docs/en/html/search/files_7.html",
+        "website/static/docs/en/html/search/files_7.js",
+        "website/static/docs/en/html/search/files_8.html",
+        "website/static/docs/en/html/search/files_8.js",
+        "website/static/docs/en/html/search/functions_0.html",
+        "website/static/docs/en/html/search/functions_0.js",
+        "website/static/docs/en/html/search/functions_1.html",
+        "website/static/docs/en/html/search/functions_1.js",
+        "website/static/docs/en/html/search/functions_10.html",
+        "website/static/docs/en/html/search/functions_10.js",
+        "website/static/docs/en/html/search/functions_11.html",
+        "website/static/docs/en/html/search/functions_11.js",
+        "website/static/docs/en/html/search/functions_12.html",
+        "website/static/docs/en/html/search/functions_12.js",
+        "website/static/docs/en/html/search/functions_13.html",
+        "website/static/docs/en/html/search/functions_13.js",
+        "website/static/docs/en/html/search/functions_14.html",
+        "website/static/docs/en/html/search/functions_14.js",
+        "website/static/docs/en/html/search/functions_15.html",
+        "website/static/docs/en/html/search/functions_15.js",
+        "website/static/docs/en/html/search/functions_16.html",
+        "website/static/docs/en/html/search/functions_16.js",
+        "website/static/docs/en/html/search/functions_17.html",
+        "website/static/docs/en/html/search/functions_17.js",
+        "website/static/docs/en/html/search/functions_2.html",
+        "website/static/docs/en/html/search/functions_2.js",
+        "website/static/docs/en/html/search/functions_3.html",
+        "website/static/docs/en/html/search/functions_3.js",
+        "website/static/docs/en/html/search/functions_4.html",
+        "website/static/docs/en/html/search/functions_4.js",
+        "website/static/docs/en/html/search/functions_5.html",
+        "website/static/docs/en/html/search/functions_5.js",
+        "website/static/docs/en/html/search/functions_6.html",
+        "website/static/docs/en/html/search/functions_6.js",
+        "website/static/docs/en/html/search/functions_7.html",
+        "website/static/docs/en/html/search/functions_7.js",
+        "website/static/docs/en/html/search/functions_8.html",
+        "website/static/docs/en/html/search/functions_8.js",
+        "website/static/docs/en/html/search/functions_9.html",
+        "website/static/docs/en/html/search/functions_9.js",
+        "website/static/docs/en/html/search/functions_a.html",
+        "website/static/docs/en/html/search/functions_a.js",
+        "website/static/docs/en/html/search/functions_b.html",
+        "website/static/docs/en/html/search/functions_b.js",
+        "website/static/docs/en/html/search/functions_c.html",
+        "website/static/docs/en/html/search/functions_c.js",
+        "website/static/docs/en/html/search/functions_d.html",
+        "website/static/docs/en/html/search/functions_d.js",
+        "website/static/docs/en/html/search/functions_e.html",
+        "website/static/docs/en/html/search/functions_e.js",
+        "website/static/docs/en/html/search/functions_f.html",
+        "website/static/docs/en/html/search/functions_f.js",
+        "website/static/docs/en/html/search/namespaces_0.html",
+        "website/static/docs/en/html/search/namespaces_0.js",
+        "website/static/docs/en/html/search/nomatches.html",
+        "website/static/docs/en/html/search/search.css",
+        "website/static/docs/en/html/search/search.js",
+        "website/static/docs/en/html/search/searchdata.js",
+        "website/static/docs/en/html/search/typedefs_0.html",
+        "website/static/docs/en/html/search/typedefs_0.js",
+        "website/static/docs/en/html/search/typedefs_1.html",
+        "website/static/docs/en/html/search/typedefs_1.js",
+        "website/static/docs/en/html/search/variables_0.html",
+        "website/static/docs/en/html/search/variables_0.js",
+        "website/static/docs/en/html/search/variables_1.html",
+        "website/static/docs/en/html/search/variables_1.js",
+        "website/static/docs/en/html/search/variables_10.html",
+        "website/static/docs/en/html/search/variables_10.js",
+        "website/static/docs/en/html/search/variables_11.html",
+        "website/static/docs/en/html/search/variables_11.js",
+        "website/static/docs/en/html/search/variables_12.html",
+        "website/static/docs/en/html/search/variables_12.js",
+        "website/static/docs/en/html/search/variables_13.html",
+        "website/static/docs/en/html/search/variables_13.js",
+        "website/static/docs/en/html/search/variables_2.html",
+        "website/static/docs/en/html/search/variables_2.js",
+        "website/static/docs/en/html/search/variables_3.html",
+        "website/static/docs/en/html/search/variables_3.js",
+        "website/static/docs/en/html/search/variables_4.html",
+        "website/static/docs/en/html/search/variables_4.js",
+        "website/static/docs/en/html/search/variables_5.html",
+        "website/static/docs/en/html/search/variables_5.js",
+        "website/static/docs/en/html/search/variables_6.html",
+        "website/static/docs/en/html/search/variables_6.js",
+        "website/static/docs/en/html/search/variables_7.html",
+        "website/static/docs/en/html/search/variables_7.js",
+        "website/static/docs/en/html/search/variables_8.html",
+        "website/static/docs/en/html/search/variables_8.js",
+        "website/static/docs/en/html/search/variables_9.html",
+        "website/static/docs/en/html/search/variables_9.js",
+        "website/static/docs/en/html/search/variables_a.html",
+        "website/static/docs/en/html/search/variables_a.js",
+        "website/static/docs/en/html/search/variables_b.html",
+        "website/static/docs/en/html/search/variables_b.js",
+        "website/static/docs/en/html/search/variables_c.html",
+        "website/static/docs/en/html/search/variables_c.js",
+        "website/static/docs/en/html/search/variables_d.html",
+        "website/static/docs/en/html/search/variables_d.js",
+        "website/static/docs/en/html/search/variables_e.html",
+        "website/static/docs/en/html/search/variables_e.js",
+        "website/static/docs/en/html/search/variables_f.html",
+        "website/static/docs/en/html/search/variables_f.js",
+        "website/static/docs/en/html/structfasttext_1_1Node-members.html",
+        "website/static/docs/en/html/structfasttext_1_1Node.html",
+        "website/static/docs/en/html/structfasttext_1_1Node.js",
+        "website/static/docs/en/html/structfasttext_1_1entry-members.html",
+        "website/static/docs/en/html/structfasttext_1_1entry.html",
+        "website/static/docs/en/html/structfasttext_1_1entry.js",
+        "website/static/docs/en/html/tabs.css",
+        "website/static/docs/en/html/utils_8cc.html",
+        "website/static/docs/en/html/utils_8cc.js",
+        "website/static/docs/en/html/utils_8h.html",
+        "website/static/docs/en/html/utils_8h.js",
+        "website/static/docs/en/html/utils_8h_source.html",
+        "website/static/docs/en/html/vector_8cc.html",
+        "website/static/docs/en/html/vector_8cc.js",
+        "website/static/docs/en/html/vector_8h.html",
+        "website/static/docs/en/html/vector_8h.js",
+        "website/static/docs/en/html/vector_8h_source.html",
+        "website/static/fasttext.css",
+        "website/static/tabber.js",
+        "wikifil.pl",
+        "word-vector-example.sh"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-present, Facebook, Inc., MIT license (LICENSE), https://github.com/facebookresearch/fastText."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1MGQ27"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.StRRNc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.i4eKqy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PACKAGE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1235 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/compiler-explorer/compiler-explorer",
+  "revision": "413b8b2ce416697541252a1e4e670f4c31367f30",
+  "checksum": "sha256:307febf1ca63f0c72e045c6b32cbb5835fea6f9fee20e560d0e9ca086c2fec7a",
+  "extract": {
+    "exclude": [
+      "docs/images/AddExecuteOnly.png",
+      "docs/images/Execute.png",
+      "docs/images/Executed.png",
+      "docs/images/ExecutorFromThis.png",
+      "docs/images/add_new_clang.png",
+      "docs/images/add_new_gcc.png",
+      "docs/images/asm_info.png",
+      "docs/images/brief_overview.png",
+      "docs/images/show_assembly_documentation.gif",
+      "etc/scripts/docenizers/vendor/**",
+      "public/favicon-beta.ico",
+      "public/favicon-dev.ico",
+      "public/favicon-staging.ico",
+      "public/favicon-suspend.ico",
+      "public/favicon.ico",
+      "public/logos/analysis.png",
+      "public/logos/assembly.png",
+      "public/logos/carbon.png",
+      "public/logos/haskell.png",
+      "public/logos/helion.png",
+      "public/logos/hlsl.png",
+      "public/logos/hook-dark.png",
+      "public/logos/hook.png",
+      "public/logos/hylo.png",
+      "public/logos/ispc.png",
+      "public/logos/lean.png",
+      "public/logos/llvm.png",
+      "public/logos/lua.png",
+      "public/logos/nim.png",
+      "public/logos/odin.png",
+      "public/logos/scala.png",
+      "public/logos/spice.png",
+      "public/logos/triton.png",
+      "public/template_screenshots/**",
+      "test/maps/squareprintfstaticlib.asm"
+    ]
+  },
+  "history": {
+    "since": "15ea5e164b55c2b5ee0d3b432e3984b8f361afd2"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2012-2022, Compiler Explorer Authors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/compiler-explorer/compiler-explorer: Copyright (c) 2012-2022, Compiler Explorer Authors, BSD-2-Clause license (LICENSE), https://github.com/compiler-explorer/compiler-explorer."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".claude/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".idea/**",
+        ".minimum-node-version",
+        ".node-version",
+        "AGENTS.md",
+        "AUTHORS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "CONTRIBUTORS.md",
+        "LICENSE",
+        "Makefile",
+        "PULL_REQUEST_TEMPLATE.md",
+        "README.md",
+        "SECURITY.md",
+        "app.ts",
+        "biome.json",
+        "codecov.yml",
+        "compiler-args-app.ts",
+        "cypress/**",
+        "cypress.config.ts",
+        "docs/API.md",
+        "docs/AboutLibraryPaths.md",
+        "docs/AddingACompiler.md",
+        "docs/AddingAFormatter.md",
+        "docs/AddingALanguage.md",
+        "docs/AddingALibrary.md",
+        "docs/AddingASiteTemplate.md",
+        "docs/AddingATool.md",
+        "docs/AddingAssemblyDocumentation.md",
+        "docs/AddingCustomCompilersOverview.md",
+        "docs/Bootstrap5Migration.md",
+        "docs/BuildSystems.md",
+        "docs/Cerberus.md",
+        "docs/ClaudeExplain.md",
+        "docs/Compiler-Args-Debugging.md",
+        "docs/Configuration.md",
+        "docs/EWARM.md",
+        "docs/EWAVR.md",
+        "docs/EWAVR.properties",
+        "docs/IDEMode.md",
+        "docs/MCP.md",
+        "docs/Mach.md",
+        "docs/NsjailSandbox.md",
+        "docs/Privacy.md",
+        "docs/README.md",
+        "docs/Roadmap.md",
+        "docs/RunningOnMacOS.md",
+        "docs/Sponsors.md",
+        "docs/SupportedEmulators.md",
+        "docs/SystemdSocketActivation.md",
+        "docs/TestingTheUi.md",
+        "docs/TiC2000.md",
+        "docs/TurboC.md",
+        "docs/UsingCypress.md",
+        "docs/VitestCribSheet.md",
+        "docs/WSL.properties",
+        "docs/WhatIsCompilerExplorer.md",
+        "docs/WindowsDelphi.properties",
+        "docs/WindowsLocal.properties",
+        "docs/WindowsNative.md",
+        "docs/WindowsSubsystemForLinux.md",
+        "docs/images/CE-explain.svg",
+        "docs/internal/**",
+        "docs/jetbrains.svg",
+        "docs/logo.svg",
+        "docs/turboc.properties",
+        "etc/cewrapper/**",
+        "etc/config/**",
+        "etc/firejail/**",
+        "etc/nsjail/**",
+        "etc/scripts/ast_dump.py",
+        "etc/scripts/build-dist-win.ps1",
+        "etc/scripts/build-dist.sh",
+        "etc/scripts/ce-properties-wizard/**",
+        "etc/scripts/check-frontend-imports.js",
+        "etc/scripts/check-license-headers.js",
+        "etc/scripts/check_infra_settings.py",
+        "etc/scripts/clojure_wrapper.clj",
+        "etc/scripts/cutedsl_wrapper.py",
+        "etc/scripts/disasms/**",
+        "etc/scripts/docenizers/.gitignore",
+        "etc/scripts/docenizers/Makefile",
+        "etc/scripts/docenizers/aarch64.json",
+        "etc/scripts/docenizers/arm32.json",
+        "etc/scripts/docenizers/docenizer-6502.py",
+        "etc/scripts/docenizers/docenizer-amd64.py",
+        "etc/scripts/docenizers/docenizer-amdgpu.py",
+        "etc/scripts/docenizers/docenizer-arm.py",
+        "etc/scripts/docenizers/docenizer-avr.py",
+        "etc/scripts/docenizers/docenizer-evm.py",
+        "etc/scripts/docenizers/docenizer-java.sh",
+        "etc/scripts/docenizers/docenizer-java.ts",
+        "etc/scripts/docenizers/docenizer-llvm.sh",
+        "etc/scripts/docenizers/docenizer-llvm.ts",
+        "etc/scripts/docenizers/docenizer-perl.py",
+        "etc/scripts/docenizers/docenizer-power.py",
+        "etc/scripts/docenizers/docenizer-ptx-sass.py",
+        "etc/scripts/docenizers/docenizer-python.py",
+        "etc/scripts/docenizers/docenizer-riscv64.py",
+        "etc/scripts/docenizers/package.json",
+        "etc/scripts/docenizers/pyproject.toml",
+        "etc/scripts/docenizers/tsconfig.json",
+        "etc/scripts/docenizers/uv.lock",
+        "etc/scripts/find-node",
+        "etc/scripts/generate_site_template_screenshots.ts",
+        "etc/scripts/gh_tool/**",
+        "etc/scripts/helion_wrapper.py",
+        "etc/scripts/julia_wrapper.jl",
+        "etc/scripts/numba_wrapper.py",
+        "etc/scripts/shortlinkmigration/**",
+        "etc/scripts/test_numba_wrapper.py",
+        "etc/scripts/test_triton_wrapper.py",
+        "etc/scripts/tilelang_wrapper.py",
+        "etc/scripts/triton_wrapper.py",
+        "etc/scripts/tsconfig.json",
+        "etc/scripts/util/**",
+        "etc/webpack/**",
+        "examples/**",
+        "lib/**",
+        "lint-staged.config.mjs",
+        "package-lock.json",
+        "package.json",
+        "public/abiexplorer.svg",
+        "public/cppinsights.svg",
+        "public/favicon-winprod.ico",
+        "public/favicon-winstaging.ico",
+        "public/favicon-wintest.ico",
+        "public/logos/README.md",
+        "public/logos/ada-dark.svg",
+        "public/logos/ada.svg",
+        "public/logos/android-dark.svg",
+        "public/logos/android.svg",
+        "public/logos/c.svg",
+        "public/logos/c3.svg",
+        "public/logos/camelia.svg",
+        "public/logos/circt.svg",
+        "public/logos/clean.svg",
+        "public/logos/clojure.svg",
+        "public/logos/cmake.svg",
+        "public/logos/cpp.svg",
+        "public/logos/crystal-dark.svg",
+        "public/logos/crystal.svg",
+        "public/logos/cuda-dark.svg",
+        "public/logos/cuda.svg",
+        "public/logos/d.svg",
+        "public/logos/dart.svg",
+        "public/logos/dotnet.svg",
+        "public/logos/elixir.svg",
+        "public/logos/erlang.svg",
+        "public/logos/fortran.svg",
+        "public/logos/fsharp.svg",
+        "public/logos/gimple.svg",
+        "public/logos/glsl-dark.svg",
+        "public/logos/glsl.svg",
+        "public/logos/go.svg",
+        "public/logos/java.svg",
+        "public/logos/js.svg",
+        "public/logos/julia.svg",
+        "public/logos/kotlin.svg",
+        "public/logos/mach-tile.svg",
+        "public/logos/mlir.svg",
+        "public/logos/mojo.svg",
+        "public/logos/nix.svg",
+        "public/logos/numba.svg",
+        "public/logos/ocaml.svg",
+        "public/logos/opencl-dark.svg",
+        "public/logos/opencl.svg",
+        "public/logos/pascal-dark.svg",
+        "public/logos/pascal.svg",
+        "public/logos/perl.svg",
+        "public/logos/pony.svg",
+        "public/logos/python.svg",
+        "public/logos/racket.svg",
+        "public/logos/ruby.svg",
+        "public/logos/rust-dark.svg",
+        "public/logos/rust.svg",
+        "public/logos/sail.svg",
+        "public/logos/slang-dark.svg",
+        "public/logos/slang.svg",
+        "public/logos/snowball.svg",
+        "public/logos/solidity.svg",
+        "public/logos/sonar-dark.svg",
+        "public/logos/sonar.svg",
+        "public/logos/spirv-dark.svg",
+        "public/logos/spirv.svg",
+        "public/logos/sway.svg",
+        "public/logos/swift.svg",
+        "public/logos/toit.svg",
+        "public/logos/ts.svg",
+        "public/logos/v.svg",
+        "public/logos/vala.svg",
+        "public/logos/vyper.svg",
+        "public/logos/wasm.svg",
+        "public/logos/zig.svg",
+        "public/quickbench.svg",
+        "public/site-logo-beta.svg",
+        "public/site-logo-dev.svg",
+        "public/site-logo-staging.svg",
+        "public/site-logo-winprod.svg",
+        "public/site-logo-winstaging.svg",
+        "public/site-logo-wintest.svg",
+        "public/site-logo.svg",
+        "server.json",
+        "shared/**",
+        "static/**",
+        "test/_setup-fake-aws.ts",
+        "test/_setup-log.ts",
+        "test/analysis-tests.ts",
+        "test/android/**",
+        "test/android-tests.ts",
+        "test/ansi-to-html-tests.ts",
+        "test/app/**",
+        "test/asm-docs-amdgpu-tests.ts",
+        "test/asm-parser-m68k-tests.ts",
+        "test/asm-parser-subclass-integration-tests.ts",
+        "test/asm-parser-tests.ts",
+        "test/asm-tests.ts",
+        "test/assert-tests.ts",
+        "test/ast/**",
+        "test/aws-tests.ts",
+        "test/base-compiler-tests.ts",
+        "test/base-formatter-tests.ts",
+        "test/build-systems-tests.ts",
+        "test/buildenvsetup-ceconan-tests.ts",
+        "test/cache-tests.ts",
+        "test/cfg-cases/**",
+        "test/cfg-tests.ts",
+        "test/check-img.ts",
+        "test/checks.ts",
+        "test/clojure-tests.ts",
+        "test/common-utils-tests.ts",
+        "test/compilation-env-tests.ts",
+        "test/compilation-queue-tests.ts",
+        "test/compiler-finder-tests.ts",
+        "test/compilers/**",
+        "test/csp-tests.ts",
+        "test/d-tests.ts",
+        "test/demangle-cases/**",
+        "test/demangler-tests.ts",
+        "test/dotnet-parser-tests.ts",
+        "test/embedding.html",
+        "test/events-websocket-tests.ts",
+        "test/ewavr-asm-parser-tests.ts",
+        "test/example-config/**",
+        "test/example-states/**",
+        "test/exec-tests.ts",
+        "test/execution/**",
+        "test/execution-triple-tests.ts",
+        "test/filter-tests.ts",
+        "test/filters-cases/**",
+        "test/gccdump-tests.ts",
+        "test/golang/**",
+        "test/golang-tests.ts",
+        "test/google-tests.ts",
+        "test/handlers/**",
+        "test/instructionsets-tests.ts",
+        "test/issue-9015-e2e-tests.ts",
+        "test/java/**",
+        "test/java-tests.ts",
+        "test/kotlin/**",
+        "test/label-processor-tests.ts",
+        "test/lang-tests.ts",
+        "test/library-tests.ts",
+        "test/llvm-ast-parser-tests.ts",
+        "test/llvm-ir-parser-tests.ts",
+        "test/llvm-ir-tests.ts",
+        "test/llvm-pass-dump-parser-tests.ts",
+        "test/lua-tests.ts",
+        "test/mach/**",
+        "test/mach-tests.ts",
+        "test/map-file-tests.ts",
+        "test/maps/minimal-delphi.map",
+        "test/maps/minimal-vs15.map",
+        "test/maps/squareprintfstaticlib.cpp",
+        "test/maps/squareprintfstaticlib.map",
+        "test/mcp/**",
+        "test/mlir-pass-dump-parser-tests.ts",
+        "test/nim-tests.ts",
+        "test/numba-tests.ts",
+        "test/objdumper-tests.ts",
+        "test/odin/**",
+        "test/odin-tests.ts",
+        "test/oldhash.txt",
+        "test/options-handler.ts",
+        "test/packager-tests.ts",
+        "test/parsing-state-tests.ts",
+        "test/pascal/**",
+        "test/pascal-tests.ts",
+        "test/pe32-tests.ts",
+        "test/pp-output-test.ts",
+        "test/ppci-tests.ts",
+        "test/properties-test.ts",
+        "test/properties-validation-tests.ts",
+        "test/python-ast-parser-tests.ts",
+        "test/racket-pass-dump-parser-tests.ts",
+        "test/release-track-tests.ts",
+        "test/resolc/**",
+        "test/resolc-tests.ts",
+        "test/rison.ts",
+        "test/runtime-tools/**",
+        "test/rust/**",
+        "test/source-line-handler-tests.ts",
+        "test/sources/**",
+        "test/spirv-asm-parser-tests.ts",
+        "test/sponsors-test.ts",
+        "test/sqs-compilation-queue-tests.ts",
+        "test/stack-usage-transformer-test.ts",
+        "test/state/**",
+        "test/statenormalisation-tests.ts",
+        "test/stats-test.ts",
+        "test/storage/**",
+        "test/symbol-store-tests.ts",
+        "test/temp-tests.ts",
+        "test/test-properties/**",
+        "test/tool-tests.ts",
+        "test/unfurl-tests.ts",
+        "test/url-serialization.ts",
+        "test/url-utils-tests.ts",
+        "test/utils-tests.ts",
+        "test/utils.ts",
+        "test/vc-asm-parser-tests.ts",
+        "test/vyper-tests.ts",
+        "test/win-path-tests.ts",
+        "tsconfig.backend.json",
+        "tsconfig.base.json",
+        "tsconfig.frontend.json",
+        "tsconfig.frontend.tests.json",
+        "tsconfig.json",
+        "tsconfig.tests.json",
+        "types/**",
+        "views/**",
+        "vitest.config.ts",
+        "webpack.config.esm.ts"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2012-2022, Compiler Explorer Authors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012-2022, Compiler Explorer Authors, BSD-2-Clause license (LICENSE), https://github.com/compiler-explorer/compiler-explorer."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ada",
+      "paths": [
+        "**/*.adb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.asm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "crystal",
+      "paths": [
+        "**/*.cr"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.ex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erlang",
+      "paths": [
+        "**/*.erl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fortran",
+      "paths": [
+        "**/*.f90"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fsharp",
+      "paths": [
+        "**/*.fs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hlsl",
+      "paths": [
+        "**/*.hlsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "julia",
+      "paths": [
+        "**/*.jl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nim",
+      "paths": [
+        "**/*.nim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ocaml",
+      "paths": [
+        "**/*.ml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pascal",
+      "paths": [
+        "**/*.pas"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "pug",
+      "paths": [
+        "**/*.pug"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "racket",
+      "paths": [
+        "**/*.rkt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "solidity",
+      "paths": [
+        "**/*.sol"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.a68"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.blue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.c3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.carbon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.clcpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.co2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cob"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpp2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.demangle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dpr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hylo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.icl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.il"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ispc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jakt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lean"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mach"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mlir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mojo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ndjson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.odin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pony"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ptx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.raku"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.slang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.smali"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spice"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spvasm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.td"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.toit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usyntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vala"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yul"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.minimum-node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.node-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/find-node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "v",
+      "paths": [
+        "**/*.v"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

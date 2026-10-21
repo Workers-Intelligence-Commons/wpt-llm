@@ -1,0 +1,2679 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/google/oss-fuzz",
+  "revision": "97b30d984674d2cde3c6331e17ae6475b8c18e64",
+  "checksum": "sha256:d1064e3b9ef252492bc1941c2d59d872a6646a227792fbebeea722eee119ffae",
+  "extract": {
+    "exclude": [
+      "docs/favicon.ico",
+      "docs/images/**",
+      "infra/base-images/base-builder/sanitizers/**",
+      "infra/build/blog/content/images/**",
+      "infra/cifuzz/test_data/timeout_fuzzer",
+      "projects/boost/boost_graph_graphml_fuzzer_seed_corpus.zip",
+      "projects/boost/boost_graph_graphviz_fuzzer_seed_corpus.zip",
+      "projects/example/my-api-repo/do_stuff_test_data/7a74862169c3375f4149daff75187cbca7372a38",
+      "projects/example/my-api-repo/do_stuff_test_data/a835d6f1c6b2ae4a35e8c0a4a0576715c8b27283",
+      "projects/example/my-api-repo/do_stuff_test_data/e8fb273916196a5e29967af0b5826daffb9b3765",
+      "projects/ghostscript/pdf_seeds/**",
+      "projects/libavif/avif_decode_seed_corpus.zip",
+      "projects/lzo/lzo_decompress_target_seeds/**",
+      "projects/pam-ipmi/corpus/**",
+      "projects/phosphor-networkd/corpus/rtnetlink/**",
+      "projects/woff2/corpus/**",
+      "tools/vscode-extension/images/**",
+      "infra/cifuzz/test_data/build-out/example_crash_fuzzer",
+      "infra/cifuzz/test_data/build-out/example_nocrash_fuzzer",
+      "infra/cifuzz/test_data/memory/build-out/curl_fuzzer_memory",
+      "infra/cifuzz/test_data/undefined/build-out/curl_fuzzer_undefined"
+    ]
+  },
+  "history": {
+    "since": "8fa5964755e2f6e66d2ecebecdd22c7e4fd3c158"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND BSD-2-Clause AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nCopyright (c) 2015, Wade Simmons\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nBSD 2-Clause License\n\nCopyright (c) 2022, The ARVO AUTHORS\nCopyright (c) 2023, The Arizona Board of Regents\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/google/oss-fuzz: the authors of google/oss-fuzz (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz; Copyright (c) 2015, Wade Simmons, BSD-2-Clause license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/base-images/base-runner/gocoverage/gocovmerge; the authors of google/oss-fuzz (infra/base-images/base-runner/gocoverage/pprof-merge) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/base-images/base-runner/gocoverage/pprof-merge; Copyright (c) 2022, The ARVO AUTHORS; Copyright (c) 2023, The Arizona Board of Regents, BSD-2-Clause license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/experimental/contrib/arvo; Christopher Krah <christopher.krah@code-intelligence.com>, ISC license (declared in package.json), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/projects/turf; the authors of google/oss-fuzz (tools/vscode-extension) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/tools/vscode-extension."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".allstar/**",
+        ".clusterfuzzlite/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pylintrc",
+        ".style.yapf",
+        "AGENTS.md",
+        "CITATION.cff",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docs/.gitignore",
+        "docs/404.html",
+        "docs/AI patches (beta).md",
+        "docs/Gemfile",
+        "docs/Gemfile.lock",
+        "docs/README.md",
+        "docs/_config.yml",
+        "docs/_sass/**",
+        "docs/advanced-topics/**",
+        "docs/assets/**",
+        "docs/faq.md",
+        "docs/further-reading/**",
+        "docs/getting-started/**",
+        "docs/glossary.md",
+        "docs/ideal_integration.md",
+        "docs/index.md",
+        "docs/new_project_guide.md",
+        "docs/oss-fuzz/**",
+        "docs/reference/**",
+        "docs/reproducing.md",
+        "docs/research/**",
+        "infra/.dockerignore",
+        "infra/MAINTAINERS.csv",
+        "infra/README.md",
+        "infra/base-images/README.md",
+        "infra/base-images/all.sh",
+        "infra/base-images/base-builder/CHANGELOG.md",
+        "infra/base-images/base-builder/Dockerfile",
+        "infra/base-images/base-builder/README.md",
+        "infra/base-images/base-builder/afl_llvm22_patch.diff",
+        "infra/base-images/base-builder/bazel.bazelrc",
+        "infra/base-images/base-builder/bazel_build_fuzz_tests",
+        "infra/base-images/base-builder/bisect_clang.py",
+        "infra/base-images/base-builder/bisect_clang_test.py",
+        "infra/base-images/base-builder/cargo",
+        "infra/base-images/base-builder/compile",
+        "infra/base-images/base-builder/compile_afl",
+        "infra/base-images/base-builder/compile_centipede",
+        "infra/base-images/base-builder/compile_fuzztests.sh",
+        "infra/base-images/base-builder/compile_go_fuzzer",
+        "infra/base-images/base-builder/compile_honggfuzz",
+        "infra/base-images/base-builder/compile_javascript_fuzzer",
+        "infra/base-images/base-builder/compile_libfuzzer",
+        "infra/base-images/base-builder/compile_native_go_fuzzer",
+        "infra/base-images/base-builder/compile_native_go_fuzzer_v2",
+        "infra/base-images/base-builder/compile_python_fuzzer",
+        "infra/base-images/base-builder/debug_afl",
+        "infra/base-images/base-builder/detect_repo.py",
+        "infra/base-images/base-builder/detect_repo_test.py",
+        "infra/base-images/base-builder/go_utils.sh",
+        "infra/base-images/base-builder/indexer/**",
+        "infra/base-images/base-builder/install_deps.sh",
+        "infra/base-images/base-builder/install_deps_ubuntu-20-04.sh",
+        "infra/base-images/base-builder/install_deps_ubuntu-24-04.sh",
+        "infra/base-images/base-builder/install_go.sh",
+        "infra/base-images/base-builder/install_java.sh",
+        "infra/base-images/base-builder/install_javascript.sh",
+        "infra/base-images/base-builder/install_python.sh",
+        "infra/base-images/base-builder/install_ruby.sh",
+        "infra/base-images/base-builder/install_rust.sh",
+        "infra/base-images/base-builder/install_swift.sh",
+        "infra/base-images/base-builder/install_swift_ubuntu-20-04.sh",
+        "infra/base-images/base-builder/install_swift_ubuntu-24-04.sh",
+        "infra/base-images/base-builder/jcc/**",
+        "infra/base-images/base-builder/llvmsymbol.diff",
+        "infra/base-images/base-builder/make_build_replayable.py",
+        "infra/base-images/base-builder/ossfuzz_coverage_runner.go",
+        "infra/base-images/base-builder/precompile_afl",
+        "infra/base-images/base-builder/precompile_centipede",
+        "infra/base-images/base-builder/precompile_honggfuzz",
+        "infra/base-images/base-builder/precompile_honggfuzz_ubuntu_20_04",
+        "infra/base-images/base-builder/precompile_honggfuzz_ubuntu_24_04",
+        "infra/base-images/base-builder/python_coverage_helper.py",
+        "infra/base-images/base-builder/replay_build.sh",
+        "infra/base-images/base-builder/srcmap",
+        "infra/base-images/base-builder/test_data/**",
+        "infra/base-images/base-builder/ubuntu-20-04.Dockerfile",
+        "infra/base-images/base-builder/ubuntu-24-04.Dockerfile",
+        "infra/base-images/base-builder/unshallow_repos.py",
+        "infra/base-images/base-builder/write_labels.py",
+        "infra/base-images/base-builder-fuzzbench/**",
+        "infra/base-images/base-builder-go/**",
+        "infra/base-images/base-builder-javascript/**",
+        "infra/base-images/base-builder-jvm/**",
+        "infra/base-images/base-builder-python/**",
+        "infra/base-images/base-builder-ruby/**",
+        "infra/base-images/base-builder-rust/**",
+        "infra/base-images/base-builder-swift/**",
+        "infra/base-images/base-clang/**",
+        "infra/base-images/base-image/**",
+        "infra/base-images/base-runner/CHANGELOG.md",
+        "infra/base-images/base-runner/Dockerfile",
+        "infra/base-images/base-runner/README.md",
+        "infra/base-images/base-runner/bad_build_check",
+        "infra/base-images/base-runner/coverage",
+        "infra/base-images/base-runner/coverage_helper",
+        "infra/base-images/base-runner/download_corpus",
+        "infra/base-images/base-runner/generate_differential_cov_report.py",
+        "infra/base-images/base-runner/gocoverage/go.mod",
+        "infra/base-images/base-runner/gocoverage/go.sum",
+        "infra/base-images/base-runner/gocoverage/gocovsum/**",
+        "infra/base-images/base-runner/install_deps.sh",
+        "infra/base-images/base-runner/install_deps_ubuntu_20_04.sh",
+        "infra/base-images/base-runner/install_deps_ubuntu_24_04.sh",
+        "infra/base-images/base-runner/install_go.sh",
+        "infra/base-images/base-runner/install_java.sh",
+        "infra/base-images/base-runner/install_javascript.sh",
+        "infra/base-images/base-runner/jacoco_report_converter.py",
+        "infra/base-images/base-runner/nyc_report_converter.py",
+        "infra/base-images/base-runner/parse_options.py",
+        "infra/base-images/base-runner/profraw_update.py",
+        "infra/base-images/base-runner/python_coverage_runner_help.py",
+        "infra/base-images/base-runner/rcfilt",
+        "infra/base-images/base-runner/reproduce",
+        "infra/base-images/base-runner/run_fuzzer",
+        "infra/base-images/base-runner/ruzzy",
+        "infra/base-images/base-runner/targets_list",
+        "infra/base-images/base-runner/test_all.py",
+        "infra/base-images/base-runner/test_all_test.py",
+        "infra/base-images/base-runner/test_one.py",
+        "infra/base-images/base-runner/ubuntu-20-04.Dockerfile",
+        "infra/base-images/base-runner/ubuntu-24-04.Dockerfile",
+        "infra/base-images/base-runner-debug/**",
+        "infra/base-images/list_images.py",
+        "infra/bisector.py",
+        "infra/bisector_test.py",
+        "infra/build/blog/.gitignore",
+        "infra/build/blog/Dockerfile",
+        "infra/build/blog/build_blog.sh",
+        "infra/build/blog/content/about.md",
+        "infra/build/blog/content/posts/**",
+        "infra/build/blog/deploy.sh",
+        "infra/build/blog/hugo.toml",
+        "infra/build/build_status/**",
+        "infra/build/functions/**",
+        "infra/build/fuzz-introspector-webapp/**",
+        "infra/build/request_all_builds.sh",
+        "infra/build/request_build.sh",
+        "infra/build/status/**",
+        "infra/build_fuzzers.Dockerfile",
+        "infra/build_fuzzers.ubuntu-24-04.Dockerfile",
+        "infra/build_specified_commit.py",
+        "infra/build_specified_commit_test.py",
+        "infra/chronos/**",
+        "infra/ci/**",
+        "infra/cifuzz/CHANGELOG",
+        "infra/cifuzz/actions/**",
+        "infra/cifuzz/affected_fuzz_targets.py",
+        "infra/cifuzz/affected_fuzz_targets_test.py",
+        "infra/cifuzz/base_runner_utils.py",
+        "infra/cifuzz/build-images.sh",
+        "infra/cifuzz/build_fuzzers.py",
+        "infra/cifuzz/build_fuzzers_entrypoint.py",
+        "infra/cifuzz/build_fuzzers_test.py",
+        "infra/cifuzz/cifuzz-base/**",
+        "infra/cifuzz/cifuzz_combined_entrypoint.py",
+        "infra/cifuzz/cifuzz_end_to_end_test.py",
+        "infra/cifuzz/cloudbuild.yaml",
+        "infra/cifuzz/clusterfuzz_deployment.py",
+        "infra/cifuzz/clusterfuzz_deployment_test.py",
+        "infra/cifuzz/config_utils.py",
+        "infra/cifuzz/config_utils_test.py",
+        "infra/cifuzz/continuous_integration.py",
+        "infra/cifuzz/continuous_integration_test.py",
+        "infra/cifuzz/docker.py",
+        "infra/cifuzz/docker_test.py",
+        "infra/cifuzz/environment.py",
+        "infra/cifuzz/example_cifuzz.yml",
+        "infra/cifuzz/external-actions/**",
+        "infra/cifuzz/filestore/**",
+        "infra/cifuzz/filestore_utils.py",
+        "infra/cifuzz/filestore_utils_test.py",
+        "infra/cifuzz/fuzz_target.py",
+        "infra/cifuzz/fuzz_target_test.py",
+        "infra/cifuzz/generate_coverage_report.py",
+        "infra/cifuzz/generate_coverage_report_test.py",
+        "infra/cifuzz/get_coverage.py",
+        "infra/cifuzz/get_coverage_test.py",
+        "infra/cifuzz/http_utils.py",
+        "infra/cifuzz/http_utils_test.py",
+        "infra/cifuzz/logs.py",
+        "infra/cifuzz/package-lock.json",
+        "infra/cifuzz/package.json",
+        "infra/cifuzz/platform_config/**",
+        "infra/cifuzz/requirements.txt",
+        "infra/cifuzz/run_cifuzz.py",
+        "infra/cifuzz/run_fuzzers.py",
+        "infra/cifuzz/run_fuzzers_entrypoint.py",
+        "infra/cifuzz/run_fuzzers_test.py",
+        "infra/cifuzz/sarif_utils.py",
+        "infra/cifuzz/sarif_utils_test.py",
+        "infra/cifuzz/test_data/TimeoutFuzzer.cpp",
+        "infra/cifuzz/test_data/build-out/**",
+        "infra/cifuzz/test_data/example_coverage_report_summary.json",
+        "infra/cifuzz/test_data/example_crash_fuzzer_bug_summary.txt",
+        "infra/cifuzz/test_data/example_crash_fuzzer_output.txt",
+        "infra/cifuzz/test_data/example_curl_cov.json",
+        "infra/cifuzz/test_data/example_curl_file_list.json",
+        "infra/cifuzz/test_data/example_curl_fuzzer_cov.json",
+        "infra/cifuzz/test_data/external-project/**",
+        "infra/cifuzz/test_data/memory/**",
+        "infra/cifuzz/test_data/msan_crash_fuzzer_bug_summary.txt",
+        "infra/cifuzz/test_data/msan_crash_fuzzer_output.txt",
+        "infra/cifuzz/test_data/sarif_utils_msan_stack.txt",
+        "infra/cifuzz/test_data/sarif_utils_only_llvmfuzzer_stack.txt",
+        "infra/cifuzz/test_data/sarif_utils_systemd_stack.txt",
+        "infra/cifuzz/test_data/undefined/**",
+        "infra/cifuzz/test_helpers.py",
+        "infra/cifuzz/workspace_utils.py",
+        "infra/common_utils.py",
+        "infra/constants.py",
+        "infra/experimental/SystemSan/**",
+        "infra/experimental/agent-skills/**",
+        "infra/experimental/chronos/**",
+        "infra/experimental/mcp/**",
+        "infra/experimental/sanitizers/**",
+        "infra/helper.py",
+        "infra/helper_test.py",
+        "infra/indexer/**",
+        "infra/manifest.py",
+        "infra/pr_helper.py",
+        "infra/pr_helper_test.py",
+        "infra/presubmit.py",
+        "infra/pytest.ini",
+        "infra/repo_manager.py",
+        "infra/repo_manager_test.py",
+        "infra/retry.py",
+        "infra/run_fuzzers.Dockerfile",
+        "infra/run_fuzzers.ubuntu-24-04.Dockerfile",
+        "infra/templates.py",
+        "infra/test",
+        "infra/test_repos.py",
+        "infra/tools/**",
+        "infra/uploader/**",
+        "infra/utils.py",
+        "infra/utils_test.py",
+        "projects/abseil-cpp/**",
+        "projects/abseil-py/**",
+        "projects/ada-url/**",
+        "projects/adal/**",
+        "projects/aiohttp/**",
+        "projects/airflow/**",
+        "projects/alembic/**",
+        "projects/ampproject/**",
+        "projects/angle/**",
+        "projects/angular/**",
+        "projects/angus-mail/**",
+        "projects/anise/**",
+        "projects/aniso8601/**",
+        "projects/ansible/**",
+        "projects/antlr3-java/**",
+        "projects/antlr4-java/**",
+        "projects/apache-axis2/**",
+        "projects/apache-commons-bcel/**",
+        "projects/apache-commons-beanutils/**",
+        "projects/apache-commons-cli/**",
+        "projects/apache-commons-codec/**",
+        "projects/apache-commons-collections/**",
+        "projects/apache-commons-compress/**",
+        "projects/apache-commons-configuration/**",
+        "projects/apache-commons-csv/**",
+        "projects/apache-commons-fileupload/**",
+        "projects/apache-commons-geometry/**",
+        "projects/apache-commons-imaging/**",
+        "projects/apache-commons-io/**",
+        "projects/apache-commons-jxpath/**",
+        "projects/apache-commons-lang/**",
+        "projects/apache-commons-logging/**",
+        "projects/apache-commons-math/**",
+        "projects/apache-commons-net/**",
+        "projects/apache-commons-text/**",
+        "projects/apache-commons-validator/**",
+        "projects/apache-cxf/**",
+        "projects/apache-doris/**",
+        "projects/apache-felix-dev/**",
+        "projects/apache-httpd/**",
+        "projects/apache-logging-log4cxx/**",
+        "projects/apache-poi/**",
+        "projects/apache-shiro/**",
+        "projects/apache-tika/**",
+        "projects/aptos-core/**",
+        "projects/archaius-core/**",
+        "projects/arduinojson/**",
+        "projects/argcomplete/**",
+        "projects/argo/**",
+        "projects/args/**",
+        "projects/args4j/**",
+        "projects/arrow/**",
+        "projects/arrow-java/**",
+        "projects/arrow-py/**",
+        "projects/askama/**",
+        "projects/asn1crypto/**",
+        "projects/aspectj/**",
+        "projects/aspell/**",
+        "projects/assimp/**",
+        "projects/astc-encoder/**",
+        "projects/asteval/**",
+        "projects/astro-compiler/**",
+        "projects/astroid/**",
+        "projects/asttokens/**",
+        "projects/async-http-client/**",
+        "projects/atomic/**",
+        "projects/attrs/**",
+        "projects/augeas/**",
+        "projects/autoflake/**",
+        "projects/autopep8/**",
+        "projects/avahi/**",
+        "projects/avm/**",
+        "projects/avro/**",
+        "projects/azure-sdk-for-python/**",
+        "projects/babel/**",
+        "projects/bad_example/**",
+        "projects/barebox/**",
+        "projects/bazel-rules-fuzzing-test/**",
+        "projects/bazel-rules-fuzzing-test-java/**",
+        "projects/bc-gh/**",
+        "projects/bc-java/**",
+        "projects/bearssl/**",
+        "projects/behaviortreecpp/**",
+        "projects/bignum-fuzzer/**",
+        "projects/bincode/**",
+        "projects/bind9/**",
+        "projects/binutils/**",
+        "projects/bios-bmc-smm-error-logger/**",
+        "projects/bitcoin-core/**",
+        "projects/black/**",
+        "projects/blackfriday/**",
+        "projects/bleach/**",
+        "projects/bloaty/**",
+        "projects/bls-signatures/**",
+        "projects/bluez/**",
+        "projects/bmcweb/**",
+        "projects/boost/Dockerfile",
+        "projects/boost/boost_datetime_fuzzer.cc",
+        "projects/boost/boost_filesystem_fuzzer.cc",
+        "projects/boost/boost_graph_graphml_fuzzer.cc",
+        "projects/boost/boost_graph_graphviz_fuzzer.cc",
+        "projects/boost/boost_programoptions_fuzzer.cc",
+        "projects/boost/boost_ptree_inforead_fuzzer.cc",
+        "projects/boost/boost_ptree_iniread_fuzzer.cc",
+        "projects/boost/boost_ptree_jsonread_fuzzer.cc",
+        "projects/boost/boost_ptree_xmlread_fuzzer.cc",
+        "projects/boost/boost_regex_fuzzer.cc",
+        "projects/boost/boost_regex_pattern_fuzzer.cc",
+        "projects/boost/boost_regex_replace_fuzzer.cc",
+        "projects/boost/boost_stralg_fuzzer.cc",
+        "projects/boost/boost_uuid_fuzzer.cc",
+        "projects/boost/build.sh",
+        "projects/boost/project.yaml",
+        "projects/boost-beast/**",
+        "projects/boost-json/**",
+        "projects/boringssl/**",
+        "projects/botan/**",
+        "projects/botocore/**",
+        "projects/bottleneck/**",
+        "projects/brotli/**",
+        "projects/brotli-java/**",
+        "projects/brpc/**",
+        "projects/brunsli/**",
+        "projects/bs4/**",
+        "projects/bson-rust/**",
+        "projects/burntsushi-toml/**",
+        "projects/bz2file/**",
+        "projects/bzip2/**",
+        "projects/c-ares/**",
+        "projects/c-blosc/**",
+        "projects/c-blosc2/**",
+        "projects/cachetools/**",
+        "projects/caddy/**",
+        "projects/caffeine/**",
+        "projects/cairo/**",
+        "projects/calcite/**",
+        "projects/calcite-avatica/**",
+        "projects/canvg/**",
+        "projects/capnproto/**",
+        "projects/capstone/**",
+        "projects/cascadia/**",
+        "projects/casync/**",
+        "projects/catapult/**",
+        "projects/cbor-java/**",
+        "projects/cbor2/**",
+        "projects/cctz/**",
+        "projects/cel-cpp/**",
+        "projects/cel-go/**",
+        "projects/cert-manager/**",
+        "projects/cfengine/**",
+        "projects/cffi/**",
+        "projects/cgif/**",
+        "projects/cglib/**",
+        "projects/chardet/**",
+        "projects/charset_normalizer/**",
+        "projects/checker-framework/**",
+        "projects/checkstyle/**",
+        "projects/chrono/**",
+        "projects/cifuzz-example/**",
+        "projects/cilium/**",
+        "projects/circl/**",
+        "projects/cirq/**",
+        "projects/civetweb/**",
+        "projects/cjson/**",
+        "projects/clamav/**",
+        "projects/clib/**",
+        "projects/click/**",
+        "projects/clickhouse/**",
+        "projects/clock/**",
+        "projects/closure-compiler/**",
+        "projects/closure-library/**",
+        "projects/cloud-custodian/**",
+        "projects/cloud-hypervisor/**",
+        "projects/cmake/**",
+        "projects/cmark/**",
+        "projects/cockroachdb/**",
+        "projects/compress/**",
+        "projects/config-validator/**",
+        "projects/configparser/**",
+        "projects/connect-ip-go/**",
+        "projects/connectedhomeip/**",
+        "projects/connexion/**",
+        "projects/containerd/**",
+        "projects/coreutils/**",
+        "projects/cosign/**",
+        "projects/cosmos-sdk/**",
+        "projects/coturn/**",
+        "projects/coveragepy/**",
+        "projects/cpp-httplib/**",
+        "projects/cppcheck/**",
+        "projects/cppitertools/**",
+        "projects/cpuinfo/**",
+        "projects/cpython3/**",
+        "projects/cras/**",
+        "projects/cri-o/**",
+        "projects/croaring/**",
+        "projects/cron-utils/**",
+        "projects/croniter/**",
+        "projects/crossplane/**",
+        "projects/crosvm/**",
+        "projects/crow/**",
+        "projects/cryptofuzz/**",
+        "projects/cryptography/**",
+        "projects/cryptsetup/**",
+        "projects/cssselect/**",
+        "projects/cubefs/**",
+        "projects/cups/**",
+        "projects/cups-filters/**",
+        "projects/cura-engine/**",
+        "projects/curl/**",
+        "projects/curvesapi/**",
+        "projects/cxxopts/**",
+        "projects/cyclonedds/**",
+        "projects/d3/**",
+        "projects/dapr/**",
+        "projects/dart/**",
+        "projects/dask/**",
+        "projects/data-encoding/**",
+        "projects/date/**",
+        "projects/dateparser/**",
+        "projects/dav1d/**",
+        "projects/dbus-broker/**",
+        "projects/dbus-sensors/**",
+        "projects/dcmtk/**",
+        "projects/decorator/**",
+        "projects/defusedxml/**",
+        "projects/demangle/**",
+        "projects/deno/**",
+        "projects/dgraph/**",
+        "projects/digest/**",
+        "projects/dill/**",
+        "projects/distlib/**",
+        "projects/distribution/**",
+        "projects/django/**",
+        "projects/dlplibs/**",
+        "projects/dng_sdk/**",
+        "projects/dnsmasq/**",
+        "projects/dnspython/**",
+        "projects/docker-client/**",
+        "projects/docutils/**",
+        "projects/dom4j/**",
+        "projects/double-conversion/**",
+        "projects/dovecot/**",
+        "projects/dpp/**",
+        "projects/dr_libs/**",
+        "projects/draco/**",
+        "projects/dragonfly/**",
+        "projects/dropbear/**",
+        "projects/dropwizard/**",
+        "projects/duckdb/**",
+        "projects/dulwich/**",
+        "projects/e2fsprogs/**",
+        "projects/easywsclient/**",
+        "projects/ecc-diff-fuzzer/**",
+        "projects/ecdsa-python/**",
+        "projects/eclipse-equinox/**",
+        "projects/edk2/**",
+        "projects/eigen/**",
+        "projects/elfutils/**",
+        "projects/envoy/**",
+        "projects/erigon/**",
+        "projects/esp-v2/**",
+        "projects/espeak-ng/**",
+        "projects/estoraged/**",
+        "projects/et-xmlfile/**",
+        "projects/etcd/**",
+        "projects/evo-inflector/**",
+        "projects/example/Dockerfile",
+        "projects/example/build.sh",
+        "projects/example/my-api-repo/Makefile",
+        "projects/example/my-api-repo/README.md",
+        "projects/example/my-api-repo/do_stuff_fuzzer.cpp",
+        "projects/example/my-api-repo/do_stuff_fuzzer.dict",
+        "projects/example/my-api-repo/do_stuff_test_data/410c23d234e7f97a2dd6265eb2909324deb8c13a",
+        "projects/example/my-api-repo/do_stuff_test_data/fc09d362f05ab97efdfcd873dacad6a9c29e57ff",
+        "projects/example/my-api-repo/do_stuff_unittest.cpp",
+        "projects/example/my-api-repo/my_api.cpp",
+        "projects/example/my-api-repo/my_api.h",
+        "projects/example/my-api-repo/standalone_fuzz_target_runner.cpp",
+        "projects/example/project.yaml",
+        "projects/exiv2/**",
+        "projects/exp4j/**",
+        "projects/expat/**",
+        "projects/expr/**",
+        "projects/exprtk/**",
+        "projects/faad2/**",
+        "projects/fabric/**",
+        "projects/face/**",
+        "projects/fast-dds/**",
+        "projects/fast-xml-parser/**",
+        "projects/fast_float/**",
+        "projects/fastcsv/**",
+        "projects/fasthttp/**",
+        "projects/fastify/**",
+        "projects/fastjson/**",
+        "projects/fastjson2/**",
+        "projects/feign/**",
+        "projects/ffmpeg/**",
+        "projects/ffms2/**",
+        "projects/fftw3/**",
+        "projects/file/**",
+        "projects/filelock/**",
+        "projects/filesystem_spec/**",
+        "projects/fio/**",
+        "projects/fips203/**",
+        "projects/firefox/**",
+        "projects/firestore/**",
+        "projects/flac/**",
+        "projects/flask/**",
+        "projects/flask-jwt-extended/**",
+        "projects/flask-restx/**",
+        "projects/flask-wtf/**",
+        "projects/flatbuffers/**",
+        "projects/flate2-rs/**",
+        "projects/flex/**",
+        "projects/fluent-bit/**",
+        "projects/fluxcd/**",
+        "projects/flyway/**",
+        "projects/fmt/**",
+        "projects/fontations/**",
+        "projects/freeimage/**",
+        "projects/freeradius/**",
+        "projects/freerdp/**",
+        "projects/freetype2/**",
+        "projects/fribidi/**",
+        "projects/frr/**",
+        "projects/fsnotify/**",
+        "projects/ftfy/**",
+        "projects/fuzzing-puzzles/**",
+        "projects/fuzztest-example/**",
+        "projects/fuzztest-raksha/**",
+        "projects/fuzzywuzzy/**",
+        "projects/fwupd/**",
+        "projects/g-api-auth-httplib2/**",
+        "projects/g-api-auth-library-python/**",
+        "projects/g-api-pubsub/**",
+        "projects/g-api-py-api-common-protos/**",
+        "projects/g-api-py-oauthlib/**",
+        "projects/g-api-python-bigquery-storage/**",
+        "projects/g-api-python-client/**",
+        "projects/g-api-python-cloud-core/**",
+        "projects/g-api-python-firestore/**",
+        "projects/g-api-python-tasks/**",
+        "projects/g-api-resource-manager/**",
+        "projects/g-api-resumable-media-python/**",
+        "projects/g-api-secret-manager/**",
+        "projects/g-apis-py-api-core/**",
+        "projects/g-auth-library-java/**",
+        "projects/g-cloud-logging-py/**",
+        "projects/g-http-java-client/**",
+        "projects/g-oauth-java-client/**",
+        "projects/g-py-bigquery/**",
+        "projects/g-py-crc32c/**",
+        "projects/gast/**",
+        "projects/gateway/**",
+        "projects/gbmc-pacemaker/**",
+        "projects/gc-iam/**",
+        "projects/gcloud-error-py/**",
+        "projects/gcloud-go/**",
+        "projects/gcp-python-cloud-storage/**",
+        "projects/gdal/**",
+        "projects/gdbm/**",
+        "projects/gdk-pixbuf/**",
+        "projects/genshi/**",
+        "projects/geos/**",
+        "projects/gfwx/**",
+        "projects/ghostscript/Dockerfile",
+        "projects/ghostscript/build.sh",
+        "projects/ghostscript/dicts/**",
+        "projects/ghostscript/generate_seeds.py",
+        "projects/ghostscript/gs_device_bmpmono_fuzzer.cc",
+        "projects/ghostscript/gs_device_eps2write_fuzzer.cc",
+        "projects/ghostscript/gs_device_faxg3_fuzzer.cc",
+        "projects/ghostscript/gs_device_ljet4_fuzzer.cc",
+        "projects/ghostscript/gs_device_pdfwrite_fuzzer.cc",
+        "projects/ghostscript/gs_device_pdfwrite_opts_fuzzer.cc",
+        "projects/ghostscript/gs_device_pgmraw_fuzzer.cc",
+        "projects/ghostscript/gs_device_png16m_fuzzer.cc",
+        "projects/ghostscript/gs_device_ps2write_fuzzer.cc",
+        "projects/ghostscript/gs_device_psdcmyk_fuzzer.cc",
+        "projects/ghostscript/gs_device_pxlcolor_fuzzer.cc",
+        "projects/ghostscript/gs_device_pxlmono_fuzzer.cc",
+        "projects/ghostscript/gs_device_tiffsep1_fuzzer.cc",
+        "projects/ghostscript/gs_device_xpswrite_fuzzer.cc",
+        "projects/ghostscript/gs_fuzzlib.h",
+        "projects/ghostscript/gs_icc_fuzzer.cc",
+        "projects/ghostscript/gs_pcl_fuzzer.cc",
+        "projects/ghostscript/gs_pcl_fuzzer.options",
+        "projects/ghostscript/gs_pxl_fuzzer.cc",
+        "projects/ghostscript/gs_pxl_fuzzer.options",
+        "projects/ghostscript/gs_xps_fuzzer.cc",
+        "projects/ghostscript/gs_xps_fuzzer.options",
+        "projects/ghostscript/gstoraster_fuzzer.cc",
+        "projects/ghostscript/gstoraster_fuzzer_all_colors.cc",
+        "projects/ghostscript/gstoraster_fuzzer_all_colors.options",
+        "projects/ghostscript/gstoraster_pdf_fuzzer.cc",
+        "projects/ghostscript/gstoraster_ps_fuzzer.cc",
+        "projects/ghostscript/gstoraster_ps_fuzzer.options",
+        "projects/ghostscript/project.yaml",
+        "projects/giflib/**",
+        "projects/gimli/**",
+        "projects/git/**",
+        "projects/gitdb/**",
+        "projects/gitea/**",
+        "projects/github_scarecrow/**",
+        "projects/gitoxide/**",
+        "projects/gitpython/**",
+        "projects/glaze/**",
+        "projects/glib/**",
+        "projects/globaleaks-whistleblowing-software/**",
+        "projects/glog/**",
+        "projects/glom/**",
+        "projects/glslang/**",
+        "projects/gluon/**",
+        "projects/gnucobol/**",
+        "projects/gnupg/**",
+        "projects/gnutls/**",
+        "projects/go-attestation/**",
+        "projects/go-cmp/**",
+        "projects/go-coap/**",
+        "projects/go-containerregistry/**",
+        "projects/go-coredns/**",
+        "projects/go-dhcp/**",
+        "projects/go-dns/**",
+        "projects/go-ethereum/**",
+        "projects/go-git/**",
+        "projects/go-humanize/**",
+        "projects/go-json-iterator/**",
+        "projects/go-ldap/**",
+        "projects/go-ole/**",
+        "projects/go-pprof/**",
+        "projects/go-readline/**",
+        "projects/go-redis/**",
+        "projects/go-sftp/**",
+        "projects/go-shlex/**",
+        "projects/go-snappy/**",
+        "projects/go-sqlite3/**",
+        "projects/go-toml/**",
+        "projects/go-yaml/**",
+        "projects/gobgp/**",
+        "projects/gogo-protobuf/**",
+        "projects/goipp/**",
+        "projects/golang/**",
+        "projects/golang-appengine/**",
+        "projects/golang-protobuf/**",
+        "projects/gonids/**",
+        "projects/gopacket/**",
+        "projects/gopsutil/**",
+        "projects/gosnmp/**",
+        "projects/gpac/**",
+        "projects/gpowerd/**",
+        "projects/gprof2dot/**",
+        "projects/gpsd/**",
+        "projects/graphicsmagick/**",
+        "projects/graphql-java/**",
+        "projects/greenmail/**",
+        "projects/grok/**",
+        "projects/groovy/**",
+        "projects/grpc-gateway/**",
+        "projects/grpc-go/**",
+        "projects/grpc-httpjson-transcoding/**",
+        "projects/grpc-py/**",
+        "projects/grpc-swift/**",
+        "projects/gson/**",
+        "projects/gss-ntlmssp/**",
+        "projects/gstreamer/**",
+        "projects/guava/**",
+        "projects/guetzli/**",
+        "projects/guice/**",
+        "projects/gunicorn/**",
+        "projects/gwt/**",
+        "projects/h11/**",
+        "projects/h2database/**",
+        "projects/h2o/**",
+        "projects/h3/**",
+        "projects/h5py/**",
+        "projects/hadoop/**",
+        "projects/halide/**",
+        "projects/hamcrest/**",
+        "projects/haproxy/**",
+        "projects/harfbuzz/**",
+        "projects/harfrust/**",
+        "projects/hcl/**",
+        "projects/hdf5/**",
+        "projects/hdrhistogram/**",
+        "projects/helm/**",
+        "projects/hermes/**",
+        "projects/hibernate-orm/**",
+        "projects/hibernate-validator/**",
+        "projects/highwayhash/**",
+        "projects/hikaricp/**",
+        "projects/hiredis/**",
+        "projects/hiredis-py/**",
+        "projects/hive/**",
+        "projects/hobbes/**",
+        "projects/hoextdown/**",
+        "projects/hostap/**",
+        "projects/hothd/**",
+        "projects/hpn-ssh/**",
+        "projects/hsqldb/**",
+        "projects/html2text/**",
+        "projects/html5lib-python/**",
+        "projects/htmlunit/**",
+        "projects/htslib/**",
+        "projects/http-parser/**",
+        "projects/http-pattern-matcher/**",
+        "projects/httparse/**",
+        "projects/httpcomponents-client/**",
+        "projects/httpcomponents-core/**",
+        "projects/httpcore/**",
+        "projects/httplib2/**",
+        "projects/httpretty/**",
+        "projects/httpx/**",
+        "projects/httrack/**",
+        "projects/hugo/**",
+        "projects/hunspell/**",
+        "projects/hwloc/**",
+        "projects/hyperium/**",
+        "projects/ibmswtpm2/**",
+        "projects/ical4j/**",
+        "projects/icalendar/**",
+        "projects/icu/**",
+        "projects/idna/**",
+        "projects/igraph/**",
+        "projects/ijson/**",
+        "projects/image-png/**",
+        "projects/image-rs/**",
+        "projects/imageio/**",
+        "projects/imagemagick/**",
+        "projects/immer/**",
+        "projects/importlib_metadata/**",
+        "projects/inchi/**",
+        "projects/influxdb/**",
+        "projects/iniconfig/**",
+        "projects/inih/**",
+        "projects/iniparser/**",
+        "projects/ion-java/**",
+        "projects/ipaddress/**",
+        "projects/iperf/**",
+        "projects/ipfs/**",
+        "projects/ipmi-fru-parser/**",
+        "projects/ipp-usb/**",
+        "projects/ipykernel/**",
+        "projects/ipython/**",
+        "projects/iroha/**",
+        "projects/irssi/**",
+        "projects/iso14229/**",
+        "projects/isodate/**",
+        "projects/istio/**",
+        "projects/istio-ztunnel/**",
+        "projects/itext7/**",
+        "projects/itoa/**",
+        "projects/itsdangerous/**",
+        "projects/iverilog/**",
+        "projects/ja3/**",
+        "projects/jackson-core/**",
+        "projects/jackson-databind/**",
+        "projects/jackson-dataformat-xml/**",
+        "projects/jackson-dataformats-binary/**",
+        "projects/jackson-dataformats-text/**",
+        "projects/jackson-datatype-joda/**",
+        "projects/jackson-datatypes-collections/**",
+        "projects/jackson-modules-java8/**",
+        "projects/jakarta-mail-api/**",
+        "projects/janet/**",
+        "projects/janino/**",
+        "projects/jansi/**",
+        "projects/jansson/**",
+        "projects/janus-gateway/**",
+        "projects/java-diff-utils/**",
+        "projects/java-example/**",
+        "projects/java-jwt/**",
+        "projects/java-uuid-generator/**",
+        "projects/java-xmlbuilder/**",
+        "projects/javacpp/**",
+        "projects/javaparser/**",
+        "projects/javapoet/**",
+        "projects/javascript-example/**",
+        "projects/javassist/**",
+        "projects/javy/**",
+        "projects/jaxb/**",
+        "projects/jbig2dec/**",
+        "projects/jboss-logging/**",
+        "projects/jc/**",
+        "projects/jdom/**",
+        "projects/jedi/**",
+        "projects/jedis/**",
+        "projects/jerryscript/**",
+        "projects/jersey/**",
+        "projects/jettison/**",
+        "projects/jetty/**",
+        "projects/jflex/**",
+        "projects/jfreechart/**",
+        "projects/jimfs/**",
+        "projects/jimp/**",
+        "projects/jinja2/**",
+        "projects/jline3/**",
+        "projects/jmespathpy/**",
+        "projects/jmh/**",
+        "projects/joblib/**",
+        "projects/joda-convert/**",
+        "projects/joda-time/**",
+        "projects/jolt/**",
+        "projects/joni/**",
+        "projects/jooq/**",
+        "projects/jopt-simple/**",
+        "projects/jose4j/**",
+        "projects/jpeg-js/**",
+        "projects/jpegoptim/**",
+        "projects/jq/**",
+        "projects/js-yaml/**",
+        "projects/jsc/**",
+        "projects/jsch/**",
+        "projects/jsemver/**",
+        "projects/jsign/**",
+        "projects/jsmin/**",
+        "projects/json/**",
+        "projects/json-c/**",
+        "projects/json-flattener/**",
+        "projects/json-java/**",
+        "projects/json-patch/**",
+        "projects/json-sanitizer/**",
+        "projects/json-simple/**",
+        "projects/json-smart-v2/**",
+        "projects/json2avro/**",
+        "projects/json5format/**",
+        "projects/jsoncons/**",
+        "projects/jsoncpp/**",
+        "projects/jsonnet/**",
+        "projects/jsonp-api/**",
+        "projects/jsonparser/**",
+        "projects/jsonpath/**",
+        "projects/jsonpickle/**",
+        "projects/jsonschema/**",
+        "projects/jsoup/**",
+        "projects/jsqlparser/**",
+        "projects/jstl-api/**",
+        "projects/jts/**",
+        "projects/juju/**",
+        "projects/jul-to-slf4j/**",
+        "projects/junrar/**",
+        "projects/jupyter-nbconvert/**",
+        "projects/jupyter_server/**",
+        "projects/jupytext/**",
+        "projects/jwt-verify-lib/**",
+        "projects/jxls/**",
+        "projects/kafka/**",
+        "projects/kamailio/**",
+        "projects/karchive/**",
+        "projects/kcodecs/**",
+        "projects/kconfig/**",
+        "projects/kde-thumbnailers/**",
+        "projects/kea/**",
+        "projects/keras/**",
+        "projects/keycloak/**",
+        "projects/keystone/**",
+        "projects/kfilemetadata/**",
+        "projects/kie-soup/**",
+        "projects/kimageformats/**",
+        "projects/kiwisolver/**",
+        "projects/kmime/**",
+        "projects/knative/**",
+        "projects/knot-dns/**",
+        "projects/krb5/**",
+        "projects/kryo/**",
+        "projects/kubearmor/**",
+        "projects/kubeedge/**",
+        "projects/kubeflow-katib/**",
+        "projects/kubeflow-model-registry/**",
+        "projects/kubeflow-pipelines/**",
+        "projects/kubeflow-spark-operator/**",
+        "projects/kubernetes/**",
+        "projects/kubernetes-cluster-api/**",
+        "projects/kubevirt/**",
+        "projects/kyverno/**",
+        "projects/lame/**",
+        "projects/lark-parser/**",
+        "projects/lcms/**",
+        "projects/leptonica/**",
+        "projects/leveldb/**",
+        "projects/libaom/**",
+        "projects/libarchive/**",
+        "projects/libass/**",
+        "projects/libavc/**",
+        "projects/libavif/Dockerfile",
+        "projects/libavif/build.sh",
+        "projects/libavif/project.yaml",
+        "projects/libbpf/**",
+        "projects/libcacard/**",
+        "projects/libcbor/**",
+        "projects/libcoap/**",
+        "projects/libconfig/**",
+        "projects/libcst/**",
+        "projects/libcue/**",
+        "projects/libcups/**",
+        "projects/libdwarf/**",
+        "projects/libecc/**",
+        "projects/libevent/**",
+        "projects/libexif/**",
+        "projects/libfdk-aac/**",
+        "projects/libfido2/**",
+        "projects/libfuse/**",
+        "projects/libgd/**",
+        "projects/libgit2/**",
+        "projects/libheif/**",
+        "projects/libhevc/**",
+        "projects/libhtp/**",
+        "projects/libical/**",
+        "projects/libidn/**",
+        "projects/libidn2/**",
+        "projects/libiec61850/**",
+        "projects/libigl/**",
+        "projects/libjpeg-turbo/**",
+        "projects/libjxl/**",
+        "projects/libldac/**",
+        "projects/liblouis/**",
+        "projects/libmicrohttpd/**",
+        "projects/libmicrohttpd2/**",
+        "projects/libmodbus/**",
+        "projects/libmpeg2/**",
+        "projects/libnfs/**",
+        "projects/liboqs/**",
+        "projects/libpcap/**",
+        "projects/libpg_query/**",
+        "projects/libphonenumber/**",
+        "projects/libplist/**",
+        "projects/libpng/**",
+        "projects/libpng-proto/**",
+        "projects/libprotobuf-mutator/**",
+        "projects/libproxy/**",
+        "projects/libpsl/**",
+        "projects/libra/**",
+        "projects/libraw/**",
+        "projects/librawspeed/**",
+        "projects/librdkafka/**",
+        "projects/libredwg/**",
+        "projects/libreoffice/**",
+        "projects/libressl/**",
+        "projects/librosa/**",
+        "projects/librsvg/**",
+        "projects/libsass/**",
+        "projects/libsndfile/**",
+        "projects/libsodium/**",
+        "projects/libsoup/**",
+        "projects/libspdm/**",
+        "projects/libspectre/**",
+        "projects/libspng/**",
+        "projects/libsrtp/**",
+        "projects/libssh/**",
+        "projects/libssh2/**",
+        "projects/libstdcpp/**",
+        "projects/libtasn1/**",
+        "projects/libteken/**",
+        "projects/libtheora/**",
+        "projects/libtiff/**",
+        "projects/libtorrent/**",
+        "projects/libtpms/**",
+        "projects/libtsm/**",
+        "projects/libucl/**",
+        "projects/libultrahdr/**",
+        "projects/libunwind/**",
+        "projects/libusb/**",
+        "projects/libvips/**",
+        "projects/libvnc/**",
+        "projects/libvpx/**",
+        "projects/libwebp/**",
+        "projects/libwebsockets/**",
+        "projects/libxaac/**",
+        "projects/libxls/**",
+        "projects/libxlsxwriter/**",
+        "projects/libxml2/**",
+        "projects/libxslt/**",
+        "projects/libyal/**",
+        "projects/libyaml/**",
+        "projects/libyang/**",
+        "projects/libyuv/**",
+        "projects/libzip/**",
+        "projects/libzmq/**",
+        "projects/lighttpd/**",
+        "projects/lima/**",
+        "projects/linkerd2/**",
+        "projects/linkerd2-proxy/**",
+        "projects/lit/**",
+        "projects/litmuschaos/**",
+        "projects/llamacpp/**",
+        "projects/lldb-eval/**",
+        "projects/lldpd/**",
+        "projects/llhttp/**",
+        "projects/llvm/**",
+        "projects/llvm_libcxx/**",
+        "projects/llvm_libcxxabi/**",
+        "projects/lodash/**",
+        "projects/lodepng/**",
+        "projects/log4j2/**",
+        "projects/logback/**",
+        "projects/loki/**",
+        "projects/looker-sdk/**",
+        "projects/lotus/**",
+        "projects/lua/**",
+        "projects/lua-example/**",
+        "projects/lucene/**",
+        "projects/lwan/**",
+        "projects/lxc/**",
+        "projects/lxml/**",
+        "projects/lz4/**",
+        "projects/lz4_flex/**",
+        "projects/lzma/**",
+        "projects/lzo/Dockerfile",
+        "projects/lzo/all_lzo_compress.cc",
+        "projects/lzo/build.sh",
+        "projects/lzo/lzo_compress_target.c",
+        "projects/lzo/lzo_compress_target.options",
+        "projects/lzo/lzo_decompress_target.c",
+        "projects/lzo/lzo_decompress_target.options",
+        "projects/lzo/project.yaml",
+        "projects/magic-enum/**",
+        "projects/magic-modules/**",
+        "projects/mako/**",
+        "projects/mandelbulber/**",
+        "projects/mapserver/**",
+        "projects/mariadb/**",
+        "projects/mariadb-connector-j/**",
+        "projects/markdown-it-py/**",
+        "projects/markupsafe/**",
+        "projects/matio/**",
+        "projects/matplotlib/**",
+        "projects/maven/**",
+        "projects/maven-model/**",
+        "projects/mbedtls/**",
+        "projects/mccabe/**",
+        "projects/md4c/**",
+        "projects/mdbook-i18n-helpers/**",
+        "projects/mdbtools/**",
+        "projects/mdit-py-plugins/**",
+        "projects/mdurl/**",
+        "projects/memcached/**",
+        "projects/mercurial/**",
+        "projects/meshoptimizer/**",
+        "projects/metadata-extractor/**",
+        "projects/metallb/**",
+        "projects/mfcmapi/**",
+        "projects/micronaut/**",
+        "projects/migtd/**",
+        "projects/minify/**",
+        "projects/miniz/**",
+        "projects/miniz_oxide/**",
+        "projects/minizip/**",
+        "projects/moby/**",
+        "projects/mod-auth-openidc/**",
+        "projects/model-transparency/**",
+        "projects/monero/**",
+        "projects/mongo-go-driver/**",
+        "projects/mongoose/**",
+        "projects/more-itertools/**",
+        "projects/mosh/**",
+        "projects/mosquitto/**",
+        "projects/mp4parse-rust/**",
+        "projects/mp4san/**",
+        "projects/mpg123/**",
+        "projects/mpv/**",
+        "projects/mrab-regex/**",
+        "projects/mruby/**",
+        "projects/ms-tpm-20-ref/**",
+        "projects/msal/**",
+        "projects/msgpack-c/**",
+        "projects/msgpack-python/**",
+        "projects/msquic/**",
+        "projects/mtail/**",
+        "projects/muduo/**",
+        "projects/multidict/**",
+        "projects/multierr/**",
+        "projects/muparser/**",
+        "projects/mupdf/**",
+        "projects/mutagen/**",
+        "projects/mvel/**",
+        "projects/mxj/**",
+        "projects/myanmar-tools/**",
+        "projects/mybatis-3/**",
+        "projects/mysql-connector-j/**",
+        "projects/mysql-server/**",
+        "projects/naga/**",
+        "projects/nanopb/**",
+        "projects/nats/**",
+        "projects/nbclassic/**",
+        "projects/nbformat/**",
+        "projects/nccl/**",
+        "projects/ndpi/**",
+        "projects/neomutt/**",
+        "projects/neqo/**",
+        "projects/nestegg/**",
+        "projects/net-snmp/**",
+        "projects/netaddr-py/**",
+        "projects/netcdf/**",
+        "projects/netdata/**",
+        "projects/nettle/**",
+        "projects/netty/**",
+        "projects/netty-tcnative/**",
+        "projects/networkmanager/**",
+        "projects/networkx/**",
+        "projects/nfstream/**",
+        "projects/nghttp2/**",
+        "projects/nginx/**",
+        "projects/ngolo-fuzzing/**",
+        "projects/ngolo-fuzzing-x/**",
+        "projects/nimbus-jwt/**",
+        "projects/ninja/**",
+        "projects/njs/**",
+        "projects/node-xml2js/**",
+        "projects/nodejs/**",
+        "projects/nokogiri/**",
+        "projects/nom/**",
+        "projects/notary/**",
+        "projects/nsmd/**",
+        "projects/nss/**",
+        "projects/ntlm-auth/**",
+        "projects/ntlm2/**",
+        "projects/ntopng/**",
+        "projects/ntp/**",
+        "projects/ntpsec/**",
+        "projects/num-bigint/**",
+        "projects/numactl/**",
+        "projects/numexpr/**",
+        "projects/numpy/**",
+        "projects/oak/**",
+        "projects/oatpp/**",
+        "projects/oauth2/**",
+        "projects/oauthlib/**",
+        "projects/ocudu/**",
+        "projects/ogre/**",
+        "projects/ohc/**",
+        "projects/okhttp/**",
+        "projects/olefile/**",
+        "projects/onednn/**",
+        "projects/onnx/**",
+        "projects/open-json/**",
+        "projects/open5gs/**",
+        "projects/open62541/**",
+        "projects/openapi-schema-validator/**",
+        "projects/openbabel/**",
+        "projects/opencensus-cpp/**",
+        "projects/opencensus-go/**",
+        "projects/opencensus-java/**",
+        "projects/opencensus-python/**",
+        "projects/opencsv/**",
+        "projects/opencv/**",
+        "projects/opendal/**",
+        "projects/opendds/**",
+        "projects/opendnp3/**",
+        "projects/openexr/**",
+        "projects/openfga/**",
+        "projects/openh264/**",
+        "projects/openjpeg/**",
+        "projects/openjph/**",
+        "projects/openkruise/**",
+        "projects/opennavsurf-bag/**",
+        "projects/openpyxl/**",
+        "projects/opensc/**",
+        "projects/opensips/**",
+        "projects/opensk/**",
+        "projects/openslide/**",
+        "projects/openssh/**",
+        "projects/openssl/**",
+        "projects/opentelemetry/**",
+        "projects/opentelemetry-go/**",
+        "projects/opentelemetry-go-contrib/**",
+        "projects/openthread/**",
+        "projects/openvpn/**",
+        "projects/openvswitch/**",
+        "projects/openweave/**",
+        "projects/openyurt/**",
+        "projects/opt_einsum/**",
+        "projects/opus/**",
+        "projects/opusfile/**",
+        "projects/oracle-py-cx/**",
+        "projects/orjson/**",
+        "projects/oscrypto/**",
+        "projects/osgi/**",
+        "projects/osquery/**",
+        "projects/oss-fuzz-example/**",
+        "projects/ossf-scorecard/**",
+        "projects/ostree/**",
+        "projects/ots/**",
+        "projects/ox-ruby/**",
+        "projects/oxia/**",
+        "projects/p11-kit/**",
+        "projects/p9/**",
+        "projects/pacemaker/**",
+        "projects/packaging/**",
+        "projects/pako/**",
+        "projects/pam-ipmi/Dockerfile",
+        "projects/pam-ipmi/build.sh",
+        "projects/pam-ipmi/pam_ipmi_fuzzer.c",
+        "projects/pam-ipmi/project.yaml",
+        "projects/pandas/**",
+        "projects/paramiko/**",
+        "projects/parse/**",
+        "projects/parsimonious/**",
+        "projects/parso/**",
+        "projects/pasta/**",
+        "projects/pathlib2/**",
+        "projects/pborman-uuid/**",
+        "projects/pcapplusplus/**",
+        "projects/pcl/**",
+        "projects/pcre2/**",
+        "projects/pdf-js/**",
+        "projects/pdfbox/**",
+        "projects/pdfminersix/**",
+        "projects/pdfplumber/**",
+        "projects/pdoc/**",
+        "projects/pem/**",
+        "projects/pendulum/**",
+        "projects/perfetto/**",
+        "projects/pest/**",
+        "projects/pffft/**",
+        "projects/phmap/**",
+        "projects/phosphor-certificate-manager/**",
+        "projects/phosphor-host-ipmid/**",
+        "projects/phosphor-networkd/Dockerfile",
+        "projects/phosphor-networkd/build.sh",
+        "projects/phosphor-networkd/config_parser_fuzzer.cpp",
+        "projects/phosphor-networkd/config_parser_fuzzer.dict",
+        "projects/phosphor-networkd/corpus/config_parser/**",
+        "projects/phosphor-networkd/corpus/util/**",
+        "projects/phosphor-networkd/fuzzing_meson.build",
+        "projects/phosphor-networkd/project.yaml",
+        "projects/phosphor-networkd/rtnetlink_fuzzer.cpp",
+        "projects/phosphor-networkd/stdplus.patch",
+        "projects/phosphor-networkd/util_fuzzer.cpp",
+        "projects/phosphor-state-manager/**",
+        "projects/php/**",
+        "projects/picotls/**",
+        "projects/pidgin/**",
+        "projects/piex/**",
+        "projects/pigweed/**",
+        "projects/pikepdf/**",
+        "projects/pillow/**",
+        "projects/pip/**",
+        "projects/pistache/**",
+        "projects/pjsip/**",
+        "projects/plan9port/**",
+        "projects/pldm/**",
+        "projects/plexus-utils/**",
+        "projects/ply/**",
+        "projects/pngquant/**",
+        "projects/poco/**",
+        "projects/poppler/**",
+        "projects/postcss/**",
+        "projects/postfix/**",
+        "projects/postgis/**",
+        "projects/postgresql/**",
+        "projects/powerdns/**",
+        "projects/powsybl-java/**",
+        "projects/presidio/**",
+        "projects/presto/**",
+        "projects/proftpd/**",
+        "projects/proj4/**",
+        "projects/prometheus/**",
+        "projects/promise-polyfill/**",
+        "projects/prost/**",
+        "projects/proto-plus-python/**",
+        "projects/protobuf-c/**",
+        "projects/protobuf-java/**",
+        "projects/protobuf-js/**",
+        "projects/protobuf-python/**",
+        "projects/protoc-gen-validate/**",
+        "projects/protocompile/**",
+        "projects/proton-bridge/**",
+        "projects/proxygen/**",
+        "projects/psqlparse/**",
+        "projects/psutil/**",
+        "projects/psycopg2/**",
+        "projects/publicsuffix-list/**",
+        "projects/pugixml/**",
+        "projects/pulldown-cmark/**",
+        "projects/pulumi/**",
+        "projects/pupnp/**",
+        "projects/py-serde/**",
+        "projects/pyasn1/**",
+        "projects/pyasn1-modules/**",
+        "projects/pybind11/**",
+        "projects/pycparser/**",
+        "projects/pycrypto/**",
+        "projects/pycryptodome/**",
+        "projects/pycups/**",
+        "projects/pydantic/**",
+        "projects/pydateutil/**",
+        "projects/pygments/**",
+        "projects/pyjson5/**",
+        "projects/pyjwt/**",
+        "projects/pymysql/**",
+        "projects/pynacl/**",
+        "projects/pyodbc/**",
+        "projects/pyparsing/**",
+        "projects/pypy3/**",
+        "projects/pyrsistent/**",
+        "projects/pytables/**",
+        "projects/pytest-py/**",
+        "projects/python-ecdsa/**",
+        "projects/python-email-validator/**",
+        "projects/python-fastjsonschema/**",
+        "projects/python-future/**",
+        "projects/python-graphviz/**",
+        "projects/python-hyperlink/**",
+        "projects/python-jose/**",
+        "projects/python-lz4/**",
+        "projects/python-markdown/**",
+        "projects/python-markdownify/**",
+        "projects/python-multipart/**",
+        "projects/python-nameparser/**",
+        "projects/python-nvd3/**",
+        "projects/python-pathspec/**",
+        "projects/python-phonenumbers/**",
+        "projects/python-prompt-toolkit/**",
+        "projects/python-pypdf/**",
+        "projects/python-rison/**",
+        "projects/python-rsa/**",
+        "projects/python-tabulate/**",
+        "projects/python3-libraries/**",
+        "projects/python3-openid/**",
+        "projects/pytz/**",
+        "projects/pyvex/**",
+        "projects/pyxdg/**",
+        "projects/pyyaml/**",
+        "projects/pyzmq/**",
+        "projects/qcms/**",
+        "projects/qdox/**",
+        "projects/qemu/**",
+        "projects/qpdf/**",
+        "projects/qpid-proton/**",
+        "projects/qs/**",
+        "projects/qt/**",
+        "projects/quantlib/**",
+        "projects/quartz/**",
+        "projects/qubes-os/**",
+        "projects/quic-go/**",
+        "projects/quiche/**",
+        "projects/quiche-cloudflare/**",
+        "projects/quick-xml/**",
+        "projects/quickjs/**",
+        "projects/r/**",
+        "projects/rabbitmq-c/**",
+        "projects/racket/**",
+        "projects/radare2/**",
+        "projects/radon/**",
+        "projects/radvd/**",
+        "projects/rapidjson/**",
+        "projects/rauc/**",
+        "projects/rdf4j/**",
+        "projects/rdkit/**",
+        "projects/re2/**",
+        "projects/readstat/**",
+        "projects/realm-core/**",
+        "projects/redis-py/**",
+        "projects/redis-rs/**",
+        "projects/redux/**",
+        "projects/reflections/**",
+        "projects/rekor/**",
+        "projects/relic/**",
+        "projects/reload4j/**",
+        "projects/requests/**",
+        "projects/resiprocate/**",
+        "projects/retrofit/**",
+        "projects/retry/**",
+        "projects/rfc3967/**",
+        "projects/rhai/**",
+        "projects/rhino/**",
+        "projects/rich/**",
+        "projects/ring/**",
+        "projects/rnp/**",
+        "projects/roaring-bitmap/**",
+        "projects/rocksdb/**",
+        "projects/rome/**",
+        "projects/ron/**",
+        "projects/roughtime/**",
+        "projects/rtpproxy/**",
+        "projects/ruby/**",
+        "projects/runc/**",
+        "projects/rust-brotli/**",
+        "projects/rust-coreutils/**",
+        "projects/rust-lexical/**",
+        "projects/rust-regex/**",
+        "projects/rust-semver-parser/**",
+        "projects/rustls/**",
+        "projects/rxjava/**",
+        "projects/ryu/**",
+        "projects/s2geometry/**",
+        "projects/s2opc/**",
+        "projects/sacremoses/**",
+        "projects/safere/**",
+        "projects/samba/**",
+        "projects/scapy/**",
+        "projects/scikit-learn/**",
+        "projects/scipy/**",
+        "projects/scorecard-web/**",
+        "projects/scrypt/**",
+        "projects/selinux/**",
+        "projects/sentencepiece/**",
+        "projects/serde-yaml/**",
+        "projects/serde_json/**",
+        "projects/serde_urlencoded/**",
+        "projects/serenity/**",
+        "projects/servo/**",
+        "projects/servo-core/**",
+        "projects/setuptools/**",
+        "projects/shaderc/**",
+        "projects/sharp/**",
+        "projects/sigstore/**",
+        "projects/sigstore-go/**",
+        "projects/sigstore-java/**",
+        "projects/sigstore-python/**",
+        "projects/simd/**",
+        "projects/simdjson/**",
+        "projects/simdutf/**",
+        "projects/simplejson/**",
+        "projects/six/**",
+        "projects/skcms/**",
+        "projects/sketches-core/**",
+        "projects/skia/**",
+        "projects/skipper/**",
+        "projects/sleuthkit/**",
+        "projects/slf4j-api/**",
+        "projects/smart_open/**",
+        "projects/smt/**",
+        "projects/snakeyaml/**",
+        "projects/snappy/**",
+        "projects/snappy-java/**",
+        "projects/snort3/**",
+        "projects/solidity/**",
+        "projects/sonic/**",
+        "projects/sound-open-firmware/**",
+        "projects/soupsieve/**",
+        "projects/spatial4j/**",
+        "projects/spdk/**",
+        "projects/spdlog/**",
+        "projects/spdm-rs/**",
+        "projects/speex/**",
+        "projects/spice-usbredir/**",
+        "projects/spicy/**",
+        "projects/spidermonkey/**",
+        "projects/spidermonkey-ufi/**",
+        "projects/spirv-cross/**",
+        "projects/spirv-tools/**",
+        "projects/spotify-json/**",
+        "projects/spring-amqp/**",
+        "projects/spring-boot/**",
+        "projects/spring-cloud-commons/**",
+        "projects/spring-cloud-config/**",
+        "projects/spring-cloud-netflix/**",
+        "projects/spring-cloud-sleuth-brave/**",
+        "projects/spring-cloud-stream/**",
+        "projects/spring-data-jpa/**",
+        "projects/spring-data-keyvalue/**",
+        "projects/spring-data-mongodb/**",
+        "projects/spring-data-redis/**",
+        "projects/spring-framework/**",
+        "projects/spring-integration/**",
+        "projects/spring-ldap/**",
+        "projects/spring-retry/**",
+        "projects/spring-security/**",
+        "projects/spring-shell/**",
+        "projects/spring-webflow/**",
+        "projects/sql-parser/**",
+        "projects/sqlalchemy/**",
+        "projects/sqlalchemy-utils/**",
+        "projects/sqlalchemy_jsonfield/**",
+        "projects/sqlite-jdbc/**",
+        "projects/sqlite3/**",
+        "projects/sqlparse/**",
+        "projects/stack_data/**",
+        "projects/starlark-rust/**",
+        "projects/starnix-netlink/**",
+        "projects/stax/**",
+        "projects/stb/**",
+        "projects/stringtemplate4/**",
+        "projects/strongswan/**",
+        "projects/struts/**",
+        "projects/sudoers/**",
+        "projects/suricata/**",
+        "projects/surrealdb/**",
+        "projects/swagger-core/**",
+        "projects/swc/**",
+        "projects/swift-nio/**",
+        "projects/swift-protobuf/**",
+        "projects/symphonia/**",
+        "projects/systemd/**",
+        "projects/syzkaller/**",
+        "projects/tablesaw/**",
+        "projects/taglib/**",
+        "projects/tailscale/**",
+        "projects/tar-rs/**",
+        "projects/tarantool/**",
+        "projects/tcmalloc/**",
+        "projects/tcpreplay/**",
+        "projects/td-shim/**",
+        "projects/tdengine/**",
+        "projects/teleport/**",
+        "projects/tendermint/**",
+        "projects/tensorflow/**",
+        "projects/tensorflow-addons/**",
+        "projects/tensorflow-py/**",
+        "projects/tensorflow-serving/**",
+        "projects/tesseract-ocr/**",
+        "projects/textdistance/**",
+        "projects/textwrap/**",
+        "projects/threetenbp/**",
+        "projects/thrift-c_glib/**",
+        "projects/thrift-cpp/**",
+        "projects/thrift-go/**",
+        "projects/thrift-java/**",
+        "projects/thrift-js/**",
+        "projects/thrift-py/**",
+        "projects/thrift-rb/**",
+        "projects/thrift-rust/**",
+        "projects/tidb/**",
+        "projects/tidy-html5/**",
+        "projects/time/**",
+        "projects/timestamp-authority/**",
+        "projects/tink-cc/**",
+        "projects/tinycss2/**",
+        "projects/tinygltf/**",
+        "projects/tinyobjloader/**",
+        "projects/tinysparql/**",
+        "projects/tinyusb/**",
+        "projects/tinyxml2/**",
+        "projects/tmux/**",
+        "projects/tokio/**",
+        "projects/tomcat/**",
+        "projects/toml/**",
+        "projects/toml_edit/**",
+        "projects/tomli/**",
+        "projects/tomlkit/**",
+        "projects/tomlplusplus/**",
+        "projects/toolbelt/**",
+        "projects/toolz/**",
+        "projects/tor/**",
+        "projects/tpm2/**",
+        "projects/tpm2-tss/**",
+        "projects/tqdm/**",
+        "projects/trafficserver/**",
+        "projects/tremor/**",
+        "projects/trust-dns/**",
+        "projects/tslib/**",
+        "projects/ttf-parser/**",
+        "projects/tungstenite-rs/**",
+        "projects/twelve-monkeys/**",
+        "projects/twitter4j/**",
+        "projects/typescript/**",
+        "projects/typescript-example/**",
+        "projects/typing_extensions/**",
+        "projects/typst/**",
+        "projects/tyrus/**",
+        "projects/u-boot/**",
+        "projects/u-root/**",
+        "projects/ua-parser-js/**",
+        "projects/uint256/**",
+        "projects/ujson/**",
+        "projects/unblob/**",
+        "projects/unbound/**",
+        "projects/underscore/**",
+        "projects/undertow/**",
+        "projects/unicode-rs/**",
+        "projects/unicorn/**",
+        "projects/unirest-java/**",
+        "projects/unit/**",
+        "projects/univocity-parsers/**",
+        "projects/unsafe-libyaml/**",
+        "projects/upx/**",
+        "projects/uriparser/**",
+        "projects/uritemplate/**",
+        "projects/urlextract/**",
+        "projects/urllib3/**",
+        "projects/usbguard/**",
+        "projects/userver/**",
+        "projects/usrsctp/**",
+        "projects/utf8parse/**",
+        "projects/utf8proc/**",
+        "projects/util-linux/**",
+        "projects/uwebsockets/**",
+        "projects/v8/**",
+        "projects/validators/**",
+        "projects/valijson/**",
+        "projects/varnish/**",
+        "projects/vitess/**",
+        "projects/vlc/**",
+        "projects/volcano/**",
+        "projects/vorbis/**",
+        "projects/vtpm-td/**",
+        "projects/vulkan-loader/**",
+        "projects/vulnerable-project/**",
+        "projects/w3lib/**",
+        "projects/w3m/**",
+        "projects/wabt/**",
+        "projects/wamr/**",
+        "projects/wasm3/**",
+        "projects/wasmedge/**",
+        "projects/wasmer/**",
+        "projects/wasmi/**",
+        "projects/wasmtime/**",
+        "projects/wavpack/**",
+        "projects/wazuh/**",
+        "projects/websocket-client/**",
+        "projects/websockets/**",
+        "projects/weechat/**",
+        "projects/wget/**",
+        "projects/wget2/**",
+        "projects/wheel/**",
+        "projects/wireshark/**",
+        "projects/woff2/Dockerfile",
+        "projects/woff2/build.sh",
+        "projects/woff2/convert_woff2ttf_fuzzer.options",
+        "projects/woff2/convert_woff2ttf_fuzzer_new_entry.options",
+        "projects/woff2/project.yaml",
+        "projects/wolfboot/**",
+        "projects/wolfmqtt/**",
+        "projects/wolfssh/**",
+        "projects/wolfssl/**",
+        "projects/wolftpm/**",
+        "projects/woodstox/**",
+        "projects/wpantund/**",
+        "projects/wt/**",
+        "projects/wtforms/**",
+        "projects/wuffs/**",
+        "projects/wxwidgets/**",
+        "projects/xbps/**",
+        "projects/xen/**",
+        "projects/xerces/**",
+        "projects/xerces-c/**",
+        "projects/xlrd/**",
+        "projects/xlsxwriter/**",
+        "projects/xmlbeans/**",
+        "projects/xmldom/**",
+        "projects/xmlpull/**",
+        "projects/xmlsec/**",
+        "projects/xmltodict/**",
+        "projects/xmlunit/**",
+        "projects/xnio-api/**",
+        "projects/xnnpack/**",
+        "projects/xnu/**",
+        "projects/xpdf/**",
+        "projects/xs/**",
+        "projects/xstream/**",
+        "projects/xvid/**",
+        "projects/xz/**",
+        "projects/xz-java/**",
+        "projects/yajl-ruby/**",
+        "projects/yaml-cpp/**",
+        "projects/yamlbeans/**",
+        "projects/yara/**",
+        "projects/yarl/**",
+        "projects/ygot/**",
+        "projects/yoga/**",
+        "projects/yyjson/**",
+        "projects/zebra/**",
+        "projects/zeek/**",
+        "projects/zenoh/**",
+        "projects/zip/**",
+        "projects/zip-rs/**",
+        "projects/zip4j/**",
+        "projects/zipp/**",
+        "projects/zlib/**",
+        "projects/zlib-ng/**",
+        "projects/znc/**",
+        "projects/zookeeper/**",
+        "projects/zopfli/**",
+        "projects/zstd/**",
+        "projects/zstd-safe/**",
+        "projects/zt-zip/**",
+        "projects/zxc/**",
+        "projects/zxing/**",
+        "projects/zydis/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of google/oss-fuzz (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "infra/base-images/base-runner/gocoverage/gocovmerge/**"
+      ],
+      "text": "Copyright (c) 2015, Wade Simmons\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2015, Wade Simmons, BSD-2-Clause license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/base-images/base-runner/gocoverage/gocovmerge."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "infra/base-images/base-runner/gocoverage/pprof-merge/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of google/oss-fuzz (infra/base-images/base-runner/gocoverage/pprof-merge) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/base-images/base-runner/gocoverage/pprof-merge."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "infra/experimental/contrib/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2022, The ARVO AUTHORS\nCopyright (c) 2023, The Arizona Board of Regents\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Copyright (c) 2022, The ARVO AUTHORS; Copyright (c) 2023, The Arizona Board of Regents, BSD-2-Clause license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/infra/experimental/contrib/arvo."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "projects/turf/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Christopher Krah <christopher.krah@code-intelligence.com>, ISC license (declared in package.json), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/projects/turf."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "tools/vscode-extension/.editorconfig",
+        "tools/vscode-extension/.eslintignore",
+        "tools/vscode-extension/.eslintrc.json",
+        "tools/vscode-extension/.gitignore",
+        "tools/vscode-extension/.prettierrc.js",
+        "tools/vscode-extension/.vscode/**",
+        "tools/vscode-extension/.vscodeignore",
+        "tools/vscode-extension/LICENSE",
+        "tools/vscode-extension/README.md",
+        "tools/vscode-extension/package-lock.json",
+        "tools/vscode-extension/package.json",
+        "tools/vscode-extension/src/**",
+        "tools/vscode-extension/tsconfig.json"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of google/oss-fuzz (tools/vscode-extension) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/oss-fuzz/tree/97b30d984674d2cde3c6331e17ae6475b8c18e64/tools/vscode-extension."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.address"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "infra/base-images/base-builder/bazel.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.coverage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.meson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.network"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.seed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.site"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "infra/base-images/base-builder/test_data/culprit-commit.txt",
+        "infra/build/functions/requirements.txt",
+        "infra/chronos/requirements.txt",
+        "infra/ci/requirements.txt",
+        "infra/cifuzz/requirements.txt",
+        "infra/cifuzz/test_data/example_crash_fuzzer_bug_summary.txt",
+        "infra/cifuzz/test_data/example_crash_fuzzer_output.txt",
+        "infra/cifuzz/test_data/msan_crash_fuzzer_bug_summary.txt",
+        "infra/cifuzz/test_data/msan_crash_fuzzer_output.txt",
+        "infra/cifuzz/test_data/sarif_utils_msan_stack.txt",
+        "infra/cifuzz/test_data/sarif_utils_only_llvmfuzzer_stack.txt",
+        "infra/cifuzz/test_data/sarif_utils_systemd_stack.txt",
+        "infra/experimental/chronos/requirements.txt",
+        "infra/experimental/mcp/requirements.txt",
+        "projects/openvpn/crypto_patch.txt",
+        "projects/phosphor-networkd/corpus/util/seed1.txt",
+        "projects/phosphor-networkd/corpus/util/seed2.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.undefined"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xdg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yapf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vscodeignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/410c23d234e7f97a2dd6265eb2909324deb8c13a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGELOG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bad_build_check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bazel_build_fuzz_tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cargo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_afl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_centipede"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_go_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_honggfuzz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_javascript_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_libfuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_lua_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_native_go_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_native_go_fuzzer_v2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/compile_python_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverage_helper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/curl_fuzzer_memory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/curl_fuzzer_undefined"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/debug_afl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/download_corpus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example_crash_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example_nocrash_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fc09d362f05ab97efdfcd873dacad6a9c29e57ff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_install_dependencies"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_install_dependencies_ubuntu_20_04"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_install_dependencies_ubuntu_24_04"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_measure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzbench_run_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzer_profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fuzzing_CMake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_fuzzers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/md5sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/parent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_afl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_centipede"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_honggfuzz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_honggfuzz_ubuntu_20_04"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_honggfuzz_ubuntu_24_04"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/precompile_swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prepare-ccache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prepare-replay-rebuild"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rcfilt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reproduce"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/route"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run_fuzzer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ruzzy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ruzzy-build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/seed1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sock_diag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/srcmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/targets_list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utils"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

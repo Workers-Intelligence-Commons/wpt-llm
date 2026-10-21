@@ -1,0 +1,694 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/arc53/DocsGPT",
+  "revision": "b038f85b632f19b7976821bb292382e741d8886c",
+  "checksum": "sha256:31ac2967fb0e4aa58db93cf8f71bd745d266a4330a01ee1ba3b9d8620e984553",
+  "extract": {
+    "exclude": [
+      "docs/public/adding-knowledge-poster.png",
+      "docs/public/adding-knowledge.mp4",
+      "docs/public/apple-touch-icon.png",
+      "docs/public/chat-widget-poster.png",
+      "docs/public/chat-widget.mp4",
+      "docs/public/connect-your-data-poster.png",
+      "docs/public/connect-your-data.mp4",
+      "docs/public/create-agent-poster.png",
+      "docs/public/create-agent.mp4",
+      "docs/public/customising-prompts-poster.png",
+      "docs/public/customising-prompts.mp4",
+      "docs/public/favicon-96x96.png",
+      "docs/public/favicon.ico",
+      "docs/public/graph-rag-settings-before-upload.png",
+      "docs/public/hacktoberfest-tee-2023.jpg",
+      "docs/public/hacktoberfest-tee-2024.jpg",
+      "docs/public/hacktoberfest-tee-2025.jpg",
+      "docs/public/home-reel-poster.png",
+      "docs/public/home-reel.mp4",
+      "docs/public/home-reel.webm",
+      "docs/public/jwt-input.png",
+      "docs/public/new-agent.png",
+      "docs/public/og/**",
+      "docs/public/quickstart-poster.png",
+      "docs/public/quickstart.mp4",
+      "docs/public/sources-settings-screen.png",
+      "docs/public/toolIcons/api-tool-example.png",
+      "docs/public/web-app-manifest-192x192.png",
+      "docs/public/web-app-manifest-512x512.png",
+      "docs/public/workflow-builder-poster.png",
+      "docs/public/workflow-builder.mp4",
+      "frontend/public/apple-touch-icon.png",
+      "frontend/public/favicon-96x96.png",
+      "frontend/public/favicon.ico",
+      "frontend/public/fonts/**",
+      "frontend/public/web-app-manifest-192x192.png",
+      "frontend/public/web-app-manifest-512x512.png",
+      "frontend/src/assets/notification-bg.jpg",
+      "tests/e2e/fixtures/docs/oversize.pdf",
+      "tests/e2e/fixtures/docs/small.pdf",
+      "tests/parser/file/fixtures/**",
+      "tests/vectorstore/fixtures/**"
+    ]
+  },
+  "history": {
+    "since": "b015520f1201dea4452365ad26c92ff42a1c6624"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 arc53\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/arc53/DocsGPT: Copyright (c) 2023 arc53, MIT license (LICENSE), https://github.com/arc53/DocsGPT."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".env-template",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".ruff.toml",
+        ".vale.ini",
+        ".vscode/**",
+        ".zed/**",
+        "AGENTS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "HACKTOBERFEST.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "application/**",
+        "codecov.yml",
+        "deployment/**",
+        "docs/AGENTS.md",
+        "docs/README.md",
+        "docs/app/**",
+        "docs/components/**",
+        "docs/content/**",
+        "docs/data/**",
+        "docs/mdx-components.jsx",
+        "docs/next.config.js",
+        "docs/package-lock.json",
+        "docs/package.json",
+        "docs/page-meta.js",
+        "docs/public/favicon.svg",
+        "docs/public/llms.txt",
+        "docs/public/robots.txt",
+        "docs/public/site.webmanifest",
+        "docs/public/toolIcons/tool_api_tool.svg",
+        "docs/public/toolIcons/tool_brave.svg",
+        "docs/public/toolIcons/tool_cryptoprice.svg",
+        "docs/public/toolIcons/tool_duckduckgo.svg",
+        "docs/public/toolIcons/tool_mcp_tool.svg",
+        "docs/public/toolIcons/tool_memory.svg",
+        "docs/public/toolIcons/tool_notes.svg",
+        "docs/public/toolIcons/tool_ntfy.svg",
+        "docs/public/toolIcons/tool_postgres.svg",
+        "docs/public/toolIcons/tool_read_webpage.svg",
+        "docs/public/toolIcons/tool_remote_device.svg",
+        "docs/public/toolIcons/tool_telegram.svg",
+        "docs/public/toolIcons/tool_todo_list.svg",
+        "docs/scripts/**",
+        "docs/theme.config.jsx",
+        "docsgpt/**",
+        "extensions/**",
+        "frontend/.dockerignore",
+        "frontend/.env.development",
+        "frontend/.env.production",
+        "frontend/.husky/**",
+        "frontend/.nvmrc",
+        "frontend/.prettierignore",
+        "frontend/DESIGN.md",
+        "frontend/Dockerfile",
+        "frontend/PATTERNS.md",
+        "frontend/components.json",
+        "frontend/docker/**",
+        "frontend/eslint/**",
+        "frontend/eslint.config.js",
+        "frontend/index.html",
+        "frontend/package-lock.json",
+        "frontend/package.json",
+        "frontend/postcss.config.cjs",
+        "frontend/prettier.config.cjs",
+        "frontend/public/favicon.svg",
+        "frontend/public/lock-dark.svg",
+        "frontend/public/lock.svg",
+        "frontend/public/message-programming-dark.svg",
+        "frontend/public/message-programming.svg",
+        "frontend/public/message-text-dark.svg",
+        "frontend/public/message-text.svg",
+        "frontend/public/site.webmanifest",
+        "frontend/public/sw.js",
+        "frontend/public/vite.svg",
+        "frontend/scripts/**",
+        "frontend/src/App.tsx",
+        "frontend/src/Hero.test.tsx",
+        "frontend/src/Hero.tsx",
+        "frontend/src/Navigation.tsx",
+        "frontend/src/PageNotFound.test.tsx",
+        "frontend/src/PageNotFound.tsx",
+        "frontend/src/activity/**",
+        "frontend/src/admin/**",
+        "frontend/src/agents/**",
+        "frontend/src/api/**",
+        "frontend/src/assets/TwitterX.svg",
+        "frontend/src/assets/confluence.svg",
+        "frontend/src/assets/connectors/**",
+        "frontend/src/assets/discord.svg",
+        "frontend/src/assets/documentation-dark.svg",
+        "frontend/src/assets/documentation.svg",
+        "frontend/src/assets/drive.svg",
+        "frontend/src/assets/full-logo-b.svg",
+        "frontend/src/assets/full-logo-w.svg",
+        "frontend/src/assets/git_nav.svg",
+        "frontend/src/assets/logo-b.svg",
+        "frontend/src/assets/logo-w.svg",
+        "frontend/src/assets/no-files-dark.svg",
+        "frontend/src/assets/no-files.svg",
+        "frontend/src/assets/reddit.svg",
+        "frontend/src/assets/research.svg",
+        "frontend/src/assets/robot.svg",
+        "frontend/src/assets/s3.svg",
+        "frontend/src/assets/science-spark-dark.svg",
+        "frontend/src/assets/science-spark.svg",
+        "frontend/src/assets/send.svg",
+        "frontend/src/assets/sharepoint.svg",
+        "frontend/src/assets/toolIcons/**",
+        "frontend/src/backgroundJobs/**",
+        "frontend/src/components/**",
+        "frontend/src/connectors/**",
+        "frontend/src/constants/**",
+        "frontend/src/conversation/**",
+        "frontend/src/design/**",
+        "frontend/src/env.ts",
+        "frontend/src/events/**",
+        "frontend/src/hooks/**",
+        "frontend/src/index.css",
+        "frontend/src/lib/**",
+        "frontend/src/locale/**",
+        "frontend/src/main.tsx",
+        "frontend/src/modals/**",
+        "frontend/src/models/**",
+        "frontend/src/monitors/**",
+        "frontend/src/navigation/**",
+        "frontend/src/notifications/**",
+        "frontend/src/preferences/**",
+        "frontend/src/settings/**",
+        "frontend/src/store.ts",
+        "frontend/src/teams/**",
+        "frontend/src/upload/**",
+        "frontend/src/utils/**",
+        "frontend/src/vite-env.d.ts",
+        "frontend/tsconfig.json",
+        "frontend/tsconfig.node.json",
+        "frontend/vite.config.ts",
+        "frontend/vitest.setup.ts",
+        "pyproject.toml",
+        "pytest.ini",
+        "scripts/**",
+        "setup.ps1",
+        "setup.sh",
+        "tests/QA_TESTS.md",
+        "tests/__init__.py",
+        "tests/activity/**",
+        "tests/agents/**",
+        "tests/api/**",
+        "tests/asgi_stream.py",
+        "tests/background/**",
+        "tests/conftest.py",
+        "tests/connectors/**",
+        "tests/core/**",
+        "tests/deploy/**",
+        "tests/devices/**",
+        "tests/e2e/.gitignore",
+        "tests/e2e/README.md",
+        "tests/e2e/fixtures/docs/_generate.py",
+        "tests/e2e/fixtures/docs/corrupt.pdf",
+        "tests/e2e/fixtures/docs/notes.txt",
+        "tests/e2e/fixtures/docs/readme.md",
+        "tests/e2e/helpers/**",
+        "tests/e2e/package-lock.json",
+        "tests/e2e/package.json",
+        "tests/e2e/playwright.config.ts",
+        "tests/e2e/specs/**",
+        "tests/e2e/tsconfig.json",
+        "tests/extensions/**",
+        "tests/fake_async_redis.py",
+        "tests/fixtures/**",
+        "tests/golden_prompts/**",
+        "tests/graphrag/**",
+        "tests/guardrails/**",
+        "tests/integration/**",
+        "tests/llm/**",
+        "tests/monitors/**",
+        "tests/notifications/**",
+        "tests/parser/__init__.py",
+        "tests/parser/conftest.py",
+        "tests/parser/connectors/**",
+        "tests/parser/counter_fakes.py",
+        "tests/parser/file/__init__.py",
+        "tests/parser/file/test_anydoc_parser.py",
+        "tests/parser/file/test_audio_parser.py",
+        "tests/parser/file/test_bulk.py",
+        "tests/parser/file/test_constants.py",
+        "tests/parser/file/test_deepseek_ocr_api.py",
+        "tests/parser/file/test_docling_parser.py",
+        "tests/parser/file/test_docs_parser.py",
+        "tests/parser/file/test_embedding_pipeline.py",
+        "tests/parser/file/test_epub_parser.py",
+        "tests/parser/file/test_html_parser.py",
+        "tests/parser/file/test_image_parser.py",
+        "tests/parser/file/test_image_vision_conversion.py",
+        "tests/parser/file/test_json_parser.py",
+        "tests/parser/file/test_markdown_parser.py",
+        "tests/parser/file/test_ocr_parser.py",
+        "tests/parser/file/test_openapi3_parser.py",
+        "tests/parser/file/test_pdf_trust.py",
+        "tests/parser/file/test_pdfium_parser.py",
+        "tests/parser/file/test_pptx_parser.py",
+        "tests/parser/file/test_rst_parser.py",
+        "tests/parser/file/test_tableize.py",
+        "tests/parser/file/test_tabular_parser.py",
+        "tests/parser/file/test_tabular_parser_real_fixtures.py",
+        "tests/parser/remote/**",
+        "tests/parser/test_attachment_archive.py",
+        "tests/parser/test_chunking.py",
+        "tests/parser/test_chunking_creator.py",
+        "tests/parser/test_chunking_strategies.py",
+        "tests/parser/test_document_reader.py",
+        "tests/parser/test_schema.py",
+        "tests/parser/test_tokenization.py",
+        "tests/quotas/**",
+        "tests/requirements.txt",
+        "tests/retriever/**",
+        "tests/sandbox/**",
+        "tests/scripts/**",
+        "tests/security/**",
+        "tests/seed/**",
+        "tests/services/**",
+        "tests/storage/**",
+        "tests/stt/**",
+        "tests/test_agent_token_tracking.py",
+        "tests/test_app.py",
+        "tests/test_app_routes.py",
+        "tests/test_asgi.py",
+        "tests/test_async_broadcast_channel.py",
+        "tests/test_async_redis.py",
+        "tests/test_attachment_full_text.py",
+        "tests/test_auth.py",
+        "tests/test_authz.py",
+        "tests/test_cache.py",
+        "tests/test_celery.py",
+        "tests/test_cli.py",
+        "tests/test_client_tools.py",
+        "tests/test_code_executor_tool.py",
+        "tests/test_compression_service.py",
+        "tests/test_continuation.py",
+        "tests/test_coverage_gaps.py",
+        "tests/test_dispatcher.py",
+        "tests/test_error.py",
+        "tests/test_event_replay.py",
+        "tests/test_events_substrate.py",
+        "tests/test_extra_coverage.py",
+        "tests/test_integration.py",
+        "tests/test_k8s_manifests.py",
+        "tests/test_logging.py",
+        "tests/test_many_attachments_fixtures.py",
+        "tests/test_memory_tool.py",
+        "tests/test_message_journal.py",
+        "tests/test_model_validation.py",
+        "tests/test_namespaces.py",
+        "tests/test_notes_tool.py",
+        "tests/test_oidc.py",
+        "tests/test_openapi3.yaml",
+        "tests/test_openapi3parser.py",
+        "tests/test_package_rename.py",
+        "tests/test_pricing.py",
+        "tests/test_prompt_composer.py",
+        "tests/test_prompt_presets.py",
+        "tests/test_pubsub_timeouts.py",
+        "tests/test_remaining_coverage.py",
+        "tests/test_retriever.py",
+        "tests/test_scim.py",
+        "tests/test_singleton_concurrency.py",
+        "tests/test_sse_keepalive.py",
+        "tests/test_sse_leases.py",
+        "tests/test_target_coverage.py",
+        "tests/test_template_engine.py",
+        "tests/test_todo_tool.py",
+        "tests/test_token_management.py",
+        "tests/test_tool_approval.py",
+        "tests/test_ui.py",
+        "tests/test_upload_limits.py",
+        "tests/test_usage.py",
+        "tests/test_usage_latency.py",
+        "tests/test_utils.py",
+        "tests/test_v1_translator.py",
+        "tests/test_version_check.py",
+        "tests/test_worker_utils.py",
+        "tests/test_zip_extraction_security.py",
+        "tests/tracing/**",
+        "tests/tts/**",
+        "tests/vectorstore/__init__.py",
+        "tests/vectorstore/test_base.py",
+        "tests/vectorstore/test_document_class.py",
+        "tests/vectorstore/test_elasticsearch.py",
+        "tests/vectorstore/test_embeddings_delegated.py",
+        "tests/vectorstore/test_embeddings_local.py",
+        "tests/vectorstore/test_embeddings_openai.py",
+        "tests/vectorstore/test_faiss.py",
+        "tests/vectorstore/test_faiss_docstore.py",
+        "tests/vectorstore/test_milvus.py",
+        "tests/vectorstore/test_model_registry.py",
+        "tests/vectorstore/test_mongodb.py",
+        "tests/vectorstore/test_pgvector.py",
+        "tests/vectorstore/test_pgvector_live_schema.py",
+        "tests/vectorstore/test_pgvector_probes.py",
+        "tests/vectorstore/test_pgvector_schema_and_pool.py",
+        "tests/vectorstore/test_qdrant.py",
+        "tests/vectorstore/test_remote_embeddings_truncation.py",
+        "tests/vectorstore/test_vector_creator.py",
+        "tests/worker/**",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 arc53\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 arc53, MIT license (LICENSE), https://github.com/arc53/DocsGPT."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.development"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mako"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.production"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tiktoken"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env-template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env_sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.parcelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

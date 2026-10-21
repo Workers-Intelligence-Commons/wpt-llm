@@ -1,0 +1,424 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/stanfordnlp/dspy",
+  "revision": "4d3323ef8088c87b53b96c1f6e929694caf2ef19",
+  "checksum": "sha256:c64a75fc1a49c392fbd0a25ceb23fe96280c0f5c953a3abecac4f9670bc252ab",
+  "extract": {
+    "exclude": [
+      "docs/docs/deep-dive/data-handling/img/**",
+      "docs/docs/learn/figures/**",
+      "docs/docs/static/img/dspy_logo.png",
+      "docs/docs/static/img/logo.png",
+      "docs/docs/static/img/mlflow-tracing-rag.png",
+      "docs/docs/static/img/modular.png",
+      "docs/docs/static/img/optimize.png",
+      "docs/docs/static/img/universal_compatibility.png",
+      "docs/docs/tutorials/agents/mlflow-tracing-agent.png",
+      "docs/docs/tutorials/classification_finetuning/mlflow-tracing-classification.png",
+      "docs/docs/tutorials/custom_module/mlflow-tracing-custom-module.png",
+      "docs/docs/tutorials/customer_service_agent/mlflow-tracing-customer-service-agent.png",
+      "docs/docs/tutorials/deployment/dspy_mlflow_ui.png",
+      "docs/docs/tutorials/email_extraction/mlflow-tracing-email-extraction.png",
+      "docs/docs/tutorials/entity_extraction/mlflow-tracing-entity-extraction.png",
+      "docs/docs/tutorials/games/mlflow-tracing-agent.png",
+      "docs/docs/tutorials/gepa_aime/mlflow-tracing-gepa-aime.png",
+      "docs/docs/tutorials/gepa_aime/mlflow-tracking-gepa-aime-optimization.png",
+      "docs/docs/tutorials/gepa_facilitysupportanalyzer/mlflow-tracing-gepa-support.png",
+      "docs/docs/tutorials/gepa_facilitysupportanalyzer/mlflow-tracking-gepa-support-optimization.png",
+      "docs/docs/tutorials/gepa_papillon/mlflow-tracing-gepa-papilon.png",
+      "docs/docs/tutorials/gepa_papillon/mlflow-tracking-gepa-papilon-optimization.png",
+      "docs/docs/tutorials/math/mlflow-tracing-math.png",
+      "docs/docs/tutorials/multihop_search/mlflow-tracing-multi-hop.png",
+      "docs/docs/tutorials/observability/mlflow_trace_ui.png",
+      "docs/docs/tutorials/observability/mlflow_trace_ui_navigation.gif",
+      "docs/docs/tutorials/observability/mlflow_trace_view.png",
+      "docs/docs/tutorials/optimizer_tracking/child_run.png",
+      "docs/docs/tutorials/optimizer_tracking/experiment.png",
+      "docs/docs/tutorials/optimizer_tracking/parent_run.png",
+      "docs/docs/tutorials/rag/mlflow-tracing-rag.png",
+      "dspy/clients/model_metadata/**",
+      "tests/clients/fixtures/lm_3_3_0/reasoning_key_async.zip",
+      "tests/clients/fixtures/lm_3_3_0/reasoning_key_sync.zip",
+      "tests/clients/fixtures/lm_3_3_0/rich_n_async.zip",
+      "tests/clients/fixtures/lm_3_3_0/rich_n_sync.zip",
+      "tests/clients/fixtures/lm_3_3_0/text_async.zip",
+      "tests/clients/fixtures/lm_3_3_0/text_sync.zip"
+    ]
+  },
+  "history": {
+    "since": "73facc01f0d3d416193f7a37469a9f9a5e3970ad"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Stanford Future Data Systems\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/stanfordnlp/dspy: Copyright (c) 2023 Stanford Future Data Systems, MIT license (LICENSE), https://github.com/stanfordnlp/dspy."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docs/.gitignore",
+        "docs/Pipfile",
+        "docs/Pipfile.lock",
+        "docs/README.md",
+        "docs/build.yml",
+        "docs/docs/api/**",
+        "docs/docs/cheatsheet.md",
+        "docs/docs/community/**",
+        "docs/docs/deep-dive/data-handling/built-in-datasets.md",
+        "docs/docs/deep-dive/data-handling/examples.md",
+        "docs/docs/deep-dive/data-handling/loading-custom-data.md",
+        "docs/docs/diving-deeper/**",
+        "docs/docs/faqs.md",
+        "docs/docs/getting-started/**",
+        "docs/docs/index.md",
+        "docs/docs/js/**",
+        "docs/docs/learn/evaluation/**",
+        "docs/docs/learn/index.md",
+        "docs/docs/learn/optimization/**",
+        "docs/docs/learn/programming/**",
+        "docs/docs/production/**",
+        "docs/docs/roadmap.md",
+        "docs/docs/static/.nojekyll",
+        "docs/docs/static/dspy-logo.svg",
+        "docs/docs/static/img/logos/**",
+        "docs/docs/static/img/undraw_docusaurus_mountain.svg",
+        "docs/docs/static/img/undraw_docusaurus_react.svg",
+        "docs/docs/static/img/undraw_docusaurus_tree.svg",
+        "docs/docs/stylesheets/**",
+        "docs/docs/tutorials/agents/index.ipynb",
+        "docs/docs/tutorials/ai_text_game/**",
+        "docs/docs/tutorials/async/**",
+        "docs/docs/tutorials/audio/**",
+        "docs/docs/tutorials/build_ai_program/**",
+        "docs/docs/tutorials/cache/**",
+        "docs/docs/tutorials/classification/**",
+        "docs/docs/tutorials/classification_finetuning/index.ipynb",
+        "docs/docs/tutorials/conversation_history/**",
+        "docs/docs/tutorials/core_development/**",
+        "docs/docs/tutorials/custom_lm_engines/**",
+        "docs/docs/tutorials/custom_module/index.ipynb",
+        "docs/docs/tutorials/customer_service_agent/index.ipynb",
+        "docs/docs/tutorials/dataframe_rlm/**",
+        "docs/docs/tutorials/deployment/index.md",
+        "docs/docs/tutorials/email_extraction/index.md",
+        "docs/docs/tutorials/entity_extraction/index.ipynb",
+        "docs/docs/tutorials/games/index.ipynb",
+        "docs/docs/tutorials/gepa_ai_program/**",
+        "docs/docs/tutorials/gepa_aime/index.ipynb",
+        "docs/docs/tutorials/gepa_facilitysupportanalyzer/index.ipynb",
+        "docs/docs/tutorials/gepa_papillon/index.ipynb",
+        "docs/docs/tutorials/gepa_trusted_monitor/**",
+        "docs/docs/tutorials/image_generation_prompting/**",
+        "docs/docs/tutorials/index.md",
+        "docs/docs/tutorials/jev_decisions/**",
+        "docs/docs/tutorials/llms_txt_generation/**",
+        "docs/docs/tutorials/math/index.ipynb",
+        "docs/docs/tutorials/mcp/**",
+        "docs/docs/tutorials/mem0_react_agent/**",
+        "docs/docs/tutorials/multihop_search/index.ipynb",
+        "docs/docs/tutorials/observability/index.md",
+        "docs/docs/tutorials/optimize_ai_program/**",
+        "docs/docs/tutorials/optimizer_tracking/index.md",
+        "docs/docs/tutorials/output_refinement/**",
+        "docs/docs/tutorials/papillon/**",
+        "docs/docs/tutorials/program_of_thought/**",
+        "docs/docs/tutorials/rag/index.ipynb",
+        "docs/docs/tutorials/real_world_examples/**",
+        "docs/docs/tutorials/rl_ai_program/**",
+        "docs/docs/tutorials/rl_multihop/**",
+        "docs/docs/tutorials/rl_papillon/**",
+        "docs/docs/tutorials/sample_code_generation/**",
+        "docs/docs/tutorials/saving/**",
+        "docs/docs/tutorials/streaming/**",
+        "docs/docs/tutorials/tool_use/**",
+        "docs/docs/tutorials/yahoo_finance_react/**",
+        "docs/hooks/**",
+        "docs/mkdocs.yml",
+        "docs/overrides/**",
+        "docs/requirements.txt",
+        "docs/scripts/**",
+        "docs/vercel.json",
+        "docs/versioning/**",
+        "dspy/__init__.py",
+        "dspy/__metadata__.py",
+        "dspy/_vendor/**",
+        "dspy/adapters/**",
+        "dspy/clients/__init__.py",
+        "dspy/clients/_deprecation.py",
+        "dspy/clients/_http.py",
+        "dspy/clients/_litellm.py",
+        "dspy/clients/backend_selection.py",
+        "dspy/clients/base_lm.py",
+        "dspy/clients/cache.py",
+        "dspy/clients/call_context.py",
+        "dspy/clients/call_result.py",
+        "dspy/clients/capabilities.py",
+        "dspy/clients/costs.py",
+        "dspy/clients/databricks.py",
+        "dspy/clients/disk_serialization.py",
+        "dspy/clients/embedding.py",
+        "dspy/clients/engines/**",
+        "dspy/clients/errors.py",
+        "dspy/clients/execution.py",
+        "dspy/clients/legacy_outputs.py",
+        "dspy/clients/legacy_requests.py",
+        "dspy/clients/lm.py",
+        "dspy/clients/lm15_boundary.py",
+        "dspy/clients/lm_local.py",
+        "dspy/clients/openai.py",
+        "dspy/clients/provider.py",
+        "dspy/clients/typesafe.py",
+        "dspy/clients/utils_finetune.py",
+        "dspy/core/**",
+        "dspy/datasets/**",
+        "dspy/dsp/**",
+        "dspy/evaluate/**",
+        "dspy/experimental/**",
+        "dspy/lm15.py",
+        "dspy/predict/**",
+        "dspy/primitives/**",
+        "dspy/propose/**",
+        "dspy/retrievers/**",
+        "dspy/signatures/**",
+        "dspy/streaming/**",
+        "dspy/teleprompt/**",
+        "dspy/utils/**",
+        "pyproject.toml",
+        "scripts/**",
+        "tests/README.md",
+        "tests/__init__.py",
+        "tests/adapters/**",
+        "tests/callback/**",
+        "tests/clients/fixtures/lm_3_3_0/README.md",
+        "tests/clients/fixtures/lm_3_3_0/generate.py",
+        "tests/clients/fixtures/lm_3_3_0/manifest.json",
+        "tests/clients/test_backend_capabilities.py",
+        "tests/clients/test_cache.py",
+        "tests/clients/test_custom_engine_contract.py",
+        "tests/clients/test_databricks.py",
+        "tests/clients/test_disk_serialization.py",
+        "tests/clients/test_embedding.py",
+        "tests/clients/test_engine_errors.py",
+        "tests/clients/test_engine_failure_lifecycle.py",
+        "tests/clients/test_gauntlet_followups.py",
+        "tests/clients/test_inspect_global_history.py",
+        "tests/clients/test_lazy_litellm_import.py",
+        "tests/clients/test_legacy_lm_deprecation.py",
+        "tests/clients/test_lm.py",
+        "tests/clients/test_lm15_adaptations_and_timeouts.py",
+        "tests/clients/test_lm15_rc3_integration.py",
+        "tests/clients/test_lm_async_execution.py",
+        "tests/clients/test_lm_direct_live.py",
+        "tests/clients/test_lm_engine_compatibility_fixes.py",
+        "tests/clients/test_lm_engine_execution.py",
+        "tests/clients/test_lm_local.py",
+        "tests/clients/test_lm_message_deprecation.py",
+        "tests/clients/test_lm_migration_compatibility.py",
+        "tests/clients/test_lm_schema_conversion.py",
+        "tests/clients/test_native_metadata.py",
+        "tests/clients/test_prompt_cache.py",
+        "tests/clients/test_registered_providers.py",
+        "tests/clients/test_typesafe.py",
+        "tests/conftest.py",
+        "tests/core/**",
+        "tests/datasets/**",
+        "tests/docs/**",
+        "tests/evaluate/**",
+        "tests/examples/**",
+        "tests/flex/**",
+        "tests/metadata/**",
+        "tests/mock_interpreter.py",
+        "tests/predict/**",
+        "tests/primitives/**",
+        "tests/propose/**",
+        "tests/reliability/**",
+        "tests/retrievers/**",
+        "tests/signatures/**",
+        "tests/streaming/**",
+        "tests/teleprompt/**",
+        "tests/test_lm15_subtree_updater.py",
+        "tests/test_utils/**",
+        "tests/test_vendored_lm15.py",
+        "tests/utils/**",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Stanford Future Data Systems\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Stanford Future Data Systems, MIT license (LICENSE), https://github.com/stanfordnlp/dspy."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lm15-LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

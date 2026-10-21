@@ -1,0 +1,1415 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/opentofu/opentofu",
+  "revision": "8535390a14ef99f5f45b622de38a71dde45b0324",
+  "checksum": "sha256:4d33654f792aa877b59089b6c6421458720db41dd0dd4504625f88368b116c5d",
+  "extract": {
+    "exclude": [
+      "docs/images/**",
+      "internal/command/e2etest/testdata/oci-module-source/fake-registry/foo/blobs/sha256/61a9a706113cb541977a4a276cbbd8dc47f66b61f5f348f56f141d2a69d51e8d",
+      "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/06014766951e54a256b679bb1e289f8a0a90a1a9af53edd7c2695bd3de1612e9",
+      "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/990e9b537cd983f28c2a33f0d6379e6d862d2f3adaed53ee21844619ec3b6b14",
+      "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/11aa47eb05d2bac7eb9c27fdbf1447152c4f07c814a24db86c24339253db1534",
+      "internal/encryption/keyprovider/external/**",
+      "internal/encryption/method/external/**",
+      "internal/lang/funcs/testdata/icon.png",
+      "internal/providercache/testdata/provider-null_2.1.0_linux_amd64.zip",
+      "website/docs/images/**"
+    ]
+  },
+  "history": {
+    "since": "ab411a1952f5b28e6c4bd73071194761da36a83f"
+  },
+  "licenses": [
+    {
+      "license": "MPL-2.0 AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) The OpenTofu Authors\nCopyright (c) 2014 HashiCorp, Inc.\n\nMozilla Public License, version 2.0\n\n1. Definitions\n\n1.1. “Contributor”\n\n     means each individual or legal entity that creates, contributes to the\n     creation of, or owns Covered Software.\n\n1.2. “Contributor Version”\n\n     means the combination of the Contributions of others (if any) used by a\n     Contributor and that particular Contributor’s Contribution.\n\n1.3. “Contribution”\n\n     means Covered Software of a particular Contributor.\n\n1.4. “Covered Software”\n\n     means Source Code Form to which the initial Contributor has attached the\n     notice in Exhibit A, the Executable Form of such Source Code Form, and\n     Modifications of such Source Code Form, in each case including portions\n     thereof.\n\n1.5. “Incompatible With Secondary Licenses”\n     means\n\n     a. that the initial Contributor has attached the notice described in\n        Exhibit B to the Covered Software; or\n\n     b. that the Covered Software was made available under the terms of version\n        1.1 or earlier of the License, but not also under the terms of a\n        Secondary License.\n\n1.6. “Executable Form”\n\n     means any form of the work other than Source Code Form.\n\n1.7. “Larger Work”\n\n     means a work that combines Covered Software with other material, in a separate\n     file or files, that is not Covered Software.\n\n1.8. “License”\n\n     means this document.\n\n1.9. “Licensable”\n\n     means having the right to grant, to the maximum extent possible, whether at the\n     time of the initial grant or subsequently, any and all of the rights conveyed by\n     this License.\n\n1.10. “Modifications”\n\n     means any of the following:\n\n     a. any file in Source Code Form that results from an addition to, deletion\n        from, or modification of the contents of Covered Software; or\n\n     b. any new file in Source Code Form that contains any Covered Software.\n\n1.11. “Patent Claims” of a Contributor\n\n      means any patent claim(s), including without limitation, method, process,\n      and apparatus claims, in any patent Licensable by such Contributor that\n      would be infringed, but for the grant of the License, by the making,\n      using, selling, offering for sale, having made, import, or transfer of\n      either its Contributions or its Contributor Version.\n\n1.12. “Secondary License”\n\n      means either the GNU General Public License, Version 2.0, the GNU Lesser\n      General Public License, Version 2.1, the GNU Affero General Public\n      License, Version 3.0, or any later versions of those licenses.\n\n1.13. “Source Code Form”\n\n      means the form of the work preferred for making modifications.\n\n1.14. “You” (or “Your”)\n\n      means an individual or a legal entity exercising rights under this\n      License. For legal entities, “You” includes any entity that controls, is\n      controlled by, or is under common control with You. For purposes of this\n      definition, “control” means (a) the power, direct or indirect, to cause\n      the direction or management of such entity, whether by contract or\n      otherwise, or (b) ownership of more than fifty percent (50%) of the\n      outstanding shares or beneficial ownership of such entity.\n\n\n2. License Grants and Conditions\n\n2.1. Grants\n\n     Each Contributor hereby grants You a world-wide, royalty-free,\n     non-exclusive license:\n\n     a. under intellectual property rights (other than patent or trademark)\n        Licensable by such Contributor to use, reproduce, make available,\n        modify, display, perform, distribute, and otherwise exploit its\n        Contributions, either on an unmodified basis, with Modifications, or as\n        part of a Larger Work; and\n\n     b. under Patent Claims of such Contributor to make, use, sell, offer for\n        sale, have made, import, and otherwise transfer either its Contributions\n        or its Contributor Version.\n\n2.2. Effective Date\n\n     The licenses granted in Section 2.1 with respect to any Contribution become\n     effective for each Contribution on the date the Contributor first distributes\n     such Contribution.\n\n2.3. Limitations on Grant Scope\n\n     The licenses granted in this Section 2 are the only rights granted under this\n     License. No additional rights or licenses will be implied from the distribution\n     or licensing of Covered Software under this License. Notwithstanding Section\n     2.1(b) above, no patent license is granted by a Contributor:\n\n     a. for any code that a Contributor has removed from Covered Software; or\n\n     b. for infringements caused by: (i) Your and any other third party’s\n        modifications of Covered Software, or (ii) the combination of its\n        Contributions with other software (except as part of its Contributor\n        Version); or\n\n     c. under Patent Claims infringed by Covered Software in the absence of its\n        Contributions.\n\n     This License does not grant any rights in the trademarks, service marks, or\n     logos of any Contributor (except as may be necessary to comply with the\n     notice requirements in Section 3.4).\n\n2.4. Subsequent Licenses\n\n     No Contributor makes additional grants as a result of Your choice to\n     distribute the Covered Software under a subsequent version of this License\n     (see Section 10.2) or under the terms of a Secondary License (if permitted\n     under the terms of Section 3.3).\n\n2.5. Representation\n\n     Each Contributor represents that the Contributor believes its Contributions\n     are its original creation(s) or it has sufficient rights to grant the\n     rights to its Contributions conveyed by this License.\n\n2.6. Fair Use\n\n     This License is not intended to limit any rights You have under applicable\n     copyright doctrines of fair use, fair dealing, or other equivalents.\n\n2.7. Conditions\n\n     Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted in\n     Section 2.1.\n\n\n3. Responsibilities\n\n3.1. Distribution of Source Form\n\n     All distribution of Covered Software in Source Code Form, including any\n     Modifications that You create or to which You contribute, must be under the\n     terms of this License. You must inform recipients that the Source Code Form\n     of the Covered Software is governed by the terms of this License, and how\n     they can obtain a copy of this License. You may not attempt to alter or\n     restrict the recipients’ rights in the Source Code Form.\n\n3.2. Distribution of Executable Form\n\n     If You distribute Covered Software in Executable Form then:\n\n     a. such Covered Software must also be made available in Source Code Form,\n        as described in Section 3.1, and You must inform recipients of the\n        Executable Form how they can obtain a copy of such Source Code Form by\n        reasonable means in a timely manner, at a charge no more than the cost\n        of distribution to the recipient; and\n\n     b. You may distribute such Executable Form under the terms of this License,\n        or sublicense it under different terms, provided that the license for\n        the Executable Form does not attempt to limit or alter the recipients’\n        rights in the Source Code Form under this License.\n\n3.3. Distribution of a Larger Work\n\n     You may create and distribute a Larger Work under terms of Your choice,\n     provided that You also comply with the requirements of this License for the\n     Covered Software. If the Larger Work is a combination of Covered Software\n     with a work governed by one or more Secondary Licenses, and the Covered\n     Software is not Incompatible With Secondary Licenses, this License permits\n     You to additionally distribute such Covered Software under the terms of\n     such Secondary License(s), so that the recipient of the Larger Work may, at\n     their option, further distribute the Covered Software under the terms of\n     either this License or such Secondary License(s).\n\n3.4. Notices\n\n     You may not remove or alter the substance of any license notices (including\n     copyright notices, patent notices, disclaimers of warranty, or limitations\n     of liability) contained within the Source Code Form of the Covered\n     Software, except that You may alter any license notices to the extent\n     required to remedy known factual inaccuracies.\n\n3.5. Application of Additional Terms\n\n     You may choose to offer, and to charge a fee for, warranty, support,\n     indemnity or liability obligations to one or more recipients of Covered\n     Software. However, You may do so only on Your own behalf, and not on behalf\n     of any Contributor. You must make it absolutely clear that any such\n     warranty, support, indemnity, or liability obligation is offered by You\n     alone, and You hereby agree to indemnify every Contributor for any\n     liability incurred by such Contributor as a result of warranty, support,\n     indemnity or liability terms You offer. You may include additional\n     disclaimers of warranty and limitations of liability specific to any\n     jurisdiction.\n\n4. Inability to Comply Due to Statute or Regulation\n\n   If it is impossible for You to comply with any of the terms of this License\n   with respect to some or all of the Covered Software due to statute, judicial\n   order, or regulation then You must: (a) comply with the terms of this License\n   to the maximum extent possible; and (b) describe the limitations and the code\n   they affect. Such description must be placed in a text file included with all\n   distributions of the Covered Software under this License. Except to the\n   extent prohibited by statute or regulation, such description must be\n   sufficiently detailed for a recipient of ordinary skill to be able to\n   understand it.\n\n5. Termination\n\n5.1. The rights granted under this License will terminate automatically if You\n     fail to comply with any of its terms. However, if You become compliant,\n     then the rights granted under this License from a particular Contributor\n     are reinstated (a) provisionally, unless and until such Contributor\n     explicitly and finally terminates Your grants, and (b) on an ongoing basis,\n     if such Contributor fails to notify You of the non-compliance by some\n     reasonable means prior to 60 days after You have come back into compliance.\n     Moreover, Your grants from a particular Contributor are reinstated on an\n     ongoing basis if such Contributor notifies You of the non-compliance by\n     some reasonable means, this is the first time You have received notice of\n     non-compliance with this License from such Contributor, and You become\n     compliant prior to 30 days after Your receipt of the notice.\n\n5.2. If You initiate litigation against any entity by asserting a patent\n     infringement claim (excluding declaratory judgment actions, counter-claims,\n     and cross-claims) alleging that a Contributor Version directly or\n     indirectly infringes any patent, then the rights granted to You by any and\n     all Contributors for the Covered Software under Section 2.1 of this License\n     shall terminate.\n\n5.3. In the event of termination under Sections 5.1 or 5.2 above, all end user\n     license agreements (excluding distributors and resellers) which have been\n     validly granted by You or Your distributors under this License prior to\n     termination shall survive termination.\n\n6. Disclaimer of Warranty\n\n   Covered Software is provided under this License on an “as is” basis, without\n   warranty of any kind, either expressed, implied, or statutory, including,\n   without limitation, warranties that the Covered Software is free of defects,\n   merchantable, fit for a particular purpose or non-infringing. The entire\n   risk as to the quality and performance of the Covered Software is with You.\n   Should any Covered Software prove defective in any respect, You (not any\n   Contributor) assume the cost of any necessary servicing, repair, or\n   correction. This disclaimer of warranty constitutes an essential part of this\n   License. No use of  any Covered Software is authorized under this License\n   except under this disclaimer.\n\n7. Limitation of Liability\n\n   Under no circumstances and under no legal theory, whether tort (including\n   negligence), contract, or otherwise, shall any Contributor, or anyone who\n   distributes Covered Software as permitted above, be liable to You for any\n   direct, indirect, special, incidental, or consequential damages of any\n   character including, without limitation, damages for lost profits, loss of\n   goodwill, work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses, even if such party shall have been\n   informed of the possibility of such damages. This limitation of liability\n   shall not apply to liability for death or personal injury resulting from such\n   party’s negligence to the extent applicable law prohibits such limitation.\n   Some jurisdictions do not allow the exclusion or limitation of incidental or\n   consequential damages, so this exclusion and limitation may not apply to You.\n\n8. Litigation\n\n   Any litigation relating to this License may be brought only in the courts of\n   a jurisdiction where the defendant maintains its principal place of business\n   and such litigation shall be governed by laws of that jurisdiction, without\n   reference to its conflict-of-law provisions. Nothing in this Section shall\n   prevent a party’s ability to bring cross-claims or counter-claims.\n\n9. Miscellaneous\n\n   This License represents the complete agreement concerning the subject matter\n   hereof. If any provision of this License is held to be unenforceable, such\n   provision shall be reformed only to the extent necessary to make it\n   enforceable. Any law or regulation which provides that the language of a\n   contract shall be construed against the drafter shall not be used to construe\n   this License against a Contributor.\n\n\n10. Versions of the License\n\n10.1. New Versions\n\n      Mozilla Foundation is the license steward. Except as provided in Section\n      10.3, no one other than the license steward has the right to modify or\n      publish new versions of this License. Each version will be given a\n      distinguishing version number.\n\n10.2. Effect of New Versions\n\n      You may distribute the Covered Software under the terms of the version of\n      the License under which You originally received the Covered Software, or\n      under the terms of any subsequent version published by the license\n      steward.\n\n10.3. Modified Versions\n\n      If you create software not governed by this License, and you want to\n      create a new license for such software, you may create and use a modified\n      version of this License if you rename the license and remove any\n      references to the name of the license steward (except to note that such\n      modified license differs from this License).\n\n10.4. Distributing Source Code Form that is Incompatible With Secondary Licenses\n      If You choose to distribute Source Code Form that is Incompatible With\n      Secondary Licenses under the terms of this version of the License, the\n      notice described in Exhibit B of this License must be attached.\n\nExhibit A - Source Code Form License Notice\n\n      This Source Code Form is subject to the\n      terms of the Mozilla Public License, v.\n      2.0. If a copy of the MPL was not\n      distributed with this file, You can\n      obtain one at\n      http://mozilla.org/MPL/2.0/.\n\nIf it is not possible or desirable to put the notice in a particular file, then\nYou may include the notice in a location (such as a LICENSE file in a relevant\ndirectory) where a recipient would be likely to look for such a notice.\n\nYou may add additional accurate notices of copyright ownership.\n\nExhibit B - “Incompatible With Secondary Licenses” Notice\n\n      This Source Code Form is “Incompatible\n      With Secondary Licenses”, as defined by\n      the Mozilla Public License, v. 2.0.\n\n\n\nCopyright (c) 2012 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/opentofu/opentofu: Copyright (c) The OpenTofu Authors; Copyright (c) 2014 HashiCorp, Inc., MPL-2.0 license (LICENSE), https://github.com/opentofu/opentofu; Copyright (c) 2012 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/opentofu/opentofu/tree/8535390a14ef99f5f45b622de38a71dde45b0324/internal/ipaddr."
+    },
+    {
+      "license": "MPL-2.0",
+      "paths": [
+        ".devcontainer.json",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yaml",
+        ".licensei.toml",
+        ".tfdev",
+        "AGENTS.md",
+        "BUG_REPORTS.md",
+        "CHANGELOG.md",
+        "CHARTER.md",
+        "CODEOWNERS",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.RELEASE.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.minimal",
+        "GOVERNANCE.md",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "Makefile",
+        "README.md",
+        "RELEASE.md",
+        "SECURITY.md",
+        "cmd/**",
+        "codecov.yml",
+        "contributing/**",
+        "docs/README.md",
+        "docs/architecture.md",
+        "docs/destroying.md",
+        "docs/diagnostics.md",
+        "docs/glossary.md",
+        "docs/planning-behaviors.md",
+        "docs/plugin-protocol/**",
+        "docs/provider-references.md",
+        "docs/resource-instance-change-lifecycle.md",
+        "docs/state_encryption.md",
+        "docs/tracing.md",
+        "docs/unicode.md",
+        "go.mod",
+        "go.sum",
+        "internal/addrs/**",
+        "internal/backend/**",
+        "internal/builtin/**",
+        "internal/checks/**",
+        "internal/cloud/**",
+        "internal/collections/**",
+        "internal/command/apply.go",
+        "internal/command/apply_destroy_test.go",
+        "internal/command/apply_e2etesting.go",
+        "internal/command/apply_test.go",
+        "internal/command/arguments/**",
+        "internal/command/autocomplete.go",
+        "internal/command/autocomplete_test.go",
+        "internal/command/cliconfig/**",
+        "internal/command/clistate/**",
+        "internal/command/command.go",
+        "internal/command/command_test.go",
+        "internal/command/console.go",
+        "internal/command/console_interactive.go",
+        "internal/command/console_interactive_test.go",
+        "internal/command/console_state.go",
+        "internal/command/console_state_test.go",
+        "internal/command/console_test.go",
+        "internal/command/e2etest/.gitignore",
+        "internal/command/e2etest/automation_test.go",
+        "internal/command/e2etest/doc.go",
+        "internal/command/e2etest/encryption_test.go",
+        "internal/command/e2etest/ephemeral_test.go",
+        "internal/command/e2etest/fakeocireg/**",
+        "internal/command/e2etest/init_test.go",
+        "internal/command/e2etest/json_dual_test.go",
+        "internal/command/e2etest/main_test.go",
+        "internal/command/e2etest/module_archive_test.go",
+        "internal/command/e2etest/module_oci_sources_test.go",
+        "internal/command/e2etest/plan_test.go",
+        "internal/command/e2etest/primary_test.go",
+        "internal/command/e2etest/provider-simple/**",
+        "internal/command/e2etest/provider-simple-v6/**",
+        "internal/command/e2etest/provider_dev_test.go",
+        "internal/command/e2etest/provider_functions_test.go",
+        "internal/command/e2etest/provider_network_mirror_test.go",
+        "internal/command/e2etest/provider_oci_mirrors_test.go",
+        "internal/command/e2etest/provider_plugin_test.go",
+        "internal/command/e2etest/providers_mirror_test.go",
+        "internal/command/e2etest/providers_tamper_test.go",
+        "internal/command/e2etest/provisioner-local-exec/**",
+        "internal/command/e2etest/provisioner_plugin_test.go",
+        "internal/command/e2etest/provisioner_test.go",
+        "internal/command/e2etest/remote_state_test.go",
+        "internal/command/e2etest/static_plan_test.go",
+        "internal/command/e2etest/strip_ansi.go",
+        "internal/command/e2etest/symbols_test.go",
+        "internal/command/e2etest/test_test.go",
+        "internal/command/e2etest/testdata/apply-panic/**",
+        "internal/command/e2etest/testdata/chdir-option/**",
+        "internal/command/e2etest/testdata/cloudinit-provider/**",
+        "internal/command/e2etest/testdata/consolidated-warnings-for-deprecated-marks/**",
+        "internal/command/e2etest/testdata/custom-provider-install-method/**",
+        "internal/command/e2etest/testdata/deprecated-values/**",
+        "internal/command/e2etest/testdata/empty/**",
+        "internal/command/e2etest/testdata/encryption-flow/**",
+        "internal/command/e2etest/testdata/ephemeral-errors/**",
+        "internal/command/e2etest/testdata/ephemeral-repetition/**",
+        "internal/command/e2etest/testdata/ephemeral-workflow/**",
+        "internal/command/e2etest/testdata/full-workflow-null/**",
+        "internal/command/e2etest/testdata/functions/**",
+        "internal/command/e2etest/testdata/functions-error/**",
+        "internal/command/e2etest/testdata/init-from-module/**",
+        "internal/command/e2etest/testdata/json_dual/**",
+        "internal/command/e2etest/testdata/linting/**",
+        "internal/command/e2etest/testdata/local-only-provider/**",
+        "internal/command/e2etest/testdata/mock-computed-block-cleanup/**",
+        "internal/command/e2etest/testdata/mock-test-with-ephemeral-in-configuration/**",
+        "internal/command/e2etest/testdata/module-archive/**",
+        "internal/command/e2etest/testdata/multiple-deprecated-marks-slice-bug/**",
+        "internal/command/e2etest/testdata/multiple-run-blocks/**",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/README",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/fake-module-pkg/**",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/foo/blobs/sha256/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/foo/blobs/sha256/a47afe6606ae1d53305461b023c193c50af457259e40dc45bd068f62ef408034",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/foo/index.json",
+        "internal/command/e2etest/testdata/oci-module-source/fake-registry/foo/oci-layout",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/README",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/15cc4d622123e7496e925855df43c73524e36f40d0e50c4bcc657f5690e1e518",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/21c1e4dab5ad5cb2d34dcd5fc6009440141a8a4f12dac12cb17adcc290461a9f",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/28fc3cb74e7e8d5007a4b1700f25b6ba9e29328af1ac0420208dd3ffb32fac11",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/7bbdf2d0f2b30e65dff1ac7984d7317ef7332f897ba20e78aa4b977a800ba8a0",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/7fee2d5c6987e97eab0dfd92f38ea627c036c52f459defcc5b7709b01df44024",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/91d5969c8c301e8f361627ec94c449b6c922bebfc41fd8f313aebb584e32f1c8",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/91e5c0e362dcc98c7df110e52f8d54750060352aa6b7ccf91fc0d9fd7bb9d915",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/92384f470c01a761db5baadd2e69cd0db73afe8ea60c264e7e7069fbe98d3d9f",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/a50cba4c6527168756dd3343d6bfcc4ddc96b3217dd3e095cf095124dccf91e6",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/aa842faadbcfd1428772b265e4f7a423fbe9ce1de5c0827746517f2ec0483d84",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/cbde373bb9b2cbde1893cdeaa68057afbe4a6eed1cfb301e1bc42c4e270f5a1f",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/blobs/sha256/d59977d043f5c492567fbcf1316ed15fb355c2e6ba87374df9b5402551137418",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/index.json",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/bar/oci-layout",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/16eb63231a08ad735691df2ecab728316b2598b819d0b74515fd1973454f9000",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/37b9bf1f2bc70bca61737b641f9c7b55eea71ccf6d8d71f37a248e9ebea98f71",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/4f63835dc7bf2efd79c82a1a9dbeed999e4803c33c2bac58fec1fe49f8fa7f31",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/59c9d55f9ef8ae99fb02ad0e702e174ede580510c267aa60bc0fc1044e1791c3",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/7bd4128bcf93bb2782038fcb957348867ddbf18267b950cbd16c71a35c74046f",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/blobs/sha256/f63e3be601c48bff768cd10288fefb24a632e5d15f3407cbc8b75e2ea7859f38",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/index.json",
+        "internal/command/e2etest/testdata/oci-provider-mirror/fake-registry/foo/oci-layout",
+        "internal/command/e2etest/testdata/oci-provider-mirror/versions.tf",
+        "internal/command/e2etest/testdata/overrides-in-tests/**",
+        "internal/command/e2etest/testdata/plan-with-embedded-ephemeral-config/**",
+        "internal/command/e2etest/testdata/plugin-cache/**",
+        "internal/command/e2etest/testdata/predecessor-dependency-lock-file/**",
+        "internal/command/e2etest/testdata/predecessor-dependency-lock-file-abs/**",
+        "internal/command/e2etest/testdata/provider-dev-override/**",
+        "internal/command/e2etest/testdata/provider-global-cache/**",
+        "internal/command/e2etest/testdata/provider-implicit-ref-not-found/**",
+        "internal/command/e2etest/testdata/provider-network-mirror/**",
+        "internal/command/e2etest/testdata/provider-not-found/**",
+        "internal/command/e2etest/testdata/provider-not-found-non-default/**",
+        "internal/command/e2etest/testdata/provider-plugin/**",
+        "internal/command/e2etest/testdata/provider-tampering-base/**",
+        "internal/command/e2etest/testdata/provider-warnings/**",
+        "internal/command/e2etest/testdata/provider_unconfigured_functions/**",
+        "internal/command/e2etest/testdata/provisioner/**",
+        "internal/command/e2etest/testdata/provisioner-plugin/**",
+        "internal/command/e2etest/testdata/static_plan_typed_variables/**",
+        "internal/command/e2etest/testdata/static_plan_variables/**",
+        "internal/command/e2etest/testdata/symbols/**",
+        "internal/command/e2etest/testdata/test-provider/**",
+        "internal/command/e2etest/testdata/tf-provider/**",
+        "internal/command/e2etest/testdata/tofu-managed-data/**",
+        "internal/command/e2etest/testdata/tofu-providers-mirror/**",
+        "internal/command/e2etest/testdata/tofu-providers-mirror-with-bad-lock-file/**",
+        "internal/command/e2etest/testdata/tofu-providers-mirror-with-lock-file/**",
+        "internal/command/e2etest/testdata/vendored-provider/**",
+        "internal/command/e2etest/tf_provider_data_test.go",
+        "internal/command/e2etest/unmanaged_test.go",
+        "internal/command/e2etest/version_test.go",
+        "internal/command/flags/**",
+        "internal/command/fmt.go",
+        "internal/command/fmt_test.go",
+        "internal/command/format/**",
+        "internal/command/get.go",
+        "internal/command/get_test.go",
+        "internal/command/graph.go",
+        "internal/command/graph_test.go",
+        "internal/command/helper.go",
+        "internal/command/hook_module_install.go",
+        "internal/command/import.go",
+        "internal/command/import_test.go",
+        "internal/command/init.go",
+        "internal/command/init_test.go",
+        "internal/command/jsonchecks/**",
+        "internal/command/jsonconfig/**",
+        "internal/command/jsonentities/**",
+        "internal/command/jsonformat/**",
+        "internal/command/jsonplan/**",
+        "internal/command/jsonprovider/**",
+        "internal/command/jsonstate/**",
+        "internal/command/login.go",
+        "internal/command/login_test.go",
+        "internal/command/logout.go",
+        "internal/command/logout_test.go",
+        "internal/command/meta.go",
+        "internal/command/meta_backend.go",
+        "internal/command/meta_backend_migrate.go",
+        "internal/command/meta_backend_migrate_test.go",
+        "internal/command/meta_backend_test.go",
+        "internal/command/meta_config.go",
+        "internal/command/meta_dependencies.go",
+        "internal/command/meta_encryption.go",
+        "internal/command/meta_new.go",
+        "internal/command/meta_providers.go",
+        "internal/command/meta_test.go",
+        "internal/command/meta_vars.go",
+        "internal/command/meta_vars_test.go",
+        "internal/command/metadata_command.go",
+        "internal/command/metadata_functions.go",
+        "internal/command/metadata_functions_test.go",
+        "internal/command/output.go",
+        "internal/command/output_test.go",
+        "internal/command/plan.go",
+        "internal/command/plan_test.go",
+        "internal/command/plugins.go",
+        "internal/command/plugins_test.go",
+        "internal/command/providers.go",
+        "internal/command/providers_lock.go",
+        "internal/command/providers_lock_test.go",
+        "internal/command/providers_mirror.go",
+        "internal/command/providers_mirror_test.go",
+        "internal/command/providers_schema.go",
+        "internal/command/providers_schema_test.go",
+        "internal/command/providers_test.go",
+        "internal/command/push.go",
+        "internal/command/refresh.go",
+        "internal/command/refresh_test.go",
+        "internal/command/show.go",
+        "internal/command/show_test.go",
+        "internal/command/state_command.go",
+        "internal/command/state_list.go",
+        "internal/command/state_list_test.go",
+        "internal/command/state_meta.go",
+        "internal/command/state_mv.go",
+        "internal/command/state_mv_test.go",
+        "internal/command/state_pull.go",
+        "internal/command/state_pull_test.go",
+        "internal/command/state_push.go",
+        "internal/command/state_push_test.go",
+        "internal/command/state_replace_provider.go",
+        "internal/command/state_replace_provider_test.go",
+        "internal/command/state_rm.go",
+        "internal/command/state_rm_test.go",
+        "internal/command/state_show.go",
+        "internal/command/state_show_test.go",
+        "internal/command/state_test.go",
+        "internal/command/system/**",
+        "internal/command/taint.go",
+        "internal/command/taint_test.go",
+        "internal/command/temp_new_runtime.go",
+        "internal/command/test.go",
+        "internal/command/test_test.go",
+        "internal/command/testdata/**",
+        "internal/command/testing/**",
+        "internal/command/ui_input.go",
+        "internal/command/ui_input_test.go",
+        "internal/command/unlock.go",
+        "internal/command/unlock_test.go",
+        "internal/command/untaint.go",
+        "internal/command/untaint_test.go",
+        "internal/command/validate.go",
+        "internal/command/validate_test.go",
+        "internal/command/version.go",
+        "internal/command/version_test.go",
+        "internal/command/views/**",
+        "internal/command/webbrowser/**",
+        "internal/command/workdir/**",
+        "internal/command/workspace_command.go",
+        "internal/command/workspace_command_test.go",
+        "internal/command/workspace_delete.go",
+        "internal/command/workspace_list.go",
+        "internal/command/workspace_new.go",
+        "internal/command/workspace_select.go",
+        "internal/command/workspace_show.go",
+        "internal/communicator/**",
+        "internal/configs/**",
+        "internal/copy/**",
+        "internal/dag/**",
+        "internal/depsfile/**",
+        "internal/didyoumean/**",
+        "internal/e2e/**",
+        "internal/encryption/README.md",
+        "internal/encryption/base.go",
+        "internal/encryption/compliancetest/**",
+        "internal/encryption/config/**",
+        "internal/encryption/default_registry.go",
+        "internal/encryption/dual_custody_test.go",
+        "internal/encryption/encryption.go",
+        "internal/encryption/enctest/**",
+        "internal/encryption/example_test.go",
+        "internal/encryption/keyprovider/README.md",
+        "internal/encryption/keyprovider/addr.go",
+        "internal/encryption/keyprovider/aws_kms/**",
+        "internal/encryption/keyprovider/azure_vault/**",
+        "internal/encryption/keyprovider/compliancetest/**",
+        "internal/encryption/keyprovider/config.go",
+        "internal/encryption/keyprovider/descriptor.go",
+        "internal/encryption/keyprovider/errors.go",
+        "internal/encryption/keyprovider/gcp_kms/**",
+        "internal/encryption/keyprovider/id.go",
+        "internal/encryption/keyprovider/keyprovider.go",
+        "internal/encryption/keyprovider/meta.go",
+        "internal/encryption/keyprovider/openbao/**",
+        "internal/encryption/keyprovider/output.go",
+        "internal/encryption/keyprovider/output_test.go",
+        "internal/encryption/keyprovider/pbkdf2/**",
+        "internal/encryption/keyprovider/static/**",
+        "internal/encryption/keyprovider/validation.go",
+        "internal/encryption/keyprovider/xor/**",
+        "internal/encryption/keyprovider.go",
+        "internal/encryption/keyprovider_meta_change_test.go",
+        "internal/encryption/method/README.md",
+        "internal/encryption/method/addr.go",
+        "internal/encryption/method/aesgcm/**",
+        "internal/encryption/method/compliancetest/**",
+        "internal/encryption/method/config.go",
+        "internal/encryption/method/descriptor.go",
+        "internal/encryption/method/errors.go",
+        "internal/encryption/method/id.go",
+        "internal/encryption/method/method.go",
+        "internal/encryption/method/unencrypted/**",
+        "internal/encryption/methods.go",
+        "internal/encryption/plan.go",
+        "internal/encryption/registry/**",
+        "internal/encryption/state.go",
+        "internal/encryption/targets.go",
+        "internal/encryption/targets_test.go",
+        "internal/engine/**",
+        "internal/experiments/**",
+        "internal/flock/**",
+        "internal/genconfig/**",
+        "internal/getmodules/**",
+        "internal/getproviders/**",
+        "internal/grpcwrap/**",
+        "internal/helper/**",
+        "internal/httpclient/**",
+        "internal/initwd/**",
+        "internal/instances/**",
+        "internal/lang/blocktoattr/**",
+        "internal/lang/data.go",
+        "internal/lang/data_test.go",
+        "internal/lang/doc.go",
+        "internal/lang/eval/**",
+        "internal/lang/eval.go",
+        "internal/lang/eval_test.go",
+        "internal/lang/evalchecks/**",
+        "internal/lang/exprs/**",
+        "internal/lang/funcs/assume.go",
+        "internal/lang/funcs/assume_test.go",
+        "internal/lang/funcs/cidr.go",
+        "internal/lang/funcs/cidr_test.go",
+        "internal/lang/funcs/collection.go",
+        "internal/lang/funcs/collection_test.go",
+        "internal/lang/funcs/conversion.go",
+        "internal/lang/funcs/conversion_test.go",
+        "internal/lang/funcs/crypto.go",
+        "internal/lang/funcs/crypto_test.go",
+        "internal/lang/funcs/datetime.go",
+        "internal/lang/funcs/datetime_test.go",
+        "internal/lang/funcs/descriptions.go",
+        "internal/lang/funcs/encoding.go",
+        "internal/lang/funcs/encoding_test.go",
+        "internal/lang/funcs/ephemeral.go",
+        "internal/lang/funcs/ephemeral_test.go",
+        "internal/lang/funcs/filesystem.go",
+        "internal/lang/funcs/filesystem_test.go",
+        "internal/lang/funcs/number.go",
+        "internal/lang/funcs/number_test.go",
+        "internal/lang/funcs/redact.go",
+        "internal/lang/funcs/redact_test.go",
+        "internal/lang/funcs/refinements.go",
+        "internal/lang/funcs/render_template.go",
+        "internal/lang/funcs/render_template_test.go",
+        "internal/lang/funcs/sensitive.go",
+        "internal/lang/funcs/sensitive_test.go",
+        "internal/lang/funcs/string.go",
+        "internal/lang/funcs/string_test.go",
+        "internal/lang/funcs/testdata/bare.tmpl",
+        "internal/lang/funcs/testdata/func.tmpl",
+        "internal/lang/funcs/testdata/hello.tmpl",
+        "internal/lang/funcs/testdata/hello.txt",
+        "internal/lang/funcs/testdata/list.tmpl",
+        "internal/lang/funcs/testdata/recursive.tmpl",
+        "internal/lang/funcs/testdata/unreadable/**",
+        "internal/lang/functions.go",
+        "internal/lang/functions_descriptions_test.go",
+        "internal/lang/functions_test.go",
+        "internal/lang/globalref/**",
+        "internal/lang/grapheval/**",
+        "internal/lang/lint/**",
+        "internal/lang/marks/**",
+        "internal/lang/references.go",
+        "internal/lang/references_test.go",
+        "internal/lang/scope.go",
+        "internal/lang/testdata/**",
+        "internal/lang/type_conversion.go",
+        "internal/lang/type_conversion_test.go",
+        "internal/lang/types/**",
+        "internal/legacy/**",
+        "internal/linting/**",
+        "internal/logging/**",
+        "internal/modsdir/**",
+        "internal/moduletest/**",
+        "internal/oci/**",
+        "internal/plans/**",
+        "internal/plugin/**",
+        "internal/plugin6/**",
+        "internal/plugins/**",
+        "internal/providercache/cached_provider.go",
+        "internal/providercache/cached_provider_test.go",
+        "internal/providercache/dir.go",
+        "internal/providercache/dir_modify.go",
+        "internal/providercache/dir_modify_test.go",
+        "internal/providercache/dir_test.go",
+        "internal/providercache/dir_testing.go",
+        "internal/providercache/doc.go",
+        "internal/providercache/installer.go",
+        "internal/providercache/installer_events.go",
+        "internal/providercache/installer_events_test.go",
+        "internal/providercache/installer_test.go",
+        "internal/providercache/testdata/.gitattributes",
+        "internal/providercache/testdata/beep-provider/**",
+        "internal/providercache/testdata/beep-provider-other-platform/**",
+        "internal/providercache/testdata/cachedir/**",
+        "internal/providers/**",
+        "internal/provisioners/**",
+        "internal/refactoring/**",
+        "internal/registry/**",
+        "internal/repl/**",
+        "internal/replacefile/**",
+        "internal/resources/**",
+        "internal/shared/**",
+        "internal/states/**",
+        "internal/terminal/**",
+        "internal/tfdiags/**",
+        "internal/tfplugin5/**",
+        "internal/tfplugin6/**",
+        "internal/tofu/**",
+        "internal/tofumigrate/**",
+        "internal/tracing/**",
+        "rfc/**",
+        "scripts/**",
+        "testing/**",
+        "tools/**",
+        "version/**",
+        "website/.eslintrc.js",
+        "website/Dockerfile",
+        "website/README.md",
+        "website/data/**",
+        "website/docker-compose.build-non-main.yml",
+        "website/docker-compose.build.yml",
+        "website/docker-compose.yml",
+        "website/docs/cli/**",
+        "website/docs/index.mdx",
+        "website/docs/internals/**",
+        "website/docs/intro/**",
+        "website/docs/language/**",
+        "website/package-lock.json",
+        "website/package.json"
+      ],
+      "text": "Copyright (c) The OpenTofu Authors\nCopyright (c) 2014 HashiCorp, Inc.\n\nMozilla Public License, version 2.0\n\n1. Definitions\n\n1.1. “Contributor”\n\n     means each individual or legal entity that creates, contributes to the\n     creation of, or owns Covered Software.\n\n1.2. “Contributor Version”\n\n     means the combination of the Contributions of others (if any) used by a\n     Contributor and that particular Contributor’s Contribution.\n\n1.3. “Contribution”\n\n     means Covered Software of a particular Contributor.\n\n1.4. “Covered Software”\n\n     means Source Code Form to which the initial Contributor has attached the\n     notice in Exhibit A, the Executable Form of such Source Code Form, and\n     Modifications of such Source Code Form, in each case including portions\n     thereof.\n\n1.5. “Incompatible With Secondary Licenses”\n     means\n\n     a. that the initial Contributor has attached the notice described in\n        Exhibit B to the Covered Software; or\n\n     b. that the Covered Software was made available under the terms of version\n        1.1 or earlier of the License, but not also under the terms of a\n        Secondary License.\n\n1.6. “Executable Form”\n\n     means any form of the work other than Source Code Form.\n\n1.7. “Larger Work”\n\n     means a work that combines Covered Software with other material, in a separate\n     file or files, that is not Covered Software.\n\n1.8. “License”\n\n     means this document.\n\n1.9. “Licensable”\n\n     means having the right to grant, to the maximum extent possible, whether at the\n     time of the initial grant or subsequently, any and all of the rights conveyed by\n     this License.\n\n1.10. “Modifications”\n\n     means any of the following:\n\n     a. any file in Source Code Form that results from an addition to, deletion\n        from, or modification of the contents of Covered Software; or\n\n     b. any new file in Source Code Form that contains any Covered Software.\n\n1.11. “Patent Claims” of a Contributor\n\n      means any patent claim(s), including without limitation, method, process,\n      and apparatus claims, in any patent Licensable by such Contributor that\n      would be infringed, but for the grant of the License, by the making,\n      using, selling, offering for sale, having made, import, or transfer of\n      either its Contributions or its Contributor Version.\n\n1.12. “Secondary License”\n\n      means either the GNU General Public License, Version 2.0, the GNU Lesser\n      General Public License, Version 2.1, the GNU Affero General Public\n      License, Version 3.0, or any later versions of those licenses.\n\n1.13. “Source Code Form”\n\n      means the form of the work preferred for making modifications.\n\n1.14. “You” (or “Your”)\n\n      means an individual or a legal entity exercising rights under this\n      License. For legal entities, “You” includes any entity that controls, is\n      controlled by, or is under common control with You. For purposes of this\n      definition, “control” means (a) the power, direct or indirect, to cause\n      the direction or management of such entity, whether by contract or\n      otherwise, or (b) ownership of more than fifty percent (50%) of the\n      outstanding shares or beneficial ownership of such entity.\n\n\n2. License Grants and Conditions\n\n2.1. Grants\n\n     Each Contributor hereby grants You a world-wide, royalty-free,\n     non-exclusive license:\n\n     a. under intellectual property rights (other than patent or trademark)\n        Licensable by such Contributor to use, reproduce, make available,\n        modify, display, perform, distribute, and otherwise exploit its\n        Contributions, either on an unmodified basis, with Modifications, or as\n        part of a Larger Work; and\n\n     b. under Patent Claims of such Contributor to make, use, sell, offer for\n        sale, have made, import, and otherwise transfer either its Contributions\n        or its Contributor Version.\n\n2.2. Effective Date\n\n     The licenses granted in Section 2.1 with respect to any Contribution become\n     effective for each Contribution on the date the Contributor first distributes\n     such Contribution.\n\n2.3. Limitations on Grant Scope\n\n     The licenses granted in this Section 2 are the only rights granted under this\n     License. No additional rights or licenses will be implied from the distribution\n     or licensing of Covered Software under this License. Notwithstanding Section\n     2.1(b) above, no patent license is granted by a Contributor:\n\n     a. for any code that a Contributor has removed from Covered Software; or\n\n     b. for infringements caused by: (i) Your and any other third party’s\n        modifications of Covered Software, or (ii) the combination of its\n        Contributions with other software (except as part of its Contributor\n        Version); or\n\n     c. under Patent Claims infringed by Covered Software in the absence of its\n        Contributions.\n\n     This License does not grant any rights in the trademarks, service marks, or\n     logos of any Contributor (except as may be necessary to comply with the\n     notice requirements in Section 3.4).\n\n2.4. Subsequent Licenses\n\n     No Contributor makes additional grants as a result of Your choice to\n     distribute the Covered Software under a subsequent version of this License\n     (see Section 10.2) or under the terms of a Secondary License (if permitted\n     under the terms of Section 3.3).\n\n2.5. Representation\n\n     Each Contributor represents that the Contributor believes its Contributions\n     are its original creation(s) or it has sufficient rights to grant the\n     rights to its Contributions conveyed by this License.\n\n2.6. Fair Use\n\n     This License is not intended to limit any rights You have under applicable\n     copyright doctrines of fair use, fair dealing, or other equivalents.\n\n2.7. Conditions\n\n     Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted in\n     Section 2.1.\n\n\n3. Responsibilities\n\n3.1. Distribution of Source Form\n\n     All distribution of Covered Software in Source Code Form, including any\n     Modifications that You create or to which You contribute, must be under the\n     terms of this License. You must inform recipients that the Source Code Form\n     of the Covered Software is governed by the terms of this License, and how\n     they can obtain a copy of this License. You may not attempt to alter or\n     restrict the recipients’ rights in the Source Code Form.\n\n3.2. Distribution of Executable Form\n\n     If You distribute Covered Software in Executable Form then:\n\n     a. such Covered Software must also be made available in Source Code Form,\n        as described in Section 3.1, and You must inform recipients of the\n        Executable Form how they can obtain a copy of such Source Code Form by\n        reasonable means in a timely manner, at a charge no more than the cost\n        of distribution to the recipient; and\n\n     b. You may distribute such Executable Form under the terms of this License,\n        or sublicense it under different terms, provided that the license for\n        the Executable Form does not attempt to limit or alter the recipients’\n        rights in the Source Code Form under this License.\n\n3.3. Distribution of a Larger Work\n\n     You may create and distribute a Larger Work under terms of Your choice,\n     provided that You also comply with the requirements of this License for the\n     Covered Software. If the Larger Work is a combination of Covered Software\n     with a work governed by one or more Secondary Licenses, and the Covered\n     Software is not Incompatible With Secondary Licenses, this License permits\n     You to additionally distribute such Covered Software under the terms of\n     such Secondary License(s), so that the recipient of the Larger Work may, at\n     their option, further distribute the Covered Software under the terms of\n     either this License or such Secondary License(s).\n\n3.4. Notices\n\n     You may not remove or alter the substance of any license notices (including\n     copyright notices, patent notices, disclaimers of warranty, or limitations\n     of liability) contained within the Source Code Form of the Covered\n     Software, except that You may alter any license notices to the extent\n     required to remedy known factual inaccuracies.\n\n3.5. Application of Additional Terms\n\n     You may choose to offer, and to charge a fee for, warranty, support,\n     indemnity or liability obligations to one or more recipients of Covered\n     Software. However, You may do so only on Your own behalf, and not on behalf\n     of any Contributor. You must make it absolutely clear that any such\n     warranty, support, indemnity, or liability obligation is offered by You\n     alone, and You hereby agree to indemnify every Contributor for any\n     liability incurred by such Contributor as a result of warranty, support,\n     indemnity or liability terms You offer. You may include additional\n     disclaimers of warranty and limitations of liability specific to any\n     jurisdiction.\n\n4. Inability to Comply Due to Statute or Regulation\n\n   If it is impossible for You to comply with any of the terms of this License\n   with respect to some or all of the Covered Software due to statute, judicial\n   order, or regulation then You must: (a) comply with the terms of this License\n   to the maximum extent possible; and (b) describe the limitations and the code\n   they affect. Such description must be placed in a text file included with all\n   distributions of the Covered Software under this License. Except to the\n   extent prohibited by statute or regulation, such description must be\n   sufficiently detailed for a recipient of ordinary skill to be able to\n   understand it.\n\n5. Termination\n\n5.1. The rights granted under this License will terminate automatically if You\n     fail to comply with any of its terms. However, if You become compliant,\n     then the rights granted under this License from a particular Contributor\n     are reinstated (a) provisionally, unless and until such Contributor\n     explicitly and finally terminates Your grants, and (b) on an ongoing basis,\n     if such Contributor fails to notify You of the non-compliance by some\n     reasonable means prior to 60 days after You have come back into compliance.\n     Moreover, Your grants from a particular Contributor are reinstated on an\n     ongoing basis if such Contributor notifies You of the non-compliance by\n     some reasonable means, this is the first time You have received notice of\n     non-compliance with this License from such Contributor, and You become\n     compliant prior to 30 days after Your receipt of the notice.\n\n5.2. If You initiate litigation against any entity by asserting a patent\n     infringement claim (excluding declaratory judgment actions, counter-claims,\n     and cross-claims) alleging that a Contributor Version directly or\n     indirectly infringes any patent, then the rights granted to You by any and\n     all Contributors for the Covered Software under Section 2.1 of this License\n     shall terminate.\n\n5.3. In the event of termination under Sections 5.1 or 5.2 above, all end user\n     license agreements (excluding distributors and resellers) which have been\n     validly granted by You or Your distributors under this License prior to\n     termination shall survive termination.\n\n6. Disclaimer of Warranty\n\n   Covered Software is provided under this License on an “as is” basis, without\n   warranty of any kind, either expressed, implied, or statutory, including,\n   without limitation, warranties that the Covered Software is free of defects,\n   merchantable, fit for a particular purpose or non-infringing. The entire\n   risk as to the quality and performance of the Covered Software is with You.\n   Should any Covered Software prove defective in any respect, You (not any\n   Contributor) assume the cost of any necessary servicing, repair, or\n   correction. This disclaimer of warranty constitutes an essential part of this\n   License. No use of  any Covered Software is authorized under this License\n   except under this disclaimer.\n\n7. Limitation of Liability\n\n   Under no circumstances and under no legal theory, whether tort (including\n   negligence), contract, or otherwise, shall any Contributor, or anyone who\n   distributes Covered Software as permitted above, be liable to You for any\n   direct, indirect, special, incidental, or consequential damages of any\n   character including, without limitation, damages for lost profits, loss of\n   goodwill, work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses, even if such party shall have been\n   informed of the possibility of such damages. This limitation of liability\n   shall not apply to liability for death or personal injury resulting from such\n   party’s negligence to the extent applicable law prohibits such limitation.\n   Some jurisdictions do not allow the exclusion or limitation of incidental or\n   consequential damages, so this exclusion and limitation may not apply to You.\n\n8. Litigation\n\n   Any litigation relating to this License may be brought only in the courts of\n   a jurisdiction where the defendant maintains its principal place of business\n   and such litigation shall be governed by laws of that jurisdiction, without\n   reference to its conflict-of-law provisions. Nothing in this Section shall\n   prevent a party’s ability to bring cross-claims or counter-claims.\n\n9. Miscellaneous\n\n   This License represents the complete agreement concerning the subject matter\n   hereof. If any provision of this License is held to be unenforceable, such\n   provision shall be reformed only to the extent necessary to make it\n   enforceable. Any law or regulation which provides that the language of a\n   contract shall be construed against the drafter shall not be used to construe\n   this License against a Contributor.\n\n\n10. Versions of the License\n\n10.1. New Versions\n\n      Mozilla Foundation is the license steward. Except as provided in Section\n      10.3, no one other than the license steward has the right to modify or\n      publish new versions of this License. Each version will be given a\n      distinguishing version number.\n\n10.2. Effect of New Versions\n\n      You may distribute the Covered Software under the terms of the version of\n      the License under which You originally received the Covered Software, or\n      under the terms of any subsequent version published by the license\n      steward.\n\n10.3. Modified Versions\n\n      If you create software not governed by this License, and you want to\n      create a new license for such software, you may create and use a modified\n      version of this License if you rename the license and remove any\n      references to the name of the license steward (except to note that such\n      modified license differs from this License).\n\n10.4. Distributing Source Code Form that is Incompatible With Secondary Licenses\n      If You choose to distribute Source Code Form that is Incompatible With\n      Secondary Licenses under the terms of this version of the License, the\n      notice described in Exhibit B of this License must be attached.\n\nExhibit A - Source Code Form License Notice\n\n      This Source Code Form is subject to the\n      terms of the Mozilla Public License, v.\n      2.0. If a copy of the MPL was not\n      distributed with this file, You can\n      obtain one at\n      http://mozilla.org/MPL/2.0/.\n\nIf it is not possible or desirable to put the notice in a particular file, then\nYou may include the notice in a location (such as a LICENSE file in a relevant\ndirectory) where a recipient would be likely to look for such a notice.\n\nYou may add additional accurate notices of copyright ownership.\n\nExhibit B - “Incompatible With Secondary Licenses” Notice\n\n      This Source Code Form is “Incompatible\n      With Secondary Licenses”, as defined by\n      the Mozilla Public License, v. 2.0.\n\n",
+      "attribution": "Copyright (c) The OpenTofu Authors; Copyright (c) 2014 HashiCorp, Inc., MPL-2.0 license (LICENSE), https://github.com/opentofu/opentofu."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "internal/ipaddr/**"
+      ],
+      "text": "Copyright (c) 2012 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/opentofu/opentofu/tree/8535390a14ef99f5f45b622de38a71dde45b0324/internal/ipaddr."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0_x4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1_x4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonlog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.minimal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfstate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfvars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tofu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockercfg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.exists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.tfdev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/15cc4d622123e7496e925855df43c73524e36f40d0e50c4bcc657f5690e1e518"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/16eb63231a08ad735691df2ecab728316b2598b819d0b74515fd1973454f9000"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/21c1e4dab5ad5cb2d34dcd5fc6009440141a8a4f12dac12cb17adcc290461a9f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/28fc3cb74e7e8d5007a4b1700f25b6ba9e29328af1ac0420208dd3ffb32fac11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/37b9bf1f2bc70bca61737b641f9c7b55eea71ccf6d8d71f37a248e9ebea98f71"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/4f63835dc7bf2efd79c82a1a9dbeed999e4803c33c2bac58fec1fe49f8fa7f31"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/59c9d55f9ef8ae99fb02ad0e702e174ede580510c267aa60bc0fc1044e1791c3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/7bbdf2d0f2b30e65dff1ac7984d7317ef7332f897ba20e78aa4b977a800ba8a0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/7bd4128bcf93bb2782038fcb957348867ddbf18267b950cbd16c71a35c74046f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/7fee2d5c6987e97eab0dfd92f38ea627c036c52f459defcc5b7709b01df44024"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/91d5969c8c301e8f361627ec94c449b6c922bebfc41fd8f313aebb584e32f1c8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/91e5c0e362dcc98c7df110e52f8d54750060352aa6b7ccf91fc0d9fd7bb9d915"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/92384f470c01a761db5baadd2e69cd0db73afe8ea60c264e7e7069fbe98d3d9f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PATENTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a47afe6606ae1d53305461b023c193c50af457259e40dc45bd068f62ef408034"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a50cba4c6527168756dd3343d6bfcc4ddc96b3217dd3e095cf095124dccf91e6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aa842faadbcfd1428772b265e4f7a423fbe9ce1de5c0827746517f2ec0483d84"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cbde373bb9b2cbde1893cdeaa68057afbe4a6eed1cfb301e1bc42c4e270f5a1f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/credentials"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/d59977d043f5c492567fbcf1316ed15fb355c2e6ba87374df9b5402551137418"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/debug-opentofu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/environment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/errors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f63e3be601c48bff768cd10288fefb24a632e5d15f3407cbc8b75e2ea7859f38"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foobar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hosts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/not-a-dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-basic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-basic-nopassword"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-basic-nousername"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-credhelper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-credhelper-badsyntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-credhelper-repopath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-duplicate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-mixedstyles"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-multi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-oauth"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-oauth-noaccess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-credentials-oauth-norefresh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-default-credentials"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-default-credentials-defaults"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-default-credentials-duplicate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-default-credentials-inconsistent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-default-credentials-no-docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oci-layout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/plan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-errors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-dynerror"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-missinghostname"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-missingnamespace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-missingtype"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-passthru"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-typeerror"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/provider-installation-oci-valueerror"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-both"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-future"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-invalid-count"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-invalid-multi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-invalid-syntax"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-invalid-timeout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-none"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-only-count"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/registry-protocols-only-timeout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/state"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-foo-bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-foo-baz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-foo-missing-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-notfoo-bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-beep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-happycloud"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-legacy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-null"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-random"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-random-beta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/terraform-provider-test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-helper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unspecified-provider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/warnings"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

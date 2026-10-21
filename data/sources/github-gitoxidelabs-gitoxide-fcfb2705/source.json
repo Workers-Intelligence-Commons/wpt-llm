@@ -1,0 +1,2311 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/GitoxideLabs/gitoxide",
+  "revision": "d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff",
+  "checksum": "sha256:6a29d00acf23339f22bcc48bbfa15c6760a32c65579fd57067fbcd134f8613c1",
+  "extract": {
+    "exclude": [
+      "etc/crate-structure.monopic",
+      "etc/gix-components.monopic",
+      "gix/tests/fixtures/generated-archives/make_am_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_am_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_basic_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_basic_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_bisect_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_bisect_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_blame_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_blame_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_cherry_pick_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_cherry_pick_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_cherry_pick_sequence_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_cherry_pick_sequence_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_clone_destinations.tar",
+      "gix/tests/fixtures/generated-archives/make_clone_destinations_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_clone_with_symlink.tar",
+      "gix/tests/fixtures/generated-archives/make_clone_with_symlink_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_commit_describe_multiple_tags.tar",
+      "gix/tests/fixtures/generated-archives/make_commit_describe_multiple_tags_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_config_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_config_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_config_repos.tar",
+      "gix/tests/fixtures/generated-archives/make_config_repos_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_diff_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_diff_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_emoji_with_decomposed_unicode.tar",
+      "gix/tests/fixtures/generated-archives/make_emoji_with_decomposed_unicode_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_empty_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_empty_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_head_repos.tar",
+      "gix/tests/fixtures/generated-archives/make_head_repos_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_mailmap_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_mailmap_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_merge_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_merge_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_packed_and_loose.tar",
+      "gix/tests/fixtures/generated-archives/make_packed_and_loose_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_pre_epoch_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_pre_epoch_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_rebase_i_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_rebase_i_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_references_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_references_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_reftable_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_reftable_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_remote_config_repos.tar",
+      "gix/tests/fixtures/generated-archives/make_remote_config_repos_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_repo_with_fork_and_dates.tar",
+      "gix/tests/fixtures/generated-archives/make_repo_with_fork_and_dates_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_rev_parse_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_rev_spec_parse_repos.tar",
+      "gix/tests/fixtures/generated-archives/make_revert_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_revert_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_revert_sequence_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_revert_sequence_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_sha256_remote.tar",
+      "gix/tests/fixtures/generated-archives/make_sha256_remote_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_shallow_repo.tar",
+      "gix/tests/fixtures/generated-archives/make_shallow_repo_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_status_repos.tar",
+      "gix/tests/fixtures/generated-archives/make_status_repos_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_submodule_traversal_advisory.tar",
+      "gix/tests/fixtures/generated-archives/make_submodule_traversal_advisory_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_submodule_update_advisory.tar",
+      "gix/tests/fixtures/generated-archives/make_submodule_update_advisory_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_symlink_prefix_reuse_advisory.tar",
+      "gix/tests/fixtures/generated-archives/make_symlink_prefix_reuse_advisory_sha256.tar",
+      "gix/tests/fixtures/generated-archives/make_worktree_relative_linking.tar",
+      "gix/tests/fixtures/generated-archives/make_worktree_relative_linking_sha256.tar",
+      "gix-bitmap/fuzz/artifacts/**",
+      "gix-blame/tests/fixtures/generated-archives/make_blame_rename_tracking_repo.tar",
+      "gix-blame/tests/fixtures/generated-archives/make_blame_rename_tracking_repo_sha256.tar",
+      "gix-blame/tests/fixtures/generated-archives/make_blame_two_roots_repo.tar",
+      "gix-blame/tests/fixtures/generated-archives/make_blame_two_roots_repo_sha256.tar",
+      "gix-commitgraph/tests/fixtures/generated-archives/**",
+      "gix-config/fuzz/artifacts/fuzz_file/slow-unit-1faaea6c3bac5acd7cfcf8ece15ebd49d9cab6fb",
+      "gix-config/tests/fixtures/fuzzed/long-parsetime.config",
+      "gix-config/tests/fixtures/fuzzed/mem-amplification.config",
+      "gix-config/tests/fixtures/fuzzed/stackoverflow-01.config",
+      "gix-config/tests/fixtures/generated-archives/config_with_worktree_extension.tar",
+      "gix-config/tests/fixtures/generated-archives/hasconfig.tar",
+      "gix-date/fuzz/artifacts/parse/crash-6bbcf307ae5719e0c27ed398e7303d5d364bd419",
+      "gix-date/tests/fixtures/generated-archives/**",
+      "gix-diff/tests/fixtures/generated-archives/make_blob_repo.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_blob_repo_sha256.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_blob_textconv_repo.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_for_rewrites_repo.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_for_rewrites_repo_sha256.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_repo.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_repo_a.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_repo_a_sha256.tar",
+      "gix-diff/tests/fixtures/generated-archives/make_diff_repo_sha256.tar",
+      "gix-dir/tests/fixtures/generated-archives/noncanonical-combining-mark-order.tar",
+      "gix-dir/tests/fixtures/generated-archives/noncanonical-combining-mark-order_sha256.tar",
+      "gix-discover/tests/fixtures/generated-archives/make_exfat_repo_darwin.tar",
+      "gix-discover/tests/fixtures/generated-archives/make_reftable_repo.tar",
+      "gix-discover/tests/fixtures/generated-archives/make_submodules.tar",
+      "gix-discover/tests/fixtures/generated-archives/make_symlinked_nested_repo.tar",
+      "gix-discover/tests/fixtures/generated-archives/make_worktree_relative_linking.tar",
+      "gix-filter/tests/fixtures/generated-archives/pipeline_repos.tar",
+      "gix-filter/tests/fixtures/generated-archives/pipeline_repos_sha256.tar",
+      "gix-glob/tests/fixtures/fuzzed/**",
+      "gix-glob/tests/fixtures/generated-archives/**",
+      "gix-hash/tests/fixtures/**",
+      "gix-ignore/fuzz/artifacts/**",
+      "gix-ignore/fuzz/corpus/ignore/clusterfuzz-testfuzz-testcase-minimized-gix-ignore-ignore-5835084912721920case-minimized-gix-ignore-ignore-5835084912721920",
+      "gix-imara-diff/tests/fixtures/clusterfuzz-testcase-minimized-gix-imara-diff-comprehensive_diff-6497314075377664",
+      "gix-index/fuzz/artifacts/**",
+      "gix-index/fuzz/corpus/**",
+      "gix-index/tests/fixtures/fuzzed/**",
+      "gix-index/tests/fixtures/generated-archives/make_symlink_prefix_reuse_advisory.tar",
+      "gix-index/tests/fixtures/generated-archives/make_symlink_prefix_reuse_advisory_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/make_traverse_literal_separators.tar",
+      "gix-index/tests/fixtures/generated-archives/make_traverse_literal_separators_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_empty.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_empty_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_nested.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_nested_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_populated.tar",
+      "gix-index/tests/fixtures/generated-archives/untracked_cache_populated_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_all_file_kinds.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_all_file_kinds_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_deeper_tree.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_empty.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_empty_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_icase_name_clashes.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_icase_name_clashes_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_more_files.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_more_files_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_sparse_index_no_dirs.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_sparse_index_no_dirs_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_index.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_index_recursive.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_index_recursive_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_index_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_vs_regular_index.tar",
+      "gix-index/tests/fixtures/generated-archives/v2_split_vs_regular_index_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_added_files.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_added_files_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_skip_worktree.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_skip_worktree_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_sparse_index.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_sparse_index_non_cone.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_sparse_index_non_cone_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v3_sparse_index_sha256.tar",
+      "gix-index/tests/fixtures/generated-archives/v4_more_files_IEOT.tar",
+      "gix-index/tests/fixtures/generated-archives/v4_more_files_IEOT_sha256.tar",
+      "gix-index/tests/fixtures/loose_index/FSMN.git-index",
+      "gix-index/tests/fixtures/loose_index/REUC.git-index",
+      "gix-index/tests/fixtures/loose_index/UNTR-with-oids.git-index",
+      "gix-index/tests/fixtures/loose_index/UNTR.git-index",
+      "gix-index/tests/fixtures/loose_index/conflicting-file.git-index",
+      "gix-index/tests/fixtures/loose_index/extended-flags.git-index",
+      "gix-index/tests/fixtures/loose_index/ignore-case-realistic.git-index",
+      "gix-index/tests/fixtures/loose_index/skip_hash.git-index",
+      "gix-index/tests/fixtures/loose_index/very-long-path.git-index",
+      "gix-mailmap/tests/fixtures/generated-archives/**",
+      "gix-merge/tests/fixtures/clusterfuzz-testcase-minimized-gix-merge-blob-5577413097750528",
+      "gix-merge/tests/fixtures/clusterfuzz-testcase-minimized-gix-merge-blob-6377298803884032",
+      "gix-merge/tests/fixtures/generated-archives/**",
+      "gix-negotiate/tests/fixtures/generated-archives/**",
+      "gix-object/tests/fixtures/generated-archives/**",
+      "gix-object/tests/fixtures/tree/**",
+      "gix-odb/tests/fixtures/generated-archives/make_replaced_history.tar",
+      "gix-odb/tests/fixtures/generated-archives/make_replaced_history_sha256.tar",
+      "gix-odb/tests/fixtures/generated-archives/make_repo_multi_index.tar",
+      "gix-odb/tests/fixtures/generated-archives/make_repo_multi_index_no.tar",
+      "gix-odb/tests/fixtures/generated-archives/make_repo_multi_index_without-multi-index.tar",
+      "gix-odb/tests/fixtures/objects/**",
+      "gix-odb/tests/fixtures/repos/small-packs.git/objects/**",
+      "gix-pack/fuzz/artifacts/**",
+      "gix-pack/fuzz/corpus/**",
+      "gix-pack/tests/fixtures/generated-archives/**",
+      "gix-pack/tests/fixtures/objects/pack/**",
+      "gix-pack/tests/fixtures/objects/pack-with-forward-delta/**",
+      "gix-packetline/fuzz/corpus/**",
+      "gix-packetline/tests/fixtures/**",
+      "gix-pathspec/tests/fixtures/generated-archives/**",
+      "gix-protocol/tests/fixtures/v1/clone-deepen-1.response",
+      "gix-protocol/tests/fixtures/v1/clone-deepen-5.response",
+      "gix-protocol/tests/fixtures/v1/clone-empty-with-capabilities.response",
+      "gix-protocol/tests/fixtures/v1/clone-only.response",
+      "gix-protocol/tests/fixtures/v1/clone-with-keepalive.response",
+      "gix-protocol/tests/fixtures/v1/clone.response",
+      "gix-protocol/tests/fixtures/v1/fetch-unshallow.response",
+      "gix-protocol/tests/fixtures/v1/fetch.response",
+      "gix-protocol/tests/fixtures/v2/clone-deepen-1.response",
+      "gix-protocol/tests/fixtures/v2/clone-deepen-5.response",
+      "gix-protocol/tests/fixtures/v2/clone-only-2.response",
+      "gix-protocol/tests/fixtures/v2/clone-only-with-keepalive.response",
+      "gix-protocol/tests/fixtures/v2/clone-only.response",
+      "gix-protocol/tests/fixtures/v2/clone-ref-in-want-sha256.response",
+      "gix-protocol/tests/fixtures/v2/clone-ref-in-want.response",
+      "gix-protocol/tests/fixtures/v2/clone.response",
+      "gix-protocol/tests/fixtures/v2/fetch-unshallow.response",
+      "gix-protocol/tests/fixtures/v2/fetch.response",
+      "gix-ref/tests/fixtures/generated-archives/make_namespaced_packed_ref_repository.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_namespaced_packed_ref_repository_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_ref_repository.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_ref_repository_for_overlay.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_ref_repository_for_overlay_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_ref_repository_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_refs_for_lookup_rules.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_packed_refs_for_lookup_rules_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_pristine.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_pristine_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_pseudo_ref_repository.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_pseudo_ref_repository_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_ref_repository.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_ref_repository_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_1850_repro.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_1850_repro_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_1928_repro.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_1928_repro_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_reflog.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repo_for_reflog_sha256.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repository_with_lots_of_packed_refs.tar",
+      "gix-ref/tests/fixtures/generated-archives/make_repository_with_lots_of_packed_refs_sha256.tar",
+      "gix-refspec/tests/fixtures/fuzzed/**",
+      "gix-refspec/tests/fixtures/generated-archives/parse_baseline.tar",
+      "gix-refspec/tests/fixtures/generated-archives/parse_baseline_sha256.tar",
+      "gix-revision/tests/fixtures/generated-archives/**",
+      "gix-status/tests/fixtures/generated-archives/conflicts.tar",
+      "gix-status/tests/fixtures/generated-archives/conflicts_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/racy_git.tar",
+      "gix-status/tests/fixtures/generated-archives/racy_git_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_conflict.tar",
+      "gix-status/tests/fixtures/generated-archives/status_conflict_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_intent_to_add.tar",
+      "gix-status/tests/fixtures/generated-archives/status_intent_to_add_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_many.tar",
+      "gix-status/tests/fixtures/generated-archives/status_many_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_removed.tar",
+      "gix-status/tests/fixtures/generated-archives/status_removed_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_submodule.tar",
+      "gix-status/tests/fixtures/generated-archives/status_submodule_sha256.tar",
+      "gix-status/tests/fixtures/generated-archives/status_tracked_dir_replaced_with_symlink.tar",
+      "gix-status/tests/fixtures/generated-archives/status_tracked_dir_replaced_with_symlink_sha256.tar",
+      "gix-submodule/tests/fixtures/generated-archives/**",
+      "gix-tix/tests/fixtures/generated-archives/auto_merge.tar",
+      "gix-tix/tests/fixtures/generated-archives/create_below.tar",
+      "gix-tix/tests/fixtures/generated-archives/create_commit.tar",
+      "gix-tix/tests/fixtures/generated-archives/forget_commit.tar",
+      "gix-tix/tests/fixtures/generated-archives/history.tar",
+      "gix-tix/tests/fixtures/generated-archives/rebase_conflict.tar",
+      "gix-tix/tests/fixtures/generated-archives/rebase_edit.tar",
+      "gix-tix/tests/fixtures/generated-archives/rebase_merge.tar",
+      "gix-tix/tests/fixtures/generated-archives/split_commit.tar",
+      "gix-trace/**",
+      "gix-transport/fuzz/corpus/capabilities_from_bytes/**",
+      "gix-transport/fuzz/corpus/capabilities_handshake/valid-v1-clone-master-object-format.txt",
+      "gix-transport/fuzz/corpus/capabilities_handshake/valid-v1-http-main-filter-no-done.packetline",
+      "gix-transport/tests/fixtures/v1/clone.request",
+      "gix-transport/tests/fixtures/v1/clone.response",
+      "gix-transport/tests/fixtures/v1/http-clone.response",
+      "gix-transport/tests/fixtures/v1/http-handshake.response",
+      "gix-transport/tests/fixtures/v1/push.request",
+      "gix-transport/tests/fixtures/v2/clone.request",
+      "gix-transport/tests/fixtures/v2/clone.response",
+      "gix-transport/tests/fixtures/v2/http-fetch.response",
+      "gix-traverse/tests/fixtures/generated-archives/**",
+      "gix-url/tests/fixtures/fuzzed/very-long.url",
+      "gix-url/tests/fixtures/fuzzed/very-long2.url",
+      "gix-url/tests/fixtures/fuzzed/very-long3.url",
+      "gix-url/tests/fixtures/fuzzed/very-long4.url",
+      "gix-url/tests/fixtures/fuzzed/very-long5.url",
+      "gix-url/tests/fixtures/fuzzed/very-long6.url",
+      "gix-worktree/tests/fixtures/generated-archives/make_special_exclude_case.tar",
+      "gix-worktree/tests/fixtures/generated-archives/make_special_exclude_case_sha256.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink_sha256.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink_to_windows_invalid.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink_to_windows_invalid_sha256.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink_to_windows_reserved.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dangling_symlink_to_windows_reserved_sha256.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dir_symlink.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_dir_symlink_sha256.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_traverse_trees.tar",
+      "gix-worktree-state/tests/fixtures/generated-archives/make_traverse_trees_sha256.tar",
+      "tests/fixtures/packs/**",
+      "tests/tools/src/signature/fixtures/x509-identity.p12"
+    ]
+  },
+  "history": {
+    "since": "ea353eb02fd4f75508600cc5676107bc7e627f1e"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "LICENSE-MIT:\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n\nVersion: Cargo.toml states the choice between the two licenses, so either applies.\n\ngitoxide-core/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngitoxide-core/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gitoxide-core/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-actor/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-actor/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-actor/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-archive/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-archive/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-archive/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-attributes/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-attributes/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-attributes/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-bitmap/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-bitmap/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-bitmap/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-blame/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-blame/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-blame/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-chunk/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-chunk/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-chunk/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-command/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-command/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-command/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-commitgraph/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-commitgraph/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-commitgraph/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-config/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-config/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-config/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-config-value/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-config-value/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-config-value/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-credentials/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-credentials/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-credentials/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-date/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-date/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-date/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-diff/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-diff/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-diff/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-dir/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-dir/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-dir/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-discover/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-discover/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-discover/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-error/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-error/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-error/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-fetchhead/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fetchhead/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fetchhead/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-filter/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-filter/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-filter/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-fs/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fs/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fs/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-fsck/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fsck/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fsck/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-glob/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-glob/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-glob/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-hash/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-hash/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-hash/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-hashtable/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-hashtable/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-hashtable/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-ignore/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-ignore/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-ignore/Cargo.toml states the choice between the two licenses, so either applies.\n\n                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\ngix-index/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-index/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-index/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-lfs/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-lfs/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-lfs/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-lock/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-lock/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-lock/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-macros/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-macros/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-macros/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-mailmap/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-mailmap/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-mailmap/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-merge/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-merge/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-merge/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-negotiate/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-negotiate/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-negotiate/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-note/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-note/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-note/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-object/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-object/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-object/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-odb/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-odb/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-odb/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-pack/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-pack/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-pack/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-packetline/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-packetline/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-packetline/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-parallel/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-parallel/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-parallel/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-path/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-path/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-path/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-pathspec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-pathspec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-pathspec/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-prompt/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-prompt/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-prompt/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-protocol/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-protocol/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-protocol/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-quote/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-quote/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-quote/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-rebase/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-rebase/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-rebase/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-ref/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-ref/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-ref/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-refspec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-refspec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-refspec/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-revision/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-revision/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-revision/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-revwalk/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-revwalk/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-revwalk/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-sec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-sec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-sec/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-sequencer/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-sequencer/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-sequencer/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-shallow/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-shallow/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-shallow/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-status/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-status/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-status/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-submodule/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-submodule/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-submodule/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-tempfile/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tempfile/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tempfile/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-tix/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tix/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tix/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-transport/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-transport/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-transport/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-traverse/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-traverse/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-traverse/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-tui/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tui/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tui/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-url/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-url/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-url/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-utils/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-utils/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-utils/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-validate/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-validate/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-validate/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-worktree/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-worktree-state/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree-state/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree-state/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-worktree-stream/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree-stream/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree-stream/Cargo.toml states the choice between the two licenses, so either applies.\n\ngix-zlib/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-zlib/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-zlib/Cargo.toml states the choice between the two licenses, so either applies.\n\ntests/tools/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ntests/tools/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: tests/tools/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Commit history of https://github.com/GitoxideLabs/gitoxide: Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gitoxide-core; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-actor; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-archive; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-attributes; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-bitmap; Christoph Rüßler <christoph.ruessler@mailbox.org>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-blame; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-chunk; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-command; Conor Davis <gitoxide@conor.fastmail.fm>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-commitgraph; Edward Shen <code@eddie.sh>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-config; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-config-value; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-credentials; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-date; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-diff; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-dir; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-discover; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-error; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fetchhead; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-filter; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fs; Cameron Esfahani <cesfahani@gmail.com>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fsck; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-glob; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-hash; Pascal Kuthe <pascal.kuthe@semimod.de>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-hashtable; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-ignore; pascalkuthe <pascalkuthe@pm.me>, Sebastian Thiel <sebastian.thiel@icloud.com>, Apache-2.0 license (LICENSE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-imara-diff; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-index; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-lfs; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-lock; Jiahao XU <Jiahao_XU@outlook.com>, Andre Bogus <bogusandre@gmail.com>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-macros; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-mailmap; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-merge; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-negotiate; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-note; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-object; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-odb; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-pack; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-packetline; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-parallel; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-path; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-pathspec; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-prompt; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-protocol; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-quote; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-rebase; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-ref; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-refspec; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-revision; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-revwalk; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-sec; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-sequencer; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-shallow; Sebastian Thiel <sebastian.thiel@icloud.com>, Pascal Kuthe <pascal.kuthe@semimod.de>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-status; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-submodule; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tempfile; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tix; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-transport; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-traverse; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tui; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-url; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-utils; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-validate; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree-state; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree-stream; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-zlib; Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/tests/tools."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gov/**",
+        ".mailmap",
+        ".zed/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "COLLABORATING.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "DEVELOPMENT.md",
+        "FUNDING.json",
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "SHORTCOMINGS.md",
+        "STABILITY.md",
+        "_typos.toml",
+        "build.rs",
+        "crate-status.md",
+        "deny.toml",
+        "etc/corpus/**",
+        "etc/discovery/**",
+        "etc/docker/**",
+        "etc/fuzz-corpus-builder.sh",
+        "etc/gix-asciicast.svg",
+        "etc/gix-components.txt",
+        "etc/msrv-badge.svg",
+        "etc/msrv-badge.template.svg",
+        "etc/plan/**",
+        "etc/reports/**",
+        "etc/scripts/**",
+        "etc/security/**",
+        "etc/speak/**",
+        "examples/**",
+        "general-tasks.md",
+        "justfile",
+        "rustfmt-nightly.toml",
+        "rustfmt.toml",
+        "src/**",
+        "tasks.md",
+        "tests/fixtures/generated-archives/**",
+        "tests/helpers.sh",
+        "tests/it/**",
+        "tests/journey/**",
+        "tests/journey.sh",
+        "tests/snapshots/**",
+        "tests/utilities.sh"
+      ],
+      "text": "LICENSE-MIT:\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n\nVersion: Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gitoxide-core/**"
+      ],
+      "text": "gitoxide-core/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngitoxide-core/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gitoxide-core/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gitoxide-core."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix/CHANGELOG.md",
+        "gix/Cargo.toml",
+        "gix/LICENSE-APACHE",
+        "gix/LICENSE-MIT",
+        "gix/examples/**",
+        "gix/src/**",
+        "gix/tests/doctest.rs",
+        "gix/tests/fixtures/assets/**",
+        "gix/tests/fixtures/generated-archives/.gitignore",
+        "gix/tests/fixtures/make_am_repo.sh",
+        "gix/tests/fixtures/make_basic_repo.sh",
+        "gix/tests/fixtures/make_bisect_repo.sh",
+        "gix/tests/fixtures/make_blame_repo.sh",
+        "gix/tests/fixtures/make_cherry_pick_repo.sh",
+        "gix/tests/fixtures/make_cherry_pick_sequence_repo.sh",
+        "gix/tests/fixtures/make_clone_destinations.sh",
+        "gix/tests/fixtures/make_clone_with_symlink.sh",
+        "gix/tests/fixtures/make_commit_describe_multiple_tags.sh",
+        "gix/tests/fixtures/make_complex_shallow_repo.sh",
+        "gix/tests/fixtures/make_config_repo.sh",
+        "gix/tests/fixtures/make_config_repos.sh",
+        "gix/tests/fixtures/make_core_worktree_repo.sh",
+        "gix/tests/fixtures/make_diff_repo.sh",
+        "gix/tests/fixtures/make_diff_repos.sh",
+        "gix/tests/fixtures/make_emoji_with_decomposed_unicode.sh",
+        "gix/tests/fixtures/make_empty_repo.sh",
+        "gix/tests/fixtures/make_fetch_repos.sh",
+        "gix/tests/fixtures/make_head_repos.sh",
+        "gix/tests/fixtures/make_linked_superproject_submodules.sh",
+        "gix/tests/fixtures/make_literal_worktree_paths.sh",
+        "gix/tests/fixtures/make_mailmap_repo.sh",
+        "gix/tests/fixtures/make_merge_repo.sh",
+        "gix/tests/fixtures/make_packed_and_loose.sh",
+        "gix/tests/fixtures/make_pre_epoch_repo.sh",
+        "gix/tests/fixtures/make_rebase_i_repo.sh",
+        "gix/tests/fixtures/make_references_repo.sh",
+        "gix/tests/fixtures/make_reftable_repo.sh",
+        "gix/tests/fixtures/make_remote_config_repos.sh",
+        "gix/tests/fixtures/make_remote_repos.sh",
+        "gix/tests/fixtures/make_replacement_refs.sh",
+        "gix/tests/fixtures/make_repo_with_fork_and_dates.sh",
+        "gix/tests/fixtures/make_rev_parse_repo.sh",
+        "gix/tests/fixtures/make_rev_spec_parse_repos.sh",
+        "gix/tests/fixtures/make_revert_repo.sh",
+        "gix/tests/fixtures/make_revert_sequence_repo.sh",
+        "gix/tests/fixtures/make_sha256_remote.sh",
+        "gix/tests/fixtures/make_shallow_repo.sh",
+        "gix/tests/fixtures/make_signatures_repo.sh",
+        "gix/tests/fixtures/make_status_repos.sh",
+        "gix/tests/fixtures/make_submodule_config_overrides.sh",
+        "gix/tests/fixtures/make_submodule_traversal_advisory.sh",
+        "gix/tests/fixtures/make_submodule_update_advisory.sh",
+        "gix/tests/fixtures/make_submodule_with_worktree.sh",
+        "gix/tests/fixtures/make_submodules.sh",
+        "gix/tests/fixtures/make_symbolic_ref_reflogs.sh",
+        "gix/tests/fixtures/make_symlink_prefix_reuse_advisory.sh",
+        "gix/tests/fixtures/make_symlinked_mailmap_repo.sh",
+        "gix/tests/fixtures/make_tracking_branch_revspecs.sh",
+        "gix/tests/fixtures/make_uninitialized_submodule.sh",
+        "gix/tests/fixtures/make_worktree_add_repos.sh",
+        "gix/tests/fixtures/make_worktree_relative_linking.sh",
+        "gix/tests/fixtures/make_worktree_repo.sh",
+        "gix/tests/fixtures/make_worktree_repo_with_configs.sh",
+        "gix/tests/fixtures/make_worktree_repo_with_info_exclude.sh",
+        "gix/tests/fixtures/make_worktree_reserved_branches.sh",
+        "gix/tests/fixtures/repo_with_untracked_files.sh",
+        "gix/tests/gix/**",
+        "gix/tests/gix-init.rs",
+        "gix/tests/interrupt.rs",
+        "gix/tests/repository.rs",
+        "gix/tests/submodule_open.rs"
+      ],
+      "text": "gix/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-actor/**"
+      ],
+      "text": "gix-actor/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-actor/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-actor/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-actor."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-archive/**"
+      ],
+      "text": "gix-archive/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-archive/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-archive/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-archive."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-attributes/**"
+      ],
+      "text": "gix-attributes/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-attributes/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-attributes/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-attributes."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-bitmap/CHANGELOG.md",
+        "gix-bitmap/Cargo.toml",
+        "gix-bitmap/LICENSE-APACHE",
+        "gix-bitmap/LICENSE-MIT",
+        "gix-bitmap/fuzz/.gitignore",
+        "gix-bitmap/fuzz/Cargo.toml",
+        "gix-bitmap/fuzz/README.md",
+        "gix-bitmap/fuzz/fuzz_targets/**",
+        "gix-bitmap/src/**",
+        "gix-bitmap/tests/**"
+      ],
+      "text": "gix-bitmap/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-bitmap/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-bitmap/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-bitmap."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-blame/CHANGELOG.md",
+        "gix-blame/Cargo.toml",
+        "gix-blame/LICENSE-APACHE",
+        "gix-blame/LICENSE-MIT",
+        "gix-blame/src/**",
+        "gix-blame/tests/blame.rs",
+        "gix-blame/tests/fixtures/generated-archives/.gitignore",
+        "gix-blame/tests/fixtures/make_blame_rename_tracking_repo.sh",
+        "gix-blame/tests/fixtures/make_blame_repo.sh",
+        "gix-blame/tests/fixtures/make_blame_symlinks_repo.sh",
+        "gix-blame/tests/fixtures/make_blame_two_roots_repo.sh"
+      ],
+      "text": "gix-blame/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-blame/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-blame/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Christoph Rüßler <christoph.ruessler@mailbox.org>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-blame."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-chunk/**"
+      ],
+      "text": "gix-chunk/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-chunk/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-chunk/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-chunk."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-command/**"
+      ],
+      "text": "gix-command/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-command/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-command/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-command."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-commitgraph/CHANGELOG.md",
+        "gix-commitgraph/Cargo.toml",
+        "gix-commitgraph/LICENSE-APACHE",
+        "gix-commitgraph/LICENSE-MIT",
+        "gix-commitgraph/fuzz/**",
+        "gix-commitgraph/src/**",
+        "gix-commitgraph/tests/access/**",
+        "gix-commitgraph/tests/commitgraph.rs",
+        "gix-commitgraph/tests/fixtures/generation_number_overflow.sh",
+        "gix-commitgraph/tests/fixtures/octopus_merges.sh",
+        "gix-commitgraph/tests/fixtures/single_commit.sh",
+        "gix-commitgraph/tests/fixtures/single_commit_huge_dates.sh",
+        "gix-commitgraph/tests/fixtures/single_parent.sh",
+        "gix-commitgraph/tests/fixtures/split_chain.sh",
+        "gix-commitgraph/tests/fixtures/two_parents.sh"
+      ],
+      "text": "gix-commitgraph/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-commitgraph/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-commitgraph/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Conor Davis <gitoxide@conor.fastmail.fm>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-commitgraph."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-config/.gitignore",
+        "gix-config/CHANGELOG.md",
+        "gix-config/Cargo.toml",
+        "gix-config/LICENSE-APACHE",
+        "gix-config/LICENSE-MIT",
+        "gix-config/README.md",
+        "gix-config/benches/**",
+        "gix-config/fuzz/.gitignore",
+        "gix-config/fuzz/Cargo.toml",
+        "gix-config/fuzz/artifacts/fuzz_file/crash-c4cbe6c3aa15981778a7b4015f121193b0514fe7",
+        "gix-config/fuzz/fuzz_targets/**",
+        "gix-config/src/**",
+        "gix-config/tests/.gitattributes",
+        "gix-config/tests/config/**",
+        "gix-config/tests/fixtures/clusterfuzz-testcase-minimized-gix-config-parse-6431708583690240",
+        "gix-config/tests/fixtures/config_with_worktree_extension.sh",
+        "gix-config/tests/fixtures/fuzzed/.gitattributes",
+        "gix-config/tests/fixtures/generated-archives/.gitignore",
+        "gix-config/tests/fixtures/hasconfig.sh",
+        "gix-config/tests/fixtures/make_config_repo.sh",
+        "gix-config/tests/fixtures/make_value_whitespace_baseline.sh",
+        "gix-config/tests/fixtures/multi-core.txt",
+        "gix-config/tests/fixtures/repo-config.crlf",
+        "gix-config/tests/mem.rs"
+      ],
+      "text": "gix-config/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-config/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-config/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Edward Shen <code@eddie.sh>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-config."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-config-value/**"
+      ],
+      "text": "gix-config-value/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-config-value/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-config-value/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-config-value."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-credentials/**"
+      ],
+      "text": "gix-credentials/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-credentials/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-credentials/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-credentials."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-date/CHANGELOG.md",
+        "gix-date/Cargo.toml",
+        "gix-date/LICENSE-APACHE",
+        "gix-date/LICENSE-MIT",
+        "gix-date/agents.md",
+        "gix-date/fuzz/.gitignore",
+        "gix-date/fuzz/Cargo.toml",
+        "gix-date/fuzz/artifacts/parse/slow-unit-56346dc9beb9fa1fa587043431b1f201f1792a5a",
+        "gix-date/fuzz/fuzz_targets/**",
+        "gix-date/src/**",
+        "gix-date/tests/fixtures/generate_git_date_baseline.sh",
+        "gix-date/tests/time/**"
+      ],
+      "text": "gix-date/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-date/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-date/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-date."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-diff/CHANGELOG.md",
+        "gix-diff/Cargo.toml",
+        "gix-diff/LICENSE-APACHE",
+        "gix-diff/LICENSE-MIT",
+        "gix-diff/benches/**",
+        "gix-diff/src/**",
+        "gix-diff/tests/README.md",
+        "gix-diff/tests/diff/**",
+        "gix-diff/tests/fixtures/.gitignore",
+        "gix-diff/tests/fixtures/generated-archives/.gitignore",
+        "gix-diff/tests/fixtures/make_blob_repo.sh",
+        "gix-diff/tests/fixtures/make_blob_textconv_repo.sh",
+        "gix-diff/tests/fixtures/make_diff_for_rewrites_repo.sh",
+        "gix-diff/tests/fixtures/make_diff_for_sliders_repo.sh",
+        "gix-diff/tests/fixtures/make_diff_for_sliders_smoke_repo.sh",
+        "gix-diff/tests/fixtures/make_diff_repo.sh"
+      ],
+      "text": "gix-diff/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-diff/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-diff/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-diff."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-dir/CHANGELOG.md",
+        "gix-dir/Cargo.toml",
+        "gix-dir/LICENSE-APACHE",
+        "gix-dir/LICENSE-MIT",
+        "gix-dir/src/**",
+        "gix-dir/tests/dir/**",
+        "gix-dir/tests/dir_cwd.rs",
+        "gix-dir/tests/fixtures/fifo.sh",
+        "gix-dir/tests/fixtures/generated-archives/.gitignore",
+        "gix-dir/tests/fixtures/many-symlinks.sh",
+        "gix-dir/tests/fixtures/many.sh",
+        "gix-dir/tests/fixtures/noncanonical-combining-mark-order.sh",
+        "gix-dir/tests/walk_utils/**"
+      ],
+      "text": "gix-dir/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-dir/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-dir/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-dir."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-discover/CHANGELOG.md",
+        "gix-discover/Cargo.toml",
+        "gix-discover/LICENSE-APACHE",
+        "gix-discover/LICENSE-MIT",
+        "gix-discover/src/**",
+        "gix-discover/tests/discover/**",
+        "gix-discover/tests/fixtures/generated-archives/.gitignore",
+        "gix-discover/tests/fixtures/make_basic_repo.sh",
+        "gix-discover/tests/fixtures/make_detached_head_repo.sh",
+        "gix-discover/tests/fixtures/make_exfat_repo_darwin.sh",
+        "gix-discover/tests/fixtures/make_linked_ownership_repo.sh",
+        "gix-discover/tests/fixtures/make_nested_repos.sh",
+        "gix-discover/tests/fixtures/make_ownership_repos.sh",
+        "gix-discover/tests/fixtures/make_reftable_repo.sh",
+        "gix-discover/tests/fixtures/make_submodules.sh",
+        "gix-discover/tests/fixtures/make_symlinked_nested_repo.sh",
+        "gix-discover/tests/fixtures/make_worktree_relative_linking.sh",
+        "gix-discover/tests/isolated.rs"
+      ],
+      "text": "gix-discover/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-discover/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-discover/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-discover."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-error/**"
+      ],
+      "text": "gix-error/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-error/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-error/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-error."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-fetchhead/**"
+      ],
+      "text": "gix-fetchhead/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fetchhead/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fetchhead/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fetchhead."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-filter/CHANGELOG.md",
+        "gix-filter/Cargo.toml",
+        "gix-filter/LICENSE-APACHE",
+        "gix-filter/LICENSE-MIT",
+        "gix-filter/examples/**",
+        "gix-filter/src/**",
+        "gix-filter/tests/filter/**",
+        "gix-filter/tests/fixtures/baseline.sh",
+        "gix-filter/tests/fixtures/generated-archives/.gitignore",
+        "gix-filter/tests/fixtures/pipeline_repos.sh",
+        "gix-filter/tests/helpers/**",
+        "gix-filter/tests/threaded.rs"
+      ],
+      "text": "gix-filter/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-filter/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-filter/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-filter."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-fs/**"
+      ],
+      "text": "gix-fs/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fs/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fs/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fs."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-fsck/**"
+      ],
+      "text": "gix-fsck/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-fsck/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-fsck/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Cameron Esfahani <cesfahani@gmail.com>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-fsck."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-glob/CHANGELOG.md",
+        "gix-glob/Cargo.toml",
+        "gix-glob/LICENSE-APACHE",
+        "gix-glob/LICENSE-MIT",
+        "gix-glob/benches/**",
+        "gix-glob/src/**",
+        "gix-glob/tests/fixtures/make_baseline.sh",
+        "gix-glob/tests/glob/**",
+        "gix-glob/tests/pattern_list.rs"
+      ],
+      "text": "gix-glob/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-glob/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-glob/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-glob."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-hash/CHANGELOG.md",
+        "gix-hash/Cargo.toml",
+        "gix-hash/LICENSE-APACHE",
+        "gix-hash/LICENSE-MIT",
+        "gix-hash/src/**",
+        "gix-hash/tests/hash/**"
+      ],
+      "text": "gix-hash/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-hash/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-hash/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-hash."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-hashtable/**"
+      ],
+      "text": "gix-hashtable/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-hashtable/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-hashtable/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Pascal Kuthe <pascal.kuthe@semimod.de>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-hashtable."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-ignore/CHANGELOG.md",
+        "gix-ignore/Cargo.toml",
+        "gix-ignore/LICENSE-APACHE",
+        "gix-ignore/LICENSE-MIT",
+        "gix-ignore/fuzz/.gitignore",
+        "gix-ignore/fuzz/Cargo.toml",
+        "gix-ignore/fuzz/corpus/ignore/precious.txt",
+        "gix-ignore/fuzz/corpus/ignore/repo.txt",
+        "gix-ignore/fuzz/corpus/ignore/slash-and-excludes.txt",
+        "gix-ignore/fuzz/corpus/ignore/star-and-excludes.txt",
+        "gix-ignore/fuzz/corpus/ignore/various.txt",
+        "gix-ignore/fuzz/fuzz_targets/**",
+        "gix-ignore/src/**",
+        "gix-ignore/tests/**"
+      ],
+      "text": "gix-ignore/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-ignore/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-ignore/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-ignore."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "gix-imara-diff/.gitattributes",
+        "gix-imara-diff/.gitignore",
+        "gix-imara-diff/CHANGELOG.md",
+        "gix-imara-diff/Cargo.toml",
+        "gix-imara-diff/LICENSE",
+        "gix-imara-diff/README.md",
+        "gix-imara-diff/UPSTREAM-PROVENANCE.tsv",
+        "gix-imara-diff/fuzz/**",
+        "gix-imara-diff/src/**",
+        "gix-imara-diff/tests/fixtures/make_git_diffs.sh",
+        "gix-imara-diff/tests/integration/**",
+        "gix-imara-diff/tests/package_provenance.rs",
+        "gix-imara-diff/tests/sliders.rs"
+      ],
+      "text": "                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright [yyyy] [name of copyright owner]\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "pascalkuthe <pascalkuthe@pm.me>, Sebastian Thiel <sebastian.thiel@icloud.com>, Apache-2.0 license (LICENSE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-imara-diff."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-index/CHANGELOG.md",
+        "gix-index/Cargo.toml",
+        "gix-index/LICENSE-APACHE",
+        "gix-index/LICENSE-MIT",
+        "gix-index/README.md",
+        "gix-index/benches/**",
+        "gix-index/fuzz/.gitignore",
+        "gix-index/fuzz/Cargo.toml",
+        "gix-index/fuzz/README.md",
+        "gix-index/fuzz/fuzz_targets/**",
+        "gix-index/src/**",
+        "gix-index/tests/fixtures/file_metadata.sh",
+        "gix-index/tests/fixtures/generated-archives/.gitignore",
+        "gix-index/tests/fixtures/loose_index/REUC.on-90d242d36e248acfae0033274b524bfa55a947fd.git-patch",
+        "gix-index/tests/fixtures/loose_index/UNTR-with-oids.on-90d242d36e248acfae0033274b524bfa55a947fd.git-patch",
+        "gix-index/tests/fixtures/make_index/**",
+        "gix-index/tests/fixtures/make_symlink_prefix_reuse_advisory.sh",
+        "gix-index/tests/fixtures/make_traverse_literal_separators.sh",
+        "gix-index/tests/index/**"
+      ],
+      "text": "gix-index/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-index/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-index/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-index."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-lfs/**"
+      ],
+      "text": "gix-lfs/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-lfs/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-lfs/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-lfs."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-lock/**"
+      ],
+      "text": "gix-lock/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-lock/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-lock/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-lock."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-macros/**"
+      ],
+      "text": "gix-macros/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-macros/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-macros/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Jiahao XU <Jiahao_XU@outlook.com>, Andre Bogus <bogusandre@gmail.com>, Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-macros."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-mailmap/CHANGELOG.md",
+        "gix-mailmap/Cargo.toml",
+        "gix-mailmap/LICENSE-APACHE",
+        "gix-mailmap/LICENSE-MIT",
+        "gix-mailmap/fuzz/**",
+        "gix-mailmap/src/**",
+        "gix-mailmap/tests/fixtures/invalid.txt",
+        "gix-mailmap/tests/fixtures/make_mailmap_baseline.sh",
+        "gix-mailmap/tests/fixtures/overwrite.txt",
+        "gix-mailmap/tests/fixtures/typical.txt",
+        "gix-mailmap/tests/mailmap/**"
+      ],
+      "text": "gix-mailmap/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-mailmap/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-mailmap/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-mailmap."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-merge/CHANGELOG.md",
+        "gix-merge/Cargo.toml",
+        "gix-merge/LICENSE-APACHE",
+        "gix-merge/LICENSE-MIT",
+        "gix-merge/benches/**",
+        "gix-merge/fuzz/**",
+        "gix-merge/src/**",
+        "gix-merge/tests/fixtures/make_blob_repo.sh",
+        "gix-merge/tests/fixtures/text-baseline.sh",
+        "gix-merge/tests/fixtures/tree-baseline.sh",
+        "gix-merge/tests/fixtures/tree-cartesian-baseline.sh",
+        "gix-merge/tests/merge/**"
+      ],
+      "text": "gix-merge/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-merge/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-merge/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-merge."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-negotiate/CHANGELOG.md",
+        "gix-negotiate/Cargo.toml",
+        "gix-negotiate/LICENSE-APACHE",
+        "gix-negotiate/LICENSE-MIT",
+        "gix-negotiate/src/**",
+        "gix-negotiate/tests/baseline/**",
+        "gix-negotiate/tests/fixtures/make_repos.sh",
+        "gix-negotiate/tests/negotiate.rs"
+      ],
+      "text": "gix-negotiate/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-negotiate/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-negotiate/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-negotiate."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-note/**"
+      ],
+      "text": "gix-note/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-note/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-note/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-note."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-object/CHANGELOG.md",
+        "gix-object/Cargo.toml",
+        "gix-object/LICENSE-APACHE",
+        "gix-object/LICENSE-MIT",
+        "gix-object/benches/**",
+        "gix-object/fuzz/**",
+        "gix-object/src/**",
+        "gix-object/tests/fixtures/.gitattributes",
+        "gix-object/tests/fixtures/commit/**",
+        "gix-object/tests/fixtures/make_trees.sh",
+        "gix-object/tests/fixtures/tag/**",
+        "gix-object/tests/object/**"
+      ],
+      "text": "gix-object/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-object/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-object/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-object."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-odb/CHANGELOG.md",
+        "gix-odb/Cargo.toml",
+        "gix-odb/LICENSE-APACHE",
+        "gix-odb/LICENSE-MIT",
+        "gix-odb/src/**",
+        "gix-odb/tests/doctest.rs",
+        "gix-odb/tests/fixtures/generated-archives/.gitignore",
+        "gix-odb/tests/fixtures/make_alternates_odb.sh",
+        "gix-odb/tests/fixtures/make_replaced_history.sh",
+        "gix-odb/tests/fixtures/make_repo_multi_index.sh",
+        "gix-odb/tests/fixtures/repo_with_loose_objects.sh",
+        "gix-odb/tests/fixtures/repos/small-packs.git/HEAD",
+        "gix-odb/tests/fixtures/repos/small-packs.git/config",
+        "gix-odb/tests/fixtures/repos/small-packs.git/description",
+        "gix-odb/tests/fixtures/repos/small-packs.git/info/**",
+        "gix-odb/tests/fixtures/repos/small-packs.git/refs/**",
+        "gix-odb/tests/odb/**",
+        "gix-odb/tests/threaded.rs"
+      ],
+      "text": "gix-odb/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-odb/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-odb/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-odb."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-pack/CHANGELOG.md",
+        "gix-pack/Cargo.toml",
+        "gix-pack/LICENSE-APACHE",
+        "gix-pack/LICENSE-MIT",
+        "gix-pack/benches/**",
+        "gix-pack/fuzz/.gitignore",
+        "gix-pack/fuzz/Cargo.toml",
+        "gix-pack/fuzz/README.md",
+        "gix-pack/fuzz/fuzz_targets/**",
+        "gix-pack/fuzz/src/**",
+        "gix-pack/src/**",
+        "gix-pack/tests/fixtures/make_pack_gen_repo.sh",
+        "gix-pack/tests/fixtures/make_pack_gen_repo_multi_index.sh",
+        "gix-pack/tests/fixtures/objects/b8aa61be84b78d7fcff788e8d844406cc97132bf.txt",
+        "gix-pack/tests/fixtures/objects/f139391424a8c623adadf2388caec73e5e90865b.txt",
+        "gix-pack/tests/pack/**"
+      ],
+      "text": "gix-pack/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-pack/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-pack/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-pack."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-packetline/CHANGELOG.md",
+        "gix-packetline/Cargo.toml",
+        "gix-packetline/LICENSE-APACHE",
+        "gix-packetline/LICENSE-MIT",
+        "gix-packetline/fuzz/.gitignore",
+        "gix-packetline/fuzz/Cargo.toml",
+        "gix-packetline/fuzz/fuzz_targets/**",
+        "gix-packetline/src/**",
+        "gix-packetline/tests/packetline/**"
+      ],
+      "text": "gix-packetline/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-packetline/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-packetline/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-packetline."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-parallel/**"
+      ],
+      "text": "gix-parallel/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-parallel/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-parallel/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-parallel."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-path/**"
+      ],
+      "text": "gix-path/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-path/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-path/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-path."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-pathspec/CHANGELOG.md",
+        "gix-pathspec/Cargo.toml",
+        "gix-pathspec/LICENSE-APACHE",
+        "gix-pathspec/LICENSE-MIT",
+        "gix-pathspec/README.md",
+        "gix-pathspec/fuzz/**",
+        "gix-pathspec/src/**",
+        "gix-pathspec/tests/defaults.rs",
+        "gix-pathspec/tests/fixtures/match_baseline_dirs.sh",
+        "gix-pathspec/tests/fixtures/match_baseline_files.sh",
+        "gix-pathspec/tests/fixtures/parse_baseline.sh",
+        "gix-pathspec/tests/normalize/**",
+        "gix-pathspec/tests/parse/**",
+        "gix-pathspec/tests/pathspec.rs",
+        "gix-pathspec/tests/search/**",
+        "gix-pathspec/tests/threaded.rs"
+      ],
+      "text": "gix-pathspec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-pathspec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-pathspec/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-pathspec."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-prompt/**"
+      ],
+      "text": "gix-prompt/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-prompt/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-prompt/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-prompt."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-protocol/CHANGELOG.md",
+        "gix-protocol/Cargo.toml",
+        "gix-protocol/LICENSE-APACHE",
+        "gix-protocol/LICENSE-MIT",
+        "gix-protocol/src/**",
+        "gix-protocol/tests/async-protocol.rs",
+        "gix-protocol/tests/blocking-protocol.rs",
+        "gix-protocol/tests/fixtures/.gitattributes",
+        "gix-protocol/tests/fixtures/v1/fetch-no-pack.response",
+        "gix-protocol/tests/fixtures/v2/fetch-err-line.response",
+        "gix-protocol/tests/fixtures/v2/fetch-no-pack.response",
+        "gix-protocol/tests/protocol/**"
+      ],
+      "text": "gix-protocol/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-protocol/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-protocol/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-protocol."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-quote/**"
+      ],
+      "text": "gix-quote/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-quote/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-quote/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-quote."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-rebase/**"
+      ],
+      "text": "gix-rebase/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-rebase/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-rebase/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-rebase."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-ref/CHANGELOG.md",
+        "gix-ref/Cargo.toml",
+        "gix-ref/LICENSE-APACHE",
+        "gix-ref/LICENSE-MIT",
+        "gix-ref/fuzz/**",
+        "gix-ref/src/**",
+        "gix-ref/tests/fixtures/generated-archives/.gitignore",
+        "gix-ref/tests/fixtures/make_multi_hop_ref.sh",
+        "gix-ref/tests/fixtures/make_namespaced_packed_ref_repository.sh",
+        "gix-ref/tests/fixtures/make_packed_ref_repository.sh",
+        "gix-ref/tests/fixtures/make_packed_ref_repository_for_overlay.sh",
+        "gix-ref/tests/fixtures/make_packed_refs_for_lookup_rules.sh",
+        "gix-ref/tests/fixtures/make_pristine.sh",
+        "gix-ref/tests/fixtures/make_pseudo_ref_repository.sh",
+        "gix-ref/tests/fixtures/make_ref_repository.sh",
+        "gix-ref/tests/fixtures/make_repo_for_1850_repro.sh",
+        "gix-ref/tests/fixtures/make_repo_for_1928_repro.sh",
+        "gix-ref/tests/fixtures/make_repo_for_reflog.sh",
+        "gix-ref/tests/fixtures/make_repository_with_lots_of_packed_refs.sh",
+        "gix-ref/tests/fixtures/make_worktree_repo.sh",
+        "gix-ref/tests/fixtures/packed-refs/**",
+        "gix-ref/tests/refs/**",
+        "gix-ref/tests/threaded.rs",
+        "gix-ref/tests/transaction_fd_limit.rs"
+      ],
+      "text": "gix-ref/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-ref/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-ref/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-ref."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-refspec/CHANGELOG.md",
+        "gix-refspec/Cargo.toml",
+        "gix-refspec/LICENSE-APACHE",
+        "gix-refspec/LICENSE-MIT",
+        "gix-refspec/README.md",
+        "gix-refspec/fuzz/**",
+        "gix-refspec/src/**",
+        "gix-refspec/tests/fixtures/generated-archives/.gitignore",
+        "gix-refspec/tests/fixtures/match_baseline.sh",
+        "gix-refspec/tests/fixtures/parse_baseline.sh",
+        "gix-refspec/tests/refspec/**"
+      ],
+      "text": "gix-refspec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-refspec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-refspec/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-refspec."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-revision/CHANGELOG.md",
+        "gix-revision/Cargo.toml",
+        "gix-revision/LICENSE-APACHE",
+        "gix-revision/LICENSE-MIT",
+        "gix-revision/README.md",
+        "gix-revision/fuzz/**",
+        "gix-revision/src/**",
+        "gix-revision/tests/fixtures/make_merge_base_repos.sh",
+        "gix-revision/tests/fixtures/make_repo_with_branches.sh",
+        "gix-revision/tests/fixtures/merge_base_octopus_repos.sh",
+        "gix-revision/tests/revision/**"
+      ],
+      "text": "gix-revision/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-revision/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-revision/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-revision."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-revwalk/**"
+      ],
+      "text": "gix-revwalk/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-revwalk/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-revwalk/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-revwalk."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-sec/**"
+      ],
+      "text": "gix-sec/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-sec/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-sec/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-sec."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-sequencer/**"
+      ],
+      "text": "gix-sequencer/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-sequencer/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-sequencer/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-sequencer."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-shallow/**"
+      ],
+      "text": "gix-shallow/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-shallow/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-shallow/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-shallow."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-status/CHANGELOG.md",
+        "gix-status/Cargo.toml",
+        "gix-status/LICENSE-APACHE",
+        "gix-status/LICENSE-MIT",
+        "gix-status/src/**",
+        "gix-status/tests/fixtures/conflicts.sh",
+        "gix-status/tests/fixtures/generated-archives/.gitignore",
+        "gix-status/tests/fixtures/racy_git.sh",
+        "gix-status/tests/fixtures/status_changed.sh",
+        "gix-status/tests/fixtures/status_conflict.sh",
+        "gix-status/tests/fixtures/status_intent_to_add.sh",
+        "gix-status/tests/fixtures/status_many.sh",
+        "gix-status/tests/fixtures/status_nonfile.sh",
+        "gix-status/tests/fixtures/status_removed.sh",
+        "gix-status/tests/fixtures/status_submodule.sh",
+        "gix-status/tests/fixtures/status_tracked_dir_replaced_with_symlink.sh",
+        "gix-status/tests/fixtures/status_unchanged.sh",
+        "gix-status/tests/fixtures/status_unchanged_filter.sh",
+        "gix-status/tests/fixtures/symlink_stack.sh",
+        "gix-status/tests/fixtures/unreadable_untracked.sh",
+        "gix-status/tests/status/**"
+      ],
+      "text": "gix-status/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-status/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-status/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, Pascal Kuthe <pascal.kuthe@semimod.de>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-status."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-submodule/CHANGELOG.md",
+        "gix-submodule/Cargo.toml",
+        "gix-submodule/LICENSE-APACHE",
+        "gix-submodule/LICENSE-MIT",
+        "gix-submodule/src/**",
+        "gix-submodule/tests/file/**",
+        "gix-submodule/tests/fixtures/basic.sh",
+        "gix-submodule/tests/submodule.rs"
+      ],
+      "text": "gix-submodule/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-submodule/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-submodule/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-submodule."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-tempfile/**"
+      ],
+      "text": "gix-tempfile/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tempfile/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tempfile/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tempfile."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-tix/AGENTS.md",
+        "gix-tix/CHANGELOG.md",
+        "gix-tix/Cargo.toml",
+        "gix-tix/LICENSE-APACHE",
+        "gix-tix/LICENSE-MIT",
+        "gix-tix/README.md",
+        "gix-tix/spec.md",
+        "gix-tix/src/**",
+        "gix-tix/tests/fixtures/auto_merge.sh",
+        "gix-tix/tests/fixtures/console-editor.ps1",
+        "gix-tix/tests/fixtures/create_below.sh",
+        "gix-tix/tests/fixtures/create_commit.sh",
+        "gix-tix/tests/fixtures/forget_commit.sh",
+        "gix-tix/tests/fixtures/generated-archives/.gitignore",
+        "gix-tix/tests/fixtures/history.sh",
+        "gix-tix/tests/fixtures/rebase_conflict.sh",
+        "gix-tix/tests/fixtures/rebase_edit.sh",
+        "gix-tix/tests/fixtures/rebase_merge.sh",
+        "gix-tix/tests/fixtures/replace-editor.ps1",
+        "gix-tix/tests/fixtures/split_commit.sh",
+        "gix-tix/tests/fixtures/with-console.ps1"
+      ],
+      "text": "gix-tix/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tix/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tix/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tix."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-transport/CHANGELOG.md",
+        "gix-transport/Cargo.toml",
+        "gix-transport/LICENSE-APACHE",
+        "gix-transport/LICENSE-MIT",
+        "gix-transport/fuzz/.gitignore",
+        "gix-transport/fuzz/Cargo.toml",
+        "gix-transport/fuzz/corpus/capabilities_from_lines/**",
+        "gix-transport/fuzz/corpus/capabilities_handshake/valid-v2-github-agent-fetch-filter.txt",
+        "gix-transport/fuzz/corpus/capabilities_handshake/valid-v2-googlesource-no-newlines.txt",
+        "gix-transport/fuzz/fuzz_targets/**",
+        "gix-transport/fuzz/src/**",
+        "gix-transport/src/**",
+        "gix-transport/tests/async-transport.rs",
+        "gix-transport/tests/blocking-transport-http-reqwest.rs",
+        "gix-transport/tests/blocking-transport-http.rs",
+        "gix-transport/tests/blocking-transport.rs",
+        "gix-transport/tests/client/**",
+        "gix-transport/tests/fixtures/.gitattributes",
+        "gix-transport/tests/fixtures/generated-archives/**",
+        "gix-transport/tests/fixtures/http-401.response",
+        "gix-transport/tests/fixtures/http-404.response",
+        "gix-transport/tests/fixtures/http-500.response",
+        "gix-transport/tests/fixtures/make_transport_baseline.sh",
+        "gix-transport/tests/fixtures/v1/push.response",
+        "gix-transport/tests/fixtures/v2/handshake-sha256.response",
+        "gix-transport/tests/fixtures/v2/http-handshake-lowercase-headers.response",
+        "gix-transport/tests/fixtures/v2/http-handshake-service-announced.response",
+        "gix-transport/tests/fixtures/v2/http-handshake-sha256.response",
+        "gix-transport/tests/fixtures/v2/http-handshake.response",
+        "gix-transport/tests/fixtures/v2/http-lsrefs.response",
+        "gix-transport/tests/fixtures/v2/http-no-newlines-handshake.response",
+        "gix-transport/tests/http_helpers/**"
+      ],
+      "text": "gix-transport/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-transport/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-transport/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-transport."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-traverse/CHANGELOG.md",
+        "gix-traverse/Cargo.toml",
+        "gix-traverse/LICENSE-APACHE",
+        "gix-traverse/LICENSE-MIT",
+        "gix-traverse/src/**",
+        "gix-traverse/tests/fixtures/make_repo_for_hidden_bug.sh",
+        "gix-traverse/tests/fixtures/make_repo_for_topo.sh",
+        "gix-traverse/tests/fixtures/make_repos.sh",
+        "gix-traverse/tests/fixtures/make_traversal_repo_for_commits_same_date.sh",
+        "gix-traverse/tests/fixtures/make_traversal_repo_for_commits_with_dates.sh",
+        "gix-traverse/tests/fixtures/make_traversal_repo_for_trees.sh",
+        "gix-traverse/tests/fixtures/make_traversal_repo_for_trees_depthfirst.sh",
+        "gix-traverse/tests/traverse/**"
+      ],
+      "text": "gix-traverse/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-traverse/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-traverse/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-traverse."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-tui/**"
+      ],
+      "text": "gix-tui/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-tui/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-tui/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-tui."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-url/CHANGELOG.md",
+        "gix-url/Cargo.toml",
+        "gix-url/LICENSE-APACHE",
+        "gix-url/LICENSE-MIT",
+        "gix-url/fuzz/**",
+        "gix-url/src/**",
+        "gix-url/tests/fixtures/fuzzed/illegal-utf8.url",
+        "gix-url/tests/fixtures/fuzzed/short-panic.url",
+        "gix-url/tests/fixtures/fuzzed/very-long-abort.url",
+        "gix-url/tests/fixtures/fuzzed/very-long-abort2.url",
+        "gix-url/tests/fixtures/generated-archives/**",
+        "gix-url/tests/fixtures/make_baseline.sh",
+        "gix-url/tests/url/**"
+      ],
+      "text": "gix-url/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-url/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-url/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-url."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-utils/**"
+      ],
+      "text": "gix-utils/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-utils/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-utils/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-utils."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-validate/**"
+      ],
+      "text": "gix-validate/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-validate/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-validate/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-validate."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-worktree/CHANGELOG.md",
+        "gix-worktree/Cargo.toml",
+        "gix-worktree/LICENSE-APACHE",
+        "gix-worktree/LICENSE-MIT",
+        "gix-worktree/benches/**",
+        "gix-worktree/src/**",
+        "gix-worktree/tests/fixtures/generated-archives/.gitignore",
+        "gix-worktree/tests/fixtures/make_attributes_baseline.sh",
+        "gix-worktree/tests/fixtures/make_ignore_and_attributes_setup.sh",
+        "gix-worktree/tests/fixtures/make_sparse_baseline.sh",
+        "gix-worktree/tests/fixtures/make_special_exclude_case.sh",
+        "gix-worktree/tests/fixtures/make_symlinked_ignore_repo.sh",
+        "gix-worktree/tests/fixtures/make_worktree_lock_symlinks.sh",
+        "gix-worktree/tests/fixtures/symlink_stack.sh",
+        "gix-worktree/tests/worktree/**"
+      ],
+      "text": "gix-worktree/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-worktree-state/CHANGELOG.md",
+        "gix-worktree-state/Cargo.toml",
+        "gix-worktree-state/LICENSE-APACHE",
+        "gix-worktree-state/LICENSE-MIT",
+        "gix-worktree-state/src/**",
+        "gix-worktree-state/tests/fixtures/generated-archives/.gitignore",
+        "gix-worktree-state/tests/fixtures/make_dangerous_symlink.sh",
+        "gix-worktree-state/tests/fixtures/make_dangling_symlink.sh",
+        "gix-worktree-state/tests/fixtures/make_dangling_symlink_to_windows_invalid.sh",
+        "gix-worktree-state/tests/fixtures/make_dangling_symlink_to_windows_reserved.sh",
+        "gix-worktree-state/tests/fixtures/make_dir_symlink.sh",
+        "gix-worktree-state/tests/fixtures/make_ignorecase_collisions.sh",
+        "gix-worktree-state/tests/fixtures/make_mixed.sh",
+        "gix-worktree-state/tests/fixtures/make_mixed_without_submodules.sh",
+        "gix-worktree-state/tests/fixtures/make_mixed_without_submodules_and_symlinks.sh",
+        "gix-worktree-state/tests/fixtures/make_symlink_chains.sh",
+        "gix-worktree-state/tests/fixtures/make_traverse_trees.sh",
+        "gix-worktree-state/tests/worktree-state/**"
+      ],
+      "text": "gix-worktree-state/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree-state/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree-state/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree-state."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-worktree-stream/**"
+      ],
+      "text": "gix-worktree-stream/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-worktree-stream/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-worktree-stream/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-worktree-stream."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "gix-zlib/**"
+      ],
+      "text": "gix-zlib/LICENSE-MIT:\n\n../LICENSE-MIT\n\ngix-zlib/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: gix-zlib/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/gix-zlib."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        "tests/tools/.gitignore",
+        "tests/tools/CHANGELOG.md",
+        "tests/tools/Cargo.lock",
+        "tests/tools/Cargo.toml",
+        "tests/tools/LICENSE-APACHE",
+        "tests/tools/LICENSE-MIT",
+        "tests/tools/src/lib.rs",
+        "tests/tools/src/main.rs",
+        "tests/tools/src/repository/**",
+        "tests/tools/src/sbom/**",
+        "tests/tools/src/scripted_fixture_prelude.sh",
+        "tests/tools/src/signature/fixtures/openpgp-public.asc",
+        "tests/tools/src/signature/fixtures/openpgp-secret.asc",
+        "tests/tools/src/signature/fixtures/regenerate.sh",
+        "tests/tools/src/signature/fixtures/ssh-allowed-signers",
+        "tests/tools/src/signature/fixtures/ssh-private",
+        "tests/tools/src/signature/fixtures/ssh-private.pub",
+        "tests/tools/src/signature/fixtures/x509-cert.pem",
+        "tests/tools/src/signature/fixtures/x509-key.pem",
+        "tests/tools/src/signature.rs",
+        "tests/tools/src/tests.rs",
+        "tests/tools/tests/**"
+      ],
+      "text": "tests/tools/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ntests/tools/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: tests/tools/Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Sebastian Thiel <sebastian.thiel@icloud.com>, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/GitoxideLabs/gitoxide/tree/d568e8b781c5e548302ba02b1bfd9ee9e4dac8ff/tests/tools."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.alpine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.blob"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crlf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.git-patch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.response"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stderr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test-cross"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.url"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-APACHE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/all-stats-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/annotated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-delete-pack-to-sink-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-delete-pack-to-sink-skip-checks-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-with-objects-dir-skip-checks-success-tree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-with-objects-dir-skip-checks-success-tree-miniz-oxide"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-with-objects-dir-skip-checks-success-tree-miniz-oxide-max"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/broken-with-objects-dir-skip-checks-success-tree-zlib-ng"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clusterfuzz-testcase-minimized-gix-config-parse-6431708583690240"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/co-authored-by-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/control-characters-rich"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/control-characters-simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crash-c4cbe6c3aa15981778a7b4015f121193b0514fe7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crash-da4b9237bacccdf19c0760cab7aec4a8359010b0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crash-db642036f9f911db1d84a0afa9f08245a2a9439d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/directory-structure-after-organize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/directory-structure-after-organize-to-new-root"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/execute-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/execute-success-new-root"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/expected-failure-in-thread"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/explicit-ssh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fail-ambiguous-host"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fail-ambiguous-path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fail-with-multi-element-directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fast-index-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-index-vs-worktree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-stats-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-json-p2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-non-existing-single-ref"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-p2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-single-ref"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-no-output-wanted-ref-p1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-with-output"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file-v-any-with-output-p2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/implicit-ssh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/index-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/index-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/index-with-statistics-json-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/index-with-statistics-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/initial-directory-structure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalid-branch-name-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/line-stats-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ls-in-output-dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/missing-directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/missing-objects-dir-fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-args-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-args-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-output-dir-as-json-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-output-dir-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-unify-identities-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/output-dir-content"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/output-dir-restore-as-json-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/output-dir-restore-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/output-dir-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pack receive-no-networking-in-small-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/positional-output-order"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remote ref-list-no-networking-in-small-failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/same-paths-from-stdin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/show-pii-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/slow-unit-56346dc9beb9fa1fa587043431b1f201f1792a5a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh-allowed-signers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ssh-private"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statistics-json-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/statistics-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stdin-paths-relative-to-cwd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/success-format-human"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/success-format-json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/success-with-multi-element-directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/to-sink-delete-pack-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/to-sink-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tracked-path-with-ignore-patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tracked-paths-below-ignored-directories"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/triggers-out-of-bounds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unannotated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unsorted"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with-objects-dir-success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with-objects-dir-success-tree"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/without-header"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

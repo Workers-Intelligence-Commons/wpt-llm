@@ -1,0 +1,1325 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pypa/pipenv",
+  "revision": "ca91943611d36b4d820c7d40fd98f56e9db62d45",
+  "checksum": "sha256:da979e3f2f539c652147beb43dc4f0f141bd3f85f44278786febc223d3d4af7f",
+  "extract": {
+    "exclude": [
+      "docs/_static/pipenv.png",
+      "pipenv/patched/pip/COPYING",
+      "pipenv/patched/pip/LICENSE",
+      "pipenv/patched/pip/LICENSE.APACHE",
+      "pipenv/patched/pip/LICENSE.BSD",
+      "pipenv/patched/pip/LICENSE.md",
+      "pipenv/patched/pip/LICENSE.txt",
+      "pipenv/patched/pip/__init__.py",
+      "pipenv/patched/pip/__main__.py",
+      "pipenv/patched/pip/__pip-runner__.py",
+      "pipenv/patched/pip/_internal/**",
+      "pipenv/patched/pip/_vendor/README.rst",
+      "pipenv/patched/pip/_vendor/__init__.py",
+      "pipenv/patched/pip/_vendor/bom.cdx.json",
+      "pipenv/patched/pip/_vendor/cachecontrol/**",
+      "pipenv/patched/pip/_vendor/certifi/**",
+      "pipenv/patched/pip/_vendor/distlib/**",
+      "pipenv/patched/pip/_vendor/msgpack/**",
+      "pipenv/patched/pip/_vendor/packaging/**",
+      "pipenv/patched/pip/_vendor/pkg_resources/**",
+      "pipenv/patched/pip/_vendor/requests/**",
+      "pipenv/patched/pip/_vendor/urllib3/contrib/**",
+      "pipenv/patched/pip/_vendor/vendor.txt",
+      "pipenv/patched/pip/py.typed",
+      "pipenv/vendor/Makefile",
+      "pipenv/vendor/README.md",
+      "pipenv/vendor/__init__.py",
+      "pipenv/vendor/dotenv/**",
+      "pipenv/vendor/packaging/**",
+      "pipenv/vendor/pexpect/**",
+      "pipenv/vendor/pipdeptree/**",
+      "pipenv/vendor/python_dotenv.LICENSE",
+      "pipenv/vendor/ruamel/**",
+      "pipenv/vendor/tomlkit/**",
+      "pipenv/vendor/vendor.txt",
+      "tasks/vendoring/patches/vendor/**",
+      "tests/pypi/Cerberus/Cerberus-1.2.tar.gz",
+      "tests/pypi/alembic/alembic-0.9.8.tar.gz",
+      "tests/pypi/alembic/alembic-0.9.9.tar.gz",
+      "tests/pypi/apscheduler/APScheduler-3.5.1-py2.py3-none-any.whl",
+      "tests/pypi/apscheduler/APScheduler-3.5.1.tar.gz",
+      "tests/pypi/backports-csv/backports.csv-1.0.7.tar.gz",
+      "tests/pypi/backports-html/backports.html-1.1.0.tar.gz",
+      "tests/pypi/cerberus/**",
+      "tests/pypi/certifi/certifi-2018.1.18-py2.py3-none-any.whl",
+      "tests/pypi/certifi/certifi-2018.1.18.tar.gz",
+      "tests/pypi/certifi/certifi-2018.4.16-py2.py3-none-any.whl",
+      "tests/pypi/certifi/certifi-2018.4.16.tar.gz",
+      "tests/pypi/certifi/certifi-2020.4.5.1-py2.py3-none-any.whl",
+      "tests/pypi/certifi/certifi-2020.4.5.1.tar.gz",
+      "tests/pypi/chardet/chardet-3.0.4-py2.py3-none-any.whl",
+      "tests/pypi/chardet/chardet-3.0.4.tar.gz",
+      "tests/pypi/click/click-6.7-py2.py3-none-any.whl",
+      "tests/pypi/click/click-6.7.tar.gz",
+      "tests/pypi/click/click-7.1.1-py2.py3-none-any.whl",
+      "tests/pypi/click/click-7.1.1.tar.gz",
+      "tests/pypi/colorama/colorama-0.3.9-py2.py3-none-any.whl",
+      "tests/pypi/cython-import-package/cython_import_package-0.0.1.tar.gz",
+      "tests/pypi/dateparser/dateparser-0.7.0-py2.py3-none-any.whl",
+      "tests/pypi/dateparser/dateparser-0.7.0.tar.gz",
+      "tests/pypi/depends-on-marked-package/depends_on_marked_package-0.0.1-py2.py3-none-any.whl",
+      "tests/pypi/django/Django-1.11.10-py2.py3-none-any.whl",
+      "tests/pypi/django/Django-1.11.10.tar.gz",
+      "tests/pypi/django/Django-1.11.13-py2.py3-none-any.whl",
+      "tests/pypi/django/Django-1.11.13.tar.gz",
+      "tests/pypi/django/Django-2.0.6-py3-none-any.whl",
+      "tests/pypi/django/Django-2.0.6.tar.gz",
+      "tests/pypi/django-classy-tags/django-classy-tags-0.8.0.tar.gz",
+      "tests/pypi/django-classy-tags/django_classy_tags-0.8.0-py2.py3-none-any.whl",
+      "tests/pypi/django-formtools/django-formtools-2.1.tar.gz",
+      "tests/pypi/django-formtools/django_formtools-2.1-py2.py3-none-any.whl",
+      "tests/pypi/django-sekizai/django-sekizai-0.10.0.tar.gz",
+      "tests/pypi/django-sekizai/django_sekizai-0.10.0-py2.py3-none-any.whl",
+      "tests/pypi/django-treebeard/django-treebeard-4.2.0.tar.gz",
+      "tests/pypi/djangocms-admin-style/djangocms-admin-style-1.2.7.tar.gz",
+      "tests/pypi/docopt/docopt-0.6.2.tar.gz",
+      "tests/pypi/enum34/enum34-1.1.6-py2-none-any.whl",
+      "tests/pypi/enum34/enum34-1.1.6-py3-none-any.whl",
+      "tests/pypi/enum34/enum34-1.1.6.tar.gz",
+      "tests/pypi/enum34/enum34-1.1.6.zip",
+      "tests/pypi/et-xmlfile/et_xmlfile-1.0.1.tar.gz",
+      "tests/pypi/fake-package/fake_package-0.0.1-py2.py3-none-any.whl",
+      "tests/pypi/fake-package/fake_package-0.0.1.tar.gz",
+      "tests/pypi/fixtures/django/**",
+      "tests/pypi/flask/Flask-0.12.2-py2.py3-none-any.whl",
+      "tests/pypi/flask/Flask-0.12.2.tar.gz",
+      "tests/pypi/flask/Flask-1.1.2-py2.py3-none-any.whl",
+      "tests/pypi/flask/Flask-1.1.2.tar.gz",
+      "tests/pypi/funcsigs/funcsigs-1.0.2-py2.py3-none-any.whl",
+      "tests/pypi/funcsigs/funcsigs-1.0.2.tar.gz",
+      "tests/pypi/functools32/functools32-3.2.3-2.tar.gz",
+      "tests/pypi/functools32/functools32-3.2.3-2.zip",
+      "tests/pypi/futures/futures-3.2.0-py2-none-any.whl",
+      "tests/pypi/futures/futures-3.2.0.tar.gz",
+      "tests/pypi/gitdb2/gitdb2-2.0.3-py2.py3-none-any.whl",
+      "tests/pypi/gitdb2/gitdb2-2.0.3.tar.gz",
+      "tests/pypi/humanize/humanize-0.5.1.tar.gz",
+      "tests/pypi/ibm-db-sa-py3/ibm-db-sa-py3-0.3.0.tar.gz",
+      "tests/pypi/ibm-db-sa-py3/ibm-db-sa-py3-0.3.1.post1.tar.gz",
+      "tests/pypi/idna/idna-2.6-py2.py3-none-any.whl",
+      "tests/pypi/idna/idna-2.6.tar.gz",
+      "tests/pypi/idna/idna-2.7-py2.py3-none-any.whl",
+      "tests/pypi/idna/idna-2.7.tar.gz",
+      "tests/pypi/itsdangerous/itsdangerous-0.24.tar.gz",
+      "tests/pypi/itsdangerous/itsdangerous-1.1.0-py2.py3-none-any.whl",
+      "tests/pypi/itsdangerous/itsdangerous-1.1.0.tar.gz",
+      "tests/pypi/jdcal/jdcal-1.3.tar.gz",
+      "tests/pypi/jdcal/jdcal-1.4-py2.py3-none-any.whl",
+      "tests/pypi/jdcal/jdcal-1.4.tar.gz",
+      "tests/pypi/jinja2/Jinja2-2.10-py2.py3-none-any.whl",
+      "tests/pypi/jinja2/Jinja2-2.10.tar.gz",
+      "tests/pypi/jinja2/Jinja2-2.11.1-py2.py3-none-any.whl",
+      "tests/pypi/jinja2/Jinja2-2.11.1.tar.gz",
+      "tests/pypi/legacy-backend-package/legacy_backend_package-0.0.1.tar.gz",
+      "tests/pypi/mako/Mako-1.0.7.tar.gz",
+      "tests/pypi/markupsafe/MarkupSafe-1.0.tar.gz",
+      "tests/pypi/markupsafe/MarkupSafe-1.1.1.tar.gz",
+      "tests/pypi/maya/maya-0.3.4-py2.py3-none-any.whl",
+      "tests/pypi/maya/maya-0.3.4.tar.gz",
+      "tests/pypi/maya/maya-0.5.0-py2.py3-none-any.whl",
+      "tests/pypi/maya/maya-0.5.0.tar.gz",
+      "tests/pypi/multidict/multidict-4.1.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/multidict/multidict-4.1.0.tar.gz",
+      "tests/pypi/odfpy/odfpy-1.3.6-py2.7.egg",
+      "tests/pypi/odfpy/odfpy-1.3.6.tar.gz",
+      "tests/pypi/openpyxl/openpyxl-2.5.0.tar.gz",
+      "tests/pypi/openpyxl/openpyxl-2.5.4.tar.gz",
+      "tests/pypi/pandas/pandas-0.22.0-cp27-cp27m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp27-cp27mu-manylinux1_i686.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp27-cp27mu-manylinux1_x86_64.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/parse/parse-1.8.2.tar.gz",
+      "tests/pypi/pathlib2/pathlib2-2.3.2-py2.py3-none-any.whl",
+      "tests/pypi/pathlib2/pathlib2-2.3.2.tar.gz",
+      "tests/pypi/pendulum/pendulum-1.4.4-cp27-cp27m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-1.4.4-cp36-cp36m-macosx_10_13_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-1.4.4-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-1.4.4.tar.gz",
+      "tests/pypi/pendulum/pendulum-1.5.1-cp27-cp27m-manylinux1_i686.whl",
+      "tests/pypi/pendulum/pendulum-1.5.1-cp27-cp27m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-1.5.1-cp36-cp36m-manylinux1_i686.whl",
+      "tests/pypi/pendulum/pendulum-1.5.1-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-1.5.1.tar.gz",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp27-cp27m-macosx_10_13_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp35-cp35m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-macosx_10_13_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-macosx_10_13_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-win_amd64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38-macosx_10_13_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38-manylinux1_x86_64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38m-win_amd64.whl",
+      "tests/pypi/pendulum/pendulum-2.1.0.tar.gz",
+      "tests/pypi/plette/plette-0.2.2-py2.py3-none-any.whl",
+      "tests/pypi/poetry/poetry-1.0.5-py2.py3-none-any.whl",
+      "tests/pypi/poetry/poetry-1.0.5.tar.gz",
+      "tests/pypi/py/py-1.5.3-py2.py3-none-any.whl",
+      "tests/pypi/py/py-1.5.3.tar.gz",
+      "tests/pypi/pysocks/PySocks-1.6.8.tar.gz",
+      "tests/pypi/pytest/pytest-3.1.0-py2.py3-none-any.whl",
+      "tests/pypi/pytest/pytest-3.1.0.tar.gz",
+      "tests/pypi/pytest/pytest-3.1.1-py2.py3-none-any.whl",
+      "tests/pypi/pytest/pytest-3.1.1.tar.gz",
+      "tests/pypi/pytest/pytest-4.6.9-py2.py3-none-any.whl",
+      "tests/pypi/pytest/pytest-4.6.9.tar.gz",
+      "tests/pypi/python-dateutil/python-dateutil-2.6.1.tar.gz",
+      "tests/pypi/python-dateutil/python-dateutil-2.7.3.tar.gz",
+      "tests/pypi/python-dateutil/python_dateutil-2.6.1-py2.py3-none-any.whl",
+      "tests/pypi/python-dateutil/python_dateutil-2.7.3-py2.py3-none-any.whl",
+      "tests/pypi/python-editor/python-editor-1.0.3.tar.gz",
+      "tests/pypi/pytz/pytz-2018.3-py2.py3-none-any.whl",
+      "tests/pypi/pytz/pytz-2018.3.tar.gz",
+      "tests/pypi/pytz/pytz-2018.4-py2.py3-none-any.whl",
+      "tests/pypi/pytz/pytz-2018.4.tar.gz",
+      "tests/pypi/pytzdata/pytzdata-2018.3-py2.py3-none-any.whl",
+      "tests/pypi/pytzdata/pytzdata-2018.3.tar.gz",
+      "tests/pypi/pytzdata/pytzdata-2018.5-py2.py3-none-any.whl",
+      "tests/pypi/pytzdata/pytzdata-2018.5.tar.gz",
+      "tests/pypi/pyyaml/PyYAML-3.12-cp27-cp27m-win32.whl",
+      "tests/pypi/pyyaml/PyYAML-3.12-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/pyyaml/PyYAML-3.12-cp35-cp35m-win32.whl",
+      "tests/pypi/pyyaml/PyYAML-3.12-cp35-cp35m-win_amd64.whl",
+      "tests/pypi/pyyaml/PyYAML-3.12.tar.gz",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp27-cp27m-win32.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp35-cp35m-win32.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp36-cp36m-win32.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1-cp37-cp37m-win_amd64.whl",
+      "tests/pypi/pyyaml/PyYAML-5.1.1.tar.gz",
+      "tests/pypi/randomwords/RandomWords-0.2.1-py2.7.egg",
+      "tests/pypi/randomwords/RandomWords-0.2.1-py3.5.egg",
+      "tests/pypi/randomwords/RandomWords-0.2.1-py3.6.egg",
+      "tests/pypi/randomwords/RandomWords-0.2.1.tar.gz",
+      "tests/pypi/records/records-0.5.2-py2.py3-none-any.whl",
+      "tests/pypi/records/records-0.5.2.tar.gz",
+      "tests/pypi/regex/regex-2018.02.21-cp27-none-win_amd64.whl",
+      "tests/pypi/regex/regex-2018.02.21-cp36-none-win_amd64.whl",
+      "tests/pypi/regex/regex-2018.02.21.tar.gz",
+      "tests/pypi/regex/regex-2018.06.21-cp27-none-win_amd64.whl",
+      "tests/pypi/regex/regex-2018.06.21-cp36-none-win_amd64.whl",
+      "tests/pypi/regex/regex-2018.06.21-cp37-none-win_amd64.whl",
+      "tests/pypi/regex/regex-2018.06.21.tar.gz",
+      "tests/pypi/regex/regex-2020.4.4-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp37-cp37m-manylinux2010_x86_64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp37-cp37m-win_amd64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp38-cp38-manylinux2010_x86_64.1.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp38-cp38-manylinux2010_x86_64.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp38-cp38-win32.whl",
+      "tests/pypi/regex/regex-2020.4.4-cp38-cp38-win_amd64.whl",
+      "tests/pypi/regex/regex-2020.4.4.tar.gz",
+      "tests/pypi/requests/requests-1.0.0.tar.gz",
+      "tests/pypi/requests/requests-2.14.0-py2.py3-none-any.whl",
+      "tests/pypi/requests/requests-2.14.0.tar.gz",
+      "tests/pypi/requests/requests-2.18.4-py2.py3-none-any.whl",
+      "tests/pypi/requests/requests-2.18.4.tar.gz",
+      "tests/pypi/requests/requests-2.19.1-py2.py3-none-any.whl",
+      "tests/pypi/requests/requests-2.19.1.tar.gz",
+      "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-cp27m-manylinux1_x86_64.whl",
+      "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-cp27mu-manylinux1_x86_64.whl",
+      "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-none-win_amd64.whl",
+      "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9.tar.gz",
+      "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp27-cp27m-manylinux1_x86_64.whl",
+      "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp27-cp27mu-manylinux1_x86_64.whl",
+      "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9.tar.gz",
+      "tests/pypi/scandir/scandir-1.9.0-cp27-cp27m-win32.whl",
+      "tests/pypi/scandir/scandir-1.9.0-cp27-cp27m-win_amd64.whl",
+      "tests/pypi/scandir/scandir-1.9.0-cp36-cp36m-win32.whl",
+      "tests/pypi/scandir/scandir-1.9.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/scandir/scandir-1.9.0.tar.gz",
+      "tests/pypi/setuptools/setuptools-39.0.1-py2.py3-none-any.whl",
+      "tests/pypi/setuptools/setuptools-40.6.3-py2.py3-none-any.whl",
+      "tests/pypi/setuptools/setuptools-46.0.0-py3-none-any.whl",
+      "tests/pypi/setuptools/setuptools-46.0.0.zip",
+      "tests/pypi/setuptools/setuptools-63.4.2-py3-none-any.whl",
+      "tests/pypi/setuptools/setuptools-63.4.2.tar.gz",
+      "tests/pypi/setuptools/setuptools-68.0.0-py3-none-any.whl",
+      "tests/pypi/setuptools/setuptools-69.5.1-py3-none-any.whl",
+      "tests/pypi/six/six-1.11.0-py2.py3-none-any.whl",
+      "tests/pypi/six/six-1.11.0.tar.gz",
+      "tests/pypi/six/six-1.12.0-py2.py3-none-any.whl",
+      "tests/pypi/smmap2/smmap2-2.0.3-py2.py3-none-any.whl",
+      "tests/pypi/smmap2/smmap2-2.0.3.tar.gz",
+      "tests/pypi/snaptime/snaptime-0.2.4.tar.gz",
+      "tests/pypi/sqlalchemy/SQLAlchemy-1.2.0b3.tar.gz",
+      "tests/pypi/sqlalchemy/SQLAlchemy-1.2.4.tar.gz",
+      "tests/pypi/sqlalchemy/SQLAlchemy-1.2.8.tar.gz",
+      "tests/pypi/tablib/tablib-0.11.5.tar.gz",
+      "tests/pypi/tablib/tablib-0.12.0.tar.gz",
+      "tests/pypi/tablib/tablib-0.12.1.tar.gz",
+      "tests/pypi/tablib/tablib-0.13.0.tar.gz",
+      "tests/pypi/test_package/test_package-1.0.0-py3-none-any.whl",
+      "tests/pypi/test_package/test_package-1.0.0.tar.gz",
+      "tests/pypi/tomlkit/tomlkit-0.5.3-py2.py3-none-any.whl",
+      "tests/pypi/tomlkit/tomlkit-0.5.3.tar.gz",
+      "tests/pypi/tpfd/tpfd-0.2.4-py2.py3-none-any.whl",
+      "tests/pypi/tpfd/tpfd-0.2.4.tar.gz",
+      "tests/pypi/typing/typing-3.6.6-py2-none-any.whl",
+      "tests/pypi/typing/typing-3.6.6-py3-none-any.whl",
+      "tests/pypi/typing/typing-3.6.6.tar.gz",
+      "tests/pypi/tzlocal/tzlocal-1.5.1.tar.gz",
+      "tests/pypi/unicodecsv/unicodecsv-0.14.1.tar.gz",
+      "tests/pypi/urllib3/urllib3-1.21.1-py2.py3-none-any.whl",
+      "tests/pypi/urllib3/urllib3-1.21.1.tar.gz",
+      "tests/pypi/urllib3/urllib3-1.22-py2.py3-none-any.whl",
+      "tests/pypi/urllib3/urllib3-1.22.tar.gz",
+      "tests/pypi/urllib3/urllib3-1.23-py2.py3-none-any.whl",
+      "tests/pypi/urllib3/urllib3-1.23.tar.gz",
+      "tests/pypi/vcrpy/vcrpy-1.11.0-py2.py3-none-any.whl",
+      "tests/pypi/vcrpy/vcrpy-1.11.0.tar.gz",
+      "tests/pypi/vcrpy/vcrpy-2.0.1-py2.py3-none-any.whl",
+      "tests/pypi/vcrpy/vcrpy-2.0.1.tar.gz",
+      "tests/pypi/werkzeug/Werkzeug-0.14.1-py2.py3-none-any.whl",
+      "tests/pypi/werkzeug/Werkzeug-0.14.1.tar.gz",
+      "tests/pypi/werkzeug/Werkzeug-1.0.1-py2.py3-none-any.whl",
+      "tests/pypi/werkzeug/Werkzeug-1.0.1.tar.gz",
+      "tests/pypi/wheel/wheel-0.31.0-py2.py3-none-any.whl",
+      "tests/pypi/wheel/wheel-0.32.3-py2.py3-none-any.whl",
+      "tests/pypi/wheel/wheel-0.34.2-py2.py3-none-any.whl",
+      "tests/pypi/wheel/wheel-0.34.2.tar.gz",
+      "tests/pypi/win-inet-pton/win_inet_pton-1.0.1.tar.gz",
+      "tests/pypi/wrapt/wrapt-1.10.11.tar.gz",
+      "tests/pypi/xlrd/xlrd-1.1.0-py2.py3-none-any.whl",
+      "tests/pypi/xlrd/xlrd-1.1.0.tar.gz",
+      "tests/pypi/xlwt/xlwt-1.3.0-py2.py3-none-any.whl",
+      "tests/pypi/xlwt/xlwt-1.3.0.tar.gz",
+      "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-manylinux1_i686.whl",
+      "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-win32.whl",
+      "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/yarl/yarl-1.1.1.tar.gz",
+      "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-manylinux1_i686.whl",
+      "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-win32.whl",
+      "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/yarl/yarl-1.2.0.tar.gz",
+      "tests/pypi/yarl/yarl-1.3.0-cp35-cp35m-manylinux1_x86_64.whl",
+      "tests/pypi/yarl/yarl-1.3.0-cp35-cp35m-win_amd64.whl",
+      "tests/pypi/yarl/yarl-1.3.0-cp36-cp36m-manylinux1_x86_64.whl",
+      "tests/pypi/yarl/yarl-1.3.0-cp36-cp36m-win_amd64.whl",
+      "tests/pypi/yarl/yarl-1.3.0-cp37-cp37m-win_amd64.whl",
+      "tests/pypi/yarl/yarl-1.3.0.tar.gz",
+      "tests/test_artifacts/django/**",
+      "tests/test_artifacts/extra_pypi/**",
+      "tests/test_artifacts/git/dateutil/**",
+      "tests/test_artifacts/git/flask/artwork/**",
+      "tests/test_artifacts/git/flask/docs/**",
+      "tests/test_artifacts/git/jinja2/docs/_static/jinja-small.png",
+      "tests/test_artifacts/git/jinja2/docs/_themes/**",
+      "tests/test_artifacts/git/jinja2/docs/logo.pdf",
+      "tests/test_artifacts/git/pinax/**",
+      "tests/test_artifacts/git/pyinstaller/**",
+      "tests/test_artifacts/git/requests/**",
+      "tests/test_artifacts/requests-2.19.1.tar.gz",
+      "tests/test_artifacts/six-1.11.0+mkl-py2.py3-none-any.whl"
+    ]
+  },
+  "history": {
+    "since": "c20e31935ba7458479cf74e9dc777ac9bf4c02dd"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0 AND BSD-3-Clause AND BSD-2-Clause AND 0BSD AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright 2020-2022 Python Packaging Authority\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nApache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nBSD 3-Clause License\n\nCopyright (c) 2013-2026, Kim Davies and contributors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nMIT License\n\nCopyright (c) 2010-202x The platformdirs developers\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2006-2022 by the respective authors (see AUTHORS file).\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n* Redistributions of source code must retain the above copyright\n  notice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright\n  notice, this list of conditions and the following disclaimer in the\n  documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 Thomas Kluyver\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nCopyright (c) 2020 Will McGugan\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 Taneli Hukkinen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2022 Seth Michael Larson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2008-2020 Andrey Petrov and contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright © 2019 Filipe Laíns <filipe.lains@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the \"Software\"),\nto deal in the Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, sublicense,\nand/or sell copies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice (including the next\nparagraph) shall be included in all copies or substantial portions of the\nSoftware.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n\n\nPtyprocess is under the ISC license, as code derived from Pexpect.\n    http://opensource.org/licenses/ISC\n\nCopyright (c) 2013-2014, Pexpect development team\nCopyright (c) 2012, Noah Spurrier <noah@noah.org>\n\nPERMISSION TO USE, COPY, MODIFY, AND/OR DISTRIBUTE THIS SOFTWARE FOR ANY PURPOSE\nWITH OR WITHOUT FEE IS HEREBY GRANTED, PROVIDED THAT THE ABOVE COPYRIGHT NOTICE\nAND THIS PERMISSION NOTICE APPEAR IN ALL COPIES. THE SOFTWARE IS PROVIDED\n\"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE\nINCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT\nSHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL\nDAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,\nWHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING\nOUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\n\nCopyright (c) 2018 Dan Ryan\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2019, Dan Ryan <dan@danryan.co>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2019 猿楽 Sarugaku\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright 2010 Pallets\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1.  Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n2.  Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\n3.  Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived from\n    this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A\nPARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright © 2010 by the Pallets team.\n\nSome rights reserved.\n\nRedistribution and use in source and binary forms of the software as\nwell as documentation, with or without modification, are permitted\nprovided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright\n  notice, this list of conditions and the following disclaimer in the\n  documentation and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE AND DOCUMENTATION IS PROVIDED BY THE COPYRIGHT HOLDERS AND\nCONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,\nBUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT\nNOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF\nUSE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE AND DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGE.\n\n\nCopyright (c) 2009 by the Jinja Team, see AUTHORS for more details.\r\n\r\nSome rights reserved.\r\n\r\nRedistribution and use in source and binary forms, with or without\r\nmodification, are permitted provided that the following conditions are\r\nmet:\r\n\r\n    * Redistributions of source code must retain the above copyright\r\n      notice, this list of conditions and the following disclaimer.\r\n\r\n    * Redistributions in binary form must reproduce the above\r\n      copyright notice, this list of conditions and the following\r\n      disclaimer in the documentation and/or other materials provided\r\n      with the distribution.\r\n\r\n    * The names of the contributors may not be used to endorse or\r\n      promote products derived from this software without specific\r\n      prior written permission.\r\n\r\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\r\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\r\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\r\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\r\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\r\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\r\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\r\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\r\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\r\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n\n\nCopyright (c) 2010-2019 Benjamin Peterson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/pypa/pipenv: Copyright 2020-2022 Python Packaging Authority, MIT license (LICENSE), https://github.com/pypa/pipenv; the authors of pypa/pipenv (pipenv/patched/pip/_vendor/distro) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/distro; Copyright (c) 2013-2026, Kim Davies and contributors., BSD-3-Clause license (LICENSE.md), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/idna; Copyright (c) 2010-202x The platformdirs developers, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/platformdirs; Copyright (c) 2006-2022 by the respective authors (see AUTHORS file)., BSD-2-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/pygments; Copyright (c) 2017 Thomas Kluyver, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/pyproject_hooks; Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/resolvelib; Copyright (c) 2020 Will McGugan, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/rich; Copyright (c) 2021 Taneli Hukkinen, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/tomli; Copyright (c) 2021 Taneli Hukkinen, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/tomli_w; Copyright (c) 2022 Seth Michael Larson, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/truststore; Copyright (c) 2008-2020 Andrey Petrov and contributors., MIT license (LICENSE.txt), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/urllib3; Copyright © 2019 Filipe Laíns <filipe.lains@gmail.com>, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/build; Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/plette; Copyright (c) 2013-2014, Pexpect development team; Copyright (c) 2012, Noah Spurrier <noah@noah.org>, ISC license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/ptyprocess; Copyright (c) 2017 Thomas Kluyver, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/pyproject_hooks; Copyright (c) 2018 Dan Ryan, MIT license (LICENSE.txt), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/pythonfinder; Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/shellingham; Copyright (c) 2019, Dan Ryan <dan@danryan.co>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/fixtures/fake-package; Copyright (c) 2019 猿楽 Sarugaku, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/pypi; Copyright 2010 Pallets, BSD-3-Clause license (LICENSE.rst), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask; Copyright © 2010 by the Pallets team., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask/examples/javascript; Copyright © 2010 by the Pallets team., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask/examples/tutorial; Copyright (c) 2009 by the Jinja Team, see AUTHORS for more details., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/jinja2; Copyright (c) 2010-2019 Benjamin Peterson, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/six."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".deepsource.toml",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "HISTORY.txt",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "NOTICES",
+        "Pipfile",
+        "Pipfile.lock",
+        "README.md",
+        "RELEASING.md",
+        "SECURITY.md",
+        "benchmarks/**",
+        "docker/**",
+        "docs/Makefile",
+        "docs/_static/custom.css",
+        "docs/_static/konami.js",
+        "docs/_templates/**",
+        "docs/advanced.md",
+        "docs/best_practices.md",
+        "docs/changelog.md",
+        "docs/cli.md",
+        "docs/commands.md",
+        "docs/conf.py",
+        "docs/configuration.md",
+        "docs/credentials.md",
+        "docs/dev/**",
+        "docs/diagnose.md",
+        "docs/docker.md",
+        "docs/faq.md",
+        "docs/index.md",
+        "docs/indexes.md",
+        "docs/installation.md",
+        "docs/locking.md",
+        "docs/make.bat",
+        "docs/migrating.md",
+        "docs/pipfile.md",
+        "docs/pylock.md",
+        "docs/quick_start.md",
+        "docs/requirements.txt",
+        "docs/scripts.md",
+        "docs/security.md",
+        "docs/shell.md",
+        "docs/specifiers.md",
+        "docs/spelling_wordlist.txt",
+        "docs/troubleshooting.md",
+        "docs/virtualenv.md",
+        "docs/workflows.md",
+        "examples/**",
+        "get-pipenv.py",
+        "initiative-g-phase1-2-plan.md",
+        "initiative-g-phase3-plan.md",
+        "initiative-g-phase3b-plan.md",
+        "news/**",
+        "pipenv/__init__.py",
+        "pipenv/__main__.py",
+        "pipenv/__version__.py",
+        "pipenv/cli/**",
+        "pipenv/cmdparse.py",
+        "pipenv/environment.py",
+        "pipenv/environments.py",
+        "pipenv/exceptions.py",
+        "pipenv/help.py",
+        "pipenv/installers.py",
+        "pipenv/patched/README.md",
+        "pipenv/patched/__init__.py",
+        "pipenv/patched/patched.txt",
+        "pipenv/pep508checker.py",
+        "pipenv/pipenv.1",
+        "pipenv/project.py",
+        "pipenv/resolver/**",
+        "pipenv/routines/**",
+        "pipenv/shells.py",
+        "pipenv/utils/**",
+        "pylock.toml",
+        "pyproject.toml",
+        "run-tests.bat",
+        "run-tests.sh",
+        "tasks/__init__.py",
+        "tasks/release.py",
+        "tasks/vendoring/__init__.py",
+        "tasks/vendoring/patches/patched/**",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/fixtures/cython-import-package/**",
+        "tests/fixtures/legacy-backend-package/**",
+        "tests/integration/**",
+        "tests/unit/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright 2020-2022 Python Packaging Authority\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright 2020-2022 Python Packaging Authority, MIT license (LICENSE), https://github.com/pypa/pipenv."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "pipenv/patched/pip/_vendor/distro/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n",
+      "attribution": "the authors of pypa/pipenv (pipenv/patched/pip/_vendor/distro) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/distro."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "pipenv/patched/pip/_vendor/idna/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2013-2026, Kim Davies and contributors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013-2026, Kim Davies and contributors., BSD-3-Clause license (LICENSE.md), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/idna."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/platformdirs/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2010-202x The platformdirs developers\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2010-202x The platformdirs developers, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/platformdirs."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "pipenv/patched/pip/_vendor/pygments/**"
+      ],
+      "text": "Copyright (c) 2006-2022 by the respective authors (see AUTHORS file).\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n* Redistributions of source code must retain the above copyright\n  notice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright\n  notice, this list of conditions and the following disclaimer in the\n  documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2006-2022 by the respective authors (see AUTHORS file)., BSD-2-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/pygments."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/pyproject_hooks/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 Thomas Kluyver\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Thomas Kluyver, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/pyproject_hooks."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "pipenv/patched/pip/_vendor/resolvelib/**"
+      ],
+      "text": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/resolvelib."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/rich/**"
+      ],
+      "text": "Copyright (c) 2020 Will McGugan\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Will McGugan, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/rich."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/tomli/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Taneli Hukkinen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Taneli Hukkinen, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/tomli."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/tomli_w/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 Taneli Hukkinen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Taneli Hukkinen, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/tomli_w."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/truststore/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2022 Seth Michael Larson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 Seth Michael Larson, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/truststore."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/patched/pip/_vendor/urllib3/LICENSE.txt",
+        "pipenv/patched/pip/_vendor/urllib3/__init__.py",
+        "pipenv/patched/pip/_vendor/urllib3/_base_connection.py",
+        "pipenv/patched/pip/_vendor/urllib3/_collections.py",
+        "pipenv/patched/pip/_vendor/urllib3/_request_methods.py",
+        "pipenv/patched/pip/_vendor/urllib3/_version.py",
+        "pipenv/patched/pip/_vendor/urllib3/connection.py",
+        "pipenv/patched/pip/_vendor/urllib3/connectionpool.py",
+        "pipenv/patched/pip/_vendor/urllib3/exceptions.py",
+        "pipenv/patched/pip/_vendor/urllib3/fields.py",
+        "pipenv/patched/pip/_vendor/urllib3/filepost.py",
+        "pipenv/patched/pip/_vendor/urllib3/http2/**",
+        "pipenv/patched/pip/_vendor/urllib3/poolmanager.py",
+        "pipenv/patched/pip/_vendor/urllib3/py.typed",
+        "pipenv/patched/pip/_vendor/urllib3/response.py",
+        "pipenv/patched/pip/_vendor/urllib3/util/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2008-2020 Andrey Petrov and contributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2008-2020 Andrey Petrov and contributors., MIT license (LICENSE.txt), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/patched/pip/_vendor/urllib3."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/vendor/build/**"
+      ],
+      "text": "Copyright © 2019 Filipe Laíns <filipe.lains@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the \"Software\"),\nto deal in the Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, sublicense,\nand/or sell copies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice (including the next\nparagraph) shall be included in all copies or substantial portions of the\nSoftware.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL\nTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright © 2019 Filipe Laíns <filipe.lains@gmail.com>, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/build."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "pipenv/vendor/plette/**"
+      ],
+      "text": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/plette."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "pipenv/vendor/ptyprocess/**"
+      ],
+      "text": "Ptyprocess is under the ISC license, as code derived from Pexpect.\n    http://opensource.org/licenses/ISC\n\nCopyright (c) 2013-2014, Pexpect development team\nCopyright (c) 2012, Noah Spurrier <noah@noah.org>\n\nPERMISSION TO USE, COPY, MODIFY, AND/OR DISTRIBUTE THIS SOFTWARE FOR ANY PURPOSE\nWITH OR WITHOUT FEE IS HEREBY GRANTED, PROVIDED THAT THE ABOVE COPYRIGHT NOTICE\nAND THIS PERMISSION NOTICE APPEAR IN ALL COPIES. THE SOFTWARE IS PROVIDED\n\"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE\nINCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT\nSHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL\nDAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,\nWHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING\nOUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2013-2014, Pexpect development team; Copyright (c) 2012, Noah Spurrier <noah@noah.org>, ISC license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/ptyprocess."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/vendor/pyproject_hooks/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 Thomas Kluyver\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Thomas Kluyver, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/pyproject_hooks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "pipenv/vendor/pythonfinder/**"
+      ],
+      "text": "Copyright (c) 2018 Dan Ryan\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Dan Ryan, MIT license (LICENSE.txt), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/pythonfinder."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "pipenv/vendor/shellingham/**"
+      ],
+      "text": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/pipenv/vendor/shellingham."
+    },
+    {
+      "license": "0BSD",
+      "paths": [
+        "tests/fixtures/fake-package/**"
+      ],
+      "text": "Copyright (c) 2019, Dan Ryan <dan@danryan.co>\n\nPermission to use, copy, modify, and distribute this software for any\npurpose with or without fee is hereby granted, provided that the above\ncopyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES\nWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR\nANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF\nOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Copyright (c) 2019, Dan Ryan <dan@danryan.co>, 0BSD license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/fixtures/fake-package."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/pypi/Cerberus/cerberus-1.2.tar.gz.sha256",
+        "tests/pypi/LICENSE",
+        "tests/pypi/README.md",
+        "tests/pypi/alembic/alembic-0.9.8.tar.gz.sha256",
+        "tests/pypi/alembic/alembic-0.9.9.tar.gz.sha256",
+        "tests/pypi/apscheduler/APScheduler-3.5.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/apscheduler/APScheduler-3.5.1.tar.gz.sha256",
+        "tests/pypi/backports-csv/backports.csv-1.0.7.tar.gz.sha256",
+        "tests/pypi/backports-html/backports.html-1.1.0.tar.gz.sha256",
+        "tests/pypi/certifi/certifi-2018.1.18-py2.py3-none-any.whl.sha256",
+        "tests/pypi/certifi/certifi-2018.1.18.tar.gz.sha256",
+        "tests/pypi/certifi/certifi-2018.4.16-py2.py3-none-any.whl.sha256",
+        "tests/pypi/certifi/certifi-2018.4.16.tar.gz.sha256",
+        "tests/pypi/certifi/certifi-2020.4.5.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/certifi/certifi-2020.4.5.1.tar.gz.sha256",
+        "tests/pypi/chardet/chardet-3.0.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/chardet/chardet-3.0.4.tar.gz.sha256",
+        "tests/pypi/click/click-6.7-py2.py3-none-any.whl.sha256",
+        "tests/pypi/click/click-6.7.tar.gz.sha256",
+        "tests/pypi/click/click-7.1.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/click/click-7.1.1.tar.gz.sha256",
+        "tests/pypi/colorama/colorama-0.3.9-py2.py3-none-any.whl.sha256",
+        "tests/pypi/cython-import-package/cython_import_package-0.0.1.tar.gz.sha256",
+        "tests/pypi/dateparser/dateparser-0.7.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/dateparser/dateparser-0.7.0.tar.gz.sha256",
+        "tests/pypi/depends-on-marked-package/depends_on_marked_package-0.0.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django/Django-1.11.10-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django/Django-1.11.10.tar.gz.sha256",
+        "tests/pypi/django/Django-1.11.13-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django/Django-1.11.13.tar.gz.sha256",
+        "tests/pypi/django/Django-2.0.6-py3-none-any.whl.sha256",
+        "tests/pypi/django/Django-2.0.6.tar.gz.sha256",
+        "tests/pypi/django-classy-tags/django-classy-tags-0.8.0.tar.gz.sha256",
+        "tests/pypi/django-classy-tags/django_classy_tags-0.8.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django-formtools/django-formtools-2.1.tar.gz.sha256",
+        "tests/pypi/django-formtools/django_formtools-2.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django-sekizai/django-sekizai-0.10.0.tar.gz.sha256",
+        "tests/pypi/django-sekizai/django_sekizai-0.10.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/django-treebeard/django-treebeard-4.2.0.tar.gz.sha256",
+        "tests/pypi/djangocms-admin-style/djangocms-admin-style-1.2.7.tar.gz.sha256",
+        "tests/pypi/docopt/docopt-0.6.2.tar.gz.sha256",
+        "tests/pypi/enum34/api.json",
+        "tests/pypi/enum34/api.json.sha256",
+        "tests/pypi/enum34/enum34-1.1.6-py2-none-any.whl.sha256",
+        "tests/pypi/enum34/enum34-1.1.6-py3-none-any.whl.sha256",
+        "tests/pypi/enum34/enum34-1.1.6.tar.gz.sha256",
+        "tests/pypi/enum34/enum34-1.1.6.zip.sha256",
+        "tests/pypi/et-xmlfile/et_xmlfile-1.0.1.tar.gz.sha256",
+        "tests/pypi/fake-package/fake_package-0.0.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/fake-package/fake_package-0.0.1.tar.gz.sha256",
+        "tests/pypi/fixtures/parent_folder/**",
+        "tests/pypi/flask/Flask-0.12.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/flask/Flask-0.12.2.tar.gz.sha256",
+        "tests/pypi/flask/Flask-1.1.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/flask/Flask-1.1.2.tar.gz.sha256",
+        "tests/pypi/funcsigs/funcsigs-1.0.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/funcsigs/funcsigs-1.0.2.tar.gz.sha256",
+        "tests/pypi/functools32/functools32-3.2.3-2.tar.gz.sha256",
+        "tests/pypi/functools32/functools32-3.2.3-2.zip.sha256",
+        "tests/pypi/futures/futures-3.2.0-py2-none-any.whl.sha256",
+        "tests/pypi/futures/futures-3.2.0.tar.gz.sha256",
+        "tests/pypi/gitdb2/gitdb2-2.0.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/gitdb2/gitdb2-2.0.3.tar.gz.sha256",
+        "tests/pypi/humanize/humanize-0.5.1.tar.gz.sha256",
+        "tests/pypi/ibm-db-sa-py3/ibm-db-sa-py3-0.3.0.tar.gz.sha256",
+        "tests/pypi/ibm-db-sa-py3/ibm-db-sa-py3-0.3.1.post1.tar.gz.sha256",
+        "tests/pypi/idna/idna-2.6-py2.py3-none-any.whl.sha256",
+        "tests/pypi/idna/idna-2.6.tar.gz.sha256",
+        "tests/pypi/idna/idna-2.7-py2.py3-none-any.whl.sha256",
+        "tests/pypi/idna/idna-2.7.tar.gz.sha256",
+        "tests/pypi/itsdangerous/itsdangerous-0.24.tar.gz.sha256",
+        "tests/pypi/itsdangerous/itsdangerous-1.1.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/itsdangerous/itsdangerous-1.1.0.tar.gz.sha256",
+        "tests/pypi/jdcal/jdcal-1.3.tar.gz.sha256",
+        "tests/pypi/jdcal/jdcal-1.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/jdcal/jdcal-1.4.tar.gz.sha256",
+        "tests/pypi/jinja2/Jinja2-2.10-py2.py3-none-any.whl.sha256",
+        "tests/pypi/jinja2/Jinja2-2.10.tar.gz.sha256",
+        "tests/pypi/jinja2/Jinja2-2.11.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/jinja2/Jinja2-2.11.1.tar.gz.sha256",
+        "tests/pypi/legacy-backend-package/legacy_backend_package-0.0.1.tar.gz.sha256",
+        "tests/pypi/mako/Mako-1.0.7.tar.gz.sha256",
+        "tests/pypi/markupsafe/MarkupSafe-1.0.tar.gz.sha256",
+        "tests/pypi/markupsafe/MarkupSafe-1.1.1.tar.gz.sha256",
+        "tests/pypi/maya/maya-0.3.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/maya/maya-0.3.4.tar.gz.sha256",
+        "tests/pypi/maya/maya-0.5.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/maya/maya-0.5.0.tar.gz.sha256",
+        "tests/pypi/multidict/multidict-4.1.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/multidict/multidict-4.1.0.tar.gz.sha256",
+        "tests/pypi/odfpy/odfpy-1.3.6-py2.7.egg.sha256",
+        "tests/pypi/odfpy/odfpy-1.3.6.tar.gz.sha256",
+        "tests/pypi/openpyxl/openpyxl-2.5.0.tar.gz.sha256",
+        "tests/pypi/openpyxl/openpyxl-2.5.4.tar.gz.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp27-cp27m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp27-cp27mu-manylinux1_i686.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp27-cp27mu-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pandas/pandas-0.22.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/parse/parse-1.8.2.tar.gz.sha256",
+        "tests/pypi/pathlib2/pathlib2-2.3.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pathlib2/pathlib2-2.3.2.tar.gz.sha256",
+        "tests/pypi/pendulum/pendulum-1.4.4-cp27-cp27m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.4.4-cp36-cp36m-macosx_10_13_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.4.4-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.4.4.tar.gz.sha256",
+        "tests/pypi/pendulum/pendulum-1.5.1-cp27-cp27m-manylinux1_i686.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.5.1-cp27-cp27m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.5.1-cp36-cp36m-manylinux1_i686.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.5.1-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-1.5.1.tar.gz.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp27-cp27m-macosx_10_13_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp35-cp35m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-macosx_10_13_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-macosx_10_13_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp37-cp37m-win_amd64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38-macosx_10_13_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0-cp38-cp38m-win_amd64.whl.sha256",
+        "tests/pypi/pendulum/pendulum-2.1.0.tar.gz.sha256",
+        "tests/pypi/plette/plette-0.2.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/poetry/poetry-1.0.5-py2.py3-none-any.whl.sha256",
+        "tests/pypi/poetry/poetry-1.0.5.tar.gz.sha256",
+        "tests/pypi/py/py-1.5.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/py/py-1.5.3.tar.gz.sha256",
+        "tests/pypi/pysocks/PySocks-1.6.8.tar.gz.sha256",
+        "tests/pypi/pytest/pytest-3.1.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytest/pytest-3.1.0.tar.gz.sha256",
+        "tests/pypi/pytest/pytest-3.1.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytest/pytest-3.1.1.tar.gz.sha256",
+        "tests/pypi/pytest/pytest-4.6.9-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytest/pytest-4.6.9.tar.gz.sha256",
+        "tests/pypi/python-dateutil/python-dateutil-2.6.1.tar.gz.sha256",
+        "tests/pypi/python-dateutil/python-dateutil-2.7.3.tar.gz.sha256",
+        "tests/pypi/python-dateutil/python_dateutil-2.6.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/python-dateutil/python_dateutil-2.7.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/python-editor/python-editor-1.0.3.tar.gz.sha256",
+        "tests/pypi/pytz/pytz-2018.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytz/pytz-2018.3.tar.gz.sha256",
+        "tests/pypi/pytz/pytz-2018.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytz/pytz-2018.4.tar.gz.sha256",
+        "tests/pypi/pytzdata/pytzdata-2018.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytzdata/pytzdata-2018.3.tar.gz.sha256",
+        "tests/pypi/pytzdata/pytzdata-2018.5-py2.py3-none-any.whl.sha256",
+        "tests/pypi/pytzdata/pytzdata-2018.5.tar.gz.sha256",
+        "tests/pypi/pyyaml/PyYAML-3.12-cp27-cp27m-win32.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-3.12-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-3.12-cp35-cp35m-win32.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-3.12-cp35-cp35m-win_amd64.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-3.12.tar.gz.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp27-cp27m-win32.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp35-cp35m-win32.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp36-cp36m-win32.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1-cp37-cp37m-win_amd64.whl.sha256",
+        "tests/pypi/pyyaml/PyYAML-5.1.1.tar.gz.sha256",
+        "tests/pypi/randomwords/RandomWords-0.2.1-py2.7.egg.sha256",
+        "tests/pypi/randomwords/RandomWords-0.2.1-py3.5.egg.sha256",
+        "tests/pypi/randomwords/RandomWords-0.2.1-py3.6.egg.sha256",
+        "tests/pypi/randomwords/RandomWords-0.2.1.tar.gz.sha256",
+        "tests/pypi/records/records-0.5.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/records/records-0.5.2.tar.gz.sha256",
+        "tests/pypi/regex/regex-2018.02.21-cp27-none-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2018.02.21-cp36-none-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2018.02.21.tar.gz.sha256",
+        "tests/pypi/regex/regex-2018.06.21-cp27-none-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2018.06.21-cp36-none-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2018.06.21-cp37-none-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2018.06.21.tar.gz.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp37-cp37m-manylinux2010_x86_64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp37-cp37m-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp38-cp38-manylinux2010_x86_64.1.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp38-cp38-manylinux2010_x86_64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp38-cp38-win32.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4-cp38-cp38-win_amd64.whl.sha256",
+        "tests/pypi/regex/regex-2020.4.4.tar.gz.sha256",
+        "tests/pypi/requests/requests-1.0.0.tar.gz.sha256",
+        "tests/pypi/requests/requests-2.14.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/requests/requests-2.14.0.tar.gz.sha256",
+        "tests/pypi/requests/requests-2.18.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/requests/requests-2.18.4.tar.gz.sha256",
+        "tests/pypi/requests/requests-2.19.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/requests/requests-2.19.1.tar.gz.sha256",
+        "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-cp27m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-cp27mu-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9-cp27-none-win_amd64.whl.sha256",
+        "tests/pypi/ruamel-ordereddict/ruamel.ordereddict-0.4.9.tar.gz.sha256",
+        "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp27-cp27m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp27-cp27mu-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/ruamel-yaml/ruamel.yaml-0.15.9.tar.gz.sha256",
+        "tests/pypi/scandir/scandir-1.9.0-cp27-cp27m-win32.whl.sha256",
+        "tests/pypi/scandir/scandir-1.9.0-cp27-cp27m-win_amd64.whl.sha256",
+        "tests/pypi/scandir/scandir-1.9.0-cp36-cp36m-win32.whl.sha256",
+        "tests/pypi/scandir/scandir-1.9.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/scandir/scandir-1.9.0.tar.gz.sha256",
+        "tests/pypi/setuptools/setuptools-39.0.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/setuptools/setuptools-40.6.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/setuptools/setuptools-46.0.0-py3-none-any.whl.sha256",
+        "tests/pypi/setuptools/setuptools-46.0.0.zip.sha256",
+        "tests/pypi/setuptools/setuptools-63.4.2-py3-none-any.whl.sha256",
+        "tests/pypi/setuptools/setuptools-63.4.2-py3-none-any.whl.sha256.bak",
+        "tests/pypi/setuptools/setuptools-63.4.2.tar.gz.sha256",
+        "tests/pypi/setuptools/setuptools-68.0.0-py3-none-any.whl.sha256",
+        "tests/pypi/setuptools/setuptools-69.5.1-py3-none-any.whl.sha256",
+        "tests/pypi/six/six-1.11.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/six/six-1.11.0.tar.gz.sha256",
+        "tests/pypi/six/six-1.12.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/smmap2/smmap2-2.0.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/smmap2/smmap2-2.0.3.tar.gz.sha256",
+        "tests/pypi/snaptime/snaptime-0.2.4.tar.gz.sha256",
+        "tests/pypi/sqlalchemy/SQLAlchemy-1.2.0b3.tar.gz.sha256",
+        "tests/pypi/sqlalchemy/SQLAlchemy-1.2.4.tar.gz.sha256",
+        "tests/pypi/sqlalchemy/SQLAlchemy-1.2.8.tar.gz.sha256",
+        "tests/pypi/tablib/tablib-0.11.5.tar.gz.sha256",
+        "tests/pypi/tablib/tablib-0.12.0.tar.gz.sha256",
+        "tests/pypi/tablib/tablib-0.12.1.tar.gz.sha256",
+        "tests/pypi/tablib/tablib-0.13.0.tar.gz.sha256",
+        "tests/pypi/test_package/test_package-1.0.0-py3-none-any.whl.sha256",
+        "tests/pypi/test_package/test_package-1.0.0.tar.gz.sha256",
+        "tests/pypi/tomlkit/api.json",
+        "tests/pypi/tomlkit/api.json.sha256",
+        "tests/pypi/tomlkit/tomlkit-0.5.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/tomlkit/tomlkit-0.5.3.tar.gz.sha256",
+        "tests/pypi/tpfd/tpfd-0.2.4-py2.py3-none-any.whl.sha256",
+        "tests/pypi/tpfd/tpfd-0.2.4.tar.gz.sha256",
+        "tests/pypi/typing/api.json",
+        "tests/pypi/typing/api.json.sha256",
+        "tests/pypi/typing/typing-3.6.6-py2-none-any.whl.sha256",
+        "tests/pypi/typing/typing-3.6.6-py3-none-any.whl.sha256",
+        "tests/pypi/typing/typing-3.6.6.tar.gz.sha256",
+        "tests/pypi/tzlocal/tzlocal-1.5.1.tar.gz.sha256",
+        "tests/pypi/unicodecsv/unicodecsv-0.14.1.tar.gz.sha256",
+        "tests/pypi/urllib3/urllib3-1.21.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/urllib3/urllib3-1.21.1.tar.gz.sha256",
+        "tests/pypi/urllib3/urllib3-1.22-py2.py3-none-any.whl.sha256",
+        "tests/pypi/urllib3/urllib3-1.22.tar.gz.sha256",
+        "tests/pypi/urllib3/urllib3-1.23-py2.py3-none-any.whl.sha256",
+        "tests/pypi/urllib3/urllib3-1.23.tar.gz.sha256",
+        "tests/pypi/vcrpy/vcrpy-1.11.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/vcrpy/vcrpy-1.11.0.tar.gz.sha256",
+        "tests/pypi/vcrpy/vcrpy-2.0.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/vcrpy/vcrpy-2.0.1.tar.gz.sha256",
+        "tests/pypi/werkzeug/Werkzeug-0.14.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/werkzeug/Werkzeug-0.14.1.tar.gz.sha256",
+        "tests/pypi/werkzeug/Werkzeug-1.0.1-py2.py3-none-any.whl.sha256",
+        "tests/pypi/werkzeug/Werkzeug-1.0.1.tar.gz.sha256",
+        "tests/pypi/wheel/wheel-0.31.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/wheel/wheel-0.32.3-py2.py3-none-any.whl.sha256",
+        "tests/pypi/wheel/wheel-0.34.2-py2.py3-none-any.whl.sha256",
+        "tests/pypi/wheel/wheel-0.34.2.tar.gz.sha256",
+        "tests/pypi/win-inet-pton/win_inet_pton-1.0.1.tar.gz.sha256",
+        "tests/pypi/wrapt/wrapt-1.10.11.tar.gz.sha256",
+        "tests/pypi/xlrd/xlrd-1.1.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/xlrd/xlrd-1.1.0.tar.gz.sha256",
+        "tests/pypi/xlwt/xlwt-1.3.0-py2.py3-none-any.whl.sha256",
+        "tests/pypi/xlwt/xlwt-1.3.0.tar.gz.sha256",
+        "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-manylinux1_i686.whl.sha256",
+        "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-win32.whl.sha256",
+        "tests/pypi/yarl/yarl-1.1.1-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.1.1.tar.gz.sha256",
+        "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-manylinux1_i686.whl.sha256",
+        "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-win32.whl.sha256",
+        "tests/pypi/yarl/yarl-1.2.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.2.0.tar.gz.sha256",
+        "tests/pypi/yarl/yarl-1.3.0-cp35-cp35m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.3.0-cp35-cp35m-win_amd64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.3.0-cp36-cp36m-manylinux1_x86_64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.3.0-cp36-cp36m-win_amd64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.3.0-cp37-cp37m-win_amd64.whl.sha256",
+        "tests/pypi/yarl/yarl-1.3.0.tar.gz.sha256"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 猿楽 Sarugaku\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 猿楽 Sarugaku, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/pypi."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/test_artifacts/git/flask/.azure-pipelines.yml",
+        "tests/test_artifacts/git/flask/.github/**",
+        "tests/test_artifacts/git/flask/.gitignore",
+        "tests/test_artifacts/git/flask/.pre-commit-config.yaml",
+        "tests/test_artifacts/git/flask/CHANGES.rst",
+        "tests/test_artifacts/git/flask/CODE_OF_CONDUCT.md",
+        "tests/test_artifacts/git/flask/CONTRIBUTING.rst",
+        "tests/test_artifacts/git/flask/LICENSE.rst",
+        "tests/test_artifacts/git/flask/MANIFEST.in",
+        "tests/test_artifacts/git/flask/README.rst",
+        "tests/test_artifacts/git/flask/setup.cfg",
+        "tests/test_artifacts/git/flask/setup.py",
+        "tests/test_artifacts/git/flask/src/**",
+        "tests/test_artifacts/git/flask/tests/**",
+        "tests/test_artifacts/git/flask/tox.ini"
+      ],
+      "text": "Copyright 2010 Pallets\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n1.  Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n2.  Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\n3.  Neither the name of the copyright holder nor the names of its\n    contributors may be used to endorse or promote products derived from\n    this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A\nPARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED\nTO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\nNEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2010 Pallets, BSD-3-Clause license (LICENSE.rst), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/test_artifacts/git/flask/examples/javascript/**"
+      ],
+      "text": "Copyright © 2010 by the Pallets team.\n\nSome rights reserved.\n\nRedistribution and use in source and binary forms of the software as\nwell as documentation, with or without modification, are permitted\nprovided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright\n  notice, this list of conditions and the following disclaimer in the\n  documentation and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE AND DOCUMENTATION IS PROVIDED BY THE COPYRIGHT HOLDERS AND\nCONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,\nBUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT\nNOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF\nUSE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE AND DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGE.\n",
+      "attribution": "Copyright © 2010 by the Pallets team., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask/examples/javascript."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/test_artifacts/git/flask/examples/tutorial/**"
+      ],
+      "text": "Copyright © 2010 by the Pallets team.\n\nSome rights reserved.\n\nRedistribution and use in source and binary forms of the software as\nwell as documentation, with or without modification, are permitted\nprovided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright\n  notice, this list of conditions and the following disclaimer in the\n  documentation and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE AND DOCUMENTATION IS PROVIDED BY THE COPYRIGHT HOLDERS AND\nCONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,\nBUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT\nNOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF\nUSE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE AND DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGE.\n",
+      "attribution": "Copyright © 2010 by the Pallets team., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/flask/examples/tutorial."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/test_artifacts/git/jinja2/.coveragerc",
+        "tests/test_artifacts/git/jinja2/.github/**",
+        "tests/test_artifacts/git/jinja2/.gitignore",
+        "tests/test_artifacts/git/jinja2/.travis.yml",
+        "tests/test_artifacts/git/jinja2/AUTHORS",
+        "tests/test_artifacts/git/jinja2/CHANGES.rst",
+        "tests/test_artifacts/git/jinja2/LICENSE",
+        "tests/test_artifacts/git/jinja2/MANIFEST.in",
+        "tests/test_artifacts/git/jinja2/Makefile",
+        "tests/test_artifacts/git/jinja2/README.rst",
+        "tests/test_artifacts/git/jinja2/artwork/**",
+        "tests/test_artifacts/git/jinja2/docs/Makefile",
+        "tests/test_artifacts/git/jinja2/docs/_build/**",
+        "tests/test_artifacts/git/jinja2/docs/_static/.ignore",
+        "tests/test_artifacts/git/jinja2/docs/_templates/**",
+        "tests/test_artifacts/git/jinja2/docs/api.rst",
+        "tests/test_artifacts/git/jinja2/docs/cache_extension.py",
+        "tests/test_artifacts/git/jinja2/docs/changelog.rst",
+        "tests/test_artifacts/git/jinja2/docs/conf.py",
+        "tests/test_artifacts/git/jinja2/docs/contents.rst.inc",
+        "tests/test_artifacts/git/jinja2/docs/extensions.rst",
+        "tests/test_artifacts/git/jinja2/docs/faq.rst",
+        "tests/test_artifacts/git/jinja2/docs/index.rst",
+        "tests/test_artifacts/git/jinja2/docs/integration.rst",
+        "tests/test_artifacts/git/jinja2/docs/intro.rst",
+        "tests/test_artifacts/git/jinja2/docs/jinjaext.py",
+        "tests/test_artifacts/git/jinja2/docs/jinjastyle.sty",
+        "tests/test_artifacts/git/jinja2/docs/latexindex.rst",
+        "tests/test_artifacts/git/jinja2/docs/nativetypes.rst",
+        "tests/test_artifacts/git/jinja2/docs/sandbox.rst",
+        "tests/test_artifacts/git/jinja2/docs/switching.rst",
+        "tests/test_artifacts/git/jinja2/docs/templates.rst",
+        "tests/test_artifacts/git/jinja2/docs/tricks.rst",
+        "tests/test_artifacts/git/jinja2/examples/**",
+        "tests/test_artifacts/git/jinja2/ext/**",
+        "tests/test_artifacts/git/jinja2/jinja2/**",
+        "tests/test_artifacts/git/jinja2/scripts/**",
+        "tests/test_artifacts/git/jinja2/setup.cfg",
+        "tests/test_artifacts/git/jinja2/setup.py",
+        "tests/test_artifacts/git/jinja2/tests/**",
+        "tests/test_artifacts/git/jinja2/tox.ini"
+      ],
+      "text": "Copyright (c) 2009 by the Jinja Team, see AUTHORS for more details.\r\n\r\nSome rights reserved.\r\n\r\nRedistribution and use in source and binary forms, with or without\r\nmodification, are permitted provided that the following conditions are\r\nmet:\r\n\r\n    * Redistributions of source code must retain the above copyright\r\n      notice, this list of conditions and the following disclaimer.\r\n\r\n    * Redistributions in binary form must reproduce the above\r\n      copyright notice, this list of conditions and the following\r\n      disclaimer in the documentation and/or other materials provided\r\n      with the distribution.\r\n\r\n    * The names of the contributors may not be used to endorse or\r\n      promote products derived from this software without specific\r\n      prior written permission.\r\n\r\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\r\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\r\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\r\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\r\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\r\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\r\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\r\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\r\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\r\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n",
+      "attribution": "Copyright (c) 2009 by the Jinja Team, see AUTHORS for more details., BSD-3-Clause license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/jinja2."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/test_artifacts/git/six/**"
+      ],
+      "text": "Copyright (c) 2010-2019 Benjamin Peterson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2010-2019 Benjamin Peterson, MIT license (LICENSE), https://github.com/pypa/pipenv/tree/ca91943611d36b4d820c7d40fd98f56e9db62d45/tests/test_artifacts/git/six."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.sty"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bak"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.with_pylock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flaskenv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylintrc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "tests/pypi": "https://github.com/sarugaku/pipenv-test-artifacts",
+    "tests/test_artifacts/git/dateutil": "https://github.com/dateutil/dateutil",
+    "tests/test_artifacts/git/flask": "https://github.com/pallets/flask",
+    "tests/test_artifacts/git/jinja2": "https://github.com/pallets/jinja",
+    "tests/test_artifacts/git/pinax": "https://github.com/pinax/pinax",
+    "tests/test_artifacts/git/pyinstaller": "https://github.com/pyinstaller/pyinstaller",
+    "tests/test_artifacts/git/requests": "https://github.com/psf/requests",
+    "tests/test_artifacts/git/six": "https://github.com/benjaminp/six"
+  }
+}

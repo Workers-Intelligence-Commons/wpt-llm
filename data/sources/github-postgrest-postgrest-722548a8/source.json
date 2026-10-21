@@ -1,0 +1,414 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/PostgREST/postgrest",
+  "revision": "48aa08248b3953f99a0a2ef78c32604cc87b244b",
+  "checksum": "sha256:5279f897b60ffa7e91829cc3354374f7f2eca9ed4c482cc6979ac4d9bb8ad8bf",
+  "extract": {
+    "exclude": [
+      "docs/_static/boxoffice.png",
+      "docs/_static/employees.png",
+      "docs/_static/empty.png",
+      "docs/_static/favicon.ico",
+      "docs/_static/film.png",
+      "docs/_static/how-tos/**",
+      "docs/_static/orders.png",
+      "docs/_static/presidents.png",
+      "docs/_static/security-anon-choice.png",
+      "docs/_static/security-roles.png",
+      "docs/_static/tuts/**",
+      "docs/_static/users.png",
+      "docs/_static/win-err-dialog.png",
+      "static/2ndquadrant.png",
+      "static/code-build-dark.png",
+      "static/code-build.png",
+      "static/gnuhost.png",
+      "static/neon-dark.jpg",
+      "static/neon.jpg",
+      "static/oblivious.jpg",
+      "static/postgrest.png",
+      "static/retool.png",
+      "static/tembo.png",
+      "static/timescaledb.png",
+      "test/io/secrets/binary.eol",
+      "test/io/secrets/binary.noeol",
+      "test/spec/fixtures/1.twkb",
+      "test/spec/fixtures/A.png",
+      "test/spec/fixtures/image.png",
+      "test/spec/fixtures/lines.twkb",
+      "vendor/**"
+    ]
+  },
+  "history": {
+    "since": "c8e0110755990ee62995af654c2f1ba0a08fd70c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2014-2026 The PostgREST contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/PostgREST/postgrest: Copyright (c) 2014-2026 The PostgREST contributors, MIT license (LICENSE), https://github.com/PostgREST/postgrest."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".readthedocs.yaml",
+        "BACKERS.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "Setup.hs",
+        "cabal.project",
+        "cabal.project.freeze",
+        "default.nix",
+        "docker-hub-readme.md",
+        "docs/.gitignore",
+        "docs/README.md",
+        "docs/_diagrams/**",
+        "docs/_static/arch-dark.svg",
+        "docs/_static/arch.svg",
+        "docs/_static/css/**",
+        "docs/_static/sch-iso-dark.svg",
+        "docs/_static/sch-iso.svg",
+        "docs/conf.py",
+        "docs/ecosystem.rst",
+        "docs/explanations/**",
+        "docs/how-tos/**",
+        "docs/index.rst",
+        "docs/integrations/**",
+        "docs/postgrest.dict",
+        "docs/references/**",
+        "docs/requirements.txt",
+        "docs/shared/**",
+        "docs/tutorials/**",
+        "flake.lock",
+        "flake.nix",
+        "fourmolu.yaml",
+        "nix/**",
+        "postgrest.cabal",
+        "shell.nix",
+        "src/**",
+        "stack.yaml",
+        "stack.yaml.lock",
+        "static/bytebase-dark.svg",
+        "static/bytebase.svg",
+        "static/cybertec-dark.svg",
+        "static/cybertec.svg",
+        "static/euronodes.svg",
+        "static/supabase-dark.svg",
+        "static/supabase.svg",
+        "test/coverage.overlay",
+        "test/doc/**",
+        "test/hasql/**",
+        "test/io/__snapshots__/**",
+        "test/io/config.py",
+        "test/io/configs/**",
+        "test/io/conftest.py",
+        "test/io/fixtures/**",
+        "test/io/nginx/**",
+        "test/io/postgrest.py",
+        "test/io/secrets/ascii.b64",
+        "test/io/secrets/ascii.jwt",
+        "test/io/secrets/ascii.noeol",
+        "test/io/secrets/ascii.txt",
+        "test/io/secrets/binary.b64",
+        "test/io/secrets/binary.jwt",
+        "test/io/secrets/utf8.b64",
+        "test/io/secrets/utf8.jwt",
+        "test/io/secrets/utf8.noeol",
+        "test/io/secrets/utf8.txt",
+        "test/io/secrets/word.b64",
+        "test/io/secrets/word.jwt",
+        "test/io/secrets/word.noeol",
+        "test/io/secrets/word.txt",
+        "test/io/test_admin.py",
+        "test/io/test_big_schema.py",
+        "test/io/test_cli.py",
+        "test/io/test_config.py",
+        "test/io/test_connection.py",
+        "test/io/test_graceful_shutdown.py",
+        "test/io/test_log.py",
+        "test/io/test_pg_internal.py",
+        "test/io/test_reloading.py",
+        "test/io/test_replica.py",
+        "test/io/test_sanity.py",
+        "test/io/test_settings.py",
+        "test/io/test_zero_downtime.py",
+        "test/io/util.py",
+        "test/load/**",
+        "test/memory/**",
+        "test/observability/**",
+        "test/orioledb.sql",
+        "test/pgbench/**",
+        "test/spec/Feature/**",
+        "test/spec/Main.hs",
+        "test/spec/SpecHelper.hs",
+        "test/spec/fixtures/data.sql",
+        "test/spec/fixtures/database.sql",
+        "test/spec/fixtures/draft04.json",
+        "test/spec/fixtures/jsonschema.sql",
+        "test/spec/fixtures/jwt.sql",
+        "test/spec/fixtures/lines.csv",
+        "test/spec/fixtures/load.sql",
+        "test/spec/fixtures/openapi.json",
+        "test/spec/fixtures/privileges.sql",
+        "test/spec/fixtures/roles.sql",
+        "test/spec/fixtures/schema.sql",
+        "test/weeder.toml"
+      ],
+      "text": "Copyright (c) 2014-2026 The PostgREST contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014-2026 The PostgREST contributors, MIT license (LICENSE), https://github.com/PostgREST/postgrest."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "haskell",
+      "paths": [
+        "**/*.hs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.b64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cabal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.er"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.freeze"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hsc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.http"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jwt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.noeol"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.overlay"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

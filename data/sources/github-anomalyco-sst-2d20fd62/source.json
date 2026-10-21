@@ -1,0 +1,2146 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/anomalyco/sst",
+  "revision": "e49ac31411f63ab4ed0d802b7e15d95f6b827e47",
+  "checksum": "sha256:1b0f25e917ea4ddebf8fee0b4203e22c5d1ffc22cb3b09bb63c26f8d10ff8742",
+  "extract": {
+    "exclude": [
+      "bun.lockb",
+      "examples/aws-analog/public/favicon.ico",
+      "examples/aws-angular/public/**",
+      "examples/aws-astro-stream/public/mr-krabs.png",
+      "examples/aws-astro-stream/public/patrick.png",
+      "examples/aws-astro-stream/public/sandy.png",
+      "examples/aws-astro-stream/public/spongebob.png",
+      "examples/aws-astro-stream/public/squidward.png",
+      "examples/aws-auth-nextjs/app/favicon.ico",
+      "examples/aws-bun-elysia/elysia.png",
+      "examples/aws-bundle/src/resource.enc",
+      "examples/aws-ffmpeg/clip.mp4",
+      "examples/aws-flutter-web/android/app/src/main/res/mipmap-hdpi/**",
+      "examples/aws-flutter-web/android/app/src/main/res/mipmap-mdpi/**",
+      "examples/aws-flutter-web/android/app/src/main/res/mipmap-xhdpi/**",
+      "examples/aws-flutter-web/android/app/src/main/res/mipmap-xxhdpi/**",
+      "examples/aws-flutter-web/android/app/src/main/res/mipmap-xxxhdpi/**",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png",
+      "examples/aws-flutter-web/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png",
+      "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png",
+      "examples/aws-flutter-web/web/favicon.png",
+      "examples/aws-flutter-web/web/icons/**",
+      "examples/aws-flutter-web/windows/runner/resources/**",
+      "examples/aws-nextjs/app/favicon.ico",
+      "examples/aws-nextjs/app/fonts/**",
+      "examples/aws-nextjs-add-behavior/app/favicon.ico",
+      "examples/aws-nextjs-add-behavior/app/fonts/**",
+      "examples/aws-nextjs-basic-auth/app/favicon.ico",
+      "examples/aws-nextjs-basic-auth/app/fonts/**",
+      "examples/aws-nextjs-container/app/favicon.ico",
+      "examples/aws-nextjs-container/app/fonts/**",
+      "examples/aws-nextjs-redis/app/favicon.ico",
+      "examples/aws-nextjs-redis/app/fonts/**",
+      "examples/aws-nextjs-stream/app/favicon.ico",
+      "examples/aws-nextjs-stream/app/fonts/**",
+      "examples/aws-nextjs-stream/public/**",
+      "examples/aws-nuxt/public/favicon.ico",
+      "examples/aws-nuxt-container/public/favicon.ico",
+      "examples/aws-nuxt-stream/public/favicon.ico",
+      "examples/aws-rails/public/icon.png",
+      "examples/aws-rails/vendor/**",
+      "examples/aws-react-router/public/**",
+      "examples/aws-realtime-nextjs/app/favicon.ico",
+      "examples/aws-remix/public/**",
+      "examples/aws-remix-container/public/**",
+      "examples/aws-remix-redis/public/**",
+      "examples/aws-remix-stream/public/**",
+      "examples/aws-sharp/logo.png",
+      "examples/aws-solid/public/**",
+      "examples/aws-solid-container/public/**",
+      "examples/aws-solid-container-ws/public/**",
+      "examples/aws-svelte-container/static/**",
+      "examples/aws-svelte-kit/static/**",
+      "examples/aws-svelte-redis/static/**",
+      "examples/aws-t3/public/**",
+      "examples/aws-tanstack-start/public/favicon.ico",
+      "examples/aws-tanstack-start/public/logo192.png",
+      "examples/aws-tanstack-start/public/logo512.png",
+      "examples/aws-tanstack-start/public/tanstack-circle-logo.png",
+      "examples/aws-vector/black-widow.jpg",
+      "examples/aws-vector/captain-america.jpg",
+      "examples/aws-vector/iron-man.jpg",
+      "examples/aws-vector/spider-man.jpg",
+      "examples/aws-vector/thor.jpg",
+      "examples/cloudflare-react-router/public/**",
+      "examples/cloudflare-tanstack-start/public/favicon.ico",
+      "examples/cloudflare-tanstack-start/public/logo192.png",
+      "examples/cloudflare-tanstack-start/public/logo512.png",
+      "platform/bun.lockb",
+      "www/public/favicon.ico",
+      "www/public/logo-square.png",
+      "www/public/social-cards/**",
+      "www/public/testimonials/**",
+      "www/src/assets/blog/frontends-are-hard/cloudfront-announcement-tweet-dark.png",
+      "www/src/assets/blog/frontends-are-hard/cloudfront-announcement-tweet-light.png",
+      "www/src/assets/blog/is-serverless-ready.png",
+      "www/src/assets/blog/sst-console-container-issues.png",
+      "www/src/assets/blog/sst-console-logs-dark.png",
+      "www/src/assets/blog/sst-console-logs-light.png",
+      "www/src/assets/blog/sst-console-updates-dark.png",
+      "www/src/assets/blog/sst-console-updates-light.png",
+      "www/src/assets/blog/sst-ion-movies-demo-ai-app.png",
+      "www/src/assets/blog/sst-pulumi-tweet.png",
+      "www/src/assets/blog/task-cli.png",
+      "www/src/assets/blog/task-console.png",
+      "www/src/assets/docs/basics/**",
+      "www/src/assets/docs/cli/**",
+      "www/src/assets/docs/console/**",
+      "www/src/assets/docs/live/**",
+      "www/src/assets/docs/sst-console-home.png",
+      "www/src/assets/docs/start/**"
+    ]
+  },
+  "history": {
+    "since": "dc915e19456ef47c6d5bb4ca27d7ce1ad83a65f6"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 SST\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023 Tim Culverhouse\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/anomalyco/sst: Copyright (c) 2024 SST, MIT license (LICENSE), https://github.com/anomalyco/sst; Copyright (c) 2023 Tim Culverhouse, MIT license (LICENSE), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/cmd/sst/mosaic/multiplexer/tcell-term; the authors of aws-api, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-api; the authors of aws-apig-websocket, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-apig-websocket; the authors of aws-apigv1, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-apigv1; the authors of aws-aurora-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-local; the authors of aws-aurora-mysql, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-mysql; the authors of aws-aurora-postgres, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-postgres; Copyright (c) 2024 SST, MIT license (LICENSE), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-auth-react; the authors of aws-bucket-queue-subscriber, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-bucket-queue-subscriber; the authors of aws-cluster-autoscaling, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-autoscaling; the authors of aws-cluster-internal, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-internal; the authors of aws-cluster-spot, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-spot; the authors of aws-cluster-vpclink, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-vpclink; the authors of aws-dead-letter-queue, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dead-letter-queue; the authors of aws-dynamo, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dynamo; the authors of aws-dynamo-composite-keys, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dynamo-composite-keys; the authors of aws-ec2-pulumi, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-ec2-pulumi; the authors of aws-efs, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs; the authors of aws-efs-sqlite, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs-sqlite; the authors of aws-efs-surrealdb, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs-surrealdb; the authors of aws-email, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-email; the authors of aws-email-domain, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-email-domain; the authors of aws-express, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-express; the authors of aws-express-redis, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-express-redis; the authors of aws-fastapi, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-fastapi; the authors of aws-ffmpeg, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-ffmpeg; the authors of aws-hono-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-hono-stream; the authors of aws-iam-permission-boundary, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-iam-permission-boundary; the authors of aws-kinesis-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-kinesis-stream; the authors of aws-lambda-hook, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-hook; the authors of aws-lambda-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-stream; the authors of aws-lambda-vpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-vpc; the authors of aws-multi-region, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-multi-region; the authors of aws-mysql, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-mysql; the authors of aws-mysql-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-mysql-local; the authors of aws-open-search, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-open-search; the authors of aws-open-search-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-open-search-local; the authors of aws-policy-pack, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-policy-pack; the authors of aws-postgres, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-postgres; the authors of aws-postgres-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-postgres-local; the authors of aws-prisma, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-prisma; the authors of aws-prisma-lambda, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-prisma-lambda; the authors of aws-puppeteer, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-puppeteer; the authors of aws-queue, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-queue; the authors of aws-rds-instance-mysql-public-example, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-rds-instance-mysql-public; the authors of aws-realtime, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-realtime; the authors of aws-redis, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-redis; the authors of aws-redis-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-redis-local; the authors of aws-rust-cluster, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-rust-cluster; the authors of aws-service-discovery, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-service-discovery; the authors of aws-service-transform-container, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-service-transform-container; the authors of aws-sharp, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-sharp; the authors of aws-static-site, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-static-site; the authors of aws-static-site-basic-auth, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-static-site-basic-auth; the authors of aws-step-functions, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-step-functions; the authors of aws-step-functions-task-token, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-step-functions-task-token; the authors of aws-task, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-task; the authors of aws-task-cron, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-task-cron; the authors of aws-topic, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-topic; the authors of aws-trpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-trpc; the authors of aws-vector, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-vector; the authors of aws-workflow, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow; the authors of aws-workflow-bus, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-bus; the authors of aws-workflow-cron, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-cron; the authors of aws-workflow-python, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-python; the authors of cloudflare-auth, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-auth; the authors of cloudflare-hono, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-hono; the authors of cloudflare-trpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-trpc; the authors of cloudflare-worker, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-worker; the authors of secret-link-all, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/secret-link-all."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".air.toml",
+        ".github/**",
+        ".gitignore",
+        ".goreleaser.yml",
+        ".nvim.lua",
+        ".prettierignore",
+        ".vscode/**",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "LICENSE",
+        "README.md",
+        "cmd/sst/add_test.go",
+        "cmd/sst/cert.go",
+        "cmd/sst/cli/**",
+        "cmd/sst/deploy.go",
+        "cmd/sst/diagnostic.go",
+        "cmd/sst/diff.go",
+        "cmd/sst/diff_test.go",
+        "cmd/sst/init.go",
+        "cmd/sst/main.go",
+        "cmd/sst/mosaic/aws/**",
+        "cmd/sst/mosaic/cloudflare/**",
+        "cmd/sst/mosaic/deployer/**",
+        "cmd/sst/mosaic/dev/**",
+        "cmd/sst/mosaic/errors/**",
+        "cmd/sst/mosaic/monoplexer/**",
+        "cmd/sst/mosaic/multiplexer/draw.go",
+        "cmd/sst/mosaic/multiplexer/keycode.go",
+        "cmd/sst/mosaic/multiplexer/multiplexer.go",
+        "cmd/sst/mosaic/multiplexer/process.go",
+        "cmd/sst/mosaic/multiplexer/terminfo.go",
+        "cmd/sst/mosaic/socket/**",
+        "cmd/sst/mosaic/ui/**",
+        "cmd/sst/mosaic/watcher/**",
+        "cmd/sst/mosaic.go",
+        "cmd/sst/refresh.go",
+        "cmd/sst/remove.go",
+        "cmd/sst/secret.go",
+        "cmd/sst/shell.go",
+        "cmd/sst/state.go",
+        "cmd/sst/tunnel.go",
+        "cmd/sst/ui.go",
+        "cmd/sst/upgrade.go",
+        "cmd/sst/version.go",
+        "examples/.gitignore",
+        "examples/aws-analog/.editorconfig",
+        "examples/aws-analog/.gitignore",
+        "examples/aws-analog/.vscode/**",
+        "examples/aws-analog/angular.json",
+        "examples/aws-analog/index.html",
+        "examples/aws-analog/package.json",
+        "examples/aws-analog/public/.gitkeep",
+        "examples/aws-analog/public/analog.svg",
+        "examples/aws-analog/public/vite.svg",
+        "examples/aws-analog/src/**",
+        "examples/aws-analog/sst.config.ts",
+        "examples/aws-analog/tsconfig.app.json",
+        "examples/aws-analog/tsconfig.json",
+        "examples/aws-analog/tsconfig.spec.json",
+        "examples/aws-analog/vite.config.ts",
+        "examples/aws-angular/.editorconfig",
+        "examples/aws-angular/.gitignore",
+        "examples/aws-angular/.vscode/**",
+        "examples/aws-angular/angular.json",
+        "examples/aws-angular/functions/**",
+        "examples/aws-angular/package.json",
+        "examples/aws-angular/src/**",
+        "examples/aws-angular/sst.config.ts",
+        "examples/aws-angular/tsconfig.app.json",
+        "examples/aws-angular/tsconfig.json",
+        "examples/aws-angular/tsconfig.spec.json",
+        "examples/aws-apig-auth/**",
+        "examples/aws-apigv1-stream/**",
+        "examples/aws-app-sync/**",
+        "examples/aws-astro/**",
+        "examples/aws-astro-container/**",
+        "examples/aws-astro-redis/**",
+        "examples/aws-astro-stream/.gitignore",
+        "examples/aws-astro-stream/.vscode/**",
+        "examples/aws-astro-stream/astro.config.mjs",
+        "examples/aws-astro-stream/package.json",
+        "examples/aws-astro-stream/public/favicon.svg",
+        "examples/aws-astro-stream/src/**",
+        "examples/aws-astro-stream/sst.config.ts",
+        "examples/aws-astro-stream/tsconfig.json",
+        "examples/aws-auth-nextjs/.gitignore",
+        "examples/aws-auth-nextjs/app/actions.ts",
+        "examples/aws-auth-nextjs/app/api/**",
+        "examples/aws-auth-nextjs/app/auth.ts",
+        "examples/aws-auth-nextjs/app/globals.css",
+        "examples/aws-auth-nextjs/app/layout.tsx",
+        "examples/aws-auth-nextjs/app/page.module.css",
+        "examples/aws-auth-nextjs/app/page.tsx",
+        "examples/aws-auth-nextjs/auth/**",
+        "examples/aws-auth-nextjs/next.config.ts",
+        "examples/aws-auth-nextjs/package.json",
+        "examples/aws-auth-nextjs/public/**",
+        "examples/aws-auth-nextjs/sst.config.ts",
+        "examples/aws-auth-nextjs/tsconfig.json",
+        "examples/aws-base/**",
+        "examples/aws-bucket-lifecycle-rules/**",
+        "examples/aws-bucket-policy/**",
+        "examples/aws-bucket-subscriber/**",
+        "examples/aws-bucket-topic-subscriber/**",
+        "examples/aws-bun/**",
+        "examples/aws-bun-elysia/.dockerignore",
+        "examples/aws-bun-elysia/.gitignore",
+        "examples/aws-bun-elysia/Dockerfile",
+        "examples/aws-bun-elysia/package.json",
+        "examples/aws-bun-elysia/src/**",
+        "examples/aws-bun-elysia/sst.config.ts",
+        "examples/aws-bun-elysia/tsconfig.json",
+        "examples/aws-bun-redis/**",
+        "examples/aws-bundle/.gitignore",
+        "examples/aws-bundle/package.json",
+        "examples/aws-bundle/src/file.json",
+        "examples/aws-bundle/src/index.mjs",
+        "examples/aws-bundle/sst.config.ts",
+        "examples/aws-bundle/tsconfig.json",
+        "examples/aws-bus/**",
+        "examples/aws-cloudflare-combined/**",
+        "examples/aws-cognito/**",
+        "examples/aws-copy-files/**",
+        "examples/aws-dart-api/**",
+        "examples/aws-deno/**",
+        "examples/aws-deno-redis/**",
+        "examples/aws-drizzle/**",
+        "examples/aws-drizzle-migrations/**",
+        "examples/aws-dsql/**",
+        "examples/aws-dsql-drizzle/**",
+        "examples/aws-dsql-multiregion/**",
+        "examples/aws-dsql-vpc/**",
+        "examples/aws-flutter-web/.gitignore",
+        "examples/aws-flutter-web/.metadata",
+        "examples/aws-flutter-web/analysis_options.yaml",
+        "examples/aws-flutter-web/android/.gitignore",
+        "examples/aws-flutter-web/android/app/build.gradle",
+        "examples/aws-flutter-web/android/app/src/debug/**",
+        "examples/aws-flutter-web/android/app/src/main/AndroidManifest.xml",
+        "examples/aws-flutter-web/android/app/src/main/kotlin/**",
+        "examples/aws-flutter-web/android/app/src/main/res/drawable/**",
+        "examples/aws-flutter-web/android/app/src/main/res/drawable-v21/**",
+        "examples/aws-flutter-web/android/app/src/main/res/values/**",
+        "examples/aws-flutter-web/android/app/src/main/res/values-night/**",
+        "examples/aws-flutter-web/android/app/src/profile/**",
+        "examples/aws-flutter-web/android/build.gradle",
+        "examples/aws-flutter-web/android/gradle/**",
+        "examples/aws-flutter-web/android/gradle.properties",
+        "examples/aws-flutter-web/android/settings.gradle",
+        "examples/aws-flutter-web/ios/.gitignore",
+        "examples/aws-flutter-web/ios/Flutter/**",
+        "examples/aws-flutter-web/ios/Runner/AppDelegate.swift",
+        "examples/aws-flutter-web/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+        "examples/aws-flutter-web/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json",
+        "examples/aws-flutter-web/ios/Runner/Base.lproj/**",
+        "examples/aws-flutter-web/ios/Runner/Info.plist",
+        "examples/aws-flutter-web/ios/Runner/Runner-Bridging-Header.h",
+        "examples/aws-flutter-web/ios/Runner.xcodeproj/**",
+        "examples/aws-flutter-web/ios/Runner.xcworkspace/**",
+        "examples/aws-flutter-web/ios/RunnerTests/**",
+        "examples/aws-flutter-web/lib/**",
+        "examples/aws-flutter-web/linux/**",
+        "examples/aws-flutter-web/macos/.gitignore",
+        "examples/aws-flutter-web/macos/Flutter/**",
+        "examples/aws-flutter-web/macos/Runner/AppDelegate.swift",
+        "examples/aws-flutter-web/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json",
+        "examples/aws-flutter-web/macos/Runner/Base.lproj/**",
+        "examples/aws-flutter-web/macos/Runner/Configs/**",
+        "examples/aws-flutter-web/macos/Runner/DebugProfile.entitlements",
+        "examples/aws-flutter-web/macos/Runner/Info.plist",
+        "examples/aws-flutter-web/macos/Runner/MainFlutterWindow.swift",
+        "examples/aws-flutter-web/macos/Runner/Release.entitlements",
+        "examples/aws-flutter-web/macos/Runner.xcodeproj/**",
+        "examples/aws-flutter-web/macos/Runner.xcworkspace/**",
+        "examples/aws-flutter-web/macos/RunnerTests/**",
+        "examples/aws-flutter-web/pubspec.lock",
+        "examples/aws-flutter-web/pubspec.yaml",
+        "examples/aws-flutter-web/sst.config.ts",
+        "examples/aws-flutter-web/test/**",
+        "examples/aws-flutter-web/web/index.html",
+        "examples/aws-flutter-web/web/manifest.json",
+        "examples/aws-flutter-web/windows/.gitignore",
+        "examples/aws-flutter-web/windows/CMakeLists.txt",
+        "examples/aws-flutter-web/windows/flutter/**",
+        "examples/aws-flutter-web/windows/runner/CMakeLists.txt",
+        "examples/aws-flutter-web/windows/runner/Runner.rc",
+        "examples/aws-flutter-web/windows/runner/flutter_window.cpp",
+        "examples/aws-flutter-web/windows/runner/flutter_window.h",
+        "examples/aws-flutter-web/windows/runner/main.cpp",
+        "examples/aws-flutter-web/windows/runner/resource.h",
+        "examples/aws-flutter-web/windows/runner/runner.exe.manifest",
+        "examples/aws-flutter-web/windows/runner/utils.cpp",
+        "examples/aws-flutter-web/windows/runner/utils.h",
+        "examples/aws-flutter-web/windows/runner/win32_window.cpp",
+        "examples/aws-flutter-web/windows/runner/win32_window.h",
+        "examples/aws-go-api-gateway-v2/**",
+        "examples/aws-go-lambda-bucket-presigned-url/**",
+        "examples/aws-go-lambda-dynamo/**",
+        "examples/aws-hono/**",
+        "examples/aws-hono-container/**",
+        "examples/aws-hono-redis/**",
+        "examples/aws-import/**",
+        "examples/aws-info/**",
+        "examples/aws-jsx-email/**",
+        "examples/aws-lambda-ai-stream/**",
+        "examples/aws-lambda-cron/**",
+        "examples/aws-lambda-golang/**",
+        "examples/aws-lambda-retry-with-queues/**",
+        "examples/aws-lambda-rust-multiple-binaries/**",
+        "examples/aws-lambda-trpc-stream/**",
+        "examples/aws-linkable/**",
+        "examples/aws-linkable-env/**",
+        "examples/aws-load-balancer-waf/**",
+        "examples/aws-monorepo/**",
+        "examples/aws-nestjs-container/**",
+        "examples/aws-nestjs-redis/**",
+        "examples/aws-nextjs/.gitignore",
+        "examples/aws-nextjs/app/globals.css",
+        "examples/aws-nextjs/app/layout.tsx",
+        "examples/aws-nextjs/app/page.module.css",
+        "examples/aws-nextjs/app/page.tsx",
+        "examples/aws-nextjs/components/**",
+        "examples/aws-nextjs/next.config.mjs",
+        "examples/aws-nextjs/package.json",
+        "examples/aws-nextjs/public/**",
+        "examples/aws-nextjs/sst.config.ts",
+        "examples/aws-nextjs/tsconfig.json",
+        "examples/aws-nextjs-add-behavior/.gitignore",
+        "examples/aws-nextjs-add-behavior/app/globals.css",
+        "examples/aws-nextjs-add-behavior/app/layout.tsx",
+        "examples/aws-nextjs-add-behavior/app/page.module.css",
+        "examples/aws-nextjs-add-behavior/app/page.tsx",
+        "examples/aws-nextjs-add-behavior/next.config.ts",
+        "examples/aws-nextjs-add-behavior/package.json",
+        "examples/aws-nextjs-add-behavior/public/**",
+        "examples/aws-nextjs-add-behavior/sst.config.ts",
+        "examples/aws-nextjs-add-behavior/tsconfig.json",
+        "examples/aws-nextjs-basic-auth/.eslintrc.json",
+        "examples/aws-nextjs-basic-auth/.gitignore",
+        "examples/aws-nextjs-basic-auth/app/globals.css",
+        "examples/aws-nextjs-basic-auth/app/layout.tsx",
+        "examples/aws-nextjs-basic-auth/app/page.module.css",
+        "examples/aws-nextjs-basic-auth/app/page.tsx",
+        "examples/aws-nextjs-basic-auth/next.config.mjs",
+        "examples/aws-nextjs-basic-auth/package.json",
+        "examples/aws-nextjs-basic-auth/sst.config.ts",
+        "examples/aws-nextjs-basic-auth/tsconfig.json",
+        "examples/aws-nextjs-container/.dockerignore",
+        "examples/aws-nextjs-container/.gitignore",
+        "examples/aws-nextjs-container/Dockerfile",
+        "examples/aws-nextjs-container/app/globals.css",
+        "examples/aws-nextjs-container/app/layout.tsx",
+        "examples/aws-nextjs-container/app/page.module.css",
+        "examples/aws-nextjs-container/app/page.tsx",
+        "examples/aws-nextjs-container/components/**",
+        "examples/aws-nextjs-container/next.config.ts",
+        "examples/aws-nextjs-container/package.json",
+        "examples/aws-nextjs-container/public/**",
+        "examples/aws-nextjs-container/sst.config.ts",
+        "examples/aws-nextjs-container/tsconfig.json",
+        "examples/aws-nextjs-redis/.dockerignore",
+        "examples/aws-nextjs-redis/.gitignore",
+        "examples/aws-nextjs-redis/Dockerfile",
+        "examples/aws-nextjs-redis/app/globals.css",
+        "examples/aws-nextjs-redis/app/layout.tsx",
+        "examples/aws-nextjs-redis/app/page.module.css",
+        "examples/aws-nextjs-redis/app/page.tsx",
+        "examples/aws-nextjs-redis/next.config.mjs",
+        "examples/aws-nextjs-redis/package.json",
+        "examples/aws-nextjs-redis/sst.config.ts",
+        "examples/aws-nextjs-redis/tsconfig.json",
+        "examples/aws-nextjs-stream/.gitignore",
+        "examples/aws-nextjs-stream/app/globals.css",
+        "examples/aws-nextjs-stream/app/layout.tsx",
+        "examples/aws-nextjs-stream/app/page.module.css",
+        "examples/aws-nextjs-stream/app/page.tsx",
+        "examples/aws-nextjs-stream/components/**",
+        "examples/aws-nextjs-stream/next.config.mjs",
+        "examples/aws-nextjs-stream/open-next.config.ts",
+        "examples/aws-nextjs-stream/package.json",
+        "examples/aws-nextjs-stream/sst.config.ts",
+        "examples/aws-nextjs-stream/tsconfig.json",
+        "examples/aws-nuxt/.gitignore",
+        "examples/aws-nuxt/app.vue",
+        "examples/aws-nuxt/nuxt.config.ts",
+        "examples/aws-nuxt/package.json",
+        "examples/aws-nuxt/public/robots.txt",
+        "examples/aws-nuxt/server/**",
+        "examples/aws-nuxt/sst.config.ts",
+        "examples/aws-nuxt/tsconfig.json",
+        "examples/aws-nuxt-container/.dockerignore",
+        "examples/aws-nuxt-container/.gitignore",
+        "examples/aws-nuxt-container/Dockerfile",
+        "examples/aws-nuxt-container/app.vue",
+        "examples/aws-nuxt-container/nuxt.config.ts",
+        "examples/aws-nuxt-container/package.json",
+        "examples/aws-nuxt-container/public/robots.txt",
+        "examples/aws-nuxt-container/server/**",
+        "examples/aws-nuxt-container/sst.config.ts",
+        "examples/aws-nuxt-container/tsconfig.json",
+        "examples/aws-nuxt-stream/.gitignore",
+        "examples/aws-nuxt-stream/app.vue",
+        "examples/aws-nuxt-stream/nuxt.config.ts",
+        "examples/aws-nuxt-stream/package.json",
+        "examples/aws-nuxt-stream/public/robots.txt",
+        "examples/aws-nuxt-stream/server/**",
+        "examples/aws-nuxt-stream/sst.config.ts",
+        "examples/aws-nuxt-stream/tsconfig.json",
+        "examples/aws-planetscale-drizzle-mysql/**",
+        "examples/aws-planetscale-drizzle-postgres/**",
+        "examples/aws-postgres-shared-parameter-group/**",
+        "examples/aws-pothos-graphql/**",
+        "examples/aws-python/**",
+        "examples/aws-python-container/**",
+        "examples/aws-python-huggingface/**",
+        "examples/aws-quota-increase/**",
+        "examples/aws-rails/.dockerignore",
+        "examples/aws-rails/.gitattributes",
+        "examples/aws-rails/.github/**",
+        "examples/aws-rails/.gitignore",
+        "examples/aws-rails/.rubocop.yml",
+        "examples/aws-rails/.ruby-version",
+        "examples/aws-rails/Dockerfile",
+        "examples/aws-rails/Gemfile",
+        "examples/aws-rails/Gemfile.lock",
+        "examples/aws-rails/Rakefile",
+        "examples/aws-rails/app/**",
+        "examples/aws-rails/bin/**",
+        "examples/aws-rails/config/**",
+        "examples/aws-rails/config.ru",
+        "examples/aws-rails/db/**",
+        "examples/aws-rails/lib/**",
+        "examples/aws-rails/log/**",
+        "examples/aws-rails/public/404.html",
+        "examples/aws-rails/public/406-unsupported-browser.html",
+        "examples/aws-rails/public/422.html",
+        "examples/aws-rails/public/500.html",
+        "examples/aws-rails/public/icon.svg",
+        "examples/aws-rails/public/robots.txt",
+        "examples/aws-rails/sst.config.ts",
+        "examples/aws-rails/storage/**",
+        "examples/aws-rails/test/**",
+        "examples/aws-react-router/.dockerignore",
+        "examples/aws-react-router/.gitignore",
+        "examples/aws-react-router/Dockerfile",
+        "examples/aws-react-router/app/**",
+        "examples/aws-react-router/package.json",
+        "examples/aws-react-router/react-router.config.ts",
+        "examples/aws-react-router/sst.config.ts",
+        "examples/aws-react-router/tsconfig.json",
+        "examples/aws-react-router/vite.config.ts",
+        "examples/aws-realtime-nextjs/.gitignore",
+        "examples/aws-realtime-nextjs/app/globals.css",
+        "examples/aws-realtime-nextjs/app/layout.tsx",
+        "examples/aws-realtime-nextjs/app/page.module.css",
+        "examples/aws-realtime-nextjs/app/page.tsx",
+        "examples/aws-realtime-nextjs/authorizer.ts",
+        "examples/aws-realtime-nextjs/components/**",
+        "examples/aws-realtime-nextjs/next.config.mjs",
+        "examples/aws-realtime-nextjs/package.json",
+        "examples/aws-realtime-nextjs/public/**",
+        "examples/aws-realtime-nextjs/sst.config.ts",
+        "examples/aws-realtime-nextjs/tsconfig.json",
+        "examples/aws-remix/.eslintrc.cjs",
+        "examples/aws-remix/.gitignore",
+        "examples/aws-remix/app/**",
+        "examples/aws-remix/package.json",
+        "examples/aws-remix/postcss.config.js",
+        "examples/aws-remix/sst.config.ts",
+        "examples/aws-remix/tailwind.config.ts",
+        "examples/aws-remix/tsconfig.json",
+        "examples/aws-remix/vite.config.ts",
+        "examples/aws-remix-container/.dockerignore",
+        "examples/aws-remix-container/.eslintrc.cjs",
+        "examples/aws-remix-container/.gitignore",
+        "examples/aws-remix-container/Dockerfile",
+        "examples/aws-remix-container/app/**",
+        "examples/aws-remix-container/package.json",
+        "examples/aws-remix-container/postcss.config.js",
+        "examples/aws-remix-container/sst.config.ts",
+        "examples/aws-remix-container/tailwind.config.ts",
+        "examples/aws-remix-container/tsconfig.json",
+        "examples/aws-remix-container/vite.config.ts",
+        "examples/aws-remix-redis/.dockerignore",
+        "examples/aws-remix-redis/.eslintrc.cjs",
+        "examples/aws-remix-redis/.gitignore",
+        "examples/aws-remix-redis/Dockerfile",
+        "examples/aws-remix-redis/app/**",
+        "examples/aws-remix-redis/package.json",
+        "examples/aws-remix-redis/postcss.config.js",
+        "examples/aws-remix-redis/sst.config.ts",
+        "examples/aws-remix-redis/tailwind.config.ts",
+        "examples/aws-remix-redis/tsconfig.json",
+        "examples/aws-remix-redis/vite.config.ts",
+        "examples/aws-remix-stream/.eslintrc.cjs",
+        "examples/aws-remix-stream/.gitignore",
+        "examples/aws-remix-stream/app/**",
+        "examples/aws-remix-stream/package.json",
+        "examples/aws-remix-stream/sst.config.ts",
+        "examples/aws-remix-stream/tsconfig.json",
+        "examples/aws-remix-stream/vite.config.ts",
+        "examples/aws-router/**",
+        "examples/aws-router-bucket/**",
+        "examples/aws-router-protection/**",
+        "examples/aws-router-waf/**",
+        "examples/aws-rust-api/**",
+        "examples/aws-rust-loco/**",
+        "examples/aws-shared-alb/**",
+        "examples/aws-shared-alb-static/**",
+        "examples/aws-solid/.gitignore",
+        "examples/aws-solid/app.config.ts",
+        "examples/aws-solid/package.json",
+        "examples/aws-solid/src/**",
+        "examples/aws-solid/sst.config.ts",
+        "examples/aws-solid/tsconfig.json",
+        "examples/aws-solid-container/.dockerignore",
+        "examples/aws-solid-container/.gitignore",
+        "examples/aws-solid-container/Dockerfile",
+        "examples/aws-solid-container/app.config.ts",
+        "examples/aws-solid-container/package.json",
+        "examples/aws-solid-container/src/**",
+        "examples/aws-solid-container/sst.config.ts",
+        "examples/aws-solid-container/tsconfig.json",
+        "examples/aws-solid-container-ws/.dockerignore",
+        "examples/aws-solid-container-ws/.gitignore",
+        "examples/aws-solid-container-ws/Dockerfile",
+        "examples/aws-solid-container-ws/app.config.ts",
+        "examples/aws-solid-container-ws/package.json",
+        "examples/aws-solid-container-ws/src/**",
+        "examples/aws-solid-container-ws/sst.config.ts",
+        "examples/aws-solid-container-ws/tsconfig.json",
+        "examples/aws-supabase-drizzle/**",
+        "examples/aws-svelte-container/.dockerignore",
+        "examples/aws-svelte-container/.gitignore",
+        "examples/aws-svelte-container/.npmrc",
+        "examples/aws-svelte-container/Dockerfile",
+        "examples/aws-svelte-container/package.json",
+        "examples/aws-svelte-container/src/**",
+        "examples/aws-svelte-container/sst.config.ts",
+        "examples/aws-svelte-container/svelte.config.js",
+        "examples/aws-svelte-container/tsconfig.json",
+        "examples/aws-svelte-container/vite.config.ts",
+        "examples/aws-svelte-kit/.gitignore",
+        "examples/aws-svelte-kit/.npmrc",
+        "examples/aws-svelte-kit/package.json",
+        "examples/aws-svelte-kit/src/**",
+        "examples/aws-svelte-kit/sst.config.ts",
+        "examples/aws-svelte-kit/svelte.config.js",
+        "examples/aws-svelte-kit/tsconfig.json",
+        "examples/aws-svelte-kit/vite.config.ts",
+        "examples/aws-svelte-kit-remote-functions/**",
+        "examples/aws-svelte-redis/.dockerignore",
+        "examples/aws-svelte-redis/.gitignore",
+        "examples/aws-svelte-redis/.npmrc",
+        "examples/aws-svelte-redis/Dockerfile",
+        "examples/aws-svelte-redis/package.json",
+        "examples/aws-svelte-redis/src/**",
+        "examples/aws-svelte-redis/sst.config.ts",
+        "examples/aws-svelte-redis/svelte.config.js",
+        "examples/aws-svelte-redis/tsconfig.json",
+        "examples/aws-svelte-redis/vite.config.ts",
+        "examples/aws-swift/**",
+        "examples/aws-t3/.eslintrc.cjs",
+        "examples/aws-t3/.gitignore",
+        "examples/aws-t3/drizzle.config.ts",
+        "examples/aws-t3/next.config.js",
+        "examples/aws-t3/package.json",
+        "examples/aws-t3/postcss.config.cjs",
+        "examples/aws-t3/prettier.config.js",
+        "examples/aws-t3/src/**",
+        "examples/aws-t3/sst.config.ts",
+        "examples/aws-t3/start-database.sh",
+        "examples/aws-t3/tailwind.config.ts",
+        "examples/aws-t3/tsconfig.json",
+        "examples/aws-tanstack-start/.cta.json",
+        "examples/aws-tanstack-start/.cursorrules",
+        "examples/aws-tanstack-start/.gitignore",
+        "examples/aws-tanstack-start/.prettierignore",
+        "examples/aws-tanstack-start/.vscode/**",
+        "examples/aws-tanstack-start/components.json",
+        "examples/aws-tanstack-start/eslint.config.js",
+        "examples/aws-tanstack-start/package.json",
+        "examples/aws-tanstack-start/prettier.config.js",
+        "examples/aws-tanstack-start/public/manifest.json",
+        "examples/aws-tanstack-start/public/robots.txt",
+        "examples/aws-tanstack-start/public/tanstack-word-logo-white.svg",
+        "examples/aws-tanstack-start/src/**",
+        "examples/aws-tanstack-start/sst.config.ts",
+        "examples/aws-tanstack-start/tsconfig.json",
+        "examples/aws-tanstack-start/vite.config.ts",
+        "examples/aws-vite/**",
+        "examples/aws-zero/**",
+        "examples/bad-decision/**",
+        "examples/cloudflare-astro/**",
+        "examples/cloudflare-astro-v5/**",
+        "examples/cloudflare-cron/**",
+        "examples/cloudflare-d1/**",
+        "examples/cloudflare-d1-static/**",
+        "examples/cloudflare-durable-object/**",
+        "examples/cloudflare-hyperdrive-aws/**",
+        "examples/cloudflare-hyperdrive-planetscale/**",
+        "examples/cloudflare-kv/**",
+        "examples/cloudflare-kv-static/**",
+        "examples/cloudflare-queue/**",
+        "examples/cloudflare-rate-limit/**",
+        "examples/cloudflare-react-router/.gitignore",
+        "examples/cloudflare-react-router/app/**",
+        "examples/cloudflare-react-router/package.json",
+        "examples/cloudflare-react-router/react-router.config.ts",
+        "examples/cloudflare-react-router/sst.config.ts",
+        "examples/cloudflare-react-router/tsconfig.cloudflare.json",
+        "examples/cloudflare-react-router/tsconfig.json",
+        "examples/cloudflare-react-router/tsconfig.node.json",
+        "examples/cloudflare-react-router/vite.config.ts",
+        "examples/cloudflare-react-router/workers/**",
+        "examples/cloudflare-solid/**",
+        "examples/cloudflare-tanstack-start/.cta.json",
+        "examples/cloudflare-tanstack-start/.gitignore",
+        "examples/cloudflare-tanstack-start/.prettierignore",
+        "examples/cloudflare-tanstack-start/.vscode/**",
+        "examples/cloudflare-tanstack-start/README.md",
+        "examples/cloudflare-tanstack-start/eslint.config.js",
+        "examples/cloudflare-tanstack-start/package.json",
+        "examples/cloudflare-tanstack-start/prettier.config.js",
+        "examples/cloudflare-tanstack-start/public/manifest.json",
+        "examples/cloudflare-tanstack-start/public/robots.txt",
+        "examples/cloudflare-tanstack-start/src/**",
+        "examples/cloudflare-tanstack-start/sst.config.ts",
+        "examples/cloudflare-tanstack-start/tsconfig.json",
+        "examples/cloudflare-tanstack-start/vite.config.ts",
+        "examples/cloudflare-vite/**",
+        "examples/cloudflare-workflow/**",
+        "examples/hetzner/**",
+        "examples/hetzner-minecraft/**",
+        "examples/python-layouts/**",
+        "examples/python-modern-uv/**",
+        "examples/sst-transform/**",
+        "examples/tsconfig.json",
+        "examples/vercel-domain/**",
+        "go.mod",
+        "go.sum",
+        "install",
+        "internal/**",
+        "package.json",
+        "pkg/**",
+        "platform/.gitignore",
+        "platform/functions/**",
+        "platform/package.json",
+        "platform/platform.go",
+        "platform/scripts/**",
+        "platform/src/**",
+        "platform/support/**",
+        "platform/templates/**",
+        "platform/test/**",
+        "platform/tsconfig.json",
+        "scripts/**",
+        "sdk/**",
+        "www/.gitignore",
+        "www/.vscode/**",
+        "www/README.md",
+        "www/astro.config.mjs",
+        "www/config.ts",
+        "www/generate.ts",
+        "www/input-patch.ts",
+        "www/package.json",
+        "www/public/favicon.svg",
+        "www/src/assets/about/**",
+        "www/src/assets/blog/frontends-are-hard/framework-market-map.svg",
+        "www/src/assets/blog/frontends-are-hard/spa-architecture-diagram.svg",
+        "www/src/assets/blog/frontends-are-hard/ssr-architecture-diagram.svg",
+        "www/src/assets/docs/router/**",
+        "www/src/assets/lander/**",
+        "www/src/assets/logo-dark.svg",
+        "www/src/assets/logo-light.svg",
+        "www/src/components/**",
+        "www/src/content/**",
+        "www/src/custom.css",
+        "www/src/env.d.ts",
+        "www/src/pages/**",
+        "www/src/styles/**",
+        "www/src/util/**",
+        "www/sst-env.d.ts",
+        "www/sst.config.ts",
+        "www/tsconfig.json"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 SST\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 SST, MIT license (LICENSE), https://github.com/anomalyco/sst."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "cmd/sst/mosaic/multiplexer/tcell-term/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Tim Culverhouse\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Tim Culverhouse, MIT license (LICENSE), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/cmd/sst/mosaic/multiplexer/tcell-term."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-api/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-api, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-api."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-apig-websocket/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-apig-websocket, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-apig-websocket."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-apigv1/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-apigv1, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-apigv1."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-aurora-local/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-aurora-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-local."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-aurora-mysql/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-aurora-mysql, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-mysql."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-aurora-postgres/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-aurora-postgres, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-aurora-postgres."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/aws-auth-react/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 SST\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 SST, MIT license (LICENSE), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-auth-react."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-bucket-queue-subscriber/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-bucket-queue-subscriber, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-bucket-queue-subscriber."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-cluster-autoscaling/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-cluster-autoscaling, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-autoscaling."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-cluster-internal/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-cluster-internal, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-internal."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-cluster-spot/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-cluster-spot, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-spot."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-cluster-vpclink/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-cluster-vpclink, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-cluster-vpclink."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-dead-letter-queue/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-dead-letter-queue, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dead-letter-queue."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-dynamo/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-dynamo, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dynamo."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-dynamo-composite-keys/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-dynamo-composite-keys, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-dynamo-composite-keys."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-ec2-pulumi/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-ec2-pulumi, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-ec2-pulumi."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-efs/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-efs, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-efs-sqlite/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-efs-sqlite, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs-sqlite."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-efs-surrealdb/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-efs-surrealdb, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-efs-surrealdb."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-email/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-email, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-email."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-email-domain/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-email-domain, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-email-domain."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-express/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-express, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-express."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-express-redis/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-express-redis, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-express-redis."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-fastapi/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-fastapi, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-fastapi."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-ffmpeg/.gitignore",
+        "examples/aws-ffmpeg/index.ts",
+        "examples/aws-ffmpeg/package.json",
+        "examples/aws-ffmpeg/sst.config.ts",
+        "examples/aws-ffmpeg/tsconfig.json"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-ffmpeg, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-ffmpeg."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-hono-stream/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-hono-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-hono-stream."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-iam-permission-boundary/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-iam-permission-boundary, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-iam-permission-boundary."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-kinesis-stream/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-kinesis-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-kinesis-stream."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-lambda-hook/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-lambda-hook, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-hook."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-lambda-stream/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-lambda-stream, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-stream."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-lambda-vpc/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-lambda-vpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-lambda-vpc."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-multi-region/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-multi-region, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-multi-region."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-mysql/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-mysql, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-mysql."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-mysql-local/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-mysql-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-mysql-local."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-open-search/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-open-search, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-open-search."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-open-search-local/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-open-search-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-open-search-local."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-policy-pack/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-policy-pack, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-policy-pack."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-postgres/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-postgres, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-postgres."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-postgres-local/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-postgres-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-postgres-local."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-prisma/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-prisma, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-prisma."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-prisma-lambda/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-prisma-lambda, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-prisma-lambda."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-puppeteer/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-puppeteer, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-puppeteer."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-queue/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-queue, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-queue."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-rds-instance-mysql-public/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-rds-instance-mysql-public-example, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-rds-instance-mysql-public."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-realtime/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-realtime, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-realtime."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-redis/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-redis, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-redis."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-redis-local/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-redis-local, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-redis-local."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-rust-cluster/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-rust-cluster, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-rust-cluster."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-service-discovery/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-service-discovery, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-service-discovery."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-service-transform-container/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-service-transform-container, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-service-transform-container."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-sharp/.gitignore",
+        "examples/aws-sharp/index.ts",
+        "examples/aws-sharp/package.json",
+        "examples/aws-sharp/sst.config.ts",
+        "examples/aws-sharp/tsconfig.json"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-sharp, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-sharp."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-static-site/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-static-site, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-static-site."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-static-site-basic-auth/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-static-site-basic-auth, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-static-site-basic-auth."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-step-functions/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-step-functions, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-step-functions."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-step-functions-task-token/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-step-functions-task-token, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-step-functions-task-token."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-task/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-task, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-task."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-task-cron/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-task-cron, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-task-cron."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-topic/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-topic, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-topic."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-trpc/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-trpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-trpc."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-vector/index.ts",
+        "examples/aws-vector/package.json",
+        "examples/aws-vector/sst.config.ts"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-vector, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-vector."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-workflow/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-workflow, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-workflow-bus/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-workflow-bus, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-bus."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-workflow-cron/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-workflow-cron, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-cron."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/aws-workflow-python/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of aws-workflow-python, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/aws-workflow-python."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/cloudflare-auth/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of cloudflare-auth, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-auth."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/cloudflare-hono/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of cloudflare-hono, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-hono."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/cloudflare-trpc/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of cloudflare-trpc, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-trpc."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/cloudflare-worker/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of cloudflare-worker, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/cloudflare-worker."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "examples/secret-link-all/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of secret-link-all, ISC license (declared in package.json), https://github.com/anomalyco/sst/tree/e49ac31411f63ab4ed0d802b7e15d95f6b827e47/examples/secret-link-all."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dart",
+      "paths": [
+        "**/*.dart"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/Justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.enc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.entitlements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/aws-flutter-web/pubspec.lock",
+        "examples/aws-rails/Gemfile.lock",
+        "examples/cloudflare-workflow/bun.lock",
+        "sdk/python/uv.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prisma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.resolved"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ru"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/aws-nuxt-container/public/robots.txt",
+        "examples/aws-nuxt-stream/public/robots.txt",
+        "examples/aws-nuxt/public/robots.txt",
+        "examples/aws-rails/public/robots.txt",
+        "examples/aws-svelte-kit-remote-functions/static/robots.txt",
+        "examples/aws-tanstack-start/public/robots.txt",
+        "examples/cloudflare-tanstack-start/public/robots.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.cursorrules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ruby-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alt_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/brakeman"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bundle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clear_undlerine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/colored_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/colored_underline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/csi_rep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deccolm_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete_chars_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete_lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/docker-entrypoint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/erase_chars_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/erase_in_line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fish_cc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grid_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hyperlinks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/importmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/indexed_256_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/insert_blank_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue_855"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/kakoune"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/newline_with_cursor_beyond_scroll_region"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/region_scroll_down"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/row_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rubocop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saved_cursor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saved_cursor_alt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scroll_up_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/selective_erasure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sgr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/snapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tab_rendering"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tmux_git_log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tmux_htop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/underline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vim_24bitcolors_bce"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vim_large_window_scroll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vim_simple_edit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest_cursor_movement_1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vttest_insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zsh_tab_completion"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

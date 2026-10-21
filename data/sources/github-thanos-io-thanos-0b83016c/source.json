@@ -1,0 +1,727 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/thanos-io/thanos",
+  "revision": "f1e0bbc906c54ca138466bd3095c3f61bf31368d",
+  "checksum": "sha256:6fc082592648825dcbe87bf71c75b1de3b622c7e8958fac15b1f7ce55738f555",
+  "extract": {
+    "exclude": [
+      "docs/blog/img/**",
+      "docs/components/compactor_no_coping_with_load.png",
+      "docs/img/Thanos-logo_fullmedium.png",
+      "docs/img/Thanos_with_cilium.png",
+      "docs/img/bottleneck-globalsort.png",
+      "docs/img/bucket-web.jpg",
+      "docs/img/compaction_progress_metrics.png",
+      "docs/img/distributed-execution-proposal-1.png",
+      "docs/img/distributed-execution-proposal-2.png",
+      "docs/img/distributed-execution-proposal-3.png",
+      "docs/img/distributed-execution-proposal-4.png",
+      "docs/img/distributed-execution-proposal-5.png",
+      "docs/img/distributed-execution-proposal-6.png",
+      "docs/img/get-ref-map.png",
+      "docs/img/globalsort-nonoptimized.png",
+      "docs/img/globalsort-optimized.png",
+      "docs/img/go-in-thanos.jpg",
+      "docs/img/groupcache.png",
+      "docs/img/hubble_network_flow.png",
+      "docs/img/latency-with-sharding.png",
+      "docs/img/latency-without-sharding.png",
+      "docs/img/memory-with-sharding.png",
+      "docs/img/memory-without-sharding.png",
+      "docs/img/meta-monitoring-validator.png",
+      "docs/img/per-receive.png",
+      "docs/img/query_ui_6week.png",
+      "docs/img/query_ui_6week_dedup.png",
+      "docs/img/query_ui_stores.png",
+      "docs/img/receive-validator.png",
+      "docs/img/rueidis-client-side.png",
+      "docs/img/thanos_log_limit.png",
+      "docs/img/thanos_proposal_flow.png",
+      "docs/img/thanos_receiver_troubleshoot_empty_replica_external_label_name.drawio.png",
+      "docs/img/thanos_receiver_troubleshoot_federation_idential_replica_name.drawio.png",
+      "docs/img/thanos_receiver_troubleshoot_grafana_remote_write.png",
+      "docs/img/thanos_receiver_troubleshoot_no_external_labels.drawio.png",
+      "docs/img/tracing.png",
+      "docs/img/tracing2.png",
+      "docs/img/vertical-sharding.png",
+      "docs/img/zoomedit.png",
+      "docs/img/zoomrecording.png",
+      "pkg/block/indexheader/testdata/index_format_v1/index",
+      "pkg/block/testdata/**",
+      "pkg/store/6545postingsrepro",
+      "pkg/ui/react-app/public/favicon.ico",
+      "pkg/ui/react-app/src/fonts/**",
+      "pkg/ui/react-app/src/thanos/images/**",
+      "pkg/ui/react-app/src/vendor/**",
+      "pkg/ui/static/react/favicon.ico",
+      "pkg/ui/static/react/static/media/codicon.b3726f0165bf67ac6849.ttf",
+      "scripts/copyright/**",
+      "test/travis-gcs-creds.json.enc",
+      "website/static/cloudraft.png",
+      "website/static/depkeep.png",
+      "website/static/icon-dark.png",
+      "website/static/icon-light.png",
+      "website/static/logos/**",
+      "website/static/platformengineers.png",
+      "website/static/tasrie-it-services.png",
+      "website/static/thanos-og-image.png",
+      "pkg/block/indexheader/testdata/index_format_v2/index"
+    ]
+  },
+  "history": {
+    "since": "3a7b2996f8574048900cfc6259561ac412bcf251"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/thanos-io/thanos: the authors of thanos-io/thanos (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/thanos-io/thanos."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".bingo/**",
+        ".busybox-versions",
+        ".circleci/**",
+        ".codecov.yml",
+        ".cortex-packages.txt",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitpod.yml",
+        ".golangci.yml",
+        ".mdox.prev-release.yaml",
+        ".mdox.validate.yaml",
+        ".mdox.yaml",
+        ".promu.yml",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.e2e-tests",
+        "Dockerfile.multi-arch",
+        "Dockerfile.multi-stage",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "VERSION",
+        "cmd/**",
+        "doc.go",
+        "docs/README.md",
+        "docs/blog/2022-09-08-thanos-at-medallia.md",
+        "docs/blog/2023-06-02-lfx-mentorship-query-observability.md",
+        "docs/blog/2023-06-08-thanos-at-aiven.md",
+        "docs/blog/2023-11-20-life-of-a-sample-part-1.md",
+        "docs/blog/2023-11-20-life-of-a-sample-part-2.md",
+        "docs/blog/2023-20-11-thanoscon.md",
+        "docs/blog/2026-02-19-thanos-project-updates.md",
+        "docs/blog/welcome.md",
+        "docs/components/README.md",
+        "docs/components/compact.md",
+        "docs/components/flags/**",
+        "docs/components/query-frontend.md",
+        "docs/components/query.md",
+        "docs/components/receive.md",
+        "docs/components/rule.md",
+        "docs/components/sidecar.md",
+        "docs/components/store.md",
+        "docs/components/tools.md",
+        "docs/contributing/**",
+        "docs/design.md",
+        "docs/getting-started.md",
+        "docs/governance.md",
+        "docs/img/Thanos-logo_full.svg",
+        "docs/img/querier.svg",
+        "docs/img/query-path-tenancy-proposal-diagram.svg",
+        "docs/img/thanos_proposal_flow.excalidraw",
+        "docs/integrations.md",
+        "docs/internals/**",
+        "docs/logging.md",
+        "docs/operating/**",
+        "docs/proposals-accepted/**",
+        "docs/proposals-done/**",
+        "docs/proposals-rejected/**",
+        "docs/quick-tutorial.md",
+        "docs/release-process.md",
+        "docs/service-discovery.md",
+        "docs/sharding.md",
+        "docs/storage.md",
+        "docs/support/**",
+        "docs/tracing.md",
+        "examples/**",
+        "go.mod",
+        "go.sum",
+        "hooks/**",
+        "internal/**",
+        "mixin/**",
+        "netlify.toml",
+        "pkg/alert/**",
+        "pkg/api/**",
+        "pkg/block/block.go",
+        "pkg/block/block_test.go",
+        "pkg/block/fetcher.go",
+        "pkg/block/fetcher_test.go",
+        "pkg/block/index.go",
+        "pkg/block/index_test.go",
+        "pkg/block/indexheader/binary_reader.go",
+        "pkg/block/indexheader/header.go",
+        "pkg/block/indexheader/header_test.go",
+        "pkg/block/indexheader/lazy_binary_reader.go",
+        "pkg/block/indexheader/lazy_binary_reader_test.go",
+        "pkg/block/indexheader/parallel_bucket.go",
+        "pkg/block/indexheader/parallel_bucket_test.go",
+        "pkg/block/indexheader/reader_pool.go",
+        "pkg/block/indexheader/reader_pool_test.go",
+        "pkg/block/indexheader/testdata/index_format_v1/chunks/**",
+        "pkg/block/indexheader/testdata/index_format_v1/meta.json",
+        "pkg/block/indexheader/testdata/index_format_v2/**",
+        "pkg/block/metadata/**",
+        "pkg/block/writer.go",
+        "pkg/cache/**",
+        "pkg/cacheutil/**",
+        "pkg/clientconfig/**",
+        "pkg/compact/**",
+        "pkg/compactv2/**",
+        "pkg/component/**",
+        "pkg/compressutil/**",
+        "pkg/dedup/**",
+        "pkg/discovery/**",
+        "pkg/errors/**",
+        "pkg/errutil/**",
+        "pkg/exemplars/**",
+        "pkg/extannotations/**",
+        "pkg/extflag/**",
+        "pkg/extgrpc/**",
+        "pkg/exthttp/**",
+        "pkg/extkingpin/**",
+        "pkg/extprom/**",
+        "pkg/extpromql/**",
+        "pkg/filter/**",
+        "pkg/gate/**",
+        "pkg/info/**",
+        "pkg/logging/**",
+        "pkg/logutil/**",
+        "pkg/losertree/**",
+        "pkg/metadata/**",
+        "pkg/model/**",
+        "pkg/pool/**",
+        "pkg/prober/**",
+        "pkg/promclient/**",
+        "pkg/query/**",
+        "pkg/queryfrontend/**",
+        "pkg/querysharding/**",
+        "pkg/receive/**",
+        "pkg/reloader/**",
+        "pkg/replicate/**",
+        "pkg/rules/**",
+        "pkg/runutil/**",
+        "pkg/server/**",
+        "pkg/shipper/**",
+        "pkg/status/**",
+        "pkg/store/acceptance_test.go",
+        "pkg/store/batchable.go",
+        "pkg/store/bucket.go",
+        "pkg/store/bucket_e2e_test.go",
+        "pkg/store/bucket_test.go",
+        "pkg/store/cache/**",
+        "pkg/store/flushable.go",
+        "pkg/store/hintspb/**",
+        "pkg/store/io.go",
+        "pkg/store/io_test.go",
+        "pkg/store/labelpb/**",
+        "pkg/store/lazy_postings.go",
+        "pkg/store/lazy_postings_test.go",
+        "pkg/store/limiter.go",
+        "pkg/store/limiter_test.go",
+        "pkg/store/local.go",
+        "pkg/store/postings.go",
+        "pkg/store/postings_codec.go",
+        "pkg/store/postings_codec_test.go",
+        "pkg/store/prometheus.go",
+        "pkg/store/prometheus_test.go",
+        "pkg/store/proxy.go",
+        "pkg/store/proxy_merge.go",
+        "pkg/store/proxy_merge_test.go",
+        "pkg/store/proxy_test.go",
+        "pkg/store/recover.go",
+        "pkg/store/recover_test.go",
+        "pkg/store/storepb/**",
+        "pkg/store/telemetry.go",
+        "pkg/store/telemetry_test.go",
+        "pkg/store/tsdb.go",
+        "pkg/store/tsdb_selector.go",
+        "pkg/store/tsdb_selector_test.go",
+        "pkg/store/tsdb_test.go",
+        "pkg/strutil/**",
+        "pkg/symboltable/**",
+        "pkg/targets/**",
+        "pkg/tenancy/**",
+        "pkg/testutil/**",
+        "pkg/tls/**",
+        "pkg/tracing/**",
+        "pkg/ui/README.md",
+        "pkg/ui/bucket.go",
+        "pkg/ui/query.go",
+        "pkg/ui/react-app/.eslintrc.json",
+        "pkg/ui/react-app/.gitignore",
+        "pkg/ui/react-app/README.md",
+        "pkg/ui/react-app/globals.d.ts",
+        "pkg/ui/react-app/package.json",
+        "pkg/ui/react-app/pnpm-lock.yaml",
+        "pkg/ui/react-app/pnpm-workspace.yaml",
+        "pkg/ui/react-app/public/index.html",
+        "pkg/ui/react-app/public/manifest.json",
+        "pkg/ui/react-app/src/App.css",
+        "pkg/ui/react-app/src/App.test.tsx",
+        "pkg/ui/react-app/src/App.tsx",
+        "pkg/ui/react-app/src/Theme.tsx",
+        "pkg/ui/react-app/src/components/**",
+        "pkg/ui/react-app/src/contexts/**",
+        "pkg/ui/react-app/src/globals.ts",
+        "pkg/ui/react-app/src/hooks/**",
+        "pkg/ui/react-app/src/index.tsx",
+        "pkg/ui/react-app/src/pages/**",
+        "pkg/ui/react-app/src/react-app-env.d.ts",
+        "pkg/ui/react-app/src/setupTests.ts",
+        "pkg/ui/react-app/src/thanos/Navbar.tsx",
+        "pkg/ui/react-app/src/thanos/config.ts",
+        "pkg/ui/react-app/src/thanos/pages/**",
+        "pkg/ui/react-app/src/thanos/types/**",
+        "pkg/ui/react-app/src/themes/**",
+        "pkg/ui/react-app/src/types/**",
+        "pkg/ui/react-app/src/utils/**",
+        "pkg/ui/react-app/tsconfig.json",
+        "pkg/ui/rule.go",
+        "pkg/ui/static/react/asset-manifest.json",
+        "pkg/ui/static/react/index.html",
+        "pkg/ui/static/react/manifest.json",
+        "pkg/ui/static/react/static/css/**",
+        "pkg/ui/static/react/static/js/**",
+        "pkg/ui/static/react/static/media/index.cd351d7c31d0d3fccf96.cjs",
+        "pkg/ui/ui.go",
+        "pkg/ui/ui_test.go",
+        "pkg/verifier/**",
+        "scripts/build-react-app.sh",
+        "scripts/busybox-updater.sh",
+        "scripts/cfggen/**",
+        "scripts/checknames.sh",
+        "scripts/cleanup-white-noise.sh",
+        "scripts/genproto.sh",
+        "scripts/insecure_grpcurl_series.sh",
+        "scripts/installprotoc.sh",
+        "scripts/quickstart.sh",
+        "scripts/remove_method.sh",
+        "scripts/thanos-block.jq",
+        "scripts/website/**",
+        "test/e2e/**",
+        "tutorials/**",
+        "website/.hugo_build.lock",
+        "website/archetypes/**",
+        "website/data/**",
+        "website/hugo.yaml",
+        "website/layouts/**",
+        "website/static/CNAME",
+        "website/static/Thanos-logo_full.svg",
+        "website/static/cloud-native-computing.svg",
+        "website/static/expand.svg",
+        "website/static/infracloud.svg",
+        "website/static/main.css",
+        "website/static/o11y.svg",
+        "website/static/procedure.svg",
+        "website/static/syntax.css"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of thanos-io/thanos (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/thanos-io/thanos."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.capnp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.e2e-tests"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.excalidraw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.libsonnet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".bingo/alertmanager.mod",
+        ".bingo/bingo.mod",
+        ".bingo/capnpc-go.mod",
+        ".bingo/faillint.mod",
+        ".bingo/goimports.mod",
+        ".bingo/gojsontoyaml.mod",
+        ".bingo/golangci-lint.mod",
+        ".bingo/gotesplit.mod",
+        ".bingo/hugo.mod",
+        ".bingo/jb.mod",
+        ".bingo/jsonnet-lint.mod",
+        ".bingo/jsonnet.mod",
+        ".bingo/jsonnetfmt.mod",
+        ".bingo/mdox.mod",
+        ".bingo/promdoc.mod",
+        ".bingo/prometheus.mod",
+        ".bingo/promtool.mod",
+        ".bingo/promu.mod",
+        ".bingo/protoc-gen-gogofast.mod",
+        ".bingo/shfmt.mod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.multi-arch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.multi-stage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".bingo/alertmanager.sum",
+        ".bingo/bingo.sum",
+        ".bingo/capnpc-go.sum",
+        ".bingo/faillint.sum",
+        ".bingo/goimports.sum",
+        ".bingo/gojsontoyaml.sum",
+        ".bingo/golangci-lint.sum",
+        ".bingo/gotesplit.sum",
+        ".bingo/hugo.sum",
+        ".bingo/jb.sum",
+        ".bingo/jsonnet-lint.sum",
+        ".bingo/jsonnet.sum",
+        ".bingo/jsonnetfmt.sum",
+        ".bingo/mdox.sum",
+        ".bingo/promdoc.sum",
+        ".bingo/prometheus.sum",
+        ".bingo/promtool.sum",
+        ".bingo/promu.sum",
+        ".bingo/protoc-gen-gogofast.sum",
+        ".bingo/shfmt.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.busybox-versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/index"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

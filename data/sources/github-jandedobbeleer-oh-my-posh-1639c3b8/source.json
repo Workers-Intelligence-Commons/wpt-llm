@@ -1,0 +1,695 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/JanDeDobbeleer/oh-my-posh",
+  "revision": "913014b4abdb5c6be2fcd6e759d242168fa390e8",
+  "checksum": "sha256:573a47433197803db19d3a6871d63ebd9c3a41da5a50390552cd77f9845f0f45",
+  "extract": {
+    "exclude": [
+      "packages/msix/icons/**",
+      "src/segments/testdata/**",
+      "src/sqlite/testdata/**",
+      "src/test/signing/checksums.txt.invalid.sig",
+      "src/test/signing/checksums.txt.sig",
+      "src/winres/icon.png",
+      "src/winres/icon16.png",
+      "src/winres/icon32.png",
+      "src/winres/icon48.png",
+      "src/winres/icon64.png",
+      "website/static/fonts/**",
+      "website/static/img/accordeon.png",
+      "website/static/img/claude.png",
+      "website/static/img/logo.png",
+      "website/static/img/og-image.png",
+      "website/static/img/posh-tooltip.gif",
+      "website/static/img/transient-after.gif",
+      "website/static/img/transient-before.gif",
+      "website/static/img/transient-color.png"
+    ]
+  },
+  "history": {
+    "since": "ca3b9ef955ae51b42efcaaf42d0e5f03a0117b71"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright 2022 Jan De Dobbeleer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,\nand to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/JanDeDobbeleer/oh-my-posh: Copyright 2022 Jan De Dobbeleer, MIT license (COPYING), https://github.com/JanDeDobbeleer/oh-my-posh."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".all-contributorsrc",
+        ".claude/**",
+        ".commitlintrc.yml",
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".entire/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".markdownlint-cli2.yaml",
+        ".prettierrc",
+        ".versionrc.json",
+        ".vscode/**",
+        "AGENTS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "COPYING",
+        "README.md",
+        "SECURITY.md",
+        "apm.lock.yaml",
+        "apm.yml",
+        "build/**",
+        "e2e/**",
+        "packages/msix/README.md",
+        "packages/msix/appxmanifest.xml",
+        "packages/msix/build.ps1",
+        "packages/msix/dsc/**",
+        "packages/msix/mapping.txt",
+        "src/.golangci.yml",
+        "src/.goreleaser.yml",
+        "src/build/**",
+        "src/cache/**",
+        "src/cli/**",
+        "src/cmdflag/**",
+        "src/cmdtree/**",
+        "src/color/**",
+        "src/config/**",
+        "src/constants/**",
+        "src/dsc/**",
+        "src/generics/**",
+        "src/gitstatus/**",
+        "src/go.mod",
+        "src/go.sum",
+        "src/ini/**",
+        "src/log/**",
+        "src/main.go",
+        "src/main_test.go",
+        "src/maps/**",
+        "src/metadata.json",
+        "src/prompt/**",
+        "src/regex/**",
+        "src/render/**",
+        "src/runtime/**",
+        "src/segments/activation.go",
+        "src/segments/activation_test.go",
+        "src/segments/angular.go",
+        "src/segments/antigravity.go",
+        "src/segments/antigravity_test.go",
+        "src/segments/argocd.go",
+        "src/segments/argocd_test.go",
+        "src/segments/aspire.go",
+        "src/segments/aspire_test.go",
+        "src/segments/aurelia.go",
+        "src/segments/aws.go",
+        "src/segments/aws_test.go",
+        "src/segments/az.go",
+        "src/segments/az_functions.go",
+        "src/segments/az_test.go",
+        "src/segments/azd.go",
+        "src/segments/azd_test.go",
+        "src/segments/base.go",
+        "src/segments/base_test.go",
+        "src/segments/battery.go",
+        "src/segments/battery_test.go",
+        "src/segments/bazel.go",
+        "src/segments/bazel_test.go",
+        "src/segments/brewfather.go",
+        "src/segments/brewfather_test.go",
+        "src/segments/buf.go",
+        "src/segments/buf_test.go",
+        "src/segments/bun.go",
+        "src/segments/bun_test.go",
+        "src/segments/carbon_intensity.go",
+        "src/segments/carbon_intensity_test.go",
+        "src/segments/cds.go",
+        "src/segments/cds_test.go",
+        "src/segments/cf.go",
+        "src/segments/cf_target.go",
+        "src/segments/cf_target_test.go",
+        "src/segments/cf_test.go",
+        "src/segments/claude.go",
+        "src/segments/claude_test.go",
+        "src/segments/cmake.go",
+        "src/segments/cmake_test.go",
+        "src/segments/connection.go",
+        "src/segments/connection_test.go",
+        "src/segments/copilot.go",
+        "src/segments/copilot_cli.go",
+        "src/segments/copilot_cli_test.go",
+        "src/segments/copilot_test.go",
+        "src/segments/deno.go",
+        "src/segments/deno_test.go",
+        "src/segments/docker.go",
+        "src/segments/docker_test.go",
+        "src/segments/dotnet.go",
+        "src/segments/dotnet_test.go",
+        "src/segments/dvc.go",
+        "src/segments/dvc_test.go",
+        "src/segments/executiontime.go",
+        "src/segments/executiontime_test.go",
+        "src/segments/fieldrefs.go",
+        "src/segments/firebase.go",
+        "src/segments/firebase_test.go",
+        "src/segments/flutter.go",
+        "src/segments/flutter_test.go",
+        "src/segments/fossil.go",
+        "src/segments/fossil_test.go",
+        "src/segments/gcp.go",
+        "src/segments/gcp_test.go",
+        "src/segments/git.go",
+        "src/segments/git_test.go",
+        "src/segments/git_unix.go",
+        "src/segments/git_unix_test.go",
+        "src/segments/git_windows.go",
+        "src/segments/git_windows_test.go",
+        "src/segments/gitversion.go",
+        "src/segments/gitversion_test.go",
+        "src/segments/golang.go",
+        "src/segments/golang_test.go",
+        "src/segments/gradle.go",
+        "src/segments/gradle_test.go",
+        "src/segments/haskell.go",
+        "src/segments/haskell_test.go",
+        "src/segments/helm.go",
+        "src/segments/helm_test.go",
+        "src/segments/http.go",
+        "src/segments/http_test.go",
+        "src/segments/ipify.go",
+        "src/segments/ipify_test.go",
+        "src/segments/java.go",
+        "src/segments/java_test.go",
+        "src/segments/jujutsu.go",
+        "src/segments/jujutsu_test.go",
+        "src/segments/kubectl.go",
+        "src/segments/kubectl_test.go",
+        "src/segments/language.go",
+        "src/segments/language_test.go",
+        "src/segments/languages.go",
+        "src/segments/languages_test.go",
+        "src/segments/lastfm.go",
+        "src/segments/lastfm_test.go",
+        "src/segments/mercurial.go",
+        "src/segments/mercurial_test.go",
+        "src/segments/mojo.go",
+        "src/segments/mojo_test.go",
+        "src/segments/music_player.go",
+        "src/segments/music_player_test.go",
+        "src/segments/mvn.go",
+        "src/segments/mvn_test.go",
+        "src/segments/nba.go",
+        "src/segments/nba_test.go",
+        "src/segments/nbgv.go",
+        "src/segments/nbgv_test.go",
+        "src/segments/nightscout.go",
+        "src/segments/nightscout_test.go",
+        "src/segments/nixshell.go",
+        "src/segments/nixshell_test.go",
+        "src/segments/node.go",
+        "src/segments/node_test.go",
+        "src/segments/npm.go",
+        "src/segments/npm_test.go",
+        "src/segments/nx.go",
+        "src/segments/options/**",
+        "src/segments/orthodoxcal.go",
+        "src/segments/orthodoxcal_test.go",
+        "src/segments/os.go",
+        "src/segments/os_test.go",
+        "src/segments/owm.go",
+        "src/segments/owm_test.go",
+        "src/segments/path.go",
+        "src/segments/path_test.go",
+        "src/segments/path_unix_test.go",
+        "src/segments/path_windows_test.go",
+        "src/segments/pear.go",
+        "src/segments/pear_test.go",
+        "src/segments/plastic.go",
+        "src/segments/plastic_test.go",
+        "src/segments/pnpm.go",
+        "src/segments/pnpm_test.go",
+        "src/segments/posh_git.go",
+        "src/segments/posh_git_test.go",
+        "src/segments/project.go",
+        "src/segments/project_test.go",
+        "src/segments/pulumi.go",
+        "src/segments/pulumi_test.go",
+        "src/segments/python.go",
+        "src/segments/python_test.go",
+        "src/segments/quasar.go",
+        "src/segments/quasar_test.go",
+        "src/segments/ramadan.go",
+        "src/segments/ramadan_test.go",
+        "src/segments/react.go",
+        "src/segments/root.go",
+        "src/segments/sapling.go",
+        "src/segments/sapling_test.go",
+        "src/segments/scm.go",
+        "src/segments/scm_test.go",
+        "src/segments/session.go",
+        "src/segments/session_test.go",
+        "src/segments/shell.go",
+        "src/segments/shell_test.go",
+        "src/segments/sitecore.go",
+        "src/segments/sitecore_test.go",
+        "src/segments/spotify.go",
+        "src/segments/spotify_darwin.go",
+        "src/segments/spotify_darwin_test.go",
+        "src/segments/spotify_linux.go",
+        "src/segments/spotify_linux_test.go",
+        "src/segments/spotify_noop.go",
+        "src/segments/spotify_smtc.go",
+        "src/segments/spotify_smtc_parser.go",
+        "src/segments/spotify_smtc_parser_test.go",
+        "src/segments/spotify_test.go",
+        "src/segments/spotify_windows.go",
+        "src/segments/spotify_windows_test.go",
+        "src/segments/status.go",
+        "src/segments/status_test.go",
+        "src/segments/strava.go",
+        "src/segments/strava_test.go",
+        "src/segments/svelte.go",
+        "src/segments/svn.go",
+        "src/segments/svn_test.go",
+        "src/segments/sysinfo.go",
+        "src/segments/sysinfo_test.go",
+        "src/segments/talosctl.go",
+        "src/segments/talosctl_test.go",
+        "src/segments/taskwarrior.go",
+        "src/segments/taskwarrior_test.go",
+        "src/segments/tauri.go",
+        "src/segments/terraform.go",
+        "src/segments/terraform_required_version.go",
+        "src/segments/terraform_required_version_test.go",
+        "src/segments/terraform_test.go",
+        "src/segments/text.go",
+        "src/segments/text_test.go",
+        "src/segments/time.go",
+        "src/segments/time_test.go",
+        "src/segments/todoist.go",
+        "src/segments/todoist_test.go",
+        "src/segments/ui5tooling.go",
+        "src/segments/ui5tooling_test.go",
+        "src/segments/umbraco.go",
+        "src/segments/umbraco_test.go",
+        "src/segments/unity.go",
+        "src/segments/unity_test.go",
+        "src/segments/uno.go",
+        "src/segments/uno_test.go",
+        "src/segments/upgrade.go",
+        "src/segments/upgrade_test.go",
+        "src/segments/vimode.go",
+        "src/segments/vimode_test.go",
+        "src/segments/wakatime.go",
+        "src/segments/wakatime_test.go",
+        "src/segments/winget.go",
+        "src/segments/winget_test.go",
+        "src/segments/winreg.go",
+        "src/segments/winreg_test.go",
+        "src/segments/withings.go",
+        "src/segments/withings_test.go",
+        "src/segments/xmake.go",
+        "src/segments/xmake_test.go",
+        "src/segments/yarn.go",
+        "src/segments/yarn_test.go",
+        "src/segments/ytm.go",
+        "src/segments/ytm_test.go",
+        "src/segments/zvm.go",
+        "src/segments/zvm_test.go",
+        "src/shell/**",
+        "src/sqlite/sqlite.go",
+        "src/sqlite/sqlite_test.go",
+        "src/svg/**",
+        "src/template/**",
+        "src/terminal/**",
+        "src/test/AzureRmContext.json",
+        "src/test/azureProfile.json",
+        "src/test/empty.nuspec",
+        "src/test/go.work",
+        "src/test/invalid.nuspec",
+        "src/test/jandedobbeleer-palette.omp.json",
+        "src/test/jandedobbeleer.omp.json",
+        "src/test/kubectl.yml",
+        "src/test/nba/**",
+        "src/test/oh-my-posh.psd1",
+        "src/test/signing/checksums.txt",
+        "src/test/terraform.tfstate",
+        "src/test/umbraco/**",
+        "src/test/valid.nuspec",
+        "src/test/versions.tf",
+        "src/text/**",
+        "src/wasm/**",
+        "src/winres/winres.json",
+        "themes/**",
+        "website/.gitignore",
+        "website/README.md",
+        "website/api/**",
+        "website/blog/**",
+        "website/docs/**",
+        "website/docusaurus.config.js",
+        "website/export_themes.mjs",
+        "website/font-metrics.mjs",
+        "website/package-lock.json",
+        "website/package.json",
+        "website/plugins/**",
+        "website/scripts/**",
+        "website/segment_data.json",
+        "website/sidebars.js",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/.well-known/**",
+        "website/static/codepoints.csv",
+        "website/static/img/favicons.svg",
+        "website/static/img/logo-dark.svg",
+        "website/static/img/logo-light.svg",
+        "website/static/img/strava_connect.svg",
+        "website/static/img/withings.svg",
+        "website/static/install.ps1",
+        "website/static/install.sh",
+        "website/static/llms-full.txt",
+        "website/static/llms.txt",
+        "website/static/robots.txt",
+        "website/static/skill.md",
+        "website/static/skills/**",
+        "website/staticwebapp.config.json"
+      ],
+      "text": "Copyright 2022 Jan De Dobbeleer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the Software without restriction, including without limitation\nthe rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,\nand to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2022 Jan De Dobbeleer, MIT license (COPYING), https://github.com/JanDeDobbeleer/oh-my-posh."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.elv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.golden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nuspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psd1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfstate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.winget"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.all-contributorsrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.funcignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

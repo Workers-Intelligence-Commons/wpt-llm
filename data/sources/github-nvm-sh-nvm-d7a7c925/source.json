@@ -1,0 +1,2453 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nvm-sh/nvm",
+  "revision": "b1b3a0038c0666c7436cb5d383608b4b72c8300b",
+  "checksum": "sha256:15d4d0aa75547c53bab5711bf78aa0eb54801610777f162b5544f85e280f6a5c",
+  "extract": {
+    "exclude": [
+      ".github/external-threat-actor.png",
+      ".github/insider-threat-actor-and-libs.png",
+      "test/fast/Unit tests/mocks/project_dirs/inside-n_m-nested/**",
+      "test/fast/Unit tests/mocks/project_dirs/inside-n_m-nested-pkg/**",
+      "test/fast/Unit tests/mocks/project_dirs/nested-both/node_modules/**",
+      "test/fast/Unit tests/mocks/project_dirs/nested-n_m/node_modules/**",
+      "test/fast/Unit tests/mocks/project_dirs/no-nesting-both/node_modules/**",
+      "test/fast/Unit tests/mocks/project_dirs/no-nesting-n_m/**"
+    ]
+  },
+  "history": {
+    "since": "d6fe38a3560387f23ede89fc64af2647b63cba57"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2010 Tim Caswell\n\nCopyright (c) 2014 Jordan Harband\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2024 nvm.sh\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nvm-sh/nvm: Copyright (c) 2010 Tim Caswell; Copyright (c) 2014 Jordan Harband, MIT license (LICENSE.md), https://github.com/nvm-sh/nvm; Copyright (c) 2024 nvm.sh, MIT license (LICENSE), https://github.com/nvm-sh/nvm/tree/b1b3a0038c0666c7436cb5d383608b4b72c8300b/test/fixtures/nvmrc; hax, ISC license (declared in package.json), https://github.com/nvm-sh/nvm/tree/b1b3a0038c0666c7436cb5d383608b4b72c8300b/test/slow/nvm reinstall-packages/test-npmlink."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/FUNDING.yml",
+        ".github/INCIDENT_RESPONSE_PLAN.md",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/SECURITY.md",
+        ".github/THREAT_MODEL.md",
+        ".github/scripts/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".gitmodules",
+        ".mailmap",
+        ".npmrc",
+        "AGENTS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "GOVERNANCE.md",
+        "LICENSE.md",
+        "Makefile",
+        "PROJECT_CHARTER.md",
+        "README.md",
+        "ROADMAP.md",
+        "bash_completion",
+        "install.sh",
+        "nvm-exec",
+        "nvm.sh",
+        "package.json",
+        "release-notes.sh",
+        "rename_test.sh",
+        "test/common.sh",
+        "test/fast/Aliases/**",
+        "test/fast/Listing paths/**",
+        "test/fast/Listing versions/**",
+        "test/fast/Running 'nvm --help' documents current and the .nvmrc fallback",
+        "test/fast/Running 'nvm alias' should create a file in the alias directory",
+        "test/fast/Running 'nvm current' should display current nvm environment",
+        "test/fast/Running 'nvm deactivate' should unset the nvm environment variables",
+        "test/fast/Running 'nvm exec' and 'nvm run' treat digit-named files as arguments, not versions",
+        "test/fast/Running 'nvm exec' and 'nvm run' without a resolvable version warn and fall back",
+        "test/fast/Running 'nvm install' with '--reinstall-packages-from' requires a valid version",
+        "test/fast/Running 'nvm install' with an invalid version fails nicely",
+        "test/fast/Running 'nvm unalias' should remove the alias file",
+        "test/fast/Running 'nvm uninstall' should clean up aliases pointing to uninstalled version",
+        "test/fast/Running 'nvm uninstall' should remove the appropriate directory",
+        "test/fast/Running 'nvm uninstall' with an inferred version shows the inferred message",
+        "test/fast/Running 'nvm uninstall' with an uninstalled version shows the requested version",
+        "test/fast/Running 'nvm uninstall' with incorrect file permissions fails nicely",
+        "test/fast/Running 'nvm unload' should unset all function and variables",
+        "test/fast/Running 'nvm use foo' where 'foo' is circular aborts",
+        "test/fast/Running 'nvm use iojs' uses latest io.js version",
+        "test/fast/Running 'nvm use system' should work as expected",
+        "test/fast/Running 'nvm use x' should create and change the 'current' symlink",
+        "test/fast/Running 'nvm use x' should not create the 'current' symlink if $NVM_SYMLINK_CURRENT is false",
+        "test/fast/Running 'nvm use' and 'nvm deactivate' with hashing disabled",
+        "test/fast/Running 'nvm use' does not leave a stale hashed node",
+        "test/fast/Running 'nvm use' should drop CR char automatically",
+        "test/fast/Running 'nvm use' should not clobber the default MANPATH",
+        "test/fast/Running 'nvm use' should respect alias pointing to system",
+        "test/fast/Running 'nvm use' should respect system in .nvmrc",
+        "test/fast/Running 'nvm which' with circular alias shows alias name",
+        "test/fast/Running 'nvm' should not change or export the caller's IFS",
+        "test/fast/Running 'nvm-exec' should display required node version",
+        "test/fast/Set Colors/**",
+        "test/fast/Sourcing nvm.sh should make the nvm command available",
+        "test/fast/Sourcing nvm.sh should not modify parameters of caller",
+        "test/fast/Subcommands with missing or invalid args show a focused usage error",
+        "test/fast/Unit tests/Running 'nvm install --save' works as expected'",
+        "test/fast/Unit tests/Running 'nvm use --save' works as expected'",
+        "test/fast/Unit tests/Running 'nvm use --save' works with a .nvmrc in the parent dir",
+        "test/fast/Unit tests/Running 'nvm use --silent --save' doesn't output anything",
+        "test/fast/Unit tests/assert_not_ok",
+        "test/fast/Unit tests/assert_ok",
+        "test/fast/Unit tests/make_echo",
+        "test/fast/Unit tests/mocks/LTS_names.txt",
+        "test/fast/Unit tests/mocks/iojs.org-dist-index.tab",
+        "test/fast/Unit tests/mocks/lts-star.txt",
+        "test/fast/Unit tests/mocks/nodejs.org-dist-index.tab",
+        "test/fast/Unit tests/mocks/nodejs.org-download-nightly-index.tab",
+        "test/fast/Unit tests/mocks/nvm ls-remote iojs.txt",
+        "test/fast/Unit tests/mocks/nvm ls-remote lts.txt",
+        "test/fast/Unit tests/mocks/nvm ls-remote node.txt",
+        "test/fast/Unit tests/mocks/nvm ls-remote.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote LTS argon.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote LTS nightly argon.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote LTS nightly.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote LTS.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote nightly.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote stable nightly.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote stable.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote.txt",
+        "test/fast/Unit tests/mocks/nvm_ls_remote_iojs.txt",
+        "test/fast/Unit tests/mocks/nvm_make_alias LTS alias calls.txt",
+        "test/fast/Unit tests/mocks/nvm_print_implicit_alias remote stable nightly.txt",
+        "test/fast/Unit tests/mocks/nvm_print_implicit_alias remote stable.txt",
+        "test/fast/Unit tests/mocks/project_dirs/nested-both/a/**",
+        "test/fast/Unit tests/mocks/project_dirs/nested-both/package.json",
+        "test/fast/Unit tests/mocks/project_dirs/nested-n_m/a/**",
+        "test/fast/Unit tests/mocks/project_dirs/nested-pkg/**",
+        "test/fast/Unit tests/mocks/project_dirs/no-nesting-both/package.json",
+        "test/fast/Unit tests/mocks/project_dirs/no-nesting-pkg/**",
+        "test/fast/Unit tests/nvm install --offline",
+        "test/fast/Unit tests/nvm install -b",
+        "test/fast/Unit tests/nvm install -s and -b conflict",
+        "test/fast/Unit tests/nvm install NVM_NO_SOURCE_FALLBACK",
+        "test/fast/Unit tests/nvm install verifies the installed version",
+        "test/fast/Unit tests/nvm install with nonlowercase LTS name",
+        "test/fast/Unit tests/nvm ls-remote",
+        "test/fast/Unit tests/nvm ls-remote aliases",
+        "test/fast/Unit tests/nvm ls-remote with nounset should not fail",
+        "test/fast/Unit tests/nvm set_colors",
+        "test/fast/Unit tests/nvm use skips re-resolving an exact installed version",
+        "test/fast/Unit tests/nvm version-remote",
+        "test/fast/Unit tests/nvm_acquire_install_lock",
+        "test/fast/Unit tests/nvm_add_iojs_prefix",
+        "test/fast/Unit tests/nvm_alias",
+        "test/fast/Unit tests/nvm_alias LTS-N",
+        "test/fast/Unit tests/nvm_alias handles comments",
+        "test/fast/Unit tests/nvm_alias path traversal",
+        "test/fast/Unit tests/nvm_alias_path",
+        "test/fast/Unit tests/nvm_auto use with a prerelease default",
+        "test/fast/Unit tests/nvm_cd",
+        "test/fast/Unit tests/nvm_change_path",
+        "test/fast/Unit tests/nvm_change_path special characters",
+        "test/fast/Unit tests/nvm_check_for_help",
+        "test/fast/Unit tests/nvm_clang_version",
+        "test/fast/Unit tests/nvm_command_info",
+        "test/fast/Unit tests/nvm_compare_checksum",
+        "test/fast/Unit tests/nvm_compute_checksum",
+        "test/fast/Unit tests/nvm_curl_libz_support",
+        "test/fast/Unit tests/nvm_curl_use_compression",
+        "test/fast/Unit tests/nvm_curl_version",
+        "test/fast/Unit tests/nvm_die_on_prefix",
+        "test/fast/Unit tests/nvm_download",
+        "test/fast/Unit tests/nvm_download and curl helpers bypass shadowed curl",
+        "test/fast/Unit tests/nvm_download no eval injection",
+        "test/fast/Unit tests/nvm_download wget Authorization header",
+        "test/fast/Unit tests/nvm_download_artifact",
+        "test/fast/Unit tests/nvm_download_artifact error propagation",
+        "test/fast/Unit tests/nvm_download_artifact version injection",
+        "test/fast/Unit tests/nvm_echo",
+        "test/fast/Unit tests/nvm_ensure_default_set",
+        "test/fast/Unit tests/nvm_ensure_version_installed",
+        "test/fast/Unit tests/nvm_ensure_version_prefix",
+        "test/fast/Unit tests/nvm_err",
+        "test/fast/Unit tests/nvm_extract_tarball",
+        "test/fast/Unit tests/nvm_find_project_dir",
+        "test/fast/Unit tests/nvm_find_up",
+        "test/fast/Unit tests/nvm_format_version",
+        "test/fast/Unit tests/nvm_get_arch",
+        "test/fast/Unit tests/nvm_get_arch alpine",
+        "test/fast/Unit tests/nvm_get_arch_unofficial",
+        "test/fast/Unit tests/nvm_get_artifact_compression",
+        "test/fast/Unit tests/nvm_get_checksum",
+        "test/fast/Unit tests/nvm_get_checksum awk injection",
+        "test/fast/Unit tests/nvm_get_checksum_alg",
+        "test/fast/Unit tests/nvm_get_checksum_binary",
+        "test/fast/Unit tests/nvm_get_colors",
+        "test/fast/Unit tests/nvm_get_default_packages",
+        "test/fast/Unit tests/nvm_get_default_packages mawk compat",
+        "test/fast/Unit tests/nvm_get_download_slug",
+        "test/fast/Unit tests/nvm_get_latest missing curl or wget",
+        "test/fast/Unit tests/nvm_get_make_jobs",
+        "test/fast/Unit tests/nvm_get_minor_version",
+        "test/fast/Unit tests/nvm_get_mirror",
+        "test/fast/Unit tests/nvm_get_os",
+        "test/fast/Unit tests/nvm_has",
+        "test/fast/Unit tests/nvm_has_colors",
+        "test/fast/Unit tests/nvm_has_italics",
+        "test/fast/Unit tests/nvm_has_non_aliased",
+        "test/fast/Unit tests/nvm_has_solaris_binary",
+        "test/fast/Unit tests/nvm_has_system_iojs",
+        "test/fast/Unit tests/nvm_has_system_node",
+        "test/fast/Unit tests/nvm_hash_reset",
+        "test/fast/Unit tests/nvm_install_binary and nvm_install_source do not remove an inherited TMPDIR",
+        "test/fast/Unit tests/nvm_install_binary_extract",
+        "test/fast/Unit tests/nvm_install_binary_extract self-heals a broken version dir",
+        "test/fast/Unit tests/nvm_install_binary_nosource",
+        "test/fast/Unit tests/nvm_install_latest_npm",
+        "test/fast/Unit tests/nvm_install_lock_name",
+        "test/fast/Unit tests/nvm_install_no_progress_bar",
+        "test/fast/Unit tests/nvm_install_source SHELL override",
+        "test/fast/Unit tests/nvm_iojs_prefix",
+        "test/fast/Unit tests/nvm_iojs_version_has_solaris_binary",
+        "test/fast/Unit tests/nvm_is_alias",
+        "test/fast/Unit tests/nvm_is_installed_exact_version",
+        "test/fast/Unit tests/nvm_is_iojs_version",
+        "test/fast/Unit tests/nvm_is_merged_node_version",
+        "test/fast/Unit tests/nvm_is_natural_num",
+        "test/fast/Unit tests/nvm_is_valid_version",
+        "test/fast/Unit tests/nvm_is_version_installed",
+        "test/fast/Unit tests/nvm_ls handles hash in pattern",
+        "test/fast/Unit tests/nvm_ls_current",
+        "test/fast/Unit tests/nvm_ls_remote",
+        "test/fast/Unit tests/nvm_ls_remote LTS aliases",
+        "test/fast/Unit tests/nvm_ls_remote LTS codename traversal",
+        "test/fast/Unit tests/nvm_ls_remote nightly",
+        "test/fast/Unit tests/nvm_ls_remote_iojs",
+        "test/fast/Unit tests/nvm_make_alias",
+        "test/fast/Unit tests/nvm_node_prefix",
+        "test/fast/Unit tests/nvm_node_version_has_solaris_binary",
+        "test/fast/Unit tests/nvm_normalize_lts",
+        "test/fast/Unit tests/nvm_num_version_groups",
+        "test/fast/Unit tests/nvm_offline_version",
+        "test/fast/Unit tests/nvm_print_alias_file",
+        "test/fast/Unit tests/nvm_print_alias_path",
+        "test/fast/Unit tests/nvm_print_color_code",
+        "test/fast/Unit tests/nvm_print_color_legend",
+        "test/fast/Unit tests/nvm_print_default_alias",
+        "test/fast/Unit tests/nvm_print_implicit_alias errors",
+        "test/fast/Unit tests/nvm_print_implicit_alias success",
+        "test/fast/Unit tests/nvm_print_npm_version",
+        "test/fast/Unit tests/nvm_process_nvmrc",
+        "test/fast/Unit tests/nvm_rc_version errors when no version and no .nvmrc",
+        "test/fast/Unit tests/nvm_release_install_lock",
+        "test/fast/Unit tests/nvm_remote_version",
+        "test/fast/Unit tests/nvm_remote_versions",
+        "test/fast/Unit tests/nvm_remote_versions propagates iojs failure",
+        "test/fast/Unit tests/nvm_sanitize_auth_header",
+        "test/fast/Unit tests/nvm_sanitize_path special characters",
+        "test/fast/Unit tests/nvm_stdout_is_terminal",
+        "test/fast/Unit tests/nvm_strip_iojs_prefix",
+        "test/fast/Unit tests/nvm_strip_path",
+        "test/fast/Unit tests/nvm_supports_xz",
+        "test/fast/Unit tests/nvm_tree_contains_path",
+        "test/fast/Unit tests/nvm_use_if_needed",
+        "test/fast/Unit tests/nvm_validate_implicit_alias",
+        "test/fast/Unit tests/nvm_validate_install",
+        "test/fast/Unit tests/nvm_version",
+        "test/fast/Unit tests/nvm_version_dir",
+        "test/fast/Unit tests/nvm_version_greater",
+        "test/fast/Unit tests/nvm_version_greater_than_or_equal_to",
+        "test/fast/Unit tests/nvm_version_path",
+        "test/fast/Unit tests/nvm_wrap_with_color_code",
+        "test/fast/Unit tests/nvm_write_nvmrc",
+        "test/fast/Unit tests/security_wget_injection",
+        "test/fast/Unit tests/zsh options survive nvm_list_aliases and nvm_ls",
+        "test/fast/nvm should remove the last trailing slash in $NVM_DIR",
+        "test/fast/setup",
+        "test/fast/setup_dir",
+        "test/fast/teardown",
+        "test/fast/teardown_dir",
+        "test/fixtures/fake-source-tarball/**",
+        "test/install_script/**",
+        "test/installation_iojs/**",
+        "test/installation_node/**",
+        "test/mocks/**",
+        "test/slow/Running 'nvm current' should display current nvm environment",
+        "test/slow/nvm exec/**",
+        "test/slow/nvm reinstall-packages/Running 'nvm copy-packages $(nvm ls current)' should error out",
+        "test/slow/nvm reinstall-packages/setup_dir",
+        "test/slow/nvm reinstall-packages/should work as expected",
+        "test/slow/nvm reinstall-packages/teardown_dir",
+        "test/slow/nvm reinstall-packages/works with no installs",
+        "test/slow/nvm run/**",
+        "test/slow/nvm uninstall/**",
+        "test/slow/nvm use/**",
+        "test/slow/nvm_get_latest/**",
+        "test/sourcing/**",
+        "test/xenial/**",
+        "update_test_mocks.sh"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2010 Tim Caswell\n\nCopyright (c) 2014 Jordan Harband\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2010 Tim Caswell; Copyright (c) 2014 Jordan Harband, MIT license (LICENSE.md), https://github.com/nvm-sh/nvm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "test/fixtures/nvmrc/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 nvm.sh\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 nvm.sh, MIT license (LICENSE), https://github.com/nvm-sh/nvm/tree/b1b3a0038c0666c7436cb5d383608b4b72c8300b/test/fixtures/nvmrc."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/slow/nvm reinstall-packages/test-npmlink/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "hax, ISC license (declared in package.json), https://github.com/nvm-sh/nvm/tree/b1b3a0038c0666c7436cb5d383608b4b72c8300b/test/slow/nvm reinstall-packages/test-npmlink."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm alias' should ensure LTS alias dir exists"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm alias' should ignore leading blank lines in the file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm alias' should not accept aliases with a hash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm alias' should not accept aliases with slashes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm unalias' should accept aliases when they shadow a built-in alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm unalias' should not accept aliases with names equal to built-in alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/'nvm unalias' should not accept aliases with slashes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0 iojs version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.21-pre"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.js version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvm'"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "test/fast/Running 'nvm use' should respect system in .nvmrc",
+        "test/fast/Unit tests/nvm_rc_version errors when no version and no .nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc fallback"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc from binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc from fake source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc from source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc in the parent dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc should install it"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvmrc version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh global alias bug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh should keep version if one is active"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh should make the nvm command available"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh should not modify parameters of caller"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh should use the default if available and no nvm node is loaded"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh with --install should install the default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh with --no-use should not use anything"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh with no default should return 0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sh with zsh extendedglob should use the default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x is not installed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x should only list a matched version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nycrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias ˂aliasname˃ ˂target˃' again should change the target"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias ˂aliasname˃' should list but one alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias' lists implicit aliases when they do not exist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias' lists manual aliases instead of implicit aliases when present"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias' should create a file in the alias directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm alias' should list all aliases"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm copy-packages $(nvm ls current)' should error out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm current' should display current nvm environment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm deactivate' should unset the nvm environment variables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm exec --lts' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm exec --silent' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm exec' and 'nvm run' treat digit-named files as arguments, not versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm exec' and 'nvm run' without a resolvable version warn and fall back"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm exec' with help should not parse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm install --save' works as expected'"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm install' with '--reinstall-packages-from' requires a valid version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm install' with an invalid version fails nicely"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls --no-alias' does not call into nvm_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls --no-alias' with a pattern errors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls default' should show system version when available"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls foo' should return a nonzero exit code when not found"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls io' should return NA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls node_' should return a nonzero exit code when not found"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls stable' and 'nvm ls unstable' should return the appropriate implicit alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls system' should include 'system' when appropriate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' calls into nvm_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' should display all installed versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' should filter out 'versions'"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' should include 'system' when appropriate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' should list versions in the 'versions' directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' should not show a trailing slash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm ls' with nounset should not fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm run --harmony --version' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm run --lts' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm run --silent' should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm unalias' should remove the alias file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm uninstall' should clean up aliases pointing to uninstalled version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm uninstall' should remove the appropriate directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm uninstall' with an inferred version shows the inferred message"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm uninstall' with an uninstalled version shows the requested version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm uninstall' with incorrect file permissions fails nicely"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm unload' should unset all function and variables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use --lts' uses latest LTS version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use --lts=foo' uses latest 'foo' LTS version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use --save' works as expected'"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use --silent --save' doesn't output anything"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use foo' where 'foo' is circular aborts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use lts' shows actionable error"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use node --silent' doesn't print anything"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use node' uses latest stable node version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use system' should work as expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use x' should create and change the 'current' symlink"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use x' should not create the 'current' symlink if $NVM_SYMLINK_CURRENT is false"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' and 'nvm deactivate' with hashing disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' calls 'nvm_die_on_prefix'"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' does not leave a stale hashed node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' should drop CR char automatically"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' should not clobber the default MANPATH"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' should respect alias pointing to system"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm use' with nvmrc containing not installed version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm which foo' should return a nonzero exit code when not found"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm which' should respect alias pointing to system"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm which' with circular alias shows alias name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm' should not change or export the caller's IFS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Running 'nvm-exec' should display required node version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Subcommands with missing or invalid args show a focused usage error"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Using a nonstandard IFS should not break"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/assert_not_ok"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/assert_ok"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bash_completion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/default-packages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install LTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install already installed uses it"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from binary with binary flag set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from fake source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from source implicitly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from source with thread parameter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install from source without V8 snapshot for ARM"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install hook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install latest npm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install on bash with ERR trap and set -E"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install two versions and use the latest one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install while reinstalling packages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install with --alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install with --default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install with --latest-npm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install_nvm_from_git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/isainfo_amd64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/isainfo_x86"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make_echo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install --offline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install -b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install -s and -b conflict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install NVM_NO_SOURCE_FALLBACK"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install v1 works"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install verifies the installed version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm install with nonlowercase LTS name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm ls-remote"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm ls-remote aliases"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm ls-remote with nounset should not fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm set_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm should remove the last trailing slash in $NVM_DIR"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm use skips re-resolving an exact installed version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm version-remote"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm-exec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_acquire_install_lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_add_iojs_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias LTS-N"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles alias with spaces in name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles binary data after version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles carriage return"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles comment-only alias file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles comments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles embedded NUL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles empty alias file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles form feed and vertical tab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles no trailing newline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles unreadable alias file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias handles very long line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias path traversal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias strips trailing whitespace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_alias_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_auto use with a prerelease default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_cd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_change_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_change_path special characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_check_for_help"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_check_global_modules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_clang_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_command_info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_compare_checksum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_compute_checksum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_curl_libz_support"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_curl_use_compression"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_curl_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_detect_profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_die_on_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_do_install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_do_install_printf_format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_do_install_profile_without_trailing_newline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_do_install_tried_profile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download and curl helpers bypass shadowed curl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download no eval injection"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download wget Authorization header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download_artifact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download_artifact error propagation"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download_artifact version injection"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_download_no_eval_injection"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_echo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_echo_with_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ensure_default_set"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ensure_version_installed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ensure_version_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_err_with_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_extract_tarball"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_find_project_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_find_up"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_format_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_arch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_arch alpine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_arch_unofficial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_artifact_compression"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_checksum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_checksum awk injection"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_checksum_alg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_checksum_binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_default_packages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_default_packages mawk compat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_download_slug"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_latest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_latest failed redirect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_latest missing curl or wget"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_make_jobs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_minor_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_mirror"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_get_os"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_italics"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_non_aliased"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_solaris_binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_system_iojs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_has_system_node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_hash_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_binary and nvm_install_source do not remove an inherited TMPDIR"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_binary_extract"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_binary_extract self-heals a broken version dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_binary_nosource"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_latest_npm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_lock_name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_no_progress_bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_profile_skip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_source SHELL override"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_with_aliased_dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_install_with_node_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_iojs_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_iojs_version_has_solaris_binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_installed_exact_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_iojs_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_merged_node_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_natural_num"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_valid_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_is_version_installed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_list_aliases calls nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_list_aliases propagates NVM_HAS_COLORS through pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_list_aliases works with LTS aliases"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_list_aliases works with no LTS aliases present"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls handles hash in pattern"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_current"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_remote"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_remote LTS aliases"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_remote LTS codename traversal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_remote nightly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_ls_remote_iojs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_make_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_mkdir_error_handling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_node_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_node_version_has_solaris_binary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_normalize_lts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_num_version_groups"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_offline_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_alias_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_alias_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_alias_path calls nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_color_code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_color_legend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_default_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_default_alias calls nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_formatted_alias calls nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_formatted_alias respects NVM_HAS_COLORS in pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_implicit_alias errors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_implicit_alias success"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_npm_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_print_versions calls nvm_get_colors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_process_nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_profile_is_bash_or_zsh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_release_install_lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_remote_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_remote_versions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_remote_versions propagates iojs failure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_reset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_alias handles cycles"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_alias handles deep chain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_alias with nonexistent target"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_local_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_resolve_local_alias skips nvm_version for an exact installed version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_sanitize_auth_header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_sanitize_path special characters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_source"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_stdout_is_terminal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_strip_iojs_prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_strip_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_supports_xz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_tree_contains_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_use_if_needed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_validate_implicit_alias"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_validate_install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_version_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_version_greater"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_version_greater_than_or_equal_to"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_version_path"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_wrap_with_color_code"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nvm_write_nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkg_info_amd64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkg_info_fail"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkg_info_x86"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/security_wget_injection"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/should work as expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/teardown"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/teardown_dir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_linux_aarch64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_linux_armv8l"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_linux_loongarch64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_linux_x86_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_osx_amd64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_osx_x86"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_smartos_amd64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uname_smartos_x86"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uppercase alias names should work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/works with no installs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zsh options survive nvm_list_aliases and nvm_ls"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "test/fixtures/nvmrc": "https://github.com/nvm-sh/nvmrc"
+  }
+}

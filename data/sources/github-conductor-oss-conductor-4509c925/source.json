@@ -1,0 +1,884 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/conductor-oss/conductor",
+  "revision": "c52919afd0ec2ffde0196afbab10762d2d48ed28",
+  "checksum": "sha256:551e7b8bc081e2db1e9ed71380188b8ba36f775afe752b10b2d7d32ea26ff458",
+  "extract": {
+    "exclude": [
+      "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/PlannerContextFetchTask.java",
+      "ai/src/test/resources/media/**",
+      "docs/assets/images/ai/**",
+      "docs/assets/images/favicon.png",
+      "docs/devguide/architecture/PollTimeoutSeconds.png",
+      "docs/devguide/architecture/ResponseTimeoutSeconds.png",
+      "docs/devguide/architecture/TaskFailure.png",
+      "docs/devguide/architecture/TimeoutSeconds.png",
+      "docs/devguide/architecture/conductor-architecture.png",
+      "docs/devguide/architecture/dag_workflow.png",
+      "docs/devguide/architecture/dag_workflow2.png",
+      "docs/devguide/architecture/directed_graph.png",
+      "docs/devguide/architecture/overview.png",
+      "docs/devguide/architecture/pirate_graph.gif",
+      "docs/devguide/architecture/regular_graph.png",
+      "docs/devguide/architecture/task_states.png",
+      "docs/devguide/how-tos/Workflows/execution_path.png",
+      "docs/devguide/how-tos/Workflows/restarting-workflows-at-runtime.jpg",
+      "docs/devguide/how-tos/Workflows/workflow-task-states.jpg",
+      "docs/devguide/how-tos/Workflows/workflow-versioning-at-runtime.jpg",
+      "docs/devguide/how-tos/Workflows/workflow_debugging.png",
+      "docs/devguide/labs/img/**",
+      "docs/devguide/labs/kitchensink.png",
+      "docs/devguide/labs/metadataWorkflowPost.png",
+      "docs/devguide/labs/metadataWorkflowRun.png",
+      "docs/devguide/labs/uiWorkflowDefinition.png",
+      "docs/devguide/labs/uiWorkflowDefinitionVisual.png",
+      "docs/devguide/labs/workflowLoaded.png",
+      "docs/devguide/labs/workflowRunIdCopy.png",
+      "docs/devguide/running/conductorUI.png",
+      "docs/devguide/running/swagger.png",
+      "docs/documentation/configuration/workflowdef/operators/ShippingWorkflow.png",
+      "docs/documentation/configuration/workflowdef/operators/ShippingWorkflowRunning.png",
+      "docs/documentation/configuration/workflowdef/operators/ShippingWorkflowUPS.png",
+      "docs/documentation/configuration/workflowdef/operators/Switch_Fedex.png",
+      "docs/documentation/configuration/workflowdef/operators/Terminate_Task.png",
+      "docs/documentation/configuration/workflowdef/operators/dynamic-task-diagram.png",
+      "docs/documentation/configuration/workflowdef/operators/fork-task-diagram.png",
+      "docs/documentation/configuration/workflowdef/operators/subworkflow_diagram.png",
+      "docs/documentation/configuration/workflowdef/operators/workflow_fork.png",
+      "docs/home/devex.png",
+      "docs/home/timeline.png",
+      "docs/img/og-conductor.png",
+      "docs/resources/**",
+      "e2e/src/test/resources/assets/**",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "rest/src/main/resources/static/favicon.ico",
+      "rest/src/main/resources/static/logo.png",
+      "ui-next/e2e/__snapshots__/**",
+      "ui-next/e2e/integration/__snapshots__/**",
+      "ui-next/public/conductorLogo.png",
+      "ui-next/public/conductorLogoSmall.png",
+      "ui-next/public/enterprise-add-ons/**",
+      "ui-next/public/favicon.ico",
+      "ui-next/public/icons/apple-touch-icon.png",
+      "ui-next/public/icons/favicon-16x16.png",
+      "ui-next/public/icons/favicon-32x32.png",
+      "ui-next/public/icons/icon-144x144.png",
+      "ui-next/public/icons/icon-192x192.png",
+      "ui-next/public/icons/icon-256x256.png",
+      "ui-next/public/icons/icon-384x384.png",
+      "ui-next/public/icons/icon-48x48.png",
+      "ui-next/public/icons/icon-512x512.png",
+      "ui-next/public/icons/icon-72x72.png",
+      "ui-next/public/icons/icon-96x96.png",
+      "ui-next/public/integrations-icons/perplexity.svg",
+      "ui-next/public/logo.png",
+      "ui-next/public/orkes-logo-purple-2x.png",
+      "ui-next/public/orkes-logo-purple-inverted-2x.png",
+      "ui-next/src/images/401-Error.png"
+    ]
+  },
+  "history": {
+    "since": "fa9ead46352ccc44f361034c7d005297e0dc0ce5"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} Orkes, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "Commit history of https://github.com/conductor-oss/conductor: the authors of conductor-oss/conductor (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/conductor-oss/conductor."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".claude/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "OSSMETADATA",
+        "README.md",
+        "RECORD_MOCKS.md",
+        "RELATED.md",
+        "ROADMAP.md",
+        "SECURITY.md",
+        "USERS.md",
+        "agentspan/build.gradle",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/ConductorAgentSpanConfiguration.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/SkillMetadataDaoAdapter.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/SkillPackageStoreAdapter.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/a2a/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/listener/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/ai/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/compiler/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/config/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/context/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/controller/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/credentials/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/normalizer/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentDagService.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentEventListener.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentHumanTask.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentHumanTaskConfig.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentService.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AgentStreamRegistry.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/AzureFoundryAgentClient.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/BedrockAgentClient.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/ListApiToolsTask.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/ListApiToolsTaskConfig.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/OpenAiAssistantsAgentClient.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/PlanAndCompileTask.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/PlanAndCompileTaskConfig.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/PlannerContextFetchTaskConfig.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/ServiceConductorAgentClient.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/SkillRegistryService.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/service/VertexAiAgentClient.java",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/spi/**",
+        "agentspan/src/main/java/org/conductoross/conductor/ai/agentspan/runtime/util/**",
+        "agentspan/src/main/resources/**",
+        "agentspan/src/test/**",
+        "ai/CONTRIBUTING.md",
+        "ai/JDBC_CONFIGURATION.md",
+        "ai/README.md",
+        "ai/VECTORDB_CONFIGURATION.md",
+        "ai/build.gradle",
+        "ai/examples/**",
+        "ai/src/main/**",
+        "ai/src/test/java/**",
+        "ai/src/test/resources/a2a/**",
+        "ai/src/test/resources/ai-test-env.sh",
+        "amqp/**",
+        "annotations/**",
+        "annotations-processor/**",
+        "awss3-storage/**",
+        "awssqs-event-queue/**",
+        "azureblob-storage/**",
+        "build.gradle",
+        "build_ui.sh",
+        "build_ui_next.sh",
+        "cassandra-persistence/**",
+        "common/**",
+        "common-persistence/**",
+        "conductor-clients/**",
+        "conductor_server.bat",
+        "conductor_server.ps1",
+        "conductor_server.sh",
+        "core/**",
+        "dependencies.gradle",
+        "deploy.gradle",
+        "docker/**",
+        "docs/architecture/**",
+        "docs/assets/images/concepts/**",
+        "docs/assets/images/event-bus/**",
+        "docs/assets/images/frameworks/**",
+        "docs/assets/images/protocols/**",
+        "docs/css/**",
+        "docs/devguide/ai/**",
+        "docs/devguide/architecture/directed-acyclic-graph.md",
+        "docs/devguide/architecture/index.md",
+        "docs/devguide/architecture/tasklifecycle.md",
+        "docs/devguide/bestpractices.md",
+        "docs/devguide/concepts/**",
+        "docs/devguide/cookbook/**",
+        "docs/devguide/faq.md",
+        "docs/devguide/how-tos/Tasks/**",
+        "docs/devguide/how-tos/Workers/**",
+        "docs/devguide/how-tos/Workflows/choosing-a-trigger.md",
+        "docs/devguide/how-tos/Workflows/creating-workflows.md",
+        "docs/devguide/how-tos/Workflows/debugging-workflows.md",
+        "docs/devguide/how-tos/Workflows/handling-errors.md",
+        "docs/devguide/how-tos/Workflows/scheduling-workflows.md",
+        "docs/devguide/how-tos/Workflows/searching-workflows.md",
+        "docs/devguide/how-tos/Workflows/starting-workflows.md",
+        "docs/devguide/how-tos/Workflows/testing-workflows.md",
+        "docs/devguide/how-tos/Workflows/versioning-workflows.md",
+        "docs/devguide/how-tos/Workflows/viewing-workflow-executions.md",
+        "docs/devguide/how-tos/cicd-integration.md",
+        "docs/devguide/how-tos/conductor-skills.md",
+        "docs/devguide/how-tos/consume-route-events.md",
+        "docs/devguide/how-tos/event-bus.md",
+        "docs/devguide/how-tos/incoming-webhooks.md",
+        "docs/devguide/how-tos/publish-events.md",
+        "docs/devguide/how-tos/schema-registry.md",
+        "docs/devguide/how-tos/schema-validation.md",
+        "docs/devguide/how-tos/workflow-status-events.md",
+        "docs/devguide/integrations/**",
+        "docs/devguide/labs/eventhandlers.md",
+        "docs/devguide/labs/first-workflow.md",
+        "docs/devguide/labs/index.md",
+        "docs/devguide/labs/kitchensink.md",
+        "docs/devguide/running/deploy.md",
+        "docs/devguide/running/hosted.md",
+        "docs/devguide/running/source.md",
+        "docs/devguide/workflows/**",
+        "docs/documentation/advanced/**",
+        "docs/documentation/api/**",
+        "docs/documentation/cli/**",
+        "docs/documentation/clientsdks/**",
+        "docs/documentation/configuration/appconf.md",
+        "docs/documentation/configuration/eventhandlers.md",
+        "docs/documentation/configuration/schemas.md",
+        "docs/documentation/configuration/taskdef.md",
+        "docs/documentation/configuration/workflowdef/index.md",
+        "docs/documentation/configuration/workflowdef/operators/do-while-task.md",
+        "docs/documentation/configuration/workflowdef/operators/dynamic-fork-task.md",
+        "docs/documentation/configuration/workflowdef/operators/dynamic-task.md",
+        "docs/documentation/configuration/workflowdef/operators/exclusive-join-task.md",
+        "docs/documentation/configuration/workflowdef/operators/fork-task.md",
+        "docs/documentation/configuration/workflowdef/operators/index.md",
+        "docs/documentation/configuration/workflowdef/operators/join-task.md",
+        "docs/documentation/configuration/workflowdef/operators/set-variable-task.md",
+        "docs/documentation/configuration/workflowdef/operators/start-workflow-task.md",
+        "docs/documentation/configuration/workflowdef/operators/sub-workflow-task.md",
+        "docs/documentation/configuration/workflowdef/operators/switch-task.md",
+        "docs/documentation/configuration/workflowdef/operators/terminate-task.md",
+        "docs/documentation/configuration/workflowdef/systemtasks/**",
+        "docs/documentation/metrics/**",
+        "docs/home/icons/**",
+        "docs/home/redirect.html",
+        "docs/home/workflow.svg",
+        "docs/img/logo.svg",
+        "docs/index.html",
+        "docs/index.md",
+        "docs/learn/**",
+        "docs/linkcheck.toml",
+        "docs/llms-full.txt",
+        "docs/llms-manifest.txt",
+        "docs/llms.txt",
+        "docs/overrides/**",
+        "docs/quickstart/**",
+        "docs/robots.txt",
+        "docs/wmq/**",
+        "e2e/README.md",
+        "e2e/build.gradle",
+        "e2e/docker/**",
+        "e2e/run_tests-cassandra-es7.sh",
+        "e2e/run_tests-es8.sh",
+        "e2e/run_tests-mysql.sh",
+        "e2e/run_tests-postgres-es7.sh",
+        "e2e/run_tests-postgres.sh",
+        "e2e/run_tests-redis-es7.sh",
+        "e2e/run_tests-redis-os2.sh",
+        "e2e/run_tests-redis-os3.sh",
+        "e2e/run_tests.sh",
+        "e2e/src/test/java/**",
+        "e2e/src/test/resources/exec_limit_workflow.json",
+        "e2e/src/test/resources/log4j2-test.xml",
+        "e2e/src/test/resources/metadata/**",
+        "es6-persistence/**",
+        "es7-persistence/**",
+        "es8-persistence/**",
+        "family.properties",
+        "file-storage/**",
+        "gcs-storage/**",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "grpc/**",
+        "grpc-client/**",
+        "grpc-server/**",
+        "hooks/**",
+        "http-task/**",
+        "json-jq-task/**",
+        "kafka/**",
+        "kafka-event-queue/**",
+        "licenseheader.txt",
+        "llm-recordings/**",
+        "main.py",
+        "mkdocs.yml",
+        "mysql-persistence/**",
+        "nats/**",
+        "nats-streaming/**",
+        "os-persistence/**",
+        "os-persistence-v2/**",
+        "os-persistence-v3/**",
+        "polyglot-clients/**",
+        "postgres-external-storage/**",
+        "postgres-persistence/**",
+        "redis-api/**",
+        "redis-concurrency-limit/**",
+        "redis-configuration/**",
+        "redis-lock/**",
+        "redis-persistence/**",
+        "requirements.txt",
+        "rest/build.gradle",
+        "rest/src/main/java/**",
+        "rest/src/main/resources/kitchensink/**",
+        "rest/src/main/resources/static/index.html",
+        "rest/src/test/**",
+        "scheduler/**",
+        "schemas/**",
+        "scripts/**",
+        "serve-docs.sh",
+        "server/**",
+        "settings.gradle",
+        "springboot-bom-overrides.gradle",
+        "sqlite-persistence/**",
+        "task-status-listener/**",
+        "test-harness/**",
+        "test-util/**",
+        "ui/**",
+        "ui-next/.env",
+        "ui-next/.gitignore",
+        "ui-next/.husky/**",
+        "ui-next/.npmrc",
+        "ui-next/.prettierignore",
+        "ui-next/.prettierrc.json",
+        "ui-next/README.md",
+        "ui-next/docker-compose.integration.yml",
+        "ui-next/docker-compose.snapshots.yml",
+        "ui-next/e2e/agent-guide-framework-scroll.spec.ts",
+        "ui-next/e2e/agent-metadata.spec.ts",
+        "ui-next/e2e/coverage-fixture.ts",
+        "ui-next/e2e/helpers/**",
+        "ui-next/e2e/integration/api-client.ts",
+        "ui-next/e2e/integration/event-handlers.spec.ts",
+        "ui-next/e2e/integration/event-monitor.spec.ts",
+        "ui-next/e2e/integration/executions.spec.ts",
+        "ui-next/e2e/integration/global-setup.ts",
+        "ui-next/e2e/integration/global-teardown.ts",
+        "ui-next/e2e/integration/helpers.ts",
+        "ui-next/e2e/integration/llm-workflows.spec.ts",
+        "ui-next/e2e/integration/load-env.ts",
+        "ui-next/e2e/integration/queue-monitor.spec.ts",
+        "ui-next/e2e/integration/run-agent.spec.ts",
+        "ui-next/e2e/integration/scheduler-definitions.spec.ts",
+        "ui-next/e2e/integration/scheduler-executions.spec.ts",
+        "ui-next/e2e/integration/task-crud.spec.ts",
+        "ui-next/e2e/integration/task-definitions.spec.ts",
+        "ui-next/e2e/integration/workflow-crud.spec.ts",
+        "ui-next/e2e/integration/workflow-definition-execute.spec.ts",
+        "ui-next/e2e/integration/workflow-emdash-save.spec.ts",
+        "ui-next/e2e/integration/workflow-execution-complete.spec.ts",
+        "ui-next/e2e/integration/workflow-http-wait-terminate.spec.ts",
+        "ui-next/e2e/integration/workflow-save-unresolved-ref.spec.ts",
+        "ui-next/e2e/integration/workflow-system-task-forms.spec.ts",
+        "ui-next/e2e/integration/workflows.spec.ts",
+        "ui-next/e2e/navigation.spec.ts",
+        "ui-next/e2e/queue-monitor.spec.ts",
+        "ui-next/e2e/smoke.spec.ts",
+        "ui-next/e2e/snapshots.spec.ts",
+        "ui-next/e2e/workflow-execution-search-filters.spec.ts",
+        "ui-next/eslint.config.mjs",
+        "ui-next/index.html",
+        "ui-next/package.json",
+        "ui-next/playwright.config.ts",
+        "ui-next/playwright.integration.config.ts",
+        "ui-next/playwright.snapshots.config.ts",
+        "ui-next/pnpm-lock.yaml",
+        "ui-next/pnpm-workspace.yaml",
+        "ui-next/public/conductorLogo-dark.svg",
+        "ui-next/public/conductorLogo.svg",
+        "ui-next/public/conductorLogoSmall.svg",
+        "ui-next/public/context.js",
+        "ui-next/public/context.js.example",
+        "ui-next/public/diagramDotBg.svg",
+        "ui-next/public/enterIcon.svg",
+        "ui-next/public/icons/info-icon.svg",
+        "ui-next/public/integrations-icons/Grok.svg",
+        "ui-next/public/integrations-icons/Productivity.svg",
+        "ui-next/public/integrations-icons/airtable.svg",
+        "ui-next/public/integrations-icons/amazon.svg",
+        "ui-next/public/integrations-icons/amqp.svg",
+        "ui-next/public/integrations-icons/anthropic.svg",
+        "ui-next/public/integrations-icons/apachekafka.svg",
+        "ui-next/public/integrations-icons/asana.svg",
+        "ui-next/public/integrations-icons/aws-lambda.svg",
+        "ui-next/public/integrations-icons/aws-s3.svg",
+        "ui-next/public/integrations-icons/aws-ses.svg",
+        "ui-next/public/integrations-icons/aws-sns.svg",
+        "ui-next/public/integrations-icons/aws.svg",
+        "ui-next/public/integrations-icons/azure-devops.svg",
+        "ui-next/public/integrations-icons/azure-functions.svg",
+        "ui-next/public/integrations-icons/azure-storage.svg",
+        "ui-next/public/integrations-icons/azure.svg",
+        "ui-next/public/integrations-icons/azureOpenAI.svg",
+        "ui-next/public/integrations-icons/azure_openai.svg",
+        "ui-next/public/integrations-icons/azure_service_bus.svg",
+        "ui-next/public/integrations-icons/bedrock.svg",
+        "ui-next/public/integrations-icons/bitbucket.svg",
+        "ui-next/public/integrations-icons/circleci.svg",
+        "ui-next/public/integrations-icons/clickhouse.svg",
+        "ui-next/public/integrations-icons/cloudflare.svg",
+        "ui-next/public/integrations-icons/cohere.svg",
+        "ui-next/public/integrations-icons/commonroom.svg",
+        "ui-next/public/integrations-icons/conductor.svg",
+        "ui-next/public/integrations-icons/confluent.svg",
+        "ui-next/public/integrations-icons/datadog.svg",
+        "ui-next/public/integrations-icons/default.svg",
+        "ui-next/public/integrations-icons/digitalocean.svg",
+        "ui-next/public/integrations-icons/discord.svg",
+        "ui-next/public/integrations-icons/discourse.svg",
+        "ui-next/public/integrations-icons/docker.svg",
+        "ui-next/public/integrations-icons/firebase-firestore.svg",
+        "ui-next/public/integrations-icons/freshdesk.svg",
+        "ui-next/public/integrations-icons/gcp_pubsub.svg",
+        "ui-next/public/integrations-icons/gemini.svg",
+        "ui-next/public/integrations-icons/git.svg",
+        "ui-next/public/integrations-icons/github.svg",
+        "ui-next/public/integrations-icons/gitlab.svg",
+        "ui-next/public/integrations-icons/gmail.svg",
+        "ui-next/public/integrations-icons/google-cloud-functions.svg",
+        "ui-next/public/integrations-icons/google-cloud-storage.svg",
+        "ui-next/public/integrations-icons/google-docs.svg",
+        "ui-next/public/integrations-icons/google-drive.svg",
+        "ui-next/public/integrations-icons/google-sheets.svg",
+        "ui-next/public/integrations-icons/google-slides.svg",
+        "ui-next/public/integrations-icons/google_sheets.svg",
+        "ui-next/public/integrations-icons/googleads.svg",
+        "ui-next/public/integrations-icons/googleanalytics.svg",
+        "ui-next/public/integrations-icons/googlecalendar.svg",
+        "ui-next/public/integrations-icons/googledrive.svg",
+        "ui-next/public/integrations-icons/googlegemini.svg",
+        "ui-next/public/integrations-icons/grafana.svg",
+        "ui-next/public/integrations-icons/hubspot.svg",
+        "ui-next/public/integrations-icons/huggingFace.svg",
+        "ui-next/public/integrations-icons/ibm_mq.svg",
+        "ui-next/public/integrations-icons/instaclustr.svg",
+        "ui-next/public/integrations-icons/intercom.svg",
+        "ui-next/public/integrations-icons/jira.svg",
+        "ui-next/public/integrations-icons/kafka.svg",
+        "ui-next/public/integrations-icons/kafka_confluent.svg",
+        "ui-next/public/integrations-icons/kafka_msk.svg",
+        "ui-next/public/integrations-icons/kubernetes.svg",
+        "ui-next/public/integrations-icons/linear.svg",
+        "ui-next/public/integrations-icons/mailgun.svg",
+        "ui-next/public/integrations-icons/menuBook.svg",
+        "ui-next/public/integrations-icons/mistral.svg",
+        "ui-next/public/integrations-icons/mistralai.svg",
+        "ui-next/public/integrations-icons/mixpanel.svg",
+        "ui-next/public/integrations-icons/mongo.svg",
+        "ui-next/public/integrations-icons/mongodb.svg",
+        "ui-next/public/integrations-icons/mongovector.svg",
+        "ui-next/public/integrations-icons/mysql.svg",
+        "ui-next/public/integrations-icons/nats.svg",
+        "ui-next/public/integrations-icons/notion.svg",
+        "ui-next/public/integrations-icons/okta.svg",
+        "ui-next/public/integrations-icons/ollama.svg",
+        "ui-next/public/integrations-icons/openAI.svg",
+        "ui-next/public/integrations-icons/pagerduty.svg",
+        "ui-next/public/integrations-icons/pgvector.svg",
+        "ui-next/public/integrations-icons/pinecone.svg",
+        "ui-next/public/integrations-icons/pipedrive.svg",
+        "ui-next/public/integrations-icons/postgres.svg",
+        "ui-next/public/integrations-icons/private-ai.svg",
+        "ui-next/public/integrations-icons/rabbitmq.svg",
+        "ui-next/public/integrations-icons/redis.svg",
+        "ui-next/public/integrations-icons/relational_db.svg",
+        "ui-next/public/integrations-icons/sendgrid.svg",
+        "ui-next/public/integrations-icons/sentry.svg",
+        "ui-next/public/integrations-icons/slack.svg",
+        "ui-next/public/integrations-icons/stripe.svg",
+        "ui-next/public/integrations-icons/symphone.svg",
+        "ui-next/public/integrations-icons/teams.svg",
+        "ui-next/public/integrations-icons/telegram.svg",
+        "ui-next/public/integrations-icons/terraform.svg",
+        "ui-next/public/integrations-icons/trello.svg",
+        "ui-next/public/integrations-icons/twilio.svg",
+        "ui-next/public/integrations-icons/vertexAI.svg",
+        "ui-next/public/integrations-icons/weaviate.svg",
+        "ui-next/public/integrations-icons/wordpress.svg",
+        "ui-next/public/integrations-icons/youtube.svg",
+        "ui-next/public/integrations-icons/zendesk.svg",
+        "ui-next/public/programming-language-icons/**",
+        "ui-next/public/robots.txt",
+        "ui-next/public/searchIconBg.svg",
+        "ui-next/public/wh-icons/**",
+        "ui-next/scripts/**",
+        "ui-next/src/commonServices/**",
+        "ui-next/src/components/**",
+        "ui-next/src/growthbook/**",
+        "ui-next/src/images/svg/**",
+        "ui-next/src/index.css",
+        "ui-next/src/index.ts",
+        "ui-next/src/main.tsx",
+        "ui-next/src/monacoLoader.ts",
+        "ui-next/src/pages/**",
+        "ui-next/src/plugins/**",
+        "ui-next/src/queryClient.ts",
+        "ui-next/src/routes/**",
+        "ui-next/src/setupTests.ts",
+        "ui-next/src/shared/**",
+        "ui-next/src/templates/**",
+        "ui-next/src/testData/**",
+        "ui-next/src/theme/**",
+        "ui-next/src/types/**",
+        "ui-next/src/useArrowNavigation.tsx",
+        "ui-next/src/utils/**",
+        "ui-next/tsconfig.json",
+        "ui-next/vite-plugin-csp-nonce.ts",
+        "ui-next/vite.config.ts",
+        "ui-next/vite.lib-peer-external.ts",
+        "workflow-event-listener/**"
+      ],
+      "text": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} Orkes, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of conductor-oss/conductor (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/conductor-oss/conductor."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Extension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MockMaker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bak"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bak2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.imports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OSSMETADATA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,741 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/11ty/buildawesome",
+  "revision": "0191dacec28cd38ee6af713798c19318a7a94574",
+  "checksum": "sha256:1265dc7fd61611554e44aa0561921ec7e1e9465afd56be3b4d4073c68b403d68",
+  "extract": {
+    "exclude": [
+      "docs/ba-11ty-logo.png",
+      "test/stubs/deps/**",
+      "test/stubs-2378/**",
+      "test/stubs-autocopy/possum.jpg",
+      "test/stubs-autocopy/possum.png",
+      "test/stubs-img-transform/possum.png"
+    ]
+  },
+  "history": {
+    "since": "f8f577e5c1e68522d0b58a7f0c9723791f8aae83"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017–2024 Zach Leatherman @zachleat\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/11ty/buildawesome: Copyright (c) 2017–2024 Zach Leatherman @zachleat, MIT license (LICENSE), https://github.com/11ty/buildawesome."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".npmignore",
+        ".nvmrc",
+        ".prettierignore",
+        ".prettierrc.json",
+        "CODE_OF_CONDUCT.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "cmd.cjs",
+        "docs/coverage.md",
+        "docs/coverage.njk",
+        "docs/eleventy.coverage.js",
+        "docs/release-instructions.md",
+        "eslint.config.js",
+        "package-lock.json",
+        "package.json",
+        "packages/**",
+        "scripts/**",
+        "src/**",
+        "test/ArrayUtilTest.js",
+        "test/BenchmarkTest.js",
+        "test/BundlePluginTest.js",
+        "test/CompatibilityTest.js",
+        "test/ComputedDataProxyTest.js",
+        "test/ComputedDataQueueTest.js",
+        "test/ComputedDataTemplateStringTest.js",
+        "test/ComputedDataTest.js",
+        "test/ConsoleLoggerTest.js",
+        "test/ContentPipelineTest.js",
+        "test/CoreTest-ComputedData.js",
+        "test/CoreTest-CustomDateParsing.js",
+        "test/CoreTest-PageData.js",
+        "test/CoreTest-Preprocessors.js",
+        "test/CoreTest-Shortcodes.js",
+        "test/CoreTest-VirtualTemplates.js",
+        "test/CoreTest.js",
+        "test/CoreWatchOutputHashesTest.js",
+        "test/DebugLogUtilTest.js",
+        "test/DefineConfigTest.js",
+        "test/DependencyGraphTest.js",
+        "test/DirContainsTest.js",
+        "test/EleventyAddGlobalDataTest.js",
+        "test/EleventyImgTransformTest.js",
+        "test/EleventyMarkdownTest.js",
+        "test/EleventyNunjucksTest.js",
+        "test/ErrorHandlerTest.js",
+        "test/ErrorUtilTest.js",
+        "test/ExistsCacheTest.js",
+        "test/ExtensionMapTest.js",
+        "test/FileSystemSearchTest.js",
+        "test/FilesGitIgnoreEleventyIgnoreTest.js",
+        "test/FilesTest.js",
+        "test/GetCollectionItemIndexTest.js",
+        "test/GetCollectionItemTest.js",
+        "test/GlobMatcherTest.js",
+        "test/GlobRemapTest.js",
+        "test/GlobStripperTest.js",
+        "test/GlobalDependencyMapTest.js",
+        "test/HtmlBasePluginTest.js",
+        "test/HtmlRelativeCopyTest.js",
+        "test/I18nPluginTest.js",
+        "test/IdAttributePluginTest.js",
+        "test/ImportJsonSyncTest.js",
+        "test/IncrementalIncludesTest.js",
+        "test/InputPathToUrlPluginTest.js",
+        "test/Issue3467Test.js",
+        "test/Issue3788Test.js",
+        "test/Issue3797Test.js",
+        "test/Issue3808Test.js",
+        "test/Issue3809Test.js",
+        "test/Issue3816Test.js",
+        "test/Issue3818Test.js",
+        "test/Issue3823Test.js",
+        "test/Issue3825Test.js",
+        "test/Issue3831Test.js",
+        "test/Issue3833Test.js",
+        "test/Issue3850Test.js",
+        "test/Issue3853Test.js",
+        "test/Issue3854Test.js",
+        "test/Issue3860Test.js",
+        "test/Issue3870IncrementalTest.js",
+        "test/Issue3870Test.js",
+        "test/Issue3875Test.js",
+        "test/Issue4182Test.js",
+        "test/Issue434Test.js",
+        "test/Issue775Test.js",
+        "test/JavaScriptDependenciesTest.js",
+        "test/JavaScriptFrontMatterTest.js",
+        "test/LayoutCacheTest.js",
+        "test/LodashTest.js",
+        "test/LogFilterTest.js",
+        "test/NunjucksWatchTest.js",
+        "test/PaginationTest.js",
+        "test/PassthroughCopyBehaviorTest.js",
+        "test/PathNormalizerTest.js",
+        "test/PathPrefixer.js",
+        "test/PluralizeTest.js",
+        "test/PostHtmlAttrsTest.js",
+        "test/PreserveClosingTagsPluginTest.js",
+        "test/ProjectDirectoriesTest.js",
+        "test/ProjectTemplateFormatsTest.js",
+        "test/ProxyWrapTest.js",
+        "test/ReservedDataTest.js",
+        "test/ResolveConfigurationDataTest.js",
+        "test/SemverCheckTest.js",
+        "test/ServeTest.js",
+        "test/SortableTest.js",
+        "test/TemplateCollectionTest.js",
+        "test/TemplateConfigTest.js",
+        "test/TemplateDataTest.js",
+        "test/TemplateDepGraphTest.js",
+        "test/TemplateEngineManagerTest.js",
+        "test/TemplateEngineTest.js",
+        "test/TemplateFileSlugTest.js",
+        "test/TemplateGlobTest.js",
+        "test/TemplateLayoutPathResolverTest.js",
+        "test/TemplateLayoutTest.js",
+        "test/TemplateMapTest-ComputedData.js",
+        "test/TemplateMapTest.js",
+        "test/TemplatePassthroughManagerTest.js",
+        "test/TemplatePassthroughTest.js",
+        "test/TemplatePermalinkTest.js",
+        "test/TemplatePipelineTest.js",
+        "test/TemplateRenderCustomTest.js",
+        "test/TemplateRenderHTMLTest.js",
+        "test/TemplateRenderJavaScriptTest.js",
+        "test/TemplateRenderLiquidTest.js",
+        "test/TemplateRenderMarkdownPluginTest.js",
+        "test/TemplateRenderMarkdownTest.js",
+        "test/TemplateRenderNunjucksTest.js",
+        "test/TemplateRenderPluginTest.js",
+        "test/TemplateRenderTest.js",
+        "test/TemplateTest-CompileOptions.js",
+        "test/TemplateTest-ComputedData.js",
+        "test/TemplateTest-CustomExtensions.js",
+        "test/TemplateTest-DataCascade.js",
+        "test/TemplateTest-Dates.js",
+        "test/TemplateTest-JavaScript.js",
+        "test/TemplateTest.js",
+        "test/TemplateTest_Permalink.js",
+        "test/TemplateWriterTest.js",
+        "test/TestUtilityTest.js",
+        "test/TransformsUtilTest.js",
+        "test/UrlTest.js",
+        "test/UserConfigTest.js",
+        "test/UserDataExtensionsTest.js",
+        "test/Util/**",
+        "test/UtilSetUnionTest.js",
+        "test/WatchQueueTest.js",
+        "test/WatchTargetsTest.js",
+        "test/_getNewTemplateForTests.js",
+        "test/_getRenderedTemplates.js",
+        "test/_issues/**",
+        "test/_testHelpers.js",
+        "test/cmdTest.js",
+        "test/file-system-search/**",
+        "test/noop/**",
+        "test/noop2/**",
+        "test/proxy-pagination-globaldata/**",
+        "test/semverCoerceTest.js",
+        "test/slugify-filter/**",
+        "test/stubs/.eleventyignore",
+        "test/stubs/2016-02-01-permalinkdate.liquid",
+        "test/stubs/_data/**",
+        "test/stubs/_includes/**",
+        "test/stubs/_layouts/**",
+        "test/stubs/add-extension/**",
+        "test/stubs/broken-config.cjs",
+        "test/stubs/buffer.11ty.cjs",
+        "test/stubs/cfg-directories-export/**",
+        "test/stubs/cfg-directories-export-cjs/**",
+        "test/stubs/class-async-data-fn.11ty.cjs",
+        "test/stubs/class-async-filter.11ty.cjs",
+        "test/stubs/class-async.11ty.cjs",
+        "test/stubs/class-buffer.11ty.cjs",
+        "test/stubs/class-data-filter.11ty.cjs",
+        "test/stubs/class-data-fn-filter.11ty.cjs",
+        "test/stubs/class-data-fn-shorthand.11ty.cjs",
+        "test/stubs/class-data-fn.11ty.cjs",
+        "test/stubs/class-data-permalink-async-fn.11ty.cjs",
+        "test/stubs/class-data-permalink-buffer.11ty.cjs",
+        "test/stubs/class-data-permalink-fn-buffer.11ty.cjs",
+        "test/stubs/class-data-permalink-fn-filter.11ty.cjs",
+        "test/stubs/class-data-permalink-fn.11ty.cjs",
+        "test/stubs/class-data-permalink.11ty.cjs",
+        "test/stubs/class-data.11ty.cjs",
+        "test/stubs/class-filter.11ty.cjs",
+        "test/stubs/class-fns-has-page.11ty.cjs",
+        "test/stubs/class-fns.11ty.cjs",
+        "test/stubs/class-norender.11ty.cjs",
+        "test/stubs/class-with-dep-upstream.js",
+        "test/stubs/class-with-dep.11ty.cjs",
+        "test/stubs/class.11ty.cjs",
+        "test/stubs/classfields-data.11ty.cjs",
+        "test/stubs/cmd-help-processing/**",
+        "test/stubs/collection/**",
+        "test/stubs/collection-layout/**",
+        "test/stubs/collection-layout-wrap.njk",
+        "test/stubs/collection-slug/**",
+        "test/stubs/collection-template/**",
+        "test/stubs/collection2/**",
+        "test/stubs/component/**",
+        "test/stubs/component-async/**",
+        "test/stubs/config-deps-upstream.cjs",
+        "test/stubs/config-deps.cjs",
+        "test/stubs/config-empty-pathprefix.cjs",
+        "test/stubs/config-promise.js",
+        "test/stubs/config.cjs",
+        "test/stubs/custom-extension-no-permalink.txt",
+        "test/stubs/custom-extension.txt",
+        "test/stubs/custom-frontmatter/**",
+        "test/stubs/data-cascade/**",
+        "test/stubs/datafiledoesnotexist/**",
+        "test/stubs/dates/**",
+        "test/stubs/default-class-export-and-others.11ty.js",
+        "test/stubs/default-export-and-others.11ty.js",
+        "test/stubs/default-frontmatter.txt",
+        "test/stubs/default-function-export-and-named-data.11ty.cjs",
+        "test/stubs/default-function-export-and-named-data.11ty.js",
+        "test/stubs/default-no-liquid.md",
+        "test/stubs/default.liquid",
+        "test/stubs/default.md",
+        "test/stubs/dependencies/**",
+        "test/stubs/dynamic-permalink/**",
+        "test/stubs/eleventyComputed/**",
+        "test/stubs/eleventyExcludeFromCollections.njk",
+        "test/stubs/eleventyExcludeFromCollectionsPermalinkFalse.njk",
+        "test/stubs/engine-singletons/**",
+        "test/stubs/events-file-after-throws.config.js",
+        "test/stubs/events-file-broken/**",
+        "test/stubs/events-file-broken-data/**",
+        "test/stubs/events-file-ok/**",
+        "test/stubs/exitCode/**",
+        "test/stubs/exitCode_globalData/**",
+        "test/stubs/exitCode_success/**",
+        "test/stubs/exports-flatdata.11ty.cjs",
+        "test/stubs/fileslug.11ty.cjs",
+        "test/stubs/firstdir/**",
+        "test/stubs/formatTest.liquid",
+        "test/stubs/frontmatter-date/**",
+        "test/stubs/function-arrow.11ty.cjs",
+        "test/stubs/function-async-filter.11ty.cjs",
+        "test/stubs/function-async.11ty.cjs",
+        "test/stubs/function-buffer.11ty.cjs",
+        "test/stubs/function-filter.11ty.cjs",
+        "test/stubs/function-fns.11ty.cjs",
+        "test/stubs/function-markdown.11ty.cjs",
+        "test/stubs/function-prototype.11ty.cjs",
+        "test/stubs/function-throws-async.11ty.cjs",
+        "test/stubs/function-throws.11ty.cjs",
+        "test/stubs/function.11ty.cjs",
+        "test/stubs/glob-pages/**",
+        "test/stubs/global-dash-variable.liquid",
+        "test/stubs/globby/**",
+        "test/stubs/ignore-dedupe/**",
+        "test/stubs/ignore1/**",
+        "test/stubs/ignore2/**",
+        "test/stubs/ignore3/**",
+        "test/stubs/ignore4/**",
+        "test/stubs/ignore5/**",
+        "test/stubs/ignore6/**",
+        "test/stubs/ignoredFolder/**",
+        "test/stubs/ignorelocalroot/**",
+        "test/stubs/ignorelocalrootgitignore/**",
+        "test/stubs/img/**",
+        "test/stubs/included.liquid",
+        "test/stubs/includer.liquid",
+        "test/stubs/includesemptystring.liquid",
+        "test/stubs/index.html",
+        "test/stubs/index.liquid",
+        "test/stubs/issue-115/**",
+        "test/stubs/issue-135/**",
+        "test/stubs/issue-522/**",
+        "test/stubs/issue-95/**",
+        "test/stubs/layout-permalink-difflang/**",
+        "test/stubs/layoutsemptystring.liquid",
+        "test/stubs/local-data-tags/**",
+        "test/stubs/multiple-ignores/**",
+        "test/stubs/multipleexports-promises.11ty.cjs",
+        "test/stubs/multipleexports.11ty.cjs",
+        "test/stubs/njk-relative/**",
+        "test/stubs/object-norender.11ty.cjs",
+        "test/stubs/object.11ty.cjs",
+        "test/stubs/oneinstance.11ty.cjs",
+        "test/stubs/overrides/**",
+        "test/stubs/page-target-collections/**",
+        "test/stubs/paged/**",
+        "test/stubs/paged-global-data-mutable/**",
+        "test/stubs/pagedate.liquid",
+        "test/stubs/pagedate.njk",
+        "test/stubs/pagedateutc.njk",
+        "test/stubs/pagination-eleventycomputed-permalink.liquid",
+        "test/stubs/pagination-eleventycomputed-title.liquid",
+        "test/stubs/pagination-templatecontent/**",
+        "test/stubs/permalink-build/**",
+        "test/stubs/permalink-conflicts/**",
+        "test/stubs/permalink-conflicts-false/**",
+        "test/stubs/permalink-data-layout/**",
+        "test/stubs/permalink-empty-object/**",
+        "test/stubs/permalink-false/**",
+        "test/stubs/permalink-false-computed/**",
+        "test/stubs/permalink-in-layout-fileslug.liquid",
+        "test/stubs/permalink-in-layout.liquid",
+        "test/stubs/permalink-markdown-override.md",
+        "test/stubs/permalink-markdown-var.md",
+        "test/stubs/permalink-markdown.md",
+        "test/stubs/permalink-nobuild/**",
+        "test/stubs/permalink-true/**",
+        "test/stubs/permalinkdata-jsfn.njk",
+        "test/stubs/permalinkdata-jspermalinkfn.njk",
+        "test/stubs/permalinkdata.njk",
+        "test/stubs/permalinkdate.liquid",
+        "test/stubs/permalinked.liquid",
+        "test/stubs/posts/**",
+        "test/stubs/prematureTemplateContent/**",
+        "test/stubs/promise.11ty.cjs",
+        "test/stubs/public/**",
+        "test/stubs/relative-liquid/**",
+        "test/stubs/reuse-permalink/**",
+        "test/stubs/script-frontmatter/**",
+        "test/stubs/string.11ty.cjs",
+        "test/stubs/string.11ty.custom",
+        "test/stubs/string.11ty.possum",
+        "test/stubs/stubs-1541/**",
+        "test/stubs/stubs-computed-permalink/**",
+        "test/stubs/stubs-virtual-conflict/**",
+        "test/stubs/subdir/**",
+        "test/stubs/subfolder/**",
+        "test/stubs/tagged-pagination-multiples/**",
+        "test/stubs/tagged-pagination-multiples-layout/**",
+        "test/stubs/template-passthrough/**",
+        "test/stubs/template-passthrough-duplicates/**",
+        "test/stubs/template-passthrough2/**",
+        "test/stubs/template.liquid",
+        "test/stubs/templateFrontMatter.liquid",
+        "test/stubs/templateFrontMatterJs.njk",
+        "test/stubs/templateFrontMatterJson.liquid",
+        "test/stubs/templateLayoutCacheDuplicates/**",
+        "test/stubs/templateLayoutCacheDuplicates-b/**",
+        "test/stubs/templateMapCollection/**",
+        "test/stubs/templateTwoLayouts.liquid",
+        "test/stubs/templateWithLayout.liquid",
+        "test/stubs/templateWithLayoutContent.liquid",
+        "test/stubs/templateWithLayoutKey.liquid",
+        "test/stubs/templatetest-frontmatter/**",
+        "test/stubs/test-override-js-markdown.11ty.cjs",
+        "test/stubs/testing.html",
+        "test/stubs/transform-pages/**",
+        "test/stubs/use-collection.11ty.cjs",
+        "test/stubs/vue-layout.11ty.cjs",
+        "test/stubs/vue.11ty.cjs",
+        "test/stubs/writeTest/**",
+        "test/stubs/writeTestJS/**",
+        "test/stubs/writeTestJS-casesensitive/**",
+        "test/stubs/writeTestJS-passthrough/**",
+        "test/stubs/writeTestMarkdown/**",
+        "test/stubs--to/**",
+        "test/stubs-1206/**",
+        "test/stubs-1242/**",
+        "test/stubs-1325/**",
+        "test/stubs-142/**",
+        "test/stubs-1691/**",
+        "test/stubs-2145/**",
+        "test/stubs-2167/**",
+        "test/stubs-2224/**",
+        "test/stubs-2258/**",
+        "test/stubs-2258-2830-skip-layouts/**",
+        "test/stubs-2261/**",
+        "test/stubs-2367/**",
+        "test/stubs-2602/**",
+        "test/stubs-2753/**",
+        "test/stubs-2790/**",
+        "test/stubs-2851/**",
+        "test/stubs-3013/**",
+        "test/stubs-3285/**",
+        "test/stubs-3356/**",
+        "test/stubs-337/**",
+        "test/stubs-3807/**",
+        "test/stubs-3810/**",
+        "test/stubs-403/**",
+        "test/stubs-408-sass/**",
+        "test/stubs-413/**",
+        "test/stubs-434/**",
+        "test/stubs-475/**",
+        "test/stubs-630/**",
+        "test/stubs-670/**",
+        "test/stubs-919/**",
+        "test/stubs-absolute/**",
+        "test/stubs-addglobaldata/**",
+        "test/stubs-addglobaldata-noop/**",
+        "test/stubs-autocopy/.gitkeep",
+        "test/stubs-base/**",
+        "test/stubs-base-case-sens/**",
+        "test/stubs-circular-layout/**",
+        "test/stubs-computed-array/**",
+        "test/stubs-computed-collections/**",
+        "test/stubs-computed-collections-filter/**",
+        "test/stubs-computed-dirdata/**",
+        "test/stubs-computed-global/**",
+        "test/stubs-computed-pagination/**",
+        "test/stubs-computed-symbolparse/**",
+        "test/stubs-custom-extension/**",
+        "test/stubs-data-cascade/**",
+        "test/stubs-data-esm/**",
+        "test/stubs-dependency-tree/**",
+        "test/stubs-empty/**",
+        "test/stubs-empty-json-data/**",
+        "test/stubs-fancyjs/**",
+        "test/stubs-freeze/**",
+        "test/stubs-global-data-config-api/**",
+        "test/stubs-global-data-config-api-nested/**",
+        "test/stubs-i18n/**",
+        "test/stubs-img-transform/ignored.md",
+        "test/stubs-img-transform/missing-alt.md",
+        "test/stubs-img-transform/multiple.md",
+        "test/stubs-img-transform/single.md",
+        "test/stubs-incremental/**",
+        "test/stubs-layout-cache/**",
+        "test/stubs-layouts-event/**",
+        "test/stubs-njk-async/**",
+        "test/stubs-pagination-computed-quotes/**",
+        "test/stubs-pagination-computed-quotes-njk/**",
+        "test/stubs-pathtourl/**",
+        "test/stubs-render-plugin/**",
+        "test/stubs-types/**",
+        "test/stubs-virtual/**",
+        "test/stubs-virtual-nowrite/**",
+        "test/views/**",
+        "test_node/**",
+        "tsconfig.json",
+        "types/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017–2024 Zach Leatherman @zachleat\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017–2024 Zach Leatherman @zachleat, MIT license (LICENSE), https://github.com/11ty/buildawesome."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.Js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "liquid",
+      "paths": [
+        "**/*.liquid"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.custom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.js1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.njk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nosj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nunj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.possum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eleventyignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.htaccess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

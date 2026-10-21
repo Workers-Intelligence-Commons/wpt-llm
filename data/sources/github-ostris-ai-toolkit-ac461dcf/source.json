@@ -1,0 +1,387 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ostris/ai-toolkit",
+  "revision": "12395a103fd0ca499c631dc6f460a8778e11490d",
+  "checksum": "sha256:291031d04b7d2862666fda6950603c88cfae21f25d934433bc2107d3010ce00a",
+  "extract": {
+    "exclude": [
+      "assets/VAE_test1.jpg",
+      "assets/lora_ease_ui.png",
+      "toolkit/audio/melbandroformer/**",
+      "toolkit/audio/moss_music/**",
+      "toolkit/audio/ostris_logo.jpg",
+      "toolkit/keymaps/stable_diffusion_refiner_ldm_base.safetensors",
+      "toolkit/keymaps/stable_diffusion_sd1_ldm_base.safetensors",
+      "toolkit/keymaps/stable_diffusion_sd2_ldm_base.safetensors",
+      "toolkit/keymaps/stable_diffusion_sdxl_ldm_base.safetensors",
+      "toolkit/keymaps/stable_diffusion_ssd_ldm_base.safetensors",
+      "toolkit/keymaps/stable_diffusion_vega_ldm_base.safetensors",
+      "toolkit/timestep_weighing/flex_timestep_weights_plot.png",
+      "ui/public/imgs/**",
+      "ui/public/ostris_logo.png",
+      "ui/public/ostris_logo_black.png",
+      "ui/public/web-app-manifest-192x192.png",
+      "ui/public/web-app-manifest-512x512.png",
+      "ui/src/app/apple-icon.png",
+      "ui/src/app/favicon.ico",
+      "ui/src/app/icon.png"
+    ]
+  },
+  "history": {
+    "since": "8f9cd823d118e62ca5d4f846af594747cffd1257"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Ostris, LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/ostris/ai-toolkit: Copyright (c) 2024 Ostris, LLC, MIT license (LICENSE), https://github.com/ostris/ai-toolkit."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".vscode/**",
+        "FAQ.md",
+        "LICENSE",
+        "README.md",
+        "assets/glif.svg",
+        "build_and_push_docker",
+        "build_and_push_docker_dev",
+        "config/**",
+        "docker/**",
+        "docker-compose.yml",
+        "extensions/**",
+        "extensions_built_in/**",
+        "flux_train_ui.py",
+        "info.py",
+        "jobs/**",
+        "manager/**",
+        "notebooks/**",
+        "output/**",
+        "requirements.txt",
+        "requirements_base.txt",
+        "run.py",
+        "run_linux.sh",
+        "run_mac.zsh",
+        "run_modal.py",
+        "run_windows.bat",
+        "scripts/**",
+        "spark_requirements.txt",
+        "testing/**",
+        "toolkit/__init__.py",
+        "toolkit/accelerator.py",
+        "toolkit/advanced_prompt_embeds.py",
+        "toolkit/assistant_lora.py",
+        "toolkit/audio/album_artwork.py",
+        "toolkit/audio/make_video.py",
+        "toolkit/audio/preserve_pitch.py",
+        "toolkit/basic.py",
+        "toolkit/buckets.py",
+        "toolkit/civitai.py",
+        "toolkit/clip_vision_adapter.py",
+        "toolkit/config.py",
+        "toolkit/config_modules.py",
+        "toolkit/control_generator.py",
+        "toolkit/cuda_malloc.py",
+        "toolkit/custom_adapter.py",
+        "toolkit/data_loader.py",
+        "toolkit/data_transfer_object/**",
+        "toolkit/dataloader_mixins.py",
+        "toolkit/dequantize.py",
+        "toolkit/dto.py",
+        "toolkit/ema.py",
+        "toolkit/embedding.py",
+        "toolkit/esrgan_utils.py",
+        "toolkit/extension.py",
+        "toolkit/guidance.py",
+        "toolkit/ideogram_caption.py",
+        "toolkit/image_utils.py",
+        "toolkit/inference_lora.py",
+        "toolkit/inversion_utils.py",
+        "toolkit/ip_adapter.py",
+        "toolkit/job.py",
+        "toolkit/keymaps/stable_diffusion_refiner.json",
+        "toolkit/keymaps/stable_diffusion_refiner_unmatched.json",
+        "toolkit/keymaps/stable_diffusion_sd1.json",
+        "toolkit/keymaps/stable_diffusion_sd2.json",
+        "toolkit/keymaps/stable_diffusion_sd2_unmatched.json",
+        "toolkit/keymaps/stable_diffusion_sdxl.json",
+        "toolkit/keymaps/stable_diffusion_sdxl_unmatched.json",
+        "toolkit/keymaps/stable_diffusion_ssd.json",
+        "toolkit/keymaps/stable_diffusion_ssd_unmatched.json",
+        "toolkit/keymaps/stable_diffusion_vega.json",
+        "toolkit/kohya_lora.py",
+        "toolkit/kohya_model_util.py",
+        "toolkit/layers.py",
+        "toolkit/llvae.py",
+        "toolkit/logging_aitk.py",
+        "toolkit/lora_special.py",
+        "toolkit/lorm.py",
+        "toolkit/losses.py",
+        "toolkit/lycoris_special.py",
+        "toolkit/lycoris_utils.py",
+        "toolkit/memory_management/**",
+        "toolkit/metadata.py",
+        "toolkit/models/**",
+        "toolkit/network_mixins.py",
+        "toolkit/optimizer.py",
+        "toolkit/optimizers/**",
+        "toolkit/orig_configs/**",
+        "toolkit/paths.py",
+        "toolkit/photomaker.py",
+        "toolkit/photomaker_pipeline.py",
+        "toolkit/pipelines.py",
+        "toolkit/pixel_shuffle_encoder.py",
+        "toolkit/print.py",
+        "toolkit/progress_bar.py",
+        "toolkit/prompt_utils.py",
+        "toolkit/reference_adapter.py",
+        "toolkit/resampler.py",
+        "toolkit/sample_step_hook.py",
+        "toolkit/sampler.py",
+        "toolkit/samplers/**",
+        "toolkit/saving.py",
+        "toolkit/scheduler.py",
+        "toolkit/sd_device_states_presets.py",
+        "toolkit/stable_diffusion_model.py",
+        "toolkit/style.py",
+        "toolkit/timer.py",
+        "toolkit/timestep_weighing/__init__.py",
+        "toolkit/timestep_weighing/default_weighing_scheme.py",
+        "toolkit/train_pipelines.py",
+        "toolkit/train_tools.py",
+        "toolkit/ui_job_status.py",
+        "toolkit/unloader.py",
+        "toolkit/util/**",
+        "toolkit/win_console.py",
+        "tsconfig.json",
+        "ui/.gitignore",
+        "ui/README.md",
+        "ui/cron/**",
+        "ui/next.config.ts",
+        "ui/package-lock.json",
+        "ui/package.json",
+        "ui/postcss.config.mjs",
+        "ui/prisma/**",
+        "ui/public/file.svg",
+        "ui/public/globe.svg",
+        "ui/public/next.svg",
+        "ui/public/vercel.svg",
+        "ui/public/window.svg",
+        "ui/src/app/api/**",
+        "ui/src/app/dashboard/**",
+        "ui/src/app/datasets/**",
+        "ui/src/app/generate/**",
+        "ui/src/app/globals.css",
+        "ui/src/app/icon.svg",
+        "ui/src/app/jobs/**",
+        "ui/src/app/layout.tsx",
+        "ui/src/app/manifest.json",
+        "ui/src/app/page.tsx",
+        "ui/src/app/settings/**",
+        "ui/src/components/**",
+        "ui/src/docs.tsx",
+        "ui/src/extensions/**",
+        "ui/src/globals.d.ts",
+        "ui/src/helpers/**",
+        "ui/src/hooks/**",
+        "ui/src/instrumentation.ts",
+        "ui/src/middleware.ts",
+        "ui/src/paths.ts",
+        "ui/src/server/**",
+        "ui/src/types.ts",
+        "ui/src/utils/**",
+        "ui/tailwind.config.ts",
+        "ui/tsconfig.json",
+        "ui/tsconfig.worker.json",
+        "ui_scripts/**",
+        "version.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Ostris, LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Ostris, LLC, MIT license (LICENSE), https://github.com/ostris/ai-toolkit."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prisma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/build_and_push_docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/build_and_push_docker_dev"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

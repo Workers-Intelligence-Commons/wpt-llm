@@ -1,0 +1,592 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nginx/nginx",
+  "revision": "82f5fd93b99bc3e0fcdb7532ea181a36571d5407",
+  "checksum": "sha256:ed6a1dd2474ea6e2781b3a965b042a1e526138151d4ab3b1c37ca5780455a24d",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "src/os/win32/nginx.ico"
+    ]
+  },
+  "history": {
+    "since": "863ab647cd659d6b326c61a1f1227629978ce132"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (C) 2002-2021 Igor Sysoev\nCopyright (C) 2011-2026 Nginx, Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\nOR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\nHOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\nLIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\nOUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/nginx/nginx: Copyright (C) 2002-2021 Igor Sysoev; Copyright (C) 2011-2026 Nginx, Inc., BSD-2-Clause license (LICENSE), https://github.com/nginx/nginx."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "auto/**",
+        "conf/**",
+        "docs/**",
+        "misc/**",
+        "src/core/**",
+        "src/event/**",
+        "src/http/**",
+        "src/mail/**",
+        "src/misc/**",
+        "src/os/unix/**",
+        "src/os/win32/nginx.rc",
+        "src/os/win32/nginx_icon16.xpm",
+        "src/os/win32/nginx_icon32.xpm",
+        "src/os/win32/nginx_icon48.xpm",
+        "src/os/win32/ngx_alloc.c",
+        "src/os/win32/ngx_alloc.h",
+        "src/os/win32/ngx_atomic.h",
+        "src/os/win32/ngx_dlopen.c",
+        "src/os/win32/ngx_dlopen.h",
+        "src/os/win32/ngx_errno.c",
+        "src/os/win32/ngx_errno.h",
+        "src/os/win32/ngx_event_log.c",
+        "src/os/win32/ngx_files.c",
+        "src/os/win32/ngx_files.h",
+        "src/os/win32/ngx_os.h",
+        "src/os/win32/ngx_process.c",
+        "src/os/win32/ngx_process.h",
+        "src/os/win32/ngx_process_cycle.c",
+        "src/os/win32/ngx_process_cycle.h",
+        "src/os/win32/ngx_service.c",
+        "src/os/win32/ngx_shmem.c",
+        "src/os/win32/ngx_shmem.h",
+        "src/os/win32/ngx_socket.c",
+        "src/os/win32/ngx_socket.h",
+        "src/os/win32/ngx_stat.c",
+        "src/os/win32/ngx_thread.c",
+        "src/os/win32/ngx_thread.h",
+        "src/os/win32/ngx_time.c",
+        "src/os/win32/ngx_time.h",
+        "src/os/win32/ngx_udp_wsarecv.c",
+        "src/os/win32/ngx_user.c",
+        "src/os/win32/ngx_user.h",
+        "src/os/win32/ngx_win32_config.h",
+        "src/os/win32/ngx_win32_init.c",
+        "src/os/win32/ngx_wsarecv.c",
+        "src/os/win32/ngx_wsarecv_chain.c",
+        "src/os/win32/ngx_wsasend.c",
+        "src/os/win32/ngx_wsasend_chain.c",
+        "src/stream/**"
+      ],
+      "text": "Copyright (C) 2002-2021 Igor Sysoev\nCopyright (C) 2011-2026 Nginx, Inc.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright\n   notice, this list of conditions and the following disclaimer in the\n   documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\nOR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\nHOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\nLIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\nOUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGE.\n",
+      "attribution": "Copyright (C) 2002-2021 Igor Sysoev; Copyright (C) 2011-2026 Nginx, Inc., BSD-2-Clause license (LICENSE), https://github.com/nginx/nginx."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/GNUmakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.PL"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dtd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.il"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.msvc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.owc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xsls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/acc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ccc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/conf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/darwin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/define"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/endianness"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fastcgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/feature"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/freebsd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/have"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/have_headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/icc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/include"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/koi-utf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/koi-win"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/module"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/modules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msvc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nohave"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/owc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/scgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sizeof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/solaris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stubs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/summary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sunc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/threads"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typedef"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typemap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uintptr_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uwsgi_params"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/value"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/win-utf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/win32"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xslt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

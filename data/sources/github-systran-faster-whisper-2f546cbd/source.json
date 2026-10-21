@@ -1,0 +1,157 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/SYSTRAN/faster-whisper",
+  "revision": "a52b026ac844c02117865e61968547639b60a6f8",
+  "checksum": "sha256:f6c3ee801fe3a98b945ba0083145a03cb612a672e6f746f7ae7d2fca19b5e095",
+  "extract": {
+    "exclude": [
+      "benchmark/benchmark.m4a",
+      "docker/jfk.flac",
+      "faster_whisper/assets/silero_vad_v6.onnx",
+      "tests/data/**"
+    ]
+  },
+  "history": {
+    "since": "5216d52d945b9182cee7ca30062d770198b03eca"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 SYSTRAN\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/SYSTRAN/faster-whisper: Copyright (c) 2023 SYSTRAN, MIT license (LICENSE), https://github.com/SYSTRAN/faster-whisper."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "benchmark/evaluate_yt_commons.py",
+        "benchmark/memory_benchmark.py",
+        "benchmark/normalizer.json",
+        "benchmark/requirements.benchmark.txt",
+        "benchmark/speed_benchmark.py",
+        "benchmark/utils.py",
+        "benchmark/wer_benchmark.py",
+        "docker/Dockerfile",
+        "docker/infer.py",
+        "faster_whisper/__init__.py",
+        "faster_whisper/assets/__init__.py",
+        "faster_whisper/audio.py",
+        "faster_whisper/feature_extractor.py",
+        "faster_whisper/tokenizer.py",
+        "faster_whisper/transcribe.py",
+        "faster_whisper/utils.py",
+        "faster_whisper/vad.py",
+        "faster_whisper/version.py",
+        "requirements.conversion.txt",
+        "requirements.txt",
+        "setup.cfg",
+        "setup.py",
+        "tests/conftest.py",
+        "tests/test_tokenizer.py",
+        "tests/test_transcribe.py",
+        "tests/test_utils.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 SYSTRAN\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 SYSTRAN, MIT license (LICENSE), https://github.com/SYSTRAN/faster-whisper."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

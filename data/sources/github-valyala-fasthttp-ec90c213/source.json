@@ -1,0 +1,257 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/valyala/fasthttp",
+  "revision": "260b43825f850596075d3d6f61532e812d67cff0",
+  "checksum": "sha256:195aaaaeb675a1407f37eb1d6feda15de87fc704d1757c6ec965d4143897a09f",
+  "history": {
+    "since": "2422ae1a0dd8411dc4b34540425c132d2f8d017d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-present Aliaksandr Valialkin, VertaMedia, Kirill Danshin, Erik Dubbelboer, FastHTTP Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 Max Riveiro\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/valyala/fasthttp: Copyright (c) 2015-present Aliaksandr Valialkin, VertaMedia, Kirill Danshin, Erik Dubbelboer, FastHTTP Authors, MIT license (LICENSE), https://github.com/valyala/fasthttp; Copyright (c) 2014 Max Riveiro, MIT license (LICENSE), https://github.com/valyala/fasthttp/tree/260b43825f850596075d3d6f61532e812d67cff0/reuseport."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "TODO",
+        "allocation_test.go",
+        "args.go",
+        "args_sort_comparator_test.go",
+        "args_test.go",
+        "args_timing_test.go",
+        "b2s.go",
+        "brotli.go",
+        "brotli_test.go",
+        "bytesconv.go",
+        "bytesconv_32.go",
+        "bytesconv_32_test.go",
+        "bytesconv_64.go",
+        "bytesconv_64_test.go",
+        "bytesconv_table.go",
+        "bytesconv_table_gen.go",
+        "bytesconv_test.go",
+        "bytesconv_timing_test.go",
+        "client.go",
+        "client_example_test.go",
+        "client_test.go",
+        "client_timing_test.go",
+        "coarsetime.go",
+        "compress.go",
+        "compress_test.go",
+        "cookie.go",
+        "cookie_test.go",
+        "cookie_timing_test.go",
+        "doc.go",
+        "errors_test.go",
+        "examples/**",
+        "expvarhandler/**",
+        "fasthttpadaptor/**",
+        "fasthttpproxy/**",
+        "fasthttputil/**",
+        "fs.go",
+        "fs_example_test.go",
+        "fs_fs_test.go",
+        "fs_handler_example_test.go",
+        "fs_test.go",
+        "fs_timing_test.go",
+        "fs_unix.go",
+        "fs_windows.go",
+        "fs_windows_test.go",
+        "fuzz_test.go",
+        "go.mod",
+        "go.sum",
+        "header.go",
+        "header_regression_test.go",
+        "header_test.go",
+        "header_timing_test.go",
+        "headers.go",
+        "headerscanner.go",
+        "http.go",
+        "http_test.go",
+        "http_timing_test.go",
+        "http_vectored_test.go",
+        "ipv6.go",
+        "ipv6_test.go",
+        "lbclient.go",
+        "lbclient_example_test.go",
+        "lbclient_test.go",
+        "methods.go",
+        "nocopy.go",
+        "peripconn.go",
+        "peripconn_test.go",
+        "pprofhandler/**",
+        "prefork/**",
+        "race_disabled_test.go",
+        "race_enabled_test.go",
+        "request_framing_test.go",
+        "requestctx_setbodystreamwriter_example_test.go",
+        "round2_32.go",
+        "round2_32_test.go",
+        "round2_64.go",
+        "round2_64_test.go",
+        "s2b.go",
+        "serve_hot_timing_test.go",
+        "server.go",
+        "server_example_test.go",
+        "server_race_test.go",
+        "server_test.go",
+        "server_timing_test.go",
+        "stackless/**",
+        "status.go",
+        "status_test.go",
+        "status_timing_test.go",
+        "stream.go",
+        "stream_test.go",
+        "stream_timing_test.go",
+        "streaming.go",
+        "streaming_test.go",
+        "strings.go",
+        "swar.go",
+        "swar_test.go",
+        "tcpdialer.go",
+        "tcplisten/**",
+        "test_timeout_test.go",
+        "testdata/**",
+        "timer.go",
+        "timer_test.go",
+        "tls.go",
+        "uri.go",
+        "uri_test.go",
+        "uri_timing_test.go",
+        "uri_unix.go",
+        "uri_windows.go",
+        "uri_windows_test.go",
+        "userdata.go",
+        "userdata_test.go",
+        "userdata_timing_test.go",
+        "workerpool.go",
+        "workerpool_test.go",
+        "zstd.go",
+        "zstd_test.go"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-present Aliaksandr Valialkin, VertaMedia, Kirill Danshin, Erik Dubbelboer, FastHTTP Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015-present Aliaksandr Valialkin, VertaMedia, Kirill Danshin, Erik Dubbelboer, FastHTTP Authors, MIT license (LICENSE), https://github.com/valyala/fasthttp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "reuseport/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Max Riveiro\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2014 Max Riveiro, MIT license (LICENSE), https://github.com/valyala/fasthttp/tree/260b43825f850596075d3d6f61532e812d67cff0/reuseport."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,4599 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/restic/restic",
+  "revision": "9da3b87b07706956e8dc5fd5cb259b99ec940f51",
+  "checksum": "sha256:faaf4624afbc4b3cb6020ba43834b423d86bd59848a8a658096a732fc601012e",
+  "extract": {
+    "exclude": [
+      "cmd/restic/testdata/**",
+      "contrib/**",
+      "doc/_static/favicon.ico",
+      "doc/images/**",
+      "doc/logo/font/Lemon-Regular.ttf",
+      "doc/logo/logo.png",
+      "internal/backend/testdata/**",
+      "internal/checker/testdata/**",
+      "internal/filter/testdata/**",
+      "internal/repository/testdata/test-repo.tar.gz"
+    ]
+  },
+  "history": {
+    "since": "5560b39deed2e490f2d0eac0e50d7dcaa03045f8"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2014, Alexander Neumann <alexander@bumpern.de>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/restic/restic: Copyright (c) 2014, Alexander Neumann <alexander@bumpern.de>, BSD-2-Clause license (LICENSE), https://github.com/restic/restic."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".codespellrc",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".readthedocs.yaml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "GOVERNANCE.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "VERSION",
+        "build.go",
+        "changelog/**",
+        "cmd/restic/.gitignore",
+        "cmd/restic/cleanup.go",
+        "cmd/restic/cmd_backup.go",
+        "cmd/restic/cmd_backup_integration_test.go",
+        "cmd/restic/cmd_backup_test.go",
+        "cmd/restic/cmd_cache.go",
+        "cmd/restic/cmd_cat.go",
+        "cmd/restic/cmd_cat_test.go",
+        "cmd/restic/cmd_check.go",
+        "cmd/restic/cmd_check_integration_test.go",
+        "cmd/restic/cmd_check_test.go",
+        "cmd/restic/cmd_copy.go",
+        "cmd/restic/cmd_copy_integration_test.go",
+        "cmd/restic/cmd_debug.go",
+        "cmd/restic/cmd_debug_disabled.go",
+        "cmd/restic/cmd_diff.go",
+        "cmd/restic/cmd_diff_integration_test.go",
+        "cmd/restic/cmd_dump.go",
+        "cmd/restic/cmd_dump_test.go",
+        "cmd/restic/cmd_features.go",
+        "cmd/restic/cmd_find.go",
+        "cmd/restic/cmd_find_integration_test.go",
+        "cmd/restic/cmd_forget.go",
+        "cmd/restic/cmd_forget_integration_test.go",
+        "cmd/restic/cmd_forget_test.go",
+        "cmd/restic/cmd_generate.go",
+        "cmd/restic/cmd_generate_integration_test.go",
+        "cmd/restic/cmd_init.go",
+        "cmd/restic/cmd_init_integration_test.go",
+        "cmd/restic/cmd_key.go",
+        "cmd/restic/cmd_key_add.go",
+        "cmd/restic/cmd_key_integration_test.go",
+        "cmd/restic/cmd_key_list.go",
+        "cmd/restic/cmd_key_passwd.go",
+        "cmd/restic/cmd_key_remove.go",
+        "cmd/restic/cmd_list.go",
+        "cmd/restic/cmd_list_integration_test.go",
+        "cmd/restic/cmd_ls.go",
+        "cmd/restic/cmd_ls_integration_test.go",
+        "cmd/restic/cmd_ls_test.go",
+        "cmd/restic/cmd_migrate.go",
+        "cmd/restic/cmd_mount.go",
+        "cmd/restic/cmd_mount_disabled.go",
+        "cmd/restic/cmd_mount_integration_test.go",
+        "cmd/restic/cmd_options.go",
+        "cmd/restic/cmd_prune.go",
+        "cmd/restic/cmd_prune_integration_test.go",
+        "cmd/restic/cmd_recover.go",
+        "cmd/restic/cmd_recover_integration_test.go",
+        "cmd/restic/cmd_repair.go",
+        "cmd/restic/cmd_repair_index.go",
+        "cmd/restic/cmd_repair_index_integration_test.go",
+        "cmd/restic/cmd_repair_packs.go",
+        "cmd/restic/cmd_repair_packs_integration_test.go",
+        "cmd/restic/cmd_repair_snapshots.go",
+        "cmd/restic/cmd_repair_snapshots_integration_test.go",
+        "cmd/restic/cmd_restore.go",
+        "cmd/restic/cmd_restore_integration_test.go",
+        "cmd/restic/cmd_rewrite.go",
+        "cmd/restic/cmd_rewrite_integration_test.go",
+        "cmd/restic/cmd_self_update.go",
+        "cmd/restic/cmd_self_update_disabled.go",
+        "cmd/restic/cmd_snapshots.go",
+        "cmd/restic/cmd_snapshots_integration_test.go",
+        "cmd/restic/cmd_snapshots_test.go",
+        "cmd/restic/cmd_stats.go",
+        "cmd/restic/cmd_stats_test.go",
+        "cmd/restic/cmd_tag.go",
+        "cmd/restic/cmd_tag_integration_test.go",
+        "cmd/restic/cmd_unlock.go",
+        "cmd/restic/cmd_version.go",
+        "cmd/restic/doc.go",
+        "cmd/restic/exclude.go",
+        "cmd/restic/find.go",
+        "cmd/restic/find_test.go",
+        "cmd/restic/flags_test.go",
+        "cmd/restic/format.go",
+        "cmd/restic/format_test.go",
+        "cmd/restic/integration_filter_pattern_test.go",
+        "cmd/restic/integration_helpers_test.go",
+        "cmd/restic/integration_helpers_unix_test.go",
+        "cmd/restic/integration_helpers_windows_test.go",
+        "cmd/restic/integration_test.go",
+        "cmd/restic/lock.go",
+        "cmd/restic/main.go",
+        "doc/.gitignore",
+        "doc/010_introduction.rst",
+        "doc/020_installation.rst",
+        "doc/030_preparing_a_new_repo.rst",
+        "doc/040_backup.rst",
+        "doc/045_working_with_repos.rst",
+        "doc/047_tuning_parameters.rst",
+        "doc/050_restore.rst",
+        "doc/060_forget.rst",
+        "doc/070_encryption.rst",
+        "doc/075_scripting.rst",
+        "doc/077_troubleshooting.rst",
+        "doc/080_examples.rst",
+        "doc/090_participating.rst",
+        "doc/100_references.rst",
+        "doc/110_talks.rst",
+        "doc/Makefile",
+        "doc/REST_backend.rst",
+        "doc/_static/css/**",
+        "doc/bash-completion.sh",
+        "doc/cache.rst",
+        "doc/conf.py",
+        "doc/design.rst",
+        "doc/developer_information.rst",
+        "doc/faq.rst",
+        "doc/fish-completion.fish",
+        "doc/index.rst",
+        "doc/logo/font/OFL.txt",
+        "doc/man/**",
+        "doc/manual_rest.rst",
+        "doc/powershell-completion.ps1",
+        "doc/requirements.txt",
+        "doc/test_irreducibility.gap",
+        "doc/view_repository.rst",
+        "doc/zsh-completion.zsh",
+        "doc.go",
+        "docker/**",
+        "go.mod",
+        "go.sum",
+        "helpers/**",
+        "internal/archiver/**",
+        "internal/backend/all/**",
+        "internal/backend/azure/**",
+        "internal/backend/b2/**",
+        "internal/backend/backend.go",
+        "internal/backend/backend_test.go",
+        "internal/backend/cache/**",
+        "internal/backend/doc.go",
+        "internal/backend/dryrun/**",
+        "internal/backend/file.go",
+        "internal/backend/file_test.go",
+        "internal/backend/gs/**",
+        "internal/backend/http_transport.go",
+        "internal/backend/httpuseragent_roundtripper.go",
+        "internal/backend/httpuseragent_roundtripper_test.go",
+        "internal/backend/layout/**",
+        "internal/backend/limiter/**",
+        "internal/backend/local/**",
+        "internal/backend/location/**",
+        "internal/backend/logger/**",
+        "internal/backend/mem/**",
+        "internal/backend/mock/**",
+        "internal/backend/rclone/**",
+        "internal/backend/readerat.go",
+        "internal/backend/rest/**",
+        "internal/backend/retry/**",
+        "internal/backend/rewind_reader.go",
+        "internal/backend/rewind_reader_test.go",
+        "internal/backend/s3/**",
+        "internal/backend/sema/**",
+        "internal/backend/sftp/**",
+        "internal/backend/shell_split.go",
+        "internal/backend/shell_split_test.go",
+        "internal/backend/swift/**",
+        "internal/backend/test/**",
+        "internal/backend/util/**",
+        "internal/backend/watchdog_roundtriper.go",
+        "internal/backend/watchdog_roundtriper_test.go",
+        "internal/bloblru/**",
+        "internal/checker/checker.go",
+        "internal/checker/checker_test.go",
+        "internal/checker/testing.go",
+        "internal/data/**",
+        "internal/debug/**",
+        "internal/dump/**",
+        "internal/errors/**",
+        "internal/feature/**",
+        "internal/fileio/**",
+        "internal/filter/doc.go",
+        "internal/filter/exclude.go",
+        "internal/filter/exclude_test.go",
+        "internal/filter/filter.go",
+        "internal/filter/filter_patterns_test.go",
+        "internal/filter/filter_test.go",
+        "internal/filter/include.go",
+        "internal/filter/include_test.go",
+        "internal/fs/**",
+        "internal/fuse/**",
+        "internal/global/**",
+        "internal/migrations/**",
+        "internal/options/**",
+        "internal/repository/checker.go",
+        "internal/repository/checker_test.go",
+        "internal/repository/chunker.go",
+        "internal/repository/crypto/**",
+        "internal/repository/debug.go",
+        "internal/repository/doc.go",
+        "internal/repository/filetype.go",
+        "internal/repository/fuzz_test.go",
+        "internal/repository/hashing/**",
+        "internal/repository/index/**",
+        "internal/repository/index_list.go",
+        "internal/repository/index_list_test.go",
+        "internal/repository/index_testutil_test.go",
+        "internal/repository/key.go",
+        "internal/repository/lock.go",
+        "internal/repository/lock_file.go",
+        "internal/repository/lock_file_test.go",
+        "internal/repository/lock_file_unix.go",
+        "internal/repository/lock_file_windows.go",
+        "internal/repository/lock_test.go",
+        "internal/repository/pack/**",
+        "internal/repository/packer_manager.go",
+        "internal/repository/packer_manager_test.go",
+        "internal/repository/packer_uploader.go",
+        "internal/repository/prune.go",
+        "internal/repository/prune_internal_test.go",
+        "internal/repository/prune_test.go",
+        "internal/repository/raw.go",
+        "internal/repository/raw_test.go",
+        "internal/repository/repack.go",
+        "internal/repository/repack_test.go",
+        "internal/repository/repair_index.go",
+        "internal/repository/repair_index_test.go",
+        "internal/repository/repair_pack.go",
+        "internal/repository/repair_pack_test.go",
+        "internal/repository/repository.go",
+        "internal/repository/repository_internal_test.go",
+        "internal/repository/repository_test.go",
+        "internal/repository/testdata/fuzz/**",
+        "internal/repository/testing.go",
+        "internal/repository/upgrade_repo.go",
+        "internal/repository/upgrade_repo_test.go",
+        "internal/repository/warmup.go",
+        "internal/repository/warmup_test.go",
+        "internal/restic/**",
+        "internal/restorer/**",
+        "internal/selfupdate/**",
+        "internal/terminal/**",
+        "internal/test/**",
+        "internal/textfile/**",
+        "internal/ui/**",
+        "internal/walker/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2014, Alexander Neumann <alexander@bumpern.de>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2014, Alexander Neumann <alexander@bumpern.de>, BSD-2-Clause license (LICENSE), https://github.com/restic/restic."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/62d79435b9ad1777d0562c405e1ab2e1ef5d11d07c8aa4fe6814010294bffd33"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TEMPLATE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/filter_snapshots_9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1013"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1021"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1029"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1055"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1067"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1073"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1081"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1102"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1106"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1114"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1132"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1153"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1167"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1179"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1208"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1212"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1216"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1246"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1271"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1274"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1291"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1367"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1378"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1433"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1445"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1457"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1495"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1497"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1506"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1512"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1522"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1528"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1541"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1542"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1561"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1567"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1570"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1590"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1605"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1608"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1633"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1641"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1652"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1665"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1680"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1681"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1721"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1730"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1734"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1756"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1758"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1759"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1766"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1786"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1800"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1801"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1822"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1825"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1833"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1834"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1842"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1843"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1854"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1863"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1866"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1870"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1880"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1893"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1895"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1906"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1909"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1926"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1935"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1937"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1941"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1967"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1978"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-1989"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2004"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2015"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2028"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2040"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2063"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2072"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2089"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2097"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2134"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2135"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2152"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2155"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2162"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2165"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2174"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2175"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2179"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2181"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21820"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2184"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2186"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21866"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21869"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21870"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21892"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21895"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21899"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-21973"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2202"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2203"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2224"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2241"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2248"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2249"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2254"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2260"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2277"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2281"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2291"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2295"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2298"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2301"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2306"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2319"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-233"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2330"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2345"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2348"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2359"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2388"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2389"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2390"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2395"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2427"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2429"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2452"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2453"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2468"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2469"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2482"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2491"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2508"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2511"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2518"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2528"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2531"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2533"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2537"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2563"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2565"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2569"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2571"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2591"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2656"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2688"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2696"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2699"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2706"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2715"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2724"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2738"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2739"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2742"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2780"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2834"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2858"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2907"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2938"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2942"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2944"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2951"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2969"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-2979"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3003"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3029"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3083"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3090"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3095"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3096"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3111"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3114"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3124"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3127"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3129"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3147"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3151"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3161"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3166"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-317"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3191"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3202"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3214"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-323"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3232"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3247"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3267"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3284"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3293"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3295"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3296"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3302"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3311"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3312"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3326"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3328"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3334"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3336"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3377"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3380"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3382"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3397"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-340"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3414"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3428"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3432"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3456"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3464"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3465"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3490"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3518"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3541"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3542"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3556"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3567"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3572"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3600"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3601"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3624"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3641"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3667"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3685"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3692"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3697"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3698"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3709"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3720"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3736"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3738"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3750"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3806"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3837"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3861"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3871"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3897"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3918"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3929"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3932"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-3941"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4003"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4004"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4016"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4033"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4048"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4085"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4103"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4128"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4130"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4147"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4159"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4179"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4188"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4199"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4209"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4211"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4239"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4251"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4253"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-426"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4274"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4275"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4278"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4287"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4375"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4433"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4437"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4447"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4467"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4472"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-448"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4513"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4516"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4521"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4523"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4529"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4540"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4547"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4549"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4560"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4568"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4574"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4583"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4601"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4602"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4612"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4627"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4656"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4676"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4677"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4678"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4707"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4728"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4733"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4744"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4759"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4760"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4768"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4781"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4795"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4817"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4850"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4868"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4873"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4902"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4934"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4942"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4944"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4945"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4948"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4953"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4957"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4969"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4970"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4971"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4975"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-4983"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5003"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5004"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5005"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5050"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5063"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5081"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5089"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5092"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-510"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5107"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5109"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-512"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5131"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5137"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5174"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5233"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5234"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5258"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5259"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5280"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5287"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5291"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5293"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5324"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5325"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5342"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5344"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5352"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5354"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5372"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5383"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5429"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5440"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5453"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5467"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5477"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5487"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-549"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-551"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5531"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5562"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5586"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5595"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5667"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5683"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5689"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5722"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5757"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-5767"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-636"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-662"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-693"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-719"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-79"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-828"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-909"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-953"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-965"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-985"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issue-989"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/issues-697"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_10"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_15"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_16"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_18"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_19"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_20"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_21"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_22"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_23"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_25"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_26"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_27"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_28"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_29"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_30"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_31"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_33"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_34"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_35"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_36"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_37"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_38"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_39"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/policy_keep_snapshots_9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pr-3250"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1040"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1044"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1061"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1080"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1082"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1115"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1126"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1134"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1144"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1149"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1164"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1191"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1196"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1203"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1205"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1249"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1269"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1281"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1317"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1319"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1353"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1436"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1437"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1439"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1452"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1454"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1459"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1462"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1507"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1538"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1549"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1552"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1554"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1560"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1564"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1579"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1584"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1589"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1594"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1595"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1623"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1634"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1638"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1647"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1648"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1649"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1684"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1709"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1720"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1729"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1735"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1746"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1772"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1780"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1782"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1853"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1861"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1876"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1882"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1891"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1901"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1920"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1949"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1953"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-1962"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2017"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2068"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2070"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2086"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2087"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2094"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2095"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2124"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2139"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21784"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21796"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21827"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21845"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21876"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21879"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21883"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21937"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2195"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-21977"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-22007"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2205"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2220"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2321"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2328"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2350"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2423"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2546"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2576"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2592"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2594"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2598"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2599"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2600"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2607"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2668"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2674"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2718"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2733"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2750"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2773"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2781"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2786"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2790"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2816"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2821"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2823"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2840"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2849"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2880"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2899"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2910"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2941"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-2978"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-299"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3006"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3014"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3048"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3067"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3081"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3099"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3106"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3130"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3152"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3167"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3249"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3254"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3261"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3305"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3419"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3426"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3427"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3429"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3436"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3449"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3475"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3484"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3488"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3508"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3513"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3514"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3519"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3591"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3593"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3619"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3680"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3716"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3729"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3742"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3772"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3773"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3776"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3780"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3819"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3899"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3905"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3915"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3925"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3931"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3943"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3951"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-3955"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4006"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4041"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4152"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4163"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4167"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4176"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4180"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4201"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4219"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4220"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4226"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4318"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4333"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4354"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4400"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4480"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4503"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4511"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4519"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4526"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4532"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4545"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4573"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4590"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4611"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4615"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4624"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4626"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4664"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4703"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4708"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4709"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4737"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4764"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4796"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4799"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4807"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4839"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4884"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4938"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4958"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4959"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4977"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-4980"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5018"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5047"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5054"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5057"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5096"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5101"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5119"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5141"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5153"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5162"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5170"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5212"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5249"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5251"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5319"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5421"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5424"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5448"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5465"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5523"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5588"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5610"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5664"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5718"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-5720"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-891"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-962"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-974"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-975"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pull-998"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/used_blobs_snapshot0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/used_blobs_snapshot1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/used_blobs_snapshot2"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

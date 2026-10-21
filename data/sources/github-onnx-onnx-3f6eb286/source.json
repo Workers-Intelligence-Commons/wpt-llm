@@ -1,0 +1,692 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/onnx/onnx",
+  "revision": "18a4972ac6482703dc105de8ade85574207bd241",
+  "checksum": "sha256:f409519e8f694fbbd451249faf92af49d8c70c207831ec0a584568359f6f4748",
+  "extract": {
+    "exclude": [
+      "cmake/external/**",
+      "docs/docsgen/source/_static/onnx-horizontal-color.png",
+      "docs/docsgen/source/_static/onnx-horizontal-white.png",
+      "docs/docsgen/source/intro/images/**",
+      "docs/docsgen/source/onnx-favicon.png",
+      "docs/docsgen/source/technical/InPlaceKVCache.png",
+      "docs/onnx-horizontal-color.png",
+      "docs/proposals/images/**",
+      "onnx/backend/test/data/light/light_bvlc_alexnet.onnx",
+      "onnx/backend/test/data/light/light_bvlc_alexnet_output_0.pb",
+      "onnx/backend/test/data/light/light_densenet121.onnx",
+      "onnx/backend/test/data/light/light_densenet121_output_0.pb",
+      "onnx/backend/test/data/light/light_inception_v1.onnx",
+      "onnx/backend/test/data/light/light_inception_v1_output_0.pb",
+      "onnx/backend/test/data/light/light_inception_v2.onnx",
+      "onnx/backend/test/data/light/light_inception_v2_output_0.pb",
+      "onnx/backend/test/data/light/light_resnet50.onnx",
+      "onnx/backend/test/data/light/light_resnet50_output_0.pb",
+      "onnx/backend/test/data/light/light_shufflenet.onnx",
+      "onnx/backend/test/data/light/light_shufflenet_output_0.pb",
+      "onnx/backend/test/data/light/light_squeezenet.onnx",
+      "onnx/backend/test/data/light/light_squeezenet_output_0.pb",
+      "onnx/backend/test/data/light/light_vgg19.onnx",
+      "onnx/backend/test/data/light/light_vgg19_output_0.pb",
+      "onnx/backend/test/data/light/light_zfnet512.onnx",
+      "onnx/backend/test/data/light/light_zfnet512_output_0.pb",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool1d/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool1d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool2d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool3d/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool3d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_AvgPool3d_stride1_pad0_gpu_input/**",
+      "onnx/backend/test/data/pytorch-converted/test_BatchNorm1d_3d_input_eval/**",
+      "onnx/backend/test/data/pytorch-converted/test_BatchNorm2d_eval/**",
+      "onnx/backend/test/data/pytorch-converted/test_BatchNorm2d_momentum_eval/**",
+      "onnx/backend/test/data/pytorch-converted/test_BatchNorm3d_eval/**",
+      "onnx/backend/test/data/pytorch-converted/test_BatchNorm3d_momentum_eval/**",
+      "onnx/backend/test/data/pytorch-converted/test_ConstantPad2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_dilated/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_groups/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_pad1/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_pad1size1/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_pad2/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_pad2size1/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv1d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_depthwise/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_depthwise_padded/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_depthwise_strided/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_depthwise_with_multiplier/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_dilated/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_groups/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_groups_thnn/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_no_bias/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_padding/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv2d_strided/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_dilated/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_dilated_strided/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_groups/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_no_bias/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_Conv3d_stride_padding/**",
+      "onnx/backend/test/data/pytorch-converted/test_ConvTranspose2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_ConvTranspose2d_no_bias/**",
+      "onnx/backend/test/data/pytorch-converted/test_ELU/**",
+      "onnx/backend/test/data/pytorch-converted/test_Embedding/**",
+      "onnx/backend/test/data/pytorch-converted/test_Embedding_sparse/**",
+      "onnx/backend/test/data/pytorch-converted/test_GLU/**",
+      "onnx/backend/test/data/pytorch-converted/test_GLU_dim/**",
+      "onnx/backend/test/data/pytorch-converted/test_LeakyReLU/**",
+      "onnx/backend/test/data/pytorch-converted/test_LeakyReLU_with_negval/**",
+      "onnx/backend/test/data/pytorch-converted/test_Linear/**",
+      "onnx/backend/test/data/pytorch-converted/test_Linear_no_bias/**",
+      "onnx/backend/test/data/pytorch-converted/test_LogSoftmax/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool1d/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool1d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool1d_stride_padding_dilation/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool2d_stride_padding_dilation/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool3d/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool3d_stride/**",
+      "onnx/backend/test/data/pytorch-converted/test_MaxPool3d_stride_padding/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_1d/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_1d_multiparam/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_2d_multiparam/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_3d/**",
+      "onnx/backend/test/data/pytorch-converted/test_PReLU_3d_multiparam/**",
+      "onnx/backend/test/data/pytorch-converted/test_PixelShuffle/**",
+      "onnx/backend/test/data/pytorch-converted/test_PoissonNLLLLoss_no_reduce/**",
+      "onnx/backend/test/data/pytorch-converted/test_ReLU/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-converted/test_ReflectionPad2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_ReplicationPad2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_SELU/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-converted/test_Sigmoid/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-converted/test_Softmax/**",
+      "onnx/backend/test/data/pytorch-converted/test_Softmin/**",
+      "onnx/backend/test/data/pytorch-converted/test_Softplus/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-converted/test_Softsign/**",
+      "onnx/backend/test/data/pytorch-converted/test_Tanh/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-converted/test_ZeroPad2d/**",
+      "onnx/backend/test/data/pytorch-converted/test_log_softmax_dim3/**",
+      "onnx/backend/test/data/pytorch-converted/test_log_softmax_lastdim/**",
+      "onnx/backend/test/data/pytorch-converted/test_softmax_functional_dim3/**",
+      "onnx/backend/test/data/pytorch-converted/test_softmax_lastdim/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_add_broadcast/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_add_size1_broadcast/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_add_size1_right_broadcast/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_add_size1_singleton_broadcast/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_addconstant/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_addmm/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_basic/model.onnx",
+      "onnx/backend/test/data/pytorch-operator/test_operator_basic/test_data_set_0/input_0.pb",
+      "onnx/backend/test/data/pytorch-operator/test_operator_basic/test_data_set_0/output_0.pb",
+      "onnx/backend/test/data/pytorch-operator/test_operator_chunk/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_clip/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_concat2/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_conv/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_convtranspose/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_exp/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_flatten/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_index/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_max/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_maxpool/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_min/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_mm/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_non_float_params/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_pad/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_params/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_permute2/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_pow/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_reduced_mean/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_reduced_mean_keepdim/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_reduced_sum/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_reduced_sum_keepdim/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_repeat/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_repeat_dim_overflow/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_selu/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_sqrt/test_data_set_0/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_symbolic_override/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_symbolic_override_nested/**",
+      "onnx/backend/test/data/pytorch-operator/test_operator_view/**",
+      "onnx/backend/test/data/simple/test_expand_shape_model1/**",
+      "onnx/backend/test/data/simple/test_expand_shape_model2/**",
+      "onnx/backend/test/data/simple/test_expand_shape_model3/**",
+      "onnx/backend/test/data/simple/test_expand_shape_model4/**",
+      "onnx/backend/test/data/simple/test_gradient_of_add/**",
+      "onnx/backend/test/data/simple/test_gradient_of_add_and_mul/**",
+      "onnx/backend/test/data/simple/test_sequence_model1/**",
+      "onnx/backend/test/data/simple/test_sequence_model2/**",
+      "onnx/backend/test/data/simple/test_sequence_model3/**",
+      "onnx/backend/test/data/simple/test_sequence_model4/**",
+      "onnx/backend/test/data/simple/test_sequence_model5/**",
+      "onnx/backend/test/data/simple/test_sequence_model6/**",
+      "onnx/backend/test/data/simple/test_sequence_model7/**",
+      "onnx/backend/test/data/simple/test_sequence_model8/**",
+      "onnx/backend/test/data/simple/test_shrink/**",
+      "onnx/backend/test/data/simple/test_sign_model/**",
+      "onnx/backend/test/data/simple/test_single_relu_model/**",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_lower/model.onnx",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_nochangecase/model.onnx",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_upper/model.onnx",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_empty_output/model.onnx",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_empty_output/test_data_set_0/output_0.pb",
+      "onnx/backend/test/data/simple/test_strnorm_model_monday_insensintive_upper_twodim/model.onnx",
+      "onnx/backend/test/data/simple/test_strnorm_model_nostopwords_nochangecase/model.onnx"
+    ]
+  },
+  "history": {
+    "since": "bd2ff65b775580d21ab38cb655a04854c348ff49"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE:\n\nONNX is licensed under the Apache License, Version 2.0 (see LICENSE).\n\nThis product includes software from the following third-party projects, which\nare linked into ONNX wheel builds. Their copyright notices are reproduced below.\n\n---\n\n## abseil-cpp\n\nCopyright 2017 The Abseil Authors.\n\nVersion: 20250127.0\nSource: https://github.com/abseil/abseil-cpp\nLicense: Apache-2.0 (see LICENSE)\n\n---\n\n## protobuf\n\nCopyright 2008 Google Inc.\n\nVersion: 31.1\nSource: https://github.com/protocolbuffers/protobuf\nLicense: BSD-3-Clause (see LICENSE)\n\n---\n\n## nanobind\n\nCopyright (c) 2022 Wenzel Jakob <wenzel.jakob@epfl.ch>\n\nVersion: 2.15.0\nSource: https://github.com/wjakob/nanobind\nLicense: BSD-3-Clause\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice,\n   this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors\n   may be used to endorse or promote products derived from this software\n   without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/onnx/onnx: Copyright 2017 The Abseil Authors.; Copyright 2008 Google Inc.; Copyright (c) 2022 Wenzel Jakob <wenzel.jakob@epfl.ch>, Apache-2.0 license (LICENSE), https://github.com/onnx/onnx."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".clang-format",
+        ".clang-tidy",
+        ".claude/**",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".lintrunner.toml",
+        ".lycheeignore",
+        ".pre-commit-config.yaml",
+        ".vex/**",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CMakeLists.txt",
+        "CODEOWNERS",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "INSTALL.md",
+        "LICENSE",
+        "LICENSES/**",
+        "NOTICE",
+        "README.md",
+        "RELEASE-MANAGEMENT.md",
+        "REUSE.toml",
+        "ROADMAP.md",
+        "SECURITY.md",
+        "VERSION_NUMBER",
+        "cmake/ONNXConfig.cmake.in",
+        "cmake/ONNXConfigVersion.cmake.in",
+        "cmake/Utils.cmake",
+        "cmake/summary.cmake",
+        "cmake/unittest.cmake",
+        "codecov.yml",
+        "community/**",
+        "docs/AddFunctionBody.md",
+        "docs/AddNewOp.md",
+        "docs/AssuranceCase.md",
+        "docs/Broadcasting.md",
+        "docs/CIPipelines.md",
+        "docs/Changelog-ml.md",
+        "docs/Changelog.md",
+        "docs/DefineDifferentiability.md",
+        "docs/DimensionDenotation.md",
+        "docs/ExternalData.md",
+        "docs/ExternalDataSecurity.md",
+        "docs/IR.md",
+        "docs/ImplementingAnOnnxBackend.md",
+        "docs/ManagingExperimentalOps.md",
+        "docs/MetadataProps.md",
+        "docs/ONNXTypes.md",
+        "docs/OnnxBackendTest.md",
+        "docs/OnnxReleases.md",
+        "docs/OpConventions.md",
+        "docs/Operators-ml.md",
+        "docs/Operators.md",
+        "docs/Overview.md",
+        "docs/PythonAPIOverview.md",
+        "docs/ReleaseAdministration.md",
+        "docs/ReleaseVerification.md",
+        "docs/Relicensing.md",
+        "docs/ShapeAnnotationSemantics.md",
+        "docs/ShapeInference.md",
+        "docs/Syntax.md",
+        "docs/TestCoverage-ml.md",
+        "docs/TestCoverage.md",
+        "docs/TypeDenotation.md",
+        "docs/VersionConverter.md",
+        "docs/Versioning.md",
+        "docs/docsgen/Makefile",
+        "docs/docsgen/make.bat",
+        "docs/docsgen/source/_static/ONNX-Logo.svg",
+        "docs/docsgen/source/_static/css/**",
+        "docs/docsgen/source/_static/diff2html-ui-slim.min.js",
+        "docs/docsgen/source/_static/diff2html.min.css",
+        "docs/docsgen/source/_static/readme.txt",
+        "docs/docsgen/source/api/**",
+        "docs/docsgen/source/conf.py",
+        "docs/docsgen/source/expect_onnxruntime.md",
+        "docs/docsgen/source/extra/**",
+        "docs/docsgen/source/index.md",
+        "docs/docsgen/source/intro/concepts.md",
+        "docs/docsgen/source/intro/converters.md",
+        "docs/docsgen/source/intro/index.md",
+        "docs/docsgen/source/intro/python.md",
+        "docs/docsgen/source/onnx_sphinx.py",
+        "docs/docsgen/source/repo-docs/**",
+        "docs/docsgen/source/technical/float4.md",
+        "docs/docsgen/source/technical/float6.md",
+        "docs/docsgen/source/technical/float8.md",
+        "docs/docsgen/source/technical/index.md",
+        "docs/docsgen/source/technical/int2.md",
+        "docs/docsgen/source/technical/int4.md",
+        "docs/docsgen/source/technical/kv_cache.md",
+        "docs/images/**",
+        "docs/proposals/0000-template.md",
+        "docs/proposals/0001-ArchiveFileFormatProposal.md",
+        "docs/proposals/0002-NLP-in-ONNX-proposal.md",
+        "docs/proposals/0003-ONNXIFIproposal.md",
+        "docs/proposals/0004-FunctionsProposal.md",
+        "docs/proposals/0005-SymbolicShapeInfProposal.md",
+        "docs/proposals/0006-ONNXMultiDeviceProposal.md",
+        "docs/proposals/0007-ShardingFormalism.md",
+        "docs/proposals/0008-Quantization.md",
+        "docs/proposals/0010-GroupedMatMulOpProposal.md",
+        "docs/proposals/README.md",
+        "onnx/CMakeLists.txt",
+        "onnx/__init__.py",
+        "onnx/_mapping.py",
+        "onnx/backend/__init__.py",
+        "onnx/backend/base.py",
+        "onnx/backend/sample/**",
+        "onnx/backend/test/__init__.py",
+        "onnx/backend/test/case/**",
+        "onnx/backend/test/cmd_tools.py",
+        "onnx/backend/test/data/light/README.md",
+        "onnx/backend/test/data/pytorch-converted/test_ReLU/model.onnx",
+        "onnx/backend/test/data/pytorch-converted/test_SELU/model.onnx",
+        "onnx/backend/test/data/pytorch-converted/test_Sigmoid/model.onnx",
+        "onnx/backend/test/data/pytorch-converted/test_Softplus/model.onnx",
+        "onnx/backend/test/data/pytorch-converted/test_Tanh/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_basic/test_data_set_0/input_1.pb",
+        "onnx/backend/test/data/pytorch-operator/test_operator_exp/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_max/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_min/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_pow/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_selu/model.onnx",
+        "onnx/backend/test/data/pytorch-operator/test_operator_sqrt/model.onnx",
+        "onnx/backend/test/data/real/**",
+        "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_lower/test_data_set_0/**",
+        "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_nochangecase/test_data_set_0/**",
+        "onnx/backend/test/data/simple/test_strnorm_model_monday_casesensintive_upper/test_data_set_0/**",
+        "onnx/backend/test/data/simple/test_strnorm_model_monday_empty_output/test_data_set_0/input_0.pb",
+        "onnx/backend/test/data/simple/test_strnorm_model_monday_insensintive_upper_twodim/test_data_set_0/**",
+        "onnx/backend/test/data/simple/test_strnorm_model_nostopwords_nochangecase/test_data_set_0/**",
+        "onnx/backend/test/loader/**",
+        "onnx/backend/test/report/**",
+        "onnx/backend/test/runner/**",
+        "onnx/backend/test/stat_coverage.py",
+        "onnx/bin/**",
+        "onnx/checker.cc",
+        "onnx/checker.h",
+        "onnx/checker.py",
+        "onnx/common/**",
+        "onnx/compose.py",
+        "onnx/cpp2py_export.cc",
+        "onnx/defs/**",
+        "onnx/external_data_helper.py",
+        "onnx/frontend/**",
+        "onnx/fuzz/**",
+        "onnx/gen_proto.py",
+        "onnx/helper.py",
+        "onnx/inliner/**",
+        "onnx/inliner.py",
+        "onnx/model_container.py",
+        "onnx/numpy_helper.py",
+        "onnx/onnx-data.in.proto",
+        "onnx/onnx-data.proto",
+        "onnx/onnx-data.proto3",
+        "onnx/onnx-ml.proto",
+        "onnx/onnx-ml.proto3",
+        "onnx/onnx-operators-ml.proto",
+        "onnx/onnx-operators-ml.proto3",
+        "onnx/onnx-operators.in.proto",
+        "onnx/onnx-operators.proto",
+        "onnx/onnx-operators.proto3",
+        "onnx/onnx-operators_pb.h",
+        "onnx/onnx.in.proto",
+        "onnx/onnx.proto",
+        "onnx/onnx.proto3",
+        "onnx/onnx_cpp2py_export/**",
+        "onnx/onnx_pb.h",
+        "onnx/parser.py",
+        "onnx/printer.py",
+        "onnx/proto_utils.h",
+        "onnx/py.typed",
+        "onnx/py_utils.h",
+        "onnx/reference/**",
+        "onnx/serialization.py",
+        "onnx/shape_inference/**",
+        "onnx/shape_inference.py",
+        "onnx/string_utils.h",
+        "onnx/tools/**",
+        "onnx/utils.py",
+        "onnx/version.py",
+        "onnx/version_converter/**",
+        "onnx/version_converter.py",
+        "pixi.lock",
+        "pixi.toml",
+        "pyproject.toml",
+        "renovate.json5",
+        "requirements-dev.txt",
+        "requirements-lintrunner.txt",
+        "requirements-release_test.txt",
+        "sbom.cdx.json",
+        "tests/**",
+        "tools/**",
+        "tsan.supp",
+        "typos.toml",
+        "workflow_scripts/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE:\n\nONNX is licensed under the Apache License, Version 2.0 (see LICENSE).\n\nThis product includes software from the following third-party projects, which\nare linked into ONNX wheel builds. Their copyright notices are reproduced below.\n\n---\n\n## abseil-cpp\n\nCopyright 2017 The Abseil Authors.\n\nVersion: 20250127.0\nSource: https://github.com/abseil/abseil-cpp\nLicense: Apache-2.0 (see LICENSE)\n\n---\n\n## protobuf\n\nCopyright 2008 Google Inc.\n\nVersion: 31.1\nSource: https://github.com/protocolbuffers/protobuf\nLicense: BSD-3-Clause (see LICENSE)\n\n---\n\n## nanobind\n\nCopyright (c) 2022 Wenzel Jakob <wenzel.jakob@epfl.ch>\n\nVersion: 2.15.0\nSource: https://github.com/wjakob/nanobind\nLicense: BSD-3-Clause\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice,\n   this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors\n   may be used to endorse or promote products derived from this software\n   without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright 2017 The Abseil Authors.; Copyright 2008 Google Inc.; Copyright (c) 2022 Wenzel Jakob <wenzel.jakob@epfl.ch>, Apache-2.0 license (LICENSE), https://github.com/onnx/onnx."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.onnx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.proto3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.supp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "LICENSES/Apache-2.0.txt",
+        "LICENSES/BSD-2-Clause.txt",
+        "docs/docsgen/source/_static/readme.txt",
+        "docs/docsgen/source/extra/llms.txt",
+        "requirements-dev.txt",
+        "requirements-lintrunner.txt",
+        "requirements-release_test.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.lycheeignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION_NUMBER"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

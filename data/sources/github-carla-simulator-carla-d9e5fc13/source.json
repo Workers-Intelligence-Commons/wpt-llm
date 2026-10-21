@@ -1,0 +1,958 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/carla-simulator/carla",
+  "revision": "cd9b97861caded2bdd75822a173f6771114ba8bb",
+  "checksum": "sha256:b0bd7236e2989d840d7109328fd503583f5decf91da2d01592ef39ea88fb8a5a",
+  "extract": {
+    "exclude": [
+      "Docs/carla_ue5_logo.png",
+      "Docs/img/0_9_15_thumbnail.webp",
+      "Docs/img/EmissiveIntensity.gif",
+      "Docs/img/RecorderCollision.jpg",
+      "Docs/img/RecorderEventAdd.jpg",
+      "Docs/img/RecorderEventDel.jpg",
+      "Docs/img/RecorderEventParent.jpg",
+      "Docs/img/RecorderFileFormat1.jpg",
+      "Docs/img/RecorderFileFormat2.jpg",
+      "Docs/img/RecorderFileFormat3.jpg",
+      "Docs/img/RecorderFlow2.gif",
+      "Docs/img/RecorderFrameEnd.jpg",
+      "Docs/img/RecorderFrameLayout.jpg",
+      "Docs/img/RecorderFrameStart.jpg",
+      "Docs/img/RecorderHeader.jpg",
+      "Docs/img/RecorderInfoHeader.jpg",
+      "Docs/img/RecorderLayout.jpg",
+      "Docs/img/RecorderLayoutSample.jpg",
+      "Docs/img/RecorderPacketHeader.jpg",
+      "Docs/img/RecorderPacketSampleEventDel.jpg",
+      "Docs/img/RecorderPackets.jpg",
+      "Docs/img/RecorderPacketsList.jpg",
+      "Docs/img/RecorderPosition.jpg",
+      "Docs/img/RecorderString.jpg",
+      "Docs/img/RecorderTrafficLight.png",
+      "Docs/img/RecorderVehicle.jpg",
+      "Docs/img/RecorderWalker.jpg",
+      "Docs/img/Town01.jpg",
+      "Docs/img/Town02.jpg",
+      "Docs/img/Town03.jpg",
+      "Docs/img/Town04.jpg",
+      "Docs/img/Town05.jpg",
+      "Docs/img/Town06.jpg",
+      "Docs/img/Town07.jpg",
+      "Docs/img/Town10.jpg",
+      "Docs/img/Town10.png",
+      "Docs/img/VectorZeroAndIcon.webp",
+      "Docs/img/accident.gif",
+      "Docs/img/actor_blocked1.png",
+      "Docs/img/actor_blocked2.png",
+      "Docs/img/add_vehicle_step_02.jpg",
+      "Docs/img/add_vehicle_step_03.jpg",
+      "Docs/img/add_vehicle_step_04.jpg",
+      "Docs/img/add_vehicle_step_06.jpg",
+      "Docs/img/add_vehicle_step_07.jpg",
+      "Docs/img/add_vehicle_step_08.jpg",
+      "Docs/img/add_vehicle_step_10.jpg",
+      "Docs/img/base_mesh.png",
+      "Docs/img/base_nw.png",
+      "Docs/img/btn/**",
+      "Docs/img/build_modules.jpg",
+      "Docs/img/building_diffuse_alpha.png",
+      "Docs/img/building_material.png",
+      "Docs/img/carla_modules.png",
+      "Docs/img/carla_plugin_graph.png",
+      "Docs/img/carla_ue5_readme_img.webp",
+      "Docs/img/carsim_analysis.jpg",
+      "Docs/img/carsim_generate.jpg",
+      "Docs/img/carsim_vehicle_sizes.jpg",
+      "Docs/img/catalogue/**",
+      "Docs/img/check_geometry.jpg",
+      "Docs/img/check_open.jpg",
+      "Docs/img/choose_material.png",
+      "Docs/img/client_window.png",
+      "Docs/img/collision1.gif",
+      "Docs/img/collision_mesh.png",
+      "Docs/img/collision_mesh_vehicle.png",
+      "Docs/img/content/**",
+      "Docs/img/copy_wheel_blueprint.png",
+      "Docs/img/create_map_01.jpg",
+      "Docs/img/decals_meshes.png",
+      "Docs/img/digital_twin_residential.png",
+      "Docs/img/digital_twin_tool.png",
+      "Docs/img/digital_twins_buildings.jpg",
+      "Docs/img/digital_twins_interface.png",
+      "Docs/img/digital_twins_vegetation.jpg",
+      "Docs/img/digital_twins_widget.png",
+      "Docs/img/disable_rendering.png",
+      "Docs/img/docs_version_panel.jpg",
+      "Docs/img/epic_quality_capture.png",
+      "Docs/img/epic_rendering.png",
+      "Docs/img/faq_rpc_error.jpg",
+      "Docs/img/instance_segmentation.png",
+      "Docs/img/large_map_export_fbx.png",
+      "Docs/img/levels.png",
+      "Docs/img/lidar_intensity.jpg",
+      "Docs/img/lidar_intensity.png",
+      "Docs/img/lidar_point_cloud.gif",
+      "Docs/img/lidar_point_cloud.jpg",
+      "Docs/img/logos/**",
+      "Docs/img/low_quality_capture.png",
+      "Docs/img/low_quality_rendering.png",
+      "Docs/img/maneuver_road.jpg",
+      "Docs/img/manual_control.png",
+      "Docs/img/map_customization/**",
+      "Docs/img/map_size.png",
+      "Docs/img/map_size_sync.png",
+      "Docs/img/map_tiles.png",
+      "Docs/img/master_material.png",
+      "Docs/img/material_customization/**",
+      "Docs/img/move_assets.png",
+      "Docs/img/multigpu-example.png",
+      "Docs/img/new_level.png",
+      "Docs/img/nwheel_config.png",
+      "Docs/img/nwheel_mech_setup.png",
+      "Docs/img/nwheels.png",
+      "Docs/img/oasis_logo.png",
+      "Docs/img/objects_small.gif",
+      "Docs/img/open_digital_twin_tool.png",
+      "Docs/img/open_pb_tool.png",
+      "Docs/img/opendrive_meshissue.jpg",
+      "Docs/img/opendrive_standalone.jpg",
+      "Docs/img/optical_flow.png",
+      "Docs/img/osm_export.png",
+      "Docs/img/pb_add_socket.png",
+      "Docs/img/pb_base_parameters.png",
+      "Docs/img/pb_building_parts.png",
+      "Docs/img/pb_detail_section.png",
+      "Docs/img/pb_detail_variations.webp",
+      "Docs/img/pb_facade_changes.webp",
+      "Docs/img/pb_facade_materials.png",
+      "Docs/img/pb_mesh_details.png",
+      "Docs/img/pb_mesh_elements.png",
+      "Docs/img/pb_mesh_parameters.png",
+      "Docs/img/physical_asset_mesh.png",
+      "Docs/img/physics_convergence_fixed_dt.png",
+      "Docs/img/physics_convergence_fixed_pdt.png",
+      "Docs/img/physics_convergence_z_acceleration.png",
+      "Docs/img/pipeline.jpg",
+      "Docs/img/pipeline.png",
+      "Docs/img/plugins_carlaviz_data.jpg",
+      "Docs/img/plugins_carlaviz_demo.jpg",
+      "Docs/img/plugins_carlaviz_empty.jpg",
+      "Docs/img/plugins_carlaviz_full.jpg",
+      "Docs/img/plugins_carlaviz_run.jpg",
+      "Docs/img/procedural_building_generation.jpg",
+      "Docs/img/procedural_cities.png",
+      "Docs/img/ptv_types.jpg",
+      "Docs/img/recast_example.jpg",
+      "Docs/img/ref_sensors_depth.jpg",
+      "Docs/img/ref_sensors_radar.jpg",
+      "Docs/img/ref_sensors_rgb.jpg",
+      "Docs/img/ref_sensors_semantic.jpg",
+      "Docs/img/rendering_quality_epic.jpg",
+      "Docs/img/rendering_quality_low.jpg",
+      "Docs/img/road_surface.jpg",
+      "Docs/img/roadrunner180.jpg",
+      "Docs/img/roadrunner_export.png",
+      "Docs/img/ros_carla.png",
+      "Docs/img/rr-ue4_plugins.jpg",
+      "Docs/img/rr_export_view.png",
+      "Docs/img/rr_world_settings.png",
+      "Docs/img/rss_carla_integration.png",
+      "Docs/img/rss_carla_integration_architecture.png",
+      "Docs/img/safe_distance_sensor.jpg",
+      "Docs/img/semantic_lidar_point_cloud.jpg",
+      "Docs/img/sensor_dvs.gif",
+      "Docs/img/sensor_dvs_scheme.jpg",
+      "Docs/img/snipets_images/**",
+      "Docs/img/steering_angle_mustang.png",
+      "Docs/img/sublevels.gif",
+      "Docs/img/synkrotron.jpg",
+      "Docs/img/tm_2_architecture.jpg",
+      "Docs/img/tm_hybrid.gif",
+      "Docs/img/transform.jpg",
+      "Docs/img/tuto_D_collider_detailed.jpg",
+      "Docs/img/tuto_D_collider_detailed_not.jpg",
+      "Docs/img/tuto_D_colliders_01.jpg",
+      "Docs/img/tuto_D_colliders_02.jpg",
+      "Docs/img/tuto_D_colliders_03.jpg",
+      "Docs/img/tuto_D_colliders_04.jpg",
+      "Docs/img/tuto_D_colliders_05.jpg",
+      "Docs/img/tuto_D_colliders_0608.jpg",
+      "Docs/img/tuto_D_colliders_CustomCollision.jpg",
+      "Docs/img/tuto_D_colliders_collider.jpg",
+      "Docs/img/tuto_D_colliders_final.jpg",
+      "Docs/img/tuto_D_colliders_mesh.jpg",
+      "Docs/img/tuto_D_colliders_staticmesh.jpg",
+      "Docs/img/tuto_D_colliders_visible.jpg",
+      "Docs/img/tuto_D_create_semantic_tags/**",
+      "Docs/img/tuto_D_pedestrian_CarlaExporter.jpg",
+      "Docs/img/tuto_G_bounding_box/**",
+      "Docs/img/tuto_G_getting_started/**",
+      "Docs/img/tuto_G_pedestrian_bones/actor_location.png",
+      "Docs/img/tuto_G_pedestrian_bones/pedestrian_skeleton.gif",
+      "Docs/img/tuto_G_pygame/**",
+      "Docs/img/tuto_G_texture_streaming/**",
+      "Docs/img/tuto_G_traffic_manager/**",
+      "Docs/img/tuto_content_authoring_maps/**",
+      "Docs/img/tuto_content_authoring_vehicles/**",
+      "Docs/img/tuto_depth.jpg",
+      "Docs/img/tuto_depths.jpg",
+      "Docs/img/tuto_detectors.jpg",
+      "Docs/img/tuto_g_osm_area.jpg",
+      "Docs/img/tuto_g_osm_carla.jpg",
+      "Docs/img/tuto_g_osm_web.jpg",
+      "Docs/img/tuto_lidar.jpg",
+      "Docs/img/tuto_map.jpg",
+      "Docs/img/tuto_no_rendering.jpg",
+      "Docs/img/tuto_other.jpg",
+      "Docs/img/tuto_query_blocked.jpg",
+      "Docs/img/tuto_query_collisions.jpg",
+      "Docs/img/tuto_query_frames.jpg",
+      "Docs/img/tuto_radar.jpg",
+      "Docs/img/tuto_rgb.jpg",
+      "Docs/img/tuto_sem.jpg",
+      "Docs/img/tuto_spawning.jpg",
+      "Docs/img/tuto_sumo.jpg",
+      "Docs/img/tuto_suspension_blueprints.jpg",
+      "Docs/img/tuto_suspension_blueprints.png",
+      "Docs/img/tuto_suspension_parameterization.jpg",
+      "Docs/img/tuto_weather.jpg",
+      "Docs/img/tutorial_roadrunner.jpg",
+      "Docs/img/tutorial_roadrunner_ue4.jpg",
+      "Docs/img/ue_collision_complexity.jpg",
+      "Docs/img/ue_crosswalks.jpg",
+      "Docs/img/ue_drag_meshes.jpg",
+      "Docs/img/ue_duplicate_basemap.png",
+      "Docs/img/ue_generate_routes.png",
+      "Docs/img/ue_illumination.jpg",
+      "Docs/img/ue_import_asset.png",
+      "Docs/img/ue_import_file.jpg",
+      "Docs/img/ue_import_mapname.jpg",
+      "Docs/img/ue_import_options.jpg",
+      "Docs/img/ue_level_content.jpg",
+      "Docs/img/ue_maps_to_include.jpg",
+      "Docs/img/ue_mesh_to_obj.jpg",
+      "Docs/img/ue_meshes.jpg",
+      "Docs/img/ue_new_level.jpg",
+      "Docs/img/ue_noexport.jpg",
+      "Docs/img/ue_noexport.png",
+      "Docs/img/ue_opendrive_actor.jpg",
+      "Docs/img/ue_route_points.jpg",
+      "Docs/img/ue_selectmesh_collision.jpg",
+      "Docs/img/ue_ssgt.jpg",
+      "Docs/img/ue_tl_group.jpg",
+      "Docs/img/ue_tl_group_times.jpg",
+      "Docs/img/ue_tlsigns_example.jpg",
+      "Docs/img/ue_trafficlight.jpg",
+      "Docs/img/vehicle_bounding_box.png",
+      "Docs/img/vehicle_factory.png",
+      "Docs/img/vehicle_mesh.png",
+      "Docs/img/vehicle_telemetry.png",
+      "Docs/img/video_thumbnail.png",
+      "Docs/img/video_thumbnail_0910.jpg",
+      "Docs/img/welcome.png",
+      "Docs/img/wheel_blueprint.png",
+      "Docs/img/wheel_shape.png",
+      "LibCarla/source/third-party/marchingcube/**",
+      "LibCarla/source/third-party/moodycamel/**",
+      "LibCarla/source/third-party/odrSpiral/**",
+      "LibCarla/source/third-party/simplify/**",
+      "Unreal/CarlaUnreal/CarlaUnreal.png",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/Icons/**",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/AnnotationColor.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/DepthEffectMaterial.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/DepthEffectMaterial_GLSL.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/GTMaterial.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/LensDistortion.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/MPC/**",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/NormalsEffectMaterial.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/PhysicLensDistortion.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/TMTextures/**",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/VelocityMaterial.uasset",
+      "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/WideAngleLens/**",
+      "Unreal/CarlaUnreal/Plugins/Carla/Resources/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/BaseMap/MainLargeMap/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/BaseMap/TilesEmpty/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Materials/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/RegionWidget/WB_TerrainMaterialWidget.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/RegionWidget/WB_VegetationGeneralSettings.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/SpecificActorPlacement/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/Weather/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Rivers/RiverPresets/River01/T_River01b.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Rivers/RiverPresets/River01/T_RiverPreset01.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_BluryLandscape.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_HeightMap.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_HeightMapPreview.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_LandscapeFinal.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_ROITileHeightMap.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_RoiHeightMap.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/RT_TileHeightMapResult.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/T_CrossMask.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/add.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/bread.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/forest.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/garbage-can.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/help.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/miscellaneous.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/mountain.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/pencil.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/place__1_.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/rainnyday01.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/right-arrow.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/shovel.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/spread.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/water-waves.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/weather.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/zoomin.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/zoomout.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/BP_OpenDriveToMap.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_BuildingGenetratorTrigger.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_RoofPropsGenerator.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_Veg_Caller.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_Veg_Scatter.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BuildingStyleHolder.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/DT_BuildingStyles.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/Trigier.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/DT_TreesGeneration.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/LevelCreator.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/MapPreview/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/UW_OnRoadMainWidget.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/ProceduralWaterManager/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/USDImporter/**",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Resources/**",
+      "Unreal/CarlaUnreal/Plugins/StreetMap/Content/**",
+      "Unreal/CarlaUnreal/Plugins/StreetMap/Docs/**",
+      "Unreal/CarlaUnreal/Plugins/StreetMap/Resources/**",
+      "PythonAPI/examples/av_stacks/autoware/map_tools/maps/Town10HD/pointcloud_map.pcd",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/BaseMap/Tiles/MapGeneratorBaseMap.umap",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/RegionWidget/WB_BaseRegionWidget.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Rivers/RiverPresets/River01/RiverPreset01.umap",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/Desert_03.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/Forest_02.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/daylight01.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/daylight02.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/night_02.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/sunset03.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/UWB_CARLA.uasset",
+      "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_BuildingGen.uasset"
+    ]
+  },
+  "history": {
+    "since": "c80111fca6373164247a30043ee119d975ee1ccb"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de\nBarcelona (UAB).\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2006-2018 Arseny Kapoulkine\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 Mike Fricker\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\nMIT License\n\nCopyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de\nBarcelona (UAB).\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/carla-simulator/carla: Copyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de, MIT license (LICENSE), https://github.com/carla-simulator/carla; Copyright (c) 2006-2018 Arseny Kapoulkine, MIT license (LICENSE.md), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/LibCarla/source/third-party/pugixml; Copyright (c) 2017 Mike Fricker, MIT license (LICENSE.txt), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/Unreal/CarlaUnreal/Plugins/StreetMap; Copyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de, MIT license (LICENSE), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/Util/AgenticTools."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clangd.in",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mcp.json",
+        ".pep8",
+        ".readthedocs.yaml",
+        ".travis.yml",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CHANGELOG_UE4.md",
+        "CMake/**",
+        "CMakeLists.txt",
+        "CMakePresets.json",
+        "CarlaSetup.bat",
+        "CarlaSetup.sh",
+        "Docs/adv_agents.md",
+        "Docs/adv_benchmarking.md",
+        "Docs/adv_recorder.md",
+        "Docs/adv_rendering_options.md",
+        "Docs/adv_synchrony_timestep.md",
+        "Docs/adv_traffic_manager.md",
+        "Docs/agent_skills.md",
+        "Docs/bp_library.md",
+        "Docs/build_carla.md",
+        "Docs/build_devcontainer.md",
+        "Docs/build_docker.md",
+        "Docs/build_linux_ue5.md",
+        "Docs/build_windows_ue5.md",
+        "Docs/camera_postprocess_presets.md",
+        "Docs/catalogue.md",
+        "Docs/catalogue_pedestrians.md",
+        "Docs/catalogue_props.md",
+        "Docs/catalogue_scripts.md",
+        "Docs/catalogue_vehicles.md",
+        "Docs/cont_code_of_conduct.md",
+        "Docs/cont_coding_standard.md",
+        "Docs/cont_contribution_guidelines.md",
+        "Docs/cont_doc_standard.md",
+        "Docs/content_authoring_props.md",
+        "Docs/content_packs.md",
+        "Docs/coordinate_conventions.md",
+        "Docs/core_actors.md",
+        "Docs/core_concepts.md",
+        "Docs/core_map.md",
+        "Docs/core_sensors.md",
+        "Docs/core_world.md",
+        "Docs/cpp_api_parity.md",
+        "Docs/custom_assets_tutorials.md",
+        "Docs/development_tutorials.md",
+        "Docs/download.md",
+        "Docs/ecosys_ansys.md",
+        "Docs/ecosys_synkrotron.md",
+        "Docs/ext_docs.md",
+        "Docs/extra.css",
+        "Docs/extra.js",
+        "Docs/foundations.md",
+        "Docs/img/carla_plugin_graph.java",
+        "Docs/img/carlaserver.svg",
+        "Docs/img/tuto_G_pedestrian_bones/skeleton.txt",
+        "Docs/index.md",
+        "Docs/inverted_ai.md",
+        "Docs/map_mine.md",
+        "Docs/map_town10.md",
+        "Docs/maps_tutorials.md",
+        "Docs/nvidia.md",
+        "Docs/nvidia_alpamayo.md",
+        "Docs/nvidia_alpamayo_architecture.md",
+        "Docs/nvidia_alpamayo_troubleshooting.md",
+        "Docs/nvidia_nurec.md",
+        "Docs/python_api.md",
+        "Docs/ref_cpp.md",
+        "Docs/ref_recorder_binary_file_format.md",
+        "Docs/ref_sensors.md",
+        "Docs/release_readme.md",
+        "Docs/requirements.txt",
+        "Docs/ros2_native.md",
+        "Docs/ros2_native_msgs.md",
+        "Docs/ros2_native_sensors.md",
+        "Docs/ros_documentation.md",
+        "Docs/start_introduction.md",
+        "Docs/start_quickstart.md",
+        "Docs/ts_traffic_simulation_overview.md",
+        "Docs/tuto_A_material_customization.md",
+        "Docs/tuto_D_contribute_assets.md",
+        "Docs/tuto_D_create_semantic_tags.md",
+        "Docs/tuto_D_customize_vehicle_suspension.md",
+        "Docs/tuto_D_generate_colliders.md",
+        "Docs/tuto_G_add_friction_triggers.md",
+        "Docs/tuto_G_bounding_boxes.md",
+        "Docs/tuto_G_control_vehicle_physics.md",
+        "Docs/tuto_G_control_walker_skeletons.md",
+        "Docs/tuto_G_getting_started.md",
+        "Docs/tuto_G_instance_segmentation_sensor.md",
+        "Docs/tuto_G_openstreetmap.md",
+        "Docs/tuto_G_pedestrian_bones.md",
+        "Docs/tuto_G_pygame.md",
+        "Docs/tuto_G_scenic.md",
+        "Docs/tuto_G_texture_streaming.md",
+        "Docs/tuto_G_traffic_manager.md",
+        "Docs/tuto_content_authoring_vehicles.md",
+        "Docs/tuto_content_authoring_vehicles_materials.md",
+        "Docs/tuto_cpp.md",
+        "Docs/tuto_first_steps.md",
+        "Docs/tutorials.md",
+        "Doxyfile",
+        "Examples/**",
+        "Import/**",
+        "Jenkinsfile",
+        "LICENSE",
+        "LibCarla/CMakeLists.txt",
+        "LibCarla/source/carla/**",
+        "LibCarla/source/test/**",
+        "LibCarla/source/util/**",
+        "PythonAPI/**",
+        "README.md",
+        "Ros2Native/**",
+        "Skills/**",
+        "TO_TEST.md",
+        "Unreal/CMakeLists.txt",
+        "Unreal/CarlaUnreal/.gitignore",
+        "Unreal/CarlaUnreal/.vsconfig",
+        "Unreal/CarlaUnreal/CarlaUnreal.uproject",
+        "Unreal/CarlaUnreal/Config/**",
+        "Unreal/CarlaUnreal/Plugins/Carla/.gitignore",
+        "Unreal/CarlaUnreal/Plugins/Carla/Carla.uplugin",
+        "Unreal/CarlaUnreal/Plugins/Carla/Content/PostProcessingMaterials/.gitignore",
+        "Unreal/CarlaUnreal/Plugins/Carla/Shaders/**",
+        "Unreal/CarlaUnreal/Plugins/Carla/Source/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaDigitalTwinsTool/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaExporter/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/.gitignore",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/CarlaTools.uplugin",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/BaseMap/Tiles/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/OpenDrive/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/PersistentFiles/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/RegionWidget/WB_BaseRegionWidget.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Misc/TerrainPresets/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Rivers/RiverPresets/River01/RiverPreset01.umap",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/Desert_03.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/Forest_02.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/daylight01.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/daylight02.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/night_02.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/Textures/UI_Icons/sunset03.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/MapGenerator/UWB_CARLA.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/OnroadMapGenerator/Blueprints/BP_BuildingGen.uasset",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Content/Python/**",
+        "Unreal/CarlaUnreal/Plugins/CarlaTools/Source/**",
+        "Unreal/CarlaUnreal/Source/**",
+        "Unreal/Package/**",
+        "Util/CARLA.sublime-project",
+        "Util/ContentPacks/**",
+        "Util/ContentRepair/**",
+        "Util/ContentVersions.json",
+        "Util/ContentVersions.txt",
+        "Util/Docker/**",
+        "Util/DockerUtils/**",
+        "Util/Formatting/**",
+        "Util/ImportAssets.sh",
+        "Util/SetupUtils/**",
+        "Util/Tools/**",
+        "Util/VehicleAuthoring/**",
+        "Util/download_from_gdrive.py",
+        "Util/lens_model_crosscheck.py",
+        "mkdocs.yml",
+        "requirements.txt",
+        "wheel_config.ini"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de\nBarcelona (UAB).\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de, MIT license (LICENSE), https://github.com/carla-simulator/carla."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "LibCarla/source/third-party/pugixml/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2006-2018 Arseny Kapoulkine\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2006-2018 Arseny Kapoulkine, MIT license (LICENSE.md), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/LibCarla/source/third-party/pugixml."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Unreal/CarlaUnreal/Plugins/StreetMap/.gitignore",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/Config/**",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/LICENSE.txt",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/README.md",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/Source/**",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/StreetMap.uplugin"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 Mike Fricker\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2017 Mike Fricker, MIT license (LICENSE.txt), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/Unreal/CarlaUnreal/Plugins/StreetMap."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Util/AgenticTools/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de\nBarcelona (UAB).\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2024 Computer Vision Center (CVC) at the Universitat Autonoma de, MIT license (LICENSE), https://github.com/carla-simulator/carla/tree/cd9b97861caded2bdd75822a173f6771114ba8bb/Util/AgenticTools."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/Jenkinsfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.osm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pcd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rviz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.scenic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sublime-project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "Docs/img/tuto_G_pedestrian_bones/skeleton.txt",
+        "Docs/requirements.txt",
+        "LibCarla/source/util/ue-macros.txt",
+        "LibCarla/source/util/winnt-macros.txt",
+        "PythonAPI/carla/requirements.txt",
+        "PythonAPI/docs/requirements.txt",
+        "PythonAPI/examples/av_stacks/alpamayo/requirements.txt",
+        "PythonAPI/examples/av_stacks/autoware/map_tools/requirements.txt",
+        "PythonAPI/examples/nvidia/nurec/nre/grpc/requirements.txt",
+        "PythonAPI/examples/nvidia/nurec/requirements.txt",
+        "PythonAPI/examples/requirements.txt",
+        "PythonAPI/test/integration_tests_list.txt",
+        "PythonAPI/test/requirements.txt",
+        "PythonAPI/test/smoke_test_list.txt",
+        "PythonAPI/util/requirements.txt",
+        "PythonAPI/util/tools/requirements.txt",
+        "Unreal/CarlaUnreal/Plugins/StreetMap/LICENSE.txt",
+        "Util/ContentVersions.txt",
+        "requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uasset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.umap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uplugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.uproject"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ush"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xodr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pep8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.vsconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Doxyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/carla-pack"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/clang-format"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

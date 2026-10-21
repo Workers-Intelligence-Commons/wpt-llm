@@ -1,0 +1,962 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apify/crawlee",
+  "revision": "02899241d570624a0ce0b77dbcb44b9d58a98ade",
+  "checksum": "sha256:bc3eb0b40285a9db368fc743c0f1822cf182669c6aa0415c08d1576dd5890900",
+  "extract": {
+    "exclude": [
+      "test/shared/data/apify.png",
+      "test/shared/data/sample.json.gz",
+      "website/blog/2024/03-27-how-to-scrape-amazon-using-typescript-cheerio-and-crawlee/img/**",
+      "website/blog/2024/04-23-scrapy-vs-crawlee/img/**",
+      "website/blog/2024/06-10-creating-a-netflix-show-recommender-using-crawlee-and-react/img/**",
+      "website/blog/2024/06-24-proxy-management-in-crawlee/img/**",
+      "website/blog/2024/07-05-launching-crawlee-python/img/**",
+      "website/blog/2024/08-20-problems-in-web-scraping/img/**",
+      "website/blog/2024/08-27-how-to-scrape-infinite-scrolling-pages/img/**",
+      "website/blog/2024/09-12-finding-students-accommodations/img/**",
+      "website/blog/2024/09-30-jsdom-based-scraping/img/**",
+      "website/blog/2024/10-14-linkedin-job-scraper-python/img/**",
+      "website/blog/2024/11-10-web-scraping-tips/img/**",
+      "website/blog/2024/11-15-graphql-persisted-query/img/**",
+      "website/blog/2024/12-02-scrape-google-search/img/**",
+      "website/blog/2024/12-13-scrape-google-maps-using-python/img/**",
+      "website/blog/2025/01-03-scrape-crunchbase/img/**",
+      "website/blog/2025/01-10/img/**",
+      "website/blog/2025/03-05-superscraper/img/**",
+      "website/blog/2025/03-06/img/**",
+      "website/blog/2025/03-20-scrape-bluesky-using-python/img/**",
+      "website/blog/2025/04-08-price-tracking/img/**",
+      "website/blog/2025/07-14-scrape-youtube/img/**",
+      "website/blog/2025/09-15/img/**",
+      "website/blog/2025/4-25-scrape-tiktok/img/**",
+      "website/blog/2026/06-15-building-gradcracker-scraper-with-crawlee/img/**",
+      "website/blog/2026/09-08-playwright-stealth-vs-fingerprint-spoofing/img/stealth-comparison.png",
+      "website/static/font/**",
+      "website/static/img/API.png",
+      "website/static/img/apify_og_SDK.png",
+      "website/static/img/auto-scaling-dark.webp",
+      "website/static/img/auto-scaling-light.webp",
+      "website/static/img/chrome-scrape-dark.gif",
+      "website/static/img/chrome-scrape-light.gif",
+      "website/static/img/crawlee-js-og.png",
+      "website/static/img/crawlee-og.png",
+      "website/static/img/favicon.ico",
+      "website/static/img/favorite-tools-dark.webp",
+      "website/static/img/favorite-tools-light.webp",
+      "website/static/img/getting-started/**",
+      "website/static/img/jaeger-search.png",
+      "website/static/img/logo-blur.png",
+      "website/static/img/oss_logo.png",
+      "website/static/img/puppeteer-live-view-dashboard.png",
+      "website/static/img/puppeteer-live-view-detail.png",
+      "website/static/img/robot.png",
+      "website/static/img/smart-proxy-dark.webp",
+      "website/static/img/smart-proxy-light.webp",
+      "website/static/img/source_code.png",
+      "website/tools/website_gif/chrome-scrape-dark.gif",
+      "website/tools/website_gif/chrome-scrape-dark.mp4",
+      "website/tools/website_gif/chrome-scrape-light.gif",
+      "website/tools/website_gif/chrome-scrape-light.mp4"
+    ]
+  },
+  "history": {
+    "since": "a264fbca7c626863c5622822c7d019ae8a77291f"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2018 Apify Technologies s.r.o.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/apify/crawlee: Copyright 2018 Apify Technologies s.r.o., Apache-2.0 license (LICENSE.md), https://github.com/apify/crawlee; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/camoufox-ts; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/cheerio-js; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/cheerio-ts; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/empty-js; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/empty-ts; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/getting-started-js; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/getting-started-ts; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/playwright-js; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/playwright-ts; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/puppeteer-js; It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/puppeteer-ts; the authors of test-adaptive-playwright-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/adaptive-playwright-default/actor; the authors of test-adaptive-playwright-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/adaptive-playwright-robots-file/actor; the authors of test-automatic-persist-value, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/automatic-persist-value/actor; the authors of test-autoscaling-max-tasks-per-minute, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/autoscaling-max-tasks-per-minute/actor; the authors of test-camoufox-cloudflare, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/camoufox-cloudflare/actor; the authors of test-cheerio-curl-impersonate-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-curl-impersonate-ts/actor; the authors of test-cheerio-default-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-default-ts/actor; the authors of test-cheerio-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-default/actor; the authors of test-cheerio-enqueue-links-base, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-enqueue-links-base/actor; the authors of test-cheerio-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-enqueue-links/actor; the authors of test-cheerio-error-snapshot, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-error-snapshot/actor; the authors of test-cheerio-ignore-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-ignore-ssl-errors/actor; the authors of test-cheerio-impit-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-impit-ts/actor; the authors of test-cheerio-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-initial-cookies/actor; the authors of test-cheerio-max-requests, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-max-requests/actor; the authors of test-cheerio-page-info, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-page-info/actor; the authors of test-cheerio-request-queue-v2, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-request-queue-v2/actor; the authors of test-cheerio-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-robots-file/actor; the authors of test-cheerio-stop-resume-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-stop-resume-ts/actor; the authors of test-cheerio-throw-on-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-throw-on-ssl-errors/actor; the authors of test-input-json5, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/input-json5/actor; the authors of test-migration, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/migration/actor; the authors of test-playwright-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-default/actor; the authors of test-playwright-enqueue-links-base, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-enqueue-links-base/actor; the authors of test-playwright-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-enqueue-links/actor; the authors of test-playwright-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-initial-cookies/actor; the authors of test-playwright-introduction-guide, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-introduction-guide/actor; the authors of test-playwright-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-robots-file/actor; the authors of test-proxy-rotation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/proxy-rotation/actor; the authors of test-puppeteer-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-default/actor; the authors of test-puppeteer-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-enqueue-links/actor; the authors of test-puppeteer-error-snapshot, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-error-snapshot/actor; the authors of test-puppeteer-ignore-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-ignore-ssl-errors/actor; the authors of test-puppeteer-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-initial-cookies/actor; the authors of test-puppeteer-page-info, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-page-info/actor; the authors of test-puppeteer-store-pagination-jquery, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-store-pagination-jquery/actor; the authors of test-puppeteer-store-pagination, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-store-pagination/actor; the authors of test-puppeteer-throw-on-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-throw-on-ssl-errors/actor; the authors of test-request-queue-with-concurrency, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-queue-with-concurrency/actor; the authors of test-request-queue-zero-concurrency, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-queue-zero-concurrency/actor; the authors of test-request-skip-navigation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-skip-navigation/actor; the authors of test-session-rotation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/session-rotation/actor; the authors of test-stagehand-claude, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/stagehand-claude/actor; the authors of test-stagehand-concurrent, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/stagehand-concurrent/actor; the authors of test-kv-open-return-storage-object, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/storage-open-return-storage-object/actor; the authors of roa-loader, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/website/roa-loader."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".claude/**",
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".oxfmtrc.json",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE.md",
+        "MIGRATIONS.md",
+        "README.md",
+        "RELEASE.md",
+        "docs/**",
+        "lerna.json",
+        "oxlint.config.ts",
+        "package.json",
+        "packages/basic-crawler/**",
+        "packages/browser-crawler/**",
+        "packages/browser-pool/**",
+        "packages/cheerio-crawler/**",
+        "packages/cli/**",
+        "packages/core/**",
+        "packages/crawlee/**",
+        "packages/fs-storage/**",
+        "packages/got-scraping-client/**",
+        "packages/http-client/**",
+        "packages/http-crawler/**",
+        "packages/impit-client/**",
+        "packages/otel/**",
+        "packages/playwright-crawler/**",
+        "packages/puppeteer-crawler/**",
+        "packages/stagehand-crawler/**",
+        "packages/templates/.npmignore",
+        "packages/templates/CHANGELOG.md",
+        "packages/templates/manifest.json",
+        "packages/templates/package.json",
+        "packages/templates/scripts/**",
+        "packages/templates/src/**",
+        "packages/templates/tsconfig.build.json",
+        "packages/templates/tsconfig.json",
+        "packages/types/**",
+        "packages/utils/**",
+        "patches/**",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "renovate.json",
+        "scripts/**",
+        "test/basic-crawler/**",
+        "test/browser-pool/**",
+        "test/cheerio-crawler/**",
+        "test/core/**",
+        "test/e2e/adaptive-playwright-default/test.mjs",
+        "test/e2e/adaptive-playwright-robots-file/test.mjs",
+        "test/e2e/automatic-persist-value/test.mjs",
+        "test/e2e/autoscaling-max-tasks-per-minute/test.mjs",
+        "test/e2e/camoufox-cloudflare/test.mjs",
+        "test/e2e/cheerio-curl-impersonate-ts/test.mjs",
+        "test/e2e/cheerio-default/test.mjs",
+        "test/e2e/cheerio-default-ts/test.mjs",
+        "test/e2e/cheerio-enqueue-links/test.mjs",
+        "test/e2e/cheerio-enqueue-links-base/test.mjs",
+        "test/e2e/cheerio-error-snapshot/test.mjs",
+        "test/e2e/cheerio-ignore-ssl-errors/test.mjs",
+        "test/e2e/cheerio-impit-ts/test.mjs",
+        "test/e2e/cheerio-initial-cookies/test.mjs",
+        "test/e2e/cheerio-max-requests/test.mjs",
+        "test/e2e/cheerio-page-info/test.mjs",
+        "test/e2e/cheerio-request-queue-v2/test.mjs",
+        "test/e2e/cheerio-robots-file/test.mjs",
+        "test/e2e/cheerio-stop-resume-ts/test.mjs",
+        "test/e2e/cheerio-throw-on-ssl-errors/test.mjs",
+        "test/e2e/input-json5/INPUT",
+        "test/e2e/input-json5/test.mjs",
+        "test/e2e/migration/test.mjs",
+        "test/e2e/playwright-default/test.mjs",
+        "test/e2e/playwright-enqueue-links/test.mjs",
+        "test/e2e/playwright-enqueue-links-base/test.mjs",
+        "test/e2e/playwright-initial-cookies/test.mjs",
+        "test/e2e/playwright-introduction-guide/test.mjs",
+        "test/e2e/playwright-robots-file/test.mjs",
+        "test/e2e/proxy-rotation/test.mjs",
+        "test/e2e/puppeteer-default/test.mjs",
+        "test/e2e/puppeteer-enqueue-links/test.mjs",
+        "test/e2e/puppeteer-error-snapshot/test.mjs",
+        "test/e2e/puppeteer-ignore-ssl-errors/test.mjs",
+        "test/e2e/puppeteer-initial-cookies/test.mjs",
+        "test/e2e/puppeteer-page-info/test.mjs",
+        "test/e2e/puppeteer-store-pagination/test.mjs",
+        "test/e2e/puppeteer-store-pagination-jquery/test.mjs",
+        "test/e2e/puppeteer-throw-on-ssl-errors/test.mjs",
+        "test/e2e/request-queue-with-concurrency/test.mjs",
+        "test/e2e/request-queue-zero-concurrency/test.mjs",
+        "test/e2e/request-skip-navigation/test.mjs",
+        "test/e2e/run.mjs",
+        "test/e2e/session-rotation/test.mjs",
+        "test/e2e/stagehand-claude/test.mjs",
+        "test/e2e/stagehand-concurrent/test.mjs",
+        "test/e2e/storage-open-return-storage-object/test.mjs",
+        "test/e2e/tools.mjs",
+        "test/e2e/tsconfig.json",
+        "test/fs-storage/**",
+        "test/integration/**",
+        "test/otel/**",
+        "test/shared/_helper.ts",
+        "test/shared/data/complex.xml",
+        "test/shared/data/html-to-text-test-data.ts",
+        "test/shared/data/inject_file.txt",
+        "test/shared/data/invalid_url_list.txt",
+        "test/shared/data/lipsum.txt",
+        "test/shared/data/simple_url_list.txt",
+        "test/shared/data/tricky_url_list.txt",
+        "test/shared/data/unicode+comma_url_list.txt",
+        "test/shared/data/unicode_url_list.txt",
+        "test/shared/typedefs.ts",
+        "test/stagehand-crawler/**",
+        "test/tsconfig.json",
+        "test/utils/**",
+        "test/vitest.setup.ts",
+        "tsconfig.build.json",
+        "tsconfig.json",
+        "turbo.json",
+        "vitest.config.mts",
+        "website/.eslintrc.json",
+        "website/blog/2024/02-22-launching-crawlee-blog/**",
+        "website/blog/2024/03-27-how-to-scrape-amazon-using-typescript-cheerio-and-crawlee/index.md",
+        "website/blog/2024/04-23-scrapy-vs-crawlee/index.md",
+        "website/blog/2024/06-10-creating-a-netflix-show-recommender-using-crawlee-and-react/index.md",
+        "website/blog/2024/06-24-proxy-management-in-crawlee/index.md",
+        "website/blog/2024/07-05-launching-crawlee-python/index.md",
+        "website/blog/2024/08-20-problems-in-web-scraping/index.md",
+        "website/blog/2024/08-27-how-to-scrape-infinite-scrolling-pages/index.md",
+        "website/blog/2024/09-12-finding-students-accommodations/index.md",
+        "website/blog/2024/09-30-jsdom-based-scraping/index.md",
+        "website/blog/2024/10-14-linkedin-job-scraper-python/index.md",
+        "website/blog/2024/11-10-web-scraping-tips/index.md",
+        "website/blog/2024/11-15-graphql-persisted-query/index.md",
+        "website/blog/2024/12-02-scrape-google-search/index.md",
+        "website/blog/2024/12-13-scrape-google-maps-using-python/index.md",
+        "website/blog/2025/01-03-scrape-crunchbase/index.md",
+        "website/blog/2025/01-10/index.md",
+        "website/blog/2025/03-05-superscraper/index.md",
+        "website/blog/2025/03-06/index.md",
+        "website/blog/2025/03-20-scrape-bluesky-using-python/index.md",
+        "website/blog/2025/04-08-price-tracking/index.md",
+        "website/blog/2025/07-14-scrape-youtube/index.md",
+        "website/blog/2025/09-15/index.md",
+        "website/blog/2025/4-25-scrape-tiktok/index.md",
+        "website/blog/2026/02-06/**",
+        "website/blog/2026/06-15-building-gradcracker-scraper-with-crawlee/index.md",
+        "website/blog/2026/08-04/**",
+        "website/blog/2026/09-08-playwright-stealth-vs-fingerprint-spoofing/img/stealth-comparison.svg",
+        "website/blog/2026/09-08-playwright-stealth-vs-fingerprint-spoofing/index.md",
+        "website/blog/authors.yml",
+        "website/docusaurus.config.js",
+        "website/nginx.conf",
+        "website/package.json",
+        "website/sidebars.js",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/img/apify_logo.svg",
+        "website/static/img/apify_sdk.svg",
+        "website/static/img/apify_sdk_white.svg",
+        "website/static/img/arrow_right.svg",
+        "website/static/img/check.svg",
+        "website/static/img/cloud_icon.svg",
+        "website/static/img/community-dark-icon.svg",
+        "website/static/img/community-light-icon.svg",
+        "website/static/img/crawlee-dark.svg",
+        "website/static/img/crawlee-javascript-dark.svg",
+        "website/static/img/crawlee-javascript-light.svg",
+        "website/static/img/crawlee-light.svg",
+        "website/static/img/crawlee-logo-monocolor.svg",
+        "website/static/img/crawlee-logo.svg",
+        "website/static/img/crawlee-python-dark.svg",
+        "website/static/img/crawlee-python-light.svg",
+        "website/static/img/defaults-dark-icon.svg",
+        "website/static/img/defaults-light-icon.svg",
+        "website/static/img/discord-brand-dark.svg",
+        "website/static/img/discord-brand.svg",
+        "website/static/img/docusaurus.svg",
+        "website/static/img/external-link.svg",
+        "website/static/img/features/**",
+        "website/static/img/github-brand-dark.svg",
+        "website/static/img/github-brand.svg",
+        "website/static/img/hearth.svg",
+        "website/static/img/javascript_logo.svg",
+        "website/static/img/js_file.svg",
+        "website/static/img/logo-big.svg",
+        "website/static/img/logo-blur.svg",
+        "website/static/img/logo-zoom.svg",
+        "website/static/img/menu-arrows.svg",
+        "website/static/img/queue-dark-icon.svg",
+        "website/static/img/queue-light-icon.svg",
+        "website/static/img/routing-dark-icon.svg",
+        "website/static/img/routing-light-icon.svg",
+        "website/static/img/scraping-utils-dark-icon.svg",
+        "website/static/img/scraping-utils-light-icon.svg",
+        "website/static/img/system.svg",
+        "website/static/img/triangles_dark.svg",
+        "website/static/img/triangles_light.svg",
+        "website/static/img/workflow.svg",
+        "website/static/img/zero-setup-dark-icon.svg",
+        "website/static/img/zero-setup-light-icon.svg",
+        "website/static/js/**",
+        "website/static/robots.txt",
+        "website/tools/docs-prettier.config.js",
+        "website/tools/joinLlmsFiles.mjs",
+        "website/tools/utils/**",
+        "website/tools/website_gif/website_gif.mjs",
+        "website/versioned_docs/**",
+        "website/versioned_sidebars/**",
+        "website/versions.json"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2018 Apify Technologies s.r.o.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2018 Apify Technologies s.r.o., Apache-2.0 license (LICENSE.md), https://github.com/apify/crawlee."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/camoufox-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/camoufox-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/cheerio-js/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/cheerio-js."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/cheerio-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/cheerio-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/empty-js/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/empty-js."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/empty-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/empty-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/getting-started-js/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/getting-started-js."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/getting-started-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/getting-started-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/playwright-js/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/playwright-js."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/playwright-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/playwright-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/puppeteer-js/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/puppeteer-js."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/templates/templates/puppeteer-ts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "It's not you it's me, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/packages/templates/templates/puppeteer-ts."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/adaptive-playwright-default/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-adaptive-playwright-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/adaptive-playwright-default/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/adaptive-playwright-robots-file/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-adaptive-playwright-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/adaptive-playwright-robots-file/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/automatic-persist-value/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-automatic-persist-value, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/automatic-persist-value/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/autoscaling-max-tasks-per-minute/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-autoscaling-max-tasks-per-minute, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/autoscaling-max-tasks-per-minute/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/camoufox-cloudflare/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-camoufox-cloudflare, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/camoufox-cloudflare/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-curl-impersonate-ts/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-curl-impersonate-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-curl-impersonate-ts/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-default-ts/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-default-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-default-ts/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-default/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-default/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-enqueue-links-base/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-enqueue-links-base, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-enqueue-links-base/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-enqueue-links/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-enqueue-links/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-error-snapshot/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-error-snapshot, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-error-snapshot/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-ignore-ssl-errors/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-ignore-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-ignore-ssl-errors/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-impit-ts/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-impit-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-impit-ts/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-initial-cookies/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-initial-cookies/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-max-requests/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-max-requests, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-max-requests/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-page-info/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-page-info, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-page-info/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-request-queue-v2/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-request-queue-v2, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-request-queue-v2/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-robots-file/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-robots-file/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-stop-resume-ts/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-stop-resume-ts, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-stop-resume-ts/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/cheerio-throw-on-ssl-errors/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-cheerio-throw-on-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/cheerio-throw-on-ssl-errors/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/input-json5/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-input-json5, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/input-json5/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/migration/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-migration, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/migration/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-default/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-default/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-enqueue-links-base/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-enqueue-links-base, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-enqueue-links-base/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-enqueue-links/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-enqueue-links/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-initial-cookies/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-initial-cookies/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-introduction-guide/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-introduction-guide, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-introduction-guide/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/playwright-robots-file/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-playwright-robots-file, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/playwright-robots-file/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/proxy-rotation/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-proxy-rotation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/proxy-rotation/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-default/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-default, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-default/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-enqueue-links/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-enqueue-links, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-enqueue-links/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-error-snapshot/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-error-snapshot, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-error-snapshot/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-ignore-ssl-errors/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-ignore-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-ignore-ssl-errors/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-initial-cookies/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-initial-cookies, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-initial-cookies/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-page-info/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-page-info, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-page-info/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-store-pagination-jquery/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-store-pagination-jquery, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-store-pagination-jquery/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-store-pagination/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-store-pagination, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-store-pagination/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/puppeteer-throw-on-ssl-errors/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-puppeteer-throw-on-ssl-errors, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/puppeteer-throw-on-ssl-errors/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/request-queue-with-concurrency/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-request-queue-with-concurrency, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-queue-with-concurrency/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/request-queue-zero-concurrency/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-request-queue-zero-concurrency, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-queue-zero-concurrency/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/request-skip-navigation/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-request-skip-navigation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/request-skip-navigation/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/session-rotation/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-session-rotation, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/session-rotation/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/stagehand-claude/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-stagehand-claude, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/stagehand-claude/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/stagehand-concurrent/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-stagehand-concurrent, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/stagehand-concurrent/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "test/e2e/storage-open-return-storage-object/actor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of test-kv-open-return-storage-object, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/test/e2e/storage-open-return-storage-object/actor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "website/roa-loader/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of roa-loader, ISC license (declared in package.json), https://github.com/apify/crawlee/tree/02899241d570624a0ce0b77dbcb44b9d58a98ade/website/roa-loader."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INPUT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

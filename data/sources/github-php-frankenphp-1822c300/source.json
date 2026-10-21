@@ -1,0 +1,457 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/php/frankenphp",
+  "revision": "2db0a2d46cff2c6a3fa77fb272d8c69bf48f34fe",
+  "checksum": "sha256:4d12e0976d5a7a2988e0aaf5687738bc3e428838341ab6e31d04d49c1302e371",
+  "extract": {
+    "exclude": [
+      "caddy/frankenphp/default.pgo",
+      "docs/digitalocean-dns.png",
+      "docs/digitalocean-droplet.png",
+      "docs/hot-reload.png",
+      "docs/mercure-hub.png",
+      "frankenphp.ico",
+      "frankenphp.png",
+      "profiles/regular.pgo",
+      "profiles/worker.pgo"
+    ]
+  },
+  "history": {
+    "since": "f8bdd640cf97b8c16573741e469b2ac6e11cc891"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT license\n\nCopyright (c) 2022-present Kévin Dunglas\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished\nto do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/php/frankenphp: Copyright (c) 2022-present Kévin Dunglas, MIT license (LICENSE), https://github.com/php/frankenphp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clang-format-ignore",
+        ".codespellrc",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitleaksignore",
+        ".golangci.yaml",
+        ".hadolint.yaml",
+        ".markdown-lint.yaml",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "alpine.Dockerfile",
+        "app.tar",
+        "app_checksum.txt",
+        "build-static.sh",
+        "caddy/admin.go",
+        "caddy/admin_test.go",
+        "caddy/app.go",
+        "caddy/br-skip.go",
+        "caddy/br.go",
+        "caddy/caddy.go",
+        "caddy/caddy_test.go",
+        "caddy/config_test.go",
+        "caddy/extinit.go",
+        "caddy/frankenphp/Caddyfile",
+        "caddy/frankenphp/cbrotli.go",
+        "caddy/frankenphp/main.go",
+        "caddy/frankenphp/mercure.go",
+        "caddy/frankenphp/vulcain.go",
+        "caddy/go.mod",
+        "caddy/go.sum",
+        "caddy/hotreload-skip.go",
+        "caddy/hotreload.go",
+        "caddy/hotreload_test.go",
+        "caddy/mercure-skip.go",
+        "caddy/mercure.go",
+        "caddy/mercure_test.go",
+        "caddy/module.go",
+        "caddy/module_test.go",
+        "caddy/php-cli.go",
+        "caddy/php-server.go",
+        "caddy/phpinfo_test.go",
+        "caddy/serveridx_test.go",
+        "caddy/servername.go",
+        "caddy/servername_test.go",
+        "caddy/testserver_test.go",
+        "caddy/watcher_test.go",
+        "caddy/workerconfig.go",
+        "cgi.go",
+        "cgi_test.go",
+        "cgo.go",
+        "cli.go",
+        "cli_linux_test.go",
+        "cli_test.go",
+        "context.go",
+        "debugstate.go",
+        "dev-alpine.Dockerfile",
+        "dev.Dockerfile",
+        "docker-bake.hcl",
+        "docs/classic.md",
+        "docs/cn/**",
+        "docs/compile.md",
+        "docs/config.md",
+        "docs/docker.md",
+        "docs/early-hints.md",
+        "docs/embed.md",
+        "docs/es/**",
+        "docs/extension-workers.md",
+        "docs/extensions.md",
+        "docs/fr/**",
+        "docs/github-actions.md",
+        "docs/hot-reload.md",
+        "docs/internals.md",
+        "docs/it/**",
+        "docs/ja/**",
+        "docs/known-issues.md",
+        "docs/laravel.md",
+        "docs/library.md",
+        "docs/logging.md",
+        "docs/mercure.md",
+        "docs/metrics.md",
+        "docs/migrate.md",
+        "docs/observability.md",
+        "docs/performance.md",
+        "docs/production.md",
+        "docs/pt-br/**",
+        "docs/ru/**",
+        "docs/security.md",
+        "docs/static.md",
+        "docs/symfony.md",
+        "docs/tr/**",
+        "docs/translate.php",
+        "docs/wordpress.md",
+        "docs/worker.md",
+        "docs/x-sendfile.md",
+        "docs/yii3.md",
+        "embed.go",
+        "emulate_php_cli.c",
+        "emulate_php_cli.h",
+        "env.go",
+        "ext.go",
+        "finishrequest_realserver_test.go",
+        "flush_after_finish_test.go",
+        "frankenphp.c",
+        "frankenphp.go",
+        "frankenphp.h",
+        "frankenphp.stub.php",
+        "frankenphp_arginfo.h",
+        "frankenphp_test.go",
+        "go.mod",
+        "go.sh",
+        "go.sum",
+        "goroutineleak_test.go",
+        "hotreload.go",
+        "hotreload_test.go",
+        "install.ps1",
+        "install.sh",
+        "internal/**",
+        "llms.txt",
+        "log_test.go",
+        "maxrequests_regular_test.go",
+        "mercure-skip.go",
+        "mercure.go",
+        "mercure_test.go",
+        "metrics.go",
+        "metrics_test.go",
+        "mtls-cflags.sh",
+        "options.go",
+        "package/**",
+        "phpconfig_test.go",
+        "phpinfo.go",
+        "phpinfo_test.go",
+        "phpmainthread.go",
+        "phpmainthread_test.go",
+        "phpthread.go",
+        "profiles/app/**",
+        "profiles/benchmark.sh",
+        "profiles/build-pgo.sh",
+        "recorder_test.go",
+        "release.sh",
+        "requestbodytimeout_test.go",
+        "requestoptions.go",
+        "requestoptions_test.go",
+        "scaling.go",
+        "scaling_test.go",
+        "server.go",
+        "server_test.go",
+        "static-builder-gnu.Dockerfile",
+        "static-builder-musl.Dockerfile",
+        "statusline_test.go",
+        "testdata/**",
+        "tests/**",
+        "thread_api_test.go",
+        "threadinactive.go",
+        "threadregular.go",
+        "threadregular_test.go",
+        "threadtasks_test.go",
+        "threadworker.go",
+        "types.c",
+        "types.go",
+        "types.h",
+        "types_test.go",
+        "vcpkg.json",
+        "watcher-skip.go",
+        "watcher-skip_test.go",
+        "watcher.go",
+        "watcher_test.go",
+        "worker.go",
+        "worker_internal_test.go",
+        "worker_test.go",
+        "workerextension.go",
+        "workerextension_test.go",
+        "zendalloc_gofuzz.go",
+        "zizmor.yaml",
+        "zval.h",
+        "zval_test.go"
+      ],
+      "text": "The MIT license\n\nCopyright (c) 2022-present Kévin Dunglas\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished\nto do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022-present Kévin Dunglas, MIT license (LICENSE), https://github.com/php/frankenphp."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Caddyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.custom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.openrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.regular"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.worker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format-ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitleaksignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Caddyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

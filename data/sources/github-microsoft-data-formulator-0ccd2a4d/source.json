@@ -1,0 +1,430 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/microsoft/data-formulator",
+  "revision": "5477f0e236426dc8f74a498ec400414fba7fbc0f",
+  "checksum": "sha256:a913ca2db3b824ac42e520a0cbf78216a604b880d61cfeab277c389f9fa2641a",
+  "extract": {
+    "exclude": [
+      "packaging/icons/**",
+      "public/climate-gas-indicator.xlsx",
+      "public/data-formulator-logo-128.png",
+      "public/data-formulator-logo-512.png",
+      "public/data-formulator-screenshot.png",
+      "public/demos/demo_gas-prices.zip",
+      "public/demos/demo_global-energy.zip",
+      "public/demos/demo_movies.zip",
+      "public/demos/demo_stock-prices.zip",
+      "public/demos/demo_unemployment.zip",
+      "public/demos/gas_prices-thumbnail.webp",
+      "public/demos/global_energy-thumbnail.webp",
+      "public/demos/movies-thumbnail.webp",
+      "public/demos/screenshot-stock-price-live-thumbnail.webp",
+      "public/demos/unemployment-thumbnail.webp",
+      "public/favicon.ico",
+      "public/feature-agent-mode.mp4",
+      "public/feature-extract-data.mp4",
+      "public/feature-generate-report.mp4",
+      "public/feature-interactive-control.mp4",
+      "public/gas_prices-thumbnail.webp",
+      "public/global_energy-thumbnail.webp",
+      "public/movies-thumbnail.webp",
+      "public/screenshot-claude-performance.webp",
+      "public/screenshot-movies-report.webp",
+      "public/screenshot-renewable-energy.webp",
+      "public/screenshot-stock-price-live-thumbnail.webp",
+      "public/screenshot-stock-price-live.webp",
+      "public/screenshot-unemployment.webp",
+      "public/unemployment-thumbnail.webp",
+      "src/assets/chart-icon-us-map-min.png",
+      "src/assets/chart-icon-world-map-min.png",
+      "src/assets/df-logo.png",
+      "src/assets/example-image-table.png",
+      "tests/backend/fixtures/excel/mixed_report_混合报表.xlsx",
+      "tests/backend/fixtures/excel/sales_report.xlsx",
+      "tests/backend/fixtures/excel/test_cn.xls",
+      "tests/backend/fixtures/excel/产品利润分析.xlsx",
+      "tests/backend/fixtures/excel/员工花名册_gbk.csv"
+    ]
+  },
+  "history": {
+    "since": "c59a4bde6942c7bae51ef1d1dddb5a77006090b9"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n",
+      "attribution": "Commit history of https://github.com/microsoft/data-formulator: Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/data-formulator."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".cursor/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".env.template",
+        ".github/**",
+        ".gitignore",
+        ".python-version",
+        ".vscode/**",
+        "CHANGELOG.md",
+        "CODESPACES.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPMENT.md",
+        "Dockerfile",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "SUPPORT.md",
+        "docker-compose.yml",
+        "docs/**",
+        "eslint.config.js",
+        "examples/**",
+        "index.html",
+        "local_server.bat",
+        "local_server.sh",
+        "loops/**",
+        "package.json",
+        "packaging/data_formulator_desktop.py",
+        "packaging/data_formulator_desktop.spec",
+        "public/demos/demos.yaml",
+        "public/df_gas_prices.json",
+        "public/df_global_energy.json",
+        "public/df_movies.json",
+        "public/df_stock_prices_live.json",
+        "public/df_unemployment.json",
+        "public/manifest.json",
+        "public/pip-logo.svg",
+        "public/robots.txt",
+        "py-src/**",
+        "pyproject.toml",
+        "pytest.ini",
+        "requirements.txt",
+        "src/api/**",
+        "src/app/**",
+        "src/assets/chart-icon-area.svg",
+        "src/assets/chart-icon-bar-table.svg",
+        "src/assets/chart-icon-box-plot.svg",
+        "src/assets/chart-icon-bullet.svg",
+        "src/assets/chart-icon-bump.svg",
+        "src/assets/chart-icon-candlestick.svg",
+        "src/assets/chart-icon-column-grouped.svg",
+        "src/assets/chart-icon-column-stacked.svg",
+        "src/assets/chart-icon-column.svg",
+        "src/assets/chart-icon-connected-scatter.svg",
+        "src/assets/chart-icon-custom-area.svg",
+        "src/assets/chart-icon-custom-bar.svg",
+        "src/assets/chart-icon-custom-line.svg",
+        "src/assets/chart-icon-custom-point.svg",
+        "src/assets/chart-icon-custom-rect.svg",
+        "src/assets/chart-icon-density.svg",
+        "src/assets/chart-icon-dot-plot-horizontal.svg",
+        "src/assets/chart-icon-dotted-line.svg",
+        "src/assets/chart-icon-ecdf.svg",
+        "src/assets/chart-icon-gantt.svg",
+        "src/assets/chart-icon-heat-map.svg",
+        "src/assets/chart-icon-histogram.svg",
+        "src/assets/chart-icon-kpi-card.svg",
+        "src/assets/chart-icon-line.svg",
+        "src/assets/chart-icon-linear-regression.svg",
+        "src/assets/chart-icon-lollipop.svg",
+        "src/assets/chart-icon-pie.svg",
+        "src/assets/chart-icon-placeholder.svg",
+        "src/assets/chart-icon-pyramid.svg",
+        "src/assets/chart-icon-radar.svg",
+        "src/assets/chart-icon-range-area.svg",
+        "src/assets/chart-icon-rose.svg",
+        "src/assets/chart-icon-scatter.svg",
+        "src/assets/chart-icon-slope.svg",
+        "src/assets/chart-icon-sparkline.svg",
+        "src/assets/chart-icon-streamgraph.svg",
+        "src/assets/chart-icon-strip-plot.svg",
+        "src/assets/chart-icon-violin.svg",
+        "src/assets/chart-icon-waterfall.svg",
+        "src/assets/df-logo.svg",
+        "src/assets/icon-design.md",
+        "src/components/**",
+        "src/data/**",
+        "src/dataOperations/**",
+        "src/i18n/**",
+        "src/icons.tsx",
+        "src/index.css",
+        "src/index.tsx",
+        "src/mui.d.ts",
+        "src/scss/**",
+        "src/types.d.ts",
+        "src/views/**",
+        "tests/README.md",
+        "tests/backend/README.md",
+        "tests/backend/agents/**",
+        "tests/backend/auth/**",
+        "tests/backend/benchmarks/**",
+        "tests/backend/data/**",
+        "tests/backend/data_loader/**",
+        "tests/backend/data_operations/**",
+        "tests/backend/errors/**",
+        "tests/backend/fixtures/README.md",
+        "tests/backend/fixtures/excel/员工花名册_utf8.csv",
+        "tests/backend/knowledge/**",
+        "tests/backend/routes/**",
+        "tests/backend/security/**",
+        "tests/backend/test_desktop_single_instance.py",
+        "tests/backend/test_model_endpoints.py",
+        "tests/backend/test_startup_spinner.py",
+        "tests/conftest.py",
+        "tests/database-dockers/**",
+        "tests/frontend/**",
+        "tests/test_plan.md",
+        "tsconfig.json",
+        "uv.lock",
+        "vite.config.ts",
+        "vitest.config.ts",
+        "yarn.lock"
+      ],
+      "text": "    MIT License\n\n    Copyright (c) Microsoft Corporation.\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE\n",
+      "attribution": "Copyright (c) Microsoft Corporation., MIT license (LICENSE), https://github.com/microsoft/data-formulator."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sandbox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.superset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

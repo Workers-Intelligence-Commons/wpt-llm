@@ -1,0 +1,1161 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/jax-ml/jax",
+  "revision": "e0ec3646e180c64be20a63b1b2d50054f8c8995e",
+  "checksum": "sha256:9ad23663a913016f5f5f11154bb844d7ca526be66a1fe9bac4ff71147838eb79",
+  "extract": {
+    "exclude": [
+      "ci/jax_ci_system.png",
+      "cloud_tpu_colabs/images/**",
+      "docs/_static/debugger.gif",
+      "docs/_static/favicon.png",
+      "docs/_static/jax_logo_250px.png",
+      "docs/_static/mesh.jpg",
+      "docs/_static/multi_host.jpg",
+      "docs/_static/multi_process/**",
+      "docs/_static/pallas/BlockSpec.png",
+      "docs/_static/pallas/grid.png",
+      "docs/_static/pallas/pallas_flow.png",
+      "docs/_static/partition_spec_none_y.png",
+      "docs/_static/partition_spec_x_none.png",
+      "docs/_static/partition_spec_x_y.png",
+      "docs/_static/partition_spec_xy.png",
+      "docs/_static/partition_spec_y_none.png",
+      "docs/_static/perfetto.png",
+      "docs/_static/shard_map_01_illustration_of_a_psum_computation.png",
+      "docs/_static/shard_map_02_illustration_of_an_all_gather_computation.png",
+      "docs/_static/shard_map_03_illustration_of_a_psum_scatter_computation.png",
+      "docs/_static/shard_map_04_illustration_of_a_psum_scatter_implementation.png",
+      "docs/_static/shard_map_05_illustration_of_a_psum_scatter_implementation.png",
+      "docs/_static/shard_map_06_illustration_of_an_all_gather_implementation.png",
+      "docs/_static/shard_map_07_illustration_of_an_all_to_all_computation.png",
+      "docs/_static/shard_map_08_profile_of_an_all_gather_matmul_without_overlap.png",
+      "docs/_static/shard_map_09_profile_of_an_all_gather_matmul_with_overlap.png",
+      "docs/_static/tensorboard_profiler.png",
+      "docs/_static/vscode-completion.png",
+      "docs/_static/xla_spmd.jpg",
+      "images/jax_logo.png",
+      "images/jax_logo_250px.png",
+      "images/jax_logo_500px.png",
+      "images/lifecycle.png",
+      "jax/_src/third_party/README.md",
+      "jax/_src/third_party/__init__.py",
+      "jaxlib/tools/**",
+      "third_party/**"
+    ]
+  },
+  "history": {
+    "since": "9ae0f3a610c08ad1355ca92cda4906b4474b6fa3"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nCopyright (c) 2001-2002 Enthought, Inc. 2003-2022, SciPy Developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above\n   copyright notice, this list of conditions and the following\n   disclaimer in the documentation and/or other materials provided\n   with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2001-2002 Enthought, Inc.  2003-2019, SciPy Developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above\n   copyright notice, this list of conditions and the following\n   disclaimer in the documentation and/or other materials provided\n   with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Commit history of https://github.com/jax-ml/jax: the authors of jax-ml/jax (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/jax-ml/jax; Copyright (c) 2001-2002 Enthought, Inc. 2003-2022, SciPy Developers., BSD-3-Clause license (LICENSE.txt), https://github.com/jax-ml/jax/tree/e0ec3646e180c64be20a63b1b2d50054f8c8995e/jax/_src/third_party/scipy; Copyright (c) 2001-2002 Enthought, Inc.  2003-2019, SciPy Developers., BSD-3-Clause license (LICENSE), https://github.com/jax-ml/jax/tree/e0ec3646e180c64be20a63b1b2d50054f8c8995e/tests/third_party/scipy."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".bazelrc",
+        ".bazelversion",
+        ".editorconfig",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yml",
+        "AUTHORS",
+        "BUILD.bazel",
+        "CHANGELOG.md",
+        "CITATION.bib",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MODULE.bazel",
+        "README.md",
+        "bazel_downloader.cfg",
+        "benchmarks/**",
+        "build/**",
+        "build_wheel.py",
+        "ci/CONTRIBUTING.md",
+        "ci/README.md",
+        "ci/bazel_dns_windows.security",
+        "ci/build_artifacts.sh",
+        "ci/build_oneapi_artifacts.sh",
+        "ci/build_rocm_artifacts.sh",
+        "ci/envs/**",
+        "ci/k8s/**",
+        "ci/parse_wheel_metadata.py",
+        "ci/postprocess/**",
+        "ci/run_bazel_cuda_targeted_tests.sh",
+        "ci/run_bazel_test_cpu_rbe.sh",
+        "ci/run_bazel_test_cuda_non_rbe.sh",
+        "ci/run_bazel_test_cuda_rbe.sh",
+        "ci/run_bazel_test_oneapi.sh",
+        "ci/run_bazel_test_rocm_rbe.sh",
+        "ci/run_bazel_test_tpu.sh",
+        "ci/run_pytest_cpu.sh",
+        "ci/run_pytest_cuda.sh",
+        "ci/run_pytest_oneapi.sh",
+        "ci/run_pytest_rocm.sh",
+        "ci/run_pytest_rocm_multi.sh",
+        "ci/run_pytest_tpu.sh",
+        "ci/upload_rocm_logs.sh",
+        "ci/utilities/**",
+        "cloud_tpu_colabs/JAX_NeurIPS_2020_demo.ipynb",
+        "cloud_tpu_colabs/JAX_demo.ipynb",
+        "cloud_tpu_colabs/Lorentz_ODE_Solver.ipynb",
+        "cloud_tpu_colabs/Pmap_Cookbook.ipynb",
+        "cloud_tpu_colabs/README.md",
+        "cloud_tpu_colabs/Wave_Equation.ipynb",
+        "conftest.py",
+        "docs/101/**",
+        "docs/201/**",
+        "docs/301/**",
+        "docs/401/**",
+        "docs/501/**",
+        "docs/601/**",
+        "docs/README.md",
+        "docs/__init__.py",
+        "docs/_static/device_memory_profile.svg",
+        "docs/_static/device_memory_profile_leak1.svg",
+        "docs/_static/device_memory_profile_leak2.svg",
+        "docs/_static/distributed_data_loading/**",
+        "docs/_static/fault_tolerance/**",
+        "docs/_static/jax-hero.svg",
+        "docs/_static/pallas/distributed/**",
+        "docs/_static/pallas/gpu/**",
+        "docs/_static/pallas/pipelining_bandwidth_bound.svg",
+        "docs/_static/pallas/pipelining_compute_bound.svg",
+        "docs/_static/pallas/pipelining_example.svg",
+        "docs/_static/pallas/pipelining_latency_multistage.svg",
+        "docs/_static/pallas/pipelining_mem_hierarchy.svg",
+        "docs/_static/pallas/sparse/**",
+        "docs/_static/pallas/vector_layout_example.svg",
+        "docs/_static/pprof_unrolled_loop.svg",
+        "docs/_static/style.css",
+        "docs/_static/type_lattice.svg",
+        "docs/_templates/**",
+        "docs/_tutorials/**",
+        "docs/about.md",
+        "docs/accuracy.md",
+        "docs/advanced_autodiff.md",
+        "docs/advanced_guides.rst",
+        "docs/aot.md",
+        "docs/api_compatibility.md",
+        "docs/array_refs.ipynb",
+        "docs/array_refs.md",
+        "docs/array_refs.py",
+        "docs/async_dispatch.rst",
+        "docs/autodidax.ipynb",
+        "docs/autodidax.md",
+        "docs/autodidax.py",
+        "docs/autodidax2_part1.ipynb",
+        "docs/autodidax2_part1.md",
+        "docs/autodidax2_part1.py",
+        "docs/automatic-differentiation.md",
+        "docs/automatic-vectorization.md",
+        "docs/beginner_guide.rst",
+        "docs/benchmarking.md",
+        "docs/buffer_donation.md",
+        "docs/build_custom_gpu.sh",
+        "docs/building_on_jax.md",
+        "docs/changelog.md",
+        "docs/complex-differentiation.md",
+        "docs/concurrency.rst",
+        "docs/conf.py",
+        "docs/config_options.rst",
+        "docs/contributing.md",
+        "docs/contributor_guide.rst",
+        "docs/control-flow.md",
+        "docs/debugging/**",
+        "docs/debugging.md",
+        "docs/deprecation.md",
+        "docs/developer.md",
+        "docs/device_memory_profiling.md",
+        "docs/direct_linearize_migration.md",
+        "docs/distributed_data_loading.md",
+        "docs/errors.rst",
+        "docs/export/**",
+        "docs/extensions.rst",
+        "docs/external-callbacks.md",
+        "docs/faq.rst",
+        "docs/fault_tolerance.rst",
+        "docs/ffi/**",
+        "docs/ffi.ipynb",
+        "docs/ffi.md",
+        "docs/ffi.py",
+        "docs/glossary.rst",
+        "docs/gpu_memory_allocation.rst",
+        "docs/gpu_performance_tips.md",
+        "docs/gradient-checkpointing.md",
+        "docs/hero.html",
+        "docs/higher-order.md",
+        "docs/hijax_custom_derivatives.ipynb",
+        "docs/hijax_custom_derivatives.md",
+        "docs/hijax_custom_derivatives.py",
+        "docs/hijax_types.ipynb",
+        "docs/hijax_types.md",
+        "docs/hijax_types.py",
+        "docs/index.rst",
+        "docs/installation.md",
+        "docs/internals/**",
+        "docs/investigating_a_regression.md",
+        "docs/jacobian-vector-products.md",
+        "docs/jax-101.rst",
+        "docs/jax.ad_checkpoint.rst",
+        "docs/jax.debug.rst",
+        "docs/jax.distributed.rst",
+        "docs/jax.dlpack.rst",
+        "docs/jax.dtypes.rst",
+        "docs/jax.example_libraries.optimizers.rst",
+        "docs/jax.example_libraries.rst",
+        "docs/jax.example_libraries.stax.rst",
+        "docs/jax.experimental.checkify.rst",
+        "docs/jax.experimental.compilation_cache.rst",
+        "docs/jax.experimental.custom_partitioning.rst",
+        "docs/jax.experimental.jet.rst",
+        "docs/jax.experimental.key_reuse.rst",
+        "docs/jax.experimental.mesh_utils.rst",
+        "docs/jax.experimental.multihost_utils.rst",
+        "docs/jax.experimental.pallas.mosaic_gpu.rst",
+        "docs/jax.experimental.pallas.rst",
+        "docs/jax.experimental.pallas.tpu.rst",
+        "docs/jax.experimental.pallas.triton.rst",
+        "docs/jax.experimental.random.rst",
+        "docs/jax.experimental.rst",
+        "docs/jax.experimental.serialize_executable.rst",
+        "docs/jax.experimental.sparse.rst",
+        "docs/jax.experimental.xla_metadata.rst",
+        "docs/jax.export.rst",
+        "docs/jax.extend.backend.rst",
+        "docs/jax.extend.core.rst",
+        "docs/jax.extend.linear_util.rst",
+        "docs/jax.extend.lowering.rst",
+        "docs/jax.extend.mlir.rst",
+        "docs/jax.extend.pallas.rst",
+        "docs/jax.extend.random.rst",
+        "docs/jax.extend.rst",
+        "docs/jax.extend.xla.rst",
+        "docs/jax.ffi.rst",
+        "docs/jax.flatten_util.rst",
+        "docs/jax.image.rst",
+        "docs/jax.lax.rst",
+        "docs/jax.nn.initializers.rst",
+        "docs/jax.nn.rst",
+        "docs/jax.numpy.rst",
+        "docs/jax.ops.rst",
+        "docs/jax.profiler.rst",
+        "docs/jax.random.rst",
+        "docs/jax.ref.rst",
+        "docs/jax.rst",
+        "docs/jax.scipy.rst",
+        "docs/jax.sharding.rst",
+        "docs/jax.stages.rst",
+        "docs/jax.test_util.rst",
+        "docs/jax.tree.rst",
+        "docs/jax.tree_util.rst",
+        "docs/jax.typing.rst",
+        "docs/jax_array_migration.md",
+        "docs/jep/**",
+        "docs/jit-compilation.md",
+        "docs/key-concepts.md",
+        "docs/migrate_pmap.md",
+        "docs/multi_process.md",
+        "docs/notebooks/**",
+        "docs/pallas/**",
+        "docs/parallel.ipynb",
+        "docs/parallel.md",
+        "docs/parallel.py",
+        "docs/persistent_compilation_cache.md",
+        "docs/profiling.md",
+        "docs/pytrees.md",
+        "docs/random-numbers.md",
+        "docs/requirements.txt",
+        "docs/security.md",
+        "docs/shardy_jax_migration.md",
+        "docs/sphinxext/**",
+        "docs/stateful-computations.md",
+        "docs/superseded.rst",
+        "docs/the-training-cookbook.py",
+        "docs/the-training-cookbook.rst",
+        "docs/thunky.md",
+        "docs/tracing.md",
+        "docs/transfer_guard.rst",
+        "docs/whats-new.md",
+        "docs/xla_flags.md",
+        "examples/**",
+        "images/jax_logo.svg",
+        "jax/BUILD",
+        "jax/__init__.py",
+        "jax/_src/BUILD",
+        "jax/_src/__init__.py",
+        "jax/_src/abstract_arrays.py",
+        "jax/_src/ad_checkpoint.py",
+        "jax/_src/ad_util.py",
+        "jax/_src/api.py",
+        "jax/_src/api_util.py",
+        "jax/_src/array.py",
+        "jax/_src/basearray.py",
+        "jax/_src/basearray.pyi",
+        "jax/_src/blocked_sampler.py",
+        "jax/_src/buffer_callback.py",
+        "jax/_src/cache_key.py",
+        "jax/_src/callback.py",
+        "jax/_src/checkify.py",
+        "jax/_src/cloud_tpu_init.py",
+        "jax/_src/clusters/**",
+        "jax/_src/compilation_cache.py",
+        "jax/_src/compilation_cache_interface.py",
+        "jax/_src/compiler.py",
+        "jax/_src/compute_on.py",
+        "jax/_src/config.py",
+        "jax/_src/core.py",
+        "jax/_src/cudnn/**",
+        "jax/_src/custom_api_util.py",
+        "jax/_src/custom_batching.py",
+        "jax/_src/custom_derivatives.py",
+        "jax/_src/custom_partitioning.py",
+        "jax/_src/custom_partitioning_sharding_rule.py",
+        "jax/_src/debugger/**",
+        "jax/_src/debugging.py",
+        "jax/_src/deprecations.py",
+        "jax/_src/dispatch.py",
+        "jax/_src/distributed.py",
+        "jax/_src/dlpack.py",
+        "jax/_src/dtypes.py",
+        "jax/_src/earray.py",
+        "jax/_src/effects.py",
+        "jax/_src/environment_info.py",
+        "jax/_src/error_check.py",
+        "jax/_src/errors.py",
+        "jax/_src/export/**",
+        "jax/_src/extend/**",
+        "jax/_src/ffi.py",
+        "jax/_src/flatten_util.py",
+        "jax/_src/flattree.py",
+        "jax/_src/frozen_dict.py",
+        "jax/_src/hardware_utils.py",
+        "jax/_src/hashable_array.py",
+        "jax/_src/hijax.py",
+        "jax/_src/hypothesis_test_util.py",
+        "jax/_src/image/**",
+        "jax/_src/indexing.py",
+        "jax/_src/internal_test_util/**",
+        "jax/_src/interpreters/**",
+        "jax/_src/jaxpr_util.py",
+        "jax/_src/lax/**",
+        "jax/_src/lax_reference.py",
+        "jax/_src/layout.py",
+        "jax/_src/lazy_loader.py",
+        "jax/_src/lib/**",
+        "jax/_src/linear_util.py",
+        "jax/_src/literals.py",
+        "jax/_src/logging_config.py",
+        "jax/_src/lru_cache.py",
+        "jax/_src/mesh.py",
+        "jax/_src/mesh_utils.py",
+        "jax/_src/monitoring.py",
+        "jax/_src/named_sharding.py",
+        "jax/_src/nn/**",
+        "jax/_src/numpy/**",
+        "jax/_src/op_shardings.py",
+        "jax/_src/ops/**",
+        "jax/_src/pallas/**",
+        "jax/_src/partition_spec.py",
+        "jax/_src/path.py",
+        "jax/_src/pickle_util.py",
+        "jax/_src/pjit.py",
+        "jax/_src/pmap.py",
+        "jax/_src/pretty_printer.py",
+        "jax/_src/profiler.py",
+        "jax/_src/program_order.py",
+        "jax/_src/public_test_util.py",
+        "jax/_src/random/**",
+        "jax/_src/ref.py",
+        "jax/_src/scipy/**",
+        "jax/_src/shard_map.py",
+        "jax/_src/sharding.py",
+        "jax/_src/sharding_impls.py",
+        "jax/_src/source_info_util.py",
+        "jax/_src/sourcemap.py",
+        "jax/_src/stages.py",
+        "jax/_src/state/**",
+        "jax/_src/test_loader.py",
+        "jax/_src/test_multiprocess.py",
+        "jax/_src/test_util.py",
+        "jax/_src/test_warning_util.py",
+        "jax/_src/thunky/**",
+        "jax/_src/tpu/**",
+        "jax/_src/tpu_custom_call.py",
+        "jax/_src/tpu_info.py",
+        "jax/_src/traceback_util.py",
+        "jax/_src/tree.py",
+        "jax/_src/tree_util.py",
+        "jax/_src/typing.py",
+        "jax/_src/util.py",
+        "jax/_src/xla_bridge.py",
+        "jax/_src/xla_metadata.py",
+        "jax/_src/xla_metadata_lib.py",
+        "jax/_src/xla_transform.py",
+        "jax/ad_checkpoint.py",
+        "jax/api_util.py",
+        "jax/collect_profile.py",
+        "jax/core.py",
+        "jax/custom_batching.py",
+        "jax/custom_derivatives.py",
+        "jax/debug.py",
+        "jax/distributed.py",
+        "jax/dlpack.py",
+        "jax/dtypes.py",
+        "jax/errors.py",
+        "jax/example_libraries/**",
+        "jax/experimental/**",
+        "jax/export.py",
+        "jax/extend/**",
+        "jax/ffi.py",
+        "jax/flatten_util.py",
+        "jax/image/**",
+        "jax/interpreters/**",
+        "jax/lax/**",
+        "jax/lib/**",
+        "jax/monitoring.py",
+        "jax/nn/**",
+        "jax/numpy/**",
+        "jax/ops/**",
+        "jax/profiler.py",
+        "jax/py.typed",
+        "jax/random.py",
+        "jax/ref.py",
+        "jax/scipy/**",
+        "jax/sharding.py",
+        "jax/stages.py",
+        "jax/test_util.py",
+        "jax/tools/**",
+        "jax/tree.py",
+        "jax/tree_util.py",
+        "jax/typing.py",
+        "jax/version.py",
+        "jax_plugins/**",
+        "jaxlib/BUILD",
+        "jaxlib/README.md",
+        "jaxlib/_ifrt_proxy.pyi",
+        "jaxlib/_jax/**",
+        "jaxlib/_pathways.pyi",
+        "jaxlib/_pretty_printer.cc",
+        "jaxlib/_pretty_printer.pyi",
+        "jaxlib/_sdy_mpmd.pyi",
+        "jaxlib/_xla.pyi",
+        "jaxlib/absl_status_casters.h",
+        "jaxlib/backport_stubs.py",
+        "jaxlib/cached_py_object.h",
+        "jaxlib/call_location.cc",
+        "jaxlib/call_location.h",
+        "jaxlib/callback.cc",
+        "jaxlib/callback.h",
+        "jaxlib/config.cc",
+        "jaxlib/config.h",
+        "jaxlib/config_test.py",
+        "jaxlib/cpu/**",
+        "jaxlib/cpu_feature_guard.c",
+        "jaxlib/cpu_feature_guard.pyi",
+        "jaxlib/cpu_sparse.py",
+        "jaxlib/cuda/**",
+        "jaxlib/custom_call_sharding.cc",
+        "jaxlib/custom_call_sharding.h",
+        "jaxlib/dlpack.cc",
+        "jaxlib/dlpack.h",
+        "jaxlib/exception_test.py",
+        "jaxlib/ffi.cc",
+        "jaxlib/ffi.h",
+        "jaxlib/ffi_helpers.h",
+        "jaxlib/free_threading.h",
+        "jaxlib/gpu/**",
+        "jaxlib/gpu_common_utils.py",
+        "jaxlib/gpu_linalg.py",
+        "jaxlib/gpu_prng.py",
+        "jaxlib/gpu_rnn.py",
+        "jaxlib/gpu_solver.py",
+        "jaxlib/gpu_sparse.py",
+        "jaxlib/gpu_triton.py",
+        "jaxlib/guard_lib.cc",
+        "jaxlib/guard_lib.h",
+        "jaxlib/hash_util.h",
+        "jaxlib/ifrt_proxy.cc",
+        "jaxlib/init.py",
+        "jaxlib/jax.bzl",
+        "jaxlib/jax.cc",
+        "jaxlib/jax_common.json",
+        "jaxlib/jax_jit.cc",
+        "jaxlib/jax_jit.h",
+        "jaxlib/jax_python_wheel.bzl",
+        "jaxlib/kernel_helpers.h",
+        "jaxlib/kernel_nanobind_helpers.h",
+        "jaxlib/lapack.py",
+        "jaxlib/libjax_common.lds",
+        "jaxlib/libjax_common_darwin.lds",
+        "jaxlib/mlir/**",
+        "jaxlib/mlir.cc",
+        "jaxlib/mlir.h",
+        "jaxlib/mosaic/**",
+        "jaxlib/nb_class_ptr.h",
+        "jaxlib/numpy.cc",
+        "jaxlib/numpy.h",
+        "jaxlib/oneapi/**",
+        "jaxlib/partition_spec.cc",
+        "jaxlib/partition_spec.h",
+        "jaxlib/pathways.cc",
+        "jaxlib/pjit.cc",
+        "jaxlib/pjit.h",
+        "jaxlib/plugin_support.py",
+        "jaxlib/pprof_profile_builder.cc",
+        "jaxlib/pprof_profile_builder.h",
+        "jaxlib/py_array.cc",
+        "jaxlib/py_array.h",
+        "jaxlib/py_client.cc",
+        "jaxlib/py_client.h",
+        "jaxlib/py_client_cpu.cc",
+        "jaxlib/py_client_cpu.h",
+        "jaxlib/py_compile_only_client.cc",
+        "jaxlib/py_compile_only_client.h",
+        "jaxlib/py_device.cc",
+        "jaxlib/py_device.h",
+        "jaxlib/py_device_list.cc",
+        "jaxlib/py_device_list.h",
+        "jaxlib/py_executable.cc",
+        "jaxlib/py_executable.h",
+        "jaxlib/py_host_callback.cc",
+        "jaxlib/py_host_callback.h",
+        "jaxlib/py_host_callback.proto",
+        "jaxlib/py_memory_space.cc",
+        "jaxlib/py_memory_space.h",
+        "jaxlib/py_mpmd_loaded_executable.cc",
+        "jaxlib/py_mpmd_loaded_executable.h",
+        "jaxlib/py_program.cc",
+        "jaxlib/py_program.h",
+        "jaxlib/py_socket_transfer.cc",
+        "jaxlib/py_socket_transfer.h",
+        "jaxlib/py_user_context.cc",
+        "jaxlib/py_user_context.h",
+        "jaxlib/py_values.cc",
+        "jaxlib/py_values.h",
+        "jaxlib/pyinit_stub.c",
+        "jaxlib/python_ref_manager.cc",
+        "jaxlib/python_ref_manager.h",
+        "jaxlib/pytree.cc",
+        "jaxlib/pytree.h",
+        "jaxlib/pytree.proto",
+        "jaxlib/pytree_test.py",
+        "jaxlib/pywrap.bzl",
+        "jaxlib/reentrant_hash_benchmark.cc",
+        "jaxlib/reentrant_hash_map.h",
+        "jaxlib/reentrant_hash_set.h",
+        "jaxlib/reentrant_hash_test.cc",
+        "jaxlib/rocm/**",
+        "jaxlib/sdy_mpmd.cc",
+        "jaxlib/setup.py",
+        "jaxlib/sharding.cc",
+        "jaxlib/sharding.h",
+        "jaxlib/strong_lru_cache.cc",
+        "jaxlib/strong_lru_cache.h",
+        "jaxlib/symlink_files.bzl",
+        "jaxlib/test_exceptions.cc",
+        "jaxlib/thunky/**",
+        "jaxlib/to_ifrt_sharding.cc",
+        "jaxlib/to_ifrt_sharding.h",
+        "jaxlib/traceback.cc",
+        "jaxlib/traceback.h",
+        "jaxlib/tridiagonal_solve_perturbed.h",
+        "jaxlib/triton/**",
+        "jaxlib/util.cc",
+        "jaxlib/util.h",
+        "jaxlib/utils.cc",
+        "jaxlib/utils.pyi",
+        "jaxlib/weak_key_weak_value_cache.cc",
+        "jaxlib/weak_key_weak_value_cache.h",
+        "jaxlib/weak_value_interner.cc",
+        "jaxlib/weak_value_interner.h",
+        "jaxlib/weak_value_interner_test.py",
+        "jaxlib/weakref_lru_cache.cc",
+        "jaxlib/weakref_lru_cache.h",
+        "jaxlib/weakref_lru_cache.pyi",
+        "jaxlib/weakref_lru_cache_module.cc",
+        "jaxlib/weakref_lru_cache_test.py",
+        "jaxlib/xla.cc",
+        "jaxlib/xla_client.py",
+        "jaxlib/xla_compiler.cc",
+        "jaxlib/xla_compiler.h",
+        "platform_mappings",
+        "pyproject.toml",
+        "setup.py",
+        "test_shard_count.bzl",
+        "tests/BUILD",
+        "tests/absl_cpp_logging_test.py",
+        "tests/ann_test.py",
+        "tests/aot_test.py",
+        "tests/api_test.py",
+        "tests/api_util_test.py",
+        "tests/array_api_skips.txt",
+        "tests/array_api_test.py",
+        "tests/array_extensibility_test.py",
+        "tests/array_interoperability_test.py",
+        "tests/array_test.py",
+        "tests/batching_test.py",
+        "tests/blocked_sampler_test.py",
+        "tests/buffer_callback_test.py",
+        "tests/cache_key_test.py",
+        "tests/checkify_test.py",
+        "tests/cholesky_update_test.py",
+        "tests/clear_backends_test.py",
+        "tests/cloud_tpu_cluster_test.py",
+        "tests/colocated_python_test.py",
+        "tests/compilation_cache_test.py",
+        "tests/config/**",
+        "tests/config_test.py",
+        "tests/core_test.py",
+        "tests/cudnn_fusion_test.py",
+        "tests/custom_api_test.py",
+        "tests/custom_linear_solve_test.py",
+        "tests/custom_partitioning_sharding_rule_test.py",
+        "tests/custom_partitioning_test.py",
+        "tests/custom_root_test.py",
+        "tests/debug_info_test.py",
+        "tests/debug_nans_test.py",
+        "tests/debugger_test.py",
+        "tests/debugging_primitives_test.py",
+        "tests/deprecation_test.py",
+        "tests/device_test.py",
+        "tests/distributed_initialize_test.py",
+        "tests/distributed_test.py",
+        "tests/documentation_coverage_test.py",
+        "tests/dtypes_test.py",
+        "tests/eigh_test.py",
+        "tests/error_check_test.py",
+        "tests/errors_test.py",
+        "tests/experimental_rnn_test.py",
+        "tests/export_back_compat_test.py",
+        "tests/export_harnesses_multi_platform_test.py",
+        "tests/export_serialization_back_compat_test.py",
+        "tests/export_test.py",
+        "tests/extend_test.py",
+        "tests/ffi_test.py",
+        "tests/fft_test.py",
+        "tests/filecheck/**",
+        "tests/fused_attention_stablehlo_multigpu_test.py",
+        "tests/fused_attention_stablehlo_test.py",
+        "tests/fused_test.py",
+        "tests/garbage_collection_guard_test.py",
+        "tests/generated_fun_test.py",
+        "tests/gpu_memory_flags_test.py",
+        "tests/hardware_utils_test.py",
+        "tests/heap_profiler_test.py",
+        "tests/hijax_test.py",
+        "tests/hypothesis_test_util_test.py",
+        "tests/image_test.py",
+        "tests/jax_jit_test.py",
+        "tests/jax_numpy_error_test.py",
+        "tests/jax_to_ir_test.py",
+        "tests/jaxpr_effects_test.py",
+        "tests/jaxpr_util_test.py",
+        "tests/jet_test.py",
+        "tests/key_reuse_test.py",
+        "tests/lax_autodiff_test.py",
+        "tests/lax_control_flow_test.py",
+        "tests/lax_numpy_einsum_test.py",
+        "tests/lax_numpy_hijax_test.py",
+        "tests/lax_numpy_indexing_test.py",
+        "tests/lax_numpy_operators_test.py",
+        "tests/lax_numpy_reducers_test.py",
+        "tests/lax_numpy_setops_test.py",
+        "tests/lax_numpy_test.py",
+        "tests/lax_numpy_ufuncs_test.py",
+        "tests/lax_numpy_vectorize_test.py",
+        "tests/lax_scipy_sparse_test.py",
+        "tests/lax_scipy_special_functions_test.py",
+        "tests/lax_scipy_spectral_dac_test.py",
+        "tests/lax_scipy_test.py",
+        "tests/lax_test.py",
+        "tests/lax_vmap_op_test.py",
+        "tests/lax_vmap_test.py",
+        "tests/layout_test.py",
+        "tests/lazy_loader_test.py",
+        "tests/linalg_sharding_test.py",
+        "tests/linalg_test.py",
+        "tests/lobpcg_test.py",
+        "tests/local_wheel_smoke_test.py",
+        "tests/logging_test.py",
+        "tests/lru_cache_test.py",
+        "tests/magma_linalg_test.py",
+        "tests/memories_test.py",
+        "tests/mesh_utils_test.py",
+        "tests/metadata_test.py",
+        "tests/mock_gpu_test.py",
+        "tests/mock_gpu_topology_test.py",
+        "tests/monitoring_test.py",
+        "tests/mosaic/**",
+        "tests/mosaic_test.py",
+        "tests/multi_device_test.py",
+        "tests/multibackend_test.py",
+        "tests/multiprocess/**",
+        "tests/multiprocess_gpu_test.py",
+        "tests/mutable_array_test.py",
+        "tests/name_stack_test.py",
+        "tests/nn_test.py",
+        "tests/notebooks/**",
+        "tests/numerics/**",
+        "tests/ode_test.py",
+        "tests/optimizers_test.py",
+        "tests/overlap_test.py",
+        "tests/package_structure_test.py",
+        "tests/pallas/**",
+        "tests/pgle_test.py",
+        "tests/pickle_test.py",
+        "tests/pjit_test.py",
+        "tests/pmap_test.py",
+        "tests/polynomial_test.py",
+        "tests/pretty_printer_test.py",
+        "tests/profiler_session_test.py",
+        "tests/profiler_test.py",
+        "tests/python_callback_test.py",
+        "tests/pytorch_interoperability_test.py",
+        "tests/qdwh_test.py",
+        "tests/ragged_collective_test.py",
+        "tests/random_impl_test.py",
+        "tests/random_lax_test.py",
+        "tests/random_test.py",
+        "tests/roofline_test.py",
+        "tests/scaled_dot_test.py",
+        "tests/scaled_matmul_stablehlo_test.py",
+        "tests/scheduling_groups_test.py",
+        "tests/scipy_fft_test.py",
+        "tests/scipy_interpolate_test.py",
+        "tests/scipy_ndimage_test.py",
+        "tests/scipy_optimize_test.py",
+        "tests/scipy_signal_test.py",
+        "tests/scipy_spatial_test.py",
+        "tests/scipy_stats_test.py",
+        "tests/shape_poly_test.py",
+        "tests/shard_map_test.py",
+        "tests/source_info_test.py",
+        "tests/source_mapper_test.py",
+        "tests/sourcemap_test.py",
+        "tests/sparse_bcoo_bcsr_test.py",
+        "tests/sparse_test.py",
+        "tests/sparsify_test.py",
+        "tests/stack_test.py",
+        "tests/state_test.py",
+        "tests/stateful_rng_test.py",
+        "tests/stax_test.py",
+        "tests/string_array_test.py",
+        "tests/svd_test.py",
+        "tests/testdata/**",
+        "tests/thunky/**",
+        "tests/traceback_test.py",
+        "tests/transfer_guard_test.py",
+        "tests/tree_util_test.py",
+        "tests/typing_test.py",
+        "tests/unary_ops_accuracy_test.py",
+        "tests/util_test.py",
+        "tests/version_test.py",
+        "tests/warnings_util_test.py",
+        "tests/x64_context_test.py",
+        "tests/xla_bridge_test.py",
+        "tests/xla_interpreter_test.py",
+        "tests/xla_metadata_test.py",
+        "tests/xla_transform_test.py"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of jax-ml/jax (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/jax-ml/jax."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "jax/_src/third_party/scipy/**"
+      ],
+      "text": "Copyright (c) 2001-2002 Enthought, Inc. 2003-2022, SciPy Developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above\n   copyright notice, this list of conditions and the following\n   disclaimer in the documentation and/or other materials provided\n   with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2001-2002 Enthought, Inc. 2003-2022, SciPy Developers., BSD-3-Clause license (LICENSE.txt), https://github.com/jax-ml/jax/tree/e0ec3646e180c64be20a63b1b2d50054f8c8995e/jax/_src/third_party/scipy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "tests/third_party/**"
+      ],
+      "text": "Copyright (c) 2001-2002 Enthought, Inc.  2003-2019, SciPy Developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n1. Redistributions of source code must retain the above copyright\n   notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above\n   copyright notice, this list of conditions and the following\n   disclaimer in the documentation and/or other materials provided\n   with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived\n   from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "Copyright (c) 2001-2002 Enthought, Inc.  2003-2019, SciPy Developers., BSD-3-Clause license (LICENSE), https://github.com/jax-ml/jax/tree/e0ec3646e180c64be20a63b1b2d50054f8c8995e/tests/third_party/scipy."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "build/rocm/rocm.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hlo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jax-ubu22"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jax-ubu24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.security"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.td"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "build/collect-profile-requirements.txt",
+        "build/nvidia-requirements.txt",
+        "build/requirements_lock_3_12.txt",
+        "build/requirements_lock_3_13.txt",
+        "build/requirements_lock_3_14.txt",
+        "build/requirements_lock_3_14_ft.txt",
+        "build/requirements_lock_3_15.txt",
+        "build/requirements_lock_3_15_ft.txt",
+        "build/rocm/ci_blocking_test_targets.txt",
+        "build/rocm/ci_test_targets.txt",
+        "build/test-requirements.txt",
+        "docs/requirements.txt",
+        "jax/_src/third_party/scipy/LICENSE.txt",
+        "jax/experimental/jax2tf/examples/requirements.txt",
+        "tests/array_api_skips.txt",
+        "tests/config/tsan-suppressions_3.14.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ci_build"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/platform_mappings"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

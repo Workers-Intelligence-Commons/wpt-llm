@@ -1,0 +1,486 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/9001/copyparty",
+  "revision": "8b4593c9a286791eb5dc40862fa24198cea4def7",
+  "checksum": "sha256:7e7e03415c8654b645aba464cb3bbff7c7fc0ef70712b026194c9a1bbfc1ddb7",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "copyparty/web/copyparty.gif",
+      "copyparty/web/deps/**",
+      "copyparty/web/iiam.gif",
+      "scripts/pyinstaller/loader.ico",
+      "scripts/pyinstaller/up2k.ico"
+    ]
+  },
+  "history": {
+    "since": "764621e1f81ee4da248d40867520863bdbaf0aad"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 ed <oss@ocv.me>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/9001/copyparty: Copyright (c) 2019 ed <oss@ocv.me>, MIT license (LICENSE), https://github.com/9001/copyparty."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".eslintrc.json",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".vscode/**",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "bin/**",
+        "copyparty/__init__.py",
+        "copyparty/__main__.py",
+        "copyparty/__version__.py",
+        "copyparty/authsrv.py",
+        "copyparty/bos/**",
+        "copyparty/broker_mp.py",
+        "copyparty/broker_mpw.py",
+        "copyparty/broker_thr.py",
+        "copyparty/broker_util.py",
+        "copyparty/cert.py",
+        "copyparty/cfg.py",
+        "copyparty/dxml.py",
+        "copyparty/fsutil.py",
+        "copyparty/ftpd.py",
+        "copyparty/httpcli.py",
+        "copyparty/httpconn.py",
+        "copyparty/httpsrv.py",
+        "copyparty/ico.py",
+        "copyparty/mdns.py",
+        "copyparty/metrics.py",
+        "copyparty/mtag.py",
+        "copyparty/multicast.py",
+        "copyparty/pwhash.py",
+        "copyparty/qrkode.py",
+        "copyparty/res/**",
+        "copyparty/sftpd.py",
+        "copyparty/smbd.py",
+        "copyparty/ssdp.py",
+        "copyparty/star.py",
+        "copyparty/stolen/**",
+        "copyparty/sutil.py",
+        "copyparty/svchub.py",
+        "copyparty/szip.py",
+        "copyparty/tcpsrv.py",
+        "copyparty/tftpd.py",
+        "copyparty/th_cli.py",
+        "copyparty/th_srv.py",
+        "copyparty/u2idx.py",
+        "copyparty/up2k.py",
+        "copyparty/util.py",
+        "copyparty/web/Makefile",
+        "copyparty/web/Makefile.s1",
+        "copyparty/web/a/**",
+        "copyparty/web/baguettebox.js",
+        "copyparty/web/browser.css",
+        "copyparty/web/browser.html",
+        "copyparty/web/browser.js",
+        "copyparty/web/browser2.html",
+        "copyparty/web/cf.html",
+        "copyparty/web/dbg-audio.js",
+        "copyparty/web/idp.html",
+        "copyparty/web/md.css",
+        "copyparty/web/md.html",
+        "copyparty/web/md.js",
+        "copyparty/web/md2.css",
+        "copyparty/web/md2.js",
+        "copyparty/web/mde.css",
+        "copyparty/web/mde.html",
+        "copyparty/web/mde.js",
+        "copyparty/web/msg.html",
+        "copyparty/web/opds.xml",
+        "copyparty/web/opds_osd.xml",
+        "copyparty/web/rups.css",
+        "copyparty/web/rups.html",
+        "copyparty/web/rups.js",
+        "copyparty/web/shares.css",
+        "copyparty/web/shares.html",
+        "copyparty/web/shares.js",
+        "copyparty/web/splash.css",
+        "copyparty/web/splash.html",
+        "copyparty/web/splash.js",
+        "copyparty/web/svcs.html",
+        "copyparty/web/svcs.js",
+        "copyparty/web/tl/**",
+        "copyparty/web/ui.css",
+        "copyparty/web/up2k.js",
+        "copyparty/web/util.js",
+        "copyparty/web/w.hash.js",
+        "copyparty/web/wopi.html",
+        "docs/**",
+        "flake.lock",
+        "flake.nix",
+        "pyproject.toml",
+        "scripts/bench/**",
+        "scripts/copyparty-android.sh",
+        "scripts/deps-docker/**",
+        "scripts/docker/**",
+        "scripts/fusefuzz.py",
+        "scripts/genhelp.sh",
+        "scripts/genlic.py",
+        "scripts/help2html.py",
+        "scripts/help2txt.sh",
+        "scripts/install-githooks.sh",
+        "scripts/lics/**",
+        "scripts/logpack.sh",
+        "scripts/make-pypi-release.sh",
+        "scripts/make-pyz.sh",
+        "scripts/make-rpm.sh",
+        "scripts/make-sfx.sh",
+        "scripts/make-tgz-release.sh",
+        "scripts/patches/**",
+        "scripts/prep.sh",
+        "scripts/profile.py",
+        "scripts/py2/**",
+        "scripts/pyinstaller/README.md",
+        "scripts/pyinstaller/build.sh",
+        "scripts/pyinstaller/depchk.sh",
+        "scripts/pyinstaller/deps.sha512",
+        "scripts/pyinstaller/deps.txt",
+        "scripts/pyinstaller/ffmpeg.patch",
+        "scripts/pyinstaller/ffmpeg.txt",
+        "scripts/pyinstaller/icon.sh",
+        "scripts/pyinstaller/loader.py",
+        "scripts/pyinstaller/loader.rc",
+        "scripts/pyinstaller/notes.txt",
+        "scripts/pyinstaller/up2k.rc",
+        "scripts/pyinstaller/up2k.sh",
+        "scripts/pyinstaller/up2k.spec",
+        "scripts/pyinstaller/up2k.spec.sh",
+        "scripts/rls.sh",
+        "scripts/run-tests.sh",
+        "scripts/sfx.ls",
+        "scripts/sfx.py",
+        "scripts/sfx.sh",
+        "scripts/speedtest-fs.py",
+        "scripts/strip_hints/**",
+        "scripts/test/**",
+        "scripts/tl/**",
+        "scripts/tl.js",
+        "scripts/tl.py",
+        "scripts/tlcheck.sh",
+        "scripts/toc.sh",
+        "scripts/uncomment.py",
+        "scripts/ziploader.py",
+        "setup.py",
+        "srv/**",
+        "tests/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 ed <oss@ocv.me>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 ed <oss@ocv.me>, MIT license (LICENSE), https://github.com/9001/copyparty."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.djd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.djf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.djff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dju"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.im"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.iv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.makefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.r13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.s1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha512"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zlibng"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

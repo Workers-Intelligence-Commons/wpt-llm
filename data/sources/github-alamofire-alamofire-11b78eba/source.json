@@ -1,0 +1,382 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/Alamofire/Alamofire",
+  "revision": "bda9ed57d72988a3a2ada33d824583541f86eac6",
+  "checksum": "sha256:8550fff4d0c36ccc15d058da9ff76f6e01d5b59b9e17f8621345bd963c063c3c",
+  "extract": {
+    "exclude": [
+      "Example/Resources/Images.xcassets/Logo.imageset/Logo.png",
+      "Example/Resources/Images.xcassets/Logo.imageset/Logo@2x.png",
+      "Resources/**",
+      "Tests/Resources/Certificates/alamofire-org/**",
+      "Tests/Resources/Certificates/expired-badssl-com/**",
+      "Tests/Resources/Certificates/selfSignedAndMalformedCerts/certDER.cer",
+      "Tests/Resources/Certificates/selfSignedAndMalformedCerts/certDER.crt",
+      "Tests/Resources/Certificates/selfSignedAndMalformedCerts/certDER.der",
+      "Tests/Resources/Certificates/selfSignedAndMalformedCerts/keyDER.der",
+      "Tests/Resources/Certificates/selfSignedAndMalformedCerts/randomGibberish.crt",
+      "Tests/Resources/Images/**",
+      "Tests/Resources/Responses/String/utf32_string.txt",
+      "docs/docsets/Alamofire.docset/Contents/Resources/Documents/img/**",
+      "docs/docsets/Alamofire.docset/Contents/Resources/docSet.dsidx",
+      "docs/docsets/Alamofire.tgz",
+      "docs/img/**"
+    ]
+  },
+  "history": {
+    "since": "c20b5602a3d58d1887f144aa12b0d95891ca1cea"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2014-2022 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/Alamofire/Alamofire: Copyright (c) 2014-2022 Alamofire Software Foundation (http://alamofire.org/), MIT license (LICENSE), https://github.com/Alamofire/Alamofire."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".jazzy.yaml",
+        ".ruby-gemset",
+        ".ruby-version",
+        ".spi.yml",
+        ".swiftformat",
+        "Alamofire.podspec",
+        "Alamofire.xcodeproj/**",
+        "Alamofire.xcworkspace/**",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "Documentation/**",
+        "Example/Resources/Base.lproj/**",
+        "Example/Resources/Images.xcassets/AppIcon.appiconset/**",
+        "Example/Resources/Images.xcassets/Contents.json",
+        "Example/Resources/Images.xcassets/Logo.imageset/Contents.json",
+        "Example/Resources/Info.plist",
+        "Example/Source/**",
+        "Example/iOS Example.xcodeproj/**",
+        "Gemfile",
+        "Gemfile.lock",
+        "LICENSE",
+        "Package.swift",
+        "Package@swift-6.0.swift",
+        "Package@swift-6.1.swift",
+        "Package@swift-6.2.swift",
+        "Package@swift-6.3.swift",
+        "README.md",
+        "Source/**",
+        "Tests/AFError+AlamofireTests.swift",
+        "Tests/AuthenticationInterceptorTests.swift",
+        "Tests/AuthenticationTests.swift",
+        "Tests/BaseTestCase.swift",
+        "Tests/Bundle+AlamofireTests.swift",
+        "Tests/CacheTests.swift",
+        "Tests/CachedResponseHandlerTests.swift",
+        "Tests/CombineTests.swift",
+        "Tests/ConcurrencyTests.swift",
+        "Tests/DataStreamTests.swift",
+        "Tests/DispatchQueue+AlamofireTests.swift",
+        "Tests/DownloadTests.swift",
+        "Tests/FileManager+AlamofireTests.swift",
+        "Tests/HTTPHeadersTests.swift",
+        "Tests/Info.plist",
+        "Tests/InspectorEventMonitor.swift",
+        "Tests/InstantTests.swift",
+        "Tests/InternalHelpers.swift",
+        "Tests/InternalRequestTests.swift",
+        "Tests/LeaksTests.swift",
+        "Tests/MIMETypeTests.swift",
+        "Tests/MultipartFormDataTests.swift",
+        "Tests/NSLoggingEventMonitor.swift",
+        "Tests/NetworkReachabilityManagerTests.swift",
+        "Tests/OfflineRetrierTests.swift",
+        "Tests/ParameterEncoderTests.swift",
+        "Tests/ParameterEncodingTests.swift",
+        "Tests/ProtectedTests.swift",
+        "Tests/RedirectHandlerTests.swift",
+        "Tests/Request+AlamofireTests.swift",
+        "Tests/RequestInterceptorTests.swift",
+        "Tests/RequestModifierTests.swift",
+        "Tests/RequestTests.swift",
+        "Tests/Resources/Certificates/selfSignedAndMalformedCerts/certPEM.cer",
+        "Tests/Resources/Certificates/selfSignedAndMalformedCerts/certPEM.crt",
+        "Tests/Resources/Responses/JSON/**",
+        "Tests/Resources/Responses/String/empty_string.txt",
+        "Tests/Resources/Responses/String/utf8_string.txt",
+        "Tests/ResponseSerializationTests.swift",
+        "Tests/ResponseTests.swift",
+        "Tests/Result+AlamofireTests.swift",
+        "Tests/RetryPolicyTests.swift",
+        "Tests/ServerTrustEvaluatorTests.swift",
+        "Tests/SessionDelegateTests.swift",
+        "Tests/SessionTests.swift",
+        "Tests/TLSEvaluationTests.swift",
+        "Tests/Test Plans/**",
+        "Tests/TestHelpers.swift",
+        "Tests/URLProtocolTests.swift",
+        "Tests/UploadTests.swift",
+        "Tests/ValidationTests.swift",
+        "Tests/WebSocketTests.swift",
+        "docs/Classes/**",
+        "docs/Classes.html",
+        "docs/Enums/**",
+        "docs/Enums.html",
+        "docs/Extensions/**",
+        "docs/Extensions.html",
+        "docs/Functions.html",
+        "docs/Global Variables.html",
+        "docs/Protocols/**",
+        "docs/Protocols.html",
+        "docs/Structs/**",
+        "docs/Structs.html",
+        "docs/Typealiases.html",
+        "docs/badge.svg",
+        "docs/css/**",
+        "docs/docsets/Alamofire.docset/Contents/Info.plist",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Classes/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Classes.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Enums/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Enums.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Extensions/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Extensions.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Functions.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Global Variables.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Protocols/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Protocols.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Structs/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Structs.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/Typealiases.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/badge.svg",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/css/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/index.html",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/js/**",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/search.json",
+        "docs/docsets/Alamofire.docset/Contents/Resources/Documents/undocumented.json",
+        "docs/docsets/Alamofire.xml",
+        "docs/index.html",
+        "docs/js/**",
+        "docs/search.json",
+        "docs/undocumented.json",
+        "watchOS Example/**"
+      ],
+      "text": "Copyright (c) 2014-2022 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014-2022 Alamofire Software Foundation (http://alamofire.org/), MIT license (LICENSE), https://github.com/Alamofire/Alamofire."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.podspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcprivacy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xctestplan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ruby-gemset"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ruby-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.swiftformat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1539 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/dolthub/dolt",
+  "revision": "7bbe6677e55273a1b39000289257f504cebf156a",
+  "checksum": "sha256:5c025d12055283b40504fcac55f5d26c183d4d6cb12065002dc4ca5eff0404f1",
+  "extract": {
+    "exclude": [
+      "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/noms/journal.idx",
+      "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/noms/journal.idx",
+      "go/libraries/doltcore/sqle/enginetest/testdata/**",
+      "go/libraries/doltcore/table/untyped/xlsx/test_files/**",
+      "go/serial/**",
+      "go/store/nbs/testdata/**",
+      "go/utils/escape-analysis/goland-file-watcher-config-macos.png",
+      "go/utils/escape-analysis/goland-file-watcher-config-windows.png",
+      "images/getting-started-new-updates.png",
+      "images/getting-started-tp-connect.png",
+      "images/getting-started-tp.png",
+      "integration-tests/bats/archive-test-repos/base/noms/8p5e2m6skovfdjlh4jg3llr8sfvu384l",
+      "integration-tests/bats/archive-test-repos/base/noms/oldgen/29o8a3uevcpr15tilcemb3s438edmoog.darc",
+      "integration-tests/bats/archive-test-repos/base/noms/oldgen/dnu4lr5j8sstbj5usbld7alsnuj5nf23.darc",
+      "integration-tests/bats/archive-test-repos/large_clone/noms/29o8a3uevcpr15tilcemb3s438edmoog.darc",
+      "integration-tests/bats/archive-test-repos/large_clone/noms/dnu4lr5j8sstbj5usbld7alsnuj5nf23.darc",
+      "integration-tests/bats/archive-test-repos/large_clone/noms/p6d0rsovtipdk6r2b1kh9qrndif41703",
+      "integration-tests/bats/archive-test-repos/small_clone/noms/29o8a3uevcpr15tilcemb3s438edmoog.darc",
+      "integration-tests/bats/archive-test-repos/small_clone/noms/dnu4lr5j8sstbj5usbld7alsnuj5nf23.darc",
+      "integration-tests/bats/archive-test-repos/small_clone/noms/oldgen/c5j9u4ced6eg6cnegk0mgdglc3t04air",
+      "integration-tests/bats/archive-test-repos/small_clone/noms/sv0o2e33pel8caor7979s4rk227raink",
+      "integration-tests/bats/archive-test-repos/v1/noms/8p5e2m6skovfdjlh4jg3llr8sfvu384l",
+      "integration-tests/bats/archive-test-repos/v1/noms/oldgen/29o8a3uevcpr15tilcemb3s438edmoog.darc",
+      "integration-tests/bats/archive-test-repos/v1/noms/oldgen/dnu4lr5j8sstbj5usbld7alsnuj5nf23.darc",
+      "integration-tests/bats/archive-test-repos/v2/noms/i8ivrn485g73hao1foo3p7l2clq3gqqv",
+      "integration-tests/bats/archive-test-repos/v2/noms/oldgen/27avtn2a3upddh52eu750m4709gfps7s.darc",
+      "integration-tests/bats/archive-test-repos/v2/noms/oldgen/sc0dq3agumuop5ngirrn7nqtgbk7lbrv",
+      "integration-tests/bats/corrupt_dbs/bad_commit/noms/9tj851gpv71861ln5k6uutfot66u79r4",
+      "integration-tests/bats/corrupt_dbs/bad_commit/noms/oldgen/aa3a08lf6sbtq9cl58mledifrqvt3fid",
+      "integration-tests/bats/corrupt_dbs/bad_journal_crc/noms/journal.idx",
+      "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/noms/journal.idx",
+      "integration-tests/bats/corrupt_dbs/journal_data.bin",
+      "integration-tests/bats/corrupt_dbs/missing_closure_object/noms/journal.idx",
+      "integration-tests/bats/corrupt_dbs/missing_closure_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/corrupt_dbs/missing_closure_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv_saved_2025_12_10_173658",
+      "integration-tests/bats/corrupt_dbs/missing_fk_object/noms/journal.idx",
+      "integration-tests/bats/corrupt_dbs/missing_fk_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/corrupt_dbs/missing_fk_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv_saved_2025_12_11_164648",
+      "integration-tests/bats/corrupt_dbs/missing_schema_object/noms/journal.idx",
+      "integration-tests/bats/corrupt_dbs/missing_schema_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/corrupt_dbs/missing_schema_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv_saved_2025_12_11_113641",
+      "integration-tests/bats/corrupt_dbs/missing_table_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/corrupt_dbs/missing_table_object/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv_saved_2025_12_15_170339",
+      "integration-tests/bats/helper/bad-characters.csv",
+      "integration-tests/bats/helper/employees-tbl-schema-unordered.utf16bebom.csv",
+      "integration-tests/bats/helper/employees-tbl-schema-unordered.utf16lebom.csv",
+      "integration-tests/bats/helper/employees-tbl.utf16bebom.json",
+      "integration-tests/bats/helper/employees-tbl.utf16lebom.json",
+      "integration-tests/bats/helper/employees.xlsx",
+      "integration-tests/bats/helper/old_dolt_schemas/noms/5fms6l3ffldbk6t8qjumnjstmurvppk8",
+      "integration-tests/bats/helper/old_dolt_schemas/noms/oldgen/6vvlbeph7glt2sskq43npe56la8p9akc",
+      "integration-tests/bats/helper/parquet/sequences.parquet",
+      "integration-tests/bats/helper/parquet/strings.parquet",
+      "integration-tests/bats/helper/testEvents/**",
+      "integration-tests/bats/helper/with_utf16be_bom.sql",
+      "integration-tests/bats/helper/with_utf16le_bom.sql",
+      "integration-tests/bats/json-oldformat-repo/.dolt/noms/journal.idx",
+      "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/noms/journal.idx",
+      "integration-tests/bats/mysql.db",
+      "integration-tests/bats/performance-repo/.dolt/noms/journal.idx",
+      "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/archive-test-repos/large_clone/noms/oldgen/b5j6kmj2m68sukiu22ouoke7u9281a06",
+      "integration-tests/bats/corrupt_dbs/bad_journal_crc/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/json-oldformat-repo/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+      "integration-tests/bats/performance-repo/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    ]
+  },
+  "history": {
+    "since": "765770d332788efac1c3dd3394448b1ee6ad7112"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/dolthub/dolt: the authors of dolthub/dolt (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/dolthub/dolt; dolthub, ISC license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/.github/actions/ses-email-action; the authors of node, ISC license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/integration-tests/mysql-client-tests/node; the authors of prisma-debug, MIT license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/integration-tests/orm-tests/prisma/branch."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".github/FUNDING.yml",
+        ".github/actions/benchmark-runner-tests/**",
+        ".github/actions/build-dolt/**",
+        ".github/actions/check-deferred-ci/**",
+        ".github/actions/data-dump-loading-tests/**",
+        ".github/actions/setup-dolt-config/**",
+        ".github/actions/setup-go-toolchain/**",
+        ".github/markdown-templates/**",
+        ".github/scripts/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".gitmodules",
+        "CODEOWNERS",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "docker/**",
+        "dolt.plugin.zsh",
+        "go/.gitignore",
+        "go/Godeps/**",
+        "go/cmd/dolt/cli/**",
+        "go/cmd/dolt/commands/add.go",
+        "go/cmd/dolt/commands/admin/**",
+        "go/cmd/dolt/commands/assist.go",
+        "go/cmd/dolt/commands/backup.go",
+        "go/cmd/dolt/commands/blame.go",
+        "go/cmd/dolt/commands/branch.go",
+        "go/cmd/dolt/commands/checkout.go",
+        "go/cmd/dolt/commands/cherry-pick.go",
+        "go/cmd/dolt/commands/ci/**",
+        "go/cmd/dolt/commands/clean.go",
+        "go/cmd/dolt/commands/clone.go",
+        "go/cmd/dolt/commands/clone_test.go",
+        "go/cmd/dolt/commands/cnfcmds/**",
+        "go/cmd/dolt/commands/commands_test.go",
+        "go/cmd/dolt/commands/commit.go",
+        "go/cmd/dolt/commands/config.go",
+        "go/cmd/dolt/commands/config_test.go",
+        "go/cmd/dolt/commands/credcmds/**",
+        "go/cmd/dolt/commands/cvcmds/**",
+        "go/cmd/dolt/commands/debug.go",
+        "go/cmd/dolt/commands/diff.go",
+        "go/cmd/dolt/commands/diff_filter_test.go",
+        "go/cmd/dolt/commands/diff_output.go",
+        "go/cmd/dolt/commands/doc.go",
+        "go/cmd/dolt/commands/docscmds/**",
+        "go/cmd/dolt/commands/dump.go",
+        "go/cmd/dolt/commands/dump_docs.go",
+        "go/cmd/dolt/commands/engine/**",
+        "go/cmd/dolt/commands/fetch.go",
+        "go/cmd/dolt/commands/filter-branch.go",
+        "go/cmd/dolt/commands/fsck.go",
+        "go/cmd/dolt/commands/fsck_test.go",
+        "go/cmd/dolt/commands/gc.go",
+        "go/cmd/dolt/commands/gen_zsh_comp.go",
+        "go/cmd/dolt/commands/indexcmds/**",
+        "go/cmd/dolt/commands/init.go",
+        "go/cmd/dolt/commands/init_test.go",
+        "go/cmd/dolt/commands/inspect.go",
+        "go/cmd/dolt/commands/log.go",
+        "go/cmd/dolt/commands/log_graph.go",
+        "go/cmd/dolt/commands/log_graph_test.go",
+        "go/cmd/dolt/commands/log_test.go",
+        "go/cmd/dolt/commands/login.go",
+        "go/cmd/dolt/commands/ls.go",
+        "go/cmd/dolt/commands/merge.go",
+        "go/cmd/dolt/commands/merge_base.go",
+        "go/cmd/dolt/commands/profile.go",
+        "go/cmd/dolt/commands/pull.go",
+        "go/cmd/dolt/commands/push.go",
+        "go/cmd/dolt/commands/query_diff.go",
+        "go/cmd/dolt/commands/read_tables.go",
+        "go/cmd/dolt/commands/read_tables_test.go",
+        "go/cmd/dolt/commands/rebase.go",
+        "go/cmd/dolt/commands/reflog.go",
+        "go/cmd/dolt/commands/remote.go",
+        "go/cmd/dolt/commands/remote_test.go",
+        "go/cmd/dolt/commands/reset.go",
+        "go/cmd/dolt/commands/revert.go",
+        "go/cmd/dolt/commands/rm.go",
+        "go/cmd/dolt/commands/roots.go",
+        "go/cmd/dolt/commands/schcmds/**",
+        "go/cmd/dolt/commands/send_metrics.go",
+        "go/cmd/dolt/commands/show.go",
+        "go/cmd/dolt/commands/signed_commits_test.go",
+        "go/cmd/dolt/commands/sql.go",
+        "go/cmd/dolt/commands/sql_slash.go",
+        "go/cmd/dolt/commands/sql_statement_scanner.go",
+        "go/cmd/dolt/commands/sql_statement_scanner_test.go",
+        "go/cmd/dolt/commands/sql_test.go",
+        "go/cmd/dolt/commands/sqlserver/**",
+        "go/cmd/dolt/commands/stash.go",
+        "go/cmd/dolt/commands/status.go",
+        "go/cmd/dolt/commands/tag.go",
+        "go/cmd/dolt/commands/tblcmds/**",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/config.json",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/noms/LOCK",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/noms/manifest",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/repo_state.json",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/config.json",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/noms/LOCK",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/noms/manifest",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "go/cmd/dolt/commands/testdata/signed_commits/db/.dolt/stats/.dolt/repo_state.json",
+        "go/cmd/dolt/commands/testdata/signed_commits/private.pgp",
+        "go/cmd/dolt/commands/transfer.go",
+        "go/cmd/dolt/commands/utils.go",
+        "go/cmd/dolt/commands/version.go",
+        "go/cmd/dolt/doc.go",
+        "go/cmd/dolt/dolt.go",
+        "go/cmd/dolt/doltcmd/**",
+        "go/cmd/dolt/doltversion/**",
+        "go/cmd/dolt/errhand/**",
+        "go/cmd/dolt/fileno_check.go",
+        "go/cmd/dolt/fileno_check_darwin.go",
+        "go/cmd/dolt/fileno_check_linux.go",
+        "go/cmd/dolt/system_checks.go",
+        "go/gen/**",
+        "go/go.mod",
+        "go/go.sum",
+        "go/libraries/doc.go",
+        "go/libraries/doltcore/branch_control/**",
+        "go/libraries/doltcore/cherry_pick/**",
+        "go/libraries/doltcore/commitgraph/**",
+        "go/libraries/doltcore/credentialhelper/**",
+        "go/libraries/doltcore/creds/**",
+        "go/libraries/doltcore/dbfactory/**",
+        "go/libraries/doltcore/dconfig/**",
+        "go/libraries/doltcore/diff/**",
+        "go/libraries/doltcore/doltdb/**",
+        "go/libraries/doltcore/dtestutils/**",
+        "go/libraries/doltcore/env/**",
+        "go/libraries/doltcore/grpcendpoint/**",
+        "go/libraries/doltcore/memlimit/**",
+        "go/libraries/doltcore/merge/**",
+        "go/libraries/doltcore/mvdata/**",
+        "go/libraries/doltcore/rebase/**",
+        "go/libraries/doltcore/ref/**",
+        "go/libraries/doltcore/remotesrv/**",
+        "go/libraries/doltcore/remotestorage/**",
+        "go/libraries/doltcore/revert/**",
+        "go/libraries/doltcore/row/**",
+        "go/libraries/doltcore/rowconv/**",
+        "go/libraries/doltcore/schema/**",
+        "go/libraries/doltcore/servercfg/**",
+        "go/libraries/doltcore/sqle/adapters/**",
+        "go/libraries/doltcore/sqle/alter_modify_preserves_encoding_test.go",
+        "go/libraries/doltcore/sqle/alterschema.go",
+        "go/libraries/doltcore/sqle/alterschema_test.go",
+        "go/libraries/doltcore/sqle/auto_gc.go",
+        "go/libraries/doltcore/sqle/auto_gc_test.go",
+        "go/libraries/doltcore/sqle/binlogreplication/**",
+        "go/libraries/doltcore/sqle/cluster/**",
+        "go/libraries/doltcore/sqle/clusterdb/**",
+        "go/libraries/doltcore/sqle/commit_hooks.go",
+        "go/libraries/doltcore/sqle/commit_hooks_test.go",
+        "go/libraries/doltcore/sqle/constants.go",
+        "go/libraries/doltcore/sqle/database.go",
+        "go/libraries/doltcore/sqle/database_provider.go",
+        "go/libraries/doltcore/sqle/database_provider_test.go",
+        "go/libraries/doltcore/sqle/database_test.go",
+        "go/libraries/doltcore/sqle/dfunctions/**",
+        "go/libraries/doltcore/sqle/dolt_procedures_diff_table.go",
+        "go/libraries/doltcore/sqle/dolt_procedures_history_table.go",
+        "go/libraries/doltcore/sqle/dolt_schemas_diff_table.go",
+        "go/libraries/doltcore/sqle/dolt_schemas_history_table.go",
+        "go/libraries/doltcore/sqle/dprocedures/**",
+        "go/libraries/doltcore/sqle/dropped_databases.go",
+        "go/libraries/doltcore/sqle/dsess/**",
+        "go/libraries/doltcore/sqle/dtablefunctions/**",
+        "go/libraries/doltcore/sqle/dtables/**",
+        "go/libraries/doltcore/sqle/enginetest/blob_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/branch_activity_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/branch_control_test.go",
+        "go/libraries/doltcore/sqle/enginetest/ddl_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_branch_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_commit_allocs_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_concurrent_autoincrement_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_engine_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_engine_tests.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_harness.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_privilege_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_cherry_pick.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_clean.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_commit_verification.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_create_database.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_diff.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_dtables.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_foreign_keys.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_help.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_legacy.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_merge.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_nonlocal.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_procedures.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_query_catalog.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_rebase.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_revert.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_revision_specs.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_rm.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_schema_merge.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_schema_override.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_squash_history.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_stash.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_test_table.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_verify_constraints.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_queries_workspace.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_query_plans.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_server_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_server_tests.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_system_table_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_transaction_commit_test.go",
+        "go/libraries/doltcore/sqle/enginetest/dolt_transaction_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/prepared_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/ref_name_index_test.go",
+        "go/libraries/doltcore/sqle/enginetest/row_lookup_join_test.go",
+        "go/libraries/doltcore/sqle/enginetest/stats_queries.go",
+        "go/libraries/doltcore/sqle/enginetest/sysbench_test.go",
+        "go/libraries/doltcore/sqle/enginetest/system_table_function_index_tests.go",
+        "go/libraries/doltcore/sqle/enginetest/validation.go",
+        "go/libraries/doltcore/sqle/enginetest/versioned_queries.go",
+        "go/libraries/doltcore/sqle/expranalysis/**",
+        "go/libraries/doltcore/sqle/expreval/**",
+        "go/libraries/doltcore/sqle/fk/**",
+        "go/libraries/doltcore/sqle/globalstate/**",
+        "go/libraries/doltcore/sqle/history_table.go",
+        "go/libraries/doltcore/sqle/index/**",
+        "go/libraries/doltcore/sqle/indexed_dolt_table.go",
+        "go/libraries/doltcore/sqle/information_schema_database_schema.go",
+        "go/libraries/doltcore/sqle/integration_test/**",
+        "go/libraries/doltcore/sqle/kvexec/**",
+        "go/libraries/doltcore/sqle/logictest/**",
+        "go/libraries/doltcore/sqle/mysql_file_handler/**",
+        "go/libraries/doltcore/sqle/overrides/**",
+        "go/libraries/doltcore/sqle/procedures_table.go",
+        "go/libraries/doltcore/sqle/procedures_table_test.go",
+        "go/libraries/doltcore/sqle/read_replica_database.go",
+        "go/libraries/doltcore/sqle/read_replica_database_test.go",
+        "go/libraries/doltcore/sqle/remotesrv.go",
+        "go/libraries/doltcore/sqle/remotesrv_hook_test.go",
+        "go/libraries/doltcore/sqle/replication.go",
+        "go/libraries/doltcore/sqle/replication_test.go",
+        "go/libraries/doltcore/sqle/resolve/**",
+        "go/libraries/doltcore/sqle/rows.go",
+        "go/libraries/doltcore/sqle/schema_override.go",
+        "go/libraries/doltcore/sqle/schema_table.go",
+        "go/libraries/doltcore/sqle/schema_table_test.go",
+        "go/libraries/doltcore/sqle/show_create_table.go",
+        "go/libraries/doltcore/sqle/sqlfmt/**",
+        "go/libraries/doltcore/sqle/sqlutil/**",
+        "go/libraries/doltcore/sqle/statspro/**",
+        "go/libraries/doltcore/sqle/system_variables.go",
+        "go/libraries/doltcore/sqle/table_editor_fk_test.go",
+        "go/libraries/doltcore/sqle/table_rename_fk_test.go",
+        "go/libraries/doltcore/sqle/tables.go",
+        "go/libraries/doltcore/sqle/tables_test.go",
+        "go/libraries/doltcore/sqle/temp_table.go",
+        "go/libraries/doltcore/sqle/testutil.go",
+        "go/libraries/doltcore/sqle/user_space_database.go",
+        "go/libraries/doltcore/sqle/views_test.go",
+        "go/libraries/doltcore/sqle/wildcard.go",
+        "go/libraries/doltcore/sqle/wildcard_test.go",
+        "go/libraries/doltcore/sqle/writer/**",
+        "go/libraries/doltcore/sqlserver/**",
+        "go/libraries/doltcore/table/doc.go",
+        "go/libraries/doltcore/table/editor/**",
+        "go/libraries/doltcore/table/errors.go",
+        "go/libraries/doltcore/table/errors_test.go",
+        "go/libraries/doltcore/table/table_iterator.go",
+        "go/libraries/doltcore/table/table_iterator_test.go",
+        "go/libraries/doltcore/table/table_reader.go",
+        "go/libraries/doltcore/table/table_writer.go",
+        "go/libraries/doltcore/table/typed/**",
+        "go/libraries/doltcore/table/untyped/csv/**",
+        "go/libraries/doltcore/table/untyped/doc.go",
+        "go/libraries/doltcore/table/untyped/sqlexport/**",
+        "go/libraries/doltcore/table/untyped/tabular/**",
+        "go/libraries/doltcore/table/untyped/untyped_rows.go",
+        "go/libraries/doltcore/table/untyped/untyped_rows_test.go",
+        "go/libraries/doltcore/table/untyped/xlsx/file_info.go",
+        "go/libraries/doltcore/table/untyped/xlsx/marshaling.go",
+        "go/libraries/doltcore/table/untyped/xlsx/marshaling_test.go",
+        "go/libraries/doltcore/table/untyped/xlsx/reader.go",
+        "go/libraries/events/**",
+        "go/libraries/utils/**",
+        "go/performance/**",
+        "go/store/.gitignore",
+        "go/store/README.md",
+        "go/store/atomicerr/**",
+        "go/store/blobstore/**",
+        "go/store/chunks/**",
+        "go/store/cmd/**",
+        "go/store/config/**",
+        "go/store/constants/**",
+        "go/store/d/**",
+        "go/store/datas/**",
+        "go/store/hash/**",
+        "go/store/metrics/**",
+        "go/store/nbs/NBS-on-AWS.md",
+        "go/store/nbs/README.md",
+        "go/store/nbs/admin_newgen_to_oldgen.go",
+        "go/store/nbs/archive.go",
+        "go/store/nbs/archive_build.go",
+        "go/store/nbs/archive_chunk_source.go",
+        "go/store/nbs/archive_chunk_source_test.go",
+        "go/store/nbs/archive_chunker.go",
+        "go/store/nbs/archive_inspect.go",
+        "go/store/nbs/archive_reader.go",
+        "go/store/nbs/archive_reader_test.go",
+        "go/store/nbs/archive_test.go",
+        "go/store/nbs/archive_validate_test.go",
+        "go/store/nbs/archive_writer.go",
+        "go/store/nbs/archive_writer_test.go",
+        "go/store/nbs/aws_table_chunk_source.go",
+        "go/store/nbs/aws_table_chunk_source_test.go",
+        "go/store/nbs/aws_table_persister.go",
+        "go/store/nbs/aws_table_persister_test.go",
+        "go/store/nbs/benchmarks/**",
+        "go/store/nbs/block_store_test.go",
+        "go/store/nbs/bs_manifest.go",
+        "go/store/nbs/bs_persister.go",
+        "go/store/nbs/byte_sink.go",
+        "go/store/nbs/byte_sink_cleanup_test.go",
+        "go/store/nbs/byte_sink_test.go",
+        "go/store/nbs/chunk_fetcher.go",
+        "go/store/nbs/chunk_source_adapter.go",
+        "go/store/nbs/cmp_chunk_table_writer.go",
+        "go/store/nbs/cmp_chunk_table_writer_test.go",
+        "go/store/nbs/conjoiner.go",
+        "go/store/nbs/conjoiner_test.go",
+        "go/store/nbs/dynamo_fake_test.go",
+        "go/store/nbs/dynamo_manifest.go",
+        "go/store/nbs/dynamo_manifest_test.go",
+        "go/store/nbs/empty_chunk_source.go",
+        "go/store/nbs/file_manifest.go",
+        "go/store/nbs/file_manifest_test.go",
+        "go/store/nbs/file_table_persister.go",
+        "go/store/nbs/file_table_persister_test.go",
+        "go/store/nbs/file_table_reader.go",
+        "go/store/nbs/file_table_reader_test.go",
+        "go/store/nbs/frag/**",
+        "go/store/nbs/gc_begingc_drain_test.go",
+        "go/store/nbs/gc_copier.go",
+        "go/store/nbs/gc_waitforgc_test.go",
+        "go/store/nbs/generational_chunk_store.go",
+        "go/store/nbs/generational_chunk_store_test.go",
+        "go/store/nbs/ghost_store.go",
+        "go/store/nbs/ghost_store_test.go",
+        "go/store/nbs/git_blobstore_empty_remote_test.go",
+        "go/store/nbs/git_blobstore_read_smoke_test.go",
+        "go/store/nbs/index_transformer.go",
+        "go/store/nbs/index_transformer_test.go",
+        "go/store/nbs/journal.go",
+        "go/store/nbs/journal_bootstrap_test.go",
+        "go/store/nbs/journal_chunk_source.go",
+        "go/store/nbs/journal_file.go",
+        "go/store/nbs/journal_file_linux.go",
+        "go/store/nbs/journal_file_nonlinux.go",
+        "go/store/nbs/journal_file_test.go",
+        "go/store/nbs/journal_index_record.go",
+        "go/store/nbs/journal_index_record_test.go",
+        "go/store/nbs/journal_inspect.go",
+        "go/store/nbs/journal_inspect_test.go",
+        "go/store/nbs/journal_record.go",
+        "go/store/nbs/journal_record_test.go",
+        "go/store/nbs/journal_test.go",
+        "go/store/nbs/journal_writer.go",
+        "go/store/nbs/journal_writer_test.go",
+        "go/store/nbs/manifest.go",
+        "go/store/nbs/mem_table.go",
+        "go/store/nbs/mem_table_test.go",
+        "go/store/nbs/metadata.go",
+        "go/store/nbs/mmap_index_reader.go",
+        "go/store/nbs/mmap_table_reader_unix.go",
+        "go/store/nbs/mmap_table_reader_windows.go",
+        "go/store/nbs/must_test.go",
+        "go/store/nbs/nbs_metrics_wrapper.go",
+        "go/store/nbs/no_conjoin_bs_persister.go",
+        "go/store/nbs/prune_grace.go",
+        "go/store/nbs/prune_grace_test.go",
+        "go/store/nbs/quota.go",
+        "go/store/nbs/race_off.go",
+        "go/store/nbs/race_on.go",
+        "go/store/nbs/reflog_ring_buffer.go",
+        "go/store/nbs/reflog_ring_buffer_test.go",
+        "go/store/nbs/root_tracker_test.go",
+        "go/store/nbs/s3_fake_test.go",
+        "go/store/nbs/s3_object_reader.go",
+        "go/store/nbs/s3_object_reader_test.go",
+        "go/store/nbs/s3_table_reader.go",
+        "go/store/nbs/s3_table_reader_test.go",
+        "go/store/nbs/single_blob_bs_persister.go",
+        "go/store/nbs/sizes.go",
+        "go/store/nbs/sizes_test.go",
+        "go/store/nbs/spooling_table_reader.go",
+        "go/store/nbs/spooling_table_reader_test.go",
+        "go/store/nbs/stats.go",
+        "go/store/nbs/stats_test.go",
+        "go/store/nbs/store.go",
+        "go/store/nbs/store_test.go",
+        "go/store/nbs/table.go",
+        "go/store/nbs/table_index.go",
+        "go/store/nbs/table_index_test.go",
+        "go/store/nbs/table_index_validate_test.go",
+        "go/store/nbs/table_persister.go",
+        "go/store/nbs/table_persister_test.go",
+        "go/store/nbs/table_reader.go",
+        "go/store/nbs/table_reader_test.go",
+        "go/store/nbs/table_set.go",
+        "go/store/nbs/table_set_test.go",
+        "go/store/nbs/table_test.go",
+        "go/store/nbs/table_writer.go",
+        "go/store/nbs/test/**",
+        "go/store/nbs/util.go",
+        "go/store/pool/**",
+        "go/store/prolly/**",
+        "go/store/skip/**",
+        "go/store/sloppy/**",
+        "go/store/spec/**",
+        "go/store/testutils/**",
+        "go/store/types/**",
+        "go/store/util/**",
+        "go/store/val/**",
+        "go/utils/3pdeps/**",
+        "go/utils/batsee/**",
+        "go/utils/concurrency/**",
+        "go/utils/copyrightshdrs/**",
+        "go/utils/devbuild/**",
+        "go/utils/escape-analysis/escape-analysis.bat",
+        "go/utils/escape-analysis/escape-analysis.sh",
+        "go/utils/genminver_validation/**",
+        "go/utils/hasher/**",
+        "go/utils/prepr/**",
+        "go/utils/publishrelease/**",
+        "go/utils/remotesrv/**",
+        "go/utils/repofmt/**",
+        "go/utils/rpmbuild/**",
+        "images/Dolt-Logo@3x.svg",
+        "integration-tests/DataDumpLoadDockerfile",
+        "integration-tests/bats/.gitignore",
+        "integration-tests/bats/1pk5col-ints.bats",
+        "integration-tests/bats/1pk5col-strings.bats",
+        "integration-tests/bats/1pksupportedtypes.bats",
+        "integration-tests/bats/2pk5cols-ints.bats",
+        "integration-tests/bats/README.md",
+        "integration-tests/bats/add-patch-expect/**",
+        "integration-tests/bats/add-patch.bats",
+        "integration-tests/bats/add.bats",
+        "integration-tests/bats/admin-archive-inspect.bats",
+        "integration-tests/bats/admin-conjoin.bats",
+        "integration-tests/bats/archive-aws.bats",
+        "integration-tests/bats/archive-test-repos/README.txt",
+        "integration-tests/bats/archive-test-repos/base/noms/LOCK",
+        "integration-tests/bats/archive-test-repos/base/noms/manifest",
+        "integration-tests/bats/archive-test-repos/base/noms/oldgen/LOCK",
+        "integration-tests/bats/archive-test-repos/base/noms/oldgen/manifest",
+        "integration-tests/bats/archive-test-repos/base/repo_state.json",
+        "integration-tests/bats/archive-test-repos/large_clone/noms/LOCK",
+        "integration-tests/bats/archive-test-repos/large_clone/noms/manifest",
+        "integration-tests/bats/archive-test-repos/large_clone/noms/oldgen/**",
+        "integration-tests/bats/archive-test-repos/large_clone/repo_state.json",
+        "integration-tests/bats/archive-test-repos/small_clone/noms/LOCK",
+        "integration-tests/bats/archive-test-repos/small_clone/noms/manifest",
+        "integration-tests/bats/archive-test-repos/small_clone/noms/oldgen/LOCK",
+        "integration-tests/bats/archive-test-repos/small_clone/noms/oldgen/manifest",
+        "integration-tests/bats/archive-test-repos/small_clone/repo_state.json",
+        "integration-tests/bats/archive-test-repos/v1/noms/LOCK",
+        "integration-tests/bats/archive-test-repos/v1/noms/manifest",
+        "integration-tests/bats/archive-test-repos/v1/noms/oldgen/LOCK",
+        "integration-tests/bats/archive-test-repos/v1/noms/oldgen/manifest",
+        "integration-tests/bats/archive-test-repos/v1/repo_state.json",
+        "integration-tests/bats/archive-test-repos/v2/noms/LOCK",
+        "integration-tests/bats/archive-test-repos/v2/noms/manifest",
+        "integration-tests/bats/archive-test-repos/v2/noms/oldgen/LOCK",
+        "integration-tests/bats/archive-test-repos/v2/noms/oldgen/manifest",
+        "integration-tests/bats/archive-test-repos/v2/repo_state.json",
+        "integration-tests/bats/archive.bats",
+        "integration-tests/bats/arg-parsing.bats",
+        "integration-tests/bats/auto_increment.bats",
+        "integration-tests/bats/auto_increment_lock_modes.bats",
+        "integration-tests/bats/backup.bats",
+        "integration-tests/bats/bats.bats",
+        "integration-tests/bats/bats.sql",
+        "integration-tests/bats/blame-system-view.bats",
+        "integration-tests/bats/blame.bats",
+        "integration-tests/bats/branch-activity.bats",
+        "integration-tests/bats/branch-control.bats",
+        "integration-tests/bats/branch.bats",
+        "integration-tests/bats/caching_sha2_password.bats",
+        "integration-tests/bats/case-sensitivity.bats",
+        "integration-tests/bats/certs/**",
+        "integration-tests/bats/checkout.bats",
+        "integration-tests/bats/cherry-pick.bats",
+        "integration-tests/bats/chunk-journal.bats",
+        "integration-tests/bats/ci.bats",
+        "integration-tests/bats/cli-hosted.bats",
+        "integration-tests/bats/clone-drop.bats",
+        "integration-tests/bats/column_tags.bats",
+        "integration-tests/bats/commit.bats",
+        "integration-tests/bats/commit_tags.bats",
+        "integration-tests/bats/commit_verification.bats",
+        "integration-tests/bats/common.bash.bats",
+        "integration-tests/bats/config-home.bats",
+        "integration-tests/bats/config.bats",
+        "integration-tests/bats/conflict-cat.bats",
+        "integration-tests/bats/conflict-detection-2.bats",
+        "integration-tests/bats/conflict-detection.bats",
+        "integration-tests/bats/conflicts-resolve.bats",
+        "integration-tests/bats/constraint-violations.bats",
+        "integration-tests/bats/copy-tags.bats",
+        "integration-tests/bats/corrupt_dbs/README.md",
+        "integration-tests/bats/corrupt_dbs/bad_commit/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/bad_commit/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/bad_commit/noms/oldgen/LOCK",
+        "integration-tests/bats/corrupt_dbs/bad_commit/noms/oldgen/manifest",
+        "integration-tests/bats/corrupt_dbs/bad_commit/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "integration-tests/bats/corrupt_dbs/bad_journal_crc_2/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/missing_closure_object/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/missing_closure_object/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/missing_closure_object/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/missing_fk_object/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/missing_fk_object/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/missing_fk_object/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/missing_schema_object/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/missing_schema_object/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/missing_schema_object/repo_state.json",
+        "integration-tests/bats/corrupt_dbs/missing_table_object/noms/LOCK",
+        "integration-tests/bats/corrupt_dbs/missing_table_object/noms/journal.idx",
+        "integration-tests/bats/corrupt_dbs/missing_table_object/noms/manifest",
+        "integration-tests/bats/corrupt_dbs/missing_table_object/repo_state.json",
+        "integration-tests/bats/cp-and-mv.bats",
+        "integration-tests/bats/create-views.bats",
+        "integration-tests/bats/createchunk.bats",
+        "integration-tests/bats/creds.bats",
+        "integration-tests/bats/db-revision-specifiers.bats",
+        "integration-tests/bats/debug.bats",
+        "integration-tests/bats/default-values.bats",
+        "integration-tests/bats/deleted-branches.bats",
+        "integration-tests/bats/diff-stat.bats",
+        "integration-tests/bats/diff-system.expect",
+        "integration-tests/bats/diff.bats",
+        "integration-tests/bats/diff.json",
+        "integration-tests/bats/directory-flag.bats",
+        "integration-tests/bats/docker-entrypoint.bats",
+        "integration-tests/bats/docs.bats",
+        "integration-tests/bats/dolt-test-run.bats",
+        "integration-tests/bats/doltpy.bats",
+        "integration-tests/bats/drop-create.bats",
+        "integration-tests/bats/dump-docs.bats",
+        "integration-tests/bats/dump.bats",
+        "integration-tests/bats/empty-repo.bats",
+        "integration-tests/bats/events.bats",
+        "integration-tests/bats/export-tables.bats",
+        "integration-tests/bats/feature-version.bats",
+        "integration-tests/bats/fetch.bats",
+        "integration-tests/bats/filter-branch.bats",
+        "integration-tests/bats/foreign-keys-invert-pk.bats",
+        "integration-tests/bats/foreign-keys.bats",
+        "integration-tests/bats/fsck.bats",
+        "integration-tests/bats/fulltext.bats",
+        "integration-tests/bats/functional-indexes.bats",
+        "integration-tests/bats/garbage_collection.bats",
+        "integration-tests/bats/gen_vals.awk",
+        "integration-tests/bats/global-args.bats",
+        "integration-tests/bats/helper/1pk5col-ints.csv",
+        "integration-tests/bats/helper/1pk5col-ints.json",
+        "integration-tests/bats/helper/1pk5col-ints.psv",
+        "integration-tests/bats/helper/1pk5col-ints.sql",
+        "integration-tests/bats/helper/1pk5col-nulls.csv",
+        "integration-tests/bats/helper/1pk5col-strings-newlines.csv",
+        "integration-tests/bats/helper/1pk5col-strings.csv",
+        "integration-tests/bats/helper/1pksupportedtypes.csv",
+        "integration-tests/bats/helper/2pk5col-ints.csv",
+        "integration-tests/bats/helper/bad.csv",
+        "integration-tests/bats/helper/bad.data",
+        "integration-tests/bats/helper/bad.xlsx",
+        "integration-tests/bats/helper/big_spatial.sql",
+        "integration-tests/bats/helper/caps-column-names.csv",
+        "integration-tests/bats/helper/common.bash",
+        "integration-tests/bats/helper/common_expect_functions.tcl",
+        "integration-tests/bats/helper/data-generation.bash",
+        "integration-tests/bats/helper/employees-sch-bad.sql",
+        "integration-tests/bats/helper/employees-sch.sql",
+        "integration-tests/bats/helper/employees-tbl-bad.json",
+        "integration-tests/bats/helper/employees-tbl-new.json",
+        "integration-tests/bats/helper/employees-tbl-schema-unordered.csv",
+        "integration-tests/bats/helper/employees-tbl-schema-unordered.json",
+        "integration-tests/bats/helper/employees-tbl-schema-unordered.utf8bom.csv",
+        "integration-tests/bats/helper/employees-tbl-schema-wrong.csv",
+        "integration-tests/bats/helper/employees-tbl-schema-wrong.json",
+        "integration-tests/bats/helper/employees-tbl.json",
+        "integration-tests/bats/helper/employees-tbl.utf8bom.json",
+        "integration-tests/bats/helper/empty-strings-null-values.json",
+        "integration-tests/bats/helper/escaped-characters.csv",
+        "integration-tests/bats/helper/git-ssh-common.bash",
+        "integration-tests/bats/helper/index-on-writes-common.bash",
+        "integration-tests/bats/helper/index_onepk.csv",
+        "integration-tests/bats/helper/index_onepk_non_unique.csv",
+        "integration-tests/bats/helper/jails.csv",
+        "integration-tests/bats/helper/known-decapitated.jwk",
+        "integration-tests/bats/helper/known-good.jwk",
+        "integration-tests/bats/helper/known-truncated.jwk",
+        "integration-tests/bats/helper/local-remote.bash",
+        "integration-tests/bats/helper/old_dolt_schemas/noms/LOCK",
+        "integration-tests/bats/helper/old_dolt_schemas/noms/manifest",
+        "integration-tests/bats/helper/old_dolt_schemas/noms/oldgen/LOCK",
+        "integration-tests/bats/helper/old_dolt_schemas/noms/oldgen/manifest",
+        "integration-tests/bats/helper/old_dolt_schemas/repo_state.json",
+        "integration-tests/bats/helper/parquet/sequences.sql",
+        "integration-tests/bats/helper/parquet/strings.sql",
+        "integration-tests/bats/helper/pytest.py",
+        "integration-tests/bats/helper/queries/**",
+        "integration-tests/bats/helper/query-server-common.bash",
+        "integration-tests/bats/helper/remotesrv-common.bash",
+        "integration-tests/bats/helper/s3-common.bash",
+        "integration-tests/bats/helper/sql-diff.bash",
+        "integration-tests/bats/helper/sql-reserved-column-name.csv",
+        "integration-tests/bats/helper/states.csv",
+        "integration-tests/bats/helper/windows-compat.bash",
+        "integration-tests/bats/helper/with_utf8_bom.sql",
+        "integration-tests/bats/ignore.bats",
+        "integration-tests/bats/import-append-tables.bats",
+        "integration-tests/bats/import-create-tables.bats",
+        "integration-tests/bats/import-mysqldump.bats",
+        "integration-tests/bats/import-no-header-csv.bats",
+        "integration-tests/bats/import-no-header-psv.bats",
+        "integration-tests/bats/import-replace-tables.bats",
+        "integration-tests/bats/import-tables.bats",
+        "integration-tests/bats/import-update-tables.bats",
+        "integration-tests/bats/index-on-writes-2.bats",
+        "integration-tests/bats/index-on-writes.bats",
+        "integration-tests/bats/index.bats",
+        "integration-tests/bats/init.bats",
+        "integration-tests/bats/json-diff.bats",
+        "integration-tests/bats/json-large-value-insert.sql",
+        "integration-tests/bats/json-new-fmt.bats",
+        "integration-tests/bats/json-oldformat-repo/.dolt/config.json",
+        "integration-tests/bats/json-oldformat-repo/.dolt/noms/LOCK",
+        "integration-tests/bats/json-oldformat-repo/.dolt/noms/manifest",
+        "integration-tests/bats/json-oldformat-repo/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "integration-tests/bats/json-oldformat-repo/.dolt/repo_state.json",
+        "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/config.json",
+        "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/noms/LOCK",
+        "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/noms/manifest",
+        "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "integration-tests/bats/json-oldformat-repo/.dolt/stats/.dolt/repo_state.json",
+        "integration-tests/bats/json-oldformat.bats",
+        "integration-tests/bats/json.bats",
+        "integration-tests/bats/keyless-foreign-keys.bats",
+        "integration-tests/bats/keyless.bats",
+        "integration-tests/bats/large-update.bats",
+        "integration-tests/bats/log.bats",
+        "integration-tests/bats/log.expect",
+        "integration-tests/bats/ls.bats",
+        "integration-tests/bats/merge-3way-schema-changes.bats",
+        "integration-tests/bats/merge-adaptive-encoding.bats",
+        "integration-tests/bats/merge-base.bats",
+        "integration-tests/bats/merge.bats",
+        "integration-tests/bats/multidb.bats",
+        "integration-tests/bats/multiple-tables.bats",
+        "integration-tests/bats/mutual-tls-auth.bats",
+        "integration-tests/bats/no-repo.bats",
+        "integration-tests/bats/nonlocal.bats",
+        "integration-tests/bats/pager.bats",
+        "integration-tests/bats/pager.expect",
+        "integration-tests/bats/performance-repo/.dolt/config.json",
+        "integration-tests/bats/performance-repo/.dolt/noms/LOCK",
+        "integration-tests/bats/performance-repo/.dolt/noms/manifest",
+        "integration-tests/bats/performance-repo/.dolt/noms/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+        "integration-tests/bats/performance-repo/.dolt/repo_state.json",
+        "integration-tests/bats/performance.bats",
+        "integration-tests/bats/prepare.bats",
+        "integration-tests/bats/primary-key-changes.bats",
+        "integration-tests/bats/private.pgp",
+        "integration-tests/bats/privs.json",
+        "integration-tests/bats/processlist.bats",
+        "integration-tests/bats/profile.bats",
+        "integration-tests/bats/pull.bats",
+        "integration-tests/bats/push.bats",
+        "integration-tests/bats/query-catalog.bats",
+        "integration-tests/bats/query-diff.bats",
+        "integration-tests/bats/rebase.bats",
+        "integration-tests/bats/reflog.bats",
+        "integration-tests/bats/regression-tests.bats",
+        "integration-tests/bats/remote-cmd.bats",
+        "integration-tests/bats/remotes-aws.bats",
+        "integration-tests/bats/remotes-file-system.bats",
+        "integration-tests/bats/remotes-git-ssh-prompt.expect",
+        "integration-tests/bats/remotes-git.bats",
+        "integration-tests/bats/remotes-localbs.bats",
+        "integration-tests/bats/remotes-push-pull.bats",
+        "integration-tests/bats/remotes-s3.bats",
+        "integration-tests/bats/remotes-sql-server.bats",
+        "integration-tests/bats/remotes.bats",
+        "integration-tests/bats/remotesrv.bats",
+        "integration-tests/bats/rename-tables.bats",
+        "integration-tests/bats/replace.bats",
+        "integration-tests/bats/replication-multidb.bats",
+        "integration-tests/bats/replication.bats",
+        "integration-tests/bats/requires-repo.bats",
+        "integration-tests/bats/reset.bats",
+        "integration-tests/bats/revert.bats",
+        "integration-tests/bats/rm.bats",
+        "integration-tests/bats/schema-changes.bats",
+        "integration-tests/bats/schema-conflicts.bats",
+        "integration-tests/bats/schema-export.bats",
+        "integration-tests/bats/schema-import.bats",
+        "integration-tests/bats/send-metrics.bats",
+        "integration-tests/bats/shallow-clone.bats",
+        "integration-tests/bats/show.bats",
+        "integration-tests/bats/signed.bats",
+        "integration-tests/bats/spatial-index.bats",
+        "integration-tests/bats/sql-add.bats",
+        "integration-tests/bats/sql-auto-gc.bats",
+        "integration-tests/bats/sql-backup.bats",
+        "integration-tests/bats/sql-batch.bats",
+        "integration-tests/bats/sql-branch.bats",
+        "integration-tests/bats/sql-charsets-collations.bats",
+        "integration-tests/bats/sql-check-constraints.bats",
+        "integration-tests/bats/sql-checkout.bats",
+        "integration-tests/bats/sql-cherry-pick.bats",
+        "integration-tests/bats/sql-clean.bats",
+        "integration-tests/bats/sql-commit-diff.bats",
+        "integration-tests/bats/sql-commit.bats",
+        "integration-tests/bats/sql-config.bats",
+        "integration-tests/bats/sql-conflicts-resolve.bats",
+        "integration-tests/bats/sql-conflicts.bats",
+        "integration-tests/bats/sql-create-database.bats",
+        "integration-tests/bats/sql-create-tables.bats",
+        "integration-tests/bats/sql-delimiter.expect",
+        "integration-tests/bats/sql-diff.bats",
+        "integration-tests/bats/sql-export.bats",
+        "integration-tests/bats/sql-fetch.bats",
+        "integration-tests/bats/sql-load-data.bats",
+        "integration-tests/bats/sql-local-remote.bats",
+        "integration-tests/bats/sql-merge.bats",
+        "integration-tests/bats/sql-multi-db.bats",
+        "integration-tests/bats/sql-mysqldb-privs.bats",
+        "integration-tests/bats/sql-privs.bats",
+        "integration-tests/bats/sql-procedure-privs.bats",
+        "integration-tests/bats/sql-pull.bats",
+        "integration-tests/bats/sql-push.bats",
+        "integration-tests/bats/sql-reflog.bats",
+        "integration-tests/bats/sql-remotes-git.bats",
+        "integration-tests/bats/sql-reserved-column-name.bats",
+        "integration-tests/bats/sql-reset.bats",
+        "integration-tests/bats/sql-server-config-env-interpolation.bats",
+        "integration-tests/bats/sql-server-config-file-generation.bats",
+        "integration-tests/bats/sql-server-mcp-config.bats",
+        "integration-tests/bats/sql-server-mcp.bats",
+        "integration-tests/bats/sql-server-mysql.expect",
+        "integration-tests/bats/sql-server-remotesrv.bats",
+        "integration-tests/bats/sql-server.bats",
+        "integration-tests/bats/sql-shell-binary-as-hex.expect",
+        "integration-tests/bats/sql-shell-clear-statement.expect",
+        "integration-tests/bats/sql-shell-comment-only-query.expect",
+        "integration-tests/bats/sql-shell-commit-time.expect",
+        "integration-tests/bats/sql-shell-empty-prompt.expect",
+        "integration-tests/bats/sql-shell-empty-query.expect",
+        "integration-tests/bats/sql-shell-error.expect",
+        "integration-tests/bats/sql-shell-multi-stmt-timings.expect",
+        "integration-tests/bats/sql-shell-ok-result.expect",
+        "integration-tests/bats/sql-shell-prompt.expect",
+        "integration-tests/bats/sql-shell-revision-db.expect",
+        "integration-tests/bats/sql-shell-slash-cmds.expect",
+        "integration-tests/bats/sql-shell-slash-status.expect",
+        "integration-tests/bats/sql-shell-use.expect",
+        "integration-tests/bats/sql-shell-warnings.expect",
+        "integration-tests/bats/sql-shell.bats",
+        "integration-tests/bats/sql-shell.expect",
+        "integration-tests/bats/sql-show-warnings.expect",
+        "integration-tests/bats/sql-show.bats",
+        "integration-tests/bats/sql-spatial-types.bats",
+        "integration-tests/bats/sql-stash.bats",
+        "integration-tests/bats/sql-status.bats",
+        "integration-tests/bats/sql-tags.bats",
+        "integration-tests/bats/sql-unique-error.expect",
+        "integration-tests/bats/sql-update-column-tag.bats",
+        "integration-tests/bats/sql-use.expect",
+        "integration-tests/bats/sql-vertical-format.expect",
+        "integration-tests/bats/sql-warning-detail.expect",
+        "integration-tests/bats/sql-warning-summary.expect",
+        "integration-tests/bats/sql-works-after-failing-query.expect",
+        "integration-tests/bats/sql.bats",
+        "integration-tests/bats/ssh-pid-leak.bats",
+        "integration-tests/bats/ssh-transfer.bats",
+        "integration-tests/bats/stash.bats",
+        "integration-tests/bats/stats.bats",
+        "integration-tests/bats/status.bats",
+        "integration-tests/bats/system-tables.bats",
+        "integration-tests/bats/tableplus.bats",
+        "integration-tests/bats/triggers.bats",
+        "integration-tests/bats/types.bats",
+        "integration-tests/bats/tzdata.bats",
+        "integration-tests/bats/tzdataDockerfile",
+        "integration-tests/bats/undrop.bats",
+        "integration-tests/bats/validation.bats",
+        "integration-tests/bats/vector-index.bats",
+        "integration-tests/bats/verify-constraints.bats",
+        "integration-tests/bats/window.bats",
+        "integration-tests/bats/zstd.bats",
+        "integration-tests/compatibility/**",
+        "integration-tests/data-dump-loading-tests/**",
+        "integration-tests/go-sql-server-driver/**",
+        "integration-tests/mysql-client-tests/.gitignore",
+        "integration-tests/mysql-client-tests/Dockerfile",
+        "integration-tests/mysql-client-tests/Dockerfile.dockerignore",
+        "integration-tests/mysql-client-tests/README.md",
+        "integration-tests/mysql-client-tests/c/**",
+        "integration-tests/mysql-client-tests/cpp/**",
+        "integration-tests/mysql-client-tests/custom-version-string-test.bats",
+        "integration-tests/mysql-client-tests/dotnet/**",
+        "integration-tests/mysql-client-tests/elixir/**",
+        "integration-tests/mysql-client-tests/go/**",
+        "integration-tests/mysql-client-tests/go-mysql/**",
+        "integration-tests/mysql-client-tests/helpers.bash",
+        "integration-tests/mysql-client-tests/java/**",
+        "integration-tests/mysql-client-tests/mariadb-binlog.bats",
+        "integration-tests/mysql-client-tests/mariadb-install.sh",
+        "integration-tests/mysql-client-tests/mysql-client-tests-entrypoint.sh",
+        "integration-tests/mysql-client-tests/mysql-client-tests.bats",
+        "integration-tests/mysql-client-tests/perl/**",
+        "integration-tests/mysql-client-tests/php/**",
+        "integration-tests/mysql-client-tests/python/**",
+        "integration-tests/mysql-client-tests/r/**",
+        "integration-tests/mysql-client-tests/ruby/**",
+        "integration-tests/mysql-client-tests/rust/**",
+        "integration-tests/mysql-client-tests/swift/**",
+        "integration-tests/orm-tests/Dockerfile",
+        "integration-tests/orm-tests/README.md",
+        "integration-tests/orm-tests/hibernate/**",
+        "integration-tests/orm-tests/mikro-orm/**",
+        "integration-tests/orm-tests/orm-tests-entrypoint.sh",
+        "integration-tests/orm-tests/orm-tests.bats",
+        "integration-tests/orm-tests/prisma/package.json",
+        "integration-tests/orm-tests/prisma/prisma/**",
+        "integration-tests/orm-tests/prisma/tsconfig.json",
+        "integration-tests/orm-tests/typeorm/**",
+        "integration-tests/transactions/**",
+        "proto/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of dolthub/dolt (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/dolthub/dolt."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        ".github/actions/ses-email-action/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "dolthub, ISC license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/.github/actions/ses-email-action."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "integration-tests/mysql-client-tests/node/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of node, ISC license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/integration-tests/mysql-client-tests/node."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "integration-tests/orm-tests/prisma/branch/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of prisma-debug, MIT license (declared in package.json), https://github.com/dolthub/dolt/tree/7bbe6677e55273a1b39000289257f504cebf156a/integration-tests/orm-tests/prisma/branch."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.MD"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "awk",
+      "paths": [
+        "**/*.awk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.ex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.exs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "r",
+      "paths": [
+        "**/*.r"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tcl",
+      "paths": [
+        "**/*.tcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "proto/tools/preset.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jwk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pgp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prisma"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xlsx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DataDumpLoadDockerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ICU4C_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LOCK"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MIMALLOC_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MUSL_COPYRIGHT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SysbenchDockerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/alt_creds_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/b5j6kmj2m68sukiu22ouoke7u9281a06"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic_config_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/basic_creds_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dolt_oss_credentials"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_oss_cred"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serverDockerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/single_oss_cred"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tzdataDockerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

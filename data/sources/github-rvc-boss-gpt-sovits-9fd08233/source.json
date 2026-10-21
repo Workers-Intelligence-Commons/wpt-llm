@@ -1,0 +1,286 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/RVC-Boss/GPT-SoVITS",
+  "revision": "1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a",
+  "checksum": "sha256:612bb55b84a6dc7c1ab88a4323102ad68c29d82c21b0fbc9a7c16099085667af",
+  "extract": {
+    "exclude": [
+      "GPT_SoVITS/Accel/vendor/**",
+      "GPT_SoVITS/BigVGAN/incl_licenses/**",
+      "GPT_SoVITS/text/engdict_cache.pickle",
+      "GPT_SoVITS/text/g2pw/polyphonic.pickle",
+      "GPT_SoVITS/text/namedict_cache.pickle"
+    ]
+  },
+  "history": {
+    "since": "6e05506a853af1ec688cdbaa7304e7144a927f8c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 RVC-Boss\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2024 NVIDIA CORPORATION.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023 Ye-Xin Lu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/RVC-Boss/GPT-SoVITS: Copyright (c) 2024 RVC-Boss, MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS; Copyright (c) 2024 NVIDIA CORPORATION., MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS/tree/1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a/GPT_SoVITS/BigVGAN; Copyright (c) 2023 Ye-Xin Lu, MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS/tree/1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a/tools/AP_BWE_main."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "Colab-Inference.ipynb",
+        "Colab-WebUI.ipynb",
+        "Docker/**",
+        "Dockerfile",
+        "GPT_SoVITS/AR/**",
+        "GPT_SoVITS/Accel/MLX/**",
+        "GPT_SoVITS/Accel/PyTorch/**",
+        "GPT_SoVITS/Accel/README.md",
+        "GPT_SoVITS/Accel/__init__.py",
+        "GPT_SoVITS/Accel/adapter.py",
+        "GPT_SoVITS/Accel/logger.py",
+        "GPT_SoVITS/Accel/runtime.py",
+        "GPT_SoVITS/TTS_infer_pack/**",
+        "GPT_SoVITS/configs/**",
+        "GPT_SoVITS/download.py",
+        "GPT_SoVITS/eres2net/**",
+        "GPT_SoVITS/export_torch_script.py",
+        "GPT_SoVITS/export_torch_script_v3v4.py",
+        "GPT_SoVITS/f5_tts/**",
+        "GPT_SoVITS/feature_extractor/**",
+        "GPT_SoVITS/inference_cli.py",
+        "GPT_SoVITS/inference_gui.py",
+        "GPT_SoVITS/inference_webui.py",
+        "GPT_SoVITS/inference_webui_fast.py",
+        "GPT_SoVITS/module/**",
+        "GPT_SoVITS/onnx_export.py",
+        "GPT_SoVITS/prepare_datasets/**",
+        "GPT_SoVITS/pretrained_models/**",
+        "GPT_SoVITS/process_ckpt.py",
+        "GPT_SoVITS/s1_train.py",
+        "GPT_SoVITS/s2_train.py",
+        "GPT_SoVITS/s2_train_v3.py",
+        "GPT_SoVITS/s2_train_v3_lora.py",
+        "GPT_SoVITS/stream_v2pro.py",
+        "GPT_SoVITS/sv.py",
+        "GPT_SoVITS/text/.gitignore",
+        "GPT_SoVITS/text/LangSegmenter/**",
+        "GPT_SoVITS/text/__init__.py",
+        "GPT_SoVITS/text/cantonese.py",
+        "GPT_SoVITS/text/chinese.py",
+        "GPT_SoVITS/text/chinese2.py",
+        "GPT_SoVITS/text/cleaner.py",
+        "GPT_SoVITS/text/cmudict-fast.rep",
+        "GPT_SoVITS/text/cmudict.rep",
+        "GPT_SoVITS/text/en_normalization/**",
+        "GPT_SoVITS/text/engdict-hot.rep",
+        "GPT_SoVITS/text/english.py",
+        "GPT_SoVITS/text/g2pw/__init__.py",
+        "GPT_SoVITS/text/g2pw/dataset.py",
+        "GPT_SoVITS/text/g2pw/g2pw.py",
+        "GPT_SoVITS/text/g2pw/onnx_api.py",
+        "GPT_SoVITS/text/g2pw/polyphonic-fix.rep",
+        "GPT_SoVITS/text/g2pw/polyphonic.md5",
+        "GPT_SoVITS/text/g2pw/polyphonic.rep",
+        "GPT_SoVITS/text/g2pw/utils.py",
+        "GPT_SoVITS/text/ja_userdic/**",
+        "GPT_SoVITS/text/japanese.py",
+        "GPT_SoVITS/text/korean.py",
+        "GPT_SoVITS/text/opencpop-strict.txt",
+        "GPT_SoVITS/text/symbols.py",
+        "GPT_SoVITS/text/symbols2.py",
+        "GPT_SoVITS/text/tone_sandhi.py",
+        "GPT_SoVITS/text/zh_normalization/**",
+        "GPT_SoVITS/utils.py",
+        "LICENSE",
+        "README.md",
+        "api.py",
+        "api_v2.py",
+        "config.py",
+        "docker-compose.yaml",
+        "docker_build.sh",
+        "docs/**",
+        "extra-req.txt",
+        "go-webui.bat",
+        "go-webui.ps1",
+        "install.ps1",
+        "install.sh",
+        "requirements-py312-win-flash_attention/**",
+        "requirements.txt",
+        "tools/__init__.py",
+        "tools/acceleration.py",
+        "tools/asr/**",
+        "tools/assets.py",
+        "tools/audio_sr.py",
+        "tools/cmd-denoise.py",
+        "tools/denoise-model/**",
+        "tools/i18n/**",
+        "tools/my_utils.py",
+        "tools/portable_runtime.py",
+        "tools/slice_audio.py",
+        "tools/slicer2.py",
+        "tools/subfix_webui.py",
+        "tools/uvr5/**",
+        "webui.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 RVC-Boss\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 RVC-Boss, MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "GPT_SoVITS/BigVGAN/LICENSE",
+        "GPT_SoVITS/BigVGAN/README.md",
+        "GPT_SoVITS/BigVGAN/activations.py",
+        "GPT_SoVITS/BigVGAN/alias_free_activation/**",
+        "GPT_SoVITS/BigVGAN/bigvgan.py",
+        "GPT_SoVITS/BigVGAN/env.py",
+        "GPT_SoVITS/BigVGAN/utils0.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 NVIDIA CORPORATION.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 NVIDIA CORPORATION., MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS/tree/1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a/GPT_SoVITS/BigVGAN."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/AP_BWE_main/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Ye-Xin Lu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Ye-Xin Lu, MIT license (LICENSE), https://github.com/RVC-Boss/GPT-SoVITS/tree/1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a/tools/AP_BWE_main."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.md5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

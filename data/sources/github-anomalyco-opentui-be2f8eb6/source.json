@@ -1,0 +1,847 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/anomalyco/opentui",
+  "revision": "212eb27da4adf5b907031ad153fc6a5b9f713fbf",
+  "checksum": "sha256:8596cfda8b4c15a09d6fdda4730b1d8a616cdc8d1516b6bea191de96d078d28a",
+  "extract": {
+    "exclude": [
+      "packages/core/src/lib/tree-sitter/assets/javascript/tree-sitter-javascript.wasm",
+      "packages/core/src/lib/tree-sitter/assets/markdown/tree-sitter-markdown.wasm",
+      "packages/core/src/lib/tree-sitter/assets/markdown_inline/tree-sitter-markdown_inline.wasm",
+      "packages/core/src/lib/tree-sitter/assets/typescript/tree-sitter-typescript.wasm",
+      "packages/core/src/lib/tree-sitter/assets/typescriptreact/tree-sitter-tsx.wasm",
+      "packages/core/src/lib/tree-sitter/assets/zig/tree-sitter-zig.wasm",
+      "packages/core/src/tests/fixtures/audio/tone-3000hz-48k-mono-1s.mp3",
+      "packages/core/src/tests/fixtures/audio/tone-750hz-48k-mono-1s-320k.mp3",
+      "packages/core/src/tests/fixtures/audio/tone-750hz-48k-mono-1s.flac",
+      "packages/core/src/tests/fixtures/audio/tone-750hz-48k-mono-1s.mp3",
+      "packages/core/src/tests/fixtures/audio/tone-750hz-48k-mono-5s.mp3",
+      "packages/core/src/tests/fixtures/images/**",
+      "packages/core/src/tests/fixtures/json/**",
+      "packages/examples/src/assets/Water_2_M_Normal.jpg",
+      "packages/examples/src/assets/concrete.png",
+      "packages/examples/src/assets/crate.png",
+      "packages/examples/src/assets/crate_emissive.png",
+      "packages/examples/src/assets/dragon.jpg",
+      "packages/examples/src/assets/forrest_background.png",
+      "packages/examples/src/assets/heart.png",
+      "packages/examples/src/assets/image-demo.gif",
+      "packages/examples/src/assets/image-demo.png",
+      "packages/examples/src/assets/image-demo.webp",
+      "packages/examples/src/assets/main_char_heavy_attack.png",
+      "packages/examples/src/assets/main_char_idle.png",
+      "packages/examples/src/assets/main_char_jump_end.png",
+      "packages/examples/src/assets/main_char_jump_landing.png",
+      "packages/examples/src/assets/main_char_jump_start.png",
+      "packages/examples/src/assets/main_char_run_loop.png",
+      "packages/examples/src/assets/roughness_map.jpg",
+      "packages/native/src/vendor/README.md",
+      "packages/native/src/vendor/miniaudio/**",
+      "packages/native/src/vendor/stb/**",
+      "packages/native/src/vendor/update-zig-deps.sh",
+      "packages/native/src/vendor/update.sh",
+      "packages/native/src/vendor/wuffs/**",
+      "packages/native/src/vendor/zig-deps/**",
+      "packages/native/src/vendor/zig-deps.md",
+      "packages/native/src/vendor/zig-deps.sha256",
+      "packages/native/src/vendor/zig-deps.tar.gz",
+      "packages/web/public/fonts/**",
+      "packages/web/public/social-card.png",
+      "packages/web/public/video/**"
+    ]
+  },
+  "history": {
+    "since": "634e0083ec430c2a42268d7de8cf4946231e0405"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 opentui\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nMIT License\n\nCopyright (c) 2023 Marti Maria Saguer\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the \n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to \npermit persons to whom the Software is furnished to do so, subject\nto the following conditions:\n\nThe above copyright notice and this permission notice shall be \nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCopyright (c) 2010, Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  * Neither the name of Google nor the names of its contributors may\n    be used to endorse or promote products derived from this software\n    without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Commit history of https://github.com/anomalyco/opentui: Copyright (c) 2025 opentui, MIT license (LICENSE), https://github.com/anomalyco/opentui; Copyright (c) 2023 Marti Maria Saguer, MIT license (LICENSE), https://github.com/anomalyco/opentui/tree/212eb27da4adf5b907031ad153fc6a5b9f713fbf/packages/native/src/vendor/lcms2; Copyright (c) 2010, Google Inc. All rights reserved., BSD-3-Clause license (COPYING), https://github.com/anomalyco/opentui/tree/212eb27da4adf5b907031ad153fc6a5b9f713fbf/packages/native/src/vendor/libwebp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
+        ".zig-version",
+        "AGENTS.md",
+        "LICENSE",
+        "README.md",
+        "api/**",
+        "bun.lock",
+        "opentui.pc.in",
+        "package.json",
+        "packages/core/.gitignore",
+        "packages/core/README.md",
+        "packages/core/THIRD_PARTY_LICENSES/**",
+        "packages/core/dev/**",
+        "packages/core/package.json",
+        "packages/core/scripts/**",
+        "packages/core/src/NativeScene.ts",
+        "packages/core/src/NativeSession.ts",
+        "packages/core/src/NativeSpanFeed.ts",
+        "packages/core/src/Renderable.ts",
+        "packages/core/src/animation/**",
+        "packages/core/src/ansi.ts",
+        "packages/core/src/audio-stream/**",
+        "packages/core/src/audio.ts",
+        "packages/core/src/benchmark/**",
+        "packages/core/src/buffer.test.ts",
+        "packages/core/src/buffer.ts",
+        "packages/core/src/console.test.ts",
+        "packages/core/src/console.ts",
+        "packages/core/src/edit-buffer.test.ts",
+        "packages/core/src/edit-buffer.ts",
+        "packages/core/src/editor-view.test.ts",
+        "packages/core/src/editor-view.ts",
+        "packages/core/src/image.ts",
+        "packages/core/src/index.ts",
+        "packages/core/src/lib/KeyHandler.integration.test.ts",
+        "packages/core/src/lib/KeyHandler.stopPropagation.test.ts",
+        "packages/core/src/lib/KeyHandler.test.ts",
+        "packages/core/src/lib/KeyHandler.ts",
+        "packages/core/src/lib/RGBA.test.ts",
+        "packages/core/src/lib/RGBA.ts",
+        "packages/core/src/lib/ascii.font.ts",
+        "packages/core/src/lib/border.test.ts",
+        "packages/core/src/lib/border.ts",
+        "packages/core/src/lib/buffer-access.ts",
+        "packages/core/src/lib/bunfs.test.ts",
+        "packages/core/src/lib/bunfs.ts",
+        "packages/core/src/lib/clipboard-service.test.ts",
+        "packages/core/src/lib/clipboard.test.ts",
+        "packages/core/src/lib/clipboard.ts",
+        "packages/core/src/lib/clock.ts",
+        "packages/core/src/lib/data-paths.test.ts",
+        "packages/core/src/lib/data-paths.ts",
+        "packages/core/src/lib/debounce.ts",
+        "packages/core/src/lib/detect-links.test.ts",
+        "packages/core/src/lib/detect-links.ts",
+        "packages/core/src/lib/env.test.ts",
+        "packages/core/src/lib/env.ts",
+        "packages/core/src/lib/extmarks-history.ts",
+        "packages/core/src/lib/extmarks-multiwidth.test.ts",
+        "packages/core/src/lib/extmarks-undo.test.ts",
+        "packages/core/src/lib/extmarks.test.ts",
+        "packages/core/src/lib/extmarks.ts",
+        "packages/core/src/lib/fonts/**",
+        "packages/core/src/lib/hast-styled-text.ts",
+        "packages/core/src/lib/host-clipboard.internal.ts",
+        "packages/core/src/lib/host-clipboard.native.ts",
+        "packages/core/src/lib/host-clipboard.test.ts",
+        "packages/core/src/lib/index.ts",
+        "packages/core/src/lib/keybinding.internal.test.ts",
+        "packages/core/src/lib/keybinding.internal.ts",
+        "packages/core/src/lib/objects-in-viewport.test.ts",
+        "packages/core/src/lib/objects-in-viewport.ts",
+        "packages/core/src/lib/output.capture.ts",
+        "packages/core/src/lib/parse.keypress-kitty.protocol.test.ts",
+        "packages/core/src/lib/parse.keypress-kitty.test.ts",
+        "packages/core/src/lib/parse.keypress-kitty.ts",
+        "packages/core/src/lib/parse.keypress.test.ts",
+        "packages/core/src/lib/parse.keypress.ts",
+        "packages/core/src/lib/parse.mouse.test.ts",
+        "packages/core/src/lib/parse.mouse.ts",
+        "packages/core/src/lib/paste.ts",
+        "packages/core/src/lib/queue.ts",
+        "packages/core/src/lib/render-geometry.ts",
+        "packages/core/src/lib/renderable.validations.test.ts",
+        "packages/core/src/lib/renderable.validations.ts",
+        "packages/core/src/lib/scroll-acceleration.ts",
+        "packages/core/src/lib/selection.ascii-font.test.ts",
+        "packages/core/src/lib/selection.ts",
+        "packages/core/src/lib/singleton.ts",
+        "packages/core/src/lib/stdin-parser.conformance.json",
+        "packages/core/src/lib/stdin-parser.test.ts",
+        "packages/core/src/lib/stdin-parser.ts",
+        "packages/core/src/lib/styled-text.test.ts",
+        "packages/core/src/lib/styled-text.ts",
+        "packages/core/src/lib/terminal-capability-detection.test.ts",
+        "packages/core/src/lib/terminal-capability-detection.ts",
+        "packages/core/src/lib/terminal-palette.test.ts",
+        "packages/core/src/lib/terminal-palette.ts",
+        "packages/core/src/lib/tree-sitter/assets/README.md",
+        "packages/core/src/lib/tree-sitter/assets/javascript/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets/markdown/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets/markdown/injections.scm",
+        "packages/core/src/lib/tree-sitter/assets/markdown_inline/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets/typescript/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets/typescriptreact/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets/update.test.ts",
+        "packages/core/src/lib/tree-sitter/assets/update.ts",
+        "packages/core/src/lib/tree-sitter/assets/zig/highlights.scm",
+        "packages/core/src/lib/tree-sitter/assets.d.ts",
+        "packages/core/src/lib/tree-sitter/cache.test.ts",
+        "packages/core/src/lib/tree-sitter/client.test.ts",
+        "packages/core/src/lib/tree-sitter/client.ts",
+        "packages/core/src/lib/tree-sitter/default-parser-assets.bun.ts",
+        "packages/core/src/lib/tree-sitter/default-parsers.ts",
+        "packages/core/src/lib/tree-sitter/download-utils.ts",
+        "packages/core/src/lib/tree-sitter/index.ts",
+        "packages/core/src/lib/tree-sitter/parser.worker.ts",
+        "packages/core/src/lib/tree-sitter/parsers-config.ts",
+        "packages/core/src/lib/tree-sitter/resolve-ft.test.ts",
+        "packages/core/src/lib/tree-sitter/resolve-ft.ts",
+        "packages/core/src/lib/tree-sitter/types.ts",
+        "packages/core/src/lib/tree-sitter/update-assets.ts",
+        "packages/core/src/lib/tree-sitter-styled-text.test.ts",
+        "packages/core/src/lib/tree-sitter-styled-text.ts",
+        "packages/core/src/lib/validate-dir-name.ts",
+        "packages/core/src/lib/yoga.options.test.ts",
+        "packages/core/src/lib/yoga.options.ts",
+        "packages/core/src/native-abi.generated.ts",
+        "packages/core/src/native-event-worker-repro.test.ts",
+        "packages/core/src/native-event-worker-repro.worker.ts",
+        "packages/core/src/native-handle.test.ts",
+        "packages/core/src/node-asset-target.ts",
+        "packages/core/src/node-assets.test.ts",
+        "packages/core/src/node-assets.ts",
+        "packages/core/src/platform/**",
+        "packages/core/src/plugins/**",
+        "packages/core/src/post/**",
+        "packages/core/src/renderables/**",
+        "packages/core/src/renderer-theme-mode.ts",
+        "packages/core/src/renderer.ts",
+        "packages/core/src/runtime-plugin-support-configure.ts",
+        "packages/core/src/runtime-plugin-support.ts",
+        "packages/core/src/runtime-plugin.ts",
+        "packages/core/src/session-buffer.ts",
+        "packages/core/src/specs/**",
+        "packages/core/src/syntax-style.test.ts",
+        "packages/core/src/syntax-style.ts",
+        "packages/core/src/terminal-env-registry.test.ts",
+        "packages/core/src/testing/**",
+        "packages/core/src/testing.ts",
+        "packages/core/src/tests/__snapshots__/**",
+        "packages/core/src/tests/absolute-positioning.snapshot.test.ts",
+        "packages/core/src/tests/allocator-stats.test.ts",
+        "packages/core/src/tests/audio-pcm-stream.test.ts",
+        "packages/core/src/tests/audio-stream.test.ts",
+        "packages/core/src/tests/audio.test.ts",
+        "packages/core/src/tests/checked-text-unprintable.test.ts",
+        "packages/core/src/tests/clipboard-native-lifecycle.test.ts",
+        "packages/core/src/tests/context-editors.test.ts",
+        "packages/core/src/tests/context-text-resources.test.ts",
+        "packages/core/src/tests/destroy-during-render.test.ts",
+        "packages/core/src/tests/destroy-on-exit.fixture.ts",
+        "packages/core/src/tests/destroy-on-exit.test.ts",
+        "packages/core/src/tests/fixtures/audio/README.md",
+        "packages/core/src/tests/frame-callback-contract.test.ts",
+        "packages/core/src/tests/frame-record-contract.test.ts",
+        "packages/core/src/tests/frame-record-parity.test.ts",
+        "packages/core/src/tests/hover-cursor.test.ts",
+        "packages/core/src/tests/image-icc-allocation-child.ts",
+        "packages/core/src/tests/image-pool.test.ts",
+        "packages/core/src/tests/image-renderable.test.ts",
+        "packages/core/src/tests/image.test.ts",
+        "packages/core/src/tests/native-backed-measurement-lifecycle.test.ts",
+        "packages/core/src/tests/native-backed-measurement-parity.test.ts",
+        "packages/core/src/tests/native-detached-session.test.ts",
+        "packages/core/src/tests/native-log-worker-child.ts",
+        "packages/core/src/tests/native-scene-buffer.test.ts",
+        "packages/core/src/tests/native-session.test.ts",
+        "packages/core/src/tests/native-span-feed-async.test.ts",
+        "packages/core/src/tests/native-span-feed-close.test.ts",
+        "packages/core/src/tests/native-span-feed-coverage.test.ts",
+        "packages/core/src/tests/native-span-feed-edge-cases.test.ts",
+        "packages/core/src/tests/native-span-feed-use-after-free.test.ts",
+        "packages/core/src/tests/native-symbol-stubs.ts",
+        "packages/core/src/tests/native-wrapper-cleanup.test.ts",
+        "packages/core/src/tests/opacity.test.ts",
+        "packages/core/src/tests/renderable-nullish-props.test.ts",
+        "packages/core/src/tests/renderable.snapshot.test.ts",
+        "packages/core/src/tests/renderable.test.ts",
+        "packages/core/src/tests/renderer.clock.test.ts",
+        "packages/core/src/tests/renderer.console-startup.test.ts",
+        "packages/core/src/tests/renderer.control.test.ts",
+        "packages/core/src/tests/renderer.core-slot-binding.test.ts",
+        "packages/core/src/tests/renderer.cursor.test.ts",
+        "packages/core/src/tests/renderer.custom-stdout.test.ts",
+        "packages/core/src/tests/renderer.destroy-during-render.test.ts",
+        "packages/core/src/tests/renderer.focus-restore.test.ts",
+        "packages/core/src/tests/renderer.focus.test.ts",
+        "packages/core/src/tests/renderer.frame-admission.test.ts",
+        "packages/core/src/tests/renderer.handler-error.test.ts",
+        "packages/core/src/tests/renderer.idle.test.ts",
+        "packages/core/src/tests/renderer.input.test.ts",
+        "packages/core/src/tests/renderer.kitty-flags.test.ts",
+        "packages/core/src/tests/renderer.kitty-transport.test.ts",
+        "packages/core/src/tests/renderer.lifecycle.test.ts",
+        "packages/core/src/tests/renderer.mouse.test.ts",
+        "packages/core/src/tests/renderer.native-scene-budget.test.ts",
+        "packages/core/src/tests/renderer.native-scene-close-output.test.ts",
+        "packages/core/src/tests/renderer.native-scene-controls.test.ts",
+        "packages/core/src/tests/renderer.native-scene-environment.test.ts",
+        "packages/core/src/tests/renderer.native-scene-lifecycle.test.ts",
+        "packages/core/src/tests/renderer.native-scene-markdown.test.ts",
+        "packages/core/src/tests/renderer.native-scene-measure.test.ts",
+        "packages/core/src/tests/renderer.native-scene-phases.test.ts",
+        "packages/core/src/tests/renderer.native-scene-post-process.test.ts",
+        "packages/core/src/tests/renderer.native-scene-scroll-lifecycle.test.ts",
+        "packages/core/src/tests/renderer.native-scene-split.test.ts",
+        "packages/core/src/tests/renderer.native-scene.test.ts",
+        "packages/core/src/tests/renderer.notifications.test.ts",
+        "packages/core/src/tests/renderer.palette.test.ts",
+        "packages/core/src/tests/renderer.program-status.test.ts",
+        "packages/core/src/tests/renderer.remote.test.ts",
+        "packages/core/src/tests/renderer.render-error.test.ts",
+        "packages/core/src/tests/renderer.render-stats.test.ts",
+        "packages/core/src/tests/renderer.scheduling.test.ts",
+        "packages/core/src/tests/renderer.scrollback-surface.test.ts",
+        "packages/core/src/tests/renderer.selection.test.ts",
+        "packages/core/src/tests/renderer.slot-registry.test.ts",
+        "packages/core/src/tests/renderer.stdin-log.test.ts",
+        "packages/core/src/tests/renderer.styled-links-contract.test.ts",
+        "packages/core/src/tests/renderer.tracker.test.ts",
+        "packages/core/src/tests/renderer.useMouse.test.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-cycle.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-import-like-string.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-mjs.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-no-bare-rewrite.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-package-type-cache.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-runtime-specifier.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-node-modules-scoped-package-bare-rewrite.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-path-alias.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-preserve-specifiers.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-resolve-roots.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-support-configure.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-support-late-addition.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-support.fixture.ts",
+        "packages/core/src/tests/runtime-plugin-support.test.ts",
+        "packages/core/src/tests/runtime-plugin-windows-file-url.fixture.ts",
+        "packages/core/src/tests/runtime-plugin.fixture.ts",
+        "packages/core/src/tests/runtime-plugin.test.ts",
+        "packages/core/src/tests/scene-observation-cache.test.ts",
+        "packages/core/src/tests/scrollbox-culling-bug.test.ts",
+        "packages/core/src/tests/scrollbox-hitgrid-resize.test.ts",
+        "packages/core/src/tests/scrollbox-hitgrid.test.ts",
+        "packages/core/src/tests/scrollbox.test.ts",
+        "packages/core/src/tests/wrap-resize-perf.test.ts",
+        "packages/core/src/tests/yoga-api-coverage.test.ts",
+        "packages/core/src/tests/yoga-callback-boundary-child.ts",
+        "packages/core/src/tests/yoga-callback-boundary.test.ts",
+        "packages/core/src/tests/yoga-callback-stress.test.ts",
+        "packages/core/src/tests/yoga-default-config-worker-child.ts",
+        "packages/core/src/tests/yoga-default-config-workers.test.ts",
+        "packages/core/src/tests/yoga-ffi.test.ts",
+        "packages/core/src/tests/yoga-setters.test.ts",
+        "packages/core/src/tests/yoga-upstream/**",
+        "packages/core/src/text-buffer-view.test.ts",
+        "packages/core/src/text-buffer-view.ts",
+        "packages/core/src/text-buffer.test.ts",
+        "packages/core/src/text-buffer.ts",
+        "packages/core/src/types.ts",
+        "packages/core/src/utils.ts",
+        "packages/core/src/yoga.internal.ts",
+        "packages/core/src/yoga.ts",
+        "packages/core/src/zig-structs.ts",
+        "packages/core/src/zig.ts",
+        "packages/core/tsconfig.build.json",
+        "packages/core/tsconfig.json",
+        "packages/core/tsconfig.node-test.json",
+        "packages/examples/install.sh",
+        "packages/examples/package.json",
+        "packages/examples/scripts/**",
+        "packages/examples/src/ascii-font-selection-demo.ts",
+        "packages/examples/src/assets/hast-example.json",
+        "packages/examples/src/audio-capture-demo.ts",
+        "packages/examples/src/audio-streaming-demo.ts",
+        "packages/examples/src/clipboard-paste-demo.ts",
+        "packages/examples/src/code-demo.ts",
+        "packages/examples/src/console-demo.ts",
+        "packages/examples/src/core-plugin-slots-demo.ts",
+        "packages/examples/src/diff-demo.ts",
+        "packages/examples/src/draggable-three-demo.ts",
+        "packages/examples/src/editor-demo.ts",
+        "packages/examples/src/embedded-terminal-demo.ts",
+        "packages/examples/src/extmarks-demo.ts",
+        "packages/examples/src/focus-restore-demo.ts",
+        "packages/examples/src/fonts.ts",
+        "packages/examples/src/fractal-shader-demo.ts",
+        "packages/examples/src/framebuffer-demo.ts",
+        "packages/examples/src/full-unicode-demo.ts",
+        "packages/examples/src/golden-star-demo.ts",
+        "packages/examples/src/grayscale-buffer-demo.ts",
+        "packages/examples/src/hast-syntax-highlighting-demo.ts",
+        "packages/examples/src/index.ts",
+        "packages/examples/src/input-demo.ts",
+        "packages/examples/src/input-select-layout-demo.ts",
+        "packages/examples/src/keymap-demo.ts",
+        "packages/examples/src/keypress-debug-demo.ts",
+        "packages/examples/src/lib/**",
+        "packages/examples/src/lights-phong-demo.ts",
+        "packages/examples/src/link-demo.ts",
+        "packages/examples/src/live-state-demo.ts",
+        "packages/examples/src/magick/**",
+        "packages/examples/src/markdown-code-block-renderer-demo.ts",
+        "packages/examples/src/markdown-demo.ts",
+        "packages/examples/src/mouse-interaction-demo.ts",
+        "packages/examples/src/native-audio-demo.ts",
+        "packages/examples/src/native-image-demo.ts",
+        "packages/examples/src/nested-zindex-demo.ts",
+        "packages/examples/src/notification-demo.ts",
+        "packages/examples/src/opacity-example.ts",
+        "packages/examples/src/opentui-demo.ts",
+        "packages/examples/src/pcm-playback.ts",
+        "packages/examples/src/physx-planck-2d-demo.ts",
+        "packages/examples/src/physx-rapier-2d-demo.ts",
+        "packages/examples/src/program-status-demo.ts",
+        "packages/examples/src/qrcode-demo.ts",
+        "packages/examples/src/relative-positioning-demo.ts",
+        "packages/examples/src/scroll-example.ts",
+        "packages/examples/src/scrollbox-mouse-test.ts",
+        "packages/examples/src/scrollbox-overlay-hit-test.ts",
+        "packages/examples/src/select-demo.ts",
+        "packages/examples/src/shader-cube-demo.ts",
+        "packages/examples/src/simple-layout-example.ts",
+        "packages/examples/src/slider-demo.ts",
+        "packages/examples/src/split-footer-image-demo.ts",
+        "packages/examples/src/split-footer-streaming-demo.ts",
+        "packages/examples/src/split-mode-demo.ts",
+        "packages/examples/src/sprite-animation-demo.ts",
+        "packages/examples/src/sprite-particle-generator-demo.ts",
+        "packages/examples/src/static-sprite-demo.ts",
+        "packages/examples/src/sticky-scroll-example.ts",
+        "packages/examples/src/styled-text-demo.ts",
+        "packages/examples/src/tab-select-demo.ts",
+        "packages/examples/src/terminal-title.ts",
+        "packages/examples/src/terminal.ts",
+        "packages/examples/src/text-node-demo.ts",
+        "packages/examples/src/text-selection-demo.ts",
+        "packages/examples/src/text-table-demo.ts",
+        "packages/examples/src/text-truncation-demo.ts",
+        "packages/examples/src/text-wrap.ts",
+        "packages/examples/src/texture-loading-demo.ts",
+        "packages/examples/src/timeline-example.ts",
+        "packages/examples/src/transparency-demo.ts",
+        "packages/examples/src/vnode-composition-demo.ts",
+        "packages/examples/src/wide-grapheme-overlay-demo.ts",
+        "packages/examples/src/xterm-web-demo/**",
+        "packages/examples/tsconfig.json",
+        "packages/keymap/**",
+        "packages/native/.gitignore",
+        "packages/native/README.md",
+        "packages/native/build.zig",
+        "packages/native/build.zig.zon",
+        "packages/native/examples/**",
+        "packages/native/include/**",
+        "packages/native/package.json",
+        "packages/native/scripts/**",
+        "packages/native/src/ansi.zig",
+        "packages/native/src/audio-abi.zig",
+        "packages/native/src/audio.zig",
+        "packages/native/src/bench/**",
+        "packages/native/src/bench-utils.zig",
+        "packages/native/src/bench.zig",
+        "packages/native/src/buffer-methods.zig",
+        "packages/native/src/buffer.zig",
+        "packages/native/src/clipboard/**",
+        "packages/native/src/clipboard-abi.zig",
+        "packages/native/src/context-abi.zig",
+        "packages/native/src/context-editor-abi.zig",
+        "packages/native/src/context-handles.zig",
+        "packages/native/src/context-image-abi.zig",
+        "packages/native/src/context-output-abi.zig",
+        "packages/native/src/context-terminal-abi.zig",
+        "packages/native/src/context-text-abi.zig",
+        "packages/native/src/context-unicode-abi.zig",
+        "packages/native/src/context.zig",
+        "packages/native/src/cov_runner.zig",
+        "packages/native/src/edit-buffer.zig",
+        "packages/native/src/editor-view.zig",
+        "packages/native/src/embedded-terminal/**",
+        "packages/native/src/encoded-unicode.zig",
+        "packages/native/src/event-emitter.zig",
+        "packages/native/src/file-logger.zig",
+        "packages/native/src/ghostty-vt.zig",
+        "packages/native/src/grapheme.zig",
+        "packages/native/src/image-resize-shim.c",
+        "packages/native/src/image-shim.c",
+        "packages/native/src/image-webp-avx2.c",
+        "packages/native/src/image-webp-config.c",
+        "packages/native/src/image-webp-sse41.c",
+        "packages/native/src/image.zig",
+        "packages/native/src/kitty-transport.zig",
+        "packages/native/src/lib.zig",
+        "packages/native/src/link.zig",
+        "packages/native/src/logger.zig",
+        "packages/native/src/mem-registry.zig",
+        "packages/native/src/miniaudio_shim.c",
+        "packages/native/src/native-renderable.zig",
+        "packages/native/src/native-span-feed-abi.zig",
+        "packages/native/src/native-span-feed-bench-lib.zig",
+        "packages/native/src/native-span-feed.zig",
+        "packages/native/src/opentui.zig",
+        "packages/native/src/renderer-output.zig",
+        "packages/native/src/renderer.zig",
+        "packages/native/src/rope.zig",
+        "packages/native/src/runtime-abi.zig",
+        "packages/native/src/runtime.zig",
+        "packages/native/src/scene-record.zig",
+        "packages/native/src/scene.zig",
+        "packages/native/src/session.zig",
+        "packages/native/src/split-scrollback.zig",
+        "packages/native/src/syntax-style.zig",
+        "packages/native/src/terminal-image.zig",
+        "packages/native/src/terminal.zig",
+        "packages/native/src/test.zig",
+        "packages/native/src/tests/**",
+        "packages/native/src/text-buffer-iterators.zig",
+        "packages/native/src/text-buffer-segment.zig",
+        "packages/native/src/text-buffer-view.zig",
+        "packages/native/src/text-buffer.zig",
+        "packages/native/src/utf8.zig",
+        "packages/native/src/utils.zig",
+        "packages/native/src/yoga-bridge.cpp",
+        "packages/native/src/yoga-bridge.h",
+        "packages/native/src/yoga-vocabulary.h",
+        "packages/native/src/yoga.zig",
+        "packages/qrcode/**",
+        "packages/react/**",
+        "packages/solid/**",
+        "packages/ssh/**",
+        "packages/three/**",
+        "packages/web/.gitignore",
+        "packages/web/AGENTS.md",
+        "packages/web/astro.config.mjs",
+        "packages/web/package.json",
+        "packages/web/public/favicon.svg",
+        "packages/web/public/opentui-logo-auto.svg",
+        "packages/web/public/opentui-logo-black.svg",
+        "packages/web/public/opentui-logo-spectrum.svg",
+        "packages/web/public/opentui-logo-white.svg",
+        "packages/web/public/recordings/**",
+        "packages/web/public/robots.txt",
+        "packages/web/scripts/**",
+        "packages/web/src/**",
+        "packages/web/tsconfig.json",
+        "scripts/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 opentui\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2025 opentui, MIT license (LICENSE), https://github.com/anomalyco/opentui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/native/src/vendor/lcms2/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Marti Maria Saguer\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the \n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to \npermit persons to whom the Software is furnished to do so, subject\nto the following conditions:\n\nThe above copyright notice and this permission notice shall be \nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Marti Maria Saguer, MIT license (LICENSE), https://github.com/anomalyco/opentui/tree/212eb27da4adf5b907031ad153fc6a5b9f713fbf/packages/native/src/vendor/lcms2."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "packages/native/src/vendor/libwebp/**"
+      ],
+      "text": "Copyright (c) 2010, Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n\n  * Neither the name of Google nor the names of its contributors may\n    be used to endorse or promote products derived from this software\n    without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nHOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n",
+      "attribution": "Copyright (c) 2010, Google Inc. All rights reserved., BSD-3-Clause license (COPYING), https://github.com/anomalyco/opentui/tree/212eb27da4adf5b907031ad153fc6a5b9f713fbf/packages/native/src/vendor/libwebp."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scheme",
+      "paths": [
+        "**/*.scm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.base64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.zig-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FILES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GHOSTTY"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PATENTS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bench-after"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bench-before"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/record"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

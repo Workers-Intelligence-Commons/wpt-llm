@@ -1,0 +1,408 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/locustio/locust",
+  "revision": "17462e27ee04533aa027f8017188018d33dc5e5e",
+  "checksum": "sha256:cb78cbe88c18c000cb2e10ab1b5d63c4f93360e210d193e18cb14e3bb4b3c4e8",
+  "extract": {
+    "exclude": [
+      "docs/images/azure-load-testing-results.png",
+      "docs/images/bottlenecked-server-dark.png",
+      "docs/images/bottlenecked-server-light.png",
+      "docs/images/extend_modern_web_ui_cache_stats.png",
+      "docs/images/locust-workers-dark.png",
+      "docs/images/locust-workers-light.png",
+      "docs/images/userclass_picker_example.png",
+      "docs/images/vscode-extension.png",
+      "docs/images/webui-running-statistics-dark.png",
+      "docs/images/webui-running-statistics-light.png",
+      "docs/images/webui-splash-dark.png",
+      "docs/images/webui-splash-light.png",
+      "locust/contrib/**",
+      "locust/webui/package.tgz",
+      "locust/webui/public/**"
+    ]
+  },
+  "history": {
+    "since": "fd44a460609c895a68cea66771c37581778375e8"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2009-2026, Carl Byström, Jonatan Heyman, Lars Holmberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\nThe MIT License\n\nCopyright (c) 2024, Andrew Baldwin, Lars Holmberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/locustio/locust: Copyright (c) 2009-2026, Carl Byström, Jonatan Heyman, Lars Holmberg, MIT license (LICENSE), https://github.com/locustio/locust; Copyright (c) 2024, Andrew Baldwin, Lars Holmberg, MIT license (LICENSE), https://github.com/locustio/locust/tree/17462e27ee04533aa027f8017188018d33dc5e5e/locust/webui."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".coveragerc",
+        ".dockerignore",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "Dockerfile",
+        "Dockerfile.ci",
+        "Dockerfile.otel",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "Vagrantfile",
+        "_typos.toml",
+        "benchmarks/**",
+        "docs/_ext/**",
+        "docs/_static/**",
+        "docs/_templates/**",
+        "docs/ai-docs.rst",
+        "docs/api.rst",
+        "docs/asyncio.rst",
+        "docs/changelog.rst",
+        "docs/conf.py",
+        "docs/configuration.rst",
+        "docs/developing-locust.rst",
+        "docs/extending-locust.rst",
+        "docs/extensions.rst",
+        "docs/faq.rst",
+        "docs/further-reading.rst",
+        "docs/history.rst",
+        "docs/hosted-load-testing.rst",
+        "docs/images/microsoft_logo.svg",
+        "docs/increase-performance.rst",
+        "docs/increasing-request-rate.rst",
+        "docs/index.rst",
+        "docs/installation.rst",
+        "docs/kubernetes-operator.rst",
+        "docs/logging.rst",
+        "docs/quickstart.rst",
+        "docs/running-distributed.rst",
+        "docs/running-in-debugger.rst",
+        "docs/running-in-docker.rst",
+        "docs/running-without-web-ui.rst",
+        "docs/tasksets.rst",
+        "docs/telemetry.rst",
+        "docs/testing-other-systems.rst",
+        "docs/use-as-lib.rst",
+        "docs/vscode-extension.rst",
+        "docs/what-is-locust.rst",
+        "docs/writing-a-locustfile.rst",
+        "examples/**",
+        "generate_changelog.py",
+        "hatch_build.py",
+        "locust/__init__.py",
+        "locust/__main__.py",
+        "locust/argument_parser.py",
+        "locust/clients.py",
+        "locust/debug.py",
+        "locust/dispatch.py",
+        "locust/env.py",
+        "locust/event.py",
+        "locust/exception.py",
+        "locust/html.py",
+        "locust/input_events.py",
+        "locust/log.py",
+        "locust/main.py",
+        "locust/opentelemetry.py",
+        "locust/py.typed",
+        "locust/rpc/**",
+        "locust/runners.py",
+        "locust/shape.py",
+        "locust/stats.py",
+        "locust/test/**",
+        "locust/user/**",
+        "locust/util/**",
+        "locust/web.py",
+        "package.json",
+        "pyproject.toml",
+        "pytest_locust/**",
+        "uv.lock"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2009-2026, Carl Byström, Jonatan Heyman, Lars Holmberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.",
+      "attribution": "Copyright (c) 2009-2026, Carl Byström, Jonatan Heyman, Lars Holmberg, MIT license (LICENSE), https://github.com/locustio/locust."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "locust/webui/.gitignore",
+        "locust/webui/.prettierrc",
+        "locust/webui/.yarn/**",
+        "locust/webui/.yarnrc.yml",
+        "locust/webui/LICENSE",
+        "locust/webui/README.md",
+        "locust/webui/auth.html",
+        "locust/webui/dev.html",
+        "locust/webui/eslint.config.mjs",
+        "locust/webui/index.html",
+        "locust/webui/package.json",
+        "locust/webui/report.html",
+        "locust/webui/src/**",
+        "locust/webui/tsconfig.json",
+        "locust/webui/vite.config.ts",
+        "locust/webui/vite.lib.config.ts",
+        "locust/webui/vite.report.config.ts",
+        "locust/webui/vitest.config.ts",
+        "locust/webui/yarn.lock"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2024, Andrew Baldwin, Lars Holmberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2024, Andrew Baldwin, Lars Holmberg, MIT license (LICENSE), https://github.com/locustio/locust/tree/17462e27ee04533aa027f8017188018d33dc5e5e/locust/webui."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Vagrantfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.otel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

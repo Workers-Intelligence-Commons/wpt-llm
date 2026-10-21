@@ -1,0 +1,966 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tensorzero/tensorzero",
+  "revision": "62eb8f63e8ec62018d70420dbf1a8c5d1c026315",
+  "checksum": "sha256:1512dc861de5962f428ea4dc8782e86b03c0afa63c283da86f300bb889e373da",
+  "extract": {
+    "exclude": [
+      "clients/placeholder-ruby/tensorzero-0.0.0.gem",
+      "crates/tensorzero-core/tests/e2e/providers/commonv2/input_audio_barks.mp3",
+      "crates/tensorzero-core/tests/e2e/providers/deepseek_paper.pdf",
+      "crates/tensorzero-core/tests/e2e/providers/ferris.png",
+      "docs/evaluations/inference-evaluations/configuration-reference-evaluation-ui.png",
+      "docs/evaluations/workflow-evaluations/tutorial-ui.png",
+      "docs/experimentation/run-adaptive-ab-tests.gif",
+      "docs/gateway/guides/inference-time-optimizations-best-of-n-sampling.png",
+      "docs/gateway/guides/inference-time-optimizations-dynamic-in-context-learning.png",
+      "docs/gateway/guides/inference-time-optimizations-mixture-of-n-sampling.png",
+      "docs/operations/centralize-auth-rate-limits-and-more-diagram.png",
+      "docs/operations/export-opentelemetry-traces-jaeger.png",
+      "docs/optimization/dynamic-in-context-learning-dicl-diagram.png",
+      "docs/quickstart-observability-function.png",
+      "docs/quickstart-observability-inference.png",
+      "docs/quickstart-sft.png",
+      "docs/tensorzero-crab.png",
+      "docs/tensorzero-freedom.png",
+      "examples/babyai/img/**",
+      "examples/haiku-hidden-preferences/data/clickhouse/**",
+      "ui/app/components/inference/Input.stories.fixture.tensorzero.mp3",
+      "ui/app/components/inference/Input.stories.fixture.tensorzero.pdf",
+      "ui/app/components/input_output/content_blocks/FileContentBlock.stories.fixture.mp3",
+      "ui/app/components/input_output/content_blocks/FileContentBlock.stories.fixture.pdf"
+    ]
+  },
+  "history": {
+    "since": "25ff0d4e67c78a233331b30eb9d417830fc6c424"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/tensorzero/tensorzero: TensorZero, Apache-2.0 license (LICENSE), https://github.com/tensorzero/tensorzero; the authors of tensorzero-node-darwin-arm64, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/darwin-arm64; the authors of tensorzero-node-darwin-x64, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/darwin-x64; the authors of tensorzero-node-linux-arm64-gnu, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-arm64-gnu; the authors of tensorzero-node-linux-arm64-musl, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-arm64-musl; the authors of tensorzero-node-linux-x64-gnu, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-x64-gnu; the authors of tensorzero-node-linux-x64-musl, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-x64-musl."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".buildkite/**",
+        ".claude/**",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".oxfmtrc.json",
+        ".pre-commit-config.yaml",
+        ".python-version",
+        "AGENTS.md",
+        "CITATION.cff",
+        "CLA.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "RELEASE_GUIDE.md",
+        "REVIEWING.md",
+        "SECURITY.md",
+        "artifacthub-repo.yml",
+        "ci/**",
+        "clients/README.md",
+        "clients/openai-go/**",
+        "clients/openai-node/**",
+        "clients/placeholder-javascript/**",
+        "clients/placeholder-ruby/lib/**",
+        "clients/placeholder-ruby/tensorzero.gemspec",
+        "composer.json",
+        "crates/.cargo/**",
+        "crates/.config/**",
+        "crates/.sqlx/**",
+        "crates/Cargo.lock",
+        "crates/Cargo.toml",
+        "crates/autopilot-client/**",
+        "crates/autopilot-tools/**",
+        "crates/autopilot-worker/**",
+        "crates/bip39-uuid-substitution/**",
+        "crates/clippy.toml",
+        "crates/config-applier/**",
+        "crates/deny.toml",
+        "crates/durable-tools/**",
+        "crates/durable-tools-spawn/**",
+        "crates/evaluations/**",
+        "crates/gateway/**",
+        "crates/googletest-matchers/**",
+        "crates/minijinja-utils/**",
+        "crates/provider-proxy/**",
+        "crates/reqwest-sse-stream/**",
+        "crates/rust-toolchain.toml",
+        "crates/tensorzero-auth/**",
+        "crates/tensorzero-client/**",
+        "crates/tensorzero-config-paths/**",
+        "crates/tensorzero-core/Cargo.toml",
+        "crates/tensorzero-core/build.rs",
+        "crates/tensorzero-core/fixtures/**",
+        "crates/tensorzero-core/src/**",
+        "crates/tensorzero-core/tests/e2e/AGENTS.md",
+        "crates/tensorzero-core/tests/e2e/CLAUDE.md",
+        "crates/tensorzero-core/tests/e2e/Dockerfile.clickhouse",
+        "crates/tensorzero-core/tests/e2e/Dockerfile.gateway.e2e",
+        "crates/tensorzero-core/tests/e2e/Dockerfile.live",
+        "crates/tensorzero-core/tests/e2e/README.md",
+        "crates/tensorzero-core/tests/e2e/aggregated_response/**",
+        "crates/tensorzero-core/tests/e2e/auth.rs",
+        "crates/tensorzero-core/tests/e2e/best_of_n.rs",
+        "crates/tensorzero-core/tests/e2e/built_in.rs",
+        "crates/tensorzero-core/tests/e2e/cache.rs",
+        "crates/tensorzero-core/tests/e2e/clickhouse-configs/**",
+        "crates/tensorzero-core/tests/e2e/clickhouse.rs",
+        "crates/tensorzero-core/tests/e2e/common.rs",
+        "crates/tensorzero-core/tests/e2e/config/**",
+        "crates/tensorzero-core/tests/e2e/config-in-db/**",
+        "crates/tensorzero-core/tests/e2e/config.rs",
+        "crates/tensorzero-core/tests/e2e/config_editing/**",
+        "crates/tensorzero-core/tests/e2e/cost.rs",
+        "crates/tensorzero-core/tests/e2e/db/**",
+        "crates/tensorzero-core/tests/e2e/db_only_boot/**",
+        "crates/tensorzero-core/tests/e2e/dicl.rs",
+        "crates/tensorzero-core/tests/e2e/docker-compose-common.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.clickhouse.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.config-in-db.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.db-only-boot.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.live.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.replicated.yml",
+        "crates/tensorzero-core/tests/e2e/docker-compose.yml",
+        "crates/tensorzero-core/tests/e2e/dynamic_variants.rs",
+        "crates/tensorzero-core/tests/e2e/endpoints/**",
+        "crates/tensorzero-core/tests/e2e/experimentation/**",
+        "crates/tensorzero-core/tests/e2e/extra_templates/**",
+        "crates/tensorzero-core/tests/e2e/fallback.rs",
+        "crates/tensorzero-core/tests/e2e/feedback.rs",
+        "crates/tensorzero-core/tests/e2e/health.rs",
+        "crates/tensorzero-core/tests/e2e/howdy.rs",
+        "crates/tensorzero-core/tests/e2e/human_feedback.rs",
+        "crates/tensorzero-core/tests/e2e/image_url.rs",
+        "crates/tensorzero-core/tests/e2e/inference/**",
+        "crates/tensorzero-core/tests/e2e/inference_clickhouse.rs",
+        "crates/tensorzero-core/tests/e2e/inference_evaluation_human_feedback.rs",
+        "crates/tensorzero-core/tests/e2e/jaeger-config.yaml",
+        "crates/tensorzero-core/tests/e2e/mcp/**",
+        "crates/tensorzero-core/tests/e2e/mixture_of_n.rs",
+        "crates/tensorzero-core/tests/e2e/object_storage.rs",
+        "crates/tensorzero-core/tests/e2e/openai_compatible.rs",
+        "crates/tensorzero-core/tests/e2e/otel-collector-config.yaml",
+        "crates/tensorzero-core/tests/e2e/otel.rs",
+        "crates/tensorzero-core/tests/e2e/otel_config_headers.rs",
+        "crates/tensorzero-core/tests/e2e/otel_export.rs",
+        "crates/tensorzero-core/tests/e2e/prometheus.rs",
+        "crates/tensorzero-core/tests/e2e/provider_tools/**",
+        "crates/tensorzero-core/tests/e2e/providers/anthropic.rs",
+        "crates/tensorzero-core/tests/e2e/providers/aws_bedrock.rs",
+        "crates/tensorzero-core/tests/e2e/providers/aws_sagemaker_openai.rs",
+        "crates/tensorzero-core/tests/e2e/providers/aws_sagemaker_tgi.rs",
+        "crates/tensorzero-core/tests/e2e/providers/azure.rs",
+        "crates/tensorzero-core/tests/e2e/providers/batch.rs",
+        "crates/tensorzero-core/tests/e2e/providers/common.rs",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/cache_input_tokens.rs",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/input_audio.rs",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/large_system_prompt.txt",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/mod.rs",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/raw_usage.rs",
+        "crates/tensorzero-core/tests/e2e/providers/commonv2/usage.rs",
+        "crates/tensorzero-core/tests/e2e/providers/deepseek.rs",
+        "crates/tensorzero-core/tests/e2e/providers/embeddings.rs",
+        "crates/tensorzero-core/tests/e2e/providers/errors.rs",
+        "crates/tensorzero-core/tests/e2e/providers/fireworks.rs",
+        "crates/tensorzero-core/tests/e2e/providers/gcp_vertex_anthropic.rs",
+        "crates/tensorzero-core/tests/e2e/providers/gcp_vertex_gemini.rs",
+        "crates/tensorzero-core/tests/e2e/providers/google_ai_studio_gemini.rs",
+        "crates/tensorzero-core/tests/e2e/providers/groq.rs",
+        "crates/tensorzero-core/tests/e2e/providers/helpers.rs",
+        "crates/tensorzero-core/tests/e2e/providers/hyperbolic.rs",
+        "crates/tensorzero-core/tests/e2e/providers/mistral.rs",
+        "crates/tensorzero-core/tests/e2e/providers/mock_batch.rs",
+        "crates/tensorzero-core/tests/e2e/providers/mod.rs",
+        "crates/tensorzero-core/tests/e2e/providers/openai/**",
+        "crates/tensorzero-core/tests/e2e/providers/openrouter.rs",
+        "crates/tensorzero-core/tests/e2e/providers/reasoning.rs",
+        "crates/tensorzero-core/tests/e2e/providers/sglang.rs",
+        "crates/tensorzero-core/tests/e2e/providers/tgi.rs",
+        "crates/tensorzero-core/tests/e2e/providers/together.rs",
+        "crates/tensorzero-core/tests/e2e/providers/vllm.rs",
+        "crates/tensorzero-core/tests/e2e/providers/xai.rs",
+        "crates/tensorzero-core/tests/e2e/proxy.rs",
+        "crates/tensorzero-core/tests/e2e/rate_limiting.rs",
+        "crates/tensorzero-core/tests/e2e/rate_limiting_startup.rs",
+        "crates/tensorzero-core/tests/e2e/raw_response/**",
+        "crates/tensorzero-core/tests/e2e/raw_usage/**",
+        "crates/tensorzero-core/tests/e2e/render_inferences.rs",
+        "crates/tensorzero-core/tests/e2e/replicated_clickhouse_config/**",
+        "crates/tensorzero-core/tests/e2e/retries.rs",
+        "crates/tensorzero-core/tests/e2e/self-signed-certs/**",
+        "crates/tensorzero-core/tests/e2e/streaming_errors.rs",
+        "crates/tensorzero-core/tests/e2e/template.rs",
+        "crates/tensorzero-core/tests/e2e/tempo.yaml",
+        "crates/tensorzero-core/tests/e2e/tests.rs",
+        "crates/tensorzero-core/tests/e2e/timeouts.rs",
+        "crates/tensorzero-core/tests/e2e/tokenize_e5.py",
+        "crates/tensorzero-core/tests/e2e/utils/**",
+        "crates/tensorzero-core/tests/e2e/workflow_evaluations.rs",
+        "crates/tensorzero-core/tests/load/**",
+        "crates/tensorzero-core/tests/mock-provider-api/**",
+        "crates/tensorzero-derive/**",
+        "crates/tensorzero-error/**",
+        "crates/tensorzero-http/**",
+        "crates/tensorzero-inference-types/**",
+        "crates/tensorzero-mcp/**",
+        "crates/tensorzero-node/.cargo/**",
+        "crates/tensorzero-node/.github/**",
+        "crates/tensorzero-node/.gitignore",
+        "crates/tensorzero-node/.npmignore",
+        "crates/tensorzero-node/.oxfmtrc.json",
+        "crates/tensorzero-node/Cargo.toml",
+        "crates/tensorzero-node/README.md",
+        "crates/tensorzero-node/build-bindings.sh",
+        "crates/tensorzero-node/build.rs",
+        "crates/tensorzero-node/eslint.config.js",
+        "crates/tensorzero-node/lib/**",
+        "crates/tensorzero-node/package.json",
+        "crates/tensorzero-node/src/**",
+        "crates/tensorzero-node/tsconfig.json",
+        "crates/tensorzero-node/vitest.config.js",
+        "crates/tensorzero-optimizers/**",
+        "crates/tensorzero-otel/**",
+        "crates/tensorzero-overhead/**",
+        "crates/tensorzero-python/**",
+        "crates/tensorzero-stored-config/**",
+        "crates/tensorzero-ts-types/**",
+        "crates/tensorzero-types/**",
+        "crates/tensorzero-types-providers/**",
+        "crates/tensorzero-unsafe-helpers/**",
+        "crates/ts-executor-pool/**",
+        "docs/AGENTS.md",
+        "docs/CLAUDE.md",
+        "docs/README.md",
+        "docs/comparison/**",
+        "docs/deployment/**",
+        "docs/docs.json",
+        "docs/evaluations/index.mdx",
+        "docs/evaluations/inference-evaluations/cli-reference.mdx",
+        "docs/evaluations/inference-evaluations/configuration-reference.mdx",
+        "docs/evaluations/inference-evaluations/tutorial.mdx",
+        "docs/evaluations/workflow-evaluations/api-reference.mdx",
+        "docs/evaluations/workflow-evaluations/tutorial.mdx",
+        "docs/experimentation/run-adaptive-ab-tests.mdx",
+        "docs/experimentation/run-static-ab-tests.mdx",
+        "docs/experimentation/scope-experiments-with-namespaces.mdx",
+        "docs/faq.mdx",
+        "docs/favicon.svg",
+        "docs/gateway/api-reference/**",
+        "docs/gateway/benchmarks.mdx",
+        "docs/gateway/call-any-llm.mdx",
+        "docs/gateway/call-llms-with-image-and-file-inputs.mdx",
+        "docs/gateway/call-the-openai-responses-api.mdx",
+        "docs/gateway/configuration-reference.mdx",
+        "docs/gateway/configure-functions-and-variants.mdx",
+        "docs/gateway/configure-models-and-providers.mdx",
+        "docs/gateway/create-a-prompt-template.mdx",
+        "docs/gateway/data-model.mdx",
+        "docs/gateway/generate-embeddings.mdx",
+        "docs/gateway/generate-structured-outputs.mdx",
+        "docs/gateway/guides/batch-inference.mdx",
+        "docs/gateway/guides/episodes.mdx",
+        "docs/gateway/guides/inference-caching.mdx",
+        "docs/gateway/guides/inference-time-optimizations.mdx",
+        "docs/gateway/guides/metrics-feedback.mdx",
+        "docs/gateway/guides/retries-fallbacks.mdx",
+        "docs/gateway/guides/tool-use.mdx",
+        "docs/gateway/index.mdx",
+        "docs/index.mdx",
+        "docs/integrations/**",
+        "docs/logo/**",
+        "docs/observability/**",
+        "docs/operations/centralize-auth-rate-limits-and-more.mdx",
+        "docs/operations/enforce-custom-rate-limits.mdx",
+        "docs/operations/export-opentelemetry-traces.mdx",
+        "docs/operations/export-prometheus-metrics.mdx",
+        "docs/operations/extend-tensorzero.mdx",
+        "docs/operations/manage-credentials.mdx",
+        "docs/operations/organize-your-configuration.mdx",
+        "docs/operations/set-up-auth-for-tensorzero.mdx",
+        "docs/operations/track-usage-and-cost.mdx",
+        "docs/optimization/dynamic-in-context-learning-dicl.mdx",
+        "docs/optimization/gepa.mdx",
+        "docs/optimization/index-mipro-diagram.svg",
+        "docs/optimization/index.mdx",
+        "docs/optimization/supervised-fine-tuning-sft.mdx",
+        "docs/package.json",
+        "docs/patches/**",
+        "docs/pnpm-lock.yaml",
+        "docs/pnpm-workspace.yaml",
+        "docs/quickstart.mdx",
+        "docs/script.js",
+        "docs/style.css",
+        "docs/vision-and-roadmap.mdx",
+        "examples/autopilot/**",
+        "examples/babyai/.env.example",
+        "examples/babyai/.python-version",
+        "examples/babyai/README.md",
+        "examples/babyai/babyai.ipynb",
+        "examples/babyai/config/**",
+        "examples/babyai/config.yml",
+        "examples/babyai/docker-compose.yml",
+        "examples/babyai/environment.yml",
+        "examples/babyai/pyproject.toml",
+        "examples/babyai/uv.lock",
+        "examples/blog/**",
+        "examples/chess-puzzles/**",
+        "examples/data-extraction-ner/**",
+        "examples/docs/**",
+        "examples/evaluations/**",
+        "examples/guides/**",
+        "examples/haiku-hidden-preferences/.env.example",
+        "examples/haiku-hidden-preferences/README.md",
+        "examples/haiku-hidden-preferences/config/**",
+        "examples/haiku-hidden-preferences/data/nounlist.txt",
+        "examples/haiku-hidden-preferences/data/visualization.svg",
+        "examples/haiku-hidden-preferences/docker-compose.yml",
+        "examples/haiku-hidden-preferences/haiku.ipynb",
+        "examples/haiku-hidden-preferences/pyproject.toml",
+        "examples/haiku-hidden-preferences/uv.lock",
+        "examples/integrations/**",
+        "examples/mcp-model-context-protocol/**",
+        "examples/multimodal-vision-finetuning/**",
+        "examples/optimization/**",
+        "examples/package.json",
+        "examples/pnpm-lock.yaml",
+        "examples/pnpm-workspace.yaml",
+        "examples/production-deployment-k8s-helm/**",
+        "examples/rag-retrieval-augmented-generation/**",
+        "examples/readme/**",
+        "examples/workflow_evaluations/**",
+        "for-agents/**",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "ruff.toml",
+        "scripts/**",
+        "ui/.dockerignore",
+        "ui/.env.example",
+        "ui/.gitignore",
+        "ui/.oxfmtrc.json",
+        "ui/.oxlintrc.json",
+        "ui/.storybook/**",
+        "ui/AGENTS.md",
+        "ui/CLAUDE.md",
+        "ui/Dockerfile",
+        "ui/README.md",
+        "ui/app/components/.storybook/**",
+        "ui/app/components/autopilot/**",
+        "ui/app/components/datapoint/**",
+        "ui/app/components/dataset/**",
+        "ui/app/components/entity-sheet/**",
+        "ui/app/components/evaluations/**",
+        "ui/app/components/experimentation/**",
+        "ui/app/components/feedback/**",
+        "ui/app/components/function/**",
+        "ui/app/components/icons/**",
+        "ui/app/components/inference/CopyMessagesButton.tsx",
+        "ui/app/components/inference/ImageBlock.tsx",
+        "ui/app/components/inference/InferenceDetailContent.tsx",
+        "ui/app/components/inference/InferencePreviewSheet.tsx",
+        "ui/app/components/inference/SkeletonImage.tsx",
+        "ui/app/components/inference/SystemContent.tsx",
+        "ui/app/components/inference/ToolParametersSection.stories.tsx",
+        "ui/app/components/inference/ToolParametersSection.tsx",
+        "ui/app/components/inference/TryWithSelect.tsx",
+        "ui/app/components/inference/VariantResponseModal.tsx",
+        "ui/app/components/input_output/ChatOutputContentBlockElement.tsx",
+        "ui/app/components/input_output/ChatOutputElement.stories.tsx",
+        "ui/app/components/input_output/ChatOutputElement.tsx",
+        "ui/app/components/input_output/ChatOutputMessageElement.tsx",
+        "ui/app/components/input_output/ContentBlockElement.tsx",
+        "ui/app/components/input_output/ExpandableElement.tsx",
+        "ui/app/components/input_output/InputElement.stories.tsx",
+        "ui/app/components/input_output/InputElement.tsx",
+        "ui/app/components/input_output/JsonOutputElement.stories.tsx",
+        "ui/app/components/input_output/JsonOutputElement.tsx",
+        "ui/app/components/input_output/MessageElement.tsx",
+        "ui/app/components/input_output/MessageWrapper.tsx",
+        "ui/app/components/input_output/MessagesElement.tsx",
+        "ui/app/components/input_output/ModelInferenceOutput.stories.tsx",
+        "ui/app/components/input_output/ModelInferenceOutput.tsx",
+        "ui/app/components/input_output/SystemElement.tsx",
+        "ui/app/components/input_output/content_blocks/ContentBlockLabel.tsx",
+        "ui/app/components/input_output/content_blocks/FileContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/FileContentBlock.test.tsx",
+        "ui/app/components/input_output/content_blocks/FileContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/InferenceResponseToolCallContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/TemplateContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/TemplateContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/TextContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/TextContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/ThoughtContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/ThoughtContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/ToolCallContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/ToolCallContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/ToolPayload.tsx",
+        "ui/app/components/input_output/content_blocks/ToolResultContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/ToolResultContentBlock.tsx",
+        "ui/app/components/input_output/content_blocks/UnknownContentBlock.stories.tsx",
+        "ui/app/components/input_output/content_blocks/UnknownContentBlock.tsx",
+        "ui/app/components/layout/**",
+        "ui/app/components/metric/**",
+        "ui/app/components/model/**",
+        "ui/app/components/querybuilder/**",
+        "ui/app/components/tags/**",
+        "ui/app/components/ui/**",
+        "ui/app/components/utils/**",
+        "ui/app/context/**",
+        "ui/app/contexts/**",
+        "ui/app/entry.server.tsx",
+        "ui/app/hooks/**",
+        "ui/app/providers/**",
+        "ui/app/root.tsx",
+        "ui/app/routes/**",
+        "ui/app/routes.ts",
+        "ui/app/tailwind.css",
+        "ui/app/types/**",
+        "ui/app/utils/**",
+        "ui/components.json",
+        "ui/docker-compose.yml",
+        "ui/e2e_tests/**",
+        "ui/entrypoint.sh",
+        "ui/eslint.config.js",
+        "ui/fixtures/**",
+        "ui/generate-autopilot-data-stream.sh",
+        "ui/generate-autopilot-data.sh",
+        "ui/generate-pending-tool-calls.sh",
+        "ui/package.json",
+        "ui/playwright.config.ts",
+        "ui/public/**",
+        "ui/react-router.config.ts",
+        "ui/run_e2e_ui.sh",
+        "ui/tsconfig.json",
+        "ui/types/**",
+        "ui/vite.config.ts",
+        "ui/vitest.shims.d.ts"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "TensorZero, Apache-2.0 license (LICENSE), https://github.com/tensorzero/tensorzero."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/darwin-arm64/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-darwin-arm64, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/darwin-arm64."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/darwin-x64/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-darwin-x64, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/darwin-x64."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/linux-arm64-gnu/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-linux-arm64-gnu, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-arm64-gnu."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/linux-arm64-musl/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-linux-arm64-musl, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-arm64-musl."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/linux-x64-gnu/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-linux-x64-gnu, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-x64-gnu."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "crates/tensorzero-node/npm/linux-x64-musl/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "the authors of tensorzero-node-linux-x64-musl, MIT license (declared in package.json), https://github.com/tensorzero/tensorzero/tree/62eb8f63e8ec62018d70420dbf1a8c5d1c026315/crates/tensorzero-node/npm/linux-x64-musl."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.banned"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.clickhouse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.e2e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jinja2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.live"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "ci/markdown-broken-link-checker/uv.lock",
+        "crates/tensorzero-core/fixtures/deployment/sagemaker-ollama/uv.lock",
+        "crates/tensorzero-core/fixtures/deployment/sagemaker-tgi/uv.lock",
+        "crates/tensorzero-python/uv.lock",
+        "examples/babyai/uv.lock",
+        "examples/blog/bandits-in-your-llm-gateway/uv.lock",
+        "examples/chess-puzzles/uv.lock",
+        "examples/data-extraction-ner/uv.lock",
+        "examples/docs/guides/experimentation/run-adaptive-ab-tests/uv.lock",
+        "examples/docs/guides/gateway/call-any-llm/uv.lock",
+        "examples/docs/guides/gateway/call-llms-with-image-and-file-inputs/uv.lock",
+        "examples/docs/guides/gateway/call-the-openai-responses-api/uv.lock",
+        "examples/docs/guides/gateway/create-a-prompt-template/uv.lock",
+        "examples/docs/guides/gateway/generate-structured-outputs/uv.lock",
+        "examples/docs/guides/observability/query-historical-inferences/uv.lock",
+        "examples/docs/guides/operations/enforce-custom-rate-limits/postgres/uv.lock",
+        "examples/docs/guides/operations/enforce-custom-rate-limits/valkey-redis/uv.lock",
+        "examples/docs/guides/operations/set-up-auth-for-tensorzero/uv.lock",
+        "examples/docs/guides/operations/track-usage-and-cost/uv.lock",
+        "examples/docs/guides/optimization/dynamic-in-context-learning-dicl/uv.lock",
+        "examples/docs/guides/optimization/gepa/uv.lock",
+        "examples/docs/guides/optimization/supervised-fine-tuning-sft/uv.lock",
+        "examples/docs/guides/quickstart/uv.lock",
+        "examples/evaluations/tutorial/uv.lock",
+        "examples/guides/datasets-datapoints/uv.lock",
+        "examples/guides/embeddings/providers/azure/uv.lock",
+        "examples/guides/embeddings/providers/openai-compatible-ollama/uv.lock",
+        "examples/guides/embeddings/providers/openai/uv.lock",
+        "examples/guides/episodes/uv.lock",
+        "examples/guides/metrics-feedback/uv.lock",
+        "examples/guides/tool-use/uv.lock",
+        "examples/haiku-hidden-preferences/uv.lock",
+        "examples/integrations/crewai/example/uv.lock",
+        "examples/integrations/langgraph/uv.lock",
+        "examples/mcp-model-context-protocol/uv.lock",
+        "examples/multimodal-vision-finetuning/uv.lock",
+        "examples/optimization/dicl/uv.lock",
+        "examples/rag-retrieval-augmented-generation/simple-agentic-rag/uv.lock",
+        "examples/readme/uv.lock",
+        "examples/workflow_evaluations/simple-agentic-rag/uv.lock",
+        "ui/fixtures/uv.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.minijinja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rs_"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stderr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-checkout"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,813 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/PowerShell/PowerShell",
+  "revision": "db1d0a56cbe41adf05d0bad90be5190a6655404f",
+  "checksum": "sha256:81414af2afbd0173c65cb2480576f958a6041f50b383c6fd34d007bca2f5f0ee",
+  "extract": {
+    "exclude": [
+      ".github/Images/**",
+      "assets/Chibi_Avatar.png",
+      "assets/Powershell-preview.icns",
+      "assets/Powershell.icns",
+      "assets/Powershell_256.png",
+      "assets/Powershell_64.png",
+      "assets/Powershell_av_colors.ico",
+      "assets/Powershell_avatar.ico",
+      "assets/Powershell_black.ico",
+      "assets/Powershell_black_64.png",
+      "assets/Square150x150Logo-Preview.png",
+      "assets/Square150x150Logo.png",
+      "assets/Square44x44Logo-Preview.png",
+      "assets/Square44x44Logo.png",
+      "assets/Square44x44Logo.targetsize-48-Preview.png",
+      "assets/Square44x44Logo.targetsize-48.png",
+      "assets/Square44x44Logo.targetsize-48_altform-unplated-Preview.png",
+      "assets/Square44x44Logo.targetsize-48_altform-unplated.png",
+      "assets/StoreLogo-Preview.png",
+      "assets/StoreLogo.png",
+      "assets/macDialog.png",
+      "assets/ps_black_32x32.ico",
+      "docs/cmdlet-example/Images/**",
+      "docs/community/process_diagram.vsdx",
+      "docs/maintainers/Images/**",
+      "docs/testing-guidelines/Images/**",
+      "src/GlobalTools/PowerShell.Windows.x64/Powershell_64.png",
+      "src/Microsoft.Management.UI.Internal/resources/Graphics/**",
+      "src/Schemas/PSMaml/Maml.rld",
+      "src/Schemas/PSMaml/developerCommand.rld",
+      "src/signing/**",
+      "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/BadCounterSamples.blg",
+      "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/CounterSamples.blg",
+      "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/Saved-Events.evtx",
+      "test/powershell/Modules/Microsoft.PowerShell.Security/TestData/CatalogTestData/TestImage.gif",
+      "test/powershell/Modules/PackageManagement/assets/**",
+      "test/powershell/engine/Help/assets/CimCmdlets_fb6cc51d-c096-4b38-b78d-0fed6277096a_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Archive_eb74e8da-9ae2-482a-a648-e96550fb8733_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Archive_eb74e8da-9ae2-482a-a648-e96550fb8733_en-US_HelpContent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Core_00000000-0000-0000-0000-000000000000_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Core_00000000-0000-0000-0000-000000000000_en-US_HelpContent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Diagnostics_ca046f10-ca64-4740-8ff9-2565dba61a4f_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Diagnostics_ca046f10-ca64-4740-8ff9-2565dba61a4f_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Host_56d66100-99a0-4ffc-a12d-eee9a6718aef_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Host_56d66100-99a0-4ffc-a12d-eee9a6718aef_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.LocalAccounts_8e362604-2c0b-448f-a414-a6a690a644e2_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Management_eefcb906-b326-4e99-9f54-8b4bb6ef3c6d_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Management_eefcb906-b326-4e99-9f54-8b4bb6ef3c6d_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Security_A94C8C7E-9810-47C0-B8AF-65089C13A35A_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Security_a94c8c7e-9810-47c0-b8af-65089c13a35a_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Utility_1da87e53-152b-403e-98dc-74d7b4d63d59_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.PowerShell.Utility_1da87e53-152b-403e-98dc-74d7b4d63d59_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/Microsoft.WSMan.Management_766204A6-330E-4263-A7AB-46C87AFC366C_en-US_HelpContent.cab",
+      "test/powershell/engine/Help/assets/Microsoft.WsMan.Management_766204A6-330E-4263-A7AB-46C87AFC366C_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/PackageManagement_4ae9fd46-338a-459c-8186-07f910774cb8_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/PackageManagement_4ae9fd46-338a-459c-8186-07f910774cb8_en-US_helpcontent.zip",
+      "test/powershell/engine/Help/assets/PowershellGet_1d73a601-4a6c-43c5-ba3f-619b18bbb404_en-US_helpcontent.cab",
+      "test/powershell/engine/Help/assets/PowershellGet_1d73a601-4a6c-43c5-ba3f-619b18bbb404_en-US_helpcontent.zip",
+      "test/powershell/engine/Module/assets/PowerShell.TestPackage.3.2.1.nupkg",
+      "tools/terms/PowerShell-Terms-Rules.mdb"
+    ]
+  },
+  "history": {
+    "since": "6dd33f751ba2055864468bf3bbee63ff3f60302e"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) Microsoft Corporation.\n\nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/PowerShell/PowerShell: Copyright (c) Microsoft Corporation., MIT license (LICENSE.txt), https://github.com/PowerShell/PowerShell."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".config/**",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/CODEOWNERS",
+        ".github/CONTRIBUTING.md",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/SECURITY.md",
+        ".github/SUPPORT.md",
+        ".github/action-filters.yml",
+        ".github/actions/**",
+        ".github/agents/**",
+        ".github/chatmodes/**",
+        ".github/dependabot.yml",
+        ".github/instructions/**",
+        ".github/issue_label_bot.yaml",
+        ".github/policies/**",
+        ".github/prompts/**",
+        ".github/prquantifier.yaml",
+        ".github/skills/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".globalconfig",
+        ".mailmap",
+        ".markdownlint.json",
+        ".markdownlintignore",
+        ".pipelines/**",
+        ".prettierrc",
+        ".spelling",
+        ".vscode/**",
+        ".vsts-ci/**",
+        "ADOPTERS.md",
+        "Analyzers.props",
+        "CHANGELOG/**",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "DotnetRuntimeMetadata.json",
+        "LICENSE.txt",
+        "Localize/**",
+        "PowerShell.Common.props",
+        "PowerShell.sln",
+        "README.md",
+        "Settings.StyleCop",
+        "ThirdPartyNotices.txt",
+        "assets/AppxManifest.xml",
+        "assets/Avatar.svg",
+        "assets/Chibi_Avatar.svg",
+        "assets/GroupPolicy/**",
+        "assets/README.md",
+        "assets/additionalAttributions.txt",
+        "assets/av_colors_128.svg",
+        "assets/avatar_128.svg",
+        "assets/default.help.txt",
+        "assets/macos-entitlements.plist",
+        "assets/manpage/**",
+        "assets/powershell_128.svg",
+        "assets/ps_black_128.svg",
+        "assets/ps_black_64.svg",
+        "assets/ps_fluent_design_384.svg",
+        "assets/pwsh.manifest",
+        "build.psm1",
+        "codecov.yml",
+        "docker/**",
+        "docs/DOCSMIGRATION.md",
+        "docs/FAQ.md",
+        "docs/building/**",
+        "docs/cmdlet-example/command-line-simple-example.md",
+        "docs/cmdlet-example/visual-studio-simple-example.md",
+        "docs/community/governance.md",
+        "docs/community/process_diagram.svg",
+        "docs/community/working-group-definitions.md",
+        "docs/community/working-group.md",
+        "docs/debugging/**",
+        "docs/dev-process/**",
+        "docs/git/**",
+        "docs/host-powershell/**",
+        "docs/maintainers/README.md",
+        "docs/maintainers/best-practice.md",
+        "docs/maintainers/issue-management.md",
+        "docs/maintainers/releasing.md",
+        "docs/testing-guidelines/PowerShellCoreTestStatus.md",
+        "docs/testing-guidelines/TestRoadmap.md",
+        "docs/testing-guidelines/WritingPesterTests.md",
+        "docs/testing-guidelines/getting-code-coverage.md",
+        "docs/testing-guidelines/testing-guidelines.md",
+        "dsc/**",
+        "es-metadata.yml",
+        "experimental-feature-linux.json",
+        "experimental-feature-windows.json",
+        "global.json",
+        "nuget.config",
+        "src/GlobalTools/PowerShell.Windows.x64/PowerShell.Windows.x64.csproj",
+        "src/Microsoft.Management.Infrastructure.CimCmdlets/**",
+        "src/Microsoft.Management.UI.Internal/CommonHelper.cs",
+        "src/Microsoft.Management.UI.Internal/HelpWindow/**",
+        "src/Microsoft.Management.UI.Internal/ManagementList/**",
+        "src/Microsoft.Management.UI.Internal/Microsoft.PowerShell.GraphicalHost.csproj",
+        "src/Microsoft.Management.UI.Internal/ShowCommand/**",
+        "src/Microsoft.Management.UI.Internal/app.config",
+        "src/Microsoft.Management.UI.Internal/commandHelpers/**",
+        "src/Microsoft.Management.UI.Internal/resources/cs/**",
+        "src/Microsoft.Management.UI.Internal/resources/de/**",
+        "src/Microsoft.Management.UI.Internal/resources/es/**",
+        "src/Microsoft.Management.UI.Internal/resources/fr/**",
+        "src/Microsoft.Management.UI.Internal/resources/it/**",
+        "src/Microsoft.Management.UI.Internal/resources/ja/**",
+        "src/Microsoft.Management.UI.Internal/resources/ko/**",
+        "src/Microsoft.Management.UI.Internal/resources/pl/**",
+        "src/Microsoft.Management.UI.Internal/resources/pt-BR/**",
+        "src/Microsoft.Management.UI.Internal/resources/public.GraphicalHostResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/public.HelpWindowResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/public.InvariantResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/public.ShowCommandResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/public.UICultureResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/public.XamlLocalizableResources.resx",
+        "src/Microsoft.Management.UI.Internal/resources/ru/**",
+        "src/Microsoft.Management.UI.Internal/resources/tr/**",
+        "src/Microsoft.Management.UI.Internal/resources/zh-Hans/**",
+        "src/Microsoft.Management.UI.Internal/resources/zh-Hant/**",
+        "src/Microsoft.Management.UI.Internal/themes/**",
+        "src/Microsoft.PowerShell.Commands.Diagnostics/**",
+        "src/Microsoft.PowerShell.Commands.Management/**",
+        "src/Microsoft.PowerShell.Commands.Utility/**",
+        "src/Microsoft.PowerShell.ConsoleHost/**",
+        "src/Microsoft.PowerShell.CoreCLR.Eventing/**",
+        "src/Microsoft.PowerShell.GlobalTool.Shim/**",
+        "src/Microsoft.PowerShell.SDK/**",
+        "src/Microsoft.PowerShell.Security/**",
+        "src/Microsoft.WSMan.Management/**",
+        "src/Microsoft.WSMan.Runtime/**",
+        "src/Modules/**",
+        "src/PowerShell.Core.Instrumentation/**",
+        "src/ResGen/**",
+        "src/Schemas/Format.xsd",
+        "src/Schemas/PSMaml/ITPro.xsd",
+        "src/Schemas/PSMaml/Maml.tbr",
+        "src/Schemas/PSMaml/Maml.xsd",
+        "src/Schemas/PSMaml/Maml.xsx",
+        "src/Schemas/PSMaml/Maml_HTML.xsl",
+        "src/Schemas/PSMaml/Maml_HTML_Style.xsl",
+        "src/Schemas/PSMaml/ManagedDeveloper.xsd",
+        "src/Schemas/PSMaml/ManagedDeveloperStructure.xsd",
+        "src/Schemas/PSMaml/ProviderHelp.xsd",
+        "src/Schemas/PSMaml/base.xsd",
+        "src/Schemas/PSMaml/baseConditional.xsd",
+        "src/Schemas/PSMaml/block.xsd",
+        "src/Schemas/PSMaml/blockCommon.xsd",
+        "src/Schemas/PSMaml/blockSoftware.xsd",
+        "src/Schemas/PSMaml/command.xsd",
+        "src/Schemas/PSMaml/conditionSet.xsd",
+        "src/Schemas/PSMaml/developer.xsd",
+        "src/Schemas/PSMaml/developerCommand.xsd",
+        "src/Schemas/PSMaml/developerDscResource.xsd",
+        "src/Schemas/PSMaml/developerManaged.xsd",
+        "src/Schemas/PSMaml/developerManagedClass.xsd",
+        "src/Schemas/PSMaml/developerManagedConstructor.xsd",
+        "src/Schemas/PSMaml/developerManagedDelegate.xsd",
+        "src/Schemas/PSMaml/developerManagedEnumeration.xsd",
+        "src/Schemas/PSMaml/developerManagedEvent.xsd",
+        "src/Schemas/PSMaml/developerManagedField.xsd",
+        "src/Schemas/PSMaml/developerManagedInterface.xsd",
+        "src/Schemas/PSMaml/developerManagedMethod.xsd",
+        "src/Schemas/PSMaml/developerManagedNamespace.xsd",
+        "src/Schemas/PSMaml/developerManagedOperator.xsd",
+        "src/Schemas/PSMaml/developerManagedOverload.xsd",
+        "src/Schemas/PSMaml/developerManagedProperty.xsd",
+        "src/Schemas/PSMaml/developerManagedStructure.xsd",
+        "src/Schemas/PSMaml/developerReference.xsd",
+        "src/Schemas/PSMaml/developerStructure.xsd",
+        "src/Schemas/PSMaml/developerXaml.xsd",
+        "src/Schemas/PSMaml/endUser.xsd",
+        "src/Schemas/PSMaml/hierarchy.xsd",
+        "src/Schemas/PSMaml/inline.xsd",
+        "src/Schemas/PSMaml/inlineCommon.xsd",
+        "src/Schemas/PSMaml/inlineSoftware.xsd",
+        "src/Schemas/PSMaml/inlineUi.xsd",
+        "src/Schemas/PSMaml/shellExecute.xsd",
+        "src/Schemas/PSMaml/structure.xsd",
+        "src/Schemas/PSMaml/structureGlossary.xsd",
+        "src/Schemas/PSMaml/structureList.xsd",
+        "src/Schemas/PSMaml/structureProcedure.xsd",
+        "src/Schemas/PSMaml/structureTable.xsd",
+        "src/Schemas/PSMaml/structureTaskExecution.xsd",
+        "src/Schemas/PSMaml/task.xsd",
+        "src/Schemas/PSMaml/troubleshooting.xsd",
+        "src/Schemas/Types.xsd",
+        "src/System.Management.Automation/**",
+        "src/TypeCatalogGen/**",
+        "src/libpsl-native/**",
+        "src/powershell/**",
+        "src/powershell-native/**",
+        "src/powershell-unix/**",
+        "src/powershell-win-core/**",
+        "stylecop.json",
+        "test/README.md",
+        "test/SSHRemoting/**",
+        "test/Test.Common.props",
+        "test/fuzzing/**",
+        "test/hosting/**",
+        "test/infrastructure/**",
+        "test/nanoserver/**",
+        "test/packaging/**",
+        "test/perf/**",
+        "test/powershell/Host/**",
+        "test/powershell/Language/**",
+        "test/powershell/Modules/CimCmdlets/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Core/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/CounterTestHelperFunctions.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/Export-Counter.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/Get-Counter.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/Get-WinEvent.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/Import-Counter.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/New-WinEvent.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/CorruptBlg.blg",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/CounterSamples.csv",
+        "test/powershell/Modules/Microsoft.PowerShell.Diagnostics/assets/CounterSamples.tsv",
+        "test/powershell/Modules/Microsoft.PowerShell.LocalAccounts/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Management/**",
+        "test/powershell/Modules/Microsoft.PowerShell.PSResourceGet/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/AclCmdlets.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/AmsiInterface.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/CertificateProvider.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/CmsMessage.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/CmsMessage2.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/ConstrainedLanguageDebugger.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/ConstrainedLanguageModules.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/ConstrainedLanguageRestriction.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/ConstrainedLanguageValidation.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/ExecutionPolicy.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/FileCatalog.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/FileOnlyEntry.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/GetCredential.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/Modules/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/SecureString.Tests.ps1",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/TestData/CatalogTestData/CatalogTestFile1.mof",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/TestData/CatalogTestData/CatalogTestFile2.xml",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/TestData/CatalogTestData/TestFileCatalog.txt",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/TestData/CatalogTestData/UserConfigProv/**",
+        "test/powershell/Modules/Microsoft.PowerShell.Security/certificateCommon.psm1",
+        "test/powershell/Modules/Microsoft.PowerShell.Utility/**",
+        "test/powershell/Modules/Microsoft.Powershell.Host/**",
+        "test/powershell/Modules/Microsoft.WSMan.Management/**",
+        "test/powershell/Modules/PSDiagnostics/**",
+        "test/powershell/Modules/PSReadLine/**",
+        "test/powershell/Modules/PackageManagement/PackageManagement.Tests.ps1",
+        "test/powershell/Modules/PowerShellGet/**",
+        "test/powershell/Modules/ThreadJob/**",
+        "test/powershell/Provider/**",
+        "test/powershell/README.md",
+        "test/powershell/SDK/**",
+        "test/powershell/dsc/**",
+        "test/powershell/engine/Api/**",
+        "test/powershell/engine/Basic/**",
+        "test/powershell/engine/COM/**",
+        "test/powershell/engine/Cdxml/**",
+        "test/powershell/engine/ETS/**",
+        "test/powershell/engine/ExperimentalFeature/**",
+        "test/powershell/engine/Formatting/**",
+        "test/powershell/engine/Help/HelpSystem.OnlineHelp.Tests.ps1",
+        "test/powershell/engine/Help/HelpSystem.Tests.ps1",
+        "test/powershell/engine/Help/UpdatableHelpSystem.Tests.ps1",
+        "test/powershell/engine/Help/assets/CimCmdlets_fb6cc51d-c096-4b38-b78d-0fed6277096a_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/HelpURI/**",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Archive_eb74e8da-9ae2-482a-a648-e96550fb8733_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Core_00000000-0000-0000-0000-000000000000_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Diagnostics_ca046f10-ca64-4740-8ff9-2565dba61a4f_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Host_56d66100-99a0-4ffc-a12d-eee9a6718aef_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.LocalAccounts_8e362604-2c0b-448f-a414-a6a690a644e2_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Management_eefcb906-b326-4e99-9f54-8b4bb6ef3c6d_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Security_A94C8C7E-9810-47C0-B8AF-65089C13A35A_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.PowerShell.Utility_1da87e53-152b-403e-98dc-74d7b4d63d59_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/Microsoft.WSMan.Management_766204A6-330E-4263-A7AB-46C87AFC366C_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/PackageManagement_4ae9fd46-338a-459c-8186-07f910774cb8_HelpInfo.xml",
+        "test/powershell/engine/Help/assets/PowershellGet_1d73a601-4a6c-43c5-ba3f-619b18bbb404_HelpInfo.xml",
+        "test/powershell/engine/Job/**",
+        "test/powershell/engine/Module/IsolatedModule.Tests.ps1",
+        "test/powershell/engine/Module/ModulePath.Tests.ps1",
+        "test/powershell/engine/Module/ModuleSpecification.Tests.ps1",
+        "test/powershell/engine/Module/NewModuleManifest.Tests.ps1",
+        "test/powershell/engine/Module/SubmodulePathInManifest.Tests.ps1",
+        "test/powershell/engine/Module/TestModuleManifest.Tests.ps1",
+        "test/powershell/engine/Module/UpdateModuleManifest.Tests.ps1",
+        "test/powershell/engine/Module/assets/testmodulerunspace/**",
+        "test/powershell/engine/OrderedHashtable.Tests.ps1",
+        "test/powershell/engine/ParameterBinding/**",
+        "test/powershell/engine/Remoting/**",
+        "test/powershell/engine/ResourceValidation/**",
+        "test/powershell/engine/Security/**",
+        "test/powershell/engine/WildcardPattern.Tests.ps1",
+        "test/releaseTools/**",
+        "test/shebang/**",
+        "test/tools/**",
+        "test/xUnit/**",
+        "tools/.gitignore",
+        "tools/AttackSurfaceAnalyzer/**",
+        "tools/ComponentGovernance/**",
+        "tools/ResxGen/**",
+        "tools/Sign-Package.ps1",
+        "tools/UpdateDotnetRuntime.ps1",
+        "tools/WindowsCI.psm1",
+        "tools/Xml/**",
+        "tools/buildCommon/**",
+        "tools/cgmanifest/**",
+        "tools/ci.psm1",
+        "tools/clearlyDefined/**",
+        "tools/credScan/**",
+        "tools/debug.sh",
+        "tools/download.sh",
+        "tools/failingTests/**",
+        "tools/findMissingNotices.ps1",
+        "tools/findMissingNotices.targets.json",
+        "tools/generate-icns.sh",
+        "tools/guardian/**",
+        "tools/install-powershell.ps1",
+        "tools/install-powershell.ps1-README.md",
+        "tools/install-powershell.sh",
+        "tools/install-powershell.sh-README.md",
+        "tools/installpsh-amazonlinux.sh",
+        "tools/installpsh-debian.sh",
+        "tools/installpsh-gentoo.sh",
+        "tools/installpsh-mariner.sh",
+        "tools/installpsh-osx.sh",
+        "tools/installpsh-redhat.sh",
+        "tools/installpsh-suse.sh",
+        "tools/metadata.json",
+        "tools/packages.microsoft.com/**",
+        "tools/packaging/**",
+        "tools/performance/**",
+        "tools/releaseBuild/**",
+        "tools/releaseTools.psm1",
+        "tools/super-linter/**",
+        "tools/terms/TermsExclusion.xml",
+        "tools/windows/**",
+        "tools/wix/**"
+      ],
+      "text": "Copyright (c) Microsoft Corporation.\n\nMIT License\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Microsoft Corporation., MIT license (LICENSE.txt), https://github.com/PowerShell/PowerShell."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.psm1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.StyleCop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.adml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.admx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.blg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cdxml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.clixml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cshtml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expect"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.man"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ps1xml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.psd1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ronn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.settings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stacktags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tbr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wpaProfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wprp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xsx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.globalconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.markdownlintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.spelling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/maxinput"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mininput"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.resx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

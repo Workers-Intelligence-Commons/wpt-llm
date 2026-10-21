@@ -1,0 +1,384 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ace-step/ACE-Step-1.5",
+  "revision": "ca1e85fe9430179831e6bc6be790c332190a3866",
+  "checksum": "sha256:3e37142f0bae7489f3a65b09c90c72d266addbb7537c898bc84bb1b845418a9b",
+  "extract": {
+    "exclude": [
+      "acestep/third_parts/nano-vllm/assets/**",
+      "assets/ACE-Step_framework.png",
+      "assets/Logo_StepFun.png",
+      "assets/acestep_logo.png",
+      "assets/acestudio_logo.png",
+      "assets/application_map.png",
+      "assets/model_zoo.png",
+      "assets/organization_logos.png",
+      "assets/star.gif",
+      "docs/pics/**",
+      "docs/public/logo.png"
+    ]
+  },
+  "history": {
+    "since": "910a4dd82aa663925451d0b161a32d21d92ac297"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 ACEStep\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2025 Xingkai Yu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/ace-step/ACE-Step-1.5: Copyright (c) 2026 ACEStep, MIT license (LICENSE), https://github.com/ace-step/ACE-Step-1.5; the authors of acestep-video, ISC license (declared in package.json), https://github.com/ace-step/ACE-Step-1.5/tree/ca1e85fe9430179831e6bc6be790c332190a3866/.claude/skills/acestep-simplemv/scripts; Copyright (c) 2025 Xingkai Yu, MIT license (LICENSE), https://github.com/ace-step/ACE-Step-1.5/tree/ca1e85fe9430179831e6bc6be790c332190a3866/acestep/third_parts/nano-vllm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/skills/acestep/**",
+        ".claude/skills/acestep-docs/**",
+        ".claude/skills/acestep-lyrics-transcription/**",
+        ".claude/skills/acestep-simplemv/SKILL.md",
+        ".claude/skills/acestep-songwriting/**",
+        ".claude/skills/acestep-thumbnail/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".env.example",
+        ".githooks/**",
+        ".github/**",
+        ".gitignore",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.jetson",
+        "LICENSE",
+        "README-XPU.md",
+        "README.md",
+        "SECURITY.md",
+        "acestep/__init__.py",
+        "acestep/acestep_v15_pipeline.py",
+        "acestep/acestep_v15_pipeline_test.py",
+        "acestep/api/**",
+        "acestep/api_server.py",
+        "acestep/audio_utils.py",
+        "acestep/audio_utils_test.py",
+        "acestep/audio_utils_uuid_test.py",
+        "acestep/cli_args.py",
+        "acestep/cli_args_test.py",
+        "acestep/constants.py",
+        "acestep/constrained_logits_processor.py",
+        "acestep/core/**",
+        "acestep/dataset/**",
+        "acestep/dataset_handler.py",
+        "acestep/debug_utils.py",
+        "acestep/direct_conditioning_tasks_test.py",
+        "acestep/genres_vocab.txt",
+        "acestep/gpu_config.py",
+        "acestep/gpu_config_effective_free_vram_test.py",
+        "acestep/gpu_config_lm_memory_ratio_test.py",
+        "acestep/gpu_config_test.py",
+        "acestep/handler.py",
+        "acestep/inference.py",
+        "acestep/inference_repaint_cache_test.py",
+        "acestep/inference_seed_fallback_test.py",
+        "acestep/launcher_compat.py",
+        "acestep/launcher_compat_test.py",
+        "acestep/launcher_legacy_torch_fix_test.py",
+        "acestep/llm_backend_compat.py",
+        "acestep/llm_backend_compat_test.py",
+        "acestep/llm_inference.py",
+        "acestep/llm_inference_cache_cleanup_test.py",
+        "acestep/llm_inference_cfg_fixes_test.py",
+        "acestep/llm_inference_dist_cleanup_test.py",
+        "acestep/llm_inference_enforce_eager_test.py",
+        "acestep/local_cache.py",
+        "acestep/local_cache_thread_safety_test.py",
+        "acestep/model_downloader.py",
+        "acestep/model_downloader_test.py",
+        "acestep/models/**",
+        "acestep/null_duration_fixes_test.py",
+        "acestep/openrouter_adapter.py",
+        "acestep/openrouter_models.py",
+        "acestep/text2music_src_audio_test.py",
+        "acestep/text_tasks/**",
+        "acestep/training/**",
+        "acestep/training_v2/**",
+        "acestep/ui/**",
+        "assets/acemusic-logo.svg",
+        "check_update.bat",
+        "check_update.sh",
+        "cli.py",
+        "close_api_server.sh",
+        "docker-compose.jetson.yml",
+        "docker-compose.yml",
+        "docs/.vitepress/**",
+        "docs/en/**",
+        "docs/index.md",
+        "docs/ja/**",
+        "docs/ko/**",
+        "docs/public/favicon.svg",
+        "docs/sidestep/**",
+        "docs/zh/**",
+        "examples/**",
+        "generate_examples.py",
+        "install_uv.bat",
+        "install_uv.sh",
+        "merge_config.bat",
+        "merge_config.sh",
+        "openrouter/**",
+        "package.json",
+        "profile_inference.py",
+        "proxy_config.txt.example",
+        "pyproject.toml",
+        "quick_test.bat",
+        "quick_test.sh",
+        "requirements-rocm-linux.txt",
+        "requirements-rocm.txt",
+        "requirements-sidestep.txt",
+        "requirements-xpu.txt",
+        "requirements.txt",
+        "run_api_server.sh",
+        "run_generate_test.py",
+        "run_openrouter_api_server.sh",
+        "scripts/**",
+        "setup_xpu.bat",
+        "start_api_server.bat",
+        "start_api_server.sh",
+        "start_api_server_macos.sh",
+        "start_api_server_rocm.bat",
+        "start_api_server_rocm.sh",
+        "start_api_server_xpu.bat",
+        "start_gradio_ui.bat",
+        "start_gradio_ui.sh",
+        "start_gradio_ui_macos.sh",
+        "start_gradio_ui_macos_manual.sh",
+        "start_gradio_ui_manual.bat",
+        "start_gradio_ui_manual.sh",
+        "start_gradio_ui_rocm.bat",
+        "start_gradio_ui_rocm.sh",
+        "start_gradio_ui_rocm_manual.bat",
+        "start_gradio_ui_rocm_manual.sh",
+        "start_gradio_ui_xpu.bat",
+        "start_gradio_ui_xpu_manual.bat",
+        "test_env_detection.bat",
+        "test_env_detection.sh",
+        "test_git_update.bat",
+        "test_git_update.sh",
+        "train.py",
+        "uv.lock"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 ACEStep\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 ACEStep, MIT license (LICENSE), https://github.com/ace-step/ACE-Step-1.5."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        ".claude/skills/acestep-simplemv/scripts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of acestep-video, ISC license (declared in package.json), https://github.com/ace-step/ACE-Step-1.5/tree/ca1e85fe9430179831e6bc6be790c332190a3866/.claude/skills/acestep-simplemv/scripts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "acestep/third_parts/nano-vllm/LICENSE",
+        "acestep/third_parts/nano-vllm/README.md",
+        "acestep/third_parts/nano-vllm/bench.py",
+        "acestep/third_parts/nano-vllm/example.py",
+        "acestep/third_parts/nano-vllm/nanovllm/**",
+        "acestep/third_parts/nano-vllm/pyproject.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Xingkai Yu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Xingkai Yu, MIT license (LICENSE), https://github.com/ace-step/ACE-Step-1.5/tree/ca1e85fe9430179831e6bc6be790c332190a3866/acestep/third_parts/nano-vllm."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jetson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-push"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

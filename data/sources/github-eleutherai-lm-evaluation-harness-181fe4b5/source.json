@@ -1,0 +1,5499 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/EleutherAI/lm-evaluation-harness",
+  "revision": "d6de81643928d653435c431bae19945d41d32520",
+  "checksum": "sha256:a1a30b99bd49f6b2f2c11076ca92d2a5cebd6f314af05ac2bef40f1014e85474",
+  "extract": {
+    "exclude": [
+      "docs/img/**",
+      "lm_eval/tasks/noreval/noreval.jpg",
+      "tests/testdata/gpt3_test_0deb8e9bde8e8327bbc48157f638ff3ba06b0cd816dad2beb8ad90f7fbe795c7.pkl",
+      "tests/testdata/gpt3_test_8025023377febbd8c5f2b9f26705c394ff375d0cad7c89c10fd9b8e1eb66ff1c.pkl",
+      "tests/testdata/gpt3_test_bb2cc49115e88788ed870ad0716eb00b280a885f91c7ed6e1e864435e5e2b6ac.pkl",
+      "tests/testdata/gpt3_test_cfd11f555a5a63b6dfa114a55a932e51b724cdd44d4842586b9ce37260bf7aaa.pkl",
+      "tests/testdata/gpt3_test_f307d52964c295e2005c5e782b688c24388e0cecadf29f1e6fc7f394236ea9c0.pkl",
+      "tests/testdata/textsynth_test_0a89c2739f9598b4be2674b0a8e43931d7f3f0b696970bcba31f9b52bdf12297.pkl",
+      "tests/testdata/textsynth_test_0c1c14571add7903b89e588c8212572b95bb57b334fc0752c89a7e045a5f63ae.pkl",
+      "tests/testdata/textsynth_test_3092d07756f3e1d010c07524cc8a2ecba7f0c19f9e39f2aaf2bf440bfe328004.pkl",
+      "tests/testdata/textsynth_test_434076260b6af3a46b7a5eaceec3306a5872c400a3872f744280b237455a0f8e.pkl",
+      "tests/testdata/textsynth_test_49c47ae40e11f349f2f6b492128188b1b2bc103a421c676ee4b2142a68b43516.pkl",
+      "tests/testdata/textsynth_test_4fd8d66a6dad7f602b40e5d7dc298d6fe329299d086a4659743a41f4a4012659.pkl",
+      "tests/testdata/textsynth_test_51b5302f157cf224f694ccad973f255ae19e9e061d533256bdf75b04e0a917ab.pkl",
+      "tests/testdata/textsynth_test_6d6c62dd70caaa208712bf766deaf419cfac89538d4ab7745621e339394c0c23.pkl",
+      "tests/testdata/textsynth_test_7209c4617547bfe17cb9e7f5f735fe35822d650aefdc5fbeeaf0c1724effbe09.pkl",
+      "tests/testdata/textsynth_test_7afdc285388e51094e12645f305328c759574fa3ec9751631025f8ad5ebf9f3e.pkl",
+      "tests/testdata/textsynth_test_9d5f33dbfe1e254928c89f5ed85e4c010d888065f55a8f1b863bc1eb0340a5f2.pkl",
+      "tests/testdata/textsynth_test_abcbcba648d89e5d81a50511a6d24ddeb538de2ffe108c1370dd74ce6ac8038d.pkl",
+      "tests/testdata/textsynth_test_b1cbb29666cce5e31a1e97695858137398a0885ca5d5d98f515404fb6aeb99e7.pkl",
+      "tests/testdata/textsynth_test_e7ad1e9f52a39e1ddd1e50f3c57ffa4546728dd150a67c0a0ddc8675c04e15d1.pkl",
+      "tests/testdata/textsynth_test_f4bfe4beb605bd52a8ab6be3c9293639e7e2261d98de58159d15ccb83131bf4e.pkl"
+    ]
+  },
+  "history": {
+    "since": "90e02bcad942d8a4967eb144839828115ff92e45"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 EleutherAI\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/EleutherAI/lm-evaluation-harness: Copyright (c) 2020 EleutherAI, MIT license (LICENSE.md), https://github.com/EleutherAI/lm-evaluation-harness."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CITATION.bib",
+        "CODEOWNERS",
+        "LICENSE.md",
+        "MANIFEST.in",
+        "README.md",
+        "docs/API_guide.md",
+        "docs/CONTRIBUTING.md",
+        "docs/README.md",
+        "docs/chat-template-readme.md",
+        "docs/config_files.md",
+        "docs/decontamination.md",
+        "docs/footguns.md",
+        "docs/interface.md",
+        "docs/model_guide.md",
+        "docs/new_task_guide.md",
+        "docs/plugins.md",
+        "docs/python-api.md",
+        "docs/task_guide.md",
+        "examples/**",
+        "ignore.txt",
+        "lm_eval/__init__.py",
+        "lm_eval/__main__.py",
+        "lm_eval/_cli/**",
+        "lm_eval/api/**",
+        "lm_eval/caching/**",
+        "lm_eval/config/**",
+        "lm_eval/decontamination/**",
+        "lm_eval/defaults.py",
+        "lm_eval/evaluator.py",
+        "lm_eval/evaluator_utils.py",
+        "lm_eval/filters/**",
+        "lm_eval/loggers/**",
+        "lm_eval/models/**",
+        "lm_eval/prompts/**",
+        "lm_eval/result_schema.py",
+        "lm_eval/tasks/README.md",
+        "lm_eval/tasks/__init__.py",
+        "lm_eval/tasks/_factory.py",
+        "lm_eval/tasks/_index.py",
+        "lm_eval/tasks/_yaml_loader.py",
+        "lm_eval/tasks/aclue/**",
+        "lm_eval/tasks/acpbench/**",
+        "lm_eval/tasks/aexams/**",
+        "lm_eval/tasks/afrimgsm/**",
+        "lm_eval/tasks/afrimmlu/**",
+        "lm_eval/tasks/afrixnli/**",
+        "lm_eval/tasks/afrobench/**",
+        "lm_eval/tasks/agieval/**",
+        "lm_eval/tasks/aime/**",
+        "lm_eval/tasks/alghafa/**",
+        "lm_eval/tasks/anli/**",
+        "lm_eval/tasks/arab_culture/**",
+        "lm_eval/tasks/arab_culture_completion/**",
+        "lm_eval/tasks/arabic_leaderboard_complete/**",
+        "lm_eval/tasks/arabic_leaderboard_light/**",
+        "lm_eval/tasks/arabicmmlu/**",
+        "lm_eval/tasks/aradice/**",
+        "lm_eval/tasks/arc/**",
+        "lm_eval/tasks/arc_mt/**",
+        "lm_eval/tasks/arithmetic/**",
+        "lm_eval/tasks/asdiv/**",
+        "lm_eval/tasks/babi/**",
+        "lm_eval/tasks/babilong/**",
+        "lm_eval/tasks/bangla/**",
+        "lm_eval/tasks/basque_bench/**",
+        "lm_eval/tasks/basqueglue/**",
+        "lm_eval/tasks/bbh/**",
+        "lm_eval/tasks/bbq/**",
+        "lm_eval/tasks/bear/**",
+        "lm_eval/tasks/belebele/**",
+        "lm_eval/tasks/benchmarks/**",
+        "lm_eval/tasks/bertaqa/**",
+        "lm_eval/tasks/bhs/**",
+        "lm_eval/tasks/bigbench/**",
+        "lm_eval/tasks/blimp/**",
+        "lm_eval/tasks/blimp_nl/**",
+        "lm_eval/tasks/c4/**",
+        "lm_eval/tasks/cabbq/**",
+        "lm_eval/tasks/careqa/**",
+        "lm_eval/tasks/catalan_bench/**",
+        "lm_eval/tasks/ceval/**",
+        "lm_eval/tasks/chartqa/**",
+        "lm_eval/tasks/click/**",
+        "lm_eval/tasks/cmmlu/**",
+        "lm_eval/tasks/cnn_dailymail/**",
+        "lm_eval/tasks/code_x_glue/**",
+        "lm_eval/tasks/common_voice/**",
+        "lm_eval/tasks/commonsense_qa/**",
+        "lm_eval/tasks/copal_id/**",
+        "lm_eval/tasks/coqa/**",
+        "lm_eval/tasks/crows_pairs/**",
+        "lm_eval/tasks/cruxeval/**",
+        "lm_eval/tasks/csatqa/**",
+        "lm_eval/tasks/darija_bench/**",
+        "lm_eval/tasks/darijahellaswag/**",
+        "lm_eval/tasks/darijammlu/**",
+        "lm_eval/tasks/discrim_eval/**",
+        "lm_eval/tasks/drop/**",
+        "lm_eval/tasks/e2lmc/**",
+        "lm_eval/tasks/egyhellaswag/**",
+        "lm_eval/tasks/egymmlu/**",
+        "lm_eval/tasks/eq_bench/**",
+        "lm_eval/tasks/esbbq/**",
+        "lm_eval/tasks/eus_exams/**",
+        "lm_eval/tasks/eus_proficiency/**",
+        "lm_eval/tasks/eus_reading/**",
+        "lm_eval/tasks/eus_trivia/**",
+        "lm_eval/tasks/evalita_llm/**",
+        "lm_eval/tasks/fda/**",
+        "lm_eval/tasks/fld/**",
+        "lm_eval/tasks/french_bench/**",
+        "lm_eval/tasks/galician_bench/**",
+        "lm_eval/tasks/glianorex/**",
+        "lm_eval/tasks/global_mmlu/**",
+        "lm_eval/tasks/global_piqa/**",
+        "lm_eval/tasks/glue/**",
+        "lm_eval/tasks/gpqa/**",
+        "lm_eval/tasks/graphwalks/**",
+        "lm_eval/tasks/greekmmlu/**",
+        "lm_eval/tasks/groundcocoa/**",
+        "lm_eval/tasks/gsm8k/**",
+        "lm_eval/tasks/gsm8k_platinum/**",
+        "lm_eval/tasks/gsm_plus/**",
+        "lm_eval/tasks/haerae/**",
+        "lm_eval/tasks/headqa/**",
+        "lm_eval/tasks/hellaswag/**",
+        "lm_eval/tasks/hendrycks_ethics/**",
+        "lm_eval/tasks/hendrycks_math/**",
+        "lm_eval/tasks/histoires_morales/**",
+        "lm_eval/tasks/hrm8k/**",
+        "lm_eval/tasks/humaneval/**",
+        "lm_eval/tasks/humaneval_infilling/**",
+        "lm_eval/tasks/icelandic_winogrande/**",
+        "lm_eval/tasks/ifeval/**",
+        "lm_eval/tasks/include/**",
+        "lm_eval/tasks/indicparam/**",
+        "lm_eval/tasks/indicxnli/**",
+        "lm_eval/tasks/infinitebench/**",
+        "lm_eval/tasks/inverse_scaling/**",
+        "lm_eval/tasks/japanese_leaderboard/**",
+        "lm_eval/tasks/jfinqa/**",
+        "lm_eval/tasks/jsonschema_bench/**",
+        "lm_eval/tasks/kbl/**",
+        "lm_eval/tasks/kmmlu/**",
+        "lm_eval/tasks/kobest/**",
+        "lm_eval/tasks/kormedmcqa/**",
+        "lm_eval/tasks/lambada/**",
+        "lm_eval/tasks/lambada_cloze/**",
+        "lm_eval/tasks/lambada_multilingual/**",
+        "lm_eval/tasks/lambada_multilingual_stablelm/**",
+        "lm_eval/tasks/leaderboard/**",
+        "lm_eval/tasks/legalbench/**",
+        "lm_eval/tasks/libra/**",
+        "lm_eval/tasks/lingoly/**",
+        "lm_eval/tasks/llama3/**",
+        "lm_eval/tasks/lm_syneval/**",
+        "lm_eval/tasks/logiqa/**",
+        "lm_eval/tasks/logiqa2/**",
+        "lm_eval/tasks/longbench/**",
+        "lm_eval/tasks/longbench2/**",
+        "lm_eval/tasks/longproc/**",
+        "lm_eval/tasks/manager.py",
+        "lm_eval/tasks/mastermind/**",
+        "lm_eval/tasks/mathqa/**",
+        "lm_eval/tasks/mbpp/**",
+        "lm_eval/tasks/mc_taco/**",
+        "lm_eval/tasks/med_concepts_qa/**",
+        "lm_eval/tasks/med_prescriptions/**",
+        "lm_eval/tasks/med_text_classification/**",
+        "lm_eval/tasks/meddialog/**",
+        "lm_eval/tasks/mediqa_qa2019/**",
+        "lm_eval/tasks/medmcqa/**",
+        "lm_eval/tasks/medqa/**",
+        "lm_eval/tasks/medtext/**",
+        "lm_eval/tasks/mela/**",
+        "lm_eval/tasks/meqsum/**",
+        "lm_eval/tasks/metabench/**",
+        "lm_eval/tasks/mgsm/**",
+        "lm_eval/tasks/mimic_repsum/**",
+        "lm_eval/tasks/minerva_math/**",
+        "lm_eval/tasks/mlqa/**",
+        "lm_eval/tasks/mmlu/**",
+        "lm_eval/tasks/mmlu-pro-plus/**",
+        "lm_eval/tasks/mmlu-redux/**",
+        "lm_eval/tasks/mmlu-redux-spanish/**",
+        "lm_eval/tasks/mmlu_pro/**",
+        "lm_eval/tasks/mmlu_prox/**",
+        "lm_eval/tasks/mmlusr/**",
+        "lm_eval/tasks/mmmu/**",
+        "lm_eval/tasks/model_written_evals/**",
+        "lm_eval/tasks/moral_stories/**",
+        "lm_eval/tasks/mts_dialog/**",
+        "lm_eval/tasks/multiblimp/**",
+        "lm_eval/tasks/mutual/**",
+        "lm_eval/tasks/nerel-bench/**",
+        "lm_eval/tasks/noreval/README.md",
+        "lm_eval/tasks/noreval/ask_gec/**",
+        "lm_eval/tasks/noreval/ncb/**",
+        "lm_eval/tasks/noreval/norbelebele/**",
+        "lm_eval/tasks/noreval/norcommonsenseqa/**",
+        "lm_eval/tasks/noreval/norec/**",
+        "lm_eval/tasks/noreval/noridiom/**",
+        "lm_eval/tasks/noreval/noropenbookqa/**",
+        "lm_eval/tasks/noreval/norquad/**",
+        "lm_eval/tasks/noreval/norrewrite-instruct/**",
+        "lm_eval/tasks/noreval/norsumm/**",
+        "lm_eval/tasks/noreval/norsummarize-instruct/**",
+        "lm_eval/tasks/noreval/nortruthfulqa/**",
+        "lm_eval/tasks/noreval/nrk_quiz_qa/**",
+        "lm_eval/tasks/noreval/tatoeba/**",
+        "lm_eval/tasks/noticia/**",
+        "lm_eval/tasks/nq_open/**",
+        "lm_eval/tasks/okapi/**",
+        "lm_eval/tasks/olaph/**",
+        "lm_eval/tasks/openai-mmmlu/**",
+        "lm_eval/tasks/openbookqa/**",
+        "lm_eval/tasks/paloma/**",
+        "lm_eval/tasks/paws-x/**",
+        "lm_eval/tasks/physics_gre/**",
+        "lm_eval/tasks/pile/**",
+        "lm_eval/tasks/pile_10k/**",
+        "lm_eval/tasks/piqa/**",
+        "lm_eval/tasks/pisa/**",
+        "lm_eval/tasks/polemo2/**",
+        "lm_eval/tasks/portuguese_bench/**",
+        "lm_eval/tasks/prost/**",
+        "lm_eval/tasks/pubmedqa/**",
+        "lm_eval/tasks/putnam_axiom/**",
+        "lm_eval/tasks/qa4mre/**",
+        "lm_eval/tasks/qasper/**",
+        "lm_eval/tasks/race/**",
+        "lm_eval/tasks/realtoxicityprompts/**",
+        "lm_eval/tasks/ruler/**",
+        "lm_eval/tasks/sciq/**",
+        "lm_eval/tasks/score/**",
+        "lm_eval/tasks/scrolls/**",
+        "lm_eval/tasks/simple_cooccurrence_bias/**",
+        "lm_eval/tasks/siqa/**",
+        "lm_eval/tasks/slr_bench/**",
+        "lm_eval/tasks/spanish_bench/**",
+        "lm_eval/tasks/squad_completion/**",
+        "lm_eval/tasks/squadv2/**",
+        "lm_eval/tasks/storycloze/**",
+        "lm_eval/tasks/super_glue/**",
+        "lm_eval/tasks/swag/**",
+        "lm_eval/tasks/swde/**",
+        "lm_eval/tasks/tinyBenchmarks/**",
+        "lm_eval/tasks/tmlu/**",
+        "lm_eval/tasks/tmmluplus/**",
+        "lm_eval/tasks/toksuite/**",
+        "lm_eval/tasks/toxigen/**",
+        "lm_eval/tasks/translation/**",
+        "lm_eval/tasks/triviaqa/**",
+        "lm_eval/tasks/truthfulqa/**",
+        "lm_eval/tasks/truthfulqa-multi/**",
+        "lm_eval/tasks/turblimp/**",
+        "lm_eval/tasks/turkishmmlu/**",
+        "lm_eval/tasks/tydiqa/**",
+        "lm_eval/tasks/ulqa/**",
+        "lm_eval/tasks/uncheatable_eval/**",
+        "lm_eval/tasks/unitxt/**",
+        "lm_eval/tasks/unscramble/**",
+        "lm_eval/tasks/webqs/**",
+        "lm_eval/tasks/wikitext/**",
+        "lm_eval/tasks/winogender/**",
+        "lm_eval/tasks/winogrande/**",
+        "lm_eval/tasks/wmdp/**",
+        "lm_eval/tasks/wmt2016/**",
+        "lm_eval/tasks/wsc273/**",
+        "lm_eval/tasks/xcopa/**",
+        "lm_eval/tasks/xnli/**",
+        "lm_eval/tasks/xnli_eu/**",
+        "lm_eval/tasks/xquad/**",
+        "lm_eval/tasks/xstorycloze/**",
+        "lm_eval/tasks/xwinograd/**",
+        "lm_eval/tasks/zhoblimp/**",
+        "lm_eval/utils.py",
+        "pile_statistics.json",
+        "pyproject.toml",
+        "scripts/**",
+        "templates/**",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/models/**",
+        "tests/scripts/**",
+        "tests/test_aggregation_pipeline.py",
+        "tests/test_bbh_filters.py",
+        "tests/test_cache.py",
+        "tests/test_cli_subcommands.py",
+        "tests/test_cli_utils.py",
+        "tests/test_configs/**",
+        "tests/test_evaluator.py",
+        "tests/test_evaluator_utils.py",
+        "tests/test_fewshot_context.py",
+        "tests/test_filters.py",
+        "tests/test_flan_config.py",
+        "tests/test_group.py",
+        "tests/test_janitor.py",
+        "tests/test_kormedmcqa.py",
+        "tests/test_metrics.py",
+        "tests/test_minerva_math.py",
+        "tests/test_misc.py",
+        "tests/test_multimodal_cache_keys.py",
+        "tests/test_plugins.py",
+        "tests/test_prompt.py",
+        "tests/test_registry.py",
+        "tests/test_requests_caching.py",
+        "tests/test_ruler.py",
+        "tests/test_samplers.py",
+        "tests/test_serialization.py",
+        "tests/test_task_manager.py",
+        "tests/test_tasks.py",
+        "tests/test_unitxt_tasks.py",
+        "tests/test_utils.py",
+        "tests/testconfigs/**",
+        "tests/testdata/ai2_arc_10_hf_pretrained-EleutherAI-pythia-14m-deduped-dtype-float32-device-cpu.txt",
+        "tests/testdata/anagrams1-v0-greedy_until",
+        "tests/testdata/anagrams1-v0-res.json",
+        "tests/testdata/anagrams2-v0-greedy_until",
+        "tests/testdata/anagrams2-v0-res.json",
+        "tests/testdata/anli_r1-v0-loglikelihood",
+        "tests/testdata/anli_r1-v0-res.json",
+        "tests/testdata/anli_r2-v0-loglikelihood",
+        "tests/testdata/anli_r2-v0-res.json",
+        "tests/testdata/anli_r3-v0-loglikelihood",
+        "tests/testdata/anli_r3-v0-res.json",
+        "tests/testdata/arc_challenge-v0-loglikelihood",
+        "tests/testdata/arc_challenge-v0-res.json",
+        "tests/testdata/arc_challenge-v2.0-loglikelihood",
+        "tests/testdata/arc_challenge-v2.0-res.json",
+        "tests/testdata/arc_easy-v0-loglikelihood",
+        "tests/testdata/arc_easy-v0-res.json",
+        "tests/testdata/arithmetic_1dc-v0-loglikelihood",
+        "tests/testdata/arithmetic_1dc-v0-res.json",
+        "tests/testdata/arithmetic_2da-v0-loglikelihood",
+        "tests/testdata/arithmetic_2da-v0-res.json",
+        "tests/testdata/arithmetic_2dm-v0-loglikelihood",
+        "tests/testdata/arithmetic_2dm-v0-res.json",
+        "tests/testdata/arithmetic_2ds-v0-loglikelihood",
+        "tests/testdata/arithmetic_2ds-v0-res.json",
+        "tests/testdata/arithmetic_3da-v0-loglikelihood",
+        "tests/testdata/arithmetic_3da-v0-res.json",
+        "tests/testdata/arithmetic_3ds-v0-loglikelihood",
+        "tests/testdata/arithmetic_3ds-v0-res.json",
+        "tests/testdata/arithmetic_4da-v0-loglikelihood",
+        "tests/testdata/arithmetic_4da-v0-res.json",
+        "tests/testdata/arithmetic_4ds-v0-loglikelihood",
+        "tests/testdata/arithmetic_4ds-v0-res.json",
+        "tests/testdata/arithmetic_5da-v0-loglikelihood",
+        "tests/testdata/arithmetic_5da-v0-res.json",
+        "tests/testdata/arithmetic_5ds-v0-loglikelihood",
+        "tests/testdata/arithmetic_5ds-v0-res.json",
+        "tests/testdata/blimp_adjunct_island-v0-loglikelihood",
+        "tests/testdata/blimp_adjunct_island-v0-res.json",
+        "tests/testdata/blimp_anaphor_gender_agreement-v0-loglikelihood",
+        "tests/testdata/blimp_anaphor_gender_agreement-v0-res.json",
+        "tests/testdata/blimp_anaphor_number_agreement-v0-loglikelihood",
+        "tests/testdata/blimp_anaphor_number_agreement-v0-res.json",
+        "tests/testdata/blimp_animate_subject_passive-v0-loglikelihood",
+        "tests/testdata/blimp_animate_subject_passive-v0-res.json",
+        "tests/testdata/blimp_animate_subject_trans-v0-loglikelihood",
+        "tests/testdata/blimp_animate_subject_trans-v0-res.json",
+        "tests/testdata/blimp_causative-v0-loglikelihood",
+        "tests/testdata/blimp_causative-v0-res.json",
+        "tests/testdata/blimp_complex_NP_island-v0-loglikelihood",
+        "tests/testdata/blimp_complex_NP_island-v0-res.json",
+        "tests/testdata/blimp_coordinate_structure_constraint_complex_left_branch-v0-loglikelihood",
+        "tests/testdata/blimp_coordinate_structure_constraint_complex_left_branch-v0-res.json",
+        "tests/testdata/blimp_coordinate_structure_constraint_object_extraction-v0-loglikelihood",
+        "tests/testdata/blimp_coordinate_structure_constraint_object_extraction-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_1-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_1-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_2-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_2-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_irregular_1-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_irregular_1-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_irregular_2-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_irregular_2-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_2-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_2-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_irregular_1-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_irregular_1-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_irregular_2-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adj_irregular_2-v0-res.json",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adjective_1-v0-loglikelihood",
+        "tests/testdata/blimp_determiner_noun_agreement_with_adjective_1-v0-res.json",
+        "tests/testdata/blimp_distractor_agreement_relational_noun-v0-loglikelihood",
+        "tests/testdata/blimp_distractor_agreement_relational_noun-v0-res.json",
+        "tests/testdata/blimp_distractor_agreement_relative_clause-v0-loglikelihood",
+        "tests/testdata/blimp_distractor_agreement_relative_clause-v0-res.json",
+        "tests/testdata/blimp_drop_argument-v0-loglikelihood",
+        "tests/testdata/blimp_drop_argument-v0-res.json",
+        "tests/testdata/blimp_ellipsis_n_bar_1-v0-loglikelihood",
+        "tests/testdata/blimp_ellipsis_n_bar_1-v0-res.json",
+        "tests/testdata/blimp_ellipsis_n_bar_2-v0-loglikelihood",
+        "tests/testdata/blimp_ellipsis_n_bar_2-v0-res.json",
+        "tests/testdata/blimp_existential_there_object_raising-v0-loglikelihood",
+        "tests/testdata/blimp_existential_there_object_raising-v0-res.json",
+        "tests/testdata/blimp_existential_there_quantifiers_1-v0-loglikelihood",
+        "tests/testdata/blimp_existential_there_quantifiers_1-v0-res.json",
+        "tests/testdata/blimp_existential_there_quantifiers_2-v0-loglikelihood",
+        "tests/testdata/blimp_existential_there_quantifiers_2-v0-res.json",
+        "tests/testdata/blimp_existential_there_subject_raising-v0-loglikelihood",
+        "tests/testdata/blimp_existential_there_subject_raising-v0-res.json",
+        "tests/testdata/blimp_expletive_it_object_raising-v0-loglikelihood",
+        "tests/testdata/blimp_expletive_it_object_raising-v0-res.json",
+        "tests/testdata/blimp_inchoative-v0-loglikelihood",
+        "tests/testdata/blimp_inchoative-v0-res.json",
+        "tests/testdata/blimp_intransitive-v0-loglikelihood",
+        "tests/testdata/blimp_intransitive-v0-res.json",
+        "tests/testdata/blimp_irregular_past_participle_adjectives-v0-loglikelihood",
+        "tests/testdata/blimp_irregular_past_participle_adjectives-v0-res.json",
+        "tests/testdata/blimp_irregular_past_participle_verbs-v0-loglikelihood",
+        "tests/testdata/blimp_irregular_past_participle_verbs-v0-res.json",
+        "tests/testdata/blimp_irregular_plural_subject_verb_agreement_1-v0-loglikelihood",
+        "tests/testdata/blimp_irregular_plural_subject_verb_agreement_1-v0-res.json",
+        "tests/testdata/blimp_irregular_plural_subject_verb_agreement_2-v0-loglikelihood",
+        "tests/testdata/blimp_irregular_plural_subject_verb_agreement_2-v0-res.json",
+        "tests/testdata/blimp_left_branch_island_echo_question-v0-loglikelihood",
+        "tests/testdata/blimp_left_branch_island_echo_question-v0-res.json",
+        "tests/testdata/blimp_left_branch_island_simple_question-v0-loglikelihood",
+        "tests/testdata/blimp_left_branch_island_simple_question-v0-res.json",
+        "tests/testdata/blimp_matrix_question_npi_licensor_present-v0-loglikelihood",
+        "tests/testdata/blimp_matrix_question_npi_licensor_present-v0-res.json",
+        "tests/testdata/blimp_npi_present_1-v0-loglikelihood",
+        "tests/testdata/blimp_npi_present_1-v0-res.json",
+        "tests/testdata/blimp_npi_present_2-v0-loglikelihood",
+        "tests/testdata/blimp_npi_present_2-v0-res.json",
+        "tests/testdata/blimp_only_npi_licensor_present-v0-loglikelihood",
+        "tests/testdata/blimp_only_npi_licensor_present-v0-res.json",
+        "tests/testdata/blimp_only_npi_scope-v0-loglikelihood",
+        "tests/testdata/blimp_only_npi_scope-v0-res.json",
+        "tests/testdata/blimp_passive_1-v0-loglikelihood",
+        "tests/testdata/blimp_passive_1-v0-res.json",
+        "tests/testdata/blimp_passive_2-v0-loglikelihood",
+        "tests/testdata/blimp_passive_2-v0-res.json",
+        "tests/testdata/blimp_principle_A_c_command-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_c_command-v0-res.json",
+        "tests/testdata/blimp_principle_A_case_1-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_case_1-v0-res.json",
+        "tests/testdata/blimp_principle_A_case_2-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_case_2-v0-res.json",
+        "tests/testdata/blimp_principle_A_domain_1-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_domain_1-v0-res.json",
+        "tests/testdata/blimp_principle_A_domain_2-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_domain_2-v0-res.json",
+        "tests/testdata/blimp_principle_A_domain_3-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_domain_3-v0-res.json",
+        "tests/testdata/blimp_principle_A_reconstruction-v0-loglikelihood",
+        "tests/testdata/blimp_principle_A_reconstruction-v0-res.json",
+        "tests/testdata/blimp_regular_plural_subject_verb_agreement_1-v0-loglikelihood",
+        "tests/testdata/blimp_regular_plural_subject_verb_agreement_1-v0-res.json",
+        "tests/testdata/blimp_regular_plural_subject_verb_agreement_2-v0-loglikelihood",
+        "tests/testdata/blimp_regular_plural_subject_verb_agreement_2-v0-res.json",
+        "tests/testdata/blimp_sentential_negation_npi_licensor_present-v0-loglikelihood",
+        "tests/testdata/blimp_sentential_negation_npi_licensor_present-v0-res.json",
+        "tests/testdata/blimp_sentential_negation_npi_scope-v0-loglikelihood",
+        "tests/testdata/blimp_sentential_negation_npi_scope-v0-res.json",
+        "tests/testdata/blimp_sentential_subject_island-v0-loglikelihood",
+        "tests/testdata/blimp_sentential_subject_island-v0-res.json",
+        "tests/testdata/blimp_superlative_quantifiers_1-v0-loglikelihood",
+        "tests/testdata/blimp_superlative_quantifiers_1-v0-res.json",
+        "tests/testdata/blimp_superlative_quantifiers_2-v0-loglikelihood",
+        "tests/testdata/blimp_superlative_quantifiers_2-v0-res.json",
+        "tests/testdata/blimp_tough_vs_raising_1-v0-loglikelihood",
+        "tests/testdata/blimp_tough_vs_raising_1-v0-res.json",
+        "tests/testdata/blimp_tough_vs_raising_2-v0-loglikelihood",
+        "tests/testdata/blimp_tough_vs_raising_2-v0-res.json",
+        "tests/testdata/blimp_transitive-v0-loglikelihood",
+        "tests/testdata/blimp_transitive-v0-res.json",
+        "tests/testdata/blimp_wh_island-v0-loglikelihood",
+        "tests/testdata/blimp_wh_island-v0-res.json",
+        "tests/testdata/blimp_wh_questions_object_gap-v0-loglikelihood",
+        "tests/testdata/blimp_wh_questions_object_gap-v0-res.json",
+        "tests/testdata/blimp_wh_questions_subject_gap-v0-loglikelihood",
+        "tests/testdata/blimp_wh_questions_subject_gap-v0-res.json",
+        "tests/testdata/blimp_wh_questions_subject_gap_long_distance-v0-loglikelihood",
+        "tests/testdata/blimp_wh_questions_subject_gap_long_distance-v0-res.json",
+        "tests/testdata/blimp_wh_vs_that_no_gap-v0-loglikelihood",
+        "tests/testdata/blimp_wh_vs_that_no_gap-v0-res.json",
+        "tests/testdata/blimp_wh_vs_that_no_gap_long_distance-v0-loglikelihood",
+        "tests/testdata/blimp_wh_vs_that_no_gap_long_distance-v0-res.json",
+        "tests/testdata/blimp_wh_vs_that_with_gap-v0-loglikelihood",
+        "tests/testdata/blimp_wh_vs_that_with_gap-v0-res.json",
+        "tests/testdata/blimp_wh_vs_that_with_gap_long_distance-v0-loglikelihood",
+        "tests/testdata/blimp_wh_vs_that_with_gap_long_distance-v0-res.json",
+        "tests/testdata/boolq-v0-loglikelihood",
+        "tests/testdata/boolq-v0-res.json",
+        "tests/testdata/boolq-v1-loglikelihood",
+        "tests/testdata/boolq-v1-res.json",
+        "tests/testdata/cb-v0-loglikelihood",
+        "tests/testdata/cb-v0-res.json",
+        "tests/testdata/cb-v1-loglikelihood",
+        "tests/testdata/cb-v1-res.json",
+        "tests/testdata/cola-v0-loglikelihood",
+        "tests/testdata/cola-v0-res.json",
+        "tests/testdata/copa-v0-loglikelihood",
+        "tests/testdata/copa-v0-res.json",
+        "tests/testdata/coqa-v0-greedy_until",
+        "tests/testdata/coqa-v0-res.json",
+        "tests/testdata/coqa-v1-greedy_until",
+        "tests/testdata/coqa-v1-res.json",
+        "tests/testdata/crows_pairs_english-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english-v0-res.json",
+        "tests/testdata/crows_pairs_english_age-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_age-v0-res.json",
+        "tests/testdata/crows_pairs_english_autre-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_autre-v0-res.json",
+        "tests/testdata/crows_pairs_english_disability-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_disability-v0-res.json",
+        "tests/testdata/crows_pairs_english_gender-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_gender-v0-res.json",
+        "tests/testdata/crows_pairs_english_nationality-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_nationality-v0-res.json",
+        "tests/testdata/crows_pairs_english_physical_appearance-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_physical_appearance-v0-res.json",
+        "tests/testdata/crows_pairs_english_race_color-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_race_color-v0-res.json",
+        "tests/testdata/crows_pairs_english_religion-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_religion-v0-res.json",
+        "tests/testdata/crows_pairs_english_sexual_orientation-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_sexual_orientation-v0-res.json",
+        "tests/testdata/crows_pairs_english_socioeconomic-v0-loglikelihood",
+        "tests/testdata/crows_pairs_english_socioeconomic-v0-res.json",
+        "tests/testdata/crows_pairs_french-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french-v0-res.json",
+        "tests/testdata/crows_pairs_french_age-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_age-v0-res.json",
+        "tests/testdata/crows_pairs_french_autre-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_autre-v0-res.json",
+        "tests/testdata/crows_pairs_french_disability-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_disability-v0-res.json",
+        "tests/testdata/crows_pairs_french_gender-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_gender-v0-res.json",
+        "tests/testdata/crows_pairs_french_nationality-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_nationality-v0-res.json",
+        "tests/testdata/crows_pairs_french_physical_appearance-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_physical_appearance-v0-res.json",
+        "tests/testdata/crows_pairs_french_race_color-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_race_color-v0-res.json",
+        "tests/testdata/crows_pairs_french_religion-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_religion-v0-res.json",
+        "tests/testdata/crows_pairs_french_sexual_orientation-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_sexual_orientation-v0-res.json",
+        "tests/testdata/crows_pairs_french_socioeconomic-v0-loglikelihood",
+        "tests/testdata/crows_pairs_french_socioeconomic-v0-res.json",
+        "tests/testdata/cycle_letters-v0-greedy_until",
+        "tests/testdata/cycle_letters-v0-res.json",
+        "tests/testdata/drop-v0-greedy_until",
+        "tests/testdata/drop-v0-res.json",
+        "tests/testdata/drop-v1-greedy_until",
+        "tests/testdata/drop-v1-res.json",
+        "tests/testdata/ethics_cm-v0-loglikelihood",
+        "tests/testdata/ethics_cm-v0-res.json",
+        "tests/testdata/ethics_deontology-v0-loglikelihood",
+        "tests/testdata/ethics_deontology-v0-res.json",
+        "tests/testdata/ethics_justice-v0-loglikelihood",
+        "tests/testdata/ethics_justice-v0-res.json",
+        "tests/testdata/ethics_utilitarianism-v0-loglikelihood",
+        "tests/testdata/ethics_utilitarianism-v0-res.json",
+        "tests/testdata/ethics_utilitarianism_original-v0-loglikelihood",
+        "tests/testdata/ethics_utilitarianism_original-v0-res.json",
+        "tests/testdata/ethics_virtue-v0-loglikelihood",
+        "tests/testdata/ethics_virtue-v0-res.json",
+        "tests/testdata/gsm8k-v0-greedy_until",
+        "tests/testdata/gsm8k-v0-res.json",
+        "tests/testdata/headqa-v0-loglikelihood",
+        "tests/testdata/headqa-v0-res.json",
+        "tests/testdata/headqa_en-v0-loglikelihood",
+        "tests/testdata/headqa_en-v0-res.json",
+        "tests/testdata/headqa_es-v0-loglikelihood",
+        "tests/testdata/headqa_es-v0-res.json",
+        "tests/testdata/hellaswag-v0-loglikelihood",
+        "tests/testdata/hellaswag-v0-res.json",
+        "tests/testdata/hendrycksTest-abstract_algebra-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-abstract_algebra-v0-res.json",
+        "tests/testdata/hendrycksTest-anatomy-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-anatomy-v0-res.json",
+        "tests/testdata/hendrycksTest-astronomy-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-astronomy-v0-res.json",
+        "tests/testdata/hendrycksTest-business_ethics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-business_ethics-v0-res.json",
+        "tests/testdata/hendrycksTest-clinical_knowledge-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-clinical_knowledge-v0-res.json",
+        "tests/testdata/hendrycksTest-college_biology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_biology-v0-res.json",
+        "tests/testdata/hendrycksTest-college_chemistry-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_chemistry-v0-res.json",
+        "tests/testdata/hendrycksTest-college_computer_science-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_computer_science-v0-res.json",
+        "tests/testdata/hendrycksTest-college_mathematics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_mathematics-v0-res.json",
+        "tests/testdata/hendrycksTest-college_medicine-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_medicine-v0-res.json",
+        "tests/testdata/hendrycksTest-college_physics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-college_physics-v0-res.json",
+        "tests/testdata/hendrycksTest-computer_security-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-computer_security-v0-res.json",
+        "tests/testdata/hendrycksTest-conceptual_physics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-conceptual_physics-v0-res.json",
+        "tests/testdata/hendrycksTest-econometrics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-econometrics-v0-res.json",
+        "tests/testdata/hendrycksTest-electrical_engineering-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-electrical_engineering-v0-res.json",
+        "tests/testdata/hendrycksTest-elementary_mathematics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-elementary_mathematics-v0-res.json",
+        "tests/testdata/hendrycksTest-formal_logic-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-formal_logic-v0-res.json",
+        "tests/testdata/hendrycksTest-global_facts-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-global_facts-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_biology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_biology-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_chemistry-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_chemistry-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_computer_science-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_computer_science-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_european_history-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_european_history-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_geography-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_geography-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_government_and_politics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_government_and_politics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_macroeconomics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_macroeconomics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_mathematics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_mathematics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_microeconomics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_microeconomics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_physics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_physics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_psychology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_psychology-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_statistics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_statistics-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_us_history-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_us_history-v0-res.json",
+        "tests/testdata/hendrycksTest-high_school_world_history-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-high_school_world_history-v0-res.json",
+        "tests/testdata/hendrycksTest-human_aging-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-human_aging-v0-res.json",
+        "tests/testdata/hendrycksTest-human_sexuality-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-human_sexuality-v0-res.json",
+        "tests/testdata/hendrycksTest-international_law-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-international_law-v0-res.json",
+        "tests/testdata/hendrycksTest-jurisprudence-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-jurisprudence-v0-res.json",
+        "tests/testdata/hendrycksTest-logical_fallacies-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-logical_fallacies-v0-res.json",
+        "tests/testdata/hendrycksTest-machine_learning-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-machine_learning-v0-res.json",
+        "tests/testdata/hendrycksTest-management-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-management-v0-res.json",
+        "tests/testdata/hendrycksTest-marketing-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-marketing-v0-res.json",
+        "tests/testdata/hendrycksTest-medical_genetics-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-medical_genetics-v0-res.json",
+        "tests/testdata/hendrycksTest-miscellaneous-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-miscellaneous-v0-res.json",
+        "tests/testdata/hendrycksTest-moral_disputes-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-moral_disputes-v0-res.json",
+        "tests/testdata/hendrycksTest-moral_scenarios-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-moral_scenarios-v0-res.json",
+        "tests/testdata/hendrycksTest-nutrition-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-nutrition-v0-res.json",
+        "tests/testdata/hendrycksTest-philosophy-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-philosophy-v0-res.json",
+        "tests/testdata/hendrycksTest-prehistory-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-prehistory-v0-res.json",
+        "tests/testdata/hendrycksTest-professional_accounting-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-professional_accounting-v0-res.json",
+        "tests/testdata/hendrycksTest-professional_law-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-professional_law-v0-res.json",
+        "tests/testdata/hendrycksTest-professional_medicine-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-professional_medicine-v0-res.json",
+        "tests/testdata/hendrycksTest-professional_psychology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-professional_psychology-v0-res.json",
+        "tests/testdata/hendrycksTest-public_relations-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-public_relations-v0-res.json",
+        "tests/testdata/hendrycksTest-security_studies-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-security_studies-v0-res.json",
+        "tests/testdata/hendrycksTest-sociology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-sociology-v0-res.json",
+        "tests/testdata/hendrycksTest-us_foreign_policy-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-us_foreign_policy-v0-res.json",
+        "tests/testdata/hendrycksTest-virology-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-virology-v0-res.json",
+        "tests/testdata/hendrycksTest-world_religions-v0-loglikelihood",
+        "tests/testdata/hendrycksTest-world_religions-v0-res.json",
+        "tests/testdata/iwslt17-ar-en-v0-greedy_until",
+        "tests/testdata/iwslt17-ar-en-v0-res.json",
+        "tests/testdata/iwslt17-en-ar-v0-greedy_until",
+        "tests/testdata/iwslt17-en-ar-v0-res.json",
+        "tests/testdata/lambada-v0-loglikelihood",
+        "tests/testdata/lambada-v0-res.json",
+        "tests/testdata/lambada_cloze-v0-loglikelihood",
+        "tests/testdata/lambada_cloze-v0-res.json",
+        "tests/testdata/lambada_mt_de-v0-loglikelihood",
+        "tests/testdata/lambada_mt_de-v0-res.json",
+        "tests/testdata/lambada_mt_en-v0-loglikelihood",
+        "tests/testdata/lambada_mt_en-v0-res.json",
+        "tests/testdata/lambada_mt_es-v0-loglikelihood",
+        "tests/testdata/lambada_mt_es-v0-res.json",
+        "tests/testdata/lambada_mt_fr-v0-loglikelihood",
+        "tests/testdata/lambada_mt_fr-v0-res.json",
+        "tests/testdata/lambada_mt_it-v0-loglikelihood",
+        "tests/testdata/lambada_mt_it-v0-res.json",
+        "tests/testdata/lambada_openai-v0-loglikelihood",
+        "tests/testdata/lambada_openai-v0-res.json",
+        "tests/testdata/lambada_openai-v2.0-loglikelihood",
+        "tests/testdata/lambada_openai-v2.0-res.json",
+        "tests/testdata/lambada_openai_10_hf_pretrained-EleutherAI-pythia-14m-deduped-dtype-float32-device-cpu.txt",
+        "tests/testdata/lambada_openai_cloze-v0-loglikelihood",
+        "tests/testdata/lambada_openai_cloze-v0-res.json",
+        "tests/testdata/lambada_openai_mt_de-v0-loglikelihood",
+        "tests/testdata/lambada_openai_mt_de-v0-res.json",
+        "tests/testdata/lambada_openai_mt_en-v0-loglikelihood",
+        "tests/testdata/lambada_openai_mt_en-v0-res.json",
+        "tests/testdata/lambada_openai_mt_es-v0-loglikelihood",
+        "tests/testdata/lambada_openai_mt_es-v0-res.json",
+        "tests/testdata/lambada_openai_mt_fr-v0-loglikelihood",
+        "tests/testdata/lambada_openai_mt_fr-v0-res.json",
+        "tests/testdata/lambada_openai_mt_it-v0-loglikelihood",
+        "tests/testdata/lambada_openai_mt_it-v0-res.json",
+        "tests/testdata/lambada_standard-v0-loglikelihood",
+        "tests/testdata/lambada_standard-v0-res.json",
+        "tests/testdata/lambada_standard_cloze-v0-loglikelihood",
+        "tests/testdata/lambada_standard_cloze-v0-res.json",
+        "tests/testdata/logiqa-v0-loglikelihood",
+        "tests/testdata/logiqa-v0-res.json",
+        "tests/testdata/math_algebra-v0-greedy_until",
+        "tests/testdata/math_algebra-v0-res.json",
+        "tests/testdata/math_algebra-v1-greedy_until",
+        "tests/testdata/math_algebra-v1-res.json",
+        "tests/testdata/math_counting_and_prob-v0-greedy_until",
+        "tests/testdata/math_counting_and_prob-v0-res.json",
+        "tests/testdata/math_counting_and_prob-v1-greedy_until",
+        "tests/testdata/math_counting_and_prob-v1-res.json",
+        "tests/testdata/math_geometry-v0-greedy_until",
+        "tests/testdata/math_geometry-v0-res.json",
+        "tests/testdata/math_geometry-v1-greedy_until",
+        "tests/testdata/math_geometry-v1-res.json",
+        "tests/testdata/math_intermediate_algebra-v0-greedy_until",
+        "tests/testdata/math_intermediate_algebra-v0-res.json",
+        "tests/testdata/math_intermediate_algebra-v1-greedy_until",
+        "tests/testdata/math_intermediate_algebra-v1-res.json",
+        "tests/testdata/math_num_theory-v0-greedy_until",
+        "tests/testdata/math_num_theory-v0-res.json",
+        "tests/testdata/math_num_theory-v1-greedy_until",
+        "tests/testdata/math_num_theory-v1-res.json",
+        "tests/testdata/math_prealgebra-v0-greedy_until",
+        "tests/testdata/math_prealgebra-v0-res.json",
+        "tests/testdata/math_prealgebra-v1-greedy_until",
+        "tests/testdata/math_prealgebra-v1-res.json",
+        "tests/testdata/math_precalc-v0-greedy_until",
+        "tests/testdata/math_precalc-v0-res.json",
+        "tests/testdata/math_precalc-v1-greedy_until",
+        "tests/testdata/math_precalc-v1-res.json",
+        "tests/testdata/mathqa-v0-loglikelihood",
+        "tests/testdata/mathqa-v0-res.json",
+        "tests/testdata/mc_taco-v0-loglikelihood",
+        "tests/testdata/mc_taco-v0-res.json",
+        "tests/testdata/mmlu_stem_10_hf_pretrained-EleutherAI-pythia-14m-deduped-dtype-float32-device-cpu.txt",
+        "tests/testdata/mnli-v0-loglikelihood",
+        "tests/testdata/mnli-v0-res.json",
+        "tests/testdata/mnli_mismatched-v0-loglikelihood",
+        "tests/testdata/mnli_mismatched-v0-res.json",
+        "tests/testdata/mrpc-v0-loglikelihood",
+        "tests/testdata/mrpc-v0-res.json",
+        "tests/testdata/multirc-v0-loglikelihood",
+        "tests/testdata/multirc-v0-res.json",
+        "tests/testdata/multirc-v1-loglikelihood",
+        "tests/testdata/multirc-v1-res.json",
+        "tests/testdata/mutual-v0-loglikelihood",
+        "tests/testdata/mutual-v0-res.json",
+        "tests/testdata/mutual-v1-loglikelihood",
+        "tests/testdata/mutual-v1-res.json",
+        "tests/testdata/mutual_plus-v0-loglikelihood",
+        "tests/testdata/mutual_plus-v0-res.json",
+        "tests/testdata/mutual_plus-v1-loglikelihood",
+        "tests/testdata/mutual_plus-v1-res.json",
+        "tests/testdata/openbookqa-v0-loglikelihood",
+        "tests/testdata/openbookqa-v0-res.json",
+        "tests/testdata/pile_arxiv-v0-loglikelihood_rolling",
+        "tests/testdata/pile_arxiv-v0-res.json",
+        "tests/testdata/pile_arxiv-v1-loglikelihood_rolling",
+        "tests/testdata/pile_arxiv-v1-res.json",
+        "tests/testdata/pile_bookcorpus2-v0-loglikelihood_rolling",
+        "tests/testdata/pile_bookcorpus2-v0-res.json",
+        "tests/testdata/pile_bookcorpus2-v1-loglikelihood_rolling",
+        "tests/testdata/pile_bookcorpus2-v1-res.json",
+        "tests/testdata/pile_books3-v0-loglikelihood_rolling",
+        "tests/testdata/pile_books3-v0-res.json",
+        "tests/testdata/pile_books3-v1-loglikelihood_rolling",
+        "tests/testdata/pile_books3-v1-res.json",
+        "tests/testdata/pile_dm-mathematics-v0-loglikelihood_rolling",
+        "tests/testdata/pile_dm-mathematics-v0-res.json",
+        "tests/testdata/pile_dm-mathematics-v1-loglikelihood_rolling",
+        "tests/testdata/pile_dm-mathematics-v1-res.json",
+        "tests/testdata/pile_enron-v0-loglikelihood_rolling",
+        "tests/testdata/pile_enron-v0-res.json",
+        "tests/testdata/pile_enron-v1-loglikelihood_rolling",
+        "tests/testdata/pile_enron-v1-res.json",
+        "tests/testdata/pile_europarl-v0-loglikelihood_rolling",
+        "tests/testdata/pile_europarl-v0-res.json",
+        "tests/testdata/pile_europarl-v1-loglikelihood_rolling",
+        "tests/testdata/pile_europarl-v1-res.json",
+        "tests/testdata/pile_freelaw-v0-loglikelihood_rolling",
+        "tests/testdata/pile_freelaw-v0-res.json",
+        "tests/testdata/pile_freelaw-v1-loglikelihood_rolling",
+        "tests/testdata/pile_freelaw-v1-res.json",
+        "tests/testdata/pile_github-v0-loglikelihood_rolling",
+        "tests/testdata/pile_github-v0-res.json",
+        "tests/testdata/pile_github-v1-loglikelihood_rolling",
+        "tests/testdata/pile_github-v1-res.json",
+        "tests/testdata/pile_gutenberg-v0-loglikelihood_rolling",
+        "tests/testdata/pile_gutenberg-v0-res.json",
+        "tests/testdata/pile_gutenberg-v1-loglikelihood_rolling",
+        "tests/testdata/pile_gutenberg-v1-res.json",
+        "tests/testdata/pile_hackernews-v0-loglikelihood_rolling",
+        "tests/testdata/pile_hackernews-v0-res.json",
+        "tests/testdata/pile_hackernews-v1-loglikelihood_rolling",
+        "tests/testdata/pile_hackernews-v1-res.json",
+        "tests/testdata/pile_nih-exporter-v0-loglikelihood_rolling",
+        "tests/testdata/pile_nih-exporter-v0-res.json",
+        "tests/testdata/pile_nih-exporter-v1-loglikelihood_rolling",
+        "tests/testdata/pile_nih-exporter-v1-res.json",
+        "tests/testdata/pile_opensubtitles-v0-loglikelihood_rolling",
+        "tests/testdata/pile_opensubtitles-v0-res.json",
+        "tests/testdata/pile_opensubtitles-v1-loglikelihood_rolling",
+        "tests/testdata/pile_opensubtitles-v1-res.json",
+        "tests/testdata/pile_openwebtext2-v0-loglikelihood_rolling",
+        "tests/testdata/pile_openwebtext2-v0-res.json",
+        "tests/testdata/pile_openwebtext2-v1-loglikelihood_rolling",
+        "tests/testdata/pile_openwebtext2-v1-res.json",
+        "tests/testdata/pile_philpapers-v0-loglikelihood_rolling",
+        "tests/testdata/pile_philpapers-v0-res.json",
+        "tests/testdata/pile_philpapers-v1-loglikelihood_rolling",
+        "tests/testdata/pile_philpapers-v1-res.json",
+        "tests/testdata/pile_pile-cc-v0-loglikelihood_rolling",
+        "tests/testdata/pile_pile-cc-v0-res.json",
+        "tests/testdata/pile_pile-cc-v1-loglikelihood_rolling",
+        "tests/testdata/pile_pile-cc-v1-res.json",
+        "tests/testdata/pile_pubmed-abstracts-v0-loglikelihood_rolling",
+        "tests/testdata/pile_pubmed-abstracts-v0-res.json",
+        "tests/testdata/pile_pubmed-abstracts-v1-loglikelihood_rolling",
+        "tests/testdata/pile_pubmed-abstracts-v1-res.json",
+        "tests/testdata/pile_pubmed-central-v0-loglikelihood_rolling",
+        "tests/testdata/pile_pubmed-central-v0-res.json",
+        "tests/testdata/pile_pubmed-central-v1-loglikelihood_rolling",
+        "tests/testdata/pile_pubmed-central-v1-res.json",
+        "tests/testdata/pile_stackexchange-v0-loglikelihood_rolling",
+        "tests/testdata/pile_stackexchange-v0-res.json",
+        "tests/testdata/pile_stackexchange-v1-loglikelihood_rolling",
+        "tests/testdata/pile_stackexchange-v1-res.json",
+        "tests/testdata/pile_ubuntu-irc-v0-loglikelihood_rolling",
+        "tests/testdata/pile_ubuntu-irc-v0-res.json",
+        "tests/testdata/pile_ubuntu-irc-v1-loglikelihood_rolling",
+        "tests/testdata/pile_ubuntu-irc-v1-res.json",
+        "tests/testdata/pile_uspto-v0-loglikelihood_rolling",
+        "tests/testdata/pile_uspto-v0-res.json",
+        "tests/testdata/pile_uspto-v1-loglikelihood_rolling",
+        "tests/testdata/pile_uspto-v1-res.json",
+        "tests/testdata/pile_wikipedia-v0-loglikelihood_rolling",
+        "tests/testdata/pile_wikipedia-v0-res.json",
+        "tests/testdata/pile_wikipedia-v1-loglikelihood_rolling",
+        "tests/testdata/pile_wikipedia-v1-res.json",
+        "tests/testdata/pile_youtubesubtitles-v0-loglikelihood_rolling",
+        "tests/testdata/pile_youtubesubtitles-v0-res.json",
+        "tests/testdata/pile_youtubesubtitles-v1-loglikelihood_rolling",
+        "tests/testdata/pile_youtubesubtitles-v1-res.json",
+        "tests/testdata/piqa-v0-loglikelihood",
+        "tests/testdata/piqa-v0-res.json",
+        "tests/testdata/prost-v0-loglikelihood",
+        "tests/testdata/prost-v0-res.json",
+        "tests/testdata/pubmedqa-v0-loglikelihood",
+        "tests/testdata/pubmedqa-v0-res.json",
+        "tests/testdata/qa4mre_2011-v0-loglikelihood",
+        "tests/testdata/qa4mre_2011-v0-res.json",
+        "tests/testdata/qa4mre_2012-v0-loglikelihood",
+        "tests/testdata/qa4mre_2012-v0-res.json",
+        "tests/testdata/qa4mre_2013-v0-loglikelihood",
+        "tests/testdata/qa4mre_2013-v0-res.json",
+        "tests/testdata/qnli-v0-loglikelihood",
+        "tests/testdata/qnli-v0-res.json",
+        "tests/testdata/qqp-v0-loglikelihood",
+        "tests/testdata/qqp-v0-res.json",
+        "tests/testdata/race-v0-loglikelihood",
+        "tests/testdata/race-v0-res.json",
+        "tests/testdata/random_insertion-v0-greedy_until",
+        "tests/testdata/random_insertion-v0-res.json",
+        "tests/testdata/record-v0-loglikelihood",
+        "tests/testdata/record-v0-res.json",
+        "tests/testdata/reversed_words-v0-greedy_until",
+        "tests/testdata/reversed_words-v0-res.json",
+        "tests/testdata/rte-v0-loglikelihood",
+        "tests/testdata/rte-v0-res.json",
+        "tests/testdata/sciq-v0-loglikelihood",
+        "tests/testdata/sciq-v0-res.json",
+        "tests/testdata/squad2-v0-greedy_until",
+        "tests/testdata/squad2-v0-loglikelihood",
+        "tests/testdata/squad2-v0-res.json",
+        "tests/testdata/squad2-v1-greedy_until",
+        "tests/testdata/squad2-v1-loglikelihood",
+        "tests/testdata/squad2-v1-res.json",
+        "tests/testdata/sst-v0-loglikelihood",
+        "tests/testdata/sst-v0-res.json",
+        "tests/testdata/swag-v0-loglikelihood",
+        "tests/testdata/swag-v0-res.json",
+        "tests/testdata/toxigen-v0-loglikelihood",
+        "tests/testdata/toxigen-v0-res.json",
+        "tests/testdata/triviaqa-v0-loglikelihood",
+        "tests/testdata/triviaqa-v0-res.json",
+        "tests/testdata/triviaqa-v1-loglikelihood",
+        "tests/testdata/triviaqa-v1-res.json",
+        "tests/testdata/truthfulqa_gen-v0-greedy_until",
+        "tests/testdata/truthfulqa_gen-v0-res.json",
+        "tests/testdata/truthfulqa_gen-v1-greedy_until",
+        "tests/testdata/truthfulqa_gen-v1-res.json",
+        "tests/testdata/truthfulqa_mc-v0-loglikelihood",
+        "tests/testdata/truthfulqa_mc-v0-res.json",
+        "tests/testdata/truthfulqa_mc-v1-loglikelihood",
+        "tests/testdata/truthfulqa_mc-v1-res.json",
+        "tests/testdata/webqs-v0-loglikelihood",
+        "tests/testdata/webqs-v0-res.json",
+        "tests/testdata/wic-v0-loglikelihood",
+        "tests/testdata/wic-v0-res.json",
+        "tests/testdata/wikitext-v0-loglikelihood_rolling",
+        "tests/testdata/wikitext-v0-res.json",
+        "tests/testdata/wikitext-v1-loglikelihood_rolling",
+        "tests/testdata/wikitext-v1-res.json",
+        "tests/testdata/wikitext_10_hf_pretrained-EleutherAI-pythia-14m-deduped-dtype-float32-device-cpu.txt",
+        "tests/testdata/winogrande-v0-loglikelihood",
+        "tests/testdata/winogrande-v0-res.json",
+        "tests/testdata/wmt14-en-fr-v0-greedy_until",
+        "tests/testdata/wmt14-en-fr-v0-res.json",
+        "tests/testdata/wmt14-fr-en-v0-greedy_until",
+        "tests/testdata/wmt14-fr-en-v0-res.json",
+        "tests/testdata/wmt16-de-en-v0-greedy_until",
+        "tests/testdata/wmt16-de-en-v0-res.json",
+        "tests/testdata/wmt16-en-de-v0-greedy_until",
+        "tests/testdata/wmt16-en-de-v0-res.json",
+        "tests/testdata/wmt16-en-ro-v0-greedy_until",
+        "tests/testdata/wmt16-en-ro-v0-res.json",
+        "tests/testdata/wmt16-ro-en-v0-greedy_until",
+        "tests/testdata/wmt16-ro-en-v0-res.json",
+        "tests/testdata/wmt20-cs-en-v0-greedy_until",
+        "tests/testdata/wmt20-cs-en-v0-res.json",
+        "tests/testdata/wmt20-de-en-v0-greedy_until",
+        "tests/testdata/wmt20-de-en-v0-res.json",
+        "tests/testdata/wmt20-de-fr-v0-greedy_until",
+        "tests/testdata/wmt20-de-fr-v0-res.json",
+        "tests/testdata/wmt20-en-cs-v0-greedy_until",
+        "tests/testdata/wmt20-en-cs-v0-res.json",
+        "tests/testdata/wmt20-en-de-v0-greedy_until",
+        "tests/testdata/wmt20-en-de-v0-res.json",
+        "tests/testdata/wmt20-en-iu-v0-greedy_until",
+        "tests/testdata/wmt20-en-iu-v0-res.json",
+        "tests/testdata/wmt20-en-ja-v0-greedy_until",
+        "tests/testdata/wmt20-en-ja-v0-res.json",
+        "tests/testdata/wmt20-en-ja-v1-greedy_until",
+        "tests/testdata/wmt20-en-ja-v1-res.json",
+        "tests/testdata/wmt20-en-km-v0-greedy_until",
+        "tests/testdata/wmt20-en-km-v0-res.json",
+        "tests/testdata/wmt20-en-pl-v0-greedy_until",
+        "tests/testdata/wmt20-en-pl-v0-res.json",
+        "tests/testdata/wmt20-en-ps-v0-greedy_until",
+        "tests/testdata/wmt20-en-ps-v0-res.json",
+        "tests/testdata/wmt20-en-ru-v0-greedy_until",
+        "tests/testdata/wmt20-en-ru-v0-res.json",
+        "tests/testdata/wmt20-en-ta-v0-greedy_until",
+        "tests/testdata/wmt20-en-ta-v0-res.json",
+        "tests/testdata/wmt20-en-zh-v0-greedy_until",
+        "tests/testdata/wmt20-en-zh-v0-res.json",
+        "tests/testdata/wmt20-en-zh-v1-greedy_until",
+        "tests/testdata/wmt20-en-zh-v1-res.json",
+        "tests/testdata/wmt20-fr-de-v0-greedy_until",
+        "tests/testdata/wmt20-fr-de-v0-res.json",
+        "tests/testdata/wmt20-iu-en-v0-greedy_until",
+        "tests/testdata/wmt20-iu-en-v0-res.json",
+        "tests/testdata/wmt20-ja-en-v0-greedy_until",
+        "tests/testdata/wmt20-ja-en-v0-res.json",
+        "tests/testdata/wmt20-km-en-v0-greedy_until",
+        "tests/testdata/wmt20-km-en-v0-res.json",
+        "tests/testdata/wmt20-pl-en-v0-greedy_until",
+        "tests/testdata/wmt20-pl-en-v0-res.json",
+        "tests/testdata/wmt20-ps-en-v0-greedy_until",
+        "tests/testdata/wmt20-ps-en-v0-res.json",
+        "tests/testdata/wmt20-ru-en-v0-greedy_until",
+        "tests/testdata/wmt20-ru-en-v0-res.json",
+        "tests/testdata/wmt20-ta-en-v0-greedy_until",
+        "tests/testdata/wmt20-ta-en-v0-res.json",
+        "tests/testdata/wmt20-zh-en-v0-greedy_until",
+        "tests/testdata/wmt20-zh-en-v0-res.json",
+        "tests/testdata/wnli-v0-loglikelihood",
+        "tests/testdata/wnli-v0-res.json",
+        "tests/testdata/wnli-v1-loglikelihood",
+        "tests/testdata/wnli-v1-res.json",
+        "tests/testdata/wsc-v0-loglikelihood",
+        "tests/testdata/wsc-v0-res.json",
+        "tests/testdata/wsc273-v0-loglikelihood",
+        "tests/testdata/wsc273-v0-res.json",
+        "tests/testyamls/**",
+        "tests/utils.py"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 EleutherAI\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 EleutherAI, MIT license (LICENSE.md), https://github.com/EleutherAI/lm-evaluation-harness."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.5k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_af_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_af_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_albanian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_albanian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_albanian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_am_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ar_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ar_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_arabic_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_arabic_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_arabic_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_arc_ca_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_arc_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_armenian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_armenian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_armenian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ask_gec_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_at_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_azerbaijani_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_azerbaijani_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_azerbaijani_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_babilong_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_base_em_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_basque_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_basque_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_basque_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_belarusian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_belarusian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_belarusian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bengali_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bengali_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bengali_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bertaqa_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bn_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bn_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_boolq_cot_2shot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bulgarian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bulgarian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_bulgarian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cabbq_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cabreu_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_chinese_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_chinese_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_chinese_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_continuation_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cot_fewshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cot_kmmlu_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cot_zeroshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_croatian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_croatian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_croatian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cs_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_cs_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_de_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_de_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_arab_culture_completion_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_arab_culture_mcq_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_arabicmmlu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_ceval_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_click_cul_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_click_lang_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_csatqa_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_darijammlu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_egymmlu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_greekmmlu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_haerae_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_indicparam_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_kmmlu_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_template_spanish_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_yaml_2k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_default_yaml_8k"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_direct_hard_kmmlu_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_direct_kmmlu_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_dutch_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_dutch_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_dutch_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_el_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_en_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_es_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_es_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_esbbq_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_estonian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_estonian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_estonian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_evalita-mp_ner_adg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_evalita-mp_ner_fic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_evalita-mp_ner_wn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fa_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_faq_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fewshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fil_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_finnish_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_finnish_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_finnish_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_flores_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fr_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fr_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_french_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_french_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_french_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gen_yaml_2shot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_georgian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_georgian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_georgian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_german_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_german_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_german_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gpqa_cot_n_shot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gpqa_cot_zeroshot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gpqa_generative_n_shot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gpqa_n_shot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_gpqa_zeroshot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_greek_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_greek_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_greek_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ha_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hard_kmmlu_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_he_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hebrew_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hebrew_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hebrew_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_held_in_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hellaswag_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hi_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hi_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hindi_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hindi_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hindi_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hrm8k_en_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hrm8k_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hs_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hu_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hungarian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hungarian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_hungarian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_id_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_id_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ig_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_indonesian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_indonesian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_indonesian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_infinitebench_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_inverse_scaling_mc_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_it_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_it_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_italian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_italian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_italian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ja_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ja_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_japanese_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_japanese_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_japanese_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_kazakh_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_kazakh_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_kazakh_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_kbl_knowledge_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_kbl_reasoning_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ko_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ko_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_korean_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_korean_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_korean_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ky_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_lang_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_legalbench_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_lithuanian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_lithuanian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_lithuanian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_longbench_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ls_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_lt_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malay_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malay_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malay_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malayalam_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malayalam_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_malayalam_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mcq_cot_2shot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mg_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlu_cot_llama_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlu_flan_cot_fewshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlu_flan_cot_zeroshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlu_flan_generative_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlu_flan_loglikelihood_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlusr_a_yml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlusr_q_yml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mmlusr_qna_yml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mr_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_mr_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ms_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ne_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ne_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nepali_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nepali_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nepali_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ner_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nl_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_noor_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_norbelebele_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_norcommonsenseqa_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_norec_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_noridiom_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_noropenbookqa_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_norquad_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_norsumm_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_north_macedonian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_north_macedonian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_north_macedonian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nortruthfulqa_gen_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nortruthfulqa_mc_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_nrk_quiz_qa_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ny_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_paloma_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_persian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_persian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_persian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_phrases_es_common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_phrases_va_common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_physics_gre_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_pl_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_polish_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_polish_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_polish_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_portuguese_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_portuguese_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_portuguese_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_pt_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_pt_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_re_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ro_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ru_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ru_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_russian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_russian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_russian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sa_template_v2_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sa_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_serbian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_serbian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_serbian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_si_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sn_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_so_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_some_results"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_spanish_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_spanish_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_spanish_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sr_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sr_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sum_template_fp-small_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sum_template_fp_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sum_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sv_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sw_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_sw_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tagalog_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tagalog_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tagalog_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tamil_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tamil_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tamil_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tatoeba_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_te_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_te_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_telugu_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_telugu_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_telugu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_th_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_th_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tmmluplus_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tr_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_truthfulqa_mc1_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_truthfulqa_mc2_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_turkish_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_turkish_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_turkish_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_turkishmmlu_cot_default_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_turkishmmlu_default_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_tydiqa_goldp_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_uk_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_uk_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ukrainian_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ukrainian_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ukrainian_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ur_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ur_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_urdu_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_urdu_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_urdu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_uzbek_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_uzbek_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_uzbek_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_var5shots_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_vi_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_vi_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_vietnamese_few_shot_en_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_vietnamese_few_shot_og_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_vietnamese_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_wic_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_wo_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_wo_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_yo_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_yo_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_zeroshot_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_zh_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_zh_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_zu_lite_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_zu_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afridiacritics_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimgsm_cot_translate_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimgsm_cot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimgsm_translate_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimgsm_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimmlu_direct"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrimmlu_translate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afriqa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrisenti"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_en_direct_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_manual_direct_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_manual_translate_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_native_direct_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_translate_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/afrixnli_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/anagrams1-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/anagrams2-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/anli_r1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/anli_r2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/anli_r3-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arc_challenge-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arc_easy-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_1dc-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_2da-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_2dm-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_2ds-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_3da-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_3ds-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_4da-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_4ds-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_5da-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arithmetic_5ds-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/belebele"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_adjunct_island-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_anaphor_gender_agreement-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_anaphor_number_agreement-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_animate_subject_passive-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_animate_subject_trans-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_causative-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_complex_NP_island-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_coordinate_structure_constraint_complex_left_branch-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_coordinate_structure_constraint_object_extraction-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_irregular_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_irregular_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_with_adj_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_with_adj_irregular_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_with_adj_irregular_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_determiner_noun_agreement_with_adjective_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_distractor_agreement_relational_noun-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_distractor_agreement_relative_clause-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_drop_argument-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_ellipsis_n_bar_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_ellipsis_n_bar_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_existential_there_object_raising-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_existential_there_quantifiers_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_existential_there_quantifiers_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_existential_there_subject_raising-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_expletive_it_object_raising-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_inchoative-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_intransitive-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_irregular_past_participle_adjectives-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_irregular_past_participle_verbs-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_irregular_plural_subject_verb_agreement_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_irregular_plural_subject_verb_agreement_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_left_branch_island_echo_question-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_left_branch_island_simple_question-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_matrix_question_npi_licensor_present-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_npi_present_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_npi_present_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_only_npi_licensor_present-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_only_npi_scope-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_passive_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_passive_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_c_command-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_case_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_case_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_domain_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_domain_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_domain_3-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_principle_A_reconstruction-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_regular_plural_subject_verb_agreement_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_regular_plural_subject_verb_agreement_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_sentential_negation_npi_licensor_present-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_sentential_negation_npi_scope-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_sentential_subject_island-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_superlative_quantifiers_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_superlative_quantifiers_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_tough_vs_raising_1-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_tough_vs_raising_2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_transitive-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_island-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_questions_object_gap-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_questions_subject_gap-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_questions_subject_gap_long_distance-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_vs_that_no_gap-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_vs_that_no_gap_long_distance-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_vs_that_with_gap-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/blimp_wh_vs_that_with_gap_long_distance-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/boolq-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/boolq-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cb-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cb-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cola-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/copa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coqa-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coqa-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cot_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_age-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_autre-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_disability-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_gender-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_nationality-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_physical_appearance-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_race_color-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_religion-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_sexual_orientation-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_english_socioeconomic-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_age-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_autre-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_disability-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_gender-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_nationality-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_physical_appearance-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_race_color-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_religion-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_sexual_orientation-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crows_pairs_french_socioeconomic-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cruxeval_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cycle_letters-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/default_darija_sentiment_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/direct_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/doda_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/drop-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/drop-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_cm-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_deontology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_justice-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_utilitarianism-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_utilitarianism_original-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ethics_virtue-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eus_exams"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eus_exams_es"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eus_exams_eu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flores"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/flores_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate_until_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gsm8k-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headqa_en-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/headqa_es-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hellaswag-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-abstract_algebra-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-anatomy-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-astronomy-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-business_ethics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-clinical_knowledge-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_biology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_chemistry-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_computer_science-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_mathematics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_medicine-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-college_physics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-computer_security-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-conceptual_physics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-econometrics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-electrical_engineering-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-elementary_mathematics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-formal_logic-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-global_facts-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_biology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_chemistry-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_computer_science-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_european_history-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_geography-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_government_and_politics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_macroeconomics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_mathematics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_microeconomics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_physics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_psychology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_statistics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_us_history-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-high_school_world_history-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-human_aging-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-human_sexuality-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-international_law-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-jurisprudence-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-logical_fallacies-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-machine_learning-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-management-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-marketing-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-medical_genetics-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-miscellaneous-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-moral_disputes-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-moral_scenarios-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-nutrition-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-philosophy-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-prehistory-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-professional_accounting-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-professional_law-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-professional_medicine-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-professional_psychology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-public_relations-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-security_studies-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-sociology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-us_foreign_policy-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-virology-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hendrycksTest-world_religions-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/injongointent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iwslt17-ar-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iwslt17-en-ar-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_cloze-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_mt_de-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_mt_en-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_mt_es-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_mt_fr-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_mt_it-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_cloze-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_mt_de-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_mt_en-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_mt_es-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_mt_fr-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_openai_mt_it-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_standard-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lambada_standard_cloze-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/logiqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/madar_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mafand"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/masakhaner"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/masakhanews"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/masakhapos_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_algebra-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_algebra-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_counting_and_prob-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_counting_and_prob-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_geometry-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_geometry-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_intermediate_algebra-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_intermediate_algebra-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_num_theory-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_num_theory-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_prealgebra-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_prealgebra-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_precalc-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/math_precalc-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mathqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mc_taco-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mlqa_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mnli-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mnli_mismatched-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mrpc-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multiple_choice_template_a_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multiple_choice_template_b_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multirc-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multirc-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mutual-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mutual-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mutual_plus-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mutual_plus-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/naijarc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nollysenti"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ntrex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openai_mmlu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/openbookqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pawsx_template_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_arxiv-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_arxiv-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_bookcorpus2-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_bookcorpus2-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_books3-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_books3-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_dm-mathematics-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_dm-mathematics-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_enron-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_enron-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_europarl-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_europarl-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_freelaw-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_freelaw-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_github-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_github-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_gutenberg-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_gutenberg-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_hackernews-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_hackernews-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_nih-exporter-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_nih-exporter-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_opensubtitles-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_opensubtitles-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_openwebtext2-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_openwebtext2-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_philpapers-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_philpapers-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pile-cc-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pile-cc-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pubmed-abstracts-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pubmed-abstracts-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pubmed-central-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_pubmed-central-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_stackexchange-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_stackexchange-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_ubuntu-irc-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_ubuntu-irc-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_uspto-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_uspto-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_wikipedia-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_wikipedia-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_youtubesubtitles-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pile_youtubesubtitles-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/piqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prost-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pubmedqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qa4mre_2011-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qa4mre_2012-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qa4mre_2013-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qnli-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qqp-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/race-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/random_insertion-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/record-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reversed_words-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rte-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/salt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sciq-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/seed_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/slr_bench_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squad2-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squad2-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squad2-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squad2-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sst-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/summarization_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swag-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/toxigen-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/translation_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/transliteration_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/triviaqa-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/triviaqa-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa-multi_gen_common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa-multi_mc_common"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa_gen-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa_gen-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa_mc-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/truthfulqa_mc-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uhura-arc-easy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unitxt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unitxt_multimodal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/utilitarianism_original_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/webqs-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wic-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wikitext-v0-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wikitext-v1-loglikelihood_rolling"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/winogenerated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/winogrande-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt14-en-fr-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt14-fr-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt16-de-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt16-en-de-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt16-en-ro-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt16-ro-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-cs-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-de-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-de-fr-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-cs-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-de-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-iu-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-ja-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-ja-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-km-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-pl-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-ps-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-ru-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-ta-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-zh-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-en-zh-v1-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-fr-de-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-iu-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-ja-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-km-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-pl-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-ps-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-ru-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-ta-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt20-zh-en-v0-greedy_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wmt_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wnli-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wnli-v1-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wsc-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wsc273-v0-loglikelihood"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xlsum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xnli_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xquad_common_yaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xwinograd_common_yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

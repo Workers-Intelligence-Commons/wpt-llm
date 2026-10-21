@@ -1,0 +1,806 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/diem/diem",
+  "revision": "fc4714a8ea273b6efe8b13dbce72ea60aad9a16c",
+  "checksum": "sha256:feea76edd459273119f25244445560f20db738df6e5c9f0884afffdc7893c4ba",
+  "extract": {
+    "exclude": [
+      ".assets/**",
+      "developers.diem.com/**",
+      "devtools/x/src/lint/**",
+      "documentation/contributing/**",
+      "documentation/tech-papers/lbft-reconfig/figures/**",
+      "documentation/tech-papers/lbft-reconfig/lbft-reconfig.pdf",
+      "documentation/tech-papers/lbft-verification/figures/**",
+      "documentation/tech-papers/lbft-verification/lbft-verification.pdf",
+      "helm/fullnode/files/genesis/**",
+      "json-rpc/docs/images/**",
+      "language/diem-framework/releases/artifacts/current/error_description/**",
+      "language/diem-framework/releases/artifacts/current/modules/**",
+      "language/diem-framework/releases/artifacts/current/script_abis/**",
+      "language/diem-framework/releases/artifacts/release-1.2.0-rc0/error_description/**",
+      "language/diem-framework/releases/artifacts/release-1.2.0-rc0/modules/**",
+      "language/diem-framework/releases/artifacts/release-1.2.0-rc0/script_abis/**",
+      "language/diem-framework/releases/artifacts/release-1.4.0-rc0/error_description/**",
+      "language/diem-framework/releases/artifacts/release-1.4.0-rc0/modules/**",
+      "language/diem-framework/releases/artifacts/release-1.4.0-rc0/script_abis/**",
+      "language/diem-framework/releases/legacy/**",
+      "language/diem-tools/writeset-transaction-generator/release/release-1.2.0-rc0.blob",
+      "language/diem-tools/writeset-transaction-generator/release/release-1.4.0-rc0.blob",
+      "language/move-binary-format/src/unit_tests/invalid_script_no_signature.mv",
+      "language/move-prover/abigen/tests/sources/script_fun_in_module/**",
+      "language/move-prover/abigen/tests/sources/some_script.abi",
+      "language/move-prover/doc/report/arch.png",
+      "language/move-prover/doc/report/main-impl.pdf",
+      "language/move-prover/doc/report/main.pdf",
+      "language/move-stdlib/error_description.errmap",
+      "language/testing-infra/e2e-tests/genesis-release-1-1/**",
+      "shuffle/sample-app/new_account.key",
+      "specifications/images/**",
+      "specifications/transactions/travel-rule/flow.png",
+      "specifications/trusted_computing_base/execution_correctness/block_tree.png",
+      "specifications/trusted_computing_base/execution_correctness/two_party.png",
+      "storage/data.png",
+      "storage/storage-service/proptest-regressions/**",
+      "testsuite/diem-fuzzer/artifacts/**",
+      "types/src/test_helpers/empty_script.mv"
+    ]
+  },
+  "history": {
+    "since": "5e034dde19a5320d7e2bdc9da25114e816b4454d"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/diem/diem: the authors of diem/diem (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/diem/diem."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".cargo/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".lintrules/**",
+        "CHANGELOG/**",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "DIEM_SETUP.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "clippy.toml",
+        "codecov.yml",
+        "config/**",
+        "consensus/**",
+        "crates/**",
+        "devtools/x/Cargo.toml",
+        "devtools/x/src/bench.rs",
+        "devtools/x/src/build.rs",
+        "devtools/x/src/cargo/**",
+        "devtools/x/src/cargo.rs",
+        "devtools/x/src/changed_since.rs",
+        "devtools/x/src/check.rs",
+        "devtools/x/src/clippy.rs",
+        "devtools/x/src/config.rs",
+        "devtools/x/src/context.rs",
+        "devtools/x/src/diff_summary.rs",
+        "devtools/x/src/fix.rs",
+        "devtools/x/src/fmt.rs",
+        "devtools/x/src/generate_summaries.rs",
+        "devtools/x/src/generate_workspace_hack.rs",
+        "devtools/x/src/installer.rs",
+        "devtools/x/src/main.rs",
+        "devtools/x/src/nextest.rs",
+        "devtools/x/src/playground.rs",
+        "devtools/x/src/test.rs",
+        "devtools/x/src/tools.rs",
+        "devtools/x/src/utils.rs",
+        "devtools/x-core/**",
+        "devtools/x-lint/**",
+        "diem-node/**",
+        "docker/**",
+        "documentation/coding_guidelines.md",
+        "documentation/tech-papers/lbft-reconfig/alternatives.tex",
+        "documentation/tech-papers/lbft-reconfig/correctness.tex",
+        "documentation/tech-papers/lbft-reconfig/introduction.tex",
+        "documentation/tech-papers/lbft-reconfig/lbft-reconfig.tex",
+        "documentation/tech-papers/lbft-reconfig/makefile",
+        "documentation/tech-papers/lbft-reconfig/mechanism.tex",
+        "documentation/tech-papers/lbft-reconfig/setup.tex",
+        "documentation/tech-papers/lbft-verification/lbft-verification.tex",
+        "documentation/tech-papers/lbft-verification/makefile",
+        "documentation/tech-papers/lbft-verification/setup.tex",
+        "execution/**",
+        "helm/fullnode/.helmignore",
+        "helm/fullnode/Chart.yaml",
+        "helm/fullnode/README.md",
+        "helm/fullnode/files/backup/**",
+        "helm/fullnode/files/fullnode.yaml",
+        "helm/fullnode/templates/**",
+        "helm/fullnode/values.yaml",
+        "json-rpc/API-CHANGELOG.md",
+        "json-rpc/Cargo.toml",
+        "json-rpc/README.md",
+        "json-rpc/docs/client_checklist.md",
+        "json-rpc/docs/client_implementation_guide.md",
+        "json-rpc/docs/method_get_account.md",
+        "json-rpc/docs/method_get_account_transaction.md",
+        "json-rpc/docs/method_get_account_transactions.md",
+        "json-rpc/docs/method_get_account_transactions_with_proofs.md",
+        "json-rpc/docs/method_get_accumulator_consistency_proof.md",
+        "json-rpc/docs/method_get_currencies.md",
+        "json-rpc/docs/method_get_event_by_version_with_proof.md",
+        "json-rpc/docs/method_get_events.md",
+        "json-rpc/docs/method_get_events_with_proofs.md",
+        "json-rpc/docs/method_get_metadata.md",
+        "json-rpc/docs/method_get_transactions.md",
+        "json-rpc/docs/method_get_transactions_with_proofs.md",
+        "json-rpc/docs/method_submit.md",
+        "json-rpc/docs/service_testnet_faucet.md",
+        "json-rpc/docs/type_account.md",
+        "json-rpc/docs/type_amount.md",
+        "json-rpc/docs/type_currency_info.md",
+        "json-rpc/docs/type_event.md",
+        "json-rpc/docs/type_metadata.md",
+        "json-rpc/docs/type_preburn_queue.md",
+        "json-rpc/docs/type_transaction.md",
+        "json-rpc/integration-tests/**",
+        "json-rpc/json-rpc-spec.md",
+        "json-rpc/src/**",
+        "json-rpc/types/**",
+        "language/CUSTOM_MOVE_MODULE_PUBLISHING.md",
+        "language/README.md",
+        "language/RELEASES.md",
+        "language/benchmarks/**",
+        "language/borrow-graph/**",
+        "language/bytecode-verifier/**",
+        "language/changes/**",
+        "language/compiler/**",
+        "language/diem-framework/CONTRIBUTING.md",
+        "language/diem-framework/Cargo.toml",
+        "language/diem-framework/README.md",
+        "language/diem-framework/modules/**",
+        "language/diem-framework/releases/Cargo.toml",
+        "language/diem-framework/releases/artifacts/current/docs/**",
+        "language/diem-framework/releases/artifacts/current/transaction_script_builder.rs",
+        "language/diem-framework/releases/artifacts/release-1.2.0-rc0/docs/**",
+        "language/diem-framework/releases/artifacts/release-1.2.0-rc0/transaction_script_builder.rs",
+        "language/diem-framework/releases/artifacts/release-1.4.0-rc0/docs/**",
+        "language/diem-framework/releases/artifacts/release-1.4.0-rc0/transaction_script_builder.rs",
+        "language/diem-framework/releases/src/**",
+        "language/diem-framework/script_documentation/**",
+        "language/diem-framework/src/**",
+        "language/diem-framework/tests/**",
+        "language/diem-tools/df-cli/**",
+        "language/diem-tools/diem-events-fetcher/**",
+        "language/diem-tools/diem-keygen/**",
+        "language/diem-tools/diem-read-write-set/**",
+        "language/diem-tools/diem-validator-interface/**",
+        "language/diem-tools/e2e-tests-replay/**",
+        "language/diem-tools/oncall-trainer/**",
+        "language/diem-tools/transaction-replay/**",
+        "language/diem-tools/writeset-transaction-generator/Cargo.toml",
+        "language/diem-tools/writeset-transaction-generator/release/artifacts.json",
+        "language/diem-tools/writeset-transaction-generator/src/**",
+        "language/diem-tools/writeset-transaction-generator/templates/**",
+        "language/diem-transaction-benchmarks/**",
+        "language/diem-vm/**",
+        "language/documentation/**",
+        "language/e2e-testsuite/**",
+        "language/ir-testsuite/**",
+        "language/move-binary-format/Cargo.toml",
+        "language/move-binary-format/README.md",
+        "language/move-binary-format/serializer-tests/**",
+        "language/move-binary-format/src/access.rs",
+        "language/move-binary-format/src/binary_views.rs",
+        "language/move-binary-format/src/check_bounds.rs",
+        "language/move-binary-format/src/compatibility.rs",
+        "language/move-binary-format/src/constant.rs",
+        "language/move-binary-format/src/control_flow_graph.rs",
+        "language/move-binary-format/src/deserializer.rs",
+        "language/move-binary-format/src/errors.rs",
+        "language/move-binary-format/src/file_format.rs",
+        "language/move-binary-format/src/file_format_common.rs",
+        "language/move-binary-format/src/internals.rs",
+        "language/move-binary-format/src/layout.rs",
+        "language/move-binary-format/src/lib.rs",
+        "language/move-binary-format/src/normalized.rs",
+        "language/move-binary-format/src/proptest_types/**",
+        "language/move-binary-format/src/proptest_types.rs",
+        "language/move-binary-format/src/serializer.rs",
+        "language/move-binary-format/src/unit_tests/binary_tests.rs",
+        "language/move-binary-format/src/unit_tests/deserializer_tests.rs",
+        "language/move-binary-format/src/unit_tests/mod.rs",
+        "language/move-binary-format/src/unit_tests/number_tests.rs",
+        "language/move-binary-format/src/unit_tests/signature_token_tests.rs",
+        "language/move-binary-format/src/views.rs",
+        "language/move-command-line-common/**",
+        "language/move-core/**",
+        "language/move-ir/**",
+        "language/move-lang/**",
+        "language/move-model/**",
+        "language/move-prover/Cargo.toml",
+        "language/move-prover/README.md",
+        "language/move-prover/abigen/Cargo.toml",
+        "language/move-prover/abigen/README.md",
+        "language/move-prover/abigen/src/**",
+        "language/move-prover/abigen/tests/sources/bad_script.abi",
+        "language/move-prover/abigen/tests/sources/bad_script.move",
+        "language/move-prover/abigen/tests/sources/diem.move",
+        "language/move-prover/abigen/tests/sources/script_fun_in_module.move",
+        "language/move-prover/abigen/tests/sources/some_script.move",
+        "language/move-prover/abigen/tests/sources/some_script.mv",
+        "language/move-prover/abigen/tests/testsuite.rs",
+        "language/move-prover/boogie-backend/**",
+        "language/move-prover/bytecode/**",
+        "language/move-prover/doc/dev/**",
+        "language/move-prover/doc/report/arch.tex",
+        "language/move-prover/doc/report/biblio.bib",
+        "language/move-prover/doc/report/formal.tex",
+        "language/move-prover/doc/report/injection.tex",
+        "language/move-prover/doc/report/intro.tex",
+        "language/move-prover/doc/report/macros.tex",
+        "language/move-prover/doc/report/main-impl.tex",
+        "language/move-prover/doc/report/main.tex",
+        "language/move-prover/doc/report/mono.tex",
+        "language/move-prover/doc/report/move.tex",
+        "language/move-prover/doc/report/references.tex",
+        "language/move-prover/doc/report/translation.tex",
+        "language/move-prover/doc/user/**",
+        "language/move-prover/docgen/**",
+        "language/move-prover/errmapgen/**",
+        "language/move-prover/interpreter/**",
+        "language/move-prover/interpreter-testsuite/**",
+        "language/move-prover/lab/**",
+        "language/move-prover/mutation/**",
+        "language/move-prover/src/**",
+        "language/move-prover/test-utils/**",
+        "language/move-prover/tests/**",
+        "language/move-prover/tools/**",
+        "language/move-stdlib/Cargo.toml",
+        "language/move-stdlib/docs/**",
+        "language/move-stdlib/modules/**",
+        "language/move-stdlib/nursery/**",
+        "language/move-stdlib/src/**",
+        "language/move-stdlib/templates/**",
+        "language/move-stdlib/tests/**",
+        "language/move-symbol-pool/**",
+        "language/move-vm/**",
+        "language/testing-infra/diem-transactional-test-harness/**",
+        "language/testing-infra/e2e-tests/Cargo.toml",
+        "language/testing-infra/e2e-tests/goldens/**",
+        "language/testing-infra/e2e-tests/src/**",
+        "language/testing-infra/functional-tests/**",
+        "language/testing-infra/module-generation/**",
+        "language/testing-infra/test-generation/**",
+        "language/testing-infra/transactional-test-runner/**",
+        "language/tools/**",
+        "language/transaction-builder/**",
+        "mempool/**",
+        "network/**",
+        "rust-toolchain",
+        "rustfmt.toml",
+        "scripts/**",
+        "sdk/**",
+        "secure/**",
+        "shuffle/README.md",
+        "shuffle/genesis/**",
+        "shuffle/move/**",
+        "shuffle/sample-app/Cargo.toml",
+        "shuffle/sample-app/src/**",
+        "shuffle/transaction-builder/**",
+        "specifications/.markdownlint.yaml",
+        "specifications/README.md",
+        "specifications/common/**",
+        "specifications/consensus/**",
+        "specifications/crypto/**",
+        "specifications/db_backup/**",
+        "specifications/mempool/**",
+        "specifications/move_adapter/**",
+        "specifications/network/**",
+        "specifications/state_sync/**",
+        "specifications/transactions/README.md",
+        "specifications/transactions/offchain-api/**",
+        "specifications/transactions/offchain-identity/**",
+        "specifications/transactions/onchain/**",
+        "specifications/transactions/ping-command/**",
+        "specifications/transactions/travel-rule/README.md",
+        "specifications/trusted_computing_base/README.md",
+        "specifications/trusted_computing_base/execution_correctness/README.md",
+        "specifications/trusted_computing_base/execution_correctness/execution_correctness.svg",
+        "specifications/trusted_computing_base/key_manager/**",
+        "specifications/trusted_computing_base/safety_rules/**",
+        "specifications/trusted_computing_base/secure_storage/**",
+        "state-sync/**",
+        "storage/README.md",
+        "storage/accumulator/**",
+        "storage/backup/**",
+        "storage/diem-scratchpad/**",
+        "storage/diem-scratchpad-benchmark/**",
+        "storage/diemdb/**",
+        "storage/diemdb-benchmark/**",
+        "storage/diemsum/**",
+        "storage/inspector/**",
+        "storage/jellyfish-merkle/**",
+        "storage/schemadb/**",
+        "storage/state-view/**",
+        "storage/storage-client/**",
+        "storage/storage-interface/**",
+        "storage/storage-service/Cargo.toml",
+        "storage/storage-service/src/**",
+        "testsuite/cli/**",
+        "testsuite/cluster-test/**",
+        "testsuite/diem-fuzzer/Cargo.toml",
+        "testsuite/diem-fuzzer/README.md",
+        "testsuite/diem-fuzzer/fuzz/**",
+        "testsuite/diem-fuzzer/lsan_suppressions.txt",
+        "testsuite/diem-fuzzer/src/**",
+        "testsuite/diem-fuzzer/tests/**",
+        "testsuite/diem-swarm/**",
+        "testsuite/forge/**",
+        "testsuite/forge-cli/**",
+        "testsuite/generate-format/**",
+        "testsuite/smoke-test/**",
+        "testsuite/testcases/**",
+        "types/Cargo.toml",
+        "types/src/access_path.rs",
+        "types/src/account_address.rs",
+        "types/src/account_config/**",
+        "types/src/account_state.rs",
+        "types/src/account_state_blob.rs",
+        "types/src/block_info.rs",
+        "types/src/block_metadata.rs",
+        "types/src/chain_id.rs",
+        "types/src/contract_event.rs",
+        "types/src/diem_id_identifier.rs",
+        "types/src/diem_timestamp.rs",
+        "types/src/epoch_change.rs",
+        "types/src/epoch_state.rs",
+        "types/src/event.rs",
+        "types/src/ledger_info.rs",
+        "types/src/lib.rs",
+        "types/src/mempool_status.rs",
+        "types/src/move_resource.rs",
+        "types/src/network_address/**",
+        "types/src/nibble/**",
+        "types/src/on_chain_config/**",
+        "types/src/proof/**",
+        "types/src/proptest_types.rs",
+        "types/src/serde_helper/**",
+        "types/src/state_proof.rs",
+        "types/src/test_helpers/mod.rs",
+        "types/src/test_helpers/transaction_test_helpers.rs",
+        "types/src/transaction/**",
+        "types/src/trusted_state.rs",
+        "types/src/unit_tests/**",
+        "types/src/validator_config.rs",
+        "types/src/validator_info.rs",
+        "types/src/validator_signer.rs",
+        "types/src/validator_verifier.rs",
+        "types/src/vm_status.rs",
+        "types/src/waypoint.rs",
+        "types/src/write_set.rs",
+        "vm-validator/**",
+        "x.toml"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of diem/diem (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/diem/diem."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.abi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bytecode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.compile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cvc4_exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fun_data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.legacy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mod_data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.model"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.move_TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mvir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.no_opaque_exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.notest_move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.proptest-regressions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.smt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unit_test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TODO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coverage_report"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cti"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rust-toolchain"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

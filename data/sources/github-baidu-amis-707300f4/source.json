@@ -1,0 +1,878 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/baidu/amis",
+  "revision": "43a33ee066990589f5891674e645c4c927761fe5",
+  "checksum": "sha256:1fef2311ccf91a0936a68d894963c1d44639eb8aba3941c84f142a36bbd1eb3c",
+  "extract": {
+    "exclude": [
+      "examples/static/ai-fake-face.jpg",
+      "examples/static/all.xlsx",
+      "examples/static/audio/**",
+      "examples/static/editor-inline-edit.png",
+      "examples/static/editor-panel.png",
+      "examples/static/editor-panel2.png",
+      "examples/static/editor-plugin.png",
+      "examples/static/editor-resize.png",
+      "examples/static/editor-scaffold-form.png",
+      "examples/static/favicon.png",
+      "examples/static/firefox.png",
+      "examples/static/font/**",
+      "examples/static/grid-2d.png",
+      "examples/static/iconfont.eot",
+      "examples/static/iconfont.ttf",
+      "examples/static/iconfont.woff",
+      "examples/static/ie.png",
+      "examples/static/image-alt-var.docx",
+      "examples/static/info.docx",
+      "examples/static/logo.png",
+      "examples/static/page.docx",
+      "examples/static/photo/**",
+      "examples/static/plumeria.jpeg",
+      "examples/static/simple.docx",
+      "examples/static/simple.pdf",
+      "examples/static/table-list.docx",
+      "examples/static/video/**",
+      "examples/static/word-alt.png",
+      "mock/cfc/mock/download.zip",
+      "packages/amis/src/renderers/placeholder.png",
+      "packages/amis-editor-core/static/Code-hover.png",
+      "packages/amis-editor-core/static/Code.png",
+      "packages/amis-editor-core/static/Outline-hover.png",
+      "packages/amis-editor-core/static/Outline.png",
+      "packages/amis-editor-core/static/Renderers-hover.png",
+      "packages/amis-editor-core/static/Renderers.png",
+      "packages/amis-editor-core/static/empty.png",
+      "packages/amis-editor-core/static/indication.png",
+      "packages/amis-editor-core/static/nav-mode.png",
+      "packages/office-viewer/__tests__/docx/dedocx/custom-list.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/footnotes-and-endnotes-multiple-repeated.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/footnotes-repeated.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/footnotes.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/full-tables.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/inline-and-block-image-styles.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/list-of-citations.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/list-test.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/lists.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/minimum-test-document.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/picture-grid.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/playground.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/runs.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/section-links.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/symbols.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/tables-with-equations.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/tables.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/textboxes.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/tooltip.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/uncaptioned-images.ds3.docx",
+      "packages/office-viewer/__tests__/docx/dedocx/undefined-bookmarks.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2003/word2003-vml.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/2010-glow-then-AlternateContent.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/2010-mcAlternateContent-MDP.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/2010-mcAlternateContent-in-header.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/2010-mcAlternateContent.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/2010-sample1.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/DrawingML_GraphicData_wps.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/w14_mcIgnorable-in-other-parts.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2010/w14_texteffects.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/2016/**",
+      "packages/office-viewer/__tests__/docx/docx4j/ArialUnicodeMS.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/Symbols.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/Word2007-fonts.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/WordOnline/HelloWordOnline.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/chart.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/WordAddIn_walkthrough.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/WordAddIn_walkthrough.pdf",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/binding-simple.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/component-subdoc.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/conventions.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/hyperlink-binding-test.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/invoice.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/invoice2013.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/invoice_Saxon_XPath2.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/non-element-bind.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/databinding/picture.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/decracdiscrim1.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/docProps.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/fonts-modesOfApplication.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/hyperlinks-internal.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/toc.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/unmarshallFromTemplateDirtyExample.docx",
+      "packages/office-viewer/__tests__/docx/docx4j/unmarshallFromTemplateExample.docx",
+      "packages/office-viewer/__tests__/docx/malformed/**",
+      "packages/office-viewer/__tests__/docx/simple/drawing-position.docx",
+      "packages/office-viewer/__tests__/docx/simple/group-in-group.docx",
+      "packages/office-viewer/__tests__/docx/simple/group.docx",
+      "packages/office-viewer/__tests__/docx/simple/image-var-table.docx",
+      "packages/office-viewer/__tests__/docx/simple/image-var.docx",
+      "packages/office-viewer/__tests__/docx/simple/jianli.docx",
+      "packages/office-viewer/__tests__/docx/simple/loop-var-test.docx",
+      "packages/office-viewer/__tests__/docx/simple/padding.docx",
+      "packages/office-viewer/__tests__/docx/simple/shape-gradFill.docx",
+      "packages/office-viewer/__tests__/docx/simple/shape-group.docx",
+      "packages/office-viewer/__tests__/docx/simple/shape-text.docx",
+      "packages/office-viewer/__tests__/docx/simple/smart-art.docx",
+      "packages/office-viewer/__tests__/docx/simple/text-background.docx",
+      "packages/office-viewer/__tests__/docx/simple/theme-not-found.docx",
+      "packages/office-viewer/__tests__/docx/simple/var-table.docx",
+      "packages/office-viewer/__tests__/docx/simple/word-art.docx",
+      "packages/office-viewer/__tests__/docx/unsupport/pass-protect.docx",
+      "packages/office-viewer/__tests__/docx/unsupport/pinyin-old.docx",
+      "packages/office-viewer/__tests__/docx/unsupport/table-height.docx",
+      "packages/office-viewer/__tests__/docx/unsupport/unsupport-visio.docx",
+      "packages/office-viewer/__tests__/docx/var/**",
+      "packages/office-viewer/__tests__/util/var/space.docx",
+      "packages/office-viewer/__tests__/util/var/table-list.docx",
+      "packages/office-viewer/__tests__/xlsx/auto_filter/**",
+      "packages/office-viewer/__tests__/xlsx/chart/**",
+      "packages/office-viewer/__tests__/xlsx/conditional_format/**",
+      "packages/office-viewer/__tests__/xlsx/font/**",
+      "packages/office-viewer/__tests__/xlsx/formula/**",
+      "packages/office-viewer/__tests__/xlsx/freeze/**",
+      "packages/office-viewer/__tests__/xlsx/image/**",
+      "packages/office-viewer/__tests__/xlsx/large/**",
+      "packages/office-viewer/__tests__/xlsx/malformed/**",
+      "packages/office-viewer/__tests__/xlsx/merge/**",
+      "packages/office-viewer/__tests__/xlsx/numfmt/**",
+      "packages/office-viewer/__tests__/xlsx/outline/**",
+      "packages/office-viewer/__tests__/xlsx/pivot/**",
+      "packages/office-viewer/__tests__/xlsx/protect/**",
+      "packages/office-viewer/__tests__/xlsx/sheet/**",
+      "packages/office-viewer/__tests__/xlsx/simple/**",
+      "packages/office-viewer/__tests__/xlsx/slow/**",
+      "packages/office-viewer/__tests__/xlsx/sparklines/**",
+      "packages/office-viewer/__tests__/xlsx/style/**",
+      "packages/office-viewer/__tests__/xlsx/table/**",
+      "packages/office-viewer/__tests__/xlsx/text/**",
+      "packages/office-viewer/__tests__/xlsx/textbox/**",
+      "packages/office-viewer/__tests__/xlsx/todo/**",
+      "packages/office-viewer/design/icons.sketch",
+      "packages/office-viewer/examples/static/font/**",
+      "packages/office-viewer/examples/static/image/**",
+      "packages/office-viewer/src/excel/io/csv/empty.xlsx",
+      "packages/office-viewer/tools/OfficeOpenXML-SpreadsheetMLStyles/PivotTableFormats.xlsx"
+    ]
+  },
+  "history": {
+    "since": "d84b439ad26f24933265ce51fc084c0e2f0f0cb0"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2023 Baidu\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2021 百度智能云爱速搭\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/baidu/amis: Copyright 2023 Baidu, Apache-2.0 license (LICENSE), https://github.com/baidu/amis; the authors of amis-mock, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/mock/cfc; @fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-editor; @fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-editor-core; Copyright (c) 2021 百度智能云爱速搭, MIT license (LICENSE), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-formula; @fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-theme-editor-helper; fex, MIT license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/vite-plugin-amisr."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitpod.yml",
+        ".husky/**",
+        ".npmrc",
+        ".prettierrc",
+        ".stylelintrc.json",
+        ".swcrc",
+        ".travis.yml",
+        ".vscode/**",
+        "LICENSE",
+        "README-en.md",
+        "README.md",
+        "__mocks__/**",
+        "amis.code-workspace",
+        "deploy-gh-pages.sh",
+        "docs/**",
+        "eslint.config.mjs",
+        "examples/app/**",
+        "examples/components/**",
+        "examples/doc.css",
+        "examples/docs.json",
+        "examples/embed.tsx",
+        "examples/index.html",
+        "examples/index.jsx",
+        "examples/loadMonacoEditor.ts",
+        "examples/loadPdfjsWorker.ts",
+        "examples/loader.ts",
+        "examples/map.json",
+        "examples/mobile.html",
+        "examples/mobile.jsx",
+        "examples/mod.js",
+        "examples/polyfills/**",
+        "examples/sdk-placeholder.html",
+        "examples/sdk-test.html",
+        "examples/static/amis.svg",
+        "examples/static/iconfont.css",
+        "examples/static/iconfont.svg",
+        "examples/static/loader.js",
+        "examples/static/officefont.css",
+        "examples/style.scss",
+        "fis-conf.js",
+        "i18nConfig.ts",
+        "index.html",
+        "lerna.json",
+        "mock/index.js",
+        "mock/server.conf",
+        "package.json",
+        "packages/amis/.gitignore",
+        "packages/amis/.npmignore",
+        "packages/amis/.npmrc",
+        "packages/amis/.swcrc",
+        "packages/amis/README-en.md",
+        "packages/amis/SECURITY.md",
+        "packages/amis/__tests__/**",
+        "packages/amis/build.sh",
+        "packages/amis/package.json",
+        "packages/amis/postcss.config.js",
+        "packages/amis/rollup.config.js",
+        "packages/amis/rollup.esm.config.js",
+        "packages/amis/src/Schema.ts",
+        "packages/amis/src/SchemaFull.ts",
+        "packages/amis/src/SchemaMinimal.ts",
+        "packages/amis/src/compat.ts",
+        "packages/amis/src/index.tsx",
+        "packages/amis/src/minimal.ts",
+        "packages/amis/src/preset.tsx",
+        "packages/amis/src/renderers/AMIS.tsx",
+        "packages/amis/src/renderers/Action.tsx",
+        "packages/amis/src/renderers/Alert.tsx",
+        "packages/amis/src/renderers/AnchorNav.tsx",
+        "packages/amis/src/renderers/App.tsx",
+        "packages/amis/src/renderers/Audio.tsx",
+        "packages/amis/src/renderers/Avatar.tsx",
+        "packages/amis/src/renderers/BarCode.tsx",
+        "packages/amis/src/renderers/Breadcrumb.tsx",
+        "packages/amis/src/renderers/ButtonGroup.tsx",
+        "packages/amis/src/renderers/CRUD.tsx",
+        "packages/amis/src/renderers/CRUD2.tsx",
+        "packages/amis/src/renderers/Calendar.tsx",
+        "packages/amis/src/renderers/Card.tsx",
+        "packages/amis/src/renderers/Card2.tsx",
+        "packages/amis/src/renderers/Cards.tsx",
+        "packages/amis/src/renderers/Carousel.tsx",
+        "packages/amis/src/renderers/Chart.tsx",
+        "packages/amis/src/renderers/Code.tsx",
+        "packages/amis/src/renderers/Collapse.tsx",
+        "packages/amis/src/renderers/CollapseGroup.tsx",
+        "packages/amis/src/renderers/Color.tsx",
+        "packages/amis/src/renderers/Container.tsx",
+        "packages/amis/src/renderers/Copyable.tsx",
+        "packages/amis/src/renderers/Custom.tsx",
+        "packages/amis/src/renderers/Date.tsx",
+        "packages/amis/src/renderers/DateRange.tsx",
+        "packages/amis/src/renderers/Dialog.tsx",
+        "packages/amis/src/renderers/Divider.tsx",
+        "packages/amis/src/renderers/Drawer.tsx",
+        "packages/amis/src/renderers/DropDownButton.tsx",
+        "packages/amis/src/renderers/Each.tsx",
+        "packages/amis/src/renderers/Flex.tsx",
+        "packages/amis/src/renderers/Form/**",
+        "packages/amis/src/renderers/Grid.tsx",
+        "packages/amis/src/renderers/Grid2D.tsx",
+        "packages/amis/src/renderers/GridNav.tsx",
+        "packages/amis/src/renderers/HBox.tsx",
+        "packages/amis/src/renderers/IFrame.tsx",
+        "packages/amis/src/renderers/Icon.tsx",
+        "packages/amis/src/renderers/Image.tsx",
+        "packages/amis/src/renderers/Images.tsx",
+        "packages/amis/src/renderers/Json.tsx",
+        "packages/amis/src/renderers/Link.tsx",
+        "packages/amis/src/renderers/List.tsx",
+        "packages/amis/src/renderers/Log.tsx",
+        "packages/amis/src/renderers/Mapping.tsx",
+        "packages/amis/src/renderers/Markdown.tsx",
+        "packages/amis/src/renderers/MultilineText.tsx",
+        "packages/amis/src/renderers/Nav.tsx",
+        "packages/amis/src/renderers/Number.tsx",
+        "packages/amis/src/renderers/OfficeViewer.tsx",
+        "packages/amis/src/renderers/Operation.tsx",
+        "packages/amis/src/renderers/Page.tsx",
+        "packages/amis/src/renderers/Pagination.tsx",
+        "packages/amis/src/renderers/PaginationWrapper.tsx",
+        "packages/amis/src/renderers/Panel.tsx",
+        "packages/amis/src/renderers/Password.tsx",
+        "packages/amis/src/renderers/PdfViewer.tsx",
+        "packages/amis/src/renderers/Plain.tsx",
+        "packages/amis/src/renderers/PopOver.tsx",
+        "packages/amis/src/renderers/Portlet.tsx",
+        "packages/amis/src/renderers/Progress.tsx",
+        "packages/amis/src/renderers/Property.tsx",
+        "packages/amis/src/renderers/QRCode.tsx",
+        "packages/amis/src/renderers/QuickEdit.tsx",
+        "packages/amis/src/renderers/Remark.tsx",
+        "packages/amis/src/renderers/SearchBox.tsx",
+        "packages/amis/src/renderers/Service.tsx",
+        "packages/amis/src/renderers/Shape.tsx",
+        "packages/amis/src/renderers/Slider.tsx",
+        "packages/amis/src/renderers/SparkLine.tsx",
+        "packages/amis/src/renderers/Spinner.tsx",
+        "packages/amis/src/renderers/Status.tsx",
+        "packages/amis/src/renderers/Steps.tsx",
+        "packages/amis/src/renderers/SwitchContainer.tsx",
+        "packages/amis/src/renderers/Table/**",
+        "packages/amis/src/renderers/Table2/**",
+        "packages/amis/src/renderers/TableView.tsx",
+        "packages/amis/src/renderers/Tabs.tsx",
+        "packages/amis/src/renderers/Tag.tsx",
+        "packages/amis/src/renderers/Tasks.tsx",
+        "packages/amis/src/renderers/Timeline.tsx",
+        "packages/amis/src/renderers/TooltipWrapper.tsx",
+        "packages/amis/src/renderers/Tpl.tsx",
+        "packages/amis/src/renderers/VBox.tsx",
+        "packages/amis/src/renderers/Video.tsx",
+        "packages/amis/src/renderers/WebComponent.tsx",
+        "packages/amis/src/renderers/Wizard.tsx",
+        "packages/amis/src/renderers/Words.tsx",
+        "packages/amis/src/renderers/Wrapper.tsx",
+        "packages/amis/src/renderers/icons/**",
+        "packages/amis/src/schemaExtend.ts",
+        "packages/amis/src/types.ts",
+        "packages/amis/tsconfig-for-declaration.json",
+        "packages/amis/tsconfig.json",
+        "packages/amis-core/**",
+        "packages/amis-ui/**",
+        "packages/office-viewer/.gitignore",
+        "packages/office-viewer/.vscode/**",
+        "packages/office-viewer/README.md",
+        "packages/office-viewer/__tests__/EmptyWord.ts",
+        "packages/office-viewer/__tests__/OpenXML.test.ts",
+        "packages/office-viewer/__tests__/README.md",
+        "packages/office-viewer/__tests__/docx/dedocx/README.md",
+        "packages/office-viewer/__tests__/docx/docx4j/2003/word2003xml.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/2010/2010-mcAlternateContent-in-header.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/WordOnline/README.txt",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/CountryRegions.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/NumberSearch.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/binding-simple-data.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/component-host.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/invoice-data.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/databinding/invoice2013.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/numberingrestart.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/sample-docx.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/table-features.xml",
+        "packages/office-viewer/__tests__/docx/docx4j/table-spans.xml",
+        "packages/office-viewer/__tests__/docx/empty.xml",
+        "packages/office-viewer/__tests__/docx/simple/all-shape-1.xml",
+        "packages/office-viewer/__tests__/docx/simple/all-shape-2.xml",
+        "packages/office-viewer/__tests__/docx/simple/alt-text.xml",
+        "packages/office-viewer/__tests__/docx/simple/bold.xml",
+        "packages/office-viewer/__tests__/docx/simple/br.xml",
+        "packages/office-viewer/__tests__/docx/simple/break-page.xml",
+        "packages/office-viewer/__tests__/docx/simple/cover.xml",
+        "packages/office-viewer/__tests__/docx/simple/cr.xml",
+        "packages/office-viewer/__tests__/docx/simple/drop-cap.xml",
+        "packages/office-viewer/__tests__/docx/simple/em.xml",
+        "packages/office-viewer/__tests__/docx/simple/embed-font.xml",
+        "packages/office-viewer/__tests__/docx/simple/eq-br.xml",
+        "packages/office-viewer/__tests__/docx/simple/header-footer.xml",
+        "packages/office-viewer/__tests__/docx/simple/header.xml",
+        "packages/office-viewer/__tests__/docx/simple/hideMark.xml",
+        "packages/office-viewer/__tests__/docx/simple/highlight.xml",
+        "packages/office-viewer/__tests__/docx/simple/image.xml",
+        "packages/office-viewer/__tests__/docx/simple/info.xml",
+        "packages/office-viewer/__tests__/docx/simple/inline-code.xml",
+        "packages/office-viewer/__tests__/docx/simple/link.xml",
+        "packages/office-viewer/__tests__/docx/simple/list.xml",
+        "packages/office-viewer/__tests__/docx/simple/math.xml",
+        "packages/office-viewer/__tests__/docx/simple/noBreakHyphen.xml",
+        "packages/office-viewer/__tests__/docx/simple/pict-position.xml",
+        "packages/office-viewer/__tests__/docx/simple/pinyin.xml",
+        "packages/office-viewer/__tests__/docx/simple/sdt.xml",
+        "packages/office-viewer/__tests__/docx/simple/shadow.xml",
+        "packages/office-viewer/__tests__/docx/simple/shape-custom.xml",
+        "packages/office-viewer/__tests__/docx/simple/shape-ellipse.xml",
+        "packages/office-viewer/__tests__/docx/simple/shape-rightArrow.xml",
+        "packages/office-viewer/__tests__/docx/simple/shape-test.xml",
+        "packages/office-viewer/__tests__/docx/simple/svg.xml",
+        "packages/office-viewer/__tests__/docx/simple/sym.xml",
+        "packages/office-viewer/__tests__/docx/simple/tab.xml",
+        "packages/office-viewer/__tests__/docx/simple/tab2.xml",
+        "packages/office-viewer/__tests__/docx/simple/tab3.xml",
+        "packages/office-viewer/__tests__/docx/simple/table-background.xml",
+        "packages/office-viewer/__tests__/docx/simple/table-height.xml",
+        "packages/office-viewer/__tests__/docx/simple/tableborder.xml",
+        "packages/office-viewer/__tests__/docx/simple/tablestyle.xml",
+        "packages/office-viewer/__tests__/docx/simple/test.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox-background.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox-behindDoc.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox-order.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox-rotation.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox-vert.xml",
+        "packages/office-viewer/__tests__/docx/simple/textbox.xml",
+        "packages/office-viewer/__tests__/docx/simple/tooltip.xml",
+        "packages/office-viewer/__tests__/docx/simple/w.xml",
+        "packages/office-viewer/__tests__/docx/unsupport/arrow.xml",
+        "packages/office-viewer/__tests__/docx/unsupport/textbox-background.xml",
+        "packages/office-viewer/__tests__/happydom.ts",
+        "packages/office-viewer/__tests__/simple/**",
+        "packages/office-viewer/__tests__/snapShotTest.ts",
+        "packages/office-viewer/__tests__/util/var/table-list.xml",
+        "packages/office-viewer/__tests__/xlsx/csv/**",
+        "packages/office-viewer/biome.json",
+        "packages/office-viewer/bunfig.toml",
+        "packages/office-viewer/design/icons/**",
+        "packages/office-viewer/examples/common.ts",
+        "packages/office-viewer/examples/excel.html",
+        "packages/office-viewer/examples/excel.ts",
+        "packages/office-viewer/examples/excelFileList.ts",
+        "packages/office-viewer/examples/font.css",
+        "packages/office-viewer/examples/presetShape.html",
+        "packages/office-viewer/examples/presetShape.ts",
+        "packages/office-viewer/examples/static/css/**",
+        "packages/office-viewer/examples/word.html",
+        "packages/office-viewer/examples/word.ts",
+        "packages/office-viewer/index.html",
+        "packages/office-viewer/package.json",
+        "packages/office-viewer/rollup.config.js",
+        "packages/office-viewer/rollup.esm.config.js",
+        "packages/office-viewer/scss/**",
+        "packages/office-viewer/src/Excel.ts",
+        "packages/office-viewer/src/OfficeViewer.ts",
+        "packages/office-viewer/src/OpenXML.ts",
+        "packages/office-viewer/src/RenderOptions.ts",
+        "packages/office-viewer/src/UnSupport.ts",
+        "packages/office-viewer/src/Word.ts",
+        "packages/office-viewer/src/common/**",
+        "packages/office-viewer/src/createOfficeViewer.ts",
+        "packages/office-viewer/src/excel/StyleSheet.ts",
+        "packages/office-viewer/src/excel/Workbook.ts",
+        "packages/office-viewer/src/excel/data/**",
+        "packages/office-viewer/src/excel/dev.md",
+        "packages/office-viewer/src/excel/edit/**",
+        "packages/office-viewer/src/excel/formula/**",
+        "packages/office-viewer/src/excel/io/csv/emptyXLSX.ts",
+        "packages/office-viewer/src/excel/io/excel/**",
+        "packages/office-viewer/src/excel/io/parseCSV.ts",
+        "packages/office-viewer/src/excel/io/parseExcel.ts",
+        "packages/office-viewer/src/excel/lang/**",
+        "packages/office-viewer/src/excel/print/**",
+        "packages/office-viewer/src/excel/render/**",
+        "packages/office-viewer/src/excel/sheet/**",
+        "packages/office-viewer/src/excel/types/**",
+        "packages/office-viewer/src/index.ts",
+        "packages/office-viewer/src/openxml/**",
+        "packages/office-viewer/src/package/**",
+        "packages/office-viewer/src/util/**",
+        "packages/office-viewer/src/word/**",
+        "packages/office-viewer/tools/OfficeOpenXML-DrawingMLGeometries/**",
+        "packages/office-viewer/tools/OfficeOpenXML-SpreadsheetMLStyles/presetCellStyles.xml",
+        "packages/office-viewer/tools/OfficeOpenXML-SpreadsheetMLStyles/presetTableStyles.xml",
+        "packages/office-viewer/tools/OfficeOpenXML-XMLSchema-Strict/**",
+        "packages/office-viewer/tools/README.md",
+        "packages/office-viewer/tools/__test__/**",
+        "packages/office-viewer/tools/convertDrawingML.ts",
+        "packages/office-viewer/tools/convertFileToBase64.ts",
+        "packages/office-viewer/tools/convertPresetCellStyles.ts",
+        "packages/office-viewer/tools/convertPresetTableStyles.ts",
+        "packages/office-viewer/tools/createLargeCSV.ts",
+        "packages/office-viewer/tools/excelParseTest.ts",
+        "packages/office-viewer/tools/ext/**",
+        "packages/office-viewer/tools/functionCount.ts",
+        "packages/office-viewer/tools/genExampleFileList.ts",
+        "packages/office-viewer/tools/genIcons.ts",
+        "packages/office-viewer/tools/genPresetIcons.ts",
+        "packages/office-viewer/tools/getFiles.ts",
+        "packages/office-viewer/tools/optXLSX.ts",
+        "packages/office-viewer/tools/testExcelRender.ts",
+        "packages/office-viewer/tools/testFormulaParser.ts",
+        "packages/office-viewer/tools/xsd2Types.ts",
+        "packages/office-viewer/tools/xsd2chart.ts",
+        "packages/office-viewer/tools/xsd2dml.ts",
+        "packages/office-viewer/tools/xsd2excel.ts",
+        "packages/office-viewer/tools/xsd2excelExt.ts",
+        "packages/office-viewer/tools/xsd2word.ts",
+        "packages/office-viewer/tsconfig-for-declaration.json",
+        "packages/office-viewer/tsconfig.json",
+        "publish.json",
+        "pull_request_template.md",
+        "scripts/**",
+        "tsconfig.json",
+        "tsconfig.typecheck.json",
+        "types/**",
+        "vite.config.ts"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2023 Baidu\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2023 Baidu, Apache-2.0 license (LICENSE), https://github.com/baidu/amis."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "mock/cfc/README.md",
+        "mock/cfc/index.js",
+        "mock/cfc/mock/chance.js",
+        "mock/cfc/mock/chart/**",
+        "mock/cfc/mock/condition-fields/**",
+        "mock/cfc/mock/crud/**",
+        "mock/cfc/mock/dashboard/**",
+        "mock/cfc/mock/detail/**",
+        "mock/cfc/mock/form/**",
+        "mock/cfc/mock/index.js",
+        "mock/cfc/mock/initWizard.json",
+        "mock/cfc/mock/json-schema.json",
+        "mock/cfc/mock/log/**",
+        "mock/cfc/mock/mail/**",
+        "mock/cfc/mock/map/**",
+        "mock/cfc/mock/mapping.json",
+        "mock/cfc/mock/notFound.json",
+        "mock/cfc/mock/number/**",
+        "mock/cfc/mock/options/**",
+        "mock/cfc/mock/page/**",
+        "mock/cfc/mock/sample.db.js",
+        "mock/cfc/mock/sample.js",
+        "mock/cfc/mock/server.conf",
+        "mock/cfc/mock/service/**",
+        "mock/cfc/mock/steps/**",
+        "mock/cfc/mock/table/**",
+        "mock/cfc/mock/table.json",
+        "mock/cfc/mock/task.js",
+        "mock/cfc/mock/template/**",
+        "mock/cfc/mock/timeline/**",
+        "mock/cfc/mock/transfer/**",
+        "mock/cfc/mock/tree/**",
+        "mock/cfc/mock/upload/**",
+        "mock/cfc/mock/upload.json",
+        "mock/cfc/pack.sh",
+        "mock/cfc/package.json"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of amis-mock, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/mock/cfc."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/amis-editor/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "@fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-editor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/amis-editor-core/.gitignore",
+        "packages/amis-editor-core/i18nConfig.js",
+        "packages/amis-editor-core/package.json",
+        "packages/amis-editor-core/rollup.config.js",
+        "packages/amis-editor-core/rollup.esm.config.js",
+        "packages/amis-editor-core/scss/**",
+        "packages/amis-editor-core/src/**",
+        "packages/amis-editor-core/static/check.svg",
+        "packages/amis-editor-core/static/search.svg",
+        "packages/amis-editor-core/static/side_hide_left.svg",
+        "packages/amis-editor-core/tsconfig.json"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "@fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-editor-core."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/amis-formula/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 百度智能云爱速搭\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 百度智能云爱速搭, MIT license (LICENSE), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-formula."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/amis-theme-editor-helper/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "@fex, ISC license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/amis-theme-editor-helper."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/vite-plugin-amisr/**"
+      ],
+      "text": "package.json declares the license \"MIT\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nMIT License\n\nCopyright (c) <year> <copyright holders>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO\nEVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "fex, MIT license (declared in package.json), https://github.com/baidu/amis/tree/43a33ee066990589f5891674e645c4c927761fe5/packages/vite-plugin-amisr."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.abnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.orig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.swcrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.XSL"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

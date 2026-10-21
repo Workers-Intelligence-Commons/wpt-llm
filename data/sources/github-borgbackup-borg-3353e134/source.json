@@ -1,0 +1,556 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/borgbackup/borg",
+  "revision": "b7383b5dbea8b14689477146f86e06212b1c2be5",
+  "checksum": "sha256:b7b3369cbb294a1916542ea00b88e937f2587e3bc195f4a5998f766186f27b84",
+  "extract": {
+    "exclude": [
+      "docs/_static/favicon.ico",
+      "docs/_static/logo.pdf",
+      "docs/_static/logo.png",
+      "docs/internals/encryption-aead.odg",
+      "docs/internals/encryption-aead.png",
+      "docs/internals/object-graph.odg",
+      "docs/internals/object-graph.png",
+      "docs/internals/pack-layout.png",
+      "docs/internals/pack-objheader.png",
+      "docs/internals/pack-write-order.png",
+      "docs/internals/structure.odg",
+      "docs/internals/structure.png",
+      "docs/misc/borg-data-flow.odg",
+      "docs/misc/borg-data-flow.png",
+      "docs/misc/stickers/borg-sticker.png",
+      "docs/misc/stickers/borg-sticker.xcf",
+      "src/borg/testsuite/archiver/dotdot_path.tar",
+      "src/borg/testsuite/archiver/repo12.tar.gz",
+      "src/borg/testsuite/archiver/unusual_paths.tar"
+    ]
+  },
+  "history": {
+    "since": "f827b99ffe960c46d8ff71325f1444f3d460f82a"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (C) 2015-2026 The Borg Collective (see AUTHORS file)\nCopyright (C) 2010-2014 Jonas Borgström <jonas@borgstrom.se>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n 1. Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n 2. Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n 3. The name of the author may not be used to endorse or promote\n    products derived from this software without specific prior\n    written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/borgbackup/borg: Copyright (C) 2015-2026 The Borg Collective (see AUTHORS file); Copyright (C) 2010-2014 Jonas Borgström <jonas@borgstrom.se>, BSD-3-Clause license (LICENSE), https://github.com/borgbackup/borg."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".claude/**",
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        "AUTHORS",
+        "Brewfile",
+        "CONTRIBUTING.md",
+        "FAME.md",
+        "FAME.svg",
+        "LICENSE",
+        "MANIFEST.in",
+        "README.rst",
+        "SECURITY.md",
+        "Vagrantfile",
+        "docs/3rd_party/**",
+        "docs/Makefile",
+        "docs/_static/Makefile",
+        "docs/_static/logo.svg",
+        "docs/_static/logo_font.txt",
+        "docs/_templates/**",
+        "docs/authors.rst",
+        "docs/binaries/**",
+        "docs/book.rst",
+        "docs/borg_theme/**",
+        "docs/changes.rst",
+        "docs/changes_0.x.rst",
+        "docs/changes_1.x.rst",
+        "docs/conf.py",
+        "docs/deployment/**",
+        "docs/deployment.rst",
+        "docs/development.rst",
+        "docs/faq.rst",
+        "docs/global.rst.inc",
+        "docs/index.rst",
+        "docs/installation.rst",
+        "docs/internals/chunker.rst",
+        "docs/internals/data-structures.rst",
+        "docs/internals/frontends.rst",
+        "docs/internals/pack-layout.excalidraw",
+        "docs/internals/pack-objheader.excalidraw",
+        "docs/internals/pack-write-order.excalidraw",
+        "docs/internals/packs.rst",
+        "docs/internals/security.rst",
+        "docs/internals.rst",
+        "docs/introduction.rst",
+        "docs/man/**",
+        "docs/man_intro.rst",
+        "docs/misc/asciinema/**",
+        "docs/misc/benchmark-crud.txt",
+        "docs/misc/create_chunker-params.txt",
+        "docs/misc/internals-picture.txt",
+        "docs/misc/joke-issue-10000/**",
+        "docs/misc/logging.conf",
+        "docs/misc/prune-example-interval.txt",
+        "docs/misc/prune-example.txt",
+        "docs/misc/stickers/README.md",
+        "docs/quickstart.rst",
+        "docs/quickstart_example.rst.inc",
+        "docs/support.rst",
+        "docs/usage/**",
+        "docs/usage.rst",
+        "docs/usage_general.rst.inc",
+        "pyproject.toml",
+        "requirements.d/**",
+        "scripts/**",
+        "setup.py",
+        "src/borg/__init__.py",
+        "src/borg/__main__.py",
+        "src/borg/archive.py",
+        "src/borg/archiver/**",
+        "src/borg/cache.py",
+        "src/borg/chunkers/**",
+        "src/borg/cockpit/**",
+        "src/borg/compress.pyi",
+        "src/borg/compress.pyx",
+        "src/borg/conftest.py",
+        "src/borg/constants.py",
+        "src/borg/crypto/**",
+        "src/borg/digests.py",
+        "src/borg/fslocking.py",
+        "src/borg/fuse.py",
+        "src/borg/fuse_impl.py",
+        "src/borg/hashindex.pyi",
+        "src/borg/hashindex.pyx",
+        "src/borg/helpers/**",
+        "src/borg/hlfuse.py",
+        "src/borg/item.pyi",
+        "src/borg/item.pyx",
+        "src/borg/legacy/**",
+        "src/borg/logger.py",
+        "src/borg/manifest.py",
+        "src/borg/paperkey.html",
+        "src/borg/patterns.py",
+        "src/borg/platform/**",
+        "src/borg/platformflags.py",
+        "src/borg/repoobj.py",
+        "src/borg/repository.py",
+        "src/borg/security.py",
+        "src/borg/selftest.py",
+        "src/borg/storelocking.py",
+        "src/borg/testsuite/__init__.py",
+        "src/borg/testsuite/archive_test.py",
+        "src/borg/testsuite/archiver/__init__.py",
+        "src/borg/testsuite/archiver/_common_test.py",
+        "src/borg/testsuite/archiver/analyze_cmd_test.py",
+        "src/borg/testsuite/archiver/argparsing_test.py",
+        "src/borg/testsuite/archiver/benchmark_cmd_test.py",
+        "src/borg/testsuite/archiver/check_cmd_remote_test.py",
+        "src/borg/testsuite/archiver/check_cmd_test.py",
+        "src/borg/testsuite/archiver/checks_test.py",
+        "src/borg/testsuite/archiver/compact_cmd_test.py",
+        "src/borg/testsuite/archiver/completion_cmd_test.py",
+        "src/borg/testsuite/archiver/copy_cmd_test.py",
+        "src/borg/testsuite/archiver/corruption_test.py",
+        "src/borg/testsuite/archiver/create_cmd_test.py",
+        "src/borg/testsuite/archiver/debug_cmds_test.py",
+        "src/borg/testsuite/archiver/delete_cmd_test.py",
+        "src/borg/testsuite/archiver/diff_cmd_test.py",
+        "src/borg/testsuite/archiver/disk_full_test.py",
+        "src/borg/testsuite/archiver/extract_cmd_test.py",
+        "src/borg/testsuite/archiver/find_cmd_test.py",
+        "src/borg/testsuite/archiver/help_cmd_test.py",
+        "src/borg/testsuite/archiver/info_cmd_test.py",
+        "src/borg/testsuite/archiver/key_cmds_test.py",
+        "src/borg/testsuite/archiver/list_cmd_test.py",
+        "src/borg/testsuite/archiver/lock_cmds_test.py",
+        "src/borg/testsuite/archiver/match_archives_date_test.py",
+        "src/borg/testsuite/archiver/mount_cmds_test.py",
+        "src/borg/testsuite/archiver/patterns_test.py",
+        "src/borg/testsuite/archiver/prune_cmd_test.py",
+        "src/borg/testsuite/archiver/recreate_cmd_test.py",
+        "src/borg/testsuite/archiver/remote_repo_test.py",
+        "src/borg/testsuite/archiver/rename_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_compress_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_create_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_delete_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_info_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_list_cmd_test.py",
+        "src/borg/testsuite/archiver/repo_space_cmd_test.py",
+        "src/borg/testsuite/archiver/restricted_permissions_test.py",
+        "src/borg/testsuite/archiver/return_codes_test.py",
+        "src/borg/testsuite/archiver/serve_cmd_test.py",
+        "src/borg/testsuite/archiver/store_objects_test.py",
+        "src/borg/testsuite/archiver/tag_cmd_test.py",
+        "src/borg/testsuite/archiver/tar_cmds_test.py",
+        "src/borg/testsuite/archiver/transfer_cmd_test.py",
+        "src/borg/testsuite/archiver/undelete_cmd_test.py",
+        "src/borg/testsuite/archiver/version_cmd_test.py",
+        "src/borg/testsuite/archiver/webdav_cmd_test.py",
+        "src/borg/testsuite/archives_test.py",
+        "src/borg/testsuite/benchmark_test.py",
+        "src/borg/testsuite/cache_test.py",
+        "src/borg/testsuite/chunkers/**",
+        "src/borg/testsuite/cockpit_test.py",
+        "src/borg/testsuite/compress_test.py",
+        "src/borg/testsuite/crypto/**",
+        "src/borg/testsuite/digests_test.py",
+        "src/borg/testsuite/fslocking_test.py",
+        "src/borg/testsuite/fuse_test.py",
+        "src/borg/testsuite/hashindex_test.py",
+        "src/borg/testsuite/helpers/**",
+        "src/borg/testsuite/item_test.py",
+        "src/borg/testsuite/legacy_archives_test.py",
+        "src/borg/testsuite/legacy_fs_test.py",
+        "src/borg/testsuite/legacy_helpers_test.py",
+        "src/borg/testsuite/legacy_upgrade_test.py",
+        "src/borg/testsuite/legacyrepository_test.py",
+        "src/borg/testsuite/logger_test.py",
+        "src/borg/testsuite/patterns_test.py",
+        "src/borg/testsuite/platform/**",
+        "src/borg/testsuite/repoobj_test.py",
+        "src/borg/testsuite/repository_test.py",
+        "src/borg/testsuite/storelocking_test.py",
+        "src/borg/testsuite/version_test.py",
+        "src/borg/testsuite/vfs_test.py",
+        "src/borg/testsuite/xattr_test.py",
+        "src/borg/upgrade.py",
+        "src/borg/version.py",
+        "src/borg/vfs.py",
+        "src/borg/webdav.py",
+        "src/borg/xattr.py"
+      ],
+      "text": "Copyright (C) 2015-2026 The Borg Collective (see AUTHORS file)\nCopyright (C) 2010-2014 Jonas Borgström <jonas@borgstrom.se>\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions\nare met:\n\n 1. Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n 2. Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in\n    the documentation and/or other materials provided with the\n    distribution.\n 3. The name of the author may not be used to endorse or promote\n    products derived from this software without specific prior\n    written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (C) 2015-2026 The Borg Collective (see AUTHORS file); Copyright (C) 2010-2014 Jonas Borgström <jonas@borgstrom.se>, BSD-3-Clause license (LICENSE), https://github.com/borgbackup/borg."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Containerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Brewfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Vagrantfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tcl",
+      "paths": [
+        "**/*.tcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.excalidraw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.linux-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pxd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tcss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fetch-binaries"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/msys2-install-deps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sdist-sign"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sign-binaries"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/upload-pypi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

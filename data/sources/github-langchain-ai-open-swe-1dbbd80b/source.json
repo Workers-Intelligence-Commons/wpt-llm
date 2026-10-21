@@ -1,0 +1,598 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/langchain-ai/open-swe",
+  "revision": "7a74fdc4c46d24f4cda6b75223fbe34525482d1b",
+  "checksum": "sha256:8623ac35be0a3de7297f4885f5a74f889e63d33223760ce1d05e18d1a83d4e61",
+  "extract": {
+    "exclude": [
+      "assets/threads-kanban-prototype.png",
+      "desktop/resources/icon.icns",
+      "desktop/resources/icon.png",
+      "docs/images/**",
+      "openswe/expedited_review/fonts/JetBrainsMonoNL-Bold.ttf",
+      "openswe/expedited_review/fonts/JetBrainsMonoNL-Italic.ttf",
+      "openswe/expedited_review/fonts/JetBrainsMonoNL-Regular.ttf",
+      "tests/e2e/screenshots/**",
+      "ui/assets/**",
+      "ui/public/apple-touch-icon.png",
+      "ui/public/favicon.png",
+      "ui/public/logo-mark.png",
+      "ui/public/logo512.png",
+      "ui/src/features/agents/terminal/ghostty/fonts/SymbolsNerdFontMono-Regular.woff2",
+      "ui/src/features/agents/terminal/ghostty/vendor/**",
+      "ui/vendor/**"
+    ]
+  },
+  "history": {
+    "since": "e2415aee3f2d8d7e23c1be6208d0376c218283cf"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License\n\nCopyright (c) LangChain, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\nMIT License\n\nCopyright (c) 2024 Mitchell Hashimoto, Ghostty contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2014 Ryan L McIntyre\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/langchain-ai/open-swe: Copyright (c) LangChain, Inc., MIT license (LICENSE), https://github.com/langchain-ai/open-swe; Copyright (c) 2024 Mitchell Hashimoto, Ghostty contributors, MIT license (LICENSE), https://github.com/langchain-ai/open-swe/tree/7a74fdc4c46d24f4cda6b75223fbe34525482d1b/ui/native/libghostty-vt; Copyright (c) 2014 Ryan L McIntyre, MIT license (LICENSE), https://github.com/langchain-ai/open-swe/tree/7a74fdc4c46d24f4cda6b75223fbe34525482d1b/ui/src/features/agents/terminal/ghostty/fonts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".codespellignore",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".open-swe/**",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
+        ".python-version",
+        ".worktreeinclude",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "Dockerfile",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "assets/dark.svg",
+        "assets/light.svg",
+        "bridge-client/**",
+        "cli/**",
+        "compose.yaml",
+        "desktop/.oxfmtrc.json",
+        "desktop/README.md",
+        "desktop/entitlements.mac.inherit.plist",
+        "desktop/entitlements.mac.plist",
+        "desktop/package.json",
+        "desktop/patches/**",
+        "desktop/resources/app-update.yml",
+        "desktop/scripts/**",
+        "desktop/src/**",
+        "desktop/test/**",
+        "desktop/tsconfig.json",
+        "docs/AUDIT_LOGS.md",
+        "docs/CUSTOMIZATION.md",
+        "docs/DEVELOPMENT.md",
+        "docs/INSTALLATION.md",
+        "docs/incidents-design.md",
+        "docs/reference/**",
+        "docs/tla/**",
+        "evals/**",
+        "examples/**",
+        "langgraph.json",
+        "mda/**",
+        "openswe/act_as/**",
+        "openswe/agent_cost.py",
+        "openswe/analytics/**",
+        "openswe/announcements/**",
+        "openswe/api/**",
+        "openswe/api_keys/**",
+        "openswe/audit_logs/**",
+        "openswe/baby_sit.py",
+        "openswe/background_tasks.py",
+        "openswe/bridge/**",
+        "openswe/bundled_skills/**",
+        "openswe/chat.py",
+        "openswe/claude_code/**",
+        "openswe/completion.py",
+        "openswe/config.py",
+        "openswe/credential_scope.py",
+        "openswe/dashboard/**",
+        "openswe/database/**",
+        "openswe/dispatch.py",
+        "openswe/encryption.py",
+        "openswe/event_claims.py",
+        "openswe/expedited_review/__init__.py",
+        "openswe/expedited_review/card.py",
+        "openswe/expedited_review/channels.py",
+        "openswe/expedited_review/diff_image.py",
+        "openswe/expedited_review/eligibility.py",
+        "openswe/expedited_review/fonts/OFL.txt",
+        "openswe/expedited_review/merge.py",
+        "openswe/expedited_review/readiness.py",
+        "openswe/expedited_review/reviews.py",
+        "openswe/expedited_review/slack.py",
+        "openswe/expedited_review/voting.py",
+        "openswe/federation/**",
+        "openswe/github/**",
+        "openswe/graphs/**",
+        "openswe/human_review/**",
+        "openswe/incidents/**",
+        "openswe/input_messages.py",
+        "openswe/invocation.py",
+        "openswe/linear/**",
+        "openswe/mcp/**",
+        "openswe/message_queue.py",
+        "openswe/middleware/**",
+        "openswe/model_request.py",
+        "openswe/openai_responses/**",
+        "openswe/prompt.py",
+        "openswe/prompts.py",
+        "openswe/reconcile.py",
+        "openswe/remote_runtime/**",
+        "openswe/resources/**",
+        "openswe/review/**",
+        "openswe/review_guide/**",
+        "openswe/review_scout/**",
+        "openswe/reviewer.py",
+        "openswe/rollout_events.py",
+        "openswe/run_config.py",
+        "openswe/runtime/**",
+        "openswe/sandboxes/**",
+        "openswe/scheduler.py",
+        "openswe/schedules/**",
+        "openswe/server.py",
+        "openswe/session_cost.py",
+        "openswe/skill_store/**",
+        "openswe/slack/**",
+        "openswe/source_context.py",
+        "openswe/tasks/**",
+        "openswe/thread_feedback.py",
+        "openswe/thread_ids.py",
+        "openswe/thread_title.py",
+        "openswe/threads/**",
+        "openswe/tool_loaders/**",
+        "openswe/tools/**",
+        "openswe/transcript/**",
+        "openswe/ui_invalidations/**",
+        "openswe/users/**",
+        "openswe/utils/**",
+        "openswe/walkthrough/**",
+        "openswe/webapp.py",
+        "openswe/webhooks/**",
+        "openswe/workspaces/**",
+        "openwiki/**",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "pyproject.toml",
+        "scripts/**",
+        "swagger.json",
+        "tests/act_as/**",
+        "tests/agent/**",
+        "tests/analytics/**",
+        "tests/announcements/**",
+        "tests/api_keys/**",
+        "tests/auth/**",
+        "tests/bridge/**",
+        "tests/claude_code/**",
+        "tests/conftest.py",
+        "tests/dashboard/**",
+        "tests/database/**",
+        "tests/e2e/.gitignore",
+        "tests/e2e/.oxfmtrc.json",
+        "tests/e2e/README.md",
+        "tests/e2e/agent_entrypoint.py",
+        "tests/e2e/chat_entrypoint.py",
+        "tests/e2e/dev-mock.sh",
+        "tests/e2e/e2e_env.py",
+        "tests/e2e/fake_llm.py",
+        "tests/e2e/fakes.py",
+        "tests/e2e/fixtures/**",
+        "tests/e2e/global-setup.desktop.ts",
+        "tests/e2e/global-setup.ts",
+        "tests/e2e/harness.py",
+        "tests/e2e/langgraph.e2e.json",
+        "tests/e2e/local_desktop_login.py",
+        "tests/e2e/package.json",
+        "tests/e2e/patches.py",
+        "tests/e2e/playwright.config.ts",
+        "tests/e2e/playwright.desktop.config.ts",
+        "tests/e2e/review_scout_entrypoint.py",
+        "tests/e2e/scheduler_entrypoint.py",
+        "tests/e2e/static/**",
+        "tests/e2e/tests/**",
+        "tests/expedited_review/**",
+        "tests/github/**",
+        "tests/human_review/**",
+        "tests/incidents/**",
+        "tests/mcp/**",
+        "tests/mcp_helpers.py",
+        "tests/middleware/**",
+        "tests/models/**",
+        "tests/review_guide/**",
+        "tests/reviewer/**",
+        "tests/runtime/**",
+        "tests/sandbox/**",
+        "tests/slack/**",
+        "tests/support/**",
+        "tests/test_analytics_capture.py",
+        "tests/test_analytics_emitter.py",
+        "tests/test_analytics_events.py",
+        "tests/test_audit_tools.py",
+        "tests/test_deploy_preview.py",
+        "tests/test_jev.py",
+        "tests/test_model_request.py",
+        "tests/test_openai_responses_replay.py",
+        "tests/test_prompts.py",
+        "tests/test_review_channel_routing.py",
+        "tests/test_task_events.py",
+        "tests/test_task_threads.py",
+        "tests/test_thread_ops.py",
+        "tests/test_thread_title.py",
+        "tests/test_tool_output_offloading.py",
+        "tests/threads/**",
+        "tests/tools/**",
+        "tests/transcript/**",
+        "tests/ui_invalidations/**",
+        "tests/users/**",
+        "tests/utils/**",
+        "tests/walkthrough/**",
+        "tests/webhooks/**",
+        "tests/workspaces/**",
+        "turbo.json",
+        "ui/.cta.json",
+        "ui/.gitignore",
+        "ui/Dockerfile",
+        "ui/README.md",
+        "ui/lint/**",
+        "ui/package.json",
+        "ui/patches/**",
+        "ui/public/gh-open-in-open-swe-dark.svg",
+        "ui/public/gh-open-in-open-swe-light.svg",
+        "ui/public/manifest.webmanifest",
+        "ui/public/robots.txt",
+        "ui/public/sw.js",
+        "ui/scripts/**",
+        "ui/server/**",
+        "ui/src/client.tsx",
+        "ui/src/components/**",
+        "ui/src/desktop.d.ts",
+        "ui/src/features/agents/components/**",
+        "ui/src/features/agents/lib/**",
+        "ui/src/features/agents/terminal/fontUtils.ts",
+        "ui/src/features/agents/terminal/ghostty/README.md",
+        "ui/src/features/agents/terminal/ghostty/T3-LICENSE",
+        "ui/src/features/agents/terminal/ghostty/core.ts",
+        "ui/src/features/agents/terminal/ghostty/keyCodes.test.ts",
+        "ui/src/features/agents/terminal/ghostty/keyCodes.ts",
+        "ui/src/features/agents/terminal/ghostty/renderer.test.ts",
+        "ui/src/features/agents/terminal/ghostty/renderer.ts",
+        "ui/src/features/agents/terminal/ghostty/runtime.ts",
+        "ui/src/features/agents/terminal/ghostty/runtimeAbi.test.ts",
+        "ui/src/features/agents/terminal/ghostty/styles.ts",
+        "ui/src/features/agents/terminal/ghostty/surface.test.ts",
+        "ui/src/features/agents/terminal/ghostty/surface.ts",
+        "ui/src/features/agents/terminal/terminalLinks.ts",
+        "ui/src/features/agents/utils/**",
+        "ui/src/features/assistant/**",
+        "ui/src/features/automations/**",
+        "ui/src/features/bots/**",
+        "ui/src/features/incidents/**",
+        "ui/src/features/reviews/**",
+        "ui/src/features/settings/**",
+        "ui/src/lib/**",
+        "ui/src/logo.svg",
+        "ui/src/routeTree.gen.ts",
+        "ui/src/router.tsx",
+        "ui/src/routes/**",
+        "ui/src/styles/**",
+        "ui/src/styles.css",
+        "ui/tailwind.config.mjs",
+        "ui/tsconfig.json",
+        "ui/vercel.json",
+        "ui/vite.config.ts",
+        "ui/vitest.config.ts",
+        "ui/vitest.setup.ts",
+        "uv.lock"
+      ],
+      "text": "The MIT License\n\nCopyright (c) LangChain, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.",
+      "attribution": "Copyright (c) LangChain, Inc., MIT license (LICENSE), https://github.com/langchain-ai/open-swe."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ui/native/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Mitchell Hashimoto, Ghostty contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Mitchell Hashimoto, Ghostty contributors, MIT license (LICENSE), https://github.com/langchain-ai/open-swe/tree/7a74fdc4c46d24f4cda6b75223fbe34525482d1b/ui/native/libghostty-vt."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "ui/src/features/agents/terminal/ghostty/fonts/LICENSE"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Ryan L McIntyre\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 Ryan L McIntyre, MIT license (LICENSE), https://github.com/langchain-ai/open-swe/tree/7a74fdc4c46d24f4cda6b75223fbe34525482d1b/ui/src/features/agents/terminal/ghostty/fonts."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mako"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.worktreeinclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/T3-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zig",
+      "paths": [
+        "**/*.zig"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,614 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/emdash-cms/emdash",
+  "revision": "30604dcb0538df477ea0d8bde894ecdb57388bad",
+  "checksum": "sha256:b6c6123795cdc25d0216c1622959db0eb7f822f85f429935b7f4c17a56b63564",
+  "extract": {
+    "exclude": [
+      "apps/labeler/evals/datasets/v1/assets/**",
+      "apps/plugins-site/public/og.jpg",
+      "assets/**",
+      "demos/playground/public/**",
+      "docs/src/assets/houston.webp",
+      "e2e/fixtures/assets/**",
+      "e2e/tests/visual-regression.spec.ts-snapshots/**",
+      "packages/core/tests/integration/smoke/fixtures/codicon.ttf",
+      "packages/marketplace/tests/fixtures/audit/brand-impersonation/icon.png",
+      "packages/marketplace/tests/fixtures/audit/clean-with-images/icon.png",
+      "packages/marketplace/tests/fixtures/audit/hate-imagery/icon.png",
+      "packages/plugins/marketplace-test/icon.png",
+      "packages/plugins/marketplace-test/screenshots/**"
+    ]
+  },
+  "history": {
+    "since": "27c2c4893722805ecf156d66fadc9ab68733fd39"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License\n\nCopyright 2026 Cloudflare Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Commit history of https://github.com/emdash-cms/emdash: Copyright 2026 Cloudflare Inc., MIT license (LICENSE), https://github.com/emdash-cms/emdash."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".changeset/**",
+        ".claude/**",
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
+        ".prettierignore",
+        ".prettierrc",
+        ".vscode/**",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "GOVERNANCE.md",
+        "LICENSE",
+        "MAINTAINING.md",
+        "README.md",
+        "ROADMAP.md",
+        "SECURITY.md",
+        "TEMPLATES.md",
+        "TRIAGE.md",
+        "acceptance/**",
+        "apps/aggregator/**",
+        "apps/labeler/CHANGELOG.md",
+        "apps/labeler/docs/**",
+        "apps/labeler/evals/dataset.ts",
+        "apps/labeler/evals/datasets/v1/manifest.json",
+        "apps/labeler/evals/datasets/v1/public.json",
+        "apps/labeler/evals/harness.ts",
+        "apps/labeler/evals/index.ts",
+        "apps/labeler/evals/live.ts",
+        "apps/labeler/evals/model-sweep.live.test.ts",
+        "apps/labeler/evals/production.ts",
+        "apps/labeler/evals/recordings/**",
+        "apps/labeler/evals/recordings.ts",
+        "apps/labeler/evals/report.ts",
+        "apps/labeler/evals/sweep-client.ts",
+        "apps/labeler/evals/sweep-worker.ts",
+        "apps/labeler/evals/tsconfig.json",
+        "apps/labeler/evals/types.ts",
+        "apps/labeler/evals/workflow.ts",
+        "apps/labeler/evals/wrangler.sweep.jsonc",
+        "apps/labeler/index.html",
+        "apps/labeler/lingui.config.ts",
+        "apps/labeler/migrations/**",
+        "apps/labeler/package.json",
+        "apps/labeler/scripts/**",
+        "apps/labeler/src/**",
+        "apps/labeler/test/**",
+        "apps/labeler/tsconfig.admin.json",
+        "apps/labeler/tsconfig.json",
+        "apps/labeler/vite.config.ts",
+        "apps/labeler/vitest.ai.config.ts",
+        "apps/labeler/vitest.config.ts",
+        "apps/labeler/vitest.sweep.config.ts",
+        "apps/labeler/vitest.ui.config.ts",
+        "apps/labeler/worker-configuration.d.ts",
+        "apps/labeler/wrangler.jsonc",
+        "apps/plugins-site/astro.config.mjs",
+        "apps/plugins-site/package.json",
+        "apps/plugins-site/public/.well-known/**",
+        "apps/plugins-site/public/favicon.svg",
+        "apps/plugins-site/public/logo-dark.svg",
+        "apps/plugins-site/public/logo-light.svg",
+        "apps/plugins-site/public/robots.txt",
+        "apps/plugins-site/src/**",
+        "apps/plugins-site/tsconfig.json",
+        "apps/plugins-site/wrangler.jsonc",
+        "apps/release-action/**",
+        "apps/release-service/**",
+        "apps/release-verifier/**",
+        "compose.yaml",
+        "demos/cloudflare/**",
+        "demos/playground/.gitignore",
+        "demos/playground/CHANGELOG.md",
+        "demos/playground/astro.config.mjs",
+        "demos/playground/emdash-env.d.ts",
+        "demos/playground/package.json",
+        "demos/playground/seed/**",
+        "demos/playground/src/**",
+        "demos/playground/tsconfig.json",
+        "demos/playground/worker-configuration.d.ts",
+        "demos/playground/wrangler.jsonc",
+        "demos/plugins-demo/**",
+        "demos/postgres/**",
+        "demos/preview/**",
+        "demos/simple/**",
+        "docs/.gitignore",
+        "docs/.vscode/**",
+        "docs/README.md",
+        "docs/astro.config.mjs",
+        "docs/package.json",
+        "docs/public/**",
+        "docs/scripts/**",
+        "docs/src/assets/logo-dark.svg",
+        "docs/src/assets/logo-light.svg",
+        "docs/src/components/**",
+        "docs/src/content/**",
+        "docs/src/content.config.ts",
+        "docs/src/pages/**",
+        "docs/src/styles/**",
+        "docs/src/worker.ts",
+        "docs/technical-specs/**",
+        "docs/tsconfig.json",
+        "docs/worker-configuration.d.ts",
+        "docs/wrangler.jsonc",
+        "docs/wrangler.local.jsonc",
+        "e2e/fixture/**",
+        "e2e/fixture-cloudflare/**",
+        "e2e/fixtures/admin.ts",
+        "e2e/fixtures/index.ts",
+        "e2e/fixtures/mock-marketplace.ts",
+        "e2e/fixtures/refresh-server-pat.ts",
+        "e2e/fixtures/sandbox-denied-plugin.mjs",
+        "e2e/fixtures/virtual-authenticator.ts",
+        "e2e/global-setup.ts",
+        "e2e/global-teardown.ts",
+        "e2e/playground/**",
+        "e2e/tests/accessibility.spec.ts",
+        "e2e/tests/admin-css-isolation.spec.ts",
+        "e2e/tests/admin-fixes.spec.ts",
+        "e2e/tests/allowed-domains.spec.ts",
+        "e2e/tests/api-route-injection.spec.ts",
+        "e2e/tests/api-tokens.spec.ts",
+        "e2e/tests/auth.spec.ts",
+        "e2e/tests/autosave.spec.ts",
+        "e2e/tests/byline-fields.spec.ts",
+        "e2e/tests/bylines.spec.ts",
+        "e2e/tests/code-block-highlighting.spec.ts",
+        "e2e/tests/comments.spec.ts",
+        "e2e/tests/content-actions.spec.ts",
+        "e2e/tests/content-crud.spec.ts",
+        "e2e/tests/content-types.spec.ts",
+        "e2e/tests/device-auth.spec.ts",
+        "e2e/tests/editor-html-block.spec.ts",
+        "e2e/tests/editor-image-drop.spec.ts",
+        "e2e/tests/editor-image-panel.spec.ts",
+        "e2e/tests/editor-image-toolbar.spec.ts",
+        "e2e/tests/entry-lock.spec.ts",
+        "e2e/tests/field-widgets.spec.ts",
+        "e2e/tests/form-data-loss.spec.ts",
+        "e2e/tests/i18n.spec.ts",
+        "e2e/tests/image-dark-variant.spec.ts",
+        "e2e/tests/image-optimization.spec.ts",
+        "e2e/tests/invite-flow.spec.ts",
+        "e2e/tests/keyboard-shortcuts.spec.ts",
+        "e2e/tests/marketplace.spec.ts",
+        "e2e/tests/media-library.spec.ts",
+        "e2e/tests/menus.spec.ts",
+        "e2e/tests/outer-middleware.spec.ts",
+        "e2e/tests/passkey-full-setup-virtual-auth.spec.ts",
+        "e2e/tests/plugin-editor-extensions.spec.ts",
+        "e2e/tests/plugin-fixture-image.spec.ts",
+        "e2e/tests/plugins.spec.ts",
+        "e2e/tests/portable-text-alignment.spec.ts",
+        "e2e/tests/portable-text-image-upload.spec.ts",
+        "e2e/tests/portable-text-table.spec.ts",
+        "e2e/tests/public-page-encoding.spec.ts",
+        "e2e/tests/public-page-styles.spec.ts",
+        "e2e/tests/redirect-loop-detection.spec.ts",
+        "e2e/tests/redirects.spec.ts",
+        "e2e/tests/registry-fixture-block-kit.spec.ts",
+        "e2e/tests/revisions.spec.ts",
+        "e2e/tests/sandbox-plugin-admin-surfaces.spec.ts",
+        "e2e/tests/sandbox-plugin-boundaries.spec.ts",
+        "e2e/tests/search.spec.ts",
+        "e2e/tests/settings-pages.spec.ts",
+        "e2e/tests/setup-wizard.spec.ts",
+        "e2e/tests/site-transfer.spec.ts",
+        "e2e/tests/theme-marketplace.spec.ts",
+        "e2e/tests/visual-editing.spec.ts",
+        "e2e/tests/visual-regression.spec.ts",
+        "e2e/tests/welcome-modal.spec.ts",
+        "e2e/tests/widgets.spec.ts",
+        "e2e/tests/wordpress-import.spec.ts",
+        "fixtures/**",
+        "i18n/**",
+        "infra/**",
+        "knip.json",
+        "lingui.config.ts",
+        "lunaria.config.ts",
+        "package.json",
+        "packages/admin/**",
+        "packages/atproto-test-utils/**",
+        "packages/auth/**",
+        "packages/auth-atproto/**",
+        "packages/blocks/**",
+        "packages/cloudflare/**",
+        "packages/contentful-to-portable-text/**",
+        "packages/core/CHANGELOG.md",
+        "packages/core/README.md",
+        "packages/core/changelog/**",
+        "packages/core/locals.d.ts",
+        "packages/core/package.json",
+        "packages/core/src/**",
+        "packages/core/tests/database/**",
+        "packages/core/tests/fields/**",
+        "packages/core/tests/fixtures/**",
+        "packages/core/tests/integration/.gitignore",
+        "packages/core/tests/integration/api/**",
+        "packages/core/tests/integration/astro/**",
+        "packages/core/tests/integration/auth/**",
+        "packages/core/tests/integration/cli/**",
+        "packages/core/tests/integration/client/**",
+        "packages/core/tests/integration/comments/**",
+        "packages/core/tests/integration/content/**",
+        "packages/core/tests/integration/database/**",
+        "packages/core/tests/integration/fixture/**",
+        "packages/core/tests/integration/global-setup.ts",
+        "packages/core/tests/integration/i18n/**",
+        "packages/core/tests/integration/loader-cursor-plan.test.ts",
+        "packages/core/tests/integration/loader-fold-plan.test.ts",
+        "packages/core/tests/integration/loader-fold.test.ts",
+        "packages/core/tests/integration/loader-long-in-list.test.ts",
+        "packages/core/tests/integration/loader-taxonomy-pivot-plan.test.ts",
+        "packages/core/tests/integration/manifest-reference.test.ts",
+        "packages/core/tests/integration/mcp/**",
+        "packages/core/tests/integration/media/**",
+        "packages/core/tests/integration/openapi/**",
+        "packages/core/tests/integration/plugins/**",
+        "packages/core/tests/integration/redirects/**",
+        "packages/core/tests/integration/runtime/**",
+        "packages/core/tests/integration/schema/**",
+        "packages/core/tests/integration/search/**",
+        "packages/core/tests/integration/seed/**",
+        "packages/core/tests/integration/seed-i18n-default-locale.test.ts",
+        "packages/core/tests/integration/seed-live-revisions.test.ts",
+        "packages/core/tests/integration/seed-on-conflict.test.ts",
+        "packages/core/tests/integration/seed-portable-text-keys.test.ts",
+        "packages/core/tests/integration/seo/**",
+        "packages/core/tests/integration/server.ts",
+        "packages/core/tests/integration/smoke/fixtures/README.md",
+        "packages/core/tests/integration/smoke/fixtures/codicon.LICENSE.txt",
+        "packages/core/tests/integration/smoke/isolated-install.test.ts",
+        "packages/core/tests/integration/smoke/site-matrix-smoke.test.ts",
+        "packages/core/tests/integration/smoke/smoke-font-provider.mjs",
+        "packages/core/tests/integration/smoke/sqlite-prerender.test.ts",
+        "packages/core/tests/integration/smoke/template-smoke.test.ts",
+        "packages/core/tests/integration/snapshot/**",
+        "packages/core/tests/integration/taxonomies/**",
+        "packages/core/tests/integration/taxonomy-reorder-writes.test.ts",
+        "packages/core/tests/integration/taxonomy-term-counts-plan.test.ts",
+        "packages/core/tests/integration/taxonomy-term-order-plan.test.ts",
+        "packages/core/tests/integration/transfer/**",
+        "packages/core/tests/integration/wordpress-import/**",
+        "packages/core/tests/integration/wordpress-migration/**",
+        "packages/core/tests/repro/**",
+        "packages/core/tests/types/**",
+        "packages/core/tests/unit/**",
+        "packages/core/tests/utils/**",
+        "packages/core/tests/workerd/**",
+        "packages/core/tsconfig.components.json",
+        "packages/core/tsconfig.json",
+        "packages/core/tsconfig.type-tests.json",
+        "packages/core/tsconfig.typecheck.json",
+        "packages/core/tsdown.config.ts",
+        "packages/core/vitest.config.ts",
+        "packages/core/vitest.integration.config.ts",
+        "packages/core/vitest.repro.config.ts",
+        "packages/core/vitest.smoke.config.ts",
+        "packages/core/vitest.types.config.ts",
+        "packages/core/vitest.workerd.config.ts",
+        "packages/create-emdash/**",
+        "packages/gutenberg-to-portable-text/**",
+        "packages/marketplace/README.md",
+        "packages/marketplace/package.json",
+        "packages/marketplace/src/**",
+        "packages/marketplace/tests/audit-fail-close.test.ts",
+        "packages/marketplace/tests/audit-response-parsing.test.ts",
+        "packages/marketplace/tests/capabilities.test.ts",
+        "packages/marketplace/tests/fixtures/audit/benign-network-usage/**",
+        "packages/marketplace/tests/fixtures/audit/brand-impersonation/backend.js",
+        "packages/marketplace/tests/fixtures/audit/brand-impersonation/expected.json",
+        "packages/marketplace/tests/fixtures/audit/brand-impersonation/manifest.json",
+        "packages/marketplace/tests/fixtures/audit/clean-seo-plugin/**",
+        "packages/marketplace/tests/fixtures/audit/clean-with-images/backend.js",
+        "packages/marketplace/tests/fixtures/audit/clean-with-images/expected.json",
+        "packages/marketplace/tests/fixtures/audit/clean-with-images/manifest.json",
+        "packages/marketplace/tests/fixtures/audit/credential-harvester/**",
+        "packages/marketplace/tests/fixtures/audit/crypto-miner/**",
+        "packages/marketplace/tests/fixtures/audit/data-exfiltration/**",
+        "packages/marketplace/tests/fixtures/audit/dynamic-url-construction/**",
+        "packages/marketplace/tests/fixtures/audit/hate-imagery/backend.js",
+        "packages/marketplace/tests/fixtures/audit/hate-imagery/expected.json",
+        "packages/marketplace/tests/fixtures/audit/hate-imagery/manifest.json",
+        "packages/marketplace/tests/fixtures/audit/misleading-screenshot/**",
+        "packages/marketplace/tests/fixtures/audit/obfuscated-payload/**",
+        "packages/marketplace/tests/fixtures/audit/prompt-injection/**",
+        "packages/marketplace/tests/fixtures/audit/social-engineering/**",
+        "packages/marketplace/tests/fixtures/audit/test-audit.sh",
+        "packages/marketplace/tests/image-audit-response-parsing.test.ts",
+        "packages/marketplace/tests/manifest-schema.test.ts",
+        "packages/marketplace/tests/plugin-capabilities.test.ts",
+        "packages/marketplace/tests/publishing-capabilities.test.ts",
+        "packages/marketplace/tests/resolve-version-status.test.ts",
+        "packages/marketplace/tests/taxonomy-write-capability.test.ts",
+        "packages/marketplace/tests/tsconfig.json",
+        "packages/marketplace/tsconfig.json",
+        "packages/marketplace/vitest.config.ts",
+        "packages/marketplace/worker-configuration.d.ts",
+        "packages/marketplace/wrangler.jsonc",
+        "packages/plugin-cli/**",
+        "packages/plugin-test/**",
+        "packages/plugin-types/**",
+        "packages/plugins/README.md",
+        "packages/plugins/ai-moderation/**",
+        "packages/plugins/api-test/**",
+        "packages/plugins/atproto/**",
+        "packages/plugins/audit-log/**",
+        "packages/plugins/color/**",
+        "packages/plugins/embeds/**",
+        "packages/plugins/field-kit/**",
+        "packages/plugins/forms/**",
+        "packages/plugins/marketplace-test/CHANGELOG.md",
+        "packages/plugins/marketplace-test/README.md",
+        "packages/plugins/marketplace-test/emdash-plugin.jsonc",
+        "packages/plugins/marketplace-test/package.json",
+        "packages/plugins/marketplace-test/src/**",
+        "packages/plugins/marketplace-test/tsconfig.json",
+        "packages/plugins/mcp-smoke/**",
+        "packages/plugins/sandboxed-test/**",
+        "packages/plugins/tsconfig.base.json",
+        "packages/plugins/webhook-notifier/**",
+        "packages/registry-client/**",
+        "packages/registry-lexicons/**",
+        "packages/registry-loader/**",
+        "packages/registry-moderation/**",
+        "packages/registry-verification/**",
+        "packages/upgrade-emdash/**",
+        "packages/workerd/**",
+        "packages/x402/**",
+        "patches/**",
+        "playwright.config.ts",
+        "playwright.table.config.ts",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "proposals/**",
+        "renovate.json",
+        "rfcs/**",
+        "scripts/**",
+        "skills/**",
+        "templates/**",
+        "tsconfig.base.json",
+        "tsconfig.json"
+      ],
+      "text": "The MIT License\n\nCopyright 2026 Cloudflare Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Copyright 2026 Cloudflare Inc., MIT license (LICENSE), https://github.com/emdash-cms/emdash."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "astro",
+      "paths": [
+        "**/*.astro"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/atproto-did"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

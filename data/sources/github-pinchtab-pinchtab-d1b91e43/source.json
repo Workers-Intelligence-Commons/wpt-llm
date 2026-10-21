@@ -1,0 +1,646 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pinchtab/pinchtab",
+  "revision": "a62662027f233444c579c29fbe42ad90df0d5bc7",
+  "checksum": "sha256:6b1e2ed70a0bd8b44d3ef068ec1fcf5b2709153987760decd13c0356b05631f7",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "dashboard/public/**",
+      "docs/media/**",
+      "internal/audit/visualdiff/testdata/**",
+      "internal/autosolver/external/**",
+      "internal/dashboard/dashboard/**",
+      "tests/e2e/fixtures/sitemap.xml.gz"
+    ]
+  },
+  "history": {
+    "since": "2454eeb67c4c5c1bfee0f26a732980c79fe01525"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Luigi Agosti\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/pinchtab/pinchtab: Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab; Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab/tree/a62662027f233444c579c29fbe42ad90df0d5bc7/npm; Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab/tree/a62662027f233444c579c29fbe42ad90df0d5bc7/plugins/grok."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".bun-version",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".envrc",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".goreleaser.yml",
+        ".grok-plugin/**",
+        ".markdownlint.json",
+        ".nvmrc",
+        ".pre-commit-config.yaml",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEFINITION_OF_DONE.md",
+        "DEVELOPMENT.md",
+        "Dockerfile",
+        "LICENSE",
+        "README.md",
+        "RELEASE.md",
+        "SECURITY.md",
+        "TESTING.md",
+        "THIRD_PARTY_LICENSES.md",
+        "cmd/**",
+        "dashboard/.gitignore",
+        "dashboard/README.md",
+        "dashboard/bun.lock",
+        "dashboard/eslint.config.js",
+        "dashboard/index.html",
+        "dashboard/package.json",
+        "dashboard/src/**",
+        "dashboard/tsconfig.app.json",
+        "dashboard/tsconfig.json",
+        "dashboard/tsconfig.node.json",
+        "dashboard/tsconfig.test.json",
+        "dashboard/tygo.yaml",
+        "dashboard/vite.config.ts",
+        "dev",
+        "docker-compose.yml",
+        "docker-entrypoint.sh",
+        "docs/architecture/**",
+        "docs/audit.md",
+        "docs/benchmark.md",
+        "docs/commands.md",
+        "docs/core-concepts.md",
+        "docs/dashboard.md",
+        "docs/deep-dive/**",
+        "docs/endpoints.md",
+        "docs/examples/**",
+        "docs/get-started.md",
+        "docs/guides/**",
+        "docs/headless-vs-headed.md",
+        "docs/implementations/**",
+        "docs/index.json",
+        "docs/mcp.md",
+        "docs/pinchtab-scrape-audit-spec.md",
+        "docs/pinchtab.md",
+        "docs/reference/**",
+        "docs/scrape.md",
+        "docs/showcase.md",
+        "go.mod",
+        "go.sum",
+        "install.sh",
+        "internal/activity/**",
+        "internal/api/**",
+        "internal/assets/**",
+        "internal/audit/a11y.go",
+        "internal/audit/a11y_test.go",
+        "internal/audit/auth.go",
+        "internal/audit/auth_test.go",
+        "internal/audit/axe.go",
+        "internal/audit/axe_test.go",
+        "internal/audit/compare.go",
+        "internal/audit/compare_test.go",
+        "internal/audit/enrich.go",
+        "internal/audit/enrich_test.go",
+        "internal/audit/report/**",
+        "internal/audit/run.go",
+        "internal/audit/run_test.go",
+        "internal/audit/sample.go",
+        "internal/audit/sample_test.go",
+        "internal/audit/seaportal.go",
+        "internal/audit/seaportal_test.go",
+        "internal/audit/security.go",
+        "internal/audit/security_test.go",
+        "internal/audit/testdata/**",
+        "internal/audit/types.go",
+        "internal/audit/types_test.go",
+        "internal/audit/visualdiff/annotate.go",
+        "internal/audit/visualdiff/diff.go",
+        "internal/audit/visualdiff/visualdiff_test.go",
+        "internal/authn/**",
+        "internal/autosolver/adapters/**",
+        "internal/autosolver/autosolver.go",
+        "internal/autosolver/autosolver_test.go",
+        "internal/autosolver/catalog/**",
+        "internal/autosolver/challenge_detection.go",
+        "internal/autosolver/challenge_detection_test.go",
+        "internal/autosolver/heuristics.go",
+        "internal/autosolver/intent_census_test.go",
+        "internal/autosolver/interfaces.go",
+        "internal/autosolver/keygated.go",
+        "internal/autosolver/llm/**",
+        "internal/autosolver/registry.go",
+        "internal/autosolver/registry_test.go",
+        "internal/autosolver/semantic/**",
+        "internal/autosolver/solvers/**",
+        "internal/autosolver/types.go",
+        "internal/bridge/**",
+        "internal/bridgeregistry/**",
+        "internal/browserops/**",
+        "internal/browserprobe/**",
+        "internal/browsers/**",
+        "internal/browsersession/**",
+        "internal/cdptk/**",
+        "internal/cfchallenge/**",
+        "internal/cli/**",
+        "internal/config/**",
+        "internal/contentguard/**",
+        "internal/daemon/**",
+        "internal/dashboard/activity_identity_test.go",
+        "internal/dashboard/activity_ingest.go",
+        "internal/dashboard/activity_ingest_test.go",
+        "internal/dashboard/admin.go",
+        "internal/dashboard/agent_session_api.go",
+        "internal/dashboard/agent_session_api_integration_test.go",
+        "internal/dashboard/agent_session_api_test.go",
+        "internal/dashboard/agent_session_routes_test.go",
+        "internal/dashboard/auth_api.go",
+        "internal/dashboard/auth_api_test.go",
+        "internal/dashboard/config_api.go",
+        "internal/dashboard/config_api_security_default_test.go",
+        "internal/dashboard/config_api_test.go",
+        "internal/dashboard/config_changes.go",
+        "internal/dashboard/config_changes_test.go",
+        "internal/dashboard/config_health.go",
+        "internal/dashboard/config_health_test.go",
+        "internal/dashboard/config_live_test.go",
+        "internal/dashboard/config_redaction.go",
+        "internal/dashboard/dashboard.go",
+        "internal/dashboard/dashboard_test.go",
+        "internal/dashboard/handlers.go",
+        "internal/dashboard/handlers_agents.go",
+        "internal/dashboard/handlers_sse.go",
+        "internal/dashboard/health_crashes_test.go",
+        "internal/dashboard/health_responsiveness_test.go",
+        "internal/dashboard/monitoring.go",
+        "internal/dashboard/monitoring_test.go",
+        "internal/dashboard/ringbuffer.go",
+        "internal/dashboard/ringbuffer_test.go",
+        "internal/dashboard/session_config.go",
+        "internal/devtools/**",
+        "internal/doctor/**",
+        "internal/extract/**",
+        "internal/fileout/**",
+        "internal/handlers/**",
+        "internal/heapsnap/**",
+        "internal/htmltrim/**",
+        "internal/httpx/**",
+        "internal/idpi/**",
+        "internal/ids/**",
+        "internal/instance/**",
+        "internal/mcp/**",
+        "internal/navguard/**",
+        "internal/netguard/**",
+        "internal/orchestrator/**",
+        "internal/profiles/**",
+        "internal/proxy/**",
+        "internal/readiness/**",
+        "internal/remedy/**",
+        "internal/routes/**",
+        "internal/runtimetypes/**",
+        "internal/safelog/**",
+        "internal/sanitize/**",
+        "internal/scheduler/**",
+        "internal/schema/**",
+        "internal/scrape/**",
+        "internal/scroll/**",
+        "internal/security/**",
+        "internal/selector/**",
+        "internal/semdesc/**",
+        "internal/server/**",
+        "internal/session/**",
+        "internal/srccensus/**",
+        "internal/state/**",
+        "internal/stealth/**",
+        "internal/strategy/**",
+        "internal/testbrowser/**",
+        "internal/urls/**",
+        "pkg/**",
+        "plugins/README.md",
+        "plugins/openclaw/**",
+        "plugins/sync-skills.mjs",
+        "scripts/**",
+        "skills/**",
+        "tests/README.md",
+        "tests/benchmark/**",
+        "tests/e2e/README.md",
+        "tests/e2e/config/**",
+        "tests/e2e/docker-compose-multi.yml",
+        "tests/e2e/docker-compose.yml",
+        "tests/e2e/executor_test.go",
+        "tests/e2e/fixtures/a11y-violations.html",
+        "tests/e2e/fixtures/audit-site/**",
+        "tests/e2e/fixtures/audit-site-staging/**",
+        "tests/e2e/fixtures/bot-detect.html",
+        "tests/e2e/fixtures/buttons.html",
+        "tests/e2e/fixtures/cdp-detect.html",
+        "tests/e2e/fixtures/console.html",
+        "tests/e2e/fixtures/cookie-banner.html",
+        "tests/e2e/fixtures/corpus/**",
+        "tests/e2e/fixtures/cross-origin-iframe-content.html",
+        "tests/e2e/fixtures/cross-origin-iframe.html",
+        "tests/e2e/fixtures/drag-drop.html",
+        "tests/e2e/fixtures/evaluate.html",
+        "tests/e2e/fixtures/extract-article.html",
+        "tests/e2e/fixtures/extract-list.html",
+        "tests/e2e/fixtures/extract-product.html",
+        "tests/e2e/fixtures/find.html",
+        "tests/e2e/fixtures/form.html",
+        "tests/e2e/fixtures/human-type.html",
+        "tests/e2e/fixtures/idpi-clean.html",
+        "tests/e2e/fixtures/idpi-domain-pivot.html",
+        "tests/e2e/fixtures/idpi-hidden-injection.html",
+        "tests/e2e/fixtures/idpi-inject.html",
+        "tests/e2e/fixtures/idpi-unicode-bypass.html",
+        "tests/e2e/fixtures/iframe-content.html",
+        "tests/e2e/fixtures/iframe-rerender-v1.html",
+        "tests/e2e/fixtures/iframe-rerender-v2.html",
+        "tests/e2e/fixtures/iframe-rerender.html",
+        "tests/e2e/fixtures/iframe.html",
+        "tests/e2e/fixtures/index.html",
+        "tests/e2e/fixtures/js-submit.html",
+        "tests/e2e/fixtures/key-modifiers.html",
+        "tests/e2e/fixtures/lite-test.html",
+        "tests/e2e/fixtures/markdown.html",
+        "tests/e2e/fixtures/memory-leak.html",
+        "tests/e2e/fixtures/mouse-events.html",
+        "tests/e2e/fixtures/navigation-extra-target.html",
+        "tests/e2e/fixtures/navigation-loading-target.html",
+        "tests/e2e/fixtures/nested-iframe-inner.html",
+        "tests/e2e/fixtures/nested-iframe-outer.html",
+        "tests/e2e/fixtures/nested-iframe.html",
+        "tests/e2e/fixtures/network-retain-body.html",
+        "tests/e2e/fixtures/network-retain-body.json",
+        "tests/e2e/fixtures/occluded-click.html",
+        "tests/e2e/fixtures/persistence-marker.html",
+        "tests/e2e/fixtures/sample.txt",
+        "tests/e2e/fixtures/schemas/**",
+        "tests/e2e/fixtures/scrape-site/**",
+        "tests/e2e/fixtures/screencast-click-targets.html",
+        "tests/e2e/fixtures/secrets.html",
+        "tests/e2e/fixtures/snapshot-hydrated-list.html",
+        "tests/e2e/fixtures/srcdoc-iframe.html",
+        "tests/e2e/fixtures/state-dialog.html",
+        "tests/e2e/fixtures/state-loading.html",
+        "tests/e2e/fixtures/state-slow.json",
+        "tests/e2e/fixtures/stealth-capabilities.html",
+        "tests/e2e/fixtures/stealth-devtools-probe.html",
+        "tests/e2e/fixtures/stealth-service-worker.html",
+        "tests/e2e/fixtures/stealth-service-worker.js",
+        "tests/e2e/fixtures/stealth-workers.html",
+        "tests/e2e/fixtures/table.html",
+        "tests/e2e/fixtures/tall.html",
+        "tests/e2e/fixtures/target-blank.html",
+        "tests/e2e/fixtures/test-extension/**",
+        "tests/e2e/fixtures/test-extension-api/**",
+        "tests/e2e/fixtures/text-fields.html",
+        "tests/e2e/fixtures/text-long.html",
+        "tests/e2e/fixtures/unicode.html",
+        "tests/e2e/fixtures/upload-shadow.html",
+        "tests/e2e/fixtures/upload.html",
+        "tests/e2e/helpers/**",
+        "tests/e2e/isolation_rules_test.go",
+        "tests/e2e/nginx/**",
+        "tests/e2e/pipefail_rules_test.go",
+        "tests/e2e/results/**",
+        "tests/e2e/run.sh",
+        "tests/e2e/runner-api/**",
+        "tests/e2e/runner-cli/**",
+        "tests/e2e/scenarios/**",
+        "tests/e2e/tab_cleanup_test.go",
+        "tests/exploration/**",
+        "tests/install-ux/**",
+        "tests/manual/**",
+        "tests/optimization/**",
+        "tests/optimization-setup/**",
+        "tests/release/**",
+        "tests/soak/**",
+        "tests/stealth-score/**",
+        "tests/tools/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Luigi Agosti\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "npm/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Luigi Agosti\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab/tree/a62662027f233444c579c29fbe42ad90df0d5bc7/npm."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/grok/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2026 Luigi Agosti\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Luigi Agosti, MIT license (LICENSE), https://github.com/pinchtab/pinchtab/tree/a62662027f233444c579c29fbe42ad90df0d5bc7/plugins/grok."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.heapsnapshot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bun-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pinchtab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runner"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,813 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/nylas/nylas-mail",
+  "revision": "a6ec2161716bd0d7c1ef87783eba4aebce361104",
+  "checksum": "sha256:98ea910348a21cf7acb9fcfb2c82ea0d4a304f1a195036a59f80f9e6952d7f28",
+  "extract": {
+    "exclude": [
+      "blog-posts/**",
+      "packages/client-app/build/resources/linux/icons/**",
+      "packages/client-app/build/resources/mac/Nylas Calendar.app/Contents/MacOS/**",
+      "packages/client-app/build/resources/mac/Nylas Calendar.app/Contents/Resources/**",
+      "packages/client-app/build/resources/mac/Nylas-Mail-DMG-Background.png",
+      "packages/client-app/build/resources/mac/file.icns",
+      "packages/client-app/build/resources/mac/nylas.icns",
+      "packages/client-app/build/resources/nylas.png",
+      "packages/client-app/build/resources/ssh/**",
+      "packages/client-app/build/resources/win/loading.gif",
+      "packages/client-app/build/resources/win/loading.png",
+      "packages/client-app/build/resources/win/nylas-mailto-default.reg",
+      "packages/client-app/build/resources/win/nylas.ico",
+      "packages/client-app/internal_packages/account-sidebar/**",
+      "packages/client-app/internal_packages/activity-list/**",
+      "packages/client-app/internal_packages/attachments/**",
+      "packages/client-app/internal_packages/category-mapper/**",
+      "packages/client-app/internal_packages/category-picker/**",
+      "packages/client-app/internal_packages/composer/**",
+      "packages/client-app/internal_packages/composer-emoji/**",
+      "packages/client-app/internal_packages/composer-mail-merge/**",
+      "packages/client-app/internal_packages/composer-markdown/**",
+      "packages/client-app/internal_packages/composer-scheduler/**",
+      "packages/client-app/internal_packages/composer-signature/**",
+      "packages/client-app/internal_packages/composer-spellcheck/**",
+      "packages/client-app/internal_packages/composer-templates/**",
+      "packages/client-app/internal_packages/composer-translate/**",
+      "packages/client-app/internal_packages/contact-rankings/**",
+      "packages/client-app/internal_packages/draft-list/**",
+      "packages/client-app/internal_packages/events/**",
+      "packages/client-app/internal_packages/github-contact-card/**",
+      "packages/client-app/internal_packages/keybase/**",
+      "packages/client-app/internal_packages/link-tracking/**",
+      "packages/client-app/internal_packages/main-calendar/**",
+      "packages/client-app/internal_packages/message-autoload-images/**",
+      "packages/client-app/internal_packages/message-list/**",
+      "packages/client-app/internal_packages/message-view-on-github/**",
+      "packages/client-app/internal_packages/mode-switch/**",
+      "packages/client-app/internal_packages/notifications/**",
+      "packages/client-app/internal_packages/nylas-private-fonts/**",
+      "packages/client-app/internal_packages/nylas-private-salesforce/**",
+      "packages/client-app/internal_packages/nylas-private-sounds/**",
+      "packages/client-app/internal_packages/onboarding/**",
+      "packages/client-app/internal_packages/open-tracking/**",
+      "packages/client-app/internal_packages/participant-profile/**",
+      "packages/client-app/internal_packages/personal-level-indicators/**",
+      "packages/client-app/internal_packages/phishing-detection/**",
+      "packages/client-app/internal_packages/plugins/**",
+      "packages/client-app/internal_packages/preferences/**",
+      "packages/client-app/internal_packages/print/**",
+      "packages/client-app/internal_packages/remove-tracking-pixels/**",
+      "packages/client-app/internal_packages/screenshot-mode/**",
+      "packages/client-app/internal_packages/search-index/**",
+      "packages/client-app/internal_packages/send-and-archive/**",
+      "packages/client-app/internal_packages/send-later/**",
+      "packages/client-app/internal_packages/send-reminders/**",
+      "packages/client-app/internal_packages/sync-health-checker/**",
+      "packages/client-app/internal_packages/system-tray/**",
+      "packages/client-app/internal_packages/theme-picker/**",
+      "packages/client-app/internal_packages/thread-list/**",
+      "packages/client-app/internal_packages/thread-search/**",
+      "packages/client-app/internal_packages/thread-sharing/**",
+      "packages/client-app/internal_packages/thread-snooze/**",
+      "packages/client-app/internal_packages/ui-less-is-more/images/**",
+      "packages/client-app/internal_packages/ui-light/**",
+      "packages/client-app/internal_packages/ui-taiga/preview.jpg",
+      "packages/client-app/internal_packages/ui-ubuntu/**",
+      "packages/client-app/internal_packages/undo-redo/**",
+      "packages/client-app/internal_packages/unread-notifications/**",
+      "packages/client-app/internal_packages/verify-install-location/**",
+      "packages/client-app/internal_packages/worker-ui/**",
+      "packages/client-app/spec/fixtures/packages/package-with-incompatible-native-module/node_modules/**",
+      "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/96CD36-restorable.plist",
+      "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/blank.gif",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/BC8A15-restorable.plist",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Planet 1.png",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Planet 1_2x.png",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Planet 2.png",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Planet 2_2x.png",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/blank.gif",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/comet.png",
+      "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/comet_2x.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 1.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 10.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 11.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 11_2x.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 12.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 13.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 14.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 15.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 15_2x.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 2.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 3.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 4.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 5.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 6 copy.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 7.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 7_2x.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 8.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 9.png",
+      "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/Layer 9_2x.png",
+      "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/DC9C02-restorable.plist",
+      "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/blank.gif",
+      "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/check-lake.png",
+      "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/check-lake_2x.png",
+      "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/4982A5-restorable.plist",
+      "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/blank.gif",
+      "packages/client-app/static/fonts/**",
+      "packages/client-app/static/images/activity-list/**",
+      "packages/client-app/static/images/application-frame/**",
+      "packages/client-app/static/images/attachments/**",
+      "packages/client-app/static/images/calendar/**",
+      "packages/client-app/static/images/composer/**",
+      "packages/client-app/static/images/composer-emoji/**",
+      "packages/client-app/static/images/editable-list/**",
+      "packages/client-app/static/images/empty-state/**",
+      "packages/client-app/static/images/events/**",
+      "packages/client-app/static/images/format-bar/**",
+      "packages/client-app/static/images/important/**",
+      "packages/client-app/static/images/inbox-zero/**",
+      "packages/client-app/static/images/labels/**",
+      "packages/client-app/static/images/mail-merge/**",
+      "packages/client-app/static/images/menu/checked-selected@2x.png",
+      "packages/client-app/static/images/menu/checked@2x.png",
+      "packages/client-app/static/images/message-list/**",
+      "packages/client-app/static/images/message-list-toggle-sidebar/**",
+      "packages/client-app/static/images/modal/**",
+      "packages/client-app/static/images/notification/**",
+      "packages/client-app/static/images/onboarding/**",
+      "packages/client-app/static/images/preferences/**",
+      "packages/client-app/static/images/reply-dropdown/**",
+      "packages/client-app/static/images/search/**",
+      "packages/client-app/static/images/sheets/**",
+      "packages/client-app/static/images/sidebar/**",
+      "packages/client-app/static/images/source-list/**",
+      "packages/client-app/static/images/swipe/**",
+      "packages/client-app/static/images/thread-list/**",
+      "packages/client-app/static/images/thread-list-quick-actions/**",
+      "packages/client-app/static/images/toolbar/**",
+      "packages/client-app/static/images/tooltip/**",
+      "packages/client-app/static/sounds/**",
+      "packages/client-sync/**",
+      "packages/cloud-api/static/images/**",
+      "screenshot/**"
+    ]
+  },
+  "history": {
+    "since": "653ff9b44a16468ef37dc109a39ef604d1369ff9"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Nylas, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2015 Jamie Wilson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2016 Alexander Adkins\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2015 Noah Buscher\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/nylas/nylas-mail: Copyright (c) 2017 Nylas, Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail; Copyright (c) 2017 Nylas, Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app; Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-dark; Copyright (c) 2015 Jamie Wilson, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-darkside; Copyright (c) 2016 Alexander Adkins, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-less-is-more; Copyright (c) 2015 Noah Buscher, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-taiga; Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-api; Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-core; Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-workers; Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/isomorphic-core."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".arcconfig",
+        ".arclint",
+        ".babelrc",
+        ".coffeelint.json",
+        ".dockerignore",
+        ".ebextensions/**",
+        ".ebignore",
+        ".eslintrc",
+        ".gitignore",
+        ".travis.yml",
+        "Dockerfile",
+        "ISSUE_TEMPLATE.md",
+        "LICENSE.md",
+        "README.md",
+        "appveyor.yml",
+        "arclib/**",
+        "lerna.json",
+        "package.json",
+        "packages/README.md",
+        "scripts/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Nylas, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Nylas, Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/client-app/.babelrc",
+        "packages/client-app/.travis.yml",
+        "packages/client-app/.watchmanconfig",
+        "packages/client-app/CHANGELOG.md",
+        "packages/client-app/CONFIGURATION.md",
+        "packages/client-app/CONTRIBUTING.md",
+        "packages/client-app/LICENSE.md",
+        "packages/client-app/README.md",
+        "packages/client-app/apm/**",
+        "packages/client-app/build/Gruntfile.js",
+        "packages/client-app/build/README.md",
+        "packages/client-app/build/config/**",
+        "packages/client-app/build/docs_templates/**",
+        "packages/client-app/build/resources/asar-ordering-hint.txt",
+        "packages/client-app/build/resources/linux/debian/**",
+        "packages/client-app/build/resources/linux/nylas-mail.desktop.in",
+        "packages/client-app/build/resources/linux/redhat/**",
+        "packages/client-app/build/resources/mac/Nylas Calendar.app/Contents/Info.plist",
+        "packages/client-app/build/resources/mac/Nylas Calendar.app/Contents/PkgInfo",
+        "packages/client-app/build/resources/mac/Nylas Calendar.app/Contents/_CodeSignature/**",
+        "packages/client-app/build/resources/mac/nylas-Info.plist",
+        "packages/client-app/build/resources/win/elevate.cmd",
+        "packages/client-app/build/resources/win/elevate.vbs",
+        "packages/client-app/build/resources/win/nylas-mailto-registration.reg",
+        "packages/client-app/build/tasks/**",
+        "packages/client-app/docs/**",
+        "packages/client-app/dot-nylas/**",
+        "packages/client-app/keymaps/**",
+        "packages/client-app/menus/**",
+        "packages/client-app/package.json",
+        "packages/client-app/script/**",
+        "packages/client-app/spec/action-bridge-spec.coffee",
+        "packages/client-app/spec/async-test-spec.es6",
+        "packages/client-app/spec/buffered-process-spec.coffee",
+        "packages/client-app/spec/components/**",
+        "packages/client-app/spec/database-object-registry-spec.es6",
+        "packages/client-app/spec/default-client-helper-spec.coffee",
+        "packages/client-app/spec/fixtures/css.css",
+        "packages/client-app/spec/fixtures/db-test-model.coffee",
+        "packages/client-app/spec/fixtures/emails/**",
+        "packages/client-app/spec/fixtures/module-cache/**",
+        "packages/client-app/spec/fixtures/packages/package-that-throws-an-exception/**",
+        "packages/client-app/spec/fixtures/packages/package-that-throws-on-activate/**",
+        "packages/client-app/spec/fixtures/packages/package-that-throws-on-deactivate/**",
+        "packages/client-app/spec/fixtures/packages/package-with-broken-keymap/**",
+        "packages/client-app/spec/fixtures/packages/package-with-broken-package-json/**",
+        "packages/client-app/spec/fixtures/packages/package-with-config-defaults/**",
+        "packages/client-app/spec/fixtures/packages/package-with-config-schema/**",
+        "packages/client-app/spec/fixtures/packages/package-with-deactivate/**",
+        "packages/client-app/spec/fixtures/packages/package-with-deprecated-pane-item-method/**",
+        "packages/client-app/spec/fixtures/packages/package-with-empty-activation-commands/**",
+        "packages/client-app/spec/fixtures/packages/package-with-empty-keymap/**",
+        "packages/client-app/spec/fixtures/packages/package-with-empty-menu/**",
+        "packages/client-app/spec/fixtures/packages/package-with-incompatible-native-module/main.js",
+        "packages/client-app/spec/fixtures/packages/package-with-incompatible-native-module/package.json",
+        "packages/client-app/spec/fixtures/packages/package-with-index/**",
+        "packages/client-app/spec/fixtures/packages/package-with-invalid-styles/**",
+        "packages/client-app/spec/fixtures/packages/package-with-keymaps/**",
+        "packages/client-app/spec/fixtures/packages/package-with-keymaps-manifest/**",
+        "packages/client-app/spec/fixtures/packages/package-with-main/**",
+        "packages/client-app/spec/fixtures/packages/package-with-menus/**",
+        "packages/client-app/spec/fixtures/packages/package-with-menus-manifest/**",
+        "packages/client-app/spec/fixtures/packages/package-with-models/**",
+        "packages/client-app/spec/fixtures/packages/package-with-serialization/**",
+        "packages/client-app/spec/fixtures/packages/package-with-serialize-error/**",
+        "packages/client-app/spec/fixtures/packages/package-with-style-sheets-manifest/**",
+        "packages/client-app/spec/fixtures/packages/package-with-styles/**",
+        "packages/client-app/spec/fixtures/packages/package-with-stylesheets-manifest/**",
+        "packages/client-app/spec/fixtures/packages/package-without-module/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-incomplete-ui-variables/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-index-css/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-index-less/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-invalid-styles/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-package-file/**",
+        "packages/client-app/spec/fixtures/packages/theme-with-ui-variables/**",
+        "packages/client-app/spec/fixtures/packages/theme-without-package-file/**",
+        "packages/client-app/spec/fixtures/paste/**",
+        "packages/client-app/spec/fixtures/sample-deltas-clustered.json",
+        "packages/client-app/spec/fixtures/sample-deltas.json",
+        "packages/client-app/spec/fixtures/sample.less",
+        "packages/client-app/spec/fixtures/table-data.es6",
+        "packages/client-app/spec/fixtures/task-spec-handler.coffee",
+        "packages/client-app/spec/list-selection-spec.coffee",
+        "packages/client-app/spec/mail-rules-processor-spec.coffee",
+        "packages/client-app/spec/mailbox-perspective-spec.es6",
+        "packages/client-app/spec/menu-manager-spec.coffee",
+        "packages/client-app/spec/models/**",
+        "packages/client-app/spec/module-cache-spec.coffee",
+        "packages/client-app/spec/n1-spec-runner/**",
+        "packages/client-app/spec/nylas-api-spec.coffee",
+        "packages/client-app/spec/nylas-env-spec.es6",
+        "packages/client-app/spec/nylas-protocol-handler-spec.es6",
+        "packages/client-app/spec/nylas-test-utils.coffee",
+        "packages/client-app/spec/package-manager-spec.coffee",
+        "packages/client-app/spec/package-spec.coffee",
+        "packages/client-app/spec/registries/**",
+        "packages/client-app/spec/services/**",
+        "packages/client-app/spec/spellchecker-spec.es6",
+        "packages/client-app/spec/stores/**",
+        "packages/client-app/spec/tasks/**",
+        "packages/client-app/spec/themes/**",
+        "packages/client-app/spec/undo-stack-spec.es6",
+        "packages/client-app/spec/utils/**",
+        "packages/client-app/src/**",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.html",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/HYPE-526.full.min.js",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/HYPE-526.thin.min.js",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/Largepine.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/PIE.htc",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/Stoutpine.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/airbag.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/airstrip_hype_generated_script.js",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/counterstripe.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/endstripes.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/grass.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/grassbits.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/plane2.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/planeshadow.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/pole1.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/pole2.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/runway.svg",
+        "packages/client-app/static/animations/inbox-zero/airstrip/airstrip.hyperesources/stripe.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.html",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Checkmark body-1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Combined Shape-1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/HYPE-526.full.min.js",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/HYPE-526.thin.min.js",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/PIE.htc",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Path 3-1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Path 4-1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Path 7-1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 1.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 2.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 3.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 4.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 5.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Ray 6.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy 2.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy 5.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy 7.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy 8.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy 9.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star 1 Copy.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/Star.svg",
+        "packages/client-app/static/animations/inbox-zero/galaxy/galaxy.hyperesources/galaxy_hype_generated_script.js",
+        "packages/client-app/static/animations/inbox-zero/gem/gem.html",
+        "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/HYPE-526.full.min.js",
+        "packages/client-app/static/animations/inbox-zero/gem/gem.hyperesources/gemslower_hype_generated_script.js",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.html",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/HYPE-526.full.min.js",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/HYPE-526.thin.min.js",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/PIE.htc",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/bottom-tree-left-right.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/bottom-tree-left-topleft.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/bottom-tree-left-topright.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/bottom-tree-left.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/desertfill.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/desertfreckles.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/nuts-cluster.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/oasis_hype_generated_script.js",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/sanddunerdige.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/smallnuts-cluster.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/top-right-trunk.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/top-tree--topright.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/top-tree-left.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/top-tree-right.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/top-tree-topleft.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/topright-tree-left.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/topright-tree-right.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/topright-tree-topleft.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/topright-tree-topright.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/tree-bottom-trunk.svg",
+        "packages/client-app/static/animations/inbox-zero/oasis/oasis.hyperesources/treetrunk-top.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.html",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/ACtGlowy right.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/ActGlowy Top Left.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/ActGlowy Top Right.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Checkmark body.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Combined Shape.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Component top.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Glowy Top Left.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Glowy Top Right.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Glowy right.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/HYPE-526.full.min.js",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/HYPE-526.thin.min.js",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/PIE.htc",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 10.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 12.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 3.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 4.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 5.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 6.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/Path 7.svg",
+        "packages/client-app/static/animations/inbox-zero/tron/tron.hyperesources/tron_hype_generated_script.js",
+        "packages/client-app/static/buttons.less",
+        "packages/client-app/static/components/**",
+        "packages/client-app/static/dropdowns.less",
+        "packages/client-app/static/email-frame.less",
+        "packages/client-app/static/font-awesome.min.css",
+        "packages/client-app/static/images/menu/osx-checkmark@2x.svg",
+        "packages/client-app/static/index.html",
+        "packages/client-app/static/index.js",
+        "packages/client-app/static/index.less",
+        "packages/client-app/static/inputs.less",
+        "packages/client-app/static/jasmine.less",
+        "packages/client-app/static/linux.less",
+        "packages/client-app/static/mixins/**",
+        "packages/client-app/static/normalize.less",
+        "packages/client-app/static/package-template/**",
+        "packages/client-app/static/resizable.less",
+        "packages/client-app/static/selection.less",
+        "packages/client-app/static/type.less",
+        "packages/client-app/static/utilities.less",
+        "packages/client-app/static/variables/**",
+        "packages/client-app/static/workspace.less"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2017 Nylas, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Nylas, Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/client-app/internal_packages/ui-dark/**"
+      ],
+      "text": "Copyright (c) 2014 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 GitHub Inc., MIT license (LICENSE.md), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-dark."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/client-app/internal_packages/ui-darkside/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015 Jamie Wilson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2015 Jamie Wilson, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-darkside."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/client-app/internal_packages/ui-less-is-more/LICENSE",
+        "packages/client-app/internal_packages/ui-less-is-more/README.md",
+        "packages/client-app/internal_packages/ui-less-is-more/index.less",
+        "packages/client-app/internal_packages/ui-less-is-more/package.json",
+        "packages/client-app/internal_packages/ui-less-is-more/styles/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016 Alexander Adkins\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Alexander Adkins, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-less-is-more."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "packages/client-app/internal_packages/ui-taiga/LICENSE",
+        "packages/client-app/internal_packages/ui-taiga/README.md",
+        "packages/client-app/internal_packages/ui-taiga/package.json",
+        "packages/client-app/internal_packages/ui-taiga/styles/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015 Noah Buscher\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2015 Noah Buscher, MIT license (LICENSE), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/client-app/internal_packages/ui-taiga."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/cloud-api/.gitignore",
+        "packages/cloud-api/README.md",
+        "packages/cloud-api/app.es6",
+        "packages/cloud-api/package.json",
+        "packages/cloud-api/spec/**",
+        "packages/cloud-api/src/**",
+        "packages/cloud-api/static/css/**",
+        "packages/cloud-api/static/fonts/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-api."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/cloud-core/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-core."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/cloud-workers/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/cloud-workers."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/isomorphic-core/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Nylas, ISC license (declared in package.json), https://github.com/nylas/nylas-mail/tree/a6ec2161716bd0d7c1ef87783eba4aebce361104/packages/isomorphic-core."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "coffeescript",
+      "paths": [
+        "**/*.coffee"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "php",
+      "paths": [
+        "**/*.php"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cjsx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cson"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.es6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.htc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.reg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.arcconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.arclint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ebignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.phutil_module_cache"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.watchmanconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CodeResources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PkgInfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grunt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lintian-overrides"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mkdeb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mkrpm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/publish-docs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

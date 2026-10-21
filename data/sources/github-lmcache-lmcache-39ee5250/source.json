@@ -1,0 +1,688 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/LMCache/LMCache",
+  "revision": "a22b292f48dc76297df00f37346e67834ec51338",
+  "checksum": "sha256:21abcbd62778e951d1933bfebcbd642bbc243e6a219caa03e35f0e46f4fdea61",
+  "extract": {
+    "exclude": [
+      "asset/**",
+      "benchmarks/ttft-estimator/llama-h100-example.png",
+      "docs/source/_static/bench_interactive_demo.gif",
+      "docs/source/assets/**",
+      "docs/source/mp/architecture.png",
+      "examples/disagg_prefill_mp/architecture.png",
+      "examples/kv_cache_reuse/remote_backends/external/**",
+      "lmcache/lmcache_frontend/static/img/**",
+      "lmcache/tools/cache_simulator/docs/**",
+      "lmcache/v1/cache_controller/frontend/static/img/**"
+    ]
+  },
+  "history": {
+    "since": "8cc5dd7c79929cca14aca81071680b70d34e26f1"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/LMCache/LMCache: LMCache Team, Apache-2.0 license (LICENSE), https://github.com/LMCache/LMCache."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".buildkite/**",
+        ".clang-format",
+        ".claude/**",
+        ".cursor/**",
+        ".gemini/**",
+        ".github/**",
+        ".gitignore",
+        ".isort.cfg",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CMakeLists.txt",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DCO",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "MANIFEST.in",
+        "README.md",
+        "SECURITY.md",
+        "benchmarks/long_doc_qa/**",
+        "benchmarks/microbenchmark/**",
+        "benchmarks/multi_doc_qa/**",
+        "benchmarks/multi_round_qa/**",
+        "benchmarks/musa/**",
+        "benchmarks/rag/**",
+        "benchmarks/storage_backend_io/**",
+        "benchmarks/ttft-estimator/ttft-estimator.py",
+        "csrc/**",
+        "docker/**",
+        "docs/Makefile",
+        "docs/README.md",
+        "docs/coding_standards.md",
+        "docs/design/**",
+        "docs/make.bat",
+        "docs/source/.nojekyll",
+        "docs/source/_static/basic_codepath.svg",
+        "docs/source/_static/custom.css",
+        "docs/source/_static/custom.js",
+        "docs/source/_static/full_layerwise_diagram.svg",
+        "docs/source/_static/kv_cache_calculator.html",
+        "docs/source/_static/modelconfig.json",
+        "docs/source/_static/scroll.css",
+        "docs/source/_templates/**",
+        "docs/source/api_reference/**",
+        "docs/source/cli/**",
+        "docs/source/community/**",
+        "docs/source/conf.py",
+        "docs/source/controller/**",
+        "docs/source/developer_guide/**",
+        "docs/source/disaggregated_prefill/**",
+        "docs/source/distributed_kv_cache.rst",
+        "docs/source/getting_started/**",
+        "docs/source/index.rst",
+        "docs/source/interacting_with_server.rst",
+        "docs/source/internal_api_server/**",
+        "docs/source/kv_cache/**",
+        "docs/source/kv_cache_management/**",
+        "docs/source/kv_cache_optimizations/**",
+        "docs/source/legacy/**",
+        "docs/source/llms.txt",
+        "docs/source/locale/**",
+        "docs/source/mp/cachegen.rst",
+        "docs/source/mp/chunk_size_negotiation.rst",
+        "docs/source/mp/configuration.rst",
+        "docs/source/mp/coordinator.rst",
+        "docs/source/mp/deployment.rst",
+        "docs/source/mp/disaggregated_prefill.rst",
+        "docs/source/mp/frontend_dashboard.rst",
+        "docs/source/mp/http_api.rst",
+        "docs/source/mp/hybrid_models.rst",
+        "docs/source/mp/index.rst",
+        "docs/source/mp/kv_cache_management.rst",
+        "docs/source/mp/l2_storage/**",
+        "docs/source/mp/lazy_offload.rst",
+        "docs/source/mp/multi_l1.rst",
+        "docs/source/mp/observability/**",
+        "docs/source/mp/operator.rst",
+        "docs/source/mp/p2p.rst",
+        "docs/source/mp/request_transport.rst",
+        "docs/source/mp/sdk.rst",
+        "docs/source/mp/serde.rst",
+        "docs/source/mp/tracing_and_debugging.rst",
+        "docs/source/non_kv_cache/**",
+        "docs/source/production/**",
+        "docs/source/recipes/**",
+        "examples/README.md",
+        "examples/agents/**",
+        "examples/basic_check/**",
+        "examples/blend_in_process/**",
+        "examples/cache_controller/**",
+        "examples/cache_interface/**",
+        "examples/cache_with_configs/**",
+        "examples/chunk_statistics/**",
+        "examples/disagg_prefill/**",
+        "examples/disagg_prefill_mp/README.md",
+        "examples/disagg_prefill_mp/disagg_proxy_server.py",
+        "examples/dynamo_integration/**",
+        "examples/frontend/**",
+        "examples/kubernetes/**",
+        "examples/kv_cache_calculator/**",
+        "examples/kv_cache_reuse/README.md",
+        "examples/kv_cache_reuse/local_backends/**",
+        "examples/kv_cache_reuse/remote_backends/README.md",
+        "examples/kv_cache_reuse/remote_backends/fs/**",
+        "examples/kv_cache_reuse/remote_backends/infinistore/**",
+        "examples/kv_cache_reuse/remote_backends/mock/**",
+        "examples/kv_cache_reuse/remote_backends/mooncakestore/**",
+        "examples/kv_cache_reuse/remote_backends/resp/**",
+        "examples/kv_cache_reuse/remote_backends/s3/**",
+        "examples/kv_cache_reuse/remote_backends/valkey/**",
+        "examples/kv_cache_reuse/share_across_engines/**",
+        "examples/kv_cache_reuse/share_across_instances/**",
+        "examples/kvcache_sdk/**",
+        "examples/lmc_external_l2_adapter/**",
+        "examples/lmc_external_native_connector/**",
+        "examples/mp_runtime_plugins/**",
+        "examples/multi_process/**",
+        "examples/observability/**",
+        "examples/online_session/**",
+        "examples/p2p/**",
+        "examples/redis_lookup/**",
+        "examples/remote_config_server/**",
+        "examples/runtime_plugins/**",
+        "examples/serde/**",
+        "examples/sgl_integration/**",
+        "examples/token_dropping/**",
+        "format.sh",
+        "lmcache/__init__.py",
+        "lmcache/banner.py",
+        "lmcache/cli/**",
+        "lmcache/connections.py",
+        "lmcache/integration/**",
+        "lmcache/lmcache_frontend/__init__.py",
+        "lmcache/lmcache_frontend/app.py",
+        "lmcache/lmcache_frontend/config.json",
+        "lmcache/lmcache_frontend/heartbeat.py",
+        "lmcache/lmcache_frontend/lmcache_mp_plugin/**",
+        "lmcache/lmcache_frontend/run_mp_server_with_frontend.sh",
+        "lmcache/lmcache_frontend/static/css/**",
+        "lmcache/lmcache_frontend/static/index.html",
+        "lmcache/lmcache_frontend/static/js/**",
+        "lmcache/lmcache_native.pyi",
+        "lmcache/logging.py",
+        "lmcache/observability.py",
+        "lmcache/sdk/**",
+        "lmcache/storage_backend/**",
+        "lmcache/tools/__init__.py",
+        "lmcache/tools/cache_simulator/README.md",
+        "lmcache/tools/cache_simulator/__init__.py",
+        "lmcache/tools/cache_simulator/gen_bench_dataset.py",
+        "lmcache/tools/cache_simulator/lru_cache.py",
+        "lmcache/tools/cache_simulator/plot_hit_rate.py",
+        "lmcache/tools/cache_simulator/simulator.py",
+        "lmcache/tools/controller_benchmark/**",
+        "lmcache/tools/mp_status_viewer/**",
+        "lmcache/tools/simple_discover_service.py",
+        "lmcache/tools/transfer_channel_benchmark/**",
+        "lmcache/usage_context.py",
+        "lmcache/usage_telemetry/**",
+        "lmcache/utils.py",
+        "lmcache/v1/__init__.py",
+        "lmcache/v1/api_server/**",
+        "lmcache/v1/basic_check.py",
+        "lmcache/v1/cache_controller/__init__.py",
+        "lmcache/v1/cache_controller/commands/**",
+        "lmcache/v1/cache_controller/config.py",
+        "lmcache/v1/cache_controller/controller_manager.py",
+        "lmcache/v1/cache_controller/controllers/**",
+        "lmcache/v1/cache_controller/executor.py",
+        "lmcache/v1/cache_controller/frontend/static/css/**",
+        "lmcache/v1/cache_controller/frontend/static/index.html",
+        "lmcache/v1/cache_controller/frontend/static/js/**",
+        "lmcache/v1/cache_controller/full_sync_sender.py",
+        "lmcache/v1/cache_controller/locks.py",
+        "lmcache/v1/cache_controller/message.py",
+        "lmcache/v1/cache_controller/observability.py",
+        "lmcache/v1/cache_controller/utils.py",
+        "lmcache/v1/cache_controller/worker.py",
+        "lmcache/v1/cache_engine.py",
+        "lmcache/v1/cache_interface.py",
+        "lmcache/v1/check/**",
+        "lmcache/v1/compute/**",
+        "lmcache/v1/config.py",
+        "lmcache/v1/config_base.py",
+        "lmcache/v1/distributed/**",
+        "lmcache/v1/ec_engine.py",
+        "lmcache/v1/event_manager.py",
+        "lmcache/v1/exceptions/**",
+        "lmcache/v1/gpu_connector/**",
+        "lmcache/v1/health_monitor/**",
+        "lmcache/v1/hidden_state_store.py",
+        "lmcache/v1/internal_api_server/**",
+        "lmcache/v1/kv_codec/**",
+        "lmcache/v1/kv_layer_groups.py",
+        "lmcache/v1/lookup_client/**",
+        "lmcache/v1/manager.py",
+        "lmcache/v1/memory_allocators/**",
+        "lmcache/v1/memory_management.py",
+        "lmcache/v1/metadata.py",
+        "lmcache/v1/mp_coordinator/**",
+        "lmcache/v1/mp_observability/**",
+        "lmcache/v1/multiprocess/**",
+        "lmcache/v1/offload_server/**",
+        "lmcache/v1/periodic_thread.py",
+        "lmcache/v1/pin_monitor.py",
+        "lmcache/v1/platform/**",
+        "lmcache/v1/plugin/**",
+        "lmcache/v1/protocol.py",
+        "lmcache/v1/rpc/**",
+        "lmcache/v1/rpc_utils.py",
+        "lmcache/v1/server/**",
+        "lmcache/v1/standalone/**",
+        "lmcache/v1/storage_backend/**",
+        "lmcache/v1/system_detection.py",
+        "lmcache/v1/token_database.py",
+        "lmcache/v1/transfer_channel/**",
+        "lmcache/v1/utils/**",
+        "operator/**",
+        "pyproject.toml",
+        "pyproject_cli.toml",
+        "pytest.ini",
+        "requirements/**",
+        "rust/**",
+        "setup.py",
+        "setup_extensions/**",
+        "tests/**",
+        "tools/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "LMCache Team, Apache-2.0 license (LICENSE), https://github.com/LMCache/LMCache."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lightweight"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.payload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rocm-lightweight"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sglang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.standalone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".buildkite/cases/comprehensive-cases.txt",
+        ".buildkite/cases/integration-cases.txt",
+        "benchmarks/multi_round_qa/requirements.txt",
+        "benchmarks/rag/requirements.txt",
+        "docs/source/llms.txt",
+        "examples/agents/requirements.txt",
+        "examples/frontend/ffmpeg.txt",
+        "examples/kv_cache_calculator/requirement.txt",
+        "examples/online_session/ffmpeg.txt",
+        "lmcache/cli/documents/lmcache.txt",
+        "operator/hack/boilerplate.go.txt",
+        "requirements/bench.txt",
+        "requirements/build.txt",
+        "requirements/cli.txt",
+        "requirements/common.txt",
+        "requirements/cuda.txt",
+        "requirements/cuda12_core.txt",
+        "requirements/cuda13_core.txt",
+        "requirements/docs.txt",
+        "requirements/kafka.txt",
+        "requirements/lint.txt",
+        "requirements/maca_core.txt",
+        "requirements/nixl.txt",
+        "requirements/proto.txt",
+        "requirements/rocm_core.txt",
+        "requirements/test.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DCO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PROJECT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

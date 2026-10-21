@@ -1,0 +1,631 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tracel-ai/burn",
+  "revision": "ba73ce30ea34a22606c2919c67271d56b28f1050",
+  "checksum": "sha256:c077370de27f3f95b5e90b7848de40d35ba39bf2b7f2954f1b45696e2f607ead",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "burn-book/src/basic-workflow/training-output.png",
+      "burn-book/src/building-blocks/dataset.png",
+      "contributor-book/src/getting-started/debug-options-vscode.png",
+      "contributor-book/src/project-architecture/module-serialization.png",
+      "crates/burn-dataset/tests/data/image_folder/**",
+      "crates/burn-dataset/tests/data/image_folder_coco/**",
+      "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_checkerboard.png",
+      "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_random_2colors.png",
+      "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_random_3colors.png",
+      "crates/burn-dataset/tests/data/segmask_folder/images/**",
+      "crates/burn-dataset/tests/data/sqlite-dataset.db",
+      "crates/burn-store/pytorch-tests/tests/batch_norm/batch_norm2d.pt",
+      "crates/burn-store/pytorch-tests/tests/boolean/boolean.pt",
+      "crates/burn-store/pytorch-tests/tests/buffer/buffer.pt",
+      "crates/burn-store/pytorch-tests/tests/complex_nested/complex_nested.pt",
+      "crates/burn-store/pytorch-tests/tests/config/weights_with_config.pt",
+      "crates/burn-store/pytorch-tests/tests/conv1d/conv1d.pt",
+      "crates/burn-store/pytorch-tests/tests/conv2d/conv2d.pt",
+      "crates/burn-store/pytorch-tests/tests/conv_transpose1d/conv_transpose1d.pt",
+      "crates/burn-store/pytorch-tests/tests/conv_transpose2d/conv_transpose2d.pt",
+      "crates/burn-store/pytorch-tests/tests/debug_test.pt",
+      "crates/burn-store/pytorch-tests/tests/embedding/embedding.pt",
+      "crates/burn-store/pytorch-tests/tests/enum_module/enum_depthwise_false.pt",
+      "crates/burn-store/pytorch-tests/tests/enum_module/enum_depthwise_true.pt",
+      "crates/burn-store/pytorch-tests/tests/group_norm/group_norm.pt",
+      "crates/burn-store/pytorch-tests/tests/integer/integer.pt",
+      "crates/burn-store/pytorch-tests/tests/keep_indices/keep_indices.pt",
+      "crates/burn-store/pytorch-tests/tests/key_remap/key_remap.pt",
+      "crates/burn-store/pytorch-tests/tests/key_remap_chained/key_remap.pt",
+      "crates/burn-store/pytorch-tests/tests/layer_norm/layer_norm.pt",
+      "crates/burn-store/pytorch-tests/tests/linear/linear.pt",
+      "crates/burn-store/pytorch-tests/tests/linear/linear_full_model.pt",
+      "crates/burn-store/pytorch-tests/tests/linear/linear_with_bias.pt",
+      "crates/burn-store/pytorch-tests/tests/missing_module_field/missing_module_field.pt",
+      "crates/burn-store/pytorch-tests/tests/non_contiguous_indexes/non_contiguous_indexes.pt",
+      "crates/burn-store/pytorch-tests/tests/test_int.pt",
+      "crates/burn-store/pytorch-tests/tests/top_level_key/top_level_key.pt",
+      "crates/burn-store/safetensors-tests/tests/multi_layer/multi_layer.safetensors",
+      "crates/burn-store/src/pytorch/tests/store/test_data/model_without_enum_variants.pt",
+      "crates/burn-vision/tests/images/**",
+      "crates/pytorch-reader/src/tests/test_data/bfloat16.pt",
+      "crates/pytorch-reader/src/tests/test_data/big_endian.pt",
+      "crates/pytorch-reader/src/tests/test_data/bool.pt",
+      "crates/pytorch-reader/src/tests/test_data/buffers.pt",
+      "crates/pytorch-reader/src/tests/test_data/checkpoint.pt",
+      "crates/pytorch-reader/src/tests/test_data/complex_structure.pt",
+      "crates/pytorch-reader/src/tests/test_data/empty.pt",
+      "crates/pytorch-reader/src/tests/test_data/extreme_values.pt",
+      "crates/pytorch-reader/src/tests/test_data/float16.pt",
+      "crates/pytorch-reader/src/tests/test_data/float32.pt",
+      "crates/pytorch-reader/src/tests/test_data/float64.pt",
+      "crates/pytorch-reader/src/tests/test_data/full_model.pt",
+      "crates/pytorch-reader/src/tests/test_data/full_model_checkpoint.pt",
+      "crates/pytorch-reader/src/tests/test_data/full_model_state_dict.pt",
+      "crates/pytorch-reader/src/tests/test_data/int16.pt",
+      "crates/pytorch-reader/src/tests/test_data/int32.pt",
+      "crates/pytorch-reader/src/tests/test_data/int64.pt",
+      "crates/pytorch-reader/src/tests/test_data/int8.pt",
+      "crates/pytorch-reader/src/tests/test_data/large_shape.pt",
+      "crates/pytorch-reader/src/tests/test_data/legacy_shared_storage.pt",
+      "crates/pytorch-reader/src/tests/test_data/legacy_uncloned_views.pt",
+      "crates/pytorch-reader/src/tests/test_data/legacy_with_offsets.pt",
+      "crates/pytorch-reader/src/tests/test_data/mixed_types.pt",
+      "crates/pytorch-reader/src/tests/test_data/nested_dict.pt",
+      "crates/pytorch-reader/src/tests/test_data/no_crc32.pt",
+      "crates/pytorch-reader/src/tests/test_data/non_contiguous.pt",
+      "crates/pytorch-reader/src/tests/test_data/parameter.pt",
+      "crates/pytorch-reader/src/tests/test_data/protocol4.pt",
+      "crates/pytorch-reader/src/tests/test_data/scalar.pt",
+      "crates/pytorch-reader/src/tests/test_data/simple_legacy.pt",
+      "crates/pytorch-reader/src/tests/test_data/special_values.pt",
+      "crates/pytorch-reader/src/tests/test_data/state_dict.pt",
+      "crates/pytorch-reader/src/tests/test_data/tar_2d_tensor.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_float32.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_float64.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_int64.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_multi_dtype.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_storage_view.tar",
+      "crates/pytorch-reader/src/tests/test_data/tar_weight_bias.tar",
+      "crates/pytorch-reader/src/tests/test_data/tensor_2d.pt",
+      "crates/pytorch-reader/src/tests/test_data/tensor_3d.pt",
+      "crates/pytorch-reader/src/tests/test_data/tensor_4d.pt",
+      "crates/pytorch-reader/src/tests/test_data/uint8.pt",
+      "examples/import-model-weights/weights/mnist.pt",
+      "examples/import-model-weights/weights/mnist.safetensors",
+      "examples/mnist-inference-web/model.bpk",
+      "examples/remote-inference-web/model.bpk"
+    ]
+  },
+  "history": {
+    "since": "bd36023b064c726d3bfa79997316d8f6524fc12c"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2022 Nathaniel Simard & Burn Framework Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright 2022 Nathaniel Simard & Burn Framework Contributors\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\nVersion: Cargo.toml states the choice between the two licenses, so either applies.\n\nburn-book/LICENSE-MIT:\n\n../LICENSE-MIT\n\nburn-book/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncontributor-book/LICENSE-MIT:\n\n../LICENSE-MIT\n\ncontributor-book/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-autodiff/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-autodiff/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-backend-extension/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-backend-extension/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-core/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-core/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-cubecl/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-cubecl/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-dataset/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-dataset/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-derive/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-derive/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-fusion/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-fusion/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-rl/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-rl/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-std/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-std/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-tensor/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-tensor/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-train/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-train/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.\n\ncrates/burn-wgpu/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-wgpu/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "Commit history of https://github.com/tracel-ai/burn: Copyright (c) 2022 Nathaniel Simard & Burn Framework Contributors; Copyright 2022 Nathaniel Simard & Burn Framework Contributors, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn; the authors of tracel-ai/burn (burn-book) (the license file names no copyright line), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/burn-book; the authors of tracel-ai/burn (contributor-book) (the license file names no copyright line), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/contributor-book; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-autodiff; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-backend-extension; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-core; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-cubecl; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-dataset; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-derive; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-fusion; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-rl; Dilshod Tadjibaev (@antimora), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-std; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-tensor; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-train; nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-wgpu."
+    },
+    {
+      "license": "MIT OR Apache-2.0",
+      "paths": [
+        ".cargo/**",
+        ".github/**",
+        ".gitignore",
+        "AGENTS.md",
+        "CITATION.cff",
+        "CLAUDE.md",
+        "CODE-OF-CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "NOTICES.md",
+        "POEM.md",
+        "README.md",
+        "_typos.toml",
+        "benchmarks.toml",
+        "codecov.yml",
+        "crates/burn-backend/**",
+        "crates/burn-backend-tests/**",
+        "crates/burn-capture/**",
+        "crates/burn-communication/**",
+        "crates/burn-cpu/**",
+        "crates/burn-cubecl-fusion/**",
+        "crates/burn-cuda/**",
+        "crates/burn-dispatch/**",
+        "crates/burn-einsum/**",
+        "crates/burn-flex/**",
+        "crates/burn-ir/**",
+        "crates/burn-linalg/**",
+        "crates/burn-nn/**",
+        "crates/burn-no-std-tests/**",
+        "crates/burn-optim/**",
+        "crates/burn-pack/**",
+        "crates/burn-remote/**",
+        "crates/burn-rocm/**",
+        "crates/burn-router/**",
+        "crates/burn-signal/**",
+        "crates/burn-store/Cargo.toml",
+        "crates/burn-store/MIGRATION.md",
+        "crates/burn-store/README.md",
+        "crates/burn-store/benches/**",
+        "crates/burn-store/examples/**",
+        "crates/burn-store/pytorch-tests/Cargo.toml",
+        "crates/burn-store/pytorch-tests/src/**",
+        "crates/burn-store/pytorch-tests/tests/batch_norm/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/batch_norm/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/boolean/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/boolean/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/buffer/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/buffer/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/complex_nested/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/complex_nested/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/config/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/config/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/conv1d/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/conv1d/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/conv2d/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/conv2d/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/conv_transpose1d/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/conv_transpose1d/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/conv_transpose2d/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/conv_transpose2d/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/embedding/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/embedding/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/enum_module/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/enum_module/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/group_norm/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/group_norm/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/integer/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/integer/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/keep_indices/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/keep_indices/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/key_remap/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/key_remap/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/key_remap_chained/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/key_remap_chained/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/layer_norm/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/layer_norm/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/linear/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/linear/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/missing_module_field/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/missing_module_field/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/non_contiguous_indexes/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/non_contiguous_indexes/mod.rs",
+        "crates/burn-store/pytorch-tests/tests/test_mod.rs",
+        "crates/burn-store/pytorch-tests/tests/top_level_key/export_weights.py",
+        "crates/burn-store/pytorch-tests/tests/top_level_key/mod.rs",
+        "crates/burn-store/safetensors-tests/Cargo.toml",
+        "crates/burn-store/safetensors-tests/src/**",
+        "crates/burn-store/safetensors-tests/tests/multi_layer/mod.rs",
+        "crates/burn-store/safetensors-tests/tests/multi_layer/multi_layer.py",
+        "crates/burn-store/safetensors-tests/tests/test_mod.rs",
+        "crates/burn-store/src/adapter.rs",
+        "crates/burn-store/src/applier.rs",
+        "crates/burn-store/src/apply_result.rs",
+        "crates/burn-store/src/bridge.rs",
+        "crates/burn-store/src/burnpack.rs",
+        "crates/burn-store/src/collector.rs",
+        "crates/burn-store/src/filter.rs",
+        "crates/burn-store/src/keyremapper.rs",
+        "crates/burn-store/src/lib.rs",
+        "crates/burn-store/src/pytorch/mod.rs",
+        "crates/burn-store/src/pytorch/store.rs",
+        "crates/burn-store/src/pytorch/tests/mod.rs",
+        "crates/burn-store/src/pytorch/tests/store/mod.rs",
+        "crates/burn-store/src/pytorch/tests/store/test_data/generate_enum_test.py",
+        "crates/burn-store/src/safetensors/**",
+        "crates/burn-store/src/traits.rs",
+        "crates/burn-store/tests/**",
+        "crates/burn-vision/Cargo.toml",
+        "crates/burn-vision/README.md",
+        "crates/burn-vision/src/**",
+        "crates/burn-vision/tests/common/**",
+        "crates/burn-vision/tests/connected_components.rs",
+        "crates/burn-vision/tests/morphology.rs",
+        "crates/burn-vision/tests/nms.rs",
+        "crates/pytorch-reader/Cargo.toml",
+        "crates/pytorch-reader/README.md",
+        "crates/pytorch-reader/src/lib.rs",
+        "crates/pytorch-reader/src/nested/**",
+        "crates/pytorch-reader/src/pickle_reader.rs",
+        "crates/pytorch-reader/src/reader.rs",
+        "crates/pytorch-reader/src/storage.rs",
+        "crates/pytorch-reader/src/tensor.rs",
+        "crates/pytorch-reader/src/tests/create_full_model.py",
+        "crates/pytorch-reader/src/tests/create_legacy_with_offsets.py",
+        "crates/pytorch-reader/src/tests/create_protocol4.py",
+        "crates/pytorch-reader/src/tests/create_tar_format.py",
+        "crates/pytorch-reader/src/tests/mod.rs",
+        "crates/pytorch-reader/src/tests/simple_legacy.py",
+        "crates/pytorch-reader/src/tests/test_data/broken.pt",
+        "crates/pytorch-reader/src/tests/test_data.py",
+        "crates/pytorch-reader/tests/**",
+        "deny.toml",
+        "docs/**",
+        "examples/custom-csv-dataset/**",
+        "examples/custom-cubecl-kernel/**",
+        "examples/custom-image-dataset/**",
+        "examples/custom-learning-strategy/**",
+        "examples/custom-renderer/**",
+        "examples/custom-training-loop/**",
+        "examples/custom-wgpu-kernel/**",
+        "examples/dqn-agent/**",
+        "examples/guide/**",
+        "examples/import-model-weights/Cargo.toml",
+        "examples/import-model-weights/README.md",
+        "examples/import-model-weights/src/**",
+        "examples/import-model-weights/weights/mnist_train_export.py",
+        "examples/mnist/**",
+        "examples/mnist-inference-web/Cargo.toml",
+        "examples/mnist-inference-web/README.md",
+        "examples/mnist-inference-web/build-for-web.sh",
+        "examples/mnist-inference-web/index.html",
+        "examples/mnist-inference-web/index.js",
+        "examples/mnist-inference-web/inference-worker.js",
+        "examples/mnist-inference-web/run-server.sh",
+        "examples/mnist-inference-web/src/**",
+        "examples/modern-lstm/**",
+        "examples/notebook/**",
+        "examples/p2p-remote-training/**",
+        "examples/remote-inference-web/Cargo.toml",
+        "examples/remote-inference-web/README.md",
+        "examples/remote-inference-web/build-for-web.sh",
+        "examples/remote-inference-web/index.html",
+        "examples/remote-inference-web/index.js",
+        "examples/remote-inference-web/run-server.sh",
+        "examples/remote-inference-web/src/**",
+        "examples/remote-mnist/**",
+        "examples/server/**",
+        "examples/simple-regression/**",
+        "examples/text-classification/**",
+        "examples/text-generation/**",
+        "examples/wgan/**",
+        "rustfmt.toml",
+        "xtask/**"
+      ],
+      "text": "LICENSE-MIT:\n\nMIT License\n\nCopyright (c) 2022 Nathaniel Simard & Burn Framework Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nLICENSE-APACHE:\n\n                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright 2022 Nathaniel Simard & Burn Framework Contributors\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\nVersion: Cargo.toml states the choice between the two licenses, so either applies.",
+      "attribution": "Copyright (c) 2022 Nathaniel Simard & Burn Framework Contributors; Copyright 2022 Nathaniel Simard & Burn Framework Contributors, MIT OR Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "burn-book/.gitignore",
+        "burn-book/.prettierrc.json",
+        "burn-book/LICENSE-APACHE",
+        "burn-book/LICENSE-MIT",
+        "burn-book/book.toml",
+        "burn-book/src/SUMMARY.md",
+        "burn-book/src/advanced/**",
+        "burn-book/src/basic-workflow/README.md",
+        "burn-book/src/basic-workflow/backend.md",
+        "burn-book/src/basic-workflow/data.md",
+        "burn-book/src/basic-workflow/inference.md",
+        "burn-book/src/basic-workflow/model.md",
+        "burn-book/src/basic-workflow/training.md",
+        "burn-book/src/building-blocks/README.md",
+        "burn-book/src/building-blocks/autodiff.md",
+        "burn-book/src/building-blocks/backend.md",
+        "burn-book/src/building-blocks/config.md",
+        "burn-book/src/building-blocks/dataset.md",
+        "burn-book/src/building-blocks/learner.md",
+        "burn-book/src/building-blocks/lr-scheduler.md",
+        "burn-book/src/building-blocks/metric.md",
+        "burn-book/src/building-blocks/module.md",
+        "burn-book/src/building-blocks/optimizer.md",
+        "burn-book/src/building-blocks/record.md",
+        "burn-book/src/building-blocks/tensor.md",
+        "burn-book/src/custom-training-loop.md",
+        "burn-book/src/examples.md",
+        "burn-book/src/getting-started.md",
+        "burn-book/src/migrating-to-0.22.md",
+        "burn-book/src/models-and-pretrained-weights.md",
+        "burn-book/src/motivation.md",
+        "burn-book/src/onnx-import.md",
+        "burn-book/src/overview.md",
+        "burn-book/src/performance/**",
+        "burn-book/src/saving-and-loading.md"
+      ],
+      "text": "burn-book/LICENSE-MIT:\n\n../LICENSE-MIT\n\nburn-book/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "the authors of tracel-ai/burn (burn-book) (the license file names no copyright line), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/burn-book."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "contributor-book/.gitignore",
+        "contributor-book/.prettierrc.json",
+        "contributor-book/LICENSE-APACHE",
+        "contributor-book/LICENSE-MIT",
+        "contributor-book/book.toml",
+        "contributor-book/src/SUMMARY.md",
+        "contributor-book/src/frequently-encountered-issues/**",
+        "contributor-book/src/getting-started/README.md",
+        "contributor-book/src/getting-started/configuring-your-editor.md",
+        "contributor-book/src/getting-started/setting-up-the-environment.md",
+        "contributor-book/src/getting-started/testing.md",
+        "contributor-book/src/guides/**",
+        "contributor-book/src/how-to-read-this-book.md",
+        "contributor-book/src/overview.md",
+        "contributor-book/src/project-architecture/README.md",
+        "contributor-book/src/project-architecture/backend.md",
+        "contributor-book/src/project-architecture/module.md",
+        "contributor-book/src/project-architecture/serialization.md",
+        "contributor-book/src/project-architecture/tensor.md"
+      ],
+      "text": "contributor-book/LICENSE-MIT:\n\n../LICENSE-MIT\n\ncontributor-book/LICENSE-APACHE:\n\n../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "the authors of tracel-ai/burn (contributor-book) (the license file names no copyright line), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/contributor-book."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn/**"
+      ],
+      "text": "crates/burn/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-autodiff/**"
+      ],
+      "text": "crates/burn-autodiff/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-autodiff/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-autodiff."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-backend-extension/**"
+      ],
+      "text": "crates/burn-backend-extension/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-backend-extension/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-backend-extension."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-core/**"
+      ],
+      "text": "crates/burn-core/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-core/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-core."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-cubecl/**"
+      ],
+      "text": "crates/burn-cubecl/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-cubecl/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-cubecl."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-dataset/Cargo.toml",
+        "crates/burn-dataset/LICENSE-APACHE",
+        "crates/burn-dataset/LICENSE-MIT",
+        "crates/burn-dataset/README.md",
+        "crates/burn-dataset/examples/**",
+        "crates/burn-dataset/src/**",
+        "crates/burn-dataset/tests/data/dataset-fmt.csv",
+        "crates/burn-dataset/tests/data/dataset.csv",
+        "crates/burn-dataset/tests/data/dataset.json",
+        "crates/burn-dataset/tests/data/dataset_coco.json",
+        "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_checkerboard.txt",
+        "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_random_2colors.txt",
+        "crates/burn-dataset/tests/data/segmask_folder/annotations/mask_random_3colors.txt",
+        "crates/burn-dataset/tests/data/text_folder/**"
+      ],
+      "text": "crates/burn-dataset/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-dataset/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-dataset."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-derive/**"
+      ],
+      "text": "crates/burn-derive/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-derive/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-derive."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-fusion/**"
+      ],
+      "text": "crates/burn-fusion/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-fusion/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-fusion."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-rl/**"
+      ],
+      "text": "crates/burn-rl/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-rl/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-rl."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-std/**"
+      ],
+      "text": "crates/burn-std/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-std/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "Dilshod Tadjibaev (@antimora), MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-std."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-tensor/**"
+      ],
+      "text": "crates/burn-tensor/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-tensor/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-tensor."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-train/**"
+      ],
+      "text": "crates/burn-train/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-train/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-train."
+    },
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        "crates/burn-wgpu/**"
+      ],
+      "text": "crates/burn-wgpu/LICENSE-MIT:\n\n../../LICENSE-MIT\n\ncrates/burn-wgpu/LICENSE-APACHE:\n\n../../LICENSE-APACHE\n\nVersion: No file states a choice between the two licenses, so both apply.",
+      "attribution": "nathanielsimard <nathaniel.simard.42@gmail.com>, MIT AND Apache-2.0 license (LICENSE-MIT and LICENSE-APACHE), https://github.com/tracel-ai/burn/tree/ba73ce30ea34a22606c2919c67271d56b28f1050/crates/burn-wgpu."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-APACHE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-MIT"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

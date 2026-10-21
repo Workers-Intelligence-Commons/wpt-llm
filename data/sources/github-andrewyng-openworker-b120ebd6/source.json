@@ -1,0 +1,418 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/andrewyng/openworker",
+  "revision": "7e20213dc88faaaaccace59461876c76e76b134a",
+  "checksum": "sha256:38dadce9ca4f2629f6ec1aa0535581693e947a6578f8116539b076a47fb462d0",
+  "extract": {
+    "exclude": [
+      "coworker/personas/builtin/cloud-posture/media/**",
+      "coworker/personas/builtin/security/media/**",
+      "docs/assets/**",
+      "packaging/dmg-background.png",
+      "packaging/dmg-background.tiff",
+      "packaging/dmg-background@2x.png",
+      "surfaces/gui/assets/**",
+      "surfaces/gui/src/fonts/**",
+      "surfaces/gui/src-tauri/icons/**"
+    ]
+  },
+  "history": {
+    "since": "2b45018ffad5385e2470a227e2f12b1318ce50c6"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Andrew Ng\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/andrewyng/openworker: Copyright (c) 2024 Andrew Ng, MIT license (LICENSE), https://github.com/andrewyng/openworker."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "coworker/__init__.py",
+        "coworker/agent.py",
+        "coworker/agents/**",
+        "coworker/attachments.py",
+        "coworker/audit.py",
+        "coworker/automation/**",
+        "coworker/basedir.py",
+        "coworker/catalog.py",
+        "coworker/cli.py",
+        "coworker/clock.py",
+        "coworker/cloud.py",
+        "coworker/compaction.py",
+        "coworker/config.py",
+        "coworker/connections.py",
+        "coworker/connectors/**",
+        "coworker/conversations.py",
+        "coworker/engine.py",
+        "coworker/environment.py",
+        "coworker/events.py",
+        "coworker/headless/**",
+        "coworker/inbox.py",
+        "coworker/inbox_routing.py",
+        "coworker/interactions.py",
+        "coworker/mcp/**",
+        "coworker/memory/**",
+        "coworker/mentions.py",
+        "coworker/model_config.py",
+        "coworker/overrides.py",
+        "coworker/pdf_support.py",
+        "coworker/permissions.py",
+        "coworker/personas/__init__.py",
+        "coworker/personas/builtin/appsec-worker/**",
+        "coworker/personas/builtin/change-worker/**",
+        "coworker/personas/builtin/cloud-posture/manifest.md",
+        "coworker/personas/builtin/cloud-posture/skills/**",
+        "coworker/personas/builtin/dep-audit/**",
+        "coworker/personas/builtin/design-worker/**",
+        "coworker/personas/builtin/devops-lead/**",
+        "coworker/personas/builtin/devsecops-lead/**",
+        "coworker/personas/builtin/infra-worker/**",
+        "coworker/personas/builtin/logs-worker/**",
+        "coworker/personas/builtin/ops.md",
+        "coworker/personas/builtin/posture-worker/**",
+        "coworker/personas/builtin/reviewer/**",
+        "coworker/personas/builtin/secrets-worker/**",
+        "coworker/personas/builtin/security/manifest.md",
+        "coworker/personas/builtin/security/skills/**",
+        "coworker/personas/builtin/swe-lead/**",
+        "coworker/personas/builtin/swe-worker/**",
+        "coworker/personas/builtin/test-worker/**",
+        "coworker/personas/builtin/triage-lead/**",
+        "coworker/personas/loading.py",
+        "coworker/personas/manifest.py",
+        "coworker/personas/registry.py",
+        "coworker/project.py",
+        "coworker/projects.py",
+        "coworker/provenance.py",
+        "coworker/providers/**",
+        "coworker/readonly.py",
+        "coworker/remote/**",
+        "coworker/reviewer.py",
+        "coworker/risk.py",
+        "coworker/roots.py",
+        "coworker/runtime_context.py",
+        "coworker/sandbox/**",
+        "coworker/secrets.py",
+        "coworker/selfwake.py",
+        "coworker/server/**",
+        "coworker/session_facts.py",
+        "coworker/sessions.py",
+        "coworker/skills/**",
+        "coworker/statelock.py",
+        "coworker/subscription_sync.py",
+        "coworker/subscriptions.py",
+        "coworker/teams/**",
+        "coworker/testing/**",
+        "coworker/toolchain.py",
+        "coworker/toolresult.py",
+        "coworker/tools/**",
+        "coworker/tui/**",
+        "coworker/unattended.py",
+        "coworker/unrouted.py",
+        "coworker/web/**",
+        "coworker/workspace_trust.py",
+        "docs/approval-guidance.md",
+        "docs/config.example.toml",
+        "docs/headless.md",
+        "docs/local-servers.md",
+        "docs/macos-sandbox.md",
+        "docs/model-settings.md",
+        "docs/openshell-inside.md",
+        "docs/openshell.md",
+        "docs/remote-machines.md",
+        "docs/team-board-evidence.md",
+        "docs/windows-sandbox.md",
+        "packaging/.gitignore",
+        "packaging/build_dmg.sh",
+        "packaging/build_linux.sh",
+        "packaging/build_macos_cli.sh",
+        "packaging/build_windows.ps1",
+        "packaging/cli_entry.py",
+        "packaging/install.sh",
+        "packaging/make_update_manifest.py",
+        "packaging/openshell/**",
+        "packaging/openworker-server.spec",
+        "packaging/server_entry.py",
+        "packaging/setup_dev_env.sh",
+        "pyproject.toml",
+        "reports/**",
+        "scripts/**",
+        "stt/**",
+        "surfaces/gui/.gitignore",
+        "surfaces/gui/README.md",
+        "surfaces/gui/e2e/**",
+        "surfaces/gui/e2e-live/**",
+        "surfaces/gui/index.html",
+        "surfaces/gui/package-lock.json",
+        "surfaces/gui/package.json",
+        "surfaces/gui/playwright.config.ts",
+        "surfaces/gui/playwright.live.config.ts",
+        "surfaces/gui/postcss.config.js",
+        "surfaces/gui/scripts/**",
+        "surfaces/gui/src/App.tsx",
+        "surfaces/gui/src/api.auth.test.ts",
+        "surfaces/gui/src/api.team.test.ts",
+        "surfaces/gui/src/api.ts",
+        "surfaces/gui/src/attach.ts",
+        "surfaces/gui/src/cardPayloads.ts",
+        "surfaces/gui/src/cloudAuth.ts",
+        "surfaces/gui/src/components/**",
+        "surfaces/gui/src/connectors/**",
+        "surfaces/gui/src/flags.ts",
+        "surfaces/gui/src/gallery/**",
+        "surfaces/gui/src/gateReconciliation.test.ts",
+        "surfaces/gui/src/gateReconciliation.ts",
+        "surfaces/gui/src/humanize.skills.test.ts",
+        "surfaces/gui/src/humanize.ts",
+        "surfaces/gui/src/i18n.test.ts",
+        "surfaces/gui/src/i18n.ts",
+        "surfaces/gui/src/itemsFromMessages.test.ts",
+        "surfaces/gui/src/itemsFromMessages.ts",
+        "surfaces/gui/src/locales/**",
+        "surfaces/gui/src/main.tsx",
+        "surfaces/gui/src/modelNames.ts",
+        "surfaces/gui/src/paths.ts",
+        "surfaces/gui/src/personaScope.ts",
+        "surfaces/gui/src/proposals.ts",
+        "surfaces/gui/src/providers/**",
+        "surfaces/gui/src/routes.ts",
+        "surfaces/gui/src/seal.ts",
+        "surfaces/gui/src/streamGate.test.ts",
+        "surfaces/gui/src/streamGate.ts",
+        "surfaces/gui/src/styles.css",
+        "surfaces/gui/src/tailwind.css",
+        "surfaces/gui/src/tauri.ts",
+        "surfaces/gui/src/teamRoster.test.ts",
+        "surfaces/gui/src/teamRoster.ts",
+        "surfaces/gui/src/teamView.ts",
+        "surfaces/gui/src/test-setup.ts",
+        "surfaces/gui/src/textSize.ts",
+        "surfaces/gui/src/theme.ts",
+        "surfaces/gui/src/types.ts",
+        "surfaces/gui/src/usage.test.ts",
+        "surfaces/gui/src/usage.ts",
+        "surfaces/gui/src/useMachineData.ts",
+        "surfaces/gui/src/useRoots.ts",
+        "surfaces/gui/src/vite-env.d.ts",
+        "surfaces/gui/src-tauri/.gitignore",
+        "surfaces/gui/src-tauri/Cargo.lock",
+        "surfaces/gui/src-tauri/Cargo.toml",
+        "surfaces/gui/src-tauri/Info.plist",
+        "surfaces/gui/src-tauri/build.rs",
+        "surfaces/gui/src-tauri/capabilities/**",
+        "surfaces/gui/src-tauri/entitlements.plist",
+        "surfaces/gui/src-tauri/src/**",
+        "surfaces/gui/src-tauri/tauri.conf.json",
+        "surfaces/gui/tailwind.config.js",
+        "surfaces/gui/tsconfig.json",
+        "surfaces/gui/tsconfig.node.json",
+        "surfaces/gui/vite.config.ts",
+        "surfaces/gui/vitest.config.ts",
+        "surfaces/gui/vitest.contract.config.ts",
+        "tests/**",
+        "ui-mocks/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 Andrew Ng\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and\nassociated documentation files (the \"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial\nportions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 Andrew Ng, MIT license (LICENSE), https://github.com/andrewyng/openworker."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

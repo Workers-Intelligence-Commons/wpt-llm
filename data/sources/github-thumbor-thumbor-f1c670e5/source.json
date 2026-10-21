@@ -1,0 +1,604 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/thumbor/thumbor",
+  "revision": "65dab4251badf873bfbdf14cced200f753459dc8",
+  "checksum": "sha256:ab01570756e42eac6c6095e43a29b7de01015d8fbb283d9329741c9fbe6bd6a7",
+  "extract": {
+    "exclude": [
+      "docs/aws.png",
+      "docs/canalplus.png",
+      "docs/deliveroo.png",
+      "docs/forbes-logo.png",
+      "docs/globocom.png",
+      "docs/images/**",
+      "docs/nrc.png",
+      "docs/squareup.png",
+      "docs/terra.png",
+      "docs/thumbor-logo.png",
+      "docs/vox.png",
+      "docs/webdev.png",
+      "docs/wikipedia.png",
+      "example.jpg",
+      "integration_tests/imgs/16bit.png",
+      "integration_tests/imgs/animated.gif",
+      "integration_tests/imgs/cmyk.jpg",
+      "integration_tests/imgs/gradient.gif",
+      "integration_tests/imgs/gradient.jpg",
+      "integration_tests/imgs/gradient.webp",
+      "integration_tests/imgs/grayscale.jpg",
+      "integration_tests/imgs/rgba-interlaced.png",
+      "integration_tests/imgs/rgba.png",
+      "integration_tests/imgs/thumbor-exif.png",
+      "logo-thumbor.png",
+      "tests/fixtures/images/10_years_of_Wikipedia_by_Guillaume_Paumier.jpg",
+      "tests/fixtures/images/15967251_212831_19242645_%D0%90%D0%B3%D0%B0%D1%82%D0%B0%D0%B2%D0%97%D0%BE%D0%BE%D0%BF%D0%B0%D1%80%D0%BA%D0%B5.jpg",
+      "tests/fixtures/images/15967251_212831_19242645_АгатавЗоопарке.jpg",
+      "tests/fixtures/images/16383x16383.png",
+      "tests/fixtures/images/16384x16384.png",
+      "tests/fixtures/images/1bit.png",
+      "tests/fixtures/images/1x1.png",
+      "tests/fixtures/images/1x1.psd",
+      "tests/fixtures/images/20x20.jpg",
+      "tests/fixtures/images/256_color_palette.png",
+      "tests/fixtures/images/940x2.png",
+      "tests/fixtures/images/9643x10328.jpg",
+      "tests/fixtures/images/BlueSquare_truncated.jpg",
+      "tests/fixtures/images/Christophe_Henner_-_June_2016.jpg",
+      "tests/fixtures/images/Giunchedi%2C_Filippo_January_2015_01-cmyk-orientation-exif.jpg",
+      "tests/fixtures/images/Giunchedi%2C_Filippo_January_2015_01-cmyk.jpg",
+      "tests/fixtures/images/Giunchedi%2C_Filippo_January_2015_01-grayscale.jpg",
+      "tests/fixtures/images/Giunchedi%2C_Filippo_January_2015_01.jpg",
+      "tests/fixtures/images/Giunchedi%2C_Filippo_January_2015_01.png",
+      "tests/fixtures/images/Rotating_earth_(large).gif",
+      "tests/fixtures/images/SmallFullColourGIF.gif",
+      "tests/fixtures/images/alabama1_ap620%C3%A9.jpg",
+      "tests/fixtures/images/alabama1_ap620é.jpg",
+      "tests/fixtures/images/animated-one-frame.gif",
+      "tests/fixtures/images/animated.gif",
+      "tests/fixtures/images/broken-exif-tag.jpg",
+      "tests/fixtures/images/cmyk-icc.jpg",
+      "tests/fixtures/images/cmyk.jpg",
+      "tests/fixtures/images/gradient_8bit.tif",
+      "tests/fixtures/images/gradient_lsb_16bperchannel.tif",
+      "tests/fixtures/images/gradient_msb_16bperchannel.tif",
+      "tests/fixtures/images/grayscale-icc.jpg",
+      "tests/fixtures/images/grayscale.jpg",
+      "tests/fixtures/images/image",
+      "tests/fixtures/images/image .jpg",
+      "tests/fixtures/images/image%20space.jpg",
+      "tests/fixtures/images/image.avif",
+      "tests/fixtures/images/image.heic",
+      "tests/fixtures/images/image.jp2",
+      "tests/fixtures/images/image.jpg",
+      "tests/fixtures/images/image.jpg%23something",
+      "tests/fixtures/images/image.jpg%3Fts%3D1",
+      "tests/fixtures/images/image.webp",
+      "tests/fixtures/images/image2%20.jpg",
+      "tests/fixtures/images/invalid_quantization.jpg",
+      "tests/fixtures/images/maracujá.jpg",
+      "tests/fixtures/images/no_face.jpg",
+      "tests/fixtures/images/paletted-transparent.png",
+      "tests/fixtures/images/single_point.jpg",
+      "tests/fixtures/images/thumbor-exif.png",
+      "tests/fixtures/images/watermark.png",
+      "tests/fixtures/images/weird_normalize_error.jpg",
+      "tests/fixtures/result_storages/**",
+      "tests/fixtures/srgb.icc",
+      "thumbor/fixtures/filters/256_color_palette.png",
+      "thumbor/fixtures/filters/256_color_palette_blur_result.png",
+      "thumbor/fixtures/filters/800px-Christophe_Henner_-_June_2016.jpg",
+      "thumbor/fixtures/filters/800px-Guido-portrait-2014.jpg",
+      "thumbor/fixtures/filters/800px-Katherine_Maher.jpg",
+      "thumbor/fixtures/filters/Giunchedi%2C_Filippo_January_2015_01.jpg",
+      "thumbor/fixtures/filters/PNG_transparency_demonstration_1.png",
+      "thumbor/fixtures/filters/PNG_transparency_demonstration_1_auto.png",
+      "thumbor/fixtures/filters/PNG_transparency_demonstration_1_blue.png",
+      "thumbor/fixtures/filters/blur.jpg",
+      "thumbor/fixtures/filters/blur2.jpg",
+      "thumbor/fixtures/filters/blur3.jpg",
+      "thumbor/fixtures/filters/blur4.png",
+      "thumbor/fixtures/filters/brightness.jpg",
+      "thumbor/fixtures/filters/colorize.jpg",
+      "thumbor/fixtures/filters/contrast.jpg",
+      "thumbor/fixtures/filters/convolution-false.png",
+      "thumbor/fixtures/filters/convolution-true.png",
+      "thumbor/fixtures/filters/fill.jpg",
+      "thumbor/fixtures/filters/fill2.jpg",
+      "thumbor/fixtures/filters/fill3.jpg",
+      "thumbor/fixtures/filters/fill4.jpg",
+      "thumbor/fixtures/filters/fill5.png",
+      "thumbor/fixtures/filters/focal.jpg",
+      "thumbor/fixtures/filters/noise.png",
+      "thumbor/fixtures/filters/proportion.jpg",
+      "thumbor/fixtures/filters/quality-10%.jpg",
+      "thumbor/fixtures/filters/redeye.png",
+      "thumbor/fixtures/filters/redeye_applied.png",
+      "thumbor/fixtures/filters/rgb.jpg",
+      "thumbor/fixtures/filters/rotate.jpg",
+      "thumbor/fixtures/filters/round_corner.jpg",
+      "thumbor/fixtures/filters/round_corner.png",
+      "thumbor/fixtures/filters/round_corner.webp",
+      "thumbor/fixtures/filters/round_corner1.jpg",
+      "thumbor/fixtures/filters/round_corner2.jpg",
+      "thumbor/fixtures/filters/round_corner3.jpg",
+      "thumbor/fixtures/filters/saturation.png",
+      "thumbor/fixtures/filters/source.jpg",
+      "thumbor/fixtures/filters/stretch.jpg",
+      "thumbor/fixtures/filters/upscale1.jpg",
+      "thumbor/fixtures/filters/upscale2.jpg",
+      "thumbor/fixtures/filters/upscale3.jpg",
+      "thumbor/fixtures/filters/upscale4.jpg",
+      "thumbor/fixtures/filters/watermark.png",
+      "thumbor/fixtures/filters/watermarkBig.png",
+      "thumbor/fixtures/filters/watermarkCenter.jpg",
+      "thumbor/fixtures/filters/watermarkCenterX.jpg",
+      "thumbor/fixtures/filters/watermarkCenterY.jpg",
+      "thumbor/fixtures/filters/watermarkRepeat.jpg",
+      "thumbor/fixtures/filters/watermarkRepeatX.jpg",
+      "thumbor/fixtures/filters/watermarkRepeatY.jpg",
+      "thumbor/fixtures/filters/watermarkResize50pWidth.jpg",
+      "thumbor/fixtures/filters/watermarkResize60p80p.jpg",
+      "thumbor/fixtures/filters/watermarkResize70pHeight.jpg",
+      "thumbor/fixtures/filters/watermarkSimple.jpg",
+      "thumbor/fixtures/filters/watermarkSimpleBig.jpg"
+    ]
+  },
+  "history": {
+    "since": "15382ac1de2eda820982a8aeb6da79bd4615b00e"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Globo.com\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/thumbor/thumbor: Copyright (c) 2014 Globo.com, MIT license (LICENSE), https://github.com/thumbor/thumbor."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".codacy.yml",
+        ".commit-template",
+        ".coveragerc",
+        ".flake8",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        ".yamllint",
+        "AGENTS.md",
+        "CHANGELOG",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "TestDockerfile",
+        "docker/**",
+        "docs/Makefile",
+        "docs/administration.md",
+        "docs/autojpg.md",
+        "docs/available_detectors.md",
+        "docs/background_color.md",
+        "docs/blur.md",
+        "docs/brightness.md",
+        "docs/conf.py",
+        "docs/configuration.md",
+        "docs/contrast.md",
+        "docs/convolution.md",
+        "docs/cover.md",
+        "docs/create_my_own_storage.md",
+        "docs/crop_and_resize_algorithms.md",
+        "docs/custom_detection.md",
+        "docs/custom_engines.md",
+        "docs/custom_error_handlers.md",
+        "docs/custom_error_handling.md",
+        "docs/custom_filters.md",
+        "docs/custom_handler_lists.md",
+        "docs/custom_loaders.md",
+        "docs/custom_optimizers.md",
+        "docs/custom_result_storages.md",
+        "docs/custom_storages.md",
+        "docs/customizing.md",
+        "docs/detection_algorithms.md",
+        "docs/detectors.md",
+        "docs/documentation_structure.txt",
+        "docs/enabling_detectors.md",
+        "docs/equalize.md",
+        "docs/extract_focal_points.md",
+        "docs/filling.md",
+        "docs/filters.md",
+        "docs/focal.md",
+        "docs/format.md",
+        "docs/getting_started.md",
+        "docs/gifv.md",
+        "docs/grayscale.md",
+        "docs/hacking_on_thumbor.md",
+        "docs/hosting.md",
+        "docs/how_to_upload_images.md",
+        "docs/image_loader.md",
+        "docs/image_storage.md",
+        "docs/imaging.md",
+        "docs/index.md",
+        "docs/installing.md",
+        "docs/jpegtran.md",
+        "docs/lazy_detection.md",
+        "docs/libraries.md",
+        "docs/licensing.md",
+        "docs/logging.md",
+        "docs/max_bytes.md",
+        "docs/metadata.md",
+        "docs/more.md",
+        "docs/no_upscale.md",
+        "docs/noise.md",
+        "docs/optimizers.md",
+        "docs/plugins.md",
+        "docs/posting_putting_deleting.md",
+        "docs/proportion.md",
+        "docs/quality.md",
+        "docs/red_eye.md",
+        "docs/result_storage.md",
+        "docs/rgb.md",
+        "docs/rotate.md",
+        "docs/round_corners.md",
+        "docs/running.md",
+        "docs/saturation.md",
+        "docs/security.md",
+        "docs/sharpen.md",
+        "docs/stretch.md",
+        "docs/strip_exif.md",
+        "docs/strip_icc.md",
+        "docs/the_team.md",
+        "docs/upload.md",
+        "docs/upscale.md",
+        "docs/usage.md",
+        "docs/watermark.md",
+        "docs/whos_using_it.md",
+        "integration_tests/__init__.py",
+        "integration_tests/imgs/README.mkd",
+        "integration_tests/pil_test.py",
+        "integration_tests/urls_helpers.py",
+        "mypy.ini",
+        "pylintrc",
+        "pyproject.toml",
+        "redis-sentinel.conf",
+        "redis.conf",
+        "requirements",
+        "scaling.rst",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "tests/__init__.py",
+        "tests/base.py",
+        "tests/compatibility/**",
+        "tests/conftest.py",
+        "tests/detectors/**",
+        "tests/engines/**",
+        "tests/error_handlers/**",
+        "tests/filters/**",
+        "tests/fixtures/__init__.py",
+        "tests/fixtures/animated_webp.py",
+        "tests/fixtures/custom_error_handler.py",
+        "tests/fixtures/detection_error_detector.py",
+        "tests/fixtures/haarcascade_eye_tree_eyeglasses.xml",
+        "tests/fixtures/haarcascade_profileface.xml",
+        "tests/fixtures/images/Commons-logo-inches.svg",
+        "tests/fixtures/images/Commons-logo.svg",
+        "tests/fixtures/images/README.mkd",
+        "tests/fixtures/images/__init__.py",
+        "tests/fixtures/images/image_invalid.jpg",
+        "tests/fixtures/images/qtables.xml",
+        "tests/fixtures/max_age_conf.py",
+        "tests/fixtures/prevent_result_storage_detector.py",
+        "tests/fixtures/thumbor.key",
+        "tests/fixtures/thumbor_config_server_test.conf",
+        "tests/fixtures/transformer_test_data.py",
+        "tests/fixtures/watermark_fixtures.py",
+        "tests/handler_lists/**",
+        "tests/handlers/**",
+        "tests/invalid-thumbor.conf",
+        "tests/loaders/**",
+        "tests/metrics/**",
+        "tests/optimizers/**",
+        "tests/result_storages/**",
+        "tests/storages/**",
+        "tests/test_app.py",
+        "tests/test_config.py",
+        "tests/test_console.py",
+        "tests/test_context.py",
+        "tests/test_doctor.py",
+        "tests/test_importer.py",
+        "tests/test_point.py",
+        "tests/test_server.py",
+        "tests/test_signal_handler.py",
+        "tests/test_threadpool.py",
+        "tests/test_transformer.py",
+        "tests/test_url_composer.py",
+        "tests/test_utils.py",
+        "thumbor/__init__.py",
+        "thumbor/app.py",
+        "thumbor/auto_image_format.py",
+        "thumbor/compatibility/**",
+        "thumbor/config.py",
+        "thumbor/console.py",
+        "thumbor/context.py",
+        "thumbor/default.key",
+        "thumbor/detectors/**",
+        "thumbor/doctor.py",
+        "thumbor/engines/**",
+        "thumbor/error_handlers/**",
+        "thumbor/ext/**",
+        "thumbor/filters/**",
+        "thumbor/fixtures/filters/README.mkd",
+        "thumbor/fixtures/filters/watermark",
+        "thumbor/fixtures/filters/watermark.svg",
+        "thumbor/handler_lists/**",
+        "thumbor/handlers/**",
+        "thumbor/importer.py",
+        "thumbor/lib/**",
+        "thumbor/loaders/**",
+        "thumbor/metrics/**",
+        "thumbor/optimizers/**",
+        "thumbor/point.py",
+        "thumbor/result_storages/**",
+        "thumbor/server.py",
+        "thumbor/signal_handler.py",
+        "thumbor/storages/**",
+        "thumbor/testing.py",
+        "thumbor/threadpool.py",
+        "thumbor/thumbor.conf",
+        "thumbor/transformer.py",
+        "thumbor/url.py",
+        "thumbor/url_composer.py",
+        "thumbor/url_signers/**",
+        "thumbor/utils.py",
+        "thumbor.key",
+        "unwanted_packages",
+        "uv.lock"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2014 Globo.com\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2014 Globo.com, MIT license (LICENSE), https://github.com/thumbor/thumbor."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jpg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mkd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.commit-template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.coveragerc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yamllint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CHANGELOG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TestDockerfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/requirements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-uv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/unwanted_packages"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

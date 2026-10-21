@@ -1,0 +1,783 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/tensorflow/tfjs",
+  "revision": "7f5309fef0a47545e34049903dbdae0f97285f7e",
+  "checksum": "sha256:9487a98c85729d9db1e8e6eb1db3feef60dcf5b16163d5b05273d7df146ab4ff",
+  "extract": {
+    "exclude": [
+      "e2e/benchmarks/movenet/group1-shard1of3.bin",
+      "e2e/benchmarks/movenet/group1-shard2of3.bin",
+      "e2e/benchmarks/movenet/group1-shard3of3.bin",
+      "e2e/custom_module/dense_model/model/group1-shard1of1.bin",
+      "e2e/integration_tests/load_predict_data/graph_model/weights.bin",
+      "e2e/integration_tests/load_predict_data/layers_model/weights.bin",
+      "tfjs-backend-nodegl/demo/dog.jpg",
+      "tfjs-backend-wasm/face-detector-bench.png",
+      "tfjs-backend-wasm/mobilenet-v2-bench.png",
+      "tfjs-converter/demo/mobilenet/cat.jpg",
+      "tfjs-converter/demo/ssd/image1.jpg",
+      "tfjs-converter/demo/ssd/image2.jpg",
+      "tfjs-converter/tensorflowjs_wizard.gif",
+      "tfjs-inference/test_data/weights.bin",
+      "tfjs-layers/**",
+      "tfjs-node/test_objects/**",
+      "tfjs-node-gpu/test_objects/**",
+      "tfjs-react-native/images/**",
+      "tfjs-react-native/integration_rn59/android/app/src/main/res/mipmap-hdpi/**",
+      "tfjs-react-native/integration_rn59/android/app/src/main/res/mipmap-mdpi/**",
+      "tfjs-react-native/integration_rn59/android/app/src/main/res/mipmap-xhdpi/**",
+      "tfjs-react-native/integration_rn59/android/app/src/main/res/mipmap-xxhdpi/**",
+      "tfjs-react-native/integration_rn59/android/app/src/main/res/mipmap-xxxhdpi/**",
+      "tfjs-react-native/integration_rn59/android/gradle/wrapper/gradle-wrapper.jar",
+      "tfjs-react-native/integration_rn59/assets/graph_model/group1-shard1of1.bin",
+      "tfjs-react-native/integration_rn59/assets/images/**",
+      "tfjs-react-native/integration_rn59/assets/model/bundle_model_test_weights.bin",
+      "tfjs-react-native/integration_rn59/assets/sharded_model/group1-shard1of2.bin",
+      "tfjs-react-native/integration_rn59/assets/sharded_model/group1-shard2of2.bin",
+      "tfjs-tflite/demo/screenshot.png",
+      "tfjs-tflite/demo/src/cat.jpg",
+      "tfjs-tflite/demo/src/mountain.jpg",
+      "tfjs-tflite/demo/src/people.jpg",
+      "tfjs-tflite/demo/src/pizza.jpg",
+      "tfjs-tflite/demo/src/room.jpg",
+      "tfjs-tflite/test_files/add4.tflite",
+      "tfjs-vis/docs/**"
+    ]
+  },
+  "history": {
+    "since": "da47ac6a3d052aee9ece6e1b16cee12ba5763cee"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/tensorflow/tfjs: the authors of tensorflow/tfjs (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/tfjs; the authors of tfjs-backend-nodegl-demo, ISC license (declared in package.json), https://github.com/tensorflow/tfjs/tree/7f5309fef0a47545e34049903dbdae0f97285f7e/tfjs-backend-nodegl/demo; the authors of tensorflow/tfjs (tfjs-vis) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/tfjs/tree/7f5309fef0a47545e34049903dbdae0f97285f7e/tfjs-vis."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".bazelignore",
+        ".bazelrc",
+        ".bazelversion",
+        ".github/**",
+        ".gitignore",
+        ".tslint/**",
+        ".vscode/**",
+        "BAZEL_MIGRATION.md",
+        "BUILD.bazel",
+        "CONTRIBUTING.md",
+        "CONTRIBUTING_MISSING_OP.md",
+        "DEVELOPMENT.md",
+        "GALLERY.md",
+        "LICENSE",
+        "README.md",
+        "WORKSPACE",
+        "cloudbuild-release.yml",
+        "cloudbuild-verdaccio.yml",
+        "cloudbuild.yml",
+        "dockers/**",
+        "docs/**",
+        "e2e/.npmignore",
+        "e2e/.npmrc",
+        "e2e/README.md",
+        "e2e/benchmarks/SpecRunner.html",
+        "e2e/benchmarks/benchmark_util.js",
+        "e2e/benchmarks/benchmark_util_test.js",
+        "e2e/benchmarks/browserstack-benchmark/**",
+        "e2e/benchmarks/firebase.json",
+        "e2e/benchmarks/firebase_staging.json",
+        "e2e/benchmarks/local-benchmark/**",
+        "e2e/benchmarks/model_config.js",
+        "e2e/benchmarks/movenet/model.json",
+        "e2e/cloudbuild.yml",
+        "e2e/custom_module/blazeface/**",
+        "e2e/custom_module/dense_model/app.js",
+        "e2e/custom_module/dense_model/app_tfjs_config.json",
+        "e2e/custom_module/dense_model/build.sh",
+        "e2e/custom_module/dense_model/model/model.json",
+        "e2e/custom_module/dense_model/package.json",
+        "e2e/custom_module/dense_model/rollup.config.js",
+        "e2e/custom_module/dense_model/webpack.config.js",
+        "e2e/custom_module/dense_model/yarn.lock",
+        "e2e/custom_module/development.md",
+        "e2e/custom_module/universal_sentence_encoder/**",
+        "e2e/integration_tests/backends_test.ts",
+        "e2e/integration_tests/constants.ts",
+        "e2e/integration_tests/convert_predict.py",
+        "e2e/integration_tests/convert_predict.ts",
+        "e2e/integration_tests/cpu_forwarding_test.ts",
+        "e2e/integration_tests/create_save_predict.js",
+        "e2e/integration_tests/create_save_predict.py",
+        "e2e/integration_tests/create_save_predict.ts",
+        "e2e/integration_tests/custom_bundle_test.ts",
+        "e2e/integration_tests/grad_layers_test.ts",
+        "e2e/integration_tests/graph_model_golden_data/**",
+        "e2e/integration_tests/graph_model_golden_tests.ts",
+        "e2e/integration_tests/load_predict_data/graph_model/model.json",
+        "e2e/integration_tests/load_predict_data/graph_model/model_new.json",
+        "e2e/integration_tests/load_predict_data/layers_model/model.json",
+        "e2e/integration_tests/load_predict_test.ts",
+        "e2e/integration_tests/memory_leak_test.ts",
+        "e2e/integration_tests/metadata.py",
+        "e2e/integration_tests/metadata.ts",
+        "e2e/integration_tests/requirements-dev.txt",
+        "e2e/integration_tests/requirements-stable.txt",
+        "e2e/integration_tests/setup_test.ts",
+        "e2e/integration_tests/test_util.ts",
+        "e2e/integration_tests/types.ts",
+        "e2e/karma.conf.js",
+        "e2e/package.json",
+        "e2e/script_tag_tests/**",
+        "e2e/scripts/**",
+        "e2e/tsconfig.json",
+        "e2e/tslint.json",
+        "e2e/webpack_test/**",
+        "e2e/yarn.lock",
+        "link-package/**",
+        "package.json",
+        "pull_request_template.md",
+        "remote-execution/**",
+        "rollup.config.helpers.js",
+        "scripts/**",
+        "tfjs/**",
+        "tfjs-automl/**",
+        "tfjs-backend-cpu/**",
+        "tfjs-backend-nodegl/.vscode/**",
+        "tfjs-backend-nodegl/README.md",
+        "tfjs-backend-nodegl/package.json",
+        "tfjs-backend-nodegl/src/**",
+        "tfjs-backend-nodegl/tasks.json",
+        "tfjs-backend-nodegl/tsconfig.json",
+        "tfjs-backend-nodegl/tslint.json",
+        "tfjs-backend-nodegl/yarn.lock",
+        "tfjs-backend-wasm/.npmignore",
+        "tfjs-backend-wasm/.npmrc",
+        "tfjs-backend-wasm/.vscode/**",
+        "tfjs-backend-wasm/BUILD.bazel",
+        "tfjs-backend-wasm/README.md",
+        "tfjs-backend-wasm/package.json",
+        "tfjs-backend-wasm/rollup_wechat.config.mjs",
+        "tfjs-backend-wasm/scripts/**",
+        "tfjs-backend-wasm/src/**",
+        "tfjs-backend-wasm/starter/**",
+        "tfjs-backend-wasm/tools/**",
+        "tfjs-backend-wasm/tsconfig.json",
+        "tfjs-backend-wasm/wasm-out/**",
+        "tfjs-backend-wasm/yarn.lock",
+        "tfjs-backend-webgl/**",
+        "tfjs-backend-webgpu/**",
+        "tfjs-converter/.babelrc",
+        "tfjs-converter/.npmignore",
+        "tfjs-converter/.vscode/**",
+        "tfjs-converter/BUILD.bazel",
+        "tfjs-converter/DEVELOPMENT.md",
+        "tfjs-converter/README.md",
+        "tfjs-converter/cloudbuild.yml",
+        "tfjs-converter/cloudbuild_nightly.yml",
+        "tfjs-converter/demo/control_flow/**",
+        "tfjs-converter/demo/mobilenet/README.md",
+        "tfjs-converter/demo/mobilenet/imagenet_classes.js",
+        "tfjs-converter/demo/mobilenet/index.html",
+        "tfjs-converter/demo/mobilenet/index.js",
+        "tfjs-converter/demo/mobilenet/mobilenet.js",
+        "tfjs-converter/demo/package.json",
+        "tfjs-converter/demo/ssd/classes.js",
+        "tfjs-converter/demo/ssd/index.html",
+        "tfjs-converter/demo/ssd/index.js",
+        "tfjs-converter/demo/yarn.lock",
+        "tfjs-converter/docs/**",
+        "tfjs-converter/metadata/**",
+        "tfjs-converter/package.json",
+        "tfjs-converter/python/**",
+        "tfjs-converter/scripts/**",
+        "tfjs-converter/src/**",
+        "tfjs-converter/tools/**",
+        "tfjs-converter/tsconfig.json",
+        "tfjs-converter/yarn.lock",
+        "tfjs-core/**",
+        "tfjs-data/**",
+        "tfjs-inference/README.md",
+        "tfjs-inference/cloudbuild.yml",
+        "tfjs-inference/package.json",
+        "tfjs-inference/python/**",
+        "tfjs-inference/scripts/**",
+        "tfjs-inference/src/**",
+        "tfjs-inference/test_data/data.json",
+        "tfjs-inference/test_data/dtype.json",
+        "tfjs-inference/test_data/model.json",
+        "tfjs-inference/test_data/model_structured_outputs.json",
+        "tfjs-inference/test_data/shape.json",
+        "tfjs-inference/test_data/tf_input_name.json",
+        "tfjs-inference/test_data/tf_output_name.json",
+        "tfjs-inference/tsconfig.json",
+        "tfjs-inference/tsconfig.test.json",
+        "tfjs-inference/tslint.json",
+        "tfjs-inference/yarn.lock",
+        "tfjs-node/.bazelversion",
+        "tfjs-node/.npmignore",
+        "tfjs-node/.nycrc",
+        "tfjs-node/.vscode/**",
+        "tfjs-node/DEVELOPMENT.md",
+        "tfjs-node/README.md",
+        "tfjs-node/WINDOWS_TROUBLESHOOTING.md",
+        "tfjs-node/binding/**",
+        "tfjs-node/binding.gyp",
+        "tfjs-node/cloudbuild.yml",
+        "tfjs-node/package.json",
+        "tfjs-node/python/**",
+        "tfjs-node/scripts/**",
+        "tfjs-node/src/**",
+        "tfjs-node/tsconfig.json",
+        "tfjs-node/tsconfig.test.json",
+        "tfjs-node/tslint.json",
+        "tfjs-node/yarn.lock",
+        "tfjs-node-gpu/.npmignore",
+        "tfjs-node-gpu/.nycrc",
+        "tfjs-node-gpu/README.md",
+        "tfjs-node-gpu/cloudbuild.yml",
+        "tfjs-node-gpu/package.json",
+        "tfjs-node-gpu/prep-gpu-windows.bat",
+        "tfjs-node-gpu/prep-gpu.sh",
+        "tfjs-node-gpu/tsconfig.json",
+        "tfjs-node-gpu/tsconfig.test.json",
+        "tfjs-node-gpu/tslint.json",
+        "tfjs-node-gpu/yarn.lock",
+        "tfjs-react-native/.npmignore",
+        "tfjs-react-native/.vscode/**",
+        "tfjs-react-native/DEVELOPMENT.md",
+        "tfjs-react-native/README.md",
+        "tfjs-react-native/cloudbuild.yml",
+        "tfjs-react-native/integration_rn59/.buckconfig",
+        "tfjs-react-native/integration_rn59/.gitattributes",
+        "tfjs-react-native/integration_rn59/.gitignore",
+        "tfjs-react-native/integration_rn59/App.tsx",
+        "tfjs-react-native/integration_rn59/README.md",
+        "tfjs-react-native/integration_rn59/android/app/.project",
+        "tfjs-react-native/integration_rn59/android/app/.settings/**",
+        "tfjs-react-native/integration_rn59/android/app/BUCK",
+        "tfjs-react-native/integration_rn59/android/app/build.gradle",
+        "tfjs-react-native/integration_rn59/android/app/build_defs.bzl",
+        "tfjs-react-native/integration_rn59/android/app/proguard-rules.pro",
+        "tfjs-react-native/integration_rn59/android/app/src/debug/**",
+        "tfjs-react-native/integration_rn59/android/app/src/main/AndroidManifest.xml",
+        "tfjs-react-native/integration_rn59/android/app/src/main/java/**",
+        "tfjs-react-native/integration_rn59/android/app/src/main/res/values/**",
+        "tfjs-react-native/integration_rn59/android/build.gradle",
+        "tfjs-react-native/integration_rn59/android/gradle/wrapper/gradle-wrapper.properties",
+        "tfjs-react-native/integration_rn59/android/gradle.properties",
+        "tfjs-react-native/integration_rn59/android/gradlew",
+        "tfjs-react-native/integration_rn59/android/gradlew.bat",
+        "tfjs-react-native/integration_rn59/android/keystores/**",
+        "tfjs-react-native/integration_rn59/android/settings.gradle",
+        "tfjs-react-native/integration_rn59/app.json",
+        "tfjs-react-native/integration_rn59/assets/graph_model/model.json",
+        "tfjs-react-native/integration_rn59/assets/model/bundle_model_test.json",
+        "tfjs-react-native/integration_rn59/assets/sharded_model/model.json",
+        "tfjs-react-native/integration_rn59/assets/sharded_model/readme.md",
+        "tfjs-react-native/integration_rn59/babel.config.js",
+        "tfjs-react-native/integration_rn59/components/**",
+        "tfjs-react-native/integration_rn59/index.js",
+        "tfjs-react-native/integration_rn59/ios/**",
+        "tfjs-react-native/integration_rn59/jest.config.js",
+        "tfjs-react-native/integration_rn59/metro.config.js",
+        "tfjs-react-native/integration_rn59/package.json",
+        "tfjs-react-native/integration_rn59/scripts/**",
+        "tfjs-react-native/integration_rn59/test/**",
+        "tfjs-react-native/integration_rn59/tsconfig.json",
+        "tfjs-react-native/integration_rn59/tslint.json",
+        "tfjs-react-native/integration_rn59/wdio.conf.js",
+        "tfjs-react-native/integration_rn59/yarn.lock",
+        "tfjs-react-native/package.json",
+        "tfjs-react-native/rollup.config.js",
+        "tfjs-react-native/scripts/**",
+        "tfjs-react-native/src/**",
+        "tfjs-react-native/tsconfig.json",
+        "tfjs-react-native/tsconfig.test.json",
+        "tfjs-react-native/tslint.json",
+        "tfjs-react-native/yarn.lock",
+        "tfjs-tfdf/**",
+        "tfjs-tflite/.npmignore",
+        "tfjs-tflite/.npmrc",
+        "tfjs-tflite/BUILD.bazel",
+        "tfjs-tflite/README.md",
+        "tfjs-tflite/demo/README.md",
+        "tfjs-tflite/demo/package.json",
+        "tfjs-tflite/demo/src/index.html",
+        "tfjs-tflite/demo/src/magic.svg",
+        "tfjs-tflite/demo/src/script.ts",
+        "tfjs-tflite/demo/tsconfig.json",
+        "tfjs-tflite/demo/yarn.lock",
+        "tfjs-tflite/package.json",
+        "tfjs-tflite/src/**",
+        "tfjs-tflite/test_files/BUILD.bazel",
+        "tfjs-tflite/tflite_repositories.bzl",
+        "tfjs-tflite/tsconfig.json",
+        "tfjs-tflite/wasm/**",
+        "tfjs-tflite/yarn.lock",
+        "tfjs.code-workspace",
+        "tools/**",
+        "tsconfig.json",
+        "tsconfig.test.json",
+        "tsconfig_base.json",
+        "tsconfig_ts_library.json",
+        "tsconfig_tslint.json",
+        "tslint.json",
+        "yarn.lock"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of tensorflow/tfjs (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/tfjs."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "tfjs-backend-nodegl/demo/README.md",
+        "tfjs-backend-nodegl/demo/package.json",
+        "tfjs-backend-nodegl/demo/run_mobilenet_inference.js",
+        "tfjs-backend-nodegl/demo/yarn.lock"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of tfjs-backend-nodegl-demo, ISC license (declared in package.json), https://github.com/tensorflow/tfjs/tree/7f5309fef0a47545e34049903dbdae0f97285f7e/tfjs-backend-nodegl/demo."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "tfjs-vis/.npmignore",
+        "tfjs-vis/CHANGELOG.md",
+        "tfjs-vis/CONTRIBUTING.md",
+        "tfjs-vis/LICENSE",
+        "tfjs-vis/README.md",
+        "tfjs-vis/cloudbuild.yml",
+        "tfjs-vis/demos/**",
+        "tfjs-vis/integration_tests/**",
+        "tfjs-vis/karma.conf.js",
+        "tfjs-vis/package.json",
+        "tfjs-vis/scripts/**",
+        "tfjs-vis/src/**",
+        "tfjs-vis/test.html",
+        "tfjs-vis/tsconfig.json",
+        "tfjs-vis/tslint.json",
+        "tfjs-vis/webpack.config.js",
+        "tfjs-vis/yarn.lock"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of tensorflow/tfjs (tfjs-vis) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/tensorflow/tfjs/tree/7f5309fef0a47545e34049903dbdae0f97285f7e/tfjs-vis."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Podfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/WORKSPACE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.code-workspace"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gyp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prefs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcsettings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.babelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.buckconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gcloudignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nycrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.parcelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUCK"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tag-version"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

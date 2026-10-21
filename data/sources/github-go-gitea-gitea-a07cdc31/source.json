@@ -1,0 +1,4416 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/go-gitea/gitea",
+  "revision": "1c117a9352e4a64cd301028403c33949ab146424",
+  "checksum": "sha256:6de208811d8e0c19cc0ec6c24b3705288d0805ebebdfa28471a8d4657d8d6c1b",
+  "extract": {
+    "exclude": [
+      "contrib/**",
+      "models/repo/**",
+      "modules/avatar/testdata/**",
+      "modules/git/tests/repos/language_stats_repo/index",
+      "modules/git/tests/repos/language_stats_repo/objects/**",
+      "modules/git/tests/repos/repo1_bare/index",
+      "modules/git/tests/repos/repo1_bare/objects/**",
+      "modules/git/tests/repos/repo1_bare_sha256/objects/info/commit-graph",
+      "modules/git/tests/repos/repo1_bare_sha256/objects/pack/**",
+      "modules/git/tests/repos/repo3_notes/index",
+      "modules/git/tests/repos/repo3_notes/objects/**",
+      "modules/git/tests/repos/repo4_commitsbetween/objects/**",
+      "modules/git/tests/repos/repo4_submodules/objects/**",
+      "modules/git/tests/repos/repo5_pulls/objects/1a/**",
+      "modules/git/tests/repos/repo5_pulls/objects/56/**",
+      "modules/git/tests/repos/repo5_pulls/objects/58/**",
+      "modules/git/tests/repos/repo5_pulls/objects/6d/**",
+      "modules/git/tests/repos/repo5_pulls/objects/a5/**",
+      "modules/git/tests/repos/repo5_pulls/objects/bf/**",
+      "modules/git/tests/repos/repo5_pulls/objects/d8/**",
+      "modules/git/tests/repos/repo5_pulls/objects/ed/**",
+      "modules/git/tests/repos/repo5_pulls/objects/ee/**",
+      "modules/git/tests/repos/repo5_pulls/objects/pack/**",
+      "modules/git/tests/repos/repo5_pulls_sha256/objects/info/commit-graph",
+      "modules/git/tests/repos/repo5_pulls_sha256/objects/pack/**",
+      "modules/git/tests/repos/repo6_blame/objects/**",
+      "modules/git/tests/repos/repo6_blame_sha256/objects/info/commit-graph",
+      "modules/git/tests/repos/repo6_blame_sha256/objects/pack/**",
+      "modules/git/tests/repos/repo6_merge/objects/**",
+      "modules/git/tests/repos/repo6_merge_sha256/objects/info/commit-graph",
+      "modules/git/tests/repos/repo6_merge_sha256/objects/pack/**",
+      "modules/markup/external/**",
+      "modules/repository/**",
+      "options/license/**",
+      "public/assets/img/apple-touch-icon.png",
+      "public/assets/img/avatar_default.png",
+      "public/assets/img/checkmark.png",
+      "public/assets/img/dingtalk.ico",
+      "public/assets/img/discord.png",
+      "public/assets/img/emoji/**",
+      "public/assets/img/failed.png",
+      "public/assets/img/favicon.png",
+      "public/assets/img/gogs.png",
+      "public/assets/img/loading.png",
+      "public/assets/img/logo.png",
+      "public/assets/img/msteams.png",
+      "public/assets/img/openid-16x16.png",
+      "public/assets/img/packagist.png",
+      "public/assets/img/repo_default.png",
+      "public/assets/img/slack.png",
+      "public/assets/img/telegram.png",
+      "public/assets/img/wechatwork.png",
+      "routers/api/v1/repo/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/08/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/0b/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/13/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/23/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/2b/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/65/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/72/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/8b/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/93/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/97/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/9c/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/a9/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/ba/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/bb/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/cb/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/d7/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/e3/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/e6/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/e8/**",
+      "routers/private/tests/repos/repo1_hook_verification/objects/tmp_objdir-incoming-a21648/**",
+      "services/mailer/icons/**",
+      "services/repository/**",
+      "tests/gitea-lfs-meta/0b/**",
+      "tests/gitea-lfs-meta/2e/**",
+      "tests/gitea-repositories-meta/limited_org/private_repo_on_limited_org.git/objects/**",
+      "tests/gitea-repositories-meta/limited_org/public_repo_on_limited_org.git/objects/**",
+      "tests/gitea-repositories-meta/migration/lfs-test.git/index",
+      "tests/gitea-repositories-meta/migration/lfs-test.git/objects/**",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker.git/index",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker.git/objects/**",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker_alpha.git/index",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker_alpha.git/objects/**",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker_numeric.git/index",
+      "tests/gitea-repositories-meta/org26/repo_external_tracker_numeric.git/objects/**",
+      "tests/gitea-repositories-meta/org3/repo3.git/objects/**",
+      "tests/gitea-repositories-meta/org3/repo5.git/objects/**",
+      "tests/gitea-repositories-meta/org42/search-by-path.git/objects/pack/**",
+      "tests/gitea-repositories-meta/privated_org/private_repo_on_private_org.git/objects/**",
+      "tests/gitea-repositories-meta/privated_org/public_repo_on_private_org.git/objects/**",
+      "tests/gitea-repositories-meta/user12/repo10.git/objects/2a/**",
+      "tests/gitea-repositories-meta/user12/repo10.git/objects/4b/**",
+      "tests/gitea-repositories-meta/user12/repo10.git/objects/65/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/0a/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/2a/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/4b/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/65/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/75/**",
+      "tests/gitea-repositories-meta/user13/repo11.git/objects/ed/**",
+      "tests/gitea-repositories-meta/user2/commits_search_test.git/objects/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/0a/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/0c/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/10/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/19/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/1e/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/23/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/28/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/35/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/38/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/3e/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/4b/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/4c/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/52/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/53/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/70/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/74/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/7e/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/81/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/83/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/87/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/92/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/96/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/97/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/c5/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/c7/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/cb/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/d1/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/d2/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/d6/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/e1/**",
+      "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/ec/**",
+      "tests/gitea-repositories-meta/user2/git_hooks_test.git/objects/2a/**",
+      "tests/gitea-repositories-meta/user2/git_hooks_test.git/objects/4b/**",
+      "tests/gitea-repositories-meta/user2/git_hooks_test.git/objects/65/**",
+      "tests/gitea-repositories-meta/user2/glob.git/objects/**",
+      "tests/gitea-repositories-meta/user2/lfs.git/objects/**",
+      "tests/gitea-repositories-meta/user2/repo-release.git/objects/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/00/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/08/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/12/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/16/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/2a/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/3f/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/40/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/46/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/4a/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/4b/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/5c/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/5f/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/62/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/65/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/6a/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/78/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/7c/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/90/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/94/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/98/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/a6/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/a7/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/b2/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/d4/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/d7/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/dc/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/dd/**",
+      "tests/gitea-repositories-meta/user2/repo1.git/objects/f3/**",
+      "tests/gitea-repositories-meta/user2/repo1.wiki.git/objects/**",
+      "tests/gitea-repositories-meta/user2/repo16.git/objects/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/0a/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/0c/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/10/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/1c/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/26/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/32/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/36/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/42/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/71/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/72/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/74/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/7c/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/ba/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/c1/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/c4/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/f5/**",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/info/commit-graph",
+      "tests/gitea-repositories-meta/user2/repo2.git/objects/pack/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/02/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/05/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/07/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/1b/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/29/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/2c/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/41/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/79/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/80/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/83/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/8b/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/8c/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/a4/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/b0/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/b6/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/ba/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/c5/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/c8/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/ce/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/cf/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/db/**",
+      "tests/gitea-repositories-meta/user2/repo20.git/objects/ea/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/14/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/1d/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/28/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/3a/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/4c/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/50/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/56/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/59/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/64/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/6d/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/84/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/9b/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/a4/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/a9/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/c7/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/e9/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/eb/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/ee/**",
+      "tests/gitea-repositories-meta/user2/utf8.git/objects/f4/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/47/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/4d/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/51/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/79/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/aa/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/dd/**",
+      "tests/gitea-repositories-meta/user27/repo49.git/objects/f2/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/2a/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/3d/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/47/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/4d/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/51/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/79/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/83/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/99/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/aa/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/af/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/b9/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/c5/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/dd/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/e6/**",
+      "tests/gitea-repositories-meta/user27/template1.git/objects/f2/**",
+      "tests/gitea-repositories-meta/user5/repo4.git/objects/**",
+      "tests/integration/avatar.png",
+      "tests/integration/migration-test/gitea-v1.6.4.mssql.sql.gz",
+      "tests/integration/migration-test/gitea-v1.6.4.mysql.sql.gz",
+      "tests/integration/migration-test/gitea-v1.6.4.postgres.sql.gz",
+      "tests/integration/migration-test/gitea-v1.6.4.sqlite3.sql.gz",
+      "tests/integration/migration-test/gitea-v1.7.0.mssql.sql.gz",
+      "tests/integration/migration-test/gitea-v1.7.0.mysql.sql.gz",
+      "tests/integration/migration-test/gitea-v1.7.0.postgres.sql.gz",
+      "tests/integration/migration-test/gitea-v1.7.0.sqlite3.sql.gz"
+    ]
+  },
+  "history": {
+    "since": "4e7eb5be9d3e9c9ba7238769d2b5f2f471d51b67"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2016 The Gitea Authors\nCopyright (c) 2015 The Gogs Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\nCopyright (c) 2016 The Gitea Authors\nCopyright (c) GitHub, Inc. and LFS Test Server contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/go-gitea/gitea: Copyright (c) 2016 The Gitea Authors; Copyright (c) 2015 The Gogs Authors, MIT license (LICENSE), https://github.com/go-gitea/gitea; Copyright (c) 2016 The Gitea Authors; Copyright (c) GitHub, Inc. and LFS Test Server contributors, MIT license (LICENSE), https://github.com/go-gitea/gitea/tree/1c117a9352e4a64cd301028403c33949ab146424/modules/lfs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".air.toml",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".envrc",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".ignore",
+        ".mailmap",
+        ".markdownlint.yaml",
+        ".shellcheckrc",
+        ".spectral.yaml",
+        ".yamllint.yaml",
+        "AGENTS.md",
+        "BSDmakefile",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DCO",
+        "Dockerfile",
+        "Dockerfile.rootless",
+        "LICENSE",
+        "MAINTAINERS",
+        "Makefile",
+        "README.md",
+        "README.zh-cn.md",
+        "README.zh-tw.md",
+        "SECURITY.md",
+        "assets/**",
+        "build/**",
+        "cliff.toml",
+        "cmd/**",
+        "crowdin.yml",
+        "custom/**",
+        "docker/**",
+        "docs/**",
+        "eslint.config.ts",
+        "eslint.json.config.ts",
+        "flake.lock",
+        "flake.nix",
+        "go.mod",
+        "go.sum",
+        "main.go",
+        "main_timezones.go",
+        "modelmigration/**",
+        "models/actions/**",
+        "models/activities/**",
+        "models/admin/**",
+        "models/asymkey/**",
+        "models/audit/**",
+        "models/auth/**",
+        "models/avatars/**",
+        "models/db/**",
+        "models/dbfs/**",
+        "models/deploykey/**",
+        "models/fixtures/**",
+        "models/git/**",
+        "models/gituser/**",
+        "models/init.go",
+        "models/issues/**",
+        "models/organization/**",
+        "models/packages/**",
+        "models/perm/**",
+        "models/project/**",
+        "models/pull/**",
+        "models/renderhelper/**",
+        "models/repostats/**",
+        "models/secret/**",
+        "models/shared/**",
+        "models/system/**",
+        "models/unit/**",
+        "models/unittest/**",
+        "models/user/**",
+        "models/webhook/**",
+        "modules/actions/**",
+        "modules/analyze/**",
+        "modules/assetfs/**",
+        "modules/auth/**",
+        "modules/avatar/avatar.go",
+        "modules/avatar/avatar_test.go",
+        "modules/avatar/federated.go",
+        "modules/avatar/hash.go",
+        "modules/avatar/hash_test.go",
+        "modules/avatar/identicon/**",
+        "modules/badge/**",
+        "modules/base/**",
+        "modules/cache/**",
+        "modules/cachegroup/**",
+        "modules/charset/**",
+        "modules/citation/**",
+        "modules/commitstatus/**",
+        "modules/consts/**",
+        "modules/container/**",
+        "modules/csv/**",
+        "modules/dump/**",
+        "modules/egress/**",
+        "modules/emoji/**",
+        "modules/fileicon/**",
+        "modules/generate/**",
+        "modules/git/archive.go",
+        "modules/git/archive_test.go",
+        "modules/git/attribute/**",
+        "modules/git/blame.go",
+        "modules/git/blame_sha256_test.go",
+        "modules/git/blame_test.go",
+        "modules/git/blob.go",
+        "modules/git/blob_test.go",
+        "modules/git/branch.go",
+        "modules/git/catfile_batch.go",
+        "modules/git/catfile_batch_command.go",
+        "modules/git/catfile_batch_legacy.go",
+        "modules/git/catfile_batch_reader.go",
+        "modules/git/catfile_batch_test.go",
+        "modules/git/clone.go",
+        "modules/git/cmdverb.go",
+        "modules/git/commit.go",
+        "modules/git/commit2.go",
+        "modules/git/commit2_test.go",
+        "modules/git/commit_count_cache.go",
+        "modules/git/commit_file.go",
+        "modules/git/commit_file_test.go",
+        "modules/git/commit_info.go",
+        "modules/git/commit_info_test.go",
+        "modules/git/commit_message.go",
+        "modules/git/commit_message_test.go",
+        "modules/git/commit_reader.go",
+        "modules/git/commit_sha256_test.go",
+        "modules/git/commit_submodule.go",
+        "modules/git/commit_submodule_file.go",
+        "modules/git/commit_submodule_file_test.go",
+        "modules/git/commit_test.go",
+        "modules/git/compare.go",
+        "modules/git/compare_test.go",
+        "modules/git/config.go",
+        "modules/git/config_managed.go",
+        "modules/git/config_submodule.go",
+        "modules/git/config_submodule_test.go",
+        "modules/git/config_test.go",
+        "modules/git/diff.go",
+        "modules/git/diff_test.go",
+        "modules/git/error.go",
+        "modules/git/fastimport.go",
+        "modules/git/fetch.go",
+        "modules/git/foreachref/**",
+        "modules/git/fsck.go",
+        "modules/git/git.go",
+        "modules/git/git_test.go",
+        "modules/git/gitcmd/**",
+        "modules/git/gitrepo/**",
+        "modules/git/gitrepo.go",
+        "modules/git/gpg.go",
+        "modules/git/gpg_test.go",
+        "modules/git/grep.go",
+        "modules/git/grep_test.go",
+        "modules/git/hook.go",
+        "modules/git/hooks.go",
+        "modules/git/hooks_test.go",
+        "modules/git/internal/**",
+        "modules/git/key.go",
+        "modules/git/languagestats/**",
+        "modules/git/last_commit_cache.go",
+        "modules/git/localfs.go",
+        "modules/git/log_name_status.go",
+        "modules/git/main_test.go",
+        "modules/git/merge.go",
+        "modules/git/merge_tree.go",
+        "modules/git/merge_tree_test.go",
+        "modules/git/notes.go",
+        "modules/git/notes_test.go",
+        "modules/git/object_format.go",
+        "modules/git/object_id.go",
+        "modules/git/object_id_test.go",
+        "modules/git/parse.go",
+        "modules/git/parse_treeentry.go",
+        "modules/git/parse_treeentry_test.go",
+        "modules/git/pipeline/**",
+        "modules/git/push.go",
+        "modules/git/receive_fsck_test.go",
+        "modules/git/ref.go",
+        "modules/git/ref_test.go",
+        "modules/git/remote.go",
+        "modules/git/remote_managed.go",
+        "modules/git/remote_test.go",
+        "modules/git/repo.go",
+        "modules/git/repo_base.go",
+        "modules/git/repo_base_test.go",
+        "modules/git/repo_blob.go",
+        "modules/git/repo_blob_test.go",
+        "modules/git/repo_branch.go",
+        "modules/git/repo_branch_test.go",
+        "modules/git/repo_commit.go",
+        "modules/git/repo_commit_test.go",
+        "modules/git/repo_commitgraph.go",
+        "modules/git/repo_compare.go",
+        "modules/git/repo_compare_test.go",
+        "modules/git/repo_index.go",
+        "modules/git/repo_object.go",
+        "modules/git/repo_ref.go",
+        "modules/git/repo_ref_test.go",
+        "modules/git/repo_stats.go",
+        "modules/git/repo_stats_test.go",
+        "modules/git/repo_tag.go",
+        "modules/git/repo_tag_test.go",
+        "modules/git/repo_test.go",
+        "modules/git/repo_tree.go",
+        "modules/git/signature.go",
+        "modules/git/signature_test.go",
+        "modules/git/size.go",
+        "modules/git/submodule.go",
+        "modules/git/submodule_test.go",
+        "modules/git/tag.go",
+        "modules/git/tag_test.go",
+        "modules/git/tests/repos/language_stats_repo/HEAD",
+        "modules/git/tests/repos/language_stats_repo/config",
+        "modules/git/tests/repos/language_stats_repo/logs/**",
+        "modules/git/tests/repos/language_stats_repo/refs/**",
+        "modules/git/tests/repos/repo1_bare/HEAD",
+        "modules/git/tests/repos/repo1_bare/config",
+        "modules/git/tests/repos/repo1_bare/logs/**",
+        "modules/git/tests/repos/repo1_bare/pulls/**",
+        "modules/git/tests/repos/repo1_bare/refs/**",
+        "modules/git/tests/repos/repo1_bare_sha256/HEAD",
+        "modules/git/tests/repos/repo1_bare_sha256/config",
+        "modules/git/tests/repos/repo1_bare_sha256/info/**",
+        "modules/git/tests/repos/repo1_bare_sha256/objects/info/packs",
+        "modules/git/tests/repos/repo1_bare_sha256/packed-refs",
+        "modules/git/tests/repos/repo1_bare_sha256/refs/**",
+        "modules/git/tests/repos/repo2_empty/**",
+        "modules/git/tests/repos/repo3_notes/HEAD",
+        "modules/git/tests/repos/repo3_notes/config",
+        "modules/git/tests/repos/repo3_notes/logs/**",
+        "modules/git/tests/repos/repo3_notes/refs/**",
+        "modules/git/tests/repos/repo4_commitsbetween/HEAD",
+        "modules/git/tests/repos/repo4_commitsbetween/config",
+        "modules/git/tests/repos/repo4_commitsbetween/logs/**",
+        "modules/git/tests/repos/repo4_commitsbetween/refs/**",
+        "modules/git/tests/repos/repo4_submodules/HEAD",
+        "modules/git/tests/repos/repo4_submodules/config",
+        "modules/git/tests/repos/repo4_submodules/refs/**",
+        "modules/git/tests/repos/repo5_pulls/HEAD",
+        "modules/git/tests/repos/repo5_pulls/config",
+        "modules/git/tests/repos/repo5_pulls/objects/info/**",
+        "modules/git/tests/repos/repo5_pulls/packed-refs",
+        "modules/git/tests/repos/repo5_pulls/refs/**",
+        "modules/git/tests/repos/repo5_pulls_sha256/HEAD",
+        "modules/git/tests/repos/repo5_pulls_sha256/config",
+        "modules/git/tests/repos/repo5_pulls_sha256/info/**",
+        "modules/git/tests/repos/repo5_pulls_sha256/objects/info/packs",
+        "modules/git/tests/repos/repo5_pulls_sha256/packed-refs",
+        "modules/git/tests/repos/repo5_pulls_sha256/refs/**",
+        "modules/git/tests/repos/repo6_blame/HEAD",
+        "modules/git/tests/repos/repo6_blame/config",
+        "modules/git/tests/repos/repo6_blame/refs/**",
+        "modules/git/tests/repos/repo6_blame_sha256/HEAD",
+        "modules/git/tests/repos/repo6_blame_sha256/config",
+        "modules/git/tests/repos/repo6_blame_sha256/info/**",
+        "modules/git/tests/repos/repo6_blame_sha256/objects/info/packs",
+        "modules/git/tests/repos/repo6_blame_sha256/packed-refs",
+        "modules/git/tests/repos/repo6_blame_sha256/refs/**",
+        "modules/git/tests/repos/repo6_merge/HEAD",
+        "modules/git/tests/repos/repo6_merge/refs/**",
+        "modules/git/tests/repos/repo6_merge_sha256/HEAD",
+        "modules/git/tests/repos/repo6_merge_sha256/config",
+        "modules/git/tests/repos/repo6_merge_sha256/info/**",
+        "modules/git/tests/repos/repo6_merge_sha256/objects/info/packs",
+        "modules/git/tests/repos/repo6_merge_sha256/packed-refs",
+        "modules/git/tests/repos/repo6_merge_sha256/refs/**",
+        "modules/git/tree.go",
+        "modules/git/tree_blob.go",
+        "modules/git/tree_entry.go",
+        "modules/git/tree_entry_common_test.go",
+        "modules/git/tree_entry_mode.go",
+        "modules/git/tree_entry_test.go",
+        "modules/git/tree_test.go",
+        "modules/git/url/**",
+        "modules/git/utils.go",
+        "modules/git/utils_test.go",
+        "modules/glob/**",
+        "modules/globallock/**",
+        "modules/graceful/**",
+        "modules/gtprof/**",
+        "modules/hcaptcha/**",
+        "modules/highlight/**",
+        "modules/htmlutil/**",
+        "modules/httpcache/**",
+        "modules/httplib/**",
+        "modules/imagecaptcha/**",
+        "modules/indexer/**",
+        "modules/issue/**",
+        "modules/json/**",
+        "modules/label/**",
+        "modules/lfstransfer/**",
+        "modules/log/**",
+        "modules/markup/camo.go",
+        "modules/markup/camo_test.go",
+        "modules/markup/common/**",
+        "modules/markup/console/**",
+        "modules/markup/csv/**",
+        "modules/markup/html.go",
+        "modules/markup/html_codepreview.go",
+        "modules/markup/html_codepreview_test.go",
+        "modules/markup/html_commit.go",
+        "modules/markup/html_email.go",
+        "modules/markup/html_emoji.go",
+        "modules/markup/html_internal_test.go",
+        "modules/markup/html_issue.go",
+        "modules/markup/html_issue_test.go",
+        "modules/markup/html_link.go",
+        "modules/markup/html_link_test.go",
+        "modules/markup/html_mention.go",
+        "modules/markup/html_node.go",
+        "modules/markup/html_node_test.go",
+        "modules/markup/html_test.go",
+        "modules/markup/html_toc_test.go",
+        "modules/markup/internal/**",
+        "modules/markup/jupyter/**",
+        "modules/markup/main_test.go",
+        "modules/markup/markdown/**",
+        "modules/markup/mdstripper/**",
+        "modules/markup/orgmode/**",
+        "modules/markup/render.go",
+        "modules/markup/render_helper.go",
+        "modules/markup/render_link.go",
+        "modules/markup/render_link_test.go",
+        "modules/markup/render_test.go",
+        "modules/markup/renderer.go",
+        "modules/markup/sanitizer.go",
+        "modules/markup/sanitizer_custom.go",
+        "modules/markup/sanitizer_default.go",
+        "modules/markup/sanitizer_default_test.go",
+        "modules/markup/sanitizer_description.go",
+        "modules/markup/sanitizer_description_test.go",
+        "modules/mcaptcha/**",
+        "modules/metrics/**",
+        "modules/migration/**",
+        "modules/nosql/**",
+        "modules/optional/**",
+        "modules/options/**",
+        "modules/packages/**",
+        "modules/paginator/**",
+        "modules/pprof/**",
+        "modules/private/**",
+        "modules/process/**",
+        "modules/proxy/**",
+        "modules/proxyprotocol/**",
+        "modules/public/**",
+        "modules/queue/**",
+        "modules/recaptcha/**",
+        "modules/references/**",
+        "modules/regexplru/**",
+        "modules/reqctx/**",
+        "modules/secret/**",
+        "modules/session/**",
+        "modules/setting/**",
+        "modules/sitemap/**",
+        "modules/ssh/**",
+        "modules/storage/**",
+        "modules/structs/**",
+        "modules/svg/**",
+        "modules/system/**",
+        "modules/tailmsg/**",
+        "modules/tempdir/**",
+        "modules/templates/**",
+        "modules/test/**",
+        "modules/testlogger/**",
+        "modules/timeutil/**",
+        "modules/translation/**",
+        "modules/turnstile/**",
+        "modules/typesniffer/**",
+        "modules/updatechecker/**",
+        "modules/uri/**",
+        "modules/user/**",
+        "modules/util/**",
+        "modules/validation/**",
+        "modules/web/**",
+        "modules/webhook/**",
+        "modules/zstd/**",
+        "options/fileicon/**",
+        "options/gitignore/**",
+        "options/label/**",
+        "options/locale/**",
+        "options/readme/**",
+        "package.json",
+        "playwright.config.ts",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "public/.well-known/**",
+        "public/assets/emoji.json",
+        "public/assets/img/favicon.svg",
+        "public/assets/img/gitea.svg",
+        "public/assets/img/logo.svg",
+        "public/assets/img/svg/**",
+        "pyproject.toml",
+        "renovate.json5",
+        "routers/api/actions/**",
+        "routers/api/packages/**",
+        "routers/api/v1/activitypub/**",
+        "routers/api/v1/admin/**",
+        "routers/api/v1/api.go",
+        "routers/api/v1/api_test.go",
+        "routers/api/v1/misc/**",
+        "routers/api/v1/notify/**",
+        "routers/api/v1/org/**",
+        "routers/api/v1/packages/**",
+        "routers/api/v1/settings/**",
+        "routers/api/v1/shared/**",
+        "routers/api/v1/swagger/**",
+        "routers/api/v1/token/**",
+        "routers/api/v1/user/**",
+        "routers/api/v1/utils/**",
+        "routers/common/**",
+        "routers/init.go",
+        "routers/install/**",
+        "routers/private/actions.go",
+        "routers/private/hook_post_receive.go",
+        "routers/private/hook_pre_receive.go",
+        "routers/private/hook_pre_receive_test.go",
+        "routers/private/hook_proc_receive.go",
+        "routers/private/hook_verification.go",
+        "routers/private/hook_verification_test.go",
+        "routers/private/internal.go",
+        "routers/private/internal_repo.go",
+        "routers/private/key.go",
+        "routers/private/mail.go",
+        "routers/private/main_test.go",
+        "routers/private/manager.go",
+        "routers/private/manager_process.go",
+        "routers/private/manager_unix.go",
+        "routers/private/manager_windows.go",
+        "routers/private/restore_repo.go",
+        "routers/private/serv.go",
+        "routers/private/ssh_log.go",
+        "routers/private/tests/repos/repo1_hook_verification/HEAD",
+        "routers/private/tests/repos/repo1_hook_verification/config",
+        "routers/private/tests/repos/repo1_hook_verification/info/**",
+        "routers/private/tests/repos/repo1_hook_verification/logs/**",
+        "routers/private/tests/repos/repo1_hook_verification/objects/info/**",
+        "routers/private/tests/repos/repo1_hook_verification/refs/**",
+        "routers/private/tests/repos/repo1_hook_verification_dummy_gpg_key.txt",
+        "routers/utils/**",
+        "routers/web/**",
+        "services/actions/**",
+        "services/agit/**",
+        "services/asymkey/**",
+        "services/attachment/**",
+        "services/audit/**",
+        "services/auth/**",
+        "services/automerge/**",
+        "services/automergequeue/**",
+        "services/context/**",
+        "services/contexttest/**",
+        "services/convert/**",
+        "services/cron/**",
+        "services/doctor/**",
+        "services/externalaccount/**",
+        "services/feed/**",
+        "services/forms/**",
+        "services/git/**",
+        "services/gitdiff/**",
+        "services/gitproxy/**",
+        "services/indexer/**",
+        "services/issue/**",
+        "services/lfs/**",
+        "services/mailer/incoming/**",
+        "services/mailer/mail.go",
+        "services/mailer/mail_comment.go",
+        "services/mailer/mail_issue.go",
+        "services/mailer/mail_issue_common.go",
+        "services/mailer/mail_release.go",
+        "services/mailer/mail_release_test.go",
+        "services/mailer/mail_repo.go",
+        "services/mailer/mail_team_invite.go",
+        "services/mailer/mail_test.go",
+        "services/mailer/mail_user.go",
+        "services/mailer/mail_workflow_run.go",
+        "services/mailer/mail_workflow_run_test.go",
+        "services/mailer/mailer.go",
+        "services/mailer/main_test.go",
+        "services/mailer/notify.go",
+        "services/mailer/sender/**",
+        "services/mailer/token/**",
+        "services/markup/**",
+        "services/migrations/**",
+        "services/mirror/**",
+        "services/notifications/**",
+        "services/notify/**",
+        "services/oauth2_provider/**",
+        "services/org/**",
+        "services/packages/**",
+        "services/projects/**",
+        "services/pubsub/**",
+        "services/pull/**",
+        "services/release/**",
+        "services/secrets/**",
+        "services/task/**",
+        "services/uinotification/**",
+        "services/user/**",
+        "services/versioned_migration/**",
+        "services/webhook/**",
+        "services/websocket/**",
+        "services/webtheme/**",
+        "services/wiki/**",
+        "snap/**",
+        "stylelint.config.ts",
+        "tailwind.config.ts",
+        "templates/**",
+        "tests/e2e/**",
+        "tests/fuzz/**",
+        "tests/gitea-lfs-meta/7b/**",
+        "tests/gitea-lfs-meta/9d/**",
+        "tests/gitea-repositories-meta/limited_org/private_repo_on_limited_org.git/HEAD",
+        "tests/gitea-repositories-meta/limited_org/private_repo_on_limited_org.git/config",
+        "tests/gitea-repositories-meta/limited_org/private_repo_on_limited_org.git/refs/**",
+        "tests/gitea-repositories-meta/limited_org/public_repo_on_limited_org.git/HEAD",
+        "tests/gitea-repositories-meta/limited_org/public_repo_on_limited_org.git/config",
+        "tests/gitea-repositories-meta/limited_org/public_repo_on_limited_org.git/refs/**",
+        "tests/gitea-repositories-meta/migration/lfs-test.git/HEAD",
+        "tests/gitea-repositories-meta/migration/lfs-test.git/config",
+        "tests/gitea-repositories-meta/migration/lfs-test.git/hooks/**",
+        "tests/gitea-repositories-meta/migration/lfs-test.git/lfs/**",
+        "tests/gitea-repositories-meta/migration/lfs-test.git/refs/**",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker.git/HEAD",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker.git/config",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker.git/refs/**",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_alpha.git/HEAD",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_alpha.git/config",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_alpha.git/refs/**",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_numeric.git/HEAD",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_numeric.git/config",
+        "tests/gitea-repositories-meta/org26/repo_external_tracker_numeric.git/refs/**",
+        "tests/gitea-repositories-meta/org3/repo3.git/HEAD",
+        "tests/gitea-repositories-meta/org3/repo3.git/config",
+        "tests/gitea-repositories-meta/org3/repo3.git/hooks/**",
+        "tests/gitea-repositories-meta/org3/repo3.git/refs/**",
+        "tests/gitea-repositories-meta/org3/repo5.git/HEAD",
+        "tests/gitea-repositories-meta/org3/repo5.git/config",
+        "tests/gitea-repositories-meta/org3/repo5.git/hooks/**",
+        "tests/gitea-repositories-meta/org3/repo5.git/refs/**",
+        "tests/gitea-repositories-meta/org41/**",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/HEAD",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/config",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/description",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/hooks/**",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/info/**",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/objects/info/**",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/packed-refs",
+        "tests/gitea-repositories-meta/org42/search-by-path.git/refs/**",
+        "tests/gitea-repositories-meta/privated_org/private_repo_on_private_org.git/HEAD",
+        "tests/gitea-repositories-meta/privated_org/private_repo_on_private_org.git/config",
+        "tests/gitea-repositories-meta/privated_org/private_repo_on_private_org.git/refs/**",
+        "tests/gitea-repositories-meta/privated_org/public_repo_on_private_org.git/HEAD",
+        "tests/gitea-repositories-meta/privated_org/public_repo_on_private_org.git/config",
+        "tests/gitea-repositories-meta/privated_org/public_repo_on_private_org.git/refs/**",
+        "tests/gitea-repositories-meta/user12/repo10.git/HEAD",
+        "tests/gitea-repositories-meta/user12/repo10.git/config",
+        "tests/gitea-repositories-meta/user12/repo10.git/hooks/**",
+        "tests/gitea-repositories-meta/user12/repo10.git/info/**",
+        "tests/gitea-repositories-meta/user12/repo10.git/objects/info/**",
+        "tests/gitea-repositories-meta/user12/repo10.git/refs/**",
+        "tests/gitea-repositories-meta/user13/repo11.git/HEAD",
+        "tests/gitea-repositories-meta/user13/repo11.git/config",
+        "tests/gitea-repositories-meta/user13/repo11.git/hooks/**",
+        "tests/gitea-repositories-meta/user13/repo11.git/info/**",
+        "tests/gitea-repositories-meta/user13/repo11.git/objects/info/**",
+        "tests/gitea-repositories-meta/user13/repo11.git/refs/**",
+        "tests/gitea-repositories-meta/user2/commits_search_test.git/HEAD",
+        "tests/gitea-repositories-meta/user2/commits_search_test.git/config",
+        "tests/gitea-repositories-meta/user2/commits_search_test.git/packed-refs",
+        "tests/gitea-repositories-meta/user2/commits_search_test.git/refs/**",
+        "tests/gitea-repositories-meta/user2/commitsonpr.git/HEAD",
+        "tests/gitea-repositories-meta/user2/commitsonpr.git/config",
+        "tests/gitea-repositories-meta/user2/commitsonpr.git/info/**",
+        "tests/gitea-repositories-meta/user2/commitsonpr.git/objects/info/**",
+        "tests/gitea-repositories-meta/user2/commitsonpr.git/refs/**",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/HEAD",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/config",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/hooks/**",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/info/**",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/objects/info/**",
+        "tests/gitea-repositories-meta/user2/git_hooks_test.git/refs/**",
+        "tests/gitea-repositories-meta/user2/glob.git/HEAD",
+        "tests/gitea-repositories-meta/user2/glob.git/config",
+        "tests/gitea-repositories-meta/user2/glob.git/refs/**",
+        "tests/gitea-repositories-meta/user2/lfs.git/HEAD",
+        "tests/gitea-repositories-meta/user2/lfs.git/config",
+        "tests/gitea-repositories-meta/user2/lfs.git/refs/**",
+        "tests/gitea-repositories-meta/user2/readme-test.git/**",
+        "tests/gitea-repositories-meta/user2/repo-release.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo-release.git/config",
+        "tests/gitea-repositories-meta/user2/repo-release.git/refs/**",
+        "tests/gitea-repositories-meta/user2/repo1.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo1.git/config",
+        "tests/gitea-repositories-meta/user2/repo1.git/hooks/**",
+        "tests/gitea-repositories-meta/user2/repo1.git/info/**",
+        "tests/gitea-repositories-meta/user2/repo1.git/objects/info/**",
+        "tests/gitea-repositories-meta/user2/repo1.git/refs/**",
+        "tests/gitea-repositories-meta/user2/repo1.wiki.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo1.wiki.git/config",
+        "tests/gitea-repositories-meta/user2/repo1.wiki.git/refs/**",
+        "tests/gitea-repositories-meta/user2/repo15.git/**",
+        "tests/gitea-repositories-meta/user2/repo16.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo16.git/config",
+        "tests/gitea-repositories-meta/user2/repo16.git/refs/**",
+        "tests/gitea-repositories-meta/user2/repo2.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo2.git/config",
+        "tests/gitea-repositories-meta/user2/repo2.git/info/**",
+        "tests/gitea-repositories-meta/user2/repo2.git/objects/info/packs",
+        "tests/gitea-repositories-meta/user2/repo2.git/packed-refs",
+        "tests/gitea-repositories-meta/user2/repo2.git/refs/**",
+        "tests/gitea-repositories-meta/user2/repo20.git/HEAD",
+        "tests/gitea-repositories-meta/user2/repo20.git/config",
+        "tests/gitea-repositories-meta/user2/repo20.git/hooks/**",
+        "tests/gitea-repositories-meta/user2/repo20.git/info/**",
+        "tests/gitea-repositories-meta/user2/repo20.git/objects/info/**",
+        "tests/gitea-repositories-meta/user2/repo20.git/refs/**",
+        "tests/gitea-repositories-meta/user2/utf8.git/HEAD",
+        "tests/gitea-repositories-meta/user2/utf8.git/config",
+        "tests/gitea-repositories-meta/user2/utf8.git/hooks/**",
+        "tests/gitea-repositories-meta/user2/utf8.git/info/**",
+        "tests/gitea-repositories-meta/user2/utf8.git/objects/info/**",
+        "tests/gitea-repositories-meta/user2/utf8.git/refs/**",
+        "tests/gitea-repositories-meta/user27/repo49.git/HEAD",
+        "tests/gitea-repositories-meta/user27/repo49.git/config",
+        "tests/gitea-repositories-meta/user27/repo49.git/hooks/**",
+        "tests/gitea-repositories-meta/user27/repo49.git/info/**",
+        "tests/gitea-repositories-meta/user27/repo49.git/objects/info/**",
+        "tests/gitea-repositories-meta/user27/repo49.git/refs/**",
+        "tests/gitea-repositories-meta/user27/template1.git/HEAD",
+        "tests/gitea-repositories-meta/user27/template1.git/config",
+        "tests/gitea-repositories-meta/user27/template1.git/hooks/**",
+        "tests/gitea-repositories-meta/user27/template1.git/info/**",
+        "tests/gitea-repositories-meta/user27/template1.git/objects/info/**",
+        "tests/gitea-repositories-meta/user27/template1.git/refs/**",
+        "tests/gitea-repositories-meta/user30/**",
+        "tests/gitea-repositories-meta/user40/**",
+        "tests/gitea-repositories-meta/user5/repo4.git/HEAD",
+        "tests/gitea-repositories-meta/user5/repo4.git/config",
+        "tests/gitea-repositories-meta/user5/repo4.git/refs/**",
+        "tests/integration/_mock_data/**",
+        "tests/integration/actions_approve_test.go",
+        "tests/integration/actions_artifact_preview_test.go",
+        "tests/integration/actions_concurrency_test.go",
+        "tests/integration/actions_concurrent_claim_test.go",
+        "tests/integration/actions_delete_run_test.go",
+        "tests/integration/actions_dynamic_matrix_test.go",
+        "tests/integration/actions_inputs_test.go",
+        "tests/integration/actions_invalid_workflow_test.go",
+        "tests/integration/actions_job_queue_test.go",
+        "tests/integration/actions_job_test.go",
+        "tests/integration/actions_job_token_test.go",
+        "tests/integration/actions_list_filter_test.go",
+        "tests/integration/actions_log_finalize_test.go",
+        "tests/integration/actions_log_test.go",
+        "tests/integration/actions_rerun_test.go",
+        "tests/integration/actions_reusable_workflow_test.go",
+        "tests/integration/actions_route_test.go",
+        "tests/integration/actions_runner_modify_test.go",
+        "tests/integration/actions_runner_sort_test.go",
+        "tests/integration/actions_runner_test.go",
+        "tests/integration/actions_schedule_test.go",
+        "tests/integration/actions_scoped_workflow_test.go",
+        "tests/integration/actions_settings_test.go",
+        "tests/integration/actions_trigger_test.go",
+        "tests/integration/actions_variables_test.go",
+        "tests/integration/admin_audit_test.go",
+        "tests/integration/admin_config_test.go",
+        "tests/integration/admin_user_org_test.go",
+        "tests/integration/admin_user_test.go",
+        "tests/integration/api_actions_artifact_test.go",
+        "tests/integration/api_actions_artifact_v4_test.go",
+        "tests/integration/api_actions_permission_test.go",
+        "tests/integration/api_actions_run_test.go",
+        "tests/integration/api_actions_runner_test.go",
+        "tests/integration/api_admin_org_test.go",
+        "tests/integration/api_admin_packages_test.go",
+        "tests/integration/api_admin_test.go",
+        "tests/integration/api_auth_test.go",
+        "tests/integration/api_branch_test.go",
+        "tests/integration/api_comment_attachment_test.go",
+        "tests/integration/api_comment_test.go",
+        "tests/integration/api_fork_test.go",
+        "tests/integration/api_gitignore_templates_test.go",
+        "tests/integration/api_gpg_keys_test.go",
+        "tests/integration/api_helper_for_declarative_test.go",
+        "tests/integration/api_httpsig_test.go",
+        "tests/integration/api_issue_attachment_test.go",
+        "tests/integration/api_issue_config_test.go",
+        "tests/integration/api_issue_dependency_test.go",
+        "tests/integration/api_issue_label_test.go",
+        "tests/integration/api_issue_lock_test.go",
+        "tests/integration/api_issue_milestone_test.go",
+        "tests/integration/api_issue_pin_test.go",
+        "tests/integration/api_issue_reaction_test.go",
+        "tests/integration/api_issue_stopwatch_test.go",
+        "tests/integration/api_issue_subscription_test.go",
+        "tests/integration/api_issue_templates_test.go",
+        "tests/integration/api_issue_test.go",
+        "tests/integration/api_issue_tracked_time_test.go",
+        "tests/integration/api_keys_test.go",
+        "tests/integration/api_label_templates_test.go",
+        "tests/integration/api_license_templates_test.go",
+        "tests/integration/api_notification_test.go",
+        "tests/integration/api_oauth2_apps_test.go",
+        "tests/integration/api_org_avatar_test.go",
+        "tests/integration/api_org_test.go",
+        "tests/integration/api_packages_alpine_test.go",
+        "tests/integration/api_packages_arch_test.go",
+        "tests/integration/api_packages_cargo_test.go",
+        "tests/integration/api_packages_chef_test.go",
+        "tests/integration/api_packages_composer_test.go",
+        "tests/integration/api_packages_conan_test.go",
+        "tests/integration/api_packages_conda_test.go",
+        "tests/integration/api_packages_container_test.go",
+        "tests/integration/api_packages_cran_test.go",
+        "tests/integration/api_packages_debian_test.go",
+        "tests/integration/api_packages_generic_test.go",
+        "tests/integration/api_packages_goproxy_test.go",
+        "tests/integration/api_packages_helm_test.go",
+        "tests/integration/api_packages_maven_test.go",
+        "tests/integration/api_packages_npm_test.go",
+        "tests/integration/api_packages_nuget_test.go",
+        "tests/integration/api_packages_pub_test.go",
+        "tests/integration/api_packages_pypi_test.go",
+        "tests/integration/api_packages_rpm_test.go",
+        "tests/integration/api_packages_rubygems_test.go",
+        "tests/integration/api_packages_swift_test.go",
+        "tests/integration/api_packages_terraform_test.go",
+        "tests/integration/api_packages_test.go",
+        "tests/integration/api_packages_vagrant_test.go",
+        "tests/integration/api_private_serv_test.go",
+        "tests/integration/api_project_test.go",
+        "tests/integration/api_public_only_test.go",
+        "tests/integration/api_pull_commits_test.go",
+        "tests/integration/api_pull_review_test.go",
+        "tests/integration/api_pull_test.go",
+        "tests/integration/api_releases_attachment_test.go",
+        "tests/integration/api_releases_test.go",
+        "tests/integration/api_repo_archive_test.go",
+        "tests/integration/api_repo_avatar_test.go",
+        "tests/integration/api_repo_branch_test.go",
+        "tests/integration/api_repo_collaborator_test.go",
+        "tests/integration/api_repo_compare_test.go",
+        "tests/integration/api_repo_delete_test.go",
+        "tests/integration/api_repo_edit_test.go",
+        "tests/integration/api_repo_file_create_test.go",
+        "tests/integration/api_repo_file_delete_test.go",
+        "tests/integration/api_repo_file_diffpatch_test.go",
+        "tests/integration/api_repo_file_get_test.go",
+        "tests/integration/api_repo_file_helpers.go",
+        "tests/integration/api_repo_file_update_test.go",
+        "tests/integration/api_repo_files_change_test.go",
+        "tests/integration/api_repo_files_get_test.go",
+        "tests/integration/api_repo_get_contents_list_test.go",
+        "tests/integration/api_repo_get_contents_test.go",
+        "tests/integration/api_repo_git_blobs_test.go",
+        "tests/integration/api_repo_git_commits_test.go",
+        "tests/integration/api_repo_git_hook_test.go",
+        "tests/integration/api_repo_git_notes_test.go",
+        "tests/integration/api_repo_git_ref_test.go",
+        "tests/integration/api_repo_git_tags_test.go",
+        "tests/integration/api_repo_git_trees_test.go",
+        "tests/integration/api_repo_hook_test.go",
+        "tests/integration/api_repo_languages_test.go",
+        "tests/integration/api_repo_lfs_locks_test.go",
+        "tests/integration/api_repo_lfs_migrate_test.go",
+        "tests/integration/api_repo_lfs_test.go",
+        "tests/integration/api_repo_license_test.go",
+        "tests/integration/api_repo_raw_test.go",
+        "tests/integration/api_repo_secrets_test.go",
+        "tests/integration/api_repo_tags_test.go",
+        "tests/integration/api_repo_teams_test.go",
+        "tests/integration/api_repo_test.go",
+        "tests/integration/api_repo_topic_test.go",
+        "tests/integration/api_repo_variables_test.go",
+        "tests/integration/api_repository_creation_token_scope_test.go",
+        "tests/integration/api_settings_test.go",
+        "tests/integration/api_team_test.go",
+        "tests/integration/api_team_user_test.go",
+        "tests/integration/api_token_self_test.go",
+        "tests/integration/api_token_test.go",
+        "tests/integration/api_twofa_test.go",
+        "tests/integration/api_user_avatar_test.go",
+        "tests/integration/api_user_block_test.go",
+        "tests/integration/api_user_email_test.go",
+        "tests/integration/api_user_follow_test.go",
+        "tests/integration/api_user_heatmap_test.go",
+        "tests/integration/api_user_info_test.go",
+        "tests/integration/api_user_org_perm_test.go",
+        "tests/integration/api_user_orgs_test.go",
+        "tests/integration/api_user_public_only_test.go",
+        "tests/integration/api_user_search_test.go",
+        "tests/integration/api_user_secrets_test.go",
+        "tests/integration/api_user_star_test.go",
+        "tests/integration/api_user_update_test.go",
+        "tests/integration/api_user_variables_test.go",
+        "tests/integration/api_user_visibility_test.go",
+        "tests/integration/api_user_watch_test.go",
+        "tests/integration/api_wiki_test.go",
+        "tests/integration/attachment_test.go",
+        "tests/integration/auth_ldap_test.go",
+        "tests/integration/auth_oauth2_test.go",
+        "tests/integration/branches_test.go",
+        "tests/integration/change_default_branch_test.go",
+        "tests/integration/cmd_keys_test.go",
+        "tests/integration/compare_test.go",
+        "tests/integration/config_instance_test.go",
+        "tests/integration/cors_test.go",
+        "tests/integration/create_no_session_test.go",
+        "tests/integration/db_collation_test.go",
+        "tests/integration/delete_user_test.go",
+        "tests/integration/deploy_token_test.go",
+        "tests/integration/download_test.go",
+        "tests/integration/dump_restore_test.go",
+        "tests/integration/editor_test.go",
+        "tests/integration/empty_repo_test.go",
+        "tests/integration/ephemeral_actions_runner_deletion_test.go",
+        "tests/integration/explore_repos_test.go",
+        "tests/integration/explore_user_test.go",
+        "tests/integration/feed_repo_test.go",
+        "tests/integration/feed_user_test.go",
+        "tests/integration/git_general_test.go",
+        "tests/integration/git_helper_for_declarative_test.go",
+        "tests/integration/git_lfs_ssh_test.go",
+        "tests/integration/git_misc_test.go",
+        "tests/integration/git_push_test.go",
+        "tests/integration/git_smart_http_test.go",
+        "tests/integration/git_ssh_redirect_test.go",
+        "tests/integration/goget_test.go",
+        "tests/integration/gpg_ssh_git_test.go",
+        "tests/integration/heatmap_test.go",
+        "tests/integration/html_helper.go",
+        "tests/integration/incoming_email_test.go",
+        "tests/integration/integration_test.go",
+        "tests/integration/issue_label_scope_test.go",
+        "tests/integration/issue_test.go",
+        "tests/integration/issue_timetrack_test.go",
+        "tests/integration/lfs_getobject_test.go",
+        "tests/integration/lfs_local_endpoint_test.go",
+        "tests/integration/lfs_view_test.go",
+        "tests/integration/linguist_test.go",
+        "tests/integration/links_test.go",
+        "tests/integration/manual_merge_test.go",
+        "tests/integration/markup_external_test.go",
+        "tests/integration/migrate_test.go",
+        "tests/integration/migration-test/migration_test.go",
+        "tests/integration/mirror_pull_test.go",
+        "tests/integration/mirror_push_test.go",
+        "tests/integration/nonascii_branches_test.go",
+        "tests/integration/oauth_avatar_test.go",
+        "tests/integration/oauth_test.go",
+        "tests/integration/org_count_test.go",
+        "tests/integration/org_profile_test.go",
+        "tests/integration/org_project_test.go",
+        "tests/integration/org_team_invite_test.go",
+        "tests/integration/org_test.go",
+        "tests/integration/org_worktime_test.go",
+        "tests/integration/packages_service_test.go",
+        "tests/integration/private-testing.key",
+        "tests/integration/privateactivity_test.go",
+        "tests/integration/project_test.go",
+        "tests/integration/pull_comment_test.go",
+        "tests/integration/pull_commit_test.go",
+        "tests/integration/pull_compare_test.go",
+        "tests/integration/pull_create_test.go",
+        "tests/integration/pull_diff_test.go",
+        "tests/integration/pull_merge_test.go",
+        "tests/integration/pull_review_test.go",
+        "tests/integration/pull_status_test.go",
+        "tests/integration/pull_update_test.go",
+        "tests/integration/release_test.go",
+        "tests/integration/rename_branch_test.go",
+        "tests/integration/repo_activity_test.go",
+        "tests/integration/repo_archive_test.go",
+        "tests/integration/repo_branch_test.go",
+        "tests/integration/repo_commits_search_test.go",
+        "tests/integration/repo_commits_test.go",
+        "tests/integration/repo_fork_test.go",
+        "tests/integration/repo_generate_test.go",
+        "tests/integration/repo_home_token_scope_test.go",
+        "tests/integration/repo_merge_upstream_test.go",
+        "tests/integration/repo_migrate_test.go",
+        "tests/integration/repo_search_test.go",
+        "tests/integration/repo_tag_test.go",
+        "tests/integration/repo_test.go",
+        "tests/integration/repo_topic_test.go",
+        "tests/integration/repo_visibility_test.go",
+        "tests/integration/repo_watch_test.go",
+        "tests/integration/repo_webhook_test.go",
+        "tests/integration/repofiles_change_test.go",
+        "tests/integration/session_test.go",
+        "tests/integration/setting_test.go",
+        "tests/integration/signin_test.go",
+        "tests/integration/signout_test.go",
+        "tests/integration/signup_test.go",
+        "tests/integration/ssh_key_test.go",
+        "tests/integration/timetracking_test.go",
+        "tests/integration/user_avatar_test.go",
+        "tests/integration/user_settings_oauth2_grant_test.go",
+        "tests/integration/user_settings_test.go",
+        "tests/integration/user_test.go",
+        "tests/integration/version_test.go",
+        "tests/integration/view_test.go",
+        "tests/integration/webauthn_test.go",
+        "tests/integration/wiki_test.go",
+        "tests/integration/workflow_run_api_check_test.go",
+        "tests/mssql.ini.tmpl",
+        "tests/mysql.ini.tmpl",
+        "tests/pgsql.ini.tmpl",
+        "tests/sqlite.ini.tmpl",
+        "tests/test_utils.go",
+        "tests/testdata/**",
+        "tools/**",
+        "tsconfig.json",
+        "types.d.ts",
+        "uv.lock",
+        "vite.config.ts",
+        "vitest.config.ts",
+        "web_src/**"
+      ],
+      "text": "Copyright (c) 2016 The Gitea Authors\nCopyright (c) 2015 The Gogs Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 The Gitea Authors; Copyright (c) 2015 The Gogs Authors, MIT license (LICENSE), https://github.com/go-gitea/gitea."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "modules/lfs/**"
+      ],
+      "text": "Copyright (c) 2016 The Gitea Authors\nCopyright (c) GitHub, Inc. and LFS Test Server contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 The Gitea Authors; Copyright (c) GitHub, Inc. and LFS Test Server contributors, MIT license (LICENSE), https://github.com/go-gitea/gitea/tree/1c117a9352e4a64cd301028403c33949ab146424/modules/lfs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.AllowList"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GetCommentsForPullRequest_%7B%22pullRequestId%22%3A%224%22%7D"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GetPullRequest_%7B%22pullRequestId%22%3A%224%22%7D"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GetRepository_%7B%22repositoryName%22%3A%22test_repo%22%7D"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ListPullRequests_%7B%22repositoryName%22%3A%22test_repo%22%7D"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.chunk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rootless"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.variables"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/2c88dba9f760a1a58469b67fee2b698ef7e9399c4ca4f34a14ccbe39f623"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/2e5c64b4f0024b9901ec6afe9ea052f3c9b6ff9f4b07956d8c48c86fca82"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Actionscript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ada"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Agda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Alteryx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AltiumDesigner"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Android"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Anjuta"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ansible"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AppEngine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AppceleratorTitanium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ArchLinuxPackages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Archives"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AtmelStudio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AutoIt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AutomationStudio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Autotools"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/B4X"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BSDmakefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Backup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ballerina"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Bazaar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Bazel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Beef"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Bitrix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BricxCC"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/C"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/C++"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CDK"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CFWheels"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CMake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CUDA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CVS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CakePHP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Calabash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChefCookbook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Clojure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Cloud9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CodeIgniter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CodeKit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CodeSniffer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CommonLisp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Composer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Concrete5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Coq"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Cordova"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CraftCMS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/D"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DCO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DM"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DartEditor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DefaultBranch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Delphi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Diff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dreamweaver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dropbox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Drupal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Drupal7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ECU-TEST"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/EPiServer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Eagle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Eclipse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/EiffelStudio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Elisp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Elixir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Elm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Emacs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ensime"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Erlang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Espresso"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Exercism"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ExpressionEngine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ExtJs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Fancy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Finale"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Firebase"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FlaxEngine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FlexBuilder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Flutter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ForceDotCom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Fortran"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/FuelPHP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F1%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F1%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F10%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F10%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F11%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F11%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F12%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F12%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F13%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F13%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F2%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F2%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F3%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F3%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F4%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F4%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F5%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F5%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F6%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F6%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F7%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F7%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F8%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F8%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F9%2Fcomments%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2F9%2Freactions%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2Fcomments%2F116550%2Freactions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2Fcomments%2F116552%2Freactions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2Fcomments%2F1553%2Freactions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%2Fcomments%2F1554%2Freactions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%3Flimit%3D2%26page%3D3%26state%3Dall%26type%3Dissues"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%3Flimit%3D47%26page%3D1%26state%3Dall%26type%3Dissues"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fissues%3Flimit%3D50%26page%3D1%26state%3Dall%26type%3Dissues"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Flabels%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fmilestones%3Flimit%3D50%26page%3D1%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F10%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F11%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F12%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F13%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F7%2Freviews%2F1770%2Fcomments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F7%2Freviews%2F1771%2Fcomments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F7%2Freviews%2F1772%2Fcomments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F7%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F8%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%2F9%2Freviews%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%3Flimit%3D3%26page%3D1%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%3Flimit%3D49%26page%3D1%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Fpulls%3Flimit%3D50%26page%3D1%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Freleases%3Flimit%3D50%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Fgitea%2Ftest_repo%2Ftopics%3Flimit%3D0%26page%3D1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Flunnytest%2FTESTREPO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Flunnytest%2FTESTREPO%2Fissues%2F1%2Fcomments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Flunnytest%2FTESTREPO%2Fissues%3Fpage%3D1%26state%3Dopen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Flunnytest%2FTESTREPO%2Flabels"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Frepos%2Flunnytest%2FTESTREPO%2Fmilestones"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Fsettings%2Fapi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv1%2Fversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frate_limit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F1%2Freactions%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F1%2Freactions%3Fpage%3D2%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F2%2Fcomments%3Fdirection%3Dasc%26per_page%3D100%26sort%3Dcreated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F2%2Freactions%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F2%2Freactions%3Fpage%3D2%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F2%2Freactions%3Fpage%3D3%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F2%2Freactions%3Fpage%3D4%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F3%2Freactions%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F4%2Freactions%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2F4%2Freactions%3Fpage%3D2%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2Fcomments%2F553111966%2Freactions%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2Fcomments%2F553111966%2Freactions%3Fpage%3D2%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%2Fcomments%2F553138856%2Freactions%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fissues%3Fdirection%3Dasc%26page%3D1%26per_page%3D2%26sort%3Dcreated%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Flabels%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fmilestones%3Fpage%3D1%26per_page%3D100%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F3%2Frequested_reviewers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F3%2Freviews%2F315859956%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F3%2Freviews%2F315860062%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F3%2Freviews%2F315861440%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F3%2Freviews%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F4%2Frequested_reviewers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F4%2Freviews%2F338338740%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F4%2Freviews%2F338339651%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F4%2Freviews%2F338349019%2Fcomments%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2F4%2Freviews%3Fper_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2Fcomments%2F363017488%2Freactions%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%2Fcomments%2F363029944%2Freactions%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Fpulls%3Fdirection%3Dasc%26page%3D1%26per_page%3D2%26sort%3Dcreated%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv3%2Frepos%2Fgo-gitea%2Ftest_repo%2Freleases%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F1%2Faward_emoji%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F1%2Faward_emoji%3Fpage%3D2%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Faward_emoji%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Faward_emoji%3Fpage%3D2%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Faward_emoji%3Fpage%3D3%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Faward_emoji%3Fpage%3D4%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Fdiscussions%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%2F2%2Fresource_state_events%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fissues%3Fpage%3D1%26per_page%3D2%26sort%3Dasc%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Flabels%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F1%2Fapprovals"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F2%2Fapprovals"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F3%2Faward_emoji%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%2F4%2Faward_emoji%3Fpage%3D1%26per_page%3D2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmerge_requests%3Fpage%3D1%26per_page%3D2%26view%3Dsimple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Fmilestones%3Fpage%3D1%26per_page%3D100%26state%3Dall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2F15578026%2Freleases%3Fpage%3D1%26per_page%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fprojects%2Fgitea%252Ftest_repo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fapi%2Fv4%2Fversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Fmilestones"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftest%2Fcommits%2Fmaster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftest%2Fcommits%2Freadme-mr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftest%2Fmerge_requests%2F100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftest%2Fmerge_requests%3Fcount%3D1%26offset%3D0%26query%3D%2522Target%2BProject%2522%2Bis%2B%2522test%2522"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftickets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftickets%2F1%2Fnotes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftickets%2F2%2Fnotes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fgitea-test%2Ftickets%2Ftypes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2Fusers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fissues%2F397%2Fiterations"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fissues%2F398%2Fchanges"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fissues%2F398%2Fcomments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fissues%2F398%2Fiterations"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fissues%3Fcount%3D2%26offset%3D0%26query%3D%2522Project%2522%2Bis%2B%2522go-gitea-test_repo%2522%26withFields%3Dtrue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fprojects%2F149%2Fiterations%3Fcount%3D100%26offset%3D0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fprojects%2F149%2Fiterations%3Fcount%3D100%26offset%3D100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fprojects%3Fcount%3D1%26offset%3D0%26query%3D%2522Path%2522%2Bis%2B%2522go-gitea-test_repo%2522"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fpulls%2F186%2Fmerge-preview"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fpulls%2F186%2Freviews"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fpulls%3Fcount%3D1%26offset%3D0%26query%3D%2522Target%2BProject%2522%2Bis%2B%2522go-gitea-test_repo%2522"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fusers%2F317"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fusers%2F317%2Femail-addresses"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fusers%2F336"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fusers%2F336%2Femail-addresses"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GET_%2F~api%2Fversion%2Fserver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GNOMEShellExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GPG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GWT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Gcov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GitBook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/GitHubPages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Go"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Godot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Gradle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Grails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Gretl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Grüßen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Haskell"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Hexo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Hugo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/IAR"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/IAR_EWARM"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/IGORPro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Idris"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Images"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/InforCMS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JBoss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JBoss4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JBoss6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JDeveloper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JENKINS_HOME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JEnv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Jekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JetBrains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Jigsaw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Joomla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Julia"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JupyterNotebooks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/KDevelop4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Kate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Kentico"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/KiCad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Kohana"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Kotlin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LabVIEW"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Laravel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Lazarus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Leiningen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LemonStand"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LensStudio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LibreOffice"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Lilypond"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Linux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Lithium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Logtalk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Lua"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LyX"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MAINTAINERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MATLAB"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Magento"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Magento1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Magento2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Maven"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Mercurial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Mercury"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MetaProgrammingSystem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Metals"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Meteor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MicrosoftOffice"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ModelSim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Modelica"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Momentics"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MonoDevelop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Move"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NWjs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Nanoc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NasaSpecsIntact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NetBeans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Nikola"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Nim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ninja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Nix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NotepadPP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NotesAndCoreConfiguration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NotesAndExtendedConfiguration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NotesOnly"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OCaml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Objective-C"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Octave"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Opa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OpenCart"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OpenSSL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OpenTofu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OracleForms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Otto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PSoCCreator"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Packer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Patch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Perl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Perl6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Phalcon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Phoenix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pimcore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PlayFramework"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Plone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Plus+Is+Not+Space"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Prestashop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Processing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PuTTY"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Puppet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PureScript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Qooxdoo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Qt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/R"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ROS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ROS2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Racket"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Rails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Raku"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ReScript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Red"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Redcar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Redis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/RhodesRhomobile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Ruby"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Rust"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SAM"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SBT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SCons"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SPFx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SVN"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Sass"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Scala"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Scheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Scrivener"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Sdcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SeamGen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SketchUp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SlickEdit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Smalltalk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Splunk"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Stata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Stella"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Strapi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SublimeText"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SugarCRM"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Symfony"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SymphonyCMS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Syncthing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SynopsysVCS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TRANSLATORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Tags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TeX"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Terraform"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Terragrunt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TextMate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Textpattern"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ThinkPHP"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Toit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TortoiseGit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TurboGears2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/TwinCAT3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Typo3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/UiPath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Umbraco"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Unity"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/UnrealEngine"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/V"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VVVV"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Vagrant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Vim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VirtualEnv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Virtuoso"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VisualStudio"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VisualStudioCode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Vue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Waf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/WebMethods"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Windows"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/WordPress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Xcode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Xilinx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/XilinxISE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Xojo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Yeoman"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Yii"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ZendFramework"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Zephir"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Zig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/add-csv"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/add_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/archive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aws_credentials"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/branch2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commits"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/core"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/d6f175817f886ec6fbbc1515326465fa96c3bfd54a4ea06cfd6dbbd8340e0152"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/develop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entrypoint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/environment-to-ini"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/esp-idf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fb8f7d8435968c4f82a726a92395be4d16f2f63116caf36c8ad35c60831ab041"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/finish"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gitea"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/good-sign"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/good-sign-not-yet-validated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/head"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/home-md-img-check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/macOS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/master"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/master-clone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/modify_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/not-signed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packed-refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/packs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-checkout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-merge"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-receive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pr-to-update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-push"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-receive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/proc-receive"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/refs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove-files-a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove-files-b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove_file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/signed-tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sshd_config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sub-home-md-img-check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-patch-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test_branch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uVision"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/update"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ГлавнаяВетка"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Тэг"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/в"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/タグ"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ブランチ"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/人"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

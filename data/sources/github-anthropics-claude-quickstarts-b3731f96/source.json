@@ -1,0 +1,360 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/anthropics/claude-quickstarts",
+  "revision": "9ec32b91df50b0d4906cae64b13c6298055ff40d",
+  "checksum": "sha256:70c005538b5c77965487e54875b21ed9754f68dac437deda2dfdca601535b872",
+  "extract": {
+    "exclude": [
+      "computer-use-best-practices/docs/**",
+      "customer-support-agent/app/favicon.ico",
+      "customer-support-agent/tutorial/**",
+      "financial-data-analyst/app/favicon.ico",
+      "financial-data-analyst/app/fonts/**",
+      "financial-data-analyst/public/hero.png",
+      "financial-data-analyst/public/image-analysis.png",
+      "managed-agents/knowledge-wiki/example_data/analyst_note.docx"
+    ]
+  },
+  "history": {
+    "since": "364c32cfce5cd61f3536948aceadbf8edfa10dc2"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Anthropic\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nCopyright 2024 Anthropic, PBC.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/anthropics/claude-quickstarts: Copyright (c) 2023 Anthropic, MIT license (LICENSE), https://github.com/anthropics/claude-quickstarts; Copyright 2024 Anthropic, PBC., MIT license (LICENSE), https://github.com/anthropics/claude-quickstarts/tree/9ec32b91df50b0d4906cae64b13c6298055ff40d/computer-use-demo."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".pre-commit-config.yaml",
+        "CLAUDE.md",
+        "LICENSE",
+        "README.md",
+        "agents/**",
+        "autonomous-coding/**",
+        "browser-toolset/**",
+        "browser-use-demo/**",
+        "computer-toolset/**",
+        "computer-use-best-practices/.claude/**",
+        "computer-use-best-practices/.env.example",
+        "computer-use-best-practices/.gitignore",
+        "computer-use-best-practices/.vscode/**",
+        "computer-use-best-practices/README.md",
+        "computer-use-best-practices/computer_use/**",
+        "computer-use-best-practices/config.example.toml",
+        "computer-use-best-practices/constants.py",
+        "computer-use-best-practices/dev_ui/**",
+        "computer-use-best-practices/pyproject.toml",
+        "computer-use-best-practices/requirements.txt",
+        "computer-use-best-practices/sandbox/**",
+        "computer-use-best-practices/tests/**",
+        "customer-support-agent/.eslintrc.json",
+        "customer-support-agent/.gitignore",
+        "customer-support-agent/README.md",
+        "customer-support-agent/amplify.yml",
+        "customer-support-agent/app/api/**",
+        "customer-support-agent/app/globals.css",
+        "customer-support-agent/app/layout.tsx",
+        "customer-support-agent/app/lib/**",
+        "customer-support-agent/app/page.tsx",
+        "customer-support-agent/components/**",
+        "customer-support-agent/components.json",
+        "customer-support-agent/config.ts",
+        "customer-support-agent/lib/**",
+        "customer-support-agent/next.config.mjs",
+        "customer-support-agent/package-lock.json",
+        "customer-support-agent/package.json",
+        "customer-support-agent/postcss.config.mjs",
+        "customer-support-agent/public/**",
+        "customer-support-agent/styles/**",
+        "customer-support-agent/tailwind.config.ts",
+        "customer-support-agent/tsconfig.json",
+        "financial-data-analyst/.eslintrc.json",
+        "financial-data-analyst/.gitignore",
+        "financial-data-analyst/README.md",
+        "financial-data-analyst/app/api/**",
+        "financial-data-analyst/app/finance/**",
+        "financial-data-analyst/app/globals.css",
+        "financial-data-analyst/app/layout.tsx",
+        "financial-data-analyst/app/page.tsx",
+        "financial-data-analyst/components/**",
+        "financial-data-analyst/components.json",
+        "financial-data-analyst/hooks/**",
+        "financial-data-analyst/lib/**",
+        "financial-data-analyst/next.config.mjs",
+        "financial-data-analyst/package-lock.json",
+        "financial-data-analyst/package.json",
+        "financial-data-analyst/postcss.config.mjs",
+        "financial-data-analyst/public/ant-logo.svg",
+        "financial-data-analyst/public/wordmark-dark.svg",
+        "financial-data-analyst/public/wordmark.svg",
+        "financial-data-analyst/tailwind.config.ts",
+        "financial-data-analyst/tsconfig.json",
+        "financial-data-analyst/types/**",
+        "financial-data-analyst/utils/**",
+        "managed-agents/README.md",
+        "managed-agents/assistant-ui/**",
+        "managed-agents/chat-sdk/**",
+        "managed-agents/copilot-kit-ag-ui/**",
+        "managed-agents/daily-brief/**",
+        "managed-agents/knowledge-wiki/.gitignore",
+        "managed-agents/knowledge-wiki/CLAUDE.md",
+        "managed-agents/knowledge-wiki/README.md",
+        "managed-agents/knowledge-wiki/assets/**",
+        "managed-agents/knowledge-wiki/build_manifest.py",
+        "managed-agents/knowledge-wiki/distill_documents_into_knowledge_wiki.ipynb",
+        "managed-agents/knowledge-wiki/example_data/analyst_note_synthetic.md",
+        "managed-agents/knowledge-wiki/example_data/data_provider_extract.csv",
+        "managed-agents/knowledge-wiki/fetch_data_room.py",
+        "managed-agents/knowledge-wiki/fetch_real_deck.py",
+        "managed-agents/knowledge-wiki/make_analyst_docx.py",
+        "managed-agents/knowledge-wiki/manifest_full.json",
+        "managed-agents/knowledge-wiki/manifest_mini.json",
+        "managed-agents/knowledge-wiki/manifest_quickstart.json",
+        "managed-agents/knowledge-wiki/manifest_standard.json",
+        "managed-agents/knowledge-wiki/requirements.txt",
+        "managed-agents/knowledge-wiki/skill.md",
+        "managed-agents/knowledge-wiki/utilities.py",
+        "managed-agents/linear/**",
+        "managed-agents/mcp-server-typescript/**",
+        "managed-agents/roadtrip-planner/**",
+        "managed-agents/self-hosted-sandboxes/**",
+        "managed-agents/sentry/**",
+        "managed-agents/slack/**",
+        "pyproject.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Anthropic\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2023 Anthropic, MIT license (LICENSE), https://github.com/anthropics/claude-quickstarts."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "computer-use-demo/**"
+      ],
+      "text": "Copyright 2024 Anthropic, PBC.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2024 Anthropic, PBC., MIT license (LICENSE), https://github.com/anthropics/claude-quickstarts/tree/9ec32b91df50b0d4906cae64b13c6298055ff40d/computer-use-demo."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tint2rc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,594 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/scrapy/scrapy",
+  "revision": "fbfc89ae7b72531a97fb4ef6d65ef3af392aa45c",
+  "checksum": "sha256:3227737edf1fdab70de868e6c5390179c055e49e47d3c81f4bbb6fa1cc85daa4",
+  "extract": {
+    "exclude": [
+      "docs/topics/_images/**",
+      "tests/sample_data/compressed/bomb-br.bin",
+      "tests/sample_data/compressed/bomb-deflate.bin",
+      "tests/sample_data/compressed/bomb-gzip.bin",
+      "tests/sample_data/compressed/bomb-zstd.bin",
+      "tests/sample_data/compressed/feed-sample1.tar",
+      "tests/sample_data/compressed/feed-sample1.xml.bz2",
+      "tests/sample_data/compressed/feed-sample1.xml.gz",
+      "tests/sample_data/compressed/feed-sample1.zip",
+      "tests/sample_data/compressed/html-br.bin",
+      "tests/sample_data/compressed/html-gzip-deflate-gzip.bin",
+      "tests/sample_data/compressed/html-gzip-deflate.bin",
+      "tests/sample_data/compressed/html-gzip.bin",
+      "tests/sample_data/compressed/html-rawdeflate.bin",
+      "tests/sample_data/compressed/html-zlibdeflate.bin",
+      "tests/sample_data/compressed/html-zstd-static-content-size.bin",
+      "tests/sample_data/compressed/html-zstd-static-no-content-size.bin",
+      "tests/sample_data/compressed/html-zstd-streaming-no-content-size.bin",
+      "tests/sample_data/compressed/truncated-crc-error-short.gz",
+      "tests/sample_data/compressed/truncated-crc-error.gz",
+      "tests/sample_data/compressed/unexpected-eof.gz",
+      "tests/sample_data/feeds/feed-sample4.csv",
+      "tests/sample_data/feeds/feed-sample5.csv",
+      "tests/sample_data/test_site/files/**",
+      "tests/test_utils_misc/test.egg"
+    ]
+  },
+  "history": {
+    "since": "ba69c29e37cfd2e752ae185abffb64c8a68e3796"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) Scrapy developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n    1. Redistributions of source code must retain the above copyright notice,\n       this list of conditions, and the following disclaimer.\n\n    2. Redistributions in binary form must reproduce the above copyright\n       notice, this list of conditions, and the following disclaimer in the\n       documentation and/or other materials provided with the distribution.\n\n    3. Neither the name of Scrapy nor the names of its contributors may be used\n       to endorse or promote products derived from this software without\n       specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/scrapy/scrapy: Copyright (c) Scrapy developers., BSD-3-Clause license (LICENSE), https://github.com/scrapy/scrapy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yml",
+        "AGENTS.md",
+        "AUTHORS",
+        "CITATION.cff",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "INSTALL.md",
+        "LICENSE",
+        "NEWS",
+        "README.rst",
+        "SECURITY.md",
+        "codecov.yml",
+        "conftest.py",
+        "docs/Makefile",
+        "docs/_ext/**",
+        "docs/_static/**",
+        "docs/_templates/**",
+        "docs/_tests/**",
+        "docs/conf.py",
+        "docs/conftest.py",
+        "docs/contributing.rst",
+        "docs/faq.rst",
+        "docs/index.rst",
+        "docs/intro/**",
+        "docs/news/**",
+        "docs/news.rst",
+        "docs/requirements.in",
+        "docs/requirements.txt",
+        "docs/topics/addons.rst",
+        "docs/topics/agents.rst",
+        "docs/topics/api.rst",
+        "docs/topics/architecture.rst",
+        "docs/topics/asyncio.rst",
+        "docs/topics/autothrottle.rst",
+        "docs/topics/benchmarking.rst",
+        "docs/topics/commands.rst",
+        "docs/topics/components.rst",
+        "docs/topics/concepts.rst",
+        "docs/topics/contracts.rst",
+        "docs/topics/cookies.rst",
+        "docs/topics/coroutines.rst",
+        "docs/topics/debug.rst",
+        "docs/topics/deploy.rst",
+        "docs/topics/developer-tools.rst",
+        "docs/topics/djangoitem.rst",
+        "docs/topics/download-handlers.rst",
+        "docs/topics/downloader-middleware.rst",
+        "docs/topics/dynamic-content.rst",
+        "docs/topics/exceptions.rst",
+        "docs/topics/exporters.rst",
+        "docs/topics/extensions.rst",
+        "docs/topics/extraction.rst",
+        "docs/topics/feed-exports.rst",
+        "docs/topics/item-pipeline.rst",
+        "docs/topics/items.rst",
+        "docs/topics/jobs.rst",
+        "docs/topics/leaks.rst",
+        "docs/topics/link-extractors.rst",
+        "docs/topics/loaders.rst",
+        "docs/topics/logging.rst",
+        "docs/topics/media-pipeline.rst",
+        "docs/topics/optimize.rst",
+        "docs/topics/practices.rst",
+        "docs/topics/request-response.rst",
+        "docs/topics/scheduler.rst",
+        "docs/topics/scrapyd.rst",
+        "docs/topics/security.rst",
+        "docs/topics/selectors.rst",
+        "docs/topics/settings.rst",
+        "docs/topics/shell.rst",
+        "docs/topics/signals.rst",
+        "docs/topics/spider-middleware.rst",
+        "docs/topics/spiders.rst",
+        "docs/topics/stats.rst",
+        "docs/topics/telnetconsole.rst",
+        "docs/utils/**",
+        "docs/versioning.rst",
+        "extras/**",
+        "pyproject.toml",
+        "scrapy/**",
+        "sep/**",
+        "tests/AsyncCrawlerProcess/**",
+        "tests/AsyncCrawlerRunner/**",
+        "tests/CrawlerProcess/**",
+        "tests/CrawlerRunner/**",
+        "tests/__init__.py",
+        "tests/benchmarks/**",
+        "tests/ignores.txt",
+        "tests/keys/**",
+        "tests/mocks/**",
+        "tests/mockserver/**",
+        "tests/pipelines.py",
+        "tests/sample_data/books/**",
+        "tests/sample_data/compressed/feed-sample1.xml",
+        "tests/sample_data/compressed/unexpected-eof-output.txt",
+        "tests/sample_data/feeds/feed-sample1.xml",
+        "tests/sample_data/feeds/feed-sample2.xml",
+        "tests/sample_data/feeds/feed-sample3.csv",
+        "tests/sample_data/feeds/feed-sample6.csv",
+        "tests/sample_data/link_extractor/**",
+        "tests/sample_data/test_site/index.html",
+        "tests/sample_data/test_site/item1.html",
+        "tests/sample_data/test_site/item2.html",
+        "tests/spiders.py",
+        "tests/test_addons.py",
+        "tests/test_closespider.py",
+        "tests/test_cmdline/**",
+        "tests/test_cmdline_crawl_with_pipeline/**",
+        "tests/test_command_check.py",
+        "tests/test_command_complete.py",
+        "tests/test_command_crawl.py",
+        "tests/test_command_fetch.py",
+        "tests/test_command_genrequest.py",
+        "tests/test_command_genspider.py",
+        "tests/test_command_parse.py",
+        "tests/test_command_runspider.py",
+        "tests/test_command_shell.py",
+        "tests/test_command_startproject.py",
+        "tests/test_command_version.py",
+        "tests/test_commands.py",
+        "tests/test_contracts.py",
+        "tests/test_core_downloader.py",
+        "tests/test_core_scraper.py",
+        "tests/test_crash.py",
+        "tests/test_crawl.py",
+        "tests/test_crawler.py",
+        "tests/test_crawler_runners.py",
+        "tests/test_crawler_subprocess.py",
+        "tests/test_dependencies.py",
+        "tests/test_downloader_handler_aioftp.py",
+        "tests/test_downloader_handler_aiohttp.py",
+        "tests/test_downloader_handler_httpx.py",
+        "tests/test_downloader_handler_twisted_ftp.py",
+        "tests/test_downloader_handler_twisted_http11.py",
+        "tests/test_downloader_handler_twisted_http2.py",
+        "tests/test_downloader_handlers.py",
+        "tests/test_downloadermiddleware.py",
+        "tests/test_downloadermiddleware_cookies.py",
+        "tests/test_downloadermiddleware_defaultheaders.py",
+        "tests/test_downloadermiddleware_downloadtimeout.py",
+        "tests/test_downloadermiddleware_httpauth.py",
+        "tests/test_downloadermiddleware_httpcache.py",
+        "tests/test_downloadermiddleware_httpcompression.py",
+        "tests/test_downloadermiddleware_httpproxy.py",
+        "tests/test_downloadermiddleware_jsonvalidation.py",
+        "tests/test_downloadermiddleware_offsite.py",
+        "tests/test_downloadermiddleware_redirect.py",
+        "tests/test_downloadermiddleware_redirect_metarefresh.py",
+        "tests/test_downloadermiddleware_retry.py",
+        "tests/test_downloadermiddleware_robotstxt.py",
+        "tests/test_downloadermiddleware_stats.py",
+        "tests/test_downloadermiddleware_useragent.py",
+        "tests/test_downloaderslotssettings.py",
+        "tests/test_dupefilters.py",
+        "tests/test_engine.py",
+        "tests/test_engine_close_spider.py",
+        "tests/test_engine_download.py",
+        "tests/test_engine_lifecycle.py",
+        "tests/test_engine_loop.py",
+        "tests/test_engine_stop_download_bytes.py",
+        "tests/test_engine_stop_download_headers.py",
+        "tests/test_exporters.py",
+        "tests/test_extension_debug.py",
+        "tests/test_extension_event_loop_lag.py",
+        "tests/test_extension_memdebug.py",
+        "tests/test_extension_memusage.py",
+        "tests/test_extension_periodic_log.py",
+        "tests/test_extension_remote_control.py",
+        "tests/test_extension_statsmailer.py",
+        "tests/test_extension_telnet.py",
+        "tests/test_extension_throttle.py",
+        "tests/test_feedexport.py",
+        "tests/test_feedexport_async.py",
+        "tests/test_feedexport_batch.py",
+        "tests/test_feedexport_empty.py",
+        "tests/test_feedexport_fields.py",
+        "tests/test_feedexport_filters_processors.py",
+        "tests/test_feedexport_formats.py",
+        "tests/test_feedexport_lifecycle.py",
+        "tests/test_feedexport_mode.py",
+        "tests/test_feedexport_postprocess.py",
+        "tests/test_feedexport_reporting.py",
+        "tests/test_feedexport_storages.py",
+        "tests/test_feedexport_uri_params.py",
+        "tests/test_http2_client_protocol.py",
+        "tests/test_http_cookies.py",
+        "tests/test_http_headers.py",
+        "tests/test_http_request.py",
+        "tests/test_http_request_form.py",
+        "tests/test_http_request_json.py",
+        "tests/test_http_response.py",
+        "tests/test_http_response_text.py",
+        "tests/test_item.py",
+        "tests/test_link.py",
+        "tests/test_linkextractors.py",
+        "tests/test_loader.py",
+        "tests/test_logformatter.py",
+        "tests/test_logstats.py",
+        "tests/test_mail.py",
+        "tests/test_middleware.py",
+        "tests/test_pipeline_crawl.py",
+        "tests/test_pipeline_files.py",
+        "tests/test_pipeline_images.py",
+        "tests/test_pipeline_media.py",
+        "tests/test_pipelines.py",
+        "tests/test_poet.py",
+        "tests/test_pqueues.py",
+        "tests/test_request_attribute_binding.py",
+        "tests/test_request_cb_kwargs.py",
+        "tests/test_request_dict.py",
+        "tests/test_request_left.py",
+        "tests/test_request_lineage.py",
+        "tests/test_resolver.py",
+        "tests/test_response_dict.py",
+        "tests/test_responsetypes.py",
+        "tests/test_robotstxt_interface.py",
+        "tests/test_scheduler.py",
+        "tests/test_scheduler_base.py",
+        "tests/test_scrapy__getattr__.py",
+        "tests/test_selector.py",
+        "tests/test_settings/**",
+        "tests/test_signalmanager.py",
+        "tests/test_signals.py",
+        "tests/test_spider.py",
+        "tests/test_spider_crawl.py",
+        "tests/test_spider_sitemap.py",
+        "tests/test_spider_start.py",
+        "tests/test_spiderloader/**",
+        "tests/test_spidermiddleware.py",
+        "tests/test_spidermiddleware_base.py",
+        "tests/test_spidermiddleware_depth.py",
+        "tests/test_spidermiddleware_httperror.py",
+        "tests/test_spidermiddleware_metacopy.py",
+        "tests/test_spidermiddleware_output_chain.py",
+        "tests/test_spidermiddleware_process_start.py",
+        "tests/test_spidermiddleware_referer.py",
+        "tests/test_spidermiddleware_start.py",
+        "tests/test_spidermiddleware_stickymeta.py",
+        "tests/test_spidermiddleware_urllength.py",
+        "tests/test_spiderstate.py",
+        "tests/test_squeues.py",
+        "tests/test_squeues_request.py",
+        "tests/test_stats.py",
+        "tests/test_toplevel.py",
+        "tests/test_utils_asyncgen.py",
+        "tests/test_utils_asyncio.py",
+        "tests/test_utils_benchserver.py",
+        "tests/test_utils_compression.py",
+        "tests/test_utils_conf.py",
+        "tests/test_utils_curl.py",
+        "tests/test_utils_datatypes.py",
+        "tests/test_utils_decorators.py",
+        "tests/test_utils_defer.py",
+        "tests/test_utils_deprecate.py",
+        "tests/test_utils_display.py",
+        "tests/test_utils_httpobj.py",
+        "tests/test_utils_iterators.py",
+        "tests/test_utils_log.py",
+        "tests/test_utils_misc/__init__.py",
+        "tests/test_utils_misc/test_return_with_argument_inside_generator.py",
+        "tests/test_utils_misc/test_walk_modules/**",
+        "tests/test_utils_ossignal.py",
+        "tests/test_utils_project.py",
+        "tests/test_utils_python.py",
+        "tests/test_utils_reactor.py",
+        "tests/test_utils_reactorless.py",
+        "tests/test_utils_remote_control.py",
+        "tests/test_utils_request.py",
+        "tests/test_utils_response.py",
+        "tests/test_utils_serialize.py",
+        "tests/test_utils_shell.py",
+        "tests/test_utils_signal.py",
+        "tests/test_utils_sitemap.py",
+        "tests/test_utils_spider.py",
+        "tests/test_utils_ssl.py",
+        "tests/test_utils_template.py",
+        "tests/test_utils_trackref.py",
+        "tests/test_utils_url.py",
+        "tests/test_utils_versions.py",
+        "tests/test_zz_resources.py",
+        "tests/utils/**",
+        "tests_typing/**",
+        "tox.ini"
+      ],
+      "text": "Copyright (c) Scrapy developers.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n    1. Redistributions of source code must retain the above copyright notice,\n       this list of conditions, and the following disclaimer.\n\n    2. Redistributions in binary form must reproduce the above copyright\n       notice, this list of conditions, and the following disclaimer in the\n       documentation and/or other materials provided with the distribution.\n\n    3. Neither the name of Scrapy nor the names of its contributors may be used\n       to endorse or promote products derived from this software without\n       specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) Scrapy developers., BSD-3-Clause license (LICENSE), https://github.com/scrapy/scrapy."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mypy-testing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NEWS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

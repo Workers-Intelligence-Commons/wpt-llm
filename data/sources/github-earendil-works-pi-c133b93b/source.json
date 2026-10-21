@@ -1,0 +1,762 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/earendil-works/pi",
+  "revision": "4954d760504c11df9b2cbdc040346107b6a8153d",
+  "checksum": "sha256:08e6f81b1a1aec015c72e7a7364093cbfd9c5a7887d34b3edf9f5184afe61293",
+  "extract": {
+    "exclude": [
+      "packages/ai/test/data/**",
+      "packages/coding-agent/docs/images/**",
+      "packages/coding-agent/examples/extensions/doom-overlay/doom/build/doom.wasm",
+      "packages/coding-agent/src/core/export-html/vendor/**",
+      "packages/coding-agent/src/modes/interactive/assets/**",
+      "packages/tui/native/darwin/prebuilds/**",
+      "packages/tui/native/linux/prebuilds/**",
+      "packages/tui/native/win32/prebuilds/**"
+    ]
+  },
+  "history": {
+    "since": "a74c5da112c29466f182a03108337a488c785d76"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Mario Zechner\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/earendil-works/pi: Copyright (c) 2025 Mario Zechner, MIT license (LICENSE), https://github.com/earendil-works/pi."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".npmrc",
+        ".pi/**",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "biome.json",
+        "flake.lock",
+        "flake.nix",
+        "nix/**",
+        "package-lock.json",
+        "package.json",
+        "packages/agent/**",
+        "packages/ai/CHANGELOG.md",
+        "packages/ai/README.md",
+        "packages/ai/bedrock-provider.d.ts",
+        "packages/ai/bedrock-provider.js",
+        "packages/ai/package.json",
+        "packages/ai/scripts/**",
+        "packages/ai/src/**",
+        "packages/ai/test/abort.test.ts",
+        "packages/ai/test/anthropic-adaptive-thinking-models.test.ts",
+        "packages/ai/test/anthropic-auth-token.test.ts",
+        "packages/ai/test/anthropic-cache-write-1h-cost.test.ts",
+        "packages/ai/test/anthropic-eager-tool-input-compat.test.ts",
+        "packages/ai/test/anthropic-eager-tool-input-e2e.test.ts",
+        "packages/ai/test/anthropic-empty-thinking-signature-compat.test.ts",
+        "packages/ai/test/anthropic-error-tool-result-images.test.ts",
+        "packages/ai/test/anthropic-federation-sdk.test.ts",
+        "packages/ai/test/anthropic-federation.test.ts",
+        "packages/ai/test/anthropic-force-adaptive-thinking.test.ts",
+        "packages/ai/test/anthropic-long-cache-retention-e2e.test.ts",
+        "packages/ai/test/anthropic-mid-conversation-effort.test.ts",
+        "packages/ai/test/anthropic-oauth.test.ts",
+        "packages/ai/test/anthropic-opus-4-8-smoke.test.ts",
+        "packages/ai/test/anthropic-sse-parsing.test.ts",
+        "packages/ai/test/anthropic-strict-tool-fallback.test.ts",
+        "packages/ai/test/anthropic-strict-tool-schema.test.ts",
+        "packages/ai/test/anthropic-temperature-compat.test.ts",
+        "packages/ai/test/anthropic-thinking-binding-e2e.test.ts",
+        "packages/ai/test/anthropic-thinking-disable.test.ts",
+        "packages/ai/test/anthropic-tool-name-normalization.test.ts",
+        "packages/ai/test/azure-openai-base-url.test.ts",
+        "packages/ai/test/azure-openai-completions.test.ts",
+        "packages/ai/test/azure-openai-responses-reasoning-replay.test.ts",
+        "packages/ai/test/azure-openai-tool-choice.test.ts",
+        "packages/ai/test/azure-utils.ts",
+        "packages/ai/test/baseten-models.test.ts",
+        "packages/ai/test/bedrock-cache-write-1h-cost.test.ts",
+        "packages/ai/test/bedrock-convert-messages.test.ts",
+        "packages/ai/test/bedrock-credentials.test.ts",
+        "packages/ai/test/bedrock-custom-headers.test.ts",
+        "packages/ai/test/bedrock-endpoint-resolution.test.ts",
+        "packages/ai/test/bedrock-error-metadata.test.ts",
+        "packages/ai/test/bedrock-models.test.ts",
+        "packages/ai/test/bedrock-raw-stop-reason.test.ts",
+        "packages/ai/test/bedrock-redacted-reasoning.test.ts",
+        "packages/ai/test/bedrock-response-headers.test.ts",
+        "packages/ai/test/bedrock-thinking-payload.test.ts",
+        "packages/ai/test/bedrock-utils.ts",
+        "packages/ai/test/cache-retention.test.ts",
+        "packages/ai/test/classifier-models.test.ts",
+        "packages/ai/test/cloudflare-ai-binding.test.ts",
+        "packages/ai/test/cloudflare-stream.test.ts",
+        "packages/ai/test/cloudflare-utils.ts",
+        "packages/ai/test/cloudflare-workers-ai-system-one.test.ts",
+        "packages/ai/test/codex-websocket-cached-probe.ts",
+        "packages/ai/test/compat-env.test.ts",
+        "packages/ai/test/compat-schema.test.ts",
+        "packages/ai/test/constrained-sampling.test.ts",
+        "packages/ai/test/context-estimate.test.ts",
+        "packages/ai/test/context-overflow.test.ts",
+        "packages/ai/test/cross-provider-handoff.test.ts",
+        "packages/ai/test/empty.test.ts",
+        "packages/ai/test/env-api-keys.test.ts",
+        "packages/ai/test/error-body.test.ts",
+        "packages/ai/test/event-stream.test.ts",
+        "packages/ai/test/faux-provider.test.ts",
+        "packages/ai/test/fetch-option.test.ts",
+        "packages/ai/test/fireworks-model-generation.test.ts",
+        "packages/ai/test/fireworks-models.test.ts",
+        "packages/ai/test/generate-models-strict.test.ts",
+        "packages/ai/test/github-copilot-anthropic.test.ts",
+        "packages/ai/test/github-copilot-oauth.test.ts",
+        "packages/ai/test/google-raw-stop-reason.test.ts",
+        "packages/ai/test/google-shared-convert-tools.test.ts",
+        "packages/ai/test/google-shared-gemini3-unsigned-tool-call.test.ts",
+        "packages/ai/test/google-shared-image-tool-result-routing.test.ts",
+        "packages/ai/test/google-shared-retry.test.ts",
+        "packages/ai/test/google-shared-signed-empty-blocks.test.ts",
+        "packages/ai/test/google-thinking-disable.test.ts",
+        "packages/ai/test/google-thinking-level-map.test.ts",
+        "packages/ai/test/google-thinking-signature.test.ts",
+        "packages/ai/test/google-vertex-api-key-resolution.test.ts",
+        "packages/ai/test/image-model-data.test.ts",
+        "packages/ai/test/image-tool-result.test.ts",
+        "packages/ai/test/images-models.test.ts",
+        "packages/ai/test/images.test.ts",
+        "packages/ai/test/interleaved-thinking.test.ts",
+        "packages/ai/test/json-parse.test.ts",
+        "packages/ai/test/kimi-coding-oauth.test.ts",
+        "packages/ai/test/lax-message-content.test.ts",
+        "packages/ai/test/lazy-module-load.test.ts",
+        "packages/ai/test/llama-cpp-classify.test.ts",
+        "packages/ai/test/max-thinking.test.ts",
+        "packages/ai/test/message-types.test.ts",
+        "packages/ai/test/meta-oauth.test.ts",
+        "packages/ai/test/mistral-http-transport.test.ts",
+        "packages/ai/test/mistral-raw-stop-reason.test.ts",
+        "packages/ai/test/mistral-reasoning-mode.test.ts",
+        "packages/ai/test/mistral-tool-schema.test.ts",
+        "packages/ai/test/model-catalog-types.test.ts",
+        "packages/ai/test/model-cost-tiers.test.ts",
+        "packages/ai/test/model-data-validation.test.ts",
+        "packages/ai/test/model-types.test.ts",
+        "packages/ai/test/models-entry.test.ts",
+        "packages/ai/test/models-runtime.test.ts",
+        "packages/ai/test/node-http-proxy.test.ts",
+        "packages/ai/test/oauth-auth.test.ts",
+        "packages/ai/test/oauth-callback-server.test.ts",
+        "packages/ai/test/oauth-device-code.test.ts",
+        "packages/ai/test/oauth.ts",
+        "packages/ai/test/openai-chatgpt-oauth.test.ts",
+        "packages/ai/test/openai-codex-cache-affinity-e2e.test.ts",
+        "packages/ai/test/openai-codex-oauth.test.ts",
+        "packages/ai/test/openai-codex-stream.test.ts",
+        "packages/ai/test/openai-completions-cache-control-format.test.ts",
+        "packages/ai/test/openai-completions-empty-tools.test.ts",
+        "packages/ai/test/openai-completions-prompt-cache.test.ts",
+        "packages/ai/test/openai-completions-provider-stream-event.test.ts",
+        "packages/ai/test/openai-completions-raw-stop-reason.test.ts",
+        "packages/ai/test/openai-completions-reasoning-details.test.ts",
+        "packages/ai/test/openai-completions-response-model.test.ts",
+        "packages/ai/test/openai-completions-retry.test.ts",
+        "packages/ai/test/openai-completions-thinking-as-text.test.ts",
+        "packages/ai/test/openai-completions-thinking-token-budget.test.ts",
+        "packages/ai/test/openai-completions-tool-choice.test.ts",
+        "packages/ai/test/openai-completions-tool-result-images.test.ts",
+        "packages/ai/test/openai-completions-vllm-priority.test.ts",
+        "packages/ai/test/openai-decisions.test.ts",
+        "packages/ai/test/openai-responses-cache-affinity-e2e.test.ts",
+        "packages/ai/test/openai-responses-chatgpt-sign-in.test.ts",
+        "packages/ai/test/openai-responses-compat.test.ts",
+        "packages/ai/test/openai-responses-empty-tool-result.test.ts",
+        "packages/ai/test/openai-responses-foreign-toolcall-id.test.ts",
+        "packages/ai/test/openai-responses-message-id.test.ts",
+        "packages/ai/test/openai-responses-mid-convo-effort.test.ts",
+        "packages/ai/test/openai-responses-namespace.test.ts",
+        "packages/ai/test/openai-responses-partial-json-cleanup.test.ts",
+        "packages/ai/test/openai-responses-reasoning-replay-e2e.test.ts",
+        "packages/ai/test/openai-responses-terminal-event.test.ts",
+        "packages/ai/test/openai-responses-tool-result-images.test.ts",
+        "packages/ai/test/openai-responses-usage-limit.test.ts",
+        "packages/ai/test/opencode-provider-headers.test.ts",
+        "packages/ai/test/openrouter-cache-control-models.test.ts",
+        "packages/ai/test/openrouter-cache-write-repro.test.ts",
+        "packages/ai/test/openrouter-images.test.ts",
+        "packages/ai/test/openrouter-oauth.test.ts",
+        "packages/ai/test/openrouter-reasoning-options.test.ts",
+        "packages/ai/test/openrouter-user-models.test.ts",
+        "packages/ai/test/overflow.test.ts",
+        "packages/ai/test/pi-messages.test.ts",
+        "packages/ai/test/pre-generation-error.test.ts",
+        "packages/ai/test/provider-error-body-passthrough.test.ts",
+        "packages/ai/test/provider-error-body-regression.test.ts",
+        "packages/ai/test/provider-retry.test.ts",
+        "packages/ai/test/providers.test.ts",
+        "packages/ai/test/qwen-token-plan-models.test.ts",
+        "packages/ai/test/radius-oauth.test.ts",
+        "packages/ai/test/radius-provider.test.ts",
+        "packages/ai/test/radius-thinking-replay-e2e.test.ts",
+        "packages/ai/test/reasoning-options.test.ts",
+        "packages/ai/test/responseid.test.ts",
+        "packages/ai/test/retry.test.ts",
+        "packages/ai/test/sampling-options.test.ts",
+        "packages/ai/test/scratch.ts",
+        "packages/ai/test/stream.test.ts",
+        "packages/ai/test/supports-xhigh.test.ts",
+        "packages/ai/test/system-message-replay.test.ts",
+        "packages/ai/test/telemetry-options.test.ts",
+        "packages/ai/test/text.test.ts",
+        "packages/ai/test/together-models.test.ts",
+        "packages/ai/test/tokens.test.ts",
+        "packages/ai/test/tool-call-id-normalization.test.ts",
+        "packages/ai/test/tool-call-without-result.test.ts",
+        "packages/ai/test/total-tokens.test.ts",
+        "packages/ai/test/transcript-tool-changes.test.ts",
+        "packages/ai/test/transform-messages-copilot-openai-to-anthropic.test.ts",
+        "packages/ai/test/transform-messages-cross-model-thinking.test.ts",
+        "packages/ai/test/typesafe-system-one.test.ts",
+        "packages/ai/test/unicode-surrogate.test.ts",
+        "packages/ai/test/uuid.test.ts",
+        "packages/ai/test/validation.test.ts",
+        "packages/ai/test/xai-oauth.test.ts",
+        "packages/ai/test/xai-responses.test.ts",
+        "packages/ai/test/xhigh.test.ts",
+        "packages/ai/test/xiaomi-models.test.ts",
+        "packages/ai/test/xiaomi-token-plan-ams-anthropic-empty-signature-smoke.test.ts",
+        "packages/ai/test/zai-coding-plan-models.test.ts",
+        "packages/ai/test/zen.test.ts",
+        "packages/ai/tsconfig.build.json",
+        "packages/ai/vitest.config.ts",
+        "packages/chord/**",
+        "packages/codemode/**",
+        "packages/coding-agent/.gitignore",
+        "packages/coding-agent/CHANGELOG.md",
+        "packages/coding-agent/README.md",
+        "packages/coding-agent/docs/cli-integration.md",
+        "packages/coding-agent/docs/cli.md",
+        "packages/coding-agent/docs/codemode.md",
+        "packages/coding-agent/docs/compaction.md",
+        "packages/coding-agent/docs/configuration.md",
+        "packages/coding-agent/docs/containerization.md",
+        "packages/coding-agent/docs/custom-provider.md",
+        "packages/coding-agent/docs/docs.json",
+        "packages/coding-agent/docs/environment-variables.md",
+        "packages/coding-agent/docs/extensions.md",
+        "packages/coding-agent/docs/how-pi-works.md",
+        "packages/coding-agent/docs/index.md",
+        "packages/coding-agent/docs/json.md",
+        "packages/coding-agent/docs/keybindings.md",
+        "packages/coding-agent/docs/llama-cpp.md",
+        "packages/coding-agent/docs/mcp.md",
+        "packages/coding-agent/docs/message-types.md",
+        "packages/coding-agent/docs/models.md",
+        "packages/coding-agent/docs/nvidia-rtx-llama-cpp.md",
+        "packages/coding-agent/docs/packages.md",
+        "packages/coding-agent/docs/prompt-templates.md",
+        "packages/coding-agent/docs/providers.md",
+        "packages/coding-agent/docs/quickstart.md",
+        "packages/coding-agent/docs/rpc-commands.md",
+        "packages/coding-agent/docs/rpc-extension-ui.md",
+        "packages/coding-agent/docs/rpc.md",
+        "packages/coding-agent/docs/sdk.md",
+        "packages/coding-agent/docs/security.md",
+        "packages/coding-agent/docs/session-format.md",
+        "packages/coding-agent/docs/sessions.md",
+        "packages/coding-agent/docs/settings.md",
+        "packages/coding-agent/docs/shell-aliases.md",
+        "packages/coding-agent/docs/skills.md",
+        "packages/coding-agent/docs/slash-commands.md",
+        "packages/coding-agent/docs/terminal-setup.md",
+        "packages/coding-agent/docs/termux.md",
+        "packages/coding-agent/docs/themes.md",
+        "packages/coding-agent/docs/tmux.md",
+        "packages/coding-agent/docs/tui.md",
+        "packages/coding-agent/docs/usage.md",
+        "packages/coding-agent/docs/virtual-models.md",
+        "packages/coding-agent/docs/windows.md",
+        "packages/coding-agent/examples/README.md",
+        "packages/coding-agent/examples/extensions/README.md",
+        "packages/coding-agent/examples/extensions/auto-commit-on-exit.ts",
+        "packages/coding-agent/examples/extensions/bash-spawn-hook.ts",
+        "packages/coding-agent/examples/extensions/bookmark.ts",
+        "packages/coding-agent/examples/extensions/border-status-editor.ts",
+        "packages/coding-agent/examples/extensions/built-in-tool-renderer.ts",
+        "packages/coding-agent/examples/extensions/claude-rules.ts",
+        "packages/coding-agent/examples/extensions/commands.ts",
+        "packages/coding-agent/examples/extensions/confirm-destructive.ts",
+        "packages/coding-agent/examples/extensions/custom-compaction.ts",
+        "packages/coding-agent/examples/extensions/custom-footer.ts",
+        "packages/coding-agent/examples/extensions/custom-header.ts",
+        "packages/coding-agent/examples/extensions/custom-provider-anthropic/**",
+        "packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/**",
+        "packages/coding-agent/examples/extensions/debug-provider.ts",
+        "packages/coding-agent/examples/extensions/dirty-repo-guard.ts",
+        "packages/coding-agent/examples/extensions/doom-overlay/.gitignore",
+        "packages/coding-agent/examples/extensions/doom-overlay/README.md",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom/build/doom.js",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom/build.sh",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom/doomgeneric_pi.c",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom-component.ts",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom-engine.ts",
+        "packages/coding-agent/examples/extensions/doom-overlay/doom-keys.ts",
+        "packages/coding-agent/examples/extensions/doom-overlay/index.ts",
+        "packages/coding-agent/examples/extensions/doom-overlay/wad-finder.ts",
+        "packages/coding-agent/examples/extensions/dynamic-resources/**",
+        "packages/coding-agent/examples/extensions/dynamic-tools.ts",
+        "packages/coding-agent/examples/extensions/entry-renderer.ts",
+        "packages/coding-agent/examples/extensions/event-bus.ts",
+        "packages/coding-agent/examples/extensions/file-trigger.ts",
+        "packages/coding-agent/examples/extensions/git-checkpoint.ts",
+        "packages/coding-agent/examples/extensions/git-merge-and-resolve.ts",
+        "packages/coding-agent/examples/extensions/github-issue-autocomplete.ts",
+        "packages/coding-agent/examples/extensions/gondolin/**",
+        "packages/coding-agent/examples/extensions/handoff.ts",
+        "packages/coding-agent/examples/extensions/hello.ts",
+        "packages/coding-agent/examples/extensions/hidden-thinking-label.ts",
+        "packages/coding-agent/examples/extensions/inline-bash.ts",
+        "packages/coding-agent/examples/extensions/input-transform-streaming.ts",
+        "packages/coding-agent/examples/extensions/input-transform.ts",
+        "packages/coding-agent/examples/extensions/interactive-shell.ts",
+        "packages/coding-agent/examples/extensions/jev-router.ts",
+        "packages/coding-agent/examples/extensions/mac-system-theme.ts",
+        "packages/coding-agent/examples/extensions/message-renderer.ts",
+        "packages/coding-agent/examples/extensions/minimal-mode.ts",
+        "packages/coding-agent/examples/extensions/modal-editor.ts",
+        "packages/coding-agent/examples/extensions/model-status.ts",
+        "packages/coding-agent/examples/extensions/notify.ts",
+        "packages/coding-agent/examples/extensions/overlay-qa-tests.ts",
+        "packages/coding-agent/examples/extensions/overlay-test.ts",
+        "packages/coding-agent/examples/extensions/permission-gate.ts",
+        "packages/coding-agent/examples/extensions/pirate.ts",
+        "packages/coding-agent/examples/extensions/plan-mode/**",
+        "packages/coding-agent/examples/extensions/preset.ts",
+        "packages/coding-agent/examples/extensions/project-trust.ts",
+        "packages/coding-agent/examples/extensions/prompt-customizer.ts",
+        "packages/coding-agent/examples/extensions/protected-paths.ts",
+        "packages/coding-agent/examples/extensions/provider-payload.ts",
+        "packages/coding-agent/examples/extensions/qna.ts",
+        "packages/coding-agent/examples/extensions/question.ts",
+        "packages/coding-agent/examples/extensions/questionnaire.ts",
+        "packages/coding-agent/examples/extensions/rainbow-editor.ts",
+        "packages/coding-agent/examples/extensions/reload-runtime.ts",
+        "packages/coding-agent/examples/extensions/rpc-demo.ts",
+        "packages/coding-agent/examples/extensions/sandbox/**",
+        "packages/coding-agent/examples/extensions/send-user-message.ts",
+        "packages/coding-agent/examples/extensions/session-name.ts",
+        "packages/coding-agent/examples/extensions/shutdown-command.ts",
+        "packages/coding-agent/examples/extensions/snake.ts",
+        "packages/coding-agent/examples/extensions/space-invaders.ts",
+        "packages/coding-agent/examples/extensions/ssh.ts",
+        "packages/coding-agent/examples/extensions/status-line.ts",
+        "packages/coding-agent/examples/extensions/structured-output.ts",
+        "packages/coding-agent/examples/extensions/subagent/**",
+        "packages/coding-agent/examples/extensions/summarize.ts",
+        "packages/coding-agent/examples/extensions/system-prompt-header.ts",
+        "packages/coding-agent/examples/extensions/tic-tac-toe.ts",
+        "packages/coding-agent/examples/extensions/timed-confirm.ts",
+        "packages/coding-agent/examples/extensions/titlebar-spinner.ts",
+        "packages/coding-agent/examples/extensions/todo.ts",
+        "packages/coding-agent/examples/extensions/tool-override.ts",
+        "packages/coding-agent/examples/extensions/tools.ts",
+        "packages/coding-agent/examples/extensions/trigger-compact.ts",
+        "packages/coding-agent/examples/extensions/truncated-tool.ts",
+        "packages/coding-agent/examples/extensions/widget-placement.ts",
+        "packages/coding-agent/examples/extensions/with-deps/**",
+        "packages/coding-agent/examples/extensions/working-indicator.ts",
+        "packages/coding-agent/examples/extensions/working-message-test.ts",
+        "packages/coding-agent/examples/rpc-client.ts",
+        "packages/coding-agent/examples/rpc-extension-ui.ts",
+        "packages/coding-agent/examples/sdk/**",
+        "packages/coding-agent/install-lock/**",
+        "packages/coding-agent/package.json",
+        "packages/coding-agent/schemas/**",
+        "packages/coding-agent/scripts/**",
+        "packages/coding-agent/src/bun/**",
+        "packages/coding-agent/src/cli/**",
+        "packages/coding-agent/src/cli.ts",
+        "packages/coding-agent/src/config.ts",
+        "packages/coding-agent/src/core/agent-session-runtime.ts",
+        "packages/coding-agent/src/core/agent-session-services.ts",
+        "packages/coding-agent/src/core/agent-session.ts",
+        "packages/coding-agent/src/core/auth-guidance.ts",
+        "packages/coding-agent/src/core/auth-storage.ts",
+        "packages/coding-agent/src/core/bash-executor.ts",
+        "packages/coding-agent/src/core/bug-report-upload.ts",
+        "packages/coding-agent/src/core/bug-report.ts",
+        "packages/coding-agent/src/core/cache-stats.ts",
+        "packages/coding-agent/src/core/cache-warmer.ts",
+        "packages/coding-agent/src/core/compaction/**",
+        "packages/coding-agent/src/core/crash-log.ts",
+        "packages/coding-agent/src/core/defaults.ts",
+        "packages/coding-agent/src/core/diagnostics.ts",
+        "packages/coding-agent/src/core/event-bus.ts",
+        "packages/coding-agent/src/core/exec.ts",
+        "packages/coding-agent/src/core/experimental.ts",
+        "packages/coding-agent/src/core/export-html/ansi-to-html.ts",
+        "packages/coding-agent/src/core/export-html/index.ts",
+        "packages/coding-agent/src/core/export-html/template.css",
+        "packages/coding-agent/src/core/export-html/template.html",
+        "packages/coding-agent/src/core/export-html/template.js",
+        "packages/coding-agent/src/core/export-html/tool-renderer.ts",
+        "packages/coding-agent/src/core/extensions/**",
+        "packages/coding-agent/src/core/footer-data-provider.ts",
+        "packages/coding-agent/src/core/http-dispatcher.ts",
+        "packages/coding-agent/src/core/index.ts",
+        "packages/coding-agent/src/core/key-id-schema.ts",
+        "packages/coding-agent/src/core/keybindings-schema.ts",
+        "packages/coding-agent/src/core/keybindings.ts",
+        "packages/coding-agent/src/core/mcp-servers.ts",
+        "packages/coding-agent/src/core/messages.ts",
+        "packages/coding-agent/src/core/model-config.ts",
+        "packages/coding-agent/src/core/model-registry.ts",
+        "packages/coding-agent/src/core/model-resolver.ts",
+        "packages/coding-agent/src/core/model-runtime.ts",
+        "packages/coding-agent/src/core/models-store.ts",
+        "packages/coding-agent/src/core/nested-tool-calls.ts",
+        "packages/coding-agent/src/core/output-guard.ts",
+        "packages/coding-agent/src/core/package-manager.ts",
+        "packages/coding-agent/src/core/pi-manifest.ts",
+        "packages/coding-agent/src/core/project-trust.ts",
+        "packages/coding-agent/src/core/prompt-templates.ts",
+        "packages/coding-agent/src/core/provider-attribution.ts",
+        "packages/coding-agent/src/core/provider-composer.ts",
+        "packages/coding-agent/src/core/radius.ts",
+        "packages/coding-agent/src/core/remote-catalog-provider.ts",
+        "packages/coding-agent/src/core/resolve-config-value.ts",
+        "packages/coding-agent/src/core/resource-loader.ts",
+        "packages/coding-agent/src/core/runtime-credentials.ts",
+        "packages/coding-agent/src/core/sdk.ts",
+        "packages/coding-agent/src/core/session-cwd.ts",
+        "packages/coding-agent/src/core/session-export.ts",
+        "packages/coding-agent/src/core/session-manager.ts",
+        "packages/coding-agent/src/core/settings-defaults.ts",
+        "packages/coding-agent/src/core/settings-diagnostics.ts",
+        "packages/coding-agent/src/core/settings-manager.ts",
+        "packages/coding-agent/src/core/settings-schema.ts",
+        "packages/coding-agent/src/core/skills.ts",
+        "packages/coding-agent/src/core/slash-commands.ts",
+        "packages/coding-agent/src/core/source-info.ts",
+        "packages/coding-agent/src/core/system-prompt.ts",
+        "packages/coding-agent/src/core/telemetry.ts",
+        "packages/coding-agent/src/core/timings.ts",
+        "packages/coding-agent/src/core/tools/**",
+        "packages/coding-agent/src/core/trust-manager.ts",
+        "packages/coding-agent/src/core/usage-totals.ts",
+        "packages/coding-agent/src/core/virtual-models.ts",
+        "packages/coding-agent/src/experimental/**",
+        "packages/coding-agent/src/extensions/**",
+        "packages/coding-agent/src/index.ts",
+        "packages/coding-agent/src/main.ts",
+        "packages/coding-agent/src/migrations.ts",
+        "packages/coding-agent/src/modes/index.ts",
+        "packages/coding-agent/src/modes/interactive/bug-report.ts",
+        "packages/coding-agent/src/modes/interactive/chat-viewport.ts",
+        "packages/coding-agent/src/modes/interactive/components/**",
+        "packages/coding-agent/src/modes/interactive/external-editor.ts",
+        "packages/coding-agent/src/modes/interactive/interactive-mode.ts",
+        "packages/coding-agent/src/modes/interactive/model-catalog-refresh.ts",
+        "packages/coding-agent/src/modes/interactive/model-search.ts",
+        "packages/coding-agent/src/modes/interactive/program-status-reporter.ts",
+        "packages/coding-agent/src/modes/interactive/session-share.ts",
+        "packages/coding-agent/src/modes/interactive/theme/**",
+        "packages/coding-agent/src/modes/interactive/tui-renderer.ts",
+        "packages/coding-agent/src/modes/json-event.ts",
+        "packages/coding-agent/src/modes/print-mode.ts",
+        "packages/coding-agent/src/modes/rpc/**",
+        "packages/coding-agent/src/package-manager-cli.ts",
+        "packages/coding-agent/src/rpc-entry.ts",
+        "packages/coding-agent/src/utils/**",
+        "packages/coding-agent/test/**",
+        "packages/coding-agent/tsconfig.build.json",
+        "packages/coding-agent/tsconfig.examples.json",
+        "packages/coding-agent/vitest.config.ts",
+        "packages/durable/**",
+        "packages/env/**",
+        "packages/evals/**",
+        "packages/mcp/**",
+        "packages/telemetry/**",
+        "packages/tui/CHANGELOG.md",
+        "packages/tui/README.md",
+        "packages/tui/native/clipboard.h",
+        "packages/tui/native/darwin/README.md",
+        "packages/tui/native/darwin/build.sh",
+        "packages/tui/native/darwin/src/**",
+        "packages/tui/native/linux/README.md",
+        "packages/tui/native/linux/build.sh",
+        "packages/tui/native/linux/src/**",
+        "packages/tui/native/napi.h",
+        "packages/tui/native/win32/README.md",
+        "packages/tui/native/win32/build.mjs",
+        "packages/tui/native/win32/src/**",
+        "packages/tui/package.json",
+        "packages/tui/src/**",
+        "packages/tui/test/**",
+        "packages/tui/tsconfig.build.json",
+        "pi-test.bat",
+        "pi-test.ps1",
+        "pi-test.sh",
+        "scripts/**",
+        "test.sh",
+        "tsconfig.base.json",
+        "tsconfig.json",
+        "vitest.base.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Mario Zechner\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2025 Mario Zechner, MIT license (LICENSE), https://github.com/earendil-works/pi."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "flake.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/APPROVED_CONTRIBUTORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/cookiecutter/cookiecutter",
+  "revision": "c88fbe921c97c58b65f1883ba90a0ab53cc91b34",
+  "checksum": "sha256:c6a0d867ed4f7d3fdf9fb1ca2f5210e533796b11bfb21322ba548ea0117b97c3",
+  "extract": {
+    "exclude": [
+      "logo/cookiecutter-logo-large.png",
+      "logo/cookiecutter_medium.png",
+      "tests/files/empty.zip",
+      "tests/files/fake-repo-tmpl.zip",
+      "tests/files/not-a-repo.zip",
+      "tests/files/protected-fake-repo-tmpl.zip",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/.DS_Store",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/logo.png",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/some_font.otf",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/.DS_Store",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/logo.png",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/some_font.otf",
+      "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/**"
+    ]
+  },
+  "history": {
+    "since": "92c9fa9ff52d10d6f8522b67c353694e23e08866"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2013-2026, Audrey M. Roy Greenfeld\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or\nwithout modification, are permitted provided that the following\nconditions are met:\n\n* Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following\ndisclaimer in the documentation and/or other materials provided\nwith the distribution.\n\n* Neither the name of the copyright holder nor the names of its\ncontributors may be used to endorse or promote products derived\nfrom this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND\nCONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES,\nINCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF\nUSE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED\nAND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\nLIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN\nANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/cookiecutter/cookiecutter: Copyright (c) 2013-2026, Audrey M. Roy Greenfeld, BSD-3-Clause license (LICENSE), https://github.com/cookiecutter/cookiecutter."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".bandit",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml.old",
+        ".readthedocs.yaml",
+        ".safety-policy.yml",
+        "AUTHORS.md",
+        "CHANGELOG/**",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "__main__.py",
+        "codecov.yml",
+        "cookiecutter/**",
+        "docs/**",
+        "justfile",
+        "logo/cookiecutter-logo.svg",
+        "pyproject.toml",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/fake-nested-templates/**",
+        "tests/fake-nested-templates-old-style/**",
+        "tests/fake-repo/**",
+        "tests/fake-repo-bad/**",
+        "tests/fake-repo-bad-json/**",
+        "tests/fake-repo-dict/**",
+        "tests/fake-repo-dir/**",
+        "tests/fake-repo-pre/**",
+        "tests/fake-repo-pre2/**",
+        "tests/fake-repo-replay/**",
+        "tests/fake-repo-tmpl/**",
+        "tests/fake-repo-tmpl-_cookiecutter/**",
+        "tests/files/bad-zip-file.zip",
+        "tests/files/syntax_error.txt",
+        "tests/files/unicode.txt",
+        "tests/files/{% if cookiecutter.generate_file == 'y' %}cheese.txt{% endif %}",
+        "tests/files/{{cookiecutter.generate_file}}.txt",
+        "tests/files/{{cookiecutter.generate_file}}_crlf_newlines.txt",
+        "tests/files/{{cookiecutter.generate_file}}_lf_newlines.txt",
+        "tests/files/{{cookiecutter.jsonify_file}}.txt",
+        "tests/files/{{cookiecutter.random_string_file}}.txt",
+        "tests/hooks-abort-render/**",
+        "tests/replay/**",
+        "tests/repository/**",
+        "tests/test-config/**",
+        "tests/test-extensions/**",
+        "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/readme.txt",
+        "tests/test-generate-binaries/input{{cookiecutter.binary_test}}/{{cookiecutter.binary_test}}/readme.txt",
+        "tests/test-generate-context/**",
+        "tests/test-generate-copy-without-render/**",
+        "tests/test-generate-copy-without-render-override/**",
+        "tests/test-generate-files/**",
+        "tests/test-generate-files-line-end/**",
+        "tests/test-generate-files-nontemplated/**",
+        "tests/test-generate-files-permissions/**",
+        "tests/test-output-folder/**",
+        "tests/test-pyhooks/**",
+        "tests/test-pyshellhooks/**",
+        "tests/test-replay/**",
+        "tests/test-shellhooks/**",
+        "tests/test-shellhooks-empty/**",
+        "tests/test-shellhooks-win/**",
+        "tests/test-templates/**",
+        "tests/test_abort_generate_on_hook_error.py",
+        "tests/test_cli.py",
+        "tests/test_cookiecutter_invocation.py",
+        "tests/test_cookiecutter_local_no_input.py",
+        "tests/test_cookiecutter_local_with_input.py",
+        "tests/test_cookiecutter_nested_templates.py",
+        "tests/test_custom_extensions_in_hooks.py",
+        "tests/test_default_extensions.py",
+        "tests/test_environment.py",
+        "tests/test_exceptions.py",
+        "tests/test_find.py",
+        "tests/test_generate_context.py",
+        "tests/test_generate_copy_without_render.py",
+        "tests/test_generate_copy_without_render_override.py",
+        "tests/test_generate_file.py",
+        "tests/test_generate_files.py",
+        "tests/test_generate_hooks.py",
+        "tests/test_get_config.py",
+        "tests/test_get_user_config.py",
+        "tests/test_hooks.py",
+        "tests/test_log.py",
+        "tests/test_main.py",
+        "tests/test_output_folder.py",
+        "tests/test_pre_prompt_hooks.py",
+        "tests/test_preferred_encoding.py",
+        "tests/test_prompt.py",
+        "tests/test_read_repo_password.py",
+        "tests/test_read_user_choice.py",
+        "tests/test_read_user_dict.py",
+        "tests/test_read_user_variable.py",
+        "tests/test_read_user_yes_no.py",
+        "tests/test_repo_not_found.py",
+        "tests/test_specify_output_dir.py",
+        "tests/test_templates.py",
+        "tests/test_time_extension.py",
+        "tests/test_utils.py",
+        "tests/undefined-variable/**",
+        "tests/vcs/**",
+        "tests/zipfile/**",
+        "uv.lock"
+      ],
+      "text": "Copyright (c) 2013-2026, Audrey M. Roy Greenfeld\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or\nwithout modification, are permitted provided that the following\nconditions are met:\n\n* Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following\ndisclaimer in the documentation and/or other materials provided\nwith the distribution.\n\n* Neither the name of the copyright holder nor the names of its\ncontributors may be used to endorse or promote products derived\nfrom this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND\nCONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES,\nINCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF\nUSE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED\nAND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\nLIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN\nANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2013-2026, Audrey M. Roy Greenfeld, BSD-3-Clause license (LICENSE), https://github.com/cookiecutter/cookiecutter."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "just",
+      "paths": [
+        "**/justfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.foobar}}"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.old"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rst_t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.thing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt{% endif %}"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.zip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bandit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/id"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

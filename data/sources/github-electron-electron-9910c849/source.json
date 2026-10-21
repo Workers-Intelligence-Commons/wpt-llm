@@ -1,0 +1,1078 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/electron/electron",
+  "revision": "2766ef64b6593b647cc69a277e1555855a9de1e0",
+  "checksum": "sha256:3529732851d79088182d64743c3057224c37c1da480eb0943eb9cbbc3963a8ca",
+  "extract": {
+    "exclude": [
+      "default_app/icon.png",
+      "docs/images/chrome-processes.png",
+      "docs/images/connection-status.png",
+      "docs/images/dark_mode.gif",
+      "docs/images/dock-progress-bar.png",
+      "docs/images/drag-and-drop.gif",
+      "docs/images/frameless-window.png",
+      "docs/images/gatekeeper.png",
+      "docs/images/macos-progress-bar.png",
+      "docs/images/mission-control-progress-bar.png",
+      "docs/images/performance-cpu-prof.png",
+      "docs/images/performance-heap-prof.png",
+      "docs/images/preload-example.png",
+      "docs/images/recent-documents.png",
+      "docs/images/represented-file.png",
+      "docs/images/subpixel-rendering-screenshot.gif",
+      "docs/images/transparent-window-mission-control.png",
+      "docs/images/transparent-window.png",
+      "docs/images/vs-options-debugging-symbols.png",
+      "docs/images/vs-tools-options.png",
+      "docs/images/web-contents-text-selection-after.png",
+      "docs/images/web-contents-text-selection-before.png",
+      "docs/images/windows-progress-bar.png",
+      "docs/images/windows-taskbar-icon-overlay.png",
+      "docs/images/windows-taskbar-jumplist.png",
+      "docs/images/windows-taskbar-thumbnail-toolbar.png",
+      "shell/browser/resources/mac/electron.icns",
+      "shell/browser/resources/win/electron.ico",
+      "spec/fixtures/api/autoupdater/msix/HelloMSIX_V1.msix",
+      "spec/fixtures/api/autoupdater/msix/HelloMSIX_V2.msix",
+      "spec/fixtures/api/autoupdater/msix/MSIXDevCert.cer",
+      "spec/fixtures/api/corner-smoothing/shape/expected-false.png",
+      "spec/fixtures/api/corner-smoothing/shape/expected-true.png",
+      "spec/fixtures/api/corner-smoothing/shape/image.png",
+      "spec/fixtures/api/corner-smoothing/system-ui-keyword/expected-darwin.png",
+      "spec/fixtures/api/corner-smoothing/system-ui-keyword/expected-linux.png",
+      "spec/fixtures/api/corner-smoothing/system-ui-keyword/expected-win32.png",
+      "spec/fixtures/api/electron-main-module/app.asar",
+      "spec/fixtures/api/shared-texture/image.png",
+      "spec/fixtures/apps/xwindow-icon/icon.png",
+      "spec/fixtures/asar/**",
+      "spec/fixtures/assets/**",
+      "spec/fixtures/cat-spin.mp4",
+      "spec/fixtures/cat.pdf",
+      "spec/fixtures/certificates/client.p12",
+      "spec/fixtures/recursive-asar/a.asar",
+      "spec/fixtures/test.asar/a.asar",
+      "spec/fixtures/test.asar/echo.asar",
+      "spec/fixtures/test.asar/empty.asar",
+      "spec/fixtures/test.asar/icon.asar",
+      "spec/fixtures/test.asar/icon.asar.unpacked/**",
+      "spec/fixtures/test.asar/logo.asar",
+      "spec/fixtures/test.asar/pdf.asar",
+      "spec/fixtures/test.asar/script.asar",
+      "spec/fixtures/test.asar/unpack.asar",
+      "spec/fixtures/test.asar/unpack.asar.unpacked/atom.png",
+      "spec/fixtures/test.asar/video.asar",
+      "spec/fixtures/test.asar/web.asar",
+      "spec/fixtures/test.asar/worker_threads.asar",
+      "spec/fixtures/video-source-image.webp",
+      "spec/fixtures/workers/workers.asar"
+    ]
+  },
+  "history": {
+    "since": "f176b2c58f0a65f796053c2a25250ab17dfd3649"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) Electron contributors\nCopyright (c) 2013-2020 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n// Copyright 2014 The Chromium Authors. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\nMIT License\n\nCopyright (c) 2020 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/electron/electron: Copyright (c) Electron contributors; Copyright (c) 2013-2020 GitHub Inc., MIT license (LICENSE), https://github.com/electron/electron; the authors of electron/electron (chromium_src) (the license file names no copyright line), BSD-3-Clause license (LICENSE.chromium), https://github.com/electron/electron/tree/2766ef64b6593b647cc69a277e1555855a9de1e0/chromium_src; Copyright (c) 2020 GitHub Inc., MIT license (LICENSE), https://github.com/electron/electron/tree/2766ef64b6593b647cc69a277e1555855a9de1e0/default_app/octicon."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".autofix.markdownlint-cli2.jsonc",
+        ".clang-format",
+        ".clang-tidy",
+        ".claude/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".env.example",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".lint-roller.json",
+        ".markdownlint-cli2.jsonc",
+        ".nvmrc",
+        ".oxfmtrc.json",
+        ".oxlintrc.json",
+        ".yarn/**",
+        ".yarnrc.yml",
+        "BUILD.gn",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEPS",
+        "LICENSE",
+        "README.md",
+        "REVIEW.md",
+        "SECURITY.md",
+        "build/**",
+        "buildflags/**",
+        "default_app/default_app.ts",
+        "default_app/index.html",
+        "default_app/main.ts",
+        "default_app/package.json",
+        "default_app/preload.ts",
+        "default_app/styles.css",
+        "docs/.oxfmtrc.json",
+        "docs/CLAUDE.md",
+        "docs/README.md",
+        "docs/api/**",
+        "docs/api-history.schema.json",
+        "docs/breaking-changes.md",
+        "docs/development/**",
+        "docs/experimental.md",
+        "docs/faq.md",
+        "docs/fiddles/**",
+        "docs/glossary.md",
+        "docs/images/corner-smoothing-example-0.svg",
+        "docs/images/corner-smoothing-example-100.svg",
+        "docs/images/corner-smoothing-example-30.svg",
+        "docs/images/corner-smoothing-example-60.svg",
+        "docs/images/corner-smoothing-summary.svg",
+        "docs/tutorial/**",
+        "docs/why-electron.md",
+        "filenames.auto.gni",
+        "filenames.gni",
+        "filenames.hunspell.gni",
+        "filenames.libcxx.gni",
+        "filenames.libcxxabi.gni",
+        "lib/**",
+        "npm/**",
+        "package.json",
+        "patches/**",
+        "script/**",
+        "shell/app/**",
+        "shell/browser/ai/**",
+        "shell/browser/animation_util.h",
+        "shell/browser/animation_util_mac.mm",
+        "shell/browser/api/**",
+        "shell/browser/app_package.cc",
+        "shell/browser/app_package.h",
+        "shell/browser/auto_updater.cc",
+        "shell/browser/auto_updater.h",
+        "shell/browser/auto_updater_mac.mm",
+        "shell/browser/background_throttling_source.h",
+        "shell/browser/badging/**",
+        "shell/browser/bluetooth/**",
+        "shell/browser/browser.cc",
+        "shell/browser/browser.h",
+        "shell/browser/browser_linux.cc",
+        "shell/browser/browser_mac.mm",
+        "shell/browser/browser_observer.h",
+        "shell/browser/browser_process_impl.cc",
+        "shell/browser/browser_process_impl.h",
+        "shell/browser/browser_win.cc",
+        "shell/browser/certificate_manager_model.cc",
+        "shell/browser/certificate_manager_model.h",
+        "shell/browser/child_web_contents_tracker.cc",
+        "shell/browser/child_web_contents_tracker.h",
+        "shell/browser/cookie_change_notifier.cc",
+        "shell/browser/cookie_change_notifier.h",
+        "shell/browser/draggable_region_provider.h",
+        "shell/browser/electron_api_ipc_handler_impl.cc",
+        "shell/browser/electron_api_ipc_handler_impl.h",
+        "shell/browser/electron_api_sw_ipc_handler_impl.cc",
+        "shell/browser/electron_api_sw_ipc_handler_impl.h",
+        "shell/browser/electron_autofill_driver.cc",
+        "shell/browser/electron_autofill_driver.h",
+        "shell/browser/electron_autofill_driver_factory.cc",
+        "shell/browser/electron_autofill_driver_factory.h",
+        "shell/browser/electron_browser_client.cc",
+        "shell/browser/electron_browser_client.h",
+        "shell/browser/electron_browser_context.cc",
+        "shell/browser/electron_browser_context.h",
+        "shell/browser/electron_browser_main_parts.cc",
+        "shell/browser/electron_browser_main_parts.h",
+        "shell/browser/electron_browser_main_parts_mac.mm",
+        "shell/browser/electron_browser_main_parts_posix.cc",
+        "shell/browser/electron_child_process_host_flags.h",
+        "shell/browser/electron_crypto_module_delegate_nss.cc",
+        "shell/browser/electron_crypto_module_delegate_nss.h",
+        "shell/browser/electron_download_manager_delegate.cc",
+        "shell/browser/electron_download_manager_delegate.h",
+        "shell/browser/electron_gpu_client.cc",
+        "shell/browser/electron_gpu_client.h",
+        "shell/browser/electron_navigation_throttle.cc",
+        "shell/browser/electron_navigation_throttle.h",
+        "shell/browser/electron_pdf_document_helper_client.cc",
+        "shell/browser/electron_pdf_document_helper_client.h",
+        "shell/browser/electron_permission_manager.cc",
+        "shell/browser/electron_permission_manager.h",
+        "shell/browser/electron_plugin_info_host_impl.cc",
+        "shell/browser/electron_plugin_info_host_impl.h",
+        "shell/browser/electron_preconnect_manager_delegate.cc",
+        "shell/browser/electron_preconnect_manager_delegate.h",
+        "shell/browser/electron_speech_recognition_manager_delegate.cc",
+        "shell/browser/electron_speech_recognition_manager_delegate.h",
+        "shell/browser/electron_web_contents_utility_handler_impl.cc",
+        "shell/browser/electron_web_contents_utility_handler_impl.h",
+        "shell/browser/electron_web_ui_controller_factory.cc",
+        "shell/browser/electron_web_ui_controller_factory.h",
+        "shell/browser/event_emitter_mixin.h",
+        "shell/browser/extended_web_contents_observer.h",
+        "shell/browser/extensions/**",
+        "shell/browser/feature_list.cc",
+        "shell/browser/feature_list.h",
+        "shell/browser/feature_list_mac.mm",
+        "shell/browser/file_select_helper.cc",
+        "shell/browser/file_select_helper.h",
+        "shell/browser/file_select_helper_mac.mm",
+        "shell/browser/file_system_access/**",
+        "shell/browser/font_defaults.cc",
+        "shell/browser/font_defaults.h",
+        "shell/browser/hid/**",
+        "shell/browser/javascript_environment.cc",
+        "shell/browser/javascript_environment.h",
+        "shell/browser/lib/**",
+        "shell/browser/linux/**",
+        "shell/browser/login_handler.cc",
+        "shell/browser/login_handler.h",
+        "shell/browser/mac/**",
+        "shell/browser/media/**",
+        "shell/browser/metrics/**",
+        "shell/browser/microtasks_runner.cc",
+        "shell/browser/microtasks_runner.h",
+        "shell/browser/native_peer.cc",
+        "shell/browser/native_peer.h",
+        "shell/browser/native_window.cc",
+        "shell/browser/native_window.h",
+        "shell/browser/native_window_mac.h",
+        "shell/browser/native_window_mac.mm",
+        "shell/browser/native_window_observer.h",
+        "shell/browser/native_window_views.cc",
+        "shell/browser/native_window_views.h",
+        "shell/browser/native_window_views_win.cc",
+        "shell/browser/net/**",
+        "shell/browser/network_hints_handler_impl.cc",
+        "shell/browser/network_hints_handler_impl.h",
+        "shell/browser/notifications/**",
+        "shell/browser/osr/**",
+        "shell/browser/plugins/**",
+        "shell/browser/preload_code_cache.cc",
+        "shell/browser/preload_code_cache.h",
+        "shell/browser/preload_script.cc",
+        "shell/browser/preload_script.h",
+        "shell/browser/printing/**",
+        "shell/browser/profiles/**",
+        "shell/browser/protocol_registry.cc",
+        "shell/browser/protocol_registry.h",
+        "shell/browser/relauncher.cc",
+        "shell/browser/relauncher.h",
+        "shell/browser/relauncher_linux.cc",
+        "shell/browser/relauncher_mac.cc",
+        "shell/browser/relauncher_win.cc",
+        "shell/browser/renderer_startup_data.cc",
+        "shell/browser/renderer_startup_data.h",
+        "shell/browser/resources/mac/Info.plist",
+        "shell/browser/resources/win/disable_window_filtering.manifest",
+        "shell/browser/resources/win/dpi_aware.manifest",
+        "shell/browser/resources/win/resource.h",
+        "shell/browser/serial/**",
+        "shell/browser/session_preferences.cc",
+        "shell/browser/session_preferences.h",
+        "shell/browser/special_storage_policy.cc",
+        "shell/browser/special_storage_policy.h",
+        "shell/browser/tracing/**",
+        "shell/browser/ui/**",
+        "shell/browser/usb/**",
+        "shell/browser/web_contents_permission_helper.cc",
+        "shell/browser/web_contents_permission_helper.h",
+        "shell/browser/web_contents_preferences.cc",
+        "shell/browser/web_contents_preferences.h",
+        "shell/browser/web_contents_zoom_controller.cc",
+        "shell/browser/web_contents_zoom_controller.h",
+        "shell/browser/web_contents_zoom_observer.h",
+        "shell/browser/web_view_guest_delegate.cc",
+        "shell/browser/web_view_guest_delegate.h",
+        "shell/browser/web_view_manager.cc",
+        "shell/browser/web_view_manager.h",
+        "shell/browser/webauthn/**",
+        "shell/browser/win/**",
+        "shell/browser/window_list.cc",
+        "shell/browser/window_list.h",
+        "shell/browser/window_list_observer.h",
+        "shell/browser/zoom_level_delegate.cc",
+        "shell/browser/zoom_level_delegate.h",
+        "shell/common/**",
+        "shell/renderer/**",
+        "shell/services/**",
+        "shell/utility/**",
+        "spec/.gitignore",
+        "spec/CLAUDE.md",
+        "spec/ambient.d.ts",
+        "spec/api-app.spec.ts",
+        "spec/api-auto-updater.spec.ts",
+        "spec/api-autoupdater-darwin-policy.spec.ts",
+        "spec/api-autoupdater-darwin.spec.ts",
+        "spec/api-autoupdater-msix.spec.ts",
+        "spec/api-base-window.spec.ts",
+        "spec/api-browser-view.spec.ts",
+        "spec/api-browser-window-ignore-mouse-events.spec.ts",
+        "spec/api-browser-window-posted-click.spec.ts",
+        "spec/api-browser-window.spec.ts",
+        "spec/api-clipboard.spec.ts",
+        "spec/api-content-tracing.spec.ts",
+        "spec/api-context-bridge.spec.ts",
+        "spec/api-corner-smoothing.spec.ts",
+        "spec/api-crash-reporter.spec.ts",
+        "spec/api-debugger.spec.ts",
+        "spec/api-desktop-capturer.spec.ts",
+        "spec/api-dialog.spec.ts",
+        "spec/api-global-shortcut.spec.ts",
+        "spec/api-image-view.spec.ts",
+        "spec/api-in-app-purchase.spec.ts",
+        "spec/api-ipc-main.spec.ts",
+        "spec/api-ipc-renderer.spec.ts",
+        "spec/api-ipc.spec.ts",
+        "spec/api-js2c-code-cache.spec.ts",
+        "spec/api-local-ai-handler.spec.ts",
+        "spec/api-media-handler.spec.ts",
+        "spec/api-menu-item.spec.ts",
+        "spec/api-menu.spec.ts",
+        "spec/api-native-image.spec.ts",
+        "spec/api-native-theme.spec.ts",
+        "spec/api-net-custom-protocols.spec.ts",
+        "spec/api-net-log.spec.ts",
+        "spec/api-net-session.spec.ts",
+        "spec/api-net-websocket.spec.ts",
+        "spec/api-net.spec.ts",
+        "spec/api-notification-dbus.spec.ts",
+        "spec/api-notification.spec.ts",
+        "spec/api-power-monitor.spec.ts",
+        "spec/api-power-save-blocker.spec.ts",
+        "spec/api-process.spec.ts",
+        "spec/api-protocol.spec.ts",
+        "spec/api-safe-storage.spec.ts",
+        "spec/api-screen.spec.ts",
+        "spec/api-service-worker-main.spec.ts",
+        "spec/api-service-workers.spec.ts",
+        "spec/api-session.spec.ts",
+        "spec/api-shared-texture.spec.ts",
+        "spec/api-shell.spec.ts",
+        "spec/api-subframe.spec.ts",
+        "spec/api-system-preferences.spec.ts",
+        "spec/api-touch-bar.spec.ts",
+        "spec/api-tray.spec.ts",
+        "spec/api-utility-process.spec.ts",
+        "spec/api-v8-code-cache.spec.ts",
+        "spec/api-view.spec.ts",
+        "spec/api-web-authn.spec.ts",
+        "spec/api-web-contents-view.spec.ts",
+        "spec/api-web-contents.spec.ts",
+        "spec/api-web-frame-main.spec.ts",
+        "spec/api-web-frame.spec.ts",
+        "spec/api-web-request.spec.ts",
+        "spec/api-web-utils.spec.ts",
+        "spec/asar-integrity.spec.ts",
+        "spec/asar.spec.ts",
+        "spec/autofill.spec.ts",
+        "spec/chromium.spec.ts",
+        "spec/cpp-heap.spec.ts",
+        "spec/crash.spec.ts",
+        "spec/deprecate.spec.ts",
+        "spec/desktop-name.spec.ts",
+        "spec/disabled-tests.json",
+        "spec/drag-region.spec.ts",
+        "spec/esm.spec.ts",
+        "spec/extensions.spec.ts",
+        "spec/fixtures/api/app-path/**",
+        "spec/fixtures/api/autoupdater/msix/ElectronDevAppxManifest.xml",
+        "spec/fixtures/api/autoupdater/msix/install_test_cert.ps1",
+        "spec/fixtures/api/autoupdater/msix/main.js",
+        "spec/fixtures/api/beforeunload-empty-string.html",
+        "spec/fixtures/api/beforeunload-false-prevent3.html",
+        "spec/fixtures/api/beforeunload-false.html",
+        "spec/fixtures/api/beforeunload-undefined.html",
+        "spec/fixtures/api/blank.html",
+        "spec/fixtures/api/close.html",
+        "spec/fixtures/api/command-line/**",
+        "spec/fixtures/api/context-bridge/**",
+        "spec/fixtures/api/cookie-app/**",
+        "spec/fixtures/api/corner-smoothing/shape/test.html",
+        "spec/fixtures/api/corner-smoothing/system-ui-keyword/test.html",
+        "spec/fixtures/api/cppgc-callback-lifetime-worker.js",
+        "spec/fixtures/api/cppgc-detached-frame.html",
+        "spec/fixtures/api/cppgc-detached-frame.js",
+        "spec/fixtures/api/cppgc-template-cache-worker.js",
+        "spec/fixtures/api/custom-protocol-shutdown.js",
+        "spec/fixtures/api/default-menu/**",
+        "spec/fixtures/api/did-fail-load-iframe.html",
+        "spec/fixtures/api/disable-hardware-acceleration/**",
+        "spec/fixtures/api/electron-main-module/app/**",
+        "spec/fixtures/api/environ-write-race.js",
+        "spec/fixtures/api/exit-before-ready-after-tls/**",
+        "spec/fixtures/api/exit-closes-all-windows-app/**",
+        "spec/fixtures/api/first-party-sets/**",
+        "spec/fixtures/api/force-dark-mode/**",
+        "spec/fixtures/api/fork-with-node-options.js",
+        "spec/fixtures/api/frame-subscriber.html",
+        "spec/fixtures/api/globals.html",
+        "spec/fixtures/api/gpu-info.js",
+        "spec/fixtures/api/ipc-main-listeners/**",
+        "spec/fixtures/api/isolated-fetch-preload.js",
+        "spec/fixtures/api/isolated-preload.js",
+        "spec/fixtures/api/isolated-process.js",
+        "spec/fixtures/api/isolated.html",
+        "spec/fixtures/api/js2c-code-cache/**",
+        "spec/fixtures/api/loaded-from-dataurl.js",
+        "spec/fixtures/api/local-ai-handler/**",
+        "spec/fixtures/api/locale-check/**",
+        "spec/fixtures/api/localstorage-and-indexeddb.html",
+        "spec/fixtures/api/localstorage.html",
+        "spec/fixtures/api/mixed-sandbox-app/**",
+        "spec/fixtures/api/native-window-open-blank.html",
+        "spec/fixtures/api/native-window-open-child.html",
+        "spec/fixtures/api/native-window-open-cross-origin.html",
+        "spec/fixtures/api/native-window-open-file.html",
+        "spec/fixtures/api/native-window-open-iframe.html",
+        "spec/fixtures/api/native-window-open-isolated-preload.js",
+        "spec/fixtures/api/native-window-open-isolated.html",
+        "spec/fixtures/api/native-window-open-native-addon.html",
+        "spec/fixtures/api/native-window-open-no-allowpopups.html",
+        "spec/fixtures/api/native-window-open-noopener.html",
+        "spec/fixtures/api/net-log/**",
+        "spec/fixtures/api/new-window-preload.js",
+        "spec/fixtures/api/new-window-webview-preload.js",
+        "spec/fixtures/api/new-window-webview.html",
+        "spec/fixtures/api/new-window.html",
+        "spec/fixtures/api/no-display/**",
+        "spec/fixtures/api/no-leak.html",
+        "spec/fixtures/api/offscreen-rendering.html",
+        "spec/fixtures/api/ozone-platform/**",
+        "spec/fixtures/api/pdf-reader.mjs",
+        "spec/fixtures/api/picture-in-picture.html",
+        "spec/fixtures/api/preload-realm/**",
+        "spec/fixtures/api/preload.html",
+        "spec/fixtures/api/print-to-pdf-large.html",
+        "spec/fixtures/api/print-to-pdf-same-origin.html",
+        "spec/fixtures/api/print-to-pdf-small.html",
+        "spec/fixtures/api/protocol-name/**",
+        "spec/fixtures/api/quit-app/**",
+        "spec/fixtures/api/relaunch/**",
+        "spec/fixtures/api/safe-storage/**",
+        "spec/fixtures/api/sandbox.html",
+        "spec/fixtures/api/send-sync-message.html",
+        "spec/fixtures/api/service-workers/**",
+        "spec/fixtures/api/session-bus-lost/**",
+        "spec/fixtures/api/shared-dictionary/**",
+        "spec/fixtures/api/shared-texture/common.js",
+        "spec/fixtures/api/shared-texture/managed/**",
+        "spec/fixtures/api/shared-texture/osr.html",
+        "spec/fixtures/api/shared-texture/subtle/**",
+        "spec/fixtures/api/shared-worker/**",
+        "spec/fixtures/api/singleton/**",
+        "spec/fixtures/api/singleton-data/**",
+        "spec/fixtures/api/singleton-userdata/**",
+        "spec/fixtures/api/test-menu-no-gtk/**",
+        "spec/fixtures/api/test-menu-null/**",
+        "spec/fixtures/api/test-menu-visibility/**",
+        "spec/fixtures/api/unhandled-rejection-handled.js",
+        "spec/fixtures/api/unhandled-rejection.js",
+        "spec/fixtures/api/unload.html",
+        "spec/fixtures/api/utility-process/**",
+        "spec/fixtures/api/v8-code-cache.cjs",
+        "spec/fixtures/api/web-request/**",
+        "spec/fixtures/api/webrequest.html",
+        "spec/fixtures/api/widevine-cdm-path/**",
+        "spec/fixtures/api/window-all-closed/**",
+        "spec/fixtures/api/window-open-location-change.html",
+        "spec/fixtures/api/window-open-location-final.html",
+        "spec/fixtures/api/window-open-location-open.html",
+        "spec/fixtures/api/window-open-preload.js",
+        "spec/fixtures/api/window-state-save/**",
+        "spec/fixtures/api/xdg-mock/**",
+        "spec/fixtures/apps/asar-fd-reads/**",
+        "spec/fixtures/apps/asar-integrity-reads/**",
+        "spec/fixtures/apps/asar-replace/**",
+        "spec/fixtures/apps/crash/**",
+        "spec/fixtures/apps/display-lost/**",
+        "spec/fixtures/apps/gdk-backend/**",
+        "spec/fixtures/apps/hello/**",
+        "spec/fixtures/apps/hidden-window-overlay/**",
+        "spec/fixtures/apps/libuv-hang/**",
+        "spec/fixtures/apps/node-options-utility-process/**",
+        "spec/fixtures/apps/open-new-window-from-link/**",
+        "spec/fixtures/apps/refresh-page/**",
+        "spec/fixtures/apps/remote-control/**",
+        "spec/fixtures/apps/remote-debugging-emulation/**",
+        "spec/fixtures/apps/self-module-paths/**",
+        "spec/fixtures/apps/set-path/**",
+        "spec/fixtures/apps/xwindow-icon/main.js",
+        "spec/fixtures/apps/xwindow-icon/package.json",
+        "spec/fixtures/auto-update/**",
+        "spec/fixtures/blank.html",
+        "spec/fixtures/blank.png",
+        "spec/fixtures/certificates/certs.cnf",
+        "spec/fixtures/certificates/generate_certs.sh",
+        "spec/fixtures/certificates/intermediateCA.pem",
+        "spec/fixtures/certificates/rootCA.pem",
+        "spec/fixtures/certificates/server.key",
+        "spec/fixtures/certificates/server.pem",
+        "spec/fixtures/chromium/**",
+        "spec/fixtures/crash-cases/**",
+        "spec/fixtures/devtools-extensions/**",
+        "spec/fixtures/dogs-running.txt",
+        "spec/fixtures/esm/**",
+        "spec/fixtures/extensions/**",
+        "spec/fixtures/file-system/**",
+        "spec/fixtures/hello.txt",
+        "spec/fixtures/log-test.js",
+        "spec/fixtures/module/**",
+        "spec/fixtures/native-addon/**",
+        "spec/fixtures/no-proprietary-codecs.js",
+        "spec/fixtures/package.json",
+        "spec/fixtures/pages/**",
+        "spec/fixtures/preload-expose-ipc.js",
+        "spec/fixtures/recursive-asar/nested/**",
+        "spec/fixtures/recursive-asar/test.txt",
+        "spec/fixtures/snapshot-items-available/**",
+        "spec/fixtures/sub-frames/**",
+        "spec/fixtures/test.asar/file",
+        "spec/fixtures/test.asar/repack.js",
+        "spec/fixtures/test.asar/unpack.asar.unpacked/a.txt",
+        "spec/fixtures/testsnap.js",
+        "spec/fixtures/type-stripping/**",
+        "spec/fixtures/webview/**",
+        "spec/fixtures/workers/audio_worklet_node.js",
+        "spec/fixtures/workers/load_shared_worker.html",
+        "spec/fixtures/workers/load_worker.html",
+        "spec/fixtures/workers/shared_worker.js",
+        "spec/fixtures/workers/shared_worker_node.js",
+        "spec/fixtures/workers/worker.js",
+        "spec/fixtures/workers/worker_node.js",
+        "spec/fixtures/workers/worker_node_fetch.js",
+        "spec/fuses.spec.ts",
+        "spec/guest-window-manager.spec.ts",
+        "spec/index.js",
+        "spec/lib/**",
+        "spec/logging.spec.ts",
+        "spec/mas.spec.ts",
+        "spec/modules.spec.ts",
+        "spec/node-event-emitter.spec.ts",
+        "spec/node.spec.ts",
+        "spec/package.json",
+        "spec/parse-features-string.spec.ts",
+        "spec/pipe-transport.ts",
+        "spec/process-binding.spec.ts",
+        "spec/security-warnings.spec.ts",
+        "spec/spellchecker.spec.ts",
+        "spec/ts-smoke/**",
+        "spec/tsconfig.json",
+        "spec/types.spec.ts",
+        "spec/visibility-state.spec.ts",
+        "spec/vitest/**",
+        "spec/vitest-runner.spec.ts",
+        "spec/vitest.config.ts",
+        "spec/webview.spec.ts",
+        "spec/xcache.spec.ts",
+        "tsconfig.default_app.json",
+        "tsconfig.electron.json",
+        "tsconfig.json",
+        "tsconfig.script.json",
+        "tsconfig.spec.json",
+        "typings/**",
+        "yarn.lock"
+      ],
+      "text": "Copyright (c) Electron contributors\nCopyright (c) 2013-2020 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) Electron contributors; Copyright (c) 2013-2020 GitHub Inc., MIT license (LICENSE), https://github.com/electron/electron."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "chromium_src/**"
+      ],
+      "text": "// Copyright 2014 The Chromium Authors. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "the authors of electron/electron (chromium_src) (the license file names no copyright line), BSD-3-Clause license (LICENSE.chromium), https://github.com/electron/electron/tree/2766ef64b6593b647cc69a277e1555855a9de1e0/chromium_src."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "default_app/octicon/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 GitHub Inc., MIT license (LICENSE), https://github.com/electron/electron/tree/2766ef64b6593b647cc69a277e1555855a9de1e0/default_app/octicon."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.chromium"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.def"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.desktop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fragment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "script/lib/electron.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gni"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.grd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gyp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.manifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mojom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sigs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xtb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.patches"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DEPS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bashrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-export-patches"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git-import-patches"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/siso_revision"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xdg-mime"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xdg-settings"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

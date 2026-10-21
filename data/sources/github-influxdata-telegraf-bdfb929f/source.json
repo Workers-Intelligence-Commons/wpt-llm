@@ -1,0 +1,2807 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/influxdata/telegraf",
+  "revision": "2bac12a6a682e02f2ef42a43d40a259083892212",
+  "checksum": "sha256:6d9423fef95d77bc6942fe56a6600f6f2fae486dc4418bc6bfdd9a5fd59d00d8",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "docs/**",
+      "plugins/inputs/cloudwatch_metric_streams/testdata/records.gz",
+      "plugins/inputs/file/testdata/mtr-utf-16be.csv",
+      "plugins/inputs/file/testdata/mtr-utf-16le.csv",
+      "plugins/inputs/http_listener_v2/testdata/testmsgs.gz",
+      "plugins/inputs/influxdb_listener/testdata/testmsgs.gz",
+      "plugins/inputs/influxdb_v2_listener/testdata/testmsgs.gz",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_0.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_1.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_2.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_3.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_4.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_5.bin",
+      "plugins/inputs/netflow/testcases/ipfix_example/ipfix_6.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-001.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-002.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-003.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-004.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-005.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-006.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-007.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-008.bin",
+      "plugins/inputs/netflow/testcases/ipfix_options/message-009.bin",
+      "plugins/inputs/netflow/testcases/ipfix_pen_35632/message-1.bin",
+      "plugins/inputs/netflow/testcases/ipfix_pen_35632/message-2.bin",
+      "plugins/inputs/netflow/testcases/ipfix_pen_35632/message-3.bin",
+      "plugins/inputs/netflow/testcases/ipfix_pen_35632/message-4.bin",
+      "plugins/inputs/netflow/testcases/issue_13305/message-1.bin",
+      "plugins/inputs/netflow/testcases/issue_13305/message-2.bin",
+      "plugins/inputs/netflow/testcases/issue_13305/message-3.bin",
+      "plugins/inputs/netflow/testcases/issue_13305/message-4.bin",
+      "plugins/inputs/netflow/testcases/issue_14370/message.bin",
+      "plugins/inputs/netflow/testcases/netflow_v5_example/netflow_v5.bin",
+      "plugins/inputs/netflow/testcases/netflow_v9_example/netflow_v9.bin",
+      "plugins/inputs/netflow/testcases/netflow_v9_options/message.bin",
+      "plugins/inputs/netflow/testcases/sflow_issue_15375/sflow_drop_1036.bin",
+      "plugins/inputs/netflow/testcases/sflow_issue_15918/message.bin",
+      "plugins/inputs/netflow/testcases/sflow_issue_18876/message.bin",
+      "plugins/inputs/netflow/testcases/sflow_v5_example/sflow_v5.bin",
+      "plugins/inputs/prometheus/testdata/**",
+      "plugins/inputs/ras/testcases/issue_19511/ras-mc_event.db",
+      "plugins/inputs/socket_listener/testcases/powerdns/powerdns_message.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_delimiter/message.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_null/message.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_variable_length/message_1.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_variable_length/message_2.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_variable_length/message_3.bin",
+      "plugins/inputs/socket_listener/testcases/splitting_variable_length/message_4.bin",
+      "plugins/inputs/tail/testdata/cpu-utf-16be.influx",
+      "plugins/inputs/tail/testdata/cpu-utf-16le.influx",
+      "plugins/inputs/zipkin/testdata/cli_microservice.dat",
+      "plugins/inputs/zipkin/testdata/distributed_trace_sample.dat",
+      "plugins/inputs/zipkin/testdata/threespans.dat",
+      "plugins/parsers/avro/testcases/measurement_name_from_message/message.avro",
+      "plugins/parsers/avro/testcases/no-timestamp-format/message.avro",
+      "plugins/parsers/avro/testcases/supplied_timestamp/message.avro",
+      "plugins/parsers/avro/testcases/supplied_timestamp_fields_specified/message.avro",
+      "plugins/parsers/avro/testcases/supplied_timestamp_fields_unspecified/message.avro",
+      "plugins/parsers/binary/testcases/multiple_messages/messageA.bin",
+      "plugins/parsers/binary/testcases/multiple_messages/messageB.bin",
+      "plugins/parsers/binary/testcases/multiple_messages/messageC.bin",
+      "plugins/parsers/openmetrics/testcases/protobuf/input.bin",
+      "plugins/parsers/openmetrics/testcases/protobuf_infolabels/input.bin",
+      "plugins/parsers/parquet/testcases/benchmark/input.parquet",
+      "plugins/parsers/parquet/testcases/datatypes/input.parquet",
+      "plugins/parsers/parquet/testcases/dense/input.parquet",
+      "plugins/parsers/parquet/testcases/empty/input.parquet",
+      "plugins/parsers/parquet/testcases/multitable/input.parquet",
+      "plugins/parsers/parquet/testcases/sparse/input.parquet",
+      "plugins/parsers/parquet/testcases/timestamp/input.parquet",
+      "plugins/parsers/prometheus/testcases/histogram_inf_bucket/input.bin",
+      "plugins/parsers/prometheus/testcases/protobuf/input.bin",
+      "plugins/parsers/xpath/testcases/addressbook.dat",
+      "plugins/parsers/xpath/testcases/cbor/addressbook.bin",
+      "plugins/parsers/xpath/testcases/cbor_base64_encoding/data.bin",
+      "plugins/parsers/xpath/testcases/cbor_benchmark/message.bin",
+      "plugins/parsers/xpath/testcases/cbor_hex_encoding/data.bin",
+      "plugins/parsers/xpath/testcases/cbor_hex_encoding_explicit/data.bin",
+      "plugins/parsers/xpath/testcases/cbor_numeric_keys/data.bin",
+      "plugins/parsers/xpath/testcases/native_types_cbor/addressbook.bin",
+      "plugins/parsers/xpath/testcases/native_types_msgpack/test.msg",
+      "plugins/parsers/xpath/testcases/native_types_protobuf/test.dat",
+      "plugins/parsers/xpath/testcases/protobuf_benchmark/message.bin",
+      "plugins/parsers/xpath/testcases/protobuf_issue_13715/message.bin",
+      "plugins/parsers/xpath/testcases/protobuf_issue_15571/message.bin",
+      "plugins/parsers/xpath/testcases/protobuf_noskip_bytes_grpc/test.dat",
+      "plugins/parsers/xpath/testcases/protobuf_powerdns_hex/powerdns_message.bin",
+      "plugins/parsers/xpath/testcases/protobuf_skip_bytes_grpc/test.dat",
+      "plugins/parsers/xpath/testcases/tracker.msg"
+    ]
+  },
+  "history": {
+    "since": "b8e13890a9623b7cfdf3569c0cd579e3814339dc"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-2025 InfluxData Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2016 Mendelson Gusmão\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/influxdata/telegraf: Copyright (c) 2015-2025 InfluxData Inc., MIT license (LICENSE), https://github.com/influxdata/telegraf; the authors of influxdata/telegraf (plugins/inputs/gnmi/testcases/issue_15046/models) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/influxdata/telegraf/tree/2bac12a6a682e02f2ef42a43d40a259083892212/plugins/inputs/gnmi/testcases/issue_15046/models; Copyright (c) 2016 Mendelson Gusmão, MIT license (LICENSE), https://github.com/influxdata/telegraf/tree/2bac12a6a682e02f2ef42a43d40a259083892212/plugins/inputs/hddtemp/go-hddtemp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".circleci/**",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".markdownlint.jsonc",
+        ".markdownlintignore",
+        "CHANGELOG-1.13.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "EXTERNAL_PLUGINS.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "accumulator.go",
+        "agent/**",
+        "aggregator.go",
+        "build_version.txt",
+        "cmd/**",
+        "config/**",
+        "etc/**",
+        "filter/**",
+        "go.mod",
+        "go.sum",
+        "info.plist",
+        "input.go",
+        "internal/**",
+        "logger/**",
+        "logger.go",
+        "metric/**",
+        "metric.go",
+        "migrations/**",
+        "models/**",
+        "output.go",
+        "parser.go",
+        "persister/**",
+        "plugin.go",
+        "plugins/aggregators/**",
+        "plugins/all_test.go",
+        "plugins/common/**",
+        "plugins/inputs/activemq/**",
+        "plugins/inputs/aliyuncms/**",
+        "plugins/inputs/all/**",
+        "plugins/inputs/amd_rocm_smi/**",
+        "plugins/inputs/amqp_consumer/**",
+        "plugins/inputs/apache/**",
+        "plugins/inputs/apcupsd/**",
+        "plugins/inputs/aurora/**",
+        "plugins/inputs/azure_monitor/**",
+        "plugins/inputs/azure_storage_queue/**",
+        "plugins/inputs/bcache/**",
+        "plugins/inputs/beanstalkd/**",
+        "plugins/inputs/beat/**",
+        "plugins/inputs/bind/**",
+        "plugins/inputs/bond/**",
+        "plugins/inputs/burrow/**",
+        "plugins/inputs/ceph/**",
+        "plugins/inputs/cgroup/**",
+        "plugins/inputs/chrony/**",
+        "plugins/inputs/cisco_telemetry_mdt/**",
+        "plugins/inputs/clickhouse/**",
+        "plugins/inputs/cloud_pubsub/**",
+        "plugins/inputs/cloud_pubsub_push/**",
+        "plugins/inputs/cloudwatch/**",
+        "plugins/inputs/cloudwatch_metric_streams/README.md",
+        "plugins/inputs/cloudwatch_metric_streams/cloudwatch_metric_streams.go",
+        "plugins/inputs/cloudwatch_metric_streams/cloudwatch_metric_streams_test.go",
+        "plugins/inputs/cloudwatch_metric_streams/sample.conf",
+        "plugins/inputs/cloudwatch_metric_streams/testdata/record.json",
+        "plugins/inputs/cloudwatch_metric_streams/testdata/records.json",
+        "plugins/inputs/conntrack/**",
+        "plugins/inputs/consul/**",
+        "plugins/inputs/consul_agent/**",
+        "plugins/inputs/couchbase/**",
+        "plugins/inputs/couchdb/**",
+        "plugins/inputs/cpu/**",
+        "plugins/inputs/csgo/**",
+        "plugins/inputs/ctrlx_datalayer/**",
+        "plugins/inputs/dcos/**",
+        "plugins/inputs/deprecations.go",
+        "plugins/inputs/directory_monitor/**",
+        "plugins/inputs/disk/**",
+        "plugins/inputs/diskio/**",
+        "plugins/inputs/disque/**",
+        "plugins/inputs/dmcache/**",
+        "plugins/inputs/dns_query/**",
+        "plugins/inputs/docker/**",
+        "plugins/inputs/docker_log/**",
+        "plugins/inputs/dovecot/**",
+        "plugins/inputs/dpdk/**",
+        "plugins/inputs/ecs/**",
+        "plugins/inputs/elasticsearch/**",
+        "plugins/inputs/elasticsearch_query/**",
+        "plugins/inputs/ethtool/**",
+        "plugins/inputs/eventhub_consumer/**",
+        "plugins/inputs/example/**",
+        "plugins/inputs/exec/**",
+        "plugins/inputs/execd/**",
+        "plugins/inputs/fail2ban/**",
+        "plugins/inputs/fibaro/**",
+        "plugins/inputs/file/README.md",
+        "plugins/inputs/file/dev/**",
+        "plugins/inputs/file/file.go",
+        "plugins/inputs/file/file_test.go",
+        "plugins/inputs/file/sample.conf",
+        "plugins/inputs/file/testdata/csv_behavior_input.csv",
+        "plugins/inputs/file/testdata/mtr-utf-8.csv",
+        "plugins/inputs/filecount/**",
+        "plugins/inputs/filestat/**",
+        "plugins/inputs/fireboard/**",
+        "plugins/inputs/firehose/**",
+        "plugins/inputs/fluentd/**",
+        "plugins/inputs/fritzbox/**",
+        "plugins/inputs/fritzbox_smarthome/**",
+        "plugins/inputs/github/**",
+        "plugins/inputs/gnmi/README.md",
+        "plugins/inputs/gnmi/gnmi.go",
+        "plugins/inputs/gnmi/gnmi_test.go",
+        "plugins/inputs/gnmi/sample.conf",
+        "plugins/inputs/gnmi/sample.conf.in",
+        "plugins/inputs/gnmi/subscriber.go",
+        "plugins/inputs/gnmi/testcases/canonical_field_names/**",
+        "plugins/inputs/gnmi/testcases/canonical_field_names_trim/**",
+        "plugins/inputs/gnmi/testcases/issue_11011/**",
+        "plugins/inputs/gnmi/testcases/issue_11778/**",
+        "plugins/inputs/gnmi/testcases/issue_12831/**",
+        "plugins/inputs/gnmi/testcases/issue_12931/**",
+        "plugins/inputs/gnmi/testcases/issue_13052/**",
+        "plugins/inputs/gnmi/testcases/issue_13512/**",
+        "plugins/inputs/gnmi/testcases/issue_14044/**",
+        "plugins/inputs/gnmi/testcases/issue_14063/**",
+        "plugins/inputs/gnmi/testcases/issue_14530/**",
+        "plugins/inputs/gnmi/testcases/issue_14833/**",
+        "plugins/inputs/gnmi/testcases/issue_14946/**",
+        "plugins/inputs/gnmi/testcases/issue_14946_canonical_field_names/**",
+        "plugins/inputs/gnmi/testcases/issue_15046/expected.out",
+        "plugins/inputs/gnmi/testcases/issue_15046/responses.json",
+        "plugins/inputs/gnmi/testcases/issue_15046/telegraf.conf",
+        "plugins/inputs/gnmi/testcases/issue_15546/**",
+        "plugins/inputs/gnmi/testcases/issue_16476/**",
+        "plugins/inputs/gnmi/testcases/issue_16515/**",
+        "plugins/inputs/gnmi/testcases/issue_17154/**",
+        "plugins/inputs/gnmi/testcases/issue_17279/**",
+        "plugins/inputs/gnmi/testcases/issue_17412/**",
+        "plugins/inputs/gnmi/testcases/issue_17622/**",
+        "plugins/inputs/gnmi/testcases/tagging_name_based/**",
+        "plugins/inputs/gnmi/testcases/tagging_subinterfaces/**",
+        "plugins/inputs/gnmi_listener/**",
+        "plugins/inputs/google_cloud_storage/**",
+        "plugins/inputs/graylog/**",
+        "plugins/inputs/haproxy/**",
+        "plugins/inputs/hddtemp/README.md",
+        "plugins/inputs/hddtemp/hddtemp.go",
+        "plugins/inputs/hddtemp/hddtemp_test.go",
+        "plugins/inputs/hddtemp/sample.conf",
+        "plugins/inputs/http/**",
+        "plugins/inputs/http_listener_v2/README.md",
+        "plugins/inputs/http_listener_v2/http_listener_v2.go",
+        "plugins/inputs/http_listener_v2/http_listener_v2_test.go",
+        "plugins/inputs/http_listener_v2/sample.conf",
+        "plugins/inputs/http_listener_v2/testdata/huge_metric",
+        "plugins/inputs/http_response/**",
+        "plugins/inputs/huebridge/**",
+        "plugins/inputs/hugepages/**",
+        "plugins/inputs/icinga2/**",
+        "plugins/inputs/infiniband/**",
+        "plugins/inputs/influxdb/**",
+        "plugins/inputs/influxdb_listener/README.md",
+        "plugins/inputs/influxdb_listener/influxdb_listener.go",
+        "plugins/inputs/influxdb_listener/influxdb_listener_benchmark_test.go",
+        "plugins/inputs/influxdb_listener/influxdb_listener_test.go",
+        "plugins/inputs/influxdb_listener/sample.conf",
+        "plugins/inputs/influxdb_listener/testdata/huge_metric",
+        "plugins/inputs/influxdb_v2_listener/README.md",
+        "plugins/inputs/influxdb_v2_listener/influxdb_v2_listener.go",
+        "plugins/inputs/influxdb_v2_listener/influxdb_v2_listener_benchmark_test.go",
+        "plugins/inputs/influxdb_v2_listener/influxdb_v2_listener_test.go",
+        "plugins/inputs/influxdb_v2_listener/sample.conf",
+        "plugins/inputs/influxdb_v2_listener/testdata/huge_metric",
+        "plugins/inputs/intel_baseband/**",
+        "plugins/inputs/intel_dlb/**",
+        "plugins/inputs/intel_pmt/**",
+        "plugins/inputs/intel_pmu/**",
+        "plugins/inputs/intel_powerstat/**",
+        "plugins/inputs/intel_rdt/**",
+        "plugins/inputs/internal/**",
+        "plugins/inputs/internet_speed/**",
+        "plugins/inputs/interrupts/**",
+        "plugins/inputs/ipmi_sensor/**",
+        "plugins/inputs/ipset/**",
+        "plugins/inputs/iptables/**",
+        "plugins/inputs/ipvs/**",
+        "plugins/inputs/jenkins/**",
+        "plugins/inputs/jolokia2_agent/**",
+        "plugins/inputs/jolokia2_proxy/**",
+        "plugins/inputs/jti_openconfig_telemetry/**",
+        "plugins/inputs/kafka/**",
+        "plugins/inputs/kafka_consumer/**",
+        "plugins/inputs/kapacitor/**",
+        "plugins/inputs/kernel/**",
+        "plugins/inputs/kernel_vmstat/**",
+        "plugins/inputs/kibana/**",
+        "plugins/inputs/kinesis_consumer/**",
+        "plugins/inputs/knx_listener/**",
+        "plugins/inputs/kube_inventory/**",
+        "plugins/inputs/kubernetes/**",
+        "plugins/inputs/lanz/**",
+        "plugins/inputs/ldap/**",
+        "plugins/inputs/leofs/**",
+        "plugins/inputs/libvirt/**",
+        "plugins/inputs/linux_cpu/**",
+        "plugins/inputs/linux_sysctl_fs/**",
+        "plugins/inputs/logql/**",
+        "plugins/inputs/logstash/**",
+        "plugins/inputs/lustre2/**",
+        "plugins/inputs/lvm/**",
+        "plugins/inputs/mailchimp/**",
+        "plugins/inputs/marklogic/**",
+        "plugins/inputs/mavlink/**",
+        "plugins/inputs/mcrouter/**",
+        "plugins/inputs/mdstat/**",
+        "plugins/inputs/mem/**",
+        "plugins/inputs/memcached/**",
+        "plugins/inputs/mesos/**",
+        "plugins/inputs/minecraft/**",
+        "plugins/inputs/mock/**",
+        "plugins/inputs/modbus/**",
+        "plugins/inputs/mongodb/**",
+        "plugins/inputs/monit/**",
+        "plugins/inputs/mqtt_consumer/**",
+        "plugins/inputs/multifile/**",
+        "plugins/inputs/mysql/**",
+        "plugins/inputs/nats/**",
+        "plugins/inputs/nats_consumer/**",
+        "plugins/inputs/neoom_beaam/**",
+        "plugins/inputs/neptune_apex/**",
+        "plugins/inputs/net/**",
+        "plugins/inputs/net_response/**",
+        "plugins/inputs/netflow/README.md",
+        "plugins/inputs/netflow/ipv4_options.csv",
+        "plugins/inputs/netflow/layer4_protocol_numbers.csv",
+        "plugins/inputs/netflow/mappings.go",
+        "plugins/inputs/netflow/mappings_ipfix_pen/**",
+        "plugins/inputs/netflow/netflow.go",
+        "plugins/inputs/netflow/netflow_decoder.go",
+        "plugins/inputs/netflow/netflow_test.go",
+        "plugins/inputs/netflow/netflow_v5.go",
+        "plugins/inputs/netflow/sample.conf",
+        "plugins/inputs/netflow/sflow_v5.go",
+        "plugins/inputs/netflow/testcases/ipfix_example/expected.out",
+        "plugins/inputs/netflow/testcases/ipfix_example/telegraf.conf",
+        "plugins/inputs/netflow/testcases/ipfix_options/expected.out",
+        "plugins/inputs/netflow/testcases/ipfix_options/telegraf.conf",
+        "plugins/inputs/netflow/testcases/ipfix_pen_35632/expected.out",
+        "plugins/inputs/netflow/testcases/ipfix_pen_35632/telegraf.conf",
+        "plugins/inputs/netflow/testcases/issue_13305/expected.out",
+        "plugins/inputs/netflow/testcases/issue_13305/telegraf.conf",
+        "plugins/inputs/netflow/testcases/issue_14370/expected.out",
+        "plugins/inputs/netflow/testcases/issue_14370/telegraf.conf",
+        "plugins/inputs/netflow/testcases/netflow_mapping.csv",
+        "plugins/inputs/netflow/testcases/netflow_v5_example/expected.out",
+        "plugins/inputs/netflow/testcases/netflow_v5_example/telegraf.conf",
+        "plugins/inputs/netflow/testcases/netflow_v9_example/expected.out",
+        "plugins/inputs/netflow/testcases/netflow_v9_example/telegraf.conf",
+        "plugins/inputs/netflow/testcases/netflow_v9_options/expected.out",
+        "plugins/inputs/netflow/testcases/netflow_v9_options/telegraf.conf",
+        "plugins/inputs/netflow/testcases/sflow_issue_15375/expected.out",
+        "plugins/inputs/netflow/testcases/sflow_issue_15375/telegraf.conf",
+        "plugins/inputs/netflow/testcases/sflow_issue_15918/expected.out",
+        "plugins/inputs/netflow/testcases/sflow_issue_15918/telegraf.conf",
+        "plugins/inputs/netflow/testcases/sflow_issue_18876/expected.out",
+        "plugins/inputs/netflow/testcases/sflow_issue_18876/telegraf.conf",
+        "plugins/inputs/netflow/testcases/sflow_v5_example/expected.out",
+        "plugins/inputs/netflow/testcases/sflow_v5_example/telegraf.conf",
+        "plugins/inputs/netflow/type_conversion.go",
+        "plugins/inputs/netflow/type_conversion_test.go",
+        "plugins/inputs/netstat/**",
+        "plugins/inputs/nfsclient/**",
+        "plugins/inputs/nftables/**",
+        "plugins/inputs/nginx/**",
+        "plugins/inputs/nginx_plus/**",
+        "plugins/inputs/nginx_plus_api/**",
+        "plugins/inputs/nginx_sts/**",
+        "plugins/inputs/nginx_upstream_check/**",
+        "plugins/inputs/nginx_vts/**",
+        "plugins/inputs/nomad/**",
+        "plugins/inputs/nsd/**",
+        "plugins/inputs/nsdp/**",
+        "plugins/inputs/nsq/**",
+        "plugins/inputs/nsq_consumer/**",
+        "plugins/inputs/nstat/**",
+        "plugins/inputs/ntpq/**",
+        "plugins/inputs/nvidia_smi/**",
+        "plugins/inputs/opcua/**",
+        "plugins/inputs/opcua_listener/**",
+        "plugins/inputs/openldap/**",
+        "plugins/inputs/openntpd/**",
+        "plugins/inputs/opensearch_query/**",
+        "plugins/inputs/opensmtpd/**",
+        "plugins/inputs/openstack/**",
+        "plugins/inputs/opentelemetry/**",
+        "plugins/inputs/openweathermap/**",
+        "plugins/inputs/p4runtime/**",
+        "plugins/inputs/passenger/**",
+        "plugins/inputs/pf/**",
+        "plugins/inputs/pgbouncer/**",
+        "plugins/inputs/phpfpm/**",
+        "plugins/inputs/ping/**",
+        "plugins/inputs/postfix/**",
+        "plugins/inputs/postgresql/**",
+        "plugins/inputs/postgresql_extensible/**",
+        "plugins/inputs/powerdns/**",
+        "plugins/inputs/powerdns_recursor/**",
+        "plugins/inputs/processes/**",
+        "plugins/inputs/procstat/**",
+        "plugins/inputs/prometheus/README.md",
+        "plugins/inputs/prometheus/consul.go",
+        "plugins/inputs/prometheus/http_service_discovery.go",
+        "plugins/inputs/prometheus/http_service_discovery_test.go",
+        "plugins/inputs/prometheus/kubernetes.go",
+        "plugins/inputs/prometheus/kubernetes_test.go",
+        "plugins/inputs/prometheus/prometheus.go",
+        "plugins/inputs/prometheus/prometheus_test.go",
+        "plugins/inputs/prometheus/sample.conf",
+        "plugins/inputs/prometheus/testcases/**",
+        "plugins/inputs/promql/**",
+        "plugins/inputs/proxmox/**",
+        "plugins/inputs/puppetagent/**",
+        "plugins/inputs/rabbitmq/**",
+        "plugins/inputs/radius/**",
+        "plugins/inputs/raindrops/**",
+        "plugins/inputs/ras/README.md",
+        "plugins/inputs/ras/ras.go",
+        "plugins/inputs/ras/ras_notlinux.go",
+        "plugins/inputs/ras/ras_test.go",
+        "plugins/inputs/ras/sample.conf",
+        "plugins/inputs/ras/testcases/issue_19511/expected.out",
+        "plugins/inputs/ras/testcases/issue_19511/telegraf.conf",
+        "plugins/inputs/ravendb/**",
+        "plugins/inputs/redfish/**",
+        "plugins/inputs/redis/**",
+        "plugins/inputs/redis_sentinel/**",
+        "plugins/inputs/registry.go",
+        "plugins/inputs/rethinkdb/**",
+        "plugins/inputs/riak/**",
+        "plugins/inputs/riemann_listener/**",
+        "plugins/inputs/s7comm/**",
+        "plugins/inputs/salesforce/**",
+        "plugins/inputs/sensors/**",
+        "plugins/inputs/sip/**",
+        "plugins/inputs/slab/**",
+        "plugins/inputs/slurm/**",
+        "plugins/inputs/smart/**",
+        "plugins/inputs/smartctl/**",
+        "plugins/inputs/snmp/**",
+        "plugins/inputs/snmp_trap/**",
+        "plugins/inputs/socket_listener/README.md",
+        "plugins/inputs/socket_listener/sample.conf",
+        "plugins/inputs/socket_listener/sample.conf.in",
+        "plugins/inputs/socket_listener/socket_listener.go",
+        "plugins/inputs/socket_listener/socket_listener_test.go",
+        "plugins/inputs/socket_listener/testcases/invalid_line_format/**",
+        "plugins/inputs/socket_listener/testcases/powerdns/dnsmessage.proto",
+        "plugins/inputs/socket_listener/testcases/powerdns/expected.out",
+        "plugins/inputs/socket_listener/testcases/powerdns/sequence.json",
+        "plugins/inputs/socket_listener/testcases/powerdns/telegraf.conf",
+        "plugins/inputs/socket_listener/testcases/splitting_delimiter/expected.out",
+        "plugins/inputs/socket_listener/testcases/splitting_delimiter/sequence.json",
+        "plugins/inputs/socket_listener/testcases/splitting_delimiter/telegraf.conf",
+        "plugins/inputs/socket_listener/testcases/splitting_fixed_length/**",
+        "plugins/inputs/socket_listener/testcases/splitting_newline/**",
+        "plugins/inputs/socket_listener/testcases/splitting_null/expected.out",
+        "plugins/inputs/socket_listener/testcases/splitting_null/sequence.json",
+        "plugins/inputs/socket_listener/testcases/splitting_null/telegraf.conf",
+        "plugins/inputs/socket_listener/testcases/splitting_variable_length/expected.out",
+        "plugins/inputs/socket_listener/testcases/splitting_variable_length/message_5.bin",
+        "plugins/inputs/socket_listener/testcases/splitting_variable_length/sequence.json",
+        "plugins/inputs/socket_listener/testcases/splitting_variable_length/telegraf.conf",
+        "plugins/inputs/socket_listener/testcases/timeout/**",
+        "plugins/inputs/socketstat/**",
+        "plugins/inputs/solr/**",
+        "plugins/inputs/sql/**",
+        "plugins/inputs/sqlserver/**",
+        "plugins/inputs/stackdriver/**",
+        "plugins/inputs/statsd/**",
+        "plugins/inputs/supervisor/**",
+        "plugins/inputs/suricata/**",
+        "plugins/inputs/swap/**",
+        "plugins/inputs/synproxy/**",
+        "plugins/inputs/syslog/**",
+        "plugins/inputs/sysstat/**",
+        "plugins/inputs/system/**",
+        "plugins/inputs/systemd_units/**",
+        "plugins/inputs/tacacs/**",
+        "plugins/inputs/tail/README.md",
+        "plugins/inputs/tail/multiline.go",
+        "plugins/inputs/tail/multiline_test.go",
+        "plugins/inputs/tail/sample.conf",
+        "plugins/inputs/tail/tail.go",
+        "plugins/inputs/tail/tail_behavior_test.go",
+        "plugins/inputs/tail/tail_shutdown_test.go",
+        "plugins/inputs/tail/tail_solaris.go",
+        "plugins/inputs/tail/tail_test.go",
+        "plugins/inputs/tail/testdata/cpu-utf-8.influx",
+        "plugins/inputs/tail/testdata/multiline_quoted_backticks.csv",
+        "plugins/inputs/tail/testdata/multiline_quoted_double.csv",
+        "plugins/inputs/tail/testdata/multiline_quoted_messed_up.csv",
+        "plugins/inputs/tail/testdata/multiline_quoted_missing_close.csv",
+        "plugins/inputs/tail/testdata/multiline_quoted_single.csv",
+        "plugins/inputs/tail/testdata/test-patterns",
+        "plugins/inputs/tail/testdata/test_multiline.log",
+        "plugins/inputs/teamspeak/**",
+        "plugins/inputs/temp/**",
+        "plugins/inputs/tengine/**",
+        "plugins/inputs/timex/**",
+        "plugins/inputs/tomcat/**",
+        "plugins/inputs/trig/**",
+        "plugins/inputs/turbostat/**",
+        "plugins/inputs/twemproxy/**",
+        "plugins/inputs/unbound/**",
+        "plugins/inputs/upsd/**",
+        "plugins/inputs/uwsgi/**",
+        "plugins/inputs/varnish/**",
+        "plugins/inputs/vault/**",
+        "plugins/inputs/vsphere/**",
+        "plugins/inputs/webhooks/**",
+        "plugins/inputs/whois/**",
+        "plugins/inputs/win_eventlog/**",
+        "plugins/inputs/win_perf_counters/**",
+        "plugins/inputs/win_services/**",
+        "plugins/inputs/win_wmi/**",
+        "plugins/inputs/wireguard/**",
+        "plugins/inputs/wireless/**",
+        "plugins/inputs/x509_cert/**",
+        "plugins/inputs/xtremio/**",
+        "plugins/inputs/zfs/**",
+        "plugins/inputs/zipkin/README.md",
+        "plugins/inputs/zipkin/cmd/**",
+        "plugins/inputs/zipkin/codec/**",
+        "plugins/inputs/zipkin/convert.go",
+        "plugins/inputs/zipkin/convert_test.go",
+        "plugins/inputs/zipkin/handler.go",
+        "plugins/inputs/zipkin/handler_test.go",
+        "plugins/inputs/zipkin/sample.conf",
+        "plugins/inputs/zipkin/testdata/json/**",
+        "plugins/inputs/zipkin/trace/**",
+        "plugins/inputs/zipkin/zipkin.go",
+        "plugins/inputs/zipkin/zipkin_test.go",
+        "plugins/inputs/zookeeper/**",
+        "plugins/outputs/**",
+        "plugins/parsers/EXAMPLE_README.md",
+        "plugins/parsers/all/**",
+        "plugins/parsers/avro/README.md",
+        "plugins/parsers/avro/parser.go",
+        "plugins/parsers/avro/parser_test.go",
+        "plugins/parsers/avro/schema_registry.go",
+        "plugins/parsers/avro/testcases/array/**",
+        "plugins/parsers/avro/testcases/array-schema-name/**",
+        "plugins/parsers/avro/testcases/bad-timestamp-format/**",
+        "plugins/parsers/avro/testcases/benchmark/**",
+        "plugins/parsers/avro/testcases/config-both/**",
+        "plugins/parsers/avro/testcases/config-neither/**",
+        "plugins/parsers/avro/testcases/enum/**",
+        "plugins/parsers/avro/testcases/json-array/**",
+        "plugins/parsers/avro/testcases/json-format/**",
+        "plugins/parsers/avro/testcases/measurement_name_from_message/expected.out",
+        "plugins/parsers/avro/testcases/measurement_name_from_message/telegraf.conf",
+        "plugins/parsers/avro/testcases/no-timestamp-format/expected.out",
+        "plugins/parsers/avro/testcases/no-timestamp-format/telegraf.conf",
+        "plugins/parsers/avro/testcases/supplied_timestamp/expected.out",
+        "plugins/parsers/avro/testcases/supplied_timestamp/telegraf.conf",
+        "plugins/parsers/avro/testcases/supplied_timestamp_fields_specified/expected.out",
+        "plugins/parsers/avro/testcases/supplied_timestamp_fields_specified/telegraf.conf",
+        "plugins/parsers/avro/testcases/supplied_timestamp_fields_unspecified/expected.out",
+        "plugins/parsers/avro/testcases/supplied_timestamp_fields_unspecified/telegraf.conf",
+        "plugins/parsers/avro/testcases/union/**",
+        "plugins/parsers/avro/testcases/union-any/**",
+        "plugins/parsers/avro/testcases/union-array/**",
+        "plugins/parsers/avro/testcases/union-nullable/**",
+        "plugins/parsers/avro/testcases/union-nullable-tag/**",
+        "plugins/parsers/binary/README.md",
+        "plugins/parsers/binary/config.go",
+        "plugins/parsers/binary/entry.go",
+        "plugins/parsers/binary/entry_test.go",
+        "plugins/parsers/binary/parser.go",
+        "plugins/parsers/binary/parser_test.go",
+        "plugins/parsers/binary/testcases/base64_encoding/**",
+        "plugins/parsers/binary/testcases/hex_encoding/**",
+        "plugins/parsers/binary/testcases/multiple_messages/expected.out",
+        "plugins/parsers/binary/testcases/multiple_messages/telegraf.conf",
+        "plugins/parsers/collectd/**",
+        "plugins/parsers/csv/**",
+        "plugins/parsers/deprecations.go",
+        "plugins/parsers/dropwizard/**",
+        "plugins/parsers/errors.go",
+        "plugins/parsers/form_urlencoded/**",
+        "plugins/parsers/graphite/**",
+        "plugins/parsers/grok/**",
+        "plugins/parsers/influx/**",
+        "plugins/parsers/json/**",
+        "plugins/parsers/json_v2/**",
+        "plugins/parsers/logfmt/**",
+        "plugins/parsers/nagios/**",
+        "plugins/parsers/openmetrics/README.md",
+        "plugins/parsers/openmetrics/metric_v1.go",
+        "plugins/parsers/openmetrics/metric_v2.go",
+        "plugins/parsers/openmetrics/openmetrics_data_model.pb.go",
+        "plugins/parsers/openmetrics/openmetrics_data_model.proto",
+        "plugins/parsers/openmetrics/parser.go",
+        "plugins/parsers/openmetrics/parser_test.go",
+        "plugins/parsers/openmetrics/testcases/dovecot/**",
+        "plugins/parsers/openmetrics/testcases/multiple/**",
+        "plugins/parsers/openmetrics/testcases/protobuf/expected_v1.out",
+        "plugins/parsers/openmetrics/testcases/protobuf/expected_v2.out",
+        "plugins/parsers/openmetrics/testcases/protobuf/telegraf.conf",
+        "plugins/parsers/openmetrics/testcases/protobuf_infolabels/expected_v1.out",
+        "plugins/parsers/openmetrics/testcases/protobuf_infolabels/expected_v2.out",
+        "plugins/parsers/openmetrics/testcases/protobuf_infolabels/telegraf.conf",
+        "plugins/parsers/openmetrics/testcases/valid_counter/**",
+        "plugins/parsers/openmetrics/testcases/valid_gauge/**",
+        "plugins/parsers/openmetrics/testcases/valid_gaugehistogram/**",
+        "plugins/parsers/openmetrics/testcases/valid_histogram/**",
+        "plugins/parsers/openmetrics/testcases/valid_info/**",
+        "plugins/parsers/openmetrics/testcases/valid_stateset/**",
+        "plugins/parsers/openmetrics/testcases/valid_summary/**",
+        "plugins/parsers/openmetrics/testcases/valid_unknown/**",
+        "plugins/parsers/openmetrics/textparse.go",
+        "plugins/parsers/opentsdb/**",
+        "plugins/parsers/parquet/README.md",
+        "plugins/parsers/parquet/columns.go",
+        "plugins/parsers/parquet/parser.go",
+        "plugins/parsers/parquet/parser_test.go",
+        "plugins/parsers/parquet/testcases/benchmark/expected.out",
+        "plugins/parsers/parquet/testcases/benchmark/generate.py",
+        "plugins/parsers/parquet/testcases/benchmark/telegraf.conf",
+        "plugins/parsers/parquet/testcases/datatypes/expected.out",
+        "plugins/parsers/parquet/testcases/datatypes/generate.py",
+        "plugins/parsers/parquet/testcases/datatypes/telegraf.conf",
+        "plugins/parsers/parquet/testcases/dense/expected.out",
+        "plugins/parsers/parquet/testcases/dense/generate.py",
+        "plugins/parsers/parquet/testcases/dense/telegraf.conf",
+        "plugins/parsers/parquet/testcases/empty/expected.out",
+        "plugins/parsers/parquet/testcases/empty/generate.py",
+        "plugins/parsers/parquet/testcases/empty/telegraf.conf",
+        "plugins/parsers/parquet/testcases/multitable/expected.out",
+        "plugins/parsers/parquet/testcases/multitable/generate.py",
+        "plugins/parsers/parquet/testcases/multitable/telegraf.conf",
+        "plugins/parsers/parquet/testcases/sparse/expected.out",
+        "plugins/parsers/parquet/testcases/sparse/generate.py",
+        "plugins/parsers/parquet/testcases/sparse/telegraf.conf",
+        "plugins/parsers/parquet/testcases/timestamp/expected.out",
+        "plugins/parsers/parquet/testcases/timestamp/generate.py",
+        "plugins/parsers/parquet/testcases/timestamp/telegraf.conf",
+        "plugins/parsers/prometheus/README.md",
+        "plugins/parsers/prometheus/common.go",
+        "plugins/parsers/prometheus/metric_v1.go",
+        "plugins/parsers/prometheus/metric_v2.go",
+        "plugins/parsers/prometheus/parser.go",
+        "plugins/parsers/prometheus/parser_test.go",
+        "plugins/parsers/prometheus/testcases/benchmark/**",
+        "plugins/parsers/prometheus/testcases/default_tags/**",
+        "plugins/parsers/prometheus/testcases/histogram_inf_bucket/expected_v1.out",
+        "plugins/parsers/prometheus/testcases/histogram_inf_bucket/expected_v2.out",
+        "plugins/parsers/prometheus/testcases/histogram_inf_bucket/telegraf.conf",
+        "plugins/parsers/prometheus/testcases/ignore_timestamp/**",
+        "plugins/parsers/prometheus/testcases/metric_with_timestamp/**",
+        "plugins/parsers/prometheus/testcases/protobuf/expected_v1.out",
+        "plugins/parsers/prometheus/testcases/protobuf/expected_v2.out",
+        "plugins/parsers/prometheus/testcases/protobuf/telegraf.conf",
+        "plugins/parsers/prometheus/testcases/valid_counter/**",
+        "plugins/parsers/prometheus/testcases/valid_gauge/**",
+        "plugins/parsers/prometheus/testcases/valid_histogram/**",
+        "plugins/parsers/prometheus/testcases/valid_summary/**",
+        "plugins/parsers/prometheusremotewrite/**",
+        "plugins/parsers/registry.go",
+        "plugins/parsers/value/**",
+        "plugins/parsers/wavefront/**",
+        "plugins/parsers/xpath/README.md",
+        "plugins/parsers/xpath/cbor_document.go",
+        "plugins/parsers/xpath/json_document.go",
+        "plugins/parsers/xpath/msgpack_document.go",
+        "plugins/parsers/xpath/parser.go",
+        "plugins/parsers/xpath/parser_test.go",
+        "plugins/parsers/xpath/protocolbuffer_document.go",
+        "plugins/parsers/xpath/testcases/addressbook.conf",
+        "plugins/parsers/xpath/testcases/cbor/expected.out",
+        "plugins/parsers/xpath/testcases/cbor/telegraf.conf",
+        "plugins/parsers/xpath/testcases/cbor_base64_encoding/expected.out",
+        "plugins/parsers/xpath/testcases/cbor_base64_encoding/telegraf.conf",
+        "plugins/parsers/xpath/testcases/cbor_benchmark/expected.out",
+        "plugins/parsers/xpath/testcases/cbor_benchmark/telegraf.conf",
+        "plugins/parsers/xpath/testcases/cbor_hex_encoding/expected.out",
+        "plugins/parsers/xpath/testcases/cbor_hex_encoding/telegraf.conf",
+        "plugins/parsers/xpath/testcases/cbor_hex_encoding_explicit/expected.out",
+        "plugins/parsers/xpath/testcases/cbor_hex_encoding_explicit/telegraf.conf",
+        "plugins/parsers/xpath/testcases/cbor_numeric_keys/expected.out",
+        "plugins/parsers/xpath/testcases/cbor_numeric_keys/telegraf.conf",
+        "plugins/parsers/xpath/testcases/earthquakes.conf",
+        "plugins/parsers/xpath/testcases/earthquakes.quakeml",
+        "plugins/parsers/xpath/testcases/field_tag_batch.conf",
+        "plugins/parsers/xpath/testcases/field_tag_batch.json",
+        "plugins/parsers/xpath/testcases/json_array_expand/**",
+        "plugins/parsers/xpath/testcases/json_array_expand_simple_types/**",
+        "plugins/parsers/xpath/testcases/json_array_simple_types/**",
+        "plugins/parsers/xpath/testcases/json_explicit_precedence/**",
+        "plugins/parsers/xpath/testcases/json_native_nonnested/**",
+        "plugins/parsers/xpath/testcases/json_string_representation/**",
+        "plugins/parsers/xpath/testcases/multisensor.xml",
+        "plugins/parsers/xpath/testcases/multisensor_explicit_basic.conf",
+        "plugins/parsers/xpath/testcases/multisensor_explicit_batch.conf",
+        "plugins/parsers/xpath/testcases/multisensor_selection_batch.conf",
+        "plugins/parsers/xpath/testcases/name_expansion/**",
+        "plugins/parsers/xpath/testcases/native_types_cbor/expected.out",
+        "plugins/parsers/xpath/testcases/native_types_cbor/telegraf.conf",
+        "plugins/parsers/xpath/testcases/native_types_json/**",
+        "plugins/parsers/xpath/testcases/native_types_msgpack/expected.out",
+        "plugins/parsers/xpath/testcases/native_types_msgpack/native_types_json/**",
+        "plugins/parsers/xpath/testcases/native_types_msgpack/telegraf.conf",
+        "plugins/parsers/xpath/testcases/native_types_protobuf/expected.out",
+        "plugins/parsers/xpath/testcases/native_types_protobuf/message.proto",
+        "plugins/parsers/xpath/testcases/native_types_protobuf/telegraf.conf",
+        "plugins/parsers/xpath/testcases/openweathermap_5d.json",
+        "plugins/parsers/xpath/testcases/openweathermap_5d.xml",
+        "plugins/parsers/xpath/testcases/openweathermap_json.conf",
+        "plugins/parsers/xpath/testcases/openweathermap_xml.conf",
+        "plugins/parsers/xpath/testcases/protobuf_benchmark/benchmark.proto",
+        "plugins/parsers/xpath/testcases/protobuf_benchmark/expected.out",
+        "plugins/parsers/xpath/testcases/protobuf_benchmark/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protobuf_issue_13715/expected.out",
+        "plugins/parsers/xpath/testcases/protobuf_issue_13715/issue.proto",
+        "plugins/parsers/xpath/testcases/protobuf_issue_13715/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protobuf_issue_15571/data.json",
+        "plugins/parsers/xpath/testcases/protobuf_issue_15571/expected.out",
+        "plugins/parsers/xpath/testcases/protobuf_issue_15571/port.proto",
+        "plugins/parsers/xpath/testcases/protobuf_issue_15571/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protobuf_issue_15571/telemetry_top.proto",
+        "plugins/parsers/xpath/testcases/protobuf_noskip_bytes_grpc/expected.err",
+        "plugins/parsers/xpath/testcases/protobuf_noskip_bytes_grpc/message.proto",
+        "plugins/parsers/xpath/testcases/protobuf_noskip_bytes_grpc/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protobuf_powerdns_hex/expected.out",
+        "plugins/parsers/xpath/testcases/protobuf_powerdns_hex/powerdns_message.proto",
+        "plugins/parsers/xpath/testcases/protobuf_powerdns_hex/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protobuf_skip_bytes_grpc/expected.out",
+        "plugins/parsers/xpath/testcases/protobuf_skip_bytes_grpc/message.proto",
+        "plugins/parsers/xpath/testcases/protobuf_skip_bytes_grpc/telegraf.conf",
+        "plugins/parsers/xpath/testcases/protos/**",
+        "plugins/parsers/xpath/testcases/string_join/**",
+        "plugins/parsers/xpath/testcases/time_float_exponential/**",
+        "plugins/parsers/xpath/testcases/time_timezone_Berlin/**",
+        "plugins/parsers/xpath/testcases/time_timezone_CEST/**",
+        "plugins/parsers/xpath/testcases/time_timezone_MST/**",
+        "plugins/parsers/xpath/testcases/time_timezone_utc/**",
+        "plugins/parsers/xpath/testcases/time_timezone_with_offset/**",
+        "plugins/parsers/xpath/testcases/tracker_msgpack.conf",
+        "plugins/parsers/xpath/xml_document.go",
+        "plugins/processors/**",
+        "plugins/secretstores/**",
+        "plugins/serializers/**",
+        "processor.go",
+        "scripts/**",
+        "secretstore.go",
+        "selfstat/**",
+        "serializer.go",
+        "testutil/**",
+        "tools/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015-2025 InfluxData Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2015-2025 InfluxData Inc., MIT license (LICENSE), https://github.com/influxdata/telegraf."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "plugins/inputs/gnmi/testcases/issue_15046/models/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n",
+      "attribution": "the authors of influxdata/telegraf (plugins/inputs/gnmi/testcases/issue_15046/models) (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/influxdata/telegraf/tree/2bac12a6a682e02f2ef42a43d40a259083892212/plugins/inputs/gnmi/testcases/issue_15046/models."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "plugins/inputs/hddtemp/go-hddtemp/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2016 Mendelson Gusmão\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016 Mendelson Gusmão, MIT license (LICENSE), https://github.com/influxdata/telegraf/tree/2bac12a6a682e02f2ef42a43d40a259083892212/plugins/inputs/hddtemp/go-hddtemp."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.jsonc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.star"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.avro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.burst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cfs_quota_us"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cpus"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.current"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.effective"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.err"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.events"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.golden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.group"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.high"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.influx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.io_serviced"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.limit_in_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.low"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.max"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.max_usage_in_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mems"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nice"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.normal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.numa_stat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.partition"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.peak"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pressure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.quakeml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.query"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.reclaim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.response"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.result"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.stat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.too_long"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage_in_bytes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.usage_percpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.use_hierarchy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.weight"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.yang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.markdownlintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/abdstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/arcstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authorize"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/baz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bios_date"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bios_vendor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bios_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/board_asset_tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/board_name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/board_serial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/board_vendor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/board_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bridgeMib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bridgeMibImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/brtstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/brw_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/buffer-not-directory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chassis_asset_tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chassis_serial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chassis_type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chassis_vendor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chassis_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/chksum_bench"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cpu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cpuinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dbufstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddt_stats_blake3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddt_stats_edonr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddt_stats_sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddt_stats_sha512"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ddt_stats_skein"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/device"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/deviceType"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dir_lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dmu_tx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dmu_tx_assign"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dnodestats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dummy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/emptyFile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entropy_stat_file_full"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entropy_stat_file_invalid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/entropy_stat_file_partial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/eviction_count"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fletcher_4_bench"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fooImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/free_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/full_scans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/guid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/health_check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/huge_metric"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hugepages-2048kB"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ifPhysAddress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ifPhysAddressImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/import_progress"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inputs_amqp_consumer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/io"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/iostats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/job_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/max_page_sharing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mcrouter_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/md_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/meminfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/memory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/merge_across_nodes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/metaslab_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/metricVersion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mockdev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mountinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mountstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/multihost"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/net"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nginx_logs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/node1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/notify_on_release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nr_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nr_hugepages_mempolicy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nr_overcommit_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nry_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x10101"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x104de"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x10737"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x10848"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1098f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x10e73"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1106c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x11074"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x11226"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1132"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x114a6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x11a19"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x11e5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x147f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x185"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x196"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1985"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x19d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x19d66"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x19d9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1aeb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1bb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1c5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1cbde"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1ce10"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1d28e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1e8e1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1e8e6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1e8ed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1e9b3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1ecad"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1ee0d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1ee87"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1f18f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x1f387"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x212b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x22d1c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x28c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x29f2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x2a1c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x2a8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x2e57"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x32c4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x36"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x390"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x403"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x40b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x44da"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x453a"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x47ae"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x49e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x523"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x79d6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x7ced"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x84eb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x886c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x92ee"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x96"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x9776"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x9bff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0x9f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xa67"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb61"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb83f5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb845b"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb8733"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb8788"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xb888e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xbe32"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xc876"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xc8e5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xc94"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xc9d7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xcb42"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xcc56"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xcc8f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xcdac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xd34f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xd4b9"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe09"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe144f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe1890"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe46"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe5967"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xe5d8d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/objset-0xfa6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/os-release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pages_shared"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pages_sharing"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pages_to_scan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pages_unshared"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pages_volatile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_family"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_serial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_sku"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_uuid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/product_version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/quux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/quuz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/qux"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/reads"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resv_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/secret-file-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/secretFile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/secret_file_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/server"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serverImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/slabinfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sleep_millisecs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/speed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stable_node_chains"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stable_node_chains_prune_millisecs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stable_node_dups"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stat_file_full"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stat_file_invalid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stat_file_invalid2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stat_file_partial"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/state"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/surplus_hugepages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sys_vendor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tableBuild"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tableMib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tableMibImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tcpMib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tcpMibImports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/telegraf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/telegraf_entry_mac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_alarm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_crit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_label"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_max"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp1_min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp2_input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp2_label"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp2_max"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp2_min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp3_input"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp3_label"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp3_max"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/temp3_min"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test-patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testmib"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/txgs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/uevent"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/use_zero_pages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/v2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vdev_mirror_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/vdev_raidz_bench"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/whitelist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/wwid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zfetchstats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zil"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zio_stats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/zstd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

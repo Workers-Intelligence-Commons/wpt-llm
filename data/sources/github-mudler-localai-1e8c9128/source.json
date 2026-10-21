@@ -1,0 +1,1444 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/mudler/LocalAI",
+  "revision": "1d0a3227d7c48ba099f49c341dda39d73b583e99",
+  "checksum": "sha256:f585b6adb904672cf9a6f717924e57683d3b4eff4ef8f7086218285f7afb36c4",
+  "extract": {
+    "exclude": [
+      "backend/python/tinygrad/vendor/**",
+      "backend/rust/kokoros/sources/**",
+      "cmd/launcher/logo.png",
+      "contrib/**",
+      "core/http/react-ui/src/vendor/**",
+      "core/http/static/assets/KFOlCnqEu92Fr1MmEU9fBBc9.ttf",
+      "core/http/static/assets/KFOlCnqEu92Fr1MmEU9vAw.ttf",
+      "core/http/static/assets/KFOlCnqEu92Fr1MmSU5fBBc9.ttf",
+      "core/http/static/assets/KFOlCnqEu92Fr1MmWUlfBBc9.ttf",
+      "core/http/static/assets/KFOlCnqEu92Fr1MmYUtfBBc9.ttf",
+      "core/http/static/assets/KFOmCnqEu92Fr1Me5Q.ttf",
+      "core/http/static/assets/KFOmCnqEu92Fr1Mu4mxP.ttf",
+      "core/http/static/assets/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZg.ttf",
+      "core/http/static/assets/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZg.ttf",
+      "core/http/static/assets/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZg.ttf",
+      "core/http/static/assets/fontawesome/webfonts/**",
+      "core/http/static/assets/jetbrains-mono-medium.ttf",
+      "core/http/static/assets/jetbrains-mono-regular.ttf",
+      "core/http/static/assets/jetbrains-mono-semibold.ttf",
+      "core/http/static/assets/playfair-display-bold.ttf",
+      "core/http/static/assets/playfair-display-regular.ttf",
+      "core/http/static/assets/playfair-display-semibold.ttf",
+      "core/http/static/assets/space-grotesk-bold.ttf",
+      "core/http/static/assets/space-grotesk-medium.ttf",
+      "core/http/static/assets/space-grotesk-regular.ttf",
+      "core/http/static/assets/space-grotesk-semibold.ttf",
+      "core/http/static/logo.png",
+      "core/http/static/logo_horizontal.png",
+      "docs/assets/images/imagen.png",
+      "docs/assets/images/localai_screenshot.png",
+      "docs/assets/images/logos/logo.png",
+      "docs/assets/images/screenshots/**",
+      "docs/static/android-chrome-192x192.png",
+      "docs/static/android-chrome-512x512.png",
+      "docs/static/apple-touch-icon.png",
+      "docs/static/favicon-16x16.png",
+      "docs/static/favicon-32x32.png",
+      "docs/static/favicon.ico",
+      "docs/static/images/diagrams/agents-loop.png",
+      "docs/static/images/diagrams/architecture-overview.png",
+      "docs/static/images/diagrams/audio-transform-io.png",
+      "docs/static/images/diagrams/cloud-proxy-sequence.png",
+      "docs/static/images/diagrams/composable-core.png",
+      "docs/static/images/diagrams/diarization-pipeline.png",
+      "docs/static/images/diagrams/distributed-mode-arch.png",
+      "docs/static/images/diagrams/ds4-layer-split.png",
+      "docs/static/images/diagrams/face-recognition-flow.png",
+      "docs/static/images/diagrams/federated-vs-worker.png",
+      "docs/static/images/diagrams/finetune-job-lifecycle.png",
+      "docs/static/images/diagrams/finetune-recipe.png",
+      "docs/static/images/diagrams/mcp-server-vs-client.png",
+      "docs/static/images/diagrams/middleware-lifecycle.png",
+      "docs/static/images/diagrams/mitm-intercept.png",
+      "docs/static/images/diagrams/mlx-pipeline.png",
+      "docs/static/images/diagrams/model-resolution.png",
+      "docs/static/images/diagrams/quantization-flow.png",
+      "docs/static/images/diagrams/quickstart-journey.png",
+      "docs/static/images/diagrams/realtime-pipeline.png",
+      "docs/static/images/diagrams/reranker-pipeline.png",
+      "docs/static/images/diagrams/reverse-proxy-tls.png",
+      "docs/static/images/diagrams/smartrouter-scheduling.png",
+      "docs/static/images/diagrams/tool-call-parsers.png",
+      "docs/static/images/diagrams/voice-recognition-flow.png",
+      "docs/static/images/diagrams/vram-eviction.png",
+      "docs/themes/hugo-theme-relearn/assets/fonts/fontawesome/webfonts/**",
+      "docs/themes/hugo-theme-relearn/assets/fonts/robotoflex/**",
+      "docs/themes/hugo-theme-relearn/assets/js/js-yaml/**",
+      "docs/themes/hugo-theme-relearn/docs/assets/images/magic.gif",
+      "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/designs/pages-chapter.png",
+      "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/designs/pages-default.png",
+      "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/designs/pages-home.png",
+      "docs/themes/hugo-theme-relearn/docs/content/categories/explanation/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/categories/howto/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/categories/reference/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/categories/tutorial/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/topbar/topbar-areas.png",
+      "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/topbar/topbar-closed.png",
+      "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/headerfooter/home_button_defaults.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/BachGavotteShort.mp3",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/Carroll_AliceAuPaysDesMerveilles.pdf",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/adivorciarsetoca00cape.pdf",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/hugo.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/movieselectricsheep-flock-244-32500-2.mp4",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/badge/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/button/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/card/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/cards/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/expand/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/highlight/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/icon/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/include/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/math/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/mermaid/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/notice/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/openapi/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/subdir/**",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/siteparam/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tab/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tabs/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tree/featured.png",
+      "docs/themes/hugo-theme-relearn/docs/content/showcase/bits-train.png",
+      "docs/themes/hugo-theme-relearn/docs/content/showcase/gobolinux.png",
+      "docs/themes/hugo-theme-relearn/docs/content/showcase/pamasol-electrics-portal.png",
+      "docs/themes/hugo-theme-relearn/docs/content/showcase/poesieland.png",
+      "docs/themes/hugo-theme-relearn/images/**",
+      "website/static/fonts/**",
+      "website/static/img/depth-field.jpg",
+      "website/static/img/hero-poster.jpg",
+      "website/static/img/logo-full.png",
+      "website/static/img/logo-mark.png",
+      "website/static/img/parakeet-speedup.jpg",
+      "website/static/img/presenter-poster.jpg",
+      "website/static/media/3d-generation.gif",
+      "website/static/media/3d-generation.mp4",
+      "website/static/media/ced.mp4",
+      "website/static/media/depth-race.mp4",
+      "website/static/media/depth.mp4",
+      "website/static/media/face-id.mp4",
+      "website/static/media/face.mp4",
+      "website/static/media/failover-runtime.mp4",
+      "website/static/media/gallery.mp4",
+      "website/static/media/hero-ui.mp4",
+      "website/static/media/import-model.mp4",
+      "website/static/media/locate.mp4",
+      "website/static/media/magpie.mp4",
+      "website/static/media/model-lifecycle.mp4",
+      "website/static/media/moss.mp4",
+      "website/static/media/nib.mp4",
+      "website/static/media/parakeet-duel.mp4",
+      "website/static/media/parakeet-long.mp4",
+      "website/static/media/presenter.mp4",
+      "website/static/media/speaker-enrollment.mp4",
+      "website/static/media/this-machine.mp4",
+      "website/static/media/v4-8-0-ui-activity.png",
+      "website/static/media/v4-8-0-ui-home.png",
+      "website/static/media/v4-8-0-ui-model-variants.png",
+      "website/static/media/v4-8-0-vllm-cpp-scoreboard.png",
+      "website/static/media/v4-9-0-ui-activity.png",
+      "website/static/media/vllm-race.mp4",
+      "website/static/media/voice.mp4"
+    ]
+  },
+  "history": {
+    "since": "d4720150b5f19144a6e05e0758c6789326362ce9"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC AND Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2025 Ettore Di Giacinto (mudler@localai.io)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nMIT License\n\nCopyright (c) 2023-2026 The omnivoice.cpp authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2021 Sören Weber\nCopyright (c) 2017 Valere JEANTET\nCopyright (c) 2016 MATHIEU CORNIC\nCopyright (c) 2014 Grav\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/mudler/LocalAI: Copyright (c) 2023-2025 Ettore Di Giacinto (mudler@localai.io), MIT license (LICENSE), https://github.com/mudler/LocalAI; Copyright (c) 2023-2026 The omnivoice.cpp authors, MIT license (LICENSE.omnivoice), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/backend/go/omnivoice-cpp/testdata/native; the authors of tech-doc-hugo, ISC license (declared in package.json), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs; Copyright (c) 2021 Sören Weber; Copyright (c) 2017 Valere JEANTET; Copyright (c) 2016 MATHIEU CORNIC; Copyright (c) 2014 Grav, MIT license (LICENSE), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs/themes/hugo-theme-relearn; MathJax Consortium, Apache-2.0 license (LICENSE), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs/themes/hugo-theme-relearn/assets/js/mathjax."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".air.toml",
+        ".devcontainer/**",
+        ".devcontainer-scripts/**",
+        ".docker/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".env",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".golangci.yml",
+        ".goreleaser.yaml",
+        ".impeccable/**",
+        ".impeccable.md",
+        ".vscode/**",
+        ".yamllint",
+        "ADOPTERS.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Entitlements.plist",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "backend/Dockerfile.audio-cpp",
+        "backend/Dockerfile.base-grpc-builder",
+        "backend/Dockerfile.bonsai",
+        "backend/Dockerfile.ds4",
+        "backend/Dockerfile.golang",
+        "backend/Dockerfile.ik-llama-cpp",
+        "backend/Dockerfile.llama-cpp",
+        "backend/Dockerfile.privacy-filter",
+        "backend/Dockerfile.python",
+        "backend/Dockerfile.rust",
+        "backend/Dockerfile.turboquant",
+        "backend/README.md",
+        "backend/backend.proto",
+        "backend/cpp/**",
+        "backend/go/acestep-cpp/**",
+        "backend/go/ced/**",
+        "backend/go/cloud-proxy/**",
+        "backend/go/crispasr/**",
+        "backend/go/depth-anything-cpp/**",
+        "backend/go/face-detect/**",
+        "backend/go/gemxcpp/**",
+        "backend/go/kimodocpp/**",
+        "backend/go/llm/**",
+        "backend/go/local-store/**",
+        "backend/go/localai-proxy/**",
+        "backend/go/localvqe/**",
+        "backend/go/locate-anything-cpp/**",
+        "backend/go/magpie-tts-cpp/**",
+        "backend/go/moss-transcribe-cpp/**",
+        "backend/go/moss-tts-cpp/**",
+        "backend/go/nemo-speech-cpp/**",
+        "backend/go/omnivoice-cpp/.gitignore",
+        "backend/go/omnivoice-cpp/CMakeLists.txt",
+        "backend/go/omnivoice-cpp/Makefile",
+        "backend/go/omnivoice-cpp/audio.go",
+        "backend/go/omnivoice-cpp/cpp/**",
+        "backend/go/omnivoice-cpp/e2e_test.go",
+        "backend/go/omnivoice-cpp/gomnivoicecpp.go",
+        "backend/go/omnivoice-cpp/gomnivoicecpp_test.go",
+        "backend/go/omnivoice-cpp/main.go",
+        "backend/go/omnivoice-cpp/native_controls_test.go",
+        "backend/go/omnivoice-cpp/options.go",
+        "backend/go/omnivoice-cpp/package.sh",
+        "backend/go/omnivoice-cpp/request_controls.go",
+        "backend/go/omnivoice-cpp/request_controls_test.go",
+        "backend/go/omnivoice-cpp/run.sh",
+        "backend/go/omnivoice-cpp/test.sh",
+        "backend/go/omnivoice-cpp/verify-controls.sh",
+        "backend/go/opus/**",
+        "backend/go/parakeet-cpp/**",
+        "backend/go/piper/**",
+        "backend/go/qdrant-store/**",
+        "backend/go/qwen3-tts-cpp/**",
+        "backend/go/rfdetr-cpp/**",
+        "backend/go/sam3-cpp/**",
+        "backend/go/sherpa-onnx/**",
+        "backend/go/silero-vad/**",
+        "backend/go/stablediffusion-ggml/**",
+        "backend/go/supertonic/**",
+        "backend/go/trellis2cpp/**",
+        "backend/go/valkey-store/**",
+        "backend/go/vibevoice-cpp/**",
+        "backend/go/vllm-cpp/**",
+        "backend/go/voice-detect/**",
+        "backend/go/voxtral/**",
+        "backend/go/whisper/**",
+        "backend/index.yaml",
+        "backend/python/README.md",
+        "backend/python/ace-step/**",
+        "backend/python/chatterbox/**",
+        "backend/python/common/**",
+        "backend/python/coqui/**",
+        "backend/python/diffusers/**",
+        "backend/python/faster-qwen3-tts/**",
+        "backend/python/faster-whisper/**",
+        "backend/python/fish-speech/**",
+        "backend/python/funasr/**",
+        "backend/python/insightface/**",
+        "backend/python/kitten-tts/**",
+        "backend/python/kokoro/**",
+        "backend/python/liquid-audio/**",
+        "backend/python/llama-cpp-quantization/**",
+        "backend/python/longcat-video/**",
+        "backend/python/mlx/**",
+        "backend/python/mlx-audio/**",
+        "backend/python/mlx-distributed/**",
+        "backend/python/mlx-video/**",
+        "backend/python/mlx-vlm/**",
+        "backend/python/moonshine/**",
+        "backend/python/nemo/**",
+        "backend/python/neutts/**",
+        "backend/python/outetts/**",
+        "backend/python/pocket-tts/**",
+        "backend/python/qwen-asr/**",
+        "backend/python/qwen-tts/**",
+        "backend/python/rerankers/**",
+        "backend/python/rfdetr/**",
+        "backend/python/sglang/**",
+        "backend/python/speaker-recognition/**",
+        "backend/python/tinygrad/Makefile",
+        "backend/python/tinygrad/backend.py",
+        "backend/python/tinygrad/install.sh",
+        "backend/python/tinygrad/package.sh",
+        "backend/python/tinygrad/protogen.sh",
+        "backend/python/tinygrad/requirements-cpu.txt",
+        "backend/python/tinygrad/requirements-cublas12.txt",
+        "backend/python/tinygrad/requirements-cublas13.txt",
+        "backend/python/tinygrad/requirements.txt",
+        "backend/python/tinygrad/run.sh",
+        "backend/python/tinygrad/test.py",
+        "backend/python/tinygrad/test.sh",
+        "backend/python/tinygrad/tool_parsers/**",
+        "backend/python/transformers/**",
+        "backend/python/trl/**",
+        "backend/python/vibevoice/**",
+        "backend/python/vllm/**",
+        "backend/python/vllm-omni/**",
+        "backend/python/voxcpm/**",
+        "backend/python/whisper-medusa/**",
+        "backend/python/whisperx/**",
+        "backend/rust/kokoros/.gitignore",
+        "backend/rust/kokoros/Cargo.lock",
+        "backend/rust/kokoros/Cargo.toml",
+        "backend/rust/kokoros/Makefile",
+        "backend/rust/kokoros/build.rs",
+        "backend/rust/kokoros/package.sh",
+        "backend/rust/kokoros/run.sh",
+        "backend/rust/kokoros/src/**",
+        "cmd/launcher/FyneApp.toml",
+        "cmd/launcher/icon.go",
+        "cmd/launcher/internal/**",
+        "cmd/launcher/main.go",
+        "cmd/local-ai/**",
+        "configuration/**",
+        "core/application/**",
+        "core/backend/**",
+        "core/cli/**",
+        "core/clients/**",
+        "core/config/**",
+        "core/dependencies_manager/**",
+        "core/explorer/**",
+        "core/gallery/**",
+        "core/http/admission_handler_test.go",
+        "core/http/app.go",
+        "core/http/app_test.go",
+        "core/http/auth/**",
+        "core/http/body_limit_test.go",
+        "core/http/csrf_multipart_test.go",
+        "core/http/diagnostics_test.go",
+        "core/http/embeddings_pooling_test.go",
+        "core/http/endpoints/**",
+        "core/http/explorer.go",
+        "core/http/http_suite_test.go",
+        "core/http/middleware/**",
+        "core/http/model_loading_held_test.go",
+        "core/http/openresponses_test.go",
+        "core/http/react-ui/.nycrc.json",
+        "core/http/react-ui/bun.lock",
+        "core/http/react-ui/coverage-baseline.txt",
+        "core/http/react-ui/e2e/**",
+        "core/http/react-ui/eslint.config.js",
+        "core/http/react-ui/i18next-parser.config.js",
+        "core/http/react-ui/index.html",
+        "core/http/react-ui/inline-style-baseline.txt",
+        "core/http/react-ui/package-lock.json",
+        "core/http/react-ui/package.json",
+        "core/http/react-ui/playwright.config.js",
+        "core/http/react-ui/public/**",
+        "core/http/react-ui/scripts/**",
+        "core/http/react-ui/src/App.css",
+        "core/http/react-ui/src/App.jsx",
+        "core/http/react-ui/src/components/**",
+        "core/http/react-ui/src/context/**",
+        "core/http/react-ui/src/contexts/**",
+        "core/http/react-ui/src/hooks/**",
+        "core/http/react-ui/src/i18n/**",
+        "core/http/react-ui/src/index.css",
+        "core/http/react-ui/src/main.jsx",
+        "core/http/react-ui/src/pages/**",
+        "core/http/react-ui/src/router.jsx",
+        "core/http/react-ui/src/theme-localai.css",
+        "core/http/react-ui/src/theme.css",
+        "core/http/react-ui/src/utils/**",
+        "core/http/react-ui/vite.config.js",
+        "core/http/render.go",
+        "core/http/route_coverage_test.go",
+        "core/http/routes/**",
+        "core/http/static/animations.css",
+        "core/http/static/assets/alpine.js",
+        "core/http/static/assets/autorefresh.min.js",
+        "core/http/static/assets/codemirror.min.css",
+        "core/http/static/assets/codemirror.min.js",
+        "core/http/static/assets/flowbite.min.js",
+        "core/http/static/assets/font1.css",
+        "core/http/static/assets/font2.css",
+        "core/http/static/assets/fontawesome/css/**",
+        "core/http/static/assets/fontawesome.css",
+        "core/http/static/assets/highlightjs.css",
+        "core/http/static/assets/highlightjs.js",
+        "core/http/static/assets/htmx.js",
+        "core/http/static/assets/js-yaml.min.js",
+        "core/http/static/assets/marked.js",
+        "core/http/static/assets/pdf.min.js",
+        "core/http/static/assets/pdf.worker.min.js",
+        "core/http/static/assets/purify.js",
+        "core/http/static/assets/tailwindcss.js",
+        "core/http/static/assets/tw-elements.css",
+        "core/http/static/assets/tw-elements.js",
+        "core/http/static/assets/yaml.min.js",
+        "core/http/static/chat.js",
+        "core/http/static/components.css",
+        "core/http/static/favicon.svg",
+        "core/http/static/general.css",
+        "core/http/static/image.js",
+        "core/http/static/p2panimation.js",
+        "core/http/static/sound.js",
+        "core/http/static/talk.js",
+        "core/http/static/theme.css",
+        "core/http/static/tts.js",
+        "core/http/static/typography.css",
+        "core/http/static/video.js",
+        "core/http/static_cache_test.go",
+        "core/http/testport_test.go",
+        "core/http/views/**",
+        "core/p2p/**",
+        "core/schema/**",
+        "core/services/**",
+        "core/startup/**",
+        "core/systemone/**",
+        "core/templates/**",
+        "core/trace/**",
+        "coverage-baseline.txt",
+        "custom-ca-certs/**",
+        "docker-compose.distributed.yaml",
+        "docker-compose.yaml",
+        "entrypoint.sh",
+        "examples/**",
+        "flake.lock",
+        "flake.nix",
+        "formal-verification/**",
+        "gallery/**",
+        "go.mod",
+        "go.sum",
+        "internal/**",
+        "pkg/**",
+        "prompt-templates/**",
+        "renovate.json",
+        "scripts/**",
+        "swagger/**",
+        "tests/**",
+        "website/README.md",
+        "website/content/**",
+        "website/data/**",
+        "website/hugo.toml",
+        "website/layouts/**",
+        "website/static/CNAME",
+        "website/static/css/**",
+        "website/static/img/trendshift.svg",
+        "website/static/install/**",
+        "website/static/install.sh",
+        "website/static/js/**",
+        "website/static/media/v4-8-0-vllm-cpp-scoreboard.html",
+        "webui_static.yaml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2025 Ettore Di Giacinto (mudler@localai.io)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2023-2025 Ettore Di Giacinto (mudler@localai.io), MIT license (LICENSE), https://github.com/mudler/LocalAI."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "backend/go/omnivoice-cpp/testdata/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The omnivoice.cpp authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2026 The omnivoice.cpp authors, MIT license (LICENSE.omnivoice), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/backend/go/omnivoice-cpp/testdata/native."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "docs/Dockerfile",
+        "docs/README.md",
+        "docs/assets/images/logos/logo.svg",
+        "docs/assets/jsconfig.json",
+        "docs/content/**",
+        "docs/data/**",
+        "docs/design/**",
+        "docs/docker-compose.yaml",
+        "docs/go.mod",
+        "docs/go.sum",
+        "docs/hugo.toml",
+        "docs/layouts/**",
+        "docs/netlify.toml",
+        "docs/package.json",
+        "docs/static/favicon.svg",
+        "docs/static/images/diagrams/agents-loop.html",
+        "docs/static/images/diagrams/architecture-overview.html",
+        "docs/static/images/diagrams/audio-transform-io.html",
+        "docs/static/images/diagrams/cloud-proxy-sequence.html",
+        "docs/static/images/diagrams/composable-core.html",
+        "docs/static/images/diagrams/diarization-pipeline.html",
+        "docs/static/images/diagrams/distributed-mode-arch.html",
+        "docs/static/images/diagrams/ds4-layer-split.html",
+        "docs/static/images/diagrams/face-recognition-flow.html",
+        "docs/static/images/diagrams/federated-vs-worker.html",
+        "docs/static/images/diagrams/finetune-job-lifecycle.html",
+        "docs/static/images/diagrams/finetune-recipe.html",
+        "docs/static/images/diagrams/mcp-server-vs-client.html",
+        "docs/static/images/diagrams/middleware-lifecycle.html",
+        "docs/static/images/diagrams/mitm-intercept.html",
+        "docs/static/images/diagrams/mlx-pipeline.html",
+        "docs/static/images/diagrams/model-resolution.html",
+        "docs/static/images/diagrams/quantization-flow.html",
+        "docs/static/images/diagrams/quickstart-journey.html",
+        "docs/static/images/diagrams/realtime-pipeline.html",
+        "docs/static/images/diagrams/reranker-pipeline.html",
+        "docs/static/images/diagrams/reverse-proxy-tls.html",
+        "docs/static/images/diagrams/smartrouter-scheduling.html",
+        "docs/static/images/diagrams/tool-call-parsers.html",
+        "docs/static/images/diagrams/voice-recognition-flow.html",
+        "docs/static/images/diagrams/vram-eviction.html",
+        "docs/static/site.webmanifest"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of tech-doc-hugo, ISC license (declared in package.json), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/themes/hugo-theme-relearn/.claude/**",
+        "docs/themes/hugo-theme-relearn/.editorconfig",
+        "docs/themes/hugo-theme-relearn/.gitattributes",
+        "docs/themes/hugo-theme-relearn/.githooks/**",
+        "docs/themes/hugo-theme-relearn/.github/**",
+        "docs/themes/hugo-theme-relearn/.gitignore",
+        "docs/themes/hugo-theme-relearn/.grenrc.js",
+        "docs/themes/hugo-theme-relearn/.imgbotconfig",
+        "docs/themes/hugo-theme-relearn/.issuetracker",
+        "docs/themes/hugo-theme-relearn/.prettierignore",
+        "docs/themes/hugo-theme-relearn/.prettierrc.json",
+        "docs/themes/hugo-theme-relearn/.vscode/**",
+        "docs/themes/hugo-theme-relearn/CHANGELOG.md",
+        "docs/themes/hugo-theme-relearn/CLAUDE.md",
+        "docs/themes/hugo-theme-relearn/LICENSE",
+        "docs/themes/hugo-theme-relearn/README.md",
+        "docs/themes/hugo-theme-relearn/archetypes/**",
+        "docs/themes/hugo-theme-relearn/assets/_relearn_searchindex.js",
+        "docs/themes/hugo-theme-relearn/assets/_relearn_versionindex.js",
+        "docs/themes/hugo-theme-relearn/assets/css/**",
+        "docs/themes/hugo-theme-relearn/assets/fonts/fontawesome/css/**",
+        "docs/themes/hugo-theme-relearn/assets/js/auto-complete/**",
+        "docs/themes/hugo-theme-relearn/assets/js/d3/**",
+        "docs/themes/hugo-theme-relearn/assets/js/lunr/**",
+        "docs/themes/hugo-theme-relearn/assets/js/mermaid/**",
+        "docs/themes/hugo-theme-relearn/assets/js/orama/**",
+        "docs/themes/hugo-theme-relearn/assets/js/search-lunr.js",
+        "docs/themes/hugo-theme-relearn/assets/js/search-orama-esm.mjs",
+        "docs/themes/hugo-theme-relearn/assets/js/search-orama.js",
+        "docs/themes/hugo-theme-relearn/assets/js/search.js",
+        "docs/themes/hugo-theme-relearn/assets/js/swagger-ui/**",
+        "docs/themes/hugo-theme-relearn/assets/js/theme.js",
+        "docs/themes/hugo-theme-relearn/content/**",
+        "docs/themes/hugo-theme-relearn/docs/.frontmatter/**",
+        "docs/themes/hugo-theme-relearn/docs/assets/images/logo.svg",
+        "docs/themes/hugo-theme-relearn/docs/assets/js/**",
+        "docs/themes/hugo-theme-relearn/docs/config/**",
+        "docs/themes/hugo-theme-relearn/docs/content/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/designs/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/designs/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/linking/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/menus/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/reference/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/frontmatter/topbar/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/linking/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/markdown.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/markdown.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/meta/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/structure/**",
+        "docs/themes/hugo-theme-relearn/docs/content/authoring/taxterm/**",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/explanation/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/explanation/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/howto/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/howto/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/reference/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/reference/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/tutorial/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/categories/tutorial/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/branding/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/content/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/designs/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/extending/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/imageeffects.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/imageeffects.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/linkeffects.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/linkeffects.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/outputformats/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/partials/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/taxonomy.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/taxonomy.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/topbar/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/customization/topbar/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/reference/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/headerfooter/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/headerfooter/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/menus/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/search/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sidebar/width/**",
+        "docs/themes/hugo-theme-relearn/docs/content/configuration/sitemanagement/**",
+        "docs/themes/hugo-theme-relearn/docs/content/development/**",
+        "docs/themes/hugo-theme-relearn/docs/content/frontmatter/**",
+        "docs/themes/hugo-theme-relearn/docs/content/introduction/**",
+        "docs/themes/hugo-theme-relearn/docs/content/more/**",
+        "docs/themes/hugo-theme-relearn/docs/content/options/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/hugo.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.pir.files/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/badge/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/badge/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/button/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/button/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/card/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/card/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/cards/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/cards/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/children-1/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/children-2/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/children-3/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/children-4/**",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/test.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/children/test.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/expand/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/expand/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/highlight/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/highlight/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/icon/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/icon/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/include/INCLUDE_GREETINGS.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/include/INCLUDE_ME.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/include/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/include/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/math/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/math/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/mermaid/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/mermaid/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/notice/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/notice/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/openapi/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/openapi/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/openapi/petstore.json",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/openapi/petstore.yaml",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/MaybeTreasure.en.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/MaybeTreasure.pir.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/NoTreasure.en.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/Treasure.pir.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/siteparam/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/siteparam/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tab/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tab/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tabs/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tabs/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tree/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/tree/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/showcase/_index.en.md",
+        "docs/themes/hugo-theme-relearn/docs/content/showcase/_index.pir.md",
+        "docs/themes/hugo-theme-relearn/docs/content/tags/**",
+        "docs/themes/hugo-theme-relearn/docs/data/**",
+        "docs/themes/hugo-theme-relearn/docs/frontmatter.json",
+        "docs/themes/hugo-theme-relearn/docs/i18n/**",
+        "docs/themes/hugo-theme-relearn/docs/layouts/**",
+        "docs/themes/hugo-theme-relearn/docs/static/**",
+        "docs/themes/hugo-theme-relearn/exampleSite/**",
+        "docs/themes/hugo-theme-relearn/go.mod",
+        "docs/themes/hugo-theme-relearn/hugo.toml",
+        "docs/themes/hugo-theme-relearn/i18n/**",
+        "docs/themes/hugo-theme-relearn/layouts/**",
+        "docs/themes/hugo-theme-relearn/theme.toml",
+        "docs/themes/hugo-theme-relearn/vscode-frontmatter/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2021 Sören Weber\nCopyright (c) 2017 Valere JEANTET\nCopyright (c) 2016 MATHIEU CORNIC\nCopyright (c) 2014 Grav\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 Sören Weber; Copyright (c) 2017 Valere JEANTET; Copyright (c) 2016 MATHIEU CORNIC; Copyright (c) 2014 Grav, MIT license (LICENSE), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs/themes/hugo-theme-relearn."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "docs/themes/hugo-theme-relearn/assets/js/mathjax/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "MathJax Consortium, Apache-2.0 license (LICENSE), https://github.com/mudler/LocalAI/tree/1d0a3227d7c48ba099f49c341dda39d73b583e99/docs/themes/hugo-theme-relearn/assets/js/mathjax."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.audio-cpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.base-grpc-builder"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bonsai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ds4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fizz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.golang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gotmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.hugo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ik-llama-cpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.llama-cpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "core/explorer/empty_db.json.lock",
+        "core/explorer/test_db.json.lock",
+        "core/http/react-ui/bun.lock",
+        "flake.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.omnivoice"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.privacy-filter"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.python"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rust"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.turboquant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "backend/python/ace-step/requirements-cpu.txt",
+        "backend/python/ace-step/requirements-cublas12.txt",
+        "backend/python/ace-step/requirements-cublas13.txt",
+        "backend/python/ace-step/requirements-hipblas.txt",
+        "backend/python/ace-step/requirements-intel.txt",
+        "backend/python/ace-step/requirements-l4t13.txt",
+        "backend/python/ace-step/requirements-mps.txt",
+        "backend/python/ace-step/requirements.txt",
+        "backend/python/chatterbox/requirements-cpu.txt",
+        "backend/python/chatterbox/requirements-cublas12.txt",
+        "backend/python/chatterbox/requirements-cublas13.txt",
+        "backend/python/chatterbox/requirements-hipblas.txt",
+        "backend/python/chatterbox/requirements-install.txt",
+        "backend/python/chatterbox/requirements-intel.txt",
+        "backend/python/chatterbox/requirements-l4t12.txt",
+        "backend/python/chatterbox/requirements-l4t13.txt",
+        "backend/python/chatterbox/requirements-mps.txt",
+        "backend/python/chatterbox/requirements.txt",
+        "backend/python/common/template/requirements-hipblas.txt",
+        "backend/python/common/template/requirements-intel.txt",
+        "backend/python/common/template/requirements.txt",
+        "backend/python/coqui/requirements-cpu.txt",
+        "backend/python/coqui/requirements-cublas12.txt",
+        "backend/python/coqui/requirements-hipblas.txt",
+        "backend/python/coqui/requirements-intel.txt",
+        "backend/python/coqui/requirements-mps.txt",
+        "backend/python/coqui/requirements.txt",
+        "backend/python/diffusers/requirements-cpu.txt",
+        "backend/python/diffusers/requirements-cublas12.txt",
+        "backend/python/diffusers/requirements-cublas13.txt",
+        "backend/python/diffusers/requirements-hipblas.txt",
+        "backend/python/diffusers/requirements-intel.txt",
+        "backend/python/diffusers/requirements-l4t12.txt",
+        "backend/python/diffusers/requirements-l4t13.txt",
+        "backend/python/diffusers/requirements-mps.txt",
+        "backend/python/diffusers/requirements.txt",
+        "backend/python/faster-qwen3-tts/requirements-cublas12.txt",
+        "backend/python/faster-qwen3-tts/requirements-cublas13.txt",
+        "backend/python/faster-qwen3-tts/requirements-install.txt",
+        "backend/python/faster-qwen3-tts/requirements-l4t12.txt",
+        "backend/python/faster-qwen3-tts/requirements-l4t13.txt",
+        "backend/python/faster-qwen3-tts/requirements.txt",
+        "backend/python/faster-whisper/requirements-cpu.txt",
+        "backend/python/faster-whisper/requirements-cublas12.txt",
+        "backend/python/faster-whisper/requirements-cublas13.txt",
+        "backend/python/faster-whisper/requirements-hipblas.txt",
+        "backend/python/faster-whisper/requirements-intel.txt",
+        "backend/python/faster-whisper/requirements-l4t12.txt",
+        "backend/python/faster-whisper/requirements-l4t13.txt",
+        "backend/python/faster-whisper/requirements-mps.txt",
+        "backend/python/faster-whisper/requirements.txt",
+        "backend/python/fish-speech/requirements-cpu.txt",
+        "backend/python/fish-speech/requirements-cublas12.txt",
+        "backend/python/fish-speech/requirements-cublas13.txt",
+        "backend/python/fish-speech/requirements-hipblas.txt",
+        "backend/python/fish-speech/requirements-intel.txt",
+        "backend/python/fish-speech/requirements-l4t12.txt",
+        "backend/python/fish-speech/requirements-l4t13.txt",
+        "backend/python/fish-speech/requirements.txt",
+        "backend/python/funasr/requirements-cpu.txt",
+        "backend/python/funasr/requirements-cublas12.txt",
+        "backend/python/funasr/requirements-cublas13.txt",
+        "backend/python/funasr/requirements-hipblas.txt",
+        "backend/python/funasr/requirements-intel.txt",
+        "backend/python/funasr/requirements-l4t12.txt",
+        "backend/python/funasr/requirements-l4t13.txt",
+        "backend/python/funasr/requirements-mps.txt",
+        "backend/python/funasr/requirements.txt",
+        "backend/python/insightface/requirements-cpu.txt",
+        "backend/python/insightface/requirements-cublas12.txt",
+        "backend/python/insightface/requirements.txt",
+        "backend/python/kitten-tts/requirements-mps.txt",
+        "backend/python/kitten-tts/requirements.txt",
+        "backend/python/kokoro/requirements-cpu.txt",
+        "backend/python/kokoro/requirements-cublas12.txt",
+        "backend/python/kokoro/requirements-cublas13.txt",
+        "backend/python/kokoro/requirements-hipblas.txt",
+        "backend/python/kokoro/requirements-intel.txt",
+        "backend/python/kokoro/requirements-l4t12.txt",
+        "backend/python/kokoro/requirements-mps.txt",
+        "backend/python/kokoro/requirements.txt",
+        "backend/python/liquid-audio/requirements-cpu.txt",
+        "backend/python/liquid-audio/requirements-cublas12.txt",
+        "backend/python/liquid-audio/requirements-cublas13.txt",
+        "backend/python/liquid-audio/requirements-hipblas.txt",
+        "backend/python/liquid-audio/requirements-l4t13.txt",
+        "backend/python/liquid-audio/requirements-mps.txt",
+        "backend/python/liquid-audio/requirements.txt",
+        "backend/python/llama-cpp-quantization/requirements-cpu.txt",
+        "backend/python/llama-cpp-quantization/requirements-mps.txt",
+        "backend/python/llama-cpp-quantization/requirements.txt",
+        "backend/python/longcat-video/requirements-after.txt",
+        "backend/python/longcat-video/requirements-cpu.txt",
+        "backend/python/longcat-video/requirements-cublas12.txt",
+        "backend/python/longcat-video/requirements-cublas13.txt",
+        "backend/python/longcat-video/requirements-l4t13.txt",
+        "backend/python/longcat-video/requirements.txt",
+        "backend/python/mlx-audio/requirements-cpu.txt",
+        "backend/python/mlx-audio/requirements-cublas12.txt",
+        "backend/python/mlx-audio/requirements-cublas13.txt",
+        "backend/python/mlx-audio/requirements-l4t12.txt",
+        "backend/python/mlx-audio/requirements-l4t13.txt",
+        "backend/python/mlx-audio/requirements-mps.txt",
+        "backend/python/mlx-audio/requirements.txt",
+        "backend/python/mlx-distributed/requirements-cpu.txt",
+        "backend/python/mlx-distributed/requirements-cublas12.txt",
+        "backend/python/mlx-distributed/requirements-cublas13.txt",
+        "backend/python/mlx-distributed/requirements-l4t12.txt",
+        "backend/python/mlx-distributed/requirements-l4t13.txt",
+        "backend/python/mlx-distributed/requirements-mps.txt",
+        "backend/python/mlx-distributed/requirements.txt",
+        "backend/python/mlx-video/requirements-mps.txt",
+        "backend/python/mlx-video/requirements.txt",
+        "backend/python/mlx-vlm/requirements-cpu.txt",
+        "backend/python/mlx-vlm/requirements-cublas12.txt",
+        "backend/python/mlx-vlm/requirements-cublas13.txt",
+        "backend/python/mlx-vlm/requirements-l4t12.txt",
+        "backend/python/mlx-vlm/requirements-l4t13.txt",
+        "backend/python/mlx-vlm/requirements-mps.txt",
+        "backend/python/mlx-vlm/requirements.txt",
+        "backend/python/mlx/requirements-cpu.txt",
+        "backend/python/mlx/requirements-cublas12.txt",
+        "backend/python/mlx/requirements-cublas13.txt",
+        "backend/python/mlx/requirements-l4t12.txt",
+        "backend/python/mlx/requirements-l4t13.txt",
+        "backend/python/mlx/requirements-mps.txt",
+        "backend/python/mlx/requirements.txt",
+        "backend/python/moonshine/requirements-mps.txt",
+        "backend/python/moonshine/requirements.txt",
+        "backend/python/nemo/requirements-cpu.txt",
+        "backend/python/nemo/requirements-cublas12.txt",
+        "backend/python/nemo/requirements-cublas13.txt",
+        "backend/python/nemo/requirements-hipblas.txt",
+        "backend/python/nemo/requirements-intel.txt",
+        "backend/python/nemo/requirements-l4t12.txt",
+        "backend/python/nemo/requirements-l4t13.txt",
+        "backend/python/nemo/requirements-mps.txt",
+        "backend/python/nemo/requirements.txt",
+        "backend/python/neutts/requirements-after.txt",
+        "backend/python/neutts/requirements-cpu.txt",
+        "backend/python/neutts/requirements-cublas12.txt",
+        "backend/python/neutts/requirements-hipblas.txt",
+        "backend/python/neutts/requirements-l4t12.txt",
+        "backend/python/neutts/requirements.txt",
+        "backend/python/outetts/requirements-cpu.txt",
+        "backend/python/outetts/requirements-cublas12.txt",
+        "backend/python/outetts/requirements-cublas13.txt",
+        "backend/python/outetts/requirements-hipblas.txt",
+        "backend/python/outetts/requirements-intel.txt",
+        "backend/python/outetts/requirements.txt",
+        "backend/python/pocket-tts/requirements-cpu.txt",
+        "backend/python/pocket-tts/requirements-cublas12.txt",
+        "backend/python/pocket-tts/requirements-cublas13.txt",
+        "backend/python/pocket-tts/requirements-hipblas.txt",
+        "backend/python/pocket-tts/requirements-intel.txt",
+        "backend/python/pocket-tts/requirements-l4t12.txt",
+        "backend/python/pocket-tts/requirements-l4t13.txt",
+        "backend/python/pocket-tts/requirements-mps.txt",
+        "backend/python/pocket-tts/requirements.txt",
+        "backend/python/qwen-asr/requirements-cpu.txt",
+        "backend/python/qwen-asr/requirements-cublas12-after.txt",
+        "backend/python/qwen-asr/requirements-cublas12.txt",
+        "backend/python/qwen-asr/requirements-cublas13.txt",
+        "backend/python/qwen-asr/requirements-hipblas.txt",
+        "backend/python/qwen-asr/requirements-intel-after.txt",
+        "backend/python/qwen-asr/requirements-intel.txt",
+        "backend/python/qwen-asr/requirements-l4t12.txt",
+        "backend/python/qwen-asr/requirements-l4t13.txt",
+        "backend/python/qwen-asr/requirements-mps.txt",
+        "backend/python/qwen-asr/requirements.txt",
+        "backend/python/qwen-tts/requirements-cpu.txt",
+        "backend/python/qwen-tts/requirements-cublas12-after.txt",
+        "backend/python/qwen-tts/requirements-cublas12.txt",
+        "backend/python/qwen-tts/requirements-cublas13.txt",
+        "backend/python/qwen-tts/requirements-hipblas.txt",
+        "backend/python/qwen-tts/requirements-intel-after.txt",
+        "backend/python/qwen-tts/requirements-intel.txt",
+        "backend/python/qwen-tts/requirements-l4t12.txt",
+        "backend/python/qwen-tts/requirements-l4t13.txt",
+        "backend/python/qwen-tts/requirements-mps.txt",
+        "backend/python/qwen-tts/requirements.txt",
+        "backend/python/rerankers/requirements-cpu.txt",
+        "backend/python/rerankers/requirements-cublas12.txt",
+        "backend/python/rerankers/requirements-cublas13.txt",
+        "backend/python/rerankers/requirements-hipblas.txt",
+        "backend/python/rerankers/requirements-intel.txt",
+        "backend/python/rerankers/requirements-mps.txt",
+        "backend/python/rerankers/requirements.txt",
+        "backend/python/rfdetr/requirements-cpu.txt",
+        "backend/python/rfdetr/requirements-cublas12.txt",
+        "backend/python/rfdetr/requirements-cublas13.txt",
+        "backend/python/rfdetr/requirements-hipblas.txt",
+        "backend/python/rfdetr/requirements-intel.txt",
+        "backend/python/rfdetr/requirements-mps.txt",
+        "backend/python/rfdetr/requirements.txt",
+        "backend/python/sglang/requirements-after.txt",
+        "backend/python/sglang/requirements-cpu-after.txt",
+        "backend/python/sglang/requirements-cpu.txt",
+        "backend/python/sglang/requirements-cublas12-after.txt",
+        "backend/python/sglang/requirements-cublas12.txt",
+        "backend/python/sglang/requirements-cublas13-after.txt",
+        "backend/python/sglang/requirements-cublas13.txt",
+        "backend/python/sglang/requirements-hipblas-after.txt",
+        "backend/python/sglang/requirements-hipblas.txt",
+        "backend/python/sglang/requirements-install.txt",
+        "backend/python/sglang/requirements-intel-after.txt",
+        "backend/python/sglang/requirements-intel.txt",
+        "backend/python/sglang/requirements-l4t13-after.txt",
+        "backend/python/sglang/requirements-l4t13.txt",
+        "backend/python/sglang/requirements.txt",
+        "backend/python/speaker-recognition/requirements-cpu.txt",
+        "backend/python/speaker-recognition/requirements-cublas12.txt",
+        "backend/python/speaker-recognition/requirements-mps.txt",
+        "backend/python/speaker-recognition/requirements.txt",
+        "backend/python/tinygrad/requirements-cpu.txt",
+        "backend/python/tinygrad/requirements-cublas12.txt",
+        "backend/python/tinygrad/requirements-cublas13.txt",
+        "backend/python/tinygrad/requirements.txt",
+        "backend/python/transformers/requirements-cpu.txt",
+        "backend/python/transformers/requirements-cublas12.txt",
+        "backend/python/transformers/requirements-cublas13.txt",
+        "backend/python/transformers/requirements-hipblas.txt",
+        "backend/python/transformers/requirements-intel.txt",
+        "backend/python/transformers/requirements-mps.txt",
+        "backend/python/transformers/requirements.txt",
+        "backend/python/trl/requirements-cpu.txt",
+        "backend/python/trl/requirements-cublas12.txt",
+        "backend/python/trl/requirements-cublas13.txt",
+        "backend/python/trl/requirements-mps.txt",
+        "backend/python/trl/requirements.txt",
+        "backend/python/vibevoice/requirements-cpu.txt",
+        "backend/python/vibevoice/requirements-cublas12.txt",
+        "backend/python/vibevoice/requirements-cublas13.txt",
+        "backend/python/vibevoice/requirements-hipblas.txt",
+        "backend/python/vibevoice/requirements-intel.txt",
+        "backend/python/vibevoice/requirements-l4t12.txt",
+        "backend/python/vibevoice/requirements-l4t13.txt",
+        "backend/python/vibevoice/requirements-mps.txt",
+        "backend/python/vibevoice/requirements.txt",
+        "backend/python/vllm-omni/requirements-after.txt",
+        "backend/python/vllm-omni/requirements-cublas12-after.txt",
+        "backend/python/vllm-omni/requirements-cublas12.txt",
+        "backend/python/vllm-omni/requirements-cublas13.txt",
+        "backend/python/vllm-omni/requirements-hipblas.txt",
+        "backend/python/vllm-omni/requirements-l4t13.txt",
+        "backend/python/vllm-omni/requirements.txt",
+        "backend/python/vllm/requirements-after.txt",
+        "backend/python/vllm/requirements-cpu-after.txt",
+        "backend/python/vllm/requirements-cpu.txt",
+        "backend/python/vllm/requirements-cublas12-after.txt",
+        "backend/python/vllm/requirements-cublas12.txt",
+        "backend/python/vllm/requirements-cublas13-after.txt",
+        "backend/python/vllm/requirements-cublas13.txt",
+        "backend/python/vllm/requirements-hipblas.txt",
+        "backend/python/vllm/requirements-install.txt",
+        "backend/python/vllm/requirements-intel-after.txt",
+        "backend/python/vllm/requirements-intel.txt",
+        "backend/python/vllm/requirements-l4t13-after.txt",
+        "backend/python/vllm/requirements-l4t13.txt",
+        "backend/python/vllm/requirements.txt",
+        "backend/python/voxcpm/requirements-cpu.txt",
+        "backend/python/voxcpm/requirements-cublas12.txt",
+        "backend/python/voxcpm/requirements-cublas13.txt",
+        "backend/python/voxcpm/requirements-hipblas.txt",
+        "backend/python/voxcpm/requirements-intel.txt",
+        "backend/python/voxcpm/requirements-l4t12.txt",
+        "backend/python/voxcpm/requirements-l4t13.txt",
+        "backend/python/voxcpm/requirements-mps.txt",
+        "backend/python/voxcpm/requirements.txt",
+        "backend/python/whisper-medusa/requirements-cpu.txt",
+        "backend/python/whisper-medusa/requirements-cublas12.txt",
+        "backend/python/whisper-medusa/requirements.txt",
+        "backend/python/whisperx/requirements-cpu.txt",
+        "backend/python/whisperx/requirements-cublas12.txt",
+        "backend/python/whisperx/requirements-cublas13.txt",
+        "backend/python/whisperx/requirements-l4t12.txt",
+        "backend/python/whisperx/requirements-l4t13.txt",
+        "backend/python/whisperx/requirements-mps.txt",
+        "backend/python/whisperx/requirements.txt",
+        "core/http/react-ui/coverage-baseline.txt",
+        "core/http/react-ui/inline-style-baseline.txt",
+        "coverage-baseline.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.en.files/hugo.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/attachments/index.pir.files/NoTreasure.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/MaybeTreasure.en.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/MaybeTreasure.pir.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/NoTreasure.en.txt",
+        "docs/themes/hugo-theme-relearn/docs/content/shortcodes/resources/Treasure.pir.txt",
+        "docs/themes/hugo-theme-relearn/layouts/partials/version.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.imgbotconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.issuetracker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.keep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yamllint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    "docs/themes/hugo-theme-relearn": "https://github.com/McShelby/hugo-theme-relearn"
+  }
+}

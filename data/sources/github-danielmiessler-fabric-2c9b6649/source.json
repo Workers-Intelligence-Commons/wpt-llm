@@ -1,0 +1,424 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/danielmiessler/Fabric",
+  "revision": "ed93f09637b6e59716d0a4bc0963ddaf78053868",
+  "checksum": "sha256:5151ea427cc2e52f997797264d8c9c16e138d2c58f0bd7e8fe9fdd0860412a63",
+  "extract": {
+    "exclude": [
+      "cmd/generate_changelog/changelog.db",
+      "docs/images/**",
+      "internal/plugins/template/Examples/memories.db",
+      "web/static/brain.png",
+      "web/static/electric.png",
+      "web/static/fabric-logo.gif",
+      "web/static/fabric-logo.png",
+      "web/static/fabric-summarize.png",
+      "web/static/favicon.png",
+      "web/static/obsidian-logo.png"
+    ]
+  },
+  "history": {
+    "since": "7079c9cb23d3ca9a4acc9aafbf051c8ba8a1db3c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2012-2024 Scott Chacon and others\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Commit history of https://github.com/danielmiessler/Fabric: Copyright (c) 2012-2024 Scott Chacon and others, MIT license (LICENSE), https://github.com/danielmiessler/Fabric."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".dockerignore",
+        ".envrc",
+        ".github/**",
+        ".gitignore",
+        ".goreleaser.yaml",
+        ".vscode/**",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.ar.md",
+        "README.md",
+        "README.zh.md",
+        "cmd/code2context/**",
+        "cmd/fabric/**",
+        "cmd/generate_changelog/PRD.md",
+        "cmd/generate_changelog/README.md",
+        "cmd/generate_changelog/internal/**",
+        "cmd/generate_changelog/main.go",
+        "cmd/generate_changelog/util/**",
+        "cmd/to_pdf/**",
+        "completions/**",
+        "data/**",
+        "docs/Automated-ChangeLog.md",
+        "docs/Automated-Changelog-Usage.md",
+        "docs/Azure-AI-Gateway.md",
+        "docs/Azure-OpenAI-Troubleshooting.md",
+        "docs/CODE_OF_CONDUCT.md",
+        "docs/CONTRIBUTING.md",
+        "docs/Desktop-Notifications.md",
+        "docs/DigitalOcean-Agents-Setup.md",
+        "docs/Gemini-TTS.md",
+        "docs/Go-Updates-September-2025.md",
+        "docs/Microsoft-365-Copilot-Setup.md",
+        "docs/NOTES.md",
+        "docs/Project-Restructured.md",
+        "docs/README.md",
+        "docs/SECURITY.md",
+        "docs/SUPPORT.md",
+        "docs/Shell-Completions.md",
+        "docs/Using-Speech-To-Text.md",
+        "docs/Using-Workflows.md",
+        "docs/YouTube-Processing.md",
+        "docs/contexts-and-sessions-tutorial.md",
+        "docs/docs.go",
+        "docs/examples/**",
+        "docs/i18n-variants.md",
+        "docs/i18n.md",
+        "docs/notification-config.yaml",
+        "docs/rest-api.md",
+        "docs/swagger.json",
+        "docs/swagger.yaml",
+        "docs/voices/**",
+        "flake.lock",
+        "flake.nix",
+        "go.mod",
+        "go.sum",
+        "internal/chat/**",
+        "internal/chatfmt/**",
+        "internal/cli/**",
+        "internal/core/**",
+        "internal/domain/**",
+        "internal/i18n/**",
+        "internal/log/**",
+        "internal/plugins/ai/**",
+        "internal/plugins/db/**",
+        "internal/plugins/plugin.go",
+        "internal/plugins/plugin_test.go",
+        "internal/plugins/strategy/**",
+        "internal/plugins/template/Examples/README.md",
+        "internal/plugins/template/Examples/openai-chat.sh",
+        "internal/plugins/template/Examples/openai.yaml",
+        "internal/plugins/template/Examples/remote-security-report.sh",
+        "internal/plugins/template/Examples/remote-security-report.yaml",
+        "internal/plugins/template/Examples/security-report.sh",
+        "internal/plugins/template/Examples/security-report.yaml",
+        "internal/plugins/template/Examples/sqlite3_demo.yaml",
+        "internal/plugins/template/Examples/test_pattern.md",
+        "internal/plugins/template/Examples/track_packages.sh",
+        "internal/plugins/template/Examples/word-generator.py",
+        "internal/plugins/template/Examples/word-generator.yaml",
+        "internal/plugins/template/README.md",
+        "internal/plugins/template/constants.go",
+        "internal/plugins/template/datetime.go",
+        "internal/plugins/template/datetime.md",
+        "internal/plugins/template/datetime_test.go",
+        "internal/plugins/template/extension_executor.go",
+        "internal/plugins/template/extension_executor_test.go",
+        "internal/plugins/template/extension_manager.go",
+        "internal/plugins/template/extension_manager_test.go",
+        "internal/plugins/template/extension_registry.go",
+        "internal/plugins/template/extension_registry_test.go",
+        "internal/plugins/template/fetch.go",
+        "internal/plugins/template/fetch.md",
+        "internal/plugins/template/fetch_test.go",
+        "internal/plugins/template/file.go",
+        "internal/plugins/template/file.md",
+        "internal/plugins/template/file_confine_test.go",
+        "internal/plugins/template/file_test.go",
+        "internal/plugins/template/hash.go",
+        "internal/plugins/template/hash_test.go",
+        "internal/plugins/template/sys.go",
+        "internal/plugins/template/sys.md",
+        "internal/plugins/template/sys_test.go",
+        "internal/plugins/template/template.go",
+        "internal/plugins/template/template_extension_mixed_test.go",
+        "internal/plugins/template/template_extension_multiple_test.go",
+        "internal/plugins/template/template_sentinel_test.go",
+        "internal/plugins/template/template_single_pass_test.go",
+        "internal/plugins/template/template_test.go",
+        "internal/plugins/template/text.go",
+        "internal/plugins/template/text.md",
+        "internal/plugins/template/text_test.go",
+        "internal/plugins/template/utils.go",
+        "internal/server/**",
+        "internal/tools/**",
+        "internal/util/**",
+        "nix/**",
+        "scripts/**",
+        "web/.browserslistrc",
+        "web/.github/**",
+        "web/.npmrc",
+        "web/.prettierignore",
+        "web/.prettierrc",
+        "web/.vscode/**",
+        "web/README.md",
+        "web/STD-README.md",
+        "web/eslint.config.js",
+        "web/jsconfig.json",
+        "web/legacy/**",
+        "web/myfiles/**",
+        "web/package-lock.json",
+        "web/package.json",
+        "web/pnpm-lock.yaml",
+        "web/pnpm-workspace.yaml",
+        "web/rollup.config.js",
+        "web/src/**",
+        "web/static/robots.txt",
+        "web/static/strategies/**",
+        "web/svelte.config.js",
+        "web/tsconfig.json",
+        "web/vite.config.ts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2012-2024 Scott Chacon and others\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "attribution": "Copyright (c) 2012-2024 Scott Chacon and others, MIT license (LICENSE), https://github.com/danielmiessler/Fabric."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.browserslistrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_fabric"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

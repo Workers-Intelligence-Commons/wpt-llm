@@ -1,0 +1,516 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/SonarSource/sonarqube",
+  "revision": "baced1a836ea2dd9435278a62df39a2d64ecb712",
+  "checksum": "sha256:06b344719a94dea50af8ca70add61396df268a5a801c3dd32ba4c2a7254c1f20",
+  "extract": {
+    "exclude": [
+      "gradle/wrapper/gradle-wrapper.jar",
+      "server/sonar-ce/src/test/plugins/sonar-test-plugin/target/**",
+      "server/sonar-ce/src/test/plugins/sonar-test2-plugin/target/**",
+      "server/sonar-ce-task-projectanalysis/src/it/resources/org/sonar/ce/task/projectanalysis/step/**",
+      "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/ReportExtractionStepTest/**",
+      "server/sonar-process/src/test/resources/sonar-dummy-app.jar",
+      "server/sonar-webserver-api/src/test/projects/fake-report-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/fake-sqale-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/fake-views-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-base-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-base-plugin-v2/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-extend-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-libs-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-require-plugin/target/**",
+      "server/sonar-webserver-api/src/test/projects/test-requirenew-plugin/target/**",
+      "server/sonar-webserver-core/**",
+      "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/updatecenter/**",
+      "sonar-application/src/main/assembly/**",
+      "sonar-core/src/test/projects/base-plugin/target/**",
+      "sonar-core/src/test/projects/dependent-plugin/target/**",
+      "sonar-core/src/test/resources/org/sonar/core/platform/**",
+      "sonar-core/src/test/resources/org/sonar/core/sarif/sarif210-nonUtf8.json",
+      "sonar-core/tester/a/A.class",
+      "sonar-core/tester/a.jar",
+      "sonar-core/tester/a_v2/A.class",
+      "sonar-core/tester/a_v2.jar",
+      "sonar-core/tester/b/B.class",
+      "sonar-core/tester/b.jar",
+      "sonar-core/tester/c/C.class",
+      "sonar-core/tester/c.jar",
+      "sonar-plugin-api-impl/src/test/resources/org/sonar/api/batch/**",
+      "sonar-testing-harness/src/test/resources/org/sonar/l10n/myPlugin_fr.properties",
+      "sonar-testing-harness/src/test/resources/org/sonar/l10n/myPlugin_fr_CA.properties",
+      "sonar-testing-harness/src/test/resources/org/sonar/l10n/myPlugin_fr_QB.properties"
+    ]
+  },
+  "history": {
+    "since": "27eb460f88731d3515c16b31ab9825688d4001e4"
+  },
+  "licenses": [
+    {
+      "license": "LGPL-3.0-or-later",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                   GNU LESSER GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n\n  This version of the GNU Lesser General Public License incorporates\nthe terms and conditions of version 3 of the GNU General Public\nLicense, supplemented by the additional permissions listed below.\n\n  0. Additional Definitions.\n\n  As used herein, \"this License\" refers to version 3 of the GNU Lesser\nGeneral Public License, and the \"GNU GPL\" refers to version 3 of the GNU\nGeneral Public License.\n\n  \"The Library\" refers to a covered work governed by this License,\nother than an Application or a Combined Work as defined below.\n\n  An \"Application\" is any work that makes use of an interface provided\nby the Library, but which is not otherwise based on the Library.\nDefining a subclass of a class defined by the Library is deemed a mode\nof using an interface provided by the Library.\n\n  A \"Combined Work\" is a work produced by combining or linking an\nApplication with the Library.  The particular version of the Library\nwith which the Combined Work was made is also called the \"Linked\nVersion\".\n\n  The \"Minimal Corresponding Source\" for a Combined Work means the\nCorresponding Source for the Combined Work, excluding any source code\nfor portions of the Combined Work that, considered in isolation, are\nbased on the Application, and not on the Linked Version.\n\n  The \"Corresponding Application Code\" for a Combined Work means the\nobject code and/or source code for the Application, including any data\nand utility programs needed for reproducing the Combined Work from the\nApplication, but excluding the System Libraries of the Combined Work.\n\n  1. Exception to Section 3 of the GNU GPL.\n\n  You may convey a covered work under sections 3 and 4 of this License\nwithout being bound by section 3 of the GNU GPL.\n\n  2. Conveying Modified Versions.\n\n  If you modify a copy of the Library, and, in your modifications, a\nfacility refers to a function or data to be supplied by an Application\nthat uses the facility (other than as an argument passed when the\nfacility is invoked), then you may convey a copy of the modified\nversion:\n\n   a) under this License, provided that you make a good faith effort to\n   ensure that, in the event an Application does not supply the\n   function or data, the facility still operates, and performs\n   whatever part of its purpose remains meaningful, or\n\n   b) under the GNU GPL, with none of the additional permissions of\n   this License applicable to that copy.\n\n  3. Object Code Incorporating Material from Library Header Files.\n\n  The object code form of an Application may incorporate material from\na header file that is part of the Library.  You may convey such object\ncode under terms of your choice, provided that, if the incorporated\nmaterial is not limited to numerical parameters, data structure\nlayouts and accessors, or small macros, inline functions and templates\n(ten or fewer lines in length), you do both of the following:\n\n   a) Give prominent notice with each copy of the object code that the\n   Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the object code with a copy of the GNU GPL and this license\n   document.\n\n  4. Combined Works.\n\n  You may convey a Combined Work under terms of your choice that,\ntaken together, effectively do not restrict modification of the\nportions of the Library contained in the Combined Work and reverse\nengineering for debugging such modifications, if you also do each of\nthe following:\n\n   a) Give prominent notice with each copy of the Combined Work that\n   the Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the Combined Work with a copy of the GNU GPL and this license\n   document.\n\n   c) For a Combined Work that displays copyright notices during\n   execution, include the copyright notice for the Library among\n   these notices, as well as a reference directing the user to the\n   copies of the GNU GPL and this license document.\n\n   d) Do one of the following:\n\n       0) Convey the Minimal Corresponding Source under the terms of this\n       License, and the Corresponding Application Code in a form\n       suitable for, and under terms that permit, the user to\n       recombine or relink the Application with a modified version of\n       the Linked Version to produce a modified Combined Work, in the\n       manner specified by section 6 of the GNU GPL for conveying\n       Corresponding Source.\n\n       1) Use a suitable shared library mechanism for linking with the\n       Library.  A suitable mechanism is one that (a) uses at run time\n       a copy of the Library already present on the user's computer\n       system, and (b) will operate properly with a modified version\n       of the Library that is interface-compatible with the Linked\n       Version.\n\n   e) Provide Installation Information, but only if you would otherwise\n   be required to provide such information under section 6 of the\n   GNU GPL, and only to the extent that such information is\n   necessary to install and execute a modified version of the\n   Combined Work produced by recombining or relinking the\n   Application with a modified version of the Linked Version. (If\n   you use option 4d0, the Installation Information must accompany\n   the Minimal Corresponding Source and Corresponding Application\n   Code. If you use option 4d1, you must provide the Installation\n   Information in the manner specified by section 6 of the GNU GPL\n   for conveying Corresponding Source.)\n\n  5. Combined Libraries.\n\n  You may place library facilities that are a work based on the\nLibrary side by side in a single library together with other library\nfacilities that are not Applications and are not covered by this\nLicense, and convey such a combined library under terms of your\nchoice, if you do both of the following:\n\n   a) Accompany the combined library with a copy of the same work based\n   on the Library, uncombined with any other library facilities,\n   conveyed under the terms of this License.\n\n   b) Give prominent notice with the combined library that part of it\n   is a work based on the Library, and explaining where to find the\n   accompanying uncombined form of the same work.\n\n  6. Revised Versions of the GNU Lesser General Public License.\n\n  The Free Software Foundation may publish revised and/or new versions\nof the GNU Lesser General Public License from time to time. Such new\nversions will be similar in spirit to the present version, but may\ndiffer in detail to address new problems or concerns.\n\n  Each version is given a distinguishing version number. If the\nLibrary as you received it specifies that a certain numbered version\nof the GNU Lesser General Public License \"or any later version\"\napplies to it, you have the option of following the terms and\nconditions either of that published version or of any later version\npublished by the Free Software Foundation. If the Library as you\nreceived it does not specify a version number of the GNU Lesser\nGeneral Public License, you may choose any version of the GNU Lesser\nGeneral Public License ever published by the Free Software Foundation.\n\n  If the Library as you received it specifies that a proxy can decide\nwhether future versions of the GNU Lesser General Public License shall\napply, that proxy's public statement of acceptance of any version is\npermanent authorization for you to choose that version for the\nLibrary.\n\n\nVersion: 7387 files allow any later version, such as HEADER.spotless (\"any later version\").",
+      "attribution": "Commit history of https://github.com/SonarSource/sonarqube: the authors of SonarSource/sonarqube (the license file names no copyright line), LGPL-3.0-or-later license (LICENSE.txt), https://github.com/SonarSource/sonarqube."
+    },
+    {
+      "license": "LGPL-3.0-or-later",
+      "paths": [
+        ".dockerignore",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".vscode/**",
+        "HEADER.spotless",
+        "LICENSE.txt",
+        "NOTICE.txt",
+        "README.md",
+        "build.gradle",
+        "build.sh",
+        "buildSrc/**",
+        "debug-server.sh",
+        "docs/**",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "logs.sh",
+        "plugins/**",
+        "response.json",
+        "scripts/**",
+        "server/build.gradle",
+        "server/sonar-alm-client/**",
+        "server/sonar-auth-bitbucket/**",
+        "server/sonar-auth-common/**",
+        "server/sonar-auth-github/**",
+        "server/sonar-auth-gitlab/**",
+        "server/sonar-auth-ldap/**",
+        "server/sonar-auth-saml/**",
+        "server/sonar-ce/build.gradle",
+        "server/sonar-ce/src/it/**",
+        "server/sonar-ce/src/main/**",
+        "server/sonar-ce/src/test/java/**",
+        "server/sonar-ce/src/test/plugins/.gitignore",
+        "server/sonar-ce/src/test/plugins/README.txt",
+        "server/sonar-ce/src/test/plugins/pom.xml",
+        "server/sonar-ce/src/test/plugins/sonar-test-plugin/pom.xml",
+        "server/sonar-ce/src/test/plugins/sonar-test-plugin/src/**",
+        "server/sonar-ce/src/test/plugins/sonar-test2-plugin/pom.xml",
+        "server/sonar-ce/src/test/plugins/sonar-test2-plugin/src/**",
+        "server/sonar-ce/src/test/resources/**",
+        "server/sonar-ce-common/**",
+        "server/sonar-ce-task/**",
+        "server/sonar-ce-task-projectanalysis/build.gradle",
+        "server/sonar-ce-task-projectanalysis/src/it/java/**",
+        "server/sonar-ce-task-projectanalysis/src/it/resources/org/sonar/ce/task/projectanalysis/filemove/**",
+        "server/sonar-ce-task-projectanalysis/src/it/resources/org/sonar/ce/task/projectexport/**",
+        "server/sonar-ce-task-projectanalysis/src/main/**",
+        "server/sonar-ce-task-projectanalysis/src/test/java/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/issue/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/measure/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/IndexSourceLinesStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/IndexTestsStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/PersistDuplicationMeasuresStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/PersistMeasuresStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/PersistNumberOfDaysSinceLastCommitStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/test/resources/org/sonar/ce/task/projectanalysis/step/SwitchSnapshotStepTest/**",
+        "server/sonar-ce-task-projectanalysis/src/testFixtures/**",
+        "server/sonar-db-dao/**",
+        "server/sonar-db-migration/**",
+        "server/sonar-db-profiling/**",
+        "server/sonar-events/**",
+        "server/sonar-main/**",
+        "server/sonar-process/build.gradle",
+        "server/sonar-process/src/it/**",
+        "server/sonar-process/src/main/**",
+        "server/sonar-process/src/test/java/**",
+        "server/sonar-process/src/test/resources/logback-test.xml",
+        "server/sonar-process/src/test/resources/org/**",
+        "server/sonar-server-common/**",
+        "server/sonar-statemachine/**",
+        "server/sonar-telemetry/**",
+        "server/sonar-telemetry-core/**",
+        "server/sonar-webserver/**",
+        "server/sonar-webserver-api/build.gradle",
+        "server/sonar-webserver-api/src/it/**",
+        "server/sonar-webserver-api/src/main/**",
+        "server/sonar-webserver-api/src/test/java/**",
+        "server/sonar-webserver-api/src/test/projects/.gitignore",
+        "server/sonar-webserver-api/src/test/projects/README.txt",
+        "server/sonar-webserver-api/src/test/projects/fake-report-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/fake-report-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/fake-sqale-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/fake-sqale-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/fake-views-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/fake-views-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-base-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-base-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/test-base-plugin-v2/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-base-plugin-v2/src/**",
+        "server/sonar-webserver-api/src/test/projects/test-extend-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-extend-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/test-libs-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-libs-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/test-require-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-require-plugin/src/**",
+        "server/sonar-webserver-api/src/test/projects/test-requirenew-plugin/pom.xml",
+        "server/sonar-webserver-api/src/test/projects/test-requirenew-plugin/src/**",
+        "server/sonar-webserver-api/src/test/resources/**",
+        "server/sonar-webserver-api/src/testFixtures/**",
+        "server/sonar-webserver-auth/**",
+        "server/sonar-webserver-common/**",
+        "server/sonar-webserver-es/**",
+        "server/sonar-webserver-monitoring/**",
+        "server/sonar-webserver-pushapi/**",
+        "server/sonar-webserver-webapi/build.gradle",
+        "server/sonar-webserver-webapi/src/it/**",
+        "server/sonar-webserver-webapi/src/main/**",
+        "server/sonar-webserver-webapi/src/test/java/**",
+        "server/sonar-webserver-webapi/src/test/resources/logback-test.xml",
+        "server/sonar-webserver-webapi/src/test/resources/mockito-extensions/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/feature/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/issue/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/language/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/metric/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/permission/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/project/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/property/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/qualitygate/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/qualityprofile/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/rule/**",
+        "server/sonar-webserver-webapi/src/test/resources/org/sonar/server/ws/**",
+        "server/sonar-webserver-webapi/src/testFixtures/**",
+        "server/sonar-webserver-webapi-v2/**",
+        "server/sonar-webserver-ws/**",
+        "settings.gradle",
+        "sonar-application/build.gradle",
+        "sonar-application/bundled_plugins.gradle",
+        "sonar-application/src/main/java/**",
+        "sonar-application/src/main/resources/**",
+        "sonar-core/build.gradle",
+        "sonar-core/src/it/**",
+        "sonar-core/src/main/**",
+        "sonar-core/src/test/java/**",
+        "sonar-core/src/test/projects/.gitignore",
+        "sonar-core/src/test/projects/README.txt",
+        "sonar-core/src/test/projects/base-plugin/pom.xml",
+        "sonar-core/src/test/projects/base-plugin/src/**",
+        "sonar-core/src/test/projects/dependent-plugin/pom.xml",
+        "sonar-core/src/test/projects/dependent-plugin/src/**",
+        "sonar-core/src/test/projects/pom.xml",
+        "sonar-core/src/test/protobuf/**",
+        "sonar-core/src/test/resources/mockito-extensions/**",
+        "sonar-core/src/test/resources/org/sonar/core/i18n/**",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/eslint-sarif210.json",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/invalid-json-syntax.json",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/sarif210-integer-overflow.json",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/sarif210-invalid-level.json",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/unsupported-sarif-version-abc.json",
+        "sonar-core/src/test/resources/org/sonar/core/sarif/valid-sarif210.json",
+        "sonar-core/src/test/resources/org/sonar/core/util/**",
+        "sonar-core/src/test/resources/org/sonar/l10n/**",
+        "sonar-core/tester/a/A.java",
+        "sonar-core/tester/a/a.txt",
+        "sonar-core/tester/a_v2/A.java",
+        "sonar-core/tester/a_v2/a.txt",
+        "sonar-core/tester/b/B.java",
+        "sonar-core/tester/b/b.txt",
+        "sonar-core/tester/build.sh",
+        "sonar-core/tester/c/C.java",
+        "sonar-core/tester/c/c.txt",
+        "sonar-duplications/**",
+        "sonar-markdown/**",
+        "sonar-plugin-api-impl/build.gradle",
+        "sonar-plugin-api-impl/src/main/**",
+        "sonar-plugin-api-impl/src/test/java/**",
+        "sonar-plugin-api-impl/src/test/resources/org/sonar/api/config/**",
+        "sonar-sarif/**",
+        "sonar-shutdowner/**",
+        "sonar-testing-harness/build.gradle",
+        "sonar-testing-harness/src/main/**",
+        "sonar-testing-harness/src/test/java/**",
+        "sonar-testing-harness/src/test/resources/org/sonar/l10n/abacus_fr.properties",
+        "sonar-testing-harness/src/test/resources/org/sonar/l10n/branding_fr.properties",
+        "sonar-testing-harness/src/test/resources/org/sonar/l10n/myPlugin.properties",
+        "sonar-testing-harness/src/test/resources/org/sonar/l10n/noMissingKeys.properties",
+        "sonar-testing-harness/src/test/resources/org/sonar/l10n/noMissingKeys_fr.properties",
+        "sonar-testing-harness/src/test/resources/org/sonar/test/**",
+        "sonar-testing-ldap/**",
+        "sonar-ws/**",
+        "sonar-ws-generator/**",
+        "start.sh",
+        "stop.sh",
+        "wss-unified-agent.config"
+      ],
+      "text": "                   GNU LESSER GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n\n  This version of the GNU Lesser General Public License incorporates\nthe terms and conditions of version 3 of the GNU General Public\nLicense, supplemented by the additional permissions listed below.\n\n  0. Additional Definitions.\n\n  As used herein, \"this License\" refers to version 3 of the GNU Lesser\nGeneral Public License, and the \"GNU GPL\" refers to version 3 of the GNU\nGeneral Public License.\n\n  \"The Library\" refers to a covered work governed by this License,\nother than an Application or a Combined Work as defined below.\n\n  An \"Application\" is any work that makes use of an interface provided\nby the Library, but which is not otherwise based on the Library.\nDefining a subclass of a class defined by the Library is deemed a mode\nof using an interface provided by the Library.\n\n  A \"Combined Work\" is a work produced by combining or linking an\nApplication with the Library.  The particular version of the Library\nwith which the Combined Work was made is also called the \"Linked\nVersion\".\n\n  The \"Minimal Corresponding Source\" for a Combined Work means the\nCorresponding Source for the Combined Work, excluding any source code\nfor portions of the Combined Work that, considered in isolation, are\nbased on the Application, and not on the Linked Version.\n\n  The \"Corresponding Application Code\" for a Combined Work means the\nobject code and/or source code for the Application, including any data\nand utility programs needed for reproducing the Combined Work from the\nApplication, but excluding the System Libraries of the Combined Work.\n\n  1. Exception to Section 3 of the GNU GPL.\n\n  You may convey a covered work under sections 3 and 4 of this License\nwithout being bound by section 3 of the GNU GPL.\n\n  2. Conveying Modified Versions.\n\n  If you modify a copy of the Library, and, in your modifications, a\nfacility refers to a function or data to be supplied by an Application\nthat uses the facility (other than as an argument passed when the\nfacility is invoked), then you may convey a copy of the modified\nversion:\n\n   a) under this License, provided that you make a good faith effort to\n   ensure that, in the event an Application does not supply the\n   function or data, the facility still operates, and performs\n   whatever part of its purpose remains meaningful, or\n\n   b) under the GNU GPL, with none of the additional permissions of\n   this License applicable to that copy.\n\n  3. Object Code Incorporating Material from Library Header Files.\n\n  The object code form of an Application may incorporate material from\na header file that is part of the Library.  You may convey such object\ncode under terms of your choice, provided that, if the incorporated\nmaterial is not limited to numerical parameters, data structure\nlayouts and accessors, or small macros, inline functions and templates\n(ten or fewer lines in length), you do both of the following:\n\n   a) Give prominent notice with each copy of the object code that the\n   Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the object code with a copy of the GNU GPL and this license\n   document.\n\n  4. Combined Works.\n\n  You may convey a Combined Work under terms of your choice that,\ntaken together, effectively do not restrict modification of the\nportions of the Library contained in the Combined Work and reverse\nengineering for debugging such modifications, if you also do each of\nthe following:\n\n   a) Give prominent notice with each copy of the Combined Work that\n   the Library is used in it and that the Library and its use are\n   covered by this License.\n\n   b) Accompany the Combined Work with a copy of the GNU GPL and this license\n   document.\n\n   c) For a Combined Work that displays copyright notices during\n   execution, include the copyright notice for the Library among\n   these notices, as well as a reference directing the user to the\n   copies of the GNU GPL and this license document.\n\n   d) Do one of the following:\n\n       0) Convey the Minimal Corresponding Source under the terms of this\n       License, and the Corresponding Application Code in a form\n       suitable for, and under terms that permit, the user to\n       recombine or relink the Application with a modified version of\n       the Linked Version to produce a modified Combined Work, in the\n       manner specified by section 6 of the GNU GPL for conveying\n       Corresponding Source.\n\n       1) Use a suitable shared library mechanism for linking with the\n       Library.  A suitable mechanism is one that (a) uses at run time\n       a copy of the Library already present on the user's computer\n       system, and (b) will operate properly with a modified version\n       of the Library that is interface-compatible with the Linked\n       Version.\n\n   e) Provide Installation Information, but only if you would otherwise\n   be required to provide such information under section 6 of the\n   GNU GPL, and only to the extent that such information is\n   necessary to install and execute a modified version of the\n   Combined Work produced by recombining or relinking the\n   Application with a modified version of the Linked Version. (If\n   you use option 4d0, the Installation Information must accompany\n   the Minimal Corresponding Source and Corresponding Application\n   Code. If you use option 4d1, you must provide the Installation\n   Information in the manner specified by section 6 of the GNU GPL\n   for conveying Corresponding Source.)\n\n  5. Combined Libraries.\n\n  You may place library facilities that are a work based on the\nLibrary side by side in a single library together with other library\nfacilities that are not Applications and are not covered by this\nLicense, and convey such a combined library under terms of your\nchoice, if you do both of the following:\n\n   a) Accompany the combined library with a copy of the same work based\n   on the Library, uncombined with any other library facilities,\n   conveyed under the terms of this License.\n\n   b) Give prominent notice with the combined library that part of it\n   is a work based on the Library, and explaining where to find the\n   accompanying uncombined form of the same work.\n\n  6. Revised Versions of the GNU Lesser General Public License.\n\n  The Free Software Foundation may publish revised and/or new versions\nof the GNU Lesser General Public License from time to time. Such new\nversions will be similar in spirit to the present version, but may\ndiffer in detail to address new problems or concerns.\n\n  Each version is given a distinguishing version number. If the\nLibrary as you received it specifies that a certain numbered version\nof the GNU Lesser General Public License \"or any later version\"\napplies to it, you have the option of following the terms and\nconditions either of that published version or of any later version\npublished by the Free Software Foundation. If the Library as you\nreceived it does not specify a version number of the GNU Lesser\nGeneral Public License, you may choose any version of the GNU Lesser\nGeneral Public License ever published by the Free Software Foundation.\n\n  If the Library as you received it specifies that a proxy can decide\nwhether future versions of the GNU Lesser General Public License shall\napply, that proxy's public statement of acceptance of any version is\npermanent authorization for you to choose that version for the\nLibrary.\n\n\nVersion: 7387 files allow any later version, such as HEADER.spotless (\"any later version\").",
+      "attribution": "the authors of SonarSource/sonarqube (the license file names no copyright line), LGPL-3.0-or-later license (LICENSE.txt), https://github.com/SonarSource/sonarqube."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CoreExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MockMaker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TestDbProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ValueExtractor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ddl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.http"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spotless"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.vm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xoo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

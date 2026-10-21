@@ -1,0 +1,534 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/shap/shap",
+  "revision": "c61c426d35e256697c2ee65f7fb9c63ee21f8fd9",
+  "checksum": "sha256:9a1171a90f8914e6a96b907e04036df0e7cb44e1500d8c1c4bad565e944b6f57",
+  "extract": {
+    "exclude": [
+      "data/imagenet50/**",
+      "data/imagenet50_224x224.npy",
+      "docs/artwork/california_beeswarm.png",
+      "docs/artwork/california_dataset.png",
+      "docs/artwork/california_global_bar.png",
+      "docs/artwork/california_instance.png",
+      "docs/artwork/california_scatter.png",
+      "docs/artwork/california_waterfall.png",
+      "docs/artwork/favicon.ico",
+      "docs/artwork/force_plot_matplotlib_rotate.png",
+      "docs/artwork/gradient_imagenet_plot.png",
+      "docs/artwork/iris_dataset.png",
+      "docs/artwork/iris_instance.png",
+      "docs/artwork/logo.ai",
+      "docs/artwork/logo.pdf",
+      "docs/artwork/logo.png",
+      "docs/artwork/mnist_image_plot.png",
+      "docs/artwork/nhanes1_chol_interaction.png",
+      "docs/artwork/nhanes_age_sex_interaction.png",
+      "docs/artwork/sentiment_analysis_plot.png",
+      "docs/artwork/shap_diagram.png",
+      "docs/artwork/shap_header.png",
+      "docs/artwork/shap_logo.png",
+      "docs/artwork/shap_logo_scratch.ai",
+      "docs/artwork/shap_logo_white.png",
+      "docs/artwork/simple_iris_dataset.png",
+      "docs/artwork/simple_iris_explanation.png",
+      "docs/artwork/strawberry_example.png",
+      "docs/notebooks/plots/data/crime.pickle",
+      "docs/notebooks/plots/data/heart.pickle",
+      "docs/pdfs/**",
+      "docs/presentations/**",
+      "docs/user_studies/sickness_scores/human_and_survey.pdf",
+      "docs/user_studies/sickness_scores/human_or_survey.pdf",
+      "docs/user_studies/sickness_scores/human_sum_survey.pdf",
+      "docs/user_studies/sickness_scores/human_xor_survey.pdf",
+      "docs/user_studies/sickness_scores/participants.db",
+      "docs/user_studies/sickness_scores/static/favicon.ico",
+      "docs/user_studies/sickness_scores/static/fonts/glyphicons-halflings-regular.eot",
+      "docs/user_studies/sickness_scores/static/fonts/glyphicons-halflings-regular.ttf",
+      "docs/user_studies/sickness_scores/static/fonts/glyphicons-halflings-regular.woff",
+      "docs/user_studies/sickness_scores/static/images/**",
+      "docs/user_studies/sickness_scores.zip",
+      "notebooks/tabular_examples/tree_based_models/global_summary.jpg",
+      "notebooks/tabular_examples/tree_based_models/tree_shap_paper/perf.pdf",
+      "shap/plots/resources/logoSmallGray.png",
+      "tests/plots/baseline/**",
+      "tests/shap_values_baselines/**"
+    ]
+  },
+  "history": {
+    "since": "56d7292f1d439bfa1cafa34fd2b34b8351d3b491"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Scott Lundberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/shap/shap: Copyright (c) 2018 Scott Lundberg, MIT license (LICENSE), https://github.com/shap/shap."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yml",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "appveyor/**",
+        "asv.conf.json",
+        "data/CommViolPredUnnormalizedData.txt",
+        "data/NHANESI_X.csv",
+        "data/NHANESI_subset_X.csv",
+        "data/NHANESI_subset_y.csv",
+        "data/NHANESI_y.csv",
+        "data/a1a.svmlight",
+        "data/adult.data",
+        "data/imagenet50_labels.csv",
+        "data/imdb_train.txt",
+        "docs/Makefile",
+        "docs/_static/**",
+        "docs/_templates/**",
+        "docs/api.rst",
+        "docs/api_examples.rst",
+        "docs/artwork/california_dataset.html",
+        "docs/artwork/california_instance.html",
+        "docs/artwork/shap_header.svg",
+        "docs/benchmarks.rst",
+        "docs/conf.py",
+        "docs/contributing.rst",
+        "docs/genomic_examples.rst",
+        "docs/image_examples.rst",
+        "docs/index.rst",
+        "docs/make.bat",
+        "docs/notebooks/Census income classification with Keras.html",
+        "docs/notebooks/Census income classification with LightGBM.html",
+        "docs/notebooks/Census income classification with XGBoost.html",
+        "docs/notebooks/Census income classification with scikit-learn.html",
+        "docs/notebooks/ImageNet VGG16 Model with Keras.html",
+        "docs/notebooks/Iris classification with scikit-learn.html",
+        "docs/notebooks/League of Legends Win Prediction with XGBoost.html",
+        "docs/notebooks/NHANES I Survival Model.html",
+        "docs/notebooks/deep_explainer/**",
+        "docs/notebooks/gradient_explainer/**",
+        "docs/notebooks/linear_explainer/**",
+        "docs/notebooks/plots/data/crime.py",
+        "docs/notebooks/plots/decision_plot.html",
+        "docs/notebooks/plots/dependence_plot.html",
+        "docs/notebooks/tree_explainer/**",
+        "docs/overviews.rst",
+        "docs/references/**",
+        "docs/release_notes.rst",
+        "docs/requirements-docs.txt",
+        "docs/tabular_examples.rst",
+        "docs/text_examples.rst",
+        "docs/user_studies/sickness_scores/.psiturk_history",
+        "docs/user_studies/sickness_scores/Analyse Results.ipynb",
+        "docs/user_studies/sickness_scores/Approve Hits.ipynb",
+        "docs/user_studies/sickness_scores/Debrief.jsx",
+        "docs/user_studies/sickness_scores/Instructions.jsx",
+        "docs/user_studies/sickness_scores/Main.jsx",
+        "docs/user_studies/sickness_scores/Questions.jsx",
+        "docs/user_studies/sickness_scores/README.md",
+        "docs/user_studies/sickness_scores/config.txt",
+        "docs/user_studies/sickness_scores/eventdata.csv",
+        "docs/user_studies/sickness_scores/index.jsx",
+        "docs/user_studies/sickness_scores/package.json",
+        "docs/user_studies/sickness_scores/questiondata.csv",
+        "docs/user_studies/sickness_scores/server.log",
+        "docs/user_studies/sickness_scores/static/css/**",
+        "docs/user_studies/sickness_scores/static/fonts/glyphicons-halflings-regular.svg",
+        "docs/user_studies/sickness_scores/static/js/**",
+        "docs/user_studies/sickness_scores/static/lib/**",
+        "docs/user_studies/sickness_scores/templates/**",
+        "docs/user_studies/sickness_scores/trial_data2_3_3_2019.csv",
+        "docs/user_studies/sickness_scores/trial_data_3_3_2019.csv",
+        "docs/user_studies/sickness_scores/trialdata.csv",
+        "docs/user_studies/sickness_scores/webpack.config.js",
+        "javascript/**",
+        "monitoring/**",
+        "notebooks/api_examples/**",
+        "notebooks/benchmarks/**",
+        "notebooks/genomic_examples/**",
+        "notebooks/image_examples/**",
+        "notebooks/overviews/**",
+        "notebooks/tabular_examples/linear_models/**",
+        "notebooks/tabular_examples/model_agnostic/**",
+        "notebooks/tabular_examples/neural_networks/**",
+        "notebooks/tabular_examples/tree_based_models/Basic SHAP Interaction Value Example in XGBoost.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Catboost tutorial.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Census income classification with LightGBM.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Census income classification with XGBoost.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Example of loading a custom tree model into SHAP.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Explaining a simple OR function.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Explaining the Loss of a Model.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Fitting a Linear Simulation with XGBoost.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Force Plot Colors.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Front page example (XGBoost).ipynb",
+        "notebooks/tabular_examples/tree_based_models/League of Legends Win Prediction with XGBoost.ipynb",
+        "notebooks/tabular_examples/tree_based_models/NHANES I Survival Model.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Perfomance Comparison.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Python Version of Tree SHAP.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Scatter Density vs. Violin Plot Comparison.ipynb",
+        "notebooks/tabular_examples/tree_based_models/Understanding Tree SHAP for Simple Models.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 1 - Simple Inconsistency Example.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 3 - User Study.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 4 - Supervised Clustering Adult Census Data.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 5 - Runtime.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 6 - Supervised Clustering R-squared.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figure 7 - Airline Tweet Sentiment Analysis.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figures 8-11 NHANES I Survival Model-Copy1.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Figures 8-11 NHANES I Survival Model.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Performance comparison copy.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Performance comparison.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/Tree SHAP in Python.ipynb",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/data/**",
+        "notebooks/text_examples/**",
+        "pyproject.toml",
+        "scripts/**",
+        "shap/__init__.py",
+        "shap/_explanation.py",
+        "shap/_serializable.py",
+        "shap/actions/**",
+        "shap/benchmark/**",
+        "shap/cext/**",
+        "shap/cutils/**",
+        "shap/datasets.py",
+        "shap/explainers/**",
+        "shap/links.py",
+        "shap/maskers/**",
+        "shap/models/**",
+        "shap/plots/__init__.py",
+        "shap/plots/_bar.py",
+        "shap/plots/_beeswarm.py",
+        "shap/plots/_benchmark.py",
+        "shap/plots/_decision.py",
+        "shap/plots/_embedding.py",
+        "shap/plots/_force.py",
+        "shap/plots/_force_matplotlib.py",
+        "shap/plots/_group_difference.py",
+        "shap/plots/_heatmap.py",
+        "shap/plots/_image.py",
+        "shap/plots/_labels.py",
+        "shap/plots/_monitoring.py",
+        "shap/plots/_partial_dependence.py",
+        "shap/plots/_scatter.py",
+        "shap/plots/_style.py",
+        "shap/plots/_text.py",
+        "shap/plots/_utils.py",
+        "shap/plots/_violin.py",
+        "shap/plots/_waterfall.py",
+        "shap/plots/colors/**",
+        "shap/plots/resources/bundle.js",
+        "shap/utils/**",
+        "tests/README.md",
+        "tests/actions/**",
+        "tests/benchmark/**",
+        "tests/conftest.py",
+        "tests/datasets_to_cache.py",
+        "tests/explainers/**",
+        "tests/gpu_tree_tests.ipynb",
+        "tests/maskers/**",
+        "tests/models/**",
+        "tests/plots/__init__.py",
+        "tests/plots/conftest.py",
+        "tests/plots/test_bar.py",
+        "tests/plots/test_beeswarm.py",
+        "tests/plots/test_benchmark.py",
+        "tests/plots/test_colors.py",
+        "tests/plots/test_decision.py",
+        "tests/plots/test_dependence.py",
+        "tests/plots/test_dependence_string_features.py",
+        "tests/plots/test_force.py",
+        "tests/plots/test_force_js.py",
+        "tests/plots/test_group_difference.py",
+        "tests/plots/test_heatmap.py",
+        "tests/plots/test_image.py",
+        "tests/plots/test_scatter.py",
+        "tests/plots/test_style.py",
+        "tests/plots/test_summary.py",
+        "tests/plots/test_text.py",
+        "tests/plots/test_utils.py",
+        "tests/plots/test_violin.py",
+        "tests/plots/test_waterfall.py",
+        "tests/test_datasets.py",
+        "tests/test_explanation.py",
+        "tests/test_install.py",
+        "tests/utils/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2018 Scott Lundberg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018 Scott Lundberg, MIT license (LICENSE), https://github.com/shap/shap."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.svmlight"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "data/CommViolPredUnnormalizedData.txt",
+        "data/imdb_train.txt",
+        "docs/requirements-docs.txt",
+        "docs/user_studies/sickness_scores/config.txt",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/data/cognitive_score.txt",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/data/module_expression.txt",
+        "notebooks/tabular_examples/tree_based_models/tree_shap_paper/data/neuropath.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.psiturk_history"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

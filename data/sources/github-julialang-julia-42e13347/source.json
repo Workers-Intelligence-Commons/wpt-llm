@@ -1,0 +1,1211 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/JuliaLang/julia",
+  "revision": "42f439c44e5ce8b64dad53dc7dacac4f30fdf781",
+  "checksum": "sha256:b443b3607936200ae39437da67a6deda4c8760541d7cb06e6eaf7a43ca4c612b",
+  "extract": {
+    "exclude": [
+      "JuliaSyntax/**",
+      "base/ryu/**",
+      "contrib/**",
+      "deps/**",
+      "doc/src/assets/julia.ico",
+      "doc/src/devdocs/img/compiler_diagram.pdf",
+      "doc/src/devdocs/img/gc-tiered-allocation.jpg",
+      "doc/src/devdocs/img/invalidation-example.pdf",
+      "doc/src/devdocs/img/precompilation_hang.png",
+      "doc/src/devdocs/img/typeinf-promotion.pdf",
+      "doc/src/devdocs/os_signpost.png",
+      "doc/src/devdocs/tracy.png",
+      "doc/src/manual/img/**",
+      "test/gcext/Foreign/deps/**",
+      "test/project/deps/**"
+    ]
+  },
+  "history": {
+    "since": "161e38496dff86873c595428e4da12620e528c57"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nend of terms and conditions\n\nPlease see [THIRDPARTY.md](./THIRDPARTY.md) for license information for other software used in this project.\n\n\nMIT License\n\nCopyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nend of terms and conditions\n\nPlease see [THIRDPARTY.md](../THIRDPARTY.md) for license information for other software used in this project.\n\n\nMIT License\n\nCopyright (c) 2024 JuliaHub and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2009 Jeff Bezanson\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice,\n      this list of conditions and the following disclaimer in the documentation\n      and/or other materials provided with the distribution.\n    * Neither the author nor the names of any contributors may be used to\n      endorse or promote products derived from this software without specific\n      prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nThe TerminalMenus.jl package is licensed under the MIT \"Expat\" License:\n\n> Copyright (c) 2017: Nick Paul.\n>\n> Permission is hereby granted, free of charge, to any person obtaining a copy\n> of this software and associated documentation files (the \"Software\"), to deal\n> in the Software without restriction, including without limitation the rights\n> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n> copies of the Software, and to permit persons to whom the Software is\n> furnished to do so, subject to the following conditions:\n>\n> The above copyright notice and this permission notice shall be included in all\n> copies or substantial portions of the Software.\n>\n> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n> SOFTWARE.\n>\n\n\nMIT License\n\nCopyright (c) 2016-2020 Art Wild, Julia Computing, Inc., Kristoffer Carlsson and\ncontributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/JuliaLang/julia: Copyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors, MIT license (LICENSE.md), https://github.com/JuliaLang/julia; Copyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors, MIT license (LICENSE.md), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/Compiler; Copyright (c) 2024 JuliaHub and contributors, MIT license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/JuliaLowering; Copyright (c) 2009 Jeff Bezanson, BSD-3-Clause license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/src/flisp; the authors of JuliaLang/julia (stdlib/REPL/src/TerminalMenus) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/stdlib/REPL/src/TerminalMenus; Copyright (c) 2016-2020 Art Wild, Julia Computing, Inc., Kristoffer Carlsson and, MIT license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/stdlib/TOML."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".buildkite-external-version",
+        ".clang-format",
+        ".clangd",
+        ".claude/**",
+        ".codecov.yml",
+        ".devcontainer/**",
+        ".git-blame-ignore-revs",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".mailmap",
+        ".vscode/**",
+        "AGENTS.md",
+        "CITATION.bib",
+        "CITATION.cff",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "HISTORY.md",
+        "LICENSE.md",
+        "Make.inc",
+        "Makefile",
+        "NEWS.md",
+        "README.md",
+        "THIRDPARTY.md",
+        "VERSION",
+        "base/.gitignore",
+        "base/Base.jl",
+        "base/Base_compiler.jl",
+        "base/Enums.jl",
+        "base/Makefile",
+        "base/Terminals.jl",
+        "base/abstractarray.jl",
+        "base/abstractarraymath.jl",
+        "base/abstractdict.jl",
+        "base/abstractset.jl",
+        "base/accumulate.jl",
+        "base/anyall.jl",
+        "base/array.jl",
+        "base/arraymath.jl",
+        "base/arrayshow.jl",
+        "base/asyncevent.jl",
+        "base/asyncmap.jl",
+        "base/atomics.jl",
+        "base/baseext.jl",
+        "base/binaryplatforms.jl",
+        "base/bitarray.jl",
+        "base/bitset.jl",
+        "base/bool.jl",
+        "base/boot.jl",
+        "base/broadcast.jl",
+        "base/c.jl",
+        "base/cancellation.jl",
+        "base/cartesian.jl",
+        "base/channels.jl",
+        "base/char.jl",
+        "base/checked.jl",
+        "base/client.jl",
+        "base/cmd.jl",
+        "base/cmem.jl",
+        "base/combinatorics.jl",
+        "base/complex.jl",
+        "base/condition.jl",
+        "base/coreio.jl",
+        "base/coreir.jl",
+        "base/cpuid.jl",
+        "base/ctypes.jl",
+        "base/deepcopy.jl",
+        "base/deprecated.jl",
+        "base/dict.jl",
+        "base/div.jl",
+        "base/docs/**",
+        "base/download.jl",
+        "base/env.jl",
+        "base/error.jl",
+        "base/errorshow.jl",
+        "base/essentials.jl",
+        "base/experimental.jl",
+        "base/exports.jl",
+        "base/expr.jl",
+        "base/fastmath.jl",
+        "base/file.jl",
+        "base/filesystem.jl",
+        "base/flfrontend.jl",
+        "base/float.jl",
+        "base/floatfuncs.jl",
+        "base/gcutils.jl",
+        "base/generator.jl",
+        "base/genericmemory.jl",
+        "base/gmp.jl",
+        "base/hamt.jl",
+        "base/hashing.jl",
+        "base/iddict.jl",
+        "base/idset.jl",
+        "base/indices.jl",
+        "base/initdefs.jl",
+        "base/int.jl",
+        "base/intfuncs.jl",
+        "base/io.jl",
+        "base/iobuffer.jl",
+        "base/iostream.jl",
+        "base/irrationals.jl",
+        "base/iterators.jl",
+        "base/libc.jl",
+        "base/libdl.jl",
+        "base/libuv.jl",
+        "base/linked_list.jl",
+        "base/linking.jl",
+        "base/loading.jl",
+        "base/lock.jl",
+        "base/locks-mt.jl",
+        "base/logging/**",
+        "base/math.jl",
+        "base/mathconstants.jl",
+        "base/meta.jl",
+        "base/methodshow.jl",
+        "base/missing.jl",
+        "base/module.jl",
+        "base/mpfr.jl",
+        "base/multidimensional.jl",
+        "base/multimedia.jl",
+        "base/multinverses.jl",
+        "base/namedtuple.jl",
+        "base/ntuple.jl",
+        "base/number.jl",
+        "base/opaque_closure.jl",
+        "base/operators.jl",
+        "base/optimized_generics.jl",
+        "base/options.jl",
+        "base/ordering.jl",
+        "base/osinfo.jl",
+        "base/osutils.jl",
+        "base/pair.jl",
+        "base/park.jl",
+        "base/parse.jl",
+        "base/parsers/**",
+        "base/partr.jl",
+        "base/path.jl",
+        "base/pcre.jl",
+        "base/permuteddimsarray.jl",
+        "base/pkgid.jl",
+        "base/pointer.jl",
+        "base/precompilation.jl",
+        "base/process.jl",
+        "base/promotion.jl",
+        "base/public.jl",
+        "base/range.jl",
+        "base/rational.jl",
+        "base/rawbigfloats.jl",
+        "base/reduce.jl",
+        "base/reducedim.jl",
+        "base/reflection.jl",
+        "base/refpointer.jl",
+        "base/refvalue.jl",
+        "base/regex.jl",
+        "base/reinterpretarray.jl",
+        "base/reshapedarray.jl",
+        "base/rounding.jl",
+        "base/runtime_internals.jl",
+        "base/scope.jl",
+        "base/scopedvalues.jl",
+        "base/secretbuffer.jl",
+        "base/set.jl",
+        "base/shell.jl",
+        "base/show.jl",
+        "base/simdloop.jl",
+        "base/slicearray.jl",
+        "base/some.jl",
+        "base/sort.jl",
+        "base/special/**",
+        "base/stacktraces.jl",
+        "base/stat.jl",
+        "base/stream.jl",
+        "base/strings/**",
+        "base/subarray.jl",
+        "base/summarysize.jl",
+        "base/syntax.jl",
+        "base/sysimg.jl",
+        "base/sysinfo.jl",
+        "base/task.jl",
+        "base/terminfo.jl",
+        "base/terminfo_data.jl",
+        "base/threadcall.jl",
+        "base/threadingconstructs.jl",
+        "base/threads.jl",
+        "base/threads_overloads.jl",
+        "base/timing.jl",
+        "base/toml/**",
+        "base/traits.jl",
+        "base/tuple.jl",
+        "base/twiceprecision.jl",
+        "base/util.jl",
+        "base/uuid.jl",
+        "base/version.jl",
+        "base/version_git.sh",
+        "base/views.jl",
+        "base/weakdict.jl",
+        "cli/**",
+        "doc/.gitignore",
+        "doc/Makefile",
+        "doc/NEWS-update.jl",
+        "doc/README.md",
+        "doc/make.jl",
+        "doc/man/**",
+        "doc/src/assets/cover-splash.tex",
+        "doc/src/assets/cover.tex",
+        "doc/src/assets/custom.sty",
+        "doc/src/assets/julia-manual.css",
+        "doc/src/assets/logo-dark.svg",
+        "doc/src/assets/logo.svg",
+        "doc/src/assets/logo.tex",
+        "doc/src/assets/preamble.tex",
+        "doc/src/base/**",
+        "doc/src/devdocs/EscapeAnalysis.md",
+        "doc/src/devdocs/agents/**",
+        "doc/src/devdocs/aot.md",
+        "doc/src/devdocs/ast.md",
+        "doc/src/devdocs/backtraces.md",
+        "doc/src/devdocs/boundscheck.md",
+        "doc/src/devdocs/build/**",
+        "doc/src/devdocs/builtins.md",
+        "doc/src/devdocs/callconv.md",
+        "doc/src/devdocs/cartesian.md",
+        "doc/src/devdocs/compiler.md",
+        "doc/src/devdocs/compiler_changes.md",
+        "doc/src/devdocs/contributing/**",
+        "doc/src/devdocs/debuggingtips.md",
+        "doc/src/devdocs/diagnostics.md",
+        "doc/src/devdocs/eval.md",
+        "doc/src/devdocs/external_profilers.md",
+        "doc/src/devdocs/functions.md",
+        "doc/src/devdocs/gc-debug.md",
+        "doc/src/devdocs/gc-mmtk.md",
+        "doc/src/devdocs/gc-sa.md",
+        "doc/src/devdocs/gc.md",
+        "doc/src/devdocs/img/compiler_diagram.svg",
+        "doc/src/devdocs/img/invalidation-example.svg",
+        "doc/src/devdocs/img/typeinf-promotion.svg",
+        "doc/src/devdocs/inference.md",
+        "doc/src/devdocs/init.md",
+        "doc/src/devdocs/isbitsunionarrays.md",
+        "doc/src/devdocs/jit.md",
+        "doc/src/devdocs/llvm-passes.md",
+        "doc/src/devdocs/llvm.md",
+        "doc/src/devdocs/locks.md",
+        "doc/src/devdocs/meta.md",
+        "doc/src/devdocs/object.md",
+        "doc/src/devdocs/offset-arrays.md",
+        "doc/src/devdocs/pkgimg.md",
+        "doc/src/devdocs/precompile_hang.md",
+        "doc/src/devdocs/probes.md",
+        "doc/src/devdocs/require.md",
+        "doc/src/devdocs/sanitizers.md",
+        "doc/src/devdocs/scheduler-wakeup/**",
+        "doc/src/devdocs/scheduler-wakeup.md",
+        "doc/src/devdocs/ssair.md",
+        "doc/src/devdocs/stdio.md",
+        "doc/src/devdocs/subarrays.md",
+        "doc/src/devdocs/sysimg.md",
+        "doc/src/devdocs/types.md",
+        "doc/src/devdocs/ub.md",
+        "doc/src/devdocs/valgrind.md",
+        "doc/src/index.md",
+        "doc/src/manual/arrays.md",
+        "doc/src/manual/asynchronous-programming.md",
+        "doc/src/manual/calling-c-and-fortran-code.md",
+        "doc/src/manual/code-loading.md",
+        "doc/src/manual/command-line-interface.md",
+        "doc/src/manual/complex-and-rational-numbers.md",
+        "doc/src/manual/constructors.md",
+        "doc/src/manual/control-flow.md",
+        "doc/src/manual/conversion-and-promotion.md",
+        "doc/src/manual/distributed-computing.md",
+        "doc/src/manual/documentation.md",
+        "doc/src/manual/embedding.md",
+        "doc/src/manual/emoji-input.md",
+        "doc/src/manual/environment-variables.md",
+        "doc/src/manual/faq.md",
+        "doc/src/manual/functions.md",
+        "doc/src/manual/getting-started.md",
+        "doc/src/manual/handling-operating-system-variation.md",
+        "doc/src/manual/installation.md",
+        "doc/src/manual/integers-and-floating-point-numbers.md",
+        "doc/src/manual/interfaces.md",
+        "doc/src/manual/mathematical-operations.md",
+        "doc/src/manual/memory-management.md",
+        "doc/src/manual/metaprogramming.md",
+        "doc/src/manual/methods.md",
+        "doc/src/manual/missing.md",
+        "doc/src/manual/modules.md",
+        "doc/src/manual/multi-threading.md",
+        "doc/src/manual/networking-and-streams.md",
+        "doc/src/manual/noteworthy-differences.md",
+        "doc/src/manual/parallel-computing.md",
+        "doc/src/manual/performance-tips.md",
+        "doc/src/manual/profile.md",
+        "doc/src/manual/running-external-programs.md",
+        "doc/src/manual/stacktraces.md",
+        "doc/src/manual/strings.md",
+        "doc/src/manual/style-guide.md",
+        "doc/src/manual/types.md",
+        "doc/src/manual/unicode-input.md",
+        "doc/src/manual/variables-and-scoping.md",
+        "doc/src/manual/variables.md",
+        "doc/src/manual/workflow-tips.md",
+        "doc/src/manual/worldage.md",
+        "etc/**",
+        "julia.spdx.json",
+        "pkgimage.mk",
+        "src/.clang-tidy",
+        "src/.gitignore",
+        "src/APInt-C.h",
+        "src/APInt.c",
+        "src/Makefile",
+        "src/abi_aarch64.cpp",
+        "src/abi_arm.cpp",
+        "src/abi_llvm.cpp",
+        "src/abi_ppc64le.cpp",
+        "src/abi_riscv.cpp",
+        "src/abi_win32.cpp",
+        "src/abi_win64.cpp",
+        "src/abi_x86.cpp",
+        "src/abi_x86_64.cpp",
+        "src/aotcompile.cpp",
+        "src/array.c",
+        "src/ast.c",
+        "src/ast.scm",
+        "src/bin2hex.scm",
+        "src/builtin_proto.h",
+        "src/builtins.c",
+        "src/ccall.cpp",
+        "src/ccalllazybar.c",
+        "src/ccalllazyfoo.c",
+        "src/ccalltest.c",
+        "src/ccalltest_common.h",
+        "src/cgmemmgr.cpp",
+        "src/cgutils.cpp",
+        "src/clangsa/**",
+        "src/codegen-stubs.c",
+        "src/codegen.cpp",
+        "src/common_symbols1.inc",
+        "src/common_symbols2.inc",
+        "src/coverage.c",
+        "src/crc32c-tables.c",
+        "src/crc32c.c",
+        "src/datatype.c",
+        "src/debug-registry.h",
+        "src/debuginfo.cpp",
+        "src/debuginfo.h",
+        "src/disasm.cpp",
+        "src/dlload.c",
+        "src/engine.c",
+        "src/file_constants.h",
+        "src/gc-alloc-profiler.c",
+        "src/gc-alloc-profiler.h",
+        "src/gc-common.c",
+        "src/gc-common.h",
+        "src/gc-debug.c",
+        "src/gc-heap-snapshot.c",
+        "src/gc-heap-snapshot.h",
+        "src/gc-interface.h",
+        "src/gc-mmtk/**",
+        "src/gc-page-profiler.c",
+        "src/gc-page-profiler.h",
+        "src/gc-pages.c",
+        "src/gc-stacks.c",
+        "src/gc-stock.c",
+        "src/gc-stock.h",
+        "src/gc-tls-common.h",
+        "src/gc-tls-stock.h",
+        "src/gc-wb-stock.h",
+        "src/gen_sysimg_symtab.jl",
+        "src/genericmemory.c",
+        "src/gf.c",
+        "src/iddict.c",
+        "src/idset.c",
+        "src/init.c",
+        "src/interpreter.c",
+        "src/intrinsics.cpp",
+        "src/intrinsics.h",
+        "src/ircode.c",
+        "src/jitlayers.cpp",
+        "src/jitlayers.h",
+        "src/jl_exported_data.inc",
+        "src/jl_exported_data_defs.inc",
+        "src/jl_exported_funcs.inc",
+        "src/jl_internal_data.inc",
+        "src/jl_uv.c",
+        "src/jlapi.c",
+        "src/jlfrontend.scm",
+        "src/jloptions.c",
+        "src/jloptions.h",
+        "src/jltypes.c",
+        "src/julia-parser.scm",
+        "src/julia-syntax.scm",
+        "src/julia-task-dispatcher.h",
+        "src/julia.expmap.in",
+        "src/julia.h",
+        "src/julia_assert.h",
+        "src/julia_atomics.h",
+        "src/julia_fasttls.h",
+        "src/julia_gcext.h",
+        "src/julia_internal.h",
+        "src/julia_locks.h",
+        "src/julia_threads.h",
+        "src/llvm-Compression.cpp",
+        "src/llvm-Compression.h",
+        "src/llvm-alloc-helpers.cpp",
+        "src/llvm-alloc-helpers.h",
+        "src/llvm-alloc-opt.cpp",
+        "src/llvm-cancellation-lowering.cpp",
+        "src/llvm-codegen-shared.h",
+        "src/llvm-cpufeatures.cpp",
+        "src/llvm-demote-float16.cpp",
+        "src/llvm-expand-atomic-modify.cpp",
+        "src/llvm-final-gc-lowering-stock.cpp",
+        "src/llvm-final-gc-lowering.cpp",
+        "src/llvm-gc-interface-passes.h",
+        "src/llvm-gc-invariant-verifier.cpp",
+        "src/llvm-julia-licm.cpp",
+        "src/llvm-julia-passes.inc",
+        "src/llvm-late-gc-lowering.cpp",
+        "src/llvm-multiversioning.cpp",
+        "src/llvm-pass-helpers.cpp",
+        "src/llvm-pass-helpers.h",
+        "src/llvm-propagate-addrspaces.cpp",
+        "src/llvm-ptls.cpp",
+        "src/llvm-remove-addrspaces.cpp",
+        "src/llvm-remove-ni.cpp",
+        "src/llvm-simdloop.cpp",
+        "src/llvm-version.h",
+        "src/llvm_api.cpp",
+        "src/llvmcalltest.cpp",
+        "src/macroexpand.scm",
+        "src/match.scm",
+        "src/method.c",
+        "src/mig/**",
+        "src/mk_julia_flisp_boot.scm",
+        "src/module.c",
+        "src/mtarraylist.c",
+        "src/objcache.cpp",
+        "src/objcache.h",
+        "src/opaque_closure.c",
+        "src/options.h",
+        "src/passes.h",
+        "src/pipeline.cpp",
+        "src/precompile.c",
+        "src/precompile_utils.c",
+        "src/processor.cpp",
+        "src/processor.h",
+        "src/rtutils.c",
+        "src/runtime_ccall.c",
+        "src/runtime_intrinsics.c",
+        "src/safepoint.c",
+        "src/scheduler.c",
+        "src/serialize.h",
+        "src/signal-handling.c",
+        "src/signals-mach.c",
+        "src/signals-unix.c",
+        "src/signals-win.c",
+        "src/simplevector.c",
+        "src/smallintset.c",
+        "src/stackwalk.c",
+        "src/static_exports.c",
+        "src/staticdata.c",
+        "src/staticdata_utils.c",
+        "src/subtype.c",
+        "src/support/**",
+        "src/symbol.c",
+        "src/sys.c",
+        "src/task.c",
+        "src/threading.c",
+        "src/threading.h",
+        "src/timing.c",
+        "src/timing.h",
+        "src/toplevel.c",
+        "src/typemap.c",
+        "src/uprobes.d",
+        "src/utils.scm",
+        "src/uv_constants.h",
+        "src/win32_ucontext.c",
+        "src/win32_ucontext.h",
+        "src/work-stealing-queue.h",
+        "stdlib/.gitignore",
+        "stdlib/ArgTools.version",
+        "stdlib/Artifacts/**",
+        "stdlib/Base64/**",
+        "stdlib/CRC32c/**",
+        "stdlib/CompilerSupportLibraries_jll/**",
+        "stdlib/Dates/**",
+        "stdlib/DelimitedFiles.version",
+        "stdlib/Distributed.version",
+        "stdlib/Downloads.version",
+        "stdlib/FileWatching/**",
+        "stdlib/Future/**",
+        "stdlib/GMP_jll/**",
+        "stdlib/InteractiveUtils/**",
+        "stdlib/JuliaSyntaxHighlighting.version",
+        "stdlib/LLD_jll/**",
+        "stdlib/LLVMLibUnwind_jll/**",
+        "stdlib/LazyArtifacts.version",
+        "stdlib/LibCURL.version",
+        "stdlib/LibCURL_jll/**",
+        "stdlib/LibGit2/**",
+        "stdlib/LibGit2_jll/**",
+        "stdlib/LibSSH2_jll/**",
+        "stdlib/LibUV_jll/**",
+        "stdlib/LibUnwind_jll/**",
+        "stdlib/Libdl/**",
+        "stdlib/LinearAlgebra.version",
+        "stdlib/Logging/**",
+        "stdlib/MPFR_jll/**",
+        "stdlib/Makefile",
+        "stdlib/Manifest.toml",
+        "stdlib/Markdown/**",
+        "stdlib/Mmap/**",
+        "stdlib/MozillaCACerts_jll/**",
+        "stdlib/NetworkOptions.version",
+        "stdlib/OpenBLAS_jll/**",
+        "stdlib/OpenLibm_jll/**",
+        "stdlib/OpenSSL_jll/**",
+        "stdlib/PCRE2_jll/**",
+        "stdlib/Pkg.version",
+        "stdlib/Printf/**",
+        "stdlib/Profile/**",
+        "stdlib/Project.toml",
+        "stdlib/REPL/Project.toml",
+        "stdlib/REPL/docs/**",
+        "stdlib/REPL/src/History/**",
+        "stdlib/REPL/src/LineEdit.jl",
+        "stdlib/REPL/src/Pkg_beforeload.jl",
+        "stdlib/REPL/src/REPL.jl",
+        "stdlib/REPL/src/REPLCompletions.jl",
+        "stdlib/REPL/src/StylingPasses.jl",
+        "stdlib/REPL/src/SyntaxUtil.jl",
+        "stdlib/REPL/src/docview.jl",
+        "stdlib/REPL/src/emoji_symbols.jl",
+        "stdlib/REPL/src/latex_symbols.jl",
+        "stdlib/REPL/src/options.jl",
+        "stdlib/REPL/src/precompile.jl",
+        "stdlib/REPL/test/**",
+        "stdlib/Random/**",
+        "stdlib/SHA.version",
+        "stdlib/Serialization/**",
+        "stdlib/SharedArrays/**",
+        "stdlib/Sockets/**",
+        "stdlib/SparseArrays.version",
+        "stdlib/Statistics.version",
+        "stdlib/StyledStrings.version",
+        "stdlib/SuiteSparse.version",
+        "stdlib/SuiteSparse_jll/**",
+        "stdlib/Tar.version",
+        "stdlib/Test/**",
+        "stdlib/UUIDs/**",
+        "stdlib/Unicode/**",
+        "stdlib/Zlib_jll/**",
+        "stdlib/Zstd_jll/**",
+        "stdlib/dSFMT_jll/**",
+        "stdlib/libLLVM_jll/**",
+        "stdlib/libblastrampoline_jll/**",
+        "stdlib/libpicosat_jll/**",
+        "stdlib/nghttp2_jll/**",
+        "stdlib/p7zip_jll/**",
+        "stdlib/stdlib.mk",
+        "sysimage.mk",
+        "test/.gitignore",
+        "test/JuliaLowering_stdlibs.jl",
+        "test/Makefile",
+        "test/RelocationTestPkg1/**",
+        "test/RelocationTestPkg2/**",
+        "test/RelocationTestPkg3/**",
+        "test/RelocationTestPkg4/**",
+        "test/TestPkg/**",
+        "test/abstractarray.jl",
+        "test/ambiguous.jl",
+        "test/apint.jl",
+        "test/arrayops.jl",
+        "test/asyncmap.jl",
+        "test/atexit.jl",
+        "test/atomics.jl",
+        "test/backtrace.jl",
+        "test/binaryplatforms.jl",
+        "test/bitarray.jl",
+        "test/bitset.jl",
+        "test/boundscheck.jl",
+        "test/boundscheck_exec.jl",
+        "test/broadcast.jl",
+        "test/buildkitetestjson.jl",
+        "test/cancellation.jl",
+        "test/cartesian.jl",
+        "test/ccall.jl",
+        "test/channel_threadpool.jl",
+        "test/channels.jl",
+        "test/char.jl",
+        "test/checked.jl",
+        "test/choosetests.jl",
+        "test/clangsa/**",
+        "test/client.jl",
+        "test/cmdlineargs.jl",
+        "test/combinatorics.jl",
+        "test/compileall.jl",
+        "test/complex.jl",
+        "test/copy.jl",
+        "test/core.jl",
+        "test/corelogging.jl",
+        "test/depot/**",
+        "test/deprecation_exec.jl",
+        "test/dict.jl",
+        "test/docs.jl",
+        "test/download.jl",
+        "test/download_exec.jl",
+        "test/embedding/**",
+        "test/enums.jl",
+        "test/env.jl",
+        "test/error.jl",
+        "test/errorshow.jl",
+        "test/euler.jl",
+        "test/exceptions.jl",
+        "test/fastmath.jl",
+        "test/faulty_constructor_method_should_not_cause_stack_overflows.jl",
+        "test/file.jl",
+        "test/filesystem.jl",
+        "test/float16.jl",
+        "test/floatapprox.jl",
+        "test/floatfuncs.jl",
+        "test/functional.jl",
+        "test/gc/**",
+        "test/gc.jl",
+        "test/gcext/.gitignore",
+        "test/gcext/DependsOnForeign/**",
+        "test/gcext/Foreign/Manifest.toml",
+        "test/gcext/Foreign/Project.toml",
+        "test/gcext/Foreign/src/**",
+        "test/gcext/ForeignObjSerialization/**",
+        "test/gcext/LocalTest.jl",
+        "test/gcext/Makefile",
+        "test/gcext/gcext-test.jl",
+        "test/gcext/gcext.c",
+        "test/generic_map_tests.jl",
+        "test/gmp.jl",
+        "test/goto.jl",
+        "test/hashing.jl",
+        "test/int.jl",
+        "test/interpreter.jl",
+        "test/intfuncs.jl",
+        "test/intrinsics.jl",
+        "test/iobuffer.jl",
+        "test/ioloop_wakeup.jl",
+        "test/iostream.jl",
+        "test/iterators.jl",
+        "test/jit.jl",
+        "test/keywordargs.jl",
+        "test/llvmcall.jl",
+        "test/llvmcall2.jl",
+        "test/llvmpasses/**",
+        "test/loading.jl",
+        "test/manifest/**",
+        "test/math.jl",
+        "test/meta.jl",
+        "test/misc.jl",
+        "test/missing.jl",
+        "test/mod2pi.jl",
+        "test/mpfr.jl",
+        "test/namedtuple.jl",
+        "test/netload/**",
+        "test/numbers.jl",
+        "test/offsetarray.jl",
+        "test/opaque_closure.jl",
+        "test/operators.jl",
+        "test/ordering.jl",
+        "test/osutils.jl",
+        "test/parse.jl",
+        "test/path.jl",
+        "test/precompile.jl",
+        "test/precompile_absint1.jl",
+        "test/precompile_absint2.jl",
+        "test/precompile_distributed.jl",
+        "test/precompile_extmi.jl",
+        "test/precompile_utils.jl",
+        "test/print_process_affinity.jl",
+        "test/profile_spawnmany_exec.jl",
+        "test/project/Extensions/**",
+        "test/project/Manifest.toml",
+        "test/project/Project.toml",
+        "test/project/ProjectPath/**",
+        "test/project/Rot13/**",
+        "test/project/ScriptProject/**",
+        "test/project/SubProject/**",
+        "test/project/SyntaxVersioning/**",
+        "test/project/Workspaces/**",
+        "test/ranges.jl",
+        "test/rational.jl",
+        "test/read.jl",
+        "test/rebinding.jl",
+        "test/reduce.jl",
+        "test/reducedim.jl",
+        "test/reflection.jl",
+        "test/regex.jl",
+        "test/reinterpretarray.jl",
+        "test/relocatedepot.jl",
+        "test/rounding.jl",
+        "test/runtests.jl",
+        "test/ryu.jl",
+        "test/scopedvalues.jl",
+        "test/secretbuffer.jl",
+        "test/sets.jl",
+        "test/show.jl",
+        "test/simdloop.jl",
+        "test/smallarrayshrink.jl",
+        "test/some.jl",
+        "test/sorting.jl",
+        "test/spawn.jl",
+        "test/specificity.jl",
+        "test/stack_overflow.jl",
+        "test/stacktraces.jl",
+        "test/staged.jl",
+        "test/stdlib_dependencies.jl",
+        "test/stress.jl",
+        "test/stress_fd_exec.jl",
+        "test/strings/**",
+        "test/subarray.jl",
+        "test/subtype.jl",
+        "test/syntax.jl",
+        "test/sysinfo.jl",
+        "test/tempdepot.jl",
+        "test/terminfo.jl",
+        "test/test_exec.jl",
+        "test/test_sourcepath.jl",
+        "test/testdefs.jl",
+        "test/testenv.jl",
+        "test/testhelpers/**",
+        "test/threadpool_latency.jl",
+        "test/threadpool_use.jl",
+        "test/threads.jl",
+        "test/threads_comprehensions.jl",
+        "test/threads_exec.jl",
+        "test/trim/**",
+        "test/trim.jl",
+        "test/trimming/**",
+        "test/triplequote.jl",
+        "test/tuple.jl",
+        "test/typegroup.jl",
+        "test/unicode/**",
+        "test/vecelement.jl",
+        "test/version.jl",
+        "test/worlds.jl",
+        "typos.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nend of terms and conditions\n\nPlease see [THIRDPARTY.md](./THIRDPARTY.md) for license information for other software used in this project.\n",
+      "attribution": "Copyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors, MIT license (LICENSE.md), https://github.com/JuliaLang/julia."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Compiler/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nend of terms and conditions\n\nPlease see [THIRDPARTY.md](../THIRDPARTY.md) for license information for other software used in this project.\n",
+      "attribution": "Copyright (c) 2009-2025: Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors: https://github.com/JuliaLang/julia/contributors, MIT license (LICENSE.md), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/Compiler."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "JuliaLowering/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2024 JuliaHub and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2024 JuliaHub and contributors, MIT license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/JuliaLowering."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "src/flisp/**"
+      ],
+      "text": "Copyright (c) 2009 Jeff Bezanson\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice,\n      this list of conditions and the following disclaimer in the documentation\n      and/or other materials provided with the distribution.\n    * Neither the author nor the names of any contributors may be used to\n      endorse or promote products derived from this software without specific\n      prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 Jeff Bezanson, BSD-3-Clause license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/src/flisp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "stdlib/REPL/src/TerminalMenus/**"
+      ],
+      "text": "The TerminalMenus.jl package is licensed under the MIT \"Expat\" License:\n\n> Copyright (c) 2017: Nick Paul.\n>\n> Permission is hereby granted, free of charge, to any person obtaining a copy\n> of this software and associated documentation files (the \"Software\"), to deal\n> in the Software without restriction, including without limitation the rights\n> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n> copies of the Software, and to permit persons to whom the Software is\n> furnished to do so, subject to the following conditions:\n>\n> The above copyright notice and this permission notice shall be included in all\n> copies or substantial portions of the Software.\n>\n> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n> SOFTWARE.\n>\n",
+      "attribution": "the authors of JuliaLang/julia (stdlib/REPL/src/TerminalMenus) (the license file names no copyright line), MIT license (LICENSE.md), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/stdlib/REPL/src/TerminalMenus."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "stdlib/TOML/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2016-2020 Art Wild, Julia Computing, Inc., Kristoffer Carlsson and\ncontributors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2016-2020 Art Wild, Julia Computing, Inc., Kristoffer Carlsson and, MIT license (LICENSE), https://github.com/JuliaLang/julia/tree/42f439c44e5ce8b64dad53dc7dacac4f30fdf781/stdlib/TOML."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bibtex",
+      "paths": [
+        "**/*.bib"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "julia",
+      "paths": [
+        "**/*.jl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.sty"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scheme",
+      "paths": [
+        "**/*.scm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.boot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.info"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.buildkite-external-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clangd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/known_hosts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/optional"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rust-toolchain"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/testgroups"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/valid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/valid-passphrase"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

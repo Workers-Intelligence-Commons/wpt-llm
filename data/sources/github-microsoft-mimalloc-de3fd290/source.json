@@ -1,0 +1,512 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/microsoft/mimalloc",
+  "revision": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+  "checksum": "sha256:d4b02a8d37999dd56f843e3d8fca5b8106dd2690022c5f957aa0b8f66260f2f5",
+  "extract": {
+    "exclude": [
+      "bin/mimalloc-redirect-arm64.dll",
+      "bin/mimalloc-redirect-arm64.lib",
+      "bin/mimalloc-redirect-arm64ec.dll",
+      "bin/mimalloc-redirect-arm64ec.lib",
+      "bin/mimalloc-redirect.dll",
+      "bin/mimalloc-redirect.lib",
+      "bin/mimalloc-redirect32.dll",
+      "bin/mimalloc-redirect32.lib",
+      "bin/minject-arm64.exe",
+      "bin/minject.exe",
+      "bin/minject32.exe",
+      "contrib/**",
+      "doc/ds-logo.jpg",
+      "doc/ds-logo.png",
+      "doc/mimalloc-logo-100.png",
+      "doc/mimalloc-logo.png",
+      "doc/spades-logo.png",
+      "docs/bc_s.png",
+      "docs/bc_sd.png",
+      "docs/bdwn.png",
+      "docs/closed.png",
+      "docs/doc.png",
+      "docs/doxygen.png",
+      "docs/folderclosed.png",
+      "docs/folderopen.png",
+      "docs/nav_f.png",
+      "docs/nav_fd.png",
+      "docs/nav_g.png",
+      "docs/nav_h.png",
+      "docs/nav_hd.png",
+      "docs/open.png",
+      "docs/search/close.png",
+      "docs/search/mag_sel.png",
+      "docs/search/search_l.png",
+      "docs/search/search_m.png",
+      "docs/search/search_r.png",
+      "docs/splitbar.png",
+      "docs/splitbard.png",
+      "docs/sync_off.png",
+      "docs/sync_on.png",
+      "docs/tab_a.png",
+      "docs/tab_ad.png",
+      "docs/tab_b.png",
+      "docs/tab_bd.png",
+      "docs/tab_h.png",
+      "docs/tab_hd.png",
+      "docs/tab_s.png",
+      "docs/tab_sd.png",
+      "src/prim/windows/etw.man"
+    ]
+  },
+  "history": {
+    "since": "23b4e65faaca611b437ebac929f8ca27fa3ae320"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018-2025 Microsoft Corporation, Daan Leijen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/microsoft/mimalloc: Copyright (c) 2018-2025 Microsoft Corporation, Daan Leijen, MIT license (LICENSE), https://github.com/microsoft/mimalloc."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "CMakeLists.txt",
+        "LICENSE",
+        "SECURITY.md",
+        "azure-pipelines.yml",
+        "bin/bundle.bat",
+        "bin/bundle.sh",
+        "bin/readme.md",
+        "cmake/**",
+        "doc/bench-2020/**",
+        "doc/bench-2021/**",
+        "doc/doxyfile",
+        "doc/mimalloc-doc.h",
+        "doc/mimalloc-doxygen.css",
+        "doc/mimalloc-logo.svg",
+        "doc/release-notes.md",
+        "doc/unreal-logo.svg",
+        "docs/annotated.html",
+        "docs/annotated_dup.js",
+        "docs/bench.html",
+        "docs/build.html",
+        "docs/classes.html",
+        "docs/clipboard.js",
+        "docs/cookie.js",
+        "docs/doc.svg",
+        "docs/docd.svg",
+        "docs/doxygen.css",
+        "docs/doxygen.svg",
+        "docs/doxygen_crawl.html",
+        "docs/dynsections.js",
+        "docs/environment.html",
+        "docs/folderclosed.svg",
+        "docs/folderclosedd.svg",
+        "docs/folderopen.svg",
+        "docs/folderopend.svg",
+        "docs/functions.html",
+        "docs/functions_vars.html",
+        "docs/group__aligned.html",
+        "docs/group__aligned.js",
+        "docs/group__analysis.html",
+        "docs/group__analysis.js",
+        "docs/group__analysis_structmi__heap__area__t.js",
+        "docs/group__arenas.html",
+        "docs/group__arenas.js",
+        "docs/group__constantsize.html",
+        "docs/group__constantsize.js",
+        "docs/group__cpp.html",
+        "docs/group__cpp.js",
+        "docs/group__extended.html",
+        "docs/group__extended.js",
+        "docs/group__heap.html",
+        "docs/group__heap.js",
+        "docs/group__internals.html",
+        "docs/group__internals.js",
+        "docs/group__malloc.html",
+        "docs/group__malloc.js",
+        "docs/group__options.html",
+        "docs/group__options.js",
+        "docs/group__posix.html",
+        "docs/group__posix.js",
+        "docs/group__stats.html",
+        "docs/group__stats.js",
+        "docs/group__stats_structmi__stats__s.js",
+        "docs/group__subproc.html",
+        "docs/group__subproc.js",
+        "docs/group__theap.html",
+        "docs/group__theap.js",
+        "docs/group__typed.html",
+        "docs/group__typed.js",
+        "docs/group__zeroinit.html",
+        "docs/group__zeroinit.js",
+        "docs/index.html",
+        "docs/jquery.js",
+        "docs/mimalloc-doc_8h_source.html",
+        "docs/mimalloc-doxygen.css",
+        "docs/mimalloc-logo.svg",
+        "docs/minus.svg",
+        "docs/minusd.svg",
+        "docs/modes.html",
+        "docs/modules.html",
+        "docs/modules.js",
+        "docs/navtree.css",
+        "docs/navtree.js",
+        "docs/navtreedata.js",
+        "docs/navtreeindex0.js",
+        "docs/navtreeindex1.js",
+        "docs/overrides.html",
+        "docs/pages.html",
+        "docs/plus.svg",
+        "docs/plusd.svg",
+        "docs/resize.js",
+        "docs/search/all_0.html",
+        "docs/search/all_0.js",
+        "docs/search/all_1.html",
+        "docs/search/all_1.js",
+        "docs/search/all_10.js",
+        "docs/search/all_11.js",
+        "docs/search/all_12.js",
+        "docs/search/all_13.js",
+        "docs/search/all_14.js",
+        "docs/search/all_2.html",
+        "docs/search/all_2.js",
+        "docs/search/all_3.html",
+        "docs/search/all_3.js",
+        "docs/search/all_4.html",
+        "docs/search/all_4.js",
+        "docs/search/all_5.html",
+        "docs/search/all_5.js",
+        "docs/search/all_6.html",
+        "docs/search/all_6.js",
+        "docs/search/all_7.html",
+        "docs/search/all_7.js",
+        "docs/search/all_8.html",
+        "docs/search/all_8.js",
+        "docs/search/all_9.html",
+        "docs/search/all_9.js",
+        "docs/search/all_a.html",
+        "docs/search/all_a.js",
+        "docs/search/all_b.html",
+        "docs/search/all_b.js",
+        "docs/search/all_c.html",
+        "docs/search/all_c.js",
+        "docs/search/all_d.html",
+        "docs/search/all_d.js",
+        "docs/search/all_e.js",
+        "docs/search/all_f.js",
+        "docs/search/classes_0.html",
+        "docs/search/classes_0.js",
+        "docs/search/close.svg",
+        "docs/search/enums_0.html",
+        "docs/search/enums_0.js",
+        "docs/search/enumvalues_0.html",
+        "docs/search/enumvalues_0.js",
+        "docs/search/enumvalues_1.html",
+        "docs/search/enumvalues_1.js",
+        "docs/search/functions_0.html",
+        "docs/search/functions_0.js",
+        "docs/search/functions_1.html",
+        "docs/search/functions_1.js",
+        "docs/search/groups_0.html",
+        "docs/search/groups_0.js",
+        "docs/search/groups_1.html",
+        "docs/search/groups_1.js",
+        "docs/search/groups_2.html",
+        "docs/search/groups_2.js",
+        "docs/search/groups_3.html",
+        "docs/search/groups_3.js",
+        "docs/search/groups_4.html",
+        "docs/search/groups_4.js",
+        "docs/search/groups_5.html",
+        "docs/search/groups_5.js",
+        "docs/search/groups_6.html",
+        "docs/search/groups_6.js",
+        "docs/search/groups_7.html",
+        "docs/search/groups_7.js",
+        "docs/search/groups_8.html",
+        "docs/search/groups_8.js",
+        "docs/search/groups_9.js",
+        "docs/search/groups_a.js",
+        "docs/search/groups_b.js",
+        "docs/search/groups_c.js",
+        "docs/search/groups_d.js",
+        "docs/search/groups_e.js",
+        "docs/search/groups_f.js",
+        "docs/search/mag.svg",
+        "docs/search/mag_d.svg",
+        "docs/search/mag_sel.svg",
+        "docs/search/mag_seld.svg",
+        "docs/search/nomatches.html",
+        "docs/search/pages_0.html",
+        "docs/search/pages_0.js",
+        "docs/search/pages_1.html",
+        "docs/search/pages_1.js",
+        "docs/search/pages_2.html",
+        "docs/search/pages_2.js",
+        "docs/search/pages_3.html",
+        "docs/search/pages_3.js",
+        "docs/search/pages_4.html",
+        "docs/search/pages_4.js",
+        "docs/search/pages_5.js",
+        "docs/search/pages_6.js",
+        "docs/search/pages_7.js",
+        "docs/search/pages_8.js",
+        "docs/search/pages_9.js",
+        "docs/search/pages_a.js",
+        "docs/search/pages_b.js",
+        "docs/search/pages_c.js",
+        "docs/search/search.css",
+        "docs/search/search.js",
+        "docs/search/searchdata.js",
+        "docs/search/typedefs_0.html",
+        "docs/search/typedefs_0.js",
+        "docs/search/typedefs_1.html",
+        "docs/search/typedefs_1.js",
+        "docs/search/typedefs_2.html",
+        "docs/search/typedefs_2.js",
+        "docs/search/variables_0.html",
+        "docs/search/variables_0.js",
+        "docs/search/variables_1.html",
+        "docs/search/variables_1.js",
+        "docs/search/variables_2.html",
+        "docs/search/variables_2.js",
+        "docs/search/variables_3.html",
+        "docs/search/variables_3.js",
+        "docs/search/variables_4.js",
+        "docs/search/variables_5.js",
+        "docs/search/variables_6.js",
+        "docs/search/variables_7.js",
+        "docs/tabs.css",
+        "docs/tools.html",
+        "docs/topics.html",
+        "docs/topics.js",
+        "docs/using.html",
+        "ide/**",
+        "include/**",
+        "mimalloc.pc.in",
+        "readme.md",
+        "src/alloc-aligned.c",
+        "src/alloc-override.c",
+        "src/alloc-posix.c",
+        "src/alloc.c",
+        "src/arena.c",
+        "src/bitmap.c",
+        "src/bitmap.h",
+        "src/free.c",
+        "src/heap.c",
+        "src/init.c",
+        "src/libc.c",
+        "src/options.c",
+        "src/os.c",
+        "src/page-map.c",
+        "src/page-queue.c",
+        "src/page.c",
+        "src/prim/emscripten/**",
+        "src/prim/osx/**",
+        "src/prim/prim-tls.c",
+        "src/prim/prim.c",
+        "src/prim/readme.md",
+        "src/prim/unix/**",
+        "src/prim/wasi/**",
+        "src/prim/windows/etw-mimalloc.wprp",
+        "src/prim/windows/etw.h",
+        "src/prim/windows/prim.c",
+        "src/prim/windows/readme.md",
+        "src/random.c",
+        "src/sample-guarded.c",
+        "src/sample-profile.c",
+        "src/static.c",
+        "src/stats.c",
+        "src/subproc.c",
+        "src/theap.c",
+        "src/threadlocal.c",
+        "test/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2018-2025 Microsoft Corporation, Daan Leijen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2018-2025 Microsoft Corporation, Daan Leijen, MIT license (LICENSE), https://github.com/microsoft/mimalloc."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.filters"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sln"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wprp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/doxyfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.vcxproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

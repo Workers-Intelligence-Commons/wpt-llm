@@ -1,0 +1,352 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/huangzworks/redis-3.0-annotated",
+  "revision": "8e60a75884e75503fb8be1a322406f21fb455f67",
+  "checksum": "sha256:0052c9207804c6639dab75c4be41148ec5523c65d4436cca19cf1b584c6c38c4",
+  "extract": {
+    "exclude": [
+      "deps/Makefile",
+      "deps/jemalloc/doc/jemalloc.html",
+      "deps/linenoise/**",
+      "deps/lua/**",
+      "tests/assets/encodings.rdb",
+      "tests/assets/hash-zipmap.rdb"
+    ]
+  },
+  "history": {
+    "since": "ed9b544e10b84cd43348ddfab7068b610a5df1f7"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2006-2014, Salvatore Sanfilippo\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n    * Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of Redis nor the names of its contributors may be used\n  to endorse or promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nUnless otherwise specified, files in the jemalloc source distribution are\nsubject to the following license:\n--------------------------------------------------------------------------------\nCopyright (C) 2002-2012 Jason Evans <jasone@canonware.com>.\nAll rights reserved.\nCopyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.\nCopyright (C) 2009-2012 Facebook, Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n1. Redistributions of source code must retain the above copyright notice(s),\n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice(s),\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) ``AS IS'' AND ANY EXPRESS\nOR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO\nEVENT SHALL THE COPYRIGHT HOLDER(S) BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE\nOR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF\nADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n--------------------------------------------------------------------------------\n",
+      "attribution": "Commit history of https://github.com/huangzworks/redis-3.0-annotated: Copyright (c) 2006-2014, Salvatore Sanfilippo, BSD-3-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated; Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-3-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated/tree/8e60a75884e75503fb8be1a322406f21fb455f67/deps/hiredis; Copyright (C) 2002-2012 Jason Evans <jasone@canonware.com>.; Copyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.; Copyright (C) 2009-2012 Facebook, Inc.  All rights reserved., BSD-2-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated/tree/8e60a75884e75503fb8be1a322406f21fb455f67/deps/jemalloc."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".gitignore",
+        "00-RELEASENOTES",
+        "BUGS",
+        "CONTRIBUTING",
+        "COPYING",
+        "INSTALL",
+        "MANIFESTO",
+        "Makefile",
+        "README",
+        "README.rst",
+        "redis.conf",
+        "runtest",
+        "runtest-cluster",
+        "runtest-sentinel",
+        "sentinel.conf",
+        "src/**",
+        "tests/assets/default.conf",
+        "tests/cluster/**",
+        "tests/helpers/**",
+        "tests/instances.tcl",
+        "tests/integration/**",
+        "tests/sentinel/**",
+        "tests/support/**",
+        "tests/test_helper.tcl",
+        "tests/tmp/**",
+        "tests/unit/**",
+        "utils/**"
+      ],
+      "text": "Copyright (c) 2006-2014, Salvatore Sanfilippo\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n    * Neither the name of Redis nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2006-2014, Salvatore Sanfilippo, BSD-3-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "deps/hiredis/**"
+      ],
+      "text": "Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>\nCopyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice,\n  this list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of Redis nor the names of its contributors may be used\n  to endorse or promote products derived from this software without specific\n  prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009-2011, Salvatore Sanfilippo <antirez at gmail dot com>; Copyright (c) 2010-2011, Pieter Noordhuis <pcnoordhuis at gmail dot com>, BSD-3-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated/tree/8e60a75884e75503fb8be1a322406f21fb455f67/deps/hiredis."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "deps/jemalloc/.gitignore",
+        "deps/jemalloc/COPYING",
+        "deps/jemalloc/ChangeLog",
+        "deps/jemalloc/INSTALL",
+        "deps/jemalloc/Makefile.in",
+        "deps/jemalloc/README",
+        "deps/jemalloc/VERSION",
+        "deps/jemalloc/autogen.sh",
+        "deps/jemalloc/bin/**",
+        "deps/jemalloc/config.guess",
+        "deps/jemalloc/config.stamp.in",
+        "deps/jemalloc/config.sub",
+        "deps/jemalloc/configure",
+        "deps/jemalloc/configure.ac",
+        "deps/jemalloc/doc/html.xsl.in",
+        "deps/jemalloc/doc/jemalloc.3",
+        "deps/jemalloc/doc/jemalloc.xml.in",
+        "deps/jemalloc/doc/manpages.xsl.in",
+        "deps/jemalloc/doc/stylesheet.xsl",
+        "deps/jemalloc/include/**",
+        "deps/jemalloc/install-sh",
+        "deps/jemalloc/src/**",
+        "deps/jemalloc/test/**"
+      ],
+      "text": "Unless otherwise specified, files in the jemalloc source distribution are\nsubject to the following license:\n--------------------------------------------------------------------------------\nCopyright (C) 2002-2012 Jason Evans <jasone@canonware.com>.\nAll rights reserved.\nCopyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.\nCopyright (C) 2009-2012 Facebook, Inc.  All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n1. Redistributions of source code must retain the above copyright notice(s),\n   this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice(s),\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) ``AS IS'' AND ANY EXPRESS\nOR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO\nEVENT SHALL THE COPYRIGHT HOLDER(S) BE LIABLE FOR ANY DIRECT, INDIRECT,\nINCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR\nPROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF\nLIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE\nOR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF\nADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n--------------------------------------------------------------------------------\n",
+      "attribution": "Copyright (C) 2002-2012 Jason Evans <jasone@canonware.com>.; Copyright (C) 2007-2012 Mozilla Foundation.  All rights reserved.; Copyright (C) 2009-2012 Facebook, Inc.  All rights reserved., BSD-2-Clause license (COPYING), https://github.com/huangzworks/redis-3.0-annotated/tree/8e60a75884e75503fb8be1a322406f21fb455f67/deps/jemalloc."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tcl",
+      "paths": [
+        "**/*.tcl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.exp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.guess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sub"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/00-RELEASENOTES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BUGS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CONTRIBUTING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/COPYING"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChangeLog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MANIFESTO"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install-sh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pprof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redis_init_script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest-cluster"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/runtest-sentinel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

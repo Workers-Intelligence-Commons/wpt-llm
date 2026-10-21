@@ -1,0 +1,1348 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/google/gvisor",
+  "revision": "c6112880b448df3cd3c939dbbcf65e8d78836eb2",
+  "checksum": "sha256:fc84dd4b04b37c9bbf4657d3e758b174f0c823a09fd0278644ddaaebe671739e",
+  "extract": {
+    "exclude": [
+      "external/**",
+      "g3doc/Layers.png",
+      "g3doc/Machine-Virtualization.png",
+      "g3doc/Rule-Based-Execution.png",
+      "g3doc/Sentry-Gofer.png",
+      "g3doc/architecture_guide/platforms.png",
+      "g3doc/architecture_guide/resources.png",
+      "g3doc/architecture_guide/security.png",
+      "g3doc/logo.png",
+      "g3doc/presentations/**",
+      "g3doc/user_guide/sandboxing-tradeoffs.png",
+      "g3doc/user_guide/tutorials/add-node-pool.png",
+      "g3doc/user_guide/tutorials/node-pool-button.png",
+      "images/basic/symlink-resolv/resolv.tar",
+      "pkg/sentry/kernel/g3doc/run_states.png",
+      "pkg/sentry/socket/netfilter/accept_blob",
+      "pkg/sentry/socket/netfilter/istio_blob",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/ffmpeg.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/iperf.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/nginx.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/redis.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/rubydev.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_kvm/sysbench.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/ffmpeg.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/iperf.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/nginx.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/redis.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/rubydev.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.26.3-linux-amd64_systrap/sysbench.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/ffmpeg.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/iperf.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/nginx.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/redis.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/rubydev.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_kvm/sysbench.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/ffmpeg.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/iperf.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/nginx.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/redis.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/rubydev.pgo.pprof.pb.gz",
+      "runsc/profiles/data/go1.27.1-linux-amd64_systrap/sysbench.pgo.pprof.pb.gz",
+      "test/gpu/gvisor.png",
+      "test/kubernetes/benchmarks/resources/chart.png",
+      "test/kubernetes/benchmarks/resources/gvisor.png",
+      "tools/go_marshal/test/external/**",
+      "tools/tracereplay/testdata/**",
+      "website/assets/favicons/**",
+      "website/assets/images/2019-11-18-security-basics-figure1.png",
+      "website/assets/images/2019-11-18-security-basics-figure2.png",
+      "website/assets/images/2019-11-18-security-basics-figure3.png",
+      "website/assets/images/2020-04-02-networking-security-figure1.png",
+      "website/assets/images/2020-09-18-containing-a-real-vulnerability-figure1.png",
+      "website/assets/images/2021-08-31-rack-figure1.png",
+      "website/assets/images/2021-08-31-rack-figure2.png",
+      "website/assets/images/2021-08-31-rack-figure3.png",
+      "website/assets/images/2021-12-02-flamegraph-figure2.png",
+      "website/assets/images/2021-12-02-syscall-figure1.png",
+      "website/assets/images/2022-10-24-buffer-pooling-figure1.png",
+      "website/assets/images/2022-10-24-buffer-pooling-figure2.png",
+      "website/assets/images/2023-06-20-astronaut-thumbs-up.png",
+      "website/assets/images/2023-06-20-sandboxed-gpu.png",
+      "website/assets/images/2023-06-20-spacesuit-helmets.png",
+      "website/assets/images/2023-06-20-stable-diffusion-web-ui.png",
+      "website/assets/images/2023-06-20-turbo.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-absl-breakdown.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-absl-empty-filter.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-absl-vs-unsandboxed.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-absl.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-cache.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-grpc-vs-unsandboxed.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-grpc.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-interpreter.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-kvm-normalized.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-nginx-vs-unsandboxed.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-nginx.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-nvproxy-ioctl.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-pytorch-vs-unsandboxed.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-pytorch.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-rubydev-vs-unsandboxed.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-rubydev.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-sentry-filter-size.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-sentry-syscall-profile.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-systrap-normalized.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp-systrap.png",
+      "website/assets/images/2024-02-01-gvisor-seccomp.png",
+      "website/assets/images/2026-04-15-magi/**",
+      "website/assets/images/2026-09-17-systemd-in-gvisor/**",
+      "website/assets/images/2026-10-02-gvisor-cncf/**",
+      "website/assets/images/background.jpg",
+      "website/assets/images/background_1080p.jpg",
+      "website/assets/images/gvisor-helmet-universe.png",
+      "website/assets/images/gvisor-high-level-arch.png",
+      "website/assets/images/gvisor-reduce-risk.png",
+      "website/assets/images/gvisor-run-untrusted.png",
+      "website/assets/images/gvisor-secure-by-default.png",
+      "website/assets/logos/anthropic_logo.png",
+      "website/assets/logos/logo_beam.png",
+      "website/assets/logos/logo_goog.png",
+      "website/assets/logos/logo_modal.png",
+      "website/assets/logos/logo_solo_monochrome.png",
+      "website/assets/logos/logo_solo_on_dark-1024.png",
+      "website/assets/logos/logo_solo_on_dark-128.png",
+      "website/assets/logos/logo_solo_on_dark-16.png",
+      "website/assets/logos/logo_solo_on_dark.png",
+      "website/assets/logos/logo_solo_on_dark_full-1024.png",
+      "website/assets/logos/logo_solo_on_dark_full-128.png",
+      "website/assets/logos/logo_solo_on_dark_full-16.png",
+      "website/assets/logos/logo_solo_on_dark_full.png",
+      "website/assets/logos/logo_solo_on_white.png",
+      "website/assets/logos/logo_solo_on_white_bordered-1024.png",
+      "website/assets/logos/logo_solo_on_white_bordered-128.png",
+      "website/assets/logos/logo_solo_on_white_bordered-16.png",
+      "website/assets/logos/logo_solo_on_white_bordered.png",
+      "website/assets/logos/logo_with_text_monochrome.png",
+      "website/assets/logos/logo_with_text_on_dark-1024.png",
+      "website/assets/logos/logo_with_text_on_dark-128.png",
+      "website/assets/logos/logo_with_text_on_dark-16.png",
+      "website/assets/logos/logo_with_text_on_dark.png",
+      "website/assets/logos/logo_with_text_on_dark_full-1024.png",
+      "website/assets/logos/logo_with_text_on_dark_full-128.png",
+      "website/assets/logos/logo_with_text_on_dark_full-16.png",
+      "website/assets/logos/logo_with_text_on_dark_full.png",
+      "website/assets/logos/logo_with_text_on_white.png",
+      "website/assets/logos/logo_with_text_on_white_bordered.png",
+      "website/assets/logos/powered-gvisor.png"
+    ]
+  },
+  "history": {
+    "since": "eca2fcce94de90a652b7924ef1ce971a9e0fe327"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND ISC AND BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n------------------\n\nSome files carry the following license, noted at the top of each file:\n\n   Permission is hereby granted, free of charge, to any person obtaining a copy\n   of this software and associated documentation files (the \"Software\"), to deal\n   in the Software without restriction, including without limitation the rights\n   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n   copies of the Software, and to permit persons to whom the Software is\n   furnished to do so, subject to the following conditions:\n\n   The above copyright notice and this permission notice shall be included in\n   all copies or substantial portions of the Software.\n\n   THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\n   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n   THE SOFTWARE.\n\n------------------\n\nSome files carry the \"BSD\" license, noted at the top of each file:\n\n   Redistribution and use in source and binary forms, with or without\n   modification, are permitted provided that the following conditions are met:\n\n      * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n\n      * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n\n      * Neither the name of Google Inc. nor the names of its contributors may be\n      used to endorse or promote products derived from this software without\n      specific prior written permission.\n\n   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\n   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\n   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n   POSSIBILITY OF SUCH DAMAGE.\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\n\nCopyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/google/gvisor: the authors of google/gvisor (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/gvisor; the authors of nodedum, ISC license (declared in package.json), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/images/benchmarks/node; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/safecopy; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/sentry/time; Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/sync."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".agents/**",
+        ".bazelignore",
+        ".bazelrc",
+        ".bazelversion",
+        ".buildkite/**",
+        ".clang-format",
+        ".clang-tidy",
+        ".clangd",
+        ".claude/**",
+        ".devcontainer.json",
+        ".gemini/**",
+        ".github/**",
+        ".gitignore",
+        ".vscode/**",
+        "ADOPTERS.md",
+        "AGENTS.md",
+        "AUTHORS",
+        "BUILD",
+        "CODEOWNERS",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "GOVERNANCE.md",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "MODULE.bazel",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "debian/**",
+        "examples/**",
+        "g3doc/BUILD",
+        "g3doc/Layers.svg",
+        "g3doc/Machine-Virtualization.svg",
+        "g3doc/README.md",
+        "g3doc/Rule-Based-Execution.svg",
+        "g3doc/Sentry-Gofer.svg",
+        "g3doc/architecture_guide/BUILD",
+        "g3doc/architecture_guide/intro_to_gvisor.md",
+        "g3doc/architecture_guide/isolation_with_gvisor.svg",
+        "g3doc/architecture_guide/isolation_with_linux_security_primitives.svg",
+        "g3doc/architecture_guide/isolation_with_virtualization.svg",
+        "g3doc/architecture_guide/networking.md",
+        "g3doc/architecture_guide/packetflow.svg",
+        "g3doc/architecture_guide/performance.md",
+        "g3doc/architecture_guide/platforms.md",
+        "g3doc/architecture_guide/platforms.svg",
+        "g3doc/architecture_guide/resources.md",
+        "g3doc/architecture_guide/resources.svg",
+        "g3doc/architecture_guide/security.md",
+        "g3doc/architecture_guide/security.svg",
+        "g3doc/community.md",
+        "g3doc/logo.txt",
+        "g3doc/proposals/**",
+        "g3doc/release.md",
+        "g3doc/roadmap.md",
+        "g3doc/style.md",
+        "g3doc/user_guide/BUILD",
+        "g3doc/user_guide/FAQ.md",
+        "g3doc/user_guide/checkpoint_restore.md",
+        "g3doc/user_guide/compatibility.md",
+        "g3doc/user_guide/containerd/**",
+        "g3doc/user_guide/debugging.md",
+        "g3doc/user_guide/filesystem.md",
+        "g3doc/user_guide/fs_snapshot.md",
+        "g3doc/user_guide/fuse.md",
+        "g3doc/user_guide/gpu.md",
+        "g3doc/user_guide/install.md",
+        "g3doc/user_guide/networking.md",
+        "g3doc/user_guide/observability.md",
+        "g3doc/user_guide/personalities/**",
+        "g3doc/user_guide/platforms.md",
+        "g3doc/user_guide/production.md",
+        "g3doc/user_guide/quick_start/**",
+        "g3doc/user_guide/rdma.md",
+        "g3doc/user_guide/rootfs_snapshot.md",
+        "g3doc/user_guide/rootless.md",
+        "g3doc/user_guide/runtime_monitoring.md",
+        "g3doc/user_guide/sandboxing-tradeoffs.svg",
+        "g3doc/user_guide/sdk/**",
+        "g3doc/user_guide/systemd.md",
+        "g3doc/user_guide/tpu.md",
+        "g3doc/user_guide/tutorials/BUILD",
+        "g3doc/user_guide/tutorials/cni.md",
+        "g3doc/user_guide/tutorials/docker-compose.md",
+        "g3doc/user_guide/tutorials/docker-in-gke-sandbox/**",
+        "g3doc/user_guide/tutorials/docker-in-gke-sandbox.md",
+        "g3doc/user_guide/tutorials/docker-in-gvisor.md",
+        "g3doc/user_guide/tutorials/docker.md",
+        "g3doc/user_guide/tutorials/falco.md",
+        "g3doc/user_guide/tutorials/knative.md",
+        "g3doc/user_guide/tutorials/kubernetes.md",
+        "go.mod",
+        "go.sum",
+        "governance/**",
+        "images/BUILD",
+        "images/README.md",
+        "images/arch-systemd/**",
+        "images/arm-qemu/**",
+        "images/basic/alpine/**",
+        "images/basic/busybox/**",
+        "images/basic/docker/**",
+        "images/basic/filecap/**",
+        "images/basic/fsstress/**",
+        "images/basic/httpd/**",
+        "images/basic/integrationtest/**",
+        "images/basic/libacl/**",
+        "images/basic/mysql/**",
+        "images/basic/nginx/**",
+        "images/basic/pidfd-tests/**",
+        "images/basic/podmantest/**",
+        "images/basic/python/**",
+        "images/basic/redis/**",
+        "images/basic/ruby/**",
+        "images/basic/rust/**",
+        "images/basic/sudo/**",
+        "images/basic/symlink-resolv/Dockerfile",
+        "images/basic/tcpdump/**",
+        "images/basic/tmpfile/**",
+        "images/basic/tomcat/**",
+        "images/basic/ubuntu/**",
+        "images/benchmarks/absl/**",
+        "images/benchmarks/alpine/**",
+        "images/benchmarks/build-grpc/**",
+        "images/benchmarks/ffmpeg/**",
+        "images/benchmarks/fio/**",
+        "images/benchmarks/gsutil/**",
+        "images/benchmarks/hackbench/**",
+        "images/benchmarks/hey/**",
+        "images/benchmarks/httpd/**",
+        "images/benchmarks/iperf/**",
+        "images/benchmarks/nginx/**",
+        "images/benchmarks/profile-helper/**",
+        "images/benchmarks/redis/**",
+        "images/benchmarks/ruby/**",
+        "images/benchmarks/rubydev/**",
+        "images/benchmarks/sysbench/**",
+        "images/benchmarks/syscallbench/**",
+        "images/benchmarks/tensorflow/**",
+        "images/benchmarks/util/**",
+        "images/benchmarks/wrk2/**",
+        "images/certs/**",
+        "images/compatibility/**",
+        "images/containerd/**",
+        "images/default/**",
+        "images/defs.bzl",
+        "images/fuse/**",
+        "images/gpu/**",
+        "images/image-test/**",
+        "images/iptables/**",
+        "images/jekyll/**",
+        "images/moby/**",
+        "images/nftables/**",
+        "images/packetdrill/**",
+        "images/runtimes/**",
+        "images/systemd-integ/**",
+        "images/systemd-services/**",
+        "images/systemd-user/**",
+        "images/syzkaller/**",
+        "images/tpu/**",
+        "images/ubi10-init/**",
+        "nogo.yaml",
+        "pkg/abi/**",
+        "pkg/aio/**",
+        "pkg/atomicbitops/**",
+        "pkg/binary/**",
+        "pkg/bitmap/**",
+        "pkg/bits/**",
+        "pkg/bpf/**",
+        "pkg/buffer/**",
+        "pkg/cleanup/**",
+        "pkg/compressio/**",
+        "pkg/context/**",
+        "pkg/control/**",
+        "pkg/coretag/**",
+        "pkg/coverage/**",
+        "pkg/cpuid/**",
+        "pkg/crypto/**",
+        "pkg/devutil/**",
+        "pkg/ebpf/**",
+        "pkg/erofs/**",
+        "pkg/errors/**",
+        "pkg/eventchannel/**",
+        "pkg/eventfd/**",
+        "pkg/fd/**",
+        "pkg/fdchannel/**",
+        "pkg/fdnotifier/**",
+        "pkg/flipcall/**",
+        "pkg/fspath/**",
+        "pkg/fsutil/**",
+        "pkg/gohacks/**",
+        "pkg/goid/**",
+        "pkg/gomaxprocs/**",
+        "pkg/gvisordetect/**",
+        "pkg/hostarch/**",
+        "pkg/hostos/**",
+        "pkg/hostsyscall/**",
+        "pkg/hosttid/**",
+        "pkg/ilist/**",
+        "pkg/linewriter/**",
+        "pkg/lisafs/**",
+        "pkg/log/**",
+        "pkg/marshal/**",
+        "pkg/memutil/**",
+        "pkg/metric/**",
+        "pkg/p9/**",
+        "pkg/pinring/**",
+        "pkg/pool/**",
+        "pkg/prometheus/**",
+        "pkg/rand/**",
+        "pkg/rawfile/**",
+        "pkg/rdma/**",
+        "pkg/refs/**",
+        "pkg/ring0/**",
+        "pkg/ringdeque/**",
+        "pkg/safemem/**",
+        "pkg/seccheck/**",
+        "pkg/seccomp/**",
+        "pkg/secio/**",
+        "pkg/segment/**",
+        "pkg/sentry/BUILD",
+        "pkg/sentry/arch/**",
+        "pkg/sentry/checkpoint/**",
+        "pkg/sentry/contexttest/**",
+        "pkg/sentry/control/**",
+        "pkg/sentry/devices/**",
+        "pkg/sentry/fdcollector/**",
+        "pkg/sentry/fdimport/**",
+        "pkg/sentry/fscheckpoint/**",
+        "pkg/sentry/fsimpl/**",
+        "pkg/sentry/fsmetric/**",
+        "pkg/sentry/fsutil/**",
+        "pkg/sentry/hostcpu/**",
+        "pkg/sentry/hostfd/**",
+        "pkg/sentry/hostmm/**",
+        "pkg/sentry/inet/**",
+        "pkg/sentry/kernel/BUILD",
+        "pkg/sentry/kernel/README.md",
+        "pkg/sentry/kernel/aio.go",
+        "pkg/sentry/kernel/auth/**",
+        "pkg/sentry/kernel/cgroup.go",
+        "pkg/sentry/kernel/cgroup2.go",
+        "pkg/sentry/kernel/context.go",
+        "pkg/sentry/kernel/contexttest/**",
+        "pkg/sentry/kernel/fasync/**",
+        "pkg/sentry/kernel/fd_table.go",
+        "pkg/sentry/kernel/fd_table_test.go",
+        "pkg/sentry/kernel/fd_table_unsafe.go",
+        "pkg/sentry/kernel/file_hash.go",
+        "pkg/sentry/kernel/fs_context.go",
+        "pkg/sentry/kernel/fscheckpoint.go",
+        "pkg/sentry/kernel/futex/**",
+        "pkg/sentry/kernel/g3doc/run_states.dot",
+        "pkg/sentry/kernel/ipc/**",
+        "pkg/sentry/kernel/ipc_namespace.go",
+        "pkg/sentry/kernel/kcov.go",
+        "pkg/sentry/kernel/kcov_unsafe.go",
+        "pkg/sentry/kernel/kernel.go",
+        "pkg/sentry/kernel/kernel_opts.go",
+        "pkg/sentry/kernel/kernel_restore.go",
+        "pkg/sentry/kernel/kernel_restore_test.go",
+        "pkg/sentry/kernel/kernel_state.go",
+        "pkg/sentry/kernel/memevent/**",
+        "pkg/sentry/kernel/mq/**",
+        "pkg/sentry/kernel/msgqueue/**",
+        "pkg/sentry/kernel/pending_signals.go",
+        "pkg/sentry/kernel/pending_signals_state.go",
+        "pkg/sentry/kernel/pending_signals_test.go",
+        "pkg/sentry/kernel/pidfd.go",
+        "pkg/sentry/kernel/pipe/**",
+        "pkg/sentry/kernel/posixtimer.go",
+        "pkg/sentry/kernel/ptrace.go",
+        "pkg/sentry/kernel/ptrace_amd64.go",
+        "pkg/sentry/kernel/ptrace_arm64.go",
+        "pkg/sentry/kernel/rseq.go",
+        "pkg/sentry/kernel/sched/**",
+        "pkg/sentry/kernel/seccheck.go",
+        "pkg/sentry/kernel/seccomp.go",
+        "pkg/sentry/kernel/semaphore/**",
+        "pkg/sentry/kernel/sessions.go",
+        "pkg/sentry/kernel/shm/**",
+        "pkg/sentry/kernel/signal.go",
+        "pkg/sentry/kernel/signal_handlers.go",
+        "pkg/sentry/kernel/syscalls.go",
+        "pkg/sentry/kernel/syscalls_state.go",
+        "pkg/sentry/kernel/syslog.go",
+        "pkg/sentry/kernel/table_test.go",
+        "pkg/sentry/kernel/task.go",
+        "pkg/sentry/kernel/task_acct.go",
+        "pkg/sentry/kernel/task_block.go",
+        "pkg/sentry/kernel/task_cgroup.go",
+        "pkg/sentry/kernel/task_clone.go",
+        "pkg/sentry/kernel/task_context.go",
+        "pkg/sentry/kernel/task_exec.go",
+        "pkg/sentry/kernel/task_exit.go",
+        "pkg/sentry/kernel/task_futex.go",
+        "pkg/sentry/kernel/task_identity.go",
+        "pkg/sentry/kernel/task_image.go",
+        "pkg/sentry/kernel/task_key.go",
+        "pkg/sentry/kernel/task_log.go",
+        "pkg/sentry/kernel/task_net.go",
+        "pkg/sentry/kernel/task_run.go",
+        "pkg/sentry/kernel/task_sched.go",
+        "pkg/sentry/kernel/task_signals.go",
+        "pkg/sentry/kernel/task_signals_test.go",
+        "pkg/sentry/kernel/task_start.go",
+        "pkg/sentry/kernel/task_stop.go",
+        "pkg/sentry/kernel/task_syscall.go",
+        "pkg/sentry/kernel/task_syscall_benchmark_test.go",
+        "pkg/sentry/kernel/task_test.go",
+        "pkg/sentry/kernel/task_usermem.go",
+        "pkg/sentry/kernel/task_work.go",
+        "pkg/sentry/kernel/thread_group.go",
+        "pkg/sentry/kernel/thread_group_unsafe.go",
+        "pkg/sentry/kernel/threads.go",
+        "pkg/sentry/kernel/threads_impl.go",
+        "pkg/sentry/kernel/timekeeper.go",
+        "pkg/sentry/kernel/timekeeper_state.go",
+        "pkg/sentry/kernel/timekeeper_test.go",
+        "pkg/sentry/kernel/tty.go",
+        "pkg/sentry/kernel/uncaught_signal.proto",
+        "pkg/sentry/kernel/uts_namespace.go",
+        "pkg/sentry/kernel/vdso.go",
+        "pkg/sentry/kernel/version/**",
+        "pkg/sentry/ktime/**",
+        "pkg/sentry/limits/**",
+        "pkg/sentry/loader/**",
+        "pkg/sentry/memmap/**",
+        "pkg/sentry/mm/**",
+        "pkg/sentry/pgalloc/**",
+        "pkg/sentry/platform/**",
+        "pkg/sentry/seccheck/**",
+        "pkg/sentry/socket/BUILD",
+        "pkg/sentry/socket/control/**",
+        "pkg/sentry/socket/hostinet/**",
+        "pkg/sentry/socket/netfilter/BUILD",
+        "pkg/sentry/socket/netfilter/comment_matcher.go",
+        "pkg/sentry/socket/netfilter/ct_target.go",
+        "pkg/sentry/socket/netfilter/dnat.go",
+        "pkg/sentry/socket/netfilter/extensions.go",
+        "pkg/sentry/socket/netfilter/ipv4.go",
+        "pkg/sentry/socket/netfilter/ipv6.go",
+        "pkg/sentry/socket/netfilter/mark_matcher.go",
+        "pkg/sentry/socket/netfilter/mark_matcher_test.go",
+        "pkg/sentry/socket/netfilter/mark_target.go",
+        "pkg/sentry/socket/netfilter/mark_target_test.go",
+        "pkg/sentry/socket/netfilter/masquerade.go",
+        "pkg/sentry/socket/netfilter/masquerade_test.go",
+        "pkg/sentry/socket/netfilter/multiport_matcher.go",
+        "pkg/sentry/socket/netfilter/multiport_matcher_v1.go",
+        "pkg/sentry/socket/netfilter/netfilter.go",
+        "pkg/sentry/socket/netfilter/netfilter_test.go",
+        "pkg/sentry/socket/netfilter/netfilter_x_test.go",
+        "pkg/sentry/socket/netfilter/owner_matcher.go",
+        "pkg/sentry/socket/netfilter/owner_matcher_v1.go",
+        "pkg/sentry/socket/netfilter/snat.go",
+        "pkg/sentry/socket/netfilter/targets.go",
+        "pkg/sentry/socket/netfilter/tcp_matcher.go",
+        "pkg/sentry/socket/netfilter/udp_matcher.go",
+        "pkg/sentry/socket/netlink/**",
+        "pkg/sentry/socket/netstack/**",
+        "pkg/sentry/socket/plugin/**",
+        "pkg/sentry/socket/socket.go",
+        "pkg/sentry/socket/unix/**",
+        "pkg/sentry/state/**",
+        "pkg/sentry/strace/**",
+        "pkg/sentry/syscalls/**",
+        "pkg/sentry/unimpl/**",
+        "pkg/sentry/uniqueid/**",
+        "pkg/sentry/usage/**",
+        "pkg/sentry/vfs/**",
+        "pkg/sentry/watchdog/**",
+        "pkg/shim/**",
+        "pkg/sigframe/**",
+        "pkg/sighandling/**",
+        "pkg/sleep/**",
+        "pkg/spinlock/**",
+        "pkg/state/**",
+        "pkg/syncevent/**",
+        "pkg/syserr/**",
+        "pkg/tcpip/**",
+        "pkg/test/**",
+        "pkg/timing/**",
+        "pkg/trie/**",
+        "pkg/unet/**",
+        "pkg/urpc/**",
+        "pkg/usermem/**",
+        "pkg/waiter/**",
+        "pkg/xdp/**",
+        "runsc/BUILD",
+        "runsc/boot/**",
+        "runsc/cgroup/**",
+        "runsc/checkpointgofer/**",
+        "runsc/cli/**",
+        "runsc/cmd/**",
+        "runsc/config/**",
+        "runsc/console/**",
+        "runsc/container/**",
+        "runsc/donation/**",
+        "runsc/fdparking/**",
+        "runsc/flag/**",
+        "runsc/fsgofer/**",
+        "runsc/gvisorbinaries/**",
+        "runsc/hostsettings/**",
+        "runsc/main.go",
+        "runsc/main_plugin_stack.go",
+        "runsc/metricserver/**",
+        "runsc/mitigate/**",
+        "runsc/prewarmer/**",
+        "runsc/procumounter/**",
+        "runsc/profile/**",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/ffmpeg.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/iperf.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/nginx.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/redis.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/rubydev.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_kvm/sysbench.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/ffmpeg.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/iperf.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/nginx.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/redis.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/rubydev.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.26.3-linux-amd64_systrap/sysbench.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/ffmpeg.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/iperf.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/nginx.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/redis.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/rubydev.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_kvm/sysbench.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/ffmpeg.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/iperf.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/nginx.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/redis.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/rubydev.pgo.pkg_commithash",
+        "runsc/profiles/data/go1.27.1-linux-amd64_systrap/sysbench.pgo.pkg_commithash",
+        "runsc/sandbox/**",
+        "runsc/specutils/**",
+        "runsc/starttime/**",
+        "runsc/version/**",
+        "runsc/version_test.sh",
+        "sandboxexec/**",
+        "shim/**",
+        "test/BUILD",
+        "test/README.md",
+        "test/benchmarks/**",
+        "test/cmd/**",
+        "test/compatibility/**",
+        "test/e2e/**",
+        "test/fsstress/**",
+        "test/fuse_host/**",
+        "test/gpu/BUILD",
+        "test/gpu/cos_gpu_compatibility_test.go",
+        "test/gpu/cuda/**",
+        "test/gpu/cuda_12_8_test.go",
+        "test/gpu/cuda_test.go",
+        "test/gpu/ffmpeg_test.go",
+        "test/gpu/gpu_driver_versions.proto",
+        "test/gpu/imagegen_test.go",
+        "test/gpu/nccl_test.go",
+        "test/gpu/ollama/**",
+        "test/gpu/pytorch_test.go",
+        "test/gpu/sglang/**",
+        "test/gpu/sglang_test.go",
+        "test/gpu/smoke_test.go",
+        "test/gpu/sniffer_test.go",
+        "test/gpu/sr_test.go",
+        "test/gpu/stablediffusion/**",
+        "test/gpu/textgen_test.go",
+        "test/gpu/triton/**",
+        "test/gpu/triton_test.go",
+        "test/gpu/vllm/**",
+        "test/image/**",
+        "test/iptables/**",
+        "test/kubernetes/BUILD",
+        "test/kubernetes/benchmarks/BUILD",
+        "test/kubernetes/benchmarks/README.md",
+        "test/kubernetes/benchmarks/abslbuild.go",
+        "test/kubernetes/benchmarks/abslbuild_test.go",
+        "test/kubernetes/benchmarks/ffmpeg.go",
+        "test/kubernetes/benchmarks/ffmpeg_test.go",
+        "test/kubernetes/benchmarks/grpc.go",
+        "test/kubernetes/benchmarks/grpc_test.go",
+        "test/kubernetes/benchmarks/gsutil.go",
+        "test/kubernetes/benchmarks/gsutil_test.go",
+        "test/kubernetes/benchmarks/httpbench/**",
+        "test/kubernetes/benchmarks/nginx.go",
+        "test/kubernetes/benchmarks/nginx_test.go",
+        "test/kubernetes/benchmarks/ollama.go",
+        "test/kubernetes/benchmarks/ollama_test.go",
+        "test/kubernetes/benchmarks/openclaw.go",
+        "test/kubernetes/benchmarks/openclaw_test.go",
+        "test/kubernetes/benchmarks/postgresql.go",
+        "test/kubernetes/benchmarks/postgresql_test.go",
+        "test/kubernetes/benchmarks/profiling/**",
+        "test/kubernetes/benchmarks/redis.go",
+        "test/kubernetes/benchmarks/redis_test.go",
+        "test/kubernetes/benchmarks/resources/BUILD",
+        "test/kubernetes/benchmarks/rubydev.go",
+        "test/kubernetes/benchmarks/rubydev_test.go",
+        "test/kubernetes/benchmarks/sglang.go",
+        "test/kubernetes/benchmarks/sglang_test.go",
+        "test/kubernetes/benchmarks/stablediffusion.go",
+        "test/kubernetes/benchmarks/stablediffusion_test.go",
+        "test/kubernetes/benchmarks/startup.go",
+        "test/kubernetes/benchmarks/startup_test.go",
+        "test/kubernetes/benchmarks/tensorflow.go",
+        "test/kubernetes/benchmarks/tensorflow_test.go",
+        "test/kubernetes/benchmarks/triton.go",
+        "test/kubernetes/benchmarks/triton_test.go",
+        "test/kubernetes/benchmarks/utils/**",
+        "test/kubernetes/benchmarks/vllm.go",
+        "test/kubernetes/benchmarks/vllm_test.go",
+        "test/kubernetes/benchmarks/wordpress.go",
+        "test/kubernetes/benchmarks/wordpress_test.go",
+        "test/kubernetes/benchmetric/**",
+        "test/kubernetes/gvisor-injection-admission-webhook.yaml.in",
+        "test/kubernetes/helpers.go",
+        "test/kubernetes/k8sctx/**",
+        "test/kubernetes/scripts/**",
+        "test/kubernetes/test_range_config.proto",
+        "test/kubernetes/testcluster/**",
+        "test/kubernetes/tests/**",
+        "test/metricclient/**",
+        "test/metricsviz/**",
+        "test/moby/**",
+        "test/netutils/**",
+        "test/nftables/**",
+        "test/packetdrill/**",
+        "test/packetimpact/**",
+        "test/perf/**",
+        "test/podman/**",
+        "test/root/**",
+        "test/rtnetlink/**",
+        "test/runner/**",
+        "test/runtimes/**",
+        "test/secbench/**",
+        "test/secfuzz/**",
+        "test/syscalls/**",
+        "test/tpu/**",
+        "test/trace/**",
+        "test/uds/**",
+        "test/util/**",
+        "tools/.codespellrc",
+        "tools/BUILD",
+        "tools/actionlint/**",
+        "tools/arch.bzl",
+        "tools/bazel.mk",
+        "tools/bazeldefs/**",
+        "tools/bigquery/**",
+        "tools/build_cover.sh",
+        "tools/buildkite_coordinator/**",
+        "tools/builkite-check-paths.sh",
+        "tools/cc_compile_inputs.bzl",
+        "tools/check_license_headers.sh",
+        "tools/checkaligned/**",
+        "tools/checkconst/**",
+        "tools/checkescape/**",
+        "tools/checklinkname/**",
+        "tools/checklocks/**",
+        "tools/checkunsafe/**",
+        "tools/clang_tidy/**",
+        "tools/com_github_cloudflare_circl.patch",
+        "tools/compat/**",
+        "tools/constraintutil/**",
+        "tools/crosstool-arm-dirs.patch",
+        "tools/cstate_wake_probe/**",
+        "tools/defs.bzl",
+        "tools/deps.bzl",
+        "tools/devcontainer-init.sh",
+        "tools/gazelle.bzl",
+        "tools/gen_compile_commands.py",
+        "tools/github/**",
+        "tools/go-allow-internal.patch",
+        "tools/go_branch.sh",
+        "tools/go_fieldenum/**",
+        "tools/go_generics/**",
+        "tools/go_hostlayout/**",
+        "tools/go_marshal/BUILD",
+        "tools/go_marshal/README.md",
+        "tools/go_marshal/analysis/**",
+        "tools/go_marshal/defs.bzl",
+        "tools/go_marshal/gomarshal/**",
+        "tools/go_marshal/main.go",
+        "tools/go_marshal/test/BUILD",
+        "tools/go_marshal/test/benchmark_test.go",
+        "tools/go_marshal/test/dynamic.go",
+        "tools/go_marshal/test/escape/**",
+        "tools/go_marshal/test/marshal_test.go",
+        "tools/go_marshal/test/test.go",
+        "tools/go_stateify/**",
+        "tools/go_types_memoize.patch",
+        "tools/gopackagesdriver.sh",
+        "tools/gpu/**",
+        "tools/gvisor2pcap/**",
+        "tools/gvisor_k8s_tool/**",
+        "tools/images.mk",
+        "tools/install_containerd.sh",
+        "tools/ioctl_sniffer/**",
+        "tools/licensecheck/**",
+        "tools/lint.sh",
+        "tools/make_apt.sh",
+        "tools/make_python_release.sh",
+        "tools/make_release.sh",
+        "tools/nogo/**",
+        "tools/nvidia_driver_differ/**",
+        "tools/parsers/**",
+        "tools/profiletool/**",
+        "tools/protobuf.disable-binary-reading-on-init.patch",
+        "tools/release.bzl",
+        "tools/remove_windows_deps.patch",
+        "tools/rules_cgo.patch",
+        "tools/rules_go_export.patch",
+        "tools/rules_go_symbols.patch",
+        "tools/show_paths.bzl",
+        "tools/stucktasks/**",
+        "tools/tag_release.sh",
+        "tools/tpu/**",
+        "tools/tpucheckpoint/**",
+        "tools/tracereplay/BUILD",
+        "tools/tracereplay/README.md",
+        "tools/tracereplay/main/**",
+        "tools/tracereplay/replay.go",
+        "tools/tracereplay/save.go",
+        "tools/tracereplay/tracereplay.go",
+        "tools/tracereplay/tracereplay_test.go",
+        "tools/workspace_status.sh",
+        "tools/xdp/**",
+        "tools/yamltest/**",
+        "tools/zstd/**",
+        "vdso/**",
+        "webhook/**",
+        "website/BUILD",
+        "website/_config.yml",
+        "website/_data/**",
+        "website/_includes/**",
+        "website/_layouts/**",
+        "website/_plugins/**",
+        "website/_sass/**",
+        "website/application-compatibility.schema.json",
+        "website/application_compatibility/**",
+        "website/archive.key",
+        "website/assets/images/2023-04-28-getpid-ptrace-vs-native.svg",
+        "website/assets/images/2023-04-28-getpid-ptrace-vs-systrap-opt.svg",
+        "website/assets/images/2023-04-28-getpid-ptrace-vs-systrap-unoptimized.svg",
+        "website/assets/images/2023-04-28-systrap-sample-workloads.svg",
+        "website/assets/images/2023-05-08-rootfs-overlay-before.svg",
+        "website/assets/images/2023-05-08-rootfs-overlay-benchmark-result.svg",
+        "website/assets/images/2023-05-08-rootfs-overlay-gofer-diagram.svg",
+        "website/assets/images/2023-05-08-rootfs-overlay-memory.svg",
+        "website/assets/images/2023-05-08-rootfs-overlay-self.svg",
+        "website/assets/images/2023-06-27-directfs.svg",
+        "website/assets/images/2023-06-27-gofer-proxy.svg",
+        "website/assets/images/2023-06-27-real-world-benchmarks.svg",
+        "website/assets/images/2023-06-27-stat-benchmark.svg",
+        "website/assets/images/2024-09-23-dangerzone-outline.svg",
+        "website/assets/images/2024-09-23-dangerzone-protections-annotated.svg",
+        "website/assets/images/2024-09-23-dangerzone-protections.svg",
+        "website/assets/images/2024-09-23-dangerzone-with-gvisor-annotated.svg",
+        "website/assets/images/2024-09-23-dangerzone-with-gvisor.svg",
+        "website/assets/images/2024-09-23-gvisor-outline.svg",
+        "website/assets/logos/Makefile",
+        "website/assets/logos/README.md",
+        "website/assets/logos/deductive_ai_logo.svg",
+        "website/assets/logos/freedom_of_the_press_foundation.svg",
+        "website/assets/logos/logo_powered_by_with_text_on_dark.svg",
+        "website/assets/logos/logo_solo_monochrome.svg",
+        "website/assets/logos/logo_solo_on_dark.svg",
+        "website/assets/logos/logo_solo_on_dark_full.svg",
+        "website/assets/logos/logo_solo_on_white.svg",
+        "website/assets/logos/logo_solo_on_white_bordered.svg",
+        "website/assets/logos/logo_with_text_monochrome.svg",
+        "website/assets/logos/logo_with_text_on_dark.svg",
+        "website/assets/logos/logo_with_text_on_dark_full.svg",
+        "website/assets/logos/logo_with_text_on_white.svg",
+        "website/assets/logos/logo_with_text_on_white_bordered.svg",
+        "website/assets/logos/openai_logo.svg",
+        "website/assets/logos/snowflake_logo.svg",
+        "website/assets/logos/tailscale_logo.svg",
+        "website/assets/logos/tines_logo.svg",
+        "website/blog/**",
+        "website/cmd/**",
+        "website/css/**",
+        "website/cve-track-record.schema.json",
+        "website/defs.bzl",
+        "website/index.md",
+        "website/performance/**",
+        "website/security_track_record/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n------------------\n\nSome files carry the following license, noted at the top of each file:\n\n   Permission is hereby granted, free of charge, to any person obtaining a copy\n   of this software and associated documentation files (the \"Software\"), to deal\n   in the Software without restriction, including without limitation the rights\n   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n   copies of the Software, and to permit persons to whom the Software is\n   furnished to do so, subject to the following conditions:\n\n   The above copyright notice and this permission notice shall be included in\n   all copies or substantial portions of the Software.\n\n   THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\n   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n   THE SOFTWARE.\n\n------------------\n\nSome files carry the \"BSD\" license, noted at the top of each file:\n\n   Redistribution and use in source and binary forms, with or without\n   modification, are permitted provided that the following conditions are met:\n\n      * Redistributions of source code must retain the above copyright notice,\n      this list of conditions and the following disclaimer.\n\n      * Redistributions in binary form must reproduce the above copyright\n      notice, this list of conditions and the following disclaimer in the\n      documentation and/or other materials provided with the distribution.\n\n      * Neither the name of Google Inc. nor the names of its contributors may be\n      used to endorse or promote products derived from this software without\n      specific prior written permission.\n\n   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\n   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\n   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n   POSSIBILITY OF SUCH DAMAGE.",
+      "attribution": "the authors of google/gvisor (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/gvisor."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "images/benchmarks/node/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of nodedum, ISC license (declared in package.json), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/images/benchmarks/node."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "pkg/safecopy/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/safecopy."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "pkg/sentry/time/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/sentry/time."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        "pkg/sync/**"
+      ],
+      "text": "Copyright (c) 2009 The Go Authors. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the names of its\ncontributors may be used to endorse or promote products derived from\nthis software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009 The Go Authors. All rights reserved., BSD-3-Clause license (LICENSE), https://github.com/google/gvisor/tree/c6112880b448df3cd3c939dbbcf65e8d78836eb2/pkg/sync."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.s"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "handlebars",
+      "paths": [
+        "**/*.hbs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aarch64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.conflist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.llama-2-7b-chat-hf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pkg_commithash"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pkt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ru"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.textproto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.x86_64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clangd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.codespellrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bazelversion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/generate_image"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libhook"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-command"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,574 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/bluenviron/mediamtx",
+  "revision": "420451a54e168b605674ee57e7c55d32403750e1",
+  "checksum": "sha256:0c4e2f7595cba65f104ae90b3d4be7bc66ec5206559b1273c5b10171787739c7",
+  "extract": {
+    "exclude": [
+      "internal/stream/offline_av1.mp4",
+      "internal/stream/offline_h264.mp4",
+      "internal/stream/offline_h265.mp4",
+      "internal/stream/offline_vp9.mp4",
+      "internal/teste2e/images/ffmpeg/emptyvideo.mkv",
+      "internal/teste2e/images/ffmpeg/emptyvideoaudio.mkv",
+      "internal/teste2e/images/gstreamer/emptyvideo.mkv",
+      "logo.png"
+    ]
+  },
+  "history": {
+    "since": "2f3baafb548deba167916eb0261bf2a67885277d"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 aler9\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/bluenviron/mediamtx: Copyright (c) 2019 aler9, MIT license (LICENSE), https://github.com/bluenviron/mediamtx."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "api/**",
+        "docker/**",
+        "docs/**",
+        "go.mod",
+        "go.sum",
+        "internal/api/**",
+        "internal/apidocsgen/**",
+        "internal/auth/**",
+        "internal/certloader/**",
+        "internal/conf/**",
+        "internal/confwatcher/**",
+        "internal/core/**",
+        "internal/counterdumper/**",
+        "internal/defs/**",
+        "internal/errordumper/**",
+        "internal/externalcmd/**",
+        "internal/formatlabel/**",
+        "internal/forward/**",
+        "internal/hooks/**",
+        "internal/linters/**",
+        "internal/logger/**",
+        "internal/metrics/**",
+        "internal/ntpestimator/**",
+        "internal/packetdumper/**",
+        "internal/playback/**",
+        "internal/pprof/**",
+        "internal/protocols/**",
+        "internal/recordcleaner/**",
+        "internal/recorder/**",
+        "internal/recordstore/**",
+        "internal/restrictnetwork/**",
+        "internal/rlimit/**",
+        "internal/servers/**",
+        "internal/staticsources/**",
+        "internal/stream/format_updater.go",
+        "internal/stream/format_updater_test.go",
+        "internal/stream/offline_sub_stream.go",
+        "internal/stream/offline_sub_stream_track.go",
+        "internal/stream/reader.go",
+        "internal/stream/rtp_decoder.go",
+        "internal/stream/rtp_decoder_test.go",
+        "internal/stream/rtp_encoder.go",
+        "internal/stream/rtp_encoder_test.go",
+        "internal/stream/stream.go",
+        "internal/stream/stream_format.go",
+        "internal/stream/stream_media.go",
+        "internal/stream/stream_test.go",
+        "internal/stream/sub_stream.go",
+        "internal/stream/sub_stream_format.go",
+        "internal/stream/sub_stream_media.go",
+        "internal/stream/unit_remuxer.go",
+        "internal/stream/unit_remuxer_test.go",
+        "internal/test/**",
+        "internal/teste2e/build_images_test.go",
+        "internal/teste2e/hls_manager_test.go",
+        "internal/teste2e/images/ffmpeg/Dockerfile",
+        "internal/teste2e/images/ffmpeg/start.sh",
+        "internal/teste2e/images/gstreamer/Dockerfile",
+        "internal/teste2e/images/gstreamer/exitafterframe.c",
+        "internal/teste2e/images/gstreamer/start.sh",
+        "internal/teste2e/images/vlc/**",
+        "internal/teste2e/rtsp_server_test.go",
+        "internal/teste2e/tests_test.go",
+        "internal/unit/**",
+        "internal/upgrade/**",
+        "main.go",
+        "mediamtx.yml",
+        "scripts/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 aler9\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 aler9, MIT license (LICENSE), https://github.com/bluenviron/mediamtx."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/012f7197e6ddf1ab"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/04dc5e127f88e4a0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0a4e2c8af3eab5cc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0be17f6a336dc723"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/0c23fc515adfd463"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1cf7bedaacbce494"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1df43ba150bdbac1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1e10b9f0074a42d0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1e14487eae37d7de"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/23731da0f18d31d0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/283cdc309b409f6e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/297c43aee5d30530"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3105c332986970bb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3344e1baba05b8af"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/34523a772174e26e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/4672cf7e303acb7c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/4742960320bb5cf4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/4aaa2cceaff6c94c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/56fe3cb486379cde"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/582528ddfad69eb5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/744d0cfe7e9fe6df"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/752f6aefa94a7185"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/7f71a2d116d5afde"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/85649d45641911d0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/8c02d6d4791df7c7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/8eff4bc3e4c19ff0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/90b5d1b18dd9f8ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/90ed9ff994ee1365"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/930f49fab2367014"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/96712476d3ab2517"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/99e20f546da05418"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9b0a8a587ff5987f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HASH"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HASH_MTXRPICAM_32_TAR_GZ"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HASH_MTXRPICAM_64_TAR_GZ"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ad79520646055dda"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/b4169cf0f5a60b81"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bb4be6daa388e10f"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/c6277ab31bacf0f0"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/caf81e9797b19c76"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cfac1bcfcd2aaed7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/d2fdaaf5c2595f2c"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dc806ec658c460fc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/e3443030b91d09bb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/e4a7f91c59e36722"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/efb79f37f6577948"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f023ecce237d452d"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f4221bf11814c7e4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/f44ebae6b8fa8577"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fbab04f43516aa5e"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

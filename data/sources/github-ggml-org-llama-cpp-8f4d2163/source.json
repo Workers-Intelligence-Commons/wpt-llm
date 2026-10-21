@@ -1,0 +1,1008 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ggml-org/llama.cpp",
+  "revision": "b76b13379d3b7d67ab0bc424516bb6fd2522bd8e",
+  "checksum": "sha256:c28666e92330940808aebd843a4b79c05185f1a8cb7f76454b97847430a60dcc",
+  "extract": {
+    "exclude": [
+      "cmake/**",
+      "docs/android/**",
+      "docs/development/llama-star/**",
+      "examples/llama.android/app/src/main/res/mipmap-hdpi/**",
+      "examples/llama.android/app/src/main/res/mipmap-mdpi/**",
+      "examples/llama.android/app/src/main/res/mipmap-xhdpi/**",
+      "examples/llama.android/app/src/main/res/mipmap-xxhdpi/**",
+      "examples/llama.android/app/src/main/res/mipmap-xxxhdpi/**",
+      "examples/llama.android/gradle/wrapper/gradle-wrapper.jar",
+      "media/llama0-banner.png",
+      "media/llama0-logo.png",
+      "media/llama1-banner.png",
+      "media/llama1-icon-transparent.png",
+      "media/llama1-icon.png",
+      "media/llama1-logo.png",
+      "media/matmul.png",
+      "models/ggml-vocab-aquila.gguf",
+      "models/ggml-vocab-baichuan.gguf",
+      "models/ggml-vocab-bert-bge.gguf",
+      "models/ggml-vocab-command-r.gguf",
+      "models/ggml-vocab-deepseek-coder.gguf",
+      "models/ggml-vocab-deepseek-llm.gguf",
+      "models/ggml-vocab-falcon.gguf",
+      "models/ggml-vocab-gemma-4.gguf",
+      "models/ggml-vocab-gpt-2.gguf",
+      "models/ggml-vocab-gpt-neox.gguf",
+      "models/ggml-vocab-llama-bpe.gguf",
+      "models/ggml-vocab-llama-spm.gguf",
+      "models/ggml-vocab-mpt.gguf",
+      "models/ggml-vocab-nomic-bert-moe.gguf",
+      "models/ggml-vocab-phi-3.gguf",
+      "models/ggml-vocab-qwen2.gguf",
+      "models/ggml-vocab-qwen35.gguf",
+      "models/ggml-vocab-refact.gguf",
+      "models/ggml-vocab-starcoder.gguf",
+      "tools/mtmd/test-1.jpeg",
+      "tools/mtmd/test-2.mp3",
+      "tools/mtmd/test-3.mp4",
+      "tools/mtmd/tests/test-1-positive.png",
+      "tools/ui/src/lib/vendors/big-integer/**",
+      "tools/ui/static/**",
+      "tools/ui/tests/stories/fixtures/assets/1.jpg",
+      "tools/ui/tests/stories/fixtures/assets/beautiful-flowers-lotus.webp",
+      "tools/ui/tests/stories/fixtures/assets/example.pdf",
+      "vendor/CMakeLists.txt",
+      "vendor/hash/CMakeLists.txt",
+      "vendor/hash/hash.cpp",
+      "vendor/hash/hash.h",
+      "vendor/hash/sha1/**",
+      "vendor/hash/sha256/**",
+      "vendor/miniaudio/**",
+      "vendor/nlohmann/**",
+      "vendor/sheredom/**",
+      "vendor/stb/**"
+    ]
+  },
+  "history": {
+    "since": "6a9a67f0bee5eed67cf8bf03f74f77619da40d3f"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND BSD-2-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT Licence.\r\n\r\nCopyright (c) 2025 Michael Mclaughlin\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining\r\na copy of this software and associated documentation files (the\r\n'Software'), to deal in the Software without restriction, including\r\nwithout limitation the rights to use, copy, modify, merge, publish,\r\ndistribute, sublicense, and/or sell copies of the Software, and to\r\npermit persons to whom the Software is furnished to do so, subject to\r\nthe following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be\r\nincluded in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\r\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\r\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\r\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\r\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\r\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\r\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n\r\n\n\nMIT License\n\nCopyright (c) 2023 together-science\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\n\nMIT License\n\nCopyright (c) 2021 William Casarin <jb55@jb55.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nxxHash Library\nCopyright (c) 2012-2021 Yann Collet\nAll rights reserved.\n\nBSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/ggml-org/llama.cpp: Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp; Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/gguf-py; Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE-jsonhpp), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/licenses; Copyright (c) 2025 Michael Mclaughlin, MIT license (LICENCE.md), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/tools/ui/src/lib/vendors/decimal.js; Copyright (c) 2023 together-science, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/tools/ui/src/lib/vendors/nerdamer-prime; Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/cpp-httplib; Copyright (c) 2021 William Casarin <jb55@jb55.com>, MIT license (LICENSE.md), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/hash/rotate-bits; Copyright (c) 2012-2021 Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/hash/xxhash."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".clang-format",
+        ".clang-tidy",
+        ".devops/**",
+        ".dockerignore",
+        ".ecrc",
+        ".editorconfig",
+        ".flake8",
+        ".gemini/**",
+        ".github/**",
+        ".gitignore",
+        ".gitmodules",
+        ".pi/**",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "AUTHORS",
+        "CLAUDE.md",
+        "CMakeLists.txt",
+        "CMakePresets.json",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "app/**",
+        "benches/**",
+        "build-xcframework.sh",
+        "ci/**",
+        "common/**",
+        "conversion/**",
+        "convert_hf_to_gguf.py",
+        "convert_hf_to_gguf_update.py",
+        "convert_llama_ggml_to_gguf.py",
+        "convert_lora_to_gguf.py",
+        "docs/android.md",
+        "docs/autoparser.md",
+        "docs/backend/**",
+        "docs/build-profiling.md",
+        "docs/build-riscv64-spacemit.md",
+        "docs/build-s390x.md",
+        "docs/build.md",
+        "docs/completions.md",
+        "docs/development/HOWTO-add-model.md",
+        "docs/development/debugging-tests.md",
+        "docs/development/parsing.md",
+        "docs/development/token_generation_performance_tips.md",
+        "docs/docker.md",
+        "docs/function-calling.md",
+        "docs/install.md",
+        "docs/llguidance.md",
+        "docs/models.md",
+        "docs/multi-gpu.md",
+        "docs/multimodal/**",
+        "docs/multimodal.md",
+        "docs/ops/**",
+        "docs/ops.md",
+        "docs/preset.md",
+        "docs/release.md",
+        "docs/speculative.md",
+        "docs/xcframework.md",
+        "examples/CMakeLists.txt",
+        "examples/batched/**",
+        "examples/batched.swift/**",
+        "examples/convert-llama2c-to-ggml/**",
+        "examples/convert_legacy_llama.py",
+        "examples/debug/**",
+        "examples/deprecation-warning/**",
+        "examples/diffusion/**",
+        "examples/embedding/**",
+        "examples/eval-callback/**",
+        "examples/gen-docs/**",
+        "examples/gguf/**",
+        "examples/gguf-hash/**",
+        "examples/idle/**",
+        "examples/json_schema_pydantic_example.py",
+        "examples/llama-eval/**",
+        "examples/llama.android/.gitignore",
+        "examples/llama.android/app/.gitignore",
+        "examples/llama.android/app/build.gradle.kts",
+        "examples/llama.android/app/proguard-rules.pro",
+        "examples/llama.android/app/src/main/AndroidManifest.xml",
+        "examples/llama.android/app/src/main/java/**",
+        "examples/llama.android/app/src/main/res/drawable/**",
+        "examples/llama.android/app/src/main/res/layout/**",
+        "examples/llama.android/app/src/main/res/mipmap-anydpi/**",
+        "examples/llama.android/app/src/main/res/values/**",
+        "examples/llama.android/app/src/main/res/xml/**",
+        "examples/llama.android/build.gradle.kts",
+        "examples/llama.android/gradle/libs.versions.toml",
+        "examples/llama.android/gradle/wrapper/gradle-wrapper.properties",
+        "examples/llama.android/gradle.properties",
+        "examples/llama.android/gradlew",
+        "examples/llama.android/lib/**",
+        "examples/llama.android/settings.gradle.kts",
+        "examples/llama.swiftui/**",
+        "examples/llama.vim",
+        "examples/lookahead/**",
+        "examples/lookup/**",
+        "examples/model-conversion/**",
+        "examples/parallel/**",
+        "examples/passkey/**",
+        "examples/pydantic_models_to_grammar.py",
+        "examples/pydantic_models_to_grammar_examples.py",
+        "examples/reason-act.sh",
+        "examples/retrieval/**",
+        "examples/server-llama2-13B.sh",
+        "examples/server_embd.py",
+        "examples/simple/**",
+        "examples/simple-chat/**",
+        "examples/simple-cmake-pkg/**",
+        "examples/speculative/**",
+        "examples/speculative-simple/**",
+        "examples/sycl/**",
+        "examples/test-cmake/**",
+        "examples/training/**",
+        "flake.nix",
+        "ggml/**",
+        "grammars/**",
+        "include/**",
+        "media/llama1-icon-transparent.svg",
+        "media/llama1-icon.svg",
+        "media/llama1-logo.svg",
+        "media/matmul.svg",
+        "models/.editorconfig",
+        "models/ggml-vocab-bert-bge.gguf.inp",
+        "models/ggml-vocab-bert-bge.gguf.out",
+        "models/ggml-vocab-command-r.gguf.inp",
+        "models/ggml-vocab-command-r.gguf.out",
+        "models/ggml-vocab-deepseek-coder.gguf.inp",
+        "models/ggml-vocab-deepseek-coder.gguf.out",
+        "models/ggml-vocab-deepseek-llm.gguf.inp",
+        "models/ggml-vocab-deepseek-llm.gguf.out",
+        "models/ggml-vocab-falcon.gguf.inp",
+        "models/ggml-vocab-falcon.gguf.out",
+        "models/ggml-vocab-gemma-4.gguf.inp",
+        "models/ggml-vocab-gemma-4.gguf.out",
+        "models/ggml-vocab-gpt-2.gguf.inp",
+        "models/ggml-vocab-gpt-2.gguf.out",
+        "models/ggml-vocab-llama-bpe.gguf.inp",
+        "models/ggml-vocab-llama-bpe.gguf.out",
+        "models/ggml-vocab-llama-spm.gguf.inp",
+        "models/ggml-vocab-llama-spm.gguf.out",
+        "models/ggml-vocab-mpt.gguf.inp",
+        "models/ggml-vocab-mpt.gguf.out",
+        "models/ggml-vocab-phi-3.gguf.inp",
+        "models/ggml-vocab-phi-3.gguf.out",
+        "models/ggml-vocab-qwen2.gguf.inp",
+        "models/ggml-vocab-qwen2.gguf.out",
+        "models/ggml-vocab-qwen35.gguf.inp",
+        "models/ggml-vocab-qwen35.gguf.out",
+        "models/ggml-vocab-refact.gguf.inp",
+        "models/ggml-vocab-refact.gguf.out",
+        "models/ggml-vocab-starcoder.gguf.inp",
+        "models/ggml-vocab-starcoder.gguf.out",
+        "models/templates/**",
+        "mypy.ini",
+        "pocs/**",
+        "pyproject.toml",
+        "pyrightconfig.json",
+        "requirements/**",
+        "requirements.txt",
+        "scripts/**",
+        "skills/**",
+        "src/**",
+        "tests/**",
+        "tools/CMakeLists.txt",
+        "tools/batched-bench/**",
+        "tools/cli/**",
+        "tools/completion/**",
+        "tools/cvector-generator/**",
+        "tools/export-lora/**",
+        "tools/fit-params/**",
+        "tools/gguf-split/**",
+        "tools/imatrix/**",
+        "tools/llama-bench/**",
+        "tools/mtmd/CMakeLists.txt",
+        "tools/mtmd/README-dev.md",
+        "tools/mtmd/README.md",
+        "tools/mtmd/clip-graph.h",
+        "tools/mtmd/clip-impl.h",
+        "tools/mtmd/clip-model.h",
+        "tools/mtmd/clip.cpp",
+        "tools/mtmd/clip.h",
+        "tools/mtmd/debug/**",
+        "tools/mtmd/deprecation-warning.cpp",
+        "tools/mtmd/legacy-models/**",
+        "tools/mtmd/models/**",
+        "tools/mtmd/mtmd-audio.cpp",
+        "tools/mtmd/mtmd-audio.h",
+        "tools/mtmd/mtmd-cli.cpp",
+        "tools/mtmd/mtmd-helper-common.h",
+        "tools/mtmd/mtmd-helper-gen.cpp",
+        "tools/mtmd/mtmd-helper.cpp",
+        "tools/mtmd/mtmd-helper.h",
+        "tools/mtmd/mtmd-image.cpp",
+        "tools/mtmd/mtmd-image.h",
+        "tools/mtmd/mtmd-internal.h",
+        "tools/mtmd/mtmd.cpp",
+        "tools/mtmd/mtmd.h",
+        "tools/mtmd/requirements.txt",
+        "tools/mtmd/tests/test-1-ground-truth.txt",
+        "tools/mtmd/tests/test-deepseek-ocr.py",
+        "tools/mtmd/tests/tests-requirements.txt",
+        "tools/mtmd/tests.sh",
+        "tools/perplexity/**",
+        "tools/quantize/**",
+        "tools/results/**",
+        "tools/rpc/**",
+        "tools/server/**",
+        "tools/tokenize/**",
+        "tools/tts/**",
+        "tools/tuning/**",
+        "tools/ui/.env.example",
+        "tools/ui/.gitignore",
+        "tools/ui/.npmrc",
+        "tools/ui/.prettierignore",
+        "tools/ui/.prettierrc",
+        "tools/ui/.storybook/**",
+        "tools/ui/CMakeLists.txt",
+        "tools/ui/README.md",
+        "tools/ui/components.json",
+        "tools/ui/eslint.config.js",
+        "tools/ui/package-lock.json",
+        "tools/ui/package.json",
+        "tools/ui/playwright.config.ts",
+        "tools/ui/pwa-assets-dark.config.ts",
+        "tools/ui/pwa-assets.config.ts",
+        "tools/ui/scripts/**",
+        "tools/ui/sources.cmake",
+        "tools/ui/src/.gitignore",
+        "tools/ui/src/app.css",
+        "tools/ui/src/app.d.ts",
+        "tools/ui/src/app.html",
+        "tools/ui/src/lib/assets/**",
+        "tools/ui/src/lib/components/**",
+        "tools/ui/src/lib/constants/**",
+        "tools/ui/src/lib/contexts/**",
+        "tools/ui/src/lib/enums/**",
+        "tools/ui/src/lib/hooks/**",
+        "tools/ui/src/lib/services/**",
+        "tools/ui/src/lib/stores/**",
+        "tools/ui/src/lib/styles/**",
+        "tools/ui/src/lib/types/**",
+        "tools/ui/src/lib/utils/**",
+        "tools/ui/src/lib/vendors/package.json",
+        "tools/ui/src/routes/**",
+        "tools/ui/src/virtual-nerdamer.d.ts",
+        "tools/ui/svelte.config.js",
+        "tools/ui/tests/client/**",
+        "tools/ui/tests/e2e/**",
+        "tools/ui/tests/stories/ChatMessage.stories.svelte",
+        "tools/ui/tests/stories/ChatScreenForm.stories.svelte",
+        "tools/ui/tests/stories/Introduction.mdx",
+        "tools/ui/tests/stories/MarkdownContent.stories.svelte",
+        "tools/ui/tests/stories/ModelsManager.stories.svelte",
+        "tools/ui/tests/stories/ModelsSelector.stories.svelte",
+        "tools/ui/tests/stories/PwaRefreshAlert.stories.svelte",
+        "tools/ui/tests/stories/SidebarNavigation.stories.svelte",
+        "tools/ui/tests/stories/a11y/**",
+        "tools/ui/tests/stories/fixtures/ai-tutorial.ts",
+        "tools/ui/tests/stories/fixtures/api-docs.ts",
+        "tools/ui/tests/stories/fixtures/assets/hf-logo.svg",
+        "tools/ui/tests/stories/fixtures/blog-post.ts",
+        "tools/ui/tests/stories/fixtures/data-analysis.ts",
+        "tools/ui/tests/stories/fixtures/empty.ts",
+        "tools/ui/tests/stories/fixtures/math-formulas.ts",
+        "tools/ui/tests/stories/fixtures/readme.ts",
+        "tools/ui/tests/stories/fixtures/storybook-mocks.ts",
+        "tools/ui/tests/unit/**",
+        "tools/ui/tsconfig.json",
+        "tools/ui/ui.cpp.in",
+        "tools/ui/ui.h.in",
+        "tools/ui/vite.config.ts",
+        "tools/ui/vitest-setup-client.ts",
+        "tools/ui/vitest.shims.d.ts",
+        "ty.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "gguf-py/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Georgi Gerganov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 Georgi Gerganov, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/gguf-py."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "licenses/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2013-2025 Niels Lohmann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2013-2025 Niels Lohmann, MIT license (LICENSE-jsonhpp), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/licenses."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/ui/src/lib/vendors/decimal.js/**"
+      ],
+      "text": "The MIT Licence.\r\n\r\nCopyright (c) 2025 Michael Mclaughlin\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining\r\na copy of this software and associated documentation files (the\r\n'Software'), to deal in the Software without restriction, including\r\nwithout limitation the rights to use, copy, modify, merge, publish,\r\ndistribute, sublicense, and/or sell copies of the Software, and to\r\npermit persons to whom the Software is furnished to do so, subject to\r\nthe following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be\r\nincluded in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\r\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\r\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\r\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\r\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\r\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\r\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n\r\n",
+      "attribution": "Copyright (c) 2025 Michael Mclaughlin, MIT license (LICENCE.md), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/tools/ui/src/lib/vendors/decimal.js."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tools/ui/src/lib/vendors/nerdamer-prime/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 together-science\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023 together-science, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/tools/ui/src/lib/vendors/nerdamer-prime."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/cpp-httplib/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2017 yhirose\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n",
+      "attribution": "Copyright (c) 2017 yhirose, MIT license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/cpp-httplib."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "vendor/hash/rotate-bits/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2021 William Casarin <jb55@jb55.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2021 William Casarin <jb55@jb55.com>, MIT license (LICENSE.md), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/hash/rotate-bits."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "vendor/hash/xxhash/**"
+      ],
+      "text": "xxHash Library\nCopyright (c) 2012-2021 Yann Collet\nAll rights reserved.\n\nBSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice, this\n  list of conditions and the following disclaimer in the documentation and/or\n  other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2012-2021 Yann Collet, BSD-2-Clause license (LICENSE), https://github.com/ggml-org/llama.cpp/tree/b76b13379d3b7d67ab0bc424516bb6fd2522bd8e/vendor/hash/xxhash."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.disabled"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.farf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gbnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.last"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.out"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.schema"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/model-conversion/requirements.txt",
+        "requirements.txt",
+        "requirements/requirements-all.txt",
+        "requirements/requirements-compare-llama-bench.txt",
+        "requirements/requirements-convert_hf_to_gguf.txt",
+        "requirements/requirements-convert_hf_to_gguf_update.txt",
+        "requirements/requirements-convert_legacy_llama.txt",
+        "requirements/requirements-convert_llama_ggml_to_gguf.txt",
+        "requirements/requirements-convert_lora_to_gguf.txt",
+        "requirements/requirements-gguf_editor_gui.txt",
+        "requirements/requirements-pydantic.txt",
+        "requirements/requirements-server-bench.txt",
+        "requirements/requirements-test-tokenizer-random.txt",
+        "requirements/requirements-tool_bench.txt",
+        "scripts/jinja/requirements.txt",
+        "scripts/make-release-summary.txt",
+        "scripts/snapdragon/qdc/requirements.txt",
+        "tools/cvector-generator/completions.txt",
+        "tools/cvector-generator/negative.txt",
+        "tools/cvector-generator/positive.txt",
+        "tools/mtmd/requirements.txt",
+        "tools/mtmd/tests/test-1-ground-truth.txt",
+        "tools/mtmd/tests/tests-requirements.txt",
+        "tools/server/bench/requirements.txt",
+        "tools/server/bench/speed-bench/requirements.txt",
+        "tools/server/tests/requirements.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ecrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.flake8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE-jsonhpp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,995 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/prowler-cloud/prowler",
+  "revision": "f5aaec21cc6ee24c6f02ec8da7c849b02a8f5e60",
+  "checksum": "sha256:bf0ab0ab89878eabce052ef16fb1791943b2930c2ca42fe0ab42989c6016f3ff",
+  "extract": {
+    "exclude": [
+      "api/src/backend/tasks/assets/**",
+      "contrib/**",
+      "dashboard/assets/favicon.ico",
+      "dashboard/assets/images/icons/docs.png",
+      "dashboard/assets/images/icons/help-black.png",
+      "dashboard/assets/images/icons/help.png",
+      "dashboard/assets/images/providers/**",
+      "dashboard/assets/logo.png",
+      "docs/favicon.ico",
+      "docs/getting-started/products/img/**",
+      "docs/images/AAD-permissions.png",
+      "docs/images/add-account.png",
+      "docs/images/add-provider.png",
+      "docs/images/add-reader-role.gif",
+      "docs/images/add-sub-to-management-group.gif",
+      "docs/images/architecture.png",
+      "docs/images/aws-credentials.png",
+      "docs/images/aws-marketplace/**",
+      "docs/images/aws-role.png",
+      "docs/images/azure-credentials.png",
+      "docs/images/changelog/**",
+      "docs/images/cli/**",
+      "docs/images/compliance/**",
+      "docs/images/compliance.png",
+      "docs/images/compliance_download.png",
+      "docs/images/compliance_section.png",
+      "docs/images/connect-aws-credentials.png",
+      "docs/images/connect-aws-role.png",
+      "docs/images/create-management-group.gif",
+      "docs/images/download_output.png",
+      "docs/images/extended-display.png",
+      "docs/images/finding-groups-drawer.png",
+      "docs/images/finding-groups-expanded.png",
+      "docs/images/finding-groups-list.png",
+      "docs/images/finding-groups-other-findings.png",
+      "docs/images/findings.png",
+      "docs/images/gcp-credentials.png",
+      "docs/images/github-action/**",
+      "docs/images/html-output.png",
+      "docs/images/issues.png",
+      "docs/images/kubernetes-credentials.png",
+      "docs/images/lighthouse-architecture.png",
+      "docs/images/log-in.png",
+      "docs/images/m365-credentials.png",
+      "docs/images/mutelist-ui-1.png",
+      "docs/images/mutelist-ui-2.png",
+      "docs/images/mutelist-ui-3.png",
+      "docs/images/mutelist-ui-4.png",
+      "docs/images/mutelist-ui-5.png",
+      "docs/images/mutelist-ui-6.png",
+      "docs/images/mutelist-ui-7.png",
+      "docs/images/mutelist-ui-8.png",
+      "docs/images/mutelist-ui-9.png",
+      "docs/images/nacho.png",
+      "docs/images/organizations/authentication-details.png",
+      "docs/images/organizations/aws-console-org-id.png",
+      "docs/images/organizations/azure/**",
+      "docs/images/organizations/cloud-providers-add.png",
+      "docs/images/organizations/connection-failures-skip.png",
+      "docs/images/organizations/delete-organization.png",
+      "docs/images/organizations/discovery-timeout.png",
+      "docs/images/organizations/gcp/**",
+      "docs/images/organizations/launch-scan.png",
+      "docs/images/organizations/onboarding-flow.png",
+      "docs/images/organizations/organization-details-form.png",
+      "docs/images/organizations/organization-row-actions.png",
+      "docs/images/organizations/replace-credentials-apply.png",
+      "docs/images/organizations/replace-credentials-setup.png",
+      "docs/images/organizations/role-arn-field.png",
+      "docs/images/organizations/select-aws-provider.png",
+      "docs/images/organizations/select-organizations-method.png",
+      "docs/images/organizations/test-connections-button.png",
+      "docs/images/organizations/test-connections.png",
+      "docs/images/organizations/tree-view-accounts.png",
+      "docs/images/organizations/two-roles-architecture.png",
+      "docs/images/output_folder.png",
+      "docs/images/pepe.png",
+      "docs/images/powerbi/**",
+      "docs/images/products/dashboard.png",
+      "docs/images/products/overview.png",
+      "docs/images/products/prowler-app-architecture.png",
+      "docs/images/products/prowler-hub.png",
+      "docs/images/products/risk-pipeline.png",
+      "docs/images/products/threat-map.png",
+      "docs/images/provider-added.png",
+      "docs/images/providers/**",
+      "docs/images/prowler-app/**",
+      "docs/images/prowler-cli-quick.gif",
+      "docs/images/prowler-for-msps/**",
+      "docs/images/prowler-logo-black.png",
+      "docs/images/prowler-logo-white.png",
+      "docs/images/prowler-mcp/**",
+      "docs/images/prowler-multi-account-environment.png",
+      "docs/images/prowler-single-account-environment.png",
+      "docs/images/quick-inventory.jpg",
+      "docs/images/register-application.png",
+      "docs/images/scan-progress.png",
+      "docs/images/scan_jobs_section.png",
+      "docs/images/select-provider.png",
+      "docs/images/sergio.png",
+      "docs/images/services.png",
+      "docs/images/short-display.png",
+      "docs/images/sign-up-button.png",
+      "docs/images/sign-up.png",
+      "docs/images/sts-configuration.png",
+      "docs/images/test-connection-button.png",
+      "docs/images/toni.png",
+      "docs/img/**",
+      "docs/user-guide/cli/img/**",
+      "docs/user-guide/img/**",
+      "docs/user-guide/providers/alibabacloud/img/**",
+      "docs/user-guide/providers/aws/img/**",
+      "docs/user-guide/providers/azure/img/**",
+      "docs/user-guide/providers/gcp/img/**",
+      "docs/user-guide/providers/github/img/**",
+      "docs/user-guide/providers/microsoft365/img/**",
+      "docs/user-guide/providers/mongodbatlas/img/**",
+      "docs/user-guide/providers/oci/images/**",
+      "docs/user-guide/providers/okta/images/**",
+      "docs/user-guide/providers/openstack/images/**",
+      "docs/user-guide/providers/vercel/images/**",
+      "tests/contrib/**",
+      "tests/providers/aws/services/autoscaling/autoscaling_find_secrets_ec2_launch_configuration/fixtures/fixture.gz",
+      "tests/providers/aws/services/ec2/ec2_instance_secrets_user_data/fixtures/fixture.gz",
+      "tests/providers/aws/services/ec2/ec2_launch_template_no_secrets/fixtures/fixture.gz",
+      "tests/providers/external/**",
+      "ui/components/icons/compliance/anssi.png",
+      "ui/components/icons/compliance/ens.png",
+      "ui/public/ens.png",
+      "ui/public/favicon.ico",
+      "ui/tests/onboarding/**",
+      "ui/tests/providers/evidence/**",
+      "ui/tests/registry/evidence/**",
+      "ui/tests/scans/evidence/**"
+    ]
+  },
+  "history": {
+    "since": "34aba536499c4d9f562a802ab42c5aab9d645884"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright @ 2024 Toni de la Fuente\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/prowler-cloud/prowler: Copyright @ 2024 Toni de la Fuente, Apache-2.0 license (LICENSE), https://github.com/prowler-cloud/prowler."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".backportrc.json",
+        ".claude-plugin/**",
+        ".config/**",
+        ".env",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".grype.yaml",
+        ".markdownlint.json",
+        ".markdownlintignore",
+        ".pre-commit-config.yaml",
+        ".readthedocs.yaml",
+        ".trivyignore.yaml",
+        ".worktreeinclude",
+        "AGENTS.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "SECURITY.md",
+        "action.yml",
+        "api/.env.example",
+        "api/AGENTS.md",
+        "api/CHANGELOG.md",
+        "api/Dockerfile",
+        "api/README.md",
+        "api/changelog.d/**",
+        "api/docker-entrypoint.sh",
+        "api/docs/**",
+        "api/pyproject.toml",
+        "api/src/__init__.py",
+        "api/src/backend/__init__.py",
+        "api/src/backend/api/**",
+        "api/src/backend/config/**",
+        "api/src/backend/conftest.py",
+        "api/src/backend/manage.py",
+        "api/src/backend/pytest.ini",
+        "api/src/backend/tasks/__init__.py",
+        "api/src/backend/tasks/beat.py",
+        "api/src/backend/tasks/jobs/**",
+        "api/src/backend/tasks/tasks.py",
+        "api/src/backend/tasks/tests/**",
+        "api/src/backend/tasks/utils.py",
+        "api/tests/**",
+        "api/towncrier.toml",
+        "api/uv.lock",
+        "claude_plugins/**",
+        "codecov.yml",
+        "dashboard/__init__.py",
+        "dashboard/__main__.py",
+        "dashboard/assets/cloud-pages.css",
+        "dashboard/assets/images/icons/arrows.svg",
+        "dashboard/assets/images/icons/cloud/**",
+        "dashboard/assets/images/icons/compliance.svg",
+        "dashboard/assets/images/icons/dropdown.svg",
+        "dashboard/assets/images/icons/overview.svg",
+        "dashboard/assets/markdown-styles.css",
+        "dashboard/assets/styles/**",
+        "dashboard/common_methods.py",
+        "dashboard/compliance/**",
+        "dashboard/config.py",
+        "dashboard/lib/**",
+        "dashboard/pages/**",
+        "dashboard/src/**",
+        "dashboard/tailwind.config.js",
+        "docker-compose-dev.yml",
+        "docker-compose.yml",
+        "docs/.mintlifyignore",
+        "docs/AGENTS.md",
+        "docs/README.md",
+        "docs/changelog.mdx",
+        "docs/developer-guide/**",
+        "docs/dockerhub/**",
+        "docs/docs.json",
+        "docs/getting-started/basic-usage/**",
+        "docs/getting-started/comparison/**",
+        "docs/getting-started/goto/**",
+        "docs/getting-started/installation/**",
+        "docs/getting-started/products/index.mdx",
+        "docs/getting-started/products/prowler-app.mdx",
+        "docs/getting-started/products/prowler-cli.mdx",
+        "docs/getting-started/products/prowler-cloud-aws-marketplace.mdx",
+        "docs/getting-started/products/prowler-cloud-lighthouse.mdx",
+        "docs/getting-started/products/prowler-cloud-pricing.mdx",
+        "docs/getting-started/products/prowler-cloud.mdx",
+        "docs/getting-started/products/prowler-for-msps.mdx",
+        "docs/getting-started/products/prowler-hub.mdx",
+        "docs/getting-started/products/prowler-lighthouse-ai.mdx",
+        "docs/getting-started/products/prowler-mcp.mdx",
+        "docs/getting-started/products/prowler-sdk.mdx",
+        "docs/images/icons/**",
+        "docs/images/lighthouse-architecture.mmd",
+        "docs/images/organizations/onboarding-flow.svg",
+        "docs/images/organizations/two-roles-architecture.svg",
+        "docs/images/products/prowler-app-architecture.mmd",
+        "docs/images/prowler_mcp_schema.mmd",
+        "docs/introduction.mdx",
+        "docs/reo.js",
+        "docs/scripts/**",
+        "docs/security/**",
+        "docs/snippets/**",
+        "docs/style.css",
+        "docs/support.mdx",
+        "docs/troubleshooting.mdx",
+        "docs/user-guide/ai-agents/**",
+        "docs/user-guide/cli/tutorials/**",
+        "docs/user-guide/compliance/**",
+        "docs/user-guide/cookbooks/**",
+        "docs/user-guide/organizations.mdx",
+        "docs/user-guide/providers/alibabacloud/authentication.mdx",
+        "docs/user-guide/providers/alibabacloud/getting-started-alibabacloud.mdx",
+        "docs/user-guide/providers/aws/authentication.mdx",
+        "docs/user-guide/providers/aws/boto3-configuration.mdx",
+        "docs/user-guide/providers/aws/cloudshell.mdx",
+        "docs/user-guide/providers/aws/getting-started-aws.mdx",
+        "docs/user-guide/providers/aws/multiaccount.mdx",
+        "docs/user-guide/providers/aws/organizations.mdx",
+        "docs/user-guide/providers/aws/regions-and-partitions.mdx",
+        "docs/user-guide/providers/aws/resource-arn-based-scan.mdx",
+        "docs/user-guide/providers/aws/role-assumption.mdx",
+        "docs/user-guide/providers/aws/s3.mdx",
+        "docs/user-guide/providers/aws/securityhub.mdx",
+        "docs/user-guide/providers/aws/tag-based-scan.mdx",
+        "docs/user-guide/providers/aws/threat-detection.mdx",
+        "docs/user-guide/providers/aws/v2_to_v3_checks_mapping.mdx",
+        "docs/user-guide/providers/azure/authentication.mdx",
+        "docs/user-guide/providers/azure/create-prowler-service-principal.mdx",
+        "docs/user-guide/providers/azure/getting-started-azure.mdx",
+        "docs/user-guide/providers/azure/management-groups.mdx",
+        "docs/user-guide/providers/azure/resource-groups.mdx",
+        "docs/user-guide/providers/azure/subscriptions.mdx",
+        "docs/user-guide/providers/azure/use-non-default-cloud.mdx",
+        "docs/user-guide/providers/cloudflare/**",
+        "docs/user-guide/providers/e2enetworks/**",
+        "docs/user-guide/providers/gcp/authentication.mdx",
+        "docs/user-guide/providers/gcp/getting-started-gcp.mdx",
+        "docs/user-guide/providers/gcp/organization.mdx",
+        "docs/user-guide/providers/gcp/projects.mdx",
+        "docs/user-guide/providers/gcp/retry-configuration.mdx",
+        "docs/user-guide/providers/github/authentication.mdx",
+        "docs/user-guide/providers/github/getting-started-github.mdx",
+        "docs/user-guide/providers/googleworkspace/**",
+        "docs/user-guide/providers/huaweicloud/**",
+        "docs/user-guide/providers/iac/**",
+        "docs/user-guide/providers/image/**",
+        "docs/user-guide/providers/kubernetes/**",
+        "docs/user-guide/providers/linode/**",
+        "docs/user-guide/providers/llm/**",
+        "docs/user-guide/providers/microsoft365/authentication.mdx",
+        "docs/user-guide/providers/microsoft365/getting-started-m365.mdx",
+        "docs/user-guide/providers/microsoft365/use-of-powershell.mdx",
+        "docs/user-guide/providers/mongodbatlas/authentication.mdx",
+        "docs/user-guide/providers/mongodbatlas/getting-started-mongodbatlas.mdx",
+        "docs/user-guide/providers/oci/authentication.mdx",
+        "docs/user-guide/providers/oci/getting-started-oci.mdx",
+        "docs/user-guide/providers/okta/authentication.mdx",
+        "docs/user-guide/providers/okta/getting-started-okta.mdx",
+        "docs/user-guide/providers/okta/retry-configuration.mdx",
+        "docs/user-guide/providers/openstack/authentication.mdx",
+        "docs/user-guide/providers/openstack/getting-started-openstack.mdx",
+        "docs/user-guide/providers/scaleway/**",
+        "docs/user-guide/providers/stackit/**",
+        "docs/user-guide/providers/vercel/authentication.mdx",
+        "docs/user-guide/providers/vercel/getting-started-vercel.mdx",
+        "docs/user-guide/tutorials/**",
+        "examples/**",
+        "kubernetes/**",
+        "mcp_server/**",
+        "osv-scanner.toml",
+        "permissions/**",
+        "prowler/**",
+        "prowler-cli.py",
+        "pyproject.toml",
+        "scripts/**",
+        "skills/**",
+        "tests/config/**",
+        "tests/conftest.py",
+        "tests/dashboard/**",
+        "tests/github/**",
+        "tests/lib/**",
+        "tests/providers/alibabacloud/**",
+        "tests/providers/aws/aws_provider_test.py",
+        "tests/providers/aws/aws_regions_by_service.json",
+        "tests/providers/aws/conftest.py",
+        "tests/providers/aws/lib/**",
+        "tests/providers/aws/services/accessanalyzer/**",
+        "tests/providers/aws/services/account/**",
+        "tests/providers/aws/services/acm/**",
+        "tests/providers/aws/services/acmpca/**",
+        "tests/providers/aws/services/amplify/**",
+        "tests/providers/aws/services/apigateway/**",
+        "tests/providers/aws/services/apigatewayv2/**",
+        "tests/providers/aws/services/appstream/**",
+        "tests/providers/aws/services/appsync/**",
+        "tests/providers/aws/services/athena/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_find_secrets_ec2_launch_configuration/autoscaling_find_secrets_ec2_launch_configuration_test.py",
+        "tests/providers/aws/services/autoscaling/autoscaling_find_secrets_ec2_launch_configuration/fixtures/fixture",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_capacity_rebalance_enabled/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_elb_health_check_enabled/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_launch_configuration_no_public_ip/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_launch_configuration_requires_imdsv2/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_multiple_az/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_multiple_instance_types/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_group_using_ec2_launch_template/**",
+        "tests/providers/aws/services/autoscaling/autoscaling_service_test.py",
+        "tests/providers/aws/services/awslambda/**",
+        "tests/providers/aws/services/backup/**",
+        "tests/providers/aws/services/batch/**",
+        "tests/providers/aws/services/bedrock/**",
+        "tests/providers/aws/services/cloudformation/**",
+        "tests/providers/aws/services/cloudfront/**",
+        "tests/providers/aws/services/cloudtrail/**",
+        "tests/providers/aws/services/cloudwatch/**",
+        "tests/providers/aws/services/codeartifact/**",
+        "tests/providers/aws/services/codebuild/**",
+        "tests/providers/aws/services/codecommit/**",
+        "tests/providers/aws/services/codepipeline/**",
+        "tests/providers/aws/services/cognito/**",
+        "tests/providers/aws/services/config/**",
+        "tests/providers/aws/services/datapipeline/**",
+        "tests/providers/aws/services/datasync/**",
+        "tests/providers/aws/services/directconnect/**",
+        "tests/providers/aws/services/directoryservice/**",
+        "tests/providers/aws/services/dlm/**",
+        "tests/providers/aws/services/dms/**",
+        "tests/providers/aws/services/documentdb/**",
+        "tests/providers/aws/services/drs/**",
+        "tests/providers/aws/services/dynamodb/**",
+        "tests/providers/aws/services/ec2/ec2_ami_account_block_public_access/**",
+        "tests/providers/aws/services/ec2/ec2_ami_public/**",
+        "tests/providers/aws/services/ec2/ec2_client_vpn_endpoint_connection_logging_enabled/**",
+        "tests/providers/aws/services/ec2/ec2_confidential_workload_host_imdsv2_not_enforced/**",
+        "tests/providers/aws/services/ec2/ec2_confidential_workload_host_not_running/**",
+        "tests/providers/aws/services/ec2/ec2_confidential_workload_host_public_ip/**",
+        "tests/providers/aws/services/ec2/ec2_confidential_workload_host_unrestricted_ingress/**",
+        "tests/providers/aws/services/ec2/ec2_confidential_workload_host_vsock_proxy_exposed/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_default_encryption/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_public_snapshot/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_snapshot_account_block_public_access/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_snapshots_encrypted/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_volume_encryption/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_volume_protected_by_backup_plan/**",
+        "tests/providers/aws/services/ec2/ec2_ebs_volume_snapshots_exists/**",
+        "tests/providers/aws/services/ec2/ec2_elastic_ip_shodan/**",
+        "tests/providers/aws/services/ec2/ec2_elastic_ip_unassigned/**",
+        "tests/providers/aws/services/ec2/ec2_instance_account_imdsv2_enabled/**",
+        "tests/providers/aws/services/ec2/ec2_instance_detailed_monitoring_enabled/**",
+        "tests/providers/aws/services/ec2/ec2_instance_imdsv2_enabled/**",
+        "tests/providers/aws/services/ec2/ec2_instance_internet_facing_with_instance_profile/**",
+        "tests/providers/aws/services/ec2/ec2_instance_managed_by_ssm/**",
+        "tests/providers/aws/services/ec2/ec2_instance_older_than_specific_days/**",
+        "tests/providers/aws/services/ec2/ec2_instance_paravirtual_type/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_cassandra_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_cifs_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_elasticsearch_kibana_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_ftp_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_kafka_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_kerberos_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_ldap_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_memcached_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_mongodb_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_mysql_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_oracle_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_postgresql_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_rdp_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_redis_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_sqlserver_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_ssh_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_port_telnet_exposed_to_internet/**",
+        "tests/providers/aws/services/ec2/ec2_instance_profile_attached/**",
+        "tests/providers/aws/services/ec2/ec2_instance_public_ip/**",
+        "tests/providers/aws/services/ec2/ec2_instance_secrets_user_data/ec2_instance_secrets_user_data_test.py",
+        "tests/providers/aws/services/ec2/ec2_instance_secrets_user_data/fixtures/fixture",
+        "tests/providers/aws/services/ec2/ec2_instance_stopped_older_than_specific_days/**",
+        "tests/providers/aws/services/ec2/ec2_instance_uses_single_eni/**",
+        "tests/providers/aws/services/ec2/ec2_instance_with_outdated_ami/**",
+        "tests/providers/aws/services/ec2/ec2_launch_template_imdsv2_required/**",
+        "tests/providers/aws/services/ec2/ec2_launch_template_no_public_ip/**",
+        "tests/providers/aws/services/ec2/ec2_launch_template_no_secrets/ec2_launch_template_no_secrets_test.py",
+        "tests/providers/aws/services/ec2/ec2_launch_template_no_secrets/fixtures/fixture",
+        "tests/providers/aws/services/ec2/ec2_networkacl_allow_ingress_any_port/**",
+        "tests/providers/aws/services/ec2/ec2_networkacl_allow_ingress_tcp_port_22/**",
+        "tests/providers/aws/services/ec2/ec2_networkacl_allow_ingress_tcp_port_3389/**",
+        "tests/providers/aws/services/ec2/ec2_networkacl_unused/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_all_ports/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_any_port/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_any_port_from_ip/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_high_risk_tcp_ports/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_3389/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_cassandra_7199_9160_8888/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_elasticsearch_kibana_9200_9300_5601/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_ftp_20_21/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_kafka_9092/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_memcached_11211/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_mongodb_27017_27018/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_mysql_3306/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_oracle_1521_2483/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_postgres_5432/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_redis_6379/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_sql_server_1433_1434/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_telnet_23/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_allow_wide_open_public_ipv4/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_default_restrict_traffic/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_from_launch_wizard/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_not_used/**",
+        "tests/providers/aws/services/ec2/ec2_securitygroup_with_many_ingress_egress_rules/**",
+        "tests/providers/aws/services/ec2/ec2_service_test.py",
+        "tests/providers/aws/services/ec2/ec2_transitgateway_auto_accept_vpc_attachments/**",
+        "tests/providers/aws/services/ec2/lib/**",
+        "tests/providers/aws/services/ecr/**",
+        "tests/providers/aws/services/ecs/**",
+        "tests/providers/aws/services/efs/**",
+        "tests/providers/aws/services/eks/**",
+        "tests/providers/aws/services/elasticache/**",
+        "tests/providers/aws/services/elasticbeanstalk/**",
+        "tests/providers/aws/services/elb/**",
+        "tests/providers/aws/services/elbv2/**",
+        "tests/providers/aws/services/emr/**",
+        "tests/providers/aws/services/eventbridge/**",
+        "tests/providers/aws/services/firehose/**",
+        "tests/providers/aws/services/fms/**",
+        "tests/providers/aws/services/fsx/**",
+        "tests/providers/aws/services/glacier/**",
+        "tests/providers/aws/services/globalaccelerator/**",
+        "tests/providers/aws/services/glue/**",
+        "tests/providers/aws/services/guardduty/**",
+        "tests/providers/aws/services/iam/**",
+        "tests/providers/aws/services/inspector2/**",
+        "tests/providers/aws/services/kafka/**",
+        "tests/providers/aws/services/kinesis/**",
+        "tests/providers/aws/services/kms/**",
+        "tests/providers/aws/services/lightsail/**",
+        "tests/providers/aws/services/macie/**",
+        "tests/providers/aws/services/memorydb/**",
+        "tests/providers/aws/services/mq/**",
+        "tests/providers/aws/services/neptune/**",
+        "tests/providers/aws/services/networkfirewall/**",
+        "tests/providers/aws/services/opensearch/**",
+        "tests/providers/aws/services/organizations/**",
+        "tests/providers/aws/services/rds/**",
+        "tests/providers/aws/services/redshift/**",
+        "tests/providers/aws/services/resourceexplorer2/**",
+        "tests/providers/aws/services/rolesanywhere/**",
+        "tests/providers/aws/services/route53/**",
+        "tests/providers/aws/services/s3/**",
+        "tests/providers/aws/services/sagemaker/**",
+        "tests/providers/aws/services/secretsmanager/**",
+        "tests/providers/aws/services/securityhub/**",
+        "tests/providers/aws/services/servicecatalog/**",
+        "tests/providers/aws/services/ses/**",
+        "tests/providers/aws/services/shield/**",
+        "tests/providers/aws/services/sns/**",
+        "tests/providers/aws/services/sqs/**",
+        "tests/providers/aws/services/ssm/**",
+        "tests/providers/aws/services/ssmincidents/**",
+        "tests/providers/aws/services/stepfunctions/**",
+        "tests/providers/aws/services/storagegateway/**",
+        "tests/providers/aws/services/transfer/**",
+        "tests/providers/aws/services/trustedadvisor/**",
+        "tests/providers/aws/services/vpc/**",
+        "tests/providers/aws/services/waf/**",
+        "tests/providers/aws/services/wafv2/**",
+        "tests/providers/aws/services/wellarchitected/**",
+        "tests/providers/aws/services/workspaces/**",
+        "tests/providers/aws/utils.py",
+        "tests/providers/azure/**",
+        "tests/providers/cloudflare/**",
+        "tests/providers/common/**",
+        "tests/providers/e2enetworks/**",
+        "tests/providers/gcp/**",
+        "tests/providers/github/**",
+        "tests/providers/googleworkspace/**",
+        "tests/providers/huaweicloud/**",
+        "tests/providers/iac/**",
+        "tests/providers/image/**",
+        "tests/providers/kubernetes/**",
+        "tests/providers/linode/**",
+        "tests/providers/m365/**",
+        "tests/providers/mongodbatlas/**",
+        "tests/providers/nhn/**",
+        "tests/providers/okta/**",
+        "tests/providers/openstack/**",
+        "tests/providers/oraclecloud/**",
+        "tests/providers/scaleway/**",
+        "tests/providers/stackit/**",
+        "tests/providers/vercel/**",
+        "tests/util/**",
+        "ui/.dockerignore",
+        "ui/.gitignore",
+        "ui/.nvmrc",
+        "ui/.pre-commit-config.yaml",
+        "ui/.prettierignore",
+        "ui/.prettierrc.json",
+        "ui/.vscode/**",
+        "ui/AGENTS.md",
+        "ui/CHANGELOG.md",
+        "ui/Dockerfile",
+        "ui/README.md",
+        "ui/__tests__/**",
+        "ui/actions/**",
+        "ui/app/**",
+        "ui/auth.config.test.ts",
+        "ui/auth.config.ts",
+        "ui/changelog.d/**",
+        "ui/components/ThemeSwitch.test.tsx",
+        "ui/components/ThemeSwitch.tsx",
+        "ui/components/auth/**",
+        "ui/components/compliance/**",
+        "ui/components/feeds/**",
+        "ui/components/filters/**",
+        "ui/components/findings/**",
+        "ui/components/graphs/**",
+        "ui/components/icons/Icons.tsx",
+        "ui/components/icons/compliance/IconCompliance.test.ts",
+        "ui/components/icons/compliance/IconCompliance.tsx",
+        "ui/components/icons/compliance/asd-essential-eight.svg",
+        "ui/components/icons/compliance/aws.svg",
+        "ui/components/icons/compliance/c5.svg",
+        "ui/components/icons/compliance/ccc.svg",
+        "ui/components/icons/compliance/cis.svg",
+        "ui/components/icons/compliance/cisa.svg",
+        "ui/components/icons/compliance/cmmc.svg",
+        "ui/components/icons/compliance/csa.svg",
+        "ui/components/icons/compliance/cyber-essentials.svg",
+        "ui/components/icons/compliance/dora.svg",
+        "ui/components/icons/compliance/fedramp.svg",
+        "ui/components/icons/compliance/ffiec.svg",
+        "ui/components/icons/compliance/gdpr.svg",
+        "ui/components/icons/compliance/gxp-aws.svg",
+        "ui/components/icons/compliance/hipaa.svg",
+        "ui/components/icons/compliance/iso-27001.svg",
+        "ui/components/icons/compliance/kisa.svg",
+        "ui/components/icons/compliance/mitre-attack.svg",
+        "ui/components/icons/compliance/nis2.svg",
+        "ui/components/icons/compliance/nist.svg",
+        "ui/components/icons/compliance/okta.svg",
+        "ui/components/icons/compliance/pci-dss.svg",
+        "ui/components/icons/compliance/prowlerThreat.svg",
+        "ui/components/icons/compliance/rbi.svg",
+        "ui/components/icons/compliance/soc2.svg",
+        "ui/components/icons/index.ts",
+        "ui/components/icons/lighthouse-icon-with-aura.tsx",
+        "ui/components/icons/lighthouse-icon.test.tsx",
+        "ui/components/icons/providers-badge/**",
+        "ui/components/icons/prowler/**",
+        "ui/components/icons/services/**",
+        "ui/components/integrations/**",
+        "ui/components/invitations/**",
+        "ui/components/layout/**",
+        "ui/components/lighthouse/**",
+        "ui/components/lighthouse-v1/**",
+        "ui/components/manage-groups/**",
+        "ui/components/onboarding/**",
+        "ui/components/overview/**",
+        "ui/components/providers/**",
+        "ui/components/registry/**",
+        "ui/components/resources/**",
+        "ui/components/roles/**",
+        "ui/components/runtime-config/**",
+        "ui/components/scans/**",
+        "ui/components/services/**",
+        "ui/components/shadcn/**",
+        "ui/components/shared/**",
+        "ui/components/side-panel/**",
+        "ui/components/survey/**",
+        "ui/components/ui/**",
+        "ui/components/users/**",
+        "ui/components.json",
+        "ui/config/**",
+        "ui/contexts/**",
+        "ui/dataServices.json",
+        "ui/dependency-log.json",
+        "ui/eslint.config.ts",
+        "ui/hooks/**",
+        "ui/images.d.ts",
+        "ui/instrumentation-client.test.ts",
+        "ui/instrumentation-client.ts",
+        "ui/instrumentation.ts",
+        "ui/knip.config.ts",
+        "ui/lib/**",
+        "ui/next.config.js",
+        "ui/next.config.test.ts",
+        "ui/nextauth.d.ts",
+        "ui/package.json",
+        "ui/playwright.base.ts",
+        "ui/playwright.config.ts",
+        "ui/playwright.registry.config.ts",
+        "ui/pnpm-lock.yaml",
+        "ui/pnpm-workspace.yaml",
+        "ui/postcss.config.js",
+        "ui/proxy.registry.test.ts",
+        "ui/proxy.test.ts",
+        "ui/proxy.ts",
+        "ui/public/logos/**",
+        "ui/public/mockServiceWorker.js",
+        "ui/public/next.svg",
+        "ui/public/vercel.svg",
+        "ui/scripts/**",
+        "ui/sentry/**",
+        "ui/store/**",
+        "ui/styles/**",
+        "ui/test-utils/**",
+        "ui/tests/auth/**",
+        "ui/tests/base-page.ts",
+        "ui/tests/helpers.ts",
+        "ui/tests/home/**",
+        "ui/tests/invitation-accept/**",
+        "ui/tests/invitations/**",
+        "ui/tests/navigation/**",
+        "ui/tests/profile/**",
+        "ui/tests/providers/providers-page.ts",
+        "ui/tests/providers/providers.md",
+        "ui/tests/providers/providers.spec.ts",
+        "ui/tests/registry/add-provider-tour-report.md",
+        "ui/tests/registry/controlled-registry-api.mts",
+        "ui/tests/registry/controlled-registry-fixture.ts",
+        "ui/tests/registry/registry-page.ts",
+        "ui/tests/registry/registry.md",
+        "ui/tests/registry/registry.spec.ts",
+        "ui/tests/registry/validation.md",
+        "ui/tests/runtime-config/**",
+        "ui/tests/scans/scans-page.ts",
+        "ui/tests/scans/scans.md",
+        "ui/tests/scans/scans.spec.ts",
+        "ui/tests/setups/**",
+        "ui/tests/sign-in-base/**",
+        "ui/tests/sign-up/**",
+        "ui/towncrier.toml",
+        "ui/tsconfig.json",
+        "ui/types/**",
+        "ui/vitest.config.ts",
+        "ui/vitest.integration.setup.ts",
+        "ui/vitest.setup.ts",
+        "util/**",
+        "uv.lock"
+      ],
+      "text": "                                Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright @ 2024 Toni de la Fuente\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright @ 2024 Toni de la Fuente, Apache-2.0 license (LICENSE), https://github.com/prowler-cloud/prowler."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jinja",
+      "paths": [
+        "**/*.jinja"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mmd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tfvars"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.markdownlintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mintlifyignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.worktreeinclude"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fixture"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,802 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/ggml-org/whisper.cpp",
+  "revision": "0c7be696371069e0baa2515ed7aa08d5a5473aa6",
+  "checksum": "sha256:51026866bcafd3575ed2904cd188eed630855dc28d6c786ccfd57da966f636a7",
+  "extract": {
+    "exclude": [
+      "bindings/go/samples/**",
+      "bindings/java/gradle/wrapper/gradle-wrapper.jar",
+      "examples/wchess/wchess.wasm/chessboardjs-1.0.0/img/**",
+      "examples/whisper.android/gradle/wrapper/gradle-wrapper.jar",
+      "examples/whisper.android.java/README_files/**",
+      "examples/whisper.android.java/app/src/main/res/mipmap-hdpi/**",
+      "examples/whisper.android.java/app/src/main/res/mipmap-mdpi/**",
+      "examples/whisper.android.java/app/src/main/res/mipmap-xhdpi/**",
+      "examples/whisper.android.java/app/src/main/res/mipmap-xxhdpi/**",
+      "examples/whisper.android.java/app/src/main/res/mipmap-xxxhdpi/**",
+      "examples/whisper.android.java/gradle/wrapper/gradle-wrapper.jar",
+      "media/**",
+      "models/for-tests-ggml-base.bin",
+      "models/for-tests-ggml-base.en.bin",
+      "models/for-tests-ggml-large.bin",
+      "models/for-tests-ggml-medium.bin",
+      "models/for-tests-ggml-medium.en.bin",
+      "models/for-tests-ggml-parakeet-tdt-bad-nfft0.bin",
+      "models/for-tests-ggml-parakeet-tdt.bin",
+      "models/for-tests-ggml-small.bin",
+      "models/for-tests-ggml-small.en.bin",
+      "models/for-tests-ggml-tiny.bin",
+      "models/for-tests-ggml-tiny.en.bin",
+      "models/for-tests-silero-v6.2.0-ggml.bin",
+      "samples/jfk.mp3",
+      "samples/jfk.wav"
+    ]
+  },
+  "history": {
+    "since": "28802c4daef86ebec073a5eeeb57cf3f7b252274"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2022 David Thorpe\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright 2019 Chris Oakman\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nCode in this directory is adapted from OpenAI Whisper project\n(https://github.com/openai/whisper) and carries the following\ncopyright and license.\n\n    MIT License\n\n    Copyright (c) 2022 OpenAI\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/ggml-org/whisper.cpp: Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp; Copyright (c) 2022 David Thorpe, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/bindings/go; Copyright 2019 Chris Oakman, MIT license (LICENSE.md), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/examples/wchess/wchess.wasm/chessboardjs-1.0.0/js/chessboard-1.0.0; Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/earnings21/normalizers; Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/librispeech-parakeet/normalizers; Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/librispeech/normalizers."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devops/**",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".pi/**",
+        "AGENTS.md",
+        "AUTHORS",
+        "CMakeLists.txt",
+        "CMakePresets.json",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "README_sycl.md",
+        "bindings/CMakeLists.txt",
+        "bindings/java/.idea/**",
+        "bindings/java/README.md",
+        "bindings/java/build.gradle",
+        "bindings/java/gradle/wrapper/gradle-wrapper.properties",
+        "bindings/java/gradle.properties",
+        "bindings/java/gradlew",
+        "bindings/java/gradlew.bat",
+        "bindings/java/settings.gradle",
+        "bindings/java/src/**",
+        "bindings/javascript/**",
+        "bindings/ruby/**",
+        "build-xcframework.sh",
+        "ci/**",
+        "cmake/**",
+        "examples/CMakeLists.txt",
+        "examples/addon.node/**",
+        "examples/bench/**",
+        "examples/bench.wasm/**",
+        "examples/cli/**",
+        "examples/coi-serviceworker.js",
+        "examples/command/**",
+        "examples/command.wasm/**",
+        "examples/common-ggml.cpp",
+        "examples/common-ggml.h",
+        "examples/common-sdl.cpp",
+        "examples/common-sdl.h",
+        "examples/common-whisper.cpp",
+        "examples/common-whisper.h",
+        "examples/common.cpp",
+        "examples/common.h",
+        "examples/deprecation-warning/**",
+        "examples/ffmpeg-transcode.cpp",
+        "examples/generate-karaoke.sh",
+        "examples/grammar-parser.cpp",
+        "examples/grammar-parser.h",
+        "examples/helpers.js",
+        "examples/json.hpp",
+        "examples/livestream.sh",
+        "examples/lsp/**",
+        "examples/miniaudio.h",
+        "examples/parakeet-cli/**",
+        "examples/parakeet-quantize/**",
+        "examples/python/**",
+        "examples/quantize/**",
+        "examples/server/**",
+        "examples/server.py",
+        "examples/stb_vorbis.c",
+        "examples/stream/**",
+        "examples/stream.wasm/**",
+        "examples/sycl/**",
+        "examples/talk-llama/**",
+        "examples/test-cmake/**",
+        "examples/twitch.sh",
+        "examples/vad-speech-segments/**",
+        "examples/wchess/CMakeLists.txt",
+        "examples/wchess/README.md",
+        "examples/wchess/libwchess/**",
+        "examples/wchess/wchess.cmd/**",
+        "examples/wchess/wchess.wasm/CMakeLists.txt",
+        "examples/wchess/wchess.wasm/chessboardjs-1.0.0/css/**",
+        "examples/wchess/wchess.wasm/chessboardjs-1.0.0/js/chessboard-1.0.0.js",
+        "examples/wchess/wchess.wasm/chessboardjs-1.0.0/js/chessboard-1.0.0.min.js",
+        "examples/wchess/wchess.wasm/index-tmpl.html",
+        "examples/wchess/wchess.wasm/jquery-3.7.1.min.js",
+        "examples/wchess/wchess.wasm/wchess.wasm.cpp",
+        "examples/whisper.android/.gitignore",
+        "examples/whisper.android/.idea/**",
+        "examples/whisper.android/README.md",
+        "examples/whisper.android/app/**",
+        "examples/whisper.android/build.gradle",
+        "examples/whisper.android/gradle/wrapper/gradle-wrapper.properties",
+        "examples/whisper.android/gradle.properties",
+        "examples/whisper.android/gradlew",
+        "examples/whisper.android/gradlew.bat",
+        "examples/whisper.android/lib/**",
+        "examples/whisper.android/settings.gradle",
+        "examples/whisper.android.java/.gitignore",
+        "examples/whisper.android.java/README.md",
+        "examples/whisper.android.java/app/.gitignore",
+        "examples/whisper.android.java/app/build.gradle",
+        "examples/whisper.android.java/app/proguard-rules.pro",
+        "examples/whisper.android.java/app/src/androidTest/**",
+        "examples/whisper.android.java/app/src/main/AndroidManifest.xml",
+        "examples/whisper.android.java/app/src/main/assets/**",
+        "examples/whisper.android.java/app/src/main/java/**",
+        "examples/whisper.android.java/app/src/main/jni/**",
+        "examples/whisper.android.java/app/src/main/res/drawable/**",
+        "examples/whisper.android.java/app/src/main/res/drawable-v24/**",
+        "examples/whisper.android.java/app/src/main/res/layout/**",
+        "examples/whisper.android.java/app/src/main/res/mipmap-anydpi-v26/**",
+        "examples/whisper.android.java/app/src/main/res/values/**",
+        "examples/whisper.android.java/app/src/main/res/values-night/**",
+        "examples/whisper.android.java/app/src/test/**",
+        "examples/whisper.android.java/build.gradle",
+        "examples/whisper.android.java/gradle/wrapper/gradle-wrapper.properties",
+        "examples/whisper.android.java/gradle.properties",
+        "examples/whisper.android.java/gradlew",
+        "examples/whisper.android.java/gradlew.bat",
+        "examples/whisper.android.java/settings.gradle",
+        "examples/whisper.nvim/**",
+        "examples/whisper.objc/**",
+        "examples/whisper.swiftui/**",
+        "examples/whisper.wasm/**",
+        "examples/yt-wsp.sh",
+        "ggml/**",
+        "grammars/**",
+        "include/**",
+        "models/.gitignore",
+        "models/README.md",
+        "models/convert-h5-to-coreml.py",
+        "models/convert-h5-to-ggml.py",
+        "models/convert-parakeet-to-ggml.py",
+        "models/convert-pt-to-ggml.py",
+        "models/convert-silero-vad-to-ggml.py",
+        "models/convert-whisper-to-coreml.py",
+        "models/convert-whisper-to-openvino.py",
+        "models/download-coreml-model.sh",
+        "models/download-ggml-model.cmd",
+        "models/download-ggml-model.sh",
+        "models/download-vad-model.cmd",
+        "models/download-vad-model.sh",
+        "models/download-vitisai-model.cmd",
+        "models/download-vitisai-model.ps1",
+        "models/download-vitisai-model.sh",
+        "models/generate-coreml-interface.sh",
+        "models/generate-coreml-model.sh",
+        "models/generate-parakeet-test-model.py",
+        "models/ggml_to_pt.py",
+        "models/requirements-coreml.txt",
+        "models/requirements-openvino.txt",
+        "models/requirements-parakeet.txt",
+        "samples/.gitignore",
+        "samples/README.md",
+        "scripts/**",
+        "src/**",
+        "tests/.gitignore",
+        "tests/CMakeLists.txt",
+        "tests/earnings21/.gitignore",
+        "tests/earnings21/Makefile",
+        "tests/earnings21/README.md",
+        "tests/earnings21/eval.mk",
+        "tests/earnings21/eval.py",
+        "tests/earnings21/requirements.txt",
+        "tests/en-0-ref.txt",
+        "tests/en-1-ref.txt",
+        "tests/en-2-ref.txt",
+        "tests/es-0-ref.txt",
+        "tests/librispeech/.gitignore",
+        "tests/librispeech/Makefile",
+        "tests/librispeech/README.md",
+        "tests/librispeech/eval.mk",
+        "tests/librispeech/eval.py",
+        "tests/librispeech/requirements.txt",
+        "tests/librispeech-parakeet/.gitignore",
+        "tests/librispeech-parakeet/Makefile",
+        "tests/librispeech-parakeet/README.md",
+        "tests/librispeech-parakeet/eval.mk",
+        "tests/librispeech-parakeet/eval.py",
+        "tests/parakeet-expected-diffusion-output.txt",
+        "tests/parakeet-expected-gb1-output.txt",
+        "tests/parakeet-expected-jfk-output.txt",
+        "tests/parakeet-verification.h",
+        "tests/run-tests.sh",
+        "tests/test-c.c",
+        "tests/test-common-utf8.cpp",
+        "tests/test-parakeet-full.cpp",
+        "tests/test-parakeet.cpp",
+        "tests/test-vad-full.cpp",
+        "tests/test-vad.cpp",
+        "tests/test-whisper-buffer-loader.cpp",
+        "tests/test-whisper-lang-detect-abort.cpp",
+        "tests/test-whisper-zero-samples.cpp",
+        "tests/test-whisper.js"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023-2026 The ggml authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2023-2026 The ggml authors, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "bindings/go/.gitignore",
+        "bindings/go/LICENSE",
+        "bindings/go/Makefile",
+        "bindings/go/README.md",
+        "bindings/go/doc.go",
+        "bindings/go/examples/**",
+        "bindings/go/go.mod",
+        "bindings/go/go.sum",
+        "bindings/go/params.go",
+        "bindings/go/pkg/**",
+        "bindings/go/whisper.go",
+        "bindings/go/whisper_test.go"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 David Thorpe\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 David Thorpe, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/bindings/go."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "examples/wchess/wchess.wasm/chessboardjs-1.0.0/js/chessboard-1.0.0/**"
+      ],
+      "text": "Copyright 2019 Chris Oakman\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright 2019 Chris Oakman, MIT license (LICENSE.md), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/examples/wchess/wchess.wasm/chessboardjs-1.0.0/js/chessboard-1.0.0."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/earnings21/normalizers/**"
+      ],
+      "text": "Code in this directory is adapted from OpenAI Whisper project\n(https://github.com/openai/whisper) and carries the following\ncopyright and license.\n\n    MIT License\n\n    Copyright (c) 2022 OpenAI\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/earnings21/normalizers."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/librispeech-parakeet/normalizers/**"
+      ],
+      "text": "Code in this directory is adapted from OpenAI Whisper project\n(https://github.com/openai/whisper) and carries the following\ncopyright and license.\n\n    MIT License\n\n    Copyright (c) 2022 OpenAI\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/librispeech-parakeet/normalizers."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "tests/librispeech/normalizers/**"
+      ],
+      "text": "Code in this directory is adapted from OpenAI Whisper project\n(https://github.com/openai/whisper) and carries the following\ncopyright and license.\n\n    MIT License\n\n    Copyright (c) 2022 OpenAI\n\n    Permission is hereby granted, free of charge, to any person obtaining a copy\n    of this software and associated documentation files (the \"Software\"), to deal\n    in the Software without restriction, including without limitation the rights\n    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n    copies of the Software, and to permit persons to whom the Software is\n    furnished to do so, subject to the following conditions:\n\n    The above copyright notice and this permission notice shall be included in all\n    copies or substantial portions of the Software.\n\n    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n    SOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 OpenAI, MIT license (LICENSE), https://github.com/ggml-org/whisper.cpp/tree/0c7be696371069e0baa2515ed7aa08d5a5473aa6/tests/librispeech/normalizers."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.S"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.cmd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cu"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cuda",
+      "paths": [
+        "**/*.cuh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "metal",
+      "paths": [
+        "**/*.metal"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-cpp",
+      "paths": [
+        "**/*.mm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.comp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.entitlements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gbnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.inf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.last"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nvim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbxproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rbs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.storyboard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/command/commands.txt",
+        "examples/talk-llama/prompts/talk-alpaca.txt",
+        "models/requirements-coreml.txt",
+        "models/requirements-openvino.txt",
+        "models/requirements-parakeet.txt",
+        "scripts/bench-all-gg.txt",
+        "tests/earnings21/requirements.txt",
+        "tests/en-0-ref.txt",
+        "tests/en-1-ref.txt",
+        "tests/en-2-ref.txt",
+        "tests/es-0-ref.txt",
+        "tests/librispeech/requirements.txt",
+        "tests/parakeet-expected-diffusion-output.txt",
+        "tests/parakeet-expected-gb1-output.txt",
+        "tests/parakeet-expected-jfk-output.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcscheme"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xcworkspacedata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.document"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.rdoc_options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/AUTHORS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/speak"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vim",
+      "paths": [
+        "**/*.vim"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "wgsl",
+      "paths": [
+        "**/*.wgsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

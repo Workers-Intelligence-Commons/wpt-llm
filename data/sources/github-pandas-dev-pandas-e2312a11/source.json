@@ -1,0 +1,998 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pandas-dev/pandas",
+  "revision": "1be9260d02e19fd0df616e0ec881d865a9dd56d9",
+  "checksum": "sha256:b82f428a0ee45576b426006aeb00a03834c905fc219c2db3fb4d705ac45c3cd9",
+  "extract": {
+    "exclude": [
+      "doc/cheatsheet/Pandas_Cheat_Sheet.pdf",
+      "doc/cheatsheet/Pandas_Cheat_Sheet.pptx",
+      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf",
+      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx",
+      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf",
+      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx",
+      "doc/source/_static/ci.png",
+      "doc/source/_static/df_repr_truncated.png",
+      "doc/source/_static/eval-perf.png",
+      "doc/source/_static/new-excel-index.png",
+      "doc/source/_static/old-excel-index.png",
+      "doc/source/_static/print_df_new.png",
+      "doc/source/_static/print_df_old.png",
+      "doc/source/_static/query-perf.png",
+      "doc/source/_static/reshaping_melt.png",
+      "doc/source/_static/reshaping_pivot.png",
+      "doc/source/_static/reshaping_stack.png",
+      "doc/source/_static/reshaping_unstack.png",
+      "doc/source/_static/reshaping_unstack_0.png",
+      "doc/source/_static/reshaping_unstack_1.png",
+      "doc/source/_static/schemas/01_table_spreadsheet.png",
+      "doc/source/_static/spreadsheets/conditional.png",
+      "doc/source/_static/spreadsheets/filter.png",
+      "doc/source/_static/spreadsheets/find.png",
+      "doc/source/_static/spreadsheets/pivot.png",
+      "doc/source/_static/spreadsheets/sort.png",
+      "doc/source/_static/spreadsheets/vlookup.png",
+      "doc/source/_static/style/**",
+      "doc/source/_static/style-excel.png",
+      "doc/source/_static/trunc_after.png",
+      "doc/source/_static/trunc_before.png",
+      "doc/source/_static/whatsnew_assign.png",
+      "doc/source/_static/whatsnew_plot_submethods.png",
+      "pandas/_libs/include/pandas/vendored/**",
+      "pandas/_libs/src/vendored/**",
+      "pandas/tests/io/data/csv/test1.csv.bz2",
+      "pandas/tests/io/data/csv/test1.csv.gz",
+      "pandas/tests/io/data/csv/tips.csv.bz2",
+      "pandas/tests/io/data/csv/tips.csv.gz",
+      "pandas/tests/io/data/excel/**",
+      "pandas/tests/io/data/feather/**",
+      "pandas/tests/io/data/html_encoding/chinese_utf-16.html",
+      "pandas/tests/io/data/html_encoding/chinese_utf-32.html",
+      "pandas/tests/io/data/html_encoding/letz_latin1.html",
+      "pandas/tests/io/data/legacy_hdf/**",
+      "pandas/tests/io/data/legacy_pickle/**",
+      "pandas/tests/io/data/orc/**",
+      "pandas/tests/io/data/parquet/**",
+      "pandas/tests/io/data/pickle/**",
+      "pandas/tests/io/data/spss/**",
+      "pandas/tests/io/data/stata/S4_EDUC1.dta",
+      "pandas/tests/io/data/stata/stata-compat-102.dta",
+      "pandas/tests/io/data/stata/stata-compat-103.dta",
+      "pandas/tests/io/data/stata/stata-compat-104.dta",
+      "pandas/tests/io/data/stata/stata-compat-105.dta",
+      "pandas/tests/io/data/stata/stata-compat-108.dta",
+      "pandas/tests/io/data/stata/stata-compat-110.dta",
+      "pandas/tests/io/data/stata/stata-compat-111.dta",
+      "pandas/tests/io/data/stata/stata-compat-113.dta",
+      "pandas/tests/io/data/stata/stata-compat-114.dta",
+      "pandas/tests/io/data/stata/stata-compat-118.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-103.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-104.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-105.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-108.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-110.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-111.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-113.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-114.dta",
+      "pandas/tests/io/data/stata/stata-compat-be-118.dta",
+      "pandas/tests/io/data/stata/stata-date-overflow-36096.dta",
+      "pandas/tests/io/data/stata/stata-dta-partially-labeled.dta",
+      "pandas/tests/io/data/stata/stata10_115.dta",
+      "pandas/tests/io/data/stata/stata10_117.dta",
+      "pandas/tests/io/data/stata/stata11_115.dta",
+      "pandas/tests/io/data/stata/stata11_117.dta",
+      "pandas/tests/io/data/stata/stata12_117.dta",
+      "pandas/tests/io/data/stata/stata12_118.dta",
+      "pandas/tests/io/data/stata/stata12_119.dta",
+      "pandas/tests/io/data/stata/stata12_be_117.dta",
+      "pandas/tests/io/data/stata/stata12_be_118.dta",
+      "pandas/tests/io/data/stata/stata12_be_119.dta",
+      "pandas/tests/io/data/stata/stata13_dates.dta",
+      "pandas/tests/io/data/stata/stata14_118.dta",
+      "pandas/tests/io/data/stata/stata14_119.dta",
+      "pandas/tests/io/data/stata/stata14_be_118.dta",
+      "pandas/tests/io/data/stata/stata14_be_119.dta",
+      "pandas/tests/io/data/stata/stata15.dta",
+      "pandas/tests/io/data/stata/stata16_118.dta",
+      "pandas/tests/io/data/stata/stata16_119.dta",
+      "pandas/tests/io/data/stata/stata16_be_118.dta",
+      "pandas/tests/io/data/stata/stata16_be_119.dta",
+      "pandas/tests/io/data/stata/stata1_102.dta",
+      "pandas/tests/io/data/stata/stata1_103.dta",
+      "pandas/tests/io/data/stata/stata1_104.dta",
+      "pandas/tests/io/data/stata/stata1_105.dta",
+      "pandas/tests/io/data/stata/stata1_108.dta",
+      "pandas/tests/io/data/stata/stata1_110.dta",
+      "pandas/tests/io/data/stata/stata1_111.dta",
+      "pandas/tests/io/data/stata/stata1_113.dta",
+      "pandas/tests/io/data/stata/stata1_114.dta",
+      "pandas/tests/io/data/stata/stata1_115.dta",
+      "pandas/tests/io/data/stata/stata1_117.dta",
+      "pandas/tests/io/data/stata/stata1_118.dta",
+      "pandas/tests/io/data/stata/stata1_119.dta",
+      "pandas/tests/io/data/stata/stata1_119.dta.gz",
+      "pandas/tests/io/data/stata/stata1_encoding.dta",
+      "pandas/tests/io/data/stata/stata1_encoding_118.dta",
+      "pandas/tests/io/data/stata/stata2_113.dta",
+      "pandas/tests/io/data/stata/stata2_114.dta",
+      "pandas/tests/io/data/stata/stata2_115.dta",
+      "pandas/tests/io/data/stata/stata2_117.dta",
+      "pandas/tests/io/data/stata/stata3_113.dta",
+      "pandas/tests/io/data/stata/stata3_114.dta",
+      "pandas/tests/io/data/stata/stata3_115.dta",
+      "pandas/tests/io/data/stata/stata3_117.dta",
+      "pandas/tests/io/data/stata/stata4_102.dta",
+      "pandas/tests/io/data/stata/stata4_103.dta",
+      "pandas/tests/io/data/stata/stata4_104.dta",
+      "pandas/tests/io/data/stata/stata4_105.dta",
+      "pandas/tests/io/data/stata/stata4_108.dta",
+      "pandas/tests/io/data/stata/stata4_110.dta",
+      "pandas/tests/io/data/stata/stata4_111.dta",
+      "pandas/tests/io/data/stata/stata4_113.dta",
+      "pandas/tests/io/data/stata/stata4_114.dta",
+      "pandas/tests/io/data/stata/stata4_115.dta",
+      "pandas/tests/io/data/stata/stata4_117.dta",
+      "pandas/tests/io/data/stata/stata5_113.dta",
+      "pandas/tests/io/data/stata/stata5_114.dta",
+      "pandas/tests/io/data/stata/stata5_115.dta",
+      "pandas/tests/io/data/stata/stata5_117.dta",
+      "pandas/tests/io/data/stata/stata6_113.dta",
+      "pandas/tests/io/data/stata/stata6_114.dta",
+      "pandas/tests/io/data/stata/stata6_115.dta",
+      "pandas/tests/io/data/stata/stata6_117.dta",
+      "pandas/tests/io/data/stata/stata7_111.dta",
+      "pandas/tests/io/data/stata/stata7_115.dta",
+      "pandas/tests/io/data/stata/stata7_117.dta",
+      "pandas/tests/io/data/stata/stata8_102.dta",
+      "pandas/tests/io/data/stata/stata8_103.dta",
+      "pandas/tests/io/data/stata/stata8_104.dta",
+      "pandas/tests/io/data/stata/stata8_105.dta",
+      "pandas/tests/io/data/stata/stata8_108.dta",
+      "pandas/tests/io/data/stata/stata8_110.dta",
+      "pandas/tests/io/data/stata/stata8_111.dta",
+      "pandas/tests/io/data/stata/stata8_113.dta",
+      "pandas/tests/io/data/stata/stata8_115.dta",
+      "pandas/tests/io/data/stata/stata8_117.dta",
+      "pandas/tests/io/data/stata/stata9_115.dta",
+      "pandas/tests/io/data/stata/stata9_117.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_102.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_103.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_104.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_105.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_108.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_110.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_111.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_113.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_114.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_115.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_117.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_118.dta",
+      "pandas/tests/io/data/stata/stata_int_validranges_119.dta",
+      "pandas/tests/io/data/tar/**",
+      "pandas/tests/io/data/xml/baby_names.xml",
+      "pandas/tests/io/json/data/tsframe_v012.json.zip",
+      "pandas/tests/io/parser/data/salaries.csv.bz2",
+      "pandas/tests/io/parser/data/salaries.csv.gz",
+      "pandas/tests/io/parser/data/salaries.csv.xz",
+      "pandas/tests/io/parser/data/salaries.csv.zip",
+      "pandas/tests/io/parser/data/salaries.csv.zst",
+      "pandas/tests/io/parser/data/sauron.SHIFT_JIS.csv",
+      "pandas/tests/io/parser/data/tar_csv.tar",
+      "pandas/tests/io/parser/data/tar_csv.tar.gz",
+      "pandas/tests/io/parser/data/unicode_series.csv",
+      "pandas/tests/io/parser/data/utf16_ex.txt",
+      "pandas/tests/io/parser/data/utf16_ex_small.zip",
+      "pandas/tests/io/parser/data/utf32_ex_small.zip",
+      "pandas/tests/io/parser/data/utf8_ex_small.zip",
+      "pandas/tests/io/sas/data/0x00controlbyte.sas7bdat.bz2",
+      "pandas/tests/io/sas/data/0x40controlbyte.sas7bdat",
+      "pandas/tests/io/sas/data/DEMO_PUF.cpt",
+      "pandas/tests/io/sas/data/SSHSV1_A.xpt",
+      "pandas/tests/io/sas/data/airline.sas7bdat",
+      "pandas/tests/io/sas/data/airline.sas7bdat.gz",
+      "pandas/tests/io/sas/data/amd_page.sas7bdat.bz2",
+      "pandas/tests/io/sas/data/amd_page_resaved.sas7bdat.bz2",
+      "pandas/tests/io/sas/data/cars.sas7bdat",
+      "pandas/tests/io/sas/data/corrupt.sas7bdat",
+      "pandas/tests/io/sas/data/dates_null.sas7bdat",
+      "pandas/tests/io/sas/data/datetime.sas7bdat",
+      "pandas/tests/io/sas/data/load_log.sas7bdat",
+      "pandas/tests/io/sas/data/many_columns.sas7bdat",
+      "pandas/tests/io/sas/data/max_sas_date.sas7bdat",
+      "pandas/tests/io/sas/data/paxraw_d_short.xpt",
+      "pandas/tests/io/sas/data/productsales.sas7bdat",
+      "pandas/tests/io/sas/data/test1.sas7bdat",
+      "pandas/tests/io/sas/data/test10.sas7bdat",
+      "pandas/tests/io/sas/data/test11.sas7bdat",
+      "pandas/tests/io/sas/data/test12.sas7bdat",
+      "pandas/tests/io/sas/data/test13.sas7bdat",
+      "pandas/tests/io/sas/data/test14.sas7bdat",
+      "pandas/tests/io/sas/data/test15.sas7bdat",
+      "pandas/tests/io/sas/data/test16.sas7bdat",
+      "pandas/tests/io/sas/data/test2.sas7bdat",
+      "pandas/tests/io/sas/data/test3.sas7bdat",
+      "pandas/tests/io/sas/data/test4.sas7bdat",
+      "pandas/tests/io/sas/data/test5.sas7bdat",
+      "pandas/tests/io/sas/data/test6.sas7bdat",
+      "pandas/tests/io/sas/data/test7.sas7bdat",
+      "pandas/tests/io/sas/data/test8.sas7bdat",
+      "pandas/tests/io/sas/data/test9.sas7bdat",
+      "pandas/tests/io/sas/data/test_12659.sas7bdat",
+      "pandas/tests/io/sas/data/test_meta2_page.sas7bdat",
+      "pandas/tests/io/sas/data/zero_rows.sas7bdat",
+      "pandas/tests/io/sas/data/zero_variables.sas7bdat",
+      "pandas/tests/tseries/offsets/data/**",
+      "web/pandas/static/img/blog/**",
+      "web/pandas/static/img/books/**",
+      "web/pandas/static/img/favicon.ico",
+      "web/pandas/static/img/favicon_white.ico",
+      "pandas/tests/io/sas/data/DEMO_G.xpt",
+      "pandas/tests/io/sas/data/DRXFCD_G.xpt"
+    ]
+  },
+  "history": {
+    "since": "5aba6659e422e985683cfb46c07c3364a02b6e5b"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team\nAll rights reserved.\n\nCopyright (c) 2011-2026, Open source contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Commit history of https://github.com/pandas-dev/pandas: Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team; Copyright (c) 2011-2026, Open source contributors., BSD-3-Clause license (LICENSE), https://github.com/pandas-dev/pandas."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "AGENTS.md",
+        "AUTHORS.md",
+        "CITATION.cff",
+        "LICENSE",
+        "LICENSES/**",
+        "README.md",
+        "asv_bench/**",
+        "ci/**",
+        "codecov.yml",
+        "doc/.gitignore",
+        "doc/_templates/**",
+        "doc/cheatsheet/README.md",
+        "doc/data/**",
+        "doc/make.py",
+        "doc/redirects.csv",
+        "doc/scripts/**",
+        "doc/source/_static/css/**",
+        "doc/source/_static/index_api.svg",
+        "doc/source/_static/index_contribute.svg",
+        "doc/source/_static/index_getting_started.svg",
+        "doc/source/_static/index_user_guide.svg",
+        "doc/source/_static/logo_r.svg",
+        "doc/source/_static/logo_sas.svg",
+        "doc/source/_static/logo_sas_white.svg",
+        "doc/source/_static/logo_sql.svg",
+        "doc/source/_static/logo_stata.svg",
+        "doc/source/_static/question_mark_noback.svg",
+        "doc/source/_static/schemas/01_table_dataframe.svg",
+        "doc/source/_static/schemas/01_table_series.svg",
+        "doc/source/_static/schemas/02_io_readwrite.svg",
+        "doc/source/_static/schemas/03_subset_columns.svg",
+        "doc/source/_static/schemas/03_subset_columns_rows.svg",
+        "doc/source/_static/schemas/03_subset_rows.svg",
+        "doc/source/_static/schemas/04_plot_overview.svg",
+        "doc/source/_static/schemas/05_newcolumn_1.svg",
+        "doc/source/_static/schemas/05_newcolumn_2.svg",
+        "doc/source/_static/schemas/05_newcolumn_3.svg",
+        "doc/source/_static/schemas/06_aggregate.svg",
+        "doc/source/_static/schemas/06_groupby.svg",
+        "doc/source/_static/schemas/06_groupby_agg_detail.svg",
+        "doc/source/_static/schemas/06_groupby_select_detail.svg",
+        "doc/source/_static/schemas/06_reduction.svg",
+        "doc/source/_static/schemas/06_valuecounts.svg",
+        "doc/source/_static/schemas/07_melt.svg",
+        "doc/source/_static/schemas/07_pivot.svg",
+        "doc/source/_static/schemas/07_pivot_table.svg",
+        "doc/source/_static/schemas/08_concat_column.svg",
+        "doc/source/_static/schemas/08_concat_row.svg",
+        "doc/source/_static/schemas/08_merge_left.svg",
+        "doc/source/_static/spreadsheets/logo_excel.svg",
+        "doc/source/conf.py",
+        "doc/source/development/**",
+        "doc/source/getting_started/**",
+        "doc/source/index.rst.template",
+        "doc/source/reference/**",
+        "doc/source/signature_overrides.py",
+        "doc/source/user_guide/**",
+        "doc/source/whatsnew/**",
+        "doc/sphinxext/**",
+        "environment.yml",
+        "generate_pxi.py",
+        "generate_version.py",
+        "meson.build",
+        "meson.options",
+        "pandas/__init__.py",
+        "pandas/_config/**",
+        "pandas/_libs/__init__.py",
+        "pandas/_libs/_ujson.pyi",
+        "pandas/_libs/algos.pxd",
+        "pandas/_libs/algos.pyi",
+        "pandas/_libs/algos.pyx",
+        "pandas/_libs/algos_common_helper.pxi.in",
+        "pandas/_libs/algos_take_helper.pxi.in",
+        "pandas/_libs/arrays.pxd",
+        "pandas/_libs/arrays.pyi",
+        "pandas/_libs/arrays.pyx",
+        "pandas/_libs/byteswap.pyi",
+        "pandas/_libs/byteswap.pyx",
+        "pandas/_libs/dtypes.pxd",
+        "pandas/_libs/groupby.pyi",
+        "pandas/_libs/groupby.pyx",
+        "pandas/_libs/hashing.pyi",
+        "pandas/_libs/hashing.pyx",
+        "pandas/_libs/hashtable.pxd",
+        "pandas/_libs/hashtable.pyi",
+        "pandas/_libs/hashtable.pyx",
+        "pandas/_libs/hashtable_class_helper.pxi.in",
+        "pandas/_libs/hashtable_func_helper.pxi.in",
+        "pandas/_libs/include/pandas/datetime/**",
+        "pandas/_libs/include/pandas/moments.h",
+        "pandas/_libs/include/pandas/parser/**",
+        "pandas/_libs/include/pandas/portable.h",
+        "pandas/_libs/include/pandas/simd/**",
+        "pandas/_libs/include/pandas/skiplist.h",
+        "pandas/_libs/index.pyi",
+        "pandas/_libs/index.pyx",
+        "pandas/_libs/index_class_helper.pxi.in",
+        "pandas/_libs/indexing.pyi",
+        "pandas/_libs/indexing.pyx",
+        "pandas/_libs/internals.pyi",
+        "pandas/_libs/internals.pyx",
+        "pandas/_libs/interval.pyi",
+        "pandas/_libs/interval.pyx",
+        "pandas/_libs/intervaltree.pxi.in",
+        "pandas/_libs/join.pyi",
+        "pandas/_libs/join.pyx",
+        "pandas/_libs/khash.pxd",
+        "pandas/_libs/khash_for_primitive_helper.pxi.in",
+        "pandas/_libs/lib.pxd",
+        "pandas/_libs/lib.pyi",
+        "pandas/_libs/lib.pyx",
+        "pandas/_libs/meson.build",
+        "pandas/_libs/missing.pxd",
+        "pandas/_libs/missing.pyi",
+        "pandas/_libs/missing.pyx",
+        "pandas/_libs/ops.pyi",
+        "pandas/_libs/ops.pyx",
+        "pandas/_libs/ops_dispatch.pyi",
+        "pandas/_libs/ops_dispatch.pyx",
+        "pandas/_libs/parsers.pyi",
+        "pandas/_libs/parsers.pyx",
+        "pandas/_libs/portable.pxd",
+        "pandas/_libs/properties.pyi",
+        "pandas/_libs/properties.pyx",
+        "pandas/_libs/reshape.pyi",
+        "pandas/_libs/reshape.pyx",
+        "pandas/_libs/sas.pyi",
+        "pandas/_libs/sas.pyx",
+        "pandas/_libs/simd/**",
+        "pandas/_libs/sparse.pyi",
+        "pandas/_libs/sparse.pyx",
+        "pandas/_libs/sparse_op_helper.pxi.in",
+        "pandas/_libs/src/datetime/**",
+        "pandas/_libs/src/parser/**",
+        "pandas/_libs/testing.pyi",
+        "pandas/_libs/testing.pyx",
+        "pandas/_libs/tslib.pyi",
+        "pandas/_libs/tslib.pyx",
+        "pandas/_libs/tslibs/**",
+        "pandas/_libs/util.pxd",
+        "pandas/_libs/window/**",
+        "pandas/_libs/writers.pyi",
+        "pandas/_libs/writers.pyx",
+        "pandas/_testing/**",
+        "pandas/_typing.py",
+        "pandas/api/**",
+        "pandas/arrays/**",
+        "pandas/compat/**",
+        "pandas/conftest.py",
+        "pandas/core/**",
+        "pandas/errors/**",
+        "pandas/io/**",
+        "pandas/meson.build",
+        "pandas/plotting/**",
+        "pandas/testing.py",
+        "pandas/tests/__init__.py",
+        "pandas/tests/api/**",
+        "pandas/tests/apply/**",
+        "pandas/tests/arithmetic/**",
+        "pandas/tests/arrays/**",
+        "pandas/tests/base/**",
+        "pandas/tests/computation/**",
+        "pandas/tests/config/**",
+        "pandas/tests/construction/**",
+        "pandas/tests/copy_view/**",
+        "pandas/tests/dtypes/**",
+        "pandas/tests/extension/**",
+        "pandas/tests/frame/**",
+        "pandas/tests/generic/**",
+        "pandas/tests/groupby/**",
+        "pandas/tests/indexes/**",
+        "pandas/tests/indexing/**",
+        "pandas/tests/interchange/**",
+        "pandas/tests/internals/**",
+        "pandas/tests/io/__init__.py",
+        "pandas/tests/io/conftest.py",
+        "pandas/tests/io/data/csv/banklist.csv",
+        "pandas/tests/io/data/csv/iris.csv",
+        "pandas/tests/io/data/csv/test1.csv",
+        "pandas/tests/io/data/csv/test_mmap.csv",
+        "pandas/tests/io/data/csv/tips.csv",
+        "pandas/tests/io/data/fixed_width/**",
+        "pandas/tests/io/data/html/**",
+        "pandas/tests/io/data/html_encoding/chinese_utf-8.html",
+        "pandas/tests/io/data/stata/stata3.csv",
+        "pandas/tests/io/data/stata/stata5.csv",
+        "pandas/tests/io/data/stata/stata6.csv",
+        "pandas/tests/io/data/xml/books.xml",
+        "pandas/tests/io/data/xml/cta_rail_lines.kml",
+        "pandas/tests/io/data/xml/doc_ch_utf.xml",
+        "pandas/tests/io/data/xml/flatten_doc.xsl",
+        "pandas/tests/io/data/xml/row_field_output.xsl",
+        "pandas/tests/io/excel/**",
+        "pandas/tests/io/formats/**",
+        "pandas/tests/io/generate_legacy_storage_files.py",
+        "pandas/tests/io/json/__init__.py",
+        "pandas/tests/io/json/conftest.py",
+        "pandas/tests/io/json/data/line_delimited.json",
+        "pandas/tests/io/json/data/teams.csv",
+        "pandas/tests/io/json/data/tsframe_iso_v012.json",
+        "pandas/tests/io/json/data/tsframe_v012.json",
+        "pandas/tests/io/json/test_compression.py",
+        "pandas/tests/io/json/test_deprecated_kwargs.py",
+        "pandas/tests/io/json/test_json_table_schema.py",
+        "pandas/tests/io/json/test_json_table_schema_ext_dtype.py",
+        "pandas/tests/io/json/test_normalize.py",
+        "pandas/tests/io/json/test_pandas.py",
+        "pandas/tests/io/json/test_readlines.py",
+        "pandas/tests/io/json/test_ujson.py",
+        "pandas/tests/io/parser/__init__.py",
+        "pandas/tests/io/parser/common/**",
+        "pandas/tests/io/parser/conftest.py",
+        "pandas/tests/io/parser/data/items.jsonl",
+        "pandas/tests/io/parser/data/salaries.csv",
+        "pandas/tests/io/parser/data/sub_char.csv",
+        "pandas/tests/io/parser/data/test2.csv",
+        "pandas/tests/io/parser/data/test_mmap.csv",
+        "pandas/tests/io/parser/dtypes/**",
+        "pandas/tests/io/parser/test_c_parser_only.py",
+        "pandas/tests/io/parser/test_comment.py",
+        "pandas/tests/io/parser/test_compression.py",
+        "pandas/tests/io/parser/test_concatenate_chunks.py",
+        "pandas/tests/io/parser/test_converters.py",
+        "pandas/tests/io/parser/test_dialect.py",
+        "pandas/tests/io/parser/test_encoding.py",
+        "pandas/tests/io/parser/test_header.py",
+        "pandas/tests/io/parser/test_index_col.py",
+        "pandas/tests/io/parser/test_mangle_dupes.py",
+        "pandas/tests/io/parser/test_multi_thread.py",
+        "pandas/tests/io/parser/test_na_values.py",
+        "pandas/tests/io/parser/test_network.py",
+        "pandas/tests/io/parser/test_parallel_read.py",
+        "pandas/tests/io/parser/test_parse_dates.py",
+        "pandas/tests/io/parser/test_python_parser_only.py",
+        "pandas/tests/io/parser/test_quoting.py",
+        "pandas/tests/io/parser/test_read_fwf.py",
+        "pandas/tests/io/parser/test_skiprows.py",
+        "pandas/tests/io/parser/test_textreader.py",
+        "pandas/tests/io/parser/test_unsupported.py",
+        "pandas/tests/io/parser/test_upcast.py",
+        "pandas/tests/io/parser/usecols/**",
+        "pandas/tests/io/pytables/**",
+        "pandas/tests/io/sas/__init__.py",
+        "pandas/tests/io/sas/data/0x40controlbyte.csv",
+        "pandas/tests/io/sas/data/DEMO_G.csv",
+        "pandas/tests/io/sas/data/DEMO_G.xpt",
+        "pandas/tests/io/sas/data/DRXFCD_G.csv",
+        "pandas/tests/io/sas/data/DRXFCD_G.xpt",
+        "pandas/tests/io/sas/data/SSHSV1_A.csv",
+        "pandas/tests/io/sas/data/airline.csv",
+        "pandas/tests/io/sas/data/datetime.csv",
+        "pandas/tests/io/sas/data/many_columns.csv",
+        "pandas/tests/io/sas/data/paxraw_d_short.csv",
+        "pandas/tests/io/sas/data/productsales.csv",
+        "pandas/tests/io/sas/data/test_12659.csv",
+        "pandas/tests/io/sas/data/test_sas7bdat_1.csv",
+        "pandas/tests/io/sas/data/test_sas7bdat_2.csv",
+        "pandas/tests/io/sas/test_byteswap.py",
+        "pandas/tests/io/sas/test_sas.py",
+        "pandas/tests/io/sas/test_sas7bdat.py",
+        "pandas/tests/io/sas/test_xport.py",
+        "pandas/tests/io/test_clipboard.py",
+        "pandas/tests/io/test_common.py",
+        "pandas/tests/io/test_compression.py",
+        "pandas/tests/io/test_feather.py",
+        "pandas/tests/io/test_fsspec.py",
+        "pandas/tests/io/test_gcs.py",
+        "pandas/tests/io/test_html.py",
+        "pandas/tests/io/test_http_headers.py",
+        "pandas/tests/io/test_iceberg.py",
+        "pandas/tests/io/test_orc.py",
+        "pandas/tests/io/test_parquet.py",
+        "pandas/tests/io/test_pickle.py",
+        "pandas/tests/io/test_s3.py",
+        "pandas/tests/io/test_spss.py",
+        "pandas/tests/io/test_sql.py",
+        "pandas/tests/io/test_stata.py",
+        "pandas/tests/io/test_util.py",
+        "pandas/tests/io/xml/**",
+        "pandas/tests/libs/**",
+        "pandas/tests/plotting/**",
+        "pandas/tests/reductions/**",
+        "pandas/tests/resample/**",
+        "pandas/tests/reshape/**",
+        "pandas/tests/scalar/**",
+        "pandas/tests/series/**",
+        "pandas/tests/strings/**",
+        "pandas/tests/test_aggregation.py",
+        "pandas/tests/test_algos.py",
+        "pandas/tests/test_col.py",
+        "pandas/tests/test_common.py",
+        "pandas/tests/test_cpu.py",
+        "pandas/tests/test_downstream.py",
+        "pandas/tests/test_errors.py",
+        "pandas/tests/test_expressions.py",
+        "pandas/tests/test_flags.py",
+        "pandas/tests/test_multilevel.py",
+        "pandas/tests/test_nanops.py",
+        "pandas/tests/test_optional_dependency.py",
+        "pandas/tests/test_register_accessor.py",
+        "pandas/tests/test_sorting.py",
+        "pandas/tests/test_take.py",
+        "pandas/tests/tools/**",
+        "pandas/tests/tseries/__init__.py",
+        "pandas/tests/tseries/frequencies/**",
+        "pandas/tests/tseries/holiday/**",
+        "pandas/tests/tseries/offsets/__init__.py",
+        "pandas/tests/tseries/offsets/common.py",
+        "pandas/tests/tseries/offsets/test_business_day.py",
+        "pandas/tests/tseries/offsets/test_business_halfyear.py",
+        "pandas/tests/tseries/offsets/test_business_hour.py",
+        "pandas/tests/tseries/offsets/test_business_month.py",
+        "pandas/tests/tseries/offsets/test_business_quarter.py",
+        "pandas/tests/tseries/offsets/test_business_year.py",
+        "pandas/tests/tseries/offsets/test_common.py",
+        "pandas/tests/tseries/offsets/test_custom_business_day.py",
+        "pandas/tests/tseries/offsets/test_custom_business_hour.py",
+        "pandas/tests/tseries/offsets/test_custom_business_month.py",
+        "pandas/tests/tseries/offsets/test_dst.py",
+        "pandas/tests/tseries/offsets/test_easter.py",
+        "pandas/tests/tseries/offsets/test_fiscal.py",
+        "pandas/tests/tseries/offsets/test_halfyear.py",
+        "pandas/tests/tseries/offsets/test_index.py",
+        "pandas/tests/tseries/offsets/test_month.py",
+        "pandas/tests/tseries/offsets/test_offsets.py",
+        "pandas/tests/tseries/offsets/test_offsets_properties.py",
+        "pandas/tests/tseries/offsets/test_quarter.py",
+        "pandas/tests/tseries/offsets/test_ticks.py",
+        "pandas/tests/tseries/offsets/test_week.py",
+        "pandas/tests/tseries/offsets/test_year.py",
+        "pandas/tests/tslibs/**",
+        "pandas/tests/util/**",
+        "pandas/tests/window/**",
+        "pandas/tseries/**",
+        "pandas/util/**",
+        "pixi.lock",
+        "pixi.toml",
+        "pyproject.toml",
+        "pyright_reportGeneralTypeIssues.json",
+        "requirements-dev.txt",
+        "scripts/**",
+        "subprojects/**",
+        "web/README.md",
+        "web/interactive_terminal/**",
+        "web/pandas/_templates/**",
+        "web/pandas/about/**",
+        "web/pandas/community/**",
+        "web/pandas/config.yml",
+        "web/pandas/contribute.md",
+        "web/pandas/getting_started.md",
+        "web/pandas/index.html",
+        "web/pandas/pdeps/**",
+        "web/pandas/robots.txt",
+        "web/pandas/static/css/**",
+        "web/pandas/static/img/pandas.svg",
+        "web/pandas/static/img/pandas_mark.svg",
+        "web/pandas/static/img/pandas_mark_white.svg",
+        "web/pandas/static/img/pandas_secondary.svg",
+        "web/pandas/static/img/pandas_secondary_white.svg",
+        "web/pandas/static/img/pandas_white.svg",
+        "web/pandas/static/img/partners/**",
+        "web/pandas/try.md",
+        "web/pandas/versions.json",
+        "web/pandas_web.py",
+        "web/tests/**"
+      ],
+      "text": "BSD 3-Clause License\n\nCopyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team\nAll rights reserved.\n\nCopyright (c) 2011-2026, Open source contributors.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team; Copyright (c) 2011-2026, Open source contributors., BSD-3-Clause license (LICENSE), https://github.com/pandas-dev/pandas."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "meson",
+      "paths": [
+        "**/meson.build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rst",
+      "paths": [
+        "**/*.rst"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.data"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.kml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pxd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wrap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xpt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/BOTTLENECK_LICENCE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/DATEUTIL_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HAVEN_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HAVEN_MIT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/KLIB_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/MUSL_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NERI_SCHNEIDER_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NUMPY_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PACKAGING_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PSF_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PYPERCLIP_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PYUPGRADE_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/SAS7BDAT_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/STATSBASE_JL_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ULTRAJSON_LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/XSIMD_LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

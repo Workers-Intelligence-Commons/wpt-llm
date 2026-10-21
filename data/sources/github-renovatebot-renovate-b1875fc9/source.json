@@ -1,0 +1,1321 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/renovatebot/renovate",
+  "revision": "47886b673a8393f0979c511cea9941c9afef6595",
+  "checksum": "sha256:8a8800efa64757b121b5e5b37441778915d3f45304b87918f0a839d82df83f2f",
+  "extract": {
+    "exclude": [
+      "docs/development/assets/renovate-logic-flow.jpg",
+      "docs/usage/assets/images/add-github-token-host-rule.png",
+      "docs/usage/assets/images/all-dead.jpg",
+      "docs/usage/assets/images/app-settings/**",
+      "docs/usage/assets/images/automerged-pr.png",
+      "docs/usage/assets/images/azure-devops-setup-1.png",
+      "docs/usage/assets/images/azure-devops-setup-2.png",
+      "docs/usage/assets/images/broken-lockfile.jpg",
+      "docs/usage/assets/images/gerrit-http-password.png",
+      "docs/usage/assets/images/github-app-choose-repos.png",
+      "docs/usage/assets/images/github-app-install.png",
+      "docs/usage/assets/images/github-token-warning.png",
+      "docs/usage/assets/images/logo.png",
+      "docs/usage/assets/images/matrix.png",
+      "docs/usage/assets/images/mend-hosted-reconfigure-failed.png",
+      "docs/usage/assets/images/mend-hosted-reconfigure-passed.png",
+      "docs/usage/assets/images/mend-renovate-cli-banner.jpg",
+      "docs/usage/assets/images/merge-confidence.png",
+      "docs/usage/assets/images/onboarding.png",
+      "docs/usage/assets/images/opentelemetry_choose_trace.png",
+      "docs/usage/assets/images/opentelemetry_pick_service.png",
+      "docs/usage/assets/images/opentelemetry_trace_viewer.png",
+      "docs/usage/assets/images/portal-sign-in.png",
+      "docs/usage/assets/images/renovate-config-debugger.jpg",
+      "docs/usage/assets/images/swissquote_cat_whack_a_mole.jpg",
+      "docs/usage/assets/images/swissquote_stats.png",
+      "docs/usage/assets/images/swissquote_stats_collection.png",
+      "docs/usage/assets/images/swissquote_sweating_guy.jpg",
+      "docs/usage/assets/images/swissquote_xkcd.png",
+      "lib/modules/datasource/deb/__fixtures__/Packages.gz",
+      "lib/modules/datasource/deb/__fixtures__/Packages2.gz",
+      "lib/modules/datasource/nuget/__fixtures__/nlog/NLog.4.7.3-no-repo.nupkg",
+      "lib/modules/datasource/nuget/__fixtures__/nlog/NLog.4.7.3.nupkg",
+      "lib/modules/manager/terraform/lockfile/__fixtures__/test.zip",
+      "lib/modules/manager/terraform/lockfile/__fixtures__/test_with_folder.zip",
+      "tools/mkdocs/overrides/partials/**"
+    ]
+  },
+  "history": {
+    "since": "2e2573b3bbf92adfc57562e6c976af40918ce96e"
+  },
+  "licenses": [
+    {
+      "license": "AGPL-3.0-only AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  Developers that use our General Public Licenses protect your rights\nwith two steps: (1) assert copyright on the software, and (2) offer\nyou this License which gives you legal permission to copy, distribute\nand/or modify the software.\n\n  A secondary benefit of defending all users' freedom is that\nimprovements made in alternate versions of the program, if they\nreceive widespread use, become available for other developers to\nincorporate.  Many developers of free software are heartened and\nencouraged by the resulting cooperation.  However, in the case of\nsoftware used on network servers, this result may fail to come about.\nThe GNU General Public License permits making a modified version and\nletting the public access it on a server without ever releasing its\nsource code to the public.\n\n  The GNU Affero General Public License is designed specifically to\nensure that, in such cases, the modified source code becomes available\nto the community.  It requires the operator of a network server to\nprovide the source code of the modified version running there to the\nusers of that server.  Therefore, public use of a modified version, on\na publicly accessible server, gives the public access to the source\ncode of the modified version.\n\n  An older license, called the Affero General Public License and\npublished by Affero, was designed to accomplish similar goals.  This is\na different license, not a version of the Affero GPL, but Affero has\nreleased a new version of the Affero GPL which permits relicensing under\nthis license.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU Affero General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Remote Network Interaction; Use with the GNU General Public License.\n\n  Notwithstanding any other provision of this License, if you modify the\nProgram, your modified version must prominently offer all users\ninteracting with it remotely through a computer network (if your version\nsupports such interaction) an opportunity to receive the Corresponding\nSource of your version by providing access to the Corresponding Source\nfrom a network server at no charge, through some standard or customary\nmeans of facilitating copying of software.  This Corresponding Source\nshall include the Corresponding Source for any work covered by version 3\nof the GNU General Public License that is incorporated pursuant to the\nfollowing paragraph.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the work with which it is combined will remain governed by version\n3 of the GNU General Public License.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU Affero General Public License from time to time.  Such new versions\nwill be similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU Affero General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU Affero General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU Affero General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as published\n    by the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If your software can interact with users remotely through a computer\nnetwork, you should also make sure that it provides a way for users to\nget its source.  For example, if your program is a web application, its\ninterface could display a \"Source\" link that leads users to an archive\nof the code.  There are many ways you could offer source, and different\nsolutions will be better for different programs; see section 13 for the\nspecific requirements.\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU AGPL, see\n<https://www.gnu.org/licenses/>.\n\n\nVersion: 3 files state one version only, such as docs/usage/index.md (\"AGPL-3.0-only\").\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/renovatebot/renovate: Rhys Arkins <rhys@arkins.net>, AGPL-3.0-only license (license), https://github.com/renovatebot/renovate; the authors of lockfile-parsing, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/lockfile-parsing; the authors of npm7, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/npm7; the authors of npm9, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/npm9; the authors of plocktest1, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/plocktest1; the authors of demo, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/pnpm-monorepo; the authors of yarn1-invalid-name, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn1-invalid-name; the authors of yarn2, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn2; the authors of yarn2.2, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn2.2."
+    },
+    {
+      "license": "AGPL-3.0-only",
+      "paths": [
+        ".claude/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".lgtm.yml",
+        ".lintstagedrc.json",
+        ".ls-lint.yml",
+        ".markdownlint-cli2.mjs",
+        ".nvmrc",
+        ".oxlintrc.json",
+        ".prettierignore",
+        ".prettierrc.json",
+        ".python-version",
+        ".releaserc.json",
+        ".vscode/**",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CODE_OF_CONDUCT.md",
+        "SECURITY.md",
+        "__mocks__/**",
+        "biome.json",
+        "codecov.yml",
+        "data/**",
+        "docs/development/adding-a-package-manager.md",
+        "docs/development/assets/renovate-flow.md",
+        "docs/development/best-practices.md",
+        "docs/development/branches-commits.md",
+        "docs/development/bug-handling.md",
+        "docs/development/bump-node-major.md",
+        "docs/development/configuration.md",
+        "docs/development/creating-editing-renovate-presets.md",
+        "docs/development/design-decisions.md",
+        "docs/development/docs-site.md",
+        "docs/development/help-us-help-you.md",
+        "docs/development/issue-labeling.md",
+        "docs/development/local-development.md",
+        "docs/development/major-release.md",
+        "docs/development/minimal-reproductions.md",
+        "docs/development/new-package-manager-template.md",
+        "docs/development/readme.md",
+        "docs/development/remote-development.md",
+        "docs/development/static-data.md",
+        "docs/development/style-guide.md",
+        "docs/development/triage-guide.md",
+        "docs/development/zod.md",
+        "docs/usage/.pages",
+        "docs/usage/about-us.md",
+        "docs/usage/assets/css/**",
+        "docs/usage/assets/images/mend-renovate-call-to-action-dark.svg",
+        "docs/usage/assets/images/mend-renovate-call-to-action.svg",
+        "docs/usage/bazel.md",
+        "docs/usage/bicep.md",
+        "docs/usage/bot-comparison.md",
+        "docs/usage/calling-aws-services.md",
+        "docs/usage/community-tools.md",
+        "docs/usage/config-migration.md",
+        "docs/usage/config-overview.md",
+        "docs/usage/config-presets.md",
+        "docs/usage/config-validation.md",
+        "docs/usage/configuration-options.md",
+        "docs/usage/configuration-templates.md",
+        "docs/usage/contributing-to-renovate.md",
+        "docs/usage/dependency-pinning.md",
+        "docs/usage/docker-build-process.md",
+        "docs/usage/docker.md",
+        "docs/usage/environment-variable-handling.md",
+        "docs/usage/examples/**",
+        "docs/usage/faq.md",
+        "docs/usage/getting-started/**",
+        "docs/usage/gitlab-bot-security.md",
+        "docs/usage/golang.md",
+        "docs/usage/index.md",
+        "docs/usage/java.md",
+        "docs/usage/javascript.md",
+        "docs/usage/json-schema.md",
+        "docs/usage/key-concepts/**",
+        "docs/usage/known-limitations.md",
+        "docs/usage/language-constraints-and-upgrading.md",
+        "docs/usage/logo-brand-guidelines.md",
+        "docs/usage/mend-hosted/**",
+        "docs/usage/merge-confidence.md",
+        "docs/usage/modules/**",
+        "docs/usage/node.md",
+        "docs/usage/noise-reduction.md",
+        "docs/usage/nuget.md",
+        "docs/usage/opentelemetry.md",
+        "docs/usage/php.md",
+        "docs/usage/python.md",
+        "docs/usage/reading-list.md",
+        "docs/usage/ruby.md",
+        "docs/usage/rust.md",
+        "docs/usage/security-and-permissions.md",
+        "docs/usage/self-hosted-configuration.md",
+        "docs/usage/self-hosted-experimental.md",
+        "docs/usage/semantic-commits.md",
+        "docs/usage/string-pattern-matching.md",
+        "docs/usage/templates.md",
+        "docs/usage/troubleshooting.md",
+        "docs/usage/updating-rebasing.md",
+        "docs/usage/upgrade-best-practices.md",
+        "docs/usage/user-stories/**",
+        "lib/commander.d.ts",
+        "lib/config/**",
+        "lib/config-validator.spec.ts",
+        "lib/config-validator.ts",
+        "lib/constants/**",
+        "lib/data/**",
+        "lib/expose.ts",
+        "lib/globals.d.ts",
+        "lib/instrumentation/**",
+        "lib/logger/**",
+        "lib/modules/datasource/api.ts",
+        "lib/modules/datasource/apk/**",
+        "lib/modules/datasource/artifactory/**",
+        "lib/modules/datasource/aws-eks-addon/**",
+        "lib/modules/datasource/aws-machine-image/**",
+        "lib/modules/datasource/aws-rds/**",
+        "lib/modules/datasource/azure-bicep-resource/**",
+        "lib/modules/datasource/azure-pipelines-tasks/**",
+        "lib/modules/datasource/azure-tags/**",
+        "lib/modules/datasource/bazel/**",
+        "lib/modules/datasource/bitbucket-server-tags/**",
+        "lib/modules/datasource/bitbucket-tags/**",
+        "lib/modules/datasource/bitrise/**",
+        "lib/modules/datasource/buildpacks-registry/**",
+        "lib/modules/datasource/cdnjs/**",
+        "lib/modules/datasource/clojure/**",
+        "lib/modules/datasource/common.spec.ts",
+        "lib/modules/datasource/common.ts",
+        "lib/modules/datasource/conan/**",
+        "lib/modules/datasource/conda/**",
+        "lib/modules/datasource/cpan/**",
+        "lib/modules/datasource/crate/**",
+        "lib/modules/datasource/custom/**",
+        "lib/modules/datasource/dart/**",
+        "lib/modules/datasource/dart-version/**",
+        "lib/modules/datasource/datasource.spec.ts",
+        "lib/modules/datasource/datasource.ts",
+        "lib/modules/datasource/deb/__fixtures__/InRelease",
+        "lib/modules/datasource/deb/__fixtures__/Packages",
+        "lib/modules/datasource/deb/checksum.spec.ts",
+        "lib/modules/datasource/deb/checksum.ts",
+        "lib/modules/datasource/deb/common.ts",
+        "lib/modules/datasource/deb/index.spec.ts",
+        "lib/modules/datasource/deb/index.ts",
+        "lib/modules/datasource/deb/packages.spec.ts",
+        "lib/modules/datasource/deb/packages.ts",
+        "lib/modules/datasource/deb/readme.md",
+        "lib/modules/datasource/deb/release.ts",
+        "lib/modules/datasource/deb/types.ts",
+        "lib/modules/datasource/deb/url.spec.ts",
+        "lib/modules/datasource/deb/url.ts",
+        "lib/modules/datasource/deb/utils.spec.ts",
+        "lib/modules/datasource/deb/utils.ts",
+        "lib/modules/datasource/deno/**",
+        "lib/modules/datasource/devbox/**",
+        "lib/modules/datasource/docker/**",
+        "lib/modules/datasource/dotnet-version/**",
+        "lib/modules/datasource/elm-package/**",
+        "lib/modules/datasource/endoflife-date/**",
+        "lib/modules/datasource/flutter-version/**",
+        "lib/modules/datasource/forgejo-releases/**",
+        "lib/modules/datasource/forgejo-tags/**",
+        "lib/modules/datasource/galaxy/**",
+        "lib/modules/datasource/galaxy-collection/**",
+        "lib/modules/datasource/git-host-tags.ts",
+        "lib/modules/datasource/git-refs/**",
+        "lib/modules/datasource/git-tags/**",
+        "lib/modules/datasource/gitea-releases/**",
+        "lib/modules/datasource/gitea-tags/**",
+        "lib/modules/datasource/github-digest/**",
+        "lib/modules/datasource/github-release-attachments/**",
+        "lib/modules/datasource/github-releases/**",
+        "lib/modules/datasource/github-runners/**",
+        "lib/modules/datasource/github-tags/**",
+        "lib/modules/datasource/gitlab-packages/**",
+        "lib/modules/datasource/gitlab-releases/**",
+        "lib/modules/datasource/gitlab-tags/**",
+        "lib/modules/datasource/glasskube-packages/**",
+        "lib/modules/datasource/go/**",
+        "lib/modules/datasource/golang-version/**",
+        "lib/modules/datasource/gradle-version/**",
+        "lib/modules/datasource/hackage/**",
+        "lib/modules/datasource/helm/**",
+        "lib/modules/datasource/hermit/**",
+        "lib/modules/datasource/hex/**",
+        "lib/modules/datasource/hexpm-bob/**",
+        "lib/modules/datasource/index.spec.ts",
+        "lib/modules/datasource/index.ts",
+        "lib/modules/datasource/java-version/**",
+        "lib/modules/datasource/jenkins-plugins/**",
+        "lib/modules/datasource/jsr/**",
+        "lib/modules/datasource/kubernetes-api/**",
+        "lib/modules/datasource/maven/**",
+        "lib/modules/datasource/metadata-manual.ts",
+        "lib/modules/datasource/metadata.spec.ts",
+        "lib/modules/datasource/metadata.ts",
+        "lib/modules/datasource/nextcloud/**",
+        "lib/modules/datasource/node-version/**",
+        "lib/modules/datasource/npm/**",
+        "lib/modules/datasource/nuget/__fixtures__/azure_devops/**",
+        "lib/modules/datasource/nuget/__fixtures__/nlog/nuspec.xml",
+        "lib/modules/datasource/nuget/__fixtures__/nlog/v3_catalog_1.json",
+        "lib/modules/datasource/nuget/__fixtures__/nlog/v3_catalog_2.json",
+        "lib/modules/datasource/nuget/__fixtures__/nlog/v3_catalog_3.json",
+        "lib/modules/datasource/nuget/__fixtures__/nlog/v3_registration.json",
+        "lib/modules/datasource/nuget/__fixtures__/nunit/**",
+        "lib/modules/datasource/nuget/__fixtures__/proxykit/**",
+        "lib/modules/datasource/nuget/__fixtures__/v3_index.json",
+        "lib/modules/datasource/nuget/common.spec.ts",
+        "lib/modules/datasource/nuget/common.ts",
+        "lib/modules/datasource/nuget/index.spec.ts",
+        "lib/modules/datasource/nuget/index.ts",
+        "lib/modules/datasource/nuget/schema.ts",
+        "lib/modules/datasource/nuget/types.ts",
+        "lib/modules/datasource/nuget/v2.ts",
+        "lib/modules/datasource/nuget/v3.ts",
+        "lib/modules/datasource/orb/**",
+        "lib/modules/datasource/packagist/**",
+        "lib/modules/datasource/pod/**",
+        "lib/modules/datasource/postprocess-release.spec.ts",
+        "lib/modules/datasource/postprocess-release.ts",
+        "lib/modules/datasource/puppet-forge/**",
+        "lib/modules/datasource/pypi/**",
+        "lib/modules/datasource/python-version/**",
+        "lib/modules/datasource/readme.md",
+        "lib/modules/datasource/repology/**",
+        "lib/modules/datasource/rpm/**",
+        "lib/modules/datasource/ruby-version/**",
+        "lib/modules/datasource/rubygems/**",
+        "lib/modules/datasource/rust-version/**",
+        "lib/modules/datasource/sbt-package/**",
+        "lib/modules/datasource/sbt-plugin/**",
+        "lib/modules/datasource/span-processor.spec.ts",
+        "lib/modules/datasource/span-processor.ts",
+        "lib/modules/datasource/terraform-module/**",
+        "lib/modules/datasource/terraform-provider/**",
+        "lib/modules/datasource/types.ts",
+        "lib/modules/datasource/typst/**",
+        "lib/modules/datasource/unity3d/**",
+        "lib/modules/datasource/unity3d-packages/**",
+        "lib/modules/datasource/util.spec.ts",
+        "lib/modules/datasource/util.ts",
+        "lib/modules/datasource/utils.spec.ts",
+        "lib/modules/manager/ansible/**",
+        "lib/modules/manager/ansible-galaxy/**",
+        "lib/modules/manager/ant/**",
+        "lib/modules/manager/api.ts",
+        "lib/modules/manager/apm/**",
+        "lib/modules/manager/argocd/**",
+        "lib/modules/manager/asdf/**",
+        "lib/modules/manager/azure-pipelines/**",
+        "lib/modules/manager/batect/**",
+        "lib/modules/manager/batect-wrapper/**",
+        "lib/modules/manager/bazel/**",
+        "lib/modules/manager/bazel-module/**",
+        "lib/modules/manager/bazelisk/**",
+        "lib/modules/manager/bicep/**",
+        "lib/modules/manager/bitbucket-pipelines/**",
+        "lib/modules/manager/bitrise/**",
+        "lib/modules/manager/buildkite/**",
+        "lib/modules/manager/buildpacks/**",
+        "lib/modules/manager/bun/**",
+        "lib/modules/manager/bun-version/**",
+        "lib/modules/manager/bundler/**",
+        "lib/modules/manager/cake/**",
+        "lib/modules/manager/cargo/**",
+        "lib/modules/manager/cdnurl/**",
+        "lib/modules/manager/circleci/**",
+        "lib/modules/manager/cloudbuild/**",
+        "lib/modules/manager/cocoapods/**",
+        "lib/modules/manager/composer/**",
+        "lib/modules/manager/conan/**",
+        "lib/modules/manager/copier/**",
+        "lib/modules/manager/cpanfile/**",
+        "lib/modules/manager/crossplane/**",
+        "lib/modules/manager/crow/**",
+        "lib/modules/manager/custom/**",
+        "lib/modules/manager/deno/**",
+        "lib/modules/manager/deps-edn/**",
+        "lib/modules/manager/devbox/**",
+        "lib/modules/manager/devcontainer/**",
+        "lib/modules/manager/docker-compose/**",
+        "lib/modules/manager/dockerfile/**",
+        "lib/modules/manager/droneci/**",
+        "lib/modules/manager/fingerprint.spec.ts",
+        "lib/modules/manager/fleet/**",
+        "lib/modules/manager/flux/**",
+        "lib/modules/manager/fvm/**",
+        "lib/modules/manager/git-submodules/**",
+        "lib/modules/manager/github-actions/**",
+        "lib/modules/manager/gitlabci/**",
+        "lib/modules/manager/gitlabci-include/**",
+        "lib/modules/manager/glasskube/**",
+        "lib/modules/manager/gleam/**",
+        "lib/modules/manager/gomod/**",
+        "lib/modules/manager/gradle/**",
+        "lib/modules/manager/gradle-wrapper/**",
+        "lib/modules/manager/haskell-cabal/**",
+        "lib/modules/manager/helm-requirements/**",
+        "lib/modules/manager/helm-values/**",
+        "lib/modules/manager/helmfile/**",
+        "lib/modules/manager/helmsman/**",
+        "lib/modules/manager/helmv3/**",
+        "lib/modules/manager/hermit/**",
+        "lib/modules/manager/homeassistant-manifest/**",
+        "lib/modules/manager/homebrew/**",
+        "lib/modules/manager/html/**",
+        "lib/modules/manager/index.spec.ts",
+        "lib/modules/manager/index.ts",
+        "lib/modules/manager/jenkins/**",
+        "lib/modules/manager/jsonnet-bundler/**",
+        "lib/modules/manager/kotlin-script/**",
+        "lib/modules/manager/kubernetes/**",
+        "lib/modules/manager/kustomize/**",
+        "lib/modules/manager/leiningen/**",
+        "lib/modules/manager/maven/**",
+        "lib/modules/manager/maven-wrapper/**",
+        "lib/modules/manager/metadata.spec.ts",
+        "lib/modules/manager/meteor/**",
+        "lib/modules/manager/mint/**",
+        "lib/modules/manager/mise/**",
+        "lib/modules/manager/mix/**",
+        "lib/modules/manager/nix/**",
+        "lib/modules/manager/nodenv/**",
+        "lib/modules/manager/npm/__fixtures__/inputs/**",
+        "lib/modules/manager/npm/__fixtures__/invalid-name.json",
+        "lib/modules/manager/npm/__fixtures__/is-object.json",
+        "lib/modules/manager/npm/__fixtures__/outputs/**",
+        "lib/modules/manager/npm/artifacts.spec.ts",
+        "lib/modules/manager/npm/artifacts.ts",
+        "lib/modules/manager/npm/constants.ts",
+        "lib/modules/manager/npm/dep-types.ts",
+        "lib/modules/manager/npm/detect.spec.ts",
+        "lib/modules/manager/npm/detect.ts",
+        "lib/modules/manager/npm/extract/**",
+        "lib/modules/manager/npm/index.ts",
+        "lib/modules/manager/npm/npmrc-parser.spec.ts",
+        "lib/modules/manager/npm/npmrc-parser.ts",
+        "lib/modules/manager/npm/npmrc.spec.ts",
+        "lib/modules/manager/npm/npmrc.ts",
+        "lib/modules/manager/npm/post-update/**",
+        "lib/modules/manager/npm/range.spec.ts",
+        "lib/modules/manager/npm/range.ts",
+        "lib/modules/manager/npm/readme.md",
+        "lib/modules/manager/npm/schema.ts",
+        "lib/modules/manager/npm/types.ts",
+        "lib/modules/manager/npm/update/**",
+        "lib/modules/manager/npm/utils.spec.ts",
+        "lib/modules/manager/npm/utils.ts",
+        "lib/modules/manager/nuget/**",
+        "lib/modules/manager/nvm/**",
+        "lib/modules/manager/ocb/**",
+        "lib/modules/manager/osgi/**",
+        "lib/modules/manager/pep621/**",
+        "lib/modules/manager/pep723/**",
+        "lib/modules/manager/pip-compile/**",
+        "lib/modules/manager/pip_requirements/**",
+        "lib/modules/manager/pip_setup/**",
+        "lib/modules/manager/pipenv/**",
+        "lib/modules/manager/pixi/**",
+        "lib/modules/manager/poetry/**",
+        "lib/modules/manager/pre-commit/**",
+        "lib/modules/manager/proto/**",
+        "lib/modules/manager/pub/**",
+        "lib/modules/manager/puppet/**",
+        "lib/modules/manager/pyenv/**",
+        "lib/modules/manager/quadlet/**",
+        "lib/modules/manager/range.spec.ts",
+        "lib/modules/manager/renovate-config/**",
+        "lib/modules/manager/ruby-version/**",
+        "lib/modules/manager/runtime-version/**",
+        "lib/modules/manager/rust-toolchain/**",
+        "lib/modules/manager/sbt/**",
+        "lib/modules/manager/scalafmt/**",
+        "lib/modules/manager/setup-cfg/**",
+        "lib/modules/manager/smithy/**",
+        "lib/modules/manager/sveltos/**",
+        "lib/modules/manager/swift/**",
+        "lib/modules/manager/tekton/**",
+        "lib/modules/manager/terraform/__fixtures__/**",
+        "lib/modules/manager/terraform/base.ts",
+        "lib/modules/manager/terraform/dep-types.ts",
+        "lib/modules/manager/terraform/extract.spec.ts",
+        "lib/modules/manager/terraform/extract.ts",
+        "lib/modules/manager/terraform/extractors/**",
+        "lib/modules/manager/terraform/extractors.ts",
+        "lib/modules/manager/terraform/hcl/**",
+        "lib/modules/manager/terraform/index.ts",
+        "lib/modules/manager/terraform/lockfile/__fixtures__/releaseBackendAzurerm_2_56_0.json",
+        "lib/modules/manager/terraform/lockfile/__fixtures__/terraformCloudBackendAzurermVersions.json",
+        "lib/modules/manager/terraform/lockfile/hash.spec.ts",
+        "lib/modules/manager/terraform/lockfile/hash.ts",
+        "lib/modules/manager/terraform/lockfile/index.spec.ts",
+        "lib/modules/manager/terraform/lockfile/index.ts",
+        "lib/modules/manager/terraform/lockfile/types.ts",
+        "lib/modules/manager/terraform/lockfile/update-locked.spec.ts",
+        "lib/modules/manager/terraform/lockfile/update-locked.ts",
+        "lib/modules/manager/terraform/lockfile/util.spec.ts",
+        "lib/modules/manager/terraform/lockfile/util.ts",
+        "lib/modules/manager/terraform/readme.md",
+        "lib/modules/manager/terraform/types.ts",
+        "lib/modules/manager/terraform/util.ts",
+        "lib/modules/manager/terraform-version/**",
+        "lib/modules/manager/terragrunt/**",
+        "lib/modules/manager/terragrunt-version/**",
+        "lib/modules/manager/tflint-plugin/**",
+        "lib/modules/manager/travis/**",
+        "lib/modules/manager/types.ts",
+        "lib/modules/manager/typst/**",
+        "lib/modules/manager/unity3d/**",
+        "lib/modules/manager/util.spec.ts",
+        "lib/modules/manager/util.ts",
+        "lib/modules/manager/velaci/**",
+        "lib/modules/manager/vendir/**",
+        "lib/modules/manager/woodpecker/**",
+        "lib/modules/manager/xcodegen/**",
+        "lib/modules/platform/**",
+        "lib/modules/versioning/**",
+        "lib/proxy.spec.ts",
+        "lib/proxy.ts",
+        "lib/punycode.cjs",
+        "lib/renovate.spec.ts",
+        "lib/renovate.ts",
+        "lib/types/**",
+        "lib/util/**",
+        "lib/workers/**",
+        "license",
+        "mise.toml",
+        "package.json",
+        "patches/**",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "pyproject.toml",
+        "readme.md",
+        "renovate.json",
+        "test/**",
+        "tools/agents/**",
+        "tools/check/**",
+        "tools/check-closes-discussion.cjs",
+        "tools/check-fenced-code.ts",
+        "tools/check-git-version.mjs",
+        "tools/check-release-dry-run.spec.ts",
+        "tools/check-release-dry-run.ts",
+        "tools/clean-cache.mjs",
+        "tools/close-answered-discussions.cjs",
+        "tools/docker/**",
+        "tools/docker.ts",
+        "tools/docs/**",
+        "tools/find-dequeued-merge-queue-prs.sh",
+        "tools/find-issues-with-missing-labels.sh",
+        "tools/generate-docs.ts",
+        "tools/generate-imports.mjs",
+        "tools/generate-schema.ts",
+        "tools/lint/**",
+        "tools/mkdocs/.gitignore",
+        "tools/mkdocs/includes/**",
+        "tools/mkdocs/mkdocs-hooks/**",
+        "tools/mkdocs/mkdocs.yml",
+        "tools/mkdocs/overrides/main.html",
+        "tools/mkdocs.ts",
+        "tools/prepare-deps.mjs",
+        "tools/prepare-release.ts",
+        "tools/prettier/**",
+        "tools/publish-release.ts",
+        "tools/schemas/**",
+        "tools/static-data/**",
+        "tools/sync-module-labels.ts",
+        "tools/sync-org-issue-fields.ts",
+        "tools/test/**",
+        "tools/test-shards.ts",
+        "tools/uncache.ts",
+        "tools/utils/**",
+        "tools/validate-schema.ts",
+        "tsconfig.json",
+        "tsdown.config.mts",
+        "uv.lock",
+        "vitest.config.mts"
+      ],
+      "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  Developers that use our General Public Licenses protect your rights\nwith two steps: (1) assert copyright on the software, and (2) offer\nyou this License which gives you legal permission to copy, distribute\nand/or modify the software.\n\n  A secondary benefit of defending all users' freedom is that\nimprovements made in alternate versions of the program, if they\nreceive widespread use, become available for other developers to\nincorporate.  Many developers of free software are heartened and\nencouraged by the resulting cooperation.  However, in the case of\nsoftware used on network servers, this result may fail to come about.\nThe GNU General Public License permits making a modified version and\nletting the public access it on a server without ever releasing its\nsource code to the public.\n\n  The GNU Affero General Public License is designed specifically to\nensure that, in such cases, the modified source code becomes available\nto the community.  It requires the operator of a network server to\nprovide the source code of the modified version running there to the\nusers of that server.  Therefore, public use of a modified version, on\na publicly accessible server, gives the public access to the source\ncode of the modified version.\n\n  An older license, called the Affero General Public License and\npublished by Affero, was designed to accomplish similar goals.  This is\na different license, not a version of the Affero GPL, but Affero has\nreleased a new version of the Affero GPL which permits relicensing under\nthis license.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU Affero General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Remote Network Interaction; Use with the GNU General Public License.\n\n  Notwithstanding any other provision of this License, if you modify the\nProgram, your modified version must prominently offer all users\ninteracting with it remotely through a computer network (if your version\nsupports such interaction) an opportunity to receive the Corresponding\nSource of your version by providing access to the Corresponding Source\nfrom a network server at no charge, through some standard or customary\nmeans of facilitating copying of software.  This Corresponding Source\nshall include the Corresponding Source for any work covered by version 3\nof the GNU General Public License that is incorporated pursuant to the\nfollowing paragraph.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the work with which it is combined will remain governed by version\n3 of the GNU General Public License.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU Affero General Public License from time to time.  Such new versions\nwill be similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU Affero General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU Affero General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU Affero General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as published\n    by the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If your software can interact with users remotely through a computer\nnetwork, you should also make sure that it provides a way for users to\nget its source.  For example, if your program is a web application, its\ninterface could display a \"Source\" link that leads users to an archive\nof the code.  There are many ways you could offer source, and different\nsolutions will be better for different programs; see section 13 for the\nspecific requirements.\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU AGPL, see\n<https://www.gnu.org/licenses/>.\n\n\nVersion: 3 files state one version only, such as docs/usage/index.md (\"AGPL-3.0-only\").",
+      "attribution": "Rhys Arkins <rhys@arkins.net>, AGPL-3.0-only license (license), https://github.com/renovatebot/renovate."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/lockfile-parsing/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of lockfile-parsing, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/lockfile-parsing."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/npm7/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of npm7, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/npm7."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/npm9/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of npm9, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/npm9."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/plocktest1/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of plocktest1, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/plocktest1."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/pnpm-monorepo/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of demo, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/pnpm-monorepo."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/yarn1-invalid-name/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of yarn1-invalid-name, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn1-invalid-name."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/yarn2/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of yarn2, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn2."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "lib/modules/manager/npm/__fixtures__/yarn2.2/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of yarn2.2, ISC license (declared in package.json), https://github.com/renovatebot/renovate/tree/47886b673a8393f0979c511cea9941c9afef6595/lib/modules/manager/npm/__fixtures__/yarn2.2."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "clojure",
+      "paths": [
+        "**/*.clj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elixir",
+      "paths": [
+        "**/*.exs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.tf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json5",
+      "paths": [
+        "**/*.json5"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scala",
+      "paths": [
+        "**/*.scala"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "swift",
+      "paths": [
+        "**/*.swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "lib/modules/manager/bazel-module/__fixtures__/extract/multiple-bazelrcs/foo.bazelrc",
+        "lib/modules/manager/bazel-module/__fixtures__/extract/multiple-bazelrcs/shared.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cake"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.complex"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.edn"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.git_tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.github_tag"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gitlab-foss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.js-invalid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mastodon"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.multiple_forges"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rubyci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sample"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sbt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.simple"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sourceBlock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sourceGroup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webpacker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.with_comments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.global_editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.json_editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.non_json_editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.renovaterc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/InRelease"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Packages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile5"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile6"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Pipfile7"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/WORKSPACE1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/WORKSPACE2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/WORKSPACE3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/amethyst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/container_pull"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go-mod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/libc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/malformed-wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mypkg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/renovate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/renovate-config-validator"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sentry"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/valid-wrapper"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.props"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

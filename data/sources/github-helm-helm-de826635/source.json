@@ -1,0 +1,813 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/helm/helm",
+  "revision": "1d4505ca6a28ebb5d97c1c35bbe71522f02744c0",
+  "checksum": "sha256:9c273cc812cd2750114bceb0eb141ec7383f1dab579a5d99c2d271d2d7ace393",
+  "extract": {
+    "exclude": [
+      "internal/chart/v3/loader/testdata/**",
+      "internal/chart/v3/util/testdata/dependent-chart-alias/**",
+      "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/charts/mast2-0.1.0.tgz",
+      "internal/chart/v3/util/testdata/dependent-chart-no-requirements-yaml/**",
+      "internal/chart/v3/util/testdata/dependent-chart-with-all-in-requirements-yaml/**",
+      "internal/chart/v3/util/testdata/dependent-chart-with-mixed-requirements-yaml/**",
+      "internal/chart/v3/util/testdata/frobnitz/**",
+      "internal/chart/v3/util/testdata/frobnitz-1.2.3.tgz",
+      "internal/chart/v3/util/testdata/frobnitz_backslash-1.2.3.tgz",
+      "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/charts/**",
+      "internal/third_party/**",
+      "pkg/action/testdata/charts/chart-with-compressed-dependencies/charts/**",
+      "pkg/action/testdata/charts/chart-with-compressed-dependencies-2.1.8.tgz",
+      "pkg/action/testdata/charts/chart-with-uncompressed-dependencies-2.1.8.tgz",
+      "pkg/action/testdata/charts/compressedchart-0.1.0.tar.gz",
+      "pkg/action/testdata/charts/compressedchart-0.1.0.tgz",
+      "pkg/action/testdata/charts/compressedchart-0.2.0.tgz",
+      "pkg/action/testdata/charts/compressedchart-0.3.0.tgz",
+      "pkg/action/testdata/charts/compressedchart-with-hyphens-0.1.0.tgz",
+      "pkg/action/testdata/charts/pre-release-chart-0.1.0-alpha.tgz",
+      "pkg/chart/v2/loader/testdata/**",
+      "pkg/chart/v2/util/testdata/dependent-chart-alias/**",
+      "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/charts/mast2-0.1.0.tgz",
+      "pkg/chart/v2/util/testdata/dependent-chart-no-requirements-yaml/**",
+      "pkg/chart/v2/util/testdata/dependent-chart-with-all-in-requirements-yaml/**",
+      "pkg/chart/v2/util/testdata/dependent-chart-with-mixed-requirements-yaml/**",
+      "pkg/chart/v2/util/testdata/frobnitz/**",
+      "pkg/chart/v2/util/testdata/frobnitz-1.2.3.tgz",
+      "pkg/chart/v2/util/testdata/frobnitz_backslash-1.2.3.tgz",
+      "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/charts/**",
+      "pkg/cmd/testdata/helm-test-key.pub",
+      "pkg/cmd/testdata/helm-test-key.secret",
+      "pkg/cmd/testdata/testcharts/chart-with-lib-dep/charts/**",
+      "pkg/cmd/testdata/testcharts/chart-with-template-lib-archive-dep/charts/**",
+      "pkg/cmd/testdata/testcharts/compressedchart-0.1.0.tar.gz",
+      "pkg/cmd/testdata/testcharts/compressedchart-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/compressedchart-0.2.0.tgz",
+      "pkg/cmd/testdata/testcharts/compressedchart-0.3.0.tgz",
+      "pkg/cmd/testdata/testcharts/compressedchart-with-hyphens-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/oci-dependent-chart-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/pre-release-chart-0.1.0-alpha.tgz",
+      "pkg/cmd/testdata/testcharts/reqtest/charts/reqsubchart3-0.2.0.tgz",
+      "pkg/cmd/testdata/testcharts/reqtest-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/signtest-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/test-0.1.0.tgz",
+      "pkg/cmd/testdata/testcharts/test1-0.1.0.tgz",
+      "pkg/downloader/testdata/helm-test-key.pub",
+      "pkg/downloader/testdata/helm-test-key.secret",
+      "pkg/downloader/testdata/local-subchart-0.1.0.tgz",
+      "pkg/downloader/testdata/signtest-0.1.0.tgz",
+      "pkg/getter/testdata/empty-0.0.1.tgz",
+      "pkg/provenance/testdata/hashtest-1.2.3.tgz",
+      "pkg/provenance/testdata/helm-mixed-keyring.kbx",
+      "pkg/provenance/testdata/helm-mixed-keyring.pub",
+      "pkg/provenance/testdata/helm-password-key.secret",
+      "pkg/provenance/testdata/helm-test-key.kbx",
+      "pkg/provenance/testdata/helm-test-key.pub",
+      "pkg/provenance/testdata/helm-test-key.secret",
+      "pkg/repo/v1/repotest/testdata/examplechart-0.1.0.tgz",
+      "pkg/repo/v1/testdata/repository/**"
+    ]
+  },
+  "history": {
+    "since": "94db53d0803034083a3a9b1c7a9a197c327eb6b0"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2016 The Kubernetes Authors All Rights Reserved\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/helm/helm: Copyright 2016 The Kubernetes Authors All Rights Reserved, Apache-2.0 license (LICENSE), https://github.com/helm/helm."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yaml",
+        "ADOPTERS.md",
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "KEYS",
+        "LICENSE",
+        "Makefile",
+        "OWNERS",
+        "README.md",
+        "SECURITY.md",
+        "cmd/**",
+        "code-of-conduct.md",
+        "go.mod",
+        "go.sum",
+        "internal/chart/v3/chart.go",
+        "internal/chart/v3/chart_test.go",
+        "internal/chart/v3/dependency.go",
+        "internal/chart/v3/dependency_test.go",
+        "internal/chart/v3/doc.go",
+        "internal/chart/v3/errors.go",
+        "internal/chart/v3/fuzz_test.go",
+        "internal/chart/v3/lint/**",
+        "internal/chart/v3/loader/archive.go",
+        "internal/chart/v3/loader/directory.go",
+        "internal/chart/v3/loader/load.go",
+        "internal/chart/v3/loader/load_test.go",
+        "internal/chart/v3/metadata.go",
+        "internal/chart/v3/metadata_test.go",
+        "internal/chart/v3/util/chartfile.go",
+        "internal/chart/v3/util/chartfile_test.go",
+        "internal/chart/v3/util/compatible.go",
+        "internal/chart/v3/util/compatible_test.go",
+        "internal/chart/v3/util/create.go",
+        "internal/chart/v3/util/create_test.go",
+        "internal/chart/v3/util/dependencies.go",
+        "internal/chart/v3/util/dependencies_test.go",
+        "internal/chart/v3/util/doc.go",
+        "internal/chart/v3/util/expand.go",
+        "internal/chart/v3/util/expand_test.go",
+        "internal/chart/v3/util/save.go",
+        "internal/chart/v3/util/save_test.go",
+        "internal/chart/v3/util/testdata/chart-with-dependency-aliased-twice/**",
+        "internal/chart/v3/util/testdata/chart-with-import-from-aliased-dependencies/**",
+        "internal/chart/v3/util/testdata/chartfiletest.yaml",
+        "internal/chart/v3/util/testdata/coleridge.yaml",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/.helmignore",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/Chart.yaml",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/.ignore_me",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/_ignore_me",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/Chart.yaml",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/README.md",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/charts/mast1/**",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/templates/**",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/charts/alpine/values.yaml",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/templates/**",
+        "internal/chart/v3/util/testdata/dependent-chart-helmignore/values.yaml",
+        "internal/chart/v3/util/testdata/dotdotname/**",
+        "internal/chart/v3/util/testdata/dotname/**",
+        "internal/chart/v3/util/testdata/genfrob.sh",
+        "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/Chart.lock",
+        "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/Chart.yaml",
+        "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/envs/**",
+        "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/templates/**",
+        "internal/chart/v3/util/testdata/import-values-from-enabled-subchart/parent-chart/values.yaml",
+        "internal/chart/v3/util/testdata/joonix/**",
+        "internal/chart/v3/util/testdata/slashinname/**",
+        "internal/chart/v3/util/testdata/subpop/**",
+        "internal/chart/v3/util/testdata/test-values-invalid.schema.json",
+        "internal/chart/v3/util/testdata/test-values-negative.yaml",
+        "internal/chart/v3/util/testdata/test-values.schema.json",
+        "internal/chart/v3/util/testdata/test-values.yaml",
+        "internal/chart/v3/util/testdata/three-level-dependent-chart/**",
+        "internal/cli/**",
+        "internal/copystructure/**",
+        "internal/fileutil/**",
+        "internal/gates/**",
+        "internal/logging/**",
+        "internal/monocular/**",
+        "internal/plugin/**",
+        "internal/release/**",
+        "internal/resolver/**",
+        "internal/statusreaders/**",
+        "internal/storage/**",
+        "internal/sympath/**",
+        "internal/test/**",
+        "internal/tlsutil/**",
+        "internal/urlutil/**",
+        "internal/version/**",
+        "pkg/action/action.go",
+        "pkg/action/action_test.go",
+        "pkg/action/dependency.go",
+        "pkg/action/dependency_test.go",
+        "pkg/action/doc.go",
+        "pkg/action/get.go",
+        "pkg/action/get_metadata.go",
+        "pkg/action/get_metadata_test.go",
+        "pkg/action/get_test.go",
+        "pkg/action/get_values.go",
+        "pkg/action/get_values_test.go",
+        "pkg/action/history.go",
+        "pkg/action/history_test.go",
+        "pkg/action/hooks.go",
+        "pkg/action/hooks_test.go",
+        "pkg/action/install.go",
+        "pkg/action/install_test.go",
+        "pkg/action/lazyclient.go",
+        "pkg/action/lint.go",
+        "pkg/action/lint_test.go",
+        "pkg/action/list.go",
+        "pkg/action/list_test.go",
+        "pkg/action/package.go",
+        "pkg/action/package_test.go",
+        "pkg/action/pull.go",
+        "pkg/action/pull_test.go",
+        "pkg/action/push.go",
+        "pkg/action/push_test.go",
+        "pkg/action/registry_login.go",
+        "pkg/action/registry_login_test.go",
+        "pkg/action/registry_logout.go",
+        "pkg/action/registry_logout_test.go",
+        "pkg/action/release_testing.go",
+        "pkg/action/release_testing_test.go",
+        "pkg/action/resource_policy.go",
+        "pkg/action/rollback.go",
+        "pkg/action/rollback_test.go",
+        "pkg/action/show.go",
+        "pkg/action/show_test.go",
+        "pkg/action/status.go",
+        "pkg/action/status_test.go",
+        "pkg/action/testdata/charts/chart-missing-deps/**",
+        "pkg/action/testdata/charts/chart-with-compressed-dependencies/Chart.yaml",
+        "pkg/action/testdata/charts/chart-with-compressed-dependencies/requirements.lock",
+        "pkg/action/testdata/charts/chart-with-compressed-dependencies/requirements.yaml",
+        "pkg/action/testdata/charts/chart-with-lock/**",
+        "pkg/action/testdata/charts/chart-with-no-templates-dir/**",
+        "pkg/action/testdata/charts/chart-with-schema/**",
+        "pkg/action/testdata/charts/chart-with-schema-negative/**",
+        "pkg/action/testdata/charts/chart-with-uncompressed-dependencies/**",
+        "pkg/action/testdata/charts/corrupted-compressed-chart.tgz",
+        "pkg/action/testdata/charts/decompressedchart/**",
+        "pkg/action/testdata/charts/multiplecharts-lint-chart-1/**",
+        "pkg/action/testdata/charts/multiplecharts-lint-chart-2/**",
+        "pkg/action/testdata/output/**",
+        "pkg/action/testdata/rbac.txt",
+        "pkg/action/uninstall.go",
+        "pkg/action/uninstall_test.go",
+        "pkg/action/upgrade.go",
+        "pkg/action/upgrade_test.go",
+        "pkg/action/validate.go",
+        "pkg/action/validate_test.go",
+        "pkg/action/verify.go",
+        "pkg/action/verify_test.go",
+        "pkg/chart/common/**",
+        "pkg/chart/common.go",
+        "pkg/chart/dependency.go",
+        "pkg/chart/interfaces.go",
+        "pkg/chart/loader/**",
+        "pkg/chart/v2/chart.go",
+        "pkg/chart/v2/chart_test.go",
+        "pkg/chart/v2/dependency.go",
+        "pkg/chart/v2/dependency_test.go",
+        "pkg/chart/v2/doc.go",
+        "pkg/chart/v2/errors.go",
+        "pkg/chart/v2/fuzz_test.go",
+        "pkg/chart/v2/lint/**",
+        "pkg/chart/v2/loader/archive.go",
+        "pkg/chart/v2/loader/directory.go",
+        "pkg/chart/v2/loader/load.go",
+        "pkg/chart/v2/loader/load_test.go",
+        "pkg/chart/v2/metadata.go",
+        "pkg/chart/v2/metadata_test.go",
+        "pkg/chart/v2/util/chartfile.go",
+        "pkg/chart/v2/util/chartfile_test.go",
+        "pkg/chart/v2/util/compatible.go",
+        "pkg/chart/v2/util/compatible_test.go",
+        "pkg/chart/v2/util/create.go",
+        "pkg/chart/v2/util/create_test.go",
+        "pkg/chart/v2/util/dependencies.go",
+        "pkg/chart/v2/util/dependencies_test.go",
+        "pkg/chart/v2/util/doc.go",
+        "pkg/chart/v2/util/expand.go",
+        "pkg/chart/v2/util/expand_test.go",
+        "pkg/chart/v2/util/save.go",
+        "pkg/chart/v2/util/save_test.go",
+        "pkg/chart/v2/util/testdata/chart-with-dependency-aliased-twice/**",
+        "pkg/chart/v2/util/testdata/chart-with-import-from-aliased-dependencies/**",
+        "pkg/chart/v2/util/testdata/chartfiletest.yaml",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/.helmignore",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/Chart.yaml",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/.ignore_me",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/_ignore_me",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/Chart.yaml",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/README.md",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/charts/mast1/**",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/templates/**",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/charts/alpine/values.yaml",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/templates/**",
+        "pkg/chart/v2/util/testdata/dependent-chart-helmignore/values.yaml",
+        "pkg/chart/v2/util/testdata/dotdotname/**",
+        "pkg/chart/v2/util/testdata/dotname/**",
+        "pkg/chart/v2/util/testdata/genfrob.sh",
+        "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/Chart.lock",
+        "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/Chart.yaml",
+        "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/envs/**",
+        "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/templates/**",
+        "pkg/chart/v2/util/testdata/import-values-from-enabled-subchart/parent-chart/values.yaml",
+        "pkg/chart/v2/util/testdata/joonix/**",
+        "pkg/chart/v2/util/testdata/slashinname/**",
+        "pkg/chart/v2/util/testdata/subpop/**",
+        "pkg/chart/v2/util/testdata/three-level-dependent-chart/**",
+        "pkg/chart/v2/util/validate_name.go",
+        "pkg/chart/v2/util/validate_name_test.go",
+        "pkg/cli/**",
+        "pkg/cmd/completion.go",
+        "pkg/cmd/completion_test.go",
+        "pkg/cmd/create.go",
+        "pkg/cmd/create_test.go",
+        "pkg/cmd/dependency.go",
+        "pkg/cmd/dependency_build.go",
+        "pkg/cmd/dependency_build_test.go",
+        "pkg/cmd/dependency_test.go",
+        "pkg/cmd/dependency_update.go",
+        "pkg/cmd/dependency_update_test.go",
+        "pkg/cmd/docs.go",
+        "pkg/cmd/docs_test.go",
+        "pkg/cmd/env.go",
+        "pkg/cmd/env_test.go",
+        "pkg/cmd/flags.go",
+        "pkg/cmd/flags_test.go",
+        "pkg/cmd/get.go",
+        "pkg/cmd/get_all.go",
+        "pkg/cmd/get_all_test.go",
+        "pkg/cmd/get_hooks.go",
+        "pkg/cmd/get_hooks_test.go",
+        "pkg/cmd/get_manifest.go",
+        "pkg/cmd/get_manifest_test.go",
+        "pkg/cmd/get_metadata.go",
+        "pkg/cmd/get_metadata_test.go",
+        "pkg/cmd/get_notes.go",
+        "pkg/cmd/get_notes_test.go",
+        "pkg/cmd/get_test.go",
+        "pkg/cmd/get_values.go",
+        "pkg/cmd/get_values_test.go",
+        "pkg/cmd/helpers.go",
+        "pkg/cmd/helpers_test.go",
+        "pkg/cmd/history.go",
+        "pkg/cmd/history_test.go",
+        "pkg/cmd/install.go",
+        "pkg/cmd/install_test.go",
+        "pkg/cmd/lint.go",
+        "pkg/cmd/lint_test.go",
+        "pkg/cmd/list.go",
+        "pkg/cmd/list_test.go",
+        "pkg/cmd/load_plugins.go",
+        "pkg/cmd/package.go",
+        "pkg/cmd/package_test.go",
+        "pkg/cmd/plugin.go",
+        "pkg/cmd/plugin_install.go",
+        "pkg/cmd/plugin_list.go",
+        "pkg/cmd/plugin_package.go",
+        "pkg/cmd/plugin_package_test.go",
+        "pkg/cmd/plugin_test.go",
+        "pkg/cmd/plugin_uninstall.go",
+        "pkg/cmd/plugin_uninstall_test.go",
+        "pkg/cmd/plugin_update.go",
+        "pkg/cmd/plugin_verify.go",
+        "pkg/cmd/plugin_verify_test.go",
+        "pkg/cmd/printer.go",
+        "pkg/cmd/profiling.go",
+        "pkg/cmd/pull.go",
+        "pkg/cmd/pull_test.go",
+        "pkg/cmd/push.go",
+        "pkg/cmd/push_test.go",
+        "pkg/cmd/registry.go",
+        "pkg/cmd/registry_login.go",
+        "pkg/cmd/registry_login_test.go",
+        "pkg/cmd/registry_logout.go",
+        "pkg/cmd/registry_logout_test.go",
+        "pkg/cmd/registry_output_test.go",
+        "pkg/cmd/release_testing.go",
+        "pkg/cmd/release_testing_test.go",
+        "pkg/cmd/repo.go",
+        "pkg/cmd/repo_add.go",
+        "pkg/cmd/repo_add_test.go",
+        "pkg/cmd/repo_index.go",
+        "pkg/cmd/repo_index_test.go",
+        "pkg/cmd/repo_list.go",
+        "pkg/cmd/repo_list_test.go",
+        "pkg/cmd/repo_remove.go",
+        "pkg/cmd/repo_remove_test.go",
+        "pkg/cmd/repo_test.go",
+        "pkg/cmd/repo_update.go",
+        "pkg/cmd/repo_update_test.go",
+        "pkg/cmd/require/**",
+        "pkg/cmd/rollback.go",
+        "pkg/cmd/rollback_test.go",
+        "pkg/cmd/root.go",
+        "pkg/cmd/root_test.go",
+        "pkg/cmd/search/**",
+        "pkg/cmd/search.go",
+        "pkg/cmd/search_hub.go",
+        "pkg/cmd/search_hub_test.go",
+        "pkg/cmd/search_repo.go",
+        "pkg/cmd/search_repo_test.go",
+        "pkg/cmd/search_test.go",
+        "pkg/cmd/show.go",
+        "pkg/cmd/show_test.go",
+        "pkg/cmd/source_date_epoch.go",
+        "pkg/cmd/source_date_epoch_test.go",
+        "pkg/cmd/status.go",
+        "pkg/cmd/status_test.go",
+        "pkg/cmd/template.go",
+        "pkg/cmd/template_test.go",
+        "pkg/cmd/testdata/helm home with space/**",
+        "pkg/cmd/testdata/helmhome/**",
+        "pkg/cmd/testdata/output/**",
+        "pkg/cmd/testdata/password",
+        "pkg/cmd/testdata/plugins.yaml",
+        "pkg/cmd/testdata/repositories.yaml",
+        "pkg/cmd/testdata/testcharts/alpine/**",
+        "pkg/cmd/testdata/testcharts/chart-bad-requirements/**",
+        "pkg/cmd/testdata/testcharts/chart-bad-type/**",
+        "pkg/cmd/testdata/testcharts/chart-missing-deps/**",
+        "pkg/cmd/testdata/testcharts/chart-with-bad-subcharts/**",
+        "pkg/cmd/testdata/testcharts/chart-with-deprecated-api/**",
+        "pkg/cmd/testdata/testcharts/chart-with-lib-dep/.helmignore",
+        "pkg/cmd/testdata/testcharts/chart-with-lib-dep/Chart.yaml",
+        "pkg/cmd/testdata/testcharts/chart-with-lib-dep/templates/**",
+        "pkg/cmd/testdata/testcharts/chart-with-lib-dep/values.yaml",
+        "pkg/cmd/testdata/testcharts/chart-with-only-crds/**",
+        "pkg/cmd/testdata/testcharts/chart-with-schema/**",
+        "pkg/cmd/testdata/testcharts/chart-with-schema-and-subchart/**",
+        "pkg/cmd/testdata/testcharts/chart-with-schema-negative/**",
+        "pkg/cmd/testdata/testcharts/chart-with-schema-negative-skip-validation/**",
+        "pkg/cmd/testdata/testcharts/chart-with-secret/**",
+        "pkg/cmd/testdata/testcharts/chart-with-subchart-notes/**",
+        "pkg/cmd/testdata/testcharts/chart-with-subchart-update/**",
+        "pkg/cmd/testdata/testcharts/chart-with-template-lib-archive-dep/.helmignore",
+        "pkg/cmd/testdata/testcharts/chart-with-template-lib-archive-dep/Chart.yaml",
+        "pkg/cmd/testdata/testcharts/chart-with-template-lib-archive-dep/templates/**",
+        "pkg/cmd/testdata/testcharts/chart-with-template-lib-archive-dep/values.yaml",
+        "pkg/cmd/testdata/testcharts/chart-with-template-lib-dep/**",
+        "pkg/cmd/testdata/testcharts/chart-with-template-with-invalid-template-expr/**",
+        "pkg/cmd/testdata/testcharts/chart-with-template-with-invalid-yaml/**",
+        "pkg/cmd/testdata/testcharts/deprecated/**",
+        "pkg/cmd/testdata/testcharts/empty/**",
+        "pkg/cmd/testdata/testcharts/issue-7233/**",
+        "pkg/cmd/testdata/testcharts/issue-9027/**",
+        "pkg/cmd/testdata/testcharts/issue1979/**",
+        "pkg/cmd/testdata/testcharts/lib-chart/**",
+        "pkg/cmd/testdata/testcharts/object-order/**",
+        "pkg/cmd/testdata/testcharts/reqtest/.helmignore",
+        "pkg/cmd/testdata/testcharts/reqtest/Chart.lock",
+        "pkg/cmd/testdata/testcharts/reqtest/Chart.yaml",
+        "pkg/cmd/testdata/testcharts/reqtest/charts/reqsubchart/**",
+        "pkg/cmd/testdata/testcharts/reqtest/charts/reqsubchart2/**",
+        "pkg/cmd/testdata/testcharts/reqtest/values.yaml",
+        "pkg/cmd/testdata/testcharts/signtest/**",
+        "pkg/cmd/testdata/testcharts/signtest-0.1.0.tgz.prov",
+        "pkg/cmd/testdata/testcharts/subchart/**",
+        "pkg/cmd/testdata/testcharts/test/**",
+        "pkg/cmd/testdata/testcharts/test1/**",
+        "pkg/cmd/testdata/testcharts/upgradetest/**",
+        "pkg/cmd/testdata/testplugin/**",
+        "pkg/cmd/testdata/testserver/**",
+        "pkg/cmd/uninstall.go",
+        "pkg/cmd/uninstall_test.go",
+        "pkg/cmd/upgrade.go",
+        "pkg/cmd/upgrade_test.go",
+        "pkg/cmd/verify.go",
+        "pkg/cmd/verify_test.go",
+        "pkg/cmd/version.go",
+        "pkg/cmd/version_test.go",
+        "pkg/downloader/cache.go",
+        "pkg/downloader/cache_test.go",
+        "pkg/downloader/chart_downloader.go",
+        "pkg/downloader/chart_downloader_test.go",
+        "pkg/downloader/chart_downloader_windows_test.go",
+        "pkg/downloader/doc.go",
+        "pkg/downloader/manager.go",
+        "pkg/downloader/manager_test.go",
+        "pkg/downloader/testdata/local-subchart/**",
+        "pkg/downloader/testdata/repositories.yaml",
+        "pkg/downloader/testdata/repository/**",
+        "pkg/downloader/testdata/signtest/**",
+        "pkg/downloader/testdata/signtest-0.1.0.tgz.prov",
+        "pkg/engine/**",
+        "pkg/gates/**",
+        "pkg/getter/doc.go",
+        "pkg/getter/getter.go",
+        "pkg/getter/getter_test.go",
+        "pkg/getter/httpgetter.go",
+        "pkg/getter/httpgetter_test.go",
+        "pkg/getter/ocigetter.go",
+        "pkg/getter/ocigetter_test.go",
+        "pkg/getter/plugingetter.go",
+        "pkg/getter/plugingetter_test.go",
+        "pkg/getter/testdata/ca.crt",
+        "pkg/getter/testdata/client.crt",
+        "pkg/getter/testdata/client.key",
+        "pkg/getter/testdata/plugins/**",
+        "pkg/getter/testdata/repository/**",
+        "pkg/helmpath/**",
+        "pkg/ignore/**",
+        "pkg/kube/**",
+        "pkg/kubeenv/**",
+        "pkg/postrenderer/**",
+        "pkg/provenance/doc.go",
+        "pkg/provenance/keybox.go",
+        "pkg/provenance/keybox_test.go",
+        "pkg/provenance/sign.go",
+        "pkg/provenance/sign_test.go",
+        "pkg/provenance/testdata/hashtest/**",
+        "pkg/provenance/testdata/hashtest-1.2.3.tgz.prov",
+        "pkg/provenance/testdata/hashtest.sha256",
+        "pkg/provenance/testdata/helm-mixed-keyring.asc",
+        "pkg/provenance/testdata/helm-test-key.asc",
+        "pkg/provenance/testdata/msgblock.yaml",
+        "pkg/provenance/testdata/msgblock.yaml.asc",
+        "pkg/provenance/testdata/msgblock.yaml.tampered",
+        "pkg/provenance/testdata/regen-hashtest.sh",
+        "pkg/provenance/testdata/regen-keyring-formats.sh",
+        "pkg/pusher/**",
+        "pkg/registry/**",
+        "pkg/release/**",
+        "pkg/repo/v1/chartrepo.go",
+        "pkg/repo/v1/chartrepo_test.go",
+        "pkg/repo/v1/doc.go",
+        "pkg/repo/v1/error.go",
+        "pkg/repo/v1/index.go",
+        "pkg/repo/v1/index_test.go",
+        "pkg/repo/v1/repo.go",
+        "pkg/repo/v1/repo_test.go",
+        "pkg/repo/v1/repotest/doc.go",
+        "pkg/repo/v1/repotest/server.go",
+        "pkg/repo/v1/repotest/server_test.go",
+        "pkg/repo/v1/repotest/testdata/examplechart/**",
+        "pkg/repo/v1/repotest/tlsconfig.go",
+        "pkg/repo/v1/testdata/chartmuseum-index.yaml",
+        "pkg/repo/v1/testdata/local-index-annotations.yaml",
+        "pkg/repo/v1/testdata/local-index-unordered.yaml",
+        "pkg/repo/v1/testdata/local-index.json",
+        "pkg/repo/v1/testdata/local-index.yaml",
+        "pkg/repo/v1/testdata/old-repositories.yaml",
+        "pkg/repo/v1/testdata/repositories.yaml",
+        "pkg/repo/v1/testdata/server/**",
+        "pkg/storage/**",
+        "pkg/strvals/**",
+        "pkg/uploader/**",
+        "scripts/**",
+        "testdata/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2016 The Kubernetes Authors All Rights Reserved\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2016 The Kubernetes Authors All Rights Reserved, Apache-2.0 license (LICENSE), https://github.com/helm/helm."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.complete"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tampered"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tgz"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dotfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore_me"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.joonix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/KEYS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_ignore_me"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crds"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/get"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/get-helm-3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/get-helm-4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/password"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1358 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/authelia/authelia",
+  "revision": "bcf6b06c77d5b172e7c0790c1050951a57c71e68",
+  "checksum": "sha256:ed8ce5b1111fdbcab85ad044c2019366006fab879297b47d358452b1187bfa02",
+  "extract": {
+    "exclude": [
+      "docs/content/blog/release-notes-4.39/consent_custom_claims.png",
+      "docs/content/blog/release-notes-4.39/language_picker_small.png",
+      "docs/content/blog/release-notes-4.39/oled.png",
+      "docs/content/blog/release-notes-4.39/passkeys.png",
+      "docs/content/blog/release-notes-4.39/password_2fa.png",
+      "docs/content/integration/guides/securing-apps-with-basic-auth/authforward.webp",
+      "docs/content/integration/openid-connect/clients/audiobookshelf/audiobookshelf_1.png",
+      "docs/content/integration/openid-connect/clients/booklore/booklore.png",
+      "docs/content/integration/openid-connect/clients/budibase/budibase_auth.png",
+      "docs/content/integration/openid-connect/clients/budibase/budibase_org.png",
+      "docs/content/integration/openid-connect/clients/firezone/firezone.png",
+      "docs/content/integration/openid-connect/clients/forgejo/forgejo-sshpubkey.png",
+      "docs/content/integration/openid-connect/clients/forgejo/forgejo.png",
+      "docs/content/integration/openid-connect/clients/gitea/gitea.png",
+      "docs/content/integration/openid-connect/clients/jellyseerr/login.png",
+      "docs/content/integration/openid-connect/clients/jellyseerr/provider.png",
+      "docs/content/integration/openid-connect/clients/jellyseerr/settings.png",
+      "docs/content/integration/openid-connect/clients/kasm-workspaces/kasm.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-2.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-3-1.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-3-2.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-3-3.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-3-4.png",
+      "docs/content/integration/openid-connect/clients/misago/misago-step-3-5.png",
+      "docs/content/integration/openid-connect/clients/peertube/peertube.png",
+      "docs/content/integration/openid-connect/clients/portainer/portainer.png",
+      "docs/content/integration/openid-connect/clients/powerdns/powerdns.png",
+      "docs/content/integration/openid-connect/clients/proxmox/proxmox.png",
+      "docs/content/integration/openid-connect/clients/synology-dsm/client.png",
+      "docs/content/integration/openid-connect/clients/tailscale/tailscale_signup_1.png",
+      "docs/content/integration/openid-connect/clients/tailscale/tailscale_signup_2.png",
+      "docs/content/integration/openid-connect/clients/uptime-kuma/uptime-kuma-authentication.png",
+      "docs/content/integration/openid-connect/clients/wikijs/wikijs.png",
+      "docs/content/integration/openid-connect/clients/windmill/windmill_core.png",
+      "docs/content/integration/openid-connect/clients/windmill/windmill_sso.png",
+      "docs/content/integration/openid-connect/clients/youtrack/youtrack_additional_settings.png",
+      "docs/content/integration/openid-connect/clients/youtrack/youtrack_authz_endpoints.png",
+      "docs/content/integration/openid-connect/clients/youtrack/youtrack_field_mapping.png",
+      "docs/content/integration/openid-connect/clients/youtrack/youtrack_overview.png",
+      "docs/content/integration/openid-connect/clients/zipline/zipline.png",
+      "docs/content/integration/proxies/forwarded-headers/cloudflare.png",
+      "docs/content/integration/proxies/forwarded-headers/cloudflare2.png",
+      "docs/content/integration/proxies/forwarded-headers/cloudflare3.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/authelia.advanced.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/authelia.details.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/nextcloud.details.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/protectedapp.advanced.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/protectedapp.customlocation.png",
+      "docs/content/integration/proxies/nginx-proxy-manager/proxyhosts.png",
+      "docs/content/integration/trusted-header-sso/organizr/organizr.png",
+      "docs/content/overview/authentication/first-factor/1FA.png",
+      "docs/content/overview/authentication/one-time-password/2FA-TOTP.png",
+      "docs/content/overview/authentication/one-time-password/REGISTER-TOTP.png",
+      "docs/content/overview/authentication/one-time-password/google-authenticator.png",
+      "docs/content/overview/authentication/password-policy/password-policy-classic-1.png",
+      "docs/content/overview/authentication/password-policy/password-policy-zxcvbn-1.png",
+      "docs/content/overview/authentication/push-notification/2FA-PUSH.png",
+      "docs/content/overview/authentication/push-notification/duo-push-1.jpg",
+      "docs/content/overview/authentication/push-notification/duo-push-2.png",
+      "docs/content/overview/authentication/security-key/2FA-U2F.png",
+      "docs/content/overview/authentication/security-key/REGISTER-U2F.png",
+      "docs/content/overview/authentication/security-key/passkeys.png",
+      "docs/content/overview/authentication/security-key/password_2fa.png",
+      "docs/content/overview/authentication/security-key/yubikey.jpg",
+      "docs/content/overview/prologue/architecture/architecture-diagram.png",
+      "docs/content/overview/prologue/architecture/sequence-diagram.png",
+      "docs/static/cover.png",
+      "docs/static/favicon.ico",
+      "docs/static/favicon.png",
+      "docs/static/images/1FA.png",
+      "docs/static/images/2FA-METHODS.png",
+      "docs/static/images/2fa-methods-dark.png",
+      "docs/static/images/2fa-methods-light.png",
+      "docs/static/images/archi.png",
+      "docs/static/images/authelia-title.png",
+      "docs/static/images/branding/logo-cropped.ai",
+      "docs/static/images/branding/logo-cropped.png",
+      "docs/static/images/branding/logo-cropped.psd",
+      "docs/static/images/branding/logo.ai",
+      "docs/static/images/branding/logo.png",
+      "docs/static/images/branding/logo.psd",
+      "docs/static/images/branding/title.ai",
+      "docs/static/images/branding/title.png",
+      "docs/static/images/branding/title.psd",
+      "docs/static/images/dark.png",
+      "docs/static/images/default-image.png",
+      "docs/static/images/light.png",
+      "docs/static/images/logos/**",
+      "docs/static/images/oid-certification.jpg",
+      "docs/static/images/oid-map.png",
+      "docs/static/images/oled.png",
+      "docs/static/keys/authelia-security.gpg",
+      "docs/static/native/branding/logo-cropped.ai",
+      "docs/static/native/branding/logo-cropped.psd",
+      "docs/static/native/branding/logo.ai",
+      "docs/static/native/branding/logo.psd",
+      "docs/static/native/branding/title.ai",
+      "docs/static/native/branding/title.psd",
+      "internal/mocks/**",
+      "internal/suites/Traefik/favicon.ico",
+      "internal/suites/Traefik/logo.png",
+      "internal/suites/example/compose/nginx/backend/html/icon.png",
+      "internal/suites/testdata/docs_homepage_snapshot.png",
+      "internal/suites/testdata/fonts/**",
+      "internal/suites/testdata/templates_event_snapshot.png",
+      "internal/suites/testdata/templates_identity_verification_jwt_snapshot.png",
+      "internal/suites/testdata/templates_identity_verification_otc_snapshot.png",
+      "web/public/favicon.ico"
+    ]
+  },
+  "history": {
+    "since": "743b84aeaa905dcb0bd044d683b037a237e3ea76"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2026 Authelia\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/authelia/authelia: Copyright 2026 Authelia, Apache-2.0 license (LICENSE), https://github.com/authelia/authelia."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".all-contributorsrc",
+        ".buildkite/**",
+        ".codecov.yml",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yml",
+        ".grype.yaml",
+        ".healthcheck.env",
+        ".lefthook.yml",
+        ".mailmap",
+        ".renovaterc",
+        ".reviewdog.yml",
+        ".shellcheckrc",
+        ".trufflehog",
+        ".typos.toml",
+        ".yamllint.yml",
+        "CITATION.cff",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.coverage",
+        "Dockerfile.coverage.dockerignore",
+        "Dockerfile.dev",
+        "Dockerfile.dev.dockerignore",
+        "LICENSE",
+        "LICENSES/**",
+        "README.md",
+        "README.md.license",
+        "REUSE.toml",
+        "SECURITY.md",
+        "api/**",
+        "authelia-fb-rc.d",
+        "authelia.service",
+        "authelia.sysusers.conf",
+        "authelia.tmpfiles.conf",
+        "authelia.tmpfiles.config.conf",
+        "authelia@.service",
+        "bootstrap.sh",
+        "cmd/**",
+        "config.template.yml",
+        "crowdin.yml",
+        "docs/.editorconfig",
+        "docs/.gitignore",
+        "docs/.npmignore",
+        "docs/README.md",
+        "docs/assets/**",
+        "docs/config/**",
+        "docs/content/_index.md",
+        "docs/content/blog/_index.md",
+        "docs/content/blog/authelia-traefik-setup-guide/**",
+        "docs/content/blog/pre-release-notes-4.37/**",
+        "docs/content/blog/release-notes-4.38/**",
+        "docs/content/blog/release-notes-4.39/consent_custom_claims.png.license",
+        "docs/content/blog/release-notes-4.39/index.md",
+        "docs/content/blog/release-notes-4.39/language_picker_small.png.license",
+        "docs/content/blog/release-notes-4.39/oled.png.license",
+        "docs/content/blog/release-notes-4.39/passkeys.png.license",
+        "docs/content/blog/release-notes-4.39/password_2fa.png.license",
+        "docs/content/blog/say-hello-to-the-new-website/**",
+        "docs/content/blog/technical-oidc-nuances/**",
+        "docs/content/blog/we-are-now-openid-certified/**",
+        "docs/content/configuration/**",
+        "docs/content/contributing/**",
+        "docs/content/contributors/**",
+        "docs/content/information/**",
+        "docs/content/integration/_index.md",
+        "docs/content/integration/deployment/**",
+        "docs/content/integration/guides/_index.md",
+        "docs/content/integration/guides/pam-authelia/**",
+        "docs/content/integration/guides/securing-apps-with-basic-auth/authforward.webp.license",
+        "docs/content/integration/guides/securing-apps-with-basic-auth/index.md",
+        "docs/content/integration/kubernetes/**",
+        "docs/content/integration/ldap/**",
+        "docs/content/integration/openid-connect/_index.md",
+        "docs/content/integration/openid-connect/clients/1password/**",
+        "docs/content/integration/openid-connect/clients/2fauth/**",
+        "docs/content/integration/openid-connect/clients/_index.md",
+        "docs/content/integration/openid-connect/clients/actual-budget/**",
+        "docs/content/integration/openid-connect/clients/adventure-log/**",
+        "docs/content/integration/openid-connect/clients/affine/**",
+        "docs/content/integration/openid-connect/clients/ansible-awx/**",
+        "docs/content/integration/openid-connect/clients/apache-guacamole/**",
+        "docs/content/integration/openid-connect/clients/arcane/**",
+        "docs/content/integration/openid-connect/clients/argocd/**",
+        "docs/content/integration/openid-connect/clients/audiobookshelf/audiobookshelf_1.png.license",
+        "docs/content/integration/openid-connect/clients/audiobookshelf/index.md",
+        "docs/content/integration/openid-connect/clients/beszel/**",
+        "docs/content/integration/openid-connect/clients/bitwarden/**",
+        "docs/content/integration/openid-connect/clients/booklore/booklore.png.license",
+        "docs/content/integration/openid-connect/clients/booklore/index.md",
+        "docs/content/integration/openid-connect/clients/bookstack/**",
+        "docs/content/integration/openid-connect/clients/budibase/budibase_auth.png.license",
+        "docs/content/integration/openid-connect/clients/budibase/budibase_org.png.license",
+        "docs/content/integration/openid-connect/clients/budibase/index.md",
+        "docs/content/integration/openid-connect/clients/chronograf/**",
+        "docs/content/integration/openid-connect/clients/claper/**",
+        "docs/content/integration/openid-connect/clients/cloud-identity-engine/**",
+        "docs/content/integration/openid-connect/clients/cloudflare-zerotrust/**",
+        "docs/content/integration/openid-connect/clients/coder/**",
+        "docs/content/integration/openid-connect/clients/dashy/**",
+        "docs/content/integration/openid-connect/clients/docmost/**",
+        "docs/content/integration/openid-connect/clients/dokuwiki/**",
+        "docs/content/integration/openid-connect/clients/donetick/**",
+        "docs/content/integration/openid-connect/clients/drupal/**",
+        "docs/content/integration/openid-connect/clients/engomo/**",
+        "docs/content/integration/openid-connect/clients/envoy-gateway/**",
+        "docs/content/integration/openid-connect/clients/espocrm/**",
+        "docs/content/integration/openid-connect/clients/expressjs/**",
+        "docs/content/integration/openid-connect/clients/ezbookkeeping/**",
+        "docs/content/integration/openid-connect/clients/file-rise/**",
+        "docs/content/integration/openid-connect/clients/filebrowser-quantum/**",
+        "docs/content/integration/openid-connect/clients/firezone/firezone.png.license",
+        "docs/content/integration/openid-connect/clients/firezone/index.md",
+        "docs/content/integration/openid-connect/clients/flower/**",
+        "docs/content/integration/openid-connect/clients/forgejo/forgejo-sshpubkey.png.license",
+        "docs/content/integration/openid-connect/clients/forgejo/forgejo.png.license",
+        "docs/content/integration/openid-connect/clients/forgejo/index.md",
+        "docs/content/integration/openid-connect/clients/freshrss/**",
+        "docs/content/integration/openid-connect/clients/gatus/**",
+        "docs/content/integration/openid-connect/clients/ghostfolio/**",
+        "docs/content/integration/openid-connect/clients/gitea/gitea.png.license",
+        "docs/content/integration/openid-connect/clients/gitea/index.md",
+        "docs/content/integration/openid-connect/clients/gitlab/**",
+        "docs/content/integration/openid-connect/clients/glitchtip/**",
+        "docs/content/integration/openid-connect/clients/go-to-social/**",
+        "docs/content/integration/openid-connect/clients/grafana/**",
+        "docs/content/integration/openid-connect/clients/gramps/**",
+        "docs/content/integration/openid-connect/clients/gravitee/**",
+        "docs/content/integration/openid-connect/clients/harbor/**",
+        "docs/content/integration/openid-connect/clients/hashicorp-vault/**",
+        "docs/content/integration/openid-connect/clients/headscale/**",
+        "docs/content/integration/openid-connect/clients/hedge-doc/**",
+        "docs/content/integration/openid-connect/clients/homarr/**",
+        "docs/content/integration/openid-connect/clients/home-assistant/**",
+        "docs/content/integration/openid-connect/clients/homebox/**",
+        "docs/content/integration/openid-connect/clients/humhub/**",
+        "docs/content/integration/openid-connect/clients/immich/**",
+        "docs/content/integration/openid-connect/clients/incus/**",
+        "docs/content/integration/openid-connect/clients/jellyfin/**",
+        "docs/content/integration/openid-connect/clients/jellyseerr/index.md",
+        "docs/content/integration/openid-connect/clients/jellyseerr/login.png.license",
+        "docs/content/integration/openid-connect/clients/jellyseerr/provider.png.license",
+        "docs/content/integration/openid-connect/clients/jellyseerr/settings.png.license",
+        "docs/content/integration/openid-connect/clients/jellysweep/**",
+        "docs/content/integration/openid-connect/clients/jenkins/**",
+        "docs/content/integration/openid-connect/clients/kanboard/**",
+        "docs/content/integration/openid-connect/clients/karakeep/**",
+        "docs/content/integration/openid-connect/clients/kasm-workspaces/index.md",
+        "docs/content/integration/openid-connect/clients/kasm-workspaces/kasm.png.license",
+        "docs/content/integration/openid-connect/clients/kiali/**",
+        "docs/content/integration/openid-connect/clients/kitchenowl/**",
+        "docs/content/integration/openid-connect/clients/komga/**",
+        "docs/content/integration/openid-connect/clients/komodo/**",
+        "docs/content/integration/openid-connect/clients/kubelogin/**",
+        "docs/content/integration/openid-connect/clients/landscape/**",
+        "docs/content/integration/openid-connect/clients/leantime/**",
+        "docs/content/integration/openid-connect/clients/librechat/**",
+        "docs/content/integration/openid-connect/clients/linkace/**",
+        "docs/content/integration/openid-connect/clients/linkding/**",
+        "docs/content/integration/openid-connect/clients/linkwarden/**",
+        "docs/content/integration/openid-connect/clients/mailcow/**",
+        "docs/content/integration/openid-connect/clients/mastodon/**",
+        "docs/content/integration/openid-connect/clients/matomo/**",
+        "docs/content/integration/openid-connect/clients/mattermost/**",
+        "docs/content/integration/openid-connect/clients/mealie/**",
+        "docs/content/integration/openid-connect/clients/memos/**",
+        "docs/content/integration/openid-connect/clients/meshcentral/**",
+        "docs/content/integration/openid-connect/clients/miniflux/**",
+        "docs/content/integration/openid-connect/clients/minio/**",
+        "docs/content/integration/openid-connect/clients/misago/index.md",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-2.png.license",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-3-1.png.license",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-3-2.png.license",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-3-3.png.license",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-3-4.png.license",
+        "docs/content/integration/openid-connect/clients/misago/misago-step-3-5.png.license",
+        "docs/content/integration/openid-connect/clients/mobilizon/**",
+        "docs/content/integration/openid-connect/clients/netbird/**",
+        "docs/content/integration/openid-connect/clients/nextcloud/**",
+        "docs/content/integration/openid-connect/clients/node-red/**",
+        "docs/content/integration/openid-connect/clients/ocis/**",
+        "docs/content/integration/openid-connect/clients/odoo/**",
+        "docs/content/integration/openid-connect/clients/open-webui/**",
+        "docs/content/integration/openid-connect/clients/opencloud/**",
+        "docs/content/integration/openid-connect/clients/opengist/**",
+        "docs/content/integration/openid-connect/clients/openid-connect-playground/**",
+        "docs/content/integration/openid-connect/clients/openproject/**",
+        "docs/content/integration/openid-connect/clients/opkssh/**",
+        "docs/content/integration/openid-connect/clients/outline/**",
+        "docs/content/integration/openid-connect/clients/pangolin/**",
+        "docs/content/integration/openid-connect/clients/paperless/**",
+        "docs/content/integration/openid-connect/clients/papra/**",
+        "docs/content/integration/openid-connect/clients/passbolt/**",
+        "docs/content/integration/openid-connect/clients/patchmon/**",
+        "docs/content/integration/openid-connect/clients/peertube/index.md",
+        "docs/content/integration/openid-connect/clients/peertube/peertube.png.license",
+        "docs/content/integration/openid-connect/clients/pgadmin/**",
+        "docs/content/integration/openid-connect/clients/photoprism/**",
+        "docs/content/integration/openid-connect/clients/plesk/**",
+        "docs/content/integration/openid-connect/clients/pocketbase/**",
+        "docs/content/integration/openid-connect/clients/portainer/index.md",
+        "docs/content/integration/openid-connect/clients/portainer/portainer.png.license",
+        "docs/content/integration/openid-connect/clients/powerdns/index.md",
+        "docs/content/integration/openid-connect/clients/powerdns/powerdns.png.license",
+        "docs/content/integration/openid-connect/clients/proxmox/index.md",
+        "docs/content/integration/openid-connect/clients/proxmox/proxmox.png.license",
+        "docs/content/integration/openid-connect/clients/rocket-chat/**",
+        "docs/content/integration/openid-connect/clients/romm/**",
+        "docs/content/integration/openid-connect/clients/roundcube/**",
+        "docs/content/integration/openid-connect/clients/rustdesk-server-pro/**",
+        "docs/content/integration/openid-connect/clients/ryot/**",
+        "docs/content/integration/openid-connect/clients/sambee/**",
+        "docs/content/integration/openid-connect/clients/seafile/**",
+        "docs/content/integration/openid-connect/clients/semaphore/**",
+        "docs/content/integration/openid-connect/clients/sftpgo/**",
+        "docs/content/integration/openid-connect/clients/stalwart/**",
+        "docs/content/integration/openid-connect/clients/stirling-pdf/**",
+        "docs/content/integration/openid-connect/clients/sure/**",
+        "docs/content/integration/openid-connect/clients/synapse/**",
+        "docs/content/integration/openid-connect/clients/synology-dsm/client.png.license",
+        "docs/content/integration/openid-connect/clients/synology-dsm/index.md",
+        "docs/content/integration/openid-connect/clients/tailscale/index.md",
+        "docs/content/integration/openid-connect/clients/tailscale/tailscale_signup_1.png.license",
+        "docs/content/integration/openid-connect/clients/tailscale/tailscale_signup_2.png.license",
+        "docs/content/integration/openid-connect/clients/tandoor/**",
+        "docs/content/integration/openid-connect/clients/technitium/**",
+        "docs/content/integration/openid-connect/clients/terrakube/**",
+        "docs/content/integration/openid-connect/clients/trillium/**",
+        "docs/content/integration/openid-connect/clients/unreal-engine/**",
+        "docs/content/integration/openid-connect/clients/uptime-kuma/index.md",
+        "docs/content/integration/openid-connect/clients/uptime-kuma/uptime-kuma-authentication.png.license",
+        "docs/content/integration/openid-connect/clients/vaultwarden/**",
+        "docs/content/integration/openid-connect/clients/vikunja/**",
+        "docs/content/integration/openid-connect/clients/wallos/**",
+        "docs/content/integration/openid-connect/clients/wanderer/**",
+        "docs/content/integration/openid-connect/clients/wapy-dev/**",
+        "docs/content/integration/openid-connect/clients/warpgate/**",
+        "docs/content/integration/openid-connect/clients/wekan/**",
+        "docs/content/integration/openid-connect/clients/wg-portal/**",
+        "docs/content/integration/openid-connect/clients/wikijs/index.md",
+        "docs/content/integration/openid-connect/clients/wikijs/wikijs.png.license",
+        "docs/content/integration/openid-connect/clients/windmill/index.md",
+        "docs/content/integration/openid-connect/clients/windmill/windmill_core.png.license",
+        "docs/content/integration/openid-connect/clients/windmill/windmill_sso.png.license",
+        "docs/content/integration/openid-connect/clients/wordpress/**",
+        "docs/content/integration/openid-connect/clients/writefreely/**",
+        "docs/content/integration/openid-connect/clients/wud/**",
+        "docs/content/integration/openid-connect/clients/xen-orchestra/**",
+        "docs/content/integration/openid-connect/clients/youtrack/index.md",
+        "docs/content/integration/openid-connect/clients/youtrack/youtrack_additional_settings.png.license",
+        "docs/content/integration/openid-connect/clients/youtrack/youtrack_authz_endpoints.png.license",
+        "docs/content/integration/openid-connect/clients/youtrack/youtrack_field_mapping.png.license",
+        "docs/content/integration/openid-connect/clients/youtrack/youtrack_overview.png.license",
+        "docs/content/integration/openid-connect/clients/zammad/**",
+        "docs/content/integration/openid-connect/clients/zipline/index.md",
+        "docs/content/integration/openid-connect/clients/zipline/zipline.png.license",
+        "docs/content/integration/openid-connect/frequently-asked-questions.md",
+        "docs/content/integration/openid-connect/introduction.md",
+        "docs/content/integration/openid-connect/oauth-2.0-bearer-token-usage.md",
+        "docs/content/integration/openid-connect/openid-connect-1.0-claims.md",
+        "docs/content/integration/prologue/**",
+        "docs/content/integration/proxies/_index.md",
+        "docs/content/integration/proxies/caddy.md",
+        "docs/content/integration/proxies/envoy.md",
+        "docs/content/integration/proxies/forwarded-headers/cloudflare.png.license",
+        "docs/content/integration/proxies/forwarded-headers/cloudflare2.png.license",
+        "docs/content/integration/proxies/forwarded-headers/cloudflare3.png.license",
+        "docs/content/integration/proxies/forwarded-headers/index.md",
+        "docs/content/integration/proxies/haproxy.md",
+        "docs/content/integration/proxies/introduction.md",
+        "docs/content/integration/proxies/nginx-proxy-manager/authelia.advanced.png.license",
+        "docs/content/integration/proxies/nginx-proxy-manager/authelia.details.png.license",
+        "docs/content/integration/proxies/nginx-proxy-manager/index.md",
+        "docs/content/integration/proxies/nginx-proxy-manager/nextcloud.details.png.license",
+        "docs/content/integration/proxies/nginx-proxy-manager/protectedapp.advanced.png.license",
+        "docs/content/integration/proxies/nginx-proxy-manager/protectedapp.customlocation.png.license",
+        "docs/content/integration/proxies/nginx-proxy-manager/proxyhosts.png.license",
+        "docs/content/integration/proxies/nginx.md",
+        "docs/content/integration/proxies/skipper.md",
+        "docs/content/integration/proxies/support.md",
+        "docs/content/integration/proxies/swag.md",
+        "docs/content/integration/proxies/traefik.md",
+        "docs/content/integration/proxies/traefikv1.md",
+        "docs/content/integration/trusted-header-sso/_index.md",
+        "docs/content/integration/trusted-header-sso/frequently-asked-questions.md",
+        "docs/content/integration/trusted-header-sso/introduction.md",
+        "docs/content/integration/trusted-header-sso/jira/**",
+        "docs/content/integration/trusted-header-sso/organizr/index.md",
+        "docs/content/integration/trusted-header-sso/organizr/organizr.png.license",
+        "docs/content/integration/trusted-header-sso/paperless/**",
+        "docs/content/integration/trusted-header-sso/seafile/**",
+        "docs/content/integration/trusted-header-sso/seerr/**",
+        "docs/content/overview/_index.md",
+        "docs/content/overview/authentication/_index.md",
+        "docs/content/overview/authentication/first-factor/1FA.png.license",
+        "docs/content/overview/authentication/first-factor/index.md",
+        "docs/content/overview/authentication/introduction.md",
+        "docs/content/overview/authentication/one-time-password/2FA-TOTP.png.license",
+        "docs/content/overview/authentication/one-time-password/REGISTER-TOTP.png.license",
+        "docs/content/overview/authentication/one-time-password/google-authenticator.png.license",
+        "docs/content/overview/authentication/one-time-password/index.md",
+        "docs/content/overview/authentication/password-policy/index.md",
+        "docs/content/overview/authentication/password-policy/password-policy-classic-1.png.license",
+        "docs/content/overview/authentication/password-policy/password-policy-zxcvbn-1.png.license",
+        "docs/content/overview/authentication/push-notification/2FA-PUSH.png.license",
+        "docs/content/overview/authentication/push-notification/duo-push-1.jpg.license",
+        "docs/content/overview/authentication/push-notification/duo-push-2.png.license",
+        "docs/content/overview/authentication/push-notification/index.md",
+        "docs/content/overview/authentication/security-key/2FA-U2F.png.license",
+        "docs/content/overview/authentication/security-key/REGISTER-U2F.png.license",
+        "docs/content/overview/authentication/security-key/index.md",
+        "docs/content/overview/authentication/security-key/passkeys.png.license",
+        "docs/content/overview/authentication/security-key/password_2fa.png.license",
+        "docs/content/overview/authentication/security-key/yubikey.jpg.license",
+        "docs/content/overview/authorization/**",
+        "docs/content/overview/prologue/_index.md",
+        "docs/content/overview/prologue/architecture/architecture-diagram.png.license",
+        "docs/content/overview/prologue/architecture/index.md",
+        "docs/content/overview/prologue/architecture/sequence-diagram.png.license",
+        "docs/content/overview/prologue/introduction.md",
+        "docs/content/overview/prologue/supported-proxies.md",
+        "docs/content/overview/security/**",
+        "docs/content/policies/**",
+        "docs/content/reference/**",
+        "docs/content/roadmap/**",
+        "docs/data/**",
+        "docs/eslint.config.mjs",
+        "docs/functions/**",
+        "docs/i18n/**",
+        "docs/layouts/**",
+        "docs/netlify.toml",
+        "docs/package.json",
+        "docs/package.json.license",
+        "docs/pnpm-lock.yaml",
+        "docs/pnpm-lock.yaml.license",
+        "docs/pnpm-workspace.yaml",
+        "docs/pnpm-workspace.yaml.license",
+        "docs/prettier.config.mjs",
+        "docs/static/.gitkeep",
+        "docs/static/.well-known/**",
+        "docs/static/client/**",
+        "docs/static/cover.png.license",
+        "docs/static/favicon.ico.license",
+        "docs/static/favicon.png.license",
+        "docs/static/favicon.svg",
+        "docs/static/favicon.svg.license",
+        "docs/static/images/1FA.png.license",
+        "docs/static/images/2FA-METHODS.png.license",
+        "docs/static/images/2fa-methods-dark.png.license",
+        "docs/static/images/2fa-methods-light.png.license",
+        "docs/static/images/archi.png.license",
+        "docs/static/images/archi.svg",
+        "docs/static/images/archi.svg.license",
+        "docs/static/images/authelia-title.png.license",
+        "docs/static/images/branding/logo-cropped.ai.license",
+        "docs/static/images/branding/logo-cropped.png.license",
+        "docs/static/images/branding/logo-cropped.psd.license",
+        "docs/static/images/branding/logo-cropped.svg",
+        "docs/static/images/branding/logo-cropped.svg.license",
+        "docs/static/images/branding/logo.ai.license",
+        "docs/static/images/branding/logo.png.license",
+        "docs/static/images/branding/logo.psd.license",
+        "docs/static/images/branding/logo.svg",
+        "docs/static/images/branding/logo.svg.license",
+        "docs/static/images/branding/title.ai.license",
+        "docs/static/images/branding/title.png.license",
+        "docs/static/images/branding/title.psd.license",
+        "docs/static/images/branding/title.svg",
+        "docs/static/images/branding/title.svg.license",
+        "docs/static/images/contributors/**",
+        "docs/static/images/dark.png.license",
+        "docs/static/images/default-image.png.license",
+        "docs/static/images/light.png.license",
+        "docs/static/images/oled.png.license",
+        "docs/static/keys/authelia-security.asc",
+        "docs/static/mask-icon.svg",
+        "docs/static/mask-icon.svg.license",
+        "docs/static/native/branding/logo-cropped.ai.license",
+        "docs/static/native/branding/logo-cropped.psd.license",
+        "docs/static/native/branding/logo.ai.license",
+        "docs/static/native/branding/logo.psd.license",
+        "docs/static/native/branding/title.ai.license",
+        "docs/static/native/branding/title.psd.license",
+        "docs/static/provider/**",
+        "docs/static/schemas/**",
+        "docs/static/svgs/**",
+        "docs/static/tools/**",
+        "docs/tool/**",
+        "entrypoint.sh",
+        "examples/**",
+        "experimental/**",
+        "go.mod",
+        "go.sum",
+        "go.sum.license",
+        "healthcheck.sh",
+        "internal/authentication/**",
+        "internal/authorization/**",
+        "internal/clock/**",
+        "internal/commands/**",
+        "internal/configuration/**",
+        "internal/duo/**",
+        "internal/expression/**",
+        "internal/handlers/**",
+        "internal/logging/**",
+        "internal/metrics/**",
+        "internal/middlewares/**",
+        "internal/model/**",
+        "internal/notification/**",
+        "internal/ntp/**",
+        "internal/oidc/**",
+        "internal/random/**",
+        "internal/regulation/**",
+        "internal/server/**",
+        "internal/service/**",
+        "internal/session/**",
+        "internal/storage/**",
+        "internal/suites/ActiveDirectory/**",
+        "internal/suites/BypassAll/**",
+        "internal/suites/CLI/**",
+        "internal/suites/Caddy/**",
+        "internal/suites/Docker/**",
+        "internal/suites/DuoPush/**",
+        "internal/suites/Envoy/**",
+        "internal/suites/HAProxy/**",
+        "internal/suites/HighAvailability/**",
+        "internal/suites/LDAP/**",
+        "internal/suites/MariaDB/**",
+        "internal/suites/MultiCookieDomain/**",
+        "internal/suites/MySQL/**",
+        "internal/suites/NetworkACL/**",
+        "internal/suites/OIDC/**",
+        "internal/suites/OIDCConformance/**",
+        "internal/suites/OIDCTraefik/**",
+        "internal/suites/OneFactorOnly/**",
+        "internal/suites/PAM/**",
+        "internal/suites/PathPrefix/**",
+        "internal/suites/Postgres/**",
+        "internal/suites/README.md",
+        "internal/suites/ShortTimeouts/**",
+        "internal/suites/Standalone/**",
+        "internal/suites/Traefik/compose.yml",
+        "internal/suites/Traefik/configuration.yml",
+        "internal/suites/Traefik/favicon.ico.license",
+        "internal/suites/Traefik/logo.png.license",
+        "internal/suites/Traefik/users.yml",
+        "internal/suites/TwoFactor/**",
+        "internal/suites/action_2fa_methods.go",
+        "internal/suites/action_change_password.go",
+        "internal/suites/action_http.go",
+        "internal/suites/action_login.go",
+        "internal/suites/action_logout.go",
+        "internal/suites/action_mail.go",
+        "internal/suites/action_register.go",
+        "internal/suites/action_reset_password.go",
+        "internal/suites/action_settings.go",
+        "internal/suites/action_totp.go",
+        "internal/suites/action_totp_test.go",
+        "internal/suites/action_verify.go",
+        "internal/suites/action_visit.go",
+        "internal/suites/action_visit_test.go",
+        "internal/suites/action_webauthn.go",
+        "internal/suites/common/**",
+        "internal/suites/compose.yml",
+        "internal/suites/conformance_api.go",
+        "internal/suites/conformance_api_test.go",
+        "internal/suites/conformance_browser.go",
+        "internal/suites/conformance_browser_driver_test.go",
+        "internal/suites/conformance_browser_test.go",
+        "internal/suites/conformance_compose_test.go",
+        "internal/suites/conformance_diagnostics.go",
+        "internal/suites/conformance_diagnostics_test.go",
+        "internal/suites/conformance_generate_test.go",
+        "internal/suites/conformance_names.go",
+        "internal/suites/conformance_names_test.go",
+        "internal/suites/conformance_progress_test.go",
+        "internal/suites/conformance_runner.go",
+        "internal/suites/conformance_runner_errors_test.go",
+        "internal/suites/conformance_runner_test.go",
+        "internal/suites/conformance_selectors_test.go",
+        "internal/suites/conformance_settle_test.go",
+        "internal/suites/conformance_trace.go",
+        "internal/suites/conformance_trace_test.go",
+        "internal/suites/conformance_users_test.go",
+        "internal/suites/console_test.go",
+        "internal/suites/const.go",
+        "internal/suites/coverage_test.go",
+        "internal/suites/doc.go",
+        "internal/suites/docker.go",
+        "internal/suites/duo.go",
+        "internal/suites/environment.go",
+        "internal/suites/example/compose/authelia/**",
+        "internal/suites/example/compose/caddy/**",
+        "internal/suites/example/compose/duo-api/**",
+        "internal/suites/example/compose/envoy/**",
+        "internal/suites/example/compose/haproxy/**",
+        "internal/suites/example/compose/httpbin/**",
+        "internal/suites/example/compose/k3d/**",
+        "internal/suites/example/compose/ldap/**",
+        "internal/suites/example/compose/mariadb/**",
+        "internal/suites/example/compose/mysql/**",
+        "internal/suites/example/compose/nginx/backend/compose.yml",
+        "internal/suites/example/compose/nginx/backend/html/admin/**",
+        "internal/suites/example/compose/nginx/backend/html/deny/**",
+        "internal/suites/example/compose/nginx/backend/html/dev/**",
+        "internal/suites/example/compose/nginx/backend/html/home/**",
+        "internal/suites/example/compose/nginx/backend/html/icon.png.license",
+        "internal/suites/example/compose/nginx/backend/html/mail/**",
+        "internal/suites/example/compose/nginx/backend/html/public/**",
+        "internal/suites/example/compose/nginx/backend/html/secure/**",
+        "internal/suites/example/compose/nginx/backend/html/singlefactor/**",
+        "internal/suites/example/compose/nginx/backend/nginx.conf",
+        "internal/suites/example/compose/nginx/cli/**",
+        "internal/suites/example/compose/nginx/portal/**",
+        "internal/suites/example/compose/oidc-client/**",
+        "internal/suites/example/compose/oidc-conformance/**",
+        "internal/suites/example/compose/pam/**",
+        "internal/suites/example/compose/postgres/**",
+        "internal/suites/example/compose/redis/**",
+        "internal/suites/example/compose/redis-sentinel/**",
+        "internal/suites/example/compose/samba/**",
+        "internal/suites/example/compose/smtp/**",
+        "internal/suites/example/compose/squid/**",
+        "internal/suites/example/compose/traefik/**",
+        "internal/suites/example/kube/**",
+        "internal/suites/external_devserver.go",
+        "internal/suites/external_main_test.go",
+        "internal/suites/external_registry.go",
+        "internal/suites/external_suite_docs.go",
+        "internal/suites/external_suite_docs_test.go",
+        "internal/suites/external_suite_templates.go",
+        "internal/suites/external_suite_templates_test.go",
+        "internal/suites/hosts.go",
+        "internal/suites/hosts_test.go",
+        "internal/suites/http.go",
+        "internal/suites/kubernetes.go",
+        "internal/suites/main_test.go",
+        "internal/suites/network.go",
+        "internal/suites/network_test.go",
+        "internal/suites/pngdiff.go",
+        "internal/suites/portal_screenshots_test.go",
+        "internal/suites/registry.go",
+        "internal/suites/scenario_available_methods_test.go",
+        "internal/suites/scenario_backend_protection_test.go",
+        "internal/suites/scenario_bypass_policy_test.go",
+        "internal/suites/scenario_change_password_test.go",
+        "internal/suites/scenario_custom_headers_test.go",
+        "internal/suites/scenario_default_redirection_url_test.go",
+        "internal/suites/scenario_inactivity_test.go",
+        "internal/suites/scenario_language_menu_test.go",
+        "internal/suites/scenario_multiple_cookie_domain_test.go",
+        "internal/suites/scenario_oidc_client_credentials_test.go",
+        "internal/suites/scenario_oidc_test.go",
+        "internal/suites/scenario_one_factor_test.go",
+        "internal/suites/scenario_passkey_test.go",
+        "internal/suites/scenario_password_complexity_test.go",
+        "internal/suites/scenario_redirection_check_test.go",
+        "internal/suites/scenario_redirection_url_test.go",
+        "internal/suites/scenario_regulation_test.go",
+        "internal/suites/scenario_request_method_test.go",
+        "internal/suites/scenario_reset_password_test.go",
+        "internal/suites/scenario_signin_email_test.go",
+        "internal/suites/scenario_two_factor_one_time_password_test.go",
+        "internal/suites/scenario_two_factor_totp_test.go",
+        "internal/suites/scenario_two_factor_webauthn_test.go",
+        "internal/suites/scenario_user_preferences_test.go",
+        "internal/suites/suite_activedirectory.go",
+        "internal/suites/suite_activedirectory_test.go",
+        "internal/suites/suite_bypass_all.go",
+        "internal/suites/suite_bypass_all_test.go",
+        "internal/suites/suite_caddy.go",
+        "internal/suites/suite_caddy_test.go",
+        "internal/suites/suite_cli.go",
+        "internal/suites/suite_cli_test.go",
+        "internal/suites/suite_docker.go",
+        "internal/suites/suite_docker_test.go",
+        "internal/suites/suite_duo_push.go",
+        "internal/suites/suite_duo_push_test.go",
+        "internal/suites/suite_envoy.go",
+        "internal/suites/suite_envoy_test.go",
+        "internal/suites/suite_haproxy.go",
+        "internal/suites/suite_haproxy_test.go",
+        "internal/suites/suite_high_availability.go",
+        "internal/suites/suite_high_availability_test.go",
+        "internal/suites/suite_kubernetes.go",
+        "internal/suites/suite_kubernetes_test.go",
+        "internal/suites/suite_ldap.go",
+        "internal/suites/suite_ldap_test.go",
+        "internal/suites/suite_mariadb.go",
+        "internal/suites/suite_mariadb_test.go",
+        "internal/suites/suite_multi_cookie_domain.go",
+        "internal/suites/suite_multi_cookie_domain_test.go",
+        "internal/suites/suite_mysql.go",
+        "internal/suites/suite_mysql_test.go",
+        "internal/suites/suite_network_acl.go",
+        "internal/suites/suite_network_acl_test.go",
+        "internal/suites/suite_oidc.go",
+        "internal/suites/suite_oidc_conformance.go",
+        "internal/suites/suite_oidc_conformance_test.go",
+        "internal/suites/suite_oidc_test.go",
+        "internal/suites/suite_oidc_traefik.go",
+        "internal/suites/suite_oidc_traefik_test.go",
+        "internal/suites/suite_one_factor_only.go",
+        "internal/suites/suite_one_factor_only_test.go",
+        "internal/suites/suite_pam.go",
+        "internal/suites/suite_pam_test.go",
+        "internal/suites/suite_pathprefix.go",
+        "internal/suites/suite_pathprefix_test.go",
+        "internal/suites/suite_postgres.go",
+        "internal/suites/suite_postgres_test.go",
+        "internal/suites/suite_short_timeouts.go",
+        "internal/suites/suite_short_timeouts_test.go",
+        "internal/suites/suite_standalone.go",
+        "internal/suites/suite_standalone_test.go",
+        "internal/suites/suite_traefik2.go",
+        "internal/suites/suite_traefik2_test.go",
+        "internal/suites/suite_traefik3.go",
+        "internal/suites/suite_traefik3_test.go",
+        "internal/suites/suite_traefik_test.go",
+        "internal/suites/suite_two_factor.go",
+        "internal/suites/suite_two_factor_test.go",
+        "internal/suites/suites.go",
+        "internal/suites/suites_credentials.go",
+        "internal/suites/teardown_test.go",
+        "internal/suites/testdata/docs_homepage_snapshot.png.license",
+        "internal/suites/testdata/templates_event_snapshot.png.license",
+        "internal/suites/testdata/templates_identity_verification_jwt_snapshot.png.license",
+        "internal/suites/testdata/templates_identity_verification_otc_snapshot.png.license",
+        "internal/suites/utils.go",
+        "internal/suites/verify_body_contains.go",
+        "internal/suites/verify_is_authenticated_page.go",
+        "internal/suites/verify_is_consent_page.go",
+        "internal/suites/verify_is_first_factor_page.go",
+        "internal/suites/verify_is_home.go",
+        "internal/suites/verify_is_oidc.go",
+        "internal/suites/verify_is_public.go",
+        "internal/suites/verify_is_second_factor_page.go",
+        "internal/suites/verify_mail.go",
+        "internal/suites/verify_notification.go",
+        "internal/suites/verify_secret_authorized.go",
+        "internal/suites/verify_url_is.go",
+        "internal/suites/watchdog.go",
+        "internal/suites/watchdog_test.go",
+        "internal/suites/webdriver.go",
+        "internal/suites/webdriver_test.go",
+        "internal/suites/webdriver_wait_test.go",
+        "internal/templates/**",
+        "internal/totp/**",
+        "internal/utils/**",
+        "internal/webauthn/**",
+        "osv-scanner.toml",
+        "web/.env.production",
+        "web/.gitignore",
+        "web/commitlint.config.mjs",
+        "web/components.json",
+        "web/components.json.license",
+        "web/eslint.config.mjs",
+        "web/index.html",
+        "web/package.json",
+        "web/package.json.license",
+        "web/pnpm-lock.yaml",
+        "web/pnpm-lock.yaml.license",
+        "web/pnpm-workspace.yaml",
+        "web/pnpm-workspace.yaml.license",
+        "web/prettier.config.mjs",
+        "web/public/favicon.ico.license",
+        "web/public/manifest.json",
+        "web/public/manifest.json.license",
+        "web/public/robots.txt",
+        "web/src/**",
+        "web/tsconfig.json",
+        "web/tsconfig.json.license",
+        "web/vite.config.ts"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2026 Authelia\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2026 Authelia, Apache-2.0 license (LICENSE), https://github.com/authelia/authelia."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "d",
+      "paths": [
+        "**/*.d"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/build"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.acl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.backend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.coverage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dev"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "Dockerfile.coverage.dockerignore",
+        "Dockerfile.dev.dockerignore",
+        "internal/suites/example/compose/pam/Dockerfile.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        ".healthcheck.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.frontend"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.license"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.production"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.values"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.all-contributorsrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.mailmap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.renovaterc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.trufflehog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Caddyfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ac"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authelia"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authelia-gen"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authelia-scripts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/authelia-suites"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bypass"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/draft"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example_filter_rsa_private_key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example_password_secret"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/example_secret"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jose"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/merge-queue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/oauth2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-artifact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-checkout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/post-command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-artifact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-command"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-exit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/saml"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/server"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

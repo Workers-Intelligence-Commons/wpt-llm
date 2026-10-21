@@ -1,0 +1,1604 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/google/ExoPlayer",
+  "revision": "dd430f7053a1a3958deea3ead6a0565150c06bfc",
+  "checksum": "sha256:afe547a8fa4d8eeb3304156651afb67a14722e70a0ccebab92bc41097e32d22c",
+  "extract": {
+    "exclude": [
+      "demos/cast/src/main/res/mipmap-hdpi/**",
+      "demos/cast/src/main/res/mipmap-mdpi/**",
+      "demos/cast/src/main/res/mipmap-xhdpi/**",
+      "demos/cast/src/main/res/mipmap-xxhdpi/**",
+      "demos/cast/src/main/res/mipmap-xxxhdpi/**",
+      "demos/gl/src/main/res/mipmap-hdpi/**",
+      "demos/gl/src/main/res/mipmap-mdpi/**",
+      "demos/gl/src/main/res/mipmap-xhdpi/**",
+      "demos/gl/src/main/res/mipmap-xxhdpi/**",
+      "demos/gl/src/main/res/mipmap-xxxhdpi/**",
+      "demos/main/src/main/res/drawable-hdpi/**",
+      "demos/main/src/main/res/drawable-mdpi/**",
+      "demos/main/src/main/res/drawable-xhdpi/**",
+      "demos/main/src/main/res/drawable-xxhdpi/**",
+      "demos/main/src/main/res/drawable-xxxhdpi/**",
+      "demos/main/src/main/res/mipmap-hdpi/**",
+      "demos/main/src/main/res/mipmap-mdpi/**",
+      "demos/main/src/main/res/mipmap-xhdpi/**",
+      "demos/main/src/main/res/mipmap-xxhdpi/**",
+      "demos/main/src/main/res/mipmap-xxxhdpi/**",
+      "demos/surface/src/main/res/mipmap-hdpi/**",
+      "demos/surface/src/main/res/mipmap-mdpi/**",
+      "demos/surface/src/main/res/mipmap-xhdpi/**",
+      "demos/surface/src/main/res/mipmap-xxhdpi/**",
+      "demos/surface/src/main/res/mipmap-xxxhdpi/**",
+      "demos/transformer/src/main/res/mipmap-hdpi/**",
+      "demos/transformer/src/main/res/mipmap-mdpi/**",
+      "demos/transformer/src/main/res/mipmap-xhdpi/**",
+      "demos/transformer/src/main/res/mipmap-xxhdpi/**",
+      "demos/transformer/src/main/res/mipmap-xxxhdpi/**",
+      "docs/_includes/article/footer/**",
+      "docs/assets/android-chrome-192x192.png",
+      "docs/assets/android-chrome-256x256.png",
+      "docs/assets/android-chrome-96x96.png",
+      "docs/assets/apple-touch-icon.png",
+      "docs/assets/favicon-16x16.png",
+      "docs/assets/favicon-32x32.png",
+      "docs/assets/favicon.ico",
+      "docs/assets/mstile-150x150.png",
+      "docs/doc/reference/jquery/external/**",
+      "docs/doc/reference/jquery/images/**",
+      "docs/doc/reference/member-search-index.zip",
+      "docs/doc/reference/package-search-index.zip",
+      "docs/doc/reference/resources/**",
+      "docs/doc/reference/type-search-index.zip",
+      "docs/images/demo-app-build-variants.png",
+      "docs/images/demo-app-project.png",
+      "docs/images/demo-app-screenshots.png",
+      "docs/images/exoplayer-logo.png",
+      "docs/images/glossary-exoplayer-architecture.png",
+      "docs/images/glossary-rendering-architecture.png",
+      "docs/images/live-window.png",
+      "docs/images/overriding-layoutfiles.png",
+      "extensions/media2/src/androidTest/res/raw/**",
+      "extensions/mediasession/src/main/res/drawable-hdpi/**",
+      "extensions/mediasession/src/main/res/drawable-ldpi/**",
+      "extensions/mediasession/src/main/res/drawable-mdpi/**",
+      "extensions/mediasession/src/main/res/drawable-xhdpi/**",
+      "extensions/mediasession/src/main/res/drawable-xxhdpi/**",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "library/ui/src/main/res/drawable-hdpi/**",
+      "library/ui/src/main/res/drawable-ldpi/**",
+      "library/ui/src/main/res/drawable-mdpi/**",
+      "library/ui/src/main/res/drawable-xhdpi/**",
+      "library/ui/src/main/res/drawable-xxhdpi/**",
+      "library/ui/src/main/res/drawable-xxxhdpi/**",
+      "library/ui/src/main/res/font/**",
+      "testdata/src/test/assets/media/amr/**",
+      "testdata/src/test/assets/media/avi/**",
+      "testdata/src/test/assets/media/binary/**",
+      "testdata/src/test/assets/media/bitmap/input_images/london.jpg",
+      "testdata/src/test/assets/media/bitmap/input_images/media3test.png",
+      "testdata/src/test/assets/media/bitmap/lut/**",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_scale_to_fit_narrow.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_scale_to_fit_wide.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_scale_to_fit_with_crop_narrow.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_scale_to_fit_with_crop_wide.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_stretch_to_fit_narrow.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/aspect_ratio_stretch_to_fit_wide.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/crop_larger.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/crop_smaller.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/crop_then_aspect_ratio.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/grayscale_then_increase_red_channel.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/increase_brightness.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/london_image_to_video.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/london_image_to_video_with_crop.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/original.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/original_hdr10.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/original_hlg10.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_bitmap_FrameProcessor.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_bitmap_anchored.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_bitmap_default.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_bitmap_scaled.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_bitmap_translucent.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_multiple.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_overlap.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_text_default.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/overlay_text_translate.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/request_output_height.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/rotate45_then_scale2w.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/rotate90.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/rotate_45_scale_to_fit.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/rotate_then_translate.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/scale_narrow.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/scale_wide.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/srgb_to_electrical_media3test.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/srgb_to_electrical_original.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/tone_map_hlg_to_sdr.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/tone_map_pq_to_sdr.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/translate_right.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/translate_then_rotate.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/adjust_all_hsl_settings.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/decrease_contrast.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/decrease_lightness.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/grayscale.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/increase_brightness.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/increase_contrast.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/increase_lightness.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/increase_red_channel.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/invert.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/lut_map_white_to_green.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/maximum_contrast.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/maximum_saturation.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/minimum_saturation.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/only_red_channel.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/original.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/rotate_hue_by_60_degrees.png",
+      "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/rotate_hue_by_negative_90_degrees.png",
+      "testdata/src/test/assets/media/dash/emsg/sample.audio.mp4",
+      "testdata/src/test/assets/media/dash/webvtt-in-mp4/sample.text.mp4",
+      "testdata/src/test/assets/media/dash/webvtt-in-mp4/sample.video.mp4",
+      "testdata/src/test/assets/media/download-actions/**",
+      "testdata/src/test/assets/media/drm/**",
+      "testdata/src/test/assets/media/dvbsi/ait_no_url_base.bin",
+      "testdata/src/test/assets/media/dvbsi/ait_no_url_path.bin",
+      "testdata/src/test/assets/media/dvbsi/ait_typical.bin",
+      "testdata/src/test/assets/media/flac/**",
+      "testdata/src/test/assets/media/flv/**",
+      "testdata/src/test/assets/media/id3/**",
+      "testdata/src/test/assets/media/jpeg/**",
+      "testdata/src/test/assets/media/midi/**",
+      "testdata/src/test/assets/media/mka/**",
+      "testdata/src/test/assets/media/mkv/**",
+      "testdata/src/test/assets/media/mp3/**",
+      "testdata/src/test/assets/media/mp4/**",
+      "testdata/src/test/assets/media/offline/**",
+      "testdata/src/test/assets/media/ogg/bear.opus",
+      "testdata/src/test/assets/media/ogg/bear_duplicate_header.opus",
+      "testdata/src/test/assets/media/ogg/bear_flac.ogg",
+      "testdata/src/test/assets/media/ogg/bear_flac_noseektable.ogg",
+      "testdata/src/test/assets/media/ogg/bear_vorbis.ogg",
+      "testdata/src/test/assets/media/ogg/bear_vorbis_gap.ogg",
+      "testdata/src/test/assets/media/ogg/bear_vorbis_with_large_metadata.ogg",
+      "testdata/src/test/assets/media/ogg/continued_packet_at_start",
+      "testdata/src/test/assets/media/ogg/continued_packet_over_four_pages",
+      "testdata/src/test/assets/media/ogg/continued_packet_over_two_pages",
+      "testdata/src/test/assets/media/ogg/eof_header",
+      "testdata/src/test/assets/media/ogg/flac_header",
+      "testdata/src/test/assets/media/ogg/four_packets_with_empty_page",
+      "testdata/src/test/assets/media/ogg/invalid_header",
+      "testdata/src/test/assets/media/ogg/invalid_ogg_header",
+      "testdata/src/test/assets/media/ogg/opus_header",
+      "testdata/src/test/assets/media/ogg/packet_with_zero_size_terminator",
+      "testdata/src/test/assets/media/ogg/page_header",
+      "testdata/src/test/assets/media/ogg/three_headers",
+      "testdata/src/test/assets/media/ogg/vorbis_header",
+      "testdata/src/test/assets/media/ogg/zero_sized_packets_at_end_of_stream",
+      "testdata/src/test/assets/media/png/**",
+      "testdata/src/test/assets/media/ssa/typical_utf16be",
+      "testdata/src/test/assets/media/ssa/typical_utf16le",
+      "testdata/src/test/assets/media/subrip/typical_utf16be",
+      "testdata/src/test/assets/media/subrip/typical_utf16le",
+      "testdata/src/test/assets/media/ts/elephants_dream.mpg",
+      "testdata/src/test/assets/media/ts/sample.ac3",
+      "testdata/src/test/assets/media/ts/sample.ac4",
+      "testdata/src/test/assets/media/ts/sample.adts",
+      "testdata/src/test/assets/media/ts/sample.eac3",
+      "testdata/src/test/assets/media/ts/sample_ac3.ps",
+      "testdata/src/test/assets/media/ts/sample_ac3.ts",
+      "testdata/src/test/assets/media/ts/sample_ac4.ts",
+      "testdata/src/test/assets/media/ts/sample_ait.ts",
+      "testdata/src/test/assets/media/ts/sample_cbs_truncated.adts",
+      "testdata/src/test/assets/media/ts/sample_eac3.ts",
+      "testdata/src/test/assets/media/ts/sample_eac3joc.ec3",
+      "testdata/src/test/assets/media/ts/sample_eac3joc.ts",
+      "testdata/src/test/assets/media/ts/sample_h262_mpeg_audio.ps",
+      "testdata/src/test/assets/media/ts/sample_h262_mpeg_audio.ts",
+      "testdata/src/test/assets/media/ts/sample_h263.ts",
+      "testdata/src/test/assets/media/ts/sample_h264_dts_audio.ts",
+      "testdata/src/test/assets/media/ts/sample_h264_mpeg_audio.ts",
+      "testdata/src/test/assets/media/ts/sample_h264_no_access_unit_delimiters.ts",
+      "testdata/src/test/assets/media/ts/sample_h265.ts",
+      "testdata/src/test/assets/media/ts/sample_h265_rps_pred.ts",
+      "testdata/src/test/assets/media/ts/sample_latm.ts",
+      "testdata/src/test/assets/media/ts/sample_scte35.ts",
+      "testdata/src/test/assets/media/ts/sample_with_id3.adts",
+      "testdata/src/test/assets/media/ts/sample_with_junk",
+      "testdata/src/test/assets/media/ts/sample_with_sdt.ts",
+      "testdata/src/test/assets/media/tx3g/**",
+      "testdata/src/test/assets/media/vp9/**",
+      "testdata/src/test/assets/media/wav/**",
+      "testdata/src/test/assets/media/ogg/random_1000_pages",
+      "testdata/src/test/assets/media/ts/bbb_2500ms.ts"
+    ]
+  },
+  "history": {
+    "since": "27ab5c83a604407e8649aa4cca1cda0e101b9aab"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nJekyll TeXt Theme\n\nMIT License\n\nCopyright (c) 2017 Tian Qi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/google/ExoPlayer: the authors of google/ExoPlayer (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/ExoPlayer; Copyright (c) 2017 Tian Qi, MIT license (LICENSE), https://github.com/google/ExoPlayer/tree/dd430f7053a1a3958deea3ead6a0565150c06bfc/docs."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "RELEASENOTES.md",
+        "SECURITY.md",
+        "build.gradle",
+        "common_library_config.gradle",
+        "constants.gradle",
+        "core_settings.gradle",
+        "demos/README.md",
+        "demos/cast/README.md",
+        "demos/cast/build.gradle",
+        "demos/cast/proguard-rules.txt",
+        "demos/cast/src/main/AndroidManifest.xml",
+        "demos/cast/src/main/java/**",
+        "demos/cast/src/main/res/drawable/**",
+        "demos/cast/src/main/res/layout/**",
+        "demos/cast/src/main/res/menu/**",
+        "demos/cast/src/main/res/values/**",
+        "demos/gl/README.md",
+        "demos/gl/build.gradle",
+        "demos/gl/src/main/AndroidManifest.xml",
+        "demos/gl/src/main/assets/**",
+        "demos/gl/src/main/java/**",
+        "demos/gl/src/main/res/layout/**",
+        "demos/gl/src/main/res/values/**",
+        "demos/main/README.md",
+        "demos/main/build.gradle",
+        "demos/main/proguard-rules.txt",
+        "demos/main/src/main/AndroidManifest.xml",
+        "demos/main/src/main/assets/**",
+        "demos/main/src/main/java/**",
+        "demos/main/src/main/res/layout/**",
+        "demos/main/src/main/res/menu/**",
+        "demos/main/src/main/res/values/**",
+        "demos/surface/README.md",
+        "demos/surface/build.gradle",
+        "demos/surface/src/main/AndroidManifest.xml",
+        "demos/surface/src/main/java/**",
+        "demos/surface/src/main/res/layout/**",
+        "demos/surface/src/main/res/values/**",
+        "demos/transformer/BUILD.bazel",
+        "demos/transformer/README.md",
+        "demos/transformer/build.gradle",
+        "demos/transformer/src/main/AndroidManifest.xml",
+        "demos/transformer/src/main/assets/**",
+        "demos/transformer/src/main/java/**",
+        "demos/transformer/src/main/res/layout/**",
+        "demos/transformer/src/main/res/values/**",
+        "demos/transformer/src/withMediaPipe/**",
+        "extensions/README.md",
+        "extensions/av1/**",
+        "extensions/cast/**",
+        "extensions/cronet/**",
+        "extensions/ffmpeg/**",
+        "extensions/flac/**",
+        "extensions/ima/**",
+        "extensions/leanback/**",
+        "extensions/media2/README.md",
+        "extensions/media2/build.gradle",
+        "extensions/media2/src/androidTest/AndroidManifest.xml",
+        "extensions/media2/src/androidTest/java/**",
+        "extensions/media2/src/androidTest/res/layout/**",
+        "extensions/media2/src/main/**",
+        "extensions/mediasession/README.md",
+        "extensions/mediasession/build.gradle",
+        "extensions/mediasession/src/main/AndroidManifest.xml",
+        "extensions/mediasession/src/main/java/**",
+        "extensions/mediasession/src/main/res/drawable-anydpi-v21/**",
+        "extensions/mediasession/src/main/res/values/**",
+        "extensions/mediasession/src/main/res/values-af/**",
+        "extensions/mediasession/src/main/res/values-am/**",
+        "extensions/mediasession/src/main/res/values-ar/**",
+        "extensions/mediasession/src/main/res/values-az/**",
+        "extensions/mediasession/src/main/res/values-b+sr+Latn/**",
+        "extensions/mediasession/src/main/res/values-be/**",
+        "extensions/mediasession/src/main/res/values-bg/**",
+        "extensions/mediasession/src/main/res/values-bn/**",
+        "extensions/mediasession/src/main/res/values-bs/**",
+        "extensions/mediasession/src/main/res/values-ca/**",
+        "extensions/mediasession/src/main/res/values-cs/**",
+        "extensions/mediasession/src/main/res/values-da/**",
+        "extensions/mediasession/src/main/res/values-de/**",
+        "extensions/mediasession/src/main/res/values-el/**",
+        "extensions/mediasession/src/main/res/values-en-rAU/**",
+        "extensions/mediasession/src/main/res/values-en-rGB/**",
+        "extensions/mediasession/src/main/res/values-en-rIN/**",
+        "extensions/mediasession/src/main/res/values-es/**",
+        "extensions/mediasession/src/main/res/values-es-rUS/**",
+        "extensions/mediasession/src/main/res/values-et/**",
+        "extensions/mediasession/src/main/res/values-eu/**",
+        "extensions/mediasession/src/main/res/values-fa/**",
+        "extensions/mediasession/src/main/res/values-fi/**",
+        "extensions/mediasession/src/main/res/values-fr/**",
+        "extensions/mediasession/src/main/res/values-fr-rCA/**",
+        "extensions/mediasession/src/main/res/values-gl/**",
+        "extensions/mediasession/src/main/res/values-gu/**",
+        "extensions/mediasession/src/main/res/values-hi/**",
+        "extensions/mediasession/src/main/res/values-hr/**",
+        "extensions/mediasession/src/main/res/values-hu/**",
+        "extensions/mediasession/src/main/res/values-hy/**",
+        "extensions/mediasession/src/main/res/values-in/**",
+        "extensions/mediasession/src/main/res/values-is/**",
+        "extensions/mediasession/src/main/res/values-it/**",
+        "extensions/mediasession/src/main/res/values-iw/**",
+        "extensions/mediasession/src/main/res/values-ja/**",
+        "extensions/mediasession/src/main/res/values-ka/**",
+        "extensions/mediasession/src/main/res/values-kk/**",
+        "extensions/mediasession/src/main/res/values-km/**",
+        "extensions/mediasession/src/main/res/values-kn/**",
+        "extensions/mediasession/src/main/res/values-ko/**",
+        "extensions/mediasession/src/main/res/values-ky/**",
+        "extensions/mediasession/src/main/res/values-lo/**",
+        "extensions/mediasession/src/main/res/values-lt/**",
+        "extensions/mediasession/src/main/res/values-lv/**",
+        "extensions/mediasession/src/main/res/values-mk/**",
+        "extensions/mediasession/src/main/res/values-ml/**",
+        "extensions/mediasession/src/main/res/values-mn/**",
+        "extensions/mediasession/src/main/res/values-mr/**",
+        "extensions/mediasession/src/main/res/values-ms/**",
+        "extensions/mediasession/src/main/res/values-my/**",
+        "extensions/mediasession/src/main/res/values-nb/**",
+        "extensions/mediasession/src/main/res/values-ne/**",
+        "extensions/mediasession/src/main/res/values-nl/**",
+        "extensions/mediasession/src/main/res/values-pa/**",
+        "extensions/mediasession/src/main/res/values-pl/**",
+        "extensions/mediasession/src/main/res/values-pt/**",
+        "extensions/mediasession/src/main/res/values-pt-rPT/**",
+        "extensions/mediasession/src/main/res/values-ro/**",
+        "extensions/mediasession/src/main/res/values-ru/**",
+        "extensions/mediasession/src/main/res/values-si/**",
+        "extensions/mediasession/src/main/res/values-sk/**",
+        "extensions/mediasession/src/main/res/values-sl/**",
+        "extensions/mediasession/src/main/res/values-sq/**",
+        "extensions/mediasession/src/main/res/values-sr/**",
+        "extensions/mediasession/src/main/res/values-sv/**",
+        "extensions/mediasession/src/main/res/values-sw/**",
+        "extensions/mediasession/src/main/res/values-ta/**",
+        "extensions/mediasession/src/main/res/values-te/**",
+        "extensions/mediasession/src/main/res/values-th/**",
+        "extensions/mediasession/src/main/res/values-tl/**",
+        "extensions/mediasession/src/main/res/values-tr/**",
+        "extensions/mediasession/src/main/res/values-uk/**",
+        "extensions/mediasession/src/main/res/values-ur/**",
+        "extensions/mediasession/src/main/res/values-uz/**",
+        "extensions/mediasession/src/main/res/values-vi/**",
+        "extensions/mediasession/src/main/res/values-zh-rCN/**",
+        "extensions/mediasession/src/main/res/values-zh-rHK/**",
+        "extensions/mediasession/src/main/res/values-zh-rTW/**",
+        "extensions/mediasession/src/main/res/values-zu/**",
+        "extensions/okhttp/**",
+        "extensions/opus/**",
+        "extensions/rtmp/**",
+        "extensions/vp9/**",
+        "extensions/workmanager/**",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "javadoc_combined.gradle",
+        "javadoc_library.gradle",
+        "javadoc_util.gradle",
+        "library/README.md",
+        "library/all/**",
+        "library/common/**",
+        "library/container/**",
+        "library/core/**",
+        "library/dash/**",
+        "library/database/**",
+        "library/datasource/**",
+        "library/decoder/**",
+        "library/effect/**",
+        "library/extractor/**",
+        "library/hls/**",
+        "library/muxer/**",
+        "library/rtsp/**",
+        "library/smoothstreaming/**",
+        "library/transformer/**",
+        "library/ui/README.md",
+        "library/ui/build.gradle",
+        "library/ui/lint-baseline.xml",
+        "library/ui/proguard-rules.txt",
+        "library/ui/src/main/AndroidManifest.xml",
+        "library/ui/src/main/java/**",
+        "library/ui/src/main/res/drawable/**",
+        "library/ui/src/main/res/drawable-anydpi-v21/**",
+        "library/ui/src/main/res/layout/**",
+        "library/ui/src/main/res/layout-v23/**",
+        "library/ui/src/main/res/values/**",
+        "library/ui/src/main/res/values-af/**",
+        "library/ui/src/main/res/values-am/**",
+        "library/ui/src/main/res/values-ar/**",
+        "library/ui/src/main/res/values-az/**",
+        "library/ui/src/main/res/values-b+sr+Latn/**",
+        "library/ui/src/main/res/values-be/**",
+        "library/ui/src/main/res/values-bg/**",
+        "library/ui/src/main/res/values-bn/**",
+        "library/ui/src/main/res/values-bs/**",
+        "library/ui/src/main/res/values-ca/**",
+        "library/ui/src/main/res/values-cs/**",
+        "library/ui/src/main/res/values-da/**",
+        "library/ui/src/main/res/values-de/**",
+        "library/ui/src/main/res/values-el/**",
+        "library/ui/src/main/res/values-en-rAU/**",
+        "library/ui/src/main/res/values-en-rGB/**",
+        "library/ui/src/main/res/values-en-rIN/**",
+        "library/ui/src/main/res/values-es/**",
+        "library/ui/src/main/res/values-es-rUS/**",
+        "library/ui/src/main/res/values-et/**",
+        "library/ui/src/main/res/values-eu/**",
+        "library/ui/src/main/res/values-fa/**",
+        "library/ui/src/main/res/values-fi/**",
+        "library/ui/src/main/res/values-fr/**",
+        "library/ui/src/main/res/values-fr-rCA/**",
+        "library/ui/src/main/res/values-gl/**",
+        "library/ui/src/main/res/values-gu/**",
+        "library/ui/src/main/res/values-hi/**",
+        "library/ui/src/main/res/values-hr/**",
+        "library/ui/src/main/res/values-hu/**",
+        "library/ui/src/main/res/values-hy/**",
+        "library/ui/src/main/res/values-in/**",
+        "library/ui/src/main/res/values-is/**",
+        "library/ui/src/main/res/values-it/**",
+        "library/ui/src/main/res/values-iw/**",
+        "library/ui/src/main/res/values-ja/**",
+        "library/ui/src/main/res/values-ka/**",
+        "library/ui/src/main/res/values-kk/**",
+        "library/ui/src/main/res/values-km/**",
+        "library/ui/src/main/res/values-kn/**",
+        "library/ui/src/main/res/values-ko/**",
+        "library/ui/src/main/res/values-ky/**",
+        "library/ui/src/main/res/values-lo/**",
+        "library/ui/src/main/res/values-lt/**",
+        "library/ui/src/main/res/values-lv/**",
+        "library/ui/src/main/res/values-mk/**",
+        "library/ui/src/main/res/values-ml/**",
+        "library/ui/src/main/res/values-mn/**",
+        "library/ui/src/main/res/values-mr/**",
+        "library/ui/src/main/res/values-ms/**",
+        "library/ui/src/main/res/values-my/**",
+        "library/ui/src/main/res/values-nb/**",
+        "library/ui/src/main/res/values-ne/**",
+        "library/ui/src/main/res/values-nl/**",
+        "library/ui/src/main/res/values-pa/**",
+        "library/ui/src/main/res/values-pl/**",
+        "library/ui/src/main/res/values-pt/**",
+        "library/ui/src/main/res/values-pt-rPT/**",
+        "library/ui/src/main/res/values-ro/**",
+        "library/ui/src/main/res/values-ru/**",
+        "library/ui/src/main/res/values-si/**",
+        "library/ui/src/main/res/values-sk/**",
+        "library/ui/src/main/res/values-sl/**",
+        "library/ui/src/main/res/values-sq/**",
+        "library/ui/src/main/res/values-sr/**",
+        "library/ui/src/main/res/values-sv/**",
+        "library/ui/src/main/res/values-sw/**",
+        "library/ui/src/main/res/values-ta/**",
+        "library/ui/src/main/res/values-te/**",
+        "library/ui/src/main/res/values-th/**",
+        "library/ui/src/main/res/values-tl/**",
+        "library/ui/src/main/res/values-tr/**",
+        "library/ui/src/main/res/values-uk/**",
+        "library/ui/src/main/res/values-ur/**",
+        "library/ui/src/main/res/values-uz/**",
+        "library/ui/src/main/res/values-v21/**",
+        "library/ui/src/main/res/values-vi/**",
+        "library/ui/src/main/res/values-zh-rCN/**",
+        "library/ui/src/main/res/values-zh-rHK/**",
+        "library/ui/src/main/res/values-zh-rTW/**",
+        "library/ui/src/main/res/values-zu/**",
+        "library/ui/src/test/**",
+        "media3-migration.sh",
+        "missing_aar_type_workaround.gradle",
+        "playbacktests/**",
+        "publish.gradle",
+        "robolectricutils/**",
+        "settings.gradle",
+        "testdata/README.md",
+        "testdata/build.gradle",
+        "testdata/src/main/**",
+        "testdata/src/test/assets/audiosinkdumps/**",
+        "testdata/src/test/assets/extractordumps/**",
+        "testdata/src/test/assets/media/ad-responses/**",
+        "testdata/src/test/assets/media/bitmap/README.md",
+        "testdata/src/test/assets/media/bitmap/input_images/README.md",
+        "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/electrical_colors/README.md",
+        "testdata/src/test/assets/media/bitmap/sample_mp4_first_frame/linear_colors/README.md",
+        "testdata/src/test/assets/media/dash/emsg/sample.mpd",
+        "testdata/src/test/assets/media/dash/webvtt-in-mp4/sample.mpd",
+        "testdata/src/test/assets/media/dvbsi/README.md",
+        "testdata/src/test/assets/media/dvbsi/ait_no_url_base.xml",
+        "testdata/src/test/assets/media/dvbsi/ait_no_url_path.xml",
+        "testdata/src/test/assets/media/dvbsi/ait_typical.xml",
+        "testdata/src/test/assets/media/m3u8/**",
+        "testdata/src/test/assets/media/mpd/**",
+        "testdata/src/test/assets/media/ogg/random_1000_pages",
+        "testdata/src/test/assets/media/rtsp/**",
+        "testdata/src/test/assets/media/smooth-streaming/**",
+        "testdata/src/test/assets/media/ssa/empty",
+        "testdata/src/test/assets/media/ssa/empty_style_line",
+        "testdata/src/test/assets/media/ssa/invalid_positioning",
+        "testdata/src/test/assets/media/ssa/invalid_timecodes",
+        "testdata/src/test/assets/media/ssa/overlapping_timecodes",
+        "testdata/src/test/assets/media/ssa/positioning",
+        "testdata/src/test/assets/media/ssa/positioning_without_playres",
+        "testdata/src/test/assets/media/ssa/style_bold_italic",
+        "testdata/src/test/assets/media/ssa/style_font_size",
+        "testdata/src/test/assets/media/ssa/style_outline_color",
+        "testdata/src/test/assets/media/ssa/style_primary_color",
+        "testdata/src/test/assets/media/ssa/style_strikeout",
+        "testdata/src/test/assets/media/ssa/style_underline",
+        "testdata/src/test/assets/media/ssa/typical",
+        "testdata/src/test/assets/media/ssa/typical_dialogue",
+        "testdata/src/test/assets/media/ssa/typical_format",
+        "testdata/src/test/assets/media/ssa/typical_header",
+        "testdata/src/test/assets/media/subrip/empty",
+        "testdata/src/test/assets/media/subrip/typical",
+        "testdata/src/test/assets/media/subrip/typical_extra_blank_line",
+        "testdata/src/test/assets/media/subrip/typical_missing_sequence",
+        "testdata/src/test/assets/media/subrip/typical_missing_timecode",
+        "testdata/src/test/assets/media/subrip/typical_negative_timestamps",
+        "testdata/src/test/assets/media/subrip/typical_no_hours_and_millis",
+        "testdata/src/test/assets/media/subrip/typical_unexpected_end",
+        "testdata/src/test/assets/media/subrip/typical_with_byte_order_mark",
+        "testdata/src/test/assets/media/subrip/typical_with_tags",
+        "testdata/src/test/assets/media/ts/bbb_2500ms.ts",
+        "testdata/src/test/assets/media/ttml/**",
+        "testdata/src/test/assets/media/webvtt/**",
+        "testdata/src/test/assets/media/xmp/**",
+        "testdata/src/test/assets/muxerdumps/**",
+        "testdata/src/test/assets/playbackdumps/**",
+        "testdata/src/test/assets/transformerdumps/**",
+        "testutils/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "the authors of google/ExoPlayer (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/google/ExoPlayer."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "docs/.hgignore",
+        "docs/404.html",
+        "docs/CNAME",
+        "docs/Gemfile",
+        "docs/LICENSE",
+        "docs/README.md",
+        "docs/_config.yml",
+        "docs/_data/**",
+        "docs/_includes/analytics-providers/**",
+        "docs/_includes/analytics.html",
+        "docs/_includes/article/top/**",
+        "docs/_includes/article-footer.html",
+        "docs/_includes/article-header.html",
+        "docs/_includes/article-info.html",
+        "docs/_includes/article-list.html",
+        "docs/_includes/article-section-navigator.html",
+        "docs/_includes/aside/**",
+        "docs/_includes/author-links.html",
+        "docs/_includes/comments-providers/**",
+        "docs/_includes/comments.html",
+        "docs/_includes/extensions/**",
+        "docs/_includes/figure.html",
+        "docs/_includes/footer.html",
+        "docs/_includes/head/**",
+        "docs/_includes/head.html",
+        "docs/_includes/header.html",
+        "docs/_includes/known-issue-box.html",
+        "docs/_includes/main/**",
+        "docs/_includes/markdown-enhancements/**",
+        "docs/_includes/markdown-enhancements.html",
+        "docs/_includes/media3-known-issue-box.html",
+        "docs/_includes/pageview-providers/**",
+        "docs/_includes/pageview.html",
+        "docs/_includes/paginator.html",
+        "docs/_includes/scripts/**",
+        "docs/_includes/search-providers/**",
+        "docs/_includes/search.html",
+        "docs/_includes/sharing-providers/**",
+        "docs/_includes/sharing.html",
+        "docs/_includes/sidebar/**",
+        "docs/_includes/snippets/**",
+        "docs/_includes/svg/**",
+        "docs/_includes/tags.html",
+        "docs/_layouts/**",
+        "docs/_page_fragments/**",
+        "docs/_sass/**",
+        "docs/ad-insertion.md",
+        "docs/analytics.md",
+        "docs/assets/browserconfig.xml",
+        "docs/assets/css/**",
+        "docs/assets/images/**",
+        "docs/assets/safari-pinned-tab.svg",
+        "docs/assets/search.js",
+        "docs/assets/site.webmanifest",
+        "docs/battery-consumption.md",
+        "docs/customization.md",
+        "docs/dash.md",
+        "docs/debug-logging.md",
+        "docs/demo-application.md",
+        "docs/design-documents.md",
+        "docs/doc/reference/allclasses-index.html",
+        "docs/doc/reference/allclasses.html",
+        "docs/doc/reference/allpackages-index.html",
+        "docs/doc/reference/com/**",
+        "docs/doc/reference/constant-values.html",
+        "docs/doc/reference/deprecated-list.html",
+        "docs/doc/reference/element-list",
+        "docs/doc/reference/help-doc.html",
+        "docs/doc/reference/index-all.html",
+        "docs/doc/reference/index.html",
+        "docs/doc/reference/jquery/jquery-3.5.1.js",
+        "docs/doc/reference/jquery/jquery-ui.css",
+        "docs/doc/reference/jquery/jquery-ui.js",
+        "docs/doc/reference/jquery/jquery-ui.min.css",
+        "docs/doc/reference/jquery/jquery-ui.min.js",
+        "docs/doc/reference/jquery/jquery-ui.structure.css",
+        "docs/doc/reference/jquery/jquery-ui.structure.min.css",
+        "docs/doc/reference/jquery/jszip/**",
+        "docs/doc/reference/jquery/jszip-utils/**",
+        "docs/doc/reference/member-search-index.js",
+        "docs/doc/reference/overview-summary.html",
+        "docs/doc/reference/overview-tree.html",
+        "docs/doc/reference/package-search-index.js",
+        "docs/doc/reference/script.js",
+        "docs/doc/reference/search.js",
+        "docs/doc/reference/serialized-form.html",
+        "docs/doc/reference/stylesheet.css",
+        "docs/doc/reference/type-search-index.js",
+        "docs/downloading-media.md",
+        "docs/drm.md",
+        "docs/glossary.md",
+        "docs/hello-world.md",
+        "docs/hls.md",
+        "docs/images/downloading.svg",
+        "docs/index.md",
+        "docs/issues/**",
+        "docs/listening-to-player-events.md",
+        "docs/live-streaming.md",
+        "docs/media-items.md",
+        "docs/media-sources.md",
+        "docs/network-stacks.md",
+        "docs/oems.md",
+        "docs/playlists.md",
+        "docs/progressive.md",
+        "docs/pros-and-cons.md",
+        "docs/retrieving-metadata.md",
+        "docs/rtsp.md",
+        "docs/run_locally.sh",
+        "docs/shrinking.md",
+        "docs/smoothstreaming.md",
+        "docs/supported-devices.md",
+        "docs/supported-formats.md",
+        "docs/track-selection.md",
+        "docs/transforming-media.md",
+        "docs/troubleshooting.md",
+        "docs/ui-components.md"
+      ],
+      "text": "Jekyll TeXt Theme\n\nMIT License\n\nCopyright (c) 2017 Tian Qi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2017 Tian Qi, MIT license (LICENSE), https://github.com/google/ExoPlayer/tree/dd430f7053a1a3958deea3ead6a0565150c06bfc/docs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "glsl",
+      "paths": [
+        "**/*.glsl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dump"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mpd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pbtxt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "demos/cast/proguard-rules.txt",
+        "demos/main/proguard-rules.txt",
+        "extensions/av1/proguard-rules.txt",
+        "extensions/ffmpeg/proguard-rules.txt",
+        "extensions/flac/proguard-rules.txt",
+        "extensions/ima/proguard-rules.txt",
+        "extensions/okhttp/proguard-rules.txt",
+        "extensions/opus/proguard-rules.txt",
+        "extensions/vp9/proguard-rules.txt",
+        "library/common/proguard-rules.txt",
+        "library/core/proguard-rules.txt",
+        "library/datasource/proguard-rules.txt",
+        "library/extractor/proguard-rules.txt",
+        "library/ui/proguard-rules.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.xmp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.hgignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CNAME"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty_style_line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalid_positioning"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/invalid_timecodes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency_full_segment"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency_full_segment_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency_full_segment_preload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency_full_segment_preload_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_low_latency_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_block_reload_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_not_skip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_not_skip_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_dateranges"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_skipped"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_skipped_media_sequence_no_overlapping"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_until"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_until_and_block_reload"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_until_and_block_reload_next"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_until_and_block_reload_next_skipped"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_media_can_skip_until_full_reload_after_error"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_multivariant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_multivariant_media_uri_with_param"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_segments_and_parts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/live_low_latency_segments_only"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/media_playlist"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/media_playlist_empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/media_playlist_independent_segments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/overlapping_timecodes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/positioning"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/positioning_without_playres"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/random_1000_pages"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resource1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/resource2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_ismc_1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_ismc_2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_asset_identifier"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_availabilityTimeOffset_baseUrl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_availabilityTimeOffset_segmentList"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_availabilityTimeOffset_segmentTemplate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_cea_608_accessibility"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_cea_708_accessibility"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_clear_key_license_url"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_essential_supplemental_properties"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_event_stream"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_images"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_labels"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_known_duration_ended"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_known_duration_not_ended"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_location_redirect_absolute"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_location_redirect_relative"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_with_complete_service_description"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_with_offset_inside_window"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_with_offset_too_long"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_with_offset_too_short"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_with_suggested_presentation_delay_2s_min_buffer_time_500ms"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_live_without_live_configuration"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_multiple_baseUrls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_relative_baseUrls_dvb_profile_declared"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_relative_baseUrls_dvb_profile_not_declared"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_segment_template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_service_description_low_latency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_service_description_low_latency_only_playback_rates"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_service_description_low_latency_only_target_latency"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_stream_keys"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_switching_and_trick_play_property"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_switching_property"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_text"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_trick_play"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_trick_play_property"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_unknown_mime_type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_vod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sample_mpd_vod_location_fallback"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_bold_italic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_font_size"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_outline_color"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_primary_color"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_strikeout"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/style_underline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_dialogue"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_extra_blank_line"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_missing_sequence"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_missing_timecode"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_negative_timestamps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_no_hours_and_millis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_unexpected_end"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_with_bad_timestamps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_with_byte_order_mark"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_with_comments"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_with_identifiers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/typical_with_tags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_bad_cue_header"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_bom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_css_complex_selectors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_css_styles"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_css_text_combine_upright"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_font_size"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_overlapping_timestamps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_positioning"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_rubies"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_tags"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_vertical"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/with_x-timestamp-map_header"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,568 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/alibaba/ice",
+  "revision": "2742ac4678781ee982bc4cdb428457b36163b6b5",
+  "checksum": "sha256:bc76a4d8e49f3b77922a32e174d1db412fad8e4dd9821bf706c9b226609b7f85",
+  "extract": {
+    "exclude": [
+      "examples/app-config/public/**",
+      "examples/basic-project/public/**",
+      "examples/basic-project/src/pages/ice.png",
+      "examples/cavans-project/src/pages/ice.png",
+      "examples/csr-project/src/pages/ice.png",
+      "examples/icestark-child/public/**",
+      "examples/icestark-layout/public/favicon.ico",
+      "examples/miniapp-project/public/**",
+      "examples/miniapp-project/src/pages/ice.png",
+      "examples/multi-target/public/**",
+      "examples/rax-inline-style/public/**",
+      "examples/rax-project/public/**",
+      "examples/with-antd-mobile/public/**",
+      "examples/with-fallback-entry/public/**",
+      "examples/with-first-chunk-cache-ssr/ice.png",
+      "examples/with-first-chunk-cache-ssr/public/**",
+      "examples/with-intl/public/**",
+      "examples/with-pha/public/**",
+      "examples/with-store/public/**",
+      "examples/with-store/src/pages/ice.png",
+      "website/static/img/favicon.ico",
+      "website/static/img/logo.png",
+      "website/static/img/mf_01.png",
+      "website/static/img/mf_02.png",
+      "website/static/img/solution_01.png",
+      "website/static/img/solution_02.png",
+      "website/static/img/solution_03.png",
+      "website/static/img/solution_04.png",
+      "website/static/img/splash.png"
+    ]
+  },
+  "history": {
+    "since": "87f5fe6a26ecf8efe2e174000673c281e784da3e"
+  },
+  "licenses": [
+    {
+      "license": "MIT AND ISC",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT LICENSE\n\nCopyright (c) 2018-present Alibaba Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\npackage.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/alibaba/ice: Copyright (c) 2018-present Alibaba Inc., MIT license (LICENSE), https://github.com/alibaba/ice; the authors of @ice/appear, ISC license (declared in package.json), https://github.com/alibaba/ice/tree/2742ac4678781ee982bc4cdb428457b36163b6b5/packages/appear; the authors of @ice/cache-canvas, ISC license (declared in package.json), https://github.com/alibaba/ice/tree/2742ac4678781ee982bc4cdb428457b36163b6b5/packages/cache-canvas."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".changeset/**",
+        ".commitlintrc.js",
+        ".editorconfig",
+        ".eslintignore",
+        ".eslintrc.js",
+        ".github/**",
+        ".gitignore",
+        ".husky/**",
+        ".npmrc",
+        ".prettierignore",
+        ".prettierrc.js",
+        ".puppeteerrc.cjs",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "README.md",
+        "codecov.yml",
+        "examples/app-config/.browserslistrc",
+        "examples/app-config/ice.config.mts",
+        "examples/app-config/package.json",
+        "examples/app-config/src/**",
+        "examples/app-config/tsconfig.json",
+        "examples/basic-project/.browserslistrc",
+        "examples/basic-project/.env",
+        "examples/basic-project/.env.development",
+        "examples/basic-project/compatHtml.config.mts",
+        "examples/basic-project/ice.config.mts",
+        "examples/basic-project/mock/**",
+        "examples/basic-project/package.json",
+        "examples/basic-project/plugin.ts",
+        "examples/basic-project/splitChunks.config.mts",
+        "examples/basic-project/src/app.tsx",
+        "examples/basic-project/src/assets/**",
+        "examples/basic-project/src/components/**",
+        "examples/basic-project/src/document.tsx",
+        "examples/basic-project/src/global.css",
+        "examples/basic-project/src/pages/about.tsx",
+        "examples/basic-project/src/pages/blog.tsx",
+        "examples/basic-project/src/pages/client-only.tsx",
+        "examples/basic-project/src/pages/downgrade.tsx",
+        "examples/basic-project/src/pages/index.css",
+        "examples/basic-project/src/pages/index.module.css",
+        "examples/basic-project/src/pages/index.module.less",
+        "examples/basic-project/src/pages/index.module.scss",
+        "examples/basic-project/src/pages/index.tsx",
+        "examples/basic-project/src/pages/layout.tsx",
+        "examples/basic-project/src/pages/var.scss",
+        "examples/basic-project/src/standard-module.ts",
+        "examples/basic-project/src/types.ts",
+        "examples/basic-project/src/typings.d.ts",
+        "examples/basic-project/tsconfig.json",
+        "examples/cavans-project/.browserslistrc",
+        "examples/cavans-project/ice.config.mts",
+        "examples/cavans-project/package.json",
+        "examples/cavans-project/src/app.tsx",
+        "examples/cavans-project/src/components/**",
+        "examples/cavans-project/src/document.tsx",
+        "examples/cavans-project/src/pages/home.tsx",
+        "examples/cavans-project/src/pages/index.module.css",
+        "examples/cavans-project/src/types.ts",
+        "examples/cavans-project/src/typings.d.ts",
+        "examples/cavans-project/tsconfig.json",
+        "examples/csr-project/.browserslistrc",
+        "examples/csr-project/ice.config.mts",
+        "examples/csr-project/package.json",
+        "examples/csr-project/src/app.tsx",
+        "examples/csr-project/src/components/**",
+        "examples/csr-project/src/document.tsx",
+        "examples/csr-project/src/pages/about.tsx",
+        "examples/csr-project/src/pages/blog.tsx",
+        "examples/csr-project/src/pages/index.module.css",
+        "examples/csr-project/src/pages/index.tsx",
+        "examples/csr-project/src/pages/layout.tsx",
+        "examples/csr-project/src/types.ts",
+        "examples/csr-project/src/typings.d.ts",
+        "examples/csr-project/tsconfig.json",
+        "examples/disable-data-loader/**",
+        "examples/hash-router/**",
+        "examples/icestark-child/ice.config.mts",
+        "examples/icestark-child/package.json",
+        "examples/icestark-child/src/**",
+        "examples/icestark-child/tsconfig.json",
+        "examples/icestark-layout/ice.config.mts",
+        "examples/icestark-layout/package.json",
+        "examples/icestark-layout/public/page-seller/**",
+        "examples/icestark-layout/public/page-waiter/**",
+        "examples/icestark-layout/src/**",
+        "examples/icestark-layout/tsconfig.json",
+        "examples/memory-router/**",
+        "examples/miniapp-project/.browserslistrc",
+        "examples/miniapp-project/ice.config.mts",
+        "examples/miniapp-project/mock/**",
+        "examples/miniapp-project/package.json",
+        "examples/miniapp-project/src/README.md",
+        "examples/miniapp-project/src/app.tsx",
+        "examples/miniapp-project/src/components/**",
+        "examples/miniapp-project/src/document.tsx",
+        "examples/miniapp-project/src/global.less",
+        "examples/miniapp-project/src/pages/fourth.tsx",
+        "examples/miniapp-project/src/pages/index.scss",
+        "examples/miniapp-project/src/pages/index.tsx",
+        "examples/miniapp-project/src/pages/second.tsx",
+        "examples/miniapp-project/src/pages/third/**",
+        "examples/miniapp-project/src/typings.d.ts",
+        "examples/miniapp-project/tsconfig.json",
+        "examples/multi-target/.browserslistrc",
+        "examples/multi-target/ice.config.mts",
+        "examples/multi-target/package.json",
+        "examples/multi-target/src/**",
+        "examples/multi-target/tsconfig.json",
+        "examples/rax-inline-style/.browserslistrc",
+        "examples/rax-inline-style/ice.config.mts",
+        "examples/rax-inline-style/package.json",
+        "examples/rax-inline-style/src/**",
+        "examples/rax-inline-style/tsconfig.json",
+        "examples/rax-project/.browserslistrc",
+        "examples/rax-project/ice.config.mts",
+        "examples/rax-project/package.json",
+        "examples/rax-project/src/**",
+        "examples/rax-project/tsconfig.json",
+        "examples/routes-config/**",
+        "examples/routes-generate/**",
+        "examples/single-route/**",
+        "examples/with-antd/**",
+        "examples/with-antd-mobile/ice.config.mts",
+        "examples/with-antd-mobile/package.json",
+        "examples/with-antd-mobile/src/**",
+        "examples/with-antd-mobile/tsconfig.json",
+        "examples/with-antd5/**",
+        "examples/with-auth/**",
+        "examples/with-basename/**",
+        "examples/with-data-loader/**",
+        "examples/with-dynamic/**",
+        "examples/with-fallback-entry/.browserslistrc",
+        "examples/with-fallback-entry/ice.config.mts",
+        "examples/with-fallback-entry/package.json",
+        "examples/with-fallback-entry/plugin.ts",
+        "examples/with-fallback-entry/src/**",
+        "examples/with-fallback-entry/tsconfig.json",
+        "examples/with-first-chunk-cache-ssr/ice.config.mts",
+        "examples/with-first-chunk-cache-ssr/package.json",
+        "examples/with-first-chunk-cache-ssr/src/**",
+        "examples/with-first-chunk-cache-ssr/tsconfig.json",
+        "examples/with-fusion/**",
+        "examples/with-i18n/**",
+        "examples/with-intl/.browserslistrc",
+        "examples/with-intl/ice.config.mts",
+        "examples/with-intl/package.json",
+        "examples/with-intl/src/**",
+        "examples/with-intl/tsconfig.json",
+        "examples/with-jest/**",
+        "examples/with-jsx-plus/**",
+        "examples/with-keep-alive/**",
+        "examples/with-keep-alive-react/**",
+        "examples/with-nested-routes/**",
+        "examples/with-pha/.browserslistrc",
+        "examples/with-pha/ice.config.mts",
+        "examples/with-pha/package.json",
+        "examples/with-pha/src/**",
+        "examples/with-pha/tsconfig.json",
+        "examples/with-request/**",
+        "examples/with-ssg/**",
+        "examples/with-store/ice.config.mts",
+        "examples/with-store/package.json",
+        "examples/with-store/src/app.tsx",
+        "examples/with-store/src/document.tsx",
+        "examples/with-store/src/models/**",
+        "examples/with-store/src/pages/blog/**",
+        "examples/with-store/src/pages/index.tsx",
+        "examples/with-store/src/pages/login.tsx",
+        "examples/with-store/src/pages/models/**",
+        "examples/with-store/src/pages/store.ts",
+        "examples/with-store/src/store.ts",
+        "examples/with-store/src/typings.d.ts",
+        "examples/with-store/tsconfig.json",
+        "examples/with-suspense-ssr/**",
+        "examples/with-tailwindcss/**",
+        "examples/with-unocss/**",
+        "examples/with-vitest/**",
+        "examples/with-web-worker/**",
+        "package.json",
+        "packages/bundles/**",
+        "packages/create-ice/**",
+        "packages/ice/**",
+        "packages/jsx-runtime/**",
+        "packages/miniapp-html-styles/**",
+        "packages/miniapp-loader/**",
+        "packages/miniapp-react-dom/**",
+        "packages/miniapp-runtime/**",
+        "packages/plugin-antd/**",
+        "packages/plugin-auth/**",
+        "packages/plugin-cavans/**",
+        "packages/plugin-css-assets-local/**",
+        "packages/plugin-externals/**",
+        "packages/plugin-fusion/**",
+        "packages/plugin-i18n/**",
+        "packages/plugin-icestark/**",
+        "packages/plugin-intl/**",
+        "packages/plugin-jsx-plus/**",
+        "packages/plugin-miniapp/**",
+        "packages/plugin-moment-locales/**",
+        "packages/plugin-pha/**",
+        "packages/plugin-rax-compat/**",
+        "packages/plugin-request/**",
+        "packages/plugin-store/**",
+        "packages/plugin-stream-error/**",
+        "packages/plugin-unocss/**",
+        "packages/rax-compat/**",
+        "packages/route-manifest/**",
+        "packages/rspack-config/**",
+        "packages/runtime/**",
+        "packages/shared/**",
+        "packages/shared-config/**",
+        "packages/style-import/**",
+        "packages/webpack-config/**",
+        "packages/webpack-modify/**",
+        "patches/**",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "scripts/**",
+        "tests/**",
+        "tsconfig.base.json",
+        "vitest.config.ts",
+        "website/README.md",
+        "website/babel.config.js",
+        "website/config/**",
+        "website/docs/**",
+        "website/docusaurus.config.js",
+        "website/package.json",
+        "website/plugins/**",
+        "website/scripts/**",
+        "website/src/**",
+        "website/static/.nojekyll",
+        "website/static/img/svg/**"
+      ],
+      "text": "MIT LICENSE\n\nCopyright (c) 2018-present Alibaba Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2018-present Alibaba Inc., MIT license (LICENSE), https://github.com/alibaba/ice."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/appear/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of @ice/appear, ISC license (declared in package.json), https://github.com/alibaba/ice/tree/2742ac4678781ee982bc4cdb428457b36163b6b5/packages/appear."
+    },
+    {
+      "license": "ISC",
+      "paths": [
+        "packages/cache-canvas/**"
+      ],
+      "text": "package.json declares the license \"ISC\" and the folder holds no license file, so this is the license's official text (SPDX license list):\n\nISC License\n\nCopyright <year> <owner> \n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n",
+      "attribution": "the authors of @ice/cache-canvas, ISC license (declared in package.json), https://github.com/alibaba/ice/tree/2742ac4678781ee982bc4cdb428457b36163b6b5/packages/cache-canvas."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ejs",
+      "paths": [
+        "**/*.ejs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.applescript"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.development"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.png"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snap"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.browserslistrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.eslintignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/commit-msg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1270 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/Homebrew/brew",
+  "revision": "be9411f7d2cef522201891d38260c63e66da88f7",
+  "checksum": "sha256:b125c972efeb5b3298fbd9d196d5fe6cb8820bd75649b7c4e949ca5cf117a181",
+  "extract": {
+    "exclude": [
+      "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/formula_audit/**",
+      "Library/Homebrew/test/rubocops/text/**",
+      "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.yosemite.bottle.tar.gz",
+      "Library/Homebrew/test/support/fixtures/cask/AppWithBinary.zip",
+      "Library/Homebrew/test/support/fixtures/cask/AppWithEmbeddedBinary.zip",
+      "Library/Homebrew/test/support/fixtures/cask/AppWithManpage.zip",
+      "Library/Homebrew/test/support/fixtures/cask/AppWithShellCompletion.zip",
+      "Library/Homebrew/test/support/fixtures/cask/MyFancyApp.zip",
+      "Library/Homebrew/test/support/fixtures/cask/MyFancyPkg.zip",
+      "Library/Homebrew/test/support/fixtures/cask/NestedApp.zip.tar.gz",
+      "Library/Homebrew/test/support/fixtures/cask/caffeine-suite.zip",
+      "Library/Homebrew/test/support/fixtures/cask/caffeine-with-plist.zip",
+      "Library/Homebrew/test/support/fixtures/cask/caffeine.zip",
+      "Library/Homebrew/test/support/fixtures/cask/caffeines-subdir.zip",
+      "Library/Homebrew/test/support/fixtures/cask/caffeines.zip",
+      "Library/Homebrew/test/support/fixtures/cask/container-apfs.dmg",
+      "Library/Homebrew/test/support/fixtures/cask/container.7z",
+      "Library/Homebrew/test/support/fixtures/cask/container.air",
+      "Library/Homebrew/test/support/fixtures/cask/container.bz2",
+      "Library/Homebrew/test/support/fixtures/cask/container.cab",
+      "Library/Homebrew/test/support/fixtures/cask/container.dmg",
+      "Library/Homebrew/test/support/fixtures/cask/container.gz",
+      "Library/Homebrew/test/support/fixtures/cask/container.lzma",
+      "Library/Homebrew/test/support/fixtures/cask/container.pkg",
+      "Library/Homebrew/test/support/fixtures/cask/container.rar",
+      "Library/Homebrew/test/support/fixtures/cask/container.sit",
+      "Library/Homebrew/test/support/fixtures/cask/container.tar.gz",
+      "Library/Homebrew/test/support/fixtures/cask/container.tar.xz.gpg",
+      "Library/Homebrew/test/support/fixtures/cask/container.tar.zst",
+      "Library/Homebrew/test/support/fixtures/cask/container.xar",
+      "Library/Homebrew/test/support/fixtures/cask/container.xz",
+      "Library/Homebrew/test/support/fixtures/cask/new-app.tar.gz",
+      "Library/Homebrew/test/support/fixtures/cask/old-app.tar.gz",
+      "Library/Homebrew/test/support/fixtures/cask/transmission-2.61.dmg",
+      "Library/Homebrew/test/support/fixtures/cask/transmission-2.61.zip",
+      "Library/Homebrew/test/support/fixtures/elf/**",
+      "Library/Homebrew/test/support/fixtures/mach/**",
+      "Library/Homebrew/test/support/fixtures/tarballs/**",
+      "Library/Homebrew/test/support/fixtures/test.dmg.gz",
+      "Library/Homebrew/test/support/fixtures/test.epub",
+      "Library/Homebrew/test/support/fixtures/test.flac",
+      "Library/Homebrew/test/support/fixtures/test.gif",
+      "Library/Homebrew/test/support/fixtures/test.ico",
+      "Library/Homebrew/test/support/fixtures/test.jar",
+      "Library/Homebrew/test/support/fixtures/test.jpg",
+      "Library/Homebrew/test/support/fixtures/test.lha",
+      "Library/Homebrew/test/support/fixtures/test.lz",
+      "Library/Homebrew/test/support/fixtures/test.m4a",
+      "Library/Homebrew/test/support/fixtures/test.mp3",
+      "Library/Homebrew/test/support/fixtures/test.mp4",
+      "Library/Homebrew/test/support/fixtures/test.pcap",
+      "Library/Homebrew/test/support/fixtures/test.png",
+      "Library/Homebrew/test/support/fixtures/test.tiff",
+      "Library/Homebrew/test/support/fixtures/test.wav",
+      "Library/Homebrew/test/support/fixtures/third-party/**",
+      "Library/Homebrew/vendor/bundle/bundler/**",
+      "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/concurrent_ruby.jar",
+      "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/elftools-2.2.0/**",
+      "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/logger-1.7.0/**",
+      "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/sorbet-runtime-0.6.13524/**",
+      "Library/Homebrew/vendor/gems/mechanize",
+      "Library/Homebrew/vendor/portable-ruby-arm64-darwin",
+      "Library/Homebrew/vendor/portable-ruby-arm64-linux",
+      "Library/Homebrew/vendor/portable-ruby-version",
+      "Library/Homebrew/vendor/portable-ruby-x86_64-darwin",
+      "Library/Homebrew/vendor/portable-ruby-x86_64-linux",
+      "docs/**",
+      "package/resources/Homebrew.png"
+    ]
+  },
+  "history": {
+    "since": "317a91bc1c6cd902ceae962fa0b1ddc0e57f775e"
+  },
+  "licenses": [
+    {
+      "license": "BSD-2-Clause AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2009-present, Homebrew contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright © 2014-2018 Homebrew contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nBSD 2-Clause License\n\nCopyright (c) 2007-2026, Dion Mendel\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\nCopyright (c) Jerry D'Antonio -- released under the MIT license.\n\nhttp://www.opensource.org/licenses/mit-license.php\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2019 david942j\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nCopyright (c) 2006-2010, Ben Bleything and Patrick May\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY\nKIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\nThe MIT License (MIT)\n\nCopyright (c) 2015, 2016, 2017, 2018 William Woodruff <william @ yossarian.net>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n\n(The MIT License)\n\nCopyright (c) 2005 by Michael Neumann (mneumann@ntecs.de)\n\nCopyright (c) 2006-2021 by Eric Hodel, Akinori MUSHA, Aaron Patterson, Lee Jarvis, Mike Dalessio\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/Homebrew/brew: Copyright (c) 2009-present, Homebrew contributors, BSD-2-Clause license (LICENSE.txt), https://github.com/Homebrew/brew; Copyright © 2014-2018 Homebrew contributors, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/command-not-found; Copyright (c) 2007-2026, Dion Mendel, BSD-2-Clause license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/bindata-3.0.1; Copyright (c) Jerry D'Antonio -- released under the MIT license., MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8; Copyright (c) 2019 david942j, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/patchelf-1.7.0; Copyright (c) 2006-2010, Ben Bleything and Patrick May, MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/plist-3.7.2; Copyright (c) 2015, 2016, 2017, 2018 William Woodruff <william @ yossarian.net>, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/ruby-macho-7.0.0; Copyright (c) 2005 by Michael Neumann (mneumann@ntecs.de); Copyright (c) 2006-2021 by Eric Hodel, Akinori MUSHA, Aaron Patterson, Lee Jarvis, Mike Dalessio, MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/gems/mechanize-2.14.1."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        ".claude/**",
+        ".codex/**",
+        ".cursor/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".oss-scanner/**",
+        ".shellcheckrc",
+        ".sublime/**",
+        ".vale.ini",
+        ".vscode/**",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "LICENSE.txt",
+        "Library/.rubocop.yml",
+        "Library/Homebrew/.bundle/**",
+        "Library/Homebrew/.rspec_parallel",
+        "Library/Homebrew/.rubocop.yml",
+        "Library/Homebrew/.ruby-version",
+        "Library/Homebrew/.simplecov",
+        "Library/Homebrew/.yardopts",
+        "Library/Homebrew/Gemfile",
+        "Library/Homebrew/Gemfile.lock",
+        "Library/Homebrew/PATH.rb",
+        "Library/Homebrew/README.md",
+        "Library/Homebrew/abstract_command.rb",
+        "Library/Homebrew/abstract_subcommand.rb",
+        "Library/Homebrew/aliases/**",
+        "Library/Homebrew/analytics/**",
+        "Library/Homebrew/api/**",
+        "Library/Homebrew/api.rb",
+        "Library/Homebrew/api_hashable.rb",
+        "Library/Homebrew/ask.rb",
+        "Library/Homebrew/ast_constants.rb",
+        "Library/Homebrew/attestation.rb",
+        "Library/Homebrew/autobump_constants.rb",
+        "Library/Homebrew/bottle.rb",
+        "Library/Homebrew/bottle_specification.rb",
+        "Library/Homebrew/bottle_transition.rb",
+        "Library/Homebrew/brew.rb",
+        "Library/Homebrew/brew.sh",
+        "Library/Homebrew/brew_irb_helpers/**",
+        "Library/Homebrew/brew_irb_helpers.rb",
+        "Library/Homebrew/brew_irbrc",
+        "Library/Homebrew/build.rb",
+        "Library/Homebrew/build_environment.rb",
+        "Library/Homebrew/build_options.rb",
+        "Library/Homebrew/bump.rb",
+        "Library/Homebrew/bump_version_parser.rb",
+        "Library/Homebrew/bundle/**",
+        "Library/Homebrew/bundle.rb",
+        "Library/Homebrew/bundle_version.rb",
+        "Library/Homebrew/cache_store/**",
+        "Library/Homebrew/cache_store.rb",
+        "Library/Homebrew/cacheable.rb",
+        "Library/Homebrew/cask/**",
+        "Library/Homebrew/cask.rb",
+        "Library/Homebrew/cask_artifact.rb",
+        "Library/Homebrew/cask_dependent.rb",
+        "Library/Homebrew/caveats.rb",
+        "Library/Homebrew/checksum.rb",
+        "Library/Homebrew/cleaner.rb",
+        "Library/Homebrew/cleanup.rb",
+        "Library/Homebrew/cli/**",
+        "Library/Homebrew/cmake/**",
+        "Library/Homebrew/cmd/**",
+        "Library/Homebrew/command_path.sh",
+        "Library/Homebrew/commands.rb",
+        "Library/Homebrew/compilers/**",
+        "Library/Homebrew/compilers.rb",
+        "Library/Homebrew/completions/**",
+        "Library/Homebrew/completions.rb",
+        "Library/Homebrew/context.rb",
+        "Library/Homebrew/cxxstdlib.rb",
+        "Library/Homebrew/data/**",
+        "Library/Homebrew/data_patch.rb",
+        "Library/Homebrew/debrew/**",
+        "Library/Homebrew/debrew.rb",
+        "Library/Homebrew/dependable.rb",
+        "Library/Homebrew/dependencies/**",
+        "Library/Homebrew/dependencies.rb",
+        "Library/Homebrew/dependencies.rbi",
+        "Library/Homebrew/dependencies_helpers.rb",
+        "Library/Homebrew/dependencies_helpers.rbi",
+        "Library/Homebrew/dependency/**",
+        "Library/Homebrew/dependency.rb",
+        "Library/Homebrew/dependency_collector.rb",
+        "Library/Homebrew/dependents_message.rb",
+        "Library/Homebrew/deprecate_disable.rb",
+        "Library/Homebrew/description_cache_store/**",
+        "Library/Homebrew/description_cache_store.rb",
+        "Library/Homebrew/descriptions.rb",
+        "Library/Homebrew/dev-cmd/**",
+        "Library/Homebrew/developer/**",
+        "Library/Homebrew/development_tools.rb",
+        "Library/Homebrew/diagnostic/**",
+        "Library/Homebrew/diagnostic.rb",
+        "Library/Homebrew/download_queue.rb",
+        "Library/Homebrew/download_strategy/**",
+        "Library/Homebrew/download_strategy.rb",
+        "Library/Homebrew/download_strategy.rbi",
+        "Library/Homebrew/downloadable.rb",
+        "Library/Homebrew/embedded_patch.rb",
+        "Library/Homebrew/env_config.rb",
+        "Library/Homebrew/exceptions.rb",
+        "Library/Homebrew/executables_db.rb",
+        "Library/Homebrew/extend/**",
+        "Library/Homebrew/external_patch.rb",
+        "Library/Homebrew/fetch.rb",
+        "Library/Homebrew/formula-analytics/**",
+        "Library/Homebrew/formula.rb",
+        "Library/Homebrew/formula_assertions.rb",
+        "Library/Homebrew/formula_auditor.rb",
+        "Library/Homebrew/formula_cellar_checks.rb",
+        "Library/Homebrew/formula_creator.rb",
+        "Library/Homebrew/formula_free_port.rb",
+        "Library/Homebrew/formula_info.rb",
+        "Library/Homebrew/formula_installer.rb",
+        "Library/Homebrew/formula_name_cask_token_auditor.rb",
+        "Library/Homebrew/formula_path.sh",
+        "Library/Homebrew/formula_pin.rb",
+        "Library/Homebrew/formula_versions.rb",
+        "Library/Homebrew/formulary.rb",
+        "Library/Homebrew/git_repository.rb",
+        "Library/Homebrew/github_packages.rb",
+        "Library/Homebrew/github_releases.rb",
+        "Library/Homebrew/github_runner.rb",
+        "Library/Homebrew/github_runner_matrix.rb",
+        "Library/Homebrew/global.rb",
+        "Library/Homebrew/hardware.rb",
+        "Library/Homebrew/head_software_spec.rb",
+        "Library/Homebrew/help.rb",
+        "Library/Homebrew/help.sh",
+        "Library/Homebrew/homebrew.rb",
+        "Library/Homebrew/ignorable.rb",
+        "Library/Homebrew/ignorable.rbi",
+        "Library/Homebrew/install/**",
+        "Library/Homebrew/install.rb",
+        "Library/Homebrew/install_renamed.rb",
+        "Library/Homebrew/install_steps/**",
+        "Library/Homebrew/install_steps.rb",
+        "Library/Homebrew/installed_dependents.rb",
+        "Library/Homebrew/items.sh",
+        "Library/Homebrew/keg.rb",
+        "Library/Homebrew/keg.rbi",
+        "Library/Homebrew/keg_only_reason.rb",
+        "Library/Homebrew/keg_relocate.rb",
+        "Library/Homebrew/language/**",
+        "Library/Homebrew/lazy_object.rb",
+        "Library/Homebrew/linkage_cache_store.rb",
+        "Library/Homebrew/linkage_checker.rb",
+        "Library/Homebrew/linux_runner_spec.rb",
+        "Library/Homebrew/list.sh",
+        "Library/Homebrew/livecheck/**",
+        "Library/Homebrew/livecheck.rb",
+        "Library/Homebrew/local_patch.rb",
+        "Library/Homebrew/locale.rb",
+        "Library/Homebrew/lock_file/**",
+        "Library/Homebrew/lock_file.rb",
+        "Library/Homebrew/macos_runner_spec.rb",
+        "Library/Homebrew/macos_version.rb",
+        "Library/Homebrew/manpages/**",
+        "Library/Homebrew/manpages.rb",
+        "Library/Homebrew/mcp_server.rb",
+        "Library/Homebrew/messages.rb",
+        "Library/Homebrew/metafiles.rb",
+        "Library/Homebrew/migrator.rb",
+        "Library/Homebrew/minimum_version.rb",
+        "Library/Homebrew/missing.rb",
+        "Library/Homebrew/missing_formula.rb",
+        "Library/Homebrew/mktemp.rb",
+        "Library/Homebrew/official_taps.rb",
+        "Library/Homebrew/on_system.rb",
+        "Library/Homebrew/on_system.rbi",
+        "Library/Homebrew/options/**",
+        "Library/Homebrew/options.rb",
+        "Library/Homebrew/options.rbi",
+        "Library/Homebrew/os/**",
+        "Library/Homebrew/os.rb",
+        "Library/Homebrew/package_manager_cache.rb",
+        "Library/Homebrew/patch.rb",
+        "Library/Homebrew/pkg_version.rb",
+        "Library/Homebrew/pkg_version.rbi",
+        "Library/Homebrew/plans/**",
+        "Library/Homebrew/postinstall.rb",
+        "Library/Homebrew/pour_bottle_check.rb",
+        "Library/Homebrew/prof/**",
+        "Library/Homebrew/pypi_packages.rb",
+        "Library/Homebrew/readall.rb",
+        "Library/Homebrew/readline_nonblock.rb",
+        "Library/Homebrew/reinstall/**",
+        "Library/Homebrew/reinstall.rb",
+        "Library/Homebrew/release_cooldown.rb",
+        "Library/Homebrew/requirement.rb",
+        "Library/Homebrew/requirements/**",
+        "Library/Homebrew/requirements.rb",
+        "Library/Homebrew/resource/**",
+        "Library/Homebrew/resource.rb",
+        "Library/Homebrew/resource_auditor.rb",
+        "Library/Homebrew/retryable_download.rb",
+        "Library/Homebrew/rubocops/**",
+        "Library/Homebrew/rubocops.rb",
+        "Library/Homebrew/rubocops.rbi",
+        "Library/Homebrew/sandbox.rb",
+        "Library/Homebrew/sandbox_operation.rb",
+        "Library/Homebrew/sbom.rb",
+        "Library/Homebrew/search.rb",
+        "Library/Homebrew/semver.rb",
+        "Library/Homebrew/service.rb",
+        "Library/Homebrew/services/**",
+        "Library/Homebrew/settings.rb",
+        "Library/Homebrew/shell_command.rb",
+        "Library/Homebrew/shims/**",
+        "Library/Homebrew/simulate_system.rb",
+        "Library/Homebrew/software_spec.rb",
+        "Library/Homebrew/sorbet/config",
+        "Library/Homebrew/sorbet/rbi/annotations/**",
+        "Library/Homebrew/sorbet/rbi/dsl/.gitattributes",
+        "Library/Homebrew/sorbet/rbi/dsl/bottle.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/cask/**",
+        "Library/Homebrew/sorbet/rbi/dsl/caveats.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/checksum.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/external_patch.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/formula.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/head_software_spec.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/homebrew/**",
+        "Library/Homebrew/sorbet/rbi/dsl/keg.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/livecheck.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/path.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/pkg_version.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/r_spec/**",
+        "Library/Homebrew/sorbet/rbi/dsl/resource.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/resource_stage_context.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cask/**",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/cask/**",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/formula_audit_strict/**",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/formula_cop.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/homebrew/**",
+        "Library/Homebrew/sorbet/rbi/dsl/rubo_cop/cop/on_system_conditionals_helper.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/software_spec.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/tty.rbi",
+        "Library/Homebrew/sorbet/rbi/dsl/utils/**",
+        "Library/Homebrew/sorbet/rbi/gems/**",
+        "Library/Homebrew/sorbet/rbi/parser@3.3.8.0.rbi",
+        "Library/Homebrew/sorbet/rbi/shims/**",
+        "Library/Homebrew/sorbet/rbi/upstream.rbi",
+        "Library/Homebrew/sorbet/tapioca/**",
+        "Library/Homebrew/source_location.rb",
+        "Library/Homebrew/standalone/**",
+        "Library/Homebrew/standalone.rb",
+        "Library/Homebrew/startup/**",
+        "Library/Homebrew/startup.rb",
+        "Library/Homebrew/string_patch.rb",
+        "Library/Homebrew/style.rb",
+        "Library/Homebrew/system_command.rb",
+        "Library/Homebrew/system_config.rb",
+        "Library/Homebrew/tab/**",
+        "Library/Homebrew/tab.rb",
+        "Library/Homebrew/tap/**",
+        "Library/Homebrew/tap.rb",
+        "Library/Homebrew/tap.sh",
+        "Library/Homebrew/tap_auditor.rb",
+        "Library/Homebrew/tap_constants.rb",
+        "Library/Homebrew/test/.brew-aliases/**",
+        "Library/Homebrew/test/.rubocop.yml",
+        "Library/Homebrew/test/ENV_spec.rb",
+        "Library/Homebrew/test/PATH_spec.rb",
+        "Library/Homebrew/test/abstract_command_spec.rb",
+        "Library/Homebrew/test/abstract_command_spec.rbi",
+        "Library/Homebrew/test/abstract_subcommand_spec.rb",
+        "Library/Homebrew/test/abstract_subcommand_spec.rbi",
+        "Library/Homebrew/test/api/**",
+        "Library/Homebrew/test/api_spec.rb",
+        "Library/Homebrew/test/attestation_spec.rb",
+        "Library/Homebrew/test/bash_spec.rb",
+        "Library/Homebrew/test/bottle/**",
+        "Library/Homebrew/test/bottle_filename_spec.rb",
+        "Library/Homebrew/test/bottle_spec.rb",
+        "Library/Homebrew/test/bottle_specification_spec.rb",
+        "Library/Homebrew/test/bottle_transition_spec.rb",
+        "Library/Homebrew/test/build_environment_spec.rb",
+        "Library/Homebrew/test/build_options_spec.rb",
+        "Library/Homebrew/test/bump_spec.rb",
+        "Library/Homebrew/test/bump_version_parser_spec.rb",
+        "Library/Homebrew/test/bundle/**",
+        "Library/Homebrew/test/bundle_version_spec.rb",
+        "Library/Homebrew/test/cache_store_spec.rb",
+        "Library/Homebrew/test/cask/**",
+        "Library/Homebrew/test/cask_config_spec.rb",
+        "Library/Homebrew/test/cask_dependent_spec.rb",
+        "Library/Homebrew/test/caveats_spec.rb",
+        "Library/Homebrew/test/checksum_spec.rb",
+        "Library/Homebrew/test/checksum_verification_spec.rb",
+        "Library/Homebrew/test/cleaner_spec.rb",
+        "Library/Homebrew/test/cleanup_spec.rb",
+        "Library/Homebrew/test/cli/**",
+        "Library/Homebrew/test/cmd/**",
+        "Library/Homebrew/test/commands_spec.rb",
+        "Library/Homebrew/test/compiler_failure_spec.rb",
+        "Library/Homebrew/test/compiler_selector_spec.rb",
+        "Library/Homebrew/test/completions_spec.rb",
+        "Library/Homebrew/test/cxxstdlib_spec.rb",
+        "Library/Homebrew/test/dependable_spec.rb",
+        "Library/Homebrew/test/dependencies_helpers_spec.rb",
+        "Library/Homebrew/test/dependencies_spec.rb",
+        "Library/Homebrew/test/dependency_collector_spec.rb",
+        "Library/Homebrew/test/dependency_expansion_spec.rb",
+        "Library/Homebrew/test/dependency_spec.rb",
+        "Library/Homebrew/test/deprecate_disable_spec.rb",
+        "Library/Homebrew/test/description_cache_store_spec.rb",
+        "Library/Homebrew/test/descriptions_spec.rb",
+        "Library/Homebrew/test/dev-cmd/**",
+        "Library/Homebrew/test/development_tools_spec.rb",
+        "Library/Homebrew/test/diagnostic/**",
+        "Library/Homebrew/test/diagnostic_checks_spec.rb",
+        "Library/Homebrew/test/diagnostic_spec.rb",
+        "Library/Homebrew/test/download_queue_spec.rb",
+        "Library/Homebrew/test/download_strategies/**",
+        "Library/Homebrew/test/downloadable_spec.rb",
+        "Library/Homebrew/test/env_config_spec.rb",
+        "Library/Homebrew/test/error_during_execution_spec.rb",
+        "Library/Homebrew/test/exceptions_spec.rb",
+        "Library/Homebrew/test/extend/**",
+        "Library/Homebrew/test/formatter_spec.rb",
+        "Library/Homebrew/test/formula_assertions_spec.rb",
+        "Library/Homebrew/test/formula_auditor_spec.rb",
+        "Library/Homebrew/test/formula_cellar_checks_spec.rb",
+        "Library/Homebrew/test/formula_creator_spec.rb",
+        "Library/Homebrew/test/formula_info_spec.rb",
+        "Library/Homebrew/test/formula_installer_bottle_spec.rb",
+        "Library/Homebrew/test/formula_installer_spec.rb",
+        "Library/Homebrew/test/formula_pin_spec.rb",
+        "Library/Homebrew/test/formula_spec.rb",
+        "Library/Homebrew/test/formula_spec_selection_spec.rb",
+        "Library/Homebrew/test/formula_validation_spec.rb",
+        "Library/Homebrew/test/formula_versions_spec.rb",
+        "Library/Homebrew/test/formulary_spec.rb",
+        "Library/Homebrew/test/free_port_spec.rb",
+        "Library/Homebrew/test/gemfile_spec.rb",
+        "Library/Homebrew/test/git_repository_spec.rb",
+        "Library/Homebrew/test/github_packages_spec.rb",
+        "Library/Homebrew/test/github_releases_spec.rb",
+        "Library/Homebrew/test/github_runner_matrix_spec.rb",
+        "Library/Homebrew/test/github_runner_spec.rb",
+        "Library/Homebrew/test/global_spec.rb",
+        "Library/Homebrew/test/hardware/**",
+        "Library/Homebrew/test/hardware_spec.rb",
+        "Library/Homebrew/test/head_software_spec_spec.rb",
+        "Library/Homebrew/test/ignorable_spec.rb",
+        "Library/Homebrew/test/install_spec.rb",
+        "Library/Homebrew/test/install_steps_spec.rb",
+        "Library/Homebrew/test/installed_dependents_spec.rb",
+        "Library/Homebrew/test/keg_only_reason_spec.rb",
+        "Library/Homebrew/test/keg_relocate/**",
+        "Library/Homebrew/test/keg_spec.rb",
+        "Library/Homebrew/test/language/**",
+        "Library/Homebrew/test/lazy_object_spec.rb",
+        "Library/Homebrew/test/linkage_cache_store_spec.rb",
+        "Library/Homebrew/test/linux_runner_spec_spec.rb",
+        "Library/Homebrew/test/livecheck/**",
+        "Library/Homebrew/test/livecheck_spec.rb",
+        "Library/Homebrew/test/locale_spec.rb",
+        "Library/Homebrew/test/lock_file/**",
+        "Library/Homebrew/test/lock_file_spec.rb",
+        "Library/Homebrew/test/macos_runner_spec_spec.rb",
+        "Library/Homebrew/test/macos_version_spec.rb",
+        "Library/Homebrew/test/manpages_spec.rb",
+        "Library/Homebrew/test/mcp_server_spec.rb",
+        "Library/Homebrew/test/messages_spec.rb",
+        "Library/Homebrew/test/migrator_spec.rb",
+        "Library/Homebrew/test/missing_formula_spec.rb",
+        "Library/Homebrew/test/mktemp_spec.rb",
+        "Library/Homebrew/test/on_system_spec.rb",
+        "Library/Homebrew/test/options/**",
+        "Library/Homebrew/test/options_spec.rb",
+        "Library/Homebrew/test/os/**",
+        "Library/Homebrew/test/os_spec.rb",
+        "Library/Homebrew/test/package_manager_cache_spec.rb",
+        "Library/Homebrew/test/patch_spec.rb",
+        "Library/Homebrew/test/patching_spec.rb",
+        "Library/Homebrew/test/pathname_spec.rb",
+        "Library/Homebrew/test/pkg_postinstall_spec.rb",
+        "Library/Homebrew/test/pkg_version_spec.rb",
+        "Library/Homebrew/test/readline_nonblock_spec.rb",
+        "Library/Homebrew/test/reinstall_spec.rb",
+        "Library/Homebrew/test/requirement_spec.rb",
+        "Library/Homebrew/test/requirements/**",
+        "Library/Homebrew/test/requirements_spec.rb",
+        "Library/Homebrew/test/resource_spec.rb",
+        "Library/Homebrew/test/rubocop_spec.rb",
+        "Library/Homebrew/test/rubocops/api_name_membership_spec.rb",
+        "Library/Homebrew/test/rubocops/blank_spec.rb",
+        "Library/Homebrew/test/rubocops/bottle/**",
+        "Library/Homebrew/test/rubocops/cask/**",
+        "Library/Homebrew/test/rubocops/caveats_spec.rb",
+        "Library/Homebrew/test/rubocops/checksum/**",
+        "Library/Homebrew/test/rubocops/class/**",
+        "Library/Homebrew/test/rubocops/cmake_args_spec.rb",
+        "Library/Homebrew/test/rubocops/compact_blank_spec.rb",
+        "Library/Homebrew/test/rubocops/components_order_spec.rb",
+        "Library/Homebrew/test/rubocops/components_redundancy_spec.rb",
+        "Library/Homebrew/test/rubocops/conflicts_spec.rb",
+        "Library/Homebrew/test/rubocops/dependency_order_spec.rb",
+        "Library/Homebrew/test/rubocops/deprecate_disable/**",
+        "Library/Homebrew/test/rubocops/desc_spec.rb",
+        "Library/Homebrew/test/rubocops/disable_comment_spec.rb",
+        "Library/Homebrew/test/rubocops/exec_shell_metacharacters_spec.rb",
+        "Library/Homebrew/test/rubocops/files_spec.rb",
+        "Library/Homebrew/test/rubocops/formula_path_methods_spec.rb",
+        "Library/Homebrew/test/rubocops/full_name_split_spec.rb",
+        "Library/Homebrew/test/rubocops/helper_functions_spec.rb",
+        "Library/Homebrew/test/rubocops/homepage_spec.rb",
+        "Library/Homebrew/test/rubocops/install_bundler_gems_spec.rb",
+        "Library/Homebrew/test/rubocops/install_steps_source_independence_spec.rb",
+        "Library/Homebrew/test/rubocops/install_steps_spec.rb",
+        "Library/Homebrew/test/rubocops/io_read_spec.rb",
+        "Library/Homebrew/test/rubocops/keg_only_spec.rb",
+        "Library/Homebrew/test/rubocops/lines/**",
+        "Library/Homebrew/test/rubocops/livecheck/**",
+        "Library/Homebrew/test/rubocops/move_to_extend_os_spec.rb",
+        "Library/Homebrew/test/rubocops/negate_include_spec.rb",
+        "Library/Homebrew/test/rubocops/no_autobump.rb",
+        "Library/Homebrew/test/rubocops/no_base64_spec.rb",
+        "Library/Homebrew/test/rubocops/no_command_literal_spec.rb",
+        "Library/Homebrew/test/rubocops/no_fileutils_rmrf_spec.rb",
+        "Library/Homebrew/test/rubocops/no_instance_variable_access_in_tests_spec.rb",
+        "Library/Homebrew/test/rubocops/no_send_in_tests_spec.rb",
+        "Library/Homebrew/test/rubocops/non_public_api_usage_spec.rb",
+        "Library/Homebrew/test/rubocops/options_spec.rb",
+        "Library/Homebrew/test/rubocops/os_depends_on_spec.rb",
+        "Library/Homebrew/test/rubocops/patches_spec.rb",
+        "Library/Homebrew/test/rubocops/presence_spec.rb",
+        "Library/Homebrew/test/rubocops/present_spec.rb",
+        "Library/Homebrew/test/rubocops/provided_by_macos_spec.rb",
+        "Library/Homebrew/test/rubocops/public_api_cookbook_spec.rb",
+        "Library/Homebrew/test/rubocops/public_api_documentation_spec.rb",
+        "Library/Homebrew/test/rubocops/resource_requires_dependencies_spec.rb",
+        "Library/Homebrew/test/rubocops/safe_navigation_with_blank_spec.rb",
+        "Library/Homebrew/test/rubocops/service_spec.rb",
+        "Library/Homebrew/test/rubocops/shell_commands_spec.rb",
+        "Library/Homebrew/test/rubocops/ternary_to_if_spec.rb",
+        "Library/Homebrew/test/rubocops/text_spec.rb",
+        "Library/Homebrew/test/rubocops/unreferenced_let_spec.rb",
+        "Library/Homebrew/test/rubocops/urls/**",
+        "Library/Homebrew/test/rubocops/urls_spec.rb",
+        "Library/Homebrew/test/rubocops/uses_from_macos_spec.rb",
+        "Library/Homebrew/test/rubocops/version_spec.rb",
+        "Library/Homebrew/test/rubocops/zero_zero_zero_zero_spec.rb",
+        "Library/Homebrew/test/sandbox_landlock_spec.rb",
+        "Library/Homebrew/test/sandbox_linux_spec.rb",
+        "Library/Homebrew/test/sandbox_operation_spec.rb",
+        "Library/Homebrew/test/sandbox_shared_spec.rb",
+        "Library/Homebrew/test/sandbox_spec.rb",
+        "Library/Homebrew/test/sandbox_terminal_spec.rb",
+        "Library/Homebrew/test/sbom_spec.rb",
+        "Library/Homebrew/test/search_spec.rb",
+        "Library/Homebrew/test/semver_spec.rb",
+        "Library/Homebrew/test/service_spec.rb",
+        "Library/Homebrew/test/services/**",
+        "Library/Homebrew/test/settings_spec.rb",
+        "Library/Homebrew/test/shims/**",
+        "Library/Homebrew/test/simulate_system_spec.rb",
+        "Library/Homebrew/test/software_spec_spec.rb",
+        "Library/Homebrew/test/sorbet/**",
+        "Library/Homebrew/test/spec_helper.rb",
+        "Library/Homebrew/test/stale_lead_maintainer_pr_approval_spec.rb",
+        "Library/Homebrew/test/startup/**",
+        "Library/Homebrew/test/style_spec.rb",
+        "Library/Homebrew/test/support/extend/**",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.all.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_big_sur.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_golden_gate.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_linux.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_macintosh.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_monterey.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_sequoia.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_sonoma.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_tahoe.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.arm64_ventura.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.armv6_linux.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.armv7l_linux.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.big_sur.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.catalina.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.el_capitan.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.golden_gate.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.high_sierra.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.intel_macintosh.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.macintosh.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.mavericks.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.mojave.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.monterey.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.mountain_lion.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.sequoia.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.sierra.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.sonoma.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.tahoe.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.ventura.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/bottles/testball_bottle-0.1.x86_64_linux.bottle.tar.gz",
+        "Library/Homebrew/test/support/fixtures/cask/Casks/**",
+        "Library/Homebrew/test/support/fixtures/cask/NewApp.app/**",
+        "Library/Homebrew/test/support/fixtures/cask/aged_caskroom/**",
+        "Library/Homebrew/test/support/fixtures/cask/caffeine.internal.json",
+        "Library/Homebrew/test/support/fixtures/cask/caffeine.json",
+        "Library/Homebrew/test/support/fixtures/cask/everything-with-variations.json",
+        "Library/Homebrew/test/support/fixtures/cask/everything.internal.json",
+        "Library/Homebrew/test/support/fixtures/cask/everything.json",
+        "Library/Homebrew/test/support/fixtures/cask/naked.AppImage",
+        "Library/Homebrew/test/support/fixtures/cask/naked_executable",
+        "Library/Homebrew/test/support/fixtures/cask/naked_non_executable",
+        "Library/Homebrew/test/support/fixtures/cask_receipt.json",
+        "Library/Homebrew/test/support/fixtures/failball.rb",
+        "Library/Homebrew/test/support/fixtures/failball_offline_install.rb",
+        "Library/Homebrew/test/support/fixtures/formulae/**",
+        "Library/Homebrew/test/support/fixtures/metal.m",
+        "Library/Homebrew/test/support/fixtures/patches/**",
+        "Library/Homebrew/test/support/fixtures/receipt.json",
+        "Library/Homebrew/test/support/fixtures/receipt_old.json",
+        "Library/Homebrew/test/support/fixtures/rubocop@x.x.x.rbi",
+        "Library/Homebrew/test/support/fixtures/sdks/**",
+        "Library/Homebrew/test/support/fixtures/test.diff",
+        "Library/Homebrew/test/support/fixtures/test.eps",
+        "Library/Homebrew/test/support/fixtures/test.pdf",
+        "Library/Homebrew/test/support/fixtures/test.ps",
+        "Library/Homebrew/test/support/fixtures/test.svg",
+        "Library/Homebrew/test/support/fixtures/testball.rb",
+        "Library/Homebrew/test/support/fixtures/testball_bottle.rb",
+        "Library/Homebrew/test/support/fixtures/testball_bottle_cellar.rb",
+        "Library/Homebrew/test/support/fixtures/testball_fetch.rb",
+        "Library/Homebrew/test/support/fixtures/updater_fixture.yaml",
+        "Library/Homebrew/test/support/fixtures/vulns/**",
+        "Library/Homebrew/test/support/helper/**",
+        "Library/Homebrew/test/support/lib/**",
+        "Library/Homebrew/test/support/quiet_progress_formatter.rb",
+        "Library/Homebrew/test/system_command_result_spec.rb",
+        "Library/Homebrew/test/system_command_spec.rb",
+        "Library/Homebrew/test/system_command_sudo_spec.rb",
+        "Library/Homebrew/test/tab_spec.rb",
+        "Library/Homebrew/test/tap_auditor_spec.rb",
+        "Library/Homebrew/test/tap_spec.rb",
+        "Library/Homebrew/test/test_bot/**",
+        "Library/Homebrew/test/test_bot_spec.rb",
+        "Library/Homebrew/test/test_runner_formula_spec.rb",
+        "Library/Homebrew/test/trust_spec.rb",
+        "Library/Homebrew/test/uninstall_spec.rb",
+        "Library/Homebrew/test/unlink_spec.rb",
+        "Library/Homebrew/test/unpack_strategy/**",
+        "Library/Homebrew/test/unpack_strategy_spec.rb",
+        "Library/Homebrew/test/unpack_strategy_type_spec.rb",
+        "Library/Homebrew/test/upgrade_spec.rb",
+        "Library/Homebrew/test/utils/**",
+        "Library/Homebrew/test/utils_spec.rb",
+        "Library/Homebrew/test/version/**",
+        "Library/Homebrew/test/version_change_spec.rb",
+        "Library/Homebrew/test/version_spec.rb",
+        "Library/Homebrew/test/vulns/**",
+        "Library/Homebrew/test/warnings_spec.rb",
+        "Library/Homebrew/test.rb",
+        "Library/Homebrew/test_bot/**",
+        "Library/Homebrew/test_bot.rb",
+        "Library/Homebrew/test_bot.rbi",
+        "Library/Homebrew/test_runner_formula.rb",
+        "Library/Homebrew/trust.rb",
+        "Library/Homebrew/uninstall.rb",
+        "Library/Homebrew/unlink.rb",
+        "Library/Homebrew/unpack_strategy/**",
+        "Library/Homebrew/unpack_strategy.rb",
+        "Library/Homebrew/unversioned_cask_checker.rb",
+        "Library/Homebrew/upgrade.rb",
+        "Library/Homebrew/url.rb",
+        "Library/Homebrew/utils/**",
+        "Library/Homebrew/utils.rb",
+        "Library/Homebrew/utils.sh",
+        "Library/Homebrew/version/**",
+        "Library/Homebrew/version.rb",
+        "Library/Homebrew/version_change.rb",
+        "Library/Homebrew/vulns/**",
+        "Library/Homebrew/vulns.rb",
+        "Library/Homebrew/warnings.rb",
+        "Library/Homebrew/yard/**",
+        "Library/README.md",
+        "Library/tap_rubocop_style.yml",
+        "README.md",
+        "bin/**",
+        "completions/**",
+        "manpages/**",
+        "package/Distribution.xml",
+        "package/resources/CONCLUSION.rtf",
+        "package/resources/WELCOME.rtf",
+        "package/scripts/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2009-present, Homebrew contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2009-present, Homebrew contributors, BSD-2-Clause license (LICENSE.txt), https://github.com/Homebrew/brew."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/command-not-found/**"
+      ],
+      "text": "Copyright © 2014-2018 Homebrew contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright © 2014-2018 Homebrew contributors, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/command-not-found."
+    },
+    {
+      "license": "BSD-2-Clause",
+      "paths": [
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/bindata-3.0.1/**"
+      ],
+      "text": "BSD 2-Clause License\n\nCopyright (c) 2007-2026, Dion Mendel\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "attribution": "Copyright (c) 2007-2026, Dion Mendel, BSD-2-Clause license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/bindata-3.0.1."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/LICENSE.txt",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/agent.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/array.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/async.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/atom.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/atomic/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/atomic_reference/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/atomics.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/collection/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/concern/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/configuration.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/constants.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/dataflow.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/delay.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/errors.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/exchanger.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/executor/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/executors.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/future.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/hash.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/immutable_struct.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/ivar.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/map.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/maybe.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/mutable_struct.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/mvar.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/options.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/promise.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/promises.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/re_include.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/scheduled_task.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/set.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/settable_struct.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/synchronization/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/synchronization.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/thread_safe/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/timer_task.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/tuple.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/tvar.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/utility/**",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent/version.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent-ruby.rb",
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8/lib/concurrent-ruby/concurrent.rb"
+      ],
+      "text": "Copyright (c) Jerry D'Antonio -- released under the MIT license.\n\nhttp://www.opensource.org/licenses/mit-license.php\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) Jerry D'Antonio -- released under the MIT license., MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/concurrent-ruby-1.3.8."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/patchelf-1.7.0/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 david942j\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 david942j, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/patchelf-1.7.0."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/plist-3.7.2/**"
+      ],
+      "text": "Copyright (c) 2006-2010, Ben Bleything and Patrick May\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY\nKIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2006-2010, Ben Bleything and Patrick May, MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/plist-3.7.2."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/ruby-macho-7.0.0/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2015, 2016, 2017, 2018 William Woodruff <william @ yossarian.net>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2015, 2016, 2017, 2018 William Woodruff <william @ yossarian.net>, MIT license (LICENSE), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/bundle/ruby/4.0.0/gems/ruby-macho-7.0.0."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "Library/Homebrew/vendor/gems/mechanize-2.14.1/**"
+      ],
+      "text": "(The MIT License)\n\nCopyright (c) 2005 by Michael Neumann (mneumann@ntecs.de)\n\nCopyright (c) 2006-2021 by Eric Hodel, Akinori MUSHA, Aaron Patterson, Lee Jarvis, Mike Dalessio\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n'Software'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2005 by Michael Neumann (mneumann@ntecs.de); Copyright (c) 2006-2021 by Eric Hodel, Akinori MUSHA, Aaron Patterson, Lee Jarvis, Mike Dalessio, MIT license (LICENSE.txt), https://github.com/Homebrew/brew/tree/be9411f7d2cef522201891d38260c63e66da88f7/Library/Homebrew/vendor/gems/mechanize-2.14.1."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "erb",
+      "paths": [
+        "**/*.erb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "fish",
+      "paths": [
+        "**/*.fish"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "objective-c",
+      "paths": [
+        "**/*.m"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.AppImage"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.eps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.icns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.long_runner"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pdf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ps"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rbi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rtf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sublime-project"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.python-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.rspec_parallel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ruby-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.simplecov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.yardopts"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NewApp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PkgInfo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_brew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/brew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/brew_irbrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/curl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo_test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/git"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/make"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/naked_executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/naked_non_executable"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ninja"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkg-config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preinstall"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rdbg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rubocop"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ruby"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rustc_wrapper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/swift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xcrun"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.plist"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "zsh",
+      "paths": [
+        "**/*.zsh"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

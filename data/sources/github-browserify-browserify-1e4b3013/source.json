@@ -1,0 +1,423 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/browserify/browserify",
+  "revision": "33ba29b803e824e73db417f2eff1415447d740ed",
+  "checksum": "sha256:40c2a7e42814d5ea9498a8c3de34f3df76c8f097205e55790a0852f3efc02417",
+  "extract": {
+    "exclude": [
+      "assets/**",
+      "test/browser_field_resolve/a/node_modules/**",
+      "test/browser_field_resolve/k/node_modules/**",
+      "test/browser_field_resolve/l/node_modules/**",
+      "test/external/**",
+      "test/field/node_modules/**",
+      "test/glob/vendor/**",
+      "test/global/node_modules/**",
+      "test/identical_different/node_modules/**",
+      "test/identical_different/wow/node_modules/**",
+      "test/ignore_browser_field/node_modules/**",
+      "test/ignore_transform_key/node_modules/**",
+      "test/node_modules/**",
+      "test/noparse/node_modules/**",
+      "test/pkg_event/node_modules/**",
+      "test/preserve_symlinks/a/node_modules/**",
+      "test/shared_symlink/app/node_modules/**",
+      "test/subdep/node_modules/**",
+      "test/tr/node_modules/**",
+      "test/tr_global/node_modules/**",
+      "test/tr_symlink/app/node_modules/**"
+    ]
+  },
+  "history": {
+    "since": "8f80729102cebfaa34ca38bd31b53057ab8e78b8"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2010 James Halliday\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/browserify/browserify: Copyright (c) 2010 James Halliday, MIT license (LICENSE), https://github.com/browserify/browserify."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/**",
+        ".gitignore",
+        ".npmrc",
+        ".nvmrc",
+        "LICENSE",
+        "appveyor.yml",
+        "bin/**",
+        "changelog.markdown",
+        "code-of-conduct.md",
+        "eslint.config.mjs",
+        "example/**",
+        "index.js",
+        "lib/**",
+        "package.json",
+        "readme.markdown",
+        "security.md",
+        "test/_versions.js",
+        "test/args.js",
+        "test/array/**",
+        "test/array.js",
+        "test/async/**",
+        "test/async.js",
+        "test/backbone.js",
+        "test/bare/**",
+        "test/bare.js",
+        "test/bare_shebang.js",
+        "test/bin.js",
+        "test/bin_entry.js",
+        "test/bin_tr_error/**",
+        "test/bin_tr_error.js",
+        "test/bom/**",
+        "test/bom.js",
+        "test/browser_field_file/**",
+        "test/browser_field_file.js",
+        "test/browser_field_resolve/a/main.js",
+        "test/browser_field_resolve/a/package.json",
+        "test/browser_field_resolve/b/**",
+        "test/browser_field_resolve/c/**",
+        "test/browser_field_resolve/d/**",
+        "test/browser_field_resolve/e/**",
+        "test/browser_field_resolve/f/**",
+        "test/browser_field_resolve/g/**",
+        "test/browser_field_resolve/h/**",
+        "test/browser_field_resolve/i/**",
+        "test/browser_field_resolve/j/**",
+        "test/browser_field_resolve/k/main.js",
+        "test/browser_field_resolve/l/main.js",
+        "test/browser_field_resolve.js",
+        "test/buffer.js",
+        "test/bundle-bundle-external/**",
+        "test/bundle-bundle-external.js",
+        "test/bundle-stream.js",
+        "test/bundle.js",
+        "test/bundle_external/**",
+        "test/bundle_external.js",
+        "test/bundle_external_global.js",
+        "test/bundle_sourcemap.js",
+        "test/catch/**",
+        "test/catch.js",
+        "test/circular/**",
+        "test/circular.js",
+        "test/coffee_bin/**",
+        "test/coffee_bin.js",
+        "test/coffeeify/**",
+        "test/coffeeify.js",
+        "test/comment/**",
+        "test/comment.js",
+        "test/constants.js",
+        "test/crypto.js",
+        "test/crypto_ig.js",
+        "test/cycle/**",
+        "test/cycle.js",
+        "test/debug_standalone/**",
+        "test/debug_standalone.js",
+        "test/dedupe-deps.js",
+        "test/dedupe-nomap.js",
+        "test/delay/**",
+        "test/delay.js",
+        "test/dep.js",
+        "test/dollar/**",
+        "test/dollar.js",
+        "test/double_buffer/**",
+        "test/double_buffer.js",
+        "test/double_bundle.js",
+        "test/double_bundle_error/**",
+        "test/double_bundle_error.js",
+        "test/double_bundle_json/**",
+        "test/double_bundle_json.js",
+        "test/double_bundle_parallel.js",
+        "test/double_bundle_parallel_cache.js",
+        "test/dup/**",
+        "test/entry/**",
+        "test/entry.js",
+        "test/entry_exec/**",
+        "test/entry_exec.js",
+        "test/entry_expose/**",
+        "test/entry_expose.js",
+        "test/entry_relative.js",
+        "test/error_code/**",
+        "test/error_code.js",
+        "test/exclude/**",
+        "test/exclude.js",
+        "test/export/**",
+        "test/export.js",
+        "test/external.js",
+        "test/external_args/**",
+        "test/external_shim/**",
+        "test/external_shim.js",
+        "test/externalize/**",
+        "test/externalize.js",
+        "test/fake/**",
+        "test/fake.js",
+        "test/field/miss.js",
+        "test/field/object.js",
+        "test/field/string.js",
+        "test/field/sub.js",
+        "test/field.js",
+        "test/file_event.js",
+        "test/five_bundle.js",
+        "test/full_paths.js",
+        "test/glob/a.js",
+        "test/glob/b.js",
+        "test/glob/lib/**",
+        "test/glob.js",
+        "test/global/buffer.js",
+        "test/global/filename.js",
+        "test/global/main.js",
+        "test/global/tick.js",
+        "test/global.js",
+        "test/global_coffeeify.js",
+        "test/global_noparse.js",
+        "test/global_recorder/**",
+        "test/global_recorder.js",
+        "test/hash/**",
+        "test/hash.js",
+        "test/hash_instance_context/**",
+        "test/hash_instance_context.js",
+        "test/identical/**",
+        "test/identical.js",
+        "test/identical_different/main.js",
+        "test/identical_different/wow/y.js",
+        "test/identical_different/x.js",
+        "test/identical_different.js",
+        "test/ignore/**",
+        "test/ignore.js",
+        "test/ignore_browser_field/main.js",
+        "test/ignore_browser_field.js",
+        "test/ignore_missing/**",
+        "test/ignore_missing.js",
+        "test/ignore_transform_key/main.js",
+        "test/ignore_transform_key.js",
+        "test/json/**",
+        "test/json.js",
+        "test/leak.js",
+        "test/maxlisteners/**",
+        "test/maxlisteners.js",
+        "test/multi_bundle/**",
+        "test/multi_bundle.js",
+        "test/multi_bundle_unique.js",
+        "test/multi_entry/**",
+        "test/multi_entry.js",
+        "test/multi_entry_cross_require/**",
+        "test/multi_entry_cross_require.js",
+        "test/multi_require/**",
+        "test/multi_require.js",
+        "test/multi_symlink/**",
+        "test/multi_symlink.js",
+        "test/no_builtins/**",
+        "test/no_builtins.js",
+        "test/noparse/a.js",
+        "test/noparse/b.js",
+        "test/noparse/dir1/**",
+        "test/noparse.js",
+        "test/pack.js",
+        "test/paths/**",
+        "test/paths.js",
+        "test/paths_transform.js",
+        "test/pipeline_deps/**",
+        "test/pipeline_deps.js",
+        "test/pkg/**",
+        "test/pkg.js",
+        "test/pkg_event/main.js",
+        "test/pkg_event/package.json",
+        "test/pkg_event.js",
+        "test/plugin/**",
+        "test/plugin.js",
+        "test/preserve-symlinks.js",
+        "test/preserve_symlinks/a/index.js",
+        "test/preserve_symlinks/b/**",
+        "test/preserve_symlinks/linked-entry.js",
+        "test/process/**",
+        "test/process.js",
+        "test/quotes/**",
+        "test/quotes.js",
+        "test/relative_dedupe/**",
+        "test/relative_dedupe.js",
+        "test/require_cache.js",
+        "test/require_expose/**",
+        "test/require_expose.js",
+        "test/reset.js",
+        "test/resolve_exposed/**",
+        "test/resolve_exposed.js",
+        "test/retarget.js",
+        "test/reverse_multi_bundle/**",
+        "test/reverse_multi_bundle.js",
+        "test/shared_symlink/app/index.js",
+        "test/shared_symlink/main.js",
+        "test/shared_symlink/shared/**",
+        "test/shared_symlink.js",
+        "test/shebang/**",
+        "test/shebang.js",
+        "test/spread/**",
+        "test/spread.js",
+        "test/standalone/**",
+        "test/standalone.js",
+        "test/standalone_events.js",
+        "test/standalone_sourcemap.js",
+        "test/stdin.js",
+        "test/stream/**",
+        "test/stream.js",
+        "test/stream_file.js",
+        "test/subdep/index.js",
+        "test/subdep/package.json",
+        "test/subdep.js",
+        "test/symlink_dedupe/**",
+        "test/symlink_dedupe.js",
+        "test/syntax_cache/**",
+        "test/syntax_cache.js",
+        "test/tr/f.js",
+        "test/tr/main.js",
+        "test/tr/package.json",
+        "test/tr/subdir/**",
+        "test/tr.js",
+        "test/tr_args/**",
+        "test/tr_args.js",
+        "test/tr_error.js",
+        "test/tr_flags.js",
+        "test/tr_global/main.js",
+        "test/tr_global.js",
+        "test/tr_no_entry/**",
+        "test/tr_no_entry.js",
+        "test/tr_once/**",
+        "test/tr_once.js",
+        "test/tr_order/**",
+        "test/tr_order.js",
+        "test/tr_symlink/a-module/**",
+        "test/tr_symlink/app/main.js",
+        "test/tr_symlink/app/package.json",
+        "test/tr_symlink/b-module/**",
+        "test/tr_symlink.js",
+        "test/unicode/**",
+        "test/unicode.js",
+        "test/util.js",
+        "test/yield/**",
+        "test/yield.js"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2010 James Halliday\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2010 James Halliday, MIT license (LICENSE), https://github.com/browserify/browserify."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.markdown"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "coffeescript",
+      "paths": [
+        "**/*.coffee"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nvmrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

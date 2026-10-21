@@ -1,0 +1,601 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/alam00000/bentopdf",
+  "revision": "b5a69f919146d81a995088fd8f1507bc8184d325",
+  "checksum": "sha256:419702a391a24eb7ebada8dac5b27bdff02be7d8ac259cd4148ad9bcf8077475",
+  "extract": {
+    "exclude": [
+      "bentopdf-airgap-bundle/**",
+      "docs/.vitepress/cache/**",
+      "public/favicon.ico",
+      "public/images/apple-touch-icon.png",
+      "public/images/author-alam.jpg",
+      "public/images/bentopdf-tools.png",
+      "public/images/favicon-192x192.png",
+      "public/images/favicon-512x512.png",
+      "public/images/favicon.png",
+      "public/images/og-pdf-converter.png",
+      "public/images/og-pdf-editor.png",
+      "public/images/og-pdf-merge-split.png",
+      "public/images/og-pdf-security.png",
+      "public/images/og-tools.png",
+      "public/libreoffice-wasm/soffice.data.gz",
+      "public/libreoffice-wasm/soffice.wasm.gz",
+      "public/pdfjs-annotation-viewer/**",
+      "public/pdfjs-viewer/cmaps/**",
+      "public/pdfjs-viewer/iccs/CGATS001Compat-v2-micro.icc",
+      "public/pdfjs-viewer/images/loading-icon.gif",
+      "public/pdfjs-viewer/standard_fonts/**",
+      "public/pdfjs-viewer/wasm/**",
+      "public/qpdf.wasm",
+      "public/sRGB_IEC61966-2-1_no_black_scaling.icc",
+      "src/js/utils/freetext-script.ts",
+      "src/tests/fixtures/**",
+      "vendor/**"
+    ]
+  },
+  "history": {
+    "since": "e0a253be83af58325273de309f56589b31d52b92"
+  },
+  "licenses": [
+    {
+      "license": "AGPL-3.0-only AND CC0-1.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  Developers that use our General Public Licenses protect your rights\nwith two steps: (1) assert copyright on the software, and (2) offer\nyou this License which gives you legal permission to copy, distribute\nand/or modify the software.\n\n  A secondary benefit of defending all users' freedom is that\nimprovements made in alternate versions of the program, if they\nreceive widespread use, become available for other developers to\nincorporate.  Many developers of free software are heartened and\nencouraged by the resulting cooperation.  However, in the case of\nsoftware used on network servers, this result may fail to come about.\nThe GNU General Public License permits making a modified version and\nletting the public access it on a server without ever releasing its\nsource code to the public.\n\n  The GNU Affero General Public License is designed specifically to\nensure that, in such cases, the modified source code becomes available\nto the community.  It requires the operator of a network server to\nprovide the source code of the modified version running there to the\nusers of that server.  Therefore, public use of a modified version, on\na publicly accessible server, gives the public access to the source\ncode of the modified version.\n\n  An older license, called the Affero General Public License and\npublished by Affero, was designed to accomplish similar goals.  This is\na different license, not a version of the Affero GPL, but Affero has\nreleased a new version of the Affero GPL which permits relicensing under\nthis license.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU Affero General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Remote Network Interaction; Use with the GNU General Public License.\n\n  Notwithstanding any other provision of this License, if you modify the\nProgram, your modified version must prominently offer all users\ninteracting with it remotely through a computer network (if your version\nsupports such interaction) an opportunity to receive the Corresponding\nSource of your version by providing access to the Corresponding Source\nfrom a network server at no charge, through some standard or customary\nmeans of facilitating copying of software.  This Corresponding Source\nshall include the Corresponding Source for any work covered by version 3\nof the GNU General Public License that is incorporated pursuant to the\nfollowing paragraph.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the work with which it is combined will remain governed by version\n3 of the GNU General Public License.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU Affero General Public License from time to time.  Such new versions\nwill be similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU Affero General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU Affero General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU Affero General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as published\n    by the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If your software can interact with users remotely through a computer\nnetwork, you should also make sure that it provides a way for users to\nget its source.  For example, if your program is a web application, its\ninterface could display a \"Source\" link that leads users to an archive\nof the code.  There are many ways you could offer source, and different\nsolutions will be better for different programs; see section 13 for the\nspecific requirements.\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU AGPL, see\n<https://www.gnu.org/licenses/>.\n\n\nVersion: 2 files state one version only, such as package-lock.json (\"AGPL-3.0-only\").\n\nCC0 1.0 Universal\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator and\nsubsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for the\npurpose of contributing to a commons of creative, cultural and scientific\nworks (\"Commons\") that the public can reliably and without fear of later\nclaims of infringement build upon, modify, incorporate in other works, reuse\nand redistribute as freely as possible in any form whatsoever and for any\npurposes, including without limitation commercial purposes. These owners may\ncontribute to the Commons to promote the ideal of a free culture and the\nfurther production of creative, cultural and scientific works, or to gain\nreputation or greater distribution for their Work in part through the use and\nefforts of others.\n\nFor these and/or other purposes and motivations, and without any expectation\nof additional consideration or compensation, the person associating CC0 with a\nWork (the \"Affirmer\"), to the extent that he or she is an owner of Copyright\nand Related Rights in the Work, voluntarily elects to apply CC0 to the Work\nand publicly distribute the Work under its terms, with knowledge of his or her\nCopyright and Related Rights in the Work and the meaning and intended legal\neffect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not limited\nto, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display, communicate,\n  and translate a Work;\n\n  ii. moral rights retained by the original author(s) and/or performer(s);\n\n  iii. publicity and privacy rights pertaining to a person's image or likeness\n  depicted in a Work;\n\n  iv. rights protecting against unfair competition in regards to a Work,\n  subject to the limitations in paragraph 4(a), below;\n\n  v. rights protecting the extraction, dissemination, use and reuse of data in\n  a Work;\n\n  vi. database rights (such as those arising under Directive 96/9/EC of the\n  European Parliament and of the Council of 11 March 1996 on the legal\n  protection of databases, and under any national implementation thereof,\n  including any amended or successor version of such directive); and\n\n  vii. other similar, equivalent or corresponding rights throughout the world\n  based on applicable law or treaty, and any national implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention of,\napplicable law, Affirmer hereby overtly, fully, permanently, irrevocably and\nunconditionally waives, abandons, and surrenders all of Affirmer's Copyright\nand Related Rights and associated claims and causes of action, whether now\nknown or unknown (including existing as well as future claims and causes of\naction), in the Work (i) in all territories worldwide, (ii) for the maximum\nduration provided by applicable law or treaty (including future time\nextensions), (iii) in any current or future medium and for any number of\ncopies, and (iv) for any purpose whatsoever, including without limitation\ncommercial, advertising or promotional purposes (the \"Waiver\"). Affirmer makes\nthe Waiver for the benefit of each member of the public at large and to the\ndetriment of Affirmer's heirs and successors, fully intending that such Waiver\nshall not be subject to revocation, rescission, cancellation, termination, or\nany other legal or equitable action to disrupt the quiet enjoyment of the Work\nby the public as contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason be\njudged legally invalid or ineffective under applicable law, then the Waiver\nshall be preserved to the maximum extent permitted taking into account\nAffirmer's express Statement of Purpose. In addition, to the extent the Waiver\nis so judged Affirmer hereby grants to each affected person a royalty-free,\nnon transferable, non sublicensable, non exclusive, irrevocable and\nunconditional license to exercise Affirmer's Copyright and Related Rights in\nthe Work (i) in all territories worldwide, (ii) for the maximum duration\nprovided by applicable law or treaty (including future time extensions), (iii)\nin any current or future medium and for any number of copies, and (iv) for any\npurpose whatsoever, including without limitation commercial, advertising or\npromotional purposes (the \"License\"). The License shall be deemed effective as\nof the date CC0 was applied by Affirmer to the Work. Should any part of the\nLicense for any reason be judged legally invalid or ineffective under\napplicable law, such partial invalidity or ineffectiveness shall not\ninvalidate the remainder of the License, and in such case Affirmer hereby\naffirms that he or she will not (i) exercise any of his or her remaining\nCopyright and Related Rights in the Work or (ii) assert any associated claims\nand causes of action with respect to the Work, in either case contrary to\nAffirmer's express Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n  a. No trademark or patent rights held by Affirmer are waived, abandoned,\n  surrendered, licensed or otherwise affected by this document.\n\n  b. Affirmer offers the Work as-is and makes no representations or warranties\n  of any kind concerning the Work, express, implied, statutory or otherwise,\n  including without limitation warranties of title, merchantability, fitness\n  for a particular purpose, non infringement, or the absence of latent or\n  other defects, accuracy, or the present or absence of errors, whether or not\n  discoverable, all to the greatest extent permissible under applicable law.\n\n  c. Affirmer disclaims responsibility for clearing rights of other persons\n  that may apply to the Work or any use thereof, including without limitation\n  any person's Copyright and Related Rights in the Work. Further, Affirmer\n  disclaims responsibility for obtaining any necessary consents, permissions\n  or other rights required for any use of the Work.\n\n  d. Affirmer understands and acknowledges that Creative Commons is not a\n  party to this document and has no duty or obligation with respect to this\n  CC0 or use of the Work.\n\nFor more information, please see\nhttp://creativecommons.org/publicdomain/zero/1.0/\n",
+      "attribution": "Commit history of https://github.com/alam00000/bentopdf: the authors of alam00000/bentopdf (the license file names no copyright line), AGPL-3.0-only license (LICENSE), https://github.com/alam00000/bentopdf; Copyright and Related Rights in the Work and the meaning and intended legal; Copyright and Related Rights in the Work or (ii) assert any associated claims, CC0-1.0 license (LICENSE), https://github.com/alam00000/bentopdf/tree/b5a69f919146d81a995088fd8f1507bc8184d325/public/pdfjs-viewer/iccs."
+    },
+    {
+      "license": "AGPL-3.0-only",
+      "paths": [
+        ".dockerignore",
+        ".env.development",
+        ".env.example",
+        ".github/**",
+        ".gitignore",
+        ".htaccess",
+        ".husky/**",
+        ".prettierignore",
+        ".prettierrc",
+        ".trivyignore",
+        ".well-known/**",
+        "404.html",
+        "CCLA.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "Dockerfile",
+        "Dockerfile.nonroot",
+        "ICLA.md",
+        "LICENSE",
+        "README.md",
+        "RELEASE.md",
+        "SECURITY.md",
+        "SIMPLE_MODE.md",
+        "STATIC-HOSTING.md",
+        "TRANSLATION.md",
+        "about.html",
+        "blog/**",
+        "chart/**",
+        "cloudflare/**",
+        "contact.html",
+        "docker-compose.dev.yml",
+        "docker-compose.yml",
+        "docs/.vitepress/config.mts",
+        "docs/contributing.md",
+        "docs/getting-started.md",
+        "docs/index.md",
+        "docs/licensing.md",
+        "docs/public/**",
+        "docs/self-hosting/**",
+        "docs/tools/**",
+        "entrypoint.sh",
+        "eslint.config.mjs",
+        "faq.html",
+        "hyper-compress.html",
+        "index.html",
+        "kura.html",
+        "licensing.html",
+        "nginx-ipv6.sh",
+        "nginx-noindex.sh",
+        "nginx.conf",
+        "package-lock.json",
+        "package.json",
+        "pdf-converter.html",
+        "pdf-editor.html",
+        "pdf-merge-split.html",
+        "pdf-security.html",
+        "privacy.html",
+        "public/CHANGELOG.md",
+        "public/coherentpdf.browser.min.js",
+        "public/config.json",
+        "public/images/badge.svg",
+        "public/images/ccpa.svg",
+        "public/images/favicon-no-bg.svg",
+        "public/images/favicon.svg",
+        "public/images/gdpr.svg",
+        "public/images/hipaa.svg",
+        "public/libreoffice-wasm/browser.worker.global.js",
+        "public/libreoffice-wasm/soffice.js",
+        "public/libreoffice-wasm/soffice.worker.js",
+        "public/locales/**",
+        "public/pdfjs-viewer/form-viewer.html",
+        "public/pdfjs-viewer/images/altText_add.svg",
+        "public/pdfjs-viewer/images/altText_disclaimer.svg",
+        "public/pdfjs-viewer/images/altText_done.svg",
+        "public/pdfjs-viewer/images/altText_spinner.svg",
+        "public/pdfjs-viewer/images/altText_warning.svg",
+        "public/pdfjs-viewer/images/annotation-check.svg",
+        "public/pdfjs-viewer/images/annotation-comment.svg",
+        "public/pdfjs-viewer/images/annotation-help.svg",
+        "public/pdfjs-viewer/images/annotation-insert.svg",
+        "public/pdfjs-viewer/images/annotation-key.svg",
+        "public/pdfjs-viewer/images/annotation-newparagraph.svg",
+        "public/pdfjs-viewer/images/annotation-noicon.svg",
+        "public/pdfjs-viewer/images/annotation-note.svg",
+        "public/pdfjs-viewer/images/annotation-paperclip.svg",
+        "public/pdfjs-viewer/images/annotation-paragraph.svg",
+        "public/pdfjs-viewer/images/annotation-pushpin.svg",
+        "public/pdfjs-viewer/images/comment-actionsButton.svg",
+        "public/pdfjs-viewer/images/comment-closeButton.svg",
+        "public/pdfjs-viewer/images/comment-editButton.svg",
+        "public/pdfjs-viewer/images/comment-popup-editButton.svg",
+        "public/pdfjs-viewer/images/cursor-editorFreeHighlight.svg",
+        "public/pdfjs-viewer/images/cursor-editorFreeText.svg",
+        "public/pdfjs-viewer/images/cursor-editorInk.svg",
+        "public/pdfjs-viewer/images/cursor-editorTextHighlight.svg",
+        "public/pdfjs-viewer/images/editor-toolbar-delete.svg",
+        "public/pdfjs-viewer/images/editor-toolbar-edit.svg",
+        "public/pdfjs-viewer/images/findbarButton-next.svg",
+        "public/pdfjs-viewer/images/findbarButton-previous.svg",
+        "public/pdfjs-viewer/images/gv-toolbarButton-download.svg",
+        "public/pdfjs-viewer/images/loading.svg",
+        "public/pdfjs-viewer/images/messageBar_closingButton.svg",
+        "public/pdfjs-viewer/images/messageBar_info.svg",
+        "public/pdfjs-viewer/images/messageBar_warning.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-documentProperties.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-firstPage.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-handTool.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-lastPage.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-rotateCcw.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-rotateCw.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-scrollHorizontal.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-scrollPage.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-scrollVertical.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-scrollWrapped.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-selectTool.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-spreadEven.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-spreadNone.svg",
+        "public/pdfjs-viewer/images/secondaryToolbarButton-spreadOdd.svg",
+        "public/pdfjs-viewer/images/toolbarButton-bookmark.svg",
+        "public/pdfjs-viewer/images/toolbarButton-currentOutlineItem.svg",
+        "public/pdfjs-viewer/images/toolbarButton-download.svg",
+        "public/pdfjs-viewer/images/toolbarButton-editorFreeText.svg",
+        "public/pdfjs-viewer/images/toolbarButton-editorHighlight.svg",
+        "public/pdfjs-viewer/images/toolbarButton-editorInk.svg",
+        "public/pdfjs-viewer/images/toolbarButton-editorSignature.svg",
+        "public/pdfjs-viewer/images/toolbarButton-editorStamp.svg",
+        "public/pdfjs-viewer/images/toolbarButton-menuArrow.svg",
+        "public/pdfjs-viewer/images/toolbarButton-openFile.svg",
+        "public/pdfjs-viewer/images/toolbarButton-pageDown.svg",
+        "public/pdfjs-viewer/images/toolbarButton-pageUp.svg",
+        "public/pdfjs-viewer/images/toolbarButton-presentationMode.svg",
+        "public/pdfjs-viewer/images/toolbarButton-print.svg",
+        "public/pdfjs-viewer/images/toolbarButton-search.svg",
+        "public/pdfjs-viewer/images/toolbarButton-secondaryToolbarToggle.svg",
+        "public/pdfjs-viewer/images/toolbarButton-sidebarToggle.svg",
+        "public/pdfjs-viewer/images/toolbarButton-viewAttachments.svg",
+        "public/pdfjs-viewer/images/toolbarButton-viewLayers.svg",
+        "public/pdfjs-viewer/images/toolbarButton-viewOutline.svg",
+        "public/pdfjs-viewer/images/toolbarButton-viewThumbnail.svg",
+        "public/pdfjs-viewer/images/toolbarButton-zoomIn.svg",
+        "public/pdfjs-viewer/images/toolbarButton-zoomOut.svg",
+        "public/pdfjs-viewer/images/treeitem-collapsed.svg",
+        "public/pdfjs-viewer/images/treeitem-expanded.svg",
+        "public/pdfjs-viewer/locale/**",
+        "public/pdfjs-viewer/pdf.mjs",
+        "public/pdfjs-viewer/pdf.sandbox.mjs",
+        "public/pdfjs-viewer/pdf.worker.mjs",
+        "public/pdfjs-viewer/pdf_viewer.css",
+        "public/pdfjs-viewer/pdf_viewer.d.mts",
+        "public/pdfjs-viewer/pdf_viewer.mjs",
+        "public/pdfjs-viewer/pdf_viewer.mjs.map",
+        "public/pdfjs-viewer/sign-viewer.html",
+        "public/pdfjs-viewer/viewer.css",
+        "public/pdfjs-viewer/viewer.html",
+        "public/pdfjs-viewer/viewer.mjs",
+        "public/pdfjs-viewer/viewer.mjs.map",
+        "public/robots.txt",
+        "public/site.webmanifest",
+        "public/sw.js",
+        "public/workers/**",
+        "scripts/**",
+        "security-headers-docs.conf",
+        "serve.json",
+        "signatures/**",
+        "simple-index.html",
+        "src/css/**",
+        "src/js/canvasEditor.ts",
+        "src/js/compare/**",
+        "src/js/config/**",
+        "src/js/const/**",
+        "src/js/editcore/**",
+        "src/js/faqModal.ts",
+        "src/js/handlers/**",
+        "src/js/i18n/**",
+        "src/js/landing.ts",
+        "src/js/logic/**",
+        "src/js/main.ts",
+        "src/js/mobileMenu.ts",
+        "src/js/pdf.worker.ts",
+        "src/js/state.ts",
+        "src/js/sw-register.ts",
+        "src/js/types/**",
+        "src/js/ui.ts",
+        "src/js/utils/alternate-merge.ts",
+        "src/js/utils/comic-info.ts",
+        "src/js/utils/compress.ts",
+        "src/js/utils/cpdf-helper.ts",
+        "src/js/utils/csv-to-pdf.ts",
+        "src/js/utils/deduplicate-filename.ts",
+        "src/js/utils/disabled-tools.ts",
+        "src/js/utils/flatten-annotations.ts",
+        "src/js/utils/font-loader.ts",
+        "src/js/utils/freetext-flatten.ts",
+        "src/js/utils/freetext-font-embed.ts",
+        "src/js/utils/full-width.ts",
+        "src/js/utils/ghostscript-dynamic-loader.ts",
+        "src/js/utils/ghostscript-loader.ts",
+        "src/js/utils/helpers.ts",
+        "src/js/utils/hocr-transform.ts",
+        "src/js/utils/image-compress.ts",
+        "src/js/utils/image-effects.ts",
+        "src/js/utils/image-input-utils.ts",
+        "src/js/utils/images-to-pdf-lib.ts",
+        "src/js/utils/libreoffice-loader.ts",
+        "src/js/utils/load-pdf-document.ts",
+        "src/js/utils/lucide-init.ts",
+        "src/js/utils/map-upsert-polyfill.ts",
+        "src/js/utils/markdown-editor.ts",
+        "src/js/utils/merge-cpdf.ts",
+        "src/js/utils/multi-tool-file-input.ts",
+        "src/js/utils/ocr.ts",
+        "src/js/utils/page-labels.ts",
+        "src/js/utils/page-preview.ts",
+        "src/js/utils/password-prompt.ts",
+        "src/js/utils/pdf-decrypt.ts",
+        "src/js/utils/pdf-operations.ts",
+        "src/js/utils/pymupdf-loader.ts",
+        "src/js/utils/render-utils.ts",
+        "src/js/utils/rotation-state.ts",
+        "src/js/utils/rotation-utils.ts",
+        "src/js/utils/safe-storage.ts",
+        "src/js/utils/sanitize.ts",
+        "src/js/utils/setup-pdf-worker.ts",
+        "src/js/utils/shortcuts-init.ts",
+        "src/js/utils/simple-mode-footer.ts",
+        "src/js/utils/split-pdf-helpers.ts",
+        "src/js/utils/tesseract-language-availability.ts",
+        "src/js/utils/tesseract-runtime.ts",
+        "src/js/utils/tiff-utils.ts",
+        "src/js/utils/wasm-preloader.ts",
+        "src/js/utils/wasm-provider.ts",
+        "src/js/utils/xml-to-pdf.ts",
+        "src/js/workflow/**",
+        "src/pages/**",
+        "src/partials/**",
+        "src/tests/comic-info.test.ts",
+        "src/tests/compare/**",
+        "src/tests/deduplicate-filename.test.ts",
+        "src/tests/digital-sign-pdf.test.ts",
+        "src/tests/duplex-collate.test.ts",
+        "src/tests/editcore-fonts.test.ts",
+        "src/tests/editcore-smoke.test.ts",
+        "src/tests/email-to-pdf.test.ts",
+        "src/tests/fix-page-size.test.ts",
+        "src/tests/flatten-annotations.test.ts",
+        "src/tests/font-loader.test.ts",
+        "src/tests/form-creator-extraction.test.ts",
+        "src/tests/freetext-flatten.test.ts",
+        "src/tests/helpers/**",
+        "src/tests/helpers.test.ts",
+        "src/tests/hocr-transform.test.ts",
+        "src/tests/i18n-resilience.test.ts",
+        "src/tests/i18n.test.ts",
+        "src/tests/image-effects.test.ts",
+        "src/tests/image-input-utils.test.ts",
+        "src/tests/images-to-pdf-lib.test.ts",
+        "src/tests/map-upsert-polyfill.test.ts",
+        "src/tests/markdown-mermaid.test.ts",
+        "src/tests/multi-tool-file-input.test.ts",
+        "src/tests/ocr.test.ts",
+        "src/tests/page-labels.test.ts",
+        "src/tests/password-prompt.test.ts",
+        "src/tests/pdf-decrypt.test.ts",
+        "src/tests/pdf-operations.test.ts",
+        "src/tests/pdf-tools.test.ts",
+        "src/tests/pdf-worker-polyfill.test.ts",
+        "src/tests/rotate-pdf-page.test.ts",
+        "src/tests/rotation-state.test.ts",
+        "src/tests/rotation-utils.test.ts",
+        "src/tests/setup.ts",
+        "src/tests/split-pdf-helpers.test.ts",
+        "src/tests/state.test.ts",
+        "src/tests/tesseract-runtime.test.ts",
+        "src/tests/tiff-to-pdf.test.ts",
+        "src/tests/timestamp-node.test.ts",
+        "src/tests/timestamp-pdf-page.test.ts",
+        "src/tests/timestamp-tsa.test.ts",
+        "src/tests/tools.test.ts",
+        "src/tests/watermark-tile.test.ts",
+        "src/tests/watermark.test.ts",
+        "src/tests/xml-to-pdf.test.ts",
+        "src/tests/xss-replay.test.ts",
+        "src/types/**",
+        "tasks/**",
+        "terms.html",
+        "tools.html",
+        "tsconfig.json",
+        "unraid_bentopdf.xml",
+        "vercel.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of it in new\nfree programs, and that you know you can do these things.\n\n  Developers that use our General Public Licenses protect your rights\nwith two steps: (1) assert copyright on the software, and (2) offer\nyou this License which gives you legal permission to copy, distribute\nand/or modify the software.\n\n  A secondary benefit of defending all users' freedom is that\nimprovements made in alternate versions of the program, if they\nreceive widespread use, become available for other developers to\nincorporate.  Many developers of free software are heartened and\nencouraged by the resulting cooperation.  However, in the case of\nsoftware used on network servers, this result may fail to come about.\nThe GNU General Public License permits making a modified version and\nletting the public access it on a server without ever releasing its\nsource code to the public.\n\n  The GNU Affero General Public License is designed specifically to\nensure that, in such cases, the modified source code becomes available\nto the community.  It requires the operator of a network server to\nprovide the source code of the modified version running there to the\nusers of that server.  Therefore, public use of a modified version, on\na publicly accessible server, gives the public access to the source\ncode of the modified version.\n\n  An older license, called the Affero General Public License and\npublished by Affero, was designed to accomplish similar goals.  This is\na different license, not a version of the Affero GPL, but Affero has\nreleased a new version of the Affero GPL which permits relicensing under\nthis license.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n                       TERMS AND CONDITIONS\n\n  0. Definitions.\n\n  \"This License\" refers to version 3 of the GNU Affero General Public License.\n\n  \"Copyright\" also means copyright-like laws that apply to other kinds of\nworks, such as semiconductor masks.\n\n  \"The Program\" refers to any copyrightable work licensed under this\nLicense.  Each licensee is addressed as \"you\".  \"Licensees\" and\n\"recipients\" may be individuals or organizations.\n\n  To \"modify\" a work means to copy from or adapt all or part of the work\nin a fashion requiring copyright permission, other than the making of an\nexact copy.  The resulting work is called a \"modified version\" of the\nearlier work or a work \"based on\" the earlier work.\n\n  A \"covered work\" means either the unmodified Program or a work based\non the Program.\n\n  To \"propagate\" a work means to do anything with it that, without\npermission, would make you directly or secondarily liable for\ninfringement under applicable copyright law, except executing it on a\ncomputer or modifying a private copy.  Propagation includes copying,\ndistribution (with or without modification), making available to the\npublic, and in some countries other activities as well.\n\n  To \"convey\" a work means any kind of propagation that enables other\nparties to make or receive copies.  Mere interaction with a user through\na computer network, with no transfer of a copy, is not conveying.\n\n  An interactive user interface displays \"Appropriate Legal Notices\"\nto the extent that it includes a convenient and prominently visible\nfeature that (1) displays an appropriate copyright notice, and (2)\ntells the user that there is no warranty for the work (except to the\nextent that warranties are provided), that licensees may convey the\nwork under this License, and how to view a copy of this License.  If\nthe interface presents a list of user commands or options, such as a\nmenu, a prominent item in the list meets this criterion.\n\n  1. Source Code.\n\n  The \"source code\" for a work means the preferred form of the work\nfor making modifications to it.  \"Object code\" means any non-source\nform of a work.\n\n  A \"Standard Interface\" means an interface that either is an official\nstandard defined by a recognized standards body, or, in the case of\ninterfaces specified for a particular programming language, one that\nis widely used among developers working in that language.\n\n  The \"System Libraries\" of an executable work include anything, other\nthan the work as a whole, that (a) is included in the normal form of\npackaging a Major Component, but which is not part of that Major\nComponent, and (b) serves only to enable use of the work with that\nMajor Component, or to implement a Standard Interface for which an\nimplementation is available to the public in source code form.  A\n\"Major Component\", in this context, means a major essential component\n(kernel, window system, and so on) of the specific operating system\n(if any) on which the executable work runs, or a compiler used to\nproduce the work, or an object code interpreter used to run it.\n\n  The \"Corresponding Source\" for a work in object code form means all\nthe source code needed to generate, install, and (for an executable\nwork) run the object code and to modify the work, including scripts to\ncontrol those activities.  However, it does not include the work's\nSystem Libraries, or general-purpose tools or generally available free\nprograms which are used unmodified in performing those activities but\nwhich are not part of the work.  For example, Corresponding Source\nincludes interface definition files associated with source files for\nthe work, and the source code for shared libraries and dynamically\nlinked subprograms that the work is specifically designed to require,\nsuch as by intimate data communication or control flow between those\nsubprograms and other parts of the work.\n\n  The Corresponding Source need not include anything that users\ncan regenerate automatically from other parts of the Corresponding\nSource.\n\n  The Corresponding Source for a work in source code form is that\nsame work.\n\n  2. Basic Permissions.\n\n  All rights granted under this License are granted for the term of\ncopyright on the Program, and are irrevocable provided the stated\nconditions are met.  This License explicitly affirms your unlimited\npermission to run the unmodified Program.  The output from running a\ncovered work is covered by this License only if the output, given its\ncontent, constitutes a covered work.  This License acknowledges your\nrights of fair use or other equivalent, as provided by copyright law.\n\n  You may make, run and propagate covered works that you do not\nconvey, without conditions so long as your license otherwise remains\nin force.  You may convey covered works to others for the sole purpose\nof having them make modifications exclusively for you, or provide you\nwith facilities for running those works, provided that you comply with\nthe terms of this License in conveying all material for which you do\nnot control copyright.  Those thus making or running the covered works\nfor you must do so exclusively on your behalf, under your direction\nand control, on terms that prohibit them from making any copies of\nyour copyrighted material outside their relationship with you.\n\n  Conveying under any other circumstances is permitted solely under\nthe conditions stated below.  Sublicensing is not allowed; section 10\nmakes it unnecessary.\n\n  3. Protecting Users' Legal Rights From Anti-Circumvention Law.\n\n  No covered work shall be deemed part of an effective technological\nmeasure under any applicable law fulfilling obligations under article\n11 of the WIPO copyright treaty adopted on 20 December 1996, or\nsimilar laws prohibiting or restricting circumvention of such\nmeasures.\n\n  When you convey a covered work, you waive any legal power to forbid\ncircumvention of technological measures to the extent such circumvention\nis effected by exercising rights under this License with respect to\nthe covered work, and you disclaim any intention to limit operation or\nmodification of the work as a means of enforcing, against the work's\nusers, your or third parties' legal rights to forbid circumvention of\ntechnological measures.\n\n  4. Conveying Verbatim Copies.\n\n  You may convey verbatim copies of the Program's source code as you\nreceive it, in any medium, provided that you conspicuously and\nappropriately publish on each copy an appropriate copyright notice;\nkeep intact all notices stating that this License and any\nnon-permissive terms added in accord with section 7 apply to the code;\nkeep intact all notices of the absence of any warranty; and give all\nrecipients a copy of this License along with the Program.\n\n  You may charge any price or no price for each copy that you convey,\nand you may offer support or warranty protection for a fee.\n\n  5. Conveying Modified Source Versions.\n\n  You may convey a work based on the Program, or the modifications to\nproduce it from the Program, in the form of source code under the\nterms of section 4, provided that you also meet all of these conditions:\n\n    a) The work must carry prominent notices stating that you modified\n    it, and giving a relevant date.\n\n    b) The work must carry prominent notices stating that it is\n    released under this License and any conditions added under section\n    7.  This requirement modifies the requirement in section 4 to\n    \"keep intact all notices\".\n\n    c) You must license the entire work, as a whole, under this\n    License to anyone who comes into possession of a copy.  This\n    License will therefore apply, along with any applicable section 7\n    additional terms, to the whole of the work, and all its parts,\n    regardless of how they are packaged.  This License gives no\n    permission to license the work in any other way, but it does not\n    invalidate such permission if you have separately received it.\n\n    d) If the work has interactive user interfaces, each must display\n    Appropriate Legal Notices; however, if the Program has interactive\n    interfaces that do not display Appropriate Legal Notices, your\n    work need not make them do so.\n\n  A compilation of a covered work with other separate and independent\nworks, which are not by their nature extensions of the covered work,\nand which are not combined with it such as to form a larger program,\nin or on a volume of a storage or distribution medium, is called an\n\"aggregate\" if the compilation and its resulting copyright are not\nused to limit the access or legal rights of the compilation's users\nbeyond what the individual works permit.  Inclusion of a covered work\nin an aggregate does not cause this License to apply to the other\nparts of the aggregate.\n\n  6. Conveying Non-Source Forms.\n\n  You may convey a covered work in object code form under the terms\nof sections 4 and 5, provided that you also convey the\nmachine-readable Corresponding Source under the terms of this License,\nin one of these ways:\n\n    a) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by the\n    Corresponding Source fixed on a durable physical medium\n    customarily used for software interchange.\n\n    b) Convey the object code in, or embodied in, a physical product\n    (including a physical distribution medium), accompanied by a\n    written offer, valid for at least three years and valid for as\n    long as you offer spare parts or customer support for that product\n    model, to give anyone who possesses the object code either (1) a\n    copy of the Corresponding Source for all the software in the\n    product that is covered by this License, on a durable physical\n    medium customarily used for software interchange, for a price no\n    more than your reasonable cost of physically performing this\n    conveying of source, or (2) access to copy the\n    Corresponding Source from a network server at no charge.\n\n    c) Convey individual copies of the object code with a copy of the\n    written offer to provide the Corresponding Source.  This\n    alternative is allowed only occasionally and noncommercially, and\n    only if you received the object code with such an offer, in accord\n    with subsection 6b.\n\n    d) Convey the object code by offering access from a designated\n    place (gratis or for a charge), and offer equivalent access to the\n    Corresponding Source in the same way through the same place at no\n    further charge.  You need not require recipients to copy the\n    Corresponding Source along with the object code.  If the place to\n    copy the object code is a network server, the Corresponding Source\n    may be on a different server (operated by you or a third party)\n    that supports equivalent copying facilities, provided you maintain\n    clear directions next to the object code saying where to find the\n    Corresponding Source.  Regardless of what server hosts the\n    Corresponding Source, you remain obligated to ensure that it is\n    available for as long as needed to satisfy these requirements.\n\n    e) Convey the object code using peer-to-peer transmission, provided\n    you inform other peers where the object code and Corresponding\n    Source of the work are being offered to the general public at no\n    charge under subsection 6d.\n\n  A separable portion of the object code, whose source code is excluded\nfrom the Corresponding Source as a System Library, need not be\nincluded in conveying the object code work.\n\n  A \"User Product\" is either (1) a \"consumer product\", which means any\ntangible personal property which is normally used for personal, family,\nor household purposes, or (2) anything designed or sold for incorporation\ninto a dwelling.  In determining whether a product is a consumer product,\ndoubtful cases shall be resolved in favor of coverage.  For a particular\nproduct received by a particular user, \"normally used\" refers to a\ntypical or common use of that class of product, regardless of the status\nof the particular user or of the way in which the particular user\nactually uses, or expects or is expected to use, the product.  A product\nis a consumer product regardless of whether the product has substantial\ncommercial, industrial or non-consumer uses, unless such uses represent\nthe only significant mode of use of the product.\n\n  \"Installation Information\" for a User Product means any methods,\nprocedures, authorization keys, or other information required to install\nand execute modified versions of a covered work in that User Product from\na modified version of its Corresponding Source.  The information must\nsuffice to ensure that the continued functioning of the modified object\ncode is in no case prevented or interfered with solely because\nmodification has been made.\n\n  If you convey an object code work under this section in, or with, or\nspecifically for use in, a User Product, and the conveying occurs as\npart of a transaction in which the right of possession and use of the\nUser Product is transferred to the recipient in perpetuity or for a\nfixed term (regardless of how the transaction is characterized), the\nCorresponding Source conveyed under this section must be accompanied\nby the Installation Information.  But this requirement does not apply\nif neither you nor any third party retains the ability to install\nmodified object code on the User Product (for example, the work has\nbeen installed in ROM).\n\n  The requirement to provide Installation Information does not include a\nrequirement to continue to provide support service, warranty, or updates\nfor a work that has been modified or installed by the recipient, or for\nthe User Product in which it has been modified or installed.  Access to a\nnetwork may be denied when the modification itself materially and\nadversely affects the operation of the network or violates the rules and\nprotocols for communication across the network.\n\n  Corresponding Source conveyed, and Installation Information provided,\nin accord with this section must be in a format that is publicly\ndocumented (and with an implementation available to the public in\nsource code form), and must require no special password or key for\nunpacking, reading or copying.\n\n  7. Additional Terms.\n\n  \"Additional permissions\" are terms that supplement the terms of this\nLicense by making exceptions from one or more of its conditions.\nAdditional permissions that are applicable to the entire Program shall\nbe treated as though they were included in this License, to the extent\nthat they are valid under applicable law.  If additional permissions\napply only to part of the Program, that part may be used separately\nunder those permissions, but the entire Program remains governed by\nthis License without regard to the additional permissions.\n\n  When you convey a copy of a covered work, you may at your option\nremove any additional permissions from that copy, or from any part of\nit.  (Additional permissions may be written to require their own\nremoval in certain cases when you modify the work.)  You may place\nadditional permissions on material, added by you to a covered work,\nfor which you have or can give appropriate copyright permission.\n\n  Notwithstanding any other provision of this License, for material you\nadd to a covered work, you may (if authorized by the copyright holders of\nthat material) supplement the terms of this License with terms:\n\n    a) Disclaiming warranty or limiting liability differently from the\n    terms of sections 15 and 16 of this License; or\n\n    b) Requiring preservation of specified reasonable legal notices or\n    author attributions in that material or in the Appropriate Legal\n    Notices displayed by works containing it; or\n\n    c) Prohibiting misrepresentation of the origin of that material, or\n    requiring that modified versions of such material be marked in\n    reasonable ways as different from the original version; or\n\n    d) Limiting the use for publicity purposes of names of licensors or\n    authors of the material; or\n\n    e) Declining to grant rights under trademark law for use of some\n    trade names, trademarks, or service marks; or\n\n    f) Requiring indemnification of licensors and authors of that\n    material by anyone who conveys the material (or modified versions of\n    it) with contractual assumptions of liability to the recipient, for\n    any liability that these contractual assumptions directly impose on\n    those licensors and authors.\n\n  All other non-permissive additional terms are considered \"further\nrestrictions\" within the meaning of section 10.  If the Program as you\nreceived it, or any part of it, contains a notice stating that it is\ngoverned by this License along with a term that is a further\nrestriction, you may remove that term.  If a license document contains\na further restriction but permits relicensing or conveying under this\nLicense, you may add to a covered work material governed by the terms\nof that license document, provided that the further restriction does\nnot survive such relicensing or conveying.\n\n  If you add terms to a covered work in accord with this section, you\nmust place, in the relevant source files, a statement of the\nadditional terms that apply to those files, or a notice indicating\nwhere to find the applicable terms.\n\n  Additional terms, permissive or non-permissive, may be stated in the\nform of a separately written license, or stated as exceptions;\nthe above requirements apply either way.\n\n  8. Termination.\n\n  You may not propagate or modify a covered work except as expressly\nprovided under this License.  Any attempt otherwise to propagate or\nmodify it is void, and will automatically terminate your rights under\nthis License (including any patent licenses granted under the third\nparagraph of section 11).\n\n  However, if you cease all violation of this License, then your\nlicense from a particular copyright holder is reinstated (a)\nprovisionally, unless and until the copyright holder explicitly and\nfinally terminates your license, and (b) permanently, if the copyright\nholder fails to notify you of the violation by some reasonable means\nprior to 60 days after the cessation.\n\n  Moreover, your license from a particular copyright holder is\nreinstated permanently if the copyright holder notifies you of the\nviolation by some reasonable means, this is the first time you have\nreceived notice of violation of this License (for any work) from that\ncopyright holder, and you cure the violation prior to 30 days after\nyour receipt of the notice.\n\n  Termination of your rights under this section does not terminate the\nlicenses of parties who have received copies or rights from you under\nthis License.  If your rights have been terminated and not permanently\nreinstated, you do not qualify to receive new licenses for the same\nmaterial under section 10.\n\n  9. Acceptance Not Required for Having Copies.\n\n  You are not required to accept this License in order to receive or\nrun a copy of the Program.  Ancillary propagation of a covered work\noccurring solely as a consequence of using peer-to-peer transmission\nto receive a copy likewise does not require acceptance.  However,\nnothing other than this License grants you permission to propagate or\nmodify any covered work.  These actions infringe copyright if you do\nnot accept this License.  Therefore, by modifying or propagating a\ncovered work, you indicate your acceptance of this License to do so.\n\n  10. Automatic Licensing of Downstream Recipients.\n\n  Each time you convey a covered work, the recipient automatically\nreceives a license from the original licensors, to run, modify and\npropagate that work, subject to this License.  You are not responsible\nfor enforcing compliance by third parties with this License.\n\n  An \"entity transaction\" is a transaction transferring control of an\norganization, or substantially all assets of one, or subdividing an\norganization, or merging organizations.  If propagation of a covered\nwork results from an entity transaction, each party to that\ntransaction who receives a copy of the work also receives whatever\nlicenses to the work the party's predecessor in interest had or could\ngive under the previous paragraph, plus a right to possession of the\nCorresponding Source of the work from the predecessor in interest, if\nthe predecessor has it or can get it with reasonable efforts.\n\n  You may not impose any further restrictions on the exercise of the\nrights granted or affirmed under this License.  For example, you may\nnot impose a license fee, royalty, or other charge for exercise of\nrights granted under this License, and you may not initiate litigation\n(including a cross-claim or counterclaim in a lawsuit) alleging that\nany patent claim is infringed by making, using, selling, offering for\nsale, or importing the Program or any portion of it.\n\n  11. Patents.\n\n  A \"contributor\" is a copyright holder who authorizes use under this\nLicense of the Program or a work on which the Program is based.  The\nwork thus licensed is called the contributor's \"contributor version\".\n\n  A contributor's \"essential patent claims\" are all patent claims\nowned or controlled by the contributor, whether already acquired or\nhereafter acquired, that would be infringed by some manner, permitted\nby this License, of making, using, or selling its contributor version,\nbut do not include claims that would be infringed only as a\nconsequence of further modification of the contributor version.  For\npurposes of this definition, \"control\" includes the right to grant\npatent sublicenses in a manner consistent with the requirements of\nthis License.\n\n  Each contributor grants you a non-exclusive, worldwide, royalty-free\npatent license under the contributor's essential patent claims, to\nmake, use, sell, offer for sale, import and otherwise run, modify and\npropagate the contents of its contributor version.\n\n  In the following three paragraphs, a \"patent license\" is any express\nagreement or commitment, however denominated, not to enforce a patent\n(such as an express permission to practice a patent or covenant not to\nsue for patent infringement).  To \"grant\" such a patent license to a\nparty means to make such an agreement or commitment not to enforce a\npatent against the party.\n\n  If you convey a covered work, knowingly relying on a patent license,\nand the Corresponding Source of the work is not available for anyone\nto copy, free of charge and under the terms of this License, through a\npublicly available network server or other readily accessible means,\nthen you must either (1) cause the Corresponding Source to be so\navailable, or (2) arrange to deprive yourself of the benefit of the\npatent license for this particular work, or (3) arrange, in a manner\nconsistent with the requirements of this License, to extend the patent\nlicense to downstream recipients.  \"Knowingly relying\" means you have\nactual knowledge that, but for the patent license, your conveying the\ncovered work in a country, or your recipient's use of the covered work\nin a country, would infringe one or more identifiable patents in that\ncountry that you have reason to believe are valid.\n\n  If, pursuant to or in connection with a single transaction or\narrangement, you convey, or propagate by procuring conveyance of, a\ncovered work, and grant a patent license to some of the parties\nreceiving the covered work authorizing them to use, propagate, modify\nor convey a specific copy of the covered work, then the patent license\nyou grant is automatically extended to all recipients of the covered\nwork and works based on it.\n\n  A patent license is \"discriminatory\" if it does not include within\nthe scope of its coverage, prohibits the exercise of, or is\nconditioned on the non-exercise of one or more of the rights that are\nspecifically granted under this License.  You may not convey a covered\nwork if you are a party to an arrangement with a third party that is\nin the business of distributing software, under which you make payment\nto the third party based on the extent of your activity of conveying\nthe work, and under which the third party grants, to any of the\nparties who would receive the covered work from you, a discriminatory\npatent license (a) in connection with copies of the covered work\nconveyed by you (or copies made from those copies), or (b) primarily\nfor and in connection with specific products or compilations that\ncontain the covered work, unless you entered into that arrangement,\nor that patent license was granted, prior to 28 March 2007.\n\n  Nothing in this License shall be construed as excluding or limiting\nany implied license or other defenses to infringement that may\notherwise be available to you under applicable patent law.\n\n  12. No Surrender of Others' Freedom.\n\n  If conditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot convey a\ncovered work so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you may\nnot convey it at all.  For example, if you agree to terms that obligate you\nto collect a royalty for further conveying from those to whom you convey\nthe Program, the only way you could satisfy both those terms and this\nLicense would be to refrain entirely from conveying the Program.\n\n  13. Remote Network Interaction; Use with the GNU General Public License.\n\n  Notwithstanding any other provision of this License, if you modify the\nProgram, your modified version must prominently offer all users\ninteracting with it remotely through a computer network (if your version\nsupports such interaction) an opportunity to receive the Corresponding\nSource of your version by providing access to the Corresponding Source\nfrom a network server at no charge, through some standard or customary\nmeans of facilitating copying of software.  This Corresponding Source\nshall include the Corresponding Source for any work covered by version 3\nof the GNU General Public License that is incorporated pursuant to the\nfollowing paragraph.\n\n  Notwithstanding any other provision of this License, you have\npermission to link or combine any covered work with a work licensed\nunder version 3 of the GNU General Public License into a single\ncombined work, and to convey the resulting work.  The terms of this\nLicense will continue to apply to the part which is the covered work,\nbut the work with which it is combined will remain governed by version\n3 of the GNU General Public License.\n\n  14. Revised Versions of this License.\n\n  The Free Software Foundation may publish revised and/or new versions of\nthe GNU Affero General Public License from time to time.  Such new versions\nwill be similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\n  Each version is given a distinguishing version number.  If the\nProgram specifies that a certain numbered version of the GNU Affero General\nPublic License \"or any later version\" applies to it, you have the\noption of following the terms and conditions either of that numbered\nversion or of any later version published by the Free Software\nFoundation.  If the Program does not specify a version number of the\nGNU Affero General Public License, you may choose any version ever published\nby the Free Software Foundation.\n\n  If the Program specifies that a proxy can decide which future\nversions of the GNU Affero General Public License can be used, that proxy's\npublic statement of acceptance of a version permanently authorizes you\nto choose that version for the Program.\n\n  Later license versions may give you additional or different\npermissions.  However, no additional obligations are imposed on any\nauthor or copyright holder as a result of your choosing to follow a\nlater version.\n\n  15. Disclaimer of Warranty.\n\n  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\nAPPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\nHOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY\nOF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\nPURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\nIS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\nALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\n  16. Limitation of Liability.\n\n  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\nTHE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\nUSE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\nDATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\nPARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\nEVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\nSUCH DAMAGES.\n\n  17. Interpretation of Sections 15 and 16.\n\n  If the disclaimer of warranty and limitation of liability provided\nabove cannot be given local legal effect according to their terms,\nreviewing courts shall apply local law that most closely approximates\nan absolute waiver of all civil liability in connection with the\nProgram, unless a warranty or assumption of liability accompanies a\ncopy of the Program in return for a fee.\n\n                     END OF TERMS AND CONDITIONS\n\n            How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nstate the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Affero General Public License as published\n    by the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Affero General Public License for more details.\n\n    You should have received a copy of the GNU Affero General Public License\n    along with this program.  If not, see <https://www.gnu.org/licenses/>.\n\nAlso add information on how to contact you by electronic and paper mail.\n\n  If your software can interact with users remotely through a computer\nnetwork, you should also make sure that it provides a way for users to\nget its source.  For example, if your program is a web application, its\ninterface could display a \"Source\" link that leads users to an archive\nof the code.  There are many ways you could offer source, and different\nsolutions will be better for different programs; see section 13 for the\nspecific requirements.\n\n  You should also get your employer (if you work as a programmer) or school,\nif any, to sign a \"copyright disclaimer\" for the program, if necessary.\nFor more information on this, and how to apply and follow the GNU AGPL, see\n<https://www.gnu.org/licenses/>.\n\n\nVersion: 2 files state one version only, such as package-lock.json (\"AGPL-3.0-only\").",
+      "attribution": "the authors of alam00000/bentopdf (the license file names no copyright line), AGPL-3.0-only license (LICENSE), https://github.com/alam00000/bentopdf."
+    },
+    {
+      "license": "CC0-1.0",
+      "paths": [
+        "public/pdfjs-viewer/iccs/LICENSE"
+      ],
+      "text": "CC0 1.0 Universal\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator and\nsubsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for the\npurpose of contributing to a commons of creative, cultural and scientific\nworks (\"Commons\") that the public can reliably and without fear of later\nclaims of infringement build upon, modify, incorporate in other works, reuse\nand redistribute as freely as possible in any form whatsoever and for any\npurposes, including without limitation commercial purposes. These owners may\ncontribute to the Commons to promote the ideal of a free culture and the\nfurther production of creative, cultural and scientific works, or to gain\nreputation or greater distribution for their Work in part through the use and\nefforts of others.\n\nFor these and/or other purposes and motivations, and without any expectation\nof additional consideration or compensation, the person associating CC0 with a\nWork (the \"Affirmer\"), to the extent that he or she is an owner of Copyright\nand Related Rights in the Work, voluntarily elects to apply CC0 to the Work\nand publicly distribute the Work under its terms, with knowledge of his or her\nCopyright and Related Rights in the Work and the meaning and intended legal\neffect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not limited\nto, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display, communicate,\n  and translate a Work;\n\n  ii. moral rights retained by the original author(s) and/or performer(s);\n\n  iii. publicity and privacy rights pertaining to a person's image or likeness\n  depicted in a Work;\n\n  iv. rights protecting against unfair competition in regards to a Work,\n  subject to the limitations in paragraph 4(a), below;\n\n  v. rights protecting the extraction, dissemination, use and reuse of data in\n  a Work;\n\n  vi. database rights (such as those arising under Directive 96/9/EC of the\n  European Parliament and of the Council of 11 March 1996 on the legal\n  protection of databases, and under any national implementation thereof,\n  including any amended or successor version of such directive); and\n\n  vii. other similar, equivalent or corresponding rights throughout the world\n  based on applicable law or treaty, and any national implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention of,\napplicable law, Affirmer hereby overtly, fully, permanently, irrevocably and\nunconditionally waives, abandons, and surrenders all of Affirmer's Copyright\nand Related Rights and associated claims and causes of action, whether now\nknown or unknown (including existing as well as future claims and causes of\naction), in the Work (i) in all territories worldwide, (ii) for the maximum\nduration provided by applicable law or treaty (including future time\nextensions), (iii) in any current or future medium and for any number of\ncopies, and (iv) for any purpose whatsoever, including without limitation\ncommercial, advertising or promotional purposes (the \"Waiver\"). Affirmer makes\nthe Waiver for the benefit of each member of the public at large and to the\ndetriment of Affirmer's heirs and successors, fully intending that such Waiver\nshall not be subject to revocation, rescission, cancellation, termination, or\nany other legal or equitable action to disrupt the quiet enjoyment of the Work\nby the public as contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason be\njudged legally invalid or ineffective under applicable law, then the Waiver\nshall be preserved to the maximum extent permitted taking into account\nAffirmer's express Statement of Purpose. In addition, to the extent the Waiver\nis so judged Affirmer hereby grants to each affected person a royalty-free,\nnon transferable, non sublicensable, non exclusive, irrevocable and\nunconditional license to exercise Affirmer's Copyright and Related Rights in\nthe Work (i) in all territories worldwide, (ii) for the maximum duration\nprovided by applicable law or treaty (including future time extensions), (iii)\nin any current or future medium and for any number of copies, and (iv) for any\npurpose whatsoever, including without limitation commercial, advertising or\npromotional purposes (the \"License\"). The License shall be deemed effective as\nof the date CC0 was applied by Affirmer to the Work. Should any part of the\nLicense for any reason be judged legally invalid or ineffective under\napplicable law, such partial invalidity or ineffectiveness shall not\ninvalidate the remainder of the License, and in such case Affirmer hereby\naffirms that he or she will not (i) exercise any of his or her remaining\nCopyright and Related Rights in the Work or (ii) assert any associated claims\nand causes of action with respect to the Work, in either case contrary to\nAffirmer's express Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n  a. No trademark or patent rights held by Affirmer are waived, abandoned,\n  surrendered, licensed or otherwise affected by this document.\n\n  b. Affirmer offers the Work as-is and makes no representations or warranties\n  of any kind concerning the Work, express, implied, statutory or otherwise,\n  including without limitation warranties of title, merchantability, fitness\n  for a particular purpose, non infringement, or the absence of latent or\n  other defects, accuracy, or the present or absence of errors, whether or not\n  discoverable, all to the greatest extent permissible under applicable law.\n\n  c. Affirmer disclaims responsibility for clearing rights of other persons\n  that may apply to the Work or any use thereof, including without limitation\n  any person's Copyright and Related Rights in the Work. Further, Affirmer\n  disclaims responsibility for obtaining any necessary consents, permissions\n  or other rights required for any use of the Work.\n\n  d. Affirmer understands and acknowledges that Creative Commons is not a\n  party to this document and has no duty or obligation with respect to this\n  CC0 or use of the Work.\n\nFor more information, please see\nhttp://creativecommons.org/publicdomain/zero/1.0/\n",
+      "attribution": "Copyright and Related Rights in the Work and the meaning and intended legal; Copyright and Related Rights in the Work or (ii) assert any associated claims, CC0-1.0 license (LICENSE), https://github.com/alam00000/bentopdf/tree/b5a69f919146d81a995088fd8f1507bc8184d325/public/pdfjs-viewer/iccs."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.development"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.map"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.nonroot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.helmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.htaccess"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.trivyignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/funding-manifest-urls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pre-commit"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

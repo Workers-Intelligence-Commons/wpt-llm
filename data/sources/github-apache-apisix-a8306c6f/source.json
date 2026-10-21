@@ -1,0 +1,1212 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/apache/apisix",
+  "revision": "64a4afdd1353bd302f03cc8f0f780b8a78176137",
+  "checksum": "sha256:48b55e9405f2bba6bfc8b58f1011fe7382be3d3a218445c50e9e955d8e1056d4",
+  "extract": {
+    "exclude": [
+      ".github/actions/autocorrect/autocorrect-tauri/app-icon.png",
+      ".github/actions/autocorrect/autocorrect-tauri/public/favicon.ico",
+      ".github/actions/autocorrect/autocorrect-tauri/public/logo192.png",
+      ".github/actions/autocorrect/autocorrect-tauri/public/logo512.png",
+      ".github/actions/autocorrect/autocorrect-tauri/src-tauri/icons/**",
+      ".github/workflows/**",
+      "docs/assets/images/MA.jpeg",
+      "docs/assets/images/OA.jpg",
+      "docs/assets/images/apache.png",
+      "docs/assets/images/apisix-multi-lang-support.png",
+      "docs/assets/images/apisix.png",
+      "docs/assets/images/aws-caddy-php-welcome-page.png",
+      "docs/assets/images/aws-define-route.png",
+      "docs/assets/images/aws-define-service.png",
+      "docs/assets/images/aws-fargate-cdk.png",
+      "docs/assets/images/aws-nlb-ip-addr.png",
+      "docs/assets/images/benchmark-1.jpg",
+      "docs/assets/images/benchmark-2.jpg",
+      "docs/assets/images/build-devcontainers-vscode-command.png",
+      "docs/assets/images/build-devcontainers-vscode-progressbar.png",
+      "docs/assets/images/consumer-internal.png",
+      "docs/assets/images/consumer-who.png",
+      "docs/assets/images/contributor-over-time.png",
+      "docs/assets/images/control-plane-service-discovery.png",
+      "docs/assets/images/create-a-route.png",
+      "docs/assets/images/dashboard-admin-key-is-correct.png",
+      "docs/assets/images/dashboard-admin-key-is-wrong.png",
+      "docs/assets/images/dashboard-need-admin-key.png",
+      "docs/assets/images/dashboard-reopen-settings-modal.png",
+      "docs/assets/images/dashboard-settings-btn-icon.png",
+      "docs/assets/images/deployment-cp_and_dp.png",
+      "docs/assets/images/deployment-traditional.png",
+      "docs/assets/images/discovery-cn.png",
+      "docs/assets/images/discovery.png",
+      "docs/assets/images/external-plugin.png",
+      "docs/assets/images/flamegraph-1.jpg",
+      "docs/assets/images/flamegraph-2.jpg",
+      "docs/assets/images/flow-load-plugin.png",
+      "docs/assets/images/flow-plugin-internal.png",
+      "docs/assets/images/flow-software-architecture.png",
+      "docs/assets/images/health_check_node_state_diagram.png",
+      "docs/assets/images/health_check_status_page.png",
+      "docs/assets/images/latency-1.jpg",
+      "docs/assets/images/latency-2.jpg",
+      "docs/assets/images/list-of-routes.png",
+      "docs/assets/images/plugin/**",
+      "docs/assets/images/requesturl.jpg",
+      "docs/assets/images/routes-example.png",
+      "docs/assets/images/secret.png",
+      "docs/assets/images/service-example.png",
+      "docs/assets/images/skip-mtls.png",
+      "docs/assets/images/update-docker-desktop-file-sharing.png",
+      "docs/assets/images/upstream-example.png",
+      "docs/assets/other/apisix-plugin-design.graffle",
+      "logos/**",
+      "t/fixtures/bedrock/bedrock-converse-streaming.bin",
+      "t/grpc_server_example/echo.pb",
+      "t/grpc_server_example/proto.pb",
+      "t/plugin/grpc-web/req.bin"
+    ]
+  },
+  "history": {
+    "since": "7742c553d1292743369e00a805115b77c478ba7c"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0 AND MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n=======================================================================\nApache APISIX Subcomponents:\n\nThe Apache APISIX project contains subcomponents with separate copyright\nnotices and license terms. Your use of the source code for the these\nsubcomponents is subject to the terms and conditions of the following\nlicenses.\n\n========================================================================\nApache 2.0 licenses\n========================================================================\n\nThe following components are provided under the Apache License. See project link for details.\nThe text of each license is the standard Apache 2.0 license.\n\n   ewma.lua file from kubernetes/ingress-nginx: https://github.com/kubernetes/ingress-nginx Apache 2.0\n   hello.go file from OpenFunction/samples: https://github.com/OpenFunction/samples Apache 2.0\n\n\nNOTICE:\n\nApache APISIX\nCopyright 2019-2025 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n\n\nMIT License\n\nCopyright (c) 2020 Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2020 Jason Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2022 Jason Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n\nMIT License\n\nCopyright (c) 2020 API7\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/apache/apisix: Copyright 2019-2025 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/apisix; Copyright (c) 2020 Contributors, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/action-semantic-pull-request; Copyright (c) 2020 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect; Copyright (c) 2020 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect/autocorrect; Copyright (c) 2022 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect/autocorrect-rb; Copyright (c) 2020 API7, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/t/toolkit."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".asf.yaml",
+        ".devcontainer/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/actions/.editorconfig",
+        ".github/dependabot.yml",
+        ".gitignore",
+        ".gitmodules",
+        ".ignore_words",
+        ".licenserc.yaml",
+        ".luacheckrc",
+        ".markdownlint.yml",
+        ".requirements",
+        ".shellcheckrc",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CODE_STYLE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MAINTAIN.md",
+        "Makefile",
+        "NOTICE",
+        "README.md",
+        "SECURITY.md",
+        "THREAT_MODEL.md",
+        "Vision-and-Milestones.md",
+        "apisix/**",
+        "apisix-master-0.rockspec",
+        "autodocs/**",
+        "benchmark/**",
+        "bin/**",
+        "ci/**",
+        "conf/**",
+        "docker/**",
+        "docs/assets/images/apisix-seed.svg",
+        "docs/assets/images/pubsub-architecture.svg",
+        "docs/assets/other/json/**",
+        "docs/en/**",
+        "docs/zh/**",
+        "example/**",
+        "powered-by.md",
+        "t/APISIX.pm",
+        "t/admin/**",
+        "t/apisix.luacov",
+        "t/assets/**",
+        "t/certs/**",
+        "t/cli/**",
+        "t/config-center-json/**",
+        "t/config-center-yaml/**",
+        "t/control/**",
+        "t/core/**",
+        "t/coredns/**",
+        "t/debug/**",
+        "t/discovery/**",
+        "t/error_page/**",
+        "t/fake-plugin-exit.lua",
+        "t/fixtures/README.md",
+        "t/fixtures/aliyun/**",
+        "t/fixtures/anthropic/**",
+        "t/fixtures/aws/**",
+        "t/fixtures/bedrock/converse-basic.json",
+        "t/fixtures/lakera/**",
+        "t/fixtures/openai/**",
+        "t/fixtures/prometheus/**",
+        "t/fixtures/protocol-conversion/**",
+        "t/fixtures/vertex-ai/**",
+        "t/fuzzing/**",
+        "t/gm/**",
+        "t/grpc_server_example/go.mod",
+        "t/grpc_server_example/go.sum",
+        "t/grpc_server_example/main.go",
+        "t/grpc_server_example/proto/**",
+        "t/http3/**",
+        "t/kubernetes/**",
+        "t/lib/**",
+        "t/misc/**",
+        "t/node/**",
+        "t/package.json",
+        "t/plugin/acl.t",
+        "t/plugin/acl2.t",
+        "t/plugin/ai-aliyun-content-moderation-result.t",
+        "t/plugin/ai-aliyun-content-moderation-stream-usage.t",
+        "t/plugin/ai-aliyun-content-moderation.t",
+        "t/plugin/ai-aws-content-moderation-secrets.t",
+        "t/plugin/ai-aws-content-moderation.t",
+        "t/plugin/ai-aws-content-moderation2.t",
+        "t/plugin/ai-cache-semantic.t",
+        "t/plugin/ai-cache-streaming.t",
+        "t/plugin/ai-cache.t",
+        "t/plugin/ai-lakera-guard-chain.t",
+        "t/plugin/ai-lakera-guard-secrets.t",
+        "t/plugin/ai-lakera-guard.t",
+        "t/plugin/ai-prompt-decorator.t",
+        "t/plugin/ai-prompt-guard.t",
+        "t/plugin/ai-prompt-template.t",
+        "t/plugin/ai-proxy-anthropic.t",
+        "t/plugin/ai-proxy-azure-openai.t",
+        "t/plugin/ai-proxy-bedrock-single.t",
+        "t/plugin/ai-proxy-bedrock.t",
+        "t/plugin/ai-proxy-client-disconnect.t",
+        "t/plugin/ai-proxy-empty-stream.t",
+        "t/plugin/ai-proxy-fixture.t",
+        "t/plugin/ai-proxy-flush-fragmented.t",
+        "t/plugin/ai-proxy-flush.t",
+        "t/plugin/ai-proxy-gemini.t",
+        "t/plugin/ai-proxy-kafka-log.t",
+        "t/plugin/ai-proxy-latency-vars.t",
+        "t/plugin/ai-proxy-multi-chash-healthcheck-stable-ring.t",
+        "t/plugin/ai-proxy-multi-construct-upstream-panic.t",
+        "t/plugin/ai-proxy-multi-construct-upstream.t",
+        "t/plugin/ai-proxy-multi-domain-healthcheck-repro.t",
+        "t/plugin/ai-proxy-multi-domain-healthcheck.t",
+        "t/plugin/ai-proxy-multi-healthcheck-stale-picker.t",
+        "t/plugin/ai-proxy-multi-retry.t",
+        "t/plugin/ai-proxy-multi.balancer.t",
+        "t/plugin/ai-proxy-multi.openai-compatible.t",
+        "t/plugin/ai-proxy-multi.t",
+        "t/plugin/ai-proxy-multi2.t",
+        "t/plugin/ai-proxy-multi3.t",
+        "t/plugin/ai-proxy-openrouter.t",
+        "t/plugin/ai-proxy-passthrough.t",
+        "t/plugin/ai-proxy-protocol-conversion.t",
+        "t/plugin/ai-proxy-request-body-override.t",
+        "t/plugin/ai-proxy-semantic-routing.t",
+        "t/plugin/ai-proxy-semantic-schema.t",
+        "t/plugin/ai-proxy-semantic.t",
+        "t/plugin/ai-proxy-stream-limits.t",
+        "t/plugin/ai-proxy-stream-truncated.t",
+        "t/plugin/ai-proxy-upstream-vars.t",
+        "t/plugin/ai-proxy-vertex-ai.t",
+        "t/plugin/ai-proxy.openai-compatible.t",
+        "t/plugin/ai-proxy.t",
+        "t/plugin/ai-proxy2.t",
+        "t/plugin/ai-proxy3.t",
+        "t/plugin/ai-rag.t",
+        "t/plugin/ai-rate-limiting-consumer-isolation.t",
+        "t/plugin/ai-rate-limiting-expression.t",
+        "t/plugin/ai-rate-limiting.t",
+        "t/plugin/ai-request-rewrite.t",
+        "t/plugin/ai-request-rewrite2.t",
+        "t/plugin/ai-transport-header-forwarding.t",
+        "t/plugin/ai-transport-http.t",
+        "t/plugin/ai.t",
+        "t/plugin/ai2.t",
+        "t/plugin/ai3.t",
+        "t/plugin/ai4.t",
+        "t/plugin/ai5.t",
+        "t/plugin/api-breaker.t",
+        "t/plugin/attach-consumer-label.t",
+        "t/plugin/authz-casbin/**",
+        "t/plugin/authz-casbin.t",
+        "t/plugin/authz-casdoor.t",
+        "t/plugin/authz-keycloak.t",
+        "t/plugin/authz-keycloak2.t",
+        "t/plugin/authz-keycloak3.t",
+        "t/plugin/authz-keycloak4.t",
+        "t/plugin/authz-keycloak5.t",
+        "t/plugin/aws-lambda.t",
+        "t/plugin/azure-functions.t",
+        "t/plugin/basic-auth-anonymous-consumer.t",
+        "t/plugin/basic-auth-realm.t",
+        "t/plugin/basic-auth.t",
+        "t/plugin/batch-requests-grpc.t",
+        "t/plugin/batch-requests.t",
+        "t/plugin/batch-requests2.t",
+        "t/plugin/body-transformer-multipart.t",
+        "t/plugin/body-transformer.t",
+        "t/plugin/body-transformer2.t",
+        "t/plugin/brotli.t",
+        "t/plugin/cas-auth.t",
+        "t/plugin/chaitin-waf-log-resp.t",
+        "t/plugin/chaitin-waf-reject.t",
+        "t/plugin/chaitin-waf-timeout.t",
+        "t/plugin/chaitin-waf.t",
+        "t/plugin/clickhouse-logger.t",
+        "t/plugin/clickhouse-logger2.t",
+        "t/plugin/clickhouse-logger3.t",
+        "t/plugin/client-control.t",
+        "t/plugin/consumer-bug-fix.t",
+        "t/plugin/consumer-restriction.t",
+        "t/plugin/consumer-restriction2.t",
+        "t/plugin/cors.t",
+        "t/plugin/cors2.t",
+        "t/plugin/cors3.t",
+        "t/plugin/cors4.t",
+        "t/plugin/csrf.t",
+        "t/plugin/custom_sort_plugins.t",
+        "t/plugin/data-mask.t",
+        "t/plugin/datadog.t",
+        "t/plugin/degraphql.t",
+        "t/plugin/dingtalk-auth.t",
+        "t/plugin/dubbo-proxy/**",
+        "t/plugin/echo.t",
+        "t/plugin/elasticsearch-logger.t",
+        "t/plugin/elasticsearch-logger2.t",
+        "t/plugin/error-log-logger-clickhouse.t",
+        "t/plugin/error-log-logger-kafka.t",
+        "t/plugin/error-log-logger-skywalking.t",
+        "t/plugin/error-log-logger.t",
+        "t/plugin/error-page.t",
+        "t/plugin/example.t",
+        "t/plugin/exit-transformer.t",
+        "t/plugin/ext-plugin/**",
+        "t/plugin/fault-injection.t",
+        "t/plugin/fault-injection2.t",
+        "t/plugin/feishu-auth.t",
+        "t/plugin/file-logger-reopen.t",
+        "t/plugin/file-logger.t",
+        "t/plugin/file-logger2.t",
+        "t/plugin/forward-auth.t",
+        "t/plugin/forward-auth2.t",
+        "t/plugin/forward-auth3.t",
+        "t/plugin/global-rule-phase-cache.t",
+        "t/plugin/google-cloud-logging/**",
+        "t/plugin/google-cloud-logging.t",
+        "t/plugin/google-cloud-logging2.t",
+        "t/plugin/google-cloud-logging3.t",
+        "t/plugin/graphql-limit-count.t",
+        "t/plugin/graphql-limit-count2.t",
+        "t/plugin/graphql-proxy-cache/**",
+        "t/plugin/grpc-transcode-reload-bugfix.t",
+        "t/plugin/grpc-transcode.t",
+        "t/plugin/grpc-transcode2.t",
+        "t/plugin/grpc-transcode3.t",
+        "t/plugin/grpc-transcode4.t",
+        "t/plugin/grpc-web/a6/**",
+        "t/plugin/grpc-web/client.cts",
+        "t/plugin/grpc-web/go.mod",
+        "t/plugin/grpc-web/go.sum",
+        "t/plugin/grpc-web/server.go",
+        "t/plugin/grpc-web/setup.sh",
+        "t/plugin/grpc-web.t",
+        "t/plugin/gzip.t",
+        "t/plugin/hmac-auth-anonymous-consumer.t",
+        "t/plugin/hmac-auth-realm.t",
+        "t/plugin/hmac-auth.t",
+        "t/plugin/hmac-auth2.t",
+        "t/plugin/hmac-auth3.t",
+        "t/plugin/hmac-auth4.t",
+        "t/plugin/http-dubbo.t",
+        "t/plugin/http-logger-json.t",
+        "t/plugin/http-logger-large-body.t",
+        "t/plugin/http-logger-log-format.t",
+        "t/plugin/http-logger-new-line.t",
+        "t/plugin/http-logger.t",
+        "t/plugin/http-logger2.t",
+        "t/plugin/http-logger3.t",
+        "t/plugin/inspect.t",
+        "t/plugin/ip-restriction.t",
+        "t/plugin/jwe-decrypt.t",
+        "t/plugin/jwt-auth-anonymous-consumer.t",
+        "t/plugin/jwt-auth-more-algo.t",
+        "t/plugin/jwt-auth-realm.t",
+        "t/plugin/jwt-auth.t",
+        "t/plugin/jwt-auth2.t",
+        "t/plugin/jwt-auth3.t",
+        "t/plugin/jwt-auth4.t",
+        "t/plugin/kafka-logger-large-body.t",
+        "t/plugin/kafka-logger-log-format.t",
+        "t/plugin/kafka-logger.t",
+        "t/plugin/kafka-logger2.t",
+        "t/plugin/kafka-logger3.t",
+        "t/plugin/kafka-logger4.t",
+        "t/plugin/kafka-proxy.t",
+        "t/plugin/key-auth-anonymous-consumer.t",
+        "t/plugin/key-auth-realm.t",
+        "t/plugin/key-auth-upstream-domain-node.t",
+        "t/plugin/key-auth.t",
+        "t/plugin/lago.spec.ts",
+        "t/plugin/lago.t",
+        "t/plugin/ldap-auth-advanced.t",
+        "t/plugin/ldap-auth-realm.t",
+        "t/plugin/ldap-auth.t",
+        "t/plugin/limit-conn-redis-cluster.t",
+        "t/plugin/limit-conn-redis.t",
+        "t/plugin/limit-conn-shared-counter.t",
+        "t/plugin/limit-conn-variable.t",
+        "t/plugin/limit-conn.t",
+        "t/plugin/limit-conn2.t",
+        "t/plugin/limit-conn3.t",
+        "t/plugin/limit-count-consumer-group-credentials.t",
+        "t/plugin/limit-count-consumer-isolation.t",
+        "t/plugin/limit-count-rate-limiting-info.t",
+        "t/plugin/limit-count-redis-cluster.t",
+        "t/plugin/limit-count-redis-cluster2.t",
+        "t/plugin/limit-count-redis-cluster3.t",
+        "t/plugin/limit-count-redis-delayed-sync.t",
+        "t/plugin/limit-count-redis-delayed-sync2.t",
+        "t/plugin/limit-count-redis-delayed-sync3.t",
+        "t/plugin/limit-count-redis-sentinel.t",
+        "t/plugin/limit-count-redis.t",
+        "t/plugin/limit-count-redis2.t",
+        "t/plugin/limit-count-redis3.t",
+        "t/plugin/limit-count-redis4.t",
+        "t/plugin/limit-count-redis5.t",
+        "t/plugin/limit-count-rules.t",
+        "t/plugin/limit-count-sliding.t",
+        "t/plugin/limit-count-variable.t",
+        "t/plugin/limit-count.t",
+        "t/plugin/limit-count2.t",
+        "t/plugin/limit-count3.t",
+        "t/plugin/limit-count4.t",
+        "t/plugin/limit-count5.t",
+        "t/plugin/limit-req-redis-cluster.t",
+        "t/plugin/limit-req-redis.t",
+        "t/plugin/limit-req-shared-counter.t",
+        "t/plugin/limit-req.t",
+        "t/plugin/limit-req2.t",
+        "t/plugin/limit-req3.t",
+        "t/plugin/log-rotate.t",
+        "t/plugin/log-rotate2.t",
+        "t/plugin/log-rotate3.t",
+        "t/plugin/loggly.t",
+        "t/plugin/loki-logger.t",
+        "t/plugin/loki-logger2.t",
+        "t/plugin/mocking.t",
+        "t/plugin/multi-auth.t",
+        "t/plugin/multi-auth2.t",
+        "t/plugin/node-status.t",
+        "t/plugin/oas-validator.t",
+        "t/plugin/oas-validator2.t",
+        "t/plugin/oas-validator3.t",
+        "t/plugin/ocsp-stapling.t",
+        "t/plugin/opa.t",
+        "t/plugin/opa2.t",
+        "t/plugin/opa3.t",
+        "t/plugin/openapi-to-mcp-cache.t",
+        "t/plugin/openapi-to-mcp-concurrent.t",
+        "t/plugin/openapi-to-mcp-e2e-sse-multiworker.t",
+        "t/plugin/openapi-to-mcp-e2e-sse.t",
+        "t/plugin/openapi-to-mcp-e2e-streamable.t",
+        "t/plugin/openapi-to-mcp-interop.spec.ts",
+        "t/plugin/openapi-to-mcp-interop.t",
+        "t/plugin/openapi-to-mcp-json-pretty.t",
+        "t/plugin/openapi-to-mcp-openapi-endpoints.t",
+        "t/plugin/openapi-to-mcp-openapi-loader.t",
+        "t/plugin/openapi-to-mcp-openapi-ref.t",
+        "t/plugin/openapi-to-mcp-openapi-schema.t",
+        "t/plugin/openapi-to-mcp-plugin-stack.t",
+        "t/plugin/openapi-to-mcp-protocol.t",
+        "t/plugin/openapi-to-mcp-session-lifecycle.t",
+        "t/plugin/openapi-to-mcp-swagger2.t",
+        "t/plugin/openapi-to-mcp-tools-generator.t",
+        "t/plugin/openapi-to-mcp.t",
+        "t/plugin/openapi_to_mcp_concurrent.py",
+        "t/plugin/openapi_to_mcp_harness.py",
+        "t/plugin/openapi_to_mcp_session_reconnect.py",
+        "t/plugin/openapi_to_mcp_sse_frozen_vars.py",
+        "t/plugin/openapi_to_mcp_sse_multiworker.py",
+        "t/plugin/openapi_to_mcp_sse_roundtrip.py",
+        "t/plugin/openfunction.t",
+        "t/plugin/openid-connect/**",
+        "t/plugin/openid-connect-claim-validation.t",
+        "t/plugin/openid-connect-identity-headers.t",
+        "t/plugin/openid-connect-redis.t",
+        "t/plugin/openid-connect-required-scopes.t",
+        "t/plugin/openid-connect-userinfo-array.t",
+        "t/plugin/openid-connect.t",
+        "t/plugin/openid-connect10.t",
+        "t/plugin/openid-connect11.t",
+        "t/plugin/openid-connect12.t",
+        "t/plugin/openid-connect2.t",
+        "t/plugin/openid-connect3.t",
+        "t/plugin/openid-connect4.t",
+        "t/plugin/openid-connect5.t",
+        "t/plugin/openid-connect6.t",
+        "t/plugin/openid-connect7.t",
+        "t/plugin/openid-connect8.t",
+        "t/plugin/openid-connect9.t",
+        "t/plugin/opentelemetry.t",
+        "t/plugin/opentelemetry2.t",
+        "t/plugin/opentelemetry3.t",
+        "t/plugin/opentelemetry4-bugfix-pb-state.t",
+        "t/plugin/opentelemetry5.t",
+        "t/plugin/opentelemetry6.t",
+        "t/plugin/openwhisk.t",
+        "t/plugin/plugin.t",
+        "t/plugin/prometheus-ai-cache.t",
+        "t/plugin/prometheus-ai-proxy.t",
+        "t/plugin/prometheus-ai-proxy2.t",
+        "t/plugin/prometheus-label-filter.t",
+        "t/plugin/prometheus-metric-expire.t",
+        "t/plugin/prometheus-websocket.t",
+        "t/plugin/prometheus.t",
+        "t/plugin/prometheus2.t",
+        "t/plugin/prometheus3.t",
+        "t/plugin/prometheus4.t",
+        "t/plugin/proxy-cache/**",
+        "t/plugin/proxy-control.t",
+        "t/plugin/proxy-mirror.t",
+        "t/plugin/proxy-mirror2.t",
+        "t/plugin/proxy-mirror3.t",
+        "t/plugin/proxy-rewrite.t",
+        "t/plugin/proxy-rewrite2.t",
+        "t/plugin/proxy-rewrite3.t",
+        "t/plugin/public-api.t",
+        "t/plugin/real-ip.t",
+        "t/plugin/redirect.t",
+        "t/plugin/redirect2.t",
+        "t/plugin/referer-restriction.t",
+        "t/plugin/request-decompress.t",
+        "t/plugin/request-id.t",
+        "t/plugin/request-id2.t",
+        "t/plugin/request-id3.t",
+        "t/plugin/request-validation.t",
+        "t/plugin/request-validation2.t",
+        "t/plugin/response-rewrite.t",
+        "t/plugin/response-rewrite2.t",
+        "t/plugin/response-rewrite3.t",
+        "t/plugin/rocketmq-logger-log-format.t",
+        "t/plugin/rocketmq-logger.t",
+        "t/plugin/rocketmq-logger2.t",
+        "t/plugin/saml-auth-options.t",
+        "t/plugin/saml-auth-post.t",
+        "t/plugin/saml-auth.t",
+        "t/plugin/security-warning.t",
+        "t/plugin/security-warning2.t",
+        "t/plugin/server-info.t",
+        "t/plugin/serverless.t",
+        "t/plugin/skywalking-logger.t",
+        "t/plugin/skywalking-logger2.t",
+        "t/plugin/skywalking.t",
+        "t/plugin/skywalking2.t",
+        "t/plugin/sls-logger.t",
+        "t/plugin/splunk-hec-logging.t",
+        "t/plugin/splunk-hec-logging2.t",
+        "t/plugin/syslog.t",
+        "t/plugin/tcp-logger.t",
+        "t/plugin/tencent-cloud-cls.t",
+        "t/plugin/traffic-label.t",
+        "t/plugin/traffic-label2.t",
+        "t/plugin/traffic-split.t",
+        "t/plugin/traffic-split2.t",
+        "t/plugin/traffic-split3.t",
+        "t/plugin/traffic-split4.t",
+        "t/plugin/traffic-split5.t",
+        "t/plugin/ua-restriction.t",
+        "t/plugin/udp-logger.t",
+        "t/plugin/uri-blocker.t",
+        "t/plugin/wolf-rbac.t",
+        "t/plugin/workflow-without-case.t",
+        "t/plugin/workflow.t",
+        "t/plugin/workflow2.t",
+        "t/plugin/workflow3.t",
+        "t/plugin/zipkin.t",
+        "t/plugin/zipkin2.t",
+        "t/plugin/zipkin3.t",
+        "t/pnpm-lock.yaml",
+        "t/pubsub/**",
+        "t/router/**",
+        "t/script/**",
+        "t/secret/**",
+        "t/spec/**",
+        "t/sse_server_example/**",
+        "t/stream-node/**",
+        "t/stream-plugin/**",
+        "t/tars/**",
+        "t/ts/**",
+        "t/tsconfig.json",
+        "t/utils/**",
+        "t/vitest.config.ts",
+        "t/wasm/**",
+        "t/xds-library/**",
+        "t/xrpc/**",
+        "utils/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n=======================================================================\nApache APISIX Subcomponents:\n\nThe Apache APISIX project contains subcomponents with separate copyright\nnotices and license terms. Your use of the source code for the these\nsubcomponents is subject to the terms and conditions of the following\nlicenses.\n\n========================================================================\nApache 2.0 licenses\n========================================================================\n\nThe following components are provided under the Apache License. See project link for details.\nThe text of each license is the standard Apache 2.0 license.\n\n   ewma.lua file from kubernetes/ingress-nginx: https://github.com/kubernetes/ingress-nginx Apache 2.0\n   hello.go file from OpenFunction/samples: https://github.com/OpenFunction/samples Apache 2.0\n\n\nNOTICE:\n\nApache APISIX\nCopyright 2019-2025 The Apache Software Foundation\n\nThis product includes software developed at\nThe Apache Software Foundation (http://www.apache.org/).\n",
+      "attribution": "Copyright 2019-2025 The Apache Software Foundation, Apache-2.0 license (LICENSE), https://github.com/apache/apisix."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/actions/action-semantic-pull-request/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Contributors, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/action-semantic-pull-request."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/actions/autocorrect/.autocorrectignore",
+        ".github/actions/autocorrect/.autocorrectrc.template",
+        ".github/actions/autocorrect/.github/**",
+        ".github/actions/autocorrect/.gitignore",
+        ".github/actions/autocorrect/.prettierignore",
+        ".github/actions/autocorrect/.vscode/**",
+        ".github/actions/autocorrect/Cargo.toml",
+        ".github/actions/autocorrect/Dockerfile",
+        ".github/actions/autocorrect/LICENSE",
+        ".github/actions/autocorrect/Makefile",
+        ".github/actions/autocorrect/README.md",
+        ".github/actions/autocorrect/autocorrect-cli/**",
+        ".github/actions/autocorrect/autocorrect-derive/**",
+        ".github/actions/autocorrect/autocorrect-java/**",
+        ".github/actions/autocorrect/autocorrect-node/**",
+        ".github/actions/autocorrect/autocorrect-py/**",
+        ".github/actions/autocorrect/autocorrect-tauri/.gitignore",
+        ".github/actions/autocorrect/autocorrect-tauri/README.md",
+        ".github/actions/autocorrect/autocorrect-tauri/craco.config.js",
+        ".github/actions/autocorrect/autocorrect-tauri/package.json",
+        ".github/actions/autocorrect/autocorrect-tauri/public/index.html",
+        ".github/actions/autocorrect/autocorrect-tauri/public/manifest.json",
+        ".github/actions/autocorrect/autocorrect-tauri/public/robots.txt",
+        ".github/actions/autocorrect/autocorrect-tauri/src/**",
+        ".github/actions/autocorrect/autocorrect-tauri/src-tauri/.gitignore",
+        ".github/actions/autocorrect/autocorrect-tauri/src-tauri/Cargo.toml",
+        ".github/actions/autocorrect/autocorrect-tauri/src-tauri/build.rs",
+        ".github/actions/autocorrect/autocorrect-tauri/src-tauri/src/**",
+        ".github/actions/autocorrect/autocorrect-tauri/src-tauri/tauri.conf.json",
+        ".github/actions/autocorrect/autocorrect-tauri/tailwind.config.js",
+        ".github/actions/autocorrect/autocorrect-tauri/tsconfig.json",
+        ".github/actions/autocorrect/autocorrect-tauri/yarn.lock",
+        ".github/actions/autocorrect/autocorrect-wasm/**",
+        ".github/actions/autocorrect/autocorrect-website/**",
+        ".github/actions/autocorrect/install",
+        ".github/actions/autocorrect/package.json",
+        ".github/actions/autocorrect/rust-toolchain.toml",
+        ".github/actions/autocorrect/tests/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Jason Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/actions/autocorrect/autocorrect/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 Jason Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect/autocorrect."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".github/actions/autocorrect/autocorrect-rb/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 Jason Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 Jason Lee, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/.github/actions/autocorrect/autocorrect-rb."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        "t/toolkit/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2020 API7\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2020 API7, MIT license (LICENSE), https://github.com/apache/apisix/tree/64a4afdd1353bd302f03cc8f0f780b8a78176137/t/toolkit."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/*.dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "handlebars",
+      "paths": [
+        "**/*.hbs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "latex",
+      "paths": [
+        "**/*.tex"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "less",
+      "paths": [
+        "**/*.less"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "lua",
+      "paths": [
+        "**/*.lua"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.pyi"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.gemspec"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Gemfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/Rakefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svelte",
+      "paths": [
+        "**/*.svelte"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.default"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ld"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.local"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ltp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.luacov"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.po"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rego"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rockspec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sse"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.strings"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.t"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.types"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.autocorrectignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitmodules"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.ignore_words"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.luacheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.npmignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.requirements"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.shellcheckrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Corefile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/apisix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/install"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.cts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "vue",
+      "paths": [
+        "**/*.vue"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  },
+  "submodules": {
+    ".github/actions/action-semantic-pull-request": "https://github.com/amannn/action-semantic-pull-request",
+    ".github/actions/autocorrect": "https://github.com/huacnlee/autocorrect",
+    "t/toolkit": "https://github.com/api7/test-toolkit"
+  }
+}

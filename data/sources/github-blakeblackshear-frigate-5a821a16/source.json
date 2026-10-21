@@ -1,0 +1,628 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/blakeblackshear/frigate",
+  "revision": "16a377233e3a1001775790ab64947cb347d6dfae",
+  "checksum": "sha256:22bb3e8f2d644a531a73eda36d2ccdd1cf38e2195da432a7e6406a46dea29362",
+  "extract": {
+    "exclude": [
+      "docker/rockchip/COCO/subset/**",
+      "docs/docs/configuration/**",
+      "docs/static/img/**",
+      "frigate/data_processing/post/**",
+      "frigate/data_processing/real_time/**",
+      "frigate/images/**",
+      "web/images/**",
+      "web/public/images/**",
+      "web/src/assets/**"
+    ]
+  },
+  "history": {
+    "since": "53ccc903daac3993b9431e39c1b985381011ad1c"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2026 Frigate, Inc. (Frigate™)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/blakeblackshear/frigate: Copyright (c) 2026 Frigate, Inc. (Frigate™), MIT license (LICENSE), https://github.com/blakeblackshear/frigate."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".cspell/**",
+        ".cursor/**",
+        ".devcontainer/**",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".pylintrc",
+        ".vscode/**",
+        "AGENTS.md",
+        "AI_POLICY.md",
+        "CLAUDE.md",
+        "CODEOWNERS",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "README_CN.md",
+        "TRADEMARK.md",
+        "audio-labelmap.txt",
+        "config/**",
+        "cspell.json",
+        "docker/deepx/**",
+        "docker/hailo8l/**",
+        "docker/main/**",
+        "docker/memryx/**",
+        "docker/migration/**",
+        "docker/rockchip/COCO/coco_subset_20.txt",
+        "docker/rockchip/Dockerfile",
+        "docker/rockchip/conv2rknn.py",
+        "docker/rockchip/requirements-wheels-rk.txt",
+        "docker/rockchip/rk.hcl",
+        "docker/rockchip/rk.mk",
+        "docker/rocm/**",
+        "docker/rpi/**",
+        "docker/synaptics/**",
+        "docker/tensorrt/**",
+        "docker-compose.yml",
+        "docs/.gitignore",
+        "docs/README.md",
+        "docs/babel.config.js",
+        "docs/data/**",
+        "docs/docs/development/**",
+        "docs/docs/frigate/**",
+        "docs/docs/guides/**",
+        "docs/docs/integrations/**",
+        "docs/docs/mdx.md",
+        "docs/docs/plus/**",
+        "docs/docs/troubleshooting/**",
+        "docs/docs/usage/**",
+        "docs/docusaurus.config.ts",
+        "docs/package-lock.json",
+        "docs/package.json",
+        "docs/plugins/**",
+        "docs/scripts/**",
+        "docs/sidebars.ts",
+        "docs/src/**",
+        "docs/static/.nojekyll",
+        "docs/static/_headers",
+        "docs/static/frigate-api.yaml",
+        "frigate/__init__.py",
+        "frigate/__main__.py",
+        "frigate/api/**",
+        "frigate/app.py",
+        "frigate/camera/**",
+        "frigate/comms/**",
+        "frigate/config/**",
+        "frigate/const.py",
+        "frigate/data_processing/common/**",
+        "frigate/data_processing/types.py",
+        "frigate/db/**",
+        "frigate/debug_replay.py",
+        "frigate/detectors/**",
+        "frigate/embeddings/**",
+        "frigate/events/**",
+        "frigate/ffmpeg_presets.py",
+        "frigate/genai/**",
+        "frigate/jobs/**",
+        "frigate/log.py",
+        "frigate/models.py",
+        "frigate/motion/**",
+        "frigate/mypy.ini",
+        "frigate/notices/**",
+        "frigate/object_detection/**",
+        "frigate/output/**",
+        "frigate/plus.py",
+        "frigate/ptz/**",
+        "frigate/record/**",
+        "frigate/review/**",
+        "frigate/service_manager/**",
+        "frigate/stats/**",
+        "frigate/storage.py",
+        "frigate/test/**",
+        "frigate/timeline.py",
+        "frigate/track/**",
+        "frigate/types.py",
+        "frigate/util/**",
+        "frigate/video/**",
+        "frigate/watchdog.py",
+        "generate_api_auth_spec.py",
+        "generate_config_translations.py",
+        "labelmap.txt",
+        "migrations/**",
+        "netlify.toml",
+        "notebooks/**",
+        "package-lock.json",
+        "pyproject.toml",
+        "testing-scripts/**",
+        "web/.gitignore",
+        "web/.prettierrc",
+        "web/.vscode/**",
+        "web/README.md",
+        "web/components.json",
+        "web/e2e/**",
+        "web/eslint.config.js",
+        "web/i18next.config.ts",
+        "web/index.html",
+        "web/login.html",
+        "web/package-lock.json",
+        "web/package.json",
+        "web/patches/**",
+        "web/postcss.config.js",
+        "web/public/locales/**",
+        "web/public/notifications-worker.js",
+        "web/public/robots.txt",
+        "web/site.webmanifest",
+        "web/src/App.tsx",
+        "web/src/api/**",
+        "web/src/components/**",
+        "web/src/context/**",
+        "web/src/env.ts",
+        "web/src/hooks/**",
+        "web/src/index.css",
+        "web/src/lib/**",
+        "web/src/login.tsx",
+        "web/src/main.tsx",
+        "web/src/pages/**",
+        "web/src/types/**",
+        "web/src/utils/**",
+        "web/src/views/**",
+        "web/src/vite-env.d.ts",
+        "web/tailwind.config.cjs",
+        "web/themes/**",
+        "web/tsconfig.json",
+        "web/tsconfig.node.json",
+        "web/vite.config.ts"
+      ],
+      "text": "The MIT License\n\nCopyright (c) 2026 Frigate, Inc. (Frigate™)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Frigate, Inc. (Frigate™), MIT license (LICENSE), https://github.com/blakeblackshear/frigate."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "hcl",
+      "paths": [
+        "**/*.hcl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "jsx",
+      "paths": [
+        "**/*.jsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.amd64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arm64"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.gotmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mdc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.nojekyll"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/_headers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/base"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certsync-pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/check"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/consumer-for"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fake_frigate_run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/finish"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fix-ownership"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/frigate"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/frigate-pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go2rtc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go2rtc-pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init-devices"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/init-usermod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/log-prepare"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nginx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nginx-pipeline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/notification-fd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pipeline-name"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prepare"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/producer-for"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/safe-sentinel"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/service-runs-as-root"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/timeout-kill"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/trt-model-prepare"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/type"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/up"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

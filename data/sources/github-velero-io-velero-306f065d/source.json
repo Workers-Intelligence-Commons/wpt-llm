@@ -1,0 +1,3596 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/velero-io/velero",
+  "revision": "c6632db674b3ae02b85bf0ff2e4602d627e64e8c",
+  "checksum": "sha256:ee1c921fac9d44ffe91a3ca5e51c9e89beec7b110ad1a948925892c195d98612",
+  "extract": {
+    "exclude": [
+      "assets/one-line/199150-vmw-os-lgo-velero-final_gry.eps",
+      "assets/one-line/199150-vmw-os-lgo-velero-final_gry.jpg",
+      "assets/one-line/199150-vmw-os-lgo-velero-final_gry.png",
+      "assets/one-line/199150-vmw-os-lgo-velero-final_wht.eps",
+      "assets/one-line/199150-vmw-os-lgo-velero-final_wht.png",
+      "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-gry.eps",
+      "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-gry.jpg",
+      "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-gry.png",
+      "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-wht.eps",
+      "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-wht.png",
+      "design/Implemented/AsyncActionFSM.graffle",
+      "design/Implemented/AsyncActionFSM.png",
+      "design/Implemented/restore-phases-transition.png",
+      "design/Implemented/unified-repo-and-kopia-integration/br-workflow.png",
+      "design/Implemented/unified-repo-and-kopia-integration/debug-log-repository.png",
+      "design/Implemented/unified-repo-and-kopia-integration/debug-log-uploader.png",
+      "design/Implemented/unified-repo-and-kopia-integration/maintenance-workflow.png",
+      "design/Implemented/unified-repo-and-kopia-integration/progress-update.png",
+      "design/Implemented/unified-repo-and-kopia-integration/scope.png",
+      "design/Implemented/unified-repo-and-kopia-integration/snapshot-deletion-workflow.png",
+      "design/Implemented/unified-repo-and-kopia-integration/unified-repo.png",
+      "design/Implemented/vgdp-micro-service/vgdp-ms-1.png",
+      "design/Implemented/vgdp-micro-service/vgdp-ms-2.png",
+      "design/Implemented/vgdp-micro-service/vgdp-ms-3.png",
+      "design/Implemented/vgdp-micro-service-for-fs-backup/vgdp-ms-1.png",
+      "design/Implemented/vgdp-micro-service-for-fs-backup/vgdp-ms-2.png",
+      "design/Implemented/volume-snapshot-data-movement/backup-sequence.png",
+      "design/Implemented/volume-snapshot-data-movement/backup-workflow.png",
+      "design/Implemented/volume-snapshot-data-movement/cancel-sequence.png",
+      "design/Implemented/volume-snapshot-data-movement/expose-objects.png",
+      "design/Implemented/volume-snapshot-data-movement/restore-sequence.png",
+      "design/Implemented/volume-snapshot-data-movement/restore-workflow.png",
+      "design/UploadFSM.graffle",
+      "design/UploadFSM.png",
+      "design/block-data-mover/backup-architecture.png",
+      "design/block-data-mover/caos-extension.png",
+      "design/block-data-mover/cbt.png",
+      "design/block-data-mover/data-path-overview.png",
+      "design/block-data-mover/restore-architecture.png",
+      "design/block-data-mover/vgdp-backup.png",
+      "design/block-data-mover/vgdp-restore.png",
+      "site/content/docs/main/contributions/img-for-tencent/**",
+      "site/content/docs/main/img/backup-process.png",
+      "site/content/docs/main/img/gv_priority1-caseA.png",
+      "site/content/docs/main/img/gv_priority1-caseB.png",
+      "site/content/docs/main/img/gv_priority2-caseC.png",
+      "site/content/docs/main/img/gv_priority3-caseD.png",
+      "site/content/docs/main/img/velero.png",
+      "site/content/docs/v0.10.0/img/backup-process.png",
+      "site/content/docs/v0.11.0/img/backup-process.png",
+      "site/content/docs/v0.11.0/img/velero.png",
+      "site/content/docs/v0.3.0/img/backup-process.png",
+      "site/content/docs/v0.4.0/img/backup-process.png",
+      "site/content/docs/v0.5.0/img/backup-process.png",
+      "site/content/docs/v0.6.0/img/backup-process.png",
+      "site/content/docs/v0.7.0/img/backup-process.png",
+      "site/content/docs/v0.7.1/img/backup-process.png",
+      "site/content/docs/v0.8.0/img/backup-process.png",
+      "site/content/docs/v0.8.1/img/backup-process.png",
+      "site/content/docs/v0.9.0/img/backup-process.png",
+      "site/content/docs/v1.0.0/img/backup-process.png",
+      "site/content/docs/v1.0.0/img/velero.png",
+      "site/content/docs/v1.1.0/img/backup-process.png",
+      "site/content/docs/v1.1.0/img/velero.png",
+      "site/content/docs/v1.10/contributions/img-for-tencent/**",
+      "site/content/docs/v1.10/img/backup-process.png",
+      "site/content/docs/v1.10/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.10/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.10/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.10/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.10/img/velero.png",
+      "site/content/docs/v1.11/contributions/img-for-tencent/**",
+      "site/content/docs/v1.11/img/backup-process.png",
+      "site/content/docs/v1.11/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.11/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.11/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.11/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.11/img/velero.png",
+      "site/content/docs/v1.12/contributions/img-for-tencent/**",
+      "site/content/docs/v1.12/img/backup-process.png",
+      "site/content/docs/v1.12/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.12/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.12/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.12/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.12/img/velero.png",
+      "site/content/docs/v1.13/contributions/img-for-tencent/**",
+      "site/content/docs/v1.13/img/backup-process.png",
+      "site/content/docs/v1.13/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.13/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.13/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.13/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.13/img/velero.png",
+      "site/content/docs/v1.14/contributions/img-for-tencent/**",
+      "site/content/docs/v1.14/img/backup-process.png",
+      "site/content/docs/v1.14/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.14/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.14/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.14/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.14/img/velero.png",
+      "site/content/docs/v1.15/contributions/img-for-tencent/**",
+      "site/content/docs/v1.15/img/backup-process.png",
+      "site/content/docs/v1.15/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.15/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.15/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.15/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.15/img/velero.png",
+      "site/content/docs/v1.16/contributions/img-for-tencent/**",
+      "site/content/docs/v1.16/img/backup-process.png",
+      "site/content/docs/v1.16/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.16/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.16/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.16/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.16/img/velero.png",
+      "site/content/docs/v1.17/contributions/img-for-tencent/**",
+      "site/content/docs/v1.17/img/backup-process.png",
+      "site/content/docs/v1.17/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.17/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.17/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.17/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.17/img/velero.png",
+      "site/content/docs/v1.18/contributions/img-for-tencent/**",
+      "site/content/docs/v1.18/img/backup-process.png",
+      "site/content/docs/v1.18/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.18/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.18/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.18/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.18/img/velero.png",
+      "site/content/docs/v1.2.0/img/backup-process.png",
+      "site/content/docs/v1.2.0/img/velero.png",
+      "site/content/docs/v1.3.0/img/backup-process.png",
+      "site/content/docs/v1.3.0/img/velero.png",
+      "site/content/docs/v1.3.1/img/backup-process.png",
+      "site/content/docs/v1.3.1/img/velero.png",
+      "site/content/docs/v1.3.2/img/backup-process.png",
+      "site/content/docs/v1.3.2/img/velero.png",
+      "site/content/docs/v1.4/img/backup-process.png",
+      "site/content/docs/v1.4/img/velero.png",
+      "site/content/docs/v1.5/contributions/img-for-tencent/**",
+      "site/content/docs/v1.5/img/backup-process.png",
+      "site/content/docs/v1.5/img/velero.png",
+      "site/content/docs/v1.6/contributions/img-for-tencent/**",
+      "site/content/docs/v1.6/img/backup-process.png",
+      "site/content/docs/v1.6/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.6/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.6/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.6/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.6/img/velero.png",
+      "site/content/docs/v1.7/contributions/img-for-tencent/**",
+      "site/content/docs/v1.7/img/backup-process.png",
+      "site/content/docs/v1.7/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.7/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.7/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.7/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.7/img/velero.png",
+      "site/content/docs/v1.8/contributions/img-for-tencent/**",
+      "site/content/docs/v1.8/img/backup-process.png",
+      "site/content/docs/v1.8/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.8/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.8/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.8/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.8/img/velero.png",
+      "site/content/docs/v1.9/contributions/img-for-tencent/**",
+      "site/content/docs/v1.9/img/backup-process.png",
+      "site/content/docs/v1.9/img/gv_priority1-caseA.png",
+      "site/content/docs/v1.9/img/gv_priority1-caseB.png",
+      "site/content/docs/v1.9/img/gv_priority2-caseC.png",
+      "site/content/docs/v1.9/img/gv_priority3-caseD.png",
+      "site/content/docs/v1.9/img/velero.png",
+      "site/static/favicon.ico",
+      "site/static/fonts/IcoMoon/**",
+      "site/static/fonts/Metropolis/Metropolis-Bold.woff",
+      "site/static/fonts/Metropolis/Metropolis-BoldItalic.woff",
+      "site/static/fonts/Metropolis/Metropolis-Light.woff",
+      "site/static/fonts/Metropolis/Metropolis-LightItalic.woff",
+      "site/static/fonts/Metropolis/Metropolis-Medium.woff",
+      "site/static/fonts/Metropolis/Metropolis-MediumItalic.woff",
+      "site/static/fonts/Metropolis/Metropolis-Regular.woff",
+      "site/static/fonts/Metropolis/Metropolis-RegularItalic.woff",
+      "site/static/fonts/Metropolis/Metropolis-SemiBold.woff",
+      "site/static/fonts/Metropolis/Metropolis-SemiBoldItalic.woff",
+      "site/static/img/adopters/DellEMC.png",
+      "site/static/img/contributors/**",
+      "site/static/img/posts/**",
+      "site/static/img/vsphere-tutorial-icons/**",
+      "third_party/**"
+    ]
+  },
+  "history": {
+    "since": "2fe501f527a88ea292ca3dde80992ec60b388dda"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction,\nand distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by\nthe copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all\nother entities that control, are controlled by, or are under common\ncontrol with that entity. For the purposes of this definition,\n\"control\" means (i) the power, direct or indirect, to cause the\ndirection or management of such entity, whether by contract or\notherwise, or (ii) ownership of fifty percent (50%) or more of the\noutstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity\nexercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications,\nincluding but not limited to software source code, documentation\nsource, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical\ntransformation or translation of a Source form, including but\nnot limited to compiled object code, generated documentation,\nand conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or\nObject form, made available under the License, as indicated by a\ncopyright notice that is included in or attached to the work\n(an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object\nform, that is based on (or derived from) the Work and for which the\neditorial revisions, annotations, elaborations, or other modifications\nrepresent, as a whole, an original work of authorship. For the purposes\nof this License, Derivative Works shall not include works that remain\nseparable from, or merely link (or bind by name) to the interfaces of,\nthe Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including\nthe original version of the Work and any modifications or additions\nto that Work or Derivative Works thereof, that is intentionally\nsubmitted to Licensor for inclusion in the Work by the copyright owner\nor by an individual or Legal Entity authorized to submit on behalf of\nthe copyright owner. For the purposes of this definition, \"submitted\"\nmeans any form of electronic, verbal, or written communication sent\nto the Licensor or its representatives, including but not limited to\ncommunication on electronic mailing lists, source code control systems,\nand issue tracking systems that are managed by, or on behalf of, the\nLicensor for the purpose of discussing and improving the Work, but\nexcluding communication that is conspicuously marked or otherwise\ndesignated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity\non behalf of whom a Contribution has been received by Licensor and\nsubsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\nthis License, each Contributor hereby grants to You a perpetual,\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\ncopyright license to reproduce, prepare Derivative Works of,\npublicly display, publicly perform, sublicense, and distribute the\nWork and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\nthis License, each Contributor hereby grants to You a perpetual,\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\n(except as stated in this section) patent license to make, have made,\nuse, offer to sell, sell, import, and otherwise transfer the Work,\nwhere such license applies only to those patent claims licensable\nby such Contributor that are necessarily infringed by their\nContribution(s) alone or by combination of their Contribution(s)\nwith the Work to which such Contribution(s) was submitted. If You\ninstitute patent litigation against any entity (including a\ncross-claim or counterclaim in a lawsuit) alleging that the Work\nor a Contribution incorporated within the Work constitutes direct\nor contributory patent infringement, then any patent licenses\ngranted to You under this License for that Work shall terminate\nas of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\nWork or Derivative Works thereof in any medium, with or without\nmodifications, and in Source or Object form, provided that You\nmeet the following conditions:\n\n(a) You must give any other recipients of the Work or\nDerivative Works a copy of this License; and\n\n(b) You must cause any modified files to carry prominent notices\nstating that You changed the files; and\n\n(c) You must retain, in the Source form of any Derivative Works\nthat You distribute, all copyright, patent, trademark, and\nattribution notices from the Source form of the Work,\nexcluding those notices that do not pertain to any part of\nthe Derivative Works; and\n\n(d) If the Work includes a \"NOTICE\" text file as part of its\ndistribution, then any Derivative Works that You distribute must\ninclude a readable copy of the attribution notices contained\nwithin such NOTICE file, excluding those notices that do not\npertain to any part of the Derivative Works, in at least one\nof the following places: within a NOTICE text file distributed\nas part of the Derivative Works; within the Source form or\ndocumentation, if provided along with the Derivative Works; or,\nwithin a display generated by the Derivative Works, if and\nwherever such third-party notices normally appear. The contents\nof the NOTICE file are for informational purposes only and\ndo not modify the License. You may add Your own attribution\nnotices within Derivative Works that You distribute, alongside\nor as an addendum to the NOTICE text from the Work, provided\nthat such additional attribution notices cannot be construed\nas modifying the License.\n\nYou may add Your own copyright statement to Your modifications and\nmay provide additional or different license terms and conditions\nfor use, reproduction, or distribution of Your modifications, or\nfor any such Derivative Works as a whole, provided Your use,\nreproduction, and distribution of the Work otherwise complies with\nthe conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\nany Contribution intentionally submitted for inclusion in the Work\nby You to the Licensor shall be under the terms and conditions of\nthis License, without any additional terms or conditions.\nNotwithstanding the above, nothing herein shall supersede or modify\nthe terms of any separate license agreement you may have executed\nwith Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\nnames, trademarks, service marks, or product names of the Licensor,\nexcept as required for reasonable and customary use in describing the\norigin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\nagreed to in writing, Licensor provides the Work (and each\nContributor provides its Contributions) on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\nimplied, including, without limitation, any warranties or conditions\nof TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\nPARTICULAR PURPOSE. You are solely responsible for determining the\nappropriateness of using or redistributing the Work and assume any\nrisks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\nwhether in tort (including negligence), contract, or otherwise,\nunless required by applicable law (such as deliberate and grossly\nnegligent acts) or agreed to in writing, shall any Contributor be\nliable to You for damages, including any direct, indirect, special,\nincidental, or consequential damages of any character arising as a\nresult of this License or out of the use or inability to use the\nWork (including but not limited to damages for loss of goodwill,\nwork stoppage, computer failure or malfunction, or any and all\nother commercial damages or losses), even if such Contributor\nhas been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\nthe Work or Derivative Works thereof, You may choose to offer,\nand charge a fee for, acceptance of support, warranty, indemnity,\nor other liability obligations and/or rights consistent with this\nLicense. However, in accepting such obligations, You may act only\non Your own behalf and on Your sole responsibility, not on behalf\nof any other Contributor, and only if You agree to indemnify,\ndefend, and hold each Contributor harmless for any liability\nincurred by, or claims asserted against, such Contributor by reason\nof your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following\nboilerplate notice, with the fields enclosed by brackets \"{}\"\nreplaced with your own identifying information. (Don't include\nthe brackets!)  The text should be enclosed in the appropriate\ncomment syntax for the file format. We also recommend that a\nfile or class name and description of purpose be included on the\nsame \"printed page\" as the copyright notice for easier\nidentification within third-party archives.\n\nCopyright {yyyy} {name of copyright owner}\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "Commit history of https://github.com/velero-io/velero: the authors of velero-io/velero (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/velero-io/velero."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".clomonitor.yml",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yaml",
+        ".goreleaser.yml",
+        "ADOPTERS.md",
+        "ARCHITECTURE.md",
+        "CHANGELOG.md",
+        "Dockerfile",
+        "Dockerfile-Windows",
+        "LICENSE",
+        "MAINTAINERS.md",
+        "Makefile",
+        "OWNERS",
+        "README.md",
+        "ROADMAP.md",
+        "SECURITY-INSIGHTS.yml",
+        "Tiltfile",
+        "assets/README.md",
+        "assets/one-line/199150-vmw-os-lgo-velero-final_gry.svg",
+        "assets/one-line/199150-vmw-os-lgo-velero-final_wht.svg",
+        "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-gry.svg",
+        "assets/stacked/199150-vmw-os-lgo-velero-final_stacked-wht.svg",
+        "changelogs/**",
+        "cmd/**",
+        "config/**",
+        "design/2082-bsl-delete-associated-resources_design.md",
+        "design/CLI/**",
+        "design/Implemented/Extend-VolumePolicies-to-support-more-actions.md",
+        "design/Implemented/apply-flag.md",
+        "design/Implemented/backup-performance-improvements.md",
+        "design/Implemented/backup-pvc-config.md",
+        "design/Implemented/backup-repo-cache-volume.md",
+        "design/Implemented/backup-repo-config.md",
+        "design/Implemented/backup-resource-list.md",
+        "design/Implemented/backup-resources-order.md",
+        "design/Implemented/biav2-design.md",
+        "design/Implemented/bsl-certificate-support_design.md",
+        "design/Implemented/clean_artifacts_in_csi_flow.md",
+        "design/Implemented/cluster-scope-resource-filter.md",
+        "design/Implemented/concurrent-backup-processing.md",
+        "design/Implemented/csi-snapshots.md",
+        "design/Implemented/custom-ca-support.md",
+        "design/Implemented/delete-item-action.md",
+        "design/Implemented/deletion-plugins.md",
+        "design/Implemented/existing-resource-policy_design.md",
+        "design/Implemented/feature-flags.md",
+        "design/Implemented/general-progress-monitoring.md",
+        "design/Implemented/generating-velero-crds-with-structural-schema.md",
+        "design/Implemented/handle-backup-of-volumes-by-resources-filters.md",
+        "design/Implemented/include-exclude-in-resource-policy.md",
+        "design/Implemented/json-substitution-action-design.md",
+        "design/Implemented/merge-patch-and-strategic-in-resource-modifier.md",
+        "design/Implemented/move-gh-org.md",
+        "design/Implemented/move-plugin-repos.md",
+        "design/Implemented/multiple-arch-build-with-windows.md",
+        "design/Implemented/multiple-csi-volumesnapshotclass-support.md",
+        "design/Implemented/multiple-label-selectors_design.md",
+        "design/Implemented/node-agent-affinity.md",
+        "design/Implemented/node-agent-concurrency.md",
+        "design/Implemented/node-agent-load-soothing.md",
+        "design/Implemented/plugin-backup-and-restore-progress-design.md",
+        "design/Implemented/plugin-versioning.md",
+        "design/Implemented/priority-class-name-support_design.md",
+        "design/Implemented/pv-cloning.md",
+        "design/Implemented/pv_backup_info.md",
+        "design/Implemented/pv_restore_info.md",
+        "design/Implemented/repo_maintenance_job_config.md",
+        "design/Implemented/repository-maintenance.md",
+        "design/Implemented/resource-status-restore.md",
+        "design/Implemented/restic-backup-and-restore-progress.md",
+        "design/Implemented/restore-finalizing-phase_design.md",
+        "design/Implemented/restore-hooks.md",
+        "design/Implemented/restore-with-EnableAPIGroupVersions-feature.md",
+        "design/Implemented/retry-patching-configuration_design.md",
+        "design/Implemented/riav2-design.md",
+        "design/Implemented/schedule-skip-immediately-config_design.md",
+        "design/Implemented/secrets.md",
+        "design/Implemented/supporting-volumeattributes-resource-policy.md",
+        "design/Implemented/unified-repo-and-kopia-integration/unified-repo-and-kopia-integration.md",
+        "design/Implemented/velero-debug.md",
+        "design/Implemented/velero-uploader-configuration.md",
+        "design/Implemented/vgdp-affinity-enhancement.md",
+        "design/Implemented/vgdp-micro-service/vgdp-micro-service.md",
+        "design/Implemented/vgdp-micro-service-for-fs-backup/vgdp-micro-service-for-fs-backup.md",
+        "design/Implemented/volume-group-snapshot.md",
+        "design/Implemented/volume-policy-label-selector-criteria.md",
+        "design/Implemented/volume-snapshot-data-movement/volume-snapshot-data-movement.md",
+        "design/Implemented/wait-for-additional-items.md",
+        "design/Implemented/wildcard-namespace-support-design.md",
+        "design/_template.md",
+        "design/backup-filter-enhancement/**",
+        "design/block-data-mover/block-data-mover.md",
+        "design/cli-dynamic-resource-completion_design.md",
+        "design/cli-install-changes.md",
+        "design/custom-volume-policy-action.md",
+        "design/default-resource-modifier_design.md",
+        "design/global-backup-volume-policies.md",
+        "design/graph-manifest.md",
+        "design/namespace-label-selector-in-resource-policy_design.md",
+        "design/new-prepost-backuprestore-plugin-hooks.md",
+        "design/restore-filter-enhancement/**",
+        "design/restore-progress.md",
+        "design/ria-must-include-addtional-items-design.md",
+        "design/upload-progress.md",
+        "design/volume-data-inplace-restore/**",
+        "design/volume-policy-pvc-volume-mode-access-modes.md",
+        "design/vsv2-design.md",
+        "examples/**",
+        "go.mod",
+        "go.sum",
+        "hack/**",
+        "internal/**",
+        "netlify.toml",
+        "pkg/**",
+        "restore-hooks_product-requirements.md",
+        "site/Dockerfile",
+        "site/README-HUGO.md",
+        "site/assets/**",
+        "site/config.yaml",
+        "site/content/_index.md",
+        "site/content/casestudies/**",
+        "site/content/community/**",
+        "site/content/contributors/**",
+        "site/content/docs/main/_index.md",
+        "site/content/docs/main/api-types/**",
+        "site/content/docs/main/backup-hooks.md",
+        "site/content/docs/main/backup-reference.md",
+        "site/content/docs/main/backup-repository-configuration.md",
+        "site/content/docs/main/backup-restore-windows.md",
+        "site/content/docs/main/basic-install.md",
+        "site/content/docs/main/build-from-source.md",
+        "site/content/docs/main/code-standards.md",
+        "site/content/docs/main/contributions/ibm-config.md",
+        "site/content/docs/main/contributions/minio.md",
+        "site/content/docs/main/contributions/oracle-config.md",
+        "site/content/docs/main/contributions/tencent-config.md",
+        "site/content/docs/main/csi-snapshot-data-movement.md",
+        "site/content/docs/main/csi.md",
+        "site/content/docs/main/custom-plugins.md",
+        "site/content/docs/main/customize-installation.md",
+        "site/content/docs/main/data-movement-backup-pvc-configuration.md",
+        "site/content/docs/main/data-movement-cache-volume.md",
+        "site/content/docs/main/data-movement-node-selection.md",
+        "site/content/docs/main/data-movement-pod-resource-configuration.md",
+        "site/content/docs/main/data-movement-restore-pvc-configuration.md",
+        "site/content/docs/main/debugging-install.md",
+        "site/content/docs/main/debugging-restores.md",
+        "site/content/docs/main/development.md",
+        "site/content/docs/main/disaster-case.md",
+        "site/content/docs/main/enable-api-group-versions-feature.md",
+        "site/content/docs/main/examples.md",
+        "site/content/docs/main/file-system-backup.md",
+        "site/content/docs/main/fine-grained-backup-filters.md",
+        "site/content/docs/main/fine-grained-restore-filters.md",
+        "site/content/docs/main/how-velero-works.md",
+        "site/content/docs/main/image-tagging.md",
+        "site/content/docs/main/img/README.md",
+        "site/content/docs/main/locations.md",
+        "site/content/docs/main/maintainers.md",
+        "site/content/docs/main/manual-testing.md",
+        "site/content/docs/main/migration-case.md",
+        "site/content/docs/main/namespace-glob-patterns.md",
+        "site/content/docs/main/namespace.md",
+        "site/content/docs/main/node-agent-concurrency.md",
+        "site/content/docs/main/node-agent-prepare-queue-length.md",
+        "site/content/docs/main/on-premises.md",
+        "site/content/docs/main/output-file-format.md",
+        "site/content/docs/main/overview-plugins.md",
+        "site/content/docs/main/performance-guidance.md",
+        "site/content/docs/main/plugin-release-instructions.md",
+        "site/content/docs/main/proxy.md",
+        "site/content/docs/main/rbac.md",
+        "site/content/docs/main/release-instructions.md",
+        "site/content/docs/main/release-schedule.md",
+        "site/content/docs/main/repository-maintenance.md",
+        "site/content/docs/main/resource-filtering.md",
+        "site/content/docs/main/restore-hooks.md",
+        "site/content/docs/main/restore-reference.md",
+        "site/content/docs/main/restore-resource-modifiers.md",
+        "site/content/docs/main/run-locally.md",
+        "site/content/docs/main/self-signed-certificates.md",
+        "site/content/docs/main/start-contributing.md",
+        "site/content/docs/main/style-guide.md",
+        "site/content/docs/main/support-process.md",
+        "site/content/docs/main/supported-configmaps/**",
+        "site/content/docs/main/supported-providers.md",
+        "site/content/docs/main/tilt.md",
+        "site/content/docs/main/troubleshooting.md",
+        "site/content/docs/main/uninstalling.md",
+        "site/content/docs/main/upgrade-to-1.18.md",
+        "site/content/docs/main/velero-install.md",
+        "site/content/docs/main/volume-group-snapshots.md",
+        "site/content/docs/main/website-guidelines.md",
+        "site/content/docs/v0.10.0/_index.md",
+        "site/content/docs/v0.10.0/about.md",
+        "site/content/docs/v0.10.0/api-types/**",
+        "site/content/docs/v0.10.0/aws-config.md",
+        "site/content/docs/v0.10.0/azure-config.md",
+        "site/content/docs/v0.10.0/build-from-scratch.md",
+        "site/content/docs/v0.10.0/debugging-install.md",
+        "site/content/docs/v0.10.0/debugging-restores.md",
+        "site/content/docs/v0.10.0/disaster-case.md",
+        "site/content/docs/v0.10.0/extend.md",
+        "site/content/docs/v0.10.0/faq.md",
+        "site/content/docs/v0.10.0/gcp-config.md",
+        "site/content/docs/v0.10.0/get-started.md",
+        "site/content/docs/v0.10.0/hooks.md",
+        "site/content/docs/v0.10.0/ibm-config.md",
+        "site/content/docs/v0.10.0/image-tagging.md",
+        "site/content/docs/v0.10.0/img/README.md",
+        "site/content/docs/v0.10.0/install-overview.md",
+        "site/content/docs/v0.10.0/locations.md",
+        "site/content/docs/v0.10.0/migration-case.md",
+        "site/content/docs/v0.10.0/namespace.md",
+        "site/content/docs/v0.10.0/output-file-format.md",
+        "site/content/docs/v0.10.0/plugins.md",
+        "site/content/docs/v0.10.0/rbac.md",
+        "site/content/docs/v0.10.0/restic.md",
+        "site/content/docs/v0.10.0/storage-layout-reorg-v0.10.md",
+        "site/content/docs/v0.10.0/support-matrix.md",
+        "site/content/docs/v0.10.0/troubleshooting.md",
+        "site/content/docs/v0.10.0/upgrading-to-v0.10.md",
+        "site/content/docs/v0.10.0/vendoring-dependencies.md",
+        "site/content/docs/v0.10.0/versions.md",
+        "site/content/docs/v0.10.0/zenhub.md",
+        "site/content/docs/v0.11.0/_index.md",
+        "site/content/docs/v0.11.0/about.md",
+        "site/content/docs/v0.11.0/api-types/**",
+        "site/content/docs/v0.11.0/aws-config.md",
+        "site/content/docs/v0.11.0/azure-config.md",
+        "site/content/docs/v0.11.0/build-from-scratch.md",
+        "site/content/docs/v0.11.0/debugging-install.md",
+        "site/content/docs/v0.11.0/debugging-restores.md",
+        "site/content/docs/v0.11.0/disaster-case.md",
+        "site/content/docs/v0.11.0/expose-minio.md",
+        "site/content/docs/v0.11.0/extend.md",
+        "site/content/docs/v0.11.0/faq.md",
+        "site/content/docs/v0.11.0/gcp-config.md",
+        "site/content/docs/v0.11.0/get-started.md",
+        "site/content/docs/v0.11.0/hooks.md",
+        "site/content/docs/v0.11.0/ibm-config.md",
+        "site/content/docs/v0.11.0/image-tagging.md",
+        "site/content/docs/v0.11.0/img/README.md",
+        "site/content/docs/v0.11.0/install-overview.md",
+        "site/content/docs/v0.11.0/locations.md",
+        "site/content/docs/v0.11.0/migrating-to-velero.md",
+        "site/content/docs/v0.11.0/migration-case.md",
+        "site/content/docs/v0.11.0/namespace.md",
+        "site/content/docs/v0.11.0/output-file-format.md",
+        "site/content/docs/v0.11.0/plugins.md",
+        "site/content/docs/v0.11.0/rbac.md",
+        "site/content/docs/v0.11.0/restic.md",
+        "site/content/docs/v0.11.0/support-matrix.md",
+        "site/content/docs/v0.11.0/troubleshooting.md",
+        "site/content/docs/v0.11.0/vendoring-dependencies.md",
+        "site/content/docs/v0.11.0/versions.md",
+        "site/content/docs/v0.11.0/zenhub.md",
+        "site/content/docs/v0.3.0/_index.md",
+        "site/content/docs/v0.3.0/build-from-scratch.md",
+        "site/content/docs/v0.3.0/cli-reference/**",
+        "site/content/docs/v0.3.0/cloud-provider-specifics.md",
+        "site/content/docs/v0.3.0/concepts.md",
+        "site/content/docs/v0.3.0/config-definition.md",
+        "site/content/docs/v0.3.0/debugging-restores.md",
+        "site/content/docs/v0.3.0/img/README.md",
+        "site/content/docs/v0.3.0/output-file-format.md",
+        "site/content/docs/v0.3.0/use-cases.md",
+        "site/content/docs/v0.4.0/_index.md",
+        "site/content/docs/v0.4.0/build-from-scratch.md",
+        "site/content/docs/v0.4.0/cli-reference/**",
+        "site/content/docs/v0.4.0/cloud-provider-specifics.md",
+        "site/content/docs/v0.4.0/concepts.md",
+        "site/content/docs/v0.4.0/config-definition.md",
+        "site/content/docs/v0.4.0/debugging-restores.md",
+        "site/content/docs/v0.4.0/img/README.md",
+        "site/content/docs/v0.4.0/output-file-format.md",
+        "site/content/docs/v0.4.0/use-cases.md",
+        "site/content/docs/v0.4.0/vendoring-dependencies.md",
+        "site/content/docs/v0.5.0/_index.md",
+        "site/content/docs/v0.5.0/api-types/**",
+        "site/content/docs/v0.5.0/build-from-scratch.md",
+        "site/content/docs/v0.5.0/cli-reference/**",
+        "site/content/docs/v0.5.0/cloud-provider-specifics.md",
+        "site/content/docs/v0.5.0/concepts.md",
+        "site/content/docs/v0.5.0/config-definition.md",
+        "site/content/docs/v0.5.0/debugging-restores.md",
+        "site/content/docs/v0.5.0/faq.md",
+        "site/content/docs/v0.5.0/hooks.md",
+        "site/content/docs/v0.5.0/img/README.md",
+        "site/content/docs/v0.5.0/output-file-format.md",
+        "site/content/docs/v0.5.0/use-cases.md",
+        "site/content/docs/v0.5.0/vendoring-dependencies.md",
+        "site/content/docs/v0.6.0/_index.md",
+        "site/content/docs/v0.6.0/api-types/**",
+        "site/content/docs/v0.6.0/build-from-scratch.md",
+        "site/content/docs/v0.6.0/cli-reference/**",
+        "site/content/docs/v0.6.0/cloud-provider-specifics.md",
+        "site/content/docs/v0.6.0/concepts.md",
+        "site/content/docs/v0.6.0/config-definition.md",
+        "site/content/docs/v0.6.0/debugging-restores.md",
+        "site/content/docs/v0.6.0/faq.md",
+        "site/content/docs/v0.6.0/hooks.md",
+        "site/content/docs/v0.6.0/img/README.md",
+        "site/content/docs/v0.6.0/output-file-format.md",
+        "site/content/docs/v0.6.0/plugins.md",
+        "site/content/docs/v0.6.0/use-cases.md",
+        "site/content/docs/v0.6.0/vendoring-dependencies.md",
+        "site/content/docs/v0.7.0/_index.md",
+        "site/content/docs/v0.7.0/about.md",
+        "site/content/docs/v0.7.0/api-types/**",
+        "site/content/docs/v0.7.0/aws-config.md",
+        "site/content/docs/v0.7.0/azure-config.md",
+        "site/content/docs/v0.7.0/build-from-scratch.md",
+        "site/content/docs/v0.7.0/cli-reference/**",
+        "site/content/docs/v0.7.0/cloud-common.md",
+        "site/content/docs/v0.7.0/config-definition.md",
+        "site/content/docs/v0.7.0/debugging-restores.md",
+        "site/content/docs/v0.7.0/extend.md",
+        "site/content/docs/v0.7.0/faq.md",
+        "site/content/docs/v0.7.0/gcp-config.md",
+        "site/content/docs/v0.7.0/hooks.md",
+        "site/content/docs/v0.7.0/img/README.md",
+        "site/content/docs/v0.7.0/namespace.md",
+        "site/content/docs/v0.7.0/output-file-format.md",
+        "site/content/docs/v0.7.0/plugins.md",
+        "site/content/docs/v0.7.0/use-cases.md",
+        "site/content/docs/v0.7.0/vendoring-dependencies.md",
+        "site/content/docs/v0.7.1/_index.md",
+        "site/content/docs/v0.7.1/about.md",
+        "site/content/docs/v0.7.1/api-types/**",
+        "site/content/docs/v0.7.1/aws-config.md",
+        "site/content/docs/v0.7.1/azure-config.md",
+        "site/content/docs/v0.7.1/build-from-scratch.md",
+        "site/content/docs/v0.7.1/cli-reference/**",
+        "site/content/docs/v0.7.1/cloud-common.md",
+        "site/content/docs/v0.7.1/config-definition.md",
+        "site/content/docs/v0.7.1/debugging-deletes.md",
+        "site/content/docs/v0.7.1/debugging-restores.md",
+        "site/content/docs/v0.7.1/extend.md",
+        "site/content/docs/v0.7.1/faq.md",
+        "site/content/docs/v0.7.1/gcp-config.md",
+        "site/content/docs/v0.7.1/hooks.md",
+        "site/content/docs/v0.7.1/img/README.md",
+        "site/content/docs/v0.7.1/namespace.md",
+        "site/content/docs/v0.7.1/output-file-format.md",
+        "site/content/docs/v0.7.1/plugins.md",
+        "site/content/docs/v0.7.1/troubleshooting.md",
+        "site/content/docs/v0.7.1/use-cases.md",
+        "site/content/docs/v0.7.1/vendoring-dependencies.md",
+        "site/content/docs/v0.8.0/_index.md",
+        "site/content/docs/v0.8.0/about.md",
+        "site/content/docs/v0.8.0/api-types/**",
+        "site/content/docs/v0.8.0/aws-config.md",
+        "site/content/docs/v0.8.0/azure-config.md",
+        "site/content/docs/v0.8.0/build-from-scratch.md",
+        "site/content/docs/v0.8.0/cli-reference/**",
+        "site/content/docs/v0.8.0/cloud-common.md",
+        "site/content/docs/v0.8.0/config-definition.md",
+        "site/content/docs/v0.8.0/debugging-deletes.md",
+        "site/content/docs/v0.8.0/debugging-restores.md",
+        "site/content/docs/v0.8.0/extend.md",
+        "site/content/docs/v0.8.0/faq.md",
+        "site/content/docs/v0.8.0/gcp-config.md",
+        "site/content/docs/v0.8.0/hooks.md",
+        "site/content/docs/v0.8.0/ibm-config.md",
+        "site/content/docs/v0.8.0/img/README.md",
+        "site/content/docs/v0.8.0/namespace.md",
+        "site/content/docs/v0.8.0/output-file-format.md",
+        "site/content/docs/v0.8.0/plugins.md",
+        "site/content/docs/v0.8.0/troubleshooting.md",
+        "site/content/docs/v0.8.0/use-cases.md",
+        "site/content/docs/v0.8.0/vendoring-dependencies.md",
+        "site/content/docs/v0.8.1/_index.md",
+        "site/content/docs/v0.8.1/about.md",
+        "site/content/docs/v0.8.1/api-types/**",
+        "site/content/docs/v0.8.1/aws-config.md",
+        "site/content/docs/v0.8.1/azure-config.md",
+        "site/content/docs/v0.8.1/build-from-scratch.md",
+        "site/content/docs/v0.8.1/cli-reference/**",
+        "site/content/docs/v0.8.1/cloud-common.md",
+        "site/content/docs/v0.8.1/config-definition.md",
+        "site/content/docs/v0.8.1/debugging-deletes.md",
+        "site/content/docs/v0.8.1/debugging-install.md",
+        "site/content/docs/v0.8.1/debugging-restores.md",
+        "site/content/docs/v0.8.1/extend.md",
+        "site/content/docs/v0.8.1/faq.md",
+        "site/content/docs/v0.8.1/gcp-config.md",
+        "site/content/docs/v0.8.1/hooks.md",
+        "site/content/docs/v0.8.1/ibm-config.md",
+        "site/content/docs/v0.8.1/img/README.md",
+        "site/content/docs/v0.8.1/namespace.md",
+        "site/content/docs/v0.8.1/output-file-format.md",
+        "site/content/docs/v0.8.1/plugins.md",
+        "site/content/docs/v0.8.1/troubleshooting.md",
+        "site/content/docs/v0.8.1/use-cases.md",
+        "site/content/docs/v0.8.1/vendoring-dependencies.md",
+        "site/content/docs/v0.9.0/_index.md",
+        "site/content/docs/v0.9.0/about.md",
+        "site/content/docs/v0.9.0/api-types/**",
+        "site/content/docs/v0.9.0/aws-config.md",
+        "site/content/docs/v0.9.0/azure-config.md",
+        "site/content/docs/v0.9.0/build-from-scratch.md",
+        "site/content/docs/v0.9.0/cli-reference/**",
+        "site/content/docs/v0.9.0/config-definition.md",
+        "site/content/docs/v0.9.0/debugging-install.md",
+        "site/content/docs/v0.9.0/debugging-restores.md",
+        "site/content/docs/v0.9.0/extend.md",
+        "site/content/docs/v0.9.0/faq.md",
+        "site/content/docs/v0.9.0/gcp-config.md",
+        "site/content/docs/v0.9.0/hooks.md",
+        "site/content/docs/v0.9.0/ibm-config.md",
+        "site/content/docs/v0.9.0/image-tagging.md",
+        "site/content/docs/v0.9.0/img/README.md",
+        "site/content/docs/v0.9.0/install-overview.md",
+        "site/content/docs/v0.9.0/namespace.md",
+        "site/content/docs/v0.9.0/output-file-format.md",
+        "site/content/docs/v0.9.0/plugins.md",
+        "site/content/docs/v0.9.0/quickstart.md",
+        "site/content/docs/v0.9.0/restic.md",
+        "site/content/docs/v0.9.0/support-matrix.md",
+        "site/content/docs/v0.9.0/troubleshooting.md",
+        "site/content/docs/v0.9.0/use-cases.md",
+        "site/content/docs/v0.9.0/vendoring-dependencies.md",
+        "site/content/docs/v1.0.0/_index.md",
+        "site/content/docs/v1.0.0/about.md",
+        "site/content/docs/v1.0.0/api-types/**",
+        "site/content/docs/v1.0.0/aws-config.md",
+        "site/content/docs/v1.0.0/azure-config.md",
+        "site/content/docs/v1.0.0/build-from-source.md",
+        "site/content/docs/v1.0.0/debugging-install.md",
+        "site/content/docs/v1.0.0/debugging-restores.md",
+        "site/content/docs/v1.0.0/disaster-case.md",
+        "site/content/docs/v1.0.0/extend.md",
+        "site/content/docs/v1.0.0/faq.md",
+        "site/content/docs/v1.0.0/gcp-config.md",
+        "site/content/docs/v1.0.0/get-started.md",
+        "site/content/docs/v1.0.0/hooks.md",
+        "site/content/docs/v1.0.0/ibm-config.md",
+        "site/content/docs/v1.0.0/image-tagging.md",
+        "site/content/docs/v1.0.0/img/README.md",
+        "site/content/docs/v1.0.0/install-overview.md",
+        "site/content/docs/v1.0.0/locations.md",
+        "site/content/docs/v1.0.0/migrating-to-velero.md",
+        "site/content/docs/v1.0.0/migration-case.md",
+        "site/content/docs/v1.0.0/namespace.md",
+        "site/content/docs/v1.0.0/oracle-config.md",
+        "site/content/docs/v1.0.0/output-file-format.md",
+        "site/content/docs/v1.0.0/plugins.md",
+        "site/content/docs/v1.0.0/rbac.md",
+        "site/content/docs/v1.0.0/restic.md",
+        "site/content/docs/v1.0.0/support-matrix.md",
+        "site/content/docs/v1.0.0/troubleshooting.md",
+        "site/content/docs/v1.0.0/upgrade-to-1.0.md",
+        "site/content/docs/v1.0.0/vendoring-dependencies.md",
+        "site/content/docs/v1.0.0/zenhub.md",
+        "site/content/docs/v1.1.0/_index.md",
+        "site/content/docs/v1.1.0/about.md",
+        "site/content/docs/v1.1.0/api-types/**",
+        "site/content/docs/v1.1.0/aws-config.md",
+        "site/content/docs/v1.1.0/azure-config.md",
+        "site/content/docs/v1.1.0/backup-reference.md",
+        "site/content/docs/v1.1.0/build-from-source.md",
+        "site/content/docs/v1.1.0/debugging-install.md",
+        "site/content/docs/v1.1.0/debugging-restores.md",
+        "site/content/docs/v1.1.0/development.md",
+        "site/content/docs/v1.1.0/disaster-case.md",
+        "site/content/docs/v1.1.0/faq.md",
+        "site/content/docs/v1.1.0/gcp-config.md",
+        "site/content/docs/v1.1.0/get-started.md",
+        "site/content/docs/v1.1.0/hooks.md",
+        "site/content/docs/v1.1.0/ibm-config.md",
+        "site/content/docs/v1.1.0/image-tagging.md",
+        "site/content/docs/v1.1.0/img/README.md",
+        "site/content/docs/v1.1.0/install-overview.md",
+        "site/content/docs/v1.1.0/locations.md",
+        "site/content/docs/v1.1.0/migrating-to-velero.md",
+        "site/content/docs/v1.1.0/migration-case.md",
+        "site/content/docs/v1.1.0/namespace.md",
+        "site/content/docs/v1.1.0/oracle-config.md",
+        "site/content/docs/v1.1.0/output-file-format.md",
+        "site/content/docs/v1.1.0/plugins.md",
+        "site/content/docs/v1.1.0/rbac.md",
+        "site/content/docs/v1.1.0/restic.md",
+        "site/content/docs/v1.1.0/restore-reference.md",
+        "site/content/docs/v1.1.0/run-locally.md",
+        "site/content/docs/v1.1.0/start-contributing.md",
+        "site/content/docs/v1.1.0/support-matrix.md",
+        "site/content/docs/v1.1.0/troubleshooting.md",
+        "site/content/docs/v1.1.0/upgrade-to-1.1.md",
+        "site/content/docs/v1.1.0/vendoring-dependencies.md",
+        "site/content/docs/v1.1.0/zenhub.md",
+        "site/content/docs/v1.10/_index.md",
+        "site/content/docs/v1.10/api-types/**",
+        "site/content/docs/v1.10/backup-hooks.md",
+        "site/content/docs/v1.10/backup-reference.md",
+        "site/content/docs/v1.10/basic-install.md",
+        "site/content/docs/v1.10/build-from-source.md",
+        "site/content/docs/v1.10/code-standards.md",
+        "site/content/docs/v1.10/contributions/ibm-config.md",
+        "site/content/docs/v1.10/contributions/minio.md",
+        "site/content/docs/v1.10/contributions/oracle-config.md",
+        "site/content/docs/v1.10/contributions/tencent-config.md",
+        "site/content/docs/v1.10/csi.md",
+        "site/content/docs/v1.10/custom-plugins.md",
+        "site/content/docs/v1.10/customize-installation.md",
+        "site/content/docs/v1.10/debugging-install.md",
+        "site/content/docs/v1.10/debugging-restores.md",
+        "site/content/docs/v1.10/development.md",
+        "site/content/docs/v1.10/disaster-case.md",
+        "site/content/docs/v1.10/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.10/examples.md",
+        "site/content/docs/v1.10/file-system-backup.md",
+        "site/content/docs/v1.10/how-velero-works.md",
+        "site/content/docs/v1.10/image-tagging.md",
+        "site/content/docs/v1.10/img/README.md",
+        "site/content/docs/v1.10/locations.md",
+        "site/content/docs/v1.10/maintainers.md",
+        "site/content/docs/v1.10/manual-testing.md",
+        "site/content/docs/v1.10/migration-case.md",
+        "site/content/docs/v1.10/namespace.md",
+        "site/content/docs/v1.10/on-premises.md",
+        "site/content/docs/v1.10/output-file-format.md",
+        "site/content/docs/v1.10/overview-plugins.md",
+        "site/content/docs/v1.10/performance-guidance.md",
+        "site/content/docs/v1.10/plugin-release-instructions.md",
+        "site/content/docs/v1.10/proxy.md",
+        "site/content/docs/v1.10/rbac.md",
+        "site/content/docs/v1.10/release-instructions.md",
+        "site/content/docs/v1.10/release-schedule.md",
+        "site/content/docs/v1.10/resource-filtering.md",
+        "site/content/docs/v1.10/restore-hooks.md",
+        "site/content/docs/v1.10/restore-reference.md",
+        "site/content/docs/v1.10/run-locally.md",
+        "site/content/docs/v1.10/self-signed-certificates.md",
+        "site/content/docs/v1.10/start-contributing.md",
+        "site/content/docs/v1.10/style-guide.md",
+        "site/content/docs/v1.10/support-process.md",
+        "site/content/docs/v1.10/supported-providers.md",
+        "site/content/docs/v1.10/tilt.md",
+        "site/content/docs/v1.10/troubleshooting.md",
+        "site/content/docs/v1.10/uninstalling.md",
+        "site/content/docs/v1.10/upgrade-to-1.10.md",
+        "site/content/docs/v1.10/velero-install.md",
+        "site/content/docs/v1.10/website-guidelines.md",
+        "site/content/docs/v1.11/_index.md",
+        "site/content/docs/v1.11/api-types/**",
+        "site/content/docs/v1.11/backup-hooks.md",
+        "site/content/docs/v1.11/backup-reference.md",
+        "site/content/docs/v1.11/basic-install.md",
+        "site/content/docs/v1.11/build-from-source.md",
+        "site/content/docs/v1.11/code-standards.md",
+        "site/content/docs/v1.11/contributions/ibm-config.md",
+        "site/content/docs/v1.11/contributions/minio.md",
+        "site/content/docs/v1.11/contributions/oracle-config.md",
+        "site/content/docs/v1.11/contributions/tencent-config.md",
+        "site/content/docs/v1.11/csi.md",
+        "site/content/docs/v1.11/custom-plugins.md",
+        "site/content/docs/v1.11/customize-installation.md",
+        "site/content/docs/v1.11/debugging-install.md",
+        "site/content/docs/v1.11/debugging-restores.md",
+        "site/content/docs/v1.11/development.md",
+        "site/content/docs/v1.11/disaster-case.md",
+        "site/content/docs/v1.11/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.11/examples.md",
+        "site/content/docs/v1.11/file-system-backup.md",
+        "site/content/docs/v1.11/how-velero-works.md",
+        "site/content/docs/v1.11/image-tagging.md",
+        "site/content/docs/v1.11/img/README.md",
+        "site/content/docs/v1.11/locations.md",
+        "site/content/docs/v1.11/maintainers.md",
+        "site/content/docs/v1.11/manual-testing.md",
+        "site/content/docs/v1.11/migration-case.md",
+        "site/content/docs/v1.11/namespace.md",
+        "site/content/docs/v1.11/on-premises.md",
+        "site/content/docs/v1.11/output-file-format.md",
+        "site/content/docs/v1.11/overview-plugins.md",
+        "site/content/docs/v1.11/performance-guidance.md",
+        "site/content/docs/v1.11/plugin-release-instructions.md",
+        "site/content/docs/v1.11/proxy.md",
+        "site/content/docs/v1.11/rbac.md",
+        "site/content/docs/v1.11/release-instructions.md",
+        "site/content/docs/v1.11/release-schedule.md",
+        "site/content/docs/v1.11/resource-filtering.md",
+        "site/content/docs/v1.11/restore-hooks.md",
+        "site/content/docs/v1.11/restore-reference.md",
+        "site/content/docs/v1.11/run-locally.md",
+        "site/content/docs/v1.11/self-signed-certificates.md",
+        "site/content/docs/v1.11/start-contributing.md",
+        "site/content/docs/v1.11/style-guide.md",
+        "site/content/docs/v1.11/support-process.md",
+        "site/content/docs/v1.11/supported-providers.md",
+        "site/content/docs/v1.11/tilt.md",
+        "site/content/docs/v1.11/troubleshooting.md",
+        "site/content/docs/v1.11/uninstalling.md",
+        "site/content/docs/v1.11/upgrade-to-1.11.md",
+        "site/content/docs/v1.11/velero-install.md",
+        "site/content/docs/v1.11/website-guidelines.md",
+        "site/content/docs/v1.12/_index.md",
+        "site/content/docs/v1.12/api-types/**",
+        "site/content/docs/v1.12/backup-hooks.md",
+        "site/content/docs/v1.12/backup-reference.md",
+        "site/content/docs/v1.12/basic-install.md",
+        "site/content/docs/v1.12/build-from-source.md",
+        "site/content/docs/v1.12/code-standards.md",
+        "site/content/docs/v1.12/contributions/ibm-config.md",
+        "site/content/docs/v1.12/contributions/minio.md",
+        "site/content/docs/v1.12/contributions/oracle-config.md",
+        "site/content/docs/v1.12/contributions/tencent-config.md",
+        "site/content/docs/v1.12/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.12/csi.md",
+        "site/content/docs/v1.12/custom-plugins.md",
+        "site/content/docs/v1.12/customize-installation.md",
+        "site/content/docs/v1.12/debugging-install.md",
+        "site/content/docs/v1.12/debugging-restores.md",
+        "site/content/docs/v1.12/development.md",
+        "site/content/docs/v1.12/disaster-case.md",
+        "site/content/docs/v1.12/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.12/examples.md",
+        "site/content/docs/v1.12/file-system-backup.md",
+        "site/content/docs/v1.12/how-velero-works.md",
+        "site/content/docs/v1.12/image-tagging.md",
+        "site/content/docs/v1.12/img/README.md",
+        "site/content/docs/v1.12/locations.md",
+        "site/content/docs/v1.12/maintainers.md",
+        "site/content/docs/v1.12/manual-testing.md",
+        "site/content/docs/v1.12/migration-case.md",
+        "site/content/docs/v1.12/namespace.md",
+        "site/content/docs/v1.12/on-premises.md",
+        "site/content/docs/v1.12/output-file-format.md",
+        "site/content/docs/v1.12/overview-plugins.md",
+        "site/content/docs/v1.12/performance-guidance.md",
+        "site/content/docs/v1.12/plugin-release-instructions.md",
+        "site/content/docs/v1.12/proxy.md",
+        "site/content/docs/v1.12/rbac.md",
+        "site/content/docs/v1.12/release-instructions.md",
+        "site/content/docs/v1.12/release-schedule.md",
+        "site/content/docs/v1.12/resource-filtering.md",
+        "site/content/docs/v1.12/restore-hooks.md",
+        "site/content/docs/v1.12/restore-reference.md",
+        "site/content/docs/v1.12/restore-resource-modifiers.md",
+        "site/content/docs/v1.12/run-locally.md",
+        "site/content/docs/v1.12/self-signed-certificates.md",
+        "site/content/docs/v1.12/start-contributing.md",
+        "site/content/docs/v1.12/style-guide.md",
+        "site/content/docs/v1.12/support-process.md",
+        "site/content/docs/v1.12/supported-providers.md",
+        "site/content/docs/v1.12/tilt.md",
+        "site/content/docs/v1.12/troubleshooting.md",
+        "site/content/docs/v1.12/uninstalling.md",
+        "site/content/docs/v1.12/upgrade-to-1.12.md",
+        "site/content/docs/v1.12/velero-install.md",
+        "site/content/docs/v1.12/website-guidelines.md",
+        "site/content/docs/v1.13/_index.md",
+        "site/content/docs/v1.13/api-types/**",
+        "site/content/docs/v1.13/backup-hooks.md",
+        "site/content/docs/v1.13/backup-reference.md",
+        "site/content/docs/v1.13/basic-install.md",
+        "site/content/docs/v1.13/build-from-source.md",
+        "site/content/docs/v1.13/code-standards.md",
+        "site/content/docs/v1.13/contributions/ibm-config.md",
+        "site/content/docs/v1.13/contributions/minio.md",
+        "site/content/docs/v1.13/contributions/oracle-config.md",
+        "site/content/docs/v1.13/contributions/tencent-config.md",
+        "site/content/docs/v1.13/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.13/csi.md",
+        "site/content/docs/v1.13/custom-plugins.md",
+        "site/content/docs/v1.13/customize-installation.md",
+        "site/content/docs/v1.13/debugging-install.md",
+        "site/content/docs/v1.13/debugging-restores.md",
+        "site/content/docs/v1.13/development.md",
+        "site/content/docs/v1.13/disaster-case.md",
+        "site/content/docs/v1.13/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.13/examples.md",
+        "site/content/docs/v1.13/file-system-backup.md",
+        "site/content/docs/v1.13/how-velero-works.md",
+        "site/content/docs/v1.13/image-tagging.md",
+        "site/content/docs/v1.13/img/README.md",
+        "site/content/docs/v1.13/locations.md",
+        "site/content/docs/v1.13/maintainers.md",
+        "site/content/docs/v1.13/manual-testing.md",
+        "site/content/docs/v1.13/migration-case.md",
+        "site/content/docs/v1.13/namespace.md",
+        "site/content/docs/v1.13/node-agent-concurrency.md",
+        "site/content/docs/v1.13/on-premises.md",
+        "site/content/docs/v1.13/output-file-format.md",
+        "site/content/docs/v1.13/overview-plugins.md",
+        "site/content/docs/v1.13/performance-guidance.md",
+        "site/content/docs/v1.13/plugin-release-instructions.md",
+        "site/content/docs/v1.13/proxy.md",
+        "site/content/docs/v1.13/rbac.md",
+        "site/content/docs/v1.13/release-instructions.md",
+        "site/content/docs/v1.13/release-schedule.md",
+        "site/content/docs/v1.13/resource-filtering.md",
+        "site/content/docs/v1.13/restore-hooks.md",
+        "site/content/docs/v1.13/restore-reference.md",
+        "site/content/docs/v1.13/restore-resource-modifiers.md",
+        "site/content/docs/v1.13/run-locally.md",
+        "site/content/docs/v1.13/self-signed-certificates.md",
+        "site/content/docs/v1.13/start-contributing.md",
+        "site/content/docs/v1.13/style-guide.md",
+        "site/content/docs/v1.13/support-process.md",
+        "site/content/docs/v1.13/supported-providers.md",
+        "site/content/docs/v1.13/tilt.md",
+        "site/content/docs/v1.13/troubleshooting.md",
+        "site/content/docs/v1.13/uninstalling.md",
+        "site/content/docs/v1.13/upgrade-to-1.13.md",
+        "site/content/docs/v1.13/velero-install.md",
+        "site/content/docs/v1.13/website-guidelines.md",
+        "site/content/docs/v1.14/_index.md",
+        "site/content/docs/v1.14/api-types/**",
+        "site/content/docs/v1.14/backup-hooks.md",
+        "site/content/docs/v1.14/backup-reference.md",
+        "site/content/docs/v1.14/basic-install.md",
+        "site/content/docs/v1.14/build-from-source.md",
+        "site/content/docs/v1.14/code-standards.md",
+        "site/content/docs/v1.14/contributions/ibm-config.md",
+        "site/content/docs/v1.14/contributions/minio.md",
+        "site/content/docs/v1.14/contributions/oracle-config.md",
+        "site/content/docs/v1.14/contributions/tencent-config.md",
+        "site/content/docs/v1.14/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.14/csi.md",
+        "site/content/docs/v1.14/custom-plugins.md",
+        "site/content/docs/v1.14/customize-installation.md",
+        "site/content/docs/v1.14/data-movement-backup-node-selection.md",
+        "site/content/docs/v1.14/debugging-install.md",
+        "site/content/docs/v1.14/debugging-restores.md",
+        "site/content/docs/v1.14/development.md",
+        "site/content/docs/v1.14/disaster-case.md",
+        "site/content/docs/v1.14/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.14/examples.md",
+        "site/content/docs/v1.14/file-system-backup.md",
+        "site/content/docs/v1.14/how-velero-works.md",
+        "site/content/docs/v1.14/image-tagging.md",
+        "site/content/docs/v1.14/img/README.md",
+        "site/content/docs/v1.14/locations.md",
+        "site/content/docs/v1.14/maintainers.md",
+        "site/content/docs/v1.14/manual-testing.md",
+        "site/content/docs/v1.14/migration-case.md",
+        "site/content/docs/v1.14/namespace.md",
+        "site/content/docs/v1.14/node-agent-concurrency.md",
+        "site/content/docs/v1.14/on-premises.md",
+        "site/content/docs/v1.14/output-file-format.md",
+        "site/content/docs/v1.14/overview-plugins.md",
+        "site/content/docs/v1.14/performance-guidance.md",
+        "site/content/docs/v1.14/plugin-release-instructions.md",
+        "site/content/docs/v1.14/proxy.md",
+        "site/content/docs/v1.14/rbac.md",
+        "site/content/docs/v1.14/release-instructions.md",
+        "site/content/docs/v1.14/release-schedule.md",
+        "site/content/docs/v1.14/repository-maintenance.md",
+        "site/content/docs/v1.14/resource-filtering.md",
+        "site/content/docs/v1.14/restore-hooks.md",
+        "site/content/docs/v1.14/restore-reference.md",
+        "site/content/docs/v1.14/restore-resource-modifiers.md",
+        "site/content/docs/v1.14/run-locally.md",
+        "site/content/docs/v1.14/self-signed-certificates.md",
+        "site/content/docs/v1.14/start-contributing.md",
+        "site/content/docs/v1.14/style-guide.md",
+        "site/content/docs/v1.14/support-process.md",
+        "site/content/docs/v1.14/supported-providers.md",
+        "site/content/docs/v1.14/tilt.md",
+        "site/content/docs/v1.14/troubleshooting.md",
+        "site/content/docs/v1.14/uninstalling.md",
+        "site/content/docs/v1.14/upgrade-to-1.14.md",
+        "site/content/docs/v1.14/velero-install.md",
+        "site/content/docs/v1.14/website-guidelines.md",
+        "site/content/docs/v1.15/_index.md",
+        "site/content/docs/v1.15/api-types/**",
+        "site/content/docs/v1.15/backup-hooks.md",
+        "site/content/docs/v1.15/backup-reference.md",
+        "site/content/docs/v1.15/backup-repository-configuration.md",
+        "site/content/docs/v1.15/basic-install.md",
+        "site/content/docs/v1.15/build-from-source.md",
+        "site/content/docs/v1.15/code-standards.md",
+        "site/content/docs/v1.15/contributions/ibm-config.md",
+        "site/content/docs/v1.15/contributions/minio.md",
+        "site/content/docs/v1.15/contributions/oracle-config.md",
+        "site/content/docs/v1.15/contributions/tencent-config.md",
+        "site/content/docs/v1.15/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.15/csi.md",
+        "site/content/docs/v1.15/custom-plugins.md",
+        "site/content/docs/v1.15/customize-installation.md",
+        "site/content/docs/v1.15/data-movement-backup-node-selection.md",
+        "site/content/docs/v1.15/data-movement-backup-pvc-configuration.md",
+        "site/content/docs/v1.15/data-movement-pod-resource-configuration.md",
+        "site/content/docs/v1.15/debugging-install.md",
+        "site/content/docs/v1.15/debugging-restores.md",
+        "site/content/docs/v1.15/development.md",
+        "site/content/docs/v1.15/disaster-case.md",
+        "site/content/docs/v1.15/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.15/examples.md",
+        "site/content/docs/v1.15/file-system-backup.md",
+        "site/content/docs/v1.15/how-velero-works.md",
+        "site/content/docs/v1.15/image-tagging.md",
+        "site/content/docs/v1.15/img/README.md",
+        "site/content/docs/v1.15/locations.md",
+        "site/content/docs/v1.15/maintainers.md",
+        "site/content/docs/v1.15/manual-testing.md",
+        "site/content/docs/v1.15/migration-case.md",
+        "site/content/docs/v1.15/namespace.md",
+        "site/content/docs/v1.15/node-agent-concurrency.md",
+        "site/content/docs/v1.15/on-premises.md",
+        "site/content/docs/v1.15/output-file-format.md",
+        "site/content/docs/v1.15/overview-plugins.md",
+        "site/content/docs/v1.15/performance-guidance.md",
+        "site/content/docs/v1.15/plugin-release-instructions.md",
+        "site/content/docs/v1.15/proxy.md",
+        "site/content/docs/v1.15/rbac.md",
+        "site/content/docs/v1.15/release-instructions.md",
+        "site/content/docs/v1.15/release-schedule.md",
+        "site/content/docs/v1.15/repository-maintenance.md",
+        "site/content/docs/v1.15/resource-filtering.md",
+        "site/content/docs/v1.15/restore-hooks.md",
+        "site/content/docs/v1.15/restore-reference.md",
+        "site/content/docs/v1.15/restore-resource-modifiers.md",
+        "site/content/docs/v1.15/run-locally.md",
+        "site/content/docs/v1.15/self-signed-certificates.md",
+        "site/content/docs/v1.15/start-contributing.md",
+        "site/content/docs/v1.15/style-guide.md",
+        "site/content/docs/v1.15/support-process.md",
+        "site/content/docs/v1.15/supported-providers.md",
+        "site/content/docs/v1.15/tilt.md",
+        "site/content/docs/v1.15/troubleshooting.md",
+        "site/content/docs/v1.15/uninstalling.md",
+        "site/content/docs/v1.15/upgrade-to-1.15.md",
+        "site/content/docs/v1.15/velero-install.md",
+        "site/content/docs/v1.15/website-guidelines.md",
+        "site/content/docs/v1.16/_index.md",
+        "site/content/docs/v1.16/api-types/**",
+        "site/content/docs/v1.16/backup-hooks.md",
+        "site/content/docs/v1.16/backup-reference.md",
+        "site/content/docs/v1.16/backup-repository-configuration.md",
+        "site/content/docs/v1.16/backup-restore-windows.md",
+        "site/content/docs/v1.16/basic-install.md",
+        "site/content/docs/v1.16/build-from-source.md",
+        "site/content/docs/v1.16/code-standards.md",
+        "site/content/docs/v1.16/contributions/ibm-config.md",
+        "site/content/docs/v1.16/contributions/minio.md",
+        "site/content/docs/v1.16/contributions/oracle-config.md",
+        "site/content/docs/v1.16/contributions/tencent-config.md",
+        "site/content/docs/v1.16/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.16/csi.md",
+        "site/content/docs/v1.16/custom-plugins.md",
+        "site/content/docs/v1.16/customize-installation.md",
+        "site/content/docs/v1.16/data-movement-backup-node-selection.md",
+        "site/content/docs/v1.16/data-movement-backup-pvc-configuration.md",
+        "site/content/docs/v1.16/data-movement-pod-resource-configuration.md",
+        "site/content/docs/v1.16/data-movement-restore-pvc-configuration.md",
+        "site/content/docs/v1.16/debugging-install.md",
+        "site/content/docs/v1.16/debugging-restores.md",
+        "site/content/docs/v1.16/development.md",
+        "site/content/docs/v1.16/disaster-case.md",
+        "site/content/docs/v1.16/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.16/examples.md",
+        "site/content/docs/v1.16/file-system-backup.md",
+        "site/content/docs/v1.16/how-velero-works.md",
+        "site/content/docs/v1.16/image-tagging.md",
+        "site/content/docs/v1.16/img/README.md",
+        "site/content/docs/v1.16/locations.md",
+        "site/content/docs/v1.16/maintainers.md",
+        "site/content/docs/v1.16/manual-testing.md",
+        "site/content/docs/v1.16/migration-case.md",
+        "site/content/docs/v1.16/namespace.md",
+        "site/content/docs/v1.16/node-agent-concurrency.md",
+        "site/content/docs/v1.16/on-premises.md",
+        "site/content/docs/v1.16/output-file-format.md",
+        "site/content/docs/v1.16/overview-plugins.md",
+        "site/content/docs/v1.16/performance-guidance.md",
+        "site/content/docs/v1.16/plugin-release-instructions.md",
+        "site/content/docs/v1.16/proxy.md",
+        "site/content/docs/v1.16/rbac.md",
+        "site/content/docs/v1.16/release-instructions.md",
+        "site/content/docs/v1.16/release-schedule.md",
+        "site/content/docs/v1.16/repository-maintenance.md",
+        "site/content/docs/v1.16/resource-filtering.md",
+        "site/content/docs/v1.16/restore-hooks.md",
+        "site/content/docs/v1.16/restore-reference.md",
+        "site/content/docs/v1.16/restore-resource-modifiers.md",
+        "site/content/docs/v1.16/run-locally.md",
+        "site/content/docs/v1.16/self-signed-certificates.md",
+        "site/content/docs/v1.16/start-contributing.md",
+        "site/content/docs/v1.16/style-guide.md",
+        "site/content/docs/v1.16/support-process.md",
+        "site/content/docs/v1.16/supported-providers.md",
+        "site/content/docs/v1.16/tilt.md",
+        "site/content/docs/v1.16/troubleshooting.md",
+        "site/content/docs/v1.16/uninstalling.md",
+        "site/content/docs/v1.16/upgrade-to-1.16.md",
+        "site/content/docs/v1.16/velero-install.md",
+        "site/content/docs/v1.16/website-guidelines.md",
+        "site/content/docs/v1.17/_index.md",
+        "site/content/docs/v1.17/api-types/**",
+        "site/content/docs/v1.17/backup-hooks.md",
+        "site/content/docs/v1.17/backup-reference.md",
+        "site/content/docs/v1.17/backup-repository-configuration.md",
+        "site/content/docs/v1.17/backup-restore-windows.md",
+        "site/content/docs/v1.17/basic-install.md",
+        "site/content/docs/v1.17/build-from-source.md",
+        "site/content/docs/v1.17/code-standards.md",
+        "site/content/docs/v1.17/contributions/ibm-config.md",
+        "site/content/docs/v1.17/contributions/minio.md",
+        "site/content/docs/v1.17/contributions/oracle-config.md",
+        "site/content/docs/v1.17/contributions/tencent-config.md",
+        "site/content/docs/v1.17/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.17/csi.md",
+        "site/content/docs/v1.17/custom-plugins.md",
+        "site/content/docs/v1.17/customize-installation.md",
+        "site/content/docs/v1.17/data-movement-backup-pvc-configuration.md",
+        "site/content/docs/v1.17/data-movement-node-selection.md",
+        "site/content/docs/v1.17/data-movement-pod-resource-configuration.md",
+        "site/content/docs/v1.17/data-movement-restore-pvc-configuration.md",
+        "site/content/docs/v1.17/debugging-install.md",
+        "site/content/docs/v1.17/debugging-restores.md",
+        "site/content/docs/v1.17/development.md",
+        "site/content/docs/v1.17/disaster-case.md",
+        "site/content/docs/v1.17/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.17/examples.md",
+        "site/content/docs/v1.17/file-system-backup.md",
+        "site/content/docs/v1.17/how-velero-works.md",
+        "site/content/docs/v1.17/image-tagging.md",
+        "site/content/docs/v1.17/img/README.md",
+        "site/content/docs/v1.17/locations.md",
+        "site/content/docs/v1.17/maintainers.md",
+        "site/content/docs/v1.17/manual-testing.md",
+        "site/content/docs/v1.17/migration-case.md",
+        "site/content/docs/v1.17/namespace.md",
+        "site/content/docs/v1.17/node-agent-concurrency.md",
+        "site/content/docs/v1.17/node-agent-prepare-queue-length.md",
+        "site/content/docs/v1.17/on-premises.md",
+        "site/content/docs/v1.17/output-file-format.md",
+        "site/content/docs/v1.17/overview-plugins.md",
+        "site/content/docs/v1.17/performance-guidance.md",
+        "site/content/docs/v1.17/plugin-release-instructions.md",
+        "site/content/docs/v1.17/proxy.md",
+        "site/content/docs/v1.17/rbac.md",
+        "site/content/docs/v1.17/release-instructions.md",
+        "site/content/docs/v1.17/release-schedule.md",
+        "site/content/docs/v1.17/repository-maintenance.md",
+        "site/content/docs/v1.17/resource-filtering.md",
+        "site/content/docs/v1.17/restore-hooks.md",
+        "site/content/docs/v1.17/restore-reference.md",
+        "site/content/docs/v1.17/restore-resource-modifiers.md",
+        "site/content/docs/v1.17/run-locally.md",
+        "site/content/docs/v1.17/self-signed-certificates.md",
+        "site/content/docs/v1.17/start-contributing.md",
+        "site/content/docs/v1.17/style-guide.md",
+        "site/content/docs/v1.17/support-process.md",
+        "site/content/docs/v1.17/supported-providers.md",
+        "site/content/docs/v1.17/tilt.md",
+        "site/content/docs/v1.17/troubleshooting.md",
+        "site/content/docs/v1.17/uninstalling.md",
+        "site/content/docs/v1.17/upgrade-to-1.17.md",
+        "site/content/docs/v1.17/velero-install.md",
+        "site/content/docs/v1.17/volume-group-snapshots.md",
+        "site/content/docs/v1.17/website-guidelines.md",
+        "site/content/docs/v1.18/_index.md",
+        "site/content/docs/v1.18/api-types/**",
+        "site/content/docs/v1.18/backup-hooks.md",
+        "site/content/docs/v1.18/backup-reference.md",
+        "site/content/docs/v1.18/backup-repository-configuration.md",
+        "site/content/docs/v1.18/backup-restore-windows.md",
+        "site/content/docs/v1.18/basic-install.md",
+        "site/content/docs/v1.18/build-from-source.md",
+        "site/content/docs/v1.18/code-standards.md",
+        "site/content/docs/v1.18/contributions/ibm-config.md",
+        "site/content/docs/v1.18/contributions/minio.md",
+        "site/content/docs/v1.18/contributions/oracle-config.md",
+        "site/content/docs/v1.18/contributions/tencent-config.md",
+        "site/content/docs/v1.18/csi-snapshot-data-movement.md",
+        "site/content/docs/v1.18/csi.md",
+        "site/content/docs/v1.18/custom-plugins.md",
+        "site/content/docs/v1.18/customize-installation.md",
+        "site/content/docs/v1.18/data-movement-backup-pvc-configuration.md",
+        "site/content/docs/v1.18/data-movement-cache-volume.md",
+        "site/content/docs/v1.18/data-movement-node-selection.md",
+        "site/content/docs/v1.18/data-movement-pod-resource-configuration.md",
+        "site/content/docs/v1.18/data-movement-restore-pvc-configuration.md",
+        "site/content/docs/v1.18/debugging-install.md",
+        "site/content/docs/v1.18/debugging-restores.md",
+        "site/content/docs/v1.18/development.md",
+        "site/content/docs/v1.18/disaster-case.md",
+        "site/content/docs/v1.18/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.18/examples.md",
+        "site/content/docs/v1.18/file-system-backup.md",
+        "site/content/docs/v1.18/how-velero-works.md",
+        "site/content/docs/v1.18/image-tagging.md",
+        "site/content/docs/v1.18/img/README.md",
+        "site/content/docs/v1.18/locations.md",
+        "site/content/docs/v1.18/maintainers.md",
+        "site/content/docs/v1.18/manual-testing.md",
+        "site/content/docs/v1.18/migration-case.md",
+        "site/content/docs/v1.18/namespace-glob-patterns.md",
+        "site/content/docs/v1.18/namespace.md",
+        "site/content/docs/v1.18/node-agent-concurrency.md",
+        "site/content/docs/v1.18/node-agent-prepare-queue-length.md",
+        "site/content/docs/v1.18/on-premises.md",
+        "site/content/docs/v1.18/output-file-format.md",
+        "site/content/docs/v1.18/overview-plugins.md",
+        "site/content/docs/v1.18/performance-guidance.md",
+        "site/content/docs/v1.18/plugin-release-instructions.md",
+        "site/content/docs/v1.18/proxy.md",
+        "site/content/docs/v1.18/rbac.md",
+        "site/content/docs/v1.18/release-instructions.md",
+        "site/content/docs/v1.18/release-schedule.md",
+        "site/content/docs/v1.18/repository-maintenance.md",
+        "site/content/docs/v1.18/resource-filtering.md",
+        "site/content/docs/v1.18/restore-hooks.md",
+        "site/content/docs/v1.18/restore-reference.md",
+        "site/content/docs/v1.18/restore-resource-modifiers.md",
+        "site/content/docs/v1.18/run-locally.md",
+        "site/content/docs/v1.18/self-signed-certificates.md",
+        "site/content/docs/v1.18/start-contributing.md",
+        "site/content/docs/v1.18/style-guide.md",
+        "site/content/docs/v1.18/support-process.md",
+        "site/content/docs/v1.18/supported-configmaps/**",
+        "site/content/docs/v1.18/supported-providers.md",
+        "site/content/docs/v1.18/tilt.md",
+        "site/content/docs/v1.18/troubleshooting.md",
+        "site/content/docs/v1.18/uninstalling.md",
+        "site/content/docs/v1.18/upgrade-to-1.18.md",
+        "site/content/docs/v1.18/velero-install.md",
+        "site/content/docs/v1.18/volume-group-snapshots.md",
+        "site/content/docs/v1.18/website-guidelines.md",
+        "site/content/docs/v1.2.0/_index.md",
+        "site/content/docs/v1.2.0/api-types/**",
+        "site/content/docs/v1.2.0/backup-reference.md",
+        "site/content/docs/v1.2.0/basic-install.md",
+        "site/content/docs/v1.2.0/build-from-source.md",
+        "site/content/docs/v1.2.0/code-standards.md",
+        "site/content/docs/v1.2.0/contributions/**",
+        "site/content/docs/v1.2.0/custom-plugins.md",
+        "site/content/docs/v1.2.0/customize-installation.md",
+        "site/content/docs/v1.2.0/debugging-install.md",
+        "site/content/docs/v1.2.0/debugging-restores.md",
+        "site/content/docs/v1.2.0/development.md",
+        "site/content/docs/v1.2.0/disaster-case.md",
+        "site/content/docs/v1.2.0/examples.md",
+        "site/content/docs/v1.2.0/faq.md",
+        "site/content/docs/v1.2.0/hooks.md",
+        "site/content/docs/v1.2.0/how-velero-works.md",
+        "site/content/docs/v1.2.0/image-tagging.md",
+        "site/content/docs/v1.2.0/img/README.md",
+        "site/content/docs/v1.2.0/locations.md",
+        "site/content/docs/v1.2.0/migration-case.md",
+        "site/content/docs/v1.2.0/namespace.md",
+        "site/content/docs/v1.2.0/on-premises.md",
+        "site/content/docs/v1.2.0/output-file-format.md",
+        "site/content/docs/v1.2.0/overview-plugins.md",
+        "site/content/docs/v1.2.0/rbac.md",
+        "site/content/docs/v1.2.0/restic.md",
+        "site/content/docs/v1.2.0/restore-reference.md",
+        "site/content/docs/v1.2.0/run-locally.md",
+        "site/content/docs/v1.2.0/start-contributing.md",
+        "site/content/docs/v1.2.0/support-process.md",
+        "site/content/docs/v1.2.0/supported-providers.md",
+        "site/content/docs/v1.2.0/troubleshooting.md",
+        "site/content/docs/v1.2.0/uninstalling.md",
+        "site/content/docs/v1.2.0/upgrade-to-1.2.md",
+        "site/content/docs/v1.2.0/velero-install.md",
+        "site/content/docs/v1.2.0/vendoring-dependencies.md",
+        "site/content/docs/v1.2.0/website-guidelines.md",
+        "site/content/docs/v1.2.0/zenhub.md",
+        "site/content/docs/v1.3.0/_index.md",
+        "site/content/docs/v1.3.0/api-types/**",
+        "site/content/docs/v1.3.0/backup-reference.md",
+        "site/content/docs/v1.3.0/basic-install.md",
+        "site/content/docs/v1.3.0/build-from-source.md",
+        "site/content/docs/v1.3.0/code-standards.md",
+        "site/content/docs/v1.3.0/contributions/**",
+        "site/content/docs/v1.3.0/csi.md",
+        "site/content/docs/v1.3.0/custom-plugins.md",
+        "site/content/docs/v1.3.0/customize-installation.md",
+        "site/content/docs/v1.3.0/debugging-install.md",
+        "site/content/docs/v1.3.0/debugging-restores.md",
+        "site/content/docs/v1.3.0/development.md",
+        "site/content/docs/v1.3.0/disaster-case.md",
+        "site/content/docs/v1.3.0/examples.md",
+        "site/content/docs/v1.3.0/faq.md",
+        "site/content/docs/v1.3.0/hooks.md",
+        "site/content/docs/v1.3.0/how-velero-works.md",
+        "site/content/docs/v1.3.0/image-tagging.md",
+        "site/content/docs/v1.3.0/img/README.md",
+        "site/content/docs/v1.3.0/locations.md",
+        "site/content/docs/v1.3.0/migration-case.md",
+        "site/content/docs/v1.3.0/namespace.md",
+        "site/content/docs/v1.3.0/on-premises.md",
+        "site/content/docs/v1.3.0/output-file-format.md",
+        "site/content/docs/v1.3.0/overview-plugins.md",
+        "site/content/docs/v1.3.0/rbac.md",
+        "site/content/docs/v1.3.0/release-instructions.md",
+        "site/content/docs/v1.3.0/restic.md",
+        "site/content/docs/v1.3.0/restore-reference.md",
+        "site/content/docs/v1.3.0/run-locally.md",
+        "site/content/docs/v1.3.0/start-contributing.md",
+        "site/content/docs/v1.3.0/support-process.md",
+        "site/content/docs/v1.3.0/supported-providers.md",
+        "site/content/docs/v1.3.0/troubleshooting.md",
+        "site/content/docs/v1.3.0/uninstalling.md",
+        "site/content/docs/v1.3.0/upgrade-to-1.3.md",
+        "site/content/docs/v1.3.0/velero-install.md",
+        "site/content/docs/v1.3.0/vendoring-dependencies.md",
+        "site/content/docs/v1.3.0/website-guidelines.md",
+        "site/content/docs/v1.3.0/zenhub.md",
+        "site/content/docs/v1.3.1/_index.md",
+        "site/content/docs/v1.3.1/api-types/**",
+        "site/content/docs/v1.3.1/backup-reference.md",
+        "site/content/docs/v1.3.1/basic-install.md",
+        "site/content/docs/v1.3.1/build-from-source.md",
+        "site/content/docs/v1.3.1/code-standards.md",
+        "site/content/docs/v1.3.1/contributions/**",
+        "site/content/docs/v1.3.1/csi.md",
+        "site/content/docs/v1.3.1/custom-plugins.md",
+        "site/content/docs/v1.3.1/customize-installation.md",
+        "site/content/docs/v1.3.1/debugging-install.md",
+        "site/content/docs/v1.3.1/debugging-restores.md",
+        "site/content/docs/v1.3.1/development.md",
+        "site/content/docs/v1.3.1/disaster-case.md",
+        "site/content/docs/v1.3.1/examples.md",
+        "site/content/docs/v1.3.1/faq.md",
+        "site/content/docs/v1.3.1/hooks.md",
+        "site/content/docs/v1.3.1/how-velero-works.md",
+        "site/content/docs/v1.3.1/image-tagging.md",
+        "site/content/docs/v1.3.1/img/README.md",
+        "site/content/docs/v1.3.1/locations.md",
+        "site/content/docs/v1.3.1/migration-case.md",
+        "site/content/docs/v1.3.1/namespace.md",
+        "site/content/docs/v1.3.1/on-premises.md",
+        "site/content/docs/v1.3.1/output-file-format.md",
+        "site/content/docs/v1.3.1/overview-plugins.md",
+        "site/content/docs/v1.3.1/rbac.md",
+        "site/content/docs/v1.3.1/release-instructions.md",
+        "site/content/docs/v1.3.1/restic.md",
+        "site/content/docs/v1.3.1/restore-reference.md",
+        "site/content/docs/v1.3.1/run-locally.md",
+        "site/content/docs/v1.3.1/start-contributing.md",
+        "site/content/docs/v1.3.1/support-process.md",
+        "site/content/docs/v1.3.1/supported-providers.md",
+        "site/content/docs/v1.3.1/troubleshooting.md",
+        "site/content/docs/v1.3.1/uninstalling.md",
+        "site/content/docs/v1.3.1/upgrade-to-1.3.md",
+        "site/content/docs/v1.3.1/velero-install.md",
+        "site/content/docs/v1.3.1/vendoring-dependencies.md",
+        "site/content/docs/v1.3.1/website-guidelines.md",
+        "site/content/docs/v1.3.1/zenhub.md",
+        "site/content/docs/v1.3.2/_index.md",
+        "site/content/docs/v1.3.2/api-types/**",
+        "site/content/docs/v1.3.2/backup-reference.md",
+        "site/content/docs/v1.3.2/basic-install.md",
+        "site/content/docs/v1.3.2/build-from-source.md",
+        "site/content/docs/v1.3.2/code-standards.md",
+        "site/content/docs/v1.3.2/contributions/**",
+        "site/content/docs/v1.3.2/csi.md",
+        "site/content/docs/v1.3.2/custom-plugins.md",
+        "site/content/docs/v1.3.2/customize-installation.md",
+        "site/content/docs/v1.3.2/debugging-install.md",
+        "site/content/docs/v1.3.2/debugging-restores.md",
+        "site/content/docs/v1.3.2/development.md",
+        "site/content/docs/v1.3.2/disaster-case.md",
+        "site/content/docs/v1.3.2/examples.md",
+        "site/content/docs/v1.3.2/faq.md",
+        "site/content/docs/v1.3.2/hooks.md",
+        "site/content/docs/v1.3.2/how-velero-works.md",
+        "site/content/docs/v1.3.2/image-tagging.md",
+        "site/content/docs/v1.3.2/img/README.md",
+        "site/content/docs/v1.3.2/locations.md",
+        "site/content/docs/v1.3.2/migration-case.md",
+        "site/content/docs/v1.3.2/namespace.md",
+        "site/content/docs/v1.3.2/on-premises.md",
+        "site/content/docs/v1.3.2/output-file-format.md",
+        "site/content/docs/v1.3.2/overview-plugins.md",
+        "site/content/docs/v1.3.2/rbac.md",
+        "site/content/docs/v1.3.2/release-instructions.md",
+        "site/content/docs/v1.3.2/restic.md",
+        "site/content/docs/v1.3.2/restore-reference.md",
+        "site/content/docs/v1.3.2/run-locally.md",
+        "site/content/docs/v1.3.2/start-contributing.md",
+        "site/content/docs/v1.3.2/support-process.md",
+        "site/content/docs/v1.3.2/supported-providers.md",
+        "site/content/docs/v1.3.2/troubleshooting.md",
+        "site/content/docs/v1.3.2/uninstalling.md",
+        "site/content/docs/v1.3.2/upgrade-to-1.3.md",
+        "site/content/docs/v1.3.2/velero-install.md",
+        "site/content/docs/v1.3.2/vendoring-dependencies.md",
+        "site/content/docs/v1.3.2/website-guidelines.md",
+        "site/content/docs/v1.3.2/zenhub.md",
+        "site/content/docs/v1.4/_index.md",
+        "site/content/docs/v1.4/api-types/**",
+        "site/content/docs/v1.4/backup-reference.md",
+        "site/content/docs/v1.4/basic-install.md",
+        "site/content/docs/v1.4/build-from-source.md",
+        "site/content/docs/v1.4/code-standards.md",
+        "site/content/docs/v1.4/contributions/**",
+        "site/content/docs/v1.4/csi.md",
+        "site/content/docs/v1.4/custom-plugins.md",
+        "site/content/docs/v1.4/customize-installation.md",
+        "site/content/docs/v1.4/debugging-install.md",
+        "site/content/docs/v1.4/debugging-restores.md",
+        "site/content/docs/v1.4/development.md",
+        "site/content/docs/v1.4/disaster-case.md",
+        "site/content/docs/v1.4/examples.md",
+        "site/content/docs/v1.4/hooks.md",
+        "site/content/docs/v1.4/how-velero-works.md",
+        "site/content/docs/v1.4/image-tagging.md",
+        "site/content/docs/v1.4/img/README.md",
+        "site/content/docs/v1.4/locations.md",
+        "site/content/docs/v1.4/migration-case.md",
+        "site/content/docs/v1.4/namespace.md",
+        "site/content/docs/v1.4/on-premises.md",
+        "site/content/docs/v1.4/output-file-format.md",
+        "site/content/docs/v1.4/overview-plugins.md",
+        "site/content/docs/v1.4/rbac.md",
+        "site/content/docs/v1.4/release-instructions.md",
+        "site/content/docs/v1.4/resource-filtering.md",
+        "site/content/docs/v1.4/restic.md",
+        "site/content/docs/v1.4/restore-reference.md",
+        "site/content/docs/v1.4/run-locally.md",
+        "site/content/docs/v1.4/self-signed-certificates.md",
+        "site/content/docs/v1.4/start-contributing.md",
+        "site/content/docs/v1.4/support-process.md",
+        "site/content/docs/v1.4/supported-providers.md",
+        "site/content/docs/v1.4/troubleshooting.md",
+        "site/content/docs/v1.4/uninstalling.md",
+        "site/content/docs/v1.4/upgrade-to-1.4.md",
+        "site/content/docs/v1.4/velero-install.md",
+        "site/content/docs/v1.4/website-guidelines.md",
+        "site/content/docs/v1.4/zenhub.md",
+        "site/content/docs/v1.5/_index.md",
+        "site/content/docs/v1.5/api-types/**",
+        "site/content/docs/v1.5/backup-hooks.md",
+        "site/content/docs/v1.5/backup-reference.md",
+        "site/content/docs/v1.5/basic-install.md",
+        "site/content/docs/v1.5/build-from-source.md",
+        "site/content/docs/v1.5/code-standards.md",
+        "site/content/docs/v1.5/contributions/ibm-config.md",
+        "site/content/docs/v1.5/contributions/minio.md",
+        "site/content/docs/v1.5/contributions/oracle-config.md",
+        "site/content/docs/v1.5/contributions/tencent-config.md",
+        "site/content/docs/v1.5/csi.md",
+        "site/content/docs/v1.5/custom-plugins.md",
+        "site/content/docs/v1.5/customize-installation.md",
+        "site/content/docs/v1.5/debugging-install.md",
+        "site/content/docs/v1.5/debugging-restores.md",
+        "site/content/docs/v1.5/development.md",
+        "site/content/docs/v1.5/disaster-case.md",
+        "site/content/docs/v1.5/examples.md",
+        "site/content/docs/v1.5/how-velero-works.md",
+        "site/content/docs/v1.5/image-tagging.md",
+        "site/content/docs/v1.5/img/README.md",
+        "site/content/docs/v1.5/locations.md",
+        "site/content/docs/v1.5/maintainers.md",
+        "site/content/docs/v1.5/migration-case.md",
+        "site/content/docs/v1.5/namespace.md",
+        "site/content/docs/v1.5/on-premises.md",
+        "site/content/docs/v1.5/output-file-format.md",
+        "site/content/docs/v1.5/overview-plugins.md",
+        "site/content/docs/v1.5/rbac.md",
+        "site/content/docs/v1.5/release-instructions.md",
+        "site/content/docs/v1.5/resource-filtering.md",
+        "site/content/docs/v1.5/restic.md",
+        "site/content/docs/v1.5/restore-hooks.md",
+        "site/content/docs/v1.5/restore-reference.md",
+        "site/content/docs/v1.5/run-locally.md",
+        "site/content/docs/v1.5/self-signed-certificates.md",
+        "site/content/docs/v1.5/start-contributing.md",
+        "site/content/docs/v1.5/style-guide.md",
+        "site/content/docs/v1.5/support-process.md",
+        "site/content/docs/v1.5/supported-providers.md",
+        "site/content/docs/v1.5/tilt.md",
+        "site/content/docs/v1.5/troubleshooting.md",
+        "site/content/docs/v1.5/uninstalling.md",
+        "site/content/docs/v1.5/upgrade-to-1.5.md",
+        "site/content/docs/v1.5/velero-install.md",
+        "site/content/docs/v1.5/website-guidelines.md",
+        "site/content/docs/v1.6/_index.md",
+        "site/content/docs/v1.6/api-types/**",
+        "site/content/docs/v1.6/backup-hooks.md",
+        "site/content/docs/v1.6/backup-reference.md",
+        "site/content/docs/v1.6/basic-install.md",
+        "site/content/docs/v1.6/build-from-source.md",
+        "site/content/docs/v1.6/code-standards.md",
+        "site/content/docs/v1.6/contributions/ibm-config.md",
+        "site/content/docs/v1.6/contributions/minio.md",
+        "site/content/docs/v1.6/contributions/oracle-config.md",
+        "site/content/docs/v1.6/contributions/tencent-config.md",
+        "site/content/docs/v1.6/csi.md",
+        "site/content/docs/v1.6/custom-plugins.md",
+        "site/content/docs/v1.6/customize-installation.md",
+        "site/content/docs/v1.6/debugging-install.md",
+        "site/content/docs/v1.6/debugging-restores.md",
+        "site/content/docs/v1.6/development.md",
+        "site/content/docs/v1.6/disaster-case.md",
+        "site/content/docs/v1.6/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.6/examples.md",
+        "site/content/docs/v1.6/how-velero-works.md",
+        "site/content/docs/v1.6/image-tagging.md",
+        "site/content/docs/v1.6/img/README.md",
+        "site/content/docs/v1.6/locations.md",
+        "site/content/docs/v1.6/maintainers.md",
+        "site/content/docs/v1.6/manual-testing.md",
+        "site/content/docs/v1.6/migration-case.md",
+        "site/content/docs/v1.6/namespace.md",
+        "site/content/docs/v1.6/on-premises.md",
+        "site/content/docs/v1.6/output-file-format.md",
+        "site/content/docs/v1.6/overview-plugins.md",
+        "site/content/docs/v1.6/plugin-release-instructions.md",
+        "site/content/docs/v1.6/rbac.md",
+        "site/content/docs/v1.6/release-instructions.md",
+        "site/content/docs/v1.6/resource-filtering.md",
+        "site/content/docs/v1.6/restic.md",
+        "site/content/docs/v1.6/restore-hooks.md",
+        "site/content/docs/v1.6/restore-reference.md",
+        "site/content/docs/v1.6/run-locally.md",
+        "site/content/docs/v1.6/self-signed-certificates.md",
+        "site/content/docs/v1.6/start-contributing.md",
+        "site/content/docs/v1.6/style-guide.md",
+        "site/content/docs/v1.6/support-process.md",
+        "site/content/docs/v1.6/supported-providers.md",
+        "site/content/docs/v1.6/tilt.md",
+        "site/content/docs/v1.6/troubleshooting.md",
+        "site/content/docs/v1.6/uninstalling.md",
+        "site/content/docs/v1.6/upgrade-to-1.6.md",
+        "site/content/docs/v1.6/velero-install.md",
+        "site/content/docs/v1.6/website-guidelines.md",
+        "site/content/docs/v1.7/_index.md",
+        "site/content/docs/v1.7/api-types/**",
+        "site/content/docs/v1.7/backup-hooks.md",
+        "site/content/docs/v1.7/backup-reference.md",
+        "site/content/docs/v1.7/basic-install.md",
+        "site/content/docs/v1.7/build-from-source.md",
+        "site/content/docs/v1.7/code-standards.md",
+        "site/content/docs/v1.7/contributions/ibm-config.md",
+        "site/content/docs/v1.7/contributions/minio.md",
+        "site/content/docs/v1.7/contributions/oracle-config.md",
+        "site/content/docs/v1.7/contributions/tencent-config.md",
+        "site/content/docs/v1.7/csi.md",
+        "site/content/docs/v1.7/custom-plugins.md",
+        "site/content/docs/v1.7/customize-installation.md",
+        "site/content/docs/v1.7/debugging-install.md",
+        "site/content/docs/v1.7/debugging-restores.md",
+        "site/content/docs/v1.7/development.md",
+        "site/content/docs/v1.7/disaster-case.md",
+        "site/content/docs/v1.7/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.7/examples.md",
+        "site/content/docs/v1.7/how-velero-works.md",
+        "site/content/docs/v1.7/image-tagging.md",
+        "site/content/docs/v1.7/img/README.md",
+        "site/content/docs/v1.7/locations.md",
+        "site/content/docs/v1.7/maintainers.md",
+        "site/content/docs/v1.7/manual-testing.md",
+        "site/content/docs/v1.7/migration-case.md",
+        "site/content/docs/v1.7/namespace.md",
+        "site/content/docs/v1.7/on-premises.md",
+        "site/content/docs/v1.7/output-file-format.md",
+        "site/content/docs/v1.7/overview-plugins.md",
+        "site/content/docs/v1.7/plugin-release-instructions.md",
+        "site/content/docs/v1.7/rbac.md",
+        "site/content/docs/v1.7/release-instructions.md",
+        "site/content/docs/v1.7/release-schedule.md",
+        "site/content/docs/v1.7/resource-filtering.md",
+        "site/content/docs/v1.7/restic.md",
+        "site/content/docs/v1.7/restore-hooks.md",
+        "site/content/docs/v1.7/restore-reference.md",
+        "site/content/docs/v1.7/run-locally.md",
+        "site/content/docs/v1.7/self-signed-certificates.md",
+        "site/content/docs/v1.7/start-contributing.md",
+        "site/content/docs/v1.7/style-guide.md",
+        "site/content/docs/v1.7/support-process.md",
+        "site/content/docs/v1.7/supported-providers.md",
+        "site/content/docs/v1.7/tilt.md",
+        "site/content/docs/v1.7/troubleshooting.md",
+        "site/content/docs/v1.7/uninstalling.md",
+        "site/content/docs/v1.7/upgrade-to-1.7.md",
+        "site/content/docs/v1.7/velero-install.md",
+        "site/content/docs/v1.7/website-guidelines.md",
+        "site/content/docs/v1.8/_index.md",
+        "site/content/docs/v1.8/api-types/**",
+        "site/content/docs/v1.8/backup-hooks.md",
+        "site/content/docs/v1.8/backup-reference.md",
+        "site/content/docs/v1.8/basic-install.md",
+        "site/content/docs/v1.8/build-from-source.md",
+        "site/content/docs/v1.8/code-standards.md",
+        "site/content/docs/v1.8/contributions/ibm-config.md",
+        "site/content/docs/v1.8/contributions/minio.md",
+        "site/content/docs/v1.8/contributions/oracle-config.md",
+        "site/content/docs/v1.8/contributions/tencent-config.md",
+        "site/content/docs/v1.8/csi.md",
+        "site/content/docs/v1.8/custom-plugins.md",
+        "site/content/docs/v1.8/customize-installation.md",
+        "site/content/docs/v1.8/debugging-install.md",
+        "site/content/docs/v1.8/debugging-restores.md",
+        "site/content/docs/v1.8/development.md",
+        "site/content/docs/v1.8/disaster-case.md",
+        "site/content/docs/v1.8/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.8/examples.md",
+        "site/content/docs/v1.8/how-velero-works.md",
+        "site/content/docs/v1.8/image-tagging.md",
+        "site/content/docs/v1.8/img/README.md",
+        "site/content/docs/v1.8/locations.md",
+        "site/content/docs/v1.8/maintainers.md",
+        "site/content/docs/v1.8/manual-testing.md",
+        "site/content/docs/v1.8/migration-case.md",
+        "site/content/docs/v1.8/namespace.md",
+        "site/content/docs/v1.8/on-premises.md",
+        "site/content/docs/v1.8/output-file-format.md",
+        "site/content/docs/v1.8/overview-plugins.md",
+        "site/content/docs/v1.8/plugin-release-instructions.md",
+        "site/content/docs/v1.8/rbac.md",
+        "site/content/docs/v1.8/release-instructions.md",
+        "site/content/docs/v1.8/release-schedule.md",
+        "site/content/docs/v1.8/resource-filtering.md",
+        "site/content/docs/v1.8/restic.md",
+        "site/content/docs/v1.8/restore-hooks.md",
+        "site/content/docs/v1.8/restore-reference.md",
+        "site/content/docs/v1.8/run-locally.md",
+        "site/content/docs/v1.8/self-signed-certificates.md",
+        "site/content/docs/v1.8/start-contributing.md",
+        "site/content/docs/v1.8/style-guide.md",
+        "site/content/docs/v1.8/support-process.md",
+        "site/content/docs/v1.8/supported-providers.md",
+        "site/content/docs/v1.8/tilt.md",
+        "site/content/docs/v1.8/troubleshooting.md",
+        "site/content/docs/v1.8/uninstalling.md",
+        "site/content/docs/v1.8/upgrade-to-1.8.md",
+        "site/content/docs/v1.8/velero-install.md",
+        "site/content/docs/v1.8/website-guidelines.md",
+        "site/content/docs/v1.9/_index.md",
+        "site/content/docs/v1.9/api-types/**",
+        "site/content/docs/v1.9/backup-hooks.md",
+        "site/content/docs/v1.9/backup-reference.md",
+        "site/content/docs/v1.9/basic-install.md",
+        "site/content/docs/v1.9/build-from-source.md",
+        "site/content/docs/v1.9/code-standards.md",
+        "site/content/docs/v1.9/contributions/ibm-config.md",
+        "site/content/docs/v1.9/contributions/minio.md",
+        "site/content/docs/v1.9/contributions/oracle-config.md",
+        "site/content/docs/v1.9/contributions/tencent-config.md",
+        "site/content/docs/v1.9/csi.md",
+        "site/content/docs/v1.9/custom-plugins.md",
+        "site/content/docs/v1.9/customize-installation.md",
+        "site/content/docs/v1.9/debugging-install.md",
+        "site/content/docs/v1.9/debugging-restores.md",
+        "site/content/docs/v1.9/development.md",
+        "site/content/docs/v1.9/disaster-case.md",
+        "site/content/docs/v1.9/enable-api-group-versions-feature.md",
+        "site/content/docs/v1.9/examples.md",
+        "site/content/docs/v1.9/how-velero-works.md",
+        "site/content/docs/v1.9/image-tagging.md",
+        "site/content/docs/v1.9/img/README.md",
+        "site/content/docs/v1.9/locations.md",
+        "site/content/docs/v1.9/maintainers.md",
+        "site/content/docs/v1.9/manual-testing.md",
+        "site/content/docs/v1.9/migration-case.md",
+        "site/content/docs/v1.9/namespace.md",
+        "site/content/docs/v1.9/on-premises.md",
+        "site/content/docs/v1.9/output-file-format.md",
+        "site/content/docs/v1.9/overview-plugins.md",
+        "site/content/docs/v1.9/plugin-release-instructions.md",
+        "site/content/docs/v1.9/rbac.md",
+        "site/content/docs/v1.9/release-instructions.md",
+        "site/content/docs/v1.9/release-schedule.md",
+        "site/content/docs/v1.9/resource-filtering.md",
+        "site/content/docs/v1.9/restic.md",
+        "site/content/docs/v1.9/restore-hooks.md",
+        "site/content/docs/v1.9/restore-reference.md",
+        "site/content/docs/v1.9/run-locally.md",
+        "site/content/docs/v1.9/self-signed-certificates.md",
+        "site/content/docs/v1.9/start-contributing.md",
+        "site/content/docs/v1.9/style-guide.md",
+        "site/content/docs/v1.9/support-process.md",
+        "site/content/docs/v1.9/supported-providers.md",
+        "site/content/docs/v1.9/tilt.md",
+        "site/content/docs/v1.9/troubleshooting.md",
+        "site/content/docs/v1.9/uninstalling.md",
+        "site/content/docs/v1.9/upgrade-to-1.9.md",
+        "site/content/docs/v1.9/velero-install.md",
+        "site/content/docs/v1.9/website-guidelines.md",
+        "site/content/plugins/**",
+        "site/content/posts/**",
+        "site/content/resources/**",
+        "site/data/**",
+        "site/layouts/**",
+        "site/static/fonts/Metropolis/Open Font License.md",
+        "site/static/fonts/Metropolis/README.md",
+        "site/static/img/Velero.svg",
+        "site/static/img/adopters/BitGo.svg",
+        "site/static/img/adopters/PITSGlobalDataRecoveryServices.svg",
+        "site/static/img/adopters/azure.svg",
+        "site/static/img/adopters/banzaicloud.svg",
+        "site/static/img/adopters/broadcom.svg",
+        "site/static/img/adopters/bugsnag.svg",
+        "site/static/img/adopters/cloudcasa.svg",
+        "site/static/img/adopters/kyma.svg",
+        "site/static/img/adopters/mayadata.svg",
+        "site/static/img/adopters/nirmata.svg",
+        "site/static/img/adopters/okteto.svg",
+        "site/static/img/adopters/redhat.svg",
+        "site/static/img/adopters/replicated-logo-red.svg",
+        "site/static/img/adopters/sighup.svg",
+        "site/static/img/case-study-icons/**",
+        "site/static/img/cncf-color.svg",
+        "site/static/img/cncf-white.svg",
+        "site/static/img/data-migration-icon.svg",
+        "site/static/img/data-protection-icon.svg",
+        "site/static/img/disaster-recover-icon.svg",
+        "site/static/img/heroes/**",
+        "site/static/img/vgs-flow.svg",
+        "site/static/js/**",
+        "test/**",
+        "tilt-resources/**"
+      ],
+      "text": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction,\nand distribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by\nthe copyright owner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all\nother entities that control, are controlled by, or are under common\ncontrol with that entity. For the purposes of this definition,\n\"control\" means (i) the power, direct or indirect, to cause the\ndirection or management of such entity, whether by contract or\notherwise, or (ii) ownership of fifty percent (50%) or more of the\noutstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity\nexercising permissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications,\nincluding but not limited to software source code, documentation\nsource, and configuration files.\n\n\"Object\" form shall mean any form resulting from mechanical\ntransformation or translation of a Source form, including but\nnot limited to compiled object code, generated documentation,\nand conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or\nObject form, made available under the License, as indicated by a\ncopyright notice that is included in or attached to the work\n(an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object\nform, that is based on (or derived from) the Work and for which the\neditorial revisions, annotations, elaborations, or other modifications\nrepresent, as a whole, an original work of authorship. For the purposes\nof this License, Derivative Works shall not include works that remain\nseparable from, or merely link (or bind by name) to the interfaces of,\nthe Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including\nthe original version of the Work and any modifications or additions\nto that Work or Derivative Works thereof, that is intentionally\nsubmitted to Licensor for inclusion in the Work by the copyright owner\nor by an individual or Legal Entity authorized to submit on behalf of\nthe copyright owner. For the purposes of this definition, \"submitted\"\nmeans any form of electronic, verbal, or written communication sent\nto the Licensor or its representatives, including but not limited to\ncommunication on electronic mailing lists, source code control systems,\nand issue tracking systems that are managed by, or on behalf of, the\nLicensor for the purpose of discussing and improving the Work, but\nexcluding communication that is conspicuously marked or otherwise\ndesignated in writing by the copyright owner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity\non behalf of whom a Contribution has been received by Licensor and\nsubsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\nthis License, each Contributor hereby grants to You a perpetual,\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\ncopyright license to reproduce, prepare Derivative Works of,\npublicly display, publicly perform, sublicense, and distribute the\nWork and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\nthis License, each Contributor hereby grants to You a perpetual,\nworldwide, non-exclusive, no-charge, royalty-free, irrevocable\n(except as stated in this section) patent license to make, have made,\nuse, offer to sell, sell, import, and otherwise transfer the Work,\nwhere such license applies only to those patent claims licensable\nby such Contributor that are necessarily infringed by their\nContribution(s) alone or by combination of their Contribution(s)\nwith the Work to which such Contribution(s) was submitted. If You\ninstitute patent litigation against any entity (including a\ncross-claim or counterclaim in a lawsuit) alleging that the Work\nor a Contribution incorporated within the Work constitutes direct\nor contributory patent infringement, then any patent licenses\ngranted to You under this License for that Work shall terminate\nas of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\nWork or Derivative Works thereof in any medium, with or without\nmodifications, and in Source or Object form, provided that You\nmeet the following conditions:\n\n(a) You must give any other recipients of the Work or\nDerivative Works a copy of this License; and\n\n(b) You must cause any modified files to carry prominent notices\nstating that You changed the files; and\n\n(c) You must retain, in the Source form of any Derivative Works\nthat You distribute, all copyright, patent, trademark, and\nattribution notices from the Source form of the Work,\nexcluding those notices that do not pertain to any part of\nthe Derivative Works; and\n\n(d) If the Work includes a \"NOTICE\" text file as part of its\ndistribution, then any Derivative Works that You distribute must\ninclude a readable copy of the attribution notices contained\nwithin such NOTICE file, excluding those notices that do not\npertain to any part of the Derivative Works, in at least one\nof the following places: within a NOTICE text file distributed\nas part of the Derivative Works; within the Source form or\ndocumentation, if provided along with the Derivative Works; or,\nwithin a display generated by the Derivative Works, if and\nwherever such third-party notices normally appear. The contents\nof the NOTICE file are for informational purposes only and\ndo not modify the License. You may add Your own attribution\nnotices within Derivative Works that You distribute, alongside\nor as an addendum to the NOTICE text from the Work, provided\nthat such additional attribution notices cannot be construed\nas modifying the License.\n\nYou may add Your own copyright statement to Your modifications and\nmay provide additional or different license terms and conditions\nfor use, reproduction, or distribution of Your modifications, or\nfor any such Derivative Works as a whole, provided Your use,\nreproduction, and distribution of the Work otherwise complies with\nthe conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\nany Contribution intentionally submitted for inclusion in the Work\nby You to the Licensor shall be under the terms and conditions of\nthis License, without any additional terms or conditions.\nNotwithstanding the above, nothing herein shall supersede or modify\nthe terms of any separate license agreement you may have executed\nwith Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\nnames, trademarks, service marks, or product names of the Licensor,\nexcept as required for reasonable and customary use in describing the\norigin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\nagreed to in writing, Licensor provides the Work (and each\nContributor provides its Contributions) on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\nimplied, including, without limitation, any warranties or conditions\nof TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\nPARTICULAR PURPOSE. You are solely responsible for determining the\nappropriateness of using or redistributing the Work and assume any\nrisks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\nwhether in tort (including negligence), contract, or otherwise,\nunless required by applicable law (such as deliberate and grossly\nnegligent acts) or agreed to in writing, shall any Contributor be\nliable to You for damages, including any direct, indirect, special,\nincidental, or consequential damages of any character arising as a\nresult of this License or out of the use or inability to use the\nWork (including but not limited to damages for loss of goodwill,\nwork stoppage, computer failure or malfunction, or any and all\nother commercial damages or losses), even if such Contributor\nhas been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\nthe Work or Derivative Works thereof, You may choose to offer,\nand charge a fee for, acceptance of support, warranty, indemnity,\nor other liability obligations and/or rights consistent with this\nLicense. However, in accepting such obligations, You may act only\non Your own behalf and on Your sole responsibility, not on behalf\nof any other Contributor, and only if You agree to indemnify,\ndefend, and hold each Contributor harmless for any liability\nincurred by, or claims asserted against, such Contributor by reason\nof your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\nTo apply the Apache License to your work, attach the following\nboilerplate notice, with the fields enclosed by brackets \"{}\"\nreplaced with your own identifying information. (Don't include\nthe brackets!)  The text should be enclosed in the appropriate\ncomment syntax for the file format. We also recommend that a\nfile or class name and description of purpose be included on the\nsame \"printed page\" as the copyright notice for easier\nidentification within third-party archives.\n\nCopyright {yyyy} {name of copyright owner}\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "attribution": "the authors of velero-io/velero (the license file names no copyright line), Apache-2.0 license (LICENSE), https://github.com/velero-io/velero."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cshd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.redirects"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10000-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10004-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10005-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10007-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10009-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10013-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10016-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10033-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10035-HajimohammadiNet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10045-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10047-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10056-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10064-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10067-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10070-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10071-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10082-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10087-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10091-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10093-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10098-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10102-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10106-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10125-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10126-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10127-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10132-arpitjain099"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10138-Jay2006sawant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10150-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10155-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10158-Pragati5-DEBUG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10159-Pragati5-DEBUG"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10161-AftAb-25"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10167-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10174-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10176-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10185-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10198-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10200-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10201-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10211-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10212-hsdfat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10218-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10225-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10227-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10229-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10231-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10234-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10242-beep-boopp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10243-reasonerjt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10245-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10247-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10250-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10251-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10252-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10254-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10255-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10256-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10258-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10259-Jay2006sawant"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10260-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10269-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10270-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10275-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10279-harshitsaini17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10280-nitishmalang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10283-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10292-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10293-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10307-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10308-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10309-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10312-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10315-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10317-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10318-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10322-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10329-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10333-reasonerjt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10338-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10339-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10342-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10343-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10344-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10346-reasonerjt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10349-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10352-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10353-PranjalManhgaye"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10357-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10359-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10362-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10363-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10370-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10371-samay43"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10376-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10403-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10418-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10419-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10421-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10430-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10436-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10441-Ralthos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10449-PratikMane0112"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10453-opbot-xd"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10455-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10461-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10464-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10475-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10477-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10479-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10482-MaxFreedomPollard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10490-lhjnano"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10496-lhjnano"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10500-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10501-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10506-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10507-mmustafasenoglu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10512-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10513-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10517-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10520-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10521-pujitha24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10523-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10524-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10525-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10526-Daniel-1600"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10530-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10533-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10536-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10537-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10538-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10549-shoemoney"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10550-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10553-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10554-pujitha24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10558-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10562-reasonerjt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10565-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10570-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10574-Kaizhe"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10578-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10579-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10582-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10585-officialasishkumar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10588-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10593-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10596-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10598-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10601-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10605-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10607-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10608-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10612-prasadjoshi12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10617-git-jxj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10619-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10621-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10630-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10631-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10635-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10636-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10637-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10638-SatvikMishra08"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10640-abhayrajjais01"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10643-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10644-krishhna24"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10650-reasonerjt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10651-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9221-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9403-GabriFedi97"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9502-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9508-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9516-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9528-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9532-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9533-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9540-sseago"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9547-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9554-testsabirweb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9558-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9560-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9561-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9570-H-M-Quang-Ngo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9574-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9575-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9581-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9613-pjjw"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9614-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9628-priyansh17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9634-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9638-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9643-priyansh17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9646-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9653-BassinD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9654-pierluigilenoci"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9663-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9668-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9676-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9677-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9682-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9683-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9684-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9693-priyansh17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9695-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9697-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9700-priyansh17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9701-emirot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9704-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9705-emirot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9716-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9720-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9724-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9728-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9732-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9736-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9740-emirot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9773-emirot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9791-christian-schlichtherle"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9792-subhramit"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9795-kaovilai"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9807-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9808-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9817-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9819-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9821-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9840-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9844-Copilot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9845-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9846-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9847-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9848-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9853-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9861-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9862-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9863-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9864-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9867-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9875-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9880-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9881-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9887-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9892-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9896-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9899-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9903-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9904-Joeavaikath"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9906-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9908-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9913-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9920-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9921-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9928-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9930-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9932-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9933-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9939-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9941-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9943-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9944-lubronzhan"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9945-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9946-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9952-alliasgher"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9954-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9955-sseago"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9966-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9967-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9968-ywk253100"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9974-blackpiglet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9978-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9979-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9982-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9983-prajoshi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9987-Shashank1306s"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9989-adam-jian-zhang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9993-chlins"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9994-Lyndon-Li"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/9995-shubham-pampattiwar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Dockerfile-Windows"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/OWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/Tiltfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cloud"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/kubeconfig"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

@@ -1,0 +1,1476 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/opensearch-project/OpenSearch",
+  "revision": "b1e2871ed77c8f1136f0bcdee14359c398c4db00",
+  "checksum": "sha256:f9a00cf5ffa618cf0fc4d6c54e0a606de7da6db1569558ba293a60b62b937283",
+  "extract": {
+    "exclude": [
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_adoptopenjdk_linux.tar.gz",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_adoptopenjdk_osx.tar.gz",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_adoptopenjdk_windows.zip",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_openjdk_linux.tar.gz",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_openjdk_osx.tar.gz",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_openjdk_windows.zip",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_opensearch.tar.gz",
+      "buildSrc/src/integTest/resources/org/opensearch/gradle/fake_opensearch.zip",
+      "buildSrc/src/main/resources/license-headers/**",
+      "buildSrc/src/main/resources/opensearch-fips-truststore.bcfks",
+      "buildSrc/src/main/resources/test/ssl/test-client.crt",
+      "buildSrc/src/main/resources/test/ssl/test-client.jks",
+      "buildSrc/src/main/resources/test/ssl/test-node.bcfks",
+      "buildSrc/src/main/resources/test/ssl/test-node.crt",
+      "buildSrc/src/main/resources/test/ssl/test-node.jks",
+      "buildSrc/src/test/resources/ca.p12",
+      "buildSrc/src/testKit/opensearch.build/**",
+      "client/rest/src/test/resources/test.der",
+      "client/rest/src/test/resources/test_truststore.bcfks",
+      "client/rest/src/test/resources/test_truststore.jks",
+      "client/rest/src/test/resources/testks.bcfks",
+      "client/rest/src/test/resources/testks.jks",
+      "client/rest-high-level/testnode.jks",
+      "distribution/packages/src/deb/**",
+      "distribution/src/bin/opensearch-service-mgr.exe",
+      "distribution/src/bin/opensearch-service-x64.exe",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "libs/common/src/test/resources/org/opensearch/common/bootstrap/**",
+      "libs/nio/src/test/resources/**",
+      "libs/ssl-config/src/test/resources/certs/ca-all/**",
+      "libs/ssl-config/src/test/resources/certs/ca1/ca.bcfks",
+      "libs/ssl-config/src/test/resources/certs/ca1/ca.p12",
+      "libs/ssl-config/src/test/resources/certs/ca2/ca.bcfks",
+      "libs/ssl-config/src/test/resources/certs/ca2/ca.p12",
+      "libs/ssl-config/src/test/resources/certs/ca3/ca.bcfks",
+      "libs/ssl-config/src/test/resources/certs/ca3/ca.p12",
+      "libs/ssl-config/src/test/resources/certs/cert-all/**",
+      "libs/ssl-config/src/test/resources/certs/cert1/cert1.p12",
+      "libs/ssl-config/src/test/resources/certs/cert2/cert2.p12",
+      "libs/ssl-config/src/test/resources/certs/pem-utils/testnode.bcfks",
+      "libs/ssl-config/src/test/resources/certs/pem-utils/testnode.jks",
+      "libs/x-content/src/test/resources/**",
+      "modules/reindex/src/test/resources/org/opensearch/index/reindex/ca.p12",
+      "modules/transport-grpc/src/test/resources/netty4-client-secure.bcfks",
+      "modules/transport-grpc/src/test/resources/netty4-client-secure.jks",
+      "modules/transport-grpc/src/test/resources/netty4-client-secure.p12",
+      "modules/transport-grpc/src/test/resources/netty4-server-secure.bcfks",
+      "modules/transport-grpc/src/test/resources/netty4-server-secure.jks",
+      "modules/transport-grpc/src/test/resources/netty4-server-secure.p12",
+      "modules/transport-netty4/src/test/resources/netty4-client-truststore.bcfks",
+      "modules/transport-netty4/src/test/resources/netty4-client-truststore.jks",
+      "modules/transport-netty4/src/test/resources/netty4-client-truststore.p12",
+      "modules/transport-netty4/src/test/resources/netty4-server-keystore.bcfks",
+      "modules/transport-netty4/src/test/resources/netty4-server-keystore.jks",
+      "modules/transport-netty4/src/test/resources/netty4-server-keystore.p12",
+      "plugins/discovery-gce/src/main/resources/**",
+      "plugins/ingest-attachment/src/main/resources/**",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/bad_tika.zip",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/encrypted.pdf",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/issue-104.docx",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/issue-22077.doc",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/issue-22077.docx",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/issue-22077.vsdx",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/test.pdf",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/testEPUB.epub",
+      "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/tika-files/**",
+      "plugins/repository-gcs/src/internalClusterTest/resources/**",
+      "plugins/repository-gcs/src/test/resources/google.bcfks",
+      "plugins/repository-gcs/src/test/resources/google.p12",
+      "sandbox/plugins/analytics-backend-datafusion/src/test/resources/**",
+      "server/src/main/resources/config/**",
+      "server/src/test/java/org/opensearch/deps/**",
+      "server/src/test/resources/indices/analyze/conf_dir/hunspell/en_US/en_US.dic",
+      "server/src/test/resources/indices/analyze/conf_dir/hunspell/en_US_custom/en_US.dic",
+      "server/src/test/resources/indices/analyze/no_aff_conf_dir/**",
+      "server/src/test/resources/indices/analyze/two_aff_conf_dir/hunspell/en_US/en_US.dic",
+      "server/src/test/resources/indices/bwc/os-1.3.0/testIndex-os-1.3.0.zip",
+      "server/src/test/resources/indices/bwc/unsupported-2.4.5.zip",
+      "server/src/test/resources/org/opensearch/bootstrap/truststore/opensearch-fips-truststore.bcfks",
+      "server/src/test/resources/org/opensearch/cluster/**",
+      "server/src/test/resources/org/opensearch/env/**",
+      "server/src/test/resources/org/opensearch/gateway/**",
+      "server/src/test/resources/org/opensearch/index/checkpoint/**",
+      "server/src/test/resources/org/opensearch/index/translog/**",
+      "server/src/test/resources/org/opensearch/plugins/**",
+      "server/src/test/resources/org/opensearch/search/geo/**",
+      "test/fixtures/hdfs-fixture/src/main/resources/**"
+    ]
+  },
+  "history": {
+    "since": "fb1fa31b656e167c5e36fb175f30328851810a8a"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.txt:\n\nOpenSearch (https://opensearch.org/)\nCopyright OpenSearch Contributors\n\nThis product includes software developed by\nElasticsearch (http://www.elastic.co).\nCopyright 2009-2018 Elasticsearch\n\nThis product includes software developed by The Apache Software\nFoundation (http://www.apache.org/).\n\nThis product includes software developed by\nJoda.org (http://www.joda.org/).\n\nThis product includes software developed by\nMorten Haraldsen (ethlo) (https://github.com/ethlo) under the Apache License, version 2.0.\n",
+      "attribution": "Commit history of https://github.com/opensearch-project/OpenSearch: Copyright OpenSearch Contributors; Copyright 2009-2018 Elasticsearch, Apache-2.0 license (LICENSE.txt), https://github.com/opensearch-project/OpenSearch."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".ci/**",
+        ".dir-locals.el",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        ".lychee.excludes",
+        ".whitesource",
+        "ADMINS.md",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "DEVELOPER_GUIDE.md",
+        "LICENSE.txt",
+        "MAINTAINERS.md",
+        "NOTICE.txt",
+        "PERFORMANCE_BENCHMARKS.md",
+        "README.md",
+        "RELEASING.md",
+        "SECURITY.md",
+        "TESTING.md",
+        "TRIAGING.md",
+        "benchmarks/**",
+        "build.gradle",
+        "buildSrc/.gitignore",
+        "buildSrc/build.gradle",
+        "buildSrc/formatterConfig.xml",
+        "buildSrc/reaper/**",
+        "buildSrc/settings.gradle",
+        "buildSrc/src/integTest/groovy/**",
+        "buildSrc/src/integTest/java/**",
+        "buildSrc/src/integTest/resources/org/opensearch/gradle/internal/**",
+        "buildSrc/src/main/groovy/**",
+        "buildSrc/src/main/java/**",
+        "buildSrc/src/main/resources/META-INF/**",
+        "buildSrc/src/main/resources/buildSrc.marker",
+        "buildSrc/src/main/resources/deb/**",
+        "buildSrc/src/main/resources/eclipse.settings/**",
+        "buildSrc/src/main/resources/forbidden/**",
+        "buildSrc/src/main/resources/minimumCompilerVersion",
+        "buildSrc/src/main/resources/minimumGradleVersion",
+        "buildSrc/src/main/resources/minimumRuntimeVersion",
+        "buildSrc/src/main/resources/opensearch.properties",
+        "buildSrc/src/main/resources/plugin-descriptor.properties",
+        "buildSrc/src/main/resources/rat-config.xml",
+        "buildSrc/src/main/resources/test/ssl/README.md",
+        "buildSrc/src/test/java/**",
+        "buildSrc/src/test/resources/ca.pem",
+        "buildSrc/src/test/resources/plugin/**",
+        "buildSrc/src/test/resources/pluginzip/**",
+        "buildSrc/src/testFixtures/**",
+        "buildSrc/src/testKit/opensearch-build-resources/**",
+        "buildSrc/src/testKit/reaper/**",
+        "buildSrc/src/testKit/symbolic-link-preserving-tar/**",
+        "buildSrc/src/testKit/testingConventions/**",
+        "buildSrc/src/testKit/thirdPartyAudit/**",
+        "buildSrc/version.properties",
+        "client/rest/build.gradle",
+        "client/rest/licenses/**",
+        "client/rest/src/main/**",
+        "client/rest/src/test/java/**",
+        "client/rest/src/test/resources/test.crt",
+        "client/rest-high-level/build.gradle",
+        "client/rest-high-level/roles.yml",
+        "client/rest-high-level/src/**",
+        "client/rest-high-level/testnode.crt",
+        "client/rest-http-client/**",
+        "client/sniffer/**",
+        "client/test/**",
+        "codecov.yml",
+        "dev-tools/**",
+        "distribution/README.md",
+        "distribution/archives/**",
+        "distribution/build.gradle",
+        "distribution/bwc/**",
+        "distribution/docker/**",
+        "distribution/licenses/**",
+        "distribution/packages/arm64-deb/**",
+        "distribution/packages/arm64-no-jdk-deb/**",
+        "distribution/packages/arm64-no-jdk-rpm/**",
+        "distribution/packages/arm64-rpm/**",
+        "distribution/packages/build.gradle",
+        "distribution/packages/deb/**",
+        "distribution/packages/no-jdk-arm64-deb/**",
+        "distribution/packages/no-jdk-arm64-rpm/**",
+        "distribution/packages/no-jdk-deb/**",
+        "distribution/packages/no-jdk-rpm/**",
+        "distribution/packages/rpm/**",
+        "distribution/packages/src/common/**",
+        "distribution/packages/src/rpm/**",
+        "distribution/src/bin/opensearch",
+        "distribution/src/bin/opensearch-cli",
+        "distribution/src/bin/opensearch-cli.bat",
+        "distribution/src/bin/opensearch-env",
+        "distribution/src/bin/opensearch-env-from-file",
+        "distribution/src/bin/opensearch-env.bat",
+        "distribution/src/bin/opensearch-fips-demo-installer",
+        "distribution/src/bin/opensearch-fips-demo-installer.bat",
+        "distribution/src/bin/opensearch-heap-prof",
+        "distribution/src/bin/opensearch-keystore",
+        "distribution/src/bin/opensearch-keystore.bat",
+        "distribution/src/bin/opensearch-node",
+        "distribution/src/bin/opensearch-node.bat",
+        "distribution/src/bin/opensearch-plugin",
+        "distribution/src/bin/opensearch-plugin.bat",
+        "distribution/src/bin/opensearch-service.bat",
+        "distribution/src/bin/opensearch-shard",
+        "distribution/src/bin/opensearch-shard.bat",
+        "distribution/src/bin/opensearch.bat",
+        "distribution/src/config/**",
+        "distribution/tools/**",
+        "doc-tools/**",
+        "docs/**",
+        "formal-models/**",
+        "gradle/build-complete.gradle",
+        "gradle/build-scan.gradle",
+        "gradle/bwc-test.gradle",
+        "gradle/code-coverage.gradle",
+        "gradle/fips.gradle",
+        "gradle/forbidden-dependencies.gradle",
+        "gradle/formatting.gradle",
+        "gradle/ide.gradle",
+        "gradle/libs.versions.toml",
+        "gradle/local-distribution.gradle",
+        "gradle/missing-javadoc.gradle",
+        "gradle/run.gradle",
+        "gradle/runtime-jdk-provision.gradle",
+        "gradle/sandbox-testclusters.gradle",
+        "gradle/security-setup.gradle",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "libs/agent-sm/**",
+        "libs/arrow-spi/**",
+        "libs/build.gradle",
+        "libs/cli/**",
+        "libs/common/build.gradle",
+        "libs/common/src/main/**",
+        "libs/common/src/test/java/**",
+        "libs/common/src/test/resources/org/acme/**",
+        "libs/common/src/test/resources/org/opensearch/common/annotation/**",
+        "libs/compress/**",
+        "libs/concurrent-queue/**",
+        "libs/core/**",
+        "libs/dissect/**",
+        "libs/geo/**",
+        "libs/grok/**",
+        "libs/netty4/**",
+        "libs/nio/build.gradle",
+        "libs/nio/src/main/**",
+        "libs/nio/src/test/java/**",
+        "libs/plugin-classloader/**",
+        "libs/secure-sm/**",
+        "libs/ssl-config/build.gradle",
+        "libs/ssl-config/licenses/**",
+        "libs/ssl-config/src/main/**",
+        "libs/ssl-config/src/test/java/**",
+        "libs/ssl-config/src/test/resources/certs/README.md",
+        "libs/ssl-config/src/test/resources/certs/ca1/ca.crt",
+        "libs/ssl-config/src/test/resources/certs/ca1/ca.key",
+        "libs/ssl-config/src/test/resources/certs/ca1-b/**",
+        "libs/ssl-config/src/test/resources/certs/ca2/ca.crt",
+        "libs/ssl-config/src/test/resources/certs/ca2/ca.key",
+        "libs/ssl-config/src/test/resources/certs/ca3/ca.crt",
+        "libs/ssl-config/src/test/resources/certs/ca3/ca.key",
+        "libs/ssl-config/src/test/resources/certs/cert1/cert1-pkcs1.crt",
+        "libs/ssl-config/src/test/resources/certs/cert1/cert1-pkcs1.key",
+        "libs/ssl-config/src/test/resources/certs/cert1/cert1.crt",
+        "libs/ssl-config/src/test/resources/certs/cert1/cert1.key",
+        "libs/ssl-config/src/test/resources/certs/cert2/cert2-pkcs1.crt",
+        "libs/ssl-config/src/test/resources/certs/cert2/cert2-pkcs1.key",
+        "libs/ssl-config/src/test/resources/certs/cert2/cert2.crt",
+        "libs/ssl-config/src/test/resources/certs/cert2/cert2.key",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/README.md",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/certificate_secp256r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/certificate_secp384r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/certificate_secp521r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/corrupted_key_pkcs8_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/dsa_key_openssl_encrypted.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/dsa_key_openssl_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/dsa_key_openssl_plain_with_params.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/dsa_key_pkcs8_encrypted.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/dsa_key_pkcs8_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/ec_key_openssl_encrypted.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/ec_key_openssl_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/ec_key_openssl_plain_with_params.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/ec_key_pkcs8_encrypted.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/ec_key_pkcs8_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/empty.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/key_DSA_enc_pbkdf2.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/key_EC_enc_pbkdf2.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/key_PKCS8_enc_pbkdf2.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/key_pkcs8_encrypted.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/key_unsupported.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/private_secp256r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/private_secp384r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/private_secp521r1.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/rsa_key_pkcs8_plain.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode-aes128.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode-aes192.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode-aes256.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode-unprotected.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode.crt",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode.pem",
+        "libs/ssl-config/src/test/resources/certs/pem-utils/testnode_with_bagattrs.pem",
+        "libs/task-commons/**",
+        "libs/telemetry/**",
+        "libs/x-content/build.gradle",
+        "libs/x-content/licenses/**",
+        "libs/x-content/src/main/**",
+        "libs/x-content/src/test/java/**",
+        "licenses/**",
+        "modules/aggs-matrix-stats/**",
+        "modules/analysis-common/**",
+        "modules/autotagging-commons/**",
+        "modules/build.gradle",
+        "modules/cache-common/**",
+        "modules/concurrency-limit/**",
+        "modules/geo/**",
+        "modules/ingest-common/**",
+        "modules/ingest-geoip/**",
+        "modules/ingest-user-agent/**",
+        "modules/lang-expression/**",
+        "modules/lang-mustache/**",
+        "modules/lang-painless/**",
+        "modules/mapper-extras/**",
+        "modules/opensearch-dashboards/**",
+        "modules/parent-join/**",
+        "modules/percolator/**",
+        "modules/rank-eval/**",
+        "modules/reindex/build.gradle",
+        "modules/reindex/src/internalClusterTest/**",
+        "modules/reindex/src/javaRestTest/**",
+        "modules/reindex/src/main/**",
+        "modules/reindex/src/test/java/**",
+        "modules/reindex/src/test/resources/org/opensearch/index/reindex/README.md",
+        "modules/reindex/src/test/resources/org/opensearch/index/reindex/ca.key",
+        "modules/reindex/src/test/resources/org/opensearch/index/reindex/ca.pem",
+        "modules/reindex/src/test/resources/org/opensearch/index/reindex/client/**",
+        "modules/reindex/src/test/resources/org/opensearch/index/reindex/http/**",
+        "modules/reindex/src/test/resources/responses/**",
+        "modules/reindex/src/yamlRestTest/**",
+        "modules/repository-url/**",
+        "modules/search-pipeline-common/**",
+        "modules/store-subdirectory/**",
+        "modules/systemd/**",
+        "modules/transport-grpc/README.md",
+        "modules/transport-grpc/build.gradle",
+        "modules/transport-grpc/licenses/**",
+        "modules/transport-grpc/spi/**",
+        "modules/transport-grpc/src/internalClusterTest/**",
+        "modules/transport-grpc/src/main/**",
+        "modules/transport-grpc/src/test/java/**",
+        "modules/transport-grpc/src/test/resources/README.md",
+        "modules/transport-grpc/src/test/resources/README.txt",
+        "modules/transport-grpc/src/test/resources/client.crt",
+        "modules/transport-grpc/src/test/resources/client.key",
+        "modules/transport-grpc/src/test/resources/openssl-san.conf",
+        "modules/transport-grpc/src/test/resources/server.crt",
+        "modules/transport-grpc/src/test/resources/server.key",
+        "modules/transport-netty4/build.gradle",
+        "modules/transport-netty4/licenses/**",
+        "modules/transport-netty4/src/internalClusterTest/**",
+        "modules/transport-netty4/src/javaRestTest/**",
+        "modules/transport-netty4/src/main/**",
+        "modules/transport-netty4/src/test/java/**",
+        "modules/transport-netty4/src/test/resources/README.md",
+        "modules/transport-netty4/src/test/resources/openssl.conf",
+        "modules/transport-netty4/src/test/resources/root.crt",
+        "modules/transport-netty4/src/test/resources/root.key",
+        "modules/transport-netty4/src/test/resources/root.srl",
+        "modules/transport-netty4/src/test/resources/server.crt",
+        "modules/transport-netty4/src/test/resources/server.csr",
+        "modules/transport-netty4/src/test/resources/server.key",
+        "modules/transport-netty4/src/yamlRestTest/**",
+        "plugins/analysis-icu/**",
+        "plugins/analysis-kuromoji/**",
+        "plugins/analysis-nori/**",
+        "plugins/analysis-phonenumber/**",
+        "plugins/analysis-phonetic/**",
+        "plugins/analysis-smartcn/**",
+        "plugins/analysis-stempel/**",
+        "plugins/analysis-ukrainian/**",
+        "plugins/arrow-base/**",
+        "plugins/arrow-flight-rpc/**",
+        "plugins/build.gradle",
+        "plugins/cache-ehcache/**",
+        "plugins/crypto-kms/**",
+        "plugins/discovery-azure-classic/**",
+        "plugins/discovery-ec2/**",
+        "plugins/discovery-gce/build.gradle",
+        "plugins/discovery-gce/licenses/**",
+        "plugins/discovery-gce/qa/**",
+        "plugins/discovery-gce/src/internalClusterTest/**",
+        "plugins/discovery-gce/src/main/java/**",
+        "plugins/discovery-gce/src/main/plugin-metadata/**",
+        "plugins/discovery-gce/src/test/**",
+        "plugins/discovery-gce/src/yamlRestTest/**",
+        "plugins/examples/**",
+        "plugins/ingest-attachment/build.gradle",
+        "plugins/ingest-attachment/licenses/**",
+        "plugins/ingest-attachment/src/main/java/**",
+        "plugins/ingest-attachment/src/main/plugin-metadata/**",
+        "plugins/ingest-attachment/src/test/java/**",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/.checksums",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/asciidoc.asciidoc",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/htmlWithEmptyDateMeta.html",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/htmlWithValidDateMeta.html",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/htmlWithoutDateMeta.html",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/testContentLength.txt",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/testXHTML.html",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/text-empty.txt",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/text-gibberish.txt",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/text-in-english.txt",
+        "plugins/ingest-attachment/src/test/resources/org/opensearch/ingest/attachment/test/sample-files/text-in-french.txt",
+        "plugins/ingest-attachment/src/yamlRestTest/**",
+        "plugins/ingestion-fs/**",
+        "plugins/ingestion-hive/**",
+        "plugins/ingestion-kafka/**",
+        "plugins/ingestion-kinesis/**",
+        "plugins/mapper-annotated-text/**",
+        "plugins/mapper-murmur3/**",
+        "plugins/mapper-size/**",
+        "plugins/repository-azure/**",
+        "plugins/repository-gcs/build.gradle",
+        "plugins/repository-gcs/licenses/**",
+        "plugins/repository-gcs/src/internalClusterTest/java/**",
+        "plugins/repository-gcs/src/main/**",
+        "plugins/repository-gcs/src/test/java/**",
+        "plugins/repository-gcs/src/test/resources/README.md",
+        "plugins/repository-gcs/src/yamlRestTest/**",
+        "plugins/repository-hdfs/**",
+        "plugins/repository-s3/**",
+        "plugins/store-smb/**",
+        "plugins/telemetry-otel/**",
+        "plugins/transport-reactor-netty4/**",
+        "plugins/workload-management/**",
+        "qa/**",
+        "release-notes/**",
+        "rest-api-spec/**",
+        "sandbox/build.gradle",
+        "sandbox/libs/**",
+        "sandbox/modules/**",
+        "sandbox/patches/**",
+        "sandbox/plugins/analytics-backend-datafusion/.gitignore",
+        "sandbox/plugins/analytics-backend-datafusion/README.md",
+        "sandbox/plugins/analytics-backend-datafusion/build.gradle",
+        "sandbox/plugins/analytics-backend-datafusion/licenses/**",
+        "sandbox/plugins/analytics-backend-datafusion/rust/**",
+        "sandbox/plugins/analytics-backend-datafusion/src/internalClusterTest/**",
+        "sandbox/plugins/analytics-backend-datafusion/src/main/**",
+        "sandbox/plugins/analytics-backend-datafusion/src/propertyTest/**",
+        "sandbox/plugins/analytics-backend-datafusion/src/test/java/**",
+        "sandbox/plugins/analytics-backend-lucene/**",
+        "sandbox/plugins/analytics-engine/**",
+        "sandbox/plugins/block-cache-foyer/**",
+        "sandbox/plugins/build.gradle",
+        "sandbox/plugins/composite-engine/**",
+        "sandbox/plugins/dsl-query-executor/**",
+        "sandbox/plugins/native-repository-azure/**",
+        "sandbox/plugins/native-repository-fs/**",
+        "sandbox/plugins/native-repository-gcs/**",
+        "sandbox/plugins/native-repository-s3/**",
+        "sandbox/plugins/parquet-data-format/**",
+        "sandbox/plugins/test-ppl-frontend/**",
+        "sandbox/qa/**",
+        "scripts/**",
+        "server/build.gradle",
+        "server/cli/**",
+        "server/licenses/**",
+        "server/src/internalClusterTest/**",
+        "server/src/main/java/**",
+        "server/src/main/proto/**",
+        "server/src/main/resources/META-INF/**",
+        "server/src/main/resources/org/**",
+        "server/src/test/java/org/opensearch/BuildTests.java",
+        "server/src/test/java/org/opensearch/ExceptionSerializationTests.java",
+        "server/src/test/java/org/opensearch/ExceptionsHelperTests.java",
+        "server/src/test/java/org/opensearch/OpenSearchExceptionTests.java",
+        "server/src/test/java/org/opensearch/OpenSearchTimeoutExceptionTests.java",
+        "server/src/test/java/org/opensearch/SpecialPermissionTests.java",
+        "server/src/test/java/org/opensearch/VersionTests.java",
+        "server/src/test/java/org/opensearch/action/**",
+        "server/src/test/java/org/opensearch/bootstrap/**",
+        "server/src/test/java/org/opensearch/cluster/**",
+        "server/src/test/java/org/opensearch/common/**",
+        "server/src/test/java/org/opensearch/core/**",
+        "server/src/test/java/org/opensearch/crypto/**",
+        "server/src/test/java/org/opensearch/discovery/**",
+        "server/src/test/java/org/opensearch/env/**",
+        "server/src/test/java/org/opensearch/extensions/**",
+        "server/src/test/java/org/opensearch/gateway/**",
+        "server/src/test/java/org/opensearch/http/**",
+        "server/src/test/java/org/opensearch/identity/**",
+        "server/src/test/java/org/opensearch/index/**",
+        "server/src/test/java/org/opensearch/indices/**",
+        "server/src/test/java/org/opensearch/ingest/**",
+        "server/src/test/java/org/opensearch/lucene/**",
+        "server/src/test/java/org/opensearch/monitor/**",
+        "server/src/test/java/org/opensearch/node/**",
+        "server/src/test/java/org/opensearch/nodesinfo/**",
+        "server/src/test/java/org/opensearch/persistent/**",
+        "server/src/test/java/org/opensearch/plugin/**",
+        "server/src/test/java/org/opensearch/plugins/**",
+        "server/src/test/java/org/opensearch/ratelimitting/**",
+        "server/src/test/java/org/opensearch/recovery/**",
+        "server/src/test/java/org/opensearch/repositories/**",
+        "server/src/test/java/org/opensearch/rest/**",
+        "server/src/test/java/org/opensearch/script/**",
+        "server/src/test/java/org/opensearch/search/**",
+        "server/src/test/java/org/opensearch/snapshots/**",
+        "server/src/test/java/org/opensearch/storage/**",
+        "server/src/test/java/org/opensearch/tasks/**",
+        "server/src/test/java/org/opensearch/telemetry/**",
+        "server/src/test/java/org/opensearch/test/**",
+        "server/src/test/java/org/opensearch/threadpool/**",
+        "server/src/test/java/org/opensearch/transport/**",
+        "server/src/test/java/org/opensearch/usage/**",
+        "server/src/test/java/org/opensearch/watcher/**",
+        "server/src/test/java/org/opensearch/wlm/**",
+        "server/src/test/resources/META-INF/**",
+        "server/src/test/resources/config/**",
+        "server/src/test/resources/indices/analyze/conf_dir/analyzers/**",
+        "server/src/test/resources/indices/analyze/conf_dir/hunspell/en_US/en_US.aff",
+        "server/src/test/resources/indices/analyze/conf_dir/hunspell/en_US_custom/en_US.aff",
+        "server/src/test/resources/indices/analyze/conf_dir/hunspell/en_US_custom/settings.yml",
+        "server/src/test/resources/indices/analyze/two_aff_conf_dir/hunspell/en_US/en_AU.aff",
+        "server/src/test/resources/indices/analyze/two_aff_conf_dir/hunspell/en_US/en_US.aff",
+        "server/src/test/resources/indices/bwc/os-1.3.0/README.md",
+        "server/src/test/resources/org/opensearch/action/**",
+        "server/src/test/resources/org/opensearch/bootstrap/test-codebases.policy",
+        "server/src/test/resources/org/opensearch/bootstrap/test.policy",
+        "server/src/test/resources/org/opensearch/bootstrap/truststore/README.md",
+        "server/src/test/resources/org/opensearch/common/**",
+        "server/src/test/resources/org/opensearch/index/analysis/**",
+        "server/src/test/resources/org/opensearch/index/mapper/**",
+        "server/src/test/resources/org/opensearch/index/query/**",
+        "server/src/test/resources/org/opensearch/search/pipeline/**",
+        "server/src/test/resources/org/opensearch/search/query/**",
+        "server/src/test/resources/org/opensearch/tasks/**",
+        "settings.gradle",
+        "test/build.gradle",
+        "test/external-modules/**",
+        "test/fixtures/azure-fixture/**",
+        "test/fixtures/build.gradle",
+        "test/fixtures/gcs-fixture/**",
+        "test/fixtures/hdfs-fixture/build.gradle",
+        "test/fixtures/hdfs-fixture/src/main/java/**",
+        "test/fixtures/krb5kdc-fixture/**",
+        "test/fixtures/minio-fixture/**",
+        "test/fixtures/s3-fixture/**",
+        "test/framework/**",
+        "test/logger-usage/**",
+        "test/telemetry/**",
+        "whitesource.config"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\nNOTICE.txt:\n\nOpenSearch (https://opensearch.org/)\nCopyright OpenSearch Contributors\n\nThis product includes software developed by\nElasticsearch (http://www.elastic.co).\nCopyright 2009-2018 Elasticsearch\n\nThis product includes software developed by The Apache Software\nFoundation (http://www.apache.org/).\n\nThis product includes software developed by\nJoda.org (http://www.joda.org/).\n\nThis product includes software developed by\nMorten Haraldsen (ethlo) (https://github.com/ethlo) under the Apache License, version 2.0.\n",
+      "attribution": "Copyright OpenSearch Contributors; Copyright 2009-2018 Elasticsearch, Apache-2.0 license (LICENSE.txt), https://github.com/opensearch-project/OpenSearch."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elisp",
+      "paths": [
+        "**/*.el"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "rust",
+      "paths": [
+        "**/*.rs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.AnalyticsSearchBackendPlugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CalendarDataProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ClasspathPluginIT$SampleExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Codec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CompressorProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ErrorOnUnknown"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.GrpcServiceFactory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MediaTypeProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MockMaker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.NamedXContentProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.NativeRemoteObjectStoreProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PainlessExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PluginsServiceTests$TestExtensionPoint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PostingsFormat"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.RuleFrameworkExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.XContentBuilderExtension"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.aff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.annotation"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.asciidoc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.csr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.eks"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.excludes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.g4"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.help"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jenkinsfile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.keystore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.marker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.painless"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.policy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ppl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.prefs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.rbbi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.security"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sha256"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.srl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.template"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.thrift"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tla"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tokens"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unknown"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.unknown_with_options"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.checksums"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.classpath1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.whitesource"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/apache-log4j-extras-DEPENDENCIES"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/aws"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bacula"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bind"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bro"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/bwcVersions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dockerOnLinuxExclusions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/exim"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/firewalls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/google-compute-default-zone"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/grok-patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/haproxy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/hostname"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/instances"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ip"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jackson-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jackson-NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jackson-core-LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/jackson-core-NOTICE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/junos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/linux-syslog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/maven"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mcollective-patterns"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/minimumCompilerVersion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/minimumGradleVersion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/minimumRuntimeVersion"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/mongodb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nagios"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nothing_to_see_here"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-cli"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-env-from-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-fips-demo-installer"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-heap-prof"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-keystore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-node"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-plugin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/opensearch-shard"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postgresql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/postrm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/posttrans"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/preinst"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prerm"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/project-id"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rails"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/redis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ruby"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/squid"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/systemd-entrypoint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/test"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/token"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/Cargo.lock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

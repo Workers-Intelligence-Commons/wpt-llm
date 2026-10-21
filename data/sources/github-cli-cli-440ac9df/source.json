@@ -1,0 +1,534 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/cli/cli",
+  "revision": "59e9f78eacdf2554f8534d166808c3e9b8c7ebcb",
+  "checksum": "sha256:fa98fc91e80f9cc971e7e5b0052d648e0da405210d55ffc015b6036a13a434d8",
+  "extract": {
+    "exclude": [
+      ".github/codeql/tests/unsanitized-response-to-terminal/vendor/**",
+      "docs/**",
+      "git/fixtures/simple.git/index",
+      "git/fixtures/simple.git/objects/**",
+      "pkg/cmd/attestation/test/data/gh_2.60.1_windows_arm64.zip",
+      "pkg/cmd/attestation/test/data/github_provenance_demo-0.0.12-py3-none-any.whl",
+      "pkg/cmd/attestation/test/data/github_release_artifact.zip",
+      "pkg/cmd/attestation/test/data/github_release_artifact_invalid.zip",
+      "pkg/cmd/attestation/test/data/reusable-workflow-artifact",
+      "pkg/cmd/attestation/test/data/sigstore-js-2.1.0.tgz",
+      "pkg/cmd/repo/license/**"
+    ]
+  },
+  "history": {
+    "since": "7f3bc25e3ae3833518cbc0efa6ff61aba709e8a4"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/cli/cli: Copyright (c) 2019 GitHub Inc., MIT license (LICENSE), https://github.com/cli/cli."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".experiments/**",
+        ".gitattributes",
+        ".github/ACCESSIBILITY.md",
+        ".github/CODE-OF-CONDUCT.md",
+        ".github/CODEOWNERS",
+        ".github/CONTRIBUTING.md",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/SECURITY.md",
+        ".github/agents/**",
+        ".github/aw/**",
+        ".github/codeql/codeql-config.yml",
+        ".github/codeql/codeql-pack.lock.yml",
+        ".github/codeql/qlpack.yml",
+        ".github/codeql/queries/**",
+        ".github/codeql/tests/.gitignore",
+        ".github/codeql/tests/codeql-pack.lock.yml",
+        ".github/codeql/tests/unsanitized-response-to-terminal/go.mod",
+        ".github/codeql/tests/unsanitized-response-to-terminal/go.sum",
+        ".github/codeql/tests/unsanitized-response-to-terminal/hits_base64_after_json.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/hits_iocopy_crossfunc.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/hits_readall_intraproc.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/hits_scanner_crossfunc.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/hits_untrusted_raw.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_contentout.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_decoder_decode.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_disk_roundtrip.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_field_after_unmarshal.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_file_sink.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_sanitized.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/misses_untrusted_string.go",
+        ".github/codeql/tests/unsanitized-response-to-terminal/pkg/**",
+        ".github/codeql/tests/unsanitized-response-to-terminal/test.expected",
+        ".github/codeql/tests/unsanitized-response-to-terminal/test.qlref",
+        ".github/dependabot.yml",
+        ".github/extensions/**",
+        ".github/golangci-lint-version",
+        ".github/govulncheck-version",
+        ".github/licenses.tmpl",
+        ".github/mcp.json",
+        ".github/skills/**",
+        ".github/workflows/**",
+        ".gitignore",
+        ".golangci.yml",
+        ".goreleaser.yml",
+        "AGENTS.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "acceptance/**",
+        "api/**",
+        "build/**",
+        "cmd/**",
+        "context/**",
+        "git/client.go",
+        "git/client_test.go",
+        "git/command.go",
+        "git/command_test.go",
+        "git/errors.go",
+        "git/fixtures/.gitignore",
+        "git/fixtures/simple.git/HEAD",
+        "git/fixtures/simple.git/config",
+        "git/fixtures/simple.git/logs/**",
+        "git/fixtures/simple.git/refs/**",
+        "git/objects.go",
+        "git/test.go",
+        "git/url.go",
+        "git/url_test.go",
+        "go.mod",
+        "go.sum",
+        "internal/**",
+        "pkg/cmd/accessibility/**",
+        "pkg/cmd/actions/**",
+        "pkg/cmd/agent-task/**",
+        "pkg/cmd/alias/**",
+        "pkg/cmd/api/**",
+        "pkg/cmd/attestation/api/**",
+        "pkg/cmd/attestation/artifact/**",
+        "pkg/cmd/attestation/attestation.go",
+        "pkg/cmd/attestation/auth/**",
+        "pkg/cmd/attestation/download/**",
+        "pkg/cmd/attestation/inspect/**",
+        "pkg/cmd/attestation/io/**",
+        "pkg/cmd/attestation/test/data/custom-issuer-artifact",
+        "pkg/cmd/attestation/test/data/custom-issuer.sigstore.json",
+        "pkg/cmd/attestation/test/data/data.go",
+        "pkg/cmd/attestation/test/data/github_provenance_demo-0.0.12-py3-none-any-bundle-missing-cert.jsonl",
+        "pkg/cmd/attestation/test/data/github_provenance_demo-0.0.12-py3-none-any-bundle-missing-verification-material.jsonl",
+        "pkg/cmd/attestation/test/data/github_provenance_demo-0.0.12-py3-none-any-bundle.jsonl",
+        "pkg/cmd/attestation/test/data/github_release_bundle.json",
+        "pkg/cmd/attestation/test/data/reusable-workflow-attestation.sigstore.json",
+        "pkg/cmd/attestation/test/data/sigstore-js-2.1.0-bundle-v0.1.json",
+        "pkg/cmd/attestation/test/data/sigstore-js-2.1.0-bundle.json",
+        "pkg/cmd/attestation/test/data/sigstore-js-2.1.0_with_2_bundles.jsonl",
+        "pkg/cmd/attestation/test/data/sigstoreBundle-invalid-signature.json",
+        "pkg/cmd/attestation/test/data/trusted_root.json",
+        "pkg/cmd/attestation/test/path.go",
+        "pkg/cmd/attestation/trustedroot/**",
+        "pkg/cmd/attestation/verification/**",
+        "pkg/cmd/attestation/verify/**",
+        "pkg/cmd/auth/**",
+        "pkg/cmd/browse/**",
+        "pkg/cmd/cache/**",
+        "pkg/cmd/codespace/**",
+        "pkg/cmd/completion/**",
+        "pkg/cmd/config/**",
+        "pkg/cmd/copilot/**",
+        "pkg/cmd/discussion/**",
+        "pkg/cmd/extension/**",
+        "pkg/cmd/factory/**",
+        "pkg/cmd/gist/**",
+        "pkg/cmd/gpg-key/**",
+        "pkg/cmd/issue/**",
+        "pkg/cmd/label/**",
+        "pkg/cmd/licenses/**",
+        "pkg/cmd/org/**",
+        "pkg/cmd/pr/**",
+        "pkg/cmd/preview/**",
+        "pkg/cmd/project/**",
+        "pkg/cmd/release/**",
+        "pkg/cmd/repo/archive/**",
+        "pkg/cmd/repo/autolink/**",
+        "pkg/cmd/repo/clone/**",
+        "pkg/cmd/repo/create/**",
+        "pkg/cmd/repo/credits/**",
+        "pkg/cmd/repo/delete/**",
+        "pkg/cmd/repo/deploy-key/**",
+        "pkg/cmd/repo/edit/**",
+        "pkg/cmd/repo/fork/**",
+        "pkg/cmd/repo/gitignore/**",
+        "pkg/cmd/repo/list/**",
+        "pkg/cmd/repo/read-dir/**",
+        "pkg/cmd/repo/read-file/**",
+        "pkg/cmd/repo/rename/**",
+        "pkg/cmd/repo/repo.go",
+        "pkg/cmd/repo/setdefault/**",
+        "pkg/cmd/repo/shared/**",
+        "pkg/cmd/repo/sync/**",
+        "pkg/cmd/repo/unarchive/**",
+        "pkg/cmd/repo/view/**",
+        "pkg/cmd/root/**",
+        "pkg/cmd/ruleset/**",
+        "pkg/cmd/run/**",
+        "pkg/cmd/search/**",
+        "pkg/cmd/secret/**",
+        "pkg/cmd/send-telemetry/**",
+        "pkg/cmd/skills/**",
+        "pkg/cmd/ssh-key/**",
+        "pkg/cmd/status/**",
+        "pkg/cmd/variable/**",
+        "pkg/cmd/version/**",
+        "pkg/cmd/workflow/**",
+        "pkg/cmdutil/**",
+        "pkg/extensions/**",
+        "pkg/findsh/**",
+        "pkg/githubtemplate/**",
+        "pkg/httpmock/**",
+        "pkg/iostreams/**",
+        "pkg/jsoncolor/**",
+        "pkg/jsonfieldstest/**",
+        "pkg/markdown/**",
+        "pkg/option/**",
+        "pkg/search/**",
+        "pkg/set/**",
+        "pkg/ssh/**",
+        "pkg/surveyext/**",
+        "script/**",
+        "skills/**",
+        "test/**",
+        "utils/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2019 GitHub Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2019 GitHub Inc., MIT license (LICENSE), https://github.com/cli/cli."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "powershell",
+      "paths": [
+        "**/*.ps1"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.expected"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qhelp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.qlref"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tmpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txtar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ubuntu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wixproj"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.wxs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/HEAD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/PLACEHOLDER"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/config"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/custom-issuer-artifact"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/distributions"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/golangci-lint-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/govulncheck-version"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/label-assets"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/licenses"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/main"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/nolint-insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pkgmacos"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/rpmmacros"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-acceptance"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/sign"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

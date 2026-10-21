@@ -1,0 +1,1365 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/spring-projects/spring-boot",
+  "revision": "e9644b19f559db8ad4825526c245ab5a5cb40909",
+  "checksum": "sha256:9b46569da756e9aaedc79844c2f9893895cafc82666872aedd428b0175c96eb5",
+  "extract": {
+    "exclude": [
+      "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/com/example/library/1.0-SNAPSHOT/library-1.0-SNAPSHOT.jar",
+      "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/commons-io-consumer/one/1.0/one-1.0.jar",
+      "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/commons-io-consumer/two/1.0/two-1.0.jar",
+      "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope/sample-1.0.0.jar",
+      "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope-default/sample-1.0.0.jar",
+      "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-additional-classpath-jar/src/main/additional-jar/**",
+      "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-system-scope/sample-1.0.0.jar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-desktop-containerd-alt-mediatype.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-desktop-containerd-manifest-list.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-desktop-containerd.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-desktop-nested-index.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-desktop.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-docker-engine.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-no-manifest.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-podman.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export-symlinks.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/export.tar",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/log-update-event-ansi.stream",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/log-update-event-invalid-stream-type.stream",
+      "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/log-update-event.stream",
+      "cli/spring-boot-cli/src/main/content/**",
+      "core/spring-boot/src/test/resources/org/springframework/boot/env/**",
+      "core/spring-boot/src/test/resources/org/springframework/boot/info/**",
+      "core/spring-boot/src/test/resources/org/springframework/boot/json/large-malformed-json.txt",
+      "core/spring-boot/src/test/resources/org/springframework/boot/ssl/jks/**",
+      "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/keystore.jks",
+      "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/keystore.pkcs12",
+      "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/test.jks",
+      "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/logging/sample.log.2021-06-15.0.gz",
+      "documentation/spring-boot-actuator-docs/src/test/resources/test.p12",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "loader/spring-boot-loader/src/test/resources/jars/**",
+      "loader/spring-boot-loader/src/test/resources/more-jars/**",
+      "loader/spring-boot-loader/src/test/resources/nested-jars/**",
+      "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/client-keystore.p12",
+      "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/client-truststore.p12",
+      "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/server-keystore.p12",
+      "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/server-truststore.p12",
+      "module/spring-boot-cassandra/src/test/resources/org/springframework/boot/cassandra/autoconfigure/test.jks",
+      "module/spring-boot-cloudfoundry/src/test/resources/**",
+      "module/spring-boot-couchbase/src/test/resources/org/springframework/boot/couchbase/autoconfigure/keystore.jks",
+      "module/spring-boot-couchbase/src/test/resources/org/springframework/boot/couchbase/autoconfigure/test.jks",
+      "module/spring-boot-data-redis/src/test/resources/**",
+      "module/spring-boot-elasticsearch/src/test/resources/**",
+      "module/spring-boot-grpc-server/src/test/resources/**",
+      "module/spring-boot-health/src/test/resources/**",
+      "module/spring-boot-http-client/src/test/resources/**",
+      "module/spring-boot-jetty/src/test/resources/**",
+      "module/spring-boot-ldap/src/test/resources/**",
+      "module/spring-boot-mail/src/test/resources/**",
+      "module/spring-boot-micrometer-metrics/src/test/resources/**",
+      "module/spring-boot-micrometer-tracing-opentelemetry/src/test/resources/**",
+      "module/spring-boot-mongodb/src/test/resources/**",
+      "module/spring-boot-opentelemetry/src/test/resources/**",
+      "module/spring-boot-rabbitmq/src/test/resources/org/**",
+      "module/spring-boot-reactor-netty/src/test/resources/org/springframework/boot/reactor/netty/test.jks",
+      "module/spring-boot-rsocket/src/test/resources/org/springframework/boot/rsocket/autoconfigure/**",
+      "module/spring-boot-rsocket/src/test/resources/org/springframework/boot/rsocket/netty/test.jks",
+      "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/servlet/test.jks",
+      "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/test.jks",
+      "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/test.jks",
+      "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/test.p12",
+      "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/reactive/test.jks",
+      "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/reactive/test.p12",
+      "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/servlet/test.jks",
+      "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/servlet/test.p12",
+      "module/spring-boot-webclient/src/test/resources/**",
+      "smoke-test/spring-boot-smoke-test-autoconfigure-classic/src/main/resources/banner.jpg",
+      "smoke-test/spring-boot-smoke-test-bootstrap-registry/src/main/java/smoketest/bootstrapregistry/external/**",
+      "smoke-test/spring-boot-smoke-test-data-cassandra/src/dockerTest/resources/ssl/test-ca.p12",
+      "smoke-test/spring-boot-smoke-test-data-cassandra/src/dockerTest/resources/ssl/test-client.p12",
+      "smoke-test/spring-boot-smoke-test-data-cassandra/src/dockerTest/resources/ssl/test-server.p12",
+      "smoke-test/spring-boot-smoke-test-jetty-ssl/src/main/resources/sample.jks",
+      "smoke-test/spring-boot-smoke-test-kafka/src/dockerTest/resources/ssl/test-ca.p12",
+      "smoke-test/spring-boot-smoke-test-kafka/src/dockerTest/resources/ssl/test-client.p12",
+      "smoke-test/spring-boot-smoke-test-kafka/src/dockerTest/resources/ssl/test-server.p12",
+      "smoke-test/spring-boot-smoke-test-simple/src/main/resources/banner.jpg",
+      "smoke-test/spring-boot-smoke-test-tomcat-jsp/src/main/resources/META-INF/**",
+      "smoke-test/spring-boot-smoke-test-tomcat-multi-connectors/src/main/resources/sample.jks",
+      "smoke-test/spring-boot-smoke-test-tomcat-ssl/src/main/resources/sample.jks",
+      "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/static/favicon.ico"
+    ]
+  },
+  "history": {
+    "since": "9059c7574b62e9820e2836e7c0b140984a0422df"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\nNOTICE.txt:\n\nSpring Boot ${version}\nCopyright (c) 2012-2026 VMware, Inc.\n\nThis product is licensed to you under the ${license}\n(the \"License\"). You may not use this product except in compliance with\nthe License.",
+      "attribution": "Commit history of https://github.com/spring-projects/spring-boot: the authors of spring-projects/spring-boot (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-boot; Copyright (c) 2012-2026 VMware, Inc., Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-boot/tree/e9644b19f559db8ad4825526c245ab5a5cb40909/buildSrc/src/main/resources/org/springframework/boot/build/legal."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".editorconfig",
+        ".git-blame-ignore-revs",
+        ".github/**",
+        ".gitignore",
+        ".idea/**",
+        ".sdkmanrc",
+        "CONTRIBUTING.adoc",
+        "LICENSE.txt",
+        "README.adoc",
+        "SUPPORT.adoc",
+        "antora/**",
+        "build-plugin/spring-boot-antlib/**",
+        "build-plugin/spring-boot-gradle-plugin/.gitignore",
+        "build-plugin/spring-boot-gradle-plugin/build.gradle",
+        "build-plugin/spring-boot-gradle-plugin/src/dockerTest/**",
+        "build-plugin/spring-boot-gradle-plugin/src/docs/**",
+        "build-plugin/spring-boot-gradle-plugin/src/main/**",
+        "build-plugin/spring-boot-gradle-plugin/src/test/java/**",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/com/**",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/org/**",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/reachability-metadata-repository/**",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/com/example/library/1.0-SNAPSHOT/library-1.0-SNAPSHOT.pom",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/commons-io-consumer/one/1.0/one-1.0.pom",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/commons-io-consumer/two/1.0/two-1.0.pom",
+        "build-plugin/spring-boot-gradle-plugin/src/test/resources/repository/org/**",
+        "build-plugin/spring-boot-maven-plugin/build.gradle",
+        "build-plugin/spring-boot-maven-plugin/src/dockerTest/**",
+        "build-plugin/spring-boot-maven-plugin/src/docs/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/java/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-arguments/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-class-proxy/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-compiler-arguments/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-exclude-devtools/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-jdk-proxy/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-jvm-arguments/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-module-info/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-profile/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-release/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-resource-generation/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-system-properties/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-test/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-test-exclude-devtools/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/aot-test-skip/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-additional-properties/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-custom-build-time/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-custom-file/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-disable-build-time/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-exclude-build-properties/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-exclude-build-time/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-reproducible/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/build-info-reproducible-epoch-seconds/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-attach-disabled/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-classifier-main/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-classifier-main-attach-disabled/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-classifier-source/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-classifier-source-attach-disabled/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-create-dir/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-custom-dir/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-custom-layout/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-exclude-entry/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-exclude-group/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-include-entry/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-layered/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-layered-custom/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-layered-custom-name/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-layered-disabled/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-lib-name-conflict/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-no-tools/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-optional-default/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-optional-exclude/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-optional-include/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-output-timestamp/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-pom/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-signed/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-skip/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope/pom.xml",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope/src/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope-default/pom.xml",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-system-scope-default/src/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-test-scope/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-with-kotlin-module/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-with-layout-property/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-with-unpack/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/jar-with-zip-layout/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-additional-classpath-directory/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-additional-classpath-jar/pom.xml",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-additional-classpath-jar/src/main/java/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-arguments/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-arguments-commandline/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-envargs/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-exclude/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-fork/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-jvm-system-props/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-jvmargs/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-jvmargs-commandline/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-profiles/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-test-classpath-all/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-test-classpath-dependencies/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-test-classpath-off/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-toolchains/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-use-test-classpath/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/run-working-directory/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/settings.xml",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/start-stop/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/start-stop-skip/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/start-stop-test/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/test-run/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-exclude-entry/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-layered/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-layered-custom/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-layered-disabled/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-no-tools/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-output-timestamp/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-reactor/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-sbom/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-signed/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-system-scope/pom.xml",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-system-scope/src/**",
+        "build-plugin/spring-boot-maven-plugin/src/intTest/projects/war-with-unpack/**",
+        "build-plugin/spring-boot-maven-plugin/src/main/**",
+        "build-plugin/spring-boot-maven-plugin/src/maven/**",
+        "build-plugin/spring-boot-maven-plugin/src/test/**",
+        "build.gradle",
+        "buildSrc/SpringRepositorySupport.groovy",
+        "buildSrc/build.gradle",
+        "buildSrc/config/**",
+        "buildSrc/settings.gradle",
+        "buildSrc/src/main/java/**",
+        "buildSrc/src/main/resources/org/springframework/boot/build/antora/**",
+        "buildSrc/src/main/resources/org/springframework/boot/build/docs/**",
+        "buildSrc/src/test/**",
+        "buildpack/spring-boot-buildpack-platform/build.gradle",
+        "buildpack/spring-boot-buildpack-platform/src/dockerTest/**",
+        "buildpack/spring-boot-buildpack-platform/src/main/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/java/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/build/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/configuration/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/container-wait-response.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/create-container-response.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/load-error.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/load-stream.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/pull-stream.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/pull-update-full.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/pull-update-minimal.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/pull-with-empty-details.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/push-stream-with-error.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/push-stream.json",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/transport/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/docker/type/**",
+        "buildpack/spring-boot-buildpack-platform/src/test/resources/org/springframework/boot/buildpack/platform/json/**",
+        "cli/spring-boot-cli/build.gradle",
+        "cli/spring-boot-cli/src/intTest/**",
+        "cli/spring-boot-cli/src/json-shade/**",
+        "cli/spring-boot-cli/src/main/executablecontent/**",
+        "cli/spring-boot-cli/src/main/homebrew/**",
+        "cli/spring-boot-cli/src/main/java/**",
+        "cli/spring-boot-cli/src/main/resources/**",
+        "cli/spring-boot-cli/src/test/**",
+        "config/**",
+        "configuration-metadata/**",
+        "core/spring-boot/build.gradle",
+        "core/spring-boot/src/main/**",
+        "core/spring-boot/src/test/java/**",
+        "core/spring-boot/src/test/kotlin/**",
+        "core/spring-boot/src/test/resources/log4j2-test.xml",
+        "core/spring-boot/src/test/resources/org/springframework/boot/json/deeply-nested-map-json.txt",
+        "core/spring-boot/src/test/resources/org/springframework/boot/json/repeated-open-array.txt",
+        "core/spring-boot/src/test/resources/org/springframework/boot/ssl/pem/**",
+        "core/spring-boot/src/testFixtures/**",
+        "core/spring-boot-autoconfigure/build.gradle",
+        "core/spring-boot-autoconfigure/src/main/**",
+        "core/spring-boot-autoconfigure/src/test/java/**",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/condition/**",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/info/**",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/ed25519-cert.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/ed25519-key.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/key1.crt",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/key1.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/key2-chain.crt",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/key2.crt",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/key2.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/rsa-cert.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/autoconfigure/ssl/rsa-key.pem",
+        "core/spring-boot-autoconfigure/src/test/resources/org/springframework/boot/cache/**",
+        "core/spring-boot-autoconfigure/src/testFixtures/**",
+        "core/spring-boot-autoconfigure-processor/**",
+        "core/spring-boot-docker-compose/**",
+        "core/spring-boot-properties-migrator/**",
+        "core/spring-boot-test/**",
+        "core/spring-boot-test-autoconfigure/**",
+        "core/spring-boot-testcontainers/**",
+        "documentation/spring-boot-actuator-docs/build.gradle",
+        "documentation/spring-boot-actuator-docs/src/docs/**",
+        "documentation/spring-boot-actuator-docs/src/test/java/**",
+        "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/env/**",
+        "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/flyway/**",
+        "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/liquibase/**",
+        "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/logging/sample.log",
+        "documentation/spring-boot-actuator-docs/src/test/resources/org/springframework/boot/actuate/docs/sbom/**",
+        "documentation/spring-boot-docs/**",
+        "eclipse/**",
+        "git/**",
+        "gradle/plugins/**",
+        "gradle/wrapper/gradle-wrapper.properties",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat",
+        "integration-test/**",
+        "loader/spring-boot-jarmode-tools/**",
+        "loader/spring-boot-loader/build.gradle",
+        "loader/spring-boot-loader/src/main/**",
+        "loader/spring-boot-loader/src/test/java/**",
+        "loader/spring-boot-loader/src/test/resources/BOOT-INF/**",
+        "loader/spring-boot-loader/src/test/resources/META-INF/**",
+        "loader/spring-boot-loader/src/test/resources/bar.properties",
+        "loader/spring-boot-loader/src/test/resources/explodedsample/**",
+        "loader/spring-boot-loader/src/test/resources/home/**",
+        "loader/spring-boot-loader/src/test/resources/org/**",
+        "loader/spring-boot-loader/src/test/resources/placeholders/**",
+        "loader/spring-boot-loader/src/test/resources/root/**",
+        "loader/spring-boot-loader-tools/**",
+        "module/spring-boot-activemq/**",
+        "module/spring-boot-actuator/**",
+        "module/spring-boot-actuator-autoconfigure/**",
+        "module/spring-boot-amqp/**",
+        "module/spring-boot-amqp-rabbitmq/**",
+        "module/spring-boot-artemis/**",
+        "module/spring-boot-autoconfigure-classic/**",
+        "module/spring-boot-autoconfigure-classic-modules/**",
+        "module/spring-boot-batch/**",
+        "module/spring-boot-batch-data-mongodb/**",
+        "module/spring-boot-batch-jdbc/**",
+        "module/spring-boot-cache/**",
+        "module/spring-boot-cache-test/**",
+        "module/spring-boot-cassandra/build.gradle",
+        "module/spring-boot-cassandra/src/dockerTest/java/**",
+        "module/spring-boot-cassandra/src/dockerTest/resources/logback-test.xml",
+        "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/cassandra-compose.yaml",
+        "module/spring-boot-cassandra/src/dockerTest/resources/org/springframework/boot/cassandra/docker/compose/cassandra-ssl-compose.yaml",
+        "module/spring-boot-cassandra/src/dockerTest/resources/spring.properties",
+        "module/spring-boot-cassandra/src/main/**",
+        "module/spring-boot-cassandra/src/test/java/**",
+        "module/spring-boot-cassandra/src/test/resources/org/springframework/boot/cassandra/autoconfigure/override-defaults.conf",
+        "module/spring-boot-cassandra/src/test/resources/org/springframework/boot/cassandra/autoconfigure/profiles.conf",
+        "module/spring-boot-cassandra/src/test/resources/org/springframework/boot/cassandra/autoconfigure/simple.conf",
+        "module/spring-boot-cloudfoundry/build.gradle",
+        "module/spring-boot-cloudfoundry/src/main/**",
+        "module/spring-boot-cloudfoundry/src/test/java/**",
+        "module/spring-boot-couchbase/build.gradle",
+        "module/spring-boot-couchbase/src/dockerTest/**",
+        "module/spring-boot-couchbase/src/main/**",
+        "module/spring-boot-couchbase/src/test/java/**",
+        "module/spring-boot-couchbase/src/test/resources/org/springframework/boot/couchbase/autoconfigure/key.crt",
+        "module/spring-boot-couchbase/src/test/resources/org/springframework/boot/couchbase/autoconfigure/key.pem",
+        "module/spring-boot-data-cassandra/**",
+        "module/spring-boot-data-cassandra-test/**",
+        "module/spring-boot-data-commons/**",
+        "module/spring-boot-data-couchbase/**",
+        "module/spring-boot-data-couchbase-test/**",
+        "module/spring-boot-data-elasticsearch/**",
+        "module/spring-boot-data-elasticsearch-test/**",
+        "module/spring-boot-data-jdbc/**",
+        "module/spring-boot-data-jdbc-test/**",
+        "module/spring-boot-data-jpa/**",
+        "module/spring-boot-data-jpa-test/**",
+        "module/spring-boot-data-ldap/**",
+        "module/spring-boot-data-ldap-test/**",
+        "module/spring-boot-data-mongodb/**",
+        "module/spring-boot-data-mongodb-test/**",
+        "module/spring-boot-data-neo4j/**",
+        "module/spring-boot-data-neo4j-test/**",
+        "module/spring-boot-data-r2dbc/**",
+        "module/spring-boot-data-r2dbc-test/**",
+        "module/spring-boot-data-redis/build.gradle",
+        "module/spring-boot-data-redis/src/dockerTest/**",
+        "module/spring-boot-data-redis/src/main/**",
+        "module/spring-boot-data-redis/src/test/java/**",
+        "module/spring-boot-data-redis-test/**",
+        "module/spring-boot-data-rest/**",
+        "module/spring-boot-devtools/**",
+        "module/spring-boot-elasticsearch/build.gradle",
+        "module/spring-boot-elasticsearch/src/dockerTest/**",
+        "module/spring-boot-elasticsearch/src/main/**",
+        "module/spring-boot-elasticsearch/src/test/java/**",
+        "module/spring-boot-flyway/**",
+        "module/spring-boot-freemarker/**",
+        "module/spring-boot-graphql/**",
+        "module/spring-boot-graphql-test/**",
+        "module/spring-boot-groovy-templates/**",
+        "module/spring-boot-grpc-client/**",
+        "module/spring-boot-grpc-server/build.gradle",
+        "module/spring-boot-grpc-server/src/main/**",
+        "module/spring-boot-grpc-server/src/test/java/**",
+        "module/spring-boot-grpc-test/**",
+        "module/spring-boot-gson/**",
+        "module/spring-boot-h2console/**",
+        "module/spring-boot-hateoas/**",
+        "module/spring-boot-hazelcast/**",
+        "module/spring-boot-health/build.gradle",
+        "module/spring-boot-health/src/main/**",
+        "module/spring-boot-health/src/test/java/**",
+        "module/spring-boot-hibernate/**",
+        "module/spring-boot-http-client/build.gradle",
+        "module/spring-boot-http-client/src/main/**",
+        "module/spring-boot-http-client/src/test/java/**",
+        "module/spring-boot-http-codec/**",
+        "module/spring-boot-http-converter/**",
+        "module/spring-boot-integration/**",
+        "module/spring-boot-jackson/**",
+        "module/spring-boot-jackson2/**",
+        "module/spring-boot-jdbc/**",
+        "module/spring-boot-jdbc-test/**",
+        "module/spring-boot-jersey/**",
+        "module/spring-boot-jetty/build.gradle",
+        "module/spring-boot-jetty/src/main/**",
+        "module/spring-boot-jetty/src/test/java/**",
+        "module/spring-boot-jms/**",
+        "module/spring-boot-jooq/**",
+        "module/spring-boot-jooq-test/**",
+        "module/spring-boot-jpa/**",
+        "module/spring-boot-jpa-test/**",
+        "module/spring-boot-jsonb/**",
+        "module/spring-boot-kafka/**",
+        "module/spring-boot-kotlinx-serialization-json/**",
+        "module/spring-boot-ldap/build.gradle",
+        "module/spring-boot-ldap/src/dockerTest/**",
+        "module/spring-boot-ldap/src/main/**",
+        "module/spring-boot-ldap/src/test/java/**",
+        "module/spring-boot-liquibase/**",
+        "module/spring-boot-mail/build.gradle",
+        "module/spring-boot-mail/src/dockerTest/**",
+        "module/spring-boot-mail/src/main/**",
+        "module/spring-boot-mail/src/test/java/**",
+        "module/spring-boot-micrometer-metrics/build.gradle",
+        "module/spring-boot-micrometer-metrics/src/dockerTest/**",
+        "module/spring-boot-micrometer-metrics/src/main/**",
+        "module/spring-boot-micrometer-metrics/src/test/java/**",
+        "module/spring-boot-micrometer-metrics/src/testFixtures/**",
+        "module/spring-boot-micrometer-metrics-test/**",
+        "module/spring-boot-micrometer-observation/**",
+        "module/spring-boot-micrometer-tracing/**",
+        "module/spring-boot-micrometer-tracing-brave/**",
+        "module/spring-boot-micrometer-tracing-opentelemetry/build.gradle",
+        "module/spring-boot-micrometer-tracing-opentelemetry/src/dockerTest/**",
+        "module/spring-boot-micrometer-tracing-opentelemetry/src/main/**",
+        "module/spring-boot-micrometer-tracing-opentelemetry/src/test/java/**",
+        "module/spring-boot-micrometer-tracing-test/**",
+        "module/spring-boot-mongodb/build.gradle",
+        "module/spring-boot-mongodb/src/dockerTest/**",
+        "module/spring-boot-mongodb/src/main/**",
+        "module/spring-boot-mongodb/src/test/java/**",
+        "module/spring-boot-mustache/**",
+        "module/spring-boot-neo4j/**",
+        "module/spring-boot-netty/**",
+        "module/spring-boot-opentelemetry/build.gradle",
+        "module/spring-boot-opentelemetry/src/dockerTest/**",
+        "module/spring-boot-opentelemetry/src/main/**",
+        "module/spring-boot-opentelemetry/src/test/java/**",
+        "module/spring-boot-persistence/**",
+        "module/spring-boot-pulsar/**",
+        "module/spring-boot-quartz/**",
+        "module/spring-boot-r2dbc/**",
+        "module/spring-boot-rabbitmq/build.gradle",
+        "module/spring-boot-rabbitmq/src/dockerTest/**",
+        "module/spring-boot-rabbitmq/src/main/**",
+        "module/spring-boot-rabbitmq/src/test/java/**",
+        "module/spring-boot-rabbitmq/src/test/resources/logback-test.xml",
+        "module/spring-boot-reactor/**",
+        "module/spring-boot-reactor-netty/build.gradle",
+        "module/spring-boot-reactor-netty/src/main/**",
+        "module/spring-boot-reactor-netty/src/test/java/**",
+        "module/spring-boot-reactor-netty/src/test/resources/org/springframework/boot/reactor/netty/1.crt",
+        "module/spring-boot-reactor-netty/src/test/resources/org/springframework/boot/reactor/netty/1.key",
+        "module/spring-boot-reactor-netty/src/test/resources/org/springframework/boot/reactor/netty/2.crt",
+        "module/spring-boot-reactor-netty/src/test/resources/org/springframework/boot/reactor/netty/2.key",
+        "module/spring-boot-restclient/**",
+        "module/spring-boot-restclient-test/**",
+        "module/spring-boot-restdocs/**",
+        "module/spring-boot-resttestclient/**",
+        "module/spring-boot-rsocket/build.gradle",
+        "module/spring-boot-rsocket/src/main/**",
+        "module/spring-boot-rsocket/src/test/java/**",
+        "module/spring-boot-rsocket/src/test/resources/org/springframework/boot/rsocket/netty/test-cert.pem",
+        "module/spring-boot-rsocket/src/test/resources/org/springframework/boot/rsocket/netty/test-key.pem",
+        "module/spring-boot-rsocket-test/**",
+        "module/spring-boot-security/**",
+        "module/spring-boot-security-oauth2-authorization-server/**",
+        "module/spring-boot-security-oauth2-client/**",
+        "module/spring-boot-security-oauth2-resource-server/**",
+        "module/spring-boot-security-saml2/**",
+        "module/spring-boot-security-test/**",
+        "module/spring-boot-sendgrid/**",
+        "module/spring-boot-servlet/**",
+        "module/spring-boot-session/**",
+        "module/spring-boot-session-data-redis/**",
+        "module/spring-boot-session-jdbc/**",
+        "module/spring-boot-sql/**",
+        "module/spring-boot-test-classic-modules/**",
+        "module/spring-boot-thymeleaf/**",
+        "module/spring-boot-tomcat/build.gradle",
+        "module/spring-boot-tomcat/src/main/**",
+        "module/spring-boot-tomcat/src/test/java/**",
+        "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/servlet/1.crt",
+        "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/servlet/1.key",
+        "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/servlet/2.crt",
+        "module/spring-boot-tomcat/src/test/resources/org/springframework/boot/tomcat/servlet/2.key",
+        "module/spring-boot-transaction/**",
+        "module/spring-boot-validation/**",
+        "module/spring-boot-web-server/build.gradle",
+        "module/spring-boot-web-server/src/main/**",
+        "module/spring-boot-web-server/src/test/java/**",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/pkcs1/**",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/pkcs8/**",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/sec1/**",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/servlet/**",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/test-cert-chain.pem",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/test-cert.pem",
+        "module/spring-boot-web-server/src/test/resources/org/springframework/boot/web/server/test-key.pem",
+        "module/spring-boot-web-server/src/testFixtures/java/**",
+        "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/reactive/test-cert.pem",
+        "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/reactive/test-key.pem",
+        "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/servlet/test-cert.pem",
+        "module/spring-boot-web-server/src/testFixtures/resources/org/springframework/boot/web/server/servlet/test-key.pem",
+        "module/spring-boot-web-server-test/**",
+        "module/spring-boot-webclient/build.gradle",
+        "module/spring-boot-webclient/src/main/**",
+        "module/spring-boot-webclient/src/test/java/**",
+        "module/spring-boot-webclient-test/**",
+        "module/spring-boot-webflux/**",
+        "module/spring-boot-webflux-test/**",
+        "module/spring-boot-webmvc/**",
+        "module/spring-boot-webmvc-test/**",
+        "module/spring-boot-webservices/**",
+        "module/spring-boot-webservices-test/**",
+        "module/spring-boot-websocket/**",
+        "module/spring-boot-webtestclient/**",
+        "module/spring-boot-zipkin/**",
+        "platform/**",
+        "settings.gradle",
+        "smoke-test/spring-boot-smoke-test-activemq/**",
+        "smoke-test/spring-boot-smoke-test-activemq-embedded/**",
+        "smoke-test/spring-boot-smoke-test-actuator/**",
+        "smoke-test/spring-boot-smoke-test-actuator-custom-security/**",
+        "smoke-test/spring-boot-smoke-test-actuator-extension/**",
+        "smoke-test/spring-boot-smoke-test-actuator-log4j2/**",
+        "smoke-test/spring-boot-smoke-test-actuator-noweb/**",
+        "smoke-test/spring-boot-smoke-test-actuator-ui/**",
+        "smoke-test/spring-boot-smoke-test-amqp/**",
+        "smoke-test/spring-boot-smoke-test-amqp-rabbitmq/**",
+        "smoke-test/spring-boot-smoke-test-ant/**",
+        "smoke-test/spring-boot-smoke-test-artemis/**",
+        "smoke-test/spring-boot-smoke-test-aspectj/**",
+        "smoke-test/spring-boot-smoke-test-autoconfigure-classic/build.gradle",
+        "smoke-test/spring-boot-smoke-test-autoconfigure-classic/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-autoconfigure-classic/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-autoconfigure-classic/src/main/resources/banner.txt",
+        "smoke-test/spring-boot-smoke-test-autoconfigure-classic/src/test/**",
+        "smoke-test/spring-boot-smoke-test-batch/**",
+        "smoke-test/spring-boot-smoke-test-batch-data-mongodb/**",
+        "smoke-test/spring-boot-smoke-test-batch-jdbc/**",
+        "smoke-test/spring-boot-smoke-test-bootstrap-registry/build.gradle",
+        "smoke-test/spring-boot-smoke-test-bootstrap-registry/src/main/java/smoketest/bootstrapregistry/app/**",
+        "smoke-test/spring-boot-smoke-test-bootstrap-registry/src/main/resources/**",
+        "smoke-test/spring-boot-smoke-test-bootstrap-registry/src/test/**",
+        "smoke-test/spring-boot-smoke-test-cache/**",
+        "smoke-test/spring-boot-smoke-test-config/**",
+        "smoke-test/spring-boot-smoke-test-data-cassandra/build.gradle",
+        "smoke-test/spring-boot-smoke-test-data-cassandra/src/dockerTest/java/**",
+        "smoke-test/spring-boot-smoke-test-data-cassandra/src/dockerTest/resources/ssl/cassandra.yaml",
+        "smoke-test/spring-boot-smoke-test-data-cassandra/src/main/**",
+        "smoke-test/spring-boot-smoke-test-data-couchbase/**",
+        "smoke-test/spring-boot-smoke-test-data-elasticsearch/**",
+        "smoke-test/spring-boot-smoke-test-data-jdbc/**",
+        "smoke-test/spring-boot-smoke-test-data-jpa/**",
+        "smoke-test/spring-boot-smoke-test-data-ldap/**",
+        "smoke-test/spring-boot-smoke-test-data-mongodb/**",
+        "smoke-test/spring-boot-smoke-test-data-r2dbc/**",
+        "smoke-test/spring-boot-smoke-test-data-r2dbc-flyway/**",
+        "smoke-test/spring-boot-smoke-test-data-r2dbc-liquibase/**",
+        "smoke-test/spring-boot-smoke-test-data-redis/**",
+        "smoke-test/spring-boot-smoke-test-data-rest/**",
+        "smoke-test/spring-boot-smoke-test-devtools/**",
+        "smoke-test/spring-boot-smoke-test-flyway/**",
+        "smoke-test/spring-boot-smoke-test-graphql/**",
+        "smoke-test/spring-boot-smoke-test-grpc-client/**",
+        "smoke-test/spring-boot-smoke-test-grpc-client-test/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server-netty-shaded/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server-oauth/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server-secure/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server-servlet/**",
+        "smoke-test/spring-boot-smoke-test-grpc-server-test/**",
+        "smoke-test/spring-boot-smoke-test-hateoas/**",
+        "smoke-test/spring-boot-smoke-test-hibernate/**",
+        "smoke-test/spring-boot-smoke-test-integration/**",
+        "smoke-test/spring-boot-smoke-test-jackson2-mixed/**",
+        "smoke-test/spring-boot-smoke-test-jackson2-only/**",
+        "smoke-test/spring-boot-smoke-test-jersey/**",
+        "smoke-test/spring-boot-smoke-test-jetty/**",
+        "smoke-test/spring-boot-smoke-test-jetty-jsp/**",
+        "smoke-test/spring-boot-smoke-test-jetty-ssl/build.gradle",
+        "smoke-test/spring-boot-smoke-test-jetty-ssl/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-jetty-ssl/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-jetty-ssl/src/test/**",
+        "smoke-test/spring-boot-smoke-test-kafka/build.gradle",
+        "smoke-test/spring-boot-smoke-test-kafka/src/dockerTest/java/**",
+        "smoke-test/spring-boot-smoke-test-kafka/src/dockerTest/resources/ssl/credentials",
+        "smoke-test/spring-boot-smoke-test-kafka/src/main/**",
+        "smoke-test/spring-boot-smoke-test-kafka/src/test/**",
+        "smoke-test/spring-boot-smoke-test-liquibase/**",
+        "smoke-test/spring-boot-smoke-test-log4j2/**",
+        "smoke-test/spring-boot-smoke-test-logback/**",
+        "smoke-test/spring-boot-smoke-test-oauth2-authorization-server/**",
+        "smoke-test/spring-boot-smoke-test-oauth2-client/**",
+        "smoke-test/spring-boot-smoke-test-oauth2-resource-server/**",
+        "smoke-test/spring-boot-smoke-test-opentelemetry/**",
+        "smoke-test/spring-boot-smoke-test-parent-context/**",
+        "smoke-test/spring-boot-smoke-test-profile/**",
+        "smoke-test/spring-boot-smoke-test-prometheus/**",
+        "smoke-test/spring-boot-smoke-test-property-validation/**",
+        "smoke-test/spring-boot-smoke-test-pulsar/**",
+        "smoke-test/spring-boot-smoke-test-quartz/**",
+        "smoke-test/spring-boot-smoke-test-rabbitmq/**",
+        "smoke-test/spring-boot-smoke-test-reactive-oauth2-client/**",
+        "smoke-test/spring-boot-smoke-test-reactive-oauth2-resource-server/**",
+        "smoke-test/spring-boot-smoke-test-restclient/**",
+        "smoke-test/spring-boot-smoke-test-rsocket/**",
+        "smoke-test/spring-boot-smoke-test-saml2-service-provider/**",
+        "smoke-test/spring-boot-smoke-test-secure/**",
+        "smoke-test/spring-boot-smoke-test-secure-jersey/**",
+        "smoke-test/spring-boot-smoke-test-secure-webflux/**",
+        "smoke-test/spring-boot-smoke-test-servlet/**",
+        "smoke-test/spring-boot-smoke-test-session-data-redis/**",
+        "smoke-test/spring-boot-smoke-test-session-data-redis-webflux/**",
+        "smoke-test/spring-boot-smoke-test-session-jdbc/**",
+        "smoke-test/spring-boot-smoke-test-simple/build.gradle",
+        "smoke-test/spring-boot-smoke-test-simple/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-simple/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-simple/src/main/resources/banner.txt",
+        "smoke-test/spring-boot-smoke-test-simple/src/test/**",
+        "smoke-test/spring-boot-smoke-test-structured-logging/**",
+        "smoke-test/spring-boot-smoke-test-structured-logging-log4j2/**",
+        "smoke-test/spring-boot-smoke-test-test/**",
+        "smoke-test/spring-boot-smoke-test-test-nomockito/**",
+        "smoke-test/spring-boot-smoke-test-testng/**",
+        "smoke-test/spring-boot-smoke-test-tomcat/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-jsp/build.gradle",
+        "smoke-test/spring-boot-smoke-test-tomcat-jsp/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-jsp/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-tomcat-jsp/src/main/webapp/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-jsp/src/test/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-multi-connectors/build.gradle",
+        "smoke-test/spring-boot-smoke-test-tomcat-multi-connectors/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-multi-connectors/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-tomcat-multi-connectors/src/test/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-ssl/build.gradle",
+        "smoke-test/spring-boot-smoke-test-tomcat-ssl/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-tomcat-ssl/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-tomcat-ssl/src/test/**",
+        "smoke-test/spring-boot-smoke-test-traditional/**",
+        "smoke-test/spring-boot-smoke-test-war/**",
+        "smoke-test/spring-boot-smoke-test-web-application-type/**",
+        "smoke-test/spring-boot-smoke-test-web-freemarker/**",
+        "smoke-test/spring-boot-smoke-test-web-groovy-templates/**",
+        "smoke-test/spring-boot-smoke-test-web-jsp/**",
+        "smoke-test/spring-boot-smoke-test-web-method-security/**",
+        "smoke-test/spring-boot-smoke-test-web-mustache/**",
+        "smoke-test/spring-boot-smoke-test-web-secure/**",
+        "smoke-test/spring-boot-smoke-test-web-secure-custom/**",
+        "smoke-test/spring-boot-smoke-test-web-secure-jdbc/**",
+        "smoke-test/spring-boot-smoke-test-web-static/**",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/build.gradle",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/java/**",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/application.properties",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/logback.xml",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/messages.properties",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/static/css/**",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/main/resources/templates/**",
+        "smoke-test/spring-boot-smoke-test-web-thymeleaf/src/test/**",
+        "smoke-test/spring-boot-smoke-test-webflux/**",
+        "smoke-test/spring-boot-smoke-test-webflux-coroutines/**",
+        "smoke-test/spring-boot-smoke-test-webservices/**",
+        "smoke-test/spring-boot-smoke-test-websocket-jetty/**",
+        "smoke-test/spring-boot-smoke-test-websocket-tomcat/**",
+        "smoke-test/spring-boot-smoke-test-xml/**",
+        "starter/**",
+        "system-test/**",
+        "test-support/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.",
+      "attribution": "the authors of spring-projects/spring-boot (the license file names no copyright line), Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-boot."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        "buildSrc/src/main/resources/org/springframework/boot/build/legal/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        https://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"{}\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright {yyyy} {name of copyright owner}\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       https://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n\nNOTICE.txt:\n\nSpring Boot ${version}\nCopyright (c) 2012-2026 VMware, Inc.\n\nThis product is licensed to you under the ${license}\n(the \"License\"). You may not use this product except in compliance with\nthe License.",
+      "attribution": "Copyright (c) 2012-2026 VMware, Inc., Apache-2.0 license (LICENSE.txt), https://github.com/spring-projects/spring-boot/tree/e9644b19f559db8ad4825526c245ab5a5cb40909/buildSrc/src/main/resources/org/springframework/boot/build/legal."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asciidoc",
+      "paths": [
+        "**/*.adoc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "batch",
+      "paths": [
+        "**/*.bat"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "graphql",
+      "paths": [
+        "**/*.graphql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.gradle"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "groovy",
+      "paths": [
+        "**/*.groovy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mustache",
+      "paths": [
+        "**/*.mustache"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "properties",
+      "paths": [
+        "**/*.properties"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ruby",
+      "paths": [
+        "**/*.rb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CachingProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.CommandFactory"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Configurator"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ConnectionFactoryProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.FileSystemProvider"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.MF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.Processor"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.PropertySource"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.TestExecutionListener"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.crt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.factories"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ftlh"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.graphqls"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.idx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.imports"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.includes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.key"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.ldif"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lines"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.mf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pom"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.processors"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.script"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.setup"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.snippet"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.springboot"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tpl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.git-blame-ignore-revs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.sdkmanrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/JarLauncher"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/certificate-location"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/credentials"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dependency-1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dependency-2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/dependency-3-SNAPSHOT"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty-file"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/excluded"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileA"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileB"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileC"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileD"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/fileF"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/forward-merge"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gradlew"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/idp-metadata"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/idp-metadata-with-multiple-providers"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inmetainfresources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inpublic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inresources"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/instatic"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/inwebapp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/java"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/javase-element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/log4j-api-element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/log4j-core-element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/prepare-forward-merge"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/private-key-location"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/simple-jndi"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/spring"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/three"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/tomcat-element-list"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/type"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xsd"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

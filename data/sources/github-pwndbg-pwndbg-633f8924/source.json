@@ -1,0 +1,395 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/pwndbg/pwndbg",
+  "revision": "b5162e66edbd0c43785a31b75e273e4492742a16",
+  "checksum": "sha256:340466282ee993bfcb560fdc180be4f1a4e24e780197f8e8b3840b4a1612757b",
+  "extract": {
+    "exclude": [
+      "docs/CHEATSHEET.pdf",
+      "docs/assets/banner.png",
+      "docs/assets/caps/**",
+      "docs/assets/favicon.ico",
+      "docs/assets/logo.png",
+      "docs/assets/logo2.png",
+      "docs/assets/videos/context-up-down.mp4",
+      "docs/assets/videos/context-up-down.webm",
+      "docs/assets/videos/demo.mp4",
+      "docs/assets/videos/demo.webm",
+      "docs/assets/videos/track-got.mp4",
+      "docs/assets/videos/track-got.webm",
+      "docs/assets/videos/track-heap.mp4",
+      "docs/assets/videos/track-heap.webm",
+      "tests/binaries/host/check_ia32.i386.out.hardcoded",
+      "tests/binaries/host/glibcs/2.33/.debug/**",
+      "tests/binaries/host/glibcs/2.33/ld-2.33.so",
+      "tests/binaries/host/glibcs/2.33/libc-2.33.so",
+      "tests/binaries/host/glibcs/2.33/libpthread-2.33.so"
+    ]
+  },
+  "history": {
+    "since": "684cee57d2c748898a1ab069f2cbd33dca919272"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2026 Dominik 'Disconnect3d' Czarnota\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/pwndbg/pwndbg: Copyright (c) 2026 Dominik 'Disconnect3d' Czarnota, MIT license (LICENSE.md), https://github.com/pwndbg/pwndbg."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".devcontainer/**",
+        ".dockerignore",
+        ".envrc",
+        ".github/**",
+        ".gitignore",
+        ".pwndbg_root",
+        "CLAUDE.md",
+        "CREDITS.md",
+        "Dockerfile",
+        "Dockerfile.arch",
+        "Dockerfile.base-apt",
+        "Dockerfile.dnf",
+        "Dockerfile.glibc-test-libs",
+        "Dockerfile.musl-test-libs",
+        "LICENSE.md",
+        "README.md",
+        "docker-compose.yml",
+        "docs/.nav.yml",
+        "docs/assets/videos/context-up-down.tape",
+        "docs/assets/videos/demo.tape",
+        "docs/assets/videos/track-got.tape",
+        "docs/assets/videos/track-heap.tape",
+        "docs/blog/**",
+        "docs/commands/**",
+        "docs/configuration/**",
+        "docs/contributing/**",
+        "docs/features.md",
+        "docs/functions/**",
+        "docs/index.md",
+        "docs/install.sh",
+        "docs/js/**",
+        "docs/robots.txt",
+        "docs/setup.md",
+        "docs/stylesheets/**",
+        "docs/tutorials/**",
+        "flake.lock",
+        "flake.nix",
+        "gdbinit.py",
+        "kernel-tests.sh",
+        "lint.sh",
+        "mkdocs.yml",
+        "nix/**",
+        "profiling/**",
+        "pwndbg/**",
+        "pwndbginit/**",
+        "pyproject.toml",
+        "scripts/**",
+        "setup-dev.sh",
+        "setup.sh",
+        "tests/__init__.py",
+        "tests/binaries/host/Makefile",
+        "tests/binaries/host/add_to_rsp.x86-64.asm",
+        "tests/binaries/host/branch_visualization.x86-64.asm",
+        "tests/binaries/host/canary.i386.c",
+        "tests/binaries/host/canary.x86-64.c",
+        "tests/binaries/host/check_ia32.i386.c",
+        "tests/binaries/host/conditional_branch_breakpoints.x86-64.asm",
+        "tests/binaries/host/context_args.native.c",
+        "tests/binaries/host/crash_simple.native.c",
+        "tests/binaries/host/div_zero.native.c",
+        "tests/binaries/host/dt_bitfields.native.c",
+        "tests/binaries/host/dt_recursive_offsets.native.c",
+        "tests/binaries/host/emulate_disasm.x86-64.asm",
+        "tests/binaries/host/emulate_disasm_loop.x86-64.asm",
+        "tests/binaries/host/exithandlers.native.c",
+        "tests/binaries/host/glibcs/2.33/ld-linux-x86-64.so.2",
+        "tests/binaries/host/glibcs/2.33/libc.so.6",
+        "tests/binaries/host/glibcs/2.33/libpthread.so.0",
+        "tests/binaries/host/glibcs/README.md",
+        "tests/binaries/host/gosample.native.go",
+        "tests/binaries/host/heap_bins.native.c",
+        "tests/binaries/host/heap_bugs.x86-64.c",
+        "tests/binaries/host/heap_find_fake_fast.native.c",
+        "tests/binaries/host/heap_glibc2.43.native.c",
+        "tests/binaries/host/heap_jemalloc_extent_info.native.c",
+        "tests/binaries/host/heap_jemalloc_heap.native.c",
+        "tests/binaries/host/heap_malloc_chunk.native.c",
+        "tests/binaries/host/heap_malloc_chunk_dump.native.c",
+        "tests/binaries/host/heap_musl.native.c",
+        "tests/binaries/host/heap_tracker_symbols.native.c",
+        "tests/binaries/host/heap_vis.native.c",
+        "tests/binaries/host/initialized_heap.native.c",
+        "tests/binaries/host/issue_1565.native.c",
+        "tests/binaries/host/jmp_to_unmapped_page.x86-64.asm",
+        "tests/binaries/host/linked-lists.native.c",
+        "tests/binaries/host/long_function.x86-64.asm",
+        "tests/binaries/host/loop_instruction.x86-64.asm",
+        "tests/binaries/host/loop_instruction_ending_in_ret.x86-64.asm",
+        "tests/binaries/host/memory.native.c",
+        "tests/binaries/host/memory.x86-64.asm",
+        "tests/binaries/host/memory_indirect_jmp_unmapped_jump_target.x86-64.asm",
+        "tests/binaries/host/memory_indirect_jmp_unmapped_memory_address.x86-64.asm",
+        "tests/binaries/host/mmap_gaps.native.c",
+        "tests/binaries/host/multiple_threads.native.c",
+        "tests/binaries/host/nested_structs.native.c",
+        "tests/binaries/host/nextret_to_double_ret_chain.x86-64.asm",
+        "tests/binaries/host/onegadget.native.c",
+        "tests/binaries/host/pku.x86-64.c",
+        "tests/binaries/host/reference-binary-net.native.c",
+        "tests/binaries/host/reference-binary-netlink.native.c",
+        "tests/binaries/host/reference-binary-pipe-fork.native.c",
+        "tests/binaries/host/reference-binary-pipe.native.c",
+        "tests/binaries/host/reference-binary-plt.native.c",
+        "tests/binaries/host/reference-binary-socketpair.native.c",
+        "tests/binaries/host/reference-binary.native.c",
+        "tests/binaries/host/ret_to_unmapped_page.x86-64.asm",
+        "tests/binaries/host/ret_with_rsp_at_unmapped_address.x86-64.asm",
+        "tests/binaries/host/rop_32x_ret.x86-64.asm",
+        "tests/binaries/host/rop_duplicate_ret.x86-64.asm",
+        "tests/binaries/host/rop_duplicate_ret_variant_2.x86-64.asm",
+        "tests/binaries/host/search_memory.native.c",
+        "tests/binaries/host/stack_vars.native.c",
+        "tests/binaries/host/stepsyscall.x86-64.asm",
+        "tests/binaries/host/stepuntilasm.x86-64.asm",
+        "tests/binaries/host/symbol_1600_and_752.native.cpp",
+        "tests/binaries/host/syscalls.x86-64.asm",
+        "tests/binaries/host/tabstop.native.c",
+        "tests/binaries/host/telescope_binary.native.c",
+        "tests/binaries/host/tls.i386.c",
+        "tests/binaries/host/tls.x86-64.c",
+        "tests/binaries/host/use-fds.native.c",
+        "tests/binaries/host/very_long_symbols.native.c",
+        "tests/binaries/qemu_user/**",
+        "tests/host/**",
+        "tests/library/**",
+        "tests/tests.py",
+        "tests/unit_tests/**",
+        "tests.sh",
+        "themes/**",
+        "unit-tests.sh",
+        "uv.lock"
+      ],
+      "text": "The MIT License (MIT)\n\nCopyright (c) 2026 Dominik 'Disconnect3d' Czarnota\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2026 Dominik 'Disconnect3d' Czarnota, MIT license (LICENSE.md), https://github.com/pwndbg/pwndbg."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "asm",
+      "paths": [
+        "**/*.asm"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "nix",
+      "paths": [
+        "**/*.nix"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.arch"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.base-apt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dnf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.glibc-test-libs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.musl-test-libs"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pwndbg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tape"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.pwndbg_root"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

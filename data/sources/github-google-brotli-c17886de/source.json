@@ -1,0 +1,638 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/google/brotli",
+  "revision": "86ee1f65f62d6272345dee751d49e7d1f01c2b11",
+  "checksum": "sha256:a47dc2d75bfa41dee362f0b6426ca2fafcde31826b3356f4f7f3c5cea26ce535",
+  "extract": {
+    "exclude": [
+      "c/common/dictionary.bin",
+      "c/common/dictionary.bin.br",
+      "docs/brotli-comparison-study-2015-09-22.pdf",
+      "java/org/brotli/integration/fuzz_data.zip",
+      "java/org/brotli/integration/test_corpus.zip",
+      "java/org/brotli/integration/test_data.zip",
+      "js/test_data.tar",
+      "research/img/**",
+      "tests/testdata/10x10y.compressed",
+      "tests/testdata/64x.compressed",
+      "tests/testdata/alice29.txt.compressed",
+      "tests/testdata/asyoulik.txt.compressed",
+      "tests/testdata/backward65536",
+      "tests/testdata/backward65536.compressed",
+      "tests/testdata/compressed_file",
+      "tests/testdata/compressed_file.compressed",
+      "tests/testdata/compressed_repeated",
+      "tests/testdata/compressed_repeated.compressed",
+      "tests/testdata/cp1251-utf16le",
+      "tests/testdata/cp1251-utf16le.compressed",
+      "tests/testdata/cp852-utf8.compressed",
+      "tests/testdata/empty.compressed.01",
+      "tests/testdata/empty.compressed.02",
+      "tests/testdata/empty.compressed.03",
+      "tests/testdata/empty.compressed.04",
+      "tests/testdata/empty.compressed.05",
+      "tests/testdata/empty.compressed.06",
+      "tests/testdata/empty.compressed.07",
+      "tests/testdata/empty.compressed.16",
+      "tests/testdata/empty.compressed.18",
+      "tests/testdata/lcet10.txt.compressed",
+      "tests/testdata/mapsdatazrh",
+      "tests/testdata/mapsdatazrh.compressed",
+      "tests/testdata/monkey.compressed",
+      "tests/testdata/plrabn12.txt.compressed",
+      "tests/testdata/quickfox.compressed",
+      "tests/testdata/quickfox_repeated.compressed",
+      "tests/testdata/random_chunks",
+      "tests/testdata/random_org_10k.bin",
+      "tests/testdata/random_org_10k.bin.compressed",
+      "tests/testdata/ukkonooa.compressed",
+      "tests/testdata/x.compressed",
+      "tests/testdata/x.compressed.00",
+      "tests/testdata/x.compressed.01",
+      "tests/testdata/x.compressed.02",
+      "tests/testdata/x.compressed.03",
+      "tests/testdata/xyzzy.compressed",
+      "tests/testdata/zeros",
+      "tests/testdata/zeros.compressed",
+      "tests/testdata/zerosukkanooa",
+      "tests/testdata/zerosukkanooa.compressed",
+      "tests/testdata/bb.binast"
+    ]
+  },
+  "history": {
+    "since": "55e9768bad1e94cbe4ec5845ca4a4d98c2246531"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/google/brotli: Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors., MIT license (LICENSE), https://github.com/google/brotli."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".bazelignore",
+        ".bcr/**",
+        ".editorconfig",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        "BUILD.bazel",
+        "CHANGELOG.md",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "MANIFEST.in",
+        "MODULE.bazel",
+        "MODULE.bazel.lock",
+        "README",
+        "README.md",
+        "SECURITY.md",
+        "c/common/constants.c",
+        "c/common/constants.h",
+        "c/common/context.c",
+        "c/common/context.h",
+        "c/common/dictionary.c",
+        "c/common/dictionary.h",
+        "c/common/dictionary_inc.h",
+        "c/common/platform.c",
+        "c/common/platform.h",
+        "c/common/shared_dictionary.c",
+        "c/common/shared_dictionary_internal.h",
+        "c/common/static_init.h",
+        "c/common/transform.c",
+        "c/common/transform.h",
+        "c/common/version.h",
+        "c/dec/**",
+        "c/enc/**",
+        "c/fuzz/**",
+        "c/include/**",
+        "c/tools/**",
+        "csharp/**",
+        "docs/brotli.1",
+        "docs/brotli.svg",
+        "docs/constants.h.3",
+        "docs/decode.h.3",
+        "docs/encode.h.3",
+        "docs/types.h.3",
+        "fetch-spec/**",
+        "go/**",
+        "java/BUILD.bazel",
+        "java/MODULE.bazel",
+        "java/MODULE.bazel.lock",
+        "java/org/brotli/common/**",
+        "java/org/brotli/dec/**",
+        "java/org/brotli/enc/**",
+        "java/org/brotli/integration/BUILD.bazel",
+        "java/org/brotli/integration/Benchmark.java",
+        "java/org/brotli/integration/BrotliJniTestBase.java",
+        "java/org/brotli/integration/BundleChecker.java",
+        "java/org/brotli/integration/BundleHelper.java",
+        "java/org/brotli/integration/pom.xml",
+        "java/org/brotli/pom.xml",
+        "java/org/brotli/wrapper/**",
+        "js/bundle_test.js",
+        "js/bundle_test.ts",
+        "js/cli.js",
+        "js/decode.js",
+        "js/decode.min.js",
+        "js/decode.ts",
+        "js/decode_synth_test.js",
+        "js/decode_synth_test.ts",
+        "js/decode_test.js",
+        "js/decode_test.ts",
+        "js/package.json",
+        "js/test_data.js",
+        "js/test_data.ts",
+        "pyproject.toml",
+        "python/**",
+        "research/BUILD.bazel",
+        "research/MODULE.bazel",
+        "research/MODULE.bazel.lock",
+        "research/README.md",
+        "research/brotli_decoder.c",
+        "research/brotlidump.py",
+        "research/deorummolae.cc",
+        "research/deorummolae.h",
+        "research/dictionary.bin",
+        "research/dictionary_generator.cc",
+        "research/draw_diff.cc",
+        "research/draw_histogram.cc",
+        "research/durchschlag.cc",
+        "research/durchschlag.h",
+        "research/find_opt_references.cc",
+        "research/read_dist.h",
+        "research/sieve.cc",
+        "research/sieve.h",
+        "sbom.cdx.json",
+        "scripts/**",
+        "setup.cfg",
+        "setup.py",
+        "tests/cli_test.sh",
+        "tests/regression/**",
+        "tests/run-compatibility-test.cmake",
+        "tests/run-roundtrip-test.cmake",
+        "tests/testdata/10x10y",
+        "tests/testdata/64x",
+        "tests/testdata/alice29.txt",
+        "tests/testdata/asyoulik.txt",
+        "tests/testdata/bb.binast",
+        "tests/testdata/cp852-utf8",
+        "tests/testdata/empty",
+        "tests/testdata/empty.compressed",
+        "tests/testdata/empty.compressed.00",
+        "tests/testdata/empty.compressed.08",
+        "tests/testdata/empty.compressed.09",
+        "tests/testdata/empty.compressed.10",
+        "tests/testdata/empty.compressed.11",
+        "tests/testdata/empty.compressed.12",
+        "tests/testdata/empty.compressed.13",
+        "tests/testdata/empty.compressed.14",
+        "tests/testdata/empty.compressed.15",
+        "tests/testdata/empty.compressed.17",
+        "tests/testdata/lcet10.txt",
+        "tests/testdata/monkey",
+        "tests/testdata/plrabn12.txt",
+        "tests/testdata/quickfox",
+        "tests/testdata/quickfox_repeated",
+        "tests/testdata/ukkonooa",
+        "tests/testdata/x",
+        "tests/testdata/xyzzy"
+      ],
+      "text": "Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "attribution": "Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors., MIT license (LICENSE), https://github.com/google/brotli."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csharp",
+      "paths": [
+        "**/*.cs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "java",
+      "paths": [
+        "**/*.java"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "kotlin",
+      "paths": [
+        "**/*.kt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/*.bzl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/BUILD.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "starlark",
+      "paths": [
+        "**/MODULE.bazel"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.00"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.08"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.09"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.10"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.11"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.12"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.13"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.14"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.15"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.17"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.binast"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.compressed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pgcfg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "csharp/injected_code.txt",
+        "fetch-spec/shared-brotli-fetch-spec.txt",
+        "tests/testdata/alice29.txt",
+        "tests/testdata/asyoulik.txt",
+        "tests/testdata/lcet10.txt",
+        "tests/testdata/plrabn12.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.bazelrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.editorconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/10x10y"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/64x"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/README"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/cp852-utf8"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/monkey"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/quickfox"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/quickfox_repeated"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ukkonooa"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/x"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/xyzzy"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.csproj"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

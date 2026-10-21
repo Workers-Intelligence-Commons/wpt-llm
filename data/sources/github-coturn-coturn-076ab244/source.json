@@ -1,0 +1,436 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/coturn/coturn",
+  "revision": "fc8eb910fbb7b49bf35e8361b05762f2b1f7a0fe",
+  "checksum": "sha256:b868811534cdaea6a5ec1deef9403fd37fb4bc1a8550a00d55917fe7865722f7",
+  "extract": {
+    "exclude": [
+      "examples/var/**",
+      "fuzzing/input/**"
+    ]
+  },
+  "history": {
+    "since": "702b29bc22da6b6e441ed86ea059cbced5b123ac"
+  },
+  "licenses": [
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "/*\n * TURN Server - RFC5766 TURN Server implementation\n * Copyright (C) 2011, 2012, 2013 Citrix Systems\n *\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n * 3. Neither the name of the project nor the names of its contributors\n *    may be used to endorse or promote products derived from this software\n *    without specific prior written permission.\n *\n * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n\n",
+      "attribution": "Commit history of https://github.com/coturn/coturn: the authors of coturn/coturn (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/coturn/coturn."
+    },
+    {
+      "license": "BSD-3-Clause",
+      "paths": [
+        ".clang-format",
+        ".clang-tidy",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".vscode/**",
+        "AUTHORS.md",
+        "CLAUDE.md",
+        "CMakeLists.txt",
+        "CONTRIBUTING.md",
+        "ChangeLog",
+        "INSTALL",
+        "LICENSE",
+        "Makefile.in",
+        "README.md",
+        "README.turnadmin",
+        "README.turnserver",
+        "README.turnutils",
+        "STATUS.md",
+        "authors.sh",
+        "cmake/**",
+        "configure",
+        "docker/**",
+        "docs/**",
+        "examples/ca/**",
+        "examples/cpu-mem.sh",
+        "examples/etc/**",
+        "examples/loadtest/**",
+        "examples/run_all_clients.sh",
+        "examples/run_tests.sh",
+        "examples/run_tests_conf.sh",
+        "examples/run_tests_dscp.sh",
+        "examples/run_tests_dtls_default.sh",
+        "examples/run_tests_expiry.sh",
+        "examples/run_tests_ipv6_relay.sh",
+        "examples/run_tests_mobile.sh",
+        "examples/run_tests_mobility_quota.sh",
+        "examples/run_tests_mobility_resume_flood.sh",
+        "examples/run_tests_multiplex_peer.sh",
+        "examples/run_tests_oauth.py",
+        "examples/run_tests_oauth.sh",
+        "examples/run_tests_prom.sh",
+        "examples/run_tests_ratelimit_401.sh",
+        "examples/run_tests_rfc5780.sh",
+        "examples/run_tests_stateless_binding.sh",
+        "examples/run_tests_stateless_nonce.sh",
+        "examples/scripts/**",
+        "filc/**",
+        "fuzzing/CMakeLists.txt",
+        "fuzzing/Dockerfile",
+        "fuzzing/FuzzOpenSSLInit.c",
+        "fuzzing/FuzzStun.c",
+        "fuzzing/FuzzStunClient.c",
+        "fuzzing/build.sh",
+        "fuzzing/docker-entrypoint.sh",
+        "fuzzing/run-local.sh",
+        "fuzzing/stun.dict",
+        "iwyu-ubuntu.imp",
+        "make-man.sh",
+        "man/**",
+        "patches/**",
+        "postinstall.txt",
+        "release.sh",
+        "rpm/**",
+        "scripts/**",
+        "src/**",
+        "tests/**",
+        "turndb/**",
+        "vcpkg.json"
+      ],
+      "text": "/*\n * TURN Server - RFC5766 TURN Server implementation\n * Copyright (C) 2011, 2012, 2013 Citrix Systems\n *\n * All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without\n * modification, are permitted provided that the following conditions\n * are met:\n * 1. Redistributions of source code must retain the above copyright\n *    notice, this list of conditions and the following disclaimer.\n * 2. Redistributions in binary form must reproduce the above copyright\n *    notice, this list of conditions and the following disclaimer in the\n *    documentation and/or other materials provided with the distribution.\n * 3. Neither the name of the project nor the names of its contributors\n *    may be used to endorse or promote products derived from this software\n *    without specific prior written permission.\n *\n * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND\n * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS\n * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT\n * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY\n * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n * SUCH DAMAGE.\n */\n\n",
+      "attribution": "the authors of coturn/coturn (the license file names no copyright line), BSD-3-Clause license (LICENSE), https://github.com/coturn/coturn."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/*.cmake"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.diff"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "elisp",
+      "paths": [
+        "**/*.el"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "perl",
+      "paths": [
+        "**/*.pl"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.attr"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bats"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dict"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.env"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.fc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.imp"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.old"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pem"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.redis"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.service"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.spec"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.sysconfig"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.turnadmin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.turnserver"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.turnutils"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "examples/ca/CA/index.txt",
+        "examples/scripts/readme.txt",
+        "postinstall.txt",
+        "rpm/build.instructions.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.clang-tidy"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/ChangeLog"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/INSTALL"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/configure"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/crlnumber"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/serial"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

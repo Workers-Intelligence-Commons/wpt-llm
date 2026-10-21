@@ -1,0 +1,897 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/bufbuild/buf",
+  "revision": "e77388d327d5d78ca8423fd2a0cd4fbc9ce66221",
+  "checksum": "sha256:7e33b5b9e297ab56d032317def1ca9a7e7c24d2bb21ab2bc1bcea5c11d9bf01f",
+  "extract": {
+    "exclude": [
+      "cmd/buf/internal/command/convert/testdata/convert/bin_json/duration.bin",
+      "cmd/buf/internal/command/convert/testdata/convert/bin_json/duration.binpb",
+      "cmd/buf/internal/command/convert/testdata/convert/bin_json/image.bin",
+      "cmd/buf/internal/command/convert/testdata/convert/bin_json/image.binpb",
+      "cmd/buf/testdata/check_plugins/current/vendor/**",
+      "cmd/buf/testdata/check_plugins/previous/vendor/**",
+      "cmd/buf/testdata/export/other/**",
+      "cmd/buf/testdata/export/proto/**",
+      "cmd/buf/testdata/lint_ignore_disabled/vendor/**",
+      "cmd/buf/testdata/workspace/success/nested/proto/external/**",
+      "cmd/buf/testdata/workspace/success/v2/export/other/**",
+      "cmd/buf/testdata/workspace/success/v2/export/proto/**",
+      "cmd/buf/testdata/workspace/success/v2/nested/proto/external/**",
+      "make/go/**",
+      "packaging/python/**",
+      "private/buf/buflsp/testdata/completion/vendor/**",
+      "private/buf/buflsp/testdata/definition/vendor/**",
+      "private/buf/buflsp/testdata/hover/vendor/**",
+      "private/buf/buflsp/testdata/semantic_tokens/vendor/**",
+      "private/buf/buflsp/testdata/vendor/**",
+      "private/buf/bufworkspace/testdata/basic/workspacev1/**",
+      "private/buf/bufworkspace/testdata/basic/workspacev2/**",
+      "private/bufpkg/bufcheck/testdata/lint/protovalidate/vendor/**",
+      "private/bufpkg/bufcheck/testdata/lint/protovalidate_predefined/vendor/**",
+      "private/bufpkg/bufimage/bufimageutil/testdata/deps/**",
+      "proto/**"
+    ]
+  },
+  "history": {
+    "since": "157c7ae554844ff7ae178536ec10787b5b74b5db"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2020-2026 Buf Technologies, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/bufbuild/buf: Copyright 2020-2026 Buf Technologies, Inc., Apache-2.0 license (LICENSE), https://github.com/bufbuild/buf."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".bufstyle.yaml",
+        ".dockerignore",
+        ".envrc",
+        ".gitattributes",
+        ".github/**",
+        ".gitignore",
+        ".godoclint.yaml",
+        ".golangci.yml",
+        ".pre-commit-hooks.yaml",
+        "CHANGELOG.md",
+        "Dockerfile.buf",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "buf.yaml",
+        "cmd/buf/buf.go",
+        "cmd/buf/buf_test.go",
+        "cmd/buf/buf_unix_test.go",
+        "cmd/buf/imports_test.go",
+        "cmd/buf/internal/command/alpha/**",
+        "cmd/buf/internal/command/beta/**",
+        "cmd/buf/internal/command/breaking/**",
+        "cmd/buf/internal/command/build/**",
+        "cmd/buf/internal/command/config/**",
+        "cmd/buf/internal/command/convert/convert.go",
+        "cmd/buf/internal/command/convert/convert_test.go",
+        "cmd/buf/internal/command/convert/testdata/convert/README.md",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/api.proto",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/buf.proto",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/buf.yaml",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/duration.json",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/duration.txtpb",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/duration.yaml",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/image.json",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/image.txtpb",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/image.yaml",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/payload.bin",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/payload.binpb",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/payload.json",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/payload.txtpb",
+        "cmd/buf/internal/command/convert/testdata/convert/bin_json/payload.yaml",
+        "cmd/buf/internal/command/convert/testdata/convert/descriptor.plain.binpb",
+        "cmd/buf/internal/command/convert/testdata/convert/source_code_info_extension/**",
+        "cmd/buf/internal/command/curl/**",
+        "cmd/buf/internal/command/dep/**",
+        "cmd/buf/internal/command/export/**",
+        "cmd/buf/internal/command/format/**",
+        "cmd/buf/internal/command/generate/**",
+        "cmd/buf/internal/command/lint/**",
+        "cmd/buf/internal/command/lsfiles/**",
+        "cmd/buf/internal/command/lsp/**",
+        "cmd/buf/internal/command/mod/**",
+        "cmd/buf/internal/command/plugin/**",
+        "cmd/buf/internal/command/policy/**",
+        "cmd/buf/internal/command/push/**",
+        "cmd/buf/internal/command/registry/**",
+        "cmd/buf/internal/command/source/**",
+        "cmd/buf/internal/command/stats/**",
+        "cmd/buf/internal/internaltesting/**",
+        "cmd/buf/testdata/check_plugins/current/buf.yaml",
+        "cmd/buf/testdata/check_plugins/current/proto/**",
+        "cmd/buf/testdata/check_plugins/previous/buf.yaml",
+        "cmd/buf/testdata/check_plugins/previous/proto/**",
+        "cmd/buf/testdata/check_plugins_module_name/**",
+        "cmd/buf/testdata/customoptions1/**",
+        "cmd/buf/testdata/export/another/**",
+        "cmd/buf/testdata/export/buf.work.yaml",
+        "cmd/buf/testdata/fail/**",
+        "cmd/buf/testdata/fail2/**",
+        "cmd/buf/testdata/fail_buf_mod/**",
+        "cmd/buf/testdata/failarchive/**",
+        "cmd/buf/testdata/format/**",
+        "cmd/buf/testdata/imports/**",
+        "cmd/buf/testdata/lint_ignore_disabled/buf.yaml",
+        "cmd/buf/testdata/lint_ignore_disabled/proto/**",
+        "cmd/buf/testdata/lsmodules/**",
+        "cmd/buf/testdata/paths/**",
+        "cmd/buf/testdata/policy_list_rules/**",
+        "cmd/buf/testdata/protofileref/**",
+        "cmd/buf/testdata/small_list_rules/**",
+        "cmd/buf/testdata/small_list_rules_yml/**",
+        "cmd/buf/testdata/success/**",
+        "cmd/buf/testdata/successnobufyaml/**",
+        "cmd/buf/testdata/symlinks/**",
+        "cmd/buf/testdata/workspace/fail/**",
+        "cmd/buf/testdata/workspace/success/breaking/**",
+        "cmd/buf/testdata/workspace/success/detached/**",
+        "cmd/buf/testdata/workspace/success/diamond/**",
+        "cmd/buf/testdata/workspace/success/dir/**",
+        "cmd/buf/testdata/workspace/success/dir_buf_work/**",
+        "cmd/buf/testdata/workspace/success/duplicate_dir_path/**",
+        "cmd/buf/testdata/workspace/success/duplicate_dir_path_overlapping_include/**",
+        "cmd/buf/testdata/workspace/success/lock/**",
+        "cmd/buf/testdata/workspace/success/nested/proto/buf.work.yaml",
+        "cmd/buf/testdata/workspace/success/nested/proto/internal/**",
+        "cmd/buf/testdata/workspace/success/noconfig/**",
+        "cmd/buf/testdata/workspace/success/overlapping_dir_path/**",
+        "cmd/buf/testdata/workspace/success/protofileref/**",
+        "cmd/buf/testdata/workspace/success/roots/**",
+        "cmd/buf/testdata/workspace/success/shared_parent_dir/**",
+        "cmd/buf/testdata/workspace/success/symlink/**",
+        "cmd/buf/testdata/workspace/success/transitive/**",
+        "cmd/buf/testdata/workspace/success/v2/breaking/**",
+        "cmd/buf/testdata/workspace/success/v2/detached/**",
+        "cmd/buf/testdata/workspace/success/v2/diamond/**",
+        "cmd/buf/testdata/workspace/success/v2/dir/**",
+        "cmd/buf/testdata/workspace/success/v2/export/another/**",
+        "cmd/buf/testdata/workspace/success/v2/export/buf.yaml",
+        "cmd/buf/testdata/workspace/success/v2/nested/proto/buf.yaml",
+        "cmd/buf/testdata/workspace/success/v2/nested/proto/internal/**",
+        "cmd/buf/testdata/workspace/success/v2/symlink/**",
+        "cmd/buf/testdata/workspace/success/v2/transitive/**",
+        "cmd/buf/testdata/workspace/success/v2/wkt/**",
+        "cmd/buf/testdata/workspace/success/wkt/**",
+        "cmd/buf/testdata/workspace_subdir/**",
+        "cmd/buf/workspace_subdir_test.go",
+        "cmd/buf/workspace_test.go",
+        "cmd/buf/workspace_unix_test.go",
+        "cmd/buf/workspace_windows_test.go",
+        "cmd/protoc-gen-buf-breaking/**",
+        "cmd/protoc-gen-buf-lint/**",
+        "context7.json",
+        "etc/**",
+        "go.mod",
+        "go.sum",
+        "make/buf/**",
+        "packaging/npm/**",
+        "private/README.md",
+        "private/buf/bufapp/**",
+        "private/buf/bufcli/**",
+        "private/buf/bufconvert/**",
+        "private/buf/bufctl/**",
+        "private/buf/bufcurl/**",
+        "private/buf/buffetch/**",
+        "private/buf/bufformat/**",
+        "private/buf/bufgen/**",
+        "private/buf/buflsp/buf_gen_yaml.go",
+        "private/buf/buflsp/buf_gen_yaml_completion.go",
+        "private/buf/buflsp/buf_gen_yaml_completion_test.go",
+        "private/buf/buflsp/buf_gen_yaml_hover.go",
+        "private/buf/buflsp/buf_gen_yaml_lsp_test.go",
+        "private/buf/buflsp/buf_lock.go",
+        "private/buf/buflsp/buf_lock_hover.go",
+        "private/buf/buflsp/buf_lock_lsp_test.go",
+        "private/buf/buflsp/buf_policy_yaml.go",
+        "private/buf/buflsp/buf_policy_yaml_completion.go",
+        "private/buf/buflsp/buf_policy_yaml_completion_test.go",
+        "private/buf/buflsp/buf_policy_yaml_hover.go",
+        "private/buf/buflsp/buf_policy_yaml_lsp_test.go",
+        "private/buf/buflsp/buf_yaml.go",
+        "private/buf/buflsp/buf_yaml_completion.go",
+        "private/buf/buflsp/buf_yaml_completion_test.go",
+        "private/buf/buflsp/buf_yaml_hover.go",
+        "private/buf/buflsp/buf_yaml_lsp_test.go",
+        "private/buf/buflsp/buf_yaml_test.go",
+        "private/buf/buflsp/buflsp.go",
+        "private/buf/buflsp/buflsp_test.go",
+        "private/buf/buflsp/builtin.go",
+        "private/buf/buflsp/cel.go",
+        "private/buf/buflsp/completion.go",
+        "private/buf/buflsp/completion_cel.go",
+        "private/buf/buflsp/completion_cel_test.go",
+        "private/buf/buflsp/completion_test.go",
+        "private/buf/buflsp/definition_cel.go",
+        "private/buf/buflsp/definition_cel_test.go",
+        "private/buf/buflsp/definition_test.go",
+        "private/buf/buflsp/deprecate.go",
+        "private/buf/buflsp/deprecate_test.go",
+        "private/buf/buflsp/diagnostic.go",
+        "private/buf/buflsp/diagnostics_test.go",
+        "private/buf/buflsp/document_highlight_test.go",
+        "private/buf/buflsp/document_link.go",
+        "private/buf/buflsp/document_link_test.go",
+        "private/buf/buflsp/document_symbol_test.go",
+        "private/buf/buflsp/file.go",
+        "private/buf/buflsp/file_manager.go",
+        "private/buf/buflsp/folding_range.go",
+        "private/buf/buflsp/folding_range_test.go",
+        "private/buf/buflsp/format_test.go",
+        "private/buf/buflsp/hover_cel.go",
+        "private/buf/buflsp/hover_cel_test.go",
+        "private/buf/buflsp/hover_test.go",
+        "private/buf/buflsp/image.go",
+        "private/buf/buflsp/jsonrpc_wrappers.go",
+        "private/buf/buflsp/lint_ignore.go",
+        "private/buf/buflsp/lint_ignore_test.go",
+        "private/buf/buflsp/nyi.go",
+        "private/buf/buflsp/organize_imports.go",
+        "private/buf/buflsp/organize_imports_test.go",
+        "private/buf/buflsp/reference_index.go",
+        "private/buf/buflsp/references_test.go",
+        "private/buf/buflsp/rename_test.go",
+        "private/buf/buflsp/semantic_tokens.go",
+        "private/buf/buflsp/semantic_tokens_cel.go",
+        "private/buf/buflsp/semantic_tokens_test.go",
+        "private/buf/buflsp/server.go",
+        "private/buf/buflsp/symbol.go",
+        "private/buf/buflsp/symbol_test.go",
+        "private/buf/buflsp/testdata/buf_gen_yaml/**",
+        "private/buf/buflsp/testdata/buf_lock/**",
+        "private/buf/buflsp/testdata/buf_policy_yaml/**",
+        "private/buf/buflsp/testdata/buf_yaml/**",
+        "private/buf/buflsp/testdata/completion/buf.yaml",
+        "private/buf/buflsp/testdata/completion/cel_completion.proto",
+        "private/buf/buflsp/testdata/completion/edition2024_test.proto",
+        "private/buf/buflsp/testdata/completion/extensions.proto",
+        "private/buf/buflsp/testdata/completion/map_test.proto",
+        "private/buf/buflsp/testdata/completion/options_test.proto",
+        "private/buf/buflsp/testdata/completion/test.proto",
+        "private/buf/buflsp/testdata/completion/update_test.proto",
+        "private/buf/buflsp/testdata/config_override/**",
+        "private/buf/buflsp/testdata/definition/buf.yaml",
+        "private/buf/buflsp/testdata/definition/cel_definition.proto",
+        "private/buf/buflsp/testdata/definition/definition.proto",
+        "private/buf/buflsp/testdata/definition/types.proto",
+        "private/buf/buflsp/testdata/deprecate/**",
+        "private/buf/buflsp/testdata/diagnostics/**",
+        "private/buf/buflsp/testdata/document_highlight/**",
+        "private/buf/buflsp/testdata/document_link/**",
+        "private/buf/buflsp/testdata/folding_range/**",
+        "private/buf/buflsp/testdata/format/**",
+        "private/buf/buflsp/testdata/hover/buf.yaml",
+        "private/buf/buflsp/testdata/hover/cel_comprehensive.proto",
+        "private/buf/buflsp/testdata/hover/edition2024.proto",
+        "private/buf/buflsp/testdata/hover/test.proto",
+        "private/buf/buflsp/testdata/hover/unused_import.proto",
+        "private/buf/buflsp/testdata/hover/unused_import_no_blank_line.proto",
+        "private/buf/buflsp/testdata/hover_dependency/**",
+        "private/buf/buflsp/testdata/lint_ignore/**",
+        "private/buf/buflsp/testdata/organize_imports/**",
+        "private/buf/buflsp/testdata/references/**",
+        "private/buf/buflsp/testdata/references_dependency/**",
+        "private/buf/buflsp/testdata/rename/**",
+        "private/buf/buflsp/testdata/semantic_tokens/buf.yaml",
+        "private/buf/buflsp/testdata/semantic_tokens/cel.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/cel_advanced.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/cel_invalid.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/cel_nested.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/comprehensive.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/edition.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/edition2024.proto",
+        "private/buf/buflsp/testdata/semantic_tokens/proto2.proto",
+        "private/buf/buflsp/testdata/symbols/**",
+        "private/buf/buflsp/testdata/type_definition/**",
+        "private/buf/buflsp/testdata/uri@encode/**",
+        "private/buf/buflsp/testdata/workspace_symbols/**",
+        "private/buf/buflsp/type_definition_test.go",
+        "private/buf/buflsp/uri.go",
+        "private/buf/buflsp/uri_test.go",
+        "private/buf/buflsp/usage.gen.go",
+        "private/buf/buflsp/workspace.go",
+        "private/buf/buflsp/workspace_test.go",
+        "private/buf/bufmigrate/**",
+        "private/buf/bufprint/**",
+        "private/buf/bufprotoc/**",
+        "private/buf/bufprotopluginexec/**",
+        "private/buf/bufstudioagent/**",
+        "private/buf/buftarget/**",
+        "private/buf/buftesting/**",
+        "private/buf/bufwkt/**",
+        "private/buf/bufworkspace/bufworkspace.go",
+        "private/buf/bufworkspace/malformed_dep.go",
+        "private/buf/bufworkspace/module_targeting.go",
+        "private/buf/bufworkspace/option.go",
+        "private/buf/bufworkspace/testdata/basic/README.md",
+        "private/buf/bufworkspace/testdata/basic/bsr/**",
+        "private/buf/bufworkspace/testdata/basic/scripts/**",
+        "private/buf/bufworkspace/testdata/basic/workspace_dep_missing_from_lock/**",
+        "private/buf/bufworkspace/testdata/basic/workspace_dep_missing_from_lock_used/**",
+        "private/buf/bufworkspace/testdata/basic/workspace_undeclared_dep/**",
+        "private/buf/bufworkspace/testdata/basic/workspace_unused_dep/**",
+        "private/buf/bufworkspace/testdata/basic/workspacev2_duplicate_path/**",
+        "private/buf/bufworkspace/usage.gen.go",
+        "private/buf/bufworkspace/workspace.go",
+        "private/buf/bufworkspace/workspace_dep_manager.go",
+        "private/buf/bufworkspace/workspace_dep_manager_provider.go",
+        "private/buf/bufworkspace/workspace_provider.go",
+        "private/buf/bufworkspace/workspace_targeting.go",
+        "private/buf/bufworkspace/workspace_test.go",
+        "private/bufpkg/bufanalysis/**",
+        "private/bufpkg/bufcheck/annotation.go",
+        "private/bufpkg/bufcheck/breaking_test.go",
+        "private/bufpkg/bufcheck/bufcheck.go",
+        "private/bufpkg/bufcheck/bufcheckserver/**",
+        "private/bufpkg/bufcheck/category.go",
+        "private/bufpkg/bufcheck/check_client_spec.go",
+        "private/bufpkg/bufcheck/client.go",
+        "private/bufpkg/bufcheck/client_test.go",
+        "private/bufpkg/bufcheck/config.go",
+        "private/bufpkg/bufcheck/file_info.go",
+        "private/bufpkg/bufcheck/internal/**",
+        "private/bufpkg/bufcheck/lint_test.go",
+        "private/bufpkg/bufcheck/multi_client.go",
+        "private/bufpkg/bufcheck/multi_client_test.go",
+        "private/bufpkg/bufcheck/options_config.go",
+        "private/bufpkg/bufcheck/policy_config.go",
+        "private/bufpkg/bufcheck/print.go",
+        "private/bufpkg/bufcheck/rule.go",
+        "private/bufpkg/bufcheck/rules_config.go",
+        "private/bufpkg/bufcheck/runner_provider.go",
+        "private/bufpkg/bufcheck/testdata/breaking/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_cascade_off/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_cascade_on/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_group/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_multiple_fails/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_off/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_on/**",
+        "private/bufpkg/bufcheck/testdata/lint/comment_ignores_with_trailing_comment/**",
+        "private/bufpkg/bufcheck/testdata/lint/comments/**",
+        "private/bufpkg/bufcheck/testdata/lint/custom_plugins/**",
+        "private/bufpkg/bufcheck/testdata/lint/custom_wasm_plugins/**",
+        "private/bufpkg/bufcheck/testdata/lint/directory_same_package/**",
+        "private/bufpkg/bufcheck/testdata/lint/editions_go_features/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_first_value_zero/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_no_allow_alias/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_pascal_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_value_prefix/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_value_upper_snake_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_zero_value_suffix/**",
+        "private/bufpkg/bufcheck/testdata/lint/enum_zero_value_suffix_custom/**",
+        "private/bufpkg/bufcheck/testdata/lint/field_lower_snake_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/field_no_descriptor/**",
+        "private/bufpkg/bufcheck/testdata/lint/field_not_required/**",
+        "private/bufpkg/bufcheck/testdata/lint/file_lower_snake_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/ignores1/**",
+        "private/bufpkg/bufcheck/testdata/lint/ignores2/**",
+        "private/bufpkg/bufcheck/testdata/lint/ignores3/**",
+        "private/bufpkg/bufcheck/testdata/lint/ignores4/**",
+        "private/bufpkg/bufcheck/testdata/lint/import_no_public/**",
+        "private/bufpkg/bufcheck/testdata/lint/import_used/**",
+        "private/bufpkg/bufcheck/testdata/lint/import_used_descriptor/**",
+        "private/bufpkg/bufcheck/testdata/lint/import_used_leading_dot/**",
+        "private/bufpkg/bufcheck/testdata/lint/lint_stable_package_import/**",
+        "private/bufpkg/bufcheck/testdata/lint/message_pascal_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/oneof_lower_snake_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_defined/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_directory_match/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_lower_snake_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_no_import_cycle/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_same_directory/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_same_directory_no_package/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_same_option_value/**",
+        "private/bufpkg/bufcheck/testdata/lint/package_version_suffix/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_disablebuiltin/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_empty/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_ignores1/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_ignores2/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_ignores3/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_ignores4/**",
+        "private/bufpkg/bufcheck/testdata/lint/policy_local/**",
+        "private/bufpkg/bufcheck/testdata/lint/protovalidate/buf.work.yaml",
+        "private/bufpkg/bufcheck/testdata/lint/protovalidate/proto/**",
+        "private/bufpkg/bufcheck/testdata/lint/protovalidate_predefined/buf.yaml",
+        "private/bufpkg/bufcheck/testdata/lint/protovalidate_predefined/import/**",
+        "private/bufpkg/bufcheck/testdata/lint/protovalidate_predefined/proto/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_no_streaming/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_pascal_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique_allow_empty_requests/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique_allow_empty_requests_and_responses/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique_allow_empty_responses/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique_allow_same/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_request_response_unique_allow_same_and_empty_request_responses/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_standard_name/**",
+        "private/bufpkg/bufcheck/testdata/lint/rpc_standard_name_allow_empty/**",
+        "private/bufpkg/bufcheck/testdata/lint/service_pascal_case/**",
+        "private/bufpkg/bufcheck/testdata/lint/service_suffix/**",
+        "private/bufpkg/bufcheck/testdata/lint/service_suffix_custom/**",
+        "private/bufpkg/bufcheck/testdata/lint/syntax_specified/**",
+        "private/bufpkg/bufcheck/testdata/lint/v2/**",
+        "private/bufpkg/bufcheck/testdata/multi_client/**",
+        "private/bufpkg/bufcheck/usage.gen.go",
+        "private/bufpkg/bufcheck/util.go",
+        "private/bufpkg/bufcobra/**",
+        "private/bufpkg/bufconfig/**",
+        "private/bufpkg/bufconnect/**",
+        "private/bufpkg/bufimage/bufimage.go",
+        "private/bufpkg/bufimage/bufimagefuzz/**",
+        "private/bufpkg/bufimage/bufimagemodify/**",
+        "private/bufpkg/bufimage/bufimagetesting/**",
+        "private/bufpkg/bufimage/bufimageutil/bufimageutil.go",
+        "private/bufpkg/bufimage/bufimageutil/bufimageutil_test.go",
+        "private/bufpkg/bufimage/bufimageutil/image_filter.go",
+        "private/bufpkg/bufimage/bufimageutil/image_index.go",
+        "private/bufpkg/bufimage/bufimageutil/source_paths_remap.go",
+        "private/bufpkg/bufimage/bufimageutil/source_paths_remap_test.go",
+        "private/bufpkg/bufimage/bufimageutil/tags.go",
+        "private/bufpkg/bufimage/bufimageutil/testdata/any/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/empty/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/exclude_import_deps/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/extensions/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/importmods/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/imports/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/nesting/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/oneofs/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/options/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/packages/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/sourcecodeinfo/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/unuseddeps/**",
+        "private/bufpkg/bufimage/bufimageutil/testdata/versioned/**",
+        "private/bufpkg/bufimage/bufimageutil/usage.gen.go",
+        "private/bufpkg/bufimage/build_image.go",
+        "private/bufpkg/bufimage/build_image_test.go",
+        "private/bufpkg/bufimage/build_image_unix_test.go",
+        "private/bufpkg/bufimage/image.go",
+        "private/bufpkg/bufimage/image_file.go",
+        "private/bufpkg/bufimage/image_test.go",
+        "private/bufpkg/bufimage/import_tracker.go",
+        "private/bufpkg/bufimage/module_file_resolver.go",
+        "private/bufpkg/bufimage/module_image_file_info.go",
+        "private/bufpkg/bufimage/testdata/**",
+        "private/bufpkg/bufimage/usage.gen.go",
+        "private/bufpkg/bufimage/util.go",
+        "private/bufpkg/bufimage/util_test.go",
+        "private/bufpkg/bufimage/validate.go",
+        "private/bufpkg/bufimage/well_known_type_image_file_info.go",
+        "private/bufpkg/bufmodule/**",
+        "private/bufpkg/bufparse/**",
+        "private/bufpkg/bufplugin/**",
+        "private/bufpkg/bufpolicy/**",
+        "private/bufpkg/bufprotocompile/**",
+        "private/bufpkg/bufprotoplugin/**",
+        "private/bufpkg/bufprotosource/**",
+        "private/bufpkg/bufreflect/**",
+        "private/bufpkg/bufregistryapi/**",
+        "private/bufpkg/bufremoteplugin/**",
+        "private/bufpkg/buftransport/**",
+        "private/gen/**",
+        "private/pkg/**"
+      ],
+      "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2020-2026 Buf Technologies, Inc.\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright 2020-2026 Buf Technologies, Inc., Apache-2.0 license (LICENSE), https://github.com/bufbuild/buf."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.bash"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/*.mk"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.bin"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.binpb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.buf"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.golden"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "cmd/buf/testdata/fail_buf_mod/buf.mod"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.release"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txtar"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txtpb"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.work"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.envrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitattributes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.netrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.netrcc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/1"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/2"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/3"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/appended-block-boundary"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/coalesce-deletion-run"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/context-width-one"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/create"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/delete-and-insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/empty"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/equal"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/first-line-prefix"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/foo"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/full-context"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/insert"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/insert-away-from-other-changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lao-tzu"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/merge-deletion-run-backwards"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/merge-insertion-run-backwards"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/merge-nearby-changes"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-newline-at-end-of-from"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-newline-at-end-of-to"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/no-newline-outside-context"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/remove"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace-one-line-with-four"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/replace-one-line-with-two"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/split-distant-changes"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

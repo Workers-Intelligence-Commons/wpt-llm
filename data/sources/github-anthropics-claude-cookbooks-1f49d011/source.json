@@ -1,0 +1,443 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/anthropics/claude-cookbooks",
+  "revision": "b2b0aa1ff7d8980b005b225d3802969c87bedad5",
+  "checksum": "sha256:fae9a03553b14cc31f7100135c84c851ba21a187be4dab4c618f1e293cdb215b",
+  "extract": {
+    "exclude": [
+      "capabilities/classification/data/vector_db.pkl",
+      "capabilities/content_moderation/data/ad_creatives/images/**",
+      "capabilities/content_moderation/images/**",
+      "capabilities/summarization/data/Sample Sublease Agreement.pdf",
+      "capabilities/text_to_sql/data/data.db",
+      "capabilities/text_to_sql/data/vector_db.pkl",
+      "claude_agent_sdk/research_agent/projects_claude.png",
+      "claude_agent_sdk/site_reliability_agent/examples/architecture_diagram.png",
+      "cost_optimization/assets/damage_photo.jpg",
+      "images/**",
+      "managed_agents/example_data/data_analyst_agent/console_session.png",
+      "managed_agents/example_data/plan_big_execute_small/**",
+      "managed_agents/example_data/slack_data_bot/slack_thread.png",
+      "managed_agents/example_data/sre/console_session.png",
+      "misc/data/Amazon-com-Inc-2023-Shareholder-Letter-highlighted.pdf",
+      "misc/data/Amazon-com-Inc-2023-Shareholder-Letter.pdf",
+      "misc/data/Constitutional AI.pdf",
+      "multimodal/documents/**",
+      "skills/assets/**",
+      "third_party/**"
+    ]
+  },
+  "history": {
+    "since": "ec9b524f5852299730e8d9260f644b51dce848b7"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Anthropic\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Commit history of https://github.com/anthropics/claude-cookbooks: Copyright (c) 2023 Anthropic, MIT license (LICENSE), https://github.com/anthropics/claude-cookbooks."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".claude/**",
+        ".env.example",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "Makefile",
+        "README.md",
+        "anthropic_cookbook/**",
+        "authors.yaml",
+        "capabilities/README.md",
+        "capabilities/classification/README.md",
+        "capabilities/classification/data/results.csv",
+        "capabilities/classification/data/test.tsv",
+        "capabilities/classification/data/train.tsv",
+        "capabilities/classification/evaluation/**",
+        "capabilities/classification/guide.ipynb",
+        "capabilities/content_moderation/README.md",
+        "capabilities/content_moderation/data/ad_creatives/build_creatives.py",
+        "capabilities/content_moderation/data/ad_creatives/context.json",
+        "capabilities/content_moderation/data/ad_creatives/policies.md",
+        "capabilities/content_moderation/data/ad_creatives/rules.golden.json",
+        "capabilities/content_moderation/data/ad_creatives/samples.jsonl",
+        "capabilities/content_moderation/data/ad_creatives/schema.json",
+        "capabilities/content_moderation/data/product_listings/**",
+        "capabilities/content_moderation/data/ugc/**",
+        "capabilities/content_moderation/engine.py",
+        "capabilities/content_moderation/evaluation/**",
+        "capabilities/content_moderation/guide.ipynb",
+        "capabilities/content_moderation/pipeline.py",
+        "capabilities/contextual-embeddings/**",
+        "capabilities/knowledge_graph/**",
+        "capabilities/retrieval_augmented_generation/**",
+        "capabilities/summarization/README.md",
+        "capabilities/summarization/data/multiple_subleases.py",
+        "capabilities/summarization/data/results.csv",
+        "capabilities/summarization/data/sample-lease1-summary.txt",
+        "capabilities/summarization/data/sample-lease1.txt",
+        "capabilities/summarization/data/sample-lease2-summary.txt",
+        "capabilities/summarization/data/sample-lease2.txt",
+        "capabilities/summarization/data/sample-lease3-summary.txt",
+        "capabilities/summarization/data/sample-lease3.txt",
+        "capabilities/summarization/data/sample-lease4-summary.txt",
+        "capabilities/summarization/data/sample-lease4.txt",
+        "capabilities/summarization/data/sample-lease5-summary.txt",
+        "capabilities/summarization/data/sample-lease5.txt",
+        "capabilities/summarization/data/sample-lease6-summary.txt",
+        "capabilities/summarization/data/sample-lease6.txt",
+        "capabilities/summarization/data/sample-lease7-summary.txt",
+        "capabilities/summarization/data/sample-lease7.txt",
+        "capabilities/summarization/data/sample-lease8-summary.txt",
+        "capabilities/summarization/data/sample-lease8.txt",
+        "capabilities/summarization/data/sample-lease9-summary.txt",
+        "capabilities/summarization/data/sample-lease9.txt",
+        "capabilities/summarization/evaluation/**",
+        "capabilities/summarization/guide.ipynb",
+        "capabilities/text_to_sql/README.md",
+        "capabilities/text_to_sql/data/results.csv",
+        "capabilities/text_to_sql/evaluation/**",
+        "capabilities/text_to_sql/guide.ipynb",
+        "claude_agent_sdk/.env.example",
+        "claude_agent_sdk/.gitignore",
+        "claude_agent_sdk/00_The_one_liner_research_agent.ipynb",
+        "claude_agent_sdk/01_The_chief_of_staff_agent.ipynb",
+        "claude_agent_sdk/02_The_observability_agent.ipynb",
+        "claude_agent_sdk/03_The_site_reliability_agent.ipynb",
+        "claude_agent_sdk/04_migrating_from_openai_agents_sdk.ipynb",
+        "claude_agent_sdk/05_Building_a_session_browser.ipynb",
+        "claude_agent_sdk/06_The_vulnerability_detection_agent.ipynb",
+        "claude_agent_sdk/07_Hosting_the_agent.ipynb",
+        "claude_agent_sdk/08_Dynamic_workflows.ipynb",
+        "claude_agent_sdk/README.md",
+        "claude_agent_sdk/chief_of_staff_agent/**",
+        "claude_agent_sdk/hosting/**",
+        "claude_agent_sdk/observability_agent/**",
+        "claude_agent_sdk/pyproject.toml",
+        "claude_agent_sdk/research_agent/agent.py",
+        "claude_agent_sdk/research_agent/architecture_diagram.md",
+        "claude_agent_sdk/scheduled_repository_reviewer/**",
+        "claude_agent_sdk/session_browser_demo/**",
+        "claude_agent_sdk/site_reliability_agent/examples/sre_bot_slack.py",
+        "claude_agent_sdk/site_reliability_agent/infra_setup.py",
+        "claude_agent_sdk/site_reliability_agent/sre_mcp_server.py",
+        "claude_agent_sdk/utils/**",
+        "claude_agent_sdk/vulnerability_detection_agent/**",
+        "coding/**",
+        "cost_optimization/assets/claims.csv",
+        "cost_optimization/assets/claims_ledger.csv",
+        "cost_optimization/assets/damage_photos.csv",
+        "cost_optimization/assets/estimates/**",
+        "cost_optimization/assets/eval_set.csv",
+        "cost_optimization/assets/policy_manual.md",
+        "cost_optimization/assets/prior_claims.csv",
+        "cost_optimization/assets/repair_parts.csv",
+        "cost_optimization/cost_optimization.ipynb",
+        "evals/**",
+        "extended_thinking/**",
+        "fable_5_fallback_billing/**",
+        "finetuning/**",
+        "lychee.toml",
+        "managed_agents/.env.example",
+        "managed_agents/.gitignore",
+        "managed_agents/CMA_cap_session_spend.ipynb",
+        "managed_agents/CMA_consult_an_advisor.ipynb",
+        "managed_agents/CMA_coordinate_specialist_team.ipynb",
+        "managed_agents/CMA_explore_unfamiliar_codebase.ipynb",
+        "managed_agents/CMA_gate_human_in_the_loop.ipynb",
+        "managed_agents/CMA_iterate_fix_failing_tests.ipynb",
+        "managed_agents/CMA_operate_in_production.ipynb",
+        "managed_agents/CMA_orchestrate_issue_to_pr.ipynb",
+        "managed_agents/CMA_pin_inference_geo.ipynb",
+        "managed_agents/CMA_plan_big_execute_small.ipynb",
+        "managed_agents/CMA_prompt_versioning_and_rollback.ipynb",
+        "managed_agents/CMA_remember_user_preferences.ipynb",
+        "managed_agents/CMA_use_skills_from_a_repo.ipynb",
+        "managed_agents/CMA_verify_with_outcome_grader.ipynb",
+        "managed_agents/CMA_watch_subagents_live.ipynb",
+        "managed_agents/CMA_with_mongodb_atlas.ipynb",
+        "managed_agents/README.md",
+        "managed_agents/cma-mcp/**",
+        "managed_agents/data_analyst_agent.ipynb",
+        "managed_agents/example_data/OVERVIEW.md",
+        "managed_agents/example_data/data_analyst_agent/sales_data.csv",
+        "managed_agents/example_data/gate/**",
+        "managed_agents/example_data/iterate/**",
+        "managed_agents/example_data/mongodb_on_cma/**",
+        "managed_agents/example_data/orchestrate/**",
+        "managed_agents/example_data/prompt_versioning_and_rollback/**",
+        "managed_agents/example_data/slack_data_bot/slack_app_manifest.yaml",
+        "managed_agents/example_data/sre/alert.json",
+        "managed_agents/example_data/sre/infra/**",
+        "managed_agents/example_data/sre/logs/**",
+        "managed_agents/example_data/sre/runbooks/**",
+        "managed_agents/linear/**",
+        "managed_agents/mongodb_on_cma/**",
+        "managed_agents/pyproject.toml",
+        "managed_agents/roadtrip_planner/**",
+        "managed_agents/self_hosted_sandboxes/**",
+        "managed_agents/sentry/**",
+        "managed_agents/slack/**",
+        "managed_agents/slack_data_bot.ipynb",
+        "managed_agents/sre_incident_responder.ipynb",
+        "managed_agents/utilities.py",
+        "misc/admin_api.ipynb",
+        "misc/batch_processing.ipynb",
+        "misc/building_evals.ipynb",
+        "misc/building_moderation_filter.ipynb",
+        "misc/data/help_center_articles/**",
+        "misc/generate_test_cases.ipynb",
+        "misc/how_to_enable_json_mode.ipynb",
+        "misc/how_to_make_sql_queries.ipynb",
+        "misc/metaprompt.ipynb",
+        "misc/pdf_upload_summarization.ipynb",
+        "misc/prompt_caching.ipynb",
+        "misc/read_web_pages_with_haiku.ipynb",
+        "misc/sampling_past_max_tokens.ipynb",
+        "misc/session_memory_compaction.ipynb",
+        "misc/speculative_prompt_caching.ipynb",
+        "misc/using_citations.ipynb",
+        "multimodal/best_practices_for_vision.ipynb",
+        "multimodal/crop_tool.ipynb",
+        "multimodal/getting_started_with_vision.ipynb",
+        "multimodal/how_to_transcribe_text.ipynb",
+        "multimodal/reading_charts_graphs_powerpoints.ipynb",
+        "multimodal/using_sub_agents.ipynb",
+        "observability/**",
+        "patterns/**",
+        "pyproject.toml",
+        "registry.yaml",
+        "requirements-dev.txt",
+        "scripts/**",
+        "skills/.claude/**",
+        "skills/.env.example",
+        "skills/.gitignore",
+        "skills/CLAUDE.md",
+        "skills/README.md",
+        "skills/custom_skills/**",
+        "skills/file_utils.py",
+        "skills/notebooks/**",
+        "skills/requirements.txt",
+        "skills/sample_data/**",
+        "skills/skill_utils.py",
+        "tests/**",
+        "tool_evaluation/**",
+        "tool_use/**",
+        "tox.ini",
+        "uv.lock",
+        "uv.toml"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2023 Anthropic\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+      "attribution": "Copyright (c) 2023 Anthropic, MIT license (LICENSE), https://github.com/anthropics/claude-cookbooks."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.conf"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.baseline"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.log"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitkeep"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/gh-mock"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsv",
+      "paths": [
+        "**/*.tsv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

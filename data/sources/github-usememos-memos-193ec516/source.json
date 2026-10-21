@@ -1,0 +1,379 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/usememos/memos",
+  "revision": "42ae2447670fdb010d3ea495fb27a315e0e938c3",
+  "checksum": "sha256:08dc913278e4bbfa1538be80c69cee1e3e09d6de676e545840fc0764b40d6eca",
+  "extract": {
+    "exclude": [
+      "core/memoexport/testdata/**",
+      "web/public/android-chrome-192x192.png",
+      "web/public/android-chrome-512x512.png",
+      "web/public/apple-touch-icon.png",
+      "web/public/logo.webp",
+      "web/src/assets/**",
+      "web/src/components/MemoContent/useSearchMatchHighlight.ts"
+    ]
+  },
+  "history": {
+    "since": "cd7000da705a2cf693190464f1087a9f7fb953f4"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Memos\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/usememos/memos: Copyright (c) 2025 Memos, MIT license (LICENSE), https://github.com/usememos/memos."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".agents/**",
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".golangci.yaml",
+        "AGENTS.md",
+        "CODEOWNERS",
+        "CONTEXT.md",
+        "LICENSE",
+        "README.md",
+        "SECURITY.md",
+        "cmd/**",
+        "core/README.md",
+        "core/access/**",
+        "core/memoexport/doc.go",
+        "core/memoexport/expansion_test.go",
+        "core/memoexport/format.go",
+        "core/memoexport/memoexport_test.go",
+        "core/memoexport/path.go",
+        "core/memoexport/reader.go",
+        "core/memoexport/validate.go",
+        "core/memoexport/writer.go",
+        "core/memopayload/**",
+        "core/notification/**",
+        "core/usagelimit/**",
+        "docs/**",
+        "filter/**",
+        "go.mod",
+        "go.sum",
+        "internal/**",
+        "markdown/**",
+        "proto/**",
+        "provider/**",
+        "scripts/**",
+        "server/**",
+        "store/**",
+        "web/.gitignore",
+        "web/biome.json",
+        "web/components.json",
+        "web/docs/**",
+        "web/index.html",
+        "web/package.json",
+        "web/patches/**",
+        "web/pnpm-lock.yaml",
+        "web/pnpm-workspace.yaml",
+        "web/public/site.webmanifest",
+        "web/scripts/**",
+        "web/src/App.tsx",
+        "web/src/auth-state.ts",
+        "web/src/components/ActivityCalendar/**",
+        "web/src/components/AppSidebar/**",
+        "web/src/components/AttachmentIcon.tsx",
+        "web/src/components/AttachmentLibrary/**",
+        "web/src/components/AuthFooter.tsx",
+        "web/src/components/AuthPageLayout.tsx",
+        "web/src/components/CalendarView/**",
+        "web/src/components/ChallengeWidget.tsx",
+        "web/src/components/ChangeMemberPasswordDialog.tsx",
+        "web/src/components/ClampedSection.tsx",
+        "web/src/components/ColumnGrid/**",
+        "web/src/components/ConfirmDialog/**",
+        "web/src/components/CreateAccessTokenDialog.tsx",
+        "web/src/components/CreateIdentityProviderDialog.tsx",
+        "web/src/components/CreateSpaceDialog.tsx",
+        "web/src/components/CreateUserDialog.tsx",
+        "web/src/components/CreateWebhookDialog.tsx",
+        "web/src/components/CredentialFields.tsx",
+        "web/src/components/CustomIcon.tsx",
+        "web/src/components/CustomIconPicker.tsx",
+        "web/src/components/DateTimeInput.tsx",
+        "web/src/components/ErrorBoundary.tsx",
+        "web/src/components/IdentityProviderButtons.tsx",
+        "web/src/components/Inbox/**",
+        "web/src/components/LearnMore.tsx",
+        "web/src/components/LocalePicker.tsx",
+        "web/src/components/LocaleSelect.tsx",
+        "web/src/components/MapView/**",
+        "web/src/components/MediaMetadataDetails.tsx",
+        "web/src/components/MemoActionMenu/**",
+        "web/src/components/MemoCommentSection.tsx",
+        "web/src/components/MemoContent/LinkMetadataCard.tsx",
+        "web/src/components/MemoContent/MentionResolutionContext.tsx",
+        "web/src/components/MemoContent/enhance.ts",
+        "web/src/components/MemoContent/headings.ts",
+        "web/src/components/MemoContent/index.tsx",
+        "web/src/components/MemoContent/types.ts",
+        "web/src/components/MemoContent/useTagNavigation.ts",
+        "web/src/components/MemoDetailSidebar/**",
+        "web/src/components/MemoDisplaySettingMenu.tsx",
+        "web/src/components/MemoEditor/**",
+        "web/src/components/MemoFilters.tsx",
+        "web/src/components/MemoMetadata/**",
+        "web/src/components/MemoPanel/**",
+        "web/src/components/MemoParentPlaceholder.tsx",
+        "web/src/components/MemoPreview/**",
+        "web/src/components/MemoReactionListView/**",
+        "web/src/components/MemoView/**",
+        "web/src/components/MemoViewIcon.tsx",
+        "web/src/components/MemosLogo.tsx",
+        "web/src/components/MotionPhotoPlayer.tsx",
+        "web/src/components/MotionPhotoPreview.tsx",
+        "web/src/components/PagedMemoList/**",
+        "web/src/components/PasswordSignInForm.tsx",
+        "web/src/components/Placeholder/**",
+        "web/src/components/PreviewImageDialog.tsx",
+        "web/src/components/RelativeTime.tsx",
+        "web/src/components/RequiredBadge.tsx",
+        "web/src/components/Settings/**",
+        "web/src/components/SpaceIcon.tsx",
+        "web/src/components/SpaceIconPicker.tsx",
+        "web/src/components/SpaceMark.tsx",
+        "web/src/components/SpaceRoleBadge.tsx",
+        "web/src/components/SpaceSelectItem.tsx",
+        "web/src/components/StatisticsView/**",
+        "web/src/components/TagTree.tsx",
+        "web/src/components/ThemeSelect.tsx",
+        "web/src/components/UpdateAccountDialog.tsx",
+        "web/src/components/UpdateCustomizedProfileDialog.tsx",
+        "web/src/components/UserAvatar.tsx",
+        "web/src/components/UserMenu.tsx",
+        "web/src/components/VideoPoster.tsx",
+        "web/src/components/VisibilityIcon.tsx",
+        "web/src/components/kit/**",
+        "web/src/components/map/**",
+        "web/src/components/ui/**",
+        "web/src/connect.ts",
+        "web/src/contexts/**",
+        "web/src/hooks/**",
+        "web/src/i18n.ts",
+        "web/src/index.css",
+        "web/src/layouts/**",
+        "web/src/lib/**",
+        "web/src/locales/**",
+        "web/src/main.tsx",
+        "web/src/pages/**",
+        "web/src/router/**",
+        "web/src/themes/**",
+        "web/src/types/**",
+        "web/src/utils/**",
+        "web/tests/**",
+        "web/tsconfig.json",
+        "web/vite.config.mts",
+        "web/vitest.config.mts"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2025 Memos\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2025 Memos, MIT license (LICENSE), https://github.com/usememos/memos."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "diff",
+      "paths": [
+        "**/*.patch"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go",
+      "paths": [
+        "**/*.go"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "go-mod",
+      "paths": [
+        "**/go.mod"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "html",
+      "paths": [
+        "**/*.html"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "protobuf",
+      "paths": [
+        "**/*.proto"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.webmanifest"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/CODEOWNERS"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/LICENSE"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/go.sum"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

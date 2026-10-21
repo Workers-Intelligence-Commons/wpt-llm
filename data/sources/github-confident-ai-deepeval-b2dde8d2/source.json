@@ -1,0 +1,605 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/confident-ai/deepeval",
+  "revision": "82896b93b1503f8082806df2803846ab9062f613",
+  "checksum": "sha256:d2be7eb0ac39c49f366229c657716afff0464e7972ce79819c46139631e78b5d",
+  "extract": {
+    "exclude": [
+      "assets/confident-mcp-architecture.png",
+      "assets/demo.gif",
+      "docs/app/apple-icon.png",
+      "docs/app/favicon.ico",
+      "docs/app/icon.png",
+      "docs/content/blog/2025_apr/deepeval-alternatives-compared/cover.webp",
+      "docs/content/blog/2025_may/top-5-geval-use-cases/cover.webp",
+      "docs/content/blog/2026_aug/how-to-evaluate-conversational-agent/cover.webp",
+      "docs/media/diagrams/external/**",
+      "docs/media/diagrams/in-house/agents/ai-agent-architecture.webp",
+      "docs/media/diagrams/in-house/agents/chatbot-memory-loop.webp",
+      "docs/media/diagrams/in-house/agents/conversation-simulator-eval-loop.webp",
+      "docs/media/diagrams/in-house/agents/mcp-architecture.webp",
+      "docs/media/diagrams/in-house/agents/mcp-tools-called-tracking.webp",
+      "docs/media/diagrams/in-house/datasets/goldens-to-test-cases.webp",
+      "docs/media/diagrams/in-house/datasets/synthesizer-pipeline.webp",
+      "docs/media/diagrams/in-house/evaluation/component-level-evals.webp",
+      "docs/media/diagrams/in-house/evaluation/conversational-test-case.webp",
+      "docs/media/diagrams/in-house/evaluation/end-to-end-evals.webp",
+      "docs/media/diagrams/in-house/evaluation/llm-test-case.webp",
+      "docs/media/diagrams/in-house/metrics/conversational-dag-turns-window.webp",
+      "docs/media/diagrams/in-house/metrics/conversational-dag.webp",
+      "docs/media/diagrams/in-house/metrics/dag-decision-tree-summary-headings.webp",
+      "docs/media/diagrams/in-house/metrics/dag-g-eval-leaf.webp",
+      "docs/media/diagrams/in-house/rag/full-eval-flow.webp",
+      "docs/media/diagrams/in-house/rag/generator-eval-loop.webp",
+      "docs/media/diagrams/in-house/rag/retriever-eval-loop.webp",
+      "docs/media/diagrams/in-house/tracing/trace-span-tree.webp",
+      "docs/media/platform/annotation/queue-annotator.webp",
+      "docs/media/platform/datasets/dataset-editor.webp",
+      "docs/media/platform/datasets/trace-ingestion-task.webp",
+      "docs/media/platform/evaluation/experiment-comparison.webp",
+      "docs/media/platform/evaluation/metric-scores-radar.webp",
+      "docs/media/platform/evaluation/metrics-library.webp",
+      "docs/media/platform/evaluation/regression-test-cases.webp",
+      "docs/media/platform/evaluation/test-run-overview.webp",
+      "docs/media/platform/monitoring/alert-rule-editor.webp",
+      "docs/media/platform/monitoring/signals.webp",
+      "docs/media/platform/prompts/prompt-editor.webp",
+      "docs/media/platform/tracing/trace-execution-tree.webp",
+      "docs/media/screenshots/deepeval/inspect-trace-tree.webp",
+      "docs/media/screenshots/example-apps/medical-chatbot.webp",
+      "docs/media/screenshots/example-apps/meeting-summarizer-markdown-output.webp",
+      "docs/media/screenshots/example-apps/meeting-summarizer-structured-output.webp",
+      "docs/media/screenshots/example-apps/meeting-summarizer.webp",
+      "docs/media/screenshots/example-apps/rag-qa-agent-markdown-output.webp",
+      "docs/media/screenshots/example-apps/rag-qa-agent-structured-output.webp",
+      "docs/media/screenshots/example-apps/rag-qa-agent.webp",
+      "docs/public/.well-known/agent-skills/deepeval/**",
+      "docs/public/.well-known/agent-skills/deepeval-otel/**",
+      "docs/public/.well-known/agent-skills/deepeval-tracing/**",
+      "docs/public/icons/frameworks/**",
+      "docs/public/icons/integrations/google-adk.png",
+      "docs/public/icons/integrations/qdrant.webp",
+      "docs/public/img/**",
+      "docs/scripts/fonts/**",
+      "examples/notebooks/static/output.png",
+      "skills/deepeval/**",
+      "skills/deepeval-otel/**",
+      "skills/deepeval-tracing/**",
+      "tests/test_core/test_synthesizer/synthesizer_data/docx_example.docx",
+      "tests/test_core/test_synthesizer/synthesizer_data/pdf_example.pdf",
+      "tests/test_metrics/images/**",
+      "voice_simulations_ws/**"
+    ]
+  },
+  "history": {
+    "since": "89ff8b0b1a0b26d6a947557f3715e50c4427c454"
+  },
+  "licenses": [
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [2024] [Confident AI Inc.]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Commit history of https://github.com/confident-ai/deepeval: Copyright [2024] [Confident AI Inc.], Apache-2.0 license (LICENSE.md), https://github.com/confident-ai/deepeval."
+    },
+    {
+      "license": "Apache-2.0",
+      "paths": [
+        ".claude-plugin/**",
+        ".cursor-plugin/**",
+        ".env.example",
+        ".github/**",
+        ".gitignore",
+        ".pre-commit-config.yaml",
+        ".scripts/**",
+        ".vscode/**",
+        "CITATION.cff",
+        "CONTRIBUTING.md",
+        "DOCS.md",
+        "LICENSE.md",
+        "MAINTAINERS.md",
+        "MANIFEST.in",
+        "README.md",
+        "a.py",
+        "assets/hero/**",
+        "b.py",
+        "c.py",
+        "deepeval/**",
+        "docs/.gitignore",
+        "docs/LANGUAGES.md",
+        "docs/README.md",
+        "docs/app/(home)/**",
+        "docs/app/.well-known/**",
+        "docs/app/api/**",
+        "docs/app/blog/**",
+        "docs/app/changelog/**",
+        "docs/app/docs/**",
+        "docs/app/enterprise/**",
+        "docs/app/global.css",
+        "docs/app/guides/**",
+        "docs/app/home.md/**",
+        "docs/app/icon.svg",
+        "docs/app/integrations/**",
+        "docs/app/layout.tsx",
+        "docs/app/llms-full.txt/**",
+        "docs/app/llms.mdx/**",
+        "docs/app/llms.txt/**",
+        "docs/app/og/**",
+        "docs/app/robots.txt/**",
+        "docs/app/setup.sh/**",
+        "docs/app/sitemap.ts",
+        "docs/app/tutorials/**",
+        "docs/components/**",
+        "docs/content/blog/2025_apr/deepeval-alternatives-compared/article.mdx",
+        "docs/content/blog/2025_apr/deepeval-vs-arize/**",
+        "docs/content/blog/2025_jun/**",
+        "docs/content/blog/2025_mar/**",
+        "docs/content/blog/2025_may/top-5-geval-use-cases/article.mdx",
+        "docs/content/blog/2026_apr/**",
+        "docs/content/blog/2026_aug/best-llm-evaluation-platforms/**",
+        "docs/content/blog/2026_aug/how-to-evaluate-conversational-agent/article.mdx",
+        "docs/content/blog/2026_aug/introducing-deepeval-typescript/**",
+        "docs/content/blog/2026_jul/**",
+        "docs/content/blog/2026_jun/**",
+        "docs/content/blog/2026_may/**",
+        "docs/content/blog/2026_oct/**",
+        "docs/content/blog/2026_sep/**",
+        "docs/content/blog/index.mdx",
+        "docs/content/blog/meta.json",
+        "docs/content/changelog/**",
+        "docs/content/docs/**",
+        "docs/content/guides/**",
+        "docs/content/integrations/**",
+        "docs/content/tutorials/**",
+        "docs/enterprise/**",
+        "docs/home/**",
+        "docs/languages-audit.json",
+        "docs/lib/**",
+        "docs/media/diagrams/in-house/agents/_index.json",
+        "docs/media/diagrams/in-house/datasets/_index.json",
+        "docs/media/diagrams/in-house/datasets/goldens-from-contexts.svg",
+        "docs/media/diagrams/in-house/datasets/goldens-from-docs.svg",
+        "docs/media/diagrams/in-house/datasets/goldens-from-goldens.svg",
+        "docs/media/diagrams/in-house/datasets/goldens-from-scratch.svg",
+        "docs/media/diagrams/in-house/datasets/input-evolution-tree.svg",
+        "docs/media/diagrams/in-house/datasets/synthetic-context-filtering.svg",
+        "docs/media/diagrams/in-house/datasets/synthetic-input-filtering.svg",
+        "docs/media/diagrams/in-house/evaluation/_index.json",
+        "docs/media/diagrams/in-house/metrics/_index.json",
+        "docs/media/diagrams/in-house/metrics/g-eval-usage-by-criteria.svg",
+        "docs/media/diagrams/in-house/rag/_index.json",
+        "docs/media/diagrams/in-house/rag/pipeline-metrics.svg",
+        "docs/media/diagrams/in-house/rag/triad-metrics.svg",
+        "docs/media/diagrams/in-house/red-teaming/**",
+        "docs/media/diagrams/in-house/tracing/_index.json",
+        "docs/media/platform/annotation/_index.json",
+        "docs/media/platform/datasets/_index.json",
+        "docs/media/platform/evaluation/_index.json",
+        "docs/media/platform/monitoring/_index.json",
+        "docs/media/platform/prompts/_index.json",
+        "docs/media/platform/settings/**",
+        "docs/media/platform/tracing/_index.json",
+        "docs/media/screenshots/deepeval/_index.json",
+        "docs/media/screenshots/example-apps/_index.json",
+        "docs/next.config.mjs",
+        "docs/package.json",
+        "docs/postcss.config.mjs",
+        "docs/proxy.ts",
+        "docs/public/.well-known/agent-skills/index.json",
+        "docs/public/.well-known/ai-catalog.json",
+        "docs/public/icons/DeepEval.svg",
+        "docs/public/icons/brand-icons/**",
+        "docs/public/icons/claudecode.svg",
+        "docs/public/icons/companies/**",
+        "docs/public/icons/deepeval-icon.svg",
+        "docs/public/icons/integrations/agentcore.svg",
+        "docs/public/icons/integrations/ai-sdk.svg",
+        "docs/public/icons/integrations/azure-pipelines.svg",
+        "docs/public/icons/integrations/azure.svg",
+        "docs/public/icons/integrations/bedrock.svg",
+        "docs/public/icons/integrations/buildkite.svg",
+        "docs/public/icons/integrations/circleci.svg",
+        "docs/public/icons/integrations/claude.svg",
+        "docs/public/icons/integrations/crewai.svg",
+        "docs/public/icons/integrations/gemini.svg",
+        "docs/public/icons/integrations/github.svg",
+        "docs/public/icons/integrations/gitlab.svg",
+        "docs/public/icons/integrations/jenkins.svg",
+        "docs/public/icons/integrations/langchain.svg",
+        "docs/public/icons/integrations/langgraph.svg",
+        "docs/public/icons/integrations/litellm.svg",
+        "docs/public/icons/integrations/llamaindex.svg",
+        "docs/public/icons/integrations/mistral.svg",
+        "docs/public/icons/integrations/openai.svg",
+        "docs/public/icons/integrations/otel.svg",
+        "docs/public/icons/integrations/portkey.svg",
+        "docs/public/icons/integrations/pydanticai.svg",
+        "docs/public/icons/integrations/strands.svg",
+        "docs/public/icons/integrations/vertext_ai.svg",
+        "docs/public/icons/python.svg",
+        "docs/public/icons/typescript.svg",
+        "docs/public/llms.txt",
+        "docs/scripts/build-readme-hero.mjs",
+        "docs/scripts/generate-agent-skills.mjs",
+        "docs/scripts/generate-changelog-contributors.mjs",
+        "docs/scripts/generate-contributors.mjs",
+        "docs/scripts/generate-page-languages.mjs",
+        "docs/scripts/generate-repo-contributors.mjs",
+        "docs/scripts/generate-sdk-versions.mjs",
+        "docs/scripts/langswitch-to-switch-case.mjs",
+        "docs/scripts/media/**",
+        "docs/scripts/normalize-admonition-titles.mjs",
+        "docs/scripts/pythonize-pages.mjs",
+        "docs/scripts/replace-img-with-image-displayer.mjs",
+        "docs/scripts/strip-redundant-mdx-imports.mjs",
+        "docs/scripts/timeline-to-steps.mjs",
+        "docs/scripts/validate-content.mjs",
+        "docs/scripts/validate-terms.mjs",
+        "docs/scripts/verify-languages-audit.mjs",
+        "docs/snippets/**",
+        "docs/source.config.ts",
+        "docs/src/**",
+        "docs/tsconfig.json",
+        "docs/vercel.json",
+        "docs/yarn.lock",
+        "examples/community/**",
+        "examples/create_tests.py",
+        "examples/dag-examples/**",
+        "examples/getting_started/**",
+        "examples/mcp_evaluation/**",
+        "examples/notebooks/crewai.ipynb",
+        "examples/notebooks/langgraph.ipynb",
+        "examples/notebooks/openai.ipynb",
+        "examples/notebooks/pydantic_ai.ipynb",
+        "examples/notebooks/static/manual.txt",
+        "examples/rag_evaluation/**",
+        "examples/sample.txt",
+        "examples/tracing/**",
+        "poetry.lock",
+        "pyproject.toml",
+        "scripts/**",
+        "skills/README.md",
+        "sqlite/**",
+        "test_pydantic_agent.py",
+        "tests/__init__.py",
+        "tests/test_agent_loop_detection.py",
+        "tests/test_benchmarks/**",
+        "tests/test_confident/**",
+        "tests/test_core/__init__.py",
+        "tests/test_core/conftest.py",
+        "tests/test_core/helpers.py",
+        "tests/test_core/stubs.py",
+        "tests/test_core/test_cli/**",
+        "tests/test_core/test_confident_region_routing.py",
+        "tests/test_core/test_config/**",
+        "tests/test_core/test_core.py",
+        "tests/test_core/test_datasets/**",
+        "tests/test_core/test_drop_trace_and_span.py",
+        "tests/test_core/test_evaluation/**",
+        "tests/test_core/test_imports.py",
+        "tests/test_core/test_models/**",
+        "tests/test_core/test_optimization/**",
+        "tests/test_core/test_prompts/**",
+        "tests/test_core/test_retry_policy.py",
+        "tests/test_core/test_run/**",
+        "tests/test_core/test_sanitize_nan.py",
+        "tests/test_core/test_simulator/**",
+        "tests/test_core/test_sqlite_store.py",
+        "tests/test_core/test_stubs_contract.py",
+        "tests/test_core/test_synthesizer/__init__.py",
+        "tests/test_core/test_synthesizer/example_simulator.py",
+        "tests/test_core/test_synthesizer/synthesizer_data/txt_example.txt",
+        "tests/test_core/test_synthesizer/test_context_generator.py",
+        "tests/test_core/test_synthesizer/test_doc_chunker.py",
+        "tests/test_core/test_synthesizer/test_generate_from_goldens.py",
+        "tests/test_core/test_synthesizer/test_synthesizer.py",
+        "tests/test_core/test_synthesizer_bugs.py",
+        "tests/test_core/test_telemetry.py",
+        "tests/test_core/test_test_case/**",
+        "tests/test_core/test_threadpool_tracing.py",
+        "tests/test_core/test_trace_memory_leak.py",
+        "tests/test_core/test_tracing/**",
+        "tests/test_core/test_trim_and_load_json.py",
+        "tests/test_core/test_utils.py",
+        "tests/test_core/test_voice/**",
+        "tests/test_docs/**",
+        "tests/test_integrations/**",
+        "tests/test_metrics/system_one_fakes.py",
+        "tests/test_metrics/test_answer_relevancy_metric.py",
+        "tests/test_metrics/test_answer_relevancy_metric_empty_output.py",
+        "tests/test_metrics/test_arena_geval_metric.py",
+        "tests/test_metrics/test_audio_glitch_metric.py",
+        "tests/test_metrics/test_audio_judge_checks.py",
+        "tests/test_metrics/test_bias_metric.py",
+        "tests/test_metrics/test_citation_faithfulness_metric.py",
+        "tests/test_metrics/test_contextual_precision_metric.py",
+        "tests/test_metrics/test_contextual_recall_metric.py",
+        "tests/test_metrics/test_contextual_relevancy_metric.py",
+        "tests/test_metrics/test_conversation_completeness_include_reason.py",
+        "tests/test_metrics/test_conversation_completeness_metric.py",
+        "tests/test_metrics/test_conversational_dag.py",
+        "tests/test_metrics/test_conversational_g_eval.py",
+        "tests/test_metrics/test_conversational_jev_eval.py",
+        "tests/test_metrics/test_dag.py",
+        "tests/test_metrics/test_dag_serialization.py",
+        "tests/test_metrics/test_eval_mode.py",
+        "tests/test_metrics/test_eval_mode_metrics.py",
+        "tests/test_metrics/test_eval_mode_shared.py",
+        "tests/test_metrics/test_exact_match_metric.py",
+        "tests/test_metrics/test_faithfulness_metric.py",
+        "tests/test_metrics/test_g_eval_metric.py",
+        "tests/test_metrics/test_g_eval_trajectory.py",
+        "tests/test_metrics/test_g_eval_utils.py",
+        "tests/test_metrics/test_goal_accuracy_metric.py",
+        "tests/test_metrics/test_hallucination_metric.py",
+        "tests/test_metrics/test_image_coherence_metric.py",
+        "tests/test_metrics/test_image_editing_metric.py",
+        "tests/test_metrics/test_image_helpfulness_metric.py",
+        "tests/test_metrics/test_image_reference_metric.py",
+        "tests/test_metrics/test_jev_eval.py",
+        "tests/test_metrics/test_json_correctness_metric.py",
+        "tests/test_metrics/test_judge_prompt_inputs.py",
+        "tests/test_metrics/test_knowledge_retention_metric.py",
+        "tests/test_metrics/test_mcp_task_completetion_metric.py",
+        "tests/test_metrics/test_mcp_use_metric.py",
+        "tests/test_metrics/test_misuse_metric.py",
+        "tests/test_metrics/test_multi_turn_mcp_use_metric.py",
+        "tests/test_metrics/test_non_advice_metric.py",
+        "tests/test_metrics/test_pattern_match_metric.py",
+        "tests/test_metrics/test_pii_lekage_metric.py",
+        "tests/test_metrics/test_plan_adherence_metric.py",
+        "tests/test_metrics/test_plan_quality_metric.py",
+        "tests/test_metrics/test_prompt_alignment_metric.py",
+        "tests/test_metrics/test_role_adherence_metric.py",
+        "tests/test_metrics/test_role_violation_metric.py",
+        "tests/test_metrics/test_step_efficiency_metric.py",
+        "tests/test_metrics/test_summarization_metric.py",
+        "tests/test_metrics/test_system_one_batch.py",
+        "tests/test_metrics/test_task_completetion_metric.py",
+        "tests/test_metrics/test_task_completion_tools_called.py",
+        "tests/test_metrics/test_text_to_image_metric.py",
+        "tests/test_metrics/test_tool_correctness_metric.py",
+        "tests/test_metrics/test_tool_permission_metric.py",
+        "tests/test_metrics/test_tool_use_metric.py",
+        "tests/test_metrics/test_topic_adherence_include_reason.py",
+        "tests/test_metrics/test_topic_adherence_metric.py",
+        "tests/test_metrics/test_toxicity_metric.py",
+        "tests/test_metrics/test_transcription_accuracy_metric.py",
+        "tests/test_metrics/test_turn_contextual_precision_metric.py",
+        "tests/test_metrics/test_turn_contextual_recall_async_expected_outcome.py",
+        "tests/test_metrics/test_turn_contextual_recall_metric.py",
+        "tests/test_metrics/test_turn_faithfulness_metric.py",
+        "tests/test_metrics/test_turn_faithfulness_metric_empty_verdicts.py",
+        "tests/test_metrics/test_turn_relevancy_aggregation.py",
+        "tests/test_metrics/test_turn_relevancy_metric.py",
+        "tests/test_metrics/test_voice_metrics.py",
+        "tests/test_metrics/turn_contextual_relevancy_metric.py",
+        "tests/test_models/**",
+        "tests/test_templates/**",
+        "typescript/**",
+        "vapi_capture.py"
+      ],
+      "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [2024] [Confident AI Inc.]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "attribution": "Copyright [2024] [Confident AI Inc.], Apache-2.0 license (LICENSE.md), https://github.com/confident-ai/deepeval."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "csv",
+      "paths": [
+        "**/*.csv"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.cjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.js"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "javascript",
+      "paths": [
+        "**/*.mjs"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "mdx",
+      "paths": [
+        "**/*.mdx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "scss",
+      "paths": [
+        "**/*.scss"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "sql",
+      "paths": [
+        "**/*.sql"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.cff"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.example"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lock"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.tcss"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.prettierrc"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "toml",
+      "paths": [
+        "**/*.toml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "tsx",
+      "paths": [
+        "**/*.tsx"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.mts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "typescript",
+      "paths": [
+        "**/*.ts"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yaml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}

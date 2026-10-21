@@ -1,0 +1,384 @@
+{
+  "schema": 5,
+  "type": "git",
+  "address": "https://github.com/rhasspy/piper",
+  "revision": "73c04d81d5590ecc46e522de3601ce7fb29fc2be",
+  "checksum": "sha256:3f2f8c892476724e9e196d06755c4dcfcdddc9f3ab5847d3538a27f31e05fa56",
+  "extract": {
+    "exclude": [
+      "etc/logo.png",
+      "etc/nabu_casa_sponsored.png",
+      "etc/test_voice.onnx",
+      "notebooks/wav/**",
+      "src/python/piper_train/norm_audio/models/**"
+    ]
+  },
+  "history": {
+    "since": "61dc7d415f84533a2f193a3edeaa49ba688ffbf5"
+  },
+  "licenses": [
+    {
+      "license": "MIT",
+      "paths": [
+        ".git/history/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 Michael Hansen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Commit history of https://github.com/rhasspy/piper: Copyright (c) 2022 Michael Hansen, MIT license (LICENSE.md), https://github.com/rhasspy/piper."
+    },
+    {
+      "license": "MIT",
+      "paths": [
+        ".dockerignore",
+        ".github/**",
+        ".gitignore",
+        ".projectile",
+        "CMakeLists.txt",
+        "Dockerfile",
+        "LICENSE.md",
+        "Makefile",
+        "README.md",
+        "TRAINING.md",
+        "VERSION",
+        "VOICES.md",
+        "etc/logo.svg",
+        "etc/nabu_casa_sponsored.svg",
+        "etc/test_sentences/**",
+        "etc/test_voice.onnx.json",
+        "lib/**",
+        "notebooks/lng/**",
+        "notebooks/piper_inference_(ONNX).ipynb",
+        "notebooks/piper_inference_(ckpt).ipynb",
+        "notebooks/piper_model_exporter.ipynb",
+        "notebooks/piper_multilenguaje_cuaderno_de_entrenamiento.ipynb",
+        "notebooks/piper_multilingual_training_notebook.ipynb",
+        "notebooks/pretrained_models.json",
+        "notebooks/translator.py",
+        "script/**",
+        "src/benchmark/**",
+        "src/cpp/**",
+        "src/python/.dockerignore",
+        "src/python/Dockerfile",
+        "src/python/README.md",
+        "src/python/build_monotonic_align.sh",
+        "src/python/mypy.ini",
+        "src/python/piper_train/.gitignore",
+        "src/python/piper_train/.isort.cfg",
+        "src/python/piper_train/VERSION",
+        "src/python/piper_train/__init__.py",
+        "src/python/piper_train/__main__.py",
+        "src/python/piper_train/_resources.py",
+        "src/python/piper_train/check_phonemes.py",
+        "src/python/piper_train/clean_cached_audio.py",
+        "src/python/piper_train/export_generator.py",
+        "src/python/piper_train/export_onnx.py",
+        "src/python/piper_train/export_onnx_streaming.py",
+        "src/python/piper_train/export_torchscript.py",
+        "src/python/piper_train/filter_utterances.py",
+        "src/python/piper_train/infer.py",
+        "src/python/piper_train/infer_generator.py",
+        "src/python/piper_train/infer_onnx.py",
+        "src/python/piper_train/infer_onnx_streaming.py",
+        "src/python/piper_train/infer_torchscript.py",
+        "src/python/piper_train/norm_audio/__init__.py",
+        "src/python/piper_train/norm_audio/trim.py",
+        "src/python/piper_train/norm_audio/vad.py",
+        "src/python/piper_train/preprocess.py",
+        "src/python/piper_train/py.typed",
+        "src/python/piper_train/pylintrc",
+        "src/python/piper_train/select_speaker.py",
+        "src/python/piper_train/setup.cfg",
+        "src/python/piper_train/vits/**",
+        "src/python/piper_train/voice_conversion.py",
+        "src/python/requirements.txt",
+        "src/python/requirements_dev.txt",
+        "src/python/run-docker",
+        "src/python/scripts/**",
+        "src/python/setup.py",
+        "src/python_run/**"
+      ],
+      "text": "MIT License\n\nCopyright (c) 2022 Michael Hansen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "attribution": "Copyright (c) 2022 Michael Hansen, MIT license (LICENSE.md), https://github.com/rhasspy/piper."
+    }
+  ],
+  "formats": [
+    {
+      "format": "code",
+      "language": "patch",
+      "paths": [
+        ".git/history/**"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "bash",
+      "paths": [
+        "**/*.sh"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.c"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "c",
+      "paths": [
+        "**/*.h"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cmake",
+      "paths": [
+        "**/CMakeLists.txt"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.cpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "cpp",
+      "paths": [
+        "**/*.hpp"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "dockerfile",
+      "paths": [
+        "**/Dockerfile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.cfg"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "ini",
+      "paths": [
+        "**/*.ini"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.ipynb"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "json",
+      "paths": [
+        "**/*.json"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "makefile",
+      "paths": [
+        "**/Makefile"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "python",
+      "paths": [
+        "**/*.py"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "svg",
+      "paths": [
+        "**/*.svg"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.in"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.jsonl"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.lang"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.pyx"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "etc/test_sentences/ar.txt",
+        "etc/test_sentences/ca.txt",
+        "etc/test_sentences/cs.txt",
+        "etc/test_sentences/cy.txt",
+        "etc/test_sentences/da.txt",
+        "etc/test_sentences/de.txt",
+        "etc/test_sentences/el.txt",
+        "etc/test_sentences/en.txt",
+        "etc/test_sentences/es.txt",
+        "etc/test_sentences/eu.txt",
+        "etc/test_sentences/fa.txt",
+        "etc/test_sentences/fi.txt",
+        "etc/test_sentences/fr.txt",
+        "etc/test_sentences/hi.txt",
+        "etc/test_sentences/hu.txt",
+        "etc/test_sentences/id.txt",
+        "etc/test_sentences/is.txt",
+        "etc/test_sentences/it.txt",
+        "etc/test_sentences/ka.txt",
+        "etc/test_sentences/kk.txt",
+        "etc/test_sentences/lb.txt",
+        "etc/test_sentences/lv.txt",
+        "etc/test_sentences/ml.txt",
+        "etc/test_sentences/ne.txt",
+        "etc/test_sentences/nl.txt",
+        "etc/test_sentences/no.txt",
+        "etc/test_sentences/pl.txt",
+        "etc/test_sentences/pt.txt",
+        "etc/test_sentences/ro.txt",
+        "etc/test_sentences/ru.txt",
+        "etc/test_sentences/sk.txt",
+        "etc/test_sentences/sl.txt",
+        "etc/test_sentences/sr.txt",
+        "etc/test_sentences/sv.txt",
+        "etc/test_sentences/sw.txt",
+        "etc/test_sentences/te.txt",
+        "etc/test_sentences/tr.txt",
+        "etc/test_sentences/uk.txt",
+        "etc/test_sentences/vi.txt",
+        "etc/test_sentences/zh.txt",
+        "notebooks/lng/0.txt",
+        "notebooks/lng/guía de traducción.txt",
+        "notebooks/lng/translation guide.txt",
+        "src/benchmark/requirements.txt",
+        "src/python/requirements.txt",
+        "src/python/requirements_dev.txt",
+        "src/python_run/requirements.txt",
+        "src/python_run/requirements_dev.txt",
+        "src/python_run/requirements_gpu.txt",
+        "src/python_run/requirements_http.txt"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/*.typed"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.dockerignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.gitignore"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/.projectile"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/VERSION"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/format"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/lint"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/piper"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/pylintrc"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/run-docker"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "**/setup"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "yaml",
+      "paths": [
+        "**/*.yml"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "code"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-16",
+    "reason": "under review"
+  }
+}
